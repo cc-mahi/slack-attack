@@ -91,7 +91,15 @@ Markers:
 - `[resolved]` — closed out (deployed fix, decision made, incident over).
 - `[watching]` — passive observation of a pattern, no active work (e.g. "USDILS toxic flow, NY first-hour, cf. prior NZD/CHF"). If anyone is actively working on it, it's `[open]`, not `[watching]`. Use sparingly.
 
-On each run, re-read any existing `[open]` entries whose threads had activity in the window; propose promoting them to `[resolved]` or updating the summary line. Don't silently flip markers — propose the change.
+On each run, re-read any existing `[open]` entries whose threads had activity in the window; promote them to `[resolved]` or update the summary line as the thread evolves.
+
+### `Recent topics` entries (channels only)
+
+Channel dossiers use `Recent topics` instead of `Recent issues`. Same permalink requirement — every entry cites at least one Slack permalink. **No status markers** — channel topics are summary bullets, not tracked issues. If something in a channel escalates into a real issue that needs tracking, the right place is the relevant client's `Recent issues`, not the channel dossier.
+
+```
+- YYYY-MM-DD — short description. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
+```
 
 ### `key_people` threshold
 
