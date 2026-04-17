@@ -36,7 +36,7 @@ In priority order:
 3. **Decisions** — "we're going to", "agreed", "let's do X".
 4. **Escalations** — client dissatisfaction, outages, urgent language, mentions of specific incidents.
 5. **Recurring issues** — topic already in the dossier's "Recent issues" that's flaring again.
-6. **New people** — names/handles that aren't in `key_people` yet.
+6. **New external people** — client-side names/handles that aren't in `key_people` yet. (Mahi staff names aren't tracked in `key_people`.)
 7. **Dossier-contradicting facts** — e.g. dossier says `status: live` but messages discuss churn/pause.
 
 Routine bot pings, deployment notifications, and single-reaction chatter are not notable. Skip them silently.
@@ -59,7 +59,7 @@ Routine bot pings, deployment notifications, and single-reaction chatter are not
 
 ## Proposed dossier updates (for clients/<slug>.md)
 
-- Add to `key_people`: {name: "...", role: "...", org: client}
+- Add to `key_people`: {name: "...", role: "..."}
 - Append to `Recent issues`:
   > [open] 2026-04-17 — <title>
   > <1–3 lines>. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
@@ -91,16 +91,18 @@ On each run, re-read any existing `[open]` entries whose threads had activity in
 
 ### `key_people` threshold
 
+**Only external people** — client-side staff, consultants, LP/vendor contacts. **Never Mahi employees.** Mahi is small enough that I know everyone; roster entries for Mahi folks are noise. Mahi names still appear naturally in `Recent issues` and `Notable topics` prose when relevant ("Rory investigating", "Kate scheduling the meeting") — that's the right place for them.
+
 Add someone only if role is known **and** you expect repeat interaction. One-off "new user added" events belong in `Recent issues`, not the people roster.
 
 Entry shape:
 ```yaml
-- {name: "...", role: "...", org: client|mahi|unknown, confidence: high|low}
+- {name: "...", role: "...", confidence: low}
 ```
 
-- `confidence: low` — uncertain org, uncertain role spelling, or contradictory signals. The next `/catchup` flags these for verification.
-- `confidence: high` — clear, repeated signal. Omit the field when high (default).
-- If two roster entries look like they might be the same role at different times (e.g. two "Pepperstone lead"s on Mahi side), propose flagging one as `confidence: low` rather than silently keeping both.
+- `confidence: low` — uncertain role spelling, contradictory signals, only seen once but plausibly recurring. The next `/catchup` flags these for verification.
+- `confidence: high` is the default — omit the field.
+- If two roster entries look like they might be the same person under different spellings, or the same role at different times, propose flagging one as `confidence: low` rather than silently keeping both.
 
 Never inline `# comment` annotations into frontmatter — YAML parsers handle them inconsistently. Use fields.
 

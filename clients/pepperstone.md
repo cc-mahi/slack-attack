@@ -11,11 +11,8 @@ channels:
   client: [mahi-pepperstone-vnd]
   other: []
 key_people:
-  - {name: "Nicola Perikhanyan", role: "Pepperstone lead", org: mahi, confidence: low}
-  - {name: "Daria Horton", role: "Pepperstone lead", org: mahi, confidence: low}
-  - {name: "Isaac Dann", role: "engineer (config/LP/pricing)", org: mahi}
-  - {name: "Stephen Hendrie", role: "exchange/product", org: client}
-  - {name: "Marianna", role: "trading ops", org: client, confidence: low}
+  - {name: "Stephen Hendrie", role: "exchange/product"}
+  - {name: "Marianna", role: "trading ops", confidence: low}
 athena_dbs: [pepperstone_ldn, pepperstone_nyc, pepperstone_crypto_ldn, pepperstone_crypto_nyc]
 aws_profile: 730335273835_MahiAnalytics
 last_catchup: 2026-04-17T10:30:00Z

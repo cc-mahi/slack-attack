@@ -31,6 +31,8 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-pepperstone-vnd` | C06AR8MT8NT |
 | `mahi-gomarkets-2025` | C09J1DP2QQH |
 | `mahi-ig-group` | C097U77HR42 |
+| `internal-rostro` | C08ALS66EDC |
+| `mahi-rostro` | C08AQKRU953 |
 | `dev-eu` | C08KZ4L2HPF |
 
 ## My user ID
