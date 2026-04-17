@@ -17,6 +17,7 @@ Personal Slack catch-up tool + client reference. See `README.md` for the concept
 
 ## Dossier discipline
 
-- Never overwrite a dossier silently. Propose changes as a diff at the end of a catch-up and let me accept.
-- `last_catchup` in frontmatter is the source of truth for "where did we leave off". Update it only after I confirm the digest.
+- `/catchup` applies changes directly — I review via `git diff` and commit when happy. No accept step.
+- `last_catchup` in frontmatter is the source of truth for "where did we leave off". Update it as part of the same `/catchup` edit.
 - Keep the prose sections short. `Recent issues` is reverse chronological, trim entries older than ~90 days.
+- Use `Edit`, not `Write`, for dossier updates — keeps diffs small and readable.

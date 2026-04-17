@@ -3,7 +3,7 @@ name: catchup
 description: Daily Slack catch-up digest. Reads activity since last_catchup for a client, a channel, or everything, summarizes notable items, and proposes dossier updates. Use when the user says "/catchup", "/catchup <slug>", or "/catchup #<channel>".
 ---
 
-Produce a focused digest of Slack activity and suggest dossier updates. Never update dossiers without confirmation.
+Produce a focused digest of Slack activity and apply dossier updates directly. I review via `git diff` and commit when happy, or edit/revert as needed — no accept step.
 
 ## Resolving the target
 
@@ -62,19 +62,18 @@ Routine bot pings, deployment notifications, and single-reaction chatter are not
 
 ---
 
-## Proposed dossier updates (for clients/<slug>.md)
+## Dossier changes applied (clients/<slug>.md)
 
-- Add to `key_people`: {name: "...", role: "..."}
-- Append to `Recent issues`:
-  > [open] 2026-04-17 — <title>
-  > <1–3 lines>. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
-- Set `last_catchup: <now>`
-- Flag for verification: <list any low-confidence entries already in the dossier>
+- Added to `key_people`: <names>
+- Appended to `Recent issues`: <count> entries
+- Appended to `Notable topics`: <count> entries
+- `last_catchup` → <now>
+- Flagged for verification: <low-confidence entries already in the dossier>
 
-Accept / edit / reject?
+Review with `git diff clients/<slug>.md`.
 ```
 
-Wait for me to accept before writing changes. Apply with `Edit`, not `Write`.
+Apply edits with `Edit`, not `Write`, so diffs stay minimal.
 
 ## Dossier conventions
 

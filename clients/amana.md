@@ -41,4 +41,7 @@ Broker on profit-share commercial terms covering MFX Compass. 25% of Skew PnL + 
 > [open] 2026-04-16 — hedger latency investigation
 > Hedger took 30–50s to cover XAG risk on some test trades even after 3dp fix. Tuned wait from 10s→5s; further digging flagged. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1776332567124099)
 
+> [resolved] 2026-04-13 — dashboard snapshot outage
+> Post-release regression from MahiMain commit 066fb9437 (addServiceInBackground race in `riskReportSnapshotRequestPublisher`) stopped AggregateReportStream snapshots; Amana couldn't use the Trading Overview. Justin rolled back the webstack change same day (`512a10b`). Followup on moving `brokerDashboard` to core component still open in #dev. [permalink](https://mahifx.slack.com/archives/C8568C6HG/p1776073126336049)
+
 ## Notable topics
