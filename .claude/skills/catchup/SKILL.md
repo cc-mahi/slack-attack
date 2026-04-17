@@ -8,7 +8,12 @@ Produce a focused digest of Slack activity and suggest dossier updates. Never up
 ## Resolving the target
 
 - `/catchup <slug>` → `clients/<slug>.md`. Channels to read = `channels.internal` + `channels.client` + `channels.other` from its frontmatter.
-- `/catchup #<channel>` or `/catchup <channel-name>` → `channels/<name>.md` (create from template if missing, ask me for `purpose` first).
+- `/catchup #<channel>` or `/catchup <channel-name>` → `channels/<name>.md`. If missing, create it from the template and derive the frontmatter yourself — don't block on me:
+  - `slack_search_channels` returns the channel's topic and purpose; use those to seed the `purpose` field.
+  - If topic/purpose are empty or generic, skim the last ~20 messages to infer usage and write a one-line working description.
+  - `scope` is a best-guess from the name/topic (`cross-cutting` | `team` | `announcements` | `other`). I'll correct it on review.
+  - Set `channel_id` from the search result and memoise in `.claude/docs/slack-conventions.md`.
+  - Then proceed with the catch-up. The proposed dossier diff at the end will include the frontmatter so I can edit `purpose`/`scope` in the same accept step.
 - `/catchup` (no arg) → scan all `clients/*.md` and `channels/*.md`; rank by `last_catchup` staleness × recent-message-count (quick `slack_search_public_and_private` with `after:` and `in:`); digest the top 3–5. Report which ones you skipped and why.
 
 If a client dossier doesn't exist for `<slug>`, stop and suggest running `/seed-client <slug>` first.
