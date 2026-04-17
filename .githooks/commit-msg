@@ -1,0 +1,34 @@
+#!/bin/sh
+# Conventional commits validation.
+# Types: feat fix docs chore refactor test ci build perf style revert
+
+msg_file="$1"
+msg=$(head -1 "$msg_file")
+
+# Allow merge commits.
+if echo "$msg" | grep -qE '^Merge '; then
+    exit 0
+fi
+
+if ! echo "$msg" | grep -qE '^(feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert)(\([a-z0-9/_-]+\))?!?: .+'; then
+    echo "ERROR: Commit message does not follow conventional commits format."
+    echo ""
+    echo "  Expected: <type>(<scope>): <description>"
+    echo "  Types:    feat fix docs chore refactor test ci build perf style revert"
+    echo "  Example:  feat(catchup): rank clients by staleness"
+    echo ""
+    echo "  Got: $msg"
+    exit 1
+fi
+
+if [ ${#msg} -gt 72 ]; then
+    echo "ERROR: Commit subject line is ${#msg} chars (max 72)."
+    echo "  $msg"
+    exit 1
+fi
+
+if echo "$msg" | grep -qE '\.$'; then
+    echo "ERROR: Commit subject should not end with a period."
+    echo "  $msg"
+    exit 1
+fi

@@ -30,3 +30,13 @@ channels/    per-channel dossiers for non-client channels
 - `../pagerbuddy/.claude/docs/slack-channels.md` — channel mapping + skip rules
 
 The catch-up skill does not need these; they're inputs to `/seed-client` only.
+
+## Setup
+
+After cloning, wire up the commit-msg hook:
+
+```
+git config core.hooksPath .githooks
+```
+
+Enforces conventional commits (`feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert`), 72-char subject, no trailing period.
