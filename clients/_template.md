@@ -3,8 +3,9 @@ slug: example
 name: Example Client
 type: broker              # broker | prop-firm | institutional | other
 status: live              # live | trial | onboarding | paused | churned
-products: []              # [fx, crypto, cfd, equities, ...]
+products: []              # asset classes traded: [fx, crypto, cfd, equities, ...]
 regions: []               # [LDN, NYC, CHI, ...]
+contract_expires: null    # YYYY-MM-DD if known, else null
 channels:
   internal: internal-example
   client: []              # shared with client, e.g. [mahi-example]
