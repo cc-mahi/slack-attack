@@ -83,9 +83,9 @@ Every entry starts with a status marker and cites at least one Slack permalink. 
 ```
 
 Markers:
-- `[open]` — unresolved, awaiting action, still under discussion.
+- `[open]` — unresolved, awaiting action, still under discussion. **Also** active investigations with a plan (e.g. "hedger latency being tuned, further digging flagged").
 - `[resolved]` — closed out (deployed fix, decision made, incident over).
-- `[watching]` — observational pattern, not actionable (e.g. "toxic flow on acct X, NY first-hour"). Use sparingly.
+- `[watching]` — passive observation of a pattern, no active work (e.g. "USDILS toxic flow, NY first-hour, cf. prior NZD/CHF"). If anyone is actively working on it, it's `[open]`, not `[watching]`. Use sparingly.
 
 On each run, re-read any existing `[open]` entries whose threads had activity in the window; propose promoting them to `[resolved]` or updating the summary line. Don't silently flip markers — propose the change.
 
@@ -111,3 +111,4 @@ Never inline `# comment` annotations into frontmatter — YAML parsers handle th
 - Keep the digest short. A dense 15-line digest beats a 200-line one I won't read.
 - Never fabricate a Slack permalink. If you don't have a real channel ID + `message_ts`, re-search with `response_format: "detailed"` rather than omitting the link.
 - If a channel has zero human messages in the window, say so in one line — don't expand it into a section.
+- Leave empty dossier sections (`Recent issues`, `Notable topics`, etc.) blank — no `_None recorded._` or similar placeholders. `/catchup` appends cleanly when a section has content to add.

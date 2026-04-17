@@ -33,6 +33,8 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-ig-group` | C097U77HR42 |
 | `internal-rostro` | C08ALS66EDC |
 | `mahi-rostro` | C08AQKRU953 |
+| `internal-amana` | C08T42TMKU3 |
+| `mahi-amana` | C08SYSMP0EB |
 | `dev-eu` | C08KZ4L2HPF |
 
 ## My user ID
