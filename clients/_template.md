@@ -10,7 +10,7 @@ channels:
   internal: internal-example
   client: []              # shared with client, e.g. [mahi-example]
   other: []               # additional related channels
-key_people: []            # [{name, role, org: client|mahi, notes}]
+key_people: []            # [{name, role, org: client|mahi|unknown, confidence: low}] — confidence optional (default high)
 athena_dbs: []
 aws_profile: null
 last_catchup: null        # ISO8601; updated by /catchup
@@ -26,7 +26,14 @@ Durable facts: infra quirks, non-obvious configuration, things I'd forget. Not a
 
 ## Recent issues
 
-Reverse chronological. Each entry: `YYYY-MM-DD — short title` + 1–3 lines. Trim >90d.
+Reverse chronological. Trim >90d. Each entry:
+
+```
+> [open|resolved|watching] YYYY-MM-DD — short title
+> 1–3 lines. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
+```
+
+Permalink required. `/catchup` promotes `[open]` → `[resolved]` when thread closes.
 
 ## Notable topics
 

@@ -26,6 +26,7 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | Channel | ID |
 |---------|----|
 | `internal-ic-markets` | C07TZ00FK1Q |
+| `internal-pepperstone` | C033K2P0RPT |
 | `mahi-ic-markets` | C07UBJNUWG1 |
 | `mahi-pepperstone-vnd` | C06AR8MT8NT |
 | `mahi-gomarkets-2025` | C09J1DP2QQH |

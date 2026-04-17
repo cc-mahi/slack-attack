@@ -61,18 +61,51 @@ Routine bot pings, deployment notifications, and single-reaction chatter are not
 
 - Add to `key_people`: {name: "...", role: "...", org: client}
 - Append to `Recent issues`:
-  > 2026-04-17 — <title>
-  > <1–3 lines>
+  > [open] 2026-04-17 — <title>
+  > <1–3 lines>. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
 - Set `last_catchup: <now>`
+- Flag for verification: <list any low-confidence entries already in the dossier>
 
 Accept / edit / reject?
 ```
 
 Wait for me to accept before writing changes. Apply with `Edit`, not `Write`.
 
+## Dossier conventions
+
+### `Recent issues` entries
+
+Every entry starts with a status marker and cites at least one Slack permalink. No exceptions — if you don't have a real `message_ts`, search again with `response_format: "detailed"` to get one before proposing the entry.
+
+```
+> [open] YYYY-MM-DD — short title
+> 1–3 lines. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
+```
+
+Markers:
+- `[open]` — unresolved, awaiting action, still under discussion.
+- `[resolved]` — closed out (deployed fix, decision made, incident over).
+- `[watching]` — observational pattern, not actionable (e.g. "toxic flow on acct X, NY first-hour"). Use sparingly.
+
+On each run, re-read any existing `[open]` entries whose threads had activity in the window; propose promoting them to `[resolved]` or updating the summary line. Don't silently flip markers — propose the change.
+
+### `key_people` threshold
+
+Add someone only if role is known **and** you expect repeat interaction. One-off "new user added" events belong in `Recent issues`, not the people roster.
+
+Entry shape:
+```yaml
+- {name: "...", role: "...", org: client|mahi|unknown, confidence: high|low}
+```
+
+- `confidence: low` — uncertain org, uncertain role spelling, or contradictory signals. The next `/catchup` flags these for verification.
+- `confidence: high` — clear, repeated signal. Omit the field when high (default).
+- If two roster entries look like they might be the same role at different times (e.g. two "Pepperstone lead"s on Mahi side), propose flagging one as `confidence: low` rather than silently keeping both.
+
+Never inline `# comment` annotations into frontmatter — YAML parsers handle them inconsistently. Use fields.
+
 ## Constraints
 
 - Keep the digest short. A dense 15-line digest beats a 200-line one I won't read.
-- Never fabricate a Slack permalink. If you don't have a real channel ID + `message_ts`, cite as `#channel — Author, YYYY-MM-DD` without a link.
-- Don't guess at `key_people` orgs — if unclear whether someone is client-side or Mahi, leave `org: unknown` and flag it.
+- Never fabricate a Slack permalink. If you don't have a real channel ID + `message_ts`, re-search with `response_format: "detailed"` rather than omitting the link.
 - If a channel has zero human messages in the window, say so in one line — don't expand it into a section.

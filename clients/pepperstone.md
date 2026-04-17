@@ -10,10 +10,15 @@ channels:
   internal: internal-pepperstone
   client: [mahi-pepperstone-vnd]
   other: []
-key_people: []
+key_people:
+  - {name: "Nicola Perikhanyan", role: "Pepperstone lead", org: mahi, confidence: low}
+  - {name: "Daria Horton", role: "Pepperstone lead", org: mahi, confidence: low}
+  - {name: "Isaac Dann", role: "engineer (config/LP/pricing)", org: mahi}
+  - {name: "Stephen Hendrie", role: "exchange/product", org: client}
+  - {name: "Marianna", role: "trading ops", org: client, confidence: low}
 athena_dbs: [pepperstone_ldn, pepperstone_nyc, pepperstone_crypto_ldn, pepperstone_crypto_nyc]
 aws_profile: 730335273835_MahiAnalytics
-last_catchup: null
+last_catchup: 2026-04-17T10:30:00Z
 ---
 
 ## Summary
@@ -47,6 +52,28 @@ Large broker client on fixed-fee commercial terms covering MFXEcho, Compass, Pul
 - `com.x.validation.AD` = Mahi pre-flight validation.
 - Party names: `SPOT_HOUSE` = `SPOT_HEDGING_MODEL_H1_LDN`; `SI` = `SI_HEDGING_MODEL_H1_NYC` / `SI_HEDGING_MODEL_ARB_NYC`; client flow = `SPOT_CLIENTS_NYC` / `SPOT_CLIENTS_LDN`; simulation = `PTR_CLIENTS` / `PTR_CLIENTS_NET` / `PTR_CLIENTS_HEDGING`; `SI_HOUSE` = Crypto SI PnL.
 
-## Recent issues
+Legacy entries below predate the permalink requirement — next `/catchup` should backfill links for any entry still `[open]`.
+
+> [open] 2026-04-17 — tXAUUSD tokenised-gold pricing live
+> Beta uses XAUTUSD, prod uses PAXGUSD; normalisation persistence deployed to pepperstone-crypto-ny-admin-1. Benchmarking both sources over the weekend.
+
+> [open] 2026-04-14 — XAGUSD allocation blocked by minimum-lag qty mismatch
+> dynamicOrderSpeeds config has XAGUSD minimum-lag normal-qty 0.5 vs normal-qty 5000, producing a 2500 minimum that blocks allocation. Thread active.
+
+> [resolved] 2026-04-13 — Sebastian Andrews Compass access revoked (compromised device)
+> Suspended same day by Rory King.
+
+> [resolved] 2026-04-13 — Arb/XAUUSD crash ~11:02 UTC (PagerDuty Q1MAQYLK2ESYP8)
+
+> [watching] 2026-04-10 — USDILS toxic flow (acct 51331195), NY first-hour pattern (cf. prior NZD/CHF)
+
+> [open] 2026-04-01 — Proposal: move crypto maintenance/reboots to weekdays
+> Weekend volumes ≥ weekday; weekend reboots left traders off-state. Awaiting Liam + Pepper confirmation.
+
+> [resolved] 2026-03-24 — XAUUSD non-execution 11:00–11:02 UTC
+> LP pricing flapping through sanity checks; Mahi pricing indicative during the period.
 
 ## Notable topics
+
+- Pepperstone CFD rollout — new desk being stood up. LDN servers in Mahi setup (IPs exchanged 2026-04-08/15). Hedgers for inventory-risk model; awaiting LP connection data + instrument specs from Pepper AU team. NY servers not yet requested.
+- Pepperstone Crypto Exchange (pcrypto.com) — soft-launched 2026-03-Q1; rolling BNB/TRX/XRP-AUD on the exchange side. See Guru card T8xkG7nc.
