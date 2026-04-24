@@ -1,37 +1,18 @@
 ---
 slug: rostro
-name: Rostro
-type: broker
-status: live
-products: [fx]
-regions: [LDN]
-contract_expires: null
-channels:
-  internal: internal-rostro
-  client: [mahi-rostro]
-  other: []
-key_people:
+refs:
+  vibepulse: ../VibePulse/.claude/clients/rostro.yaml
+  billing: ../MahiProduct/data/billing/clients.json     # entry: rostro
+  hosts: ../MahiProduct/data/client-hosts.json          # entry: rostro (also: easton for contracting entity)
+  wiki: null                                             # ../MahiProduct/wiki/clients/rostro.md (not yet)
+channels_override: null
+key_people_overrides:
   - {name: "Alexandre", role: "trading ops", confidence: low}
   - {name: "Will", role: "scheduling contact", confidence: low}
   - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
   - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
-athena_dbs: [rostro_ldn]
-aws_profile: null
 last_catchup: 2026-04-24T09:00:00Z
 ---
-
-## Summary
-
-LDN-based broker contracted under Easton Consulting (original agreement 2025-06-01). Volume-tiered fixed fee: $30k up to $20bn → $80k up to $100bn. Rolling 1-month terms for first 6 months (30d notice), then rolling 3-month (90d notice). B-book only (`B_CLIENTS`). Hosting: Beeks Apollo (~GBP404/mo est.) plus AWS pass-through.
-
-## Technical notes
-
-- **LDN infra**: trading `rostro-ln-trading-1.wjze.prod.mahimarkets.com`, admin `rostro-ln-admin-1.wjze.prod.mahimarkets.com`, DC LD4.
-- **S3**: `rostro-parquet-store`. Athena DB: `rostro_ldn`.
-- **6-party book structure** including SI and CNH. Parties: `CLIENTS_NET`, `CLIENTS_HEDGING`, `B_CLIENTS_NET`, `SI_BOOK_NET`, `OFF_BOOK_NET`, `CNH_CLIENTS_NET`.
-- **Trade types**: `CLIENT_TRADE`, `BROKER_CLIENT_TRADE`, `SPLIT_CLIENT_TRADE`, `AGGRESSIVE_HEDGE_TRADE`, `UNKNOWN_TYPE_TRADE`.
-- **LP FIX**: `fixMarketData1`, `fixMarketData3`, `fixMarketDataInternal1`.
-- **Distribution markets (LDN)**: `CLIENT_PRICE_LDN`, `CLIENT_PRICE_BETA_LDN`, `CLIENT_PRICE_INV_LDN`, `CLIENT_PRICE_RETAIL_LDN`, `CLIENT_PRICE_VIP_LDN`, `DISTRIBUTION_LDN`, `DISTRIBUTION_INSTI_LDN`, `DISTRIBUTION_INTERNAL_LDN`, `DISTRIBUTION_INV_LDN`.
 
 ## Recent issues
 
@@ -40,6 +21,9 @@ LDN-based broker contracted under Easton Consulting (original agreement 2025-06-
 
 > [open] 2026-04-22 — G30EUR rejects (cpty 109_1_2656) via arb-classification exec rule
 > Limit-order flow getting cancelled because arb classification routes to a neutral-rate + markup exec rule, and the continuity rate breached the limit price. Kate digging into the trades to confirm whether the arb tag is correct. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776871777184599)
+
+> [open] 2026-04-17 — Missing pricing on new retail-feed API
+> Alexandre reports gaps on the newly-created retail feed API. Rory King investigating; Chrysovalantis looped in for reference. Some symbols (USOIL→CL1USD) corrected; XNGUSD now tracked as separate `[open]`. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776422678609409)
 
 > [resolved] 2026-04-23 — HRP_AGG_HEDGE re-added to XAUUSD off-book hedger
 > Oli asked for HRP_AGG_HEDGE back in the hedging pool for XAUUSD off-book flow only (not brokered). Initially added more broadly; Isaac corrected the scope on 04-24. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776962468190769)
@@ -52,9 +36,6 @@ LDN-based broker contracted under Easton Consulting (original agreement 2025-06-
 
 > [resolved] 2026-04-20 — Cpty 104_7_129656_11_0 off-book PnL drop
 > Kate caught -$101k aggregated yield over 4 minutes in the off book driven by 104_7_129656_11_0, classified as signal follow + broker. Removed the `104_7*` off-book whitelist and risk-split their flow to SI book; rule priorities adjusted. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776688746006519)
-
-> [open] 2026-04-17 — Missing pricing on new retail-feed API
-> Alexandre reports gaps on the newly-created retail feed API. Rory King investigating; Chrysovalantis looped in for reference. Some symbols (USOIL→CL1USD) corrected; XNGUSD now tracked as separate `[open]`. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776422678609409)
 
 > [resolved] 2026-04-16 — G30 EUR RETAIL spread misconfig
 > Alexandre saw TOB 70cfd@1.46 vs configured 20cfd@0.8 (NYC TZ) on primexm. Cameron Hughes: signal widening was making first+second layer spreads match and stack at distribution. Fixed with signal change + pricer bounce; Alexandre confirmed. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776363572685119)

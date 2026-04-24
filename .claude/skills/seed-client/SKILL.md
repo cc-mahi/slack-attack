@@ -1,43 +1,28 @@
 ---
 name: seed-client
-description: Create a client dossier in clients/<slug>.md from VibePulse + MahiProduct data. Use when the user says "/seed-client <slug>" or asks to add a new client to the reference.
+description: Create a minimal client dossier in clients/<slug>.md pointing at VibePulse + MahiProduct as source of truth. Use when the user says "/seed-client <slug>" or asks to add a client without pulling Slack yet.
 ---
 
-Build `clients/<slug>.md` by merging what exists in sibling repos. Do not pull Slack — `/catchup` does that.
+Most of the time you don't need this — `/catchup <slug>` auto-bootstraps a missing dossier before digesting. Use `/seed-client` only when Cameron wants to pre-create the file without running a catch-up.
 
-## Inputs (check all four, not all will have entries)
+## Steps
 
-1. `../VibePulse/.claude/clients/<slug>.yaml` — `regions`, `slack.internal`, `slack.client`, `athena_dbs`, `aws_profile`, `notes`.
-2. `../MahiProduct/data/billing/clients.json` — find `slug` match. Pulls `name`, `athenaDb`, fee structure, `billingClarification`, hosting/contract clarifications.
-3. `../MahiProduct/data/client-hosts.json` — `environments` with `graphiteHost`/`graphiteRegion`.
-4. `../pagerbuddy/.claude/docs/slack-channels.md` — confirms `internal-*` / `mahi-*` channel names, especially for clients with non-standard suffixes.
-
-The slug may not match across all four — try the obvious candidates (hyphen vs underscore, with/without vendor suffix) and report if a source has nothing.
-
-## Merging VibePulse variants
-
-VibePulse often splits one commercial client into multiple entries for infra reasons (e.g. `pepperstone` and `pepperstone-crypto`). If sibling entries share the same `slack.internal` and `slack.client` channels, they are one client from slack-attack's perspective — merge them into a single dossier:
-
-- Use the parent slug (the shorter one, typically).
-- Union `products`, `regions`, `athena_dbs` in frontmatter.
-- Under Technical notes, keep a subsection per variant so the per-desk infra (hosts, DCs, workgroups, LP FIX connections, order-table quirks) stays addressable.
-- Tell me which VibePulse entries you merged so I can sanity-check.
-
-## Output
-
-Copy `clients/_template.md` → `clients/<slug>.md` and fill frontmatter from the sources. Body sections:
-
-- **Summary**: one paragraph derived from contract/fee notes + product clues. If nothing substantive is known, leave a single line placeholder (don't invent).
-- **Technical notes**: copy anything non-obvious from VibePulse `notes` or MahiProduct billing clarifications. Infra quirks, ring-fenced accounts, Athena weirdness — these are the kinds of things worth capturing. When variants were merged, use a subsection per variant.
-- **Recent issues / Notable topics**: leave empty — `/catchup` populates these.
-
-For frontmatter:
-- `products`: asset classes the client trades (fx, crypto, cfd, equities), not Mahi services.
-- `contract_expires`: extract from billing notes if a term end date is mentioned (e.g. "3yr terms" + signing date → compute). Leave null if not derivable with confidence.
+1. Verify `clients/<slug>.md` doesn't already exist (abort if it does — suggest `/catchup <slug>` to refresh instead).
+2. Confirm the slug resolves somewhere:
+   - `../VibePulse/.claude/clients/<slug>.yaml`, or common variants (hyphen/underscore, with/without `-crypto`/`-cfd`).
+   - `../MahiProduct/data/billing/clients.json` entry for the slug.
+   - If neither has the slug, report unknown and stop.
+3. Copy `clients/_template.md` → `clients/<slug>.md` and fill `refs:`:
+   - `vibepulse`: one yaml path, or a list if sibling yamls share the same slack channels (e.g. `pepperstone` + `pepperstone-crypto`).
+   - `billing`: `../MahiProduct/data/billing/clients.json` with an inline comment naming the entry slug.
+   - `hosts`: `../MahiProduct/data/client-hosts.json` with the entry slug(s).
+   - `wiki`: `../MahiProduct/wiki/clients/<slug>.md` if that file exists, else `null`.
+4. Leave `channels_override: null`, `key_people_overrides: []`, `last_catchup: null`.
+5. Leave `Recent issues` and `Notable topics` sections empty — `/catchup` populates those.
+6. Report what you filled in and what you left `null` / empty.
 
 ## Rules
 
-- Never invent a field. If the source is silent, leave the frontmatter value empty/null.
-- If `clients/<slug>.md` already exists, do not overwrite. Instead, show me what's changed between the sources and the existing dossier and let me merge.
-- Leave `last_catchup: null` — seeding does not count as a catch-up.
-- At the end, summarize what you filled in and what you left blank so I can judge whether to enrich manually.
+- Don't restate anything that lives in the upstream refs — the whole point of this schema is that the dossier is a pointer + Slack-derived state, nothing more.
+- `last_catchup: null` after seeding — seeding isn't a catch-up.
+- Don't write into `../VibePulse/` or `../MahiProduct/` under any circumstances.

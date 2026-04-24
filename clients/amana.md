@@ -1,32 +1,17 @@
 ---
 slug: amana
-name: Amana
-channels:
-  internal: internal-amana
-  client: [mahi-amana]
-  other: []
 refs:
-  commercial: ../MahiProduct/data/billing/clients.json  # entry: amana
-  hosts: ../MahiProduct/data/client-hosts.json  # entry: amana
-  wiki: null  # TODO: ../MahiProduct/wiki/clients/amana.md (doesn't exist yet)
+  vibepulse: ../VibePulse/.claude/clients/amana.yaml
+  billing: ../MahiProduct/data/billing/clients.json     # entry: amana
+  hosts: ../MahiProduct/data/client-hosts.json          # entry: amana
+  wiki: null                                             # ../MahiProduct/wiki/clients/amana.md (not yet)
+channels_override: null
 key_people_overrides:
   - {name: "Karen Montero", role: "ops / test trading liaison", confidence: low}
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
 last_catchup: 2026-04-23T22:00:00Z
 ---
-
-Commercial terms, hosting, contract dates → see `refs.commercial`.
-Graphite host + s3 slug → see `refs.hosts`.
-Everything below is Slack-derived or slack-context-only (not yet in MahiProduct).
-
-## Slack-context cheat sheet
-
-- Distribution markets (LDN): `CLIENT_PRICE_LDN`, `CLIENT_PRICE_ABOOK_LDN`, `CLIENT_PRICE_BETA_LDN`, `DISTRIBUTION_LDN`.
-- LP FIX connections: `fixMarketData1`, `fixMarketData2`, `fixMarketDataCentroid`.
-- Trade types: `CLIENT_TRADE`, `BROKER_CLIENT_TRADE`, `SPLIT_CLIENT_TRADE`, `AGGRESSIVE_HEDGE_TRADE`, `UNKNOWN_TYPE_TRADE`.
-- Party names: `CLIENTS_NET` = client net P&L; `CLIENTS_HEDGING` = hedging P&L; `B_CLIENTS_NET` = B-book client net P&L. 3-party setup — no `SI` / `OFF_BOOK`.
-- Futures: XAU/XAG internalised since 2026-04-22, routed to CMC_CENTROID under a separate per-instrument book structure. Bridge sends `GC6{M,J}_→XAUFUT-{M,J}` / `SI6{K,N}_→XAGFUT-{K,N}` on tag 55.
 
 ## Recent issues
 
@@ -46,7 +31,7 @@ Everything below is Slack-derived or slack-context-only (not yet in MahiProduct)
 > Cpty 8004007 generated small PnL drop via XAU futs — hedger took ~30s to cover 512oz. Rory digging into decreasing timing for larger incoming positions. Supersedes prior XAG hedger-wait tuning. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776860083517709)
 
 > [resolved] 2026-04-22 — XAU + XAG futures internalisation live
-> XAU futs live 09:17 BST (first trade internalised + hedged), XAG futs live 13:53 BST. FI yield +10x day-on-day post-changes (2026-04-21). LR levers tuned for new arb cpty 8008699: 1.2 multiplier + 1s rate-limit period (max-reduction $200/M lifted earlier). Profile definitions copied from spot XAG/XAU to fix holding risk too long. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776845875089209)
+> XAU futs live 09:17 BST (first trade internalised + hedged), XAG futs live 13:53 BST. FI yield +10x day-on-day post-changes (2026-04-21). LR levers tuned for new arb cpty 8008699: 1.2 multiplier + 1s rate-limit period (max-reduction $200/M lifted earlier). Profile definitions copied from spot XAG/XAU to fix holding risk too long. Futures routed to CMC_CENTROID under separate per-instrument book structure; bridge maps `GC6{M,J}_→XAUFUT-{M,J}` / `SI6{K,N}_→XAGFUT-{K,N}` on tag 55. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776845875089209)
 
 > [resolved] 2026-04-13 — dashboard snapshot outage
 > Post-release regression from MahiMain commit 066fb9437 (addServiceInBackground race in `riskReportSnapshotRequestPublisher`) stopped AggregateReportStream snapshots; Amana couldn't use the Trading Overview. Justin rolled back the webstack change same day (`512a10b`). Followup on moving `brokerDashboard` to core component still open in #dev. [permalink](https://mahifx.slack.com/archives/C8568C6HG/p1776073126336049)
