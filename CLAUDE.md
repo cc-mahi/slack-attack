@@ -1,6 +1,29 @@
 # slack-attack — instructions for Claude
 
-Personal Slack catch-up tool + client reference. See `README.md` for the concept.
+Personal Slack catch-up tool for one reader (me, Cameron). Two things live here:
+
+1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere.
+2. **`/catchup`** — pulls Slack activity since `last_catchup`, produces a digest, and applies dossier updates in place.
+
+## Source-of-truth boundary
+
+`../MahiProduct` and `../VibePulse` are canonical. **Don't duplicate what they already hold; don't edit them from here.** This repo is only for Slack-derived state and overrides.
+
+| Want... | Look in... |
+|---|---|
+| Per-client hosts, Slack channels, Athena DBs, party names, distribution markets, LP FIX, LR rules | `../VibePulse/.claude/clients/{slug}.yaml` |
+| Who's internal at Mahi (for the "Mahi staff aren't in `key_people`" rule) | `../MahiProduct/.claude/org-chart.md` |
+| Client commercial terms, fees, contract dates | `../MahiProduct/data/billing/clients.json` |
+| Per-env Graphite hosts, s3 slugs | `../MahiProduct/data/client-hosts.json`, `../MahiProduct/data/infra-hosts.json` |
+| External contacts (client/prospect/vendor) | `../MahiProduct/wiki/people/` |
+| Full client relationship state | `../MahiProduct/wiki/clients/{slug}.md` (exists for some; not yet for most brokers) |
+
+Each dossier points at its refs via `refs:` in frontmatter. If a ref is `null`, the upstream doesn't cover it yet and slack-attack content is the effective source until it does. If an upstream disagrees with slack-attack, **trust the upstream** and remove the override here — unless the override is deliberate (note why).
+
+Rules:
+- Never write into `../MahiProduct/` or `../VibePulse/` from any workflow here.
+- `key_people_overrides` holds only external contacts not yet in `../MahiProduct/wiki/people/`, plus low-confidence discoveries waiting for promotion.
+- Don't re-state hosts, commercial terms, party names, or distribution markets in the dossier body — the refs are authoritative.
 
 ## Tone
 
@@ -19,5 +42,29 @@ Personal Slack catch-up tool + client reference. See `README.md` for the concept
 
 - `/catchup` applies changes directly — I review via `git diff` and commit when happy. No accept step.
 - `last_catchup` in frontmatter is the source of truth for "where did we leave off". Update it as part of the same `/catchup` edit.
-- Keep the prose sections short. `Recent issues` is reverse chronological, trim entries older than ~90 days.
+- Keep prose short. `Recent issues` is reverse chronological, trim entries older than ~90 days.
 - Use `Edit`, not `Write`, for dossier updates — keeps diffs small and readable.
+- If a dossier doesn't exist for a client `/catchup` is asked about, auto-bootstrap a minimal one from the VibePulse yaml (hosts, slack channels) rather than blocking.
+
+## Layout
+
+```
+clients/     per-client dossiers (_template.md is the schema)
+channels/    per-channel dossiers for non-client channels
+.claude/
+  skills/
+    catchup/       /catchup [target]
+    seed-client/   /seed-client <slug>
+  docs/
+    slack-conventions.md   channel patterns + skip rules
+```
+
+## Setup
+
+After cloning, wire up the commit-msg hook:
+
+```
+git config core.hooksPath .githooks
+```
+
+Enforces conventional commits (`feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert`), 72-char subject, no trailing period.
