@@ -13,9 +13,10 @@ channels:
 key_people:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
+  - {name: "Reece", role: "ops / counterparty admin", confidence: low}
 athena_dbs: [pepperstone_ldn, pepperstone_nyc, pepperstone_crypto_ldn, pepperstone_crypto_nyc]
 aws_profile: 730335273835_MahiAnalytics
-last_catchup: 2026-04-17T10:30:00Z
+last_catchup: 2026-04-24T11:00:00Z
 ---
 
 ## Summary
@@ -51,8 +52,17 @@ Large broker client on fixed-fee commercial terms covering MFXEcho, Compass, Pul
 
 Legacy entries below predate the permalink requirement — next `/catchup` should backfill links for any entry still `[open]`.
 
-> [open] 2026-04-17 — tXAUUSD tokenised-gold pricing live
-> Beta uses XAUTUSD, prod uses PAXGUSD; normalisation persistence deployed to pepperstone-crypto-ny-admin-1. Benchmarking both sources over the weekend.
+> [open] 2026-04-24 — YTD list of counterparties removed from `reference.lists.counterparty.custom`
+> Reece asked for a full YTD removal list beyond what Audit History surfaces; Kate investigating. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777024868051039)
+
+> [open] 2026-04-23 — Cpty 2075077 not routed to Dynamic Arbitrageurs as expected
+> Client expected `B-RETAIL/Dynamic Arbitrageurs` routing based on markouts + classification config, but wasn't. Discussion in thread; unresolved as of 04-23 15:29. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1776942671186329)
+
+> [open] 2026-04-22 — Inventory XAG Tapaas A/B reporting — tag 1 prefix solution
+> Hedger fills currently come down the Mahi_A OZ takers, breaking Tapaas A/B split. Will proposed splitting tag 1 per order source (keep `MahiFX` for A-book, `B-MahiFX` or agreed prefix for inventory hedger). No code change needed. Awaiting Marianna/Tapaas prefix confirmation. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1776849698434619)
+
+> [open] 2026-04-21 — tXAUUSD post-normalisation-persistence review
+> Weekend review: XAUT mids cluster better than PaxG (Wintermute drifts from B2C2/HRP). Isaac proposes dual-rate model — a 24/7 normalised rate (all XAUT+PAXG sources, single basis) included in tXAUUSD mid-formation during the week, with Primary tracking B2C2+HRP PAXG blend for XAU-close→XAU-open tracking. Beta prices ~10s above gold open at 7s into open, resolves quickly. Supersedes prior `[open] 2026-04-17` tXAUUSD entry. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1776743136995659)
 
 > [open] 2026-04-14 — XAGUSD allocation blocked by minimum-lag qty mismatch
 > dynamicOrderSpeeds config has XAGUSD minimum-lag normal-qty 0.5 vs normal-qty 5000, producing a 2500 minimum that blocks allocation. Thread active.
@@ -72,5 +82,8 @@ Legacy entries below predate the permalink requirement — next `/catchup` shoul
 
 ## Notable topics
 
-- Pepperstone CFD rollout — new desk being stood up. LDN servers in Mahi setup (IPs exchanged 2026-04-08/15). Hedgers for inventory-risk model; awaiting LP connection data + instrument specs from Pepper AU team. NY servers not yet requested.
+- 2026-04-22 — XRPAUD live on Pepperstone Crypto Exchange. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1776826778419749)
+- 2026-04-23 — CFD NY IPs posted (trading-1 `192.81.111.207`, admin `192.81.111.240`); Nathan chasing LP handover ETA with Gordon/Martyna. Hardware updates done over weekend, handover imminent per Gordon. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1776904666370719)
+- 2026-04-21 — Argamon want Tokyo JPY crypto crosses too (Lee bumping existing request). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1776735210458109)
+- Pepperstone CFD rollout — new desk being stood up. LDN servers in Mahi setup (IPs exchanged 2026-04-08/15). NY IPs now shared (see above). Hedgers for inventory-risk model; awaiting LP connection data + instrument specs from Pepper AU team.
 - Pepperstone Crypto Exchange (pcrypto.com) — soft-launched 2026-03-Q1; rolling BNB/TRX/XRP-AUD on the exchange side. See Guru card T8xkG7nc.

@@ -13,9 +13,11 @@ channels:
 key_people:
   - {name: "Alexandre", role: "trading ops", confidence: low}
   - {name: "Will", role: "scheduling contact", confidence: low}
+  - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
+  - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
 athena_dbs: [rostro_ldn]
 aws_profile: null
-last_catchup: 2026-04-17T11:47:00Z
+last_catchup: 2026-04-24T09:00:00Z
 ---
 
 ## Summary
@@ -33,8 +35,26 @@ LDN-based broker contracted under Easton Consulting (original agreement 2025-06-
 
 ## Recent issues
 
+> [open] 2026-04-23 — XNGUSD retail-feed pricing still being finalised
+> Abdullah tried subscribing XNGUSD/NGC1 and got `unknown symbol`; Kate confirmed the correct mapping is `NG1USD` but pricing is still being finalised — don't send flow yet. Jump sub-code `NTGASP` confirmed earlier. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776932072322889)
+
+> [open] 2026-04-22 — G30EUR rejects (cpty 109_1_2656) via arb-classification exec rule
+> Limit-order flow getting cancelled because arb classification routes to a neutral-rate + markup exec rule, and the continuity rate breached the limit price. Kate digging into the trades to confirm whether the arb tag is correct. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776871777184599)
+
+> [resolved] 2026-04-23 — HRP_AGG_HEDGE re-added to XAUUSD off-book hedger
+> Oli asked for HRP_AGG_HEDGE back in the hedging pool for XAUUSD off-book flow only (not brokered). Initially added more broadly; Isaac corrected the scope on 04-24. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776962468190769)
+
+> [resolved] 2026-04-22 — Invast order-response latency (~2s ack, 3min cancel)
+> Nathan flagged Invast taking ~2s to respond to order requests (risk exposure on fills unknown) and a separate 3-minute cancel response. Root cause: OZ-Hub maintenance 17:30–18:30 NY on Invast side — order sat as pending leg in xcore until TTL cancel. Kate asked Abdullah to flag scheduled LP maintenance windows in advance. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776741282590589)
+
+> [resolved] 2026-04-22 — INV/SI routing sweep, overrides removed for 104*/146*
+> Oli asked for a classification + execution rule sweep so everyone trades down INV except 104* and 146*. Kate confirmed SI/INV connection setup: arb/signal-follow/broker → brokered, fast-hedge → SI book, remainder → Off Book. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776865644758649)
+
+> [resolved] 2026-04-20 — Cpty 104_7_129656_11_0 off-book PnL drop
+> Kate caught -$101k aggregated yield over 4 minutes in the off book driven by 104_7_129656_11_0, classified as signal follow + broker. Removed the `104_7*` off-book whitelist and risk-split their flow to SI book; rule priorities adjusted. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776688746006519)
+
 > [open] 2026-04-17 — Missing pricing on new retail-feed API
-> Alexandre reports gaps on the newly-created retail feed API. Rory King investigating; Chrysovalantis looped in for reference. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776422678609409)
+> Alexandre reports gaps on the newly-created retail feed API. Rory King investigating; Chrysovalantis looped in for reference. Some symbols (USOIL→CL1USD) corrected; XNGUSD now tracked as separate `[open]`. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776422678609409)
 
 > [resolved] 2026-04-16 — G30 EUR RETAIL spread misconfig
 > Alexandre saw TOB 70cfd@1.46 vs configured 20cfd@0.8 (NYC TZ) on primexm. Cameron Hughes: signal widening was making first+second layer spreads match and stack at distribution. Fixed with signal change + pricer bounce; Alexandre confirmed. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776363572685119)
@@ -44,5 +64,7 @@ LDN-based broker contracted under Easton Consulting (original agreement 2025-06-
 
 ## Notable topics
 
+- 2026-04-21 — Client call outcomes: (1) they want LR PnL backtesting under different parameter changes — Andrew notes the existing LR sim supports this and will draft a KB article; (2) exploring SI-PnL attribution per client — Kate to check the Exinity script Will C wrote; (3) want a "Big Boys" book with a lower VAR threshold to route large-clip clients and reduce exposure — achievable in next couple of days. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776761460382099)
+- 2026-04-21 — Will/Andrew internal discussion: Rostro LR tuning highlights the value of inverting the sim — "what params get me X $/M across client, with toxic top-5% at 50 $/M and everyone else ≤ 5 $/M" — vs forward parameter search. Declarative-rule direction flagged for future work. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776764246169119)
 - **Futures-based index pricing / custom basis** — Rostro asking about status; previously discussed with "Sammy". No clear owner on Mahi side; Andrew suggested discussing in person. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776353177596759)
 - **In-person client meeting** — Kate and Andrew scheduling via Will for next week or week after, LDN.
