@@ -14,7 +14,7 @@ Produce a focused digest of Slack activity and apply dossier updates directly. C
 
 ## Resolving the target
 
-- `/catchup <slug>` → `clients/<slug>.md`. Read channels from (in order): `channels_override` on the dossier, then `slack:` in `../VibePulse/.claude/clients/<slug>.yaml`. If VibePulse has multiple related yamls (e.g. `pepperstone` + `pepperstone-crypto`) and they share the same slack channels, they're one target — use either, they'll resolve to the same thing.
+- `/catchup <slug>` → `clients/<slug>.md`. Channels resolve from (in order): `channels_override` on the dossier, then `slack:` in `../VibePulse/.claude/clients/<slug>.yaml`. The VibePulse `slack:` block is a dict `{internal: <name>, client: <name>}` — **scan both**. The internal channel typically has the actual root-cause diagnosis; skipping it loses load-bearing context. If VibePulse has multiple related yamls (e.g. `pepperstone` + `pepperstone-crypto`) and they share the same slack channels, they're one target — use either, they'll resolve to the same thing.
 - `/catchup #<channel>` or `/catchup <channel-name>` → `channels/<name>.md`. If missing, create it from `channels/_template.md` and derive the frontmatter yourself (see "Bootstrap a channel dossier" below) — don't block.
 - `/catchup` (no arg) → rank all targets by `last_catchup` staleness × recent-message-count. For clients, use VibePulse + MahiProduct's active-client lists as the enumeration — if a slack-attack dossier is missing, **auto-bootstrap it** (see "Bootstrap a client dossier" below) rather than skipping. Digest the top 3–5. Report which ones you skipped and why.
 
@@ -42,7 +42,7 @@ If `channels/<name>.md` doesn't exist:
 For each target channel:
 
 1. `oldest` = `last_catchup` on the dossier, else 24h ago.
-2. Resolve channel_id: prefer `.claude/docs/slack-conventions.md` cache; else `slack_search_channels` with `channel_types: "public_channel,private_channel"`. Write any newly-resolved ID back to the cache.
+2. Resolve channel_id: prefer `.claude/docs/slack-conventions.md` cache; else `slack_search_channels` with `channel_types: "public_channel,private_channel"`. Write any newly-resolved ID back to the cache. If a client target's internal channel is missing from the cache, **don't skip it** — search for it and cache it on first sight. Absence-by-omission is the failure mode that cost us the axiory LD4 root-cause diagnosis on 2026-04-27.
 3. `slack_read_channel` with `oldest`, `limit: 100`. Note if hit the limit — there's more.
 4. For notable threads, `slack_read_thread` with the real `message_ts` (needs `response_format: "detailed"` when searching).
 
