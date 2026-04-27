@@ -21,7 +21,7 @@ Personal Slack catch-up tool for one reader (me, Cameron). Two things live here:
 Each dossier points at its refs via `refs:` in frontmatter. If a ref is `null`, the upstream doesn't cover it yet and slack-attack content is the effective source until it does. If an upstream disagrees with slack-attack, **trust the upstream** and remove the override here — unless the override is deliberate (note why).
 
 Rules:
-- Never write into `../MahiProduct/` or `../VibePulse/` from any workflow here.
+- Prefer writing to this project over `../MahiProduct/` or `../VibePulse/`.
 - `key_people_overrides` holds only external contacts not yet in `../MahiProduct/wiki/people/`, plus low-confidence discoveries waiting for promotion.
 - Don't re-state hosts, commercial terms, party names, or distribution markets in the dossier body — the refs are authoritative.
 
