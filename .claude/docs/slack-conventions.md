@@ -37,6 +37,30 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-amana` | C08SYSMP0EB |
 | `dev-eu` | C08KZ4L2HPF |
 | `dev` | C8568C6HG |
+| `mahi-argamon-operations` | C06TW3D8NMV |
+| `mahi-atc` | C04AZM0LPMH |
+| `mahi-axiory` | C06KHNQQYMR |
+| `internal-axiory` | C06KQT6EU3W |
+| `mahi-base-markets` | C09D8V41JAG |
+| `mahi-brightfunded` | C08473TFD7Z |
+| `mahi-exinity` | C0456LSHQQK |
+| `mahi-fintokei` | C08QWKFARDL |
+| `mahi-fundingpips` | C073FHA6TAR |
+| `mahi-gcc-brokers` | C09PNC1MFAA |
+| `mahi-infinox` | C022S6NL82D |
+| `mahi-instant-funding` | C076RHNUP36 |
+| `mahi-starprime` | C096422RPKK |
+| `internal-errante` | C09LE05K3FC |
+| `internal-go` | CNF3WPNSK |
+| `internal-the-5-percenters` | C079M09MGGP |
+| `mahi-the-five-percenters` | C07AQJS4E80 |
+| `internal-toponetrader` | C08TG143F4L |
+| `mahi-toponetraders` | C08U853T684 |
+| `internal-valutrades` | CP7A1F8BT |
+| `mahi-valutrades` | CSLM3Q8AD |
+| `mahi-valutrades-operations` | C09HN93T0G2 |
+| `internal-velocity` | CPDS0M2KF |
+| `mahi-velocity` | C05NB72AGR2 |
 
 ## My user ID
 

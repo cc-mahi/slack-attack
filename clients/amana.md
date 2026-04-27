@@ -10,10 +10,16 @@ key_people_overrides:
   - {name: "Karen Montero", role: "ops / test trading liaison", confidence: low}
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
-last_catchup: 2026-04-23T22:00:00Z
+last_catchup: 2026-04-27T09:35:00Z
 ---
 
 ## Recent issues
+
+> [open] 2026-04-24 — XAUUSD cenID 68015323 LR partial-fill leaves 0.504562oz residual
+> IoC trade filled to 248.495438oz; LR config produced a fractional residual the hedger can't clear (violates min/increment). Position manually adjusted; Mohamad asked to place offsetting sell of 0.504562oz XAUUSD on LP side. Mahi change in flight to round LR rate-limited fills to nearest minimum increment. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777030682390399)
+
+> [open] 2026-04-24 — Gold/silver futures contract rollover subscriptions (GC6Q_, SI6N_)
+> April gold (GC6M_) expiring; GC6Q_ activation 2026-04-27 — Nikos asked Rory to prep the subscription. Silver SI6N_ first notice ~week out. CMC + IG pricing gold/silver futures but Jump still not pricing any futures — Rory following up. US index futures (NQ6M_ etc.) also being set up; Rory confirming sub-symbol convention and min/step sizes with Maynard. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1776958276713199)
 
 > [open] 2026-04-23 — Gold skew post instant uplift
 > Uplift 2x last week on volume, but skew predictiveness slipped since Wed's instant uplift. Isaac proposing: bump base spread proportion 0.5→1.0, double Twilight base/benchmark, new LDN overrides at 1.2, swap IFMS→IFM. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776976532606559)

@@ -1,0 +1,19 @@
+---
+slug: starprime
+refs:
+  vibepulse: ../VibePulse/.claude/clients/starprime.yaml
+  billing: ../MahiProduct/data/billing/clients.json     # entry: starprime
+  hosts: ../MahiProduct/data/client-hosts.json          # entry: starprime
+  wiki: ../MahiProduct/wiki/clients/starprime.md
+channels_override: null
+key_people_overrides:
+  - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
+last_catchup: 2026-04-27T09:35:00Z
+---
+
+## Recent issues
+
+> [open] 2026-04-23 — REST API request for historical trade data
+> Shahid asked about connecting to MFX via REST API for historical trade data; Cameron Hughes suggested Pulse (`houseorder_response`) first — Shahid to check with Sam internally and revert. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1776941638461559)
+
+## Notable topics

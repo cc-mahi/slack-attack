@@ -11,10 +11,16 @@ key_people_overrides:
   - {name: "Will", role: "scheduling contact", confidence: low}
   - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
   - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
-last_catchup: 2026-04-24T09:00:00Z
+last_catchup: 2026-04-27T09:35:00Z
 ---
 
 ## Recent issues
+
+> [open] 2026-04-27 — YM.M26 invalid-size alerts on MAHI_CMC — step size mismatch (Mahi 0.05)
+> Andreas: receiving multiple alerts on YM.M26 on MAHI_CMC due to invalid size; their step is 0.05 and asked Mahi to adjust to match. Rory King acknowledged and will adjust. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777282393851299)
+
+> [open] 2026-04-24 — UBS direct feed — connect into Mahi rather than PXM
+> Owen: Rostro receiving a direct feed from UBS and want to connect directly into Mahi rather than via PXM; asked for the technical point of contact for UBS's tech team. Kate routed via support@mahifx.com. Awaiting UBS engagement. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777044459539369)
 
 > [open] 2026-04-23 — XNGUSD retail-feed pricing still being finalised
 > Abdullah tried subscribing XNGUSD/NGC1 and got `unknown symbol`; Kate confirmed the correct mapping is `NG1USD` but pricing is still being finalised — don't send flow yet. Jump sub-code `NTGASP` confirmed earlier. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776932072322889)
