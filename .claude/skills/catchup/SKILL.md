@@ -27,7 +27,8 @@ If `clients/<slug>.md` doesn't exist:
 3. Fill `refs:` — point `vibepulse` at the yaml(s), `billing`/`hosts` at the MahiProduct catalogues, `wiki` at `../MahiProduct/wiki/clients/<slug>.md` if it exists else `null`.
 4. Leave `channels_override: null`, `key_people_overrides: []`, `last_catchup: null`.
 5. Leave `Recent issues` and `Notable topics` empty — the current `/catchup` run will populate them.
-6. Note the bootstrap in the digest output ("bootstrapped `clients/<slug>.md` from VibePulse").
+6. **Status section:** if `wiki:` is set (MahiProduct has it), delete the `## Status` section entirely — the wiki is canonical. If `wiki: null`, keep the section and populate from VibePulse + the catchup window's signals (stage, integration, relationship — three bullets, one line each). Don't fabricate; if a field is unknown, write `unknown` and move on.
+7. Note the bootstrap in the digest output ("bootstrapped `clients/<slug>.md` from VibePulse").
 
 ### Bootstrap a channel dossier
 
@@ -58,7 +59,7 @@ In priority order:
 4. **Escalations** — client dissatisfaction, outages, urgent language, specific incidents.
 5. **Recurring issues** — topic already in the dossier's `Recent issues` that's flaring again.
 6. **New external people** — client/prospect/vendor names that aren't yet in `../MahiProduct/wiki/people/` *and* aren't already in `key_people_overrides`.
-7. **Dossier-contradicting facts** — e.g. VibePulse says `SI book` but messages discuss churn/pause; flag but don't edit VibePulse.
+7. **Dossier-contradicting facts** — e.g. VibePulse says `SI book` but messages discuss churn/pause; flag but don't edit VibePulse. If the contradiction is about longer-term state (stage / integration / relationship) on a `wiki: null` dossier, refresh the `## Status` section in the same run.
 
 Routine bot pings, deployment notifications, and single-reaction chatter are not notable. Skip silently.
 

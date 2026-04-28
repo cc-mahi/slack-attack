@@ -10,6 +10,14 @@ key_people_overrides: []                                   # external contacts n
 last_catchup: null                                         # ISO8601; updated by /catchup
 ---
 
+## Status
+
+Populate **only when `wiki: null`** — i.e. MahiProduct doesn't yet have a `wiki/clients/<slug>.md`. Three lines, no more. Delete this whole section when a wiki page lands and update the `wiki:` ref.
+
+- **Stage:** live / onboarding / pre-launch / paused / churned
+- **Integration:** one line — what they're using us for (platforms, products, scope)
+- **Relationship:** one line — health / cadence / primary contact
+
 ## Recent issues
 
 Reverse chronological. Trim entries >90d. Each entry:

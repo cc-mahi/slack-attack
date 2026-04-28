@@ -19,7 +19,8 @@ Most of the time you don't need this — `/catchup <slug>` auto-bootstraps a mis
    - `wiki`: `../MahiProduct/wiki/clients/<slug>.md` if that file exists, else `null`.
 4. Leave `channels_override: null`, `key_people_overrides: []`, `last_catchup: null`.
 5. Leave `Recent issues` and `Notable topics` sections empty — `/catchup` populates those.
-6. Report what you filled in and what you left `null` / empty.
+6. **Status section:** if `wiki:` resolves to an existing file (MahiProduct has it), delete the `## Status` section entirely — the wiki is canonical. If `wiki: null`, keep the section's bullet skeleton (`Stage:` / `Integration:` / `Relationship:`) with placeholder values for `/catchup` (or Cameron) to fill.
+7. Report what you filled in and what you left `null` / empty.
 
 ## Rules
 
