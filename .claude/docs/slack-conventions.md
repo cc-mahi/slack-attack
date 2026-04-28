@@ -35,6 +35,8 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-rostro` | C08AQKRU953 |
 | `internal-amana` | C08T42TMKU3 |
 | `mahi-amana` | C08SYSMP0EB |
+| `internal-alphacapitalgroup` | C06UHTDQ8JF |
+| `mahi-alphacapitalgroup` | C070016ND6X |
 | `dev-eu` | C08KZ4L2HPF |
 | `dev` | C8568C6HG |
 | `internal-argamon` | C06U76A7ZJR |
