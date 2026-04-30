@@ -2,8 +2,11 @@
 
 Personal Slack catch-up tool for one reader (me, Cameron). Two things live here:
 
-1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere.
-2. **`/catchup`** — pulls Slack activity since `last_catchup`, produces a digest, and applies dossier updates in place.
+1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere. The dossier is the durable artefact and can be detailed / jargon-dense.
+2. **Skills**:
+   - **`/catchup <target>`** — worker. Pulls Slack since `last_catchup` and edits one dossier in place. Output is a structured confirmation, not a readable brief.
+   - **`/slack-attack [slug]`** — reader-facing entrypoint. Dispatches `/catchup` in subagents (to keep main context clean), then synthesises a natural-language prose brief from the updated dossier(s) for me. With no slug it batches across active clients oldest-first, until the brief is substantial, then prompts to continue.
+   - **`/seed-client <slug>`** — pre-create a stub dossier without running a catch-up. Rarely needed; `/catchup` auto-bootstraps.
 
 ## Source-of-truth boundary
 
@@ -28,7 +31,8 @@ Rules:
 
 ## Tone
 
-- Digest output is for one reader (me). Be terse, skip preamble, lead with what's new/important.
+- The brief (slack-attack output) is for one reader (me). Natural-language prose, terse, no preamble, lead with what's new/important. No bullet checklists of open/resolved — verbs handle that ("hit a snag", "got closed", "is still being debugged"). Embed technical names inside sentences rather than chaining them as keywords.
+- catchup's output (to its caller) is structured, not prose. The dossier is the artefact; the readable form is slack-attack's job.
 - "Notable" means: direct mention of me (Slack user `U099FA0D7CP`), a question awaiting reply, a decision, an escalation, a recurring issue, or something that contradicts the dossier. Routine bot noise is not notable.
 
 ## Slack MCP conventions
@@ -43,9 +47,13 @@ Rules:
 
 - `/catchup` applies changes directly — I review via `git diff` and commit when happy. No accept step.
 - `last_catchup` in frontmatter is the source of truth for "where did we leave off". Update it as part of the same `/catchup` edit.
-- Keep prose short. `Recent issues` is reverse chronological, trim entries older than ~90 days.
+- Keep dossier `Recent issues` reverse chronological, trim entries older than ~90 days. The dossier itself can be dense and detailed; readability is `/slack-attack`'s problem, not the dossier's.
 - Use `Edit`, not `Write`, for dossier updates — keeps diffs small and readable.
 - If a dossier doesn't exist for a client `/catchup` is asked about, auto-bootstrap a minimal one from the VibePulse yaml (hosts, slack channels) rather than blocking.
+
+## Brief output (slack-attack)
+
+The brief is for me, in the terminal. Prose paragraphs, not bullet checklists. Each claim that's grounded in a Slack thread gets a numbered bare-URL reference (`[N]` inline, URL on its own line below the sentence). Per-client numbering, resets at each client header. Bare URLs only — no labelled markdown links (Ghostty + my ctrl+space,space picker can't open those).
 
 ## Layout
 
@@ -54,9 +62,9 @@ clients/     per-client dossiers (_template.md is the schema)
 channels/    per-channel dossiers for non-client channels
 .claude/
   skills/
-    catchup/       /catchup [target]
-    seed-client/   /seed-client <slug>
-    slack-attack/  /slack-attack [slug] — higher-level brief from dossiers (no Slack)
+    catchup/       /catchup <target>            — worker, edits one dossier
+    slack-attack/  /slack-attack [slug]         — orchestrator + reader-facing brief
+    seed-client/   /seed-client <slug>          — pre-create stub dossier
   docs/
     slack-conventions.md   channel patterns + skip rules
 ```
