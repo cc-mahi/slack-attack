@@ -59,6 +59,33 @@ For each target channel:
 
 Skip channels matching the skip list in `.claude/docs/slack-conventions.md`.
 
+## Resolving ambiguity — expand the window
+
+The default windows (24h since `last_catchup`, 30d when freshly bootstrapped) are starting points, not ceilings. **If what you find references events you can't see, dig deeper before writing the dossier.** The bar is: every `Recent issues` entry should stand on its own without phrases like "pre-window", "per earlier event", or "following the [unspecified] incident". If you'd have to write that, you haven't read enough yet.
+
+This matters most for clients **without an established dossier** — Cameron shouldn't have to manually `/seed-client` and re-run to get a coherent first pass. catchup should keep digging until the picture is clear, on its own.
+
+Triggers to expand:
+
+- A message in the window refers to an earlier event you don't have context for ("after the mid-April pause", "since the X incident", "client lost N on Y", "post-decommission", "now that we've moved off Z").
+- Cross-channel signals contradict and you can't tell which is current — e.g. one channel discusses winding infra down, another shows ongoing automation/onboarding work. (Real example: fundingpips 2026-04-30 — internal channel discussed AWS shutdown costs, while the same window had a terraform import suggesting infra still being maintained. The dossier ended up with "pre-window" leaning on a David Cooney comment about a futures-business loss the agent never read directly.)
+- The dossier has no prior `Recent issues` to anchor against (freshly bootstrapped, or first real-content run) and the immediate window leaves you guessing about lifecycle / status / what-changed-recently.
+- Status section (when `wiki: null`) can't be filled in confidently — e.g. you can't say if integration is "live", "paused", or "winding down" from the window alone.
+
+How to expand, in order:
+
+1. **Widen the channel reads** on the target's resolved channels. Bump `oldest` to 60d, then 90d if still incoherent. Re-run `slack_read_channel`.
+2. **Search the slug across all channels** with `slack_search_public_and_private` (default context on, no narrow window) to surface earlier mentions in #sales, #frontoffice, #internal-trading-daily-checks, etc. Apply the cross-channel rule (trigger, not truth) — but use these to decide *where to read next*, not what to write directly.
+3. **Read parent threads.** If the in-window message has a `thread_ts` referencing earlier replies, fetch them with `slack_read_thread`.
+4. **Follow the breadcrumb.** Once you've located the earlier event referenced (e.g. the original "we're pausing flow" message), read its surrounding context — the decisions and follow-ups around it usually answer the ambiguity.
+
+Stopping rule:
+
+- You can write each `Recent issues` entry self-contained, with concrete dates and permalinks for the events it references.
+- Hard cap: 90d back. Beyond that, write what you have, **flag the open question explicitly** in the entry ("earliest signal in this window — older context not searched"), and move on. Don't loop indefinitely.
+
+Cost note: this trades latency for dossier quality. A first-time fundingpips catchup pulling 90d is going to be slower than a normal 24h refresh. That's fine — the dossier is durable, so the cost is paid once.
+
 ## What counts as notable
 
 In priority order:
