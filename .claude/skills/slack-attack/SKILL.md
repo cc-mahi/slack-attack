@@ -47,17 +47,20 @@ Run catchups in **subagents** so the Slack reads stay out of the main thread. Us
 
 > Run the `catchup` skill for slug `<slug>` and return the structured summary it produces. Use the Skill tool: `Skill(skill="catchup", args="<slug>")`. After it completes, paste the catchup summary verbatim and stop. Do not add commentary, do not produce a prose digest — that's the orchestrator's job.
 
-Dispatch is **serial and interleaved with synthesis**. The loop is:
+Dispatch is **parallel in the background, with streaming synthesis**. The loop is:
 
-1. Pick the next client.
-2. Dispatch its catchup subagent. Wait for it to return.
-3. Read the updated dossier (`git diff` + full read for context).
-4. **Synthesise and print that client's prose section immediately.** Cameron should see the brief streaming in client-by-client, not waiting for the whole batch.
-5. Decide whether to continue (per the stopping rule below) or stop and show the remaining-clients table.
+1. Pick the top N clients from `scripts/rank-clients` (N ≤ 5 hard cap; fewer if there are fewer to do).
+2. Dispatch all N catchup subagents at once with `run_in_background: true`. Print one `→ catching up <slug>…` line per dispatch so Cameron knows what's running.
+3. As each subagent completion notification arrives:
+   a. Read the updated dossier (`git diff` + full read for context).
+   b. **Synthesise and print that client's prose section immediately.** Don't wait for the rest.
+4. After the last subagent completes, print the continuation table.
 
-Do not parallel-dispatch and do not buffer the brief until the end. A 10-minute silent wait while five subagents run in the background is the failure mode this skill is structured to avoid.
+Section ordering will be **completion-time, not staleness-rank** — that's intentional. Quick wins (quiet clients, small windows) print first; heavy ones land later but don't block the others. Total wall time = the slowest single subagent, not the sum.
 
-Slack rate-limit risk also stays low this way, but the primary reason is feedback latency — Cameron reading paragraph 1 while catchup 2 is running is the whole point.
+Do not synthesise serially or buffer the brief until the end. The whole point of the parallel-background model is that Cameron sees output as soon as each catchup is done, with no idle main thread.
+
+Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`) are typically lenient enough for 5-way concurrency. If you hit a 429, the subagent will surface it in its return summary; treat it as a bug to revisit rather than something to pre-throttle for.
 
 ## Reading the updated dossier
 
@@ -88,11 +91,17 @@ Length is fuzzy: a quiet window gets one paragraph (or a one-liner); a heavy wee
 
 Rules:
 
-- **Bare URLs only.** No `[label](url)` markdown — Cameron's terminal can't open those. URLs go on their own line directly under the sentence whose claim they support.
+- **One issue per paragraph.** Don't chain multiple distinct events into a single wall-of-text paragraph just because they all happened in the window. Each `[N]` reference belongs to its own short paragraph — typically a lead sentence, then one or two of supporting detail, then the URL line. If you find yourself joining two unrelated topics with "; meanwhile…" or "the same evening…", break the paragraph instead.
+- **Plain-English lead.** The first sentence of each paragraph must be readable by someone who's been away from the desk for a week. Lead with the human shape — *who, what, status* — not internal jargon. ❌ "Erik reckons it's the expected LR effect plus LL PnL we recapture (PI is off on Radex's FX-crosses execution rules)" — opaque without prior context. ✅ "Radex (client) flagged slippage on three FX crosses; our take is it's expected behaviour from how we throttle pricing, and a sample trade actually netted us PnL despite the apparent loss." Acronyms can show up in the second clause once the topic is anchored, but never as the lede.
+- **Glossary discipline.** When you use a Mahi-internal acronym (LR, LL, PI, PnL recapture, B_CLIENTS_RA, MAHI_CONTINUITY_NYC, etc.), the surrounding sentence should make the *role* of that thing legible — even if Cameron doesn't recall the exact definition cold. "the LR throttle on B_CLIENTS_RA" beats "LR on B_CLIENTS_RA" because the word *throttle* anchors the meaning. The dossier carries the deep technical detail; the brief gives Cameron enough to know whether to click the link.
+- **Active voice, status via verbs.** "Radex flagged slippage." "We closed the XAGUSD spike." "The execution-rule flag is still under discussion." Past tense for what happened, present for what's still rough, future for what's coming. Don't add `[open]`/`[resolved]` markers; the verbs do that work.
+- **Bare URLs only.** No `[label](url)` markdown — Cameron's terminal can't open those. URLs go on their own line directly under the paragraph that supports them.
 - **`[N]` references inline in the prose**, matched to the URL line below. Cameron uses these to refer back ("what's [3]?").
 - **Per-client numbering**, resets at each client section in a multi-client brief. Cameron disambiguates by client header ("amana [3]").
 - **No bullet checklists** of open/resolved. The prose verb tense already signals status; the dossier carries the structured list for anyone who wants it.
 - **Don't restate upstream refs.** Hosts, commercial terms, party names, distribution markets live in VibePulse / MahiProduct. Reference them by name where needed but don't expand.
+
+Test for whether the brief is working: read the first sentence of each paragraph aloud, in order. If that read alone tells Cameron the shape of the window — what's hot, what closed, what's pending — the brief is good. If it's just a list of acronyms strung together, rewrite.
 
 ### Quiet weeks
 
@@ -106,15 +115,11 @@ That's it — no padding, no numbered refs.
 
 ## Output — batched (`/slack-attack` no-arg)
 
-Per-client sections are printed **as soon as that client's catchup returns** (see "Dispatching catchup" above). The brief streams in client-by-client; do not buffer until the whole batch completes.
+Per-client sections are printed **as soon as that client's catchup returns** (see "Dispatching catchup" above). The brief streams in completion-order — quick wins first, heavy ones later — and the order is **not** tied to the staleness ranking the dispatch was based on.
 
-After printing each client's section, decide whether to continue to the next or stop and prompt. Stop when the brief **feels substantial** — roughly three to five paragraphs of real content total, not counting one-liners for quiet clients. The judgement is fuzzy on purpose: one heavy client can be enough on its own; five quiet ones plus one busy one might also be a natural stop.
+Batch size: pick the top N from `scripts/rank-clients`, capped at 5. All N are dispatched in parallel up front; there's no mid-batch stopping rule any more (with parallelism, the cost is fixed once dispatched, so let them all complete and print).
 
-Hard cap: 5 clients per batch regardless of volume, so Cameron always gets a chance to react.
-
-Optional progress line: before dispatching each subagent, you can print a one-line "→ catching up <slug>…" so Cameron knows what's running while the subagent is in flight. Drop it once the section prints.
-
-When the batch ends (substantial, hard cap, or no clients left), append the continuation table:
+After the last subagent completes, append the continuation table:
 
 ```
 ---
