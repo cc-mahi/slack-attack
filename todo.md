@@ -1,0 +1,8 @@
+- refactor refs from Cameron to user or something like that. others may want to use the scripts here
+- update sa skill to commit after running catchup
+- idea: a way to prioritise which stories are worth highlighting?\
+- idea: run on a schedule and send me highlights summary
+- idea: if data is recent (e.g. up to today) a lighter weight skill to just brief me based on the existing dossier
+  - does this fold in to the same skill? or should be ad hoc?
+- possibly some of the recent issues are a bit low importance. do we keep them in the flow but use sa skill to float the high importance ones?
+  - might event want curation of the doc as part of the catchup skill (or another one). as is could end up with long polluted file. perhaps summarisation after issues age out by a few weeks?
