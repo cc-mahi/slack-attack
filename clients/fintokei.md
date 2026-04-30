@@ -8,22 +8,17 @@ refs:
 channels_override: null
 key_people_overrides: []
 last_catchup: 2026-04-27T09:35:00Z
-status: retired
-retired_at: 2026-04-29
-retired_reason: |
-  Sales (Nia Rose) confirmed in #sales 2026-04-29 "Errante and Fintokei are no longer with us".
-  https://mahifx.slack.com/archives/C8YMBES8N/p1777452857245439
 ---
 
 ## Status
 
-- Stage: offboarded — sales confirms "Errante and Fintokei are no longer with us" (Nia Rose, #sales, 2026-04-29).
-- Integration: dormant — being removed from active client lists; channel state not yet verified from this end.
-- Relationship: ended.
+- Stage: live — prop-firm B-book, low-spread pricing model in production.
+- Integration: live — Fintokei MT5 via Compass on `fintokei-ln-*`, YourBourse FIX connector being set up. CLIENT_PRICE_LDN distribution.
+- Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
 
-> [resolved] 2026-04-29 — Fintokei offboarded
-> Sales (Nia Rose) noted in #sales that Fintokei (alongside Errante) is no longer a client. Worth verifying internal-fintokei archive state and any residual flow on next sweep before this dossier is fully closed out. [sales note](https://mahifx.slack.com/archives/C8YMBES8N/p1777452857245439)
+> [open] 2026-04-16 — `fintokei-ln-trading-1` mysql volume at 90%
+> Cameron flagged in #internal-fintokei (2026-04-16 16:41 BST): archiver retention defaults left in place on `PROD_LIVE_CLIENTDB`, top tables (EnrichedTradeOutputSummary 89GB, HouseOrder 84GB, HOUSE1PositionHistory 67GB) growing fast. LVM has ~1.26TB free so growing the volume buys time, but real fix is archiver overrides matching Funding Pips (POSITION_HISTORY 365→3 days, ORDER_HISTORY 365→30 days). Estimated ~2 weeks until full at current rate. https://mahifx.pagerduty.com/incidents/Q114Z685M3X0C1
 
 ## Notable topics
