@@ -7,7 +7,7 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/fintokei.md (not yet)
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-04-27T09:35:00Z
+last_catchup: 2026-04-30T10:30:00Z
 ---
 
 ## Status
