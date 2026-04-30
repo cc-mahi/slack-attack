@@ -39,9 +39,17 @@ Run catchups in **subagents** so the Slack reads stay out of the main thread. Us
 
 > Run the `catchup` skill for slug `<slug>` and return the structured summary it produces. Use the Skill tool: `Skill(skill="catchup", args="<slug>")`. After it completes, paste the catchup summary verbatim and stop. Do not add commentary, do not produce a prose digest — that's the orchestrator's job.
 
-Default to **serial** dispatch (one client at a time). Cameron sees streaming progress and Slack rate-limit risk stays low. Parallel is fine if you have a reason — clients are independent — but don't bother by default.
+Dispatch is **serial and interleaved with synthesis**. The loop is:
 
-After each subagent returns, the dossier on disk has been updated. Read it directly to synthesise the prose.
+1. Pick the next client.
+2. Dispatch its catchup subagent. Wait for it to return.
+3. Read the updated dossier (`git diff` + full read for context).
+4. **Synthesise and print that client's prose section immediately.** Cameron should see the brief streaming in client-by-client, not waiting for the whole batch.
+5. Decide whether to continue (per the stopping rule below) or stop and show the remaining-clients table.
+
+Do not parallel-dispatch and do not buffer the brief until the end. A 10-minute silent wait while five subagents run in the background is the failure mode this skill is structured to avoid.
+
+Slack rate-limit risk also stays low this way, but the primary reason is feedback latency — Cameron reading paragraph 1 while catchup 2 is running is the whole point.
 
 ## Reading the updated dossier
 
@@ -90,13 +98,15 @@ That's it — no padding, no numbered refs.
 
 ## Output — batched (`/slack-attack` no-arg)
 
-Run the same single-client format for each client in turn. Concatenate them with a blank line between, oldest-staleness first.
+Per-client sections are printed **as soon as that client's catchup returns** (see "Dispatching catchup" above). The brief streams in client-by-client; do not buffer until the whole batch completes.
 
-Stop accumulating clients when the brief **feels substantial** — roughly three to five paragraphs of real content total, not counting one-liners for quiet clients. The judgement is fuzzy on purpose: one heavy client can be enough on its own; five quiet ones plus one busy one might also be a natural stop.
+After printing each client's section, decide whether to continue to the next or stop and prompt. Stop when the brief **feels substantial** — roughly three to five paragraphs of real content total, not counting one-liners for quiet clients. The judgement is fuzzy on purpose: one heavy client can be enough on its own; five quiet ones plus one busy one might also be a natural stop.
 
 Hard cap: 5 clients per batch regardless of volume, so Cameron always gets a chance to react.
 
-After the brief, append a continuation table:
+Optional progress line: before dispatching each subagent, you can print a one-line "→ catching up <slug>…" so Cameron knows what's running while the subagent is in flight. Drop it once the section prints.
+
+When the batch ends (substantial, hard cap, or no clients left), append the continuation table:
 
 ```
 ---
