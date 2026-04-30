@@ -73,6 +73,20 @@ In priority order:
 
 Routine bot pings, deployment notifications, and single-reaction chatter are not notable. Skip silently.
 
+## Cross-channel signals — trigger, not truth
+
+`slack_read_channel` is the authoritative read — scoped to the target's resolved channels (`channels_override` → VibePulse `slack:` block → cache). Anything from there can be written into the dossier directly.
+
+`slack_search_public_and_private` for the slug across all channels is allowed and sometimes load-bearing (e.g. an offboarded client's `internal-<slug>` is archived; the only live signal is in `#sales` or `#internal-trading-daily-checks`). But search results are **triggers to investigate, not authoritative state**.
+
+Rules for any cross-channel hit:
+
+1. **Corroborate against the target's own channels before writing it as fact.** If a #sales message claims a client is offboarded, check `internal-<slug>` and `mahi-<slug>` activity in the same window — channels still live, recent client comms, live PnL or dashboards all contradict it. Mismatches are usually typos, scope confusion, or someone speaking about a specific product/contract rather than the whole relationship. (Real example: 2026-04-29 #sales note grouped Fintokei with Errante as offboarded; Errante checked out, Fintokei did not — channels live, B-book PnL active, FIX integration in flight.)
+2. **Read the context, don't just keyword-match.** `slack_search_public_and_private` returns surrounding messages by default (`include_context: true`) — don't pass `include_context: false` for lifecycle hits, and don't collapse a hit to a one-line summary that throws the context away. The neighbouring messages often contain the correction or qualifier (real example: 2026-04-29 #sales note grouping Fintokei with Errante was a typo Nia self-corrected in a follow-up; the worker had access to it via search context but reported only the matching line). If the context didn't include enough to corroborate, `slack_read_channel` the source around the hit's `message_ts`, or `slack_read_thread` if it's threaded.
+3. **If corroboration fails, write the contradiction, not the claim.** A `[open]` Recent issues entry naming both signals ("sales says X, target channels show Y") is more useful than picking one and being wrong.
+
+This applies to lifecycle claims especially (offboarded, paused, churned, contract changes) — the kind of thing that drives `status: retired`. Don't retire a dossier on cross-channel signal alone.
+
 ## Updating the dossier
 
 Apply edits with `Edit`, not `Write`, so diffs stay minimal (except when bootstrapping a new dossier).
