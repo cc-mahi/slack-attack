@@ -15,17 +15,21 @@ The brief is the product Cameron reads. The dossier is the durable artefact behi
 - `/slack-attack <slug>` → refresh and brief one client.
 - `/slack-attack` (no arg) → batched flow across active clients, oldest `last_catchup` first, until the brief is substantial. Then prompt to continue.
 
-## Active-client enumeration
+## Active-client enumeration and ranking
 
-For the no-arg flow, the universe of clients is the union of:
+Run `scripts/rank-clients` from the repo root. It enumerates the union of `clients/*.md`, `../VibePulse/.claude/clients/*.yaml`, and `../MahiProduct/data/billing/clients.json`, and returns tab-separated rows sorted oldest-`last_catchup`-first (with never-caught-up clients sorted to the very top, since they're effectively the most stale):
 
-- `clients/*.md` (excluding `_template.md`) — anything that already has a dossier here.
-- `../VibePulse/.claude/clients/*.yaml` — anything VibePulse considers a client.
-- `../MahiProduct/data/billing/clients.json` — anything billed.
+```
+slug    last_catchup    days_since    note
+```
 
-If a client appears in VibePulse or billing but has no dossier, it's eligible — `/catchup` will bootstrap on first contact.
+- `last_catchup`: ISO string from frontmatter, or `never`.
+- `days_since`: integer with `d` suffix, or `—` for `never`.
+- `note`: `bootstrap` if there's no local dossier yet (catchup will create one on first contact), else blank.
 
-**Exclude retired clients.** A dossier with `status: retired` in frontmatter is dropped from the no-arg rotation entirely — silently skipped, not listed in the continuation table. The `retired_at` / `retired_reason` fields capture when and why; the dossier stays on disk as a frozen record.
+Take the top N rows (start with N=5; that's also the hard cap on a batch). **Do not reimplement the parse inline** — the script handles frontmatter parsing, retired-client filtering, billing JSON shape, and date arithmetic in one place. Past attempts at inline shell hit zsh's reserved `status` variable and JSON-shape mismatches; that's why the script exists.
+
+Retired clients (`status: retired` in dossier frontmatter) are excluded by default — the script handles this. They're silently dropped from the no-arg rotation and never appear in the continuation table. Pass `--include-retired` only for ad-hoc inspection.
 
 If Cameron runs `/slack-attack <slug>` against a retired client, **short-circuit**: print one line and stop, no subagent, no Slack pull.
 
@@ -35,11 +39,7 @@ If Cameron runs `/slack-attack <slug>` against a retired client, **short-circuit
 
 Re-activating is a deliberate edit: remove `status: retired` from frontmatter, then run `/catchup <slug>` normally. Don't try to make slack-attack do it for him.
 
-## Ranking
-
-Order by `last_catchup` staleness, oldest first. `null` (never caught up) sorts oldest-of-all. Ties broken alphabetically.
-
-That's it for v1. Don't try to weight by activity, dossier volume, or pinning — staleness alone is enough until proven otherwise.
+That's the ranking — staleness alone, no activity weighting or pinning. If that proves wrong over time, change the script, not the skill.
 
 ## Dispatching catchup
 

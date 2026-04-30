@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+"""Enumerate active clients and rank by /catchup staleness, oldest first.
+
+Sources (union):
+  - clients/*.md                                — local dossiers (excluding _template.md)
+  - ../VibePulse/.claude/clients/*.yaml         — slug = filename basename
+  - ../MahiProduct/data/billing/clients.json    — clients[].slug
+
+Output: tab-separated rows, columns:
+  slug    last_catchup    days_since    note
+
+  - last_catchup: ISO string from dossier frontmatter, or 'never' if no dossier or null
+  - days_since:   integer with 'd' suffix, or '—' if 'never'
+  - note:         'bootstrap' if no local dossier yet, else blank
+
+Sort: 'never' first (oldest of all), then by days_since descending, then slug alphabetical.
+
+Retired clients (status: retired in dossier frontmatter) are excluded by default;
+pass --include-retired to keep them.
+"""
+
+import argparse
+import json
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent.parent
+DOSSIER_DIR = REPO / "clients"
+VIBEPULSE_DIR = REPO.parent / "VibePulse" / ".claude" / "clients"
+BILLING_PATH = REPO.parent / "MahiProduct" / "data" / "billing" / "clients.json"
+
+
+def parse_frontmatter(path: Path) -> dict:
+    """Pull top-level key: value pairs from a YAML frontmatter block.
+
+    Skips indented (nested) lines and comments. Good enough for the flat
+    keys we care about: last_catchup, status. Don't use this for refs.
+    """
+    text = path.read_text()
+    if not text.startswith("---\n"):
+        return {}
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}
+    out = {}
+    for line in text[4:end].splitlines():
+        if not line or line[0] in (" ", "\t", "#"):
+            continue
+        if ":" not in line:
+            continue
+        k, _, v = line.partition(":")
+        out[k.strip()] = v.strip().strip('"').strip("'")
+    return out
+
+
+def collect() -> dict:
+    slugs = {}
+
+    if DOSSIER_DIR.is_dir():
+        for p in sorted(DOSSIER_DIR.glob("*.md")):
+            if p.stem == "_template":
+                continue
+            fm = parse_frontmatter(p)
+            slugs[p.stem] = {
+                "last_catchup": fm.get("last_catchup") or None,
+                "status": fm.get("status") or "active",
+                "has_dossier": True,
+            }
+
+    if VIBEPULSE_DIR.is_dir():
+        for p in VIBEPULSE_DIR.glob("*.yaml"):
+            slugs.setdefault(p.stem, {
+                "last_catchup": None,
+                "status": "active",
+                "has_dossier": False,
+            })
+
+    if BILLING_PATH.is_file():
+        data = json.loads(BILLING_PATH.read_text())
+        for entry in data.get("clients", []):
+            slug = entry.get("slug")
+            if not slug:
+                continue
+            slugs.setdefault(slug, {
+                "last_catchup": None,
+                "status": "active",
+                "has_dossier": False,
+            })
+
+    return slugs
+
+
+def days_since(iso):
+    if not iso or iso.lower() == "null":
+        return None
+    try:
+        dt = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return max(0, (datetime.now(timezone.utc) - dt).days)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--include-retired", action="store_true",
+                    help="Include retired clients (default: exclude)")
+    args = ap.parse_args()
+
+    slugs = collect()
+
+    rows = []
+    for slug, info in slugs.items():
+        if info["status"] == "retired" and not args.include_retired:
+            continue
+        d = days_since(info["last_catchup"])
+        rows.append({
+            "slug": slug,
+            "last_catchup": info["last_catchup"] or "never",
+            "days": d,
+            "note": "" if info["has_dossier"] else "bootstrap",
+        })
+
+    rows.sort(key=lambda r: (
+        0 if r["days"] is None else 1,
+        -(r["days"] or 0),
+        r["slug"],
+    ))
+
+    for r in rows:
+        days_str = "—" if r["days"] is None else f"{r['days']}d"
+        print(f"{r['slug']}\t{r['last_catchup']}\t{days_str}\t{r['note']}")
+
+
+if __name__ == "__main__":
+    main()
