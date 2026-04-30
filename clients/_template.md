@@ -22,6 +22,10 @@ Populate **only when `wiki: null`** — i.e. MahiProduct doesn't yet have a `wik
 - **Integration:** one line — what they're using us for (platforms, products, scope)
 - **Relationship:** one line — health / cadence / primary contact
 
+## History
+
+Long-horizon relationship arc — major status changes, integrations, commercial milestones, stakeholder evolution. Populated by `/backfill`, not `/catchup`. Optional — only present when `/backfill` has been run. Lives between `## Status` (if present) and `## Recent issues`. Refused if `wiki:` is set (the wiki page is canonical for relationship history).
+
 ## Recent issues
 
 Reverse chronological. Trim entries >90d. Each entry:

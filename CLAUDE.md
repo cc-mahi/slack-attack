@@ -2,11 +2,11 @@
 
 Personal Slack catch-up tool for one reader (me, Cameron). Two things live here:
 
-1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere. The dossier is the durable artefact and can be detailed / jargon-dense.
+1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `History` (long-horizon relationship arc), `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere. The dossier is the durable artefact and can be detailed / jargon-dense.
 2. **Skills**:
-   - **`/catchup <target>`** — worker. Pulls Slack since `last_catchup` and edits one dossier in place. Output is a structured confirmation, not a readable brief.
+   - **`/catchup <target>`** — worker. Pulls Slack since `last_catchup` and edits one dossier in place (Recent issues + Notable topics). Output is a structured confirmation, not a readable brief.
    - **`/slack-attack [slug]`** — reader-facing entrypoint. Dispatches `/catchup` in subagents (to keep main context clean), then synthesises a natural-language prose brief from the updated dossier(s) for me. With no slug it batches across active clients oldest-first, until the brief is substantial, then prompts to continue.
-   - **`/seed-client <slug>`** — pre-create a stub dossier without running a catch-up. Rarely needed; `/catchup` auto-bootstraps.
+   - **`/backfill <slug>`** — one-shot lookback worker. Default 12m horizon; populates the dossier's `## History` section with the relationship arc. Suggests an extension run if older history is detected. Run once per client (or twice with `--since YYYY-MM-DD` to extend). Refuses if a wiki page exists upstream.
 
 ## Source-of-truth boundary
 
@@ -63,9 +63,9 @@ clients/     per-client dossiers (_template.md is the schema)
 channels/    per-channel dossiers for non-client channels
 .claude/
   skills/
-    catchup/       /catchup <target>            — worker, edits one dossier
+    catchup/       /catchup <target>            — worker, edits Recent issues + Notable topics
     slack-attack/  /slack-attack [slug]         — orchestrator + reader-facing brief
-    seed-client/   /seed-client <slug>          — pre-create stub dossier
+    backfill/      /backfill <slug>             — one-shot lookback, populates ## History
   docs/
     slack-conventions.md   channel patterns + skip rules
 ```
