@@ -71,6 +71,8 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `internal-go` | CNF3WPNSK |
 | `internal-the-5-percenters` | C079M09MGGP |
 | `mahi-the-five-percenters` | C07AQJS4E80 |
+| `internal-toa-ops` | C035H1VNCAD |
+| `toa-nado-shared` | C09RGU1T1GE (cross-workspace: ink-foundation) |
 | `internal-toponetrader` | C08TG143F4L |
 | `mahi-toponetraders` | C08U853T684 |
 | `internal-valutrades` | CP7A1F8BT |
