@@ -8,6 +8,9 @@ refs:
 channels_override: null                                    # only if VibePulse is wrong for this client
 key_people_overrides: []                                   # external contacts not yet in ../MahiProduct/wiki/people/; [{name, role, confidence: low}]
 last_catchup: null                                         # ISO8601; updated by /catchup
+status: active                                             # active (default — omit) | retired
+retired_at: null                                           # YYYY-MM-DD when status: retired
+retired_reason: null                                       # short prose + permalink(s) when status: retired
 ---
 
 ## Status

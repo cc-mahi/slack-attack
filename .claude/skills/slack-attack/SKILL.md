@@ -25,7 +25,15 @@ For the no-arg flow, the universe of clients is the union of:
 
 If a client appears in VibePulse or billing but has no dossier, it's eligible — `/catchup` will bootstrap on first contact.
 
-(Future: a `status: retired` flag in dossier frontmatter will exclude clients from rotation. Not implemented yet — manually skip if asked.)
+**Exclude retired clients.** A dossier with `status: retired` in frontmatter is dropped from the no-arg rotation entirely — silently skipped, not listed in the continuation table. The `retired_at` / `retired_reason` fields capture when and why; the dossier stays on disk as a frozen record.
+
+If Cameron runs `/slack-attack <slug>` against a retired client, **short-circuit**: print one line and stop, no subagent, no Slack pull.
+
+```
+<slug> — retired since <retired_at> (<retired_reason>). Edit frontmatter to re-activate.
+```
+
+Re-activating is a deliberate edit: remove `status: retired` from frontmatter, then run `/catchup <slug>` normally. Don't try to make slack-attack do it for him.
 
 ## Ranking
 

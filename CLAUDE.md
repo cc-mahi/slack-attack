@@ -28,6 +28,7 @@ Rules:
 - `key_people_overrides` holds only external contacts not yet in `../MahiProduct/wiki/people/`, plus low-confidence discoveries waiting for promotion.
 - Don't re-state hosts, commercial terms, party names, or distribution markets in the dossier body — the refs are authoritative.
 - The dossier's `## Status` section (Stage / Integration / Relationship) exists **only when `wiki: null`**. If a wiki page exists for the client, it is canonical for longer-term state and the dossier carries no Status section. When a wiki page later lands, delete the Status section and update the `wiki:` ref in the same change.
+- **Retiring a client**: add `status: retired`, `retired_at: <ISO date>`, `retired_reason: <free text>` to the dossier frontmatter. `/slack-attack` and `/catchup` then skip it (no-arg flow silently; explicit-slug flow short-circuits with a one-line note). To re-activate, remove `status: retired` from frontmatter and run `/catchup <slug>` — that's the whole flow, no separate command.
 
 ## Tone
 

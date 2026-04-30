@@ -7,6 +7,14 @@ description: Worker — pulls Slack activity since last_catchup for one client o
 
 A target is required. If invoked with no arg, stop and point at `/slack-attack`.
 
+If the resolved client dossier has `status: retired` in frontmatter, refuse and stop. Emit one line and exit — don't pull Slack, don't bump `last_catchup`:
+
+```
+catchup: <slug> — retired (<retired_at>); skipping. Remove `status: retired` from frontmatter to re-activate.
+```
+
+The dossier stays as a frozen record. Re-activation is a deliberate frontmatter edit by Cameron, not something to negotiate around.
+
 ## Source-of-truth recap
 
 - Hosts / Slack channels / party names / distribution markets → `../VibePulse/.claude/clients/<slug>.yaml`.
