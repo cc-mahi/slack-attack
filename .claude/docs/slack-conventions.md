@@ -37,6 +37,8 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-amana` | C08SYSMP0EB |
 | `internal-alphacapitalgroup` | C06UHTDQ8JF |
 | `mahi-alphacapitalgroup` | C070016ND6X |
+| `internal-alpha-cap-broker` | C09FFSWHZ8W |
+| `mahi-alpha-cap-broker` | C09F15FRTAB |
 | `dev-eu` | C08KZ4L2HPF |
 | `dev` | C8568C6HG |
 | `internal-argamon` | C06U76A7ZJR |
@@ -64,6 +66,7 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-instant-funding` | C076RHNUP36 |
 | `internal-starprime` | C095MJHC68J |
 | `mahi-starprime` | C096422RPKK |
+| `internal-easton` | C090T6MM867 (archived 2026-03-26) |
 | `internal-errante` | C09LE05K3FC |
 | `internal-go` | CNF3WPNSK |
 | `internal-the-5-percenters` | C079M09MGGP |
