@@ -3,8 +3,12 @@
 
 Sources (union):
   - clients/*.md                                — local dossiers (excluding _template.md)
-  - ../VibePulse/.claude/clients/*.yaml         — slug = filename basename
   - ../MahiProduct/data/billing/clients.json    — clients[].slug
+
+VibePulse yamls are *not* an enumeration source — they include internal infra
+(mahi-central), aliases (pepperstone-crypto), and stale onboardings, so unioning
+them in produces noise. Use /seed-client to bring a VibePulse-only entity into
+the rotation explicitly.
 
 Output: tab-separated rows, columns:
   slug    last_catchup    days_since    note
@@ -27,7 +31,6 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 DOSSIER_DIR = REPO / "clients"
-VIBEPULSE_DIR = REPO.parent / "VibePulse" / ".claude" / "clients"
 BILLING_PATH = REPO.parent / "MahiProduct" / "data" / "billing" / "clients.json"
 
 
@@ -35,7 +38,8 @@ def parse_frontmatter(path: Path) -> dict:
     """Pull top-level key: value pairs from a YAML frontmatter block.
 
     Skips indented (nested) lines and comments. Good enough for the flat
-    keys we care about: last_catchup, status. Don't use this for refs.
+    keys we care about: last_catchup, status, aliases. Don't use this for refs.
+    Inline list values like `aliases: [a, b]` are parsed into a Python list.
     """
     text = path.read_text()
     if not text.startswith("---\n"):
@@ -50,31 +54,44 @@ def parse_frontmatter(path: Path) -> dict:
         if ":" not in line:
             continue
         k, _, v = line.partition(":")
-        out[k.strip()] = v.strip().strip('"').strip("'")
+        v = v.strip()
+        if v.startswith("[") and v.endswith("]"):
+            inner = v[1:-1].strip()
+            out[k.strip()] = [s.strip().strip('"').strip("'") for s in inner.split(",") if s.strip()]
+        else:
+            out[k.strip()] = v.strip('"').strip("'")
     return out
 
 
 def collect() -> dict:
     slugs = {}
+    alias_map = {}  # alias -> canonical dossier slug
 
     if DOSSIER_DIR.is_dir():
         for p in sorted(DOSSIER_DIR.glob("*.md")):
             if p.stem == "_template":
                 continue
             fm = parse_frontmatter(p)
+            lc = fm.get("last_catchup")
+            if isinstance(lc, str) and lc.lower() == "null":
+                lc = None
             slugs[p.stem] = {
-                "last_catchup": fm.get("last_catchup") or None,
+                "last_catchup": lc or None,
                 "status": fm.get("status") or "active",
                 "has_dossier": True,
             }
+            aliases = fm.get("aliases") or []
+            if isinstance(aliases, list):
+                for a in aliases:
+                    alias_map[a] = p.stem
 
-    if VIBEPULSE_DIR.is_dir():
-        for p in VIBEPULSE_DIR.glob("*.yaml"):
-            slugs.setdefault(p.stem, {
-                "last_catchup": None,
-                "status": "active",
-                "has_dossier": False,
-            })
+    def add_external(slug):
+        canonical = alias_map.get(slug, slug)
+        slugs.setdefault(canonical, {
+            "last_catchup": None,
+            "status": "active",
+            "has_dossier": False,
+        })
 
     if BILLING_PATH.is_file():
         data = json.loads(BILLING_PATH.read_text())
@@ -82,11 +99,7 @@ def collect() -> dict:
             slug = entry.get("slug")
             if not slug:
                 continue
-            slugs.setdefault(slug, {
-                "last_catchup": None,
-                "status": "active",
-                "has_dossier": False,
-            })
+            add_external(slug)
 
     return slugs
 

@@ -1,5 +1,6 @@
 ---
 slug: pepperstone
+aliases: [pepperstone-crypto]
 refs:
   vibepulse: [../VibePulse/.claude/clients/pepperstone.yaml, ../VibePulse/.claude/clients/pepperstone-crypto.yaml]
   billing: ../MahiProduct/data/billing/clients.json     # entry: pepperstone

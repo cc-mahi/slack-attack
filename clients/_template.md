@@ -1,5 +1,6 @@
 ---
 slug: example
+aliases: []                                                # other slugs (billing/VibePulse) that map to this dossier; e.g. [example-crypto]
 refs:
   vibepulse: ../VibePulse/.claude/clients/example.yaml   # hosts, slack channels, party names, distribution markets, LR rules
   billing: ../MahiProduct/data/billing/clients.json       # entry: example

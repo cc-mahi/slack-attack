@@ -1,5 +1,6 @@
 ---
 slug: icmarkets
+aliases: [icmarkets-crypto]
 refs:
   vibepulse: ../VibePulse/.claude/clients/icmarkets.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: icmarkets-crypto
