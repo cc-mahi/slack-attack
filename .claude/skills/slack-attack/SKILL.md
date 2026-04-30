@@ -27,7 +27,7 @@ slug    last_catchup    days_since    note
 - `days_since`: integer with `d` suffix, or `—` for `never`.
 - `note`: `bootstrap` if there's no local dossier yet (catchup will create one on first contact), else blank.
 
-Take the top N rows (start with N=5; that's also the hard cap on a batch). **Do not reimplement the parse inline** — the script handles frontmatter parsing, retired-client filtering, billing JSON shape, and date arithmetic in one place. Past attempts at inline shell hit zsh's reserved `status` variable and JSON-shape mismatches; that's why the script exists.
+Take the top N rows (start with N=3; that's also the hard cap on a batch). **Do not reimplement the parse inline** — the script handles frontmatter parsing, retired-client filtering, billing JSON shape, and date arithmetic in one place. Past attempts at inline shell hit zsh's reserved `status` variable and JSON-shape mismatches; that's why the script exists.
 
 Retired clients (`status: retired` in dossier frontmatter) are excluded by default — the script handles this. They're silently dropped from the no-arg rotation and never appear in the continuation table. Pass `--include-retired` only for ad-hoc inspection.
 
@@ -43,23 +43,23 @@ That's the ranking — staleness alone, no activity weighting or pinning. If tha
 
 ## Dispatching catchup
 
-Run catchups in **subagents** so the Slack reads stay out of the main thread. Use the `Agent` tool with `subagent_type: general-purpose`. Each subagent's job is small and well-scoped:
+Run catchups in **subagents** so the Slack reads stay out of the main thread. Use the `Agent` tool with `subagent_type: general-purpose` and `model: sonnet` — catchup is mechanical Slack-reading and dossier editing, doesn't need Opus, and Sonnet runs cheaper and faster in parallel. The orchestrator (this skill, doing synthesis) stays on whatever model the parent thread is on. Each subagent's job is small and well-scoped:
 
 > Run the `catchup` skill for slug `<slug>` and return the structured summary it produces. Use the Skill tool: `Skill(skill="catchup", args="<slug>")`. After it completes, paste the catchup summary verbatim and stop. Do not add commentary, do not produce a prose digest — that's the orchestrator's job.
 
 Dispatch is **parallel in the foreground**. The loop is:
 
-1. Pick the top N clients from `scripts/rank-clients` (N ≤ 5 hard cap; fewer if there are fewer to do).
+1. Pick the top N clients from `scripts/rank-clients` (N ≤ 3 hard cap; fewer if there are fewer to do).
 2. Dispatch all N catchup subagents at once — make N Agent tool calls **in a single message**, no `run_in_background` flag. The harness runs them concurrently in the foreground. (Print a single up-front line listing the N slugs so Cameron knows what's running; per-dispatch lines aren't shown anyway.)
 3. Wait for all subagents to return. The orchestrator's main thread blocks until every one is done.
-4. Once all returns are in, synthesise each client's section in turn — `git diff clients/<slug>.md`, full dossier read, prose paragraph(s), URL refs — and print as you go. With ~5 clients and ~5s synthesis each, the printing stage takes ~25s after the last subagent lands.
+4. Once all returns are in, synthesise each client's section in turn — `git diff clients/<slug>.md`, full dossier read, prose paragraph(s), URL refs — and print as you go. With ~3 clients and ~5s synthesis each, the printing stage takes ~15s after the last subagent lands.
 5. After the last section prints, print the continuation table.
 
-Total wall time ≈ slowest-individual catchup + N × ~5s synthesis. With 5 catchups averaging 60–90s each, expect ~2 minutes end-to-end — versus 5–10 minutes if dispatched serially.
+Total wall time ≈ slowest-individual catchup + N × ~5s synthesis. With 3 catchups averaging 60–90s each, expect ~1.5 minutes end-to-end — versus 3–5 minutes if dispatched serially.
 
 Trade-off versus true streaming: Cameron doesn't see prose appear as each catchup individually completes; he sees nothing until all N return, then a burst of synthesised sections. We accepted this because the prior attempt at parallel-background streaming (`run_in_background: true`) had the subagents return in 7–9s with only their opening narration as "result" — i.e. they bailed before doing any real work. Foreground parallel is documented to run concurrently and was empirically fine in serial form (the working serial-with-streaming runs in commits `a455cbb` / `b34c56f`); we keep that working dispatch shape and only add the multi-call-in-one-message wrapper.
 
-Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`) are typically lenient enough for 5-way concurrency. If you hit a 429, the subagent will surface it in its return; treat it as a bug to revisit rather than pre-throttle for.
+Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`) are typically lenient enough for 3-way concurrency. If you hit a 429, the subagent will surface it in its return; treat it as a bug to revisit rather than pre-throttle for.
 
 ## Reading the updated dossier
 
@@ -116,7 +116,7 @@ That's it — no padding, no numbered refs.
 
 Per-client sections are printed **after all subagents have returned** (see "Dispatching catchup"). With foreground-parallel dispatch the orchestrator can't synthesise mid-batch — it has to wait until the slowest one finishes — and then it prints sections back-to-back in staleness-rank order (oldest-staleness first), one paragraph per topic per client.
 
-Batch size: pick the top N from `scripts/rank-clients`, capped at 5. All N are dispatched in parallel up front; there's no mid-batch stopping rule (with parallelism, the cost is fixed once dispatched, so let them all complete and print).
+Batch size: pick the top N from `scripts/rank-clients`, capped at 3. All N are dispatched in parallel up front; there's no mid-batch stopping rule (with parallelism, the cost is fixed once dispatched, so let them all complete and print).
 
 After the last section prints, append the continuation table:
 
