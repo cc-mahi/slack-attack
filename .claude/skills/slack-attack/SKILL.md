@@ -47,20 +47,19 @@ Run catchups in **subagents** so the Slack reads stay out of the main thread. Us
 
 > Run the `catchup` skill for slug `<slug>` and return the structured summary it produces. Use the Skill tool: `Skill(skill="catchup", args="<slug>")`. After it completes, paste the catchup summary verbatim and stop. Do not add commentary, do not produce a prose digest — that's the orchestrator's job.
 
-Dispatch is **parallel in the background, with streaming synthesis**. The loop is:
+Dispatch is **parallel in the foreground**. The loop is:
 
 1. Pick the top N clients from `scripts/rank-clients` (N ≤ 5 hard cap; fewer if there are fewer to do).
-2. Dispatch all N catchup subagents at once with `run_in_background: true`. Print one `→ catching up <slug>…` line per dispatch so Cameron knows what's running.
-3. As each subagent completion notification arrives:
-   a. Read the updated dossier (`git diff` + full read for context).
-   b. **Synthesise and print that client's prose section immediately.** Don't wait for the rest.
-4. After the last subagent completes, print the continuation table.
+2. Dispatch all N catchup subagents at once — make N Agent tool calls **in a single message**, no `run_in_background` flag. The harness runs them concurrently in the foreground. (Print a single up-front line listing the N slugs so Cameron knows what's running; per-dispatch lines aren't shown anyway.)
+3. Wait for all subagents to return. The orchestrator's main thread blocks until every one is done.
+4. Once all returns are in, synthesise each client's section in turn — `git diff clients/<slug>.md`, full dossier read, prose paragraph(s), URL refs — and print as you go. With ~5 clients and ~5s synthesis each, the printing stage takes ~25s after the last subagent lands.
+5. After the last section prints, print the continuation table.
 
-Section ordering will be **completion-time, not staleness-rank** — that's intentional. Quick wins (quiet clients, small windows) print first; heavy ones land later but don't block the others. Total wall time = the slowest single subagent, not the sum.
+Total wall time ≈ slowest-individual catchup + N × ~5s synthesis. With 5 catchups averaging 60–90s each, expect ~2 minutes end-to-end — versus 5–10 minutes if dispatched serially.
 
-Do not synthesise serially or buffer the brief until the end. The whole point of the parallel-background model is that Cameron sees output as soon as each catchup is done, with no idle main thread.
+Trade-off versus true streaming: Cameron doesn't see prose appear as each catchup individually completes; he sees nothing until all N return, then a burst of synthesised sections. We accepted this because the prior attempt at parallel-background streaming (`run_in_background: true`) had the subagents return in 7–9s with only their opening narration as "result" — i.e. they bailed before doing any real work. Foreground parallel is documented to run concurrently and was empirically fine in serial form (the working serial-with-streaming runs in commits `a455cbb` / `b34c56f`); we keep that working dispatch shape and only add the multi-call-in-one-message wrapper.
 
-Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`) are typically lenient enough for 5-way concurrency. If you hit a 429, the subagent will surface it in its return summary; treat it as a bug to revisit rather than something to pre-throttle for.
+Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`) are typically lenient enough for 5-way concurrency. If you hit a 429, the subagent will surface it in its return; treat it as a bug to revisit rather than pre-throttle for.
 
 ## Reading the updated dossier
 
@@ -115,11 +114,11 @@ That's it — no padding, no numbered refs.
 
 ## Output — batched (`/slack-attack` no-arg)
 
-Per-client sections are printed **as soon as that client's catchup returns** (see "Dispatching catchup" above). The brief streams in completion-order — quick wins first, heavy ones later — and the order is **not** tied to the staleness ranking the dispatch was based on.
+Per-client sections are printed **after all subagents have returned** (see "Dispatching catchup"). With foreground-parallel dispatch the orchestrator can't synthesise mid-batch — it has to wait until the slowest one finishes — and then it prints sections back-to-back in staleness-rank order (oldest-staleness first), one paragraph per topic per client.
 
-Batch size: pick the top N from `scripts/rank-clients`, capped at 5. All N are dispatched in parallel up front; there's no mid-batch stopping rule any more (with parallelism, the cost is fixed once dispatched, so let them all complete and print).
+Batch size: pick the top N from `scripts/rank-clients`, capped at 5. All N are dispatched in parallel up front; there's no mid-batch stopping rule (with parallelism, the cost is fixed once dispatched, so let them all complete and print).
 
-After the last subagent completes, append the continuation table:
+After the last section prints, append the continuation table:
 
 ```
 ---
