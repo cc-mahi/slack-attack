@@ -8,16 +8,41 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
-last_catchup: 2026-04-27T09:35:00Z
+  - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
+last_catchup: 2026-04-30T11:30:00Z
 ---
 
 ## Recent issues
+
+> [open] 2026-04-29 — Premium channel rollout for tags 911 / 960 / 960a — initial losses, multiple rounds of tuning
+> William Denny ran yield-profile analysis of the CSV client datasets (CELER, GNT, SQB, Royal still processing) and confirmed 911/960/960a suitable for fast hedge (10-30s yield curves). Premium feed switched from STP back to internalise+10-30s hedge. Day saw losses from "drip-feed" flow on premium with wide LP pool: Will flagged "can't see how we're going to monetise this drip feed of flow by risk managing it on premium spreads", "the LP pool is so much wider than our 15 currently". Richard Holman pushed back: "hedging spreads are going to be wider — that's kind of the whole point". Tweaks during the day: configured premium channel to widen to pool TOB over ROLL / TWILIGHT / SNGMON; doubled all time-delay triggers and bounced hedger; reduced TOB qty (1st layer 50oz @ 15c, 2nd layer 50oz @ 35c static); switched fill source from internal to published. By EOD pnl recovering. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777462632819049)
+
+> [open] 2026-04-30 — Overnight overhedge + missing B pricing model
+> Daria diagnosed early-morning losses: hybrid + arb both bought 50oz from GS, hybrid sold 46oz to XTX 100ms later with no client trades between (overhedge cost ~$18). Also flagged missing B pricing model in Echo — restarting `starfishFilePersisterExternalMD` to start persisting. Will: "to be expected with MWMS on ROLL and TL". [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777520549312209)
+
+> [open] 2026-04-30 — Internal strategy debate: license risk if flow doesn't grow
+> Internal channel discussion (Andrew Morgan, David Cooney, Will): flow remains minimal, "strong danger of license petering out if we can't sort something". David suggested plugging into Argamon (tight client spreads, wide LP spreads, no flow diversity needs another ingredient — TOA-Argamon CME also raised). Andrew floated partitioning the book into "real retail vs dirt bags" (two models — one defensive, one skew aggressively); is also moving his mid-evaluation feature branch onto velocity as a playground. Will: 200/day is critical mass; last 24h roughly flat post-changes. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777540196996579)
+
+> [open] 2026-04-30 — Compass sims being rerun on combined client trade data
+> William Denny: need to rerun Compass sims to pick up changed hedger + pricing config. Ready for tomorrow (2026-05-01). [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777547238227629)
+
+> [watching] 2026-04-30 — XAUUSD priceFormatPipRelative for LMAX — fixOrders2 restart pending EOD
+> Shyam: PagerDuty alert needed `priceFormatPipRelative` for XAUUSD & LMAX changed from 0.01 to 0.001. Config change already made but `fixOrders2` not restarted to pick it up; restart scheduled at EOD. LMAX temporarily removed as LP for `hybridHedger1` until then to avoid further rejections. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777520897089699)
+
+> [open] 2026-04-28 — Dan's question on one-sided / risk-skewed pricing — partial answer
+> Dan asked (carried from Friday): can one of the APIs show a wide two-price and skew one side in when there's risk to get out, potentially landing top-of-book? William Denny replied "our pricers won't go one-sided". Dan re-asked with refinement on 2026-04-29; Will Carter engaged: asymmetric skewing is possible (tighten one side via signals), starting from a wide price and teasing it in is feasible — risk-skewing into VT's own pool would need design thought. Agreed to discuss on call next morning. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777384240375059)
+
+> [resolved] 2026-04-29 — CSV_CLIENTS drop-copy yield profiles backfilled
+> William Denny backfilled missing yield profiles for the CSV_CLIENTS drop copies. Dan to do check-backs vs Horizon. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777471939461419)
 
 > [open] 2026-04-23 — Xenfin (XF) CSV upload latency — moving to once-daily uploads
 > Dan couldn't see yield profiles for counterparties 1009 / 851 in Echo. Daria diagnosed: Echo's counterparty field uses the obfuscated client ID (in `cpty_anon` column of the XF CSVs). Morning huddle (Will, Cameron Hughes, William Denny) agreed Mahi moves to once-a-day upload of all Xenfin CSVs until Xenfin fixes the latency. Will put a fix in for XF CSV lag — 60-min trade-to-yield-profile lag now (vs prior EOD). [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1776927890282329)
 
 ## Notable topics
 
+- 2026-04-30 — GS hedging looking better $/M on XAU (small sample); GS spread flickering 18/36 then settling 35-40. Premium-channel widens to pool TOB on ROLL/TWILIGHT/SNGMON. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777452886321469)
+- 2026-04-30 — Pricing channel taxonomy clarified by Will: `CLIENT_PRICE_LDN` (wide spreads, matches pool via MWMS, channel `A_CLIENTS`, currently internalise+hedge); `CLIENT_PRICE_B_LDN` (premium spreads, stable 50oz XAU TOB ~15oz, channel `A_CLIENTS_PREMIUM`, internalise+hedge); party `CLIENTS_CSV` is the post-trade drop-copy from Xenfin used for whole-book yield profiles (last 2 weeks). [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777540742930749)
+- 2026-04-29 — Will floated the structural tension out loud: "How do we monetise this mofo with truck wide spreads at the LPs". SI flagged as best option but yields not there yet. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777460625699159)
 - 2026-04-23 — Huddle action items (recap): (1) once-daily Xenfin CSV upload; (2) VT working on hedge liquidity + cautious bank skew (can't be aggressive or it's lost); (3) Mahi to add pricing for XAU crosses + other majors (low-hanging fruit); (4) look at reducing XAU TOB; (5) VT has more prospect data to upload. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1776936723214169)
 - 2026-04-23 — XAU triangulated crosses added (XAU/{AUD,CHF,CNH,EUR,GBP,JPY,NZD,SGD}); pricers + dashGW bounced. Action item #3 from huddle. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1776954962207129)
 - 2026-04-23 — VEL000951 on-prem per chat. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1776936286728029)

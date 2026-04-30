@@ -11,13 +11,25 @@ key_people_overrides:
   - {name: "Will", role: "scheduling contact", confidence: low}
   - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
   - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
-last_catchup: 2026-04-27T09:35:00Z
+last_catchup: 2026-04-30T11:30:00Z
 ---
 
 ## Recent issues
 
-> [open] 2026-04-27 — YM.M26 invalid-size alerts on MAHI_CMC — step size mismatch (Mahi 0.05)
-> Andreas: receiving multiple alerts on YM.M26 on MAHI_CMC due to invalid size; their step is 0.05 and asked Mahi to adjust to match. Rory King acknowledged and will adjust. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777282393851299)
+> [open] 2026-04-30 — G30EUR client_price_vip_ldn TOB ~1.35 vs configured 0.6
+> Alex flagged the VIP-LDN G30EUR spread is ~1.35 against 0.6 config. Kate confirmed signals look responsible and was deploying a change at 12:09 BST. Awaiting confirmation post-fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777547078939949)
+
+> [open] 2026-04-29 — Centroid-Retail-Orders FIX: XAGUSD/XAUUSD min-quantity rejection
+> Chrysovalantis hit `FIELD_VALIDATION_ERROR {DISTRIBUTION_LDN-maximumShowQuantity=TOO_SMALL, DISTRIBUTION_LDN-quantity=TOO_SMALL}` on XAGUSD via session 49=MahiFX-Orders / 56=Centroid-Retail-Orders (Mahi config 50 from prior request). Asked for connection-specific min 0.5 XAGUSD / 0.01 XAUUSD. Kate making the config change; needs EOD restart to pick up. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777466777885749)
+
+> [open] 2026-04-29 — China FIX session removal: please disconnect Scope-X-China-2
+> Kate (Mahi) requested Rostro disconnect the Scope-X-China-2 Orders/Prices sessions ahead of removing the unused China FIX config; Scope-X-China-1 already idle 7d, China-2 still showing live heartbeats. Awaiting Rostro disconnect. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777465172441569)
+
+> [resolved] 2026-04-27 — YM.M26 invalid-size alerts on MAHI_CMC — step size mismatch (Mahi 0.05)
+> Andreas: receiving multiple alerts on YM.M26 on MAHI_CMC due to invalid size; their step is 0.05 and asked Mahi to adjust to match. Rory King made the hedger config changes to trade in 0.05 minimum increments for Dow futures, live same morning. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777283400358769)
+
+> [resolved] 2026-04-29 — XAUUSD HRP_AGG_HEDGE risk-reducing-only mode + position alignment
+> 04-28: Oli asked to flip HRP_AGG_HEDGE to risk-reducing only; Kate stripped the prior hedging rule, imported a -10,009oz position to align with Rostro's -9,334oz, hedger chipped flat through 04-29. 04-29 14:00 BST cycle: -6,918oz residual surfaced (HRP_AGG aggregate had still routed flow there before removal); Kate re-imported and the hedger cleared it again to flat. Returned to standard hedging rules at 17:30 BST with a tighter risk-reducing rule retained alongside, so position-reducing trades still take priority but at a tighter spread. Alex confirmed; will revisit if positions grow again (Centroid don't do giveups, so risk-reducing mode is their main lever). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777372407923539)
 
 > [open] 2026-04-24 — UBS direct feed — connect into Mahi rather than PXM
 > Owen: Rostro receiving a direct feed from UBS and want to connect directly into Mahi rather than via PXM; asked for the technical point of contact for UBS's tech team. Kate routed via support@mahifx.com. Awaiting UBS engagement. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777044459539369)
