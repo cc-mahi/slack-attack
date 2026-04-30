@@ -8,6 +8,13 @@ refs:
 channels_override: ["internal-errante"]                  # no mahi-errante channel exists
 key_people_overrides: []
 last_catchup: 2026-04-30T00:00:00Z
+status: retired
+retired_at: 2026-04-29
+retired_reason: |
+  Sales (Nia Rose) confirmed in #sales 2026-04-29 "Errante and Fintokei are no longer with us".
+  #internal-errante archived 2026-04-29 by Nicola Perikhanyan; Errante A-book zero volume in 28 Apr LDN daily checks.
+  https://mahifx.slack.com/archives/C8YMBES8N/p1777452857245439
+  https://mahifx.slack.com/archives/C09LE05K3FC/p1777475922470539
 ---
 
 ## Status
