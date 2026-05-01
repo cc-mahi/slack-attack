@@ -10,16 +10,16 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-04-30T09:35:00Z
+last_catchup: 2026-05-01T10:00:00Z
 ---
 
 ## Recent issues
 
 > [open] 2026-04-26 — Recurring weekend disconnections — root cause B2Broker session break
-> Internal (Kate, 04-28): only crypto LP is B2Broker; their session break Saturday morning stopped pricing → drop-out 5ers saw. B2Broker confirmed they can't customise session times. Plan: set up proxied crypto pricing so a normalised feed covers the 2h downtime. Yaron's order-book ask (FX +1pt, XAG +1pt/side from 0.05 lots) was discussed on weekly call — Yaniv decided **not** to change visible TOB; XAGUSD test config reverted. Permanent fix on the disconnect still pending. [yaron-escalation](https://mahifx.slack.com/archives/C07AQJS4E80/p1777196856253159) [internal-rca](https://mahifx.slack.com/archives/C079M09MGGP/p1777394276388709)
+> Internal (Kate, 04-28): only crypto LP is B2Broker; their session break Saturday morning stopped pricing → drop-out 5ers saw. B2Broker confirmed they can't customise session times. Plan: set up proxied crypto pricing so a normalised feed covers the 2h downtime. Yaron's order-book ask (FX +1pt, XAG +1pt/side from 0.05 lots) was discussed on weekly call — Yaniv decided **not** to change visible TOB; XAGUSD test config reverted. 2026-04-30: Kate deployed crypto feed enrichment — additional market data sourced to supplement B2BROKER, XBTEUR base spreads tightened. CFD enrichment in progress. Permanent weekend disconnect fix still pending (session times not yet changed). [yaron-escalation](https://mahifx.slack.com/archives/C07AQJS4E80/p1777196856253159) [internal-rca](https://mahifx.slack.com/archives/C079M09MGGP/p1777394276388709) [feed-fix-update](https://mahifx.slack.com/archives/C07AQJS4E80/p1777572138698369)
 
-> [open] 2026-04-26 — liquidityPool* down on 5ersCryptoCFDs — failed over 5ers→B2BROKER reference
-> Sam Hewitt: liquidityPoolMDAggregator1/2 + liquidityPoolSOR1 down; swapped 5ers→B2BROKER in `5ersCryptoCFDs.reference.referencePriceMarketSelectors` to recover. Same root cause as the weekend disconnect (B2Broker session break) — proxied crypto feed will address both. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1777235724205449)
+> [watching] 2026-04-26 — liquidityPool* down on 5ersCryptoCFDs — failed over 5ers→B2BROKER reference
+> Sam Hewitt: liquidityPoolMDAggregator1/2 + liquidityPoolSOR1 down; swapped 5ers→B2BROKER in `5ersCryptoCFDs.reference.referencePriceMarketSelectors` to recover. Same root cause as the weekend disconnect (B2Broker session break). 2026-04-30: crypto feed enrichment deployed (multi-source now supplementing B2BROKER); CFD enrichment still in progress — this entry remains open until CFD side is resolved. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1777235724205449)
 
 > [resolved] 2026-04-27 — Spreads "fixed" on assets switched yourbourse→Mahi
 > Andreas accepted Kate's proposal to bring base spreads down so dynamic widening drives the price; applied across all symbols 04-27 14:39 BST. Andreas asked 04-28 whether it also applied to FX + XAUUSD — no reply yet, but change was applied across the board. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777278243169839)
@@ -36,3 +36,4 @@ last_catchup: 2026-04-30T09:35:00Z
 ## Notable topics
 
 - 2026-04-28 — Yaniv weekly call recap: T4B→YB demo flow migration complete; FX order-book tier change applied (100k/200k/300k/500k…, was 100k/400k/500k…); Yaniv keen on further education for Yaron given he's been trialling YB's order book on demo; client now using Claude to surface toxic counterparties from MT trade logs. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1777391713854269)
+- 2026-04-30 — Constantinos requested USDSGD pricing — not previously in environment; Kate confirmed will set up. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777554437360859)
