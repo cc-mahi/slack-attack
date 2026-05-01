@@ -9,7 +9,8 @@ channels_override: null
 key_people_overrides:
   - {name: "Tom McLean", role: "Argamon-side analyst — primary day-to-day contact in mahi-argamon-operations", confidence: low}
   - {name: "Levi", role: "Argamon ops — give-up / rejection queries", confidence: low}
-last_catchup: 2026-04-30T00:00:00Z
+  - {name: "Joanna", role: "Argamon-side ops — recurring contact in mahi-argamon-operations for alerts and client trade queries", confidence: low}
+last_catchup: 2026-05-01T23:59:59Z
 ---
 
 ## Status
@@ -19,6 +20,15 @@ last_catchup: 2026-04-30T00:00:00Z
 - **Relationship:** downstream of Toa. Slack: `internal-argamon`, `mahi-argamon-operations`. Tom McLean (Argamon-side) is asking detailed questions across pricing, brokering and rejections — relationship is engaged and ops-heavy.
 
 ## Recent issues
+
+> [resolved] 2026-05-01 — XAUUSD retail losses from sharp/sniping flow; DFSN signal added; signal-follow whitelist cleaned
+> Isaac identified XAUUSD retail losses from 2026-04-30 caused by signal-follow clients sniping sharp moves in pricing. Affected counterparties moved back to broker-only classification (signal-follow whitelist cleaned). DFSN signal rule added to the pricing model to widen Mahi out of the way during large moves. Separate from but related to the CME hedging brokering test (2026-04-28 open issue). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1746063187834529)
+
+> [resolved] 2026-05-01 — Wide spread on majors (~15:00 BST); LR kicking in on published rate
+> Tom flagged EURUSD at ~20 ticks wide for a couple of hours with no client complaints yet. Will identified LR kicking in on the published rate — removed from published, spread immediately restored. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1746107990556329)
+
+> [resolved] 2026-05-01 — JPY crypto LMAX position risk at rollover (non-issue)
+> Tom wanted LMAX removed from JPY crypto hedging/STP ahead of anticipated large JPY financing charge at rollover. Amir confirmed with Isaac that JPY crypto pairs are weekend-only for hedging and are not STP'd — no position should build regardless. No config change needed. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1746087135603309)
 
 > [open] 2026-04-28 — XAUUSD brokered counterparties expansion to test CME hedging
 > Daria added counterparty 104881 to be brokered to Toa, working through softest first (104881, 105048, 105153, 105681, 105773) to evaluate whether hedging XAUUSD to CME helps. Ongoing. https://mahifx.slack.com/archives/C06U76A7ZJR/p1777335260425589
@@ -58,3 +68,4 @@ last_catchup: 2026-04-30T00:00:00Z
 - Mid-formation LP set under review — Tom and Daria are both pushing to broaden the price-formation LP set (COMZ, Jane Street) to reduce dependency on HSBC and to fix per-pair indicatives. Decision still sitting with Elan.
 - Reactive direct setup is the strategic remediation for NWPB (Natwest) min-ticket-size filtering of small client orders. Flagged in 2026-04-15 thread; no eta.
 - Centroid LDN distribution issues are a CTO-level dig (James Furness) — backpressure root-caused via pcap; further work likely needed and may generalise to other NY-local clients distributing via Centroid.
+- XAUUSD sharp-flow / signal-follow risk — signal-follow whitelist cleaned 2026-05-01 and DFSN signal added to retail pricing model. May need monitoring if similar sniping recurs.
