@@ -41,19 +41,44 @@ Re-activating is a deliberate edit: remove `status: retired` from frontmatter, t
 
 That's the ranking — staleness alone, no activity weighting or pinning. If that proves wrong over time, change the script, not the skill.
 
+## Probe-skip pre-flight
+
+Most days most clients are quiet. Spinning up a full catchup subagent just to discover that and emit a one-line bump is wasteful — subagent context-warmup is the dominant token cost. Before dispatching, the orchestrator probes each candidate itself; if every resolved channel returns zero non-bot human messages since `last_catchup`, the orchestrator skips dispatch, does a frontmatter-only `last_catchup` bump, commits it, and emits the standard quiet one-liner in the brief. **This is the only case where slack-attack writes to `clients/*.md` directly** — see "What this skill does NOT do" for the carve-out.
+
+Per-candidate probe procedure:
+
+1. Read `clients/<slug>.md` frontmatter — capture `last_catchup` and `channels_override`. If `last_catchup` is null (first-population case), **never probe-skip** — dispatch the full subagent so catchup does bootstrap properly.
+2. Resolve channels: `channels_override` if set, else the `slack:` block in `../VibePulse/.claude/clients/<slug>.yaml` (both `internal:` and `client:` keys). Look up channel IDs from the `.claude/docs/slack-conventions.md` cache. If any channel can't be resolved from the cache, **skip the skip** — dispatch a full subagent so catchup can resolve and cache. Don't `slack_search_channels` from the orchestrator; that's catchup's job.
+3. For each resolved channel ID, `slack_read_channel(channel_id, oldest=<last_catchup unix ts>, limit=20)`. Limit is intentionally tight — we only need to know whether any human messages exist, not what they are. If the API errors, **skip the skip** for that client (be generous on errors; let catchup handle).
+4. Filter out non-human messages: drop messages where `subtype` is set (covers `bot_message`, `channel_join`, `channel_leave`, topic/purpose/name changes, pin/unpin events) or `bot_id` is set (covers bots that omit subtype).
+5. **If the total non-bot count across all resolved channels is exactly 0:** probe-skip (next section). **Otherwise:** dispatch the full catchup subagent as normal.
+
+The probe runs in the orchestrator's main thread, but message payloads are small (limit=20 × ~200 tokens × handful of channels) and reduced to a count immediately. No persistent context bloat.
+
+Known acceptable miss: a bot message that *is* notable (a critical alert in a non-skipped channel) will be probe-skipped. In practice the live alert channels (`*-alerts`, `*-notifications`) are already on catchup's skip list, so this risk is low. If it bites, raise the threshold to "skip only when 0 messages period (bot or human)" — that'd be safer but skip far fewer cases.
+
+### Probe-skip action
+
+When the probe finds zero human messages, the orchestrator (not a subagent) does the bump itself:
+
+1. `Edit` `clients/<slug>.md` frontmatter — replace the `last_catchup:` line with the current ISO-8601 UTC timestamp. No body changes.
+2. `git add clients/<slug>.md && git commit -m "chore(catchup): bump <slug> last_catchup (probe-skip, no human activity)"`.
+3. The client's brief section is the standard quiet one-liner (see "Quiet weeks").
+
 ## Dispatching catchup
 
-Run catchups in **subagents** so the Slack reads stay out of the main thread. Use the `Agent` tool with `subagent_type: general-purpose` and `model: sonnet` — catchup is mechanical Slack-reading and dossier editing, doesn't need Opus, and Sonnet runs cheaper and faster in parallel. The orchestrator (this skill, doing synthesis) stays on whatever model the parent thread is on. Each subagent's job is small and well-scoped:
+Run non-skipped catchups in **subagents** so the Slack reads stay out of the main thread. Use the `Agent` tool with `subagent_type: general-purpose` and `model: sonnet` — catchup is mechanical Slack-reading and dossier editing, doesn't need Opus, and Sonnet runs cheaper and faster in parallel. The orchestrator (this skill, doing synthesis) stays on whatever model the parent thread is on. Each subagent's job is small and well-scoped:
 
 > Run the `catchup` skill for slug `<slug>` and return the structured summary it produces. Use the Skill tool: `Skill(skill="catchup", args="<slug>")`. After it completes, paste the catchup summary verbatim and stop. Do not add commentary, do not produce a prose digest — that's the orchestrator's job.
 
 Dispatch is **parallel in the foreground**. The loop is:
 
 1. Pick the top N clients from `scripts/rank-clients` (N ≤ 3 hard cap; fewer if there are fewer to do).
-2. Dispatch all N catchup subagents at once — make N Agent tool calls **in a single message**, no `run_in_background` flag. The harness runs them concurrently in the foreground. (Print a single up-front line listing the N slugs so the user knows what's running; per-dispatch lines aren't shown anyway.)
-3. Wait for all subagents to return. The orchestrator's main thread blocks until every one is done.
-4. Once all returns are in, synthesise each client's section in turn — `git diff clients/<slug>.md`, full dossier read, prose paragraph(s), URL refs — and print as you go. With ~3 clients and ~5s synthesis each, the printing stage takes ~15s after the last subagent lands.
-5. After the last section prints, print the continuation table.
+2. Probe each candidate (see "Probe-skip pre-flight"). For probe-skipped candidates, do the frontmatter bump + commit inline. For the rest, prepare to dispatch. Print a single up-front line listing which slugs are being dispatched and which probe-skipped, so the user knows what's running.
+3. Dispatch the remaining (non-skipped) catchup subagents at once — make Agent tool calls **in a single message**, no `run_in_background` flag. The harness runs them concurrently in the foreground. If every candidate probe-skipped, there's nothing to dispatch — go straight to synthesis.
+4. Wait for all subagents to return. The orchestrator's main thread blocks until every one is done.
+5. Once all returns are in, synthesise each client's section in turn — `git show <sha> -- clients/<slug>.md` for dispatched clients, the standard quiet one-liner for probe-skipped ones — and print as you go. With ~3 clients and ~5s synthesis each, the printing stage takes ~15s after the last subagent lands.
+6. After the last section prints, print the continuation table.
 
 Total wall time ≈ slowest-individual catchup + N × ~5s synthesis. With 3 catchups averaging 60–90s each, expect ~1.5 minutes end-to-end — versus 3–5 minutes if dispatched serially.
 
@@ -67,7 +92,7 @@ For each client just refreshed:
 
 1. `git show <sha> -- clients/<slug>.md` against the SHA the catchup subagent reported on its `Commit:` line. This is exactly what this run added or changed — the subagent has already committed, so the working tree is clean and `git diff` is empty. If a subagent's output had no `Commit:` line (hit a quiet window with no commit, or errored), fall back to the dossier read alone.
 2. Read the full dossier for context (existing `[open]` entries the brief should reference, `key_people_overrides` for names, refs).
-3. If the commit is purely a `last_catchup` bump (catchup reported a quiet window), the brief for that client is one line — see "Quiet weeks" below.
+3. If the commit is purely a `last_catchup` bump (catchup reported a quiet window, or the orchestrator probe-skipped before dispatch), the brief for that client is one line — see "Quiet weeks" below.
 
 ## Output — single client (`/slack-attack <slug>`)
 
@@ -146,9 +171,9 @@ If the user says yes, run the next batch picking up where you stopped (re-rank b
 
 ## What this skill does NOT do
 
-- Doesn't pull Slack itself — that's catchup's job, run in a subagent.
-- Doesn't edit dossiers — catchup handles all writes. slack-attack is read-only against `clients/*.md` (and read-only against the VibePulse / MahiProduct refs, always).
-- Doesn't bump `last_catchup` — catchup does that.
+- Doesn't pull Slack itself for content — that's catchup's job, run in a subagent. The probe-skip pre-flight does cheap `slack_read_channel` calls in the orchestrator main thread, but only to count messages, never to extract content.
+- Doesn't edit dossier bodies — catchup handles all body writes (`Recent issues`, `Notable topics`, `key_people_overrides`, `Status`). The single carve-out: when the probe-skip pre-flight determines a candidate has zero human activity since `last_catchup`, the orchestrator does a frontmatter-only `last_catchup` bump and commits it (rather than spinning up a subagent for a one-line update). VibePulse and MahiProduct stay read-only always.
+- Doesn't bump `last_catchup` *as part of body changes* — catchup does that. Probe-skip frontmatter-only bumps are the orchestrator's responsibility, see above.
 - Doesn't produce structured bullet output — that's catchup's terminal output, intended for the subagent caller, not for the user.
 
 ## Constraints

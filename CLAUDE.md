@@ -47,6 +47,7 @@ Rules:
 ## Dossier discipline
 
 - `/catchup` applies changes and commits them itself (one commit per run, scoped to the dossier and any newly-cached channel ID). No review-then-commit step. Locally I `git pull`/inspect history to see what landed; remotely the routine pushes the commits at the end of the batch.
+- `/slack-attack` probe-skips dispatch for any client whose resolved channels show zero non-bot human messages since `last_catchup`. On a probe-skip the orchestrator does a frontmatter-only `last_catchup` bump itself (commit message `chore(catchup): bump <slug> last_catchup (probe-skip, no human activity)`) and emits the standard quiet one-liner in the brief. This keeps the daily routine cheap when most clients are idle.
 - `last_catchup` in frontmatter is the source of truth for "where did we leave off". Update it as part of the same `/catchup` edit.
 - Keep dossier `Recent issues` reverse chronological, trim entries older than ~90 days. The dossier itself can be dense and detailed; readability is `/slack-attack`'s problem, not the dossier's.
 - Use `Edit`, not `Write`, for dossier updates — keeps diffs small and readable.
