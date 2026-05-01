@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Will", role: "scheduling contact", confidence: low}
   - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
   - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
-last_catchup: 2026-04-30T11:30:00Z
+last_catchup: 2026-05-01T09:30:00Z
 ---
 
 ## Recent issues
+
+> [open] 2026-04-30 — USDJPY cpty 95_0_652431 arb-classification slippage complaint
+> Alex flagged consistent slippage on USDJPY from cpty 95_0_652431. Kate confirmed: classifier tagged them as arb after 29 sells / $15.05M in ~6 min 10:27–10:33, aggregated 4-min yield -$17k → trades brokered. Kate proposed internalising to SI book for fast-hedge instead; client acknowledged short-term markout vol. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777562968245279) [Kate's analysis](https://mahifx.slack.com/archives/C08AQKRU953/p1777567089259889)
 
 > [open] 2026-04-30 — G30EUR client_price_vip_ldn TOB ~1.35 vs configured 0.6
 > Alex flagged the VIP-LDN G30EUR spread is ~1.35 against 0.6 config. Kate confirmed signals look responsible and was deploying a change at 12:09 BST. Awaiting confirmation post-fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777547078939949)
