@@ -65,9 +65,9 @@ Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`)
 
 For each client just refreshed:
 
-1. `git diff clients/<slug>.md` to see exactly what catchup added or changed in this run. This is the authoritative window — frontmatter timestamps can lie if a previous run got interrupted, but the diff doesn't.
+1. `git show <sha> -- clients/<slug>.md` against the SHA the catchup subagent reported on its `Commit:` line. This is exactly what this run added or changed — the subagent has already committed, so the working tree is clean and `git diff` is empty. If a subagent's output had no `Commit:` line (hit a quiet window with no commit, or errored), fall back to the dossier read alone.
 2. Read the full dossier for context (existing `[open]` entries the brief should reference, `key_people_overrides` for names, refs).
-3. If the diff is empty (catchup reported a quiet window), the brief for that client is one line — see "Quiet weeks" below.
+3. If the commit is purely a `last_catchup` bump (catchup reported a quiet window), the brief for that client is one line — see "Quiet weeks" below.
 
 ## Output — single client (`/slack-attack <slug>`)
 

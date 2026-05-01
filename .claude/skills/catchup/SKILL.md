@@ -126,12 +126,23 @@ Apply edits with `Edit`, not `Write`, so diffs stay minimal (except when bootstr
 
 The dossier is the readable artefact — it can be detailed, jargon-dense, and contain everything `/slack-attack` will later need to summarise. Don't pre-summarise; write what you found.
 
+## Committing
+
+Once the dossier edit is in place, commit it as part of the same run — don't leave it staged or wait for the user to commit. The reader will see the change either by `git pull` (if a remote agent ran the catchup) or by reviewing the new commit locally.
+
+- Stage only the files this run actually touched: the target dossier (`clients/<slug>.md` or `channels/<name>.md`) and `.claude/docs/slack-conventions.md` if a newly-resolved channel ID was cached. Never `git add -A` — it'll sweep up unrelated work.
+- Commit message is conventional: `chore(catchup): refresh <slug> dossier (<oldest>..<now>)`. For a quiet window, `chore(catchup): bump <slug> last_catchup (quiet window)`. For a bootstrap, `chore(catchup): bootstrap <slug> dossier from VibePulse`.
+- Don't push. Pushing is the caller's call — the local user just needs the commit on disk; the remote agent (when running this from a routine) handles its own push after all dispatched catchups have committed.
+- If `git status` shows unrelated dirty files in the working tree, leave them — only stage the catchup-owned paths. If the catchup-owned path itself has unrelated edits already staged or modified, stop and surface that in the output instead of guessing.
+
 ## Output (to caller)
 
 Catchup's output is a structured confirmation, not a prose digest. The caller (the user directly, or a `/slack-attack` subagent) uses this to know what changed. Keep it tight.
 
 ```
 catchup: <target> — <ISO window>
+
+Commit: <short-sha>
 
 Changes to <path>:
 - bootstrapped from VibePulse  (only if applicable)
@@ -145,10 +156,12 @@ Quiet channels (no human discussion): <comma list or "none">
 Hit channel limit on: <list or "none">
 ```
 
+The `Commit:` line is the SHA of the commit this run made (`git rev-parse --short HEAD` after committing). The orchestrator uses it to diff against — it can't rely on working-tree state because catchup has already committed.
+
 If the run produced zero changes (quiet window), output one line and stop:
 
 ```
-catchup: <target> — quiet window (<N> bot pings, no human discussion). last_catchup bumped.
+catchup: <target> — quiet window (<N> bot pings, no human discussion). last_catchup bumped (commit <short-sha>).
 ```
 
 Do **not** produce paragraphs of prose. Do **not** synthesise a readable brief. The dossier is the artefact; `/slack-attack` reads it to write prose for the user.
@@ -204,4 +217,4 @@ Never inline `# comment` annotations into YAML values — parsers handle them in
 - Channel zero human messages in the window → one-line note, don't expand.
 - Leave empty dossier sections blank — no placeholder text. Append cleanly when content exists.
 - Don't re-state info that's in VibePulse / MahiProduct. If something appears in Slack that's *already true* per the upstream ref (e.g. a host FQDN), skip it.
-- No prose digest in the output. The user reviews the dossier via `git diff` and gets the readable form via `/slack-attack`.
+- No prose digest in the output. The dossier change lands as a commit (see "Committing"); the readable form comes from `/slack-attack`.
