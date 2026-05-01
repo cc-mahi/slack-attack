@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Adam Foltyn", role: "client trading ops — LP/pricing escalations", confidence: low}
-last_catchup: 2026-04-30T09:35:00Z
+last_catchup: 2026-05-01T09:30:00Z
 ---
 
 ## Recent issues
