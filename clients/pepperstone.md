@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-04-30T10:30:00Z
+last_catchup: 2026-05-01T14:52:02Z
 ---
 
 ## History
