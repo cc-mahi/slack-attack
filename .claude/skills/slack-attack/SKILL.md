@@ -3,12 +3,12 @@ name: slack-attack
 description: Orchestrator and reader-facing entrypoint. Runs /catchup against one or more clients (in subagents to keep main context clean), then synthesises a readable natural-language brief from the updated dossiers. Use when the user says "/slack-attack" or "/slack-attack <slug>".
 ---
 
-`/slack-attack` is the entrypoint Cameron uses to actually catch up. It does two jobs:
+`/slack-attack` is the entrypoint the user uses to actually catch up. It does two jobs:
 
 1. **Dispatch catchup.** Decide which client(s) to refresh, then run `/catchup <slug>` for each — in **subagents**, so the Slack reads don't pollute the main thread.
-2. **Read and synthesise.** After each catchup finishes, read the updated dossier and produce a readable natural-language brief for Cameron. Bullet checklists are out; prose paragraphs are in.
+2. **Read and synthesise.** After each catchup finishes, read the updated dossier and produce a readable natural-language brief for the user. Bullet checklists are out; prose paragraphs are in.
 
-The brief is the product Cameron reads. The dossier is the durable artefact behind it.
+The brief is the product the user reads. The dossier is the durable artefact behind it.
 
 ## Resolving the target
 
@@ -31,13 +31,13 @@ Take the top N rows (start with N=3; that's also the hard cap on a batch). **Do 
 
 Retired clients (`status: retired` in dossier frontmatter) are excluded by default — the script handles this. They're silently dropped from the no-arg rotation and never appear in the continuation table. Pass `--include-retired` only for ad-hoc inspection.
 
-If Cameron runs `/slack-attack <slug>` against a retired client, **short-circuit**: print one line and stop, no subagent, no Slack pull.
+If the user runs `/slack-attack <slug>` against a retired client, **short-circuit**: print one line and stop, no subagent, no Slack pull.
 
 ```
 <slug> — retired since <retired_at> (<retired_reason>). Edit frontmatter to re-activate.
 ```
 
-Re-activating is a deliberate edit: remove `status: retired` from frontmatter, then run `/catchup <slug>` normally. Don't try to make slack-attack do it for him.
+Re-activating is a deliberate edit: remove `status: retired` from frontmatter, then run `/catchup <slug>` normally. Don't try to make slack-attack do it for them.
 
 That's the ranking — staleness alone, no activity weighting or pinning. If that proves wrong over time, change the script, not the skill.
 
@@ -50,14 +50,14 @@ Run catchups in **subagents** so the Slack reads stay out of the main thread. Us
 Dispatch is **parallel in the foreground**. The loop is:
 
 1. Pick the top N clients from `scripts/rank-clients` (N ≤ 3 hard cap; fewer if there are fewer to do).
-2. Dispatch all N catchup subagents at once — make N Agent tool calls **in a single message**, no `run_in_background` flag. The harness runs them concurrently in the foreground. (Print a single up-front line listing the N slugs so Cameron knows what's running; per-dispatch lines aren't shown anyway.)
+2. Dispatch all N catchup subagents at once — make N Agent tool calls **in a single message**, no `run_in_background` flag. The harness runs them concurrently in the foreground. (Print a single up-front line listing the N slugs so the user knows what's running; per-dispatch lines aren't shown anyway.)
 3. Wait for all subagents to return. The orchestrator's main thread blocks until every one is done.
 4. Once all returns are in, synthesise each client's section in turn — `git diff clients/<slug>.md`, full dossier read, prose paragraph(s), URL refs — and print as you go. With ~3 clients and ~5s synthesis each, the printing stage takes ~15s after the last subagent lands.
 5. After the last section prints, print the continuation table.
 
 Total wall time ≈ slowest-individual catchup + N × ~5s synthesis. With 3 catchups averaging 60–90s each, expect ~1.5 minutes end-to-end — versus 3–5 minutes if dispatched serially.
 
-Trade-off versus true streaming: Cameron doesn't see prose appear as each catchup individually completes; he sees nothing until all N return, then a burst of synthesised sections. We accepted this because the prior attempt at parallel-background streaming (`run_in_background: true`) had the subagents return in 7–9s with only their opening narration as "result" — i.e. they bailed before doing any real work. Foreground parallel is documented to run concurrently and was empirically fine in serial form (the working serial-with-streaming runs in commits `a455cbb` / `b34c56f`); we keep that working dispatch shape and only add the multi-call-in-one-message wrapper.
+Trade-off versus true streaming: the user doesn't see prose appear as each catchup individually completes; they see nothing until all N return, then a burst of synthesised sections. We accepted this because the prior attempt at parallel-background streaming (`run_in_background: true`) had the subagents return in 7–9s with only their opening narration as "result" — i.e. they bailed before doing any real work. Foreground parallel is documented to run concurrently and was empirically fine in serial form (the working serial-with-streaming runs in commits `a455cbb` / `b34c56f`); we keep that working dispatch shape and only add the multi-call-in-one-message wrapper.
 
 Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`) are typically lenient enough for 3-way concurrency. If you hit a 429, the subagent will surface it in its return; treat it as a bug to revisit rather than pre-throttle for.
 
@@ -92,15 +92,15 @@ Rules:
 
 - **One issue per paragraph.** Don't chain multiple distinct events into a single wall-of-text paragraph just because they all happened in the window. Each `[N]` reference belongs to its own short paragraph — typically a lead sentence, then one or two of supporting detail, then the URL line. If you find yourself joining two unrelated topics with "; meanwhile…" or "the same evening…", break the paragraph instead.
 - **Plain-English lead.** The first sentence of each paragraph must be readable by someone who's been away from the desk for a week. Lead with the human shape — *who, what, status* — not internal jargon. ❌ "Erik reckons it's the expected LR effect plus LL PnL we recapture (PI is off on Radex's FX-crosses execution rules)" — opaque without prior context. ✅ "Radex (client) flagged slippage on three FX crosses; our take is it's expected behaviour from how we throttle pricing, and a sample trade actually netted us PnL despite the apparent loss." Acronyms can show up in the second clause once the topic is anchored, but never as the lede.
-- **Glossary discipline.** When you use a Mahi-internal acronym (LR, LL, PI, PnL recapture, B_CLIENTS_RA, MAHI_CONTINUITY_NYC, etc.), the surrounding sentence should make the *role* of that thing legible — even if Cameron doesn't recall the exact definition cold. "the LR throttle on B_CLIENTS_RA" beats "LR on B_CLIENTS_RA" because the word *throttle* anchors the meaning. The dossier carries the deep technical detail; the brief gives Cameron enough to know whether to click the link.
+- **Glossary discipline.** When you use a Mahi-internal acronym (LR, LL, PI, PnL recapture, B_CLIENTS_RA, MAHI_CONTINUITY_NYC, etc.), the surrounding sentence should make the *role* of that thing legible — even if the user doesn't recall the exact definition cold. "the LR throttle on B_CLIENTS_RA" beats "LR on B_CLIENTS_RA" because the word *throttle* anchors the meaning. The dossier carries the deep technical detail; the brief gives the user enough to know whether to click the link.
 - **Active voice, status via verbs.** "Radex flagged slippage." "We closed the XAGUSD spike." "The execution-rule flag is still under discussion." Past tense for what happened, present for what's still rough, future for what's coming. Don't add `[open]`/`[resolved]` markers; the verbs do that work.
-- **Bare URLs only.** No `[label](url)` markdown — Cameron's terminal can't open those. URLs go on their own line directly under the paragraph that supports them.
-- **`[N]` references inline in the prose**, matched to the URL line below. Cameron uses these to refer back ("what's [3]?").
-- **Per-client numbering**, resets at each client section in a multi-client brief. Cameron disambiguates by client header ("amana [3]").
+- **Bare URLs only.** No `[label](url)` markdown — the user's terminal can't open those. URLs go on their own line directly under the paragraph that supports them.
+- **`[N]` references inline in the prose**, matched to the URL line below. The user uses these to refer back ("what's [3]?").
+- **Per-client numbering**, resets at each client section in a multi-client brief. The user disambiguates by client header ("amana [3]").
 - **No bullet checklists** of open/resolved. The prose verb tense already signals status; the dossier carries the structured list for anyone who wants it.
 - **Don't restate upstream refs.** Hosts, commercial terms, party names, distribution markets live in VibePulse / MahiProduct. Reference them by name where needed but don't expand.
 
-Test for whether the brief is working: read the first sentence of each paragraph aloud, in order. If that read alone tells Cameron the shape of the window — what's hot, what closed, what's pending — the brief is good. If it's just a list of acronyms strung together, rewrite.
+Test for whether the brief is working: read the first sentence of each paragraph aloud, in order. If that read alone tells the user the shape of the window — what's hot, what closed, what's pending — the brief is good. If it's just a list of acronyms strung together, rewrite.
 
 ### Quiet weeks
 
@@ -135,11 +135,11 @@ Remaining (oldest catchup first):
 Continue with next batch? (y/n)
 ```
 
-If Cameron says yes, run the next batch picking up where you stopped (re-rank by current staleness — some clients you just refreshed have moved to the bottom).
+If the user says yes, run the next batch picking up where you stopped (re-rank by current staleness — some clients you just refreshed have moved to the bottom).
 
 ## Tone
 
-- Cameron is the only reader. Terse, no preamble, lead with what's hot.
+- The user is the only reader. Terse, no preamble, lead with what's hot.
 - Natural-language prose, not Slack-quote vocabulary. Embed technical names (instruments, LPs, counterparty IDs) inside sentences rather than chaining them as keywords.
 - Past-tense for what happened, present-tense for what's still rough, future-tense for what's coming up. The verbs do the open/closed signalling — don't add markers.
 - Don't editorialise. If a thread didn't conclude, say so plainly; don't speculate.
@@ -149,7 +149,7 @@ If Cameron says yes, run the next batch picking up where you stopped (re-rank by
 - Doesn't pull Slack itself — that's catchup's job, run in a subagent.
 - Doesn't edit dossiers — catchup handles all writes. slack-attack is read-only against `clients/*.md` (and read-only against the VibePulse / MahiProduct refs, always).
 - Doesn't bump `last_catchup` — catchup does that.
-- Doesn't produce structured bullet output — that's catchup's terminal output, intended for the subagent caller, not for Cameron.
+- Doesn't produce structured bullet output — that's catchup's terminal output, intended for the subagent caller, not for the user.
 
 ## Constraints
 

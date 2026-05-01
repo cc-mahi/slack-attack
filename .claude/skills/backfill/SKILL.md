@@ -1,6 +1,6 @@
 ---
 name: backfill
-description: One-shot lookback worker. Pulls a long horizon (default 12m) from a client's Slack channels and populates the dossier's `## History` section with the relationship arc, major status changes, and stakeholder evolution. Use when Cameron says "/backfill <slug>" or "/backfill <slug> --since YYYY-MM-DD".
+description: One-shot lookback worker. Pulls a long horizon (default 12m) from a client's Slack channels and populates the dossier's `## History` section with the relationship arc, major status changes, and stakeholder evolution. Use when the user says "/backfill <slug>" or "/backfill <slug> --since YYYY-MM-DD".
 ---
 
 `/backfill` is the lookback worker. Where `/catchup` keeps the rolling 24h-since-last view fresh, `/backfill` does the one-shot wide-horizon read that establishes the relationship's history. Its product is the `## History` section in `clients/<slug>.md`. It's not a recurring flow — run once per client, twice if the first pass surfaces older history worth extending into.
@@ -120,7 +120,7 @@ If `## History` already exists and `--since` is **older** than the existing prea
 2. Mine the new earlier window only (no need to re-mine what's already covered).
 3. Prepend new entries, keeping the section in chronological order (earliest-first).
 4. Update the preamble's lookback boundary.
-5. Don't touch existing entries — Cameron's manual edits are sticky.
+5. Don't touch existing entries — the user's manual edits are sticky.
 
 If `--since` is the same or newer than the existing boundary, no-op:
 
@@ -128,7 +128,7 @@ If `--since` is the same or newer than the existing boundary, no-op:
 History already covers from <date>. Pass an earlier --since to extend, or delete the section to regenerate.
 ```
 
-For a full regenerate, Cameron deletes the section first.
+For a full regenerate, the user deletes the section first.
 
 ## Cost expectations
 
@@ -140,6 +140,6 @@ Backfill is heavy. A 12m run on a busy client = ~10–15 keyword searches + 1–
 
 - Doesn't touch `Recent issues` or `Notable topics` — that's `/catchup`'s territory.
 - Doesn't bump `last_catchup` — that's `/catchup`'s job.
-- Doesn't write to `../MahiProduct/wiki/`. If a wiki page exists, refuse — Cameron migrates the History content manually if he wants it upstream.
+- Doesn't write to `../MahiProduct/wiki/`. If a wiki page exists, refuse — the user migrates the History content manually if they want it upstream.
 - Doesn't run on retired clients.
 - Not part of `/slack-attack`'s rotation.

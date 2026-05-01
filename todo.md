@@ -1,4 +1,3 @@
-- refactor refs from Cameron to user or something like that. others may want to use the scripts here
 - update sa skill to commit after running catchup
 - idea: a way to prioritise which stories are worth highlighting?\
 - idea: run on a schedule and send me highlights summary

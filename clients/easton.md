@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shervin Arian", role: "ex-Easton — primary contact during integration; departed 2025-08-15, indicated would resurface at next firm", confidence: low}
-  - {name: "Carlos Rico-Ospina", role: "ex-Easton — quant / handover after Shervin's exit; left ~2025-08-19; personal email carlosricojr@gmail.com", confidence: low}
+  - {name: "Carlos Rico-Ospina", role: "ex-Easton — quant / handover after Shervin's exit; left ~2025-08-19", confidence: low}
 last_catchup: 2026-04-30T00:00:00Z
 status: retired
 retired_at: 2025-08-19

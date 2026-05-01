@@ -1,6 +1,6 @@
 # slack-attack — instructions for Claude
 
-Personal Slack catch-up tool for one reader (me, Cameron). Two things live here:
+Personal Slack catch-up tool for one reader (me). Two things live here:
 
 1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `History` (long-horizon relationship arc), `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere. The dossier is the durable artefact and can be detailed / jargon-dense.
 2. **Skills**:

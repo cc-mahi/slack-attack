@@ -3,7 +3,7 @@ name: catchup
 description: Worker — pulls Slack activity since last_catchup for one client or channel and applies dossier updates in place. Writes the dossier; does not produce a readable digest. Use when the user says "/catchup <slug>" or "/catchup #<channel>". For the readable brief or a multi-client run, use /slack-attack instead.
 ---
 
-`/catchup` is the worker. Its product is the dossier file on disk — it reads Slack and edits `clients/<slug>.md` or `channels/<name>.md`. It does **not** synthesise a readable brief; that's `/slack-attack`'s job. When invoked directly by Cameron it returns a terse structured summary of what changed; when invoked from a subagent (via `/slack-attack`) the subagent forwards the same summary back.
+`/catchup` is the worker. Its product is the dossier file on disk — it reads Slack and edits `clients/<slug>.md` or `channels/<name>.md`. It does **not** synthesise a readable brief; that's `/slack-attack`'s job. When invoked directly by the user it returns a terse structured summary of what changed; when invoked from a subagent (via `/slack-attack`) the subagent forwards the same summary back.
 
 A target is required. If invoked with no arg, stop and point at `/slack-attack`.
 
@@ -13,7 +13,7 @@ If the resolved client dossier has `status: retired` in frontmatter, refuse and 
 catchup: <slug> — retired (<retired_at>); skipping. Remove `status: retired` from frontmatter to re-activate.
 ```
 
-The dossier stays as a frozen record. Re-activation is a deliberate frontmatter edit by Cameron, not something to negotiate around.
+The dossier stays as a frozen record. Re-activation is a deliberate frontmatter edit by the user, not something to negotiate around.
 
 ## Source-of-truth recap
 
@@ -26,7 +26,7 @@ The dossier stays as a frozen record. Re-activation is a deliberate frontmatter 
 
 - `/catchup <slug>` → `clients/<slug>.md`. Channels resolve from (in order): `channels_override` on the dossier, then `slack:` in `../VibePulse/.claude/clients/<slug>.yaml`. The VibePulse `slack:` block is a dict `{internal: <name>, client: <name>}` — **scan both**. The internal channel typically has the actual root-cause diagnosis; skipping it loses load-bearing context. If VibePulse has multiple related yamls (e.g. `pepperstone` + `pepperstone-crypto`) and they share the same slack channels, they're one target — use either, they'll resolve to the same thing.
 - `/catchup #<channel>` or `/catchup <channel-name>` → `channels/<name>.md`. If missing, create it from `channels/_template.md` and derive the frontmatter yourself (see "Bootstrap a channel dossier" below) — don't block.
-- No-arg form is not supported. Tell Cameron to use `/slack-attack` for the multi-client batched flow.
+- No-arg form is not supported. Tell the user to use `/slack-attack` for the multi-client batched flow.
 
 ### Bootstrap a client dossier
 
@@ -45,7 +45,7 @@ If `clients/<slug>.md` doesn't exist:
 If `channels/<name>.md` doesn't exist:
 
 1. `slack_search_channels` for the channel; seed `purpose` from its topic/purpose. If generic, skim ~20 recent messages to infer.
-2. `scope` is a best-guess (`cross-cutting` / `team` / `announcements` / `other`) — Cameron will correct on review.
+2. `scope` is a best-guess (`cross-cutting` / `team` / `announcements` / `other`) — the user will correct on review.
 3. Record `channel_id` in `.claude/docs/slack-conventions.md`.
 
 ## Reading activity
@@ -63,7 +63,7 @@ Skip channels matching the skip list in `.claude/docs/slack-conventions.md`.
 
 The default windows (24h since `last_catchup`, 30d when freshly bootstrapped) are starting points, not ceilings. **If what you find references events you can't see, dig deeper before writing the dossier.** The bar is: every `Recent issues` entry should stand on its own without phrases like "pre-window", "per earlier event", or "following the [unspecified] incident". If you'd have to write that, you haven't read enough yet.
 
-This matters most for clients **without an established dossier** — Cameron shouldn't have to manually `/seed-client` and re-run to get a coherent first pass. catchup should keep digging until the picture is clear, on its own.
+This matters most for clients **without an established dossier** — the user shouldn't have to manually `/seed-client` and re-run to get a coherent first pass. catchup should keep digging until the picture is clear, on its own.
 
 Triggers to expand:
 
@@ -90,8 +90,8 @@ Cost note: this trades latency for dossier quality. A first-time fundingpips cat
 
 In priority order:
 
-1. **Direct mentions of Cameron** (`<@U099FA0D7CP>`) or DMs.
-2. **Questions awaiting a reply** — unanswered `?` messages, especially in threads Cameron was in.
+1. **Direct mentions of the user** (`<@U099FA0D7CP>`) or DMs.
+2. **Questions awaiting a reply** — unanswered `?` messages, especially in threads the user was in.
 3. **Decisions** — "we're going to", "agreed", "let's do X".
 4. **Escalations** — client dissatisfaction, outages, urgent language, specific incidents.
 5. **Recurring issues** — topic already in the dossier's `Recent issues` that's flaring again.
@@ -128,7 +128,7 @@ The dossier is the readable artefact — it can be detailed, jargon-dense, and c
 
 ## Output (to caller)
 
-Catchup's output is a structured confirmation, not a prose digest. The caller (Cameron directly, or a `/slack-attack` subagent) uses this to know what changed. Keep it tight.
+Catchup's output is a structured confirmation, not a prose digest. The caller (the user directly, or a `/slack-attack` subagent) uses this to know what changed. Keep it tight.
 
 ```
 catchup: <target> — <ISO window>
@@ -151,11 +151,11 @@ If the run produced zero changes (quiet window), output one line and stop:
 catchup: <target> — quiet window (<N> bot pings, no human discussion). last_catchup bumped.
 ```
 
-Do **not** produce paragraphs of prose. Do **not** synthesise a readable brief. The dossier is the artefact; `/slack-attack` reads it to write prose for Cameron.
+Do **not** produce paragraphs of prose. Do **not** synthesise a readable brief. The dossier is the artefact; `/slack-attack` reads it to write prose for the user.
 
 ## Action items
 
-If anything in the window is addressed to Cameron (direct mention or DM awaiting reply), include a single `Action items:` line at the end of the output naming the items with permalinks. Otherwise omit. Don't speculate about other Camerons / Wills — Cameron Copland is `U099FA0D7CP`.
+If anything in the window is addressed to the user (direct mention or DM awaiting reply), include a single `Action items:` line at the end of the output naming the items with permalinks. Otherwise omit. Match strictly on the Slack user ID `U099FA0D7CP` — don't infer from first names alone (other users may share a first name).
 
 ## Dossier conventions
 
@@ -204,4 +204,4 @@ Never inline `# comment` annotations into YAML values — parsers handle them in
 - Channel zero human messages in the window → one-line note, don't expand.
 - Leave empty dossier sections blank — no placeholder text. Append cleanly when content exists.
 - Don't re-state info that's in VibePulse / MahiProduct. If something appears in Slack that's *already true* per the upstream ref (e.g. a host FQDN), skip it.
-- No prose digest in the output. Cameron reviews the dossier via `git diff` and gets the readable form via `/slack-attack`.
+- No prose digest in the output. The user reviews the dossier via `git diff` and gets the readable form via `/slack-attack`.
