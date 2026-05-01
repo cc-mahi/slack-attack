@@ -6,16 +6,15 @@ refs:
   hosts: ../MahiProduct/data/client-hosts.json          # entry: toa
   wiki: null
 channels_override: null
-key_people_overrides:
-  - {name: "James", role: "primary engineer (Mahi-side)"}
-last_catchup: 2026-04-30T12:00:00Z
+key_people_overrides: []
+last_catchup: 2026-05-01T10:00:00Z
 ---
 
 ## Status
 
-- **Stage:** live (Toa sister company; Nado perpetual products quoting on APN1 since 2026-03-31; Mag7 perps (MSFT/NVDA/AAPL/AMZN/TSLA/META/GOOGL-UST-PERP) added 2026-04-08)
-- **Integration:** Mahi infra hosting Toa's pricing/distribution across APN1, CHI, EUW2, USE2; CHAOS_ORACLE quoting ETF prices, CFD feeds weekday-only. Lee piloting Nado's new `/ws/v2` endpoint (testnet) for ordering — faster but out-of-order responses, replaces existing `/ws`.
-- **Relationship:** sister company (same CTO); James effectively dedicated. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
+- **Stage:** live and expanding rapidly. Nado spot markets (WETH, kBTC, USDC, BNB) + BTC/ETH perps launched 2025-11-21. Dozens of new perps added through Dec 2025–Apr 2026 (HYPE, MONAD, ZEC, XAUT, Lighter, DOGE, kBONK, kPEPE, UNI, XPL, ASTER, ONDO, and more). FX perps live 2026-03-26; Silver (XAG) 2026-03-17; Oil (CL/WTI) ~2026-03-24. ETF pricing (QQQ/SPY) live 2026-03-31; Mag7 perps 2026-04-08. NLP is the primary liquidity provider for Nado spot and perp markets. Toa Argamon Tokyo live on minor coins 2026-06-26.
+- **Integration:** Mahi infra hosting Toa's pricing/distribution across APN1, CHI, EUW2, USE2; CHAOS_ORACLE quoting ETF prices, CFD feeds weekday-only. Replace workflow (cancel-and-place) deployed mainnet 2026-02-23 via Lee. Nado's `/ws/v2` (faster, async responses) piloted on testnet by Lee — intermittent connection-reset under load (affects both old+new endpoint; likely proxy/limit issue). NLP fee structure: 0/-3bps maker/taker; vault cap targeting 10M. Recurring CVEX/Vertex/Binance instability on crypto side operationally managed by ops team.
+- **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
 
@@ -40,13 +39,63 @@ last_catchup: 2026-04-30T12:00:00Z
 > [open] 2026-04-15 — PnlDropAlerter false-positive on transient swings; fix committed, needs deploy
 > Cameron raised a PnL drop alert (Argamon LDN, but the alerter is shared Toa-stack infra). James's writeup attributed it to a real ~$8.8K swing inside 2 minutes that Graphite's 60s TRADEPOSITIONPNL smoothed away — alerter not wrong, but operationally noise. systemStateMonitor `--binaryLogOutputPath` was rolled back 2026-03-08 so tick-by-tick binlogs unavailable. Fix committed 2026-04-23 (`MahiMain` c2cdb3b3) — needs release + config set. https://mahifx.slack.com/archives/C035H1VNCAD/p1776245271372289
 
-> [open] 2026-04-29 — `/ws/v2` testnet rollout: intermittent connection-reset under load
-> Nado asked Lee to pilot the new `/ws/v2` endpoint on testnet (faster, responses no longer strictly ordered across requests; per-request still atomic — would obviate IoC/PostOnly segregation per James). Lee hit `java.net.SocketException: Connection reset` running the test suite; Nado side has no error log around the timestamp and confirmed it didn't reach their gateway. Lee reproduced once on the old `/ws` URL too — likely an existing limit/proxy issue, not new to v2. Investigation continues. https://mahifx.slack.com/archives/C09RGU1T1GE/p1777450163783759
+> [resolved] 2026-04-29 — `/ws/v2` testnet rollout: intermittent connection-reset under load
+> Nado asked Lee to pilot the new `/ws/v2` endpoint on testnet (faster, responses no longer strictly ordered across requests; per-request still atomic — would obviate IoC/PostOnly segregation per James). Lee hit `java.net.SocketException: Connection reset` running the test suite; Nado side confirmed it didn't reach their gateway. Lee reproduced once on the old `/ws` URL too — diagnosed as existing limit/proxy issue not specific to v2. As of 2026-04-30 thread close, Nado confirmed and investigation concluded. https://mahifx.slack.com/archives/C09RGU1T1GE/p1777450163783759
 
-> [open] 2026-04-29 — Toa asking for NLP depth/size update post SLA reductions
-> Toa-side asked James to update the shared NLP depth/size sheet given recent SLA reductions: https://docs.google.com/spreadsheets/d/1FocxIgFFc0MqDuxfi9GLWa2STdH28q0V7l6Fl0Rozm0/edit?gid=0#gid=0 . James replied in-thread; awaiting whether the sheet was actually updated. https://mahifx.slack.com/archives/C09RGU1T1GE/p1777452146937409
+> [resolved] 2026-04-29 — Toa asking for NLP depth/size update post SLA reductions
+> Toa-side asked James to update the shared NLP depth/size sheet given recent SLA reductions. James replied in-thread with a canvas doc (Toa Capital Slack canvas F0B0LF4TJ0J) containing the past-24h avg depth/size NLP is currently servicing. https://mahifx.slack.com/archives/C09RGU1T1GE/p1777452146937409
+
+> [open] 2026-04-30 — CVEX EUW2 risk limit hit: BTC-30MAY25 quoting stopped
+> `noRecentOpenOrderUpdates.CVEX-BTC-30MAY25` PD fired after no two-way orders since 13:53 UTC; Justin identified Toa at the risk limit with no way to close risk. James noted alerting will need to be backed off given the limit is a structural cap. Justin resolved the PD alert at 17:54. Alerting threshold calibration for CVEX contracts at max risk remains open. https://mahifx.slack.com/archives/C035H1VNCAD/p1746030941556329
+
+> [resolved] 2026-05-05 — traderVertexSei1 crash loop on APN1: VERTEX cancel timeouts
+> traderVertexSei1 crashed 3+ times in quick succession (`Exceeded maximum number of order breaches (0): [VERTEX cancel timed out: ...]`). Inald handled: turned off books, bounced ordersVertex1, restarted traders; stable after fourth attempt. paidGivenProfileProcess also came down and was restored. https://mahifx.slack.com/archives/C035H1VNCAD/p1746454824352989
+
+> [resolved] 2026-05-12 — Toa-CHI OOM: riskReporting1/riskPath down
+> Both `riskReporting1` and `riskPath` on Toa-CHI came down with native OOM (`mmap failed to map 2113929216 bytes`). Resolved after memory bump and process restarts. Also same day: high VAR alert at TOA APN1 (12,654 USDT) — levelled off after monitoring. https://mahifx.slack.com/archives/C035H1VNCAD/p1747079989606149
+
+> [resolved] 2026-05-15 — signalProcessAP1-1 OOM at TOA APN (recurring, fix in progress)
+> signalProcessAP1-1 at TOA APN OOM at 8192MB. Reoccurred 2026-05-21 (heap space OOM). James was testing fixes; still in testing on 2026-05-21. https://mahifx.slack.com/archives/C035H1VNCAD/p1747299963170189
+
+> [watching] 2026-05-22 — Crypto infrastructure expansion: new APN boxes, Binance moved to rocky 8
+> Lee moved traderBinance1 to new rocky 8 `toa-apnortheast1-prod-crypto-2` box 2026-05-22 (alerts now route to existing Toa APN PD service). New `toa-apnortheast1-prod-crypto-01` box being built in parallel; alerts suppressed until declared live. Recurring limit-price-breach and self-trade alerts on crypto-2 flagged by Lee as spammy (can resolve). https://mahifx.slack.com/archives/C035H1VNCAD/p1747885755306959
+
+> [open] 2026-05-18 — traderCvex CVEX order-breach crash loop: recurring pattern
+> traderCvex crashing repeatedly on order breach exceptions (`Exceeded maximum number of order breaches (0): [CVEX replace order timed out ...]`) across EUW1 and EUW2. Multiple instances: 2026-05-18 (Daria), 2026-06-27 (Maten, twice), 2026-06-30 (Maten), 2026-07-04 (ongoing thread). Each resolved by bouncing ordersGW and restarting trader, but the root cause — CVEX replace order timeouts causing breach trips — is not fixed. James identified the breach limit is set to 0 (zero tolerance). https://mahifx.slack.com/archives/C035H1VNCAD/p1747601897439739
+
+> [resolved] 2026-06-23 — ordersVertex1 fails to start: Vertex contract load timeout (APN-TOA)
+> ordersVertex1 failing on APN1 with `Error loading contract data: Timed out after 60 seconds waiting for response for {"type":"contracts"}`. traderVertexSei1 also down as a result. Stable after several restart attempts; Arun confirmed orders and trades flowing. https://mahifx.slack.com/archives/C035H1VNCAD/p1750688652805529
+
+> [resolved] 2026-06-24 — Crypto.com FIX migration: temporarily offline
+> CDC would not allow two simultaneous FIX sessions; James turned off Crypto.com while migrating connections to the new `toa-apnortheast1-prod-crypto-2` server. CVEX also turned off during the transition. Both back live 2026-06-26. https://mahifx.slack.com/archives/C035H1VNCAD/p1750764060944289
+
+> [resolved] 2026-07-01 — CVEX EUW2 MD feed died: cancel-ratio alert
+> CVEX market data feed died (failing to peg bids/offers), causing 99% cancel-ratio PD alert. James restarted MD feed; alert auto-resolved by James in PD. https://mahifx.slack.com/archives/C035H1VNCAD/p1751363641150399
+
+> [open] 2026-07-02 — High VaR with increased Argamon crypto flow: threshold needs tuning
+> High VaR alert (~50k now at critical threshold) following increased crypto flow from Argamon. James bumped critical VaR limit to 50k temporarily. Acknowledged that thresholds need tuning to match the new Argamon volume. https://mahifx.slack.com/archives/C035H1VNCAD/p1751443836066739
+
+> [open] 2026-07-04 — Crypto.com crossed data + cancel-ratio alert
+> Crypto.com market data became crossed again on 2026-07-03 (James bounced marketDataCryptoDotCom). 2026-07-04 Daria bounced the MD gateway to fix crossing. Leo raised a 78% cancel-ratio alert (`CRYPTO_DOT_COM/PROP_TRADER_CRYPTO_DOT_COM_1`, 629 of 808 orders cancelled in 15 min). https://mahifx.slack.com/archives/C035H1VNCAD/p1751612943352569
+
+> [resolved] 2025-11-21 — Nado spot market launch: WETH/kBTC/USDC/BNB/BTC-ETH perps go live
+> Nado spot markets (WETH, kBTC, USDC, BNB) and BTC/ETH perps launched on 2025-11-21. James spent the day tuning: spread widening, throttle limits (increased from 10k to 60k orders/min), spot pricer fix (odd single bid/offer creating a strange mid), BNB pricing issue resolved by restart. Nado side noted thin candle resolution due to low trade frequency and requested tighter NLP quotes. Stable by evening with ETH perp near risk limit. https://mahifx.slack.com/archives/C09RGU1T1GE/p1763755276568719
+
+> [resolved] 2025-12-12 — Latency crisis: Nado market data 200ms worst-case, orders >30ms speedbump
+> Dec 2025 review call: NLP performance at -0.5bps (below breakeven); last 7 days lost ~$7,500. Market data latency 200ms worst case (avg 1-2ms), order posting 43ms, cancel 20ms — all exceeding the 30ms speedbump. Cost: ~$12k to spread deterioration, ~$4.5k to late cancellations. NLP capital utilisation at 1% of $1.6M. Nado side agreed to infra upgrade (hot-warm → hot-hot) and add `remaining_qty` field to order_update for replace workflow. https://mahifx.slack.com/archives/C09RGU1T1GE/p1765547958843559
+
+> [resolved] 2026-02-23 — Replace workflow (cancel-and-place) deployed to mainnet
+> Lee deployed replace workflow on Nado mainnet 2026-02-23 after the `remaining_qty` field question was escalated. Latency improved substantially by 2026-03-05/06 — p95 much better post Nado BE changes; TCP retransmissions still unresolved, max latency occasionally 500ms+. Nado confirmed further improvements coming. https://mahifx.slack.com/archives/C09RGU1T1GE/p1771853944369159
+
+> [resolved] 2026-03-17 to 2026-03-31 — FX perps + Silver + ETF pricing rollout on Nado
+> Silver (XAG) went live 2026-03-17 after network/system issues. FX perps (XXXUSD-PERP format) live on Nado mainnet 2026-03-26 in post-only mode; FX price feed report shared with notes on JPY divergence vs Hyperliquid. ETF pricing (QQQ/SPY) live 2026-03-31; opened for trading 2026-04-02. Oil/CL listed ~2026-03-24. Chaos oracle price weighting change (Tiingo:1/Finnhub:1/Nobi:2) applied 2026-03-25. https://mahifx.slack.com/archives/C09RGU1T1GE/p1774964941888099
 
 ## Notable topics
 
 - Cameron asked whether low-urgency PD alerts requiring prompt action will get missed in the noise; James says most should drop off PD entirely as EOD telemetry. Open design question for pagerbuddy / alert routing.
 - `--binaryLogOutputPath` for systemStateMonitor remains commented out (rolled back 2026-03-08); without it pnlDropAlerter forensics rely on slower log digs. Worth tracking whether this gets re-enabled once the alerter fix lands.
+- Nado NLP vault cap targeted at 10M; NLP fee structure moving to 0/-3bps maker/taker (announced Dec 2025). Hot-hot infra transition deferred while code issues resolved.
+- CVEX traderCvex crash loop (`order breaches (0): replace timed out`) is a persistent pattern across EUW1/EUW2 — multiple staff members handling each time with bounces. Zero breach tolerance means any single timeout trips the trader. Worth a James investigation when bandwidth allows.
+- Nado listing cadence is very rapid (weekly-to-fortnightly new perps Dec 2025–Apr 2026). Bot `Listing Request` pings James in `toa-nado-shared` for each one. No evidence of a systematic listing-support process on Mahi's side — handled ad hoc.
+- Nado spot empty-book alerts on WETH/USDC recurring when NLP hits risk limits; no other MMs to offset spot risk. Nado flagging they plan to bring more MMs into spot books, but not yet materialised as of 2026-04-30.
+- Key Nado contacts in `toa-nado-shared` (not in wiki/people): Ives Luo (ops/listing), Melanie (ops/listing), jeury (eng), Ian (ops), tony (ops), Chang (infra/latency), Jake (exec/business).
