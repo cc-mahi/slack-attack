@@ -139,7 +139,15 @@ That's it — no padding, no numbered refs.
 
 ## Output — batched (`/slack-attack` no-arg)
 
-Per-client sections are printed **after all subagents have returned** (see "Dispatching catchup"). With foreground-parallel dispatch the orchestrator can't synthesise mid-batch — it has to wait until the slowest one finishes — and then it prints sections back-to-back in staleness-rank order (oldest-staleness first), one paragraph per topic per client.
+Per-client sections are printed **after all subagents have returned** (see "Dispatching catchup"). With foreground-parallel dispatch the orchestrator can't synthesise mid-batch — it has to wait until the slowest one finishes — then it prints sections back-to-back, one paragraph per topic per client.
+
+Order sections by **significance, not staleness**. You've just read each diff — lead with whatever a tired reader would most want to see first (direct mentions, escalations, real decisions, anything that would otherwise get buried). Use judgment; there's no scoring rubric. Collapse genuinely-quiet clients (probe-skipped or catchup-quiet windows) into a single line at the very end of the brief, after the last full section:
+
+```
+Quiet today (N): slug, slug, slug, ...
+```
+
+Low-importance-but-not-quiet clients (a routine LR profile add, a single low-priority new entry) get a one-paragraph summary somewhere in the middle of the brief — don't promote them to the top just because something happened, but don't lump them with truly quiet ones either.
 
 Batch size: pick the top N from `scripts/rank-clients`, capped at 3. All N are dispatched in parallel up front; there's no mid-batch stopping rule (with parallelism, the cost is fixed once dispatched, so let them all complete and print).
 
