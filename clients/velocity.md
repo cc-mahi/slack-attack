@@ -9,10 +9,16 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-04-30T11:30:00Z
+last_catchup: 2026-05-01T09:43:46Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-01 — Overnight losses, chunky position offside; Will and William investigating
+> Client (Richard) flagged at 09:12: "looks like we took a hit overnight / spreads too tight?". Will had already posted Echo yield-profile link at 08:24 and pinged William Denny "need to look into this asap". William confirmed checking at 09:13. Will's read at 09:37: position went offside quickly, "sort of locked in that loss at 10-15 seconds"; told client to "trust the process a bit today, hopefully the yield quality evens out". Root cause (too-tight spreads vs chunky directional flow) under investigation — no resolution in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777624588186949)
+
+> [open] 2026-04-30 — Arb hedger reconfigured to breathe more; EOD hedger restart timed poorly
+> Will put changes into arb hedger at 16:57 to "let initial risk breathe more" and slowed the hybrid down. Hedger restarted at EOD — Will noted "wrong time to restart the hedger", PnL expected to fluctuate more. Feeds into 2026-05-01 overnight losses above. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777564631716889)
 
 > [open] 2026-04-29 — Premium channel rollout for tags 911 / 960 / 960a — initial losses, multiple rounds of tuning
 > William Denny ran yield-profile analysis of the CSV client datasets (CELER, GNT, SQB, Royal still processing) and confirmed 911/960/960a suitable for fast hedge (10-30s yield curves). Premium feed switched from STP back to internalise+10-30s hedge. Day saw losses from "drip-feed" flow on premium with wide LP pool: Will flagged "can't see how we're going to monetise this drip feed of flow by risk managing it on premium spreads", "the LP pool is so much wider than our 15 currently". Richard Holman pushed back: "hedging spreads are going to be wider — that's kind of the whole point". Tweaks during the day: configured premium channel to widen to pool TOB over ROLL / TWILIGHT / SNGMON; doubled all time-delay triggers and bounced hedger; reduced TOB qty (1st layer 50oz @ 15c, 2nd layer 50oz @ 35c static); switched fill source from internal to published. By EOD pnl recovering. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777462632819049)
@@ -26,11 +32,11 @@ last_catchup: 2026-04-30T11:30:00Z
 > [open] 2026-04-30 — Compass sims being rerun on combined client trade data
 > William Denny: need to rerun Compass sims to pick up changed hedger + pricing config. Ready for tomorrow (2026-05-01). [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777547238227629)
 
-> [watching] 2026-04-30 — XAUUSD priceFormatPipRelative for LMAX — fixOrders2 restart pending EOD
-> Shyam: PagerDuty alert needed `priceFormatPipRelative` for XAUUSD & LMAX changed from 0.01 to 0.001. Config change already made but `fixOrders2` not restarted to pick it up; restart scheduled at EOD. LMAX temporarily removed as LP for `hybridHedger1` until then to avoid further rejections. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777520897089699)
+> [resolved] 2026-04-30 — XAUUSD priceFormatPipRelative for LMAX — fixOrders2 restarted EOD
+> Shyam: PagerDuty alert needed `priceFormatPipRelative` for XAUUSD & LMAX changed from 0.01 to 0.001. Config change already made; `fixOrders2` restarted at EOD (Will's hedger restart at ~17:08 confirms). LMAX re-added as LP for `hybridHedger1` post-restart. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777520897089699)
 
-> [open] 2026-04-28 — Dan's question on one-sided / risk-skewed pricing — partial answer
-> Dan asked (carried from Friday): can one of the APIs show a wide two-price and skew one side in when there's risk to get out, potentially landing top-of-book? William Denny replied "our pricers won't go one-sided". Dan re-asked with refinement on 2026-04-29; Will Carter engaged: asymmetric skewing is possible (tighten one side via signals), starting from a wide price and teasing it in is feasible — risk-skewing into VT's own pool would need design thought. Agreed to discuss on call next morning. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777384240375059)
+> [resolved] 2026-04-28 — Dan's question on one-sided / risk-skewed pricing — discussed on call 2026-04-30
+> Dan asked: can one API show a wide two-price and skew one side in when there's risk to get out? William Denny replied "our pricers won't go one-sided". Dan re-asked with refinement on 2026-04-29; Will Carter: asymmetric skewing possible (tighten one side via signals), teasing in from a wide price feasible — risk-skewing into VT's own pool needs design thought. Agreed to discuss on call; huddle held 2026-04-30 at 11:03. No follow-up outstanding. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777384240375059)
 
 > [resolved] 2026-04-29 — CSV_CLIENTS drop-copy yield profiles backfilled
 > William Denny backfilled missing yield profiles for the CSV_CLIENTS drop copies. Dan to do check-backs vs Horizon. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777471939461419)
@@ -40,6 +46,7 @@ last_catchup: 2026-04-30T11:30:00Z
 
 ## Notable topics
 
+- 2026-05-01 — Bank holiday Monday 4 May: Mahi emergency-only coverage, Slack less monitored. Client channel notified; support email / phone numbers provided. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777622405037559)
 - 2026-04-30 — GS hedging looking better $/M on XAU (small sample); GS spread flickering 18/36 then settling 35-40. Premium-channel widens to pool TOB on ROLL/TWILIGHT/SNGMON. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777452886321469)
 - 2026-04-30 — Pricing channel taxonomy clarified by Will: `CLIENT_PRICE_LDN` (wide spreads, matches pool via MWMS, channel `A_CLIENTS`, currently internalise+hedge); `CLIENT_PRICE_B_LDN` (premium spreads, stable 50oz XAU TOB ~15oz, channel `A_CLIENTS_PREMIUM`, internalise+hedge); party `CLIENTS_CSV` is the post-trade drop-copy from Xenfin used for whole-book yield profiles (last 2 weeks). [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777540742930749)
 - 2026-04-29 — Will floated the structural tension out loud: "How do we monetise this mofo with truck wide spreads at the LPs". SI flagged as best option but yields not there yet. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777460625699159)
