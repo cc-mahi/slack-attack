@@ -126,9 +126,39 @@ Apply edits with `Edit`, not `Write`, so diffs stay minimal (except when bootstr
 
 The dossier is the readable artefact — it can be detailed, jargon-dense, and contain everything `/slack-attack` will later need to summarise. Don't pre-summarise; write what you found.
 
+## Sanity-check before commit
+
+Before staging the dossier and committing, verify each newly-added entry's Slack permalink timestamp falls within the catchup window. This guard exists because two real corruptions landed on 2026-05-01: a local run wrote 2025-05/06-dated entries into a window labelled 2026-04-28..2026-05-01 (year off into the past), and a separate cloud run wrote 2026-05/06/07-dated entries from 2025 source data (year off into the future). Both got reverted by hand. The check below would have caught both before they committed.
+
+Procedure:
+
+1. For every new `Recent issues` / `Recent topics` / `Notable topics` entry just written in this run, extract the first Slack permalink: `https://mahifx.slack.com/archives/<CID>/p<DIGITS>`. The first 10 digits of `<DIGITS>` are the Unix seconds of the source message.
+2. Decode the run's window:
+   - `oldest_unix` = the Unix-seconds value passed to `slack_read_channel` as `oldest` (the previous `last_catchup`, or the 30d-ago anchor for bootstrap, or whatever wider value was used when expanding for ambiguity).
+   - `now_unix` = current Unix time (`date +%s`).
+3. For each new entry, the permalink ts must satisfy `oldest_unix - 60 ≤ entry_ts ≤ now_unix + 60` (60s margin tolerates clock skew).
+4. Separately, the new `last_catchup` value being written into frontmatter must satisfy `new_last_catchup_unix ≤ now_unix + 60` — never bump `last_catchup` to a future timestamp.
+5. If **any** check fails, **abort**: leave the dossier dirty (do not stage, do not commit, do not bump `last_catchup`), and emit:
+
+   ```
+   catchup: <target> — ABORT: sanity-check failed before commit.
+
+   <one line per violation, e.g.:
+     entry dated 2026-07-02 has Slack ts 2025-07-02T03:00:43Z, outside window [2026-04-30T00:00:00Z, 2026-05-01T15:00:00Z]
+     proposed last_catchup 2026-07-02T06:22:40Z is in the future (now is 2026-05-01T15:00:00Z)>
+
+   Likely date-math bug. Inspect with `git diff` and investigate before committing manually.
+   ```
+
+   Exit without further work. The caller (user or `/slack-attack`) sees the abort message and decides next steps.
+
+Why a hard abort vs. a warning: silent dossier corruption is worse than a noisy halt. A flagged abort forces investigation; a warning gets buried.
+
+The check doesn't apply to the `History` section (that's `/backfill`'s domain, deliberately wide-window) or to non-permalinked content (`Status`, `key_people_overrides`). It only checks entries that cite a Slack permalink — which by convention is every `Recent issues` / `Recent topics` / `Notable topics` entry.
+
 ## Committing
 
-Once the dossier edit is in place, commit it as part of the same run — don't leave it staged or wait for the user to commit. The reader will see the change either by `git pull` (if a remote agent ran the catchup) or by reviewing the new commit locally.
+Once the dossier edit is in place **and the sanity-check has passed**, commit it as part of the same run — don't leave it staged or wait for the user to commit. The reader will see the change either by `git pull` (if a remote agent ran the catchup) or by reviewing the new commit locally.
 
 - Stage only the files this run actually touched: the target dossier (`clients/<slug>.md` or `channels/<name>.md`) and `.claude/docs/slack-conventions.md` if a newly-resolved channel ID was cached. Never `git add -A` — it'll sweep up unrelated work.
 - Commit message is conventional: `chore(catchup): refresh <slug> dossier (<oldest>..<now>)`. For a quiet window, `chore(catchup): bump <slug> last_catchup (quiet window)`. For a bootstrap, `chore(catchup): bootstrap <slug> dossier from VibePulse`.
