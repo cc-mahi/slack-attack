@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-01T15:00:00Z
+last_catchup: 2026-05-02T07:23:41Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-01 — DOWUSD tag1 routing: trades falling into CMCSWAPFREE instead of ABOOK
+> Rory noticed DOWUSD index CFD trades for some counterparties assigned `trading_account = CMCSWAPFREE` in Pulse instead of `ABOOK`. Internalisation and hedging unaffected; reporting impact only. Root cause: `tag1=CMCSWAPFREE` being applied beyond metals. Rory asked client to scope the tag to metals-only counterparties; no response yet. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777663932045299)
 
 > [open] 2026-05-01 — Index futures go-live blocked by TOO_SMALL quantity validation
 > DOWFUT-M and NDXFUT-M test trading attempted 2026-05-01 morning; Princess test trade rejected with `DISTRIBUTION_LDN-maximumShowQuantity=TOO_SMALL, quantity=TOO_SMALL`. Root cause identified by Rory but requires weekend EOD restarts to take effect — US futures index go-live pushed to early next week. In the meantime: continuing setup for all other cash + futures equity indices (EU, Asia), collecting step/min sizes from Princess/Nikos. Princess provided min+step per LP at 13:46. Rory to revert with further items requiring EOD restarts. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777629657810339)
