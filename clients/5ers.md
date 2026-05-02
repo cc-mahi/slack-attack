@@ -10,16 +10,16 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-01T10:00:00Z
+last_catchup: 2026-05-02T07:21:15Z
 ---
 
 ## Recent issues
 
-> [open] 2026-04-26 — Recurring weekend disconnections — root cause B2Broker session break
-> Internal (Kate, 04-28): only crypto LP is B2Broker; their session break Saturday morning stopped pricing → drop-out 5ers saw. B2Broker confirmed they can't customise session times. Plan: set up proxied crypto pricing so a normalised feed covers the 2h downtime. Yaron's order-book ask (FX +1pt, XAG +1pt/side from 0.05 lots) was discussed on weekly call — Yaniv decided **not** to change visible TOB; XAGUSD test config reverted. 2026-04-30: Kate deployed crypto feed enrichment — additional market data sourced to supplement B2BROKER, XBTEUR base spreads tightened. CFD enrichment in progress. Permanent weekend disconnect fix still pending (session times not yet changed). [yaron-escalation](https://mahifx.slack.com/archives/C07AQJS4E80/p1777196856253159) [internal-rca](https://mahifx.slack.com/archives/C079M09MGGP/p1777394276388709) [feed-fix-update](https://mahifx.slack.com/archives/C07AQJS4E80/p1777572138698369)
+> [resolved] 2026-04-26 — Recurring weekend disconnections — root cause B2Broker session break
+> Internal (Kate, 04-28): only crypto LP is B2Broker; their session break Saturday morning stopped pricing → drop-out 5ers saw. B2Broker confirmed they can't customise session times. 2026-04-30: Kate deployed crypto feed enrichment — additional market data sourced to supplement B2BROKER, XBTEUR base spreads tightened. 2026-05-01: Kate confirmed to client that additional crypto feeds are normalised into price formation alongside B2Broker; feeds remained stable through the Saturday B2Broker downtime window. CFD side: same pattern applied, additional CFD feeds layered in. B2Broker session-time change not possible but fully worked around via multi-source enrichment. [yaron-escalation](https://mahifx.slack.com/archives/C07AQJS4E80/p1777196856253159) [internal-rca](https://mahifx.slack.com/archives/C079M09MGGP/p1777394276388709) [feed-fix-update](https://mahifx.slack.com/archives/C07AQJS4E80/p1777572138698369) [resolved-update](https://mahifx.slack.com/archives/C07AQJS4E80/p1777652354910519)
 
-> [watching] 2026-04-26 — liquidityPool* down on 5ersCryptoCFDs — failed over 5ers→B2BROKER reference
-> Sam Hewitt: liquidityPoolMDAggregator1/2 + liquidityPoolSOR1 down; swapped 5ers→B2BROKER in `5ersCryptoCFDs.reference.referencePriceMarketSelectors` to recover. Same root cause as the weekend disconnect (B2Broker session break). 2026-04-30: crypto feed enrichment deployed (multi-source now supplementing B2BROKER); CFD enrichment still in progress — this entry remains open until CFD side is resolved. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1777235724205449)
+> [resolved] 2026-04-26 — liquidityPool* down on 5ersCryptoCFDs — failed over 5ers→B2BROKER reference
+> Sam Hewitt: liquidityPoolMDAggregator1/2 + liquidityPoolSOR1 down; swapped 5ers→B2BROKER in `5ersCryptoCFDs.reference.referencePriceMarketSelectors` to recover. Same root cause as the weekend disconnect (B2Broker session break). 2026-04-30: crypto feed enrichment deployed. 2026-05-01: CFD enrichment also deployed — additional CFD feeds layered in alongside B2Broker; both crypto and CFD sides now multi-source. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1777235724205449) [resolved-update](https://mahifx.slack.com/archives/C07AQJS4E80/p1777652354910519)
 
 > [resolved] 2026-04-27 — Spreads "fixed" on assets switched yourbourse→Mahi
 > Andreas accepted Kate's proposal to bring base spreads down so dynamic widening drives the price; applied across all symbols 04-27 14:39 BST. Andreas asked 04-28 whether it also applied to FX + XAUUSD — no reply yet, but change was applied across the board. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777278243169839)
