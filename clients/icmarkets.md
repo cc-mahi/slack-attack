@@ -8,7 +8,7 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/icmarkets.md (not yet)
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-01T12:05:00Z
+last_catchup: 2026-05-02T07:00:00Z
 ---
 
 ## Recent issues
@@ -16,8 +16,8 @@ last_catchup: 2026-05-01T12:05:00Z
 > [resolved] 2026-05-01 — Crypto full licence contract signed (12 months)
 > Nicola Perikhanyan announced contract agreed and ready for signature; 7 :tada: reactions. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777626006675209)
 
-> [resolved] 2026-05-01 — IC Markets planned system upgrade, 1h downtime, Friday 16:55–17:45 NYC
-> Justin Young (IC) requested a maintenance window for a routine system upgrade. Mahi confirmed the 16:55–17:45 NYC window aligns with the scheduled crypto trading break. Justin confirmed at 12:02 NY time: "we'll begin the release promptly after 5pm NY this evening." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777619417966509)
+> [open] 2026-05-01 — IC Markets system upgrade aborted; retry next weekend
+> Justin Young started the deploy at 21:59 UTC but pulled it 17 minutes later: "We've identified a last minute issue, we've decided to err on the side of caution and pull the release, we'll try again this time next weekend." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777670185603189) Internal post-mortem: Justin hadn't accounted for the NYC server reboot falling in the middle of the 45-min window — starting before the reboot risked the deploy being killed; starting after left no buffer to fix issues. Failover config also unclear. Plan: discuss with Liam next week; NYC could be deployed with a `norestart` deploy before the reboot. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777670658111869)
 
 > [resolved] 2026-04-27 — Zendesk #22850: IC backup, START SLAVE + 69GB dump cleanup
 > Inald flagged ticket — IC backup running on trading1/trading2 with 69GB dumps eating memory; needed START SLAVE post-backup + dump removal. Daria assigned Sam Hewitt, who picked it up. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777303185515629)
