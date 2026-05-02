@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-01T12:00:00Z
+last_catchup: 2026-05-02T07:26:11Z
 ---
 
 ## Recent issues
