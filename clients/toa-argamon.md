@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Tom McLean", role: "Argamon-side analyst — primary day-to-day contact in mahi-argamon-operations", confidence: low}
   - {name: "Levi", role: "Argamon ops — give-up / rejection queries", confidence: low}
   - {name: "Joanna", role: "Argamon-side ops — recurring contact in mahi-argamon-operations for alerts and client trade queries", confidence: low}
-last_catchup: 2026-05-01T23:59:59Z
+last_catchup: 2026-05-02T07:29:18Z
 ---
 
 ## Status
