@@ -7,7 +7,7 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/fundingpips.md (not yet)
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-01T09:30:00Z
+last_catchup: 2026-05-02T07:25:41Z
 ---
 
 ## Recent issues
