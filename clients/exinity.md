@@ -16,10 +16,14 @@ key_people_overrides:
   - {name: "Daniel Kurra", role: "trading ops — pricing channels / hedger config", confidence: low}
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
-last_catchup: 2026-05-01T00:00:00Z
+  - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
+last_catchup: 2026-05-02T05:27:04Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-01 — BIG_INSTI_HOUSE position break: 20L DOWFUT-M / 20S DOWUSD
+> Christian Lee (Exinity ops) reported a DOWFUT-M vs DOWUSD mismatch in BIG_INSTI_HOUSE with no visible root cause on their side. Rory King (Mahi) traced it: counterparty MT5_111000009 executed back-to-back futures+spot trades on 2026-03-17 at 13:42 UTC — bought 20 lots DOWFUT-M (Jun futures) and sold 20 lots DOWUSD (spot CFD) within 16 seconds into BIG_INSTI_CLIENTS book, creating the persistent house position. Subsequent 23–26 March DOWFUT-M activity netted to zero. Louie asked whether zeroing BIG_INSTI_HOUSE positions would impact other books; Rory confirmed BIG_INSTI_HOUSE adjustments are isolated (child books only, no impact to Big House / B Insti House etc). As of end of window Louie had not confirmed the fix was applied. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777632218017979)
 
 > [open] 2025-07-07 — CFD licence (Addendum 5) under commercial review — client says unviable
 > Justin (Exinity exec) messaged Nicola requesting a call "early next week" to discuss Addendum 5: "this addition is currently unviable as an offering (for the last few months we have lost money)". Andrew/Nicola discussed internally: need profitability review (actual vs potential value-add if tuned), roadmap, and risk mgmt assessment. Notice period is 1 month per main agreement. Exinity on a multi-year contract for core services; CFD is Addendum 5 only. Call not yet confirmed as of this window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1751880944781859)
@@ -81,4 +85,5 @@ last_catchup: 2026-05-01T00:00:00Z
 - 2025-05-01 — $23M additional spread revenue at Exinity noted by Andrew (2-year cumulative B_CLIENTS lifetime PnL). SI RoS 171%; SI Insti flagged anomalously high at 6,345% — suspected reporting artefact. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1746116025826429)
 - 2026-04-29 — UBS reply turnaround flagged by George Moore — Kate apologised for delay, awaiting Charlie's reply; FRCeCommerce@ubs.com supplied as direct route to UBS FRC team. Internal Daria review (04-30): 3 issues escalated, first two looked into, third (this UBS one) was missed — flagged so client could've followed up sooner. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777446054108019)
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
+- 2026-05-01 — Nick (Nicola) in Singapore 11–15 May for Finance Magnates expo; any calls requiring her will need scheduling around that window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1777621042911649)
 - 2026-04-30 — Latency notifications (Samuel) traced to a heartbeat received latent from non-Mahi side; Isaac suspects one-off, will recheck Mahi-side latency around the time. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777510067154679)
