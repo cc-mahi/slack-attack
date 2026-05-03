@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-01T13:00:00Z
+last_catchup: 2026-05-03T07:07:50Z
 ---
 
 ## Recent issues
@@ -17,8 +17,11 @@ last_catchup: 2026-05-01T13:00:00Z
 > [open] 2026-04-30 — `riskPathValutrades` on valutrades-ny-admin-1 throwing 14k+ errors/day — `CLIENT_PRICE_ICDX_MINI_NYC` unavailable
 > Justin Young investigating why `CLIENT_PRICE_ICDX_MINI_NYC` is set as `defaultClientPriceMarket` for USOUSD and a large instrument list (NDFUSD, CL1USD, CO1USD, DOWUSD, NDXUSD, JPFUSD, SPFUSD, DJFUSD, HSFUSD, SPXUSD, UKXGBP, HSIHKD, JPXJPY, G30EUR); riskPath throwing `IllegalArgumentException: CLIENT_PRICE_ICDX_MINI_NYC/<sym> unavailable` at 14k+/day. No resolution in window. [permalink](https://mahifx.slack.com/archives/CP7A1F8BT/p1777544417254539)
 
-> [open] 2026-04-28 — Yield profiles negative/incorrect for cpty 92549025 — fix queued for weekend release
-> Garry flagged incomplete chart data for SPXUSD on VALUTRADES_B_CLIENTS (operations channel); Andri also chasing on yield profiles for cpty 92549025 in the trading channel. Issue re-escalated 2026-04-30 — still appearing on 2026-04-29 data. Justin Young confirmed fix requires a weekend release; client awaiting completion. [ops-link](https://mahifx.slack.com/archives/C09HN93T0G2/p1777373692703529) [trading-link](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777445407538749) [re-escalation](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777530647177429) [fix-ETA](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777623275661629)
+> [resolved] 2026-04-28 — Yield profiles negative/incorrect for cpty 92549025 — fix deployed 2026-05-02
+> Garry flagged incomplete chart data for SPXUSD on VALUTRADES_B_CLIENTS (operations channel); Andri also chasing on yield profiles for cpty 92549025 in the trading channel. Issue re-escalated 2026-04-30 — still appearing on 2026-04-29 data. Justin Young confirmed fix requires a weekend release. Justin posted "Release complete" 2026-05-02 18:30 BST. [ops-link](https://mahifx.slack.com/archives/C09HN93T0G2/p1777373692703529) [trading-link](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777445407538749) [re-escalation](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777530647177429) [fix-ETA](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777623275661629) [release-complete](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777743032175839)
+
+> [resolved] 2026-05-02 — MySQL data gap on 2026-01-30 — 6-hour window backfilled
+> Neil Whitehead flagged a 6-hour gap on 2026-01-30 remaining after the earlier backfill (which covered 2026-01-01→2026-01-29). Sam Hewitt confirmed the gap is now corrected. Follow-on to the April archiver retention fix. [client-flag](https://mahifx.slack.com/archives/C09HN93T0G2/p1777750823493739) [fix-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1777786213688159)
 
 > [resolved] 2026-04-30 — MySQL data archiving — January ExternalOrder data backfilled, retention bumped to 365 days
 > Client (Neil Whitehead) reported January data missing after archiver default changed to 90-day retention. Sam Hewitt backfilled 386,250 rows (2026-01-01→2026-01-29) from Pulse parquet into PROD_LIVE_CLIENTDB on 192.81.111.24, and bumped ORDER_HISTORY daysToRetain 90→365. Client confirmed working. [escalation](https://mahifx.slack.com/archives/C09HN93T0G2/p1777543312438289) [resolution](https://mahifx.slack.com/archives/C09HN93T0G2/p1777602765022229)
