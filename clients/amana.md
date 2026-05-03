@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-02T07:23:41Z
+last_catchup: 2026-05-03T07:14:31Z
 ---
 
 ## Recent issues
