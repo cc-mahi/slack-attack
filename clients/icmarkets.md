@@ -8,7 +8,7 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/icmarkets.md (not yet)
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-02T07:00:00Z
+last_catchup: 2026-05-03T07:06:49Z
 ---
 
 ## Recent issues
