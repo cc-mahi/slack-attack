@@ -17,10 +17,13 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-03T07:06:49Z
+last_catchup: 2026-05-04T07:20:09Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-03 — EXINITY_ECN FX minor rejects on Singapore Monday open
+> Mukhammad Khamidov reported noticeable rejects on FX minors shortly after market open. Nathan Burch diagnosed: EXINITY_ECN channel has WSS configured to go indicative during Singapore Monday (`SingaporeMonday` timezone); when CLIENT_PRICE crosses the threshold (e.g. 0.00633 for GBPNZD), distribution price goes indicative and trades reject. Client acknowledged and elected to keep the config as-is; will discuss internally if adjustment needed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777846525218399)
 
 > [open] 2026-05-01 — BIG_INSTI_HOUSE position break: 20L DOWFUT-M / 20S DOWUSD
 > Christian Lee (Exinity ops) reported a DOWFUT-M vs DOWUSD mismatch in BIG_INSTI_HOUSE with no visible root cause on their side. Rory King (Mahi) traced it: counterparty MT5_111000009 executed back-to-back futures+spot trades on 2026-03-17 at 13:42 UTC — bought 20 lots DOWFUT-M (Jun futures) and sold 20 lots DOWUSD (spot CFD) within 16 seconds into BIG_INSTI_CLIENTS book, creating the persistent house position. Subsequent 23–26 March DOWFUT-M activity netted to zero. Louie asked whether zeroing BIG_INSTI_HOUSE positions would impact other books; Rory confirmed BIG_INSTI_HOUSE adjustments are isolated (child books only, no impact to Big House / B Insti House etc). As of end of window Louie had not confirmed the fix was applied. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777632218017979)
