@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Carl", role: "client ops / LMAX + Finalto mappings", confidence: low}
   - {name: "Nael", role: "client trading ops", confidence: low}
   - {name: "Youssef", role: "client — CFD internalisation rollout", confidence: low}
-last_catchup: 2026-05-03T07:10:06Z
+last_catchup: 2026-05-04T07:19:29Z
 ---
 
 ## Recent issues
