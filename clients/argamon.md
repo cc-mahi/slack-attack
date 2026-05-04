@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-03T07:14:31Z
+last_catchup: 2026-05-04T07:24:42Z
 ---
 
 ## Status
@@ -105,3 +105,5 @@ last_catchup: 2026-05-03T07:14:31Z
 - 2025-06-25 — Retail roadmap call requested: Will asked to schedule call with Jeremy and Elan (Argamon doing interesting things on client acquisition). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1750845735746069)
 - 2025-06-26 — XRP and LTC hedging back on Toa. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1750927626443199)
 - 2025-06-30 — Reactive UAT test trades passed; production test trades 2025-07-01 with party mapping config updates. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1750269992249569)
+- 2026-05-03 — XAUUSD retail NY4→CHI hedging disabled: retail achieving positive spreads; CHI giving negative spreads so hedging there turned off. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777845150173619)
+- 2026-05-04 — EURUSD mid formation: Elan approved adding all LPs back into mid (NY now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary LPs; backtests show reduced spiky pricing and arb opportunities. Adaptive mid logic also added to betaRetailPricer1 for EURUSD; FI/skew PnL review ongoing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
