@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-05-03T07:17:48Z
+last_catchup: 2026-05-04T07:28:12Z
 ---
 
 ## History
@@ -97,6 +97,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [resolved] 2026-05-04 — XAU/USDTHB/XAG indicative alerts (brief, investigated OK, Zendesk 22906)
+> Stephen flagged indicative alerts on XAU, USDTHB, XAG at 03:42 UTC. Daria confirmed all processes and pricing looking okay by 04:34 UTC; raised Zendesk ticket 22906 for dev review. Stephen confirmed no ongoing issue by 04:47 UTC. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777862549479679)
+
+> [watching] 2026-05-04 — XBT sanity-check params loosened; PSCN signal lag noted on large price move
+> Isaac loosened sanity check params on XBTUSD to prevent indicative mid during large price moves where Compass tries to skew more aggressively. Separately noted that the crypto signal was substantially slower than primary LP (PSCN) over a recent XBT price move; PSCN direction volume would have improved P&L further. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777861675208069)
 
 > [open] 2026-04-30 — XETUSD B2C2 reject "buy price received is lower than our offer price" (spot crypto)
 > Ruby flagged a B2C2 reject on XETUSD/ETHUSD.SPOT 02:46:09 UTC; FIX tag 58 = "Buy price received is lower than our offer price" (8002=504). Isaac digging — Compass TOB shows we were sending limits at B2C2's offer price. May need B2C2 query. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777527397662369)
