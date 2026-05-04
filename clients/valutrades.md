@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-03T07:07:50Z
+last_catchup: 2026-05-04T07:22:26Z
 ---
 
 ## Recent issues
@@ -42,3 +42,7 @@ last_catchup: 2026-05-03T07:07:50Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-05-04 — cpty 89467069 A-book classification check: client asked team to advise on cpty 89467069; Shyam Hari confirmed A-book for JPXJPY and DOWUSD (with charts), client acknowledged. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777870072809899)
+
+- 2026-05-03 — Pulse upsell in ops thread: following client confirming the MySQL gap fix ("looks good, appreciate help over weekend"), Justin Young suggested moving off MySQL to Pulse (faster, larger retention periods), linking the knowledge base. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777821952617999)
