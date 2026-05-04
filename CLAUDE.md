@@ -2,6 +2,10 @@
 
 Personal Slack catch-up tool for one reader (me). Two things live here:
 
+## Who "me" is
+
+The reader / user is **Cameron Copland** (Slack user ID `U099FA0D7CP`, email `cameron.copland@mahimarkets.com`). Mahi staff and roles live in `../MahiProduct/.claude/org-chart.md` — consult it before naming anyone in a brief. Distinct people the brief is **not** addressed to: **Cameron Hughes** (Analyst, client-facing — appears across many client RACI rows), **Liam Cordelle** (Cameron Copland's manager). Don't confuse the brief's audience with another Cameron, and don't refer to the user by anyone else's name.
+
 1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `History` (long-horizon relationship arc), `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere. The dossier is the durable artefact and can be detailed / jargon-dense.
 2. **Skills**:
    - **`/catchup <target>`** — worker. Pulls Slack since `last_catchup` and edits one dossier in place (Recent issues + Notable topics). Output is a structured confirmation, not a readable brief.

@@ -15,11 +15,15 @@ catchup: <slug> — retired (<retired_at>); skipping. Remove `status: retired` f
 
 The dossier stays as a frozen record. Re-activation is a deliberate frontmatter edit by the user, not something to negotiate around.
 
+## Who the user is
+
+The reader is **Cameron Copland** (Slack user ID `U099FA0D7CP`). Direct mentions / DMs that target this ID are notable; mentions of other Camerons (notably **Cameron Hughes**, an Analyst — see `../MahiProduct/.claude/org-chart.md`) are not. Match strictly on the Slack user ID — don't infer audience from first names alone.
+
 ## Source-of-truth recap
 
 - Hosts / Slack channels / party names / distribution markets → `../VibePulse/.claude/clients/<slug>.yaml`.
 - Commercial terms → `../MahiProduct/data/billing/clients.json`.
-- Internal Mahi staff roster (for the "no Mahi staff in `key_people_overrides`" rule) → `../MahiProduct/.claude/org-chart.md`. If a name appears there, it's internal — don't add to `key_people_overrides`.
+- Internal Mahi staff roster (for the "no Mahi staff in `key_people_overrides`" rule, and for distinguishing Mahi vs client speakers in dossier prose) → `../MahiProduct/.claude/org-chart.md`. If a name appears there, it's internal — don't add to `key_people_overrides`, and the org-chart row tells you their role for prose attribution.
 - External contacts worth persisting → `../MahiProduct/wiki/people/`. Never write there from here; if you find a new external contact worth keeping, add to `key_people_overrides` here with `confidence: low` and flag for promotion.
 
 ## Resolving the target
@@ -126,19 +130,54 @@ Apply edits with `Edit`, not `Write`, so diffs stay minimal (except when bootstr
 
 The dossier is the readable artefact — it can be detailed, jargon-dense, and contain everything `/slack-attack` will later need to summarise. Don't pre-summarise; write what you found.
 
+## Sanity-check the window — before reading Slack
+
+Before any `slack_read_channel` call, anchor every date to **bash output, not your own reasoning**. Three documented corruptions came from the agent silently miscalculating "today" by a year — a local run wrote 2025-05/06-dated entries into a window labelled 2026-04-28..2026-05-01, a cloud run wrote 2026-05/06/07-dated entries from 2025 source data, and a 2026-05-04 cloud run pulled five months of 2025 history into both `toa-argamon` (committed window `2026-05-01..2026-07-02`) and `rostro` (hit the 500-message channel limit at ~Oct 2025 and never reached today). The original sanity-check fired *after* the entries were written — too late if the agent's "today" is wrong, since both bounds drift in the same wrong direction and entries pass.
+
+Procedure (run this once at the top of the run, before reading any channel):
+
+1. **Get the real current time from bash, never from context.** Run, via the Bash tool:
+
+   ```
+   now_unix=$(date +%s)
+   now_iso=$(date -u +%FT%TZ)
+   ```
+
+   Use `now_unix` and `now_iso` from this output verbatim for the rest of the run. Do **not** infer "today" from the conversation, the dossier, recent commit dates, or training context.
+
+2. **Decode `oldest_unix`** — the Unix-seconds value you intend to pass to `slack_read_channel`:
+   - For a normal refresh: `oldest_unix = ` Unix seconds of the dossier's `last_catchup` ISO timestamp (compute via `date -u -d "<iso>" +%s` or equivalent).
+   - For a freshly-bootstrapped dossier (`last_catchup: null`): `oldest_unix = now_unix - 30*86400`.
+   - For an ambiguity-expansion run: whatever wider anchor you chose (60d, 90d).
+
+   Decode it back: `oldest_iso=$(date -u -r $oldest_unix +%FT%TZ)`. **Sanity-check that `oldest_iso` matches what you expected** — if the dossier's `last_catchup` is `2026-05-01T...` and your decoded `oldest_iso` reads `2025-05-01T...`, abort immediately. Don't pull Slack with a year-off `oldest`.
+
+3. **Cap the window width.** If `now_unix - oldest_unix > 90 * 86400` (≈ 90 days), abort. The hard cap exists for both performance and as a year-off tripwire — almost any year-off bug produces a window > 90d wide, well before any real catchup needs that much. Genuine 90d expansion runs (deliberate ambiguity-resolution, see "Resolving ambiguity") are allowed up to this exact bound but no further.
+
+4. **Sanity-check the proposed `last_catchup` you'll write.** It must satisfy `new_last_catchup_unix ≤ now_unix + 60`. Never bump `last_catchup` to a future timestamp.
+
+If any of these fail, **abort before reading Slack**:
+
+```
+catchup: <target> — ABORT: window sanity-check failed.
+
+<one line per violation, e.g.:
+  decoded oldest 2025-05-04T00:00:00Z does not match dossier last_catchup 2026-05-01T23:59:59Z (year off)
+  window width 4,752,000s (~55d) exceeds 90d cap — likely date-math bug
+  proposed last_catchup 2026-07-02T06:22:40Z is in the future (now is 2026-05-01T15:00:00Z)>
+
+Inspect the dossier and your date conversions before retrying.
+```
+
 ## Sanity-check before commit
 
-Before staging the dossier and committing, verify each newly-added entry's Slack permalink timestamp falls within the catchup window. This guard exists because two real corruptions landed on 2026-05-01: a local run wrote 2025-05/06-dated entries into a window labelled 2026-04-28..2026-05-01 (year off into the past), and a separate cloud run wrote 2026-05/06/07-dated entries from 2025 source data (year off into the future). Both got reverted by hand. The check below would have caught both before they committed.
+After writing dossier edits and before staging / committing, verify each newly-added entry's Slack permalink timestamp falls within the window you just sanity-checked above. This is the second line of defence: the pre-read check catches bad windows; this catches bad writes (entries dated outside the legitimate window, e.g. agent confusion fabricating a year offset on entry dates).
 
 Procedure:
 
-1. For every new `Recent issues` / `Recent topics` / `Notable topics` entry just written in this run, extract the first Slack permalink: `https://mahifx.slack.com/archives/<CID>/p<DIGITS>`. The first 10 digits of `<DIGITS>` are the Unix seconds of the source message.
-2. Decode the run's window:
-   - `oldest_unix` = the Unix-seconds value passed to `slack_read_channel` as `oldest` (the previous `last_catchup`, or the 30d-ago anchor for bootstrap, or whatever wider value was used when expanding for ambiguity).
-   - `now_unix` = current Unix time (`date +%s`).
-3. For each new entry, the permalink ts must satisfy `oldest_unix - 60 ≤ entry_ts ≤ now_unix + 60` (60s margin tolerates clock skew).
-4. Separately, the new `last_catchup` value being written into frontmatter must satisfy `new_last_catchup_unix ≤ now_unix + 60` — never bump `last_catchup` to a future timestamp.
-5. If **any** check fails, **abort**: leave the dossier dirty (do not stage, do not commit, do not bump `last_catchup`), and emit:
+1. For every new `Recent issues` / `Recent topics` / `Notable topics` entry just written, extract the first Slack permalink: `https://mahifx.slack.com/archives/<CID>/p<DIGITS>`. The first 10 digits of `<DIGITS>` are the Unix seconds of the source message.
+2. The permalink ts must satisfy `oldest_unix - 60 ≤ entry_ts ≤ now_unix + 60` (60s margin tolerates clock skew). Use the `oldest_unix` and `now_unix` you established at run start — do not recompute "now" here.
+3. If **any** check fails, **abort**: leave the dossier dirty (do not stage, do not commit, do not bump `last_catchup`), and emit:
 
    ```
    catchup: <target> — ABORT: sanity-check failed before commit.

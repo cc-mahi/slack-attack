@@ -10,6 +10,10 @@ description: Orchestrator and reader-facing entrypoint. Runs /catchup against on
 
 The brief is the product the user reads. The dossier is the durable artefact behind it.
 
+## Who the brief is for
+
+The reader is **Cameron Copland** (Slack `U099FA0D7CP`). When the brief says "you" or refers to a direct mention, that's Cameron Copland — not Cameron Hughes (Analyst) or anyone else in `../MahiProduct/.claude/org-chart.md`. Don't address the brief to a different name.
+
 ## Resolving the target
 
 - `/slack-attack <slug>` → refresh and brief one client.
