@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-03T07:14:31Z
+last_catchup: 2026-05-04T07:22:25Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-04 — monitoring.pnlDrop: false PnL drop alerts suppressed for futures books
+> Nathan Burch enabled `useTradePositionPnl` in `monitoring.pnlDrop` config. XAGFUT (and other futures instruments) were triggering false PnL drop alerts because PnL was calculated by converting futures positions using the spot price — the inherent futures/spot price differential caused alerts to fire incorrectly. No book-specific override exists, so the change applies to all books. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1777850060789949)
 
 > [open] 2026-05-01 — DOWUSD tag1 routing: trades falling into CMCSWAPFREE instead of ABOOK
 > Rory noticed DOWUSD index CFD trades for some counterparties assigned `trading_account = CMCSWAPFREE` in Pulse instead of `ABOOK`. Internalisation and hedging unaffected; reporting impact only. Root cause: `tag1=CMCSWAPFREE` being applied beyond metals. Rory asked client to scope the tag to metals-only counterparties; no response yet. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777663932045299)
