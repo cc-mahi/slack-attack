@@ -7,14 +7,43 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/rostro.md (not yet)
 channels_override: null
 key_people_overrides:
-  - {name: "Alexandre", role: "trading ops", confidence: low}
+  - {name: "Alexandre Goudergues", role: "trading ops (alexandre.goudergues@scopemarkets.com)"}
   - {name: "Will", role: "scheduling contact", confidence: low}
   - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
   - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
-last_catchup: 2026-05-04T07:29:25Z
+  - {name: "Manglai", role: "FIX/technical ops — XCore config, dropcopy, LP subscriptions"}
+  - {name: "Riz Dusoye", role: "trading ops — spreads, Pulse, VIP feed (rizwaan.dusoye@rostro.com)"}
+  - {name: "Louiza Ignatiou", role: "ops — FIX sessions, IP whitelisting"}
+  - {name: "Daniel Lawrance", role: "CEO (linkedin.com/in/daniel-lawrance-/); B2B bridge discussions", confidence: low}
+  - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
+last_catchup: 2026-05-04T07:31:07Z
 ---
 
 ## Recent issues
+
+> [open] 2025-10-03 — NAS100/SPX/DOW/CL1 futures pricing spikes at open
+> Oli reported urgent SPX pricing spikes on 2025-10-03 (second consecutive day). Kate changed harmonics signals for DOW and SPX; pricing improved but CL1 still spiky later that day. Louiza submitted full futures min/step/max size spreadsheet; Kate applied changes pending weekend restarts. Rostro asked to give advance notice before rolling new instruments. Kate also noted DAXFUT-Z subscription failing via PXM with "invalid symbol" — symbol mapping in progress. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1759483209208009) [futures sizes](https://mahifx.slack.com/archives/C08AQKRU953/p1759483009859979)
+
+> [open] 2025-09-26 — VIP XAUUSD slippage: client seeing retail price, filled on VIP model
+> Alex flagged 10ct slippage on Scope-X-VIP XAUUSD (sample orders 44752358, 44752372). Kate's internal note: clients see retail price in MT5, trade gets sent down VIP connection, executed on VIP model — perceived as slippage. Kate reverted signals from synapse-insti back to harmonics-insti + IFMS-INSTI; kicked off backtests. Andrew flagged that if clients are being shown one model and filled on another, this will build mistrust. Rostro working with TS to fix the MT5 routing issue on their side. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1758888142404869) [internal](https://mahifx.slack.com/archives/C08ALS66EDC/p1759139558735169)
+
+> [open] 2025-09-17 — FI/LR P&L missing in Pulse for newly-added instruments
+> Sammy flagged on 2025-09-12 that live instruments added recently are not appearing in Pulse for FI P&L in riskreportingmetrics (visible in Compass but not Pulse). Bonnie checked; Pulse access confirmed but data gap persists. Still outstanding as of 2025-09-18 with Sammy chasing. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1757665068899269)
+
+> [open] 2025-09-04 — Jump direct connection conformance testing stalled
+> Kate stopped fixMarketData2 and fixOrders2 on 2025-08-05 whilst awaiting Jump conformance. As of 2025-09-08 Mahi had messaged Jump twice with no reply; Kate asked Sammy to nudge Jump on the "MahiMarkets <> Jump FX - UAT" email thread. Jump feed currently consumed via PXM as JUMP_2. Futures FIX session (Scope-X-Fut) credentials sent 2025-08-07; conformance still in progress. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1757325715665229) [internal](https://mahifx.slack.com/archives/C08ALS66EDC/p1754388667282279)
+
+> [open] 2025-07-21 — Compass failover: Sammy blocking on XCore failover plan
+> Sammy struggling to configure automatic failover from A-booking to Mahi to B-booking in PXM if Compass goes down. Proposed B-booking all via PXM with skewed Compass price — Mahi pushing back. Alternatives discussed: One Zero bridge failover, London COE as failover source. As of 2025-07-16 Kate reported Sammy "back on board with One Zero failover" and testing internally. Plan was to have failover agreed before go-live. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1752590947240169) [update](https://mahifx.slack.com/archives/C08ALS66EDC/p1752670637687949)
+
+> [resolved] 2025-07-21 — XAUUSD retail go-live: counterparty tag (tag 1) missing
+> Sammy announced going live with retail XAUUSD flow on 2025-07-21. Kate immediately asked Sammy to revert — FIX messages from Scope-X-Retail-Orders were missing tag 1 (trading account remap). Isaac and Kate worked through the mapping (tag 1=ROSTRO, tag 448 for cpty). Manglai fixed and sent a test trade EOD 2025-07-18 (pre-announcement). As of 2025-07-24 Kate confirmed receiving counterparty tags correctly. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1753085649110309) [resolved](https://mahifx.slack.com/archives/C08AQKRU953/p1753343821482759)
+
+> [resolved] 2025-06-13 — Test trades: JUMP_2 field validation error; ROSTROOrders channel possibly redundant
+> Test trades on 2025-06-13: client orders via Scope-X-Retail-Orders hitting correct book; external orders filled at EDGEWATER, EDGEWATER_2, INVAST. JUMP_2 (XAUUSD only) hit a field validation error in the UI. Amir following up internally. ROSTROOrders (B_CLIENTS channel) — Rostro don't have config for it, possibly redundant. Resolved by 2025-06-16: Justin longed and shorted 1oz at JUMP_2 successfully. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1749824834932309) [resolved](https://mahifx.slack.com/archives/C08ALS66EDC/p1750074876417109)
+
+> [resolved] 2025-05-20 — Dropcopy FIX session setup (Manglai)
+> Manglai provided dropcopy FIX config and worked through IP whitelisting across multiple rounds: Beeks whitelist via Maten, additional IPs 69.6.29.122/32 and 46.28.177.153/32 added. Multiple dropcopy config versions exchanged. As of 2025-05-22 further connectivity issues (nc timeout) resolved; dropcopy established in time for test trades. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1747812582784569) [connectivity resolved](https://mahifx.slack.com/archives/C08AQKRU953/p1747930393940489)
 
 > [open] 2026-05-04 — DAX40 Scope-X-SI-Prices: no pricing received
 > Louiza (Rostro) flagged DAX40 not receiving prices on the SI feed. Isaac confirmed checking as of market open. No resolution yet in window. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777879262200339)
@@ -25,8 +54,8 @@ last_catchup: 2026-05-04T07:29:25Z
 > [open] 2026-04-30 — G30EUR client_price_vip_ldn TOB ~1.35 vs configured 0.6
 > Alex flagged the VIP-LDN G30EUR spread is ~1.35 against 0.6 config. Kate confirmed signals look responsible and was deploying a change at 12:09 BST. Awaiting confirmation post-fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777547078939949)
 
-> [open] 2026-04-29 — Centroid-Retail-Orders FIX: XAGUSD/XAUUSD min-quantity rejection
-> Chrysovalantis hit `FIELD_VALIDATION_ERROR {DISTRIBUTION_LDN-maximumShowQuantity=TOO_SMALL, DISTRIBUTION_LDN-quantity=TOO_SMALL}` on XAGUSD via session 49=MahiFX-Orders / 56=Centroid-Retail-Orders (Mahi config 50 from prior request). Asked for connection-specific min 0.5 XAGUSD / 0.01 XAUUSD. Kate making the config change; needs EOD restart to pick up. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777466777885749)
+> [resolved] 2026-04-29 — Centroid-Retail-Orders FIX: XAGUSD/XAUUSD min-quantity rejection
+> Chrysovalantis hit `FIELD_VALIDATION_ERROR {DISTRIBUTION_LDN-maximumShowQuantity=TOO_SMALL, DISTRIBUTION_LDN-quantity=TOO_SMALL}` on XAGUSD via session 49=MahiFX-Orders / 56=Centroid-Retail-Orders (Mahi config 50 from prior request). Asked for connection-specific min 0.5 XAGUSD / 0.01 XAUUSD. Kate making the config change; needs EOD restart to pick up. Centroid-Retail connection rebuilt with new FIX creds in Sep 2025 (see Sep entry); min sizes confirmed 0.01oz XAUUSD / 1k FX. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777466777885749)
 
 > [open] 2026-04-29 — China FIX session removal: please disconnect Scope-X-China-2
 > Kate (Mahi) requested Rostro disconnect the Scope-X-China-2 Orders/Prices sessions ahead of removing the unused China FIX config; Scope-X-China-1 already idle 7d, China-2 still showing live heartbeats. Awaiting Rostro disconnect. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777465172441569)
@@ -46,8 +75,8 @@ last_catchup: 2026-05-04T07:29:25Z
 > [open] 2026-04-22 — G30EUR rejects (cpty 109_1_2656) via arb-classification exec rule
 > Limit-order flow getting cancelled because arb classification routes to a neutral-rate + markup exec rule, and the continuity rate breached the limit price. Kate digging into the trades to confirm whether the arb tag is correct. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776871777184599)
 
-> [open] 2026-04-17 — Missing pricing on new retail-feed API
-> Alexandre reports gaps on the newly-created retail feed API. Rory King investigating; Chrysovalantis looped in for reference. Some symbols (USOIL→CL1USD) corrected; XNGUSD now tracked as separate `[open]`. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776422678609409)
+> [resolved] 2026-04-17 — Missing pricing on new retail-feed API
+> Alexandre reports gaps on the newly-created retail feed API. Rory King investigating; Chrysovalantis looped in for reference. Some symbols (USOIL→CL1USD) corrected; XNGUSD now tracked as separate `[open]`. Superseded by full onboarding through May–Sep 2025: Compass logins issued, FIX sessions (Retail, Insti, Futures, VIP, Centroid) all stood up, and XAUUSD retail went live 2025-07-21. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776422678609409)
 
 > [resolved] 2026-04-23 — HRP_AGG_HEDGE re-added to XAUUSD off-book hedger
 > Oli asked for HRP_AGG_HEDGE back in the hedging pool for XAUUSD off-book flow only (not brokered). Initially added more broadly; Isaac corrected the scope on 04-24. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1776962468190769)
@@ -73,3 +102,11 @@ last_catchup: 2026-05-04T07:29:25Z
 - 2026-04-21 — Will/Andrew internal discussion: Rostro LR tuning highlights the value of inverting the sim — "what params get me X $/M across client, with toxic top-5% at 50 $/M and everyone else ≤ 5 $/M" — vs forward parameter search. Declarative-rule direction flagged for future work. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776764246169119)
 - **Futures-based index pricing / custom basis** — Rostro asking about status; previously discussed with "Sammy". No clear owner on Mahi side; Andrew suggested discussing in person. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776353177596759)
 - **In-person client meeting** — Kate and Andrew scheduling via Will for next week or week after, LDN.
+- 2025-06-18 — Cyprus in-person meeting. Andrew met Sammy + ops team + CEO Daniel Lawrance (linkedin.com/in/daniel-lawrance-/). Context framed around bridge eval: Rostro in early vendor selection for a B2B bridge, not planning to move until 2026. Andrew proposed bridge white-label deal (Rostro as bridge white-labeller, flow from ~5 broker clients). Daniel Lawrance very interested in client-stickiness angle. Actions: Sammy to write B2B bridge requirements doc; Mahi to propose commercials + pilot plan. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1750232392028879)
+- 2025-08-11 — Sammy sent RFP heads-up to Andrew. Rostro sending RFPs to vendors in coming weeks for bridge selection. Mahi will be receiving one. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1754905124966239)
+- 2025-05-27 — Andrew update: Rostro fairly early in bridge evaluation; not planning to move until 2026. Cyprus meeting framing: vendor selection assessment. Sammy has been asking OneZero if they can do SI out of the box for single stocks. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1748345316279539)
+- 2025-06-10 — Internal discussion: Sammy wants another "MK-style" relationship (deep operator access). Will/Kate pushing back — they will manage signals and outcomes, not give full config access. Decision to hide `pricing.adjustmentSignalRegistry` keys from non-Mahi users. Weekly calls established on Tuesdays. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1749551514053999)
+- 2025-06-25 — Kate flagged Jump gold futures SI integration (priced by and hedged to Jump); low priority, could take feed through PXM initially. Kate/Justin back and forth on prioritisation through July. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1750860061915179)
+- 2025-09-12 — Sammy requested Centroid-Retail connection (separate pricing API for retail Centroid flow, same model/channel as Scope-X-Retail). New FIX creds issued. Min deal sizes: XAUUSD 0.01oz, FX 1k (base). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1757660365030579) [creds](https://mahifx.slack.com/archives/C08AQKRU953/p1757684113491319)
+- 2025-08-29 — Sammy exploring DPSM (Dynamic Predictive Spread Modulation), volatility widening, and zero-spread econ news widening. Will explained econ news base spread override config for 0-spread instruments. Sammy also asked about roll-period spread management (marketWidthMinimumSpreadParameters with timezone overrides). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1756459549972139)
+- 2025-10-06 — Liam working on solution to let Rostro query Mahi classifications from database. IPs needed: 161.12.67.66 and 10.101.10.9. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1759745772797999)
