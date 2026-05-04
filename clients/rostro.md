@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Will", role: "scheduling contact", confidence: low}
   - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
   - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
-last_catchup: 2026-05-03T07:18:16Z
+last_catchup: 2026-05-04T07:29:25Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-04 — DAX40 Scope-X-SI-Prices: no pricing received
+> Louiza (Rostro) flagged DAX40 not receiving prices on the SI feed. Isaac confirmed checking as of market open. No resolution yet in window. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777879262200339)
 
 > [open] 2026-04-30 — USDJPY cpty 95_0_652431 arb-classification slippage complaint
 > Alex flagged consistent slippage on USDJPY from cpty 95_0_652431. Kate confirmed: classifier tagged them as arb after 29 sells / $15.05M in ~6 min 10:27–10:33, aggregated 4-min yield -$17k → trades brokered. Kate proposed internalising to SI book for fast-hedge instead; client acknowledged short-term markout vol. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777562968245279) [Kate's analysis](https://mahifx.slack.com/archives/C08AQKRU953/p1777567089259889)
