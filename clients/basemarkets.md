@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Alex", role: "Base Markets — primary client contact (algo / flow)", confidence: low}
-last_catchup: 2026-05-03T07:15:12Z
+last_catchup: 2026-05-04T07:26:16Z
 ---
 
 ## Status
