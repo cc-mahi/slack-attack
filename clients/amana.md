@@ -11,16 +11,19 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-04T07:22:25Z
+last_catchup: 2026-05-05T07:19:55Z
 ---
 
 ## Recent issues
 
+> [open] 2026-05-05 — XAUUSD limit order rejected LIQUIDITY_VIOLATION: off-market limit price
+> Princess reported a sell limit order on XAUUSD rejected with `LIQUIDITY_VIOLATION`; tag1=ABOOK, order sent at 4550.95 sell-limit, published price was 4550.77/4550.89 at time of receipt — order was off-market. Daria explained the rejection. Princess followed up at 07:39 asking if resolved; Will replied at 08:06 that Mahi will look into it today. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777960089109199)
+
 > [resolved] 2026-05-04 — monitoring.pnlDrop: false PnL drop alerts suppressed for futures books
 > Nathan Burch enabled `useTradePositionPnl` in `monitoring.pnlDrop` config. XAGFUT (and other futures instruments) were triggering false PnL drop alerts because PnL was calculated by converting futures positions using the spot price — the inherent futures/spot price differential caused alerts to fire incorrectly. No book-specific override exists, so the change applies to all books. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1777850060789949)
 
-> [open] 2026-05-01 — DOWUSD tag1 routing: trades falling into CMCSWAPFREE instead of ABOOK
-> Rory noticed DOWUSD index CFD trades for some counterparties assigned `trading_account = CMCSWAPFREE` in Pulse instead of `ABOOK`. Internalisation and hedging unaffected; reporting impact only. Root cause: `tag1=CMCSWAPFREE` being applied beyond metals. Rory asked client to scope the tag to metals-only counterparties; no response yet. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777663932045299)
+> [resolved] 2026-05-01 — DOWUSD tag1 routing: trades falling into CMCSWAPFREE instead of ABOOK
+> Rory noticed DOWUSD index CFD trades for some counterparties assigned `trading_account = CMCSWAPFREE` in Pulse instead of `ABOOK`. Root cause: `tag1=CMCSWAPFREE` being applied beyond metals. 2026-05-04: Karen confirmed she will scope CMCSWAPFREE to spot metals only; Cameron Hughes clarified spot FX/metals can keep the tag, indices/CFDs should have it removed. Karen confirmed done at 10:05. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777885500546369)
 
 > [open] 2026-05-01 — Index futures go-live blocked by TOO_SMALL quantity validation
 > DOWFUT-M and NDXFUT-M test trading attempted 2026-05-01 morning; Princess test trade rejected with `DISTRIBUTION_LDN-maximumShowQuantity=TOO_SMALL, quantity=TOO_SMALL`. Root cause identified by Rory but requires weekend EOD restarts to take effect — US futures index go-live pushed to early next week. In the meantime: continuing setup for all other cash + futures equity indices (EU, Asia), collecting step/min sizes from Princess/Nikos. Princess provided min+step per LP at 13:46. Rory to revert with further items requiring EOD restarts. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777629657810339)
