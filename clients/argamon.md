@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-04T07:24:42Z
+last_catchup: 2026-05-05T07:25:27Z
 ---
 
 ## Status
@@ -86,6 +86,9 @@ last_catchup: 2026-05-04T07:24:42Z
 
 > [open] 2026-04-28 — XAUUSD brokerage to Toa expansion
 > Daria added party 104881 to brokered-to-Toa for XAUUSD on argamon.NYC; plan is to migrate the softest of 104881/105048/105153/105681/105773 progressively to see if hedging to CME helps yield. Starting with softest first. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777335260425589)
+
+> [open] 2026-05-04 — TOA_CHI/A_EXTERNAL_WASH XAUUSD reject spike (quantity too large) — analytics support question unanswered
+> Alert at 11:59–12:00Z: 98% reject ratio (93/95 orders) on TOA_CHI/A_EXTERNAL_WASH for XAUUSD from 1 counterparty (90000580), error `FIELD_VALIDATION_ERROR: quantity=TOO_LARGE, maximumShowQuantity=TOO_LARGE`. Justin Young forwarded the ZD ticket to internal-argamon asking who's on analytics support today; two +1 reactions but no reply in thread. Zendesk ticket: https://mahifx.zendesk.com/agent/tickets/22907. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777898434100499)
 
 ## Notable topics
 
