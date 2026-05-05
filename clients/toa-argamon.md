@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-04T07:09:21Z
+last_catchup: 2026-05-05T07:16:37Z
 ---
 
 ## Status
@@ -63,6 +63,9 @@ last_catchup: 2026-05-04T07:09:21Z
 
 > [resolved] 2025-05-15 — Counterparty 84004149 crypto flow review; brokered LR / EURUSD skew tuning
 > Andrew flagged counterparty 84004149 as consistently bad for Mahi crypto book (up $200k lifetime, but consistently costly over recent weeks). Reviewed with Isaac: XBT flow switches between BBook and sharp brokered week-to-week. Amir added brokered LR to clientDist1; EURUSD signal response reduced (skew was 1 pip on 0.1 spread, dialled down to ~0.2). Separately, counterparty 84004395 flagged as toxic (retail, EURUSD-focused). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1747325182217329)
+
+> [open] 2026-05-04 — XAUUSD TOO_LARGE reject storm on TOA_CHI/A_EXTERNAL_WASH; ZenDesk ticket open, analytics support not yet assigned
+> Emergency alert fired ~12:00Z: 98% reject ratio (93/95 orders) from counterparty 90000580 on XAUUSD in TOA_CHI/A_EXTERNAL_WASH — validation error `quantity=TOO_LARGE, maximumShowQuantity=TOO_LARGE`, burst window 11:59:38–12:00:00Z. Justin Young routed to ZenDesk (ticket 22907) and asked who's on analytics support — no reply in thread as of catchup. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777898434100499)
 
 > [resolved] 2026-05-04 — EURUSD mid-formation LP set broadened; arb opportunities eliminated
 > Elan approved adding all LPs back into mid formation for NY (now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary EURUSD mid-formation LPs — backtests confirm significantly reduced spiky pricing and arb opportunities at open and general periods. Adaptive mid logic also added to betaRetailPricer1 for EURUSD as a further experiment. Shyam continuing review of other instruments and overall FI/skew PnL. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
