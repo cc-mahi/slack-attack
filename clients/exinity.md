@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-04T07:20:09Z
+last_catchup: 2026-05-05T07:22:12Z
 ---
 
 ## Recent issues
