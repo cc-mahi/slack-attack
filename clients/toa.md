@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-03T07:18:16Z
+last_catchup: 2026-05-05T07:14:21Z
 ---
 
 ## Status
@@ -47,6 +47,9 @@ last_catchup: 2026-05-03T07:18:16Z
 
 > [open] 2026-04-30 — CVEX EUW2 risk limit hit: BTC-30MAY25 quoting stopped
 > `noRecentOpenOrderUpdates.CVEX-BTC-30MAY25` PD fired after no two-way orders since 13:53 UTC; Justin identified Toa at the risk limit with no way to close risk. James noted alerting will need to be backed off given the limit is a structural cap. Justin resolved the PD alert at 17:54. Alerting threshold calibration for CVEX contracts at max risk remains open. https://mahifx.slack.com/archives/C035H1VNCAD/p1746030941556329
+
+> [resolved] 2026-05-04 — noRecentOpenOrders PD on APN1: XETUST-PERP, XBTUST-PERP, SOLUST-PERP
+> Three Nado instruments fired `noRecentOpenOrders` PD alerts on TOA APN1 following a reboot. James confirmed processes looked live; Leo verified all procs up on both boxes; resolved within 6 minutes of the alert. https://mahifx.slack.com/archives/C035H1VNCAD/p1777904442214679
 
 > [resolved] 2026-05-05 — traderVertexSei1 crash loop on APN1: VERTEX cancel timeouts
 > traderVertexSei1 crashed 3+ times in quick succession (`Exceeded maximum number of order breaches (0): [VERTEX cancel timed out: ...]`). Inald handled: turned off books, bounced ordersVertex1, restarted traders; stable after fourth attempt. paidGivenProfileProcess also came down and was restored. https://mahifx.slack.com/archives/C035H1VNCAD/p1746454824352989
