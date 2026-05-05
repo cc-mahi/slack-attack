@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-05-04T07:28:12Z
+last_catchup: 2026-05-05T07:33:09Z
 ---
 
 ## History
@@ -107,8 +107,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 > [open] 2026-04-30 — XETUSD B2C2 reject "buy price received is lower than our offer price" (spot crypto)
 > Ruby flagged a B2C2 reject on XETUSD/ETHUSD.SPOT 02:46:09 UTC; FIX tag 58 = "Buy price received is lower than our offer price" (8002=504). Isaac digging — Compass TOB shows we were sending limits at B2C2's offer price. May need B2C2 query. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777527397662369)
 
-> [open] 2026-04-30 — Reece: custom1 classification 0 min-dollars-per-million semantics
-> Reece asking whether the 0 Minimum dollars per million in `analytics.counterpartyClassification.B Book.custom1.badCheck` is inception-only or tied to the 500Ms check now in place. Rory looking. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777543336242789)
+> [open] 2026-04-30 — Reece: custom1 classification 0 min-dollars-per-million semantics + SHARP routing request
+> Reece asked whether the 0 Minimum dollars per million in `analytics.counterpartyClassification.B Book.custom1.badCheck` is inception-only or tied to the 500Ms check now in place; Rory looking. 2026-05-04: Reece separately requested the `custom1` badCheck be set up and routed to the SHARP channel (NY BBook) — no reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777543336242789) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777895550879849)
 
 > [open] 2026-04-28 — GBPNZD indicative for 1h at NY roll (WSS threshold)
 > 20:58:59–22:00:00 UTC indicative on GBPNZD due to wide-spread suppression hitting threshold 0.00150 with mode=indicative; Pepperstone (Mariapaz/Diego) flagged as non-critical but avoidable. Nathan offered to widen the threshold or switch mode to cap during roll. Stephen asked Reece to review NZD crosses WSS settings. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777413142731729)
@@ -154,4 +154,5 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-04-23 — CFD NY IPs posted (trading-1 `192.81.111.207`, admin `192.81.111.240`); Nathan chasing LP handover ETA with Gordon/Martyna. Hardware updates done over weekend, handover imminent per Gordon. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1776904666370719)
 - 2026-04-21 — Argamon want Tokyo JPY crypto crosses too (Lee bumping existing request). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1776735210458109)
 - Pepperstone CFD rollout — new desk being stood up. LDN servers in Mahi setup (IPs exchanged 2026-04-08/15). NY IPs now shared (see above). Hedgers for inventory-risk model; awaiting LP connection data + instrument specs from Pepper AU team.
+- 2026-05-05 — LMAX Crypto CFD price/qty increment changes going live Sunday 2026-05-10; Stephen shared an xlsx with the new increments in `mahi-pepperstone-vnd`. Isaac acknowledged — will review and adjust Mahi config if needed; Stephen to confirm which symbols need published-pricing digit changes. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777941326564039)
 - Pepperstone Crypto Exchange (pcrypto.com) — soft-launched 2026-03-Q1; rolling BNB/TRX/XRP-AUD on the exchange side. See Guru card T8xkG7nc.
