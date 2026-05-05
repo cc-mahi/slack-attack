@@ -16,7 +16,7 @@ key_people_overrides:
   - {name: "Louiza Ignatiou", role: "ops — FIX sessions, IP whitelisting"}
   - {name: "Daniel Lawrance", role: "CEO (linkedin.com/in/daniel-lawrance-/); B2B bridge discussions", confidence: low}
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
-last_catchup: 2026-05-04T07:31:07Z
+last_catchup: 2026-05-05T07:33:11Z
 ---
 
 ## Recent issues
@@ -45,8 +45,11 @@ last_catchup: 2026-05-04T07:31:07Z
 > [resolved] 2025-05-20 — Dropcopy FIX session setup (Manglai)
 > Manglai provided dropcopy FIX config and worked through IP whitelisting across multiple rounds: Beeks whitelist via Maten, additional IPs 69.6.29.122/32 and 46.28.177.153/32 added. Multiple dropcopy config versions exchanged. As of 2025-05-22 further connectivity issues (nc timeout) resolved; dropcopy established in time for test trades. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1747812582784569) [connectivity resolved](https://mahifx.slack.com/archives/C08AQKRU953/p1747930393940489)
 
-> [open] 2026-05-04 — DAX40 Scope-X-SI-Prices: no pricing received
-> Louiza (Rostro) flagged DAX40 not receiving prices on the SI feed. Isaac confirmed checking as of market open. No resolution yet in window. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777879262200339)
+> [resolved] 2026-05-04 — Edgewater 4-second fill on XCore order 61206552
+> Client (Abdullah, cc Oli) queried a ~4-second fill time on XCore order 61206552 (SUBID3 5d87b54a). Cameron Hughes investigated: flow was STP-classified (signal-follow) and routed externally; Edgewater returned `expired` (DONE_CANCELLED) on the first two hedge attempts after ~2.0s each, with the third attempt filling at 16:25:31.226 UTC (~24ms). Client received fill at 4639.7. Client confirmed understanding and closed. No config change; pattern consistent with prior Edgewater last-look behaviour (see 2026-04-22 Invast latency entry for parallel). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777889706290469) [Cameron Hughes timeline](https://mahifx.slack.com/archives/C08AQKRU953/p1777898412438959)
+
+> [resolved] 2026-05-04 — DAX40 Scope-X-SI-Prices: no pricing received
+> Louiza (Rostro) flagged DAX40 not receiving prices on the SI feed. Isaac confirmed checking as of market open, then posted a live G30EUR FIX snapshot from Scope-X-SI-Prices at 08:32 UTC confirming Mahi is publishing quotes. Client asked "So from your side you are sending prices?" — Isaac confirmed "Yes". Client acknowledged. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777879262200339) [Isaac confirms](https://mahifx.slack.com/archives/C08AQKRU953/p1777879927998989)
 
 > [open] 2026-04-30 — USDJPY cpty 95_0_652431 arb-classification slippage complaint
 > Alex flagged consistent slippage on USDJPY from cpty 95_0_652431. Kate confirmed: classifier tagged them as arb after 29 sells / $15.05M in ~6 min 10:27–10:33, aggregated 4-min yield -$17k → trades brokered. Kate proposed internalising to SI book for fast-hedge instead; client acknowledged short-term markout vol. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1777562968245279) [Kate's analysis](https://mahifx.slack.com/archives/C08AQKRU953/p1777567089259889)
