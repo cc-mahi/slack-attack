@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-04T07:22:26Z
+last_catchup: 2026-05-05T07:31:01Z
 ---
 
 ## Recent issues
@@ -42,6 +42,10 @@ last_catchup: 2026-05-04T07:22:26Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-05-05 — cpty 92549025 yield profile follow-up: client sent Echo yield-profile chart link (valutrades.NYC, 2026-04-26→2026-05-04 window) asking "is this graph expected?" and flagging no yield after zeros. Isaac confirmed the fix is deployed and data going forward won't have the same issue; historical zeros in the chart remain. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777952984794689) [isaac-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777953182292069)
+
+- 2026-05-05 — cpty 84034427 & 84034562 A/B book classification: client asked Isaac to advise on both. Isaac replied: `84034562` = A book (historic losses, recent improvement and increased volume); `84034427` = B book overall (A on USOUSD, B on NDFUSD — larger volume/PnL in NDFUSD drives B classification). [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777958393137049)
 
 - 2026-05-04 — cpty 89467069 A-book classification check: client asked team to advise on cpty 89467069; Shyam Hari confirmed A-book for JPXJPY and DOWUSD (with charts), client acknowledged. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777870072809899)
 
