@@ -10,11 +10,17 @@ key_people_overrides:
   - {name: "Daria Horton", role: "Mahi trading ops liaison"}
   - {name: "Carl", role: "client ops / LMAX + Finalto mappings", confidence: low}
   - {name: "Nael", role: "client trading ops", confidence: low}
-  - {name: "Youssef", role: "client — CFD internalisation rollout", confidence: low}
-last_catchup: 2026-05-04T07:19:29Z
+  - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
+last_catchup: 2026-05-05T07:22:21Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-04 — Counterparty 4004089 reclassified to Dynamic Signal Follow after ABook PnL drop
+> A-book XAUUSD PnL dropped ~$2,700 at 10:20 UTC as counterparty 4004089 traded ahead of a large price move (internalised; market moved against). After a second similar event, 4004089 was reclassified to Dynamic Signal Follow (now brokered). Counterparty 700154 then placed a similarly-sized internalised XAUUSD trade; market moved in Mahi's favour and ~$2,500 was recovered. Reclassification appears actioned; no follow-up confirmation of stability. [internal](https://mahifx.slack.com/archives/C09QS1NUA80/p1777949002875889)
+
+> [open] 2026-05-04 — Fast-hedge strategy proposed for counterparty 700154; swap-free viability questioned
+> Cameron Hughes shared yield profile for counterparty tag 700154 (Echo access issue resolved after permissions fix): stays onside for 16 mins in aggregate, making it suitable for fast-hedge (hold risk up to 5 min, let arb hedger chip away, clear via hybrid). Youssef raised concern that this client's high volume is tied to a swap-free offer, which may erode the edge — estimated XAUUSD spread margin ~$20/M and FX ~$11/M. Daria noted analysis needed on whether positions are held overnight vs closed intraday, plus swap charge quantum, before concluding viability. No resolution yet. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1777908996386319) [Daria analysis](https://mahifx.slack.com/archives/C09PNC1MFAA/p1777931713192039)
 
 > [open] 2026-05-01 — CFD internalisation live testing: LP routing clarified, instrument tests in progress
 > Client confirmed routing split: Futures + Spot Commodities (USOIL/UKOIL/NGAS) → Finalto only; Spot Indices + CFD Crypto → LMAX only (Finalto has no CFD Indices; crypto offer on Finalto deemed poor). Shyam set up MAHI_LP_CFD proxy (VELOCITY_EXINITY + LMAX) for CFD pricing. William bounced hybridHedgerCFD1 to pick up CO1USD and CL1USD additions; initial CL1USD test hedged to LMAX (wrong), fixed mapping, re-tested to Finalto. CO1USD also confirmed Finalto. DOWUSD, NDXUSD, SPXUSD tested to LMAX — all confirmed. JPXJPY, UKXGBP also confirmed during testing session. ASXAUD test position opened and subsequently closed (confirmed "done" by client 2026-05-01 ~17:13 BST). G30EUR and F40EUR deferred to next week — markets closed over bank holiday weekend. NG1USD flagged internally as third Finalto commodity — mapping not yet complete. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1777636046504329) [internal](https://mahifx.slack.com/archives/C09QS1NUA80/p1777635124504809) [ASXAUD close](https://mahifx.slack.com/archives/C09PNC1MFAA/p1777653635607519)
