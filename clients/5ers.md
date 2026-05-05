@@ -10,10 +10,22 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-04T07:17:46Z
+last_catchup: 2026-05-05T07:19:36Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-04 — XPDUSD/XPTUSD not received on YourBourse connection
+> Client (Andreas) reported missing prices for XPTUSD and XPDUSD. Isaac diagnosed that the YourBourse connection had not subscribed to those symbols (CTrader/MT5 connections were publishing fine). Andreas confirmed working after clarifying symbol names. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777882979456319)
+
+> [open] 2026-05-04 — 4dp decimal place config for crypto/index symbols — MT5 vs cTrader discrepancy
+> Cameron Hughes put in config for 4dp on a set of symbols (NGCUSD, DOGUSD, XRPUSD, HSI, etc.) per Andreas's instrument list; Daria applied the change in time for EOD restarts 2026-05-04 ~22:00. 2026-05-05 07:41: client reported the issue persists on MT5 only — cTrader prices correctly. Daria tagged but no reply yet as of run time. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777889065439829) [morning-reply](https://mahifx.slack.com/archives/C07AQJS4E80/p1777963272059319)
+
+> [resolved] 2026-05-04 — CUCUSD spread inconsistency — dual LP base conflict
+> Client (Andreas) flagged CUCUSD spreads looked wrong with screenshots. Cameron Hughes identified two LPs in the price formation had different bases; switched CUCUSD to B2BROKER only. Client confirmed better shortly after. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777896061408079)
+
+> [open] 2026-05-04 — USDCNH pricing request
+> Client (Linos) requested USDCNH be added to pricing. Nathan Burch checked: no USDCNH feed currently subscribed; asked client if B2BROKER feed is available. Awaiting client confirmation; will require EOD restart once confirmed. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777897598263539)
 
 > [resolved] 2026-04-26 — Recurring weekend disconnections — B2Broker session break / CLIENT_PRICE_LDN going indicative
 > Internal (Kate, 04-28): only crypto LP is B2Broker; their session break Saturday morning stopped pricing → drop-out 5ers saw. B2Broker confirmed they can't customise session times. 2026-04-30: Kate deployed crypto feed enrichment — additional market data sourced to supplement B2BROKER, XBTEUR base spreads tightened. 2026-05-01: Kate confirmed to client that additional crypto feeds are normalised into price formation alongside B2Broker; feeds remained stable through the Saturday B2Broker downtime window. CFD side: same pattern applied, additional CFD feeds layered in. **2026-05-02 recurrence:** Yaniv reported crypto trading down on both MT5 and cTrader from ~08:00 UTC. Justin found `CLIENT_PRICE_LDN` was 98–100% indicative during 08:00–10:00 UTC; LMAX also unavailable in that window; B2Broker sessions also down. Yaniv disabled real-account routing on MT5 to restore MT5 crypto. **2026-05-04 RCA (Daria):** enriched feed changes were picked up by pricer1 last week but pricer2 — the one publishing to distribution channels — was never restarted and ran the old config. When B2Broker went down, pricer2 went indicative while pricer1 priced fine (confirming the enrichment itself works). Both pricers now fully patched; fix will cover B2Broker downtime this coming weekend. Full details in Zendesk #22903. [yaron-escalation](https://mahifx.slack.com/archives/C07AQJS4E80/p1777196856253159) [internal-rca](https://mahifx.slack.com/archives/C079M09MGGP/p1777394276388709) [feed-fix-update](https://mahifx.slack.com/archives/C07AQJS4E80/p1777572138698369) [resolved-update-05-01](https://mahifx.slack.com/archives/C07AQJS4E80/p1777652354910519) [05-02-client-report](https://mahifx.slack.com/archives/C07AQJS4E80/p1777713097183339) [05-02-justin-analysis](https://mahifx.slack.com/archives/C079M09MGGP/p1777731760352189) [05-04-rca-internal](https://mahifx.slack.com/archives/C079M09MGGP/p1777851392339829) [05-04-rca-client](https://mahifx.slack.com/archives/C07AQJS4E80/p1777853771186479)
