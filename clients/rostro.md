@@ -16,7 +16,7 @@ key_people_overrides:
   - {name: "Louiza Ignatiou", role: "ops — FIX sessions, IP whitelisting"}
   - {name: "Daniel Lawrance", role: "CEO (linkedin.com/in/daniel-lawrance-/); B2B bridge discussions", confidence: low}
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
-last_catchup: 2026-05-05T07:33:11Z
+last_catchup: 2026-05-05T07:35:12Z
 ---
 
 ## Recent issues
