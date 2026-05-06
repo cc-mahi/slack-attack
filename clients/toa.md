@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-05T07:14:21Z
+last_catchup: 2026-05-06T07:28:43Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-05-05T07:14:21Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-05-06 — Toa Argamon LDN rejects: oncall investigation requested
+> Lee Butts (06:57 UTC) tagged the oncall subteam to investigate rejects on the Toa Argamon LDN instance; stated he was not at a computer. No reply or resolution in thread as of window close. https://mahifx.slack.com/archives/C035H1VNCAD/p1778050635016669
 
 > [resolved] 2026-03-31 — Nado ETF pricing live on APN1
 > ETF pricing rolled out as planned on the 2026-03-31 target. QQQ/SPY opened for trading on 2026-04-02. https://mahifx.slack.com/archives/C09RGU1T1GE/p1774964941888099
