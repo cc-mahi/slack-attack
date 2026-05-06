@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-05T07:16:37Z
+last_catchup: 2026-05-06T07:07:30Z
 ---
 
 ## Status
