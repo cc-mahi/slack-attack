@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact", confidence: low}
-last_catchup: 2026-05-05T07:16:16Z
+last_catchup: 2026-05-06T07:09:47Z
 ---
 
 ## Recent issues
@@ -33,3 +33,4 @@ last_catchup: 2026-05-05T07:16:16Z
 - 2026-04-20 — Go-live target early May; T4B replacement project follows launch. Andrew flagged that the high-priority/high-risk milestones (coexistence with T4B, end-to-end trades) are already delivered, and Mahi has backfilled all the REST APIs T4B had. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1776681404918759)
 - 2026-04-29 — Risk-management strategy ownership. Will: "we are the risk management experts" per Rapp; "we're free to run it as we want." Implication: Mahi dictates how risk works once instrument coverage settles. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777465055105989)
 - 2026-04-29 — Externalisation gap for proxied-LP CFDs at Argamon. CFDs at Argamon often have only proxied LP pricing, so Mahi can't externalise the trades. Cam considering CPL pricing setups in Argamon for CFDs where direct LP pricing exists; TOA crypto already available. Open design question. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462376226129)
+- 2026-05-05 — Swap management: inventory-skewed benchmark swap solution scoped. Andrew (responding to Rapp/Maten Apr-30 call note that ACG want MT swaps to match Argamon's values, with daily updates and 10% markup) flagged need to push MQ swap-management setup into KB and scope the inventory-skewed benchmark swap solution further. Separately, David Cooney relayed that Elan (Argamon) estimates the swaps give an annual return of ~25%, underpinning the commercial case. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777975121524689) [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777991358798539)
