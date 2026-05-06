@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-05-05T07:27:56Z
+last_catchup: 2026-05-06T07:18:25Z
 status: active
 retired_at: null
 retired_reason: null
@@ -41,6 +41,9 @@ retired_reason: null
 > [resolved] 2026-05-07 — commercial renegotiation: new fee model agreed
 > Pilot contract ($30k/month + 10% skew PnL) expired; Mahi targeting ~$18k/month based on April active-user counts (~6k active trading counterparties). Extended commercial negotiation across 2026-05-01 to 2026-05-07: Jelle Dijkstra (co-founder) proposed tiered $2.50–$1.50/account with $30k cap; Mahi proposed $12k fixed + $1/active challenge; David Cooney rejected a $32.5k cap ("not fair to clients who pay multiples of that"). Final agreement on 2026-05-07: $12k fixed + $1/active trading user/month (1 active trading user = 1 unique individual trader), no cap. Addendum to be drafted by Mahi legal (NZ) and sent within days. Long-term intent is to move to Option B (consumption/funded-capital model) via addendum once DX and cTrader platform integrations can supply user+challenge+deposit IDs. April was billed at pilot rate per agreement extension. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1746623989396429)
 
+> [open] 2026-05-05 — new crypto pairs expansion request (22 pairs; OKB/KCS need code change)
+> Benjamin Galindo (@here tagged) requested 22 new crypto pairs be added: XMR, BCH, ETC, MKR, TON, HBAR, ICP, VET, THETA, EOS, AVAX, ATOM, MANA, SAND, OKB, KCS, GRT, PYTH, EGLD, XTZ, COMP, SNX. Isaac Dann confirmed 20 can be added immediately; OKB and KCS require a code change and deployment. Benjamin confirmed they're MatchTrade-priced (per existing setup) and is checking with MT on OKB/KCS availability. Thread still open as of 2026-05-06T06:06 UTC — no Mahi confirmation that OKB/KCS code change is scheduled. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778006518033119)
+
 > [open] 2026-06-03 — second pricing model for qualifying traders (tighter spreads)
 > Jelle raised on a call (2026-06-03) that VWAP on larger-ticket qualifying traders is causing complaints; wants tighter spreads for qualifying flow only without touching funded. Amir proposed a separate qualifying pricing model (same config, tighter tiers and BMSL) — straightforward to set up but needs a new FIX connection (DX + cTrader = 2 additional connections; BF already uses 3 of their contracted FIX connections). As of 2026-06-04/05 Bonnie checking the contract (1 distribution channel, 3 FIX connections specified); Andrew says $500/month for one model, and server load needs a review before proceeding. Bonnie reached out to Syb, who was unaware of the specifics. Not yet contracted or scheduled. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1748947530909369)
 
@@ -61,3 +64,4 @@ retired_reason: null
 - Match Trade feed stuck (2026-05-01): G30EUR/F40EUR/E50EUR briefly indicative; Jelle confirmed instruments referred to GER30.cash/FRA40.cash/EU50.cash and they were closed for a public holiday. Resolved without intervention. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1746109085301459)
 - New cTrader account tags announced by Syb (2026-05-02): `fundedNormalSwapsRedLev` and `fundedSwapFreeRedLev` added for reduced-leverage funded accounts. Kate Stagg acknowledged. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1746194166004499)
 - Crypto pricing went indicative briefly on 2026-05-22 (Match MD login failure ~8 min); Daria noted Pepper LDN could proxy as backup in the continuity pool. Self-recovered. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1747945987365829)
+- Market reopen pricing monitoring (2026-05-05): Shyam Hari asked internal team to keep BrightFunded updated on indicative pricing at reopen and watch pagers; Daria confirmed coverage in place within 4 min. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1778016012506979)
