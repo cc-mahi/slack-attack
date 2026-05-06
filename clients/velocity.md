@@ -9,13 +9,19 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-05T07:25:33Z
+last_catchup: 2026-05-06T07:29:01Z
 ---
 
 ## Recent issues
 
 > [open] 2026-05-05 — Allow Top Up on A_CLIENTS_PREMIUM/Broker Everything Temp disabled after 350 XAU internalisation loss
-> At 16:10 UTC 2026-05-04, counterparty 889 placed a 750 XAU order on DistributionLDN (A_CLIENTS_PREMIUM//Broker Everything Temp, execution rule: broker). Compass brokered 400 XAU; the remaining 350 XAU was internalised via Allow Top Up. Price moved against the book immediately — full 350 XAU hedged to cap further losses but loss already realised. Nathan Burch disabled Allow Top Up for this execution rule as a protective measure, noting counterparties in this classification trade directionally. He flagged this for review: Allow Top Up is currently on for all other execution rules — possibly intended to protect client fills — and the policy should be revisited. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777957038011259)
+> At 16:10 UTC 2026-05-04, counterparty 889 placed a 750 XAU order on DistributionLDN (A_CLIENTS_PREMIUM//Broker Everything Temp, execution rule: broker). Compass brokered 400 XAU; the remaining 350 XAU was internalised via Allow Top Up. Price moved against the book immediately — full 350 XAU hedged to cap further losses but loss already realised. Nathan Burch disabled Allow Top Up for this execution rule as a protective measure, noting counterparties in this classification trade directionally. He flagged this for review: Allow Top Up is currently on for all other execution rules — possibly intended to protect client fills — and the policy should be revisited. By 09:04 UTC+1 2026-05-05 Will confirmed "book has recovered somewhat so far this morning" and endorsed the disable ("that's the right call — thanks Nathan"). Policy review of Allow Top Up across other execution rules remains open. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777957038011259) [recovery confirm](https://mahifx.slack.com/archives/CPDS0M2KF/p1777968282.241929)
+
+> [open] 2026-05-05 — New connection for inventory skewed feed — status unconfirmed
+> William Denny asked in the client channel at 11:59 BST: "can I check on the status of the new connection for the inventory skewed feed?" No reply in window. Context: client was asking about Compass sims and XAU crosses in the same conversation; the inventory skewed feed is a separate pending item. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777978746.882379)
+
+> [open] 2026-05-05 — Client requesting hold-position analysis on internalised flow
+> Richard (or another client-side contact) asked at 11:32 BST: "on the flow we've internalised can we run some analysis on that to see what the outcome would have been if we held onto the position at different intervals? vs where it was hedged." William pointed at the Echo yield profiles for A_CLIENTS_PREMIUM (2026-04-28–2026-05-05) as the relevant data source. Client acknowledged at 13:00. Analysis not delivered in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777977153.873319)
 
 > [open] 2026-05-01 — Overnight losses, chunky position offside; Will and William investigating
 > Client (Richard) flagged at 09:12: "looks like we took a hit overnight / spreads too tight?". Will had already posted Echo yield-profile link at 08:24 and pinged William Denny "need to look into this asap". William confirmed checking at 09:13. Will's read at 09:37: position went offside quickly, "sort of locked in that loss at 10-15 seconds"; told client to "trust the process a bit today, hopefully the yield quality evens out". Root cause (too-tight spreads vs chunky directional flow) under investigation — no resolution in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777624588186949)
@@ -49,6 +55,8 @@ last_catchup: 2026-05-05T07:25:33Z
 
 ## Notable topics
 
+- 2026-05-05 — XAU crosses setup believed done; client requesting hedger workflow test trades. Richard asked "are we done on the XAU crosses?"; William said "believe the setup is done"; Richard wants test trades per cross to verify hedger workflow. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777973517.232639)
+- 2026-05-05 — Compass sims still pending as of 09:03 BST. Richard asked "hoping the sim has run now?"; William: "checking on the sims now". No confirmed outcome in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777968117.606539)
 - 2026-05-01 — Bank holiday Monday 4 May: Mahi emergency-only coverage, Slack less monitored. Client channel notified; support email / phone numbers provided. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777622405037559)
 - 2026-04-30 — GS hedging looking better $/M on XAU (small sample); GS spread flickering 18/36 then settling 35-40. Premium-channel widens to pool TOB on ROLL/TWILIGHT/SNGMON. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777452886321469)
 - 2026-04-30 — Pricing channel taxonomy clarified by Will: `CLIENT_PRICE_LDN` (wide spreads, matches pool via MWMS, channel `A_CLIENTS`, currently internalise+hedge); `CLIENT_PRICE_B_LDN` (premium spreads, stable 50oz XAU TOB ~15oz, channel `A_CLIENTS_PREMIUM`, internalise+hedge); party `CLIENTS_CSV` is the post-trade drop-copy from Xenfin used for whole-book yield profiles (last 2 weeks). [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777540742930749)
