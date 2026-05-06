@@ -16,10 +16,18 @@ key_people_overrides:
   - {name: "Louiza Ignatiou", role: "ops — FIX sessions, IP whitelisting"}
   - {name: "Daniel Lawrance", role: "CEO (linkedin.com/in/daniel-lawrance-/); B2B bridge discussions", confidence: low}
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
-last_catchup: 2026-05-05T07:35:12Z
+  - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
+  - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
+last_catchup: 2026-05-06T07:28:28Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-06 — riskreportingmetrics in Pulse stale since 2026-05-05 18:29 UTC
+> Riz flagged that riskreportingmetrics has not updated since 2026-05-05 18:29:58. Daria acknowledged and said "we'll have a look". No resolution confirmed yet. Separate from the 2025-09-17 missing-instruments entry (that was about specific new instruments not appearing; this is a full metrics refresh stall). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778050841008309) [Daria ack](https://mahifx.slack.com/archives/C08AQKRU953/p1778051309275809)
+
+> [open] 2026-05-05 — Key contact Lochlan departed to OZ (OneZero?)
+> Will flagged Lochlan has moved to OZ. Andrew asked who remains as a good point of contact given Lochlan was championing Mahi at Rostro, and whether the departure was acrimonious (potential first attempted customer for Lochlan at OZ). Mahi currently only has Oli (ex-Exinity, LDN-based) as a strong contact. Dave Cooney to try to reach Mike Ayres (described as "the main boss") to rebuild the senior relationship. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1777970074025209) [Andrew's question](https://mahifx.slack.com/archives/C08ALS66EDC/p1777971293751749)
 
 > [open] 2025-10-03 — NAS100/SPX/DOW/CL1 futures pricing spikes at open
 > Oli reported urgent SPX pricing spikes on 2025-10-03 (second consecutive day). Kate changed harmonics signals for DOW and SPX; pricing improved but CL1 still spiky later that day. Louiza submitted full futures min/step/max size spreadsheet; Kate applied changes pending weekend restarts. Rostro asked to give advance notice before rolling new instruments. Kate also noted DAXFUT-Z subscription failing via PXM with "invalid symbol" — symbol mapping in progress. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1759483209208009) [futures sizes](https://mahifx.slack.com/archives/C08AQKRU953/p1759483009859979)
