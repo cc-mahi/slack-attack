@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-05T07:19:55Z
+last_catchup: 2026-05-06T07:12:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-05 — XAUFUT LIQUIDITY_VIOLATION: off-market limit on futures (trade 68635742_1)
+> Princess reported XAUFUT LIQUIDITY_VIOLATION on trade 68635742_1 at 13:31; Rory confirmed "same issue" (off-market limit price on futures) and was still investigating at 14:06. Separate from the XAUUSD spot limit rejection reported earlier same day. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777984308577199)
 
 > [open] 2026-05-05 — XAUUSD limit order rejected LIQUIDITY_VIOLATION: off-market limit price
 > Princess reported a sell limit order on XAUUSD rejected with `LIQUIDITY_VIOLATION`; tag1=ABOOK, order sent at 4550.95 sell-limit, published price was 4550.77/4550.89 at time of receipt — order was off-market. Daria explained the rejection. Princess followed up at 07:39 asking if resolved; Will replied at 08:06 that Mahi will look into it today. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777960089109199)
@@ -27,6 +30,7 @@ last_catchup: 2026-05-05T07:19:55Z
 
 > [open] 2026-05-01 — Index futures go-live blocked by TOO_SMALL quantity validation
 > DOWFUT-M and NDXFUT-M test trading attempted 2026-05-01 morning; Princess test trade rejected with `DISTRIBUTION_LDN-maximumShowQuantity=TOO_SMALL, quantity=TOO_SMALL`. Root cause identified by Rory but requires weekend EOD restarts to take effect — US futures index go-live pushed to early next week. In the meantime: continuing setup for all other cash + futures equity indices (EU, Asia), collecting step/min sizes from Princess/Nikos. Princess provided min+step per LP at 13:46. Rory to revert with further items requiring EOD restarts. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777629657810339)
+> 2026-05-05 update: root cause confirmed by test — hedger fires immediately at cumulative 0.1 NDX but fails to recognise sub-0.1 positions (e.g. 0.05 and 0.01 not hedged). DOWFUT-M routing to IG_CENTROID confirmed correct for ≥0.1 positions. Cameron Hughes bounced futsP1 hedger at 14:18 to clear a residual 0.01 NDXFUT-M position it wouldn't clear; Rory bounced hybridHedgerFutsP1 at 12:14. Further fix still required. Nikos asked 2026-05-06 07:59 whether ready to switch on EQ INDEX FUT — Daria said LDN team will update. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778050766305989)
 
 > [resolved] 2026-04-29 — US index CFD go-live: NAS hedger not firing on test trades
 > Resolved 2026-04-30: NDXUSD + DOWUSD CFDs went live; spreads uploaded by Rory, Amana switched on NAS + U30 by 16:03, SPX also enabled 2026-05-01. First CFD trade internalised + hedged by Rory at 17:16 (criticalHedgerBooks updated to include CFD hybrid hedger). [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777565764829549)
@@ -92,4 +96,6 @@ last_catchup: 2026-05-05T07:19:55Z
 - 2026-04-28 — Will speaking to Nikos about doing XAUUSD B-book pricing properly: 8c stable TOB with panic-stations MWMS + BMSL beyond 100oz; connectivity already in place. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1777386952494079)
 - 2026-04-28 — Nikos roll-out plan (call): A-book first across cash indices to prove workflow, then B-book once spreads agreed (IG call later this week on metals futures spreads); B-book index volume ~90mio/day vs A-book ~10mio. Granular: indices first, oil/gas after.
 - 2026-04-21 — P&L Attribution KB article added (`kbPnlAttribution`) to Compass knowledge base, covering risk-path closed-system P&L, 0→120m/0→20m horizons, and reconciliation vs Account Summary. Driven by Nikos asking for per-client trading PnL attribution. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776760822802469)
+- 2026-05-05 — XAUUSD skew bumped overnight by Isaac: IFMS `priceAdjustmentAsProportionOfBaseSpread` 0.5→0.8, `priceAdjustmentAsProportionOfBenchmarkSpread` 0.5→0.8; flow-price-thresh base 0.3→0.4, benchmark 0.2→0.4. Yield trajectory: 5.53→8.80→12.55 $/M this week. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1777978361549719)
+- 2026-05-05 — Direct-brokered/STP execution rule created by Rory for arbing DOW counterparty 8011825 (manually selected tag only, same structure as arber profile). Nikos requested at 10:17. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777972663980609)
 - 2026-04-20 — LP price-withdrawal handling: Centroid now passes through 0/empty MD updates when an LP withdraws price; Will confirmed OK to enable on Mahi side (hedger will keep retrying, client experience preserved). [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776681806903129)
