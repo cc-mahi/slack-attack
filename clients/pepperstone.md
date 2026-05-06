@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-05-05T07:33:09Z
+last_catchup: 2026-05-06T07:26:00Z
 ---
 
 ## History
@@ -97,6 +97,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-05-06 — custom2 classification not triggering as expected; Shyam investigating
+> Reece asked to clear the `analytics.counterpartyClassification.B Book.custom2.badCheck` global list (193 entries); Rory cleared it. After refresh, Reece observed that CP 51397366 is not landing in custom2 despite what appear to be negative yields at 5s. Shyam (internal) reviewed: custom2 is configured as OR across horizons (5s/10s/30s/60s/2m/4m), not AND — but the aggregated yield profile for this CP shows no negative horizons, so classification seems correct yet Reece expected otherwise. Shyam flagged for further investigation. Reece sent a follow-up "morning team- any update on this?" at 07:11 UTC with no reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777984346581039) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778038180841259) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778043575578009) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778047876914949)
+
+> [resolved] 2026-05-05 — Crossover enabled on spot hedging; NOP cap config reviewed
+> Stephen requested Crossover LP be added to spot hedging; Daria enabled it same night. Stephen also asked for a NOP cap review — Daria confirmed the per-instrument and per-market NOP config looks reasonable. Stephen confirmed satisfied. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778020198535509)
 
 > [resolved] 2026-05-04 — XAU/USDTHB/XAG indicative alerts (brief, investigated OK, Zendesk 22906)
 > Stephen flagged indicative alerts on XAU, USDTHB, XAG at 03:42 UTC. Daria confirmed all processes and pricing looking okay by 04:34 UTC; raised Zendesk ticket 22906 for dev review. Stephen confirmed no ongoing issue by 04:47 UTC. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777862549479679)
