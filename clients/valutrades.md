@@ -9,10 +9,13 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-05T07:31:01Z
+last_catchup: 2026-05-06T07:30:45Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-05 — MySQL DB whitelist: new users `bpambudi` + `airflow` blocked, client working through IP resolution
+> Brandon (client) requested whitelisting of `108.136.197.46` for DB access; Maten found prior whitelist but asked Brandon to clarify credentials. Follow-up: Brandon asked for `bpambudi` (IP `108.136.197.46`) and `airflow` (private IP `10.200.1.216`). Maten suggested shared creds for bpambudi and asked for a public IP for airflow. Brandon supplied public IP `43.218.202.79` for airflow on 2026-05-06. Resolution pending (Maten to confirm whitelist complete). [initial-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1777966759391499) [airflow-ip-supplied](https://mahifx.slack.com/archives/C09HN93T0G2/p1778051757632209)
 
 > [open] 2026-04-30 — `riskPathValutrades` on valutrades-ny-admin-1 throwing 14k+ errors/day — `CLIENT_PRICE_ICDX_MINI_NYC` unavailable
 > Justin Young investigating why `CLIENT_PRICE_ICDX_MINI_NYC` is set as `defaultClientPriceMarket` for USOUSD and a large instrument list (NDFUSD, CL1USD, CO1USD, DOWUSD, NDXUSD, JPFUSD, SPFUSD, DJFUSD, HSFUSD, SPXUSD, UKXGBP, HSIHKD, JPXJPY, G30EUR); riskPath throwing `IllegalArgumentException: CLIENT_PRICE_ICDX_MINI_NYC/<sym> unavailable` at 14k+/day. No resolution in window. [permalink](https://mahifx.slack.com/archives/CP7A1F8BT/p1777544417254539)
@@ -42,6 +45,10 @@ last_catchup: 2026-05-05T07:31:01Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-05-05 — UAT Compass availability query: Graeme asked `@here` whether a functioning UAT Compass environment is available. Kate replied she would check; Liam noted a UAT environment exists and "we should be able to spin up whatever you need in fairly short order". No definitive confirmation in window. Bonnie flagged the unanswered question internally. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997434492069) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997877227319)
+
+- 2026-05-05 — TT credentials request for order-cancellation testing: client asked for TT credentials to pass orders to TT for testing order-cancel scenarios; noted this would also support the SOW work on algo parameters. No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777999511634679)
 
 - 2026-05-05 — cpty 92549025 yield profile follow-up: client sent Echo yield-profile chart link (valutrades.NYC, 2026-04-26→2026-05-04 window) asking "is this graph expected?" and flagging no yield after zeros. Isaac confirmed the fix is deployed and data going forward won't have the same issue; historical zeros in the chart remain. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777952984794689) [isaac-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777953182292069)
 
