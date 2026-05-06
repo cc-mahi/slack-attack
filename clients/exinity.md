@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-05T07:22:12Z
+last_catchup: 2026-05-06T07:18:26Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-05 — 360T EURUSD A-book position trace (3 Feb 2026)
+> Louie followed up on an outstanding query about a 360T EURUSD position executed on A-book on 3 Feb 2026. Kate traced via Compass: Matthew placed two 500k EUR/USD sells at 07:21:58 and 07:22:05 UTC into `CLIENTS_HEDGING` (360T refs `HL69811F160004737.1` and `HL69811F160004754.1`). Louie acknowledged and closed off. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777971709952829)
+
+> [resolved] 2026-05-05 — XAU/USD 360T limit order cancels ("expired") — offside limit price
+> Louie reported XAU/USD limit orders to 360T returning "expired" with no LP cancel reason in FIX logs. Kate reviewed TOB at trade time: orders were sent at LP's bid price rather than the offer (offside limit). Advised Louie to adjust the limit price and confirm with 360T. Louie confirmed they are adjusting limit order room; confirmed the same issue occurred the previous day. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777993658873589)
 
 > [resolved] 2026-05-03 — EXINITY_ECN FX minor rejects on Singapore Monday open
 > Mukhammad Khamidov reported noticeable rejects on FX minors shortly after market open. Nathan Burch diagnosed: EXINITY_ECN channel has WSS configured to go indicative during Singapore Monday (`SingaporeMonday` timezone); when CLIENT_PRICE crosses the threshold (e.g. 0.00633 for GBPNZD), distribution price goes indicative and trades reject. Client acknowledged and elected to keep the config as-is; will discuss internally if adjustment needed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777846525218399)
