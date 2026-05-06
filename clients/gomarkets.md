@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-05T07:28:38Z
+last_catchup: 2026-05-06T07:20:39Z
 ---
 
 ## Recent issues
@@ -32,5 +32,7 @@ last_catchup: 2026-05-05T07:28:38Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-06 — Spread stats report requested: client asked for an updated Metals + FX spread statistics report comparing CLIENT_PRICE_NYC, ISPRIME, and 26DEGREES (previous version worked well). Isaac acknowledged and delivered top-5 CSV (bottlenecks prevented the full set); remainder plus 26DEGREES inclusion promised for tomorrow. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778031991175309)
 
 - 2026-04-23 — All Books tenant profile migration: Isaac confirmed All Books and legacy profiles co-exist; execution rules now use All Books exclusively. All Books is a soft reset that will populate further over time. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776909525989209)
