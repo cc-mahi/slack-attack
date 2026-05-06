@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-05T07:31:00Z
+last_catchup: 2026-05-06T07:22:40Z
 ---
 
 ## Recent issues
@@ -46,6 +46,9 @@ last_catchup: 2026-05-05T07:31:00Z
 
 > [resolved] 2025-05-08 — EURUSD order burst from 87906376 + 87049913: PD queue overflow alerts
 > Daria flagged ~1K EURUSD orders in 1h from CPs 87906376 and 87049913 triggered two PagerDuty alerts (clientDistributionGateway1 queue depth 769/1024, request publisher overflow). Latency spikes visible but not severe. Both CPs were already throttle-listed; Daria extended throttle config to include them. Liam noted Infinox infra generally un-tuned; no further action required at the time. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1746671103701289)
+
+> [resolved] 2026-05-05 — Routine LR-profile adds (24007117 → Heavy; GiraffeMkts 87012979 all-tags confirmed)
+> Sadiq requested CP 24007117 → Heavy LR; Kate actioned immediately (CP has not yet traded). Lazaros separately confirmed from his side that all 5 tag variants for institutional CP 87012979 (GiraffeMkts — API + Coverage client) had been correctly added to Heavy LR, matching the bridge naming patterns from the March 2026 prior action. Kate acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1777975096074509)
 
 > [resolved] 2026-04-30 — Lazaros call on classification/arb-profile PnL contribution
 > Call held 2026-05-01 at 2pm UK (Kate, Will with Lazaros). Lazaros' core question: is the PnL saved by arb classification worth the volume of client complaints? Will's call notes: ~800 arb-classified accounts, ~463 dormant (Kate's post-call count). Agreed to reduce classification intensity via config (done — see arb classifier threshold tightening issue below). LR Overview call agreed for next week. Outstanding analytical question: does arbing on one instrument justify worsened execution on all instruments? [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1777619106120579)
