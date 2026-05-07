@@ -18,10 +18,16 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-06T07:28:28Z
+last_catchup: 2026-05-07T07:39:22Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-06 — NAS100 XCore order 61437785: brokering rejected 3× by CMC
+> Abdullah queried rejection on XCore order 61437785 (SUBID3 2895, NAS100, ordered 14:12:09 UTC 2026-05-06). Kate confirmed three rejects from CMC when trying to broker the trade. No resolution or further Rostro response in window. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778078860807189) [Kate confirms CMC rejects](https://mahifx.slack.com/archives/C08AQKRU953/p1778079332175879)
+
+> [open] 2026-05-06 — New LP proposal: route SI VIP hedging with no aggregation; Kate flagged risks
+> Alex (Rostro) emailed Kate proposing to go live with a new LP offering tighter spreads in Gold and FX majors, initially routing SI VIP soft flow with no aggregation (full lifecycle to the LP), then phasing in more SI hedging flow later. Kate flagged internally: single-LP risk (no fallback if they widen/reject, citing Kama as precedent), book restructure required (VIP flow to separate book to ensure fully hedged), and reduced SI offsetting (more hedge volume = more spread paid). No Mahi response to Alex yet in window. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778060197092949) [Kate's risks](https://mahifx.slack.com/archives/C08ALS66EDC/p1778060619854249)
 
 > [open] 2026-05-06 — riskreportingmetrics in Pulse stale since 2026-05-05 18:29 UTC
 > Riz flagged that riskreportingmetrics has not updated since 2026-05-05 18:29:58. Daria acknowledged and said "we'll have a look". No resolution confirmed yet. Separate from the 2025-09-17 missing-instruments entry (that was about specific new instruments not appearing; this is a full metrics refresh stall). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778050841008309) [Daria ack](https://mahifx.slack.com/archives/C08AQKRU953/p1778051309275809)
@@ -109,6 +115,7 @@ last_catchup: 2026-05-06T07:28:28Z
 
 ## Notable topics
 
+- 2026-05-06 — Saul Knapp (Rostro exec) hired as CRO at MAS Markets. Will flagged the article internally with "What is going on at Rostro". No discussion yet. Adds to the senior relationship risk alongside Lochlan's departure (see 2026-05-05 entry). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778069286617949) [source](https://fxnewsgroup.com/forex-news/executives/mas-markets-hires-rostro-exec-saul-knapp-as-cro/)
 - 2026-04-21 — Client call outcomes: (1) they want LR PnL backtesting under different parameter changes — Andrew notes the existing LR sim supports this and will draft a KB article; (2) exploring SI-PnL attribution per client — Kate to check the Exinity script Will C wrote; (3) want a "Big Boys" book with a lower VAR threshold to route large-clip clients and reduce exposure — achievable in next couple of days. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776761460382099)
 - 2026-04-21 — Will/Andrew internal discussion: Rostro LR tuning highlights the value of inverting the sim — "what params get me X $/M across client, with toxic top-5% at 50 $/M and everyone else ≤ 5 $/M" — vs forward parameter search. Declarative-rule direction flagged for future work. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776764246169119)
 - **Futures-based index pricing / custom basis** — Rostro asking about status; previously discussed with "Sammy". No clear owner on Mahi side; Andrew suggested discussing in person. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776353177596759)
