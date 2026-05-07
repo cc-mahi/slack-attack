@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-06T07:22:40Z
+last_catchup: 2026-05-07T07:30:23Z
 ---
 
 ## Recent issues
@@ -46,6 +46,15 @@ last_catchup: 2026-05-06T07:22:40Z
 
 > [resolved] 2025-05-08 — EURUSD order burst from 87906376 + 87049913: PD queue overflow alerts
 > Daria flagged ~1K EURUSD orders in 1h from CPs 87906376 and 87049913 triggered two PagerDuty alerts (clientDistributionGateway1 queue depth 769/1024, request publisher overflow). Latency spikes visible but not severe. Both CPs were already throttle-listed; Daria extended throttle config to include them. Liam noted Infinox infra generally un-tuned; no further action required at the time. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1746671103701289)
+
+> [open] 2026-05-06 — Lazaros formalising Mahi pricing model — David Cooney to confirm
+> Lazaros posted a mathematical formalisation of Mahi's pricing process (variable experimentation / shock impulse model, images attached) in #mahi-infinox and asked David Cooney to confirm whether it captures the intended behaviour. David replied he would look at it the following day. No confirmation in window — thread unresolved. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778080716715819)
+
+> [resolved] 2026-05-06 — Routine Heavy LR adds: 6 Centroid CPs (MT5_87018814_Centroid_*)
+> Trading Ops requested 5 Centroid CPs (3597135, 3597136, 3595560, 2145764010, 2145764005) added to Heavy LR; Kate actioned at 14:45 confirming raw CP IDs added to the counterparty list. A second single-CP request (2145764040) followed at 18:11; Cameron Hughes confirmed actioned at 18:28. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778073178461719)
+
+> [resolved] 2026-05-06 — CH queried whether 87022535 is actually receiving reduced liquidity
+> CH asked if CP 87022535 (on Heavy LR) was genuinely being influenced by LR. Cameron Hughes confirmed via Echo: 57 $/M avg additional PnL from LR over the past week (~$2500 total), with individual trades hitting the 100 $/M Heavy LR max. CH acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778055440197529)
 
 > [resolved] 2026-05-05 — Routine LR-profile adds (24007117 → Heavy; GiraffeMkts 87012979 all-tags confirmed)
 > Sadiq requested CP 24007117 → Heavy LR; Kate actioned immediately (CP has not yet traded). Lazaros separately confirmed from his side that all 5 tag variants for institutional CP 87012979 (GiraffeMkts — API + Coverage client) had been correctly added to Heavy LR, matching the bridge naming patterns from the March 2026 prior action. Kate acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1777975096074509)
