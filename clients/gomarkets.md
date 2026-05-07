@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-06T07:20:39Z
+last_catchup: 2026-05-07T07:27:51Z
 ---
 
 ## Recent issues
@@ -33,6 +33,8 @@ last_catchup: 2026-05-06T07:20:39Z
 
 ## Notable topics
 
-- 2026-05-06 — Spread stats report requested: client asked for an updated Metals + FX spread statistics report comparing CLIENT_PRICE_NYC, ISPRIME, and 26DEGREES (previous version worked well). Isaac acknowledged and delivered top-5 CSV (bottlenecks prevented the full set); remainder plus 26DEGREES inclusion promised for tomorrow. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778031991175309)
+- 2026-05-06..07 — Spread stats report delivered: client requested updated Metals + FX spread statistics comparing CLIENT_PRICE_NYC, ISPRIME, and 26DEGREES. Isaac delivered top-5 CSV same day (bottlenecks); Nathan delivered the full `goMarketsSpreadStats.csv` (all instruments, April data, 26DEGREES included) on 2026-05-07 — client (Will) confirmed receipt and happy. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778125660740479)
+
+- 2026-05-07 — Realized PnL query for B-book execution profiles: client asked whether Echo's execution profile yield views show realized PnL. Nathan confirmed Compass has no record of opens/closes per counterparty so realized PnL is not directly available there; pointed to Echo's PnL attribution KB article. Client shared a yield profile screenshot (BBOOK_PLAIN / Dynamic Signal Follow). Query answered same session, no follow-up outstanding. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778123261093089)
 
 - 2026-04-23 — All Books tenant profile migration: Isaac confirmed All Books and legacy profiles co-exist; execution rules now use All Books exclusively. All Books is a soft reset that will populate further over time. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776909525989209)
