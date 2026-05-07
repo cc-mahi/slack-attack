@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-05-06T07:26:00Z
+last_catchup: 2026-05-07T07:34:16Z
 ---
 
 ## History
@@ -97,6 +97,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [resolved] 2026-05-06 — XAGUSD Inventory hedger go-live on CFD desk (NYC)
+> Silver positions moved to Inventory hedger at ~10:07 UTC; hedgers restarted and live by 12:01 UTC. Pre-go-live: NOP config for Inventory book set in `risk.nop.perMarket` (reviewed by Kate via DM); VaR/P&L alert thresholds added to `multiTenant.compassTenantProfiles`; Kate bounced `systemStateMonitor` to pick up new thresholds (internal-pepperstone). Post-live: Stephen confirmed no A-book trades since rollover (2026-05-05 23:49:55 UTC) — expected. B-Book sharp was routing to `B_CLIENTS_NYC`; Stephen asked for same treatment as other B-Book (fill client, shift risk to Inventory) — Sam added config. B_BOOK_RAZOR stays in B-house on XAG only. Ruby moved hedges from Manual hedging NYC to Inventory hedging NY creating P&L/VaR noise; Daria adjusted positions. Resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778065316604209) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778116381328159) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778118688509249) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778071203112049)
 
 > [open] 2026-05-06 — custom2 classification not triggering as expected; Shyam investigating
 > Reece asked to clear the `analytics.counterpartyClassification.B Book.custom2.badCheck` global list (193 entries); Rory cleared it. After refresh, Reece observed that CP 51397366 is not landing in custom2 despite what appear to be negative yields at 5s. Shyam (internal) reviewed: custom2 is configured as OR across horizons (5s/10s/30s/60s/2m/4m), not AND — but the aggregated yield profile for this CP shows no negative horizons, so classification seems correct yet Reece expected otherwise. Shyam flagged for further investigation. Reece sent a follow-up "morning team- any update on this?" at 07:11 UTC with no reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777984346581039) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778038180841259) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778043575578009) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778047876914949)
