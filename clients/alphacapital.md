@@ -8,13 +8,14 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
-last_catchup: 2026-05-06T07:12:48Z
+last_catchup: 2026-05-07T07:19:42Z
 ---
 
 ## Recent issues
 
 > [open] 2026-05-05 — XAGUSD skew abuse: arbitrageur classifier lag costing ~$35K/week
 > Andrew Morgan (handover to Cameron): /skew-health-check run on alphacapital found 5 of 8 stage-c CPs inception-negative on 3–8 May (CPs: 2685507, 2696788, 2698331, 2697815, 2695337). Cohort detection-lag cost: $24.8K inception leakage across $555M volume in 5 days, ~$35K/week extrapolated. CP 2685507 alone accounts for 63% ($290M traded in single day before being caught, 4-day tag lag). 3 of 5 tagged on Qualifying FX.arbitrageurs.list (Bot wrote 2026-05-05 17:03 UTC); 2 still untagged (2696788, 2695337). Open items: (1) why offline classifier took 4 days on 2685507; (2) whether post-17:03Z trades on 2685507 route through Q1-Arbitrageurs vs Q1-Small-Tickets; (3) curation mechanism behind 13,120-CP arbitrageurs population (no arbitrageurs.badCheck configured); (4) analytics.realtimeArbDetection.* entirely unconfigured; (5) Q1-Arbitrageurs execution profile uses FORCE_INTERNALISATION + 200-300ms last-look with priceCheckThreshold: -1 (Andrew expected continuity-pool routing). Full report: docs/skew-health/alphacapital/2026-05-05-skew-health.md (commit cf26e5e). Context: Cameron Hughes had identified neuron signal as best-performing for XAG and promoted it; Andrew flagged this neuron-wins-while-all-flow-imbalance-signals-bleed pattern as a skew-abuse signature (CPs flipping positions to harvest skew, neuron lights up on reversal). Right fix is classifier auto-tagging, not signal tuning. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778009823301759)
+> 2026-05-06 update — Andrew Morgan confirmed: continuity-pool fills on arbitrageur-classified flow do not apply LR (last-look/last-resort rules). Noted with grimacing reaction — no fix actioned yet. Directly addresses open item (5): the Q1-Arbitrageurs execution profile is routing via continuity pool as expected, but absence of LR is a further concern. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778057583339569)
 
 > [open] 2026-05-05 — Velocity FX BMSL spread blowouts on GBPUSD/EURUSD/USDJPY (2026-05-04 21:10 UTC)
 > Cameron Hughes: spread blowouts at 21:10 on 2026-05-04 across GBPUSD, EURUSD, USDJPY; Alpha reached out about GBPUSD. Backtest confirmed spike caused by BMSL. MAHI_BENCHMARK_LDN looks firm through each event; backtesting MAHI_BENCHMARK_LDN in BMSL to verify it would have prevented the blowouts. Investigation ongoing. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1777994333748779)
