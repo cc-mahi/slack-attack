@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact", confidence: low}
-last_catchup: 2026-05-06T07:09:47Z
+last_catchup: 2026-05-07T07:14:34Z
 ---
 
 ## Recent issues
@@ -18,6 +18,7 @@ last_catchup: 2026-05-06T07:09:47Z
 
 > [open] 2026-04-29 — ACG remaining instrument subscriptions pending Argamon enablement
 > 22 instruments still missing after Cam bounced fixMarketDataArgamon and fixOrdersArgamon to pick up subscription mappings: 4 FX (GBPPLN, USDCZK, USDHUF, USDPLN), 3 metals (XAGEUR, XPDUSD, XPTUSD), 7 commodities (COFFEE/CORN/COTTON/SOYBEAN/SUGAR/COCOA/WHEATUSD), 8 crypto (ADA/AVAX/BCH/DOG/LINK/SOL/XLC/XRP). Cam reached out to Tom McLean at Argamon — Tom's reply (Apr 30): commodities subscribed our side but not flowing in ACG MD logs (suggests ACG hasn't subscribed); AVAX/DOGE/LINK/SOL crypto only available in NY (not LDN); FX/metals visible on taker feed, ACG end needs to subscribe. Cam telling ACG we want NY crypto despite NY/LN latency. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777538204659809)
+> Progress (May 6): Cameron Hughes bounced pricers twice — first bounce (13:44) added XAUAUD, XAGAUD, AVAXUSD, DOGUSD, LINKUSD, SOLUSD [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1778071485886139); second bounce (14:38) added base spreads and custom instrument lists for COFARA, CORN, COTTON, SOYBEAN, SUGARRAW, USCOCOA, WHEAT [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1778074723331379). Remaining gap: 4 FX (GBPPLN, USDCZK, USDHUF, USDPLN), 3 metals (XAGEUR, XPDUSD, XPTUSD), 2 crypto (ADA/BCH/XLC/XRP — 4 of the 8 original crypto still unresolved). Active work in progress; keeping open.
 
 > [open] 2026-04-29 — Account manager handoff: Maten → Cameron Hughes for setup work
 > Andrew (Apr 27) handed Maten back to Cameron Hughes for ongoing setup; Cam owns pricing model config. External: ACG want to match Argamon's symbol naming. Zendesk ticket 22877 carries the fuller brief. Andrew (Apr 30) noted David Rapp got "a bit shirty" last week and needs keeping in the loop alongside Maten Rehimi; ACG are "low maintenance on the prop side" and a "great customer" there, but the broker side is unfunded effort until fees kick in. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777291816435319)
