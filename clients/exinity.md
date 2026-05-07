@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-06T07:18:26Z
+last_catchup: 2026-05-07T07:25:27Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-06 — A-book client XAGUSD routing: HR LPs today vs Invast yesterday
+> Louie asked why A-book client `ASV_MT5_228041520` was executed at HR LPs on 2026-05-06 but Invast the day before. Kate traced: a new execution rule `HRP Abook Counterparties (lime)` was created on 2026-05-05 and routes to `LIQUIDITY_POOL_LDN`, whereas yesterday's trades used `Abook Counterparties (lime)` routed to `HEDGING_POOL_LDN`. Kate confirmed the routing is working as the new rule intends; Louie had not replied confirming acceptance as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778082430.457469)
+
+> [resolved] 2026-05-06 — Big House 20% coefficient — B-book PnL confirmation
+> Louie asked whether the 80% remainder of client PnL (from two Big House tags each with 20% coefficient) is correctly reflected in B-book PnL. Rory confirmed yes — the 80% remainder is correctly in B-book. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778060955.121419)
 
 > [resolved] 2026-05-05 — 360T EURUSD A-book position trace (3 Feb 2026)
 > Louie followed up on an outstanding query about a 360T EURUSD position executed on A-book on 3 Feb 2026. Kate traced via Compass: Matthew placed two 500k EUR/USD sells at 07:21:58 and 07:22:05 UTC into `CLIENTS_HEDGING` (360T refs `HL69811F160004737.1` and `HL69811F160004754.1`). Louie acknowledged and closed off. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777971709952829)
@@ -92,6 +98,7 @@ last_catchup: 2026-05-06T07:18:26Z
 - 2025-05-02 — Signal architecture consolidated: signal processes now have 4 publish lists (price, flow, tightening, widening) via multi-CEP. Signal2 process removed as redundant. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1746175471569169)
 - 2025-05-02 — Compass release (w/e 3 May): performance/stability enhancements; key item: crossover precision support to 9dp on orders (for Aeron re-enablement without order rejections). Not yet switched on as of release date. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1746192208793839)
 - 2025-05-01 — $23M additional spread revenue at Exinity noted by Andrew (2-year cumulative B_CLIENTS lifetime PnL). SI RoS 171%; SI Insti flagged anomalously high at 6,345% — suspected reporting artefact. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1746116025826429)
+- 2026-05-06 — UBS FA session setup: partial-fill risk + £99 cross-connect confirmed. Kate flagged Compass has no guarantee of full-amount delivery on FA sessions (sweep across multiple venues possible). Nick Serff confirmed £99/mo Beeks shared cross-connect is fine; Kate clarified the sweep caveat; Nick's final confirmation on whether to proceed under those conditions not yet received as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778072525.036309)
 - 2026-04-29 — UBS reply turnaround flagged by George Moore — Kate apologised for delay, awaiting Charlie's reply; FRCeCommerce@ubs.com supplied as direct route to UBS FRC team. Internal Daria review (04-30): 3 issues escalated, first two looked into, third (this UBS one) was missed — flagged so client could've followed up sooner. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777446054108019)
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
 - 2026-05-01 — Nick (Nicola) in Singapore 11–15 May for Finance Magnates expo; any calls requiring her will need scheduling around that window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1777621042911649)
