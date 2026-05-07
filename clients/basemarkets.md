@@ -8,7 +8,8 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Alex", role: "Base Markets — primary client contact (algo / flow)", confidence: low}
-last_catchup: 2026-05-06T07:14:52Z
+  - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
+last_catchup: 2026-05-07T07:23:14Z
 ---
 
 ## Status
@@ -18,6 +19,9 @@ last_catchup: 2026-05-06T07:14:52Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-05-06 — Client asking for zero spread / zero slippage on Tegis MT4 account
+> Kate B (Base Markets) asked via Kate Stagg whether the Tegis MT4 onboarding account can be set to zero spread and no slippage — matching their current Scope setup (100+ MT4 accounts, zero spread/no slippage, with a separate MT5 SCOPE account as "true" P&L). Will Carter: zero spread is not possible as Mahi needs spread to hedge profitably; slippage control is possible and was part of the pitch. Kate Stagg will push back to client. Pre-go-live expectation mismatch; resolution pending. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778068928760819) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778075907252749)
 
 > [open] 2026-05-05 — Pre-flow readiness: cross skew + driver pair hedging workflow
 > Will Carter flagged need to be ready for Monday (2026-05-11) — wants workflow testing to confirm skew is running on the crosses Base Markets trades, with hedging in driver pairs. Aligns with the ~2-week Tegis onboarding timeline from 2026-04-29. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777983387923419)
