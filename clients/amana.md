@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-06T07:12:48Z
+last_catchup: 2026-05-07T07:21:42Z
 ---
 
 ## Recent issues
@@ -31,6 +31,7 @@ last_catchup: 2026-05-06T07:12:48Z
 > [open] 2026-05-01 — Index futures go-live blocked by TOO_SMALL quantity validation
 > DOWFUT-M and NDXFUT-M test trading attempted 2026-05-01 morning; Princess test trade rejected with `DISTRIBUTION_LDN-maximumShowQuantity=TOO_SMALL, quantity=TOO_SMALL`. Root cause identified by Rory but requires weekend EOD restarts to take effect — US futures index go-live pushed to early next week. In the meantime: continuing setup for all other cash + futures equity indices (EU, Asia), collecting step/min sizes from Princess/Nikos. Princess provided min+step per LP at 13:46. Rory to revert with further items requiring EOD restarts. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777629657810339)
 > 2026-05-05 update: root cause confirmed by test — hedger fires immediately at cumulative 0.1 NDX but fails to recognise sub-0.1 positions (e.g. 0.05 and 0.01 not hedged). DOWFUT-M routing to IG_CENTROID confirmed correct for ≥0.1 positions. Cameron Hughes bounced futsP1 hedger at 14:18 to clear a residual 0.01 NDXFUT-M position it wouldn't clear; Rory bounced hybridHedgerFutsP1 at 12:14. Further fix still required. Nikos asked 2026-05-06 07:59 whether ready to switch on EQ INDEX FUT — Daria said LDN team will update. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778050766305989)
+> 2026-05-06 update: NQ/DOW test trading continued with Karen. NQ hedger spam incident at 13:49 — hedger looped a BUY NQ generating 1212 rejections in ms; Rory killed futures hedger, Karen closed position, hedger re-enabled after hybridHedgerFutsP1 bounced with `riskQuantisationOverride` adjustment. Second test passed: DOW hedged at 0.05, NQ at 0.02 both confirmed. NQ minimum confirmed as 0.02 (Compass min/increment left at 0.01 — acceptable as internalisation floor is 0.02). Nikos confirmed go-live for LDN morning 2026-05-07. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778071776.491909)
 
 > [resolved] 2026-04-29 — US index CFD go-live: NAS hedger not firing on test trades
 > Resolved 2026-04-30: NDXUSD + DOWUSD CFDs went live; spreads uploaded by Rory, Amana switched on NAS + U30 by 16:03, SPX also enabled 2026-05-01. First CFD trade internalised + hedged by Rory at 17:16 (criticalHedgerBooks updated to include CFD hybrid hedger). [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777565764829549)
