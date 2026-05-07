@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-06T07:26:20Z
+last_catchup: 2026-05-07T07:37:21Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-07 — XAUUSD LIMIT order LIQUIDITY_VIOLATION, rejectCount=35
+> Umar Bin Aziz posted logs showing order 2409798-50 (1.0 lot XAUUSD limit @ 4735.94) rejected by connector LIV_NRI_5036 with `LIQUIDITY_VIOLATION`; `maker_trade_setting.rejectCount=35`. Sam Hewitt acknowledged and is investigating. No resolution yet. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778138513075849)
 
 > [open] 2026-05-05 — Go-live timeline shifted to July; pre-go-live call notes
 > Call with Samin (client ops lead) held 2026-05-05. Key points: go-live delayed due to operational issues on client side; Samin is heading to LDN then Madrid; target is July but wants to pull it sooner if packaging allows. Action items: prep Signals deck for Insti SI; PSM discussed — Dave confirmed feasible but chargeable. Testing underway with fixed spread values on gold to assess flow attracted. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777983798434859)
