@@ -10,7 +10,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Pavlos Elpidorou", role: "IC Markets team member (Compass/Echo user)", confidence: low}
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
-last_catchup: 2026-05-07T07:30:22Z
+last_catchup: 2026-05-07T07:32:55Z
 ---
 
 ## Recent issues
