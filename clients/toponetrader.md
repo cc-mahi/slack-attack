@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Shane Kalichurn", role: "Operations; weekly payout reporting"}
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-05-06T07:07:30Z
+last_catchup: 2026-05-07T07:34:06Z
 ---
 
 ## Status
