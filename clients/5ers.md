@@ -10,10 +10,14 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-07T07:16:34Z
+last_catchup: 2026-05-08T07:11:31Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-07 — High cancel/reject numbers + client switching limit→market order execution
+> Kate flagged very high cancel/reject numbers internally at 08:37 UTC; screenshot attached. Investigation: cancels are mainly "off market" reason (Mid Distance Check), with numbers inflated by bridge retries. Aggregated spread on these trades today -$20k at time of flagging. [internal-alert](https://mahifx.slack.com/archives/C079M09MGGP/p1778143035715449) [echo-link](https://mahifx.slack.com/archives/C079M09MGGP/p1778143372314639)
+> Separately (branching from the 2026-05-05 TP miss): YourBourse suggested to Constantinos that TP orders could be switched from limit to market (`TakeProfitByMarketOrder=true`). Kate confirmed (2026-05-06, pre-window) that market orders still go through LL and LR/skew — no protections removed, but end-customer gets fill certainty at potentially slightly worse price. In-window: Constantinos confirmed TP already switched to market execution; SL was already market. Client internally discussing whether to do the same for pending orders. Kate confirmed pending-order switch would also be fine. Pending orders decision still pending as of 13:34 UTC 2026-05-07. [pending-orders-q](https://mahifx.slack.com/archives/C07AQJS4E80/p1778143436529089) [kate-reply](https://mahifx.slack.com/archives/C07AQJS4E80/p1778150525407869) [client-confirms-tp-market](https://mahifx.slack.com/archives/C07AQJS4E80/p1778160897919909)
 
 > [resolved] 2026-05-04 — XPDUSD/XPTUSD not received on YourBourse connection
 > Client (Andreas) reported missing prices for XPTUSD and XPDUSD. Isaac diagnosed that the YourBourse connection had not subscribed to those symbols (CTrader/MT5 connections were publishing fine). Andreas confirmed working after clarifying symbol names. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777882979456319)
