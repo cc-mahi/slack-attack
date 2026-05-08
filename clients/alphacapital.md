@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
-last_catchup: 2026-05-07T07:19:42Z
+last_catchup: 2026-05-08T07:12:10Z
 ---
 
 ## Recent issues
@@ -51,6 +51,8 @@ last_catchup: 2026-05-07T07:19:42Z
 > Inald: 4s input latency on CLIENT_PRICE_LDN and CLIENT_PRICE_MAHI during NFPs. Root cause: riskPathQualifying on wrong node. Moved to low-latency node 0 same day. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1746190417423999)
 
 ## Notable topics
+
+- 2026-05-07 — Compass UI: Execution Rule editor reworked for Arbitrageurs routing. Justin Young (release/26.3): (1) Recognised Arbitrageurs rules now show a plain-English banner instead of full config form (profile matched when targeting dynamically-classified arbitrageurs, routing to internal/continuity-pool, zero fees, no price improvement, last-look fills accepted regardless of price-check). Analytics invited to flag if matcher params need tightening. (2) Rules with no Arbitrageurs profile now flagged in pale orange with tooltip explaining consequence (arb-classified CPs won't route to Continuity Pool). (3) New LR P&L column in Execution Rules and Profiles tables alongside Spread and 30s P&L. A fleet-wide scan skill (for profiles missing Arbitrageurs rule) is forthcoming. Directly relevant to open XAGUSD skew-abuse issue (open item: Q1-Arbitrageurs execution profile, FORCE_INTERNALISATION + continuity-pool fills with no LR). [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778150187657269)
 
 - 2026-04-02 — Alpha's alpha-signals lag fleet defaults. Andrew Morgan: "the alpha signals are not currently running the best and latest stuff" — neuron/synapse eclipsed by newer signals; signal-default-registry now exists for fleet-wide rollout. Tied to the XAG switch on Apr 23. Also flagged: should auto-handle skew abusers via an ER. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1775126095434959)
 
