@@ -8,13 +8,16 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-07T07:37:21Z
+last_catchup: 2026-05-08T07:28:27Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-07 — XAUUSD LIMIT order LIQUIDITY_VIOLATION, rejectCount=35
-> Umar Bin Aziz posted logs showing order 2409798-50 (1.0 lot XAUUSD limit @ 4735.94) rejected by connector LIV_NRI_5036 with `LIQUIDITY_VIOLATION`; `maker_trade_setting.rejectCount=35`. Sam Hewitt acknowledged and is investigating. No resolution yet. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778138513075849)
+> [resolved] 2026-05-07 — Limit order cancellations due to Arbitrageur misclassification of counterparty RBI_5036_LIVE-97F5F2
+> Umar Bin Aziz reported execution errors on limit orders (~11:20 BST). Rory King diagnosed: counterparty RBI_5036_LIVE-97F5F2 had been classified under the `BBOOK//Arbitrageurs` execution rule after a small number of trades; limit orders were being force-internalised on the continuity pool with markup, with fills breaching the limit price and cancelling. Umar requested removal; Rory blacklisted the counterparty from the Arbitrageurs profile at 12:03 BST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778151195430889)
+
+> [resolved] 2026-05-07 — XAUUSD LIMIT order LIQUIDITY_VIOLATION on orders 2409798/2409799 (LP-side incident)
+> Umar Bin Aziz posted logs showing orders 2409798 and 2409799 (XAUUSD limit) rejected with `LIQUIDITY_VIOLATION` on connector LIV_NRI_5036. Sam Hewitt investigated and confirmed the LP was returning liquidity violation rejects 06:35–06:40 UTC; 49 and 50 hedge legs retried respectively, all cancelled. LP-side issue self-cleared at 06:40, no recurrence. Umar acknowledged. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778140090765839)
 
 > [open] 2026-05-05 — Go-live timeline shifted to July; pre-go-live call notes
 > Call with Samin (client ops lead) held 2026-05-05. Key points: go-live delayed due to operational issues on client side; Samin is heading to LDN then Madrid; target is July but wants to pull it sooner if packaging allows. Action items: prep Signals deck for Insti SI; PSM discussed — Dave confirmed feasible but chargeable. Testing underway with fixed spread values on gold to assess flow attracted. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777983798434859)
