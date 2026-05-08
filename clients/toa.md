@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-07T07:37:11Z
+last_catchup: 2026-05-08T07:31:17Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-05-07T07:37:11Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-05-08 — EURUSD-PERP 1% wide on Nado: FX max risk limit blocking orders
+> Kento (Nado-side) flagged EURUSD book 1% wide at 04:33 UTC. Lee responded that FX max risk settings were blocking order placement; loosened the limit to allow one-sided quoting but position is short at the cap. No full resolution in thread. https://ink-foundation.slack.com/archives/C09RGU1T1GE/p1778214820766959
 
 > [open] 2026-05-06 — Toa Argamon LDN rejects: oncall investigation requested
 > Lee Butts (06:57 UTC) tagged the oncall subteam to investigate rejects on the Toa Argamon LDN instance; stated he was not at a computer. No reply or resolution in thread as of window close. https://mahifx.slack.com/archives/C035H1VNCAD/p1778050635016669
@@ -122,6 +125,7 @@ last_catchup: 2026-05-07T07:37:11Z
 
 ## Notable topics
 
+- Nado weekly maintenance window moved to 22:30 UTC Mon/Thu (was previously aligned to LDN hours); Toa reboot schedule updated to match — PRI reboots Monday 22:30 UTC, SEC reboots Thursday 22:30 UTC. Calendar reminder updated for NZ support coverage instead of LDN. https://mahifx.slack.com/archives/C035H1VNCAD/p1778185084196589
 - Cameron asked whether low-urgency PD alerts requiring prompt action will get missed in the noise; James says most should drop off PD entirely as EOD telemetry. Open design question for pagerbuddy / alert routing. PD noise review (Feb 2026) showed 2064 incidents on APN1 — threshold tuning still pending.
 - `--binaryLogOutputPath` for systemStateMonitor remains commented out (rolled back 2026-03-08); without it pnlDropAlerter forensics rely on slower log digs. PnlDropAlerter fix committed 2026-04-23 (c2cdb3b3) — needs release + config set before binlogs are useful again.
 - Nado NLP vault cap targeted at 10M; NLP fee structure 0/-3bps maker/taker (in place since Dec 2025). Hot-hot infra transition still deferred.
