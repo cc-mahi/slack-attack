@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-07T07:25:27Z
+last_catchup: 2026-05-08T07:20:13Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-07 — LMAX XAUUSD lot-size mismatch: Compass qty vs LMAX contract size
+> Louie flagged urgent: a 30oz close at LMAX appeared as 3 lots (10x under), and a 10-lot client buy was reflected as 20 lots at LMAX (10x over). Kate explained Compass sends raw FX quantity and LMAX multiplies by its 10oz contract size (config shows `contractSize=10`). Compass quantities are in oz. The two examples appear to represent the same misalignment from opposing angles. Kate offered a call to resolve. No confirmation from Louie that the discrepancy was understood/fixed as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778164543303029)
+
+> [resolved] 2026-05-07 — analyticsFixServer1 5001ms latency alert (FX_MT4_ECN_ZEROTrades)
+> Keshav alerted on `analyticsFixServer1 MahiFXMT4Bridge >>> recv FX_MT4_ECN_ZEROTrades: Incoming FIX message 5001ms latent`. Daria acknowledged; Sam Hewitt confirmed: this is the internal trade analytics bridge (reporting copies of fills), not in the execution path — client trades were unaffected. Spike returned to baseline shortly after. No action needed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778180704781329)
 
 > [open] 2026-05-06 — A-book client XAGUSD routing: HR LPs today vs Invast yesterday
 > Louie asked why A-book client `ASV_MT5_228041520` was executed at HR LPs on 2026-05-06 but Invast the day before. Kate traced: a new execution rule `HRP Abook Counterparties (lime)` was created on 2026-05-05 and routes to `LIQUIDITY_POOL_LDN`, whereas yesterday's trades used `Abook Counterparties (lime)` routed to `HEDGING_POOL_LDN`. Kate confirmed the routing is working as the new rule intends; Louie had not replied confirming acceptance as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778082430.457469)
@@ -98,6 +104,9 @@ last_catchup: 2026-05-07T07:25:27Z
 - 2025-05-02 — Signal architecture consolidated: signal processes now have 4 publish lists (price, flow, tightening, widening) via multi-CEP. Signal2 process removed as redundant. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1746175471569169)
 - 2025-05-02 — Compass release (w/e 3 May): performance/stability enhancements; key item: crossover precision support to 9dp on orders (for Aeron re-enablement without order rejections). Not yet switched on as of release date. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1746192208793839)
 - 2025-05-01 — $23M additional spread revenue at Exinity noted by Andrew (2-year cumulative B_CLIENTS lifetime PnL). SI RoS 171%; SI Insti flagged anomalously high at 6,345% — suspected reporting artefact. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1746116025826429)
+- 2026-05-07 — Louie requested client simulations from trading data (Athens UTC+3 timezone). Kate confirmed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778141520510569)
+- 2026-05-07 — Kate bounced `hybridHedgerBigBook1` (internal note only; no client-facing context surfaced). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778161010370699)
+- 2026-05-07 — Andrew deployed an analytics component referencing Zendesk 22880 (no thread context). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778177980786529)
 - 2026-05-06 — UBS FA session setup: partial-fill risk + £99 cross-connect confirmed. Kate flagged Compass has no guarantee of full-amount delivery on FA sessions (sweep across multiple venues possible). Nick Serff confirmed £99/mo Beeks shared cross-connect is fine; Kate clarified the sweep caveat; Nick's final confirmation on whether to proceed under those conditions not yet received as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778072525.036309)
 - 2026-04-29 — UBS reply turnaround flagged by George Moore — Kate apologised for delay, awaiting Charlie's reply; FRCeCommerce@ubs.com supplied as direct route to UBS FRC team. Internal Daria review (04-30): 3 issues escalated, first two looked into, third (this UBS one) was missed — flagged so client could've followed up sooner. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777446054108019)
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
