@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-07T07:27:51Z
+last_catchup: 2026-05-08T07:22:43Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-07 — GoMarkets data lake / Pulse S3 permission outage (~6 min)
+> Arun Patel flagged S3 permission errors on the GoMarkets data lake/Pulse infrastructure — getObject permission missing from IAM policy added via Terraform (commit 4f1bbfc in mahi-infra at ~00:48 UTC fixed it). Liam noted alerts had stopped at midnight and wondered about a backfill. Arun confirmed: strict outage was 5m 54s (23:00:28–23:06:22 UTC 2026-05-06), end-to-end recovery at ~23:15:23 UTC. No backfill deemed necessary. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1778140756883249)
 
 > [open] 2026-04-29 — Radex AUDCAD/AUDNZD/NZDCAD slippage complaint — LR + LL PnL pattern on FX crosses
 > Erik (GoMarkets) reports Radex accounts seeing "slippage" on AUD/CAD, AUD/NZD, NZD/CAD. His own analysis: LR active (expected — they trade simultaneously) plus LL PnL we recapture since PI is off on FX-crosses execution rules; LL amount at 150ms appears to grow on AUDNZD when orders execute via Dynamic Signal Follow, and the cross prices look reactive/zig-zag versus smoother LP feeds. Asking whether we can smooth the price or add liquidity to reduce LR effect. Nathan replied: LR is applied directly into published price (not represented as slippage; LL is) via the liquidity throttle toggle on B_CLIENTS_RA; PI is intentionally off on Radex so client always fills at worst price during last-look window. Drilled into a -$42 LL counterparty 63193567/AUDNZD, showed the -$18 trade was actually +PnL for us via internalisation. Backtest: our mid follows triangulated LP mids; we price tighter than all LPs; offer skews slightly from the no-arb protection node. Erik thanked, asked William to revert with findings — William: "we'll review and revert". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1777474386410269)
@@ -32,6 +35,10 @@ last_catchup: 2026-05-07T07:27:51Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-08 — A/B book Signal Follow — execution routing question: David (client) asked whether A-book vs B-book Signal Follow classification is purely group-based. Nathan confirmed: execution differs (B-book = internalised, A-book = brokered); David followed up asking how the system decides which profile to use, noting TradeVolumeThreshold/TradeCountThreshold parameters look identical across profiles. Client self-answered: "it's just our groups; more to follow on this." No Mahi action required yet, but David signalled further questions incoming. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778216233747989)
+
+- 2026-05-07 — XAUUSD position correction booking: Will (GoMarkets) requested Mahi ops (Sam Hewitt) book offsetting XAUUSD trades — SELL 2oz @ 4582.67 on A HOUSE → A_CLIENTS_RA_NYC, BUY 2oz @ 4582.67 on B HOUSE → B_CLIENTS_RA_NYC. Sam completed and confirmed same session. Likely related to ongoing DIST_NYC position discrepancy issue. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778193152765119)
 
 - 2026-05-06..07 — Spread stats report delivered: client requested updated Metals + FX spread statistics comparing CLIENT_PRICE_NYC, ISPRIME, and 26DEGREES. Isaac delivered top-5 CSV same day (bottlenecks); Nathan delivered the full `goMarketsSpreadStats.csv` (all instruments, April data, 26DEGREES included) on 2026-05-07 — client (Will) confirmed receipt and happy. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778125660740479)
 
