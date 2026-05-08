@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-05-07T07:34:16Z
+last_catchup: 2026-05-08T07:28:24Z
 ---
 
 ## History
@@ -98,6 +98,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Recent issues
 
+> [resolved] 2026-05-07 — XETUSD arbitrageur limit order rejections (continuity pool markup)
+> Reece flagged high rejection volume on XETUSD from accounts 1353145/1353144/1353142 in mahi-pepperstone-notifications. Orders were being cancelled before eventually executing once price moved enough. Rory investigated: these accounts are labelled as arbitrageurs — their limit orders are force-internalised on the continuity pool with markup, but the resulting fill would breach the client's limit price, so orders cancel until the market price falls to the limit. Root cause identified; no config change noted yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778168234906839) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778172460768509)
+
 > [resolved] 2026-05-06 — XAGUSD Inventory hedger go-live on CFD desk (NYC)
 > Silver positions moved to Inventory hedger at ~10:07 UTC; hedgers restarted and live by 12:01 UTC. Pre-go-live: NOP config for Inventory book set in `risk.nop.perMarket` (reviewed by Kate via DM); VaR/P&L alert thresholds added to `multiTenant.compassTenantProfiles`; Kate bounced `systemStateMonitor` to pick up new thresholds (internal-pepperstone). Post-live: Stephen confirmed no A-book trades since rollover (2026-05-05 23:49:55 UTC) — expected. B-Book sharp was routing to `B_CLIENTS_NYC`; Stephen asked for same treatment as other B-Book (fill client, shift risk to Inventory) — Sam added config. B_BOOK_RAZOR stays in B-house on XAG only. Ruby moved hedges from Manual hedging NYC to Inventory hedging NY creating P&L/VaR noise; Daria adjusted positions. Resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778065316604209) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778116381328159) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778118688509249) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778071203112049)
 
@@ -163,5 +166,6 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-04-23 — CFD NY IPs posted (trading-1 `192.81.111.207`, admin `192.81.111.240`); Nathan chasing LP handover ETA with Gordon/Martyna. Hardware updates done over weekend, handover imminent per Gordon. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1776904666370719)
 - 2026-04-21 — Argamon want Tokyo JPY crypto crosses too (Lee bumping existing request). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1776735210458109)
 - Pepperstone CFD rollout — new desk being stood up. LDN servers in Mahi setup (IPs exchanged 2026-04-08/15). NY IPs now shared (see above). Hedgers for inventory-risk model; awaiting LP connection data + instrument specs from Pepper AU team.
+- 2026-05-07 — Tom building an XAG position reconciliation script; requested access to INV_CLIENT_RISK_TRANSFER (DISTRIBUTION_NYC/LDN) and INV_HEDGING_WASHBOOK (NY/LDN) trade position tables, and asked whether a Compass API or S3 access exists. Daria added the parties for position persistence (INV_BOOK_NET + INV_HEDGING included) and confirmed Pulse access covers positions + tradepositions tables. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778158035567039)
 - 2026-05-05 — LMAX Crypto CFD price/qty increment changes going live Sunday 2026-05-10; Stephen shared an xlsx with the new increments in `mahi-pepperstone-vnd`. Isaac acknowledged — will review and adjust Mahi config if needed; Stephen to confirm which symbols need published-pricing digit changes. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777941326564039)
 - Pepperstone Crypto Exchange (pcrypto.com) — soft-launched 2026-03-Q1; rolling BNB/TRX/XRP-AUD on the exchange side. See Guru card T8xkG7nc.
