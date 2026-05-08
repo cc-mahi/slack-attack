@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-07T07:40:36Z
+last_catchup: 2026-05-08T07:33:19Z
 ---
 
 ## Recent issues
@@ -23,8 +23,8 @@ last_catchup: 2026-05-07T07:40:36Z
 > [open] 2026-05-05 — Client requesting hold-position analysis on internalised flow
 > Richard (or another client-side contact) asked at 11:32 BST: "on the flow we've internalised can we run some analysis on that to see what the outcome would have been if we held onto the position at different intervals? vs where it was hedged." William pointed at the Echo yield profiles for A_CLIENTS_PREMIUM (2026-04-28–2026-05-05) as the relevant data source. Client acknowledged at 13:00. Analysis not delivered in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777977153.873319)
 
-> [open] 2026-05-01 — Overnight losses, chunky position offside; Will and William investigating
-> Client (Richard) flagged at 09:12: "looks like we took a hit overnight / spreads too tight?". Will had already posted Echo yield-profile link at 08:24 and pinged William Denny "need to look into this asap". William confirmed checking at 09:13. Will's read at 09:37: position went offside quickly, "sort of locked in that loss at 10-15 seconds"; told client to "trust the process a bit today, hopefully the yield quality evens out". Root cause (too-tight spreads vs chunky directional flow) under investigation — no resolution in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777624588186949)
+> [open] 2026-05-01 — Overnight losses, chunky position offside; LTD equity recovering
+> Client (Richard) flagged at 09:12: "looks like we took a hit overnight / spreads too tight?". Will had already posted Echo yield-profile link at 08:24 and pinged William Denny "need to look into this asap". William confirmed checking at 09:13. Will's read at 09:37: position went offside quickly, "sort of locked in that loss at 10-15 seconds"; told client to "trust the process a bit today, hopefully the yield quality evens out". Root cause (too-tight spreads vs chunky directional flow) under investigation — no resolution in window. 2026-05-07 update (internal): Will Carter: "LTD equity down 5k. Considerably better than last time round with improvements to come." [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777624588186949) [2026-05-07 update](https://mahifx.slack.com/archives/CPDS0M2KF/p1778147786077159)
 
 > [open] 2026-04-30 — Arb hedger reconfigured to breathe more; EOD hedger restart timed poorly
 > Will put changes into arb hedger at 16:57 to "let initial risk breathe more" and slowed the hybrid down. Hedger restarted at EOD — Will noted "wrong time to restart the hedger", PnL expected to fluctuate more. Feeds into 2026-05-01 overnight losses above. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777564631716889)
@@ -55,8 +55,10 @@ last_catchup: 2026-05-07T07:40:36Z
 
 ## Notable topics
 
+- 2026-05-07 — Will Carter internal planning note: mid changes going to beta; gold crosses to be activated (expected to make money hedging in drivers); signals approach — pull-away predicates of seconds not milliseconds with a 1k stop-loss cannon; theme of giving Velocity ownership of rate construction to market to clients continuing; no questions on the bill. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778145258473989)
 - 2026-05-06 — Pricers bounced: synapse → flow-price-thresh on XAUUSD adjustment signal params. William Denny bounced pricers at 17:33 BST to switch from synapse to flow-price-thresh on the XAUUSD adjustment signal parameters. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778085235.796909)
 - 2026-05-06 — Will Carter posted Echo yield-profile link (internal, no message text) covering 2026-05-03–2026-05-08, filtered on negative yield across all velocity parties. Indicates ongoing monitoring of loss-heavy flow post-Allow-Top-Up disable and arb hedger reconfig. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778072376.401969)
+- 2026-05-07 — XAU crosses test trades agreed; pending hedger setup completion on Mahi side. William Denny asked Richard: "Shall we arrange some test trades for the XAU crosses once the hedger setup is all done on our end?" — Richard replied "sure". Hedger setup still in progress. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778161039114649)
 - 2026-05-05 — XAU crosses setup believed done; client requesting hedger workflow test trades. Richard asked "are we done on the XAU crosses?"; William said "believe the setup is done"; Richard wants test trades per cross to verify hedger workflow. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777973517.232639)
 - 2026-05-06 — Compass sims still pending; parameters being tweaked. Client asked "are we still waiting on the sim?" at 10:02 BST; William Denny replied at 10:39: "sorry for the delay, we've been tweaking the parameters of the config to get the best output from the sims so will keep you updated when these are ready to share." [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778060398.191679)
 - 2026-05-05 — Compass sims still pending as of 09:03 BST. Richard asked "hoping the sim has run now?"; William: "checking on the sims now". No confirmed outcome in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777968117.606539)
