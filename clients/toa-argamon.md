@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-07T07:34:06Z
+last_catchup: 2026-05-08T07:31:14Z
 ---
 
 ## Status
@@ -64,6 +64,9 @@ last_catchup: 2026-05-07T07:34:06Z
 > [resolved] 2025-05-15 — Counterparty 84004149 crypto flow review; brokered LR / EURUSD skew tuning
 > Andrew flagged counterparty 84004149 as consistently bad for Mahi crypto book (up $200k lifetime, but consistently costly over recent weeks). Reviewed with Isaac: XBT flow switches between BBook and sharp brokered week-to-week. Amir added brokered LR to clientDist1; EURUSD signal response reduced (skew was 1 pip on 0.1 spread, dialled down to ~0.2). Separately, counterparty 84004395 flagged as toxic (retail, EURUSD-focused). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1747325182217329)
 
+> [resolved] 2026-05-08 — XAUUSD signal reverted neuron → synapse; skew-driven decision
+> Shyam switched XAUUSD signal back to synapse (from neuron, which was set 2026-04-22) in response to skew analysis. Monitoring for CPs picking off pricing; pricing impact review planned for next week. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778211684932129)
+
 > [open] 2026-05-04 — XAUUSD TOO_LARGE reject storm on TOA_CHI/A_EXTERNAL_WASH; ZenDesk ticket open, analytics support not yet assigned
 > Emergency alert fired ~12:00Z: 98% reject ratio (93/95 orders) from counterparty 90000580 on XAUUSD in TOA_CHI/A_EXTERNAL_WASH — validation error `quantity=TOO_LARGE, maximumShowQuantity=TOO_LARGE`, burst window 11:59:38–12:00:00Z. Justin Young routed to ZenDesk (ticket 22907) and asked who's on analytics support — no reply in thread as of catchup. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777898434100499)
 
@@ -85,8 +88,8 @@ last_catchup: 2026-05-07T07:34:06Z
 > [resolved] 2026-04-28 — XAUUSD brokered counterparties expansion to test CME hedging; CHI hedging disabled 2026-05-03
 > Daria added counterparty 104881 to be brokered to Toa (working through 104881, 105048, 105153, 105681, 105773) to evaluate whether hedging XAUUSD to CME helps. Result: CHI hedging disabled 2026-05-03 as retail was achieving positive spreads (negative in CHI), meaning the NY4→CHI brokering was not beneficial for retail flow. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777845150173619)
 
-> [resolved] 2026-04-22 — XAUUSD signal switched synapse → neuron
-> Shyam moved XAUUSD from synapse to neuron model to reduce spiky pricing; also cited better skew PnL over the last month. https://mahifx.slack.com/archives/C06U76A7ZJR/p1776832052585769
+> [resolved] 2026-04-22 — XAUUSD signal switched synapse → neuron, then back → synapse 2026-05-08
+> Shyam moved XAUUSD from synapse to neuron model to reduce spiky pricing; also cited better skew PnL over the last month. https://mahifx.slack.com/archives/C06U76A7ZJR/p1776832052585769. Reverted to synapse 2026-05-08 following skew analysis (see 2026-05-08 entry).
 
 > [resolved] 2026-04-20 — USDCAD ask-price spike, over-weighting HSBC mid; LP set broadened 2026-05-04
 > Tom flagged order 012dr52nxnb filled at 1.371 while market was around 1.370; only HSBC was deviating (other mid-formation LPs unavailable). Tom asked Elan re. adding COMZ and other non-skew-protective LPs into mid. Resolved 2026-05-04: Elan approved adding all LPs into mid formation now that NY is retail-only; Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 for EURUSD, significantly reducing spiky pricing. Further instruments under review. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1776694811277649)
@@ -117,6 +120,7 @@ last_catchup: 2026-05-07T07:34:06Z
 
 ## Notable topics
 
+- Weekly P&L (w/c 2026-05-08): $7.5k from 402m; 222m internalised ($47/M), 180m brokered ($14/M); RoS 130%. Counterparties 928986 and 928994 moved back to internalise (blacklisted from broker routing — aggregate performance OK despite two bad weeks). Skew P&L recovered after EURUSD open arb loss. Shyam actively reviewing skew and mid improvements. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
 - Mid-formation LP set under review — Tom and Daria are both pushing to broaden the price-formation LP set (COMZ, Jane Street) to reduce dependency on HSBC and to fix per-pair indicatives. Decision still sitting with Elan.
 - Reactive direct setup is the strategic remediation for NWPB (Natwest) min-ticket-size filtering of small client orders. Flagged in 2025-04-15 thread; HRP LP mappings being configured as of 2025-07-07; production test trades in progress.
 - Centroid LDN distribution issues are a CTO-level dig (James Furness) — backpressure root-caused via pcap; further work likely needed and may generalise to other NY-local clients distributing via Centroid. Argamon simultaneously migrating to Centroid from OneZero before Aug 2025, creating CPU-saturation risk; LP feed pruning flagged.
