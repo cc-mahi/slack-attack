@@ -9,10 +9,19 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-07T07:42:38Z
+last_catchup: 2026-05-08T07:33:19Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-08 — cpty 77008554 A/B book classification query (mahi-valutrades)
+> Client asked team to advise on cpty 77008554; Daria replied "Hey overnight, A book" with two charts. Client acknowledged ("thanks"). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778219665733729) [daria-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778220819121709)
+
+> [open] 2026-05-07 — `valu.user` DB access denied on 43.218.202.79 — unanswered
+> Client reported `Error: 1044 (42000): Access denied for user 'valu.user'@'43.218.202.79' to database 'PROD_LIVE_CLIENTDB'`. Note: this IP was whitelisted for `airflow` in the 2026-05-06 DB whitelist run (see below); `valu.user` may require separate whitelisting. No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778151018652949)
+
+> [open] 2026-05-07 — USD volume on TT algo trades incorrect in Echo — fix in progress
+> Graeme (client) chasing fix for USD volume displayed on TT algo trades in Echo. Inald replied: "we are currently working on a fix for this and should hopefully get this out soon." No ETA given. [client-chase](https://mahifx.slack.com/archives/C09HN93T0G2/p1778153944809909)
 
 > [resolved] 2026-05-06 — Echo chart data incomplete for VALUTRADES_B_CLIENTS (ops channel) — fixed by Liam same day
 > Garry Bersnov (client) had raised incomplete Echo yield-profile chart data for SPXUSD and other instruments on VALUTRADES_B_CLIENTS on 2026-04-28 (ops thread). Issue persisted after the trading-channel yield-profiles fix (2026-05-02 release); Andri chased again 2026-05-06 10:52 ("Have this been fixed?") and 11:08 ("please give a priority"). Liam replied 10:52 ("tricky to investigate"), identified the bug at 11:09 ("I think I've managed to identify the bug, just working on a fix"), deployed fix and confirmed at 14:41, corrected historic data at 20:59. Client confirmed "Looks good now" 2026-05-07 06:08. [client-chase](https://mahifx.slack.com/archives/C09HN93T0G2/p1778061150922779) [liam-fix](https://mahifx.slack.com/archives/C09HN93T0G2/p1778074877176869) [historic-fixed](https://mahifx.slack.com/archives/C09HN93T0G2/p1778097584848219) [client-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1778130513793059)
