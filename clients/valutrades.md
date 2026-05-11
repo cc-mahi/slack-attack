@@ -9,10 +9,19 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-08T07:33:19Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-11 — Compass receiving unsubscribed market data — full market config requested, unanswered
+> Daria Horton flagged that Compass is receiving market data it's not subscribing to, and listed the current mapping: MFX-IG_Q→ValuCY_Live_Q with JFX_VALUTRADES-SW-NY4; MFX-FEED4_Q→ValuCY_Live_Q with Valutrades, LMAX-ValutradesNWtk1, Currenex-Valutrades, JUMP-CFD, JumpMakerValutrades, Velocity, JFX_VALUTRADES-SW-NY4, Commerz-Valutrades. Client followed up at 08:25 asking Daria for the full configured market list — unanswered. [daria-flag](https://mahifx.slack.com/archives/C09HN93T0G2/p1778465858044369) [client-followup](https://mahifx.slack.com/archives/C09HN93T0G2/p1778484353813979)
+
+> [open] 2026-05-10 — Client requested gateway disconnect check — clarification pending
+> Client (Brandon) asked Mahi to confirm gateways were disconnected. Nathan Burch replied at 21:34 asking Brandon to confirm which connections he saw as disconnected and whether they remain disconnected. No client reply in window. Earlier (17:58) client also sent an unthreaded message: "Sorry if not bounced already please bounce before the market open" — no Mahi reply visible. [gateway-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778390311600029) [bounce-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778432301421509)
+
+> [resolved] 2026-05-11 — cpty 89468240 A/B book classification query (mahi-valutrades)
+> Client asked overnight for book classification on cpty 89468240. Nathan Burch checked and confirmed B-book (with chart). Client thanked. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778478084784169) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778478527256749)
 
 > [resolved] 2026-05-08 — cpty 77008554 A/B book classification query (mahi-valutrades)
 > Client asked team to advise on cpty 77008554; Daria replied "Hey overnight, A book" with two charts. Client acknowledged ("thanks"). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778219665733729) [daria-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778220819121709)

@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Shane Kalichurn", role: "Operations; weekly payout reporting"}
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-05-08T07:05:00Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Status
@@ -22,6 +22,9 @@ last_catchup: 2026-05-08T07:05:00Z
 - **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
+
+> [open] 2026-05-11 — XAUUSD -$4,932 alert under investigation (reporting error suspected)
+> Bot alert flagged Funded FX XAUUSD position at -$4,932 across 5 CPs (1 ESCALATE, 1 REVIEW, 3 OK). Will Carter tagged Cameron Hughes to review. Cameron Hughes responded within 2 min: suspects a reporting error, checking trades around the time. No resolution confirmed. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1778493988840849)
 
 > [open] 2026-03-19 — Brokerage expansion discussion
 > Will Carter had introductory call with Matt Morris. TOT wants to use their Comoros FX licence to launch a retail brokerage, marketing to prop clients — full outsourced dealing desk discussed, same model as ACG. Follow-up call scheduled Monday 23 March. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1773937053278899)

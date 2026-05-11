@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-08T07:31:17Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Status
@@ -125,6 +125,7 @@ last_catchup: 2026-05-08T07:31:17Z
 
 ## Notable topics
 
+- 2026-05-08 — Toa-side agreed to cut NLP depth in RWAs; cited inability to hedge risk without DMM liquidity. Decision referenced an internal Toa discussion from the prior week. https://ink-foundation.slack.com/archives/C09RGU1T1GE/p1778243163166359
 - Nado weekly maintenance window moved to 22:30 UTC Mon/Thu (was previously aligned to LDN hours); Toa reboot schedule updated to match — PRI reboots Monday 22:30 UTC, SEC reboots Thursday 22:30 UTC. Calendar reminder updated for NZ support coverage instead of LDN. https://mahifx.slack.com/archives/C035H1VNCAD/p1778185084196589
 - Cameron asked whether low-urgency PD alerts requiring prompt action will get missed in the noise; James says most should drop off PD entirely as EOD telemetry. Open design question for pagerbuddy / alert routing. PD noise review (Feb 2026) showed 2064 incidents on APN1 — threshold tuning still pending.
 - `--binaryLogOutputPath` for systemStateMonitor remains commented out (rolled back 2026-03-08); without it pnlDropAlerter forensics rely on slower log digs. PnlDropAlerter fix committed 2026-04-23 (c2cdb3b3) — needs release + config set before binlogs are useful again.

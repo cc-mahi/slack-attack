@@ -9,10 +9,16 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-08T07:33:19Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-11 — NWM_HSBC FIX credentials disabled — connection down, no reply yet
+> Nathan Burch reported at 02:54 BST that Velocity cannot connect to NWM_HSBC. FIX logout message (35=5) from session `VELOLDN→VELBINT099HS-price` reads `58=Credentials disabled, please contact support`. No response from Mahi side in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778464467944329)
+
+> [open] 2026-05-08 — XAU crosses: client not subscribed to 6 of 8 instruments via FIX MD
+> At 11:40 BST William Denny flagged that there are no FIX MD subscription logs from Velocity for XAUCHF, XAUEUR, XAUGBP, XAUJPY, XAUNZD, XAUSGD. XAUAUD subscription visible (pricing working); XAUCNH subscription seen but pricing not yet enabled on Mahi side. No client reply in window. Relates to ongoing XAU crosses setup — test trades cannot proceed until subscriptions are in place. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778236837382589)
 
 > [open] 2026-05-05 — Allow Top Up on A_CLIENTS_PREMIUM/Broker Everything Temp disabled after 350 XAU internalisation loss
 > At 16:10 UTC 2026-05-04, counterparty 889 placed a 750 XAU order on DistributionLDN (A_CLIENTS_PREMIUM//Broker Everything Temp, execution rule: broker). Compass brokered 400 XAU; the remaining 350 XAU was internalised via Allow Top Up. Price moved against the book immediately — full 350 XAU hedged to cap further losses but loss already realised. Nathan Burch disabled Allow Top Up for this execution rule as a protective measure, noting counterparties in this classification trade directionally. He flagged this for review: Allow Top Up is currently on for all other execution rules — possibly intended to protect client fills — and the policy should be revisited. By 09:04 UTC+1 2026-05-05 Will confirmed "book has recovered somewhat so far this morning" and endorsed the disable ("that's the right call — thanks Nathan"). Policy review of Allow Top Up across other execution rules remains open. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777957038011259) [recovery confirm](https://mahifx.slack.com/archives/CPDS0M2KF/p1777968282.241929)
@@ -55,6 +61,8 @@ last_catchup: 2026-05-08T07:33:19Z
 
 ## Notable topics
 
+- 2026-05-10 — USDCNH removed from SIGNAL-PROXY list; riskReportingExtended override added. Nathan Burch made the config change via admin console. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778397244340729)
+- 2026-05-08 — CSV_CLIENTS yield profiles (EURUSD, GBPUSD, AUDUSD, USDJPY, USDCAD) for Apr–May 2026 reviewed internally. Will Carter: "Looks pretty good" and flagged intent to add more instruments; noting hedging needs to be "more creative". [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778236030144899)
 - 2026-05-07 — Will Carter internal planning note: mid changes going to beta; gold crosses to be activated (expected to make money hedging in drivers); signals approach — pull-away predicates of seconds not milliseconds with a 1k stop-loss cannon; theme of giving Velocity ownership of rate construction to market to clients continuing; no questions on the bill. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778145258473989)
 - 2026-05-06 — Pricers bounced: synapse → flow-price-thresh on XAUUSD adjustment signal params. William Denny bounced pricers at 17:33 BST to switch from synapse to flow-price-thresh on the XAUUSD adjustment signal parameters. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778085235.796909)
 - 2026-05-06 — Will Carter posted Echo yield-profile link (internal, no message text) covering 2026-05-03–2026-05-08, filtered on negative yield across all velocity parties. Indicates ongoing monitoring of loss-heavy flow post-Allow-Top-Up disable and arb hedger reconfig. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778072376.401969)
