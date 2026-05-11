@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-05-08T07:05:00Z
+last_catchup: 2026-05-11T09:53:48Z
 status: active
 retired_at: null
 retired_reason: null
@@ -52,6 +52,9 @@ retired_reason: null
 
 > [watching] 2026-05 — recurring pricer memory pressure and latency alerts
 > Multiple pricer bounces through May: 2026-05-08 Arun bumped memory on pricer2/pricerBeta1 for MD latency; 2026-05-14 Maten bumped pricer1 from 2GB→3GB and bounced after CPL latency alerts (EURGBP 992ms on CLIENT_PRICE_LDN); 2026-05-16 Arun bounced pricerBeta1 again for allocation stalls (AeronEventLoop 1477ms); 2026-05-21 MdAnalytics OOM'd and self-restarted. Pattern of memory pressure on the BF eu-west-2 pricer fleet; no root-cause fix yet seen in window. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1747218630842229)
+
+> [open] 2026-05-08 — trading correlation script requested for copy/group trading review
+> Mio Knights (BrightFunded) asked if Mahi still has the correlation script used to detect copy/group trading. BrightFunded is about to implement fingerprinting software for multi-account users and wants to run both together in a weekly review process. Cameron Hughes replied he'd dig it out "shortly" (13:14 BST); no confirmation of delivery yet. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778240384530379)
 
 ## Notable topics
 

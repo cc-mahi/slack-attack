@@ -10,10 +10,16 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-08T07:11:31Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-10 — Pricer1/Pricer2 not starting — missing BMSL config for IBXEUR
+> Nathan Burch flagged 2026-05-10 06:48 BST that both pricers failed to start due to a missing BenchmarkMinimumSpreadLogicParameters (BMSL) override for IBXEUR. Nathan disabled the override as a workaround so pricers could start, and asked for the config to be reviewed. Kate replied 2026-05-11 09:05 BST: IBXEUR should have been covered by the `5ersCryptoCFDs` BMSL setting — Kate is resolving now. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1778392103699269) [kate-reply](https://mahifx.slack.com/archives/C079M09MGGP/p1778486754941749)
+
+> [open] 2026-05-08 — New symbols: order book tiers added; variable spreads + BTCEUR/LTCUSD/ETHEUR reduction pending
+> Andreas asked Kate (2026-05-08 10:35 BST) to confirm order book, liquidity reduction, and skew are applied on 24 new symbols (XRPUSD, XPTUSD, XPDUSD, XAUEUR, XAGEUR, USDZAR, USDPLN, USDNOK, USDMXN, USDHKD, USDDKK, USDBRL, SOLUSD, NGCUSD, LTCUSD, IBXEUR, HSIHKD, F40EUR, ETHEUR, ESXEUR, DOGUSD, CUCUSD, BTCEUR, ASXAUD). Kate confirmed (12:58 BST): liquidity reduction is active on all; skew signals running where volume is high and will be calibrated as new-instrument flow builds. Order book: multi-tier in place for all except IBXEUR, F40EUR, CUCUSD, ASXAUD (single B2Broker tier only) — Kate added extra tiers for those four same day (confirmed 15:56 BST). 2026-05-11 08:04 BST: Andreas followed up that some new symbol spreads look static and asked for them to be made variable; also requested ~30% spread reduction on BTCEUR, LTCUSD, and ETHEUR. Kate committed to action both today (09:21 BST) — not yet confirmed complete. [thread](https://mahifx.slack.com/archives/C07AQJS4E80/p1778232918165629) [kate-orderbook-reply](https://mahifx.slack.com/archives/C07AQJS4E80/p1778241513633659) [tiers-confirmed](https://mahifx.slack.com/archives/C07AQJS4E80/p1778252189590879) [spreads-request](https://mahifx.slack.com/archives/C07AQJS4E80/p1778483088074649) [kate-commits](https://mahifx.slack.com/archives/C07AQJS4E80/p1778487677938279)
 
 > [open] 2026-05-07 — High cancel/reject numbers + client switching limit→market order execution
 > Kate flagged very high cancel/reject numbers internally at 08:37 UTC; screenshot attached. Investigation: cancels are mainly "off market" reason (Mid Distance Check), with numbers inflated by bridge retries. Aggregated spread on these trades today -$20k at time of flagging. [internal-alert](https://mahifx.slack.com/archives/C079M09MGGP/p1778143035715449) [echo-link](https://mahifx.slack.com/archives/C079M09MGGP/p1778143372314639)

@@ -17,10 +17,19 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-08T07:20:13Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-11 — B-book -$250K reval at 21:00 UTC Sunday open — not a PnL error
+> Matthew Ayub (Exinity) flagged the Compass B-book homepage graph showing a ~$250K drop at 21:00 UTC, querying whether PnL was out. Nathan Burch diagnosed: the GBP balance in B_CLIENTS_NET (£16.77M ≈ $22.85M) was reval'd at Sunday's new open prices — GBPUSD dropped ~71.8 pips (1.36284 → 1.35566) over the weekend, contributing ~−$120k, with AUD, EUR, and CO1 also moving against. The subsequent PnL recovery on metals and CO1 open was the same reval dynamic in reverse. No Mahi-side issue; Matthew confirmed resolved. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778457525066839)
+
+> [resolved] 2026-05-10 — Cluster heartbeat ERROR alert — stale notification from May 9 disruption
+> Samuel Ewebiyi (Exinity) flagged a heartbeat ERROR in Compass. Sam Hewitt: the error was a stale notification from a brief admin-1/trading-1 connectivity loss on the morning of 9 May; both servers reconnected automatically with no operational impact. Alert cleared. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778447962243699)
+
+> [resolved] 2026-05-08 — analyticsFixServer1 FX_MT4_CENT2Trades: 5004ms latency alert
+> Keshav Woottum flagged a second back-to-back analyticsFixServer1 FIX latency alert (same time of day as the prior day's ECN_ZERO alert, different connection: FX_MT4_CENT2Trades, 5004ms). Daria Horton confirmed analyticsFixServer1 is dropcopy-only — receives post-execution trade copies; any latency affects only dropcopy yield profiles, not live trade execution. No action needed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778268117987849)
 
 > [open] 2026-05-07 — LMAX XAUUSD lot-size mismatch: Compass qty vs LMAX contract size
 > Louie flagged urgent: a 30oz close at LMAX appeared as 3 lots (10x under), and a 10-lot client buy was reflected as 20 lots at LMAX (10x over). Kate explained Compass sends raw FX quantity and LMAX multiplies by its 10oz contract size (config shows `contractSize=10`). Compass quantities are in oz. The two examples appear to represent the same misalignment from opposing angles. Kate offered a call to resolve. No confirmation from Louie that the discrepancy was understood/fixed as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778164543303029)
@@ -111,4 +120,6 @@ last_catchup: 2026-05-08T07:20:13Z
 - 2026-04-29 — UBS reply turnaround flagged by George Moore — Kate apologised for delay, awaiting Charlie's reply; FRCeCommerce@ubs.com supplied as direct route to UBS FRC team. Internal Daria review (04-30): 3 issues escalated, first two looked into, third (this UBS one) was missed — flagged so client could've followed up sooner. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777446054108019)
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
 - 2026-05-01 — Nick (Nicola) in Singapore 11–15 May for Finance Magnates expo; any calls requiring her will need scheduling around that window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1777621042911649)
+- 2026-05-11 — RealtimeArbDetection enabled at Exinity after repeated arb events causing significant PnL impact from classifier lag. Shyam Hari enabled the config on exinity-ln-admin-1; required setting `useSimplePath=false` as a workaround (Andrew Morgan noted this is fixed in release/26.3 — `useSimplePath` can be reverted to default once deployed). Shyam plans to roll out to alphacapital next after monitoring performance here. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778460837024559)
+- 2026-05-11 — Yield-profile sim #529 found to be significantly inflating volumes due to default MT4 lot-size conversion rates. Shyam kicked off sim #552 with converter overrides for the affected instruments (ZenDesk 22952). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778472296531499)
 - 2026-04-30 — Latency notifications (Samuel) traced to a heartbeat received latent from non-Mahi side; Isaac suspects one-off, will recheck Mahi-side latency around the time. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777510067154679)
