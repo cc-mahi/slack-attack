@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-05-08T07:28:24Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## History
@@ -98,14 +98,17 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Recent issues
 
+> [open] 2026-05-11 — UST/B2C2 hedger not failing over when B2C2 has insufficient balance
+> Stephen flagged (via FYI forward) that UST USD spot hedging via B2C2 was rejecting as of ~08:56 UTC; suspected NOP limit. Rory investigating. Root identified: when B2C2 is best offer, the hedger keeps retrying B2C2 even if B2C2 has insufficient balance rather than routing to the next LP. Orders eventually routed to Crossover. No config fix noted yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489916059959) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489962714849)
+
 > [resolved] 2026-05-07 — XETUSD arbitrageur limit order rejections (continuity pool markup)
 > Reece flagged high rejection volume on XETUSD from accounts 1353145/1353144/1353142 in mahi-pepperstone-notifications. Orders were being cancelled before eventually executing once price moved enough. Rory investigated: these accounts are labelled as arbitrageurs — their limit orders are force-internalised on the continuity pool with markup, but the resulting fill would breach the client's limit price, so orders cancel until the market price falls to the limit. Root cause identified; no config change noted yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778168234906839) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778172460768509)
 
 > [resolved] 2026-05-06 — XAGUSD Inventory hedger go-live on CFD desk (NYC)
 > Silver positions moved to Inventory hedger at ~10:07 UTC; hedgers restarted and live by 12:01 UTC. Pre-go-live: NOP config for Inventory book set in `risk.nop.perMarket` (reviewed by Kate via DM); VaR/P&L alert thresholds added to `multiTenant.compassTenantProfiles`; Kate bounced `systemStateMonitor` to pick up new thresholds (internal-pepperstone). Post-live: Stephen confirmed no A-book trades since rollover (2026-05-05 23:49:55 UTC) — expected. B-Book sharp was routing to `B_CLIENTS_NYC`; Stephen asked for same treatment as other B-Book (fill client, shift risk to Inventory) — Sam added config. B_BOOK_RAZOR stays in B-house on XAG only. Ruby moved hedges from Manual hedging NYC to Inventory hedging NY creating P&L/VaR noise; Daria adjusted positions. Resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778065316604209) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778116381328159) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778118688509249) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778071203112049)
 
-> [open] 2026-05-06 — custom2 classification not triggering as expected; Shyam investigating
-> Reece asked to clear the `analytics.counterpartyClassification.B Book.custom2.badCheck` global list (193 entries); Rory cleared it. After refresh, Reece observed that CP 51397366 is not landing in custom2 despite what appear to be negative yields at 5s. Shyam (internal) reviewed: custom2 is configured as OR across horizons (5s/10s/30s/60s/2m/4m), not AND — but the aggregated yield profile for this CP shows no negative horizons, so classification seems correct yet Reece expected otherwise. Shyam flagged for further investigation. Reece sent a follow-up "morning team- any update on this?" at 07:11 UTC with no reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777984346581039) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778038180841259) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778043575578009) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778047876914949)
+> [open] 2026-05-06 — custom2 classification not triggering as expected; MTM sim in progress
+> Reece asked to clear the `analytics.counterpartyClassification.B Book.custom2.badCheck` global list (193 entries); Rory cleared it. After refresh, Reece observed that CP 51397366 is not landing in custom2 despite what appear to be negative yields at 5s. Shyam (internal) reviewed: custom2 is configured as OR across horizons (5s/10s/30s/60s/2m/4m), not AND — but the aggregated yield profile for this CP shows no negative horizons, so classification seems correct yet Reece expected otherwise. 2026-05-11: Shyam kicked off MTM sim #548 (Zendesk 22953) to investigate further. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777984346581039) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778038180841259) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778043575578009) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778047876914949) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778472938471219)
 
 > [resolved] 2026-05-05 — Crossover enabled on spot hedging; NOP cap config reviewed
 > Stephen requested Crossover LP be added to spot hedging; Daria enabled it same night. Stephen also asked for a NOP cap review — Daria confirmed the per-instrument and per-market NOP config looks reasonable. Stephen confirmed satisfied. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778020198535509)
@@ -158,6 +161,10 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-05-11 — Kraken SOW signed by Pepperstone; Nicola sorting with GTC same day. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778489350508919)
+- 2026-05-11 — Daria heads-up: Pepper expecting a $500k AUD equiv UST order on the exchange, larger than current quote; system should handle it if the order is split over time. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778463127285009)
+- 2026-05-11 — Stephen (Pepper) requested bulk update of 116 accounts to B-sharp execution profile via Compass reference list. Nathan handled it in `mahi-pepperstone-vnd`; resolved same session. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778473107934599)
+- 2026-05-08 — Reece requested YP check on an account (files attached); Rory confirmed he'd run it. Follow-up from client on 2026-05-11 08:37 asking for results; no reply in channel yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778246927097659)
 - 2026-04-28 — Pepper exchange release planned 22:00 SGT; propTraderModulusUAT enabled in NY to catch issues pre-prod. Daria flagged a missed-fill on partial-fill-around-logout for monitoring. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777361423971719)
 - 2026-04-28 — Crypto cancel-reject loop on orders 012dzkfuvfl / 012dzkfupe6 — Pepper-side restart causing Failure_General rejects; not genuine, Daria switched it off. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777364442933499)
 - 2026-04-27 — Isaac flagged Pepper CFD signal process needs a subset instrument list (proposed "CFD-Majors"/"CFD-Signals": DOW, SPX, NDX, G30, CL1, CO1) — full instrument list too big; needs feedback on expected volumes. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777328246477439)

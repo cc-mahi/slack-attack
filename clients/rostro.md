@@ -18,16 +18,22 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-08T07:28:25Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
 
+> [resolved] 2026-05-11 — Second-layer spreads wide on FX and Gold (VIP and SI): benchmark LP reference was invast_2 only
+> Alex (Rostro) flagged at 09:21 BST that second-layer spreads were significantly wider than config on most FX and Gold for both VIP and normal SI feeds. Riz self-resolved at 09:26 BST: he had added Edgewater to the benchmark reference LPs — the pricer had been referencing only invast_2 which was wide. Kate confirmed the fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487685.725129) [Riz fix](https://mahifx.slack.com/archives/C08AQKRU953/p1778487969.268199)
+
+> [resolved] 2026-05-08 — XCore order multiple rejections before fill: LP price outside limit order tolerance (Notmarketable)
+> Andreas (Rostro) flagged with high priority that a client had multiple rejections before getting filled on an XCore order and asked for an explanation. Kate checked and confirmed: Mahi was attempting to broker the trade but the LP price was not within the limit order tolerance, so it was cancelled with reason "Notmarketable" on each attempt before eventually filling. Client acknowledged and closed. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778247529.071489) [Kate explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1778247839.343299)
+
 > [open] 2026-05-07 — VIP skew P&L drop: cpty 160_0_100029 arb-bypass via Force Internalise: VIP rule
 > Alex flagged P&L dropping on USDJPY and EURUSD on B_INSTI_CLIENTS_LDN from 2026-05-06. Kate identified cpty `160_0_100029` as the driver: -$7.4k aggregated skew yield on EURUSD+USDJPY over two days, classified as arb by the classifier but the _Force Internalise: VIP_ execution rule was positioned ahead of the arb rule, bypassing standard protections. Kate proposed reprioritising the arb rule or creating a specific rule (force internalise or broker) for this cpty. Kate also changed the skew signal on the VIP pricer for USDJPY and EURUSD. Alex: sees +$5.8k spread revenue from the tag over same period, happy to leave classification unchanged for now, asked what skew signal was applied. Kate to send more analysis. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778168946042139) [Kate's analysis](https://mahifx.slack.com/archives/C08AQKRU953/p1778172421819659) [Alex reply](https://mahifx.slack.com/archives/C08AQKRU953/p1778173597538779) [Kate follow-up](https://mahifx.slack.com/archives/C08AQKRU953/p1778174516862669)
 
-> [open] 2026-05-07 — New LP stream MAHI_ICM added to second connector; Mahi to subscribe
-> Owen (Rostro) flagged they added a new stream "MAHI_ICM" to the second connector overnight and asked if Mahi needs to subscribe for pricing visibility. Kate confirmed yes — will add the new market, make config changes, and schedule EOD restart to pick up the changes. Owen acknowledged. Awaiting EOD restart. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778144750339029) [Kate confirms](https://mahifx.slack.com/archives/C08AQKRU953/p1778144990547319)
+> [open] 2026-05-07 — IC Markets (MAHI_ICM) integration: pricing live, test trades pending account funding
+> Owen (Rostro) flagged 2026-05-07 they added a new stream "MAHI_ICM" to the second connector and asked Mahi to subscribe. Kate confirmed Mahi would add the market and schedule EOD restart. 2026-05-11: Oli asked for a status update; Kate confirmed pricing is now being received from IC Markets and test trades are ready to run. Rostro haven't funded the account yet — Kate will proceed once they confirm. Scope: all FX symbols confirmed. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778144750339029) [Kate confirms](https://mahifx.slack.com/archives/C08AQKRU953/p1778144990547319) [2026-05-11 update](https://mahifx.slack.com/archives/C08AQKRU953/p1778487852.170619)
 
 > [open] 2026-05-06 — NAS100 XCore order 61437785: brokering rejected 3× by CMC
 > Abdullah queried rejection on XCore order 61437785 (SUBID3 2895, NAS100, ordered 14:12:09 UTC 2026-05-06). Kate confirmed three rejects from CMC when trying to broker the trade. No resolution or further Rostro response in window. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778078860807189) [Kate confirms CMC rejects](https://mahifx.slack.com/archives/C08AQKRU953/p1778079332175879)
