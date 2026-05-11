@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-08T07:28:27Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-11 — XAUUSD price adjustment floor pips reduced from 3 to 0.5 on CLIENT_PRICE_INSTI
+> Nathan Burch changed the price adjustment floor pips on IFMS from 3 to 0.5 for XAUUSD on CLIENT_PRICE_INSTI (02:45 BST). The prior floor of 3 was greater than the ceiling, preventing price formation entirely. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778463918376889)
 
 > [resolved] 2026-05-07 — Limit order cancellations due to Arbitrageur misclassification of counterparty RBI_5036_LIVE-97F5F2
 > Umar Bin Aziz reported execution errors on limit orders (~11:20 BST). Rory King diagnosed: counterparty RBI_5036_LIVE-97F5F2 had been classified under the `BBOOK//Arbitrageurs` execution rule after a small number of trades; limit orders were being force-internalised on the continuity pool with markup, with fills breaching the limit price and cancelling. Umar requested removal; Rory blacklisted the counterparty from the Arbitrageurs profile at 12:03 BST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778151195430889)

@@ -12,10 +12,22 @@ key_people_overrides:
   - {name: "Nael", role: "client trading ops", confidence: low}
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
-last_catchup: 2026-05-08T07:24:43Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-11 — LMAX crypto pricing absent on Mahi side (10 instruments)
+> Daria flagged at 03:00 BST that LMAX pricing was not arriving for several crypto instruments (e.g. SOLUSD, DOGUSD). Client replied at 08:51 BST confirming the same issue from their side: LMAX prices visible but no Mahi price for UNIUSD, TRXUSD, TRPUSD, LNKUSD, FILUSD, AXSUSD, AVAUSD, ATOMUSD, ARBUSD, AAVEUSD. No resolution in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778464802043159) [client reply](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778485904843649)
+
+> [resolved] 2026-05-10 — Gold spread went critically wide during twilight; root cause Toa/MAHI_BENCHMARK_LDN signal config
+> Client escalated urgently at 23:47 BST ("Why is gold spread so wide??? Urgent. Clients are complaining rightfully"). Daria acknowledged immediately and investigated. Root cause: the signal config referenced MAHI_BENCHMARK_LDN (an internal feed based on the Toa rate), which carries a $10 base spread during twilight; `maximalPriceImprovementPipsOnTob` constrained the model to stay within $1.50 of that wide price. Emergency fix at ~23:52 BST: Daria removed the signal config entirely; spread normalised by 23:55 BST ("Better, thanks Daria"). Post-fix: (1) Daria adding signal config back with large `maximalPriceImprovementPipsOnTob` settings to prevent recurrence; (2) reworking protective logic to reference LP feeds rather than the internal Toa feed; (3) MAHI_BENCHMARK_LDN now visible in Echo as of 03:31 BST 2026-05-11. Client declined WSS hard-cap and indicative options as conflicting with STP. [client escalation](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778453245117999) [Daria fix](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778453563938609) [root cause internal](https://mahifx.slack.com/archives/C09QS1NUA80/p1778457009882529) [Echo visible](https://mahifx.slack.com/archives/C09QS1NUA80/p1778466662221219)
+
+> [resolved] 2026-05-10 — Hedgers all down: E50 missing from covariance matrix
+> Nathan reported at 07:36 BST that most hedgers were down due to E50 not found in the covariance matrix. Made the covariance matrix asset override global to restore hedger operation. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1778394975056689)
+
+> [open] 2026-05-08 — Compass/Finalto gold position discrepancy (~2,930oz)
+> Nael reported at 12:00 BST a ~2,930oz discrepancy between gold exposure in Compass and actual Finalto position (LMAX side matching); attributed to volume being sent directly to Finalto without passing through Compass. William acknowledged and asked client to reconcile their Finalto trades against the Compass manual hedging position book. Client confirmed at 13:34 BST the discrepancy is cumulative (not a single trade) and will investigate. William confirmed understanding and provided manual hedging transaction visibility guidance at 14:07 BST. No confirmed resolution in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778238041871829) [reconcile request](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778243543485199)
 
 > [resolved] 2026-05-07 — CO1USD, CL1USD and CFD Indices switched to live internalisation
 > William proposed the go-live switch at 13:37 BST; client confirmed at 14:22 BST; William confirmed "all done" at 14:27 BST. Covers CO1USD, CL1USD, and all previously-tested indices (ASXAUD, G30EUR, F40EUR, JPXJPY, UKXGBP, NDXUSD, DOWUSD, SPXUSD). Pricers bounced at 11:22 BST to pick up XAU signals change ahead of the switch. William noted futures fast-hedge setup is still in progress (separate entry). [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778157450972219) [pricers bounce](https://mahifx.slack.com/archives/C09QS1NUA80/p1778149361517089)
@@ -67,5 +79,6 @@ last_catchup: 2026-05-08T07:24:43Z
 
 ## Notable topics
 
+- 2026-05-11 — WSS (Wide Spread Suppression) discussed with client following twilight gold spread incident. Client declined hard-cap and indicative-mode options (STP conflict). Daria instead reworking model protective logic to reference LP execution feeds only, not internal benchmark feeds. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778455348857459)
 - 2026-05-01 — Bank holiday notice (Mon 4 May): Nia posted standard Mahi bank holiday advisory — Slack less monitored, emergency support via support@mahimarkets.com or London/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1777622406041909)
 - 2026-04-23 — "Crypto later?" — William agreed to follow-up session with client on crypto setup after CFD list sign-off.

@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-05-08T07:05:00Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Status
@@ -26,3 +26,6 @@ last_catchup: 2026-05-08T07:05:00Z
 > Jan reached out via #mahi-fintokei reporting an issue closing positions 28614965 and 28618336 on account 6027381, attaching a journal screenshot (UTC+3 timezone). Kate Stagg acknowledged and Will Denny followed up at 16:33 confirming the trades show as filled in Compass and asking Jan to clarify what the actual issue was — no client response yet. [permalink](https://mahifx.slack.com/archives/C08QWKFARDL/p1777988138576279) [Will Denny follow-up](https://mahifx.slack.com/archives/C08QWKFARDL/p1777995236877329)
 
 ## Notable topics
+
+> [resolved] 2026-05-11 — SYNAPSE_MT5_UAT and SYNAPSE_MT5_UAT_BACKUP FIX connections queried
+> Nathan Burch asked whether SYNAPSE_MT5_UAT_BACKUP & SYNAPSE_MT5_UAT FIX connections were supposed to be connected. Maten Rehimi confirmed both are expected to be down. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1778468805865709)

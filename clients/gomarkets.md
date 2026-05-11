@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-08T07:22:43Z
+last_catchup: 2026-05-11T09:53:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-10 — Order rejections at FX market open: last-look latency overrun
+> Client (Will) reported a burst of order cancellations at the 21:00 UTC FX open — event message: "Forcibly cancelled order due to excessive internal latency. Configured last-look delay was exceeded by 475ms (actual delay 605ms - expected delay 130ms) > max overrun allowed 300ms (PropertyKey:clientOrders.server.maximumUnexpectedFillLatency)." Duration ~1 second; last cancel at 21:01:01.571. Nathan Burch acknowledged, investigated, and advised this was an isolated FX market-open event, now stable; Mahi dev team reviewing to prevent recurrence. Client asked for any config adjustment that might help — no config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778450112481459)
 
 > [resolved] 2026-05-07 — GoMarkets data lake / Pulse S3 permission outage (~6 min)
 > Arun Patel flagged S3 permission errors on the GoMarkets data lake/Pulse infrastructure — getObject permission missing from IAM policy added via Terraform (commit 4f1bbfc in mahi-infra at ~00:48 UTC fixed it). Liam noted alerts had stopped at midnight and wondered about a backfill. Arun confirmed: strict outage was 5m 54s (23:00:28–23:06:22 UTC 2026-05-06), end-to-end recovery at ~23:15:23 UTC. No backfill deemed necessary. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1778140756883249)
