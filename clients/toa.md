@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-08T07:31:17Z
+last_catchup: 2026-05-12T07:33:50Z
 ---
 
 ## Status
@@ -18,8 +18,11 @@ last_catchup: 2026-05-08T07:31:17Z
 
 ## Recent issues
 
-> [open] 2026-05-08 — EURUSD-PERP 1% wide on Nado: FX max risk limit blocking orders
-> Kento (Nado-side) flagged EURUSD book 1% wide at 04:33 UTC. Lee responded that FX max risk settings were blocking order placement; loosened the limit to allow one-sided quoting but position is short at the cap. No full resolution in thread. https://ink-foundation.slack.com/archives/C09RGU1T1GE/p1778214820766959
+> [resolved] 2026-05-11 — marketDataCboe1 down on TOA Argamon CHI: new process, resolved in ~33 min
+> Inald flagged marketDataCboe1 down on TOA Argamon CHI (16:55 UTC). James replied it was a new process he was adding. Inald resolved the ordersCboe alert independently; James confirmed the process was up by 17:29 UTC. https://mahifx.slack.com/archives/C035H1VNCAD/p1778514939388589
+
+> [resolved] 2026-05-08 — EURUSD-PERP 1% wide on Nado: deliberate RWA depth cut due to absent DMM liquidity
+> Kento (Nado-side) flagged EURUSD book 1% wide at 04:33 UTC. Lee loosened the FX max risk limit to allow one-sided quoting. Later that day (13:26 UTC) Nado clarified the RWA depth was deliberately cut the prior week because NLP cannot hedge risk without DMM liquidity — not a misconfiguration. https://ink-foundation.slack.com/archives/C09RGU1T1GE/p1778214820766959
 
 > [open] 2026-05-06 — Toa Argamon LDN rejects: oncall investigation requested
 > Lee Butts (06:57 UTC) tagged the oncall subteam to investigate rejects on the Toa Argamon LDN instance; stated he was not at a computer. No reply or resolution in thread as of window close. https://mahifx.slack.com/archives/C035H1VNCAD/p1778050635016669
