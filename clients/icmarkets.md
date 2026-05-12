@@ -10,10 +10,14 @@ channels_override: null
 key_people_overrides:
   - {name: "Pavlos Elpidorou", role: "IC Markets team member (Compass/Echo user)", confidence: low}
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
-last_catchup: 2026-05-08T07:05:00Z
+  - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
+last_catchup: 2026-05-12T07:14:50Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-08 — IC requested updated toxic execution account list; Cameron Hughes shared ~170-account list in-thread
+> Kyriakos (IC side) asked for the latest list of accounts in toxic execution. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778260250029739) Cameron Hughes replied with the full list in-thread (~170 account IDs, including 1000137974); IC acknowledged. No follow-up action outstanding.
 
 > [open] 2026-05-06 — BTCUSD/ETHUSD weekend latency complaint; Mahi found no latency, awaiting IC logs
 > Joanna Theophanous (i.theophanous, IC side) reported high latency on several BTCUSD and ETHUSD trades over the weekend (examples attached as image). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778085021583819) Kate Stagg acknowledged. Nathan Burch investigated overnight (01:34 UTC 2026-05-07): all Compass processing within ~100ms, order handling latency dashboard clean — no Mahi-side latency found; shared the order events trace URL and asked IC for further information or oneZero logs. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778114040166719) Cameron Hughes separately escalated to #eod-trading-analytics-handovers asking NZ to look into it; no NZ reply yet in that thread. Thread open pending IC response.
@@ -24,8 +28,8 @@ last_catchup: 2026-05-08T07:05:00Z
 > [open] 2026-05-04 — Tag 1000137974 slippage complaint: large burst orders consuming order book; LR rule reinstated
 > IC flagged $13 slippage on a 10,000oz ($46m) gold buy (tag 1000137974). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777899133408759) Cameron Hughes found the trade swept 6 price tiers due to 20k oz of pending orders from the same burst arriving in the same ms and consuming the stack before this 10k order settled; VWAP across the burst was ~$4650.57, broadly in line with the quoted price. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777908230843349) IC flagged multiple trades affected, mostly from the same tag. Cameron Hughes placed the tag into a no-LR rule at ~17:45 BST and committed to providing a slippage summary so IC could rebate if needed. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777913117580329) Daria's internal analysis (00:57 UTC) identified the root cause as `liquidityThrottle.sweepQuantityExpiryPeriod` / `pendingLiquidityExpiryPeriod` resetting pending qty between bursts when split orders arrive in different ms — setting both to 0 would disable the throttle (already the config at Pepper). Ideally IC sends the full order not split legs; if throttle is disabled, published liquidity depth will need boosting for 500m+ sizes. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777939076875329) IC side separately instructed Mahi to "deplete this client" (07:54 UTC); Cooney confirmed internally that Angus had specifically asked Mahi to LR the tag hard. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777964054205519) IC management response at 08:12 UTC: "trading positions over 500m, slippage expected and better than they would've gotten in the real world." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777965157342419) 2026-05-05 update: Cooney requested re-enabling the LR rule at 09:38 BST (tag was sitting close to stop-out with ~$800 at top of book, feared a full fill); Cameron Hughes confirmed at 09:39 BST he had already removed the tag from the no-LR rule earlier that morning, leaving it in custom-1 execution — LR active. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777970283729469) Will Carter and Andrew Morgan subsequently ran yield profile analysis on the tag — noting ~£1M in LR alone and flagging it as a "proper whale". [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777983965093089) Open items: slippage summary/rebate list still owed to IC; throttle config change not yet confirmed applied; liquidity depth for large orders under review.
 
-> [resolved] 2026-05-01 — Crypto full licence contract signed (12 months)
-> Nicola Perikhanyan announced contract agreed and ready for signature; 7 :tada: reactions. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777626006675209)
+> [resolved] 2026-05-11 — Crypto full licence contract confirmed signed (12 months); weekend support included; XAU pilot expires 29 May
+> Nicola confirmed the 12-month crypto agreement is now signed (11 :tada: reactions). [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778494046358709) Contract includes weekend support — Cooney's plan: get interns in Dubai and London to monitor Slack rather than pulling in the main team. IC will be billed for May (they had a 1-month extension at pilot rate due to impact of Iran/Dubai). [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778495367683659) XAU pilot expiry is 29 May — next negotiation target per Nicola.
 
 > [open] 2026-05-01 — IC Markets system upgrade aborted; retry next weekend
 > Justin Young started the deploy at 21:59 UTC but pulled it 17 minutes later: "We've identified a last minute issue, we've decided to err on the side of caution and pull the release, we'll try again this time next weekend." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777670185603189) Internal post-mortem: Justin hadn't accounted for the NYC server reboot falling in the middle of the 45-min window — starting before the reboot risked the deploy being killed; starting after left no buffer to fix issues. Failover config also unclear. Plan: discuss with Liam next week; NYC could be deployed with a `norestart` deploy before the reboot. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777670658111869)
@@ -47,7 +51,7 @@ last_catchup: 2026-05-08T07:05:00Z
 
 ## Notable topics
 
-- 2026-05-01: Crypto full licence contract agreed and ready for signature — 12-month term.
+- 2026-05-11: Crypto full licence contract confirmed signed — 12-month term. Includes weekend support; IC billed for May. XAU pilot expires 29 May — next negotiation target. Weekend coverage plan: interns in Dubai + London to monitor Slack (Cooney's call).
 - Compass tag is now a major B-book directional risk concentration at IC (single client running ~$1.1B notional gold, $5M+ peak MtM swings). New LR rule and arb-blacklist in place but worth watching.
 - IC interested in passing reference-client-group on FIX so execution rules can route off it — open product/roadmap question, no IC response yet.
 - 2026-05-04: Tag 1000137974 (500m gold directional trader) causing burst slippage complaints — no-LR rule lifted 2026-05-05, tag back in custom-1; throttle config under review, slippage rebate summary owed to IC.
@@ -56,3 +60,4 @@ last_catchup: 2026-05-08T07:05:00Z
 - 2026-05-05: Justin Young deployed the Compass knowledge base to icmarkets-crypto-ny environment. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777969694228499)
 - 2026-05-06: BTCUSD/ETHUSD latency complaint from IC — Mahi found nothing on their end; awaiting IC oneZero logs to close.
 - 2026-05-06: New IC team member Pavlos Elpidorou onboarded to the Slack channel; Compass + Echo access creation acknowledged by Will Carter but not confirmed complete.
+- 2026-05-08: IC (Kyriakos) requested updated toxic execution account list; Cameron Hughes shared ~170 accounts including 1000137974.
