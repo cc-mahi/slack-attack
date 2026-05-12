@@ -11,7 +11,9 @@ key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}
   - {name: "Marianna", role: "trading ops", confidence: low}
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
-last_catchup: 2026-05-08T07:28:24Z
+  - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
+  - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
+last_catchup: 2026-05-12T07:31:46Z
 ---
 
 ## History
@@ -98,6 +100,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Recent issues
 
+> [open] 2026-05-11 — USTUSD hedger B2C2 deprioritisation lag on large order; fill speed concern
+> Stephen flagged that during a ~$500k AUD UST trade (382k units at 1.38), hedgers kept retrying B2C2 despite insufficient-balance errors rather than switching to Crossover/LMAX sooner, leaving the position partially exposed. Marianna clarified the LP wasn't deprioritised fast enough. Daria adjusted hedger config (further restricting B2C2, reordered rules so backstop can fire), increased liquidity layers; Stephen raised TOB to 10k UST. Separately, fills were slow (250 UST parcels) because only the first two layers were inside the client's limit price — Stephen gathering client feedback on acceptable fill timeframe. Daria still simulating the config change. NOP alignment between Compass and B2C2 limits also discussed — Stephen noted treasury deposits/withdrawals make Compass NOP not reflective of underlying. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489962714849) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778536863658599) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778560468492269)
+
+> [resolved] 2026-05-11 — Inventory hedger failed to auto-start after weekend restart
+> MK reported that the inventory hedger (CFD desk) did not come up automatically after the weekend restarts. Kate Stagg added config to ensure auto-start and bounced systemStateMonitor to pick up the alerting config for expected on/off status. MK confirmed resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778506644097019)
+
 > [resolved] 2026-05-07 — XETUSD arbitrageur limit order rejections (continuity pool markup)
 > Reece flagged high rejection volume on XETUSD from accounts 1353145/1353144/1353142 in mahi-pepperstone-notifications. Orders were being cancelled before eventually executing once price moved enough. Rory investigated: these accounts are labelled as arbitrageurs — their limit orders are force-internalised on the continuity pool with markup, but the resulting fill would breach the client's limit price, so orders cancel until the market price falls to the limit. Root cause identified; no config change noted yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778168234906839) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778172460768509)
 
@@ -169,3 +177,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-07 — Tom building an XAG position reconciliation script; requested access to INV_CLIENT_RISK_TRANSFER (DISTRIBUTION_NYC/LDN) and INV_HEDGING_WASHBOOK (NY/LDN) trade position tables, and asked whether a Compass API or S3 access exists. Daria added the parties for position persistence (INV_BOOK_NET + INV_HEDGING included) and confirmed Pulse access covers positions + tradepositions tables. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778158035567039)
 - 2026-05-05 — LMAX Crypto CFD price/qty increment changes going live Sunday 2026-05-10; Stephen shared an xlsx with the new increments in `mahi-pepperstone-vnd`. Isaac acknowledged — will review and adjust Mahi config if needed; Stephen to confirm which symbols need published-pricing digit changes. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777941326564039)
 - Pepperstone Crypto Exchange (pcrypto.com) — soft-launched 2026-03-Q1; rolling BNB/TRX/XRP-AUD on the exchange side. See Guru card T8xkG7nc.
+- 2026-05-11 — Kraken SOW signed on Pepperstone's side; Nicola Perikhanyan handling GTC coordination. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778489350508919)
+- 2026-05-11 — Ruby Wang (Pepper) requested bulk update of 116 accounts to B-sharp execution profile; Nathan Burch applied, accidentally reverted, then re-applied. Resolved same session. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778473107934599)
+- 2026-05-11 — MTM sim for Reece's YP check: initial run (sim #548) produced 41tn USD notional vs expected ~450m due to lot conversion issue. Re-ran as sim #553 with no lot conversion; Rory delivered Echo Yield Profiles link to Reece. Zendesk 22953. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778472938471219)
+- 2026-05-12 — CFD NY/LDN OZ connectivity stalled: LDN xconnect (10.74.101.142) set up by Beeks 2026-05-08 but OZ still can't locate it; LDN taker/LP credentials outstanding from OZ. NY server provisioning still pending new server provision (old servers had issues). Diego pinging Daria/Isaac/Liam for ETA; Daria escalating to Liam for OZ NY ETA; LDN taker side also blocked. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778566455574649)
