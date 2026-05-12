@@ -7,12 +7,11 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/gcc-brokers.md (not yet)
 channels_override: null
 key_people_overrides:
-  - {name: "Daria Horton", role: "Mahi trading ops liaison"}
   - {name: "Carl", role: "client ops / LMAX + Finalto mappings", confidence: low}
   - {name: "Nael", role: "client trading ops", confidence: low}
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
-last_catchup: 2026-05-08T07:24:43Z
+last_catchup: 2026-05-12T07:28:08Z
 ---
 
 ## Recent issues
