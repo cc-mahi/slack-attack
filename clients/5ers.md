@@ -10,10 +10,19 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-08T07:11:31Z
+last_catchup: 2026-05-12T07:16:57Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-11 — New symbols: static spreads + BTCEUR/LTCUSD/ETHEUR spread reduction requested
+> Andreas (2026-05-11 08:04 UTC) flagged that several of the newly-onboarded symbols have static (non-variable) spreads and asked for them to be made variable. Also requested ~30% spread reduction on BTCEUR, LTCUSD, and ETHEUR. Kate confirmed she will sort all of it the same day (2026-05-11). No confirmation of completion received in window. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1778483088074649) [kate-reply](https://mahifx.slack.com/archives/C07AQJS4E80/p1778487677938279)
+
+> [open] 2026-05-10 — IBXEUR BMSL missing config — pricers failed to start
+> Nathan (2026-05-10 06:48 UTC): Pricer1 and Pricer2 failed to start due to a missing BenchmarkMinimumSpreadLogic config for IBXEUR. Nathan disabled the override to recover the pricers and flagged for review. Kate (2026-05-11 09:05 UTC): IBXEUR should have been covered by the `5ersCryptoCFDs` BMSL setting — Kate will fix. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1778392103699269) [kate-reply](https://mahifx.slack.com/archives/C079M09MGGP/p1778486754941749)
+
+> [resolved] 2026-05-08 — Order book tiers missing on IBXEUR, F40EUR, CUCUSD, ASXAUD (new symbols)
+> Andreas asked (2026-05-08 10:35 UTC) whether order book, LR, skew had been applied to ~24 newly-added symbols. Kate confirmed: multi-tier books in place for all except IBXEUR, F40EUR, CUCUSD, ASXAUD (single B2Broker tier). Kate added additional order book tiers for all four same afternoon (confirmed 2026-05-08 15:56 UTC). Skew signals running on high-volume instruments; will be calibrated for new instruments as flow builds. LR active at execution level on all instruments. [client-request](https://mahifx.slack.com/archives/C07AQJS4E80/p1778232918165629) [kate-status](https://mahifx.slack.com/archives/C07AQJS4E80/p1778241513633659) [kate-confirmed](https://mahifx.slack.com/archives/C07AQJS4E80/p1778252189590879)
 
 > [open] 2026-05-07 — High cancel/reject numbers + client switching limit→market order execution
 > Kate flagged very high cancel/reject numbers internally at 08:37 UTC; screenshot attached. Investigation: cancels are mainly "off market" reason (Mid Distance Check), with numbers inflated by bridge retries. Aggregated spread on these trades today -$20k at time of flagging. [internal-alert](https://mahifx.slack.com/archives/C079M09MGGP/p1778143035715449) [echo-link](https://mahifx.slack.com/archives/C079M09MGGP/p1778143372314639)
