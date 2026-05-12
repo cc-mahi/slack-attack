@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-08T07:22:43Z
+last_catchup: 2026-05-12T07:26:06Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-10 — FX market-open order rejections due to excessive internal latency
+> Will (GoMarkets) reported a burst of order cancellations at FX open: "Forcibly cancelled order due to excessive internal latency. Configured last-look delay was exceeded by 475ms (actual delay 605ms - expected delay 130ms) > max overrun allowed 300ms." Event lasted ~1 second (last cancel at 21:01:01.571 UTC). Nathan confirmed isolated to FX market opening, stable since; reviewing with dev team to prevent recurrence. Client asked whether any config adjustments could help. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778450112481459)
 
 > [resolved] 2026-05-07 — GoMarkets data lake / Pulse S3 permission outage (~6 min)
 > Arun Patel flagged S3 permission errors on the GoMarkets data lake/Pulse infrastructure — getObject permission missing from IAM policy added via Terraform (commit 4f1bbfc in mahi-infra at ~00:48 UTC fixed it). Liam noted alerts had stopped at midnight and wondered about a backfill. Arun confirmed: strict outage was 5m 54s (23:00:28–23:06:22 UTC 2026-05-06), end-to-end recovery at ~23:15:23 UTC. No backfill deemed necessary. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1778140756883249)
@@ -35,6 +38,8 @@ last_catchup: 2026-05-08T07:22:43Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-12 — LR counterparty-level trading-account query: Erik (GoMarkets) asked whether Liquidity Reduction is set up at the counterparty level listening to any trading account. Nathan confirmed: all counterparties receive the default LR configuration regardless of trading account, except counterparty 440381. No follow-up or action requested. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778570489549959)
 
 - 2026-05-08 — A/B book Signal Follow — execution routing question: David (client) asked whether A-book vs B-book Signal Follow classification is purely group-based. Nathan confirmed: execution differs (B-book = internalised, A-book = brokered); David followed up asking how the system decides which profile to use, noting TradeVolumeThreshold/TradeCountThreshold parameters look identical across profiles. Client self-answered: "it's just our groups; more to follow on this." No Mahi action required yet, but David signalled further questions incoming. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778216233747989)
 
