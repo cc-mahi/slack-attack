@@ -9,10 +9,19 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-08T07:33:19Z
+last_catchup: 2026-05-12T07:35:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-11 — Compass receiving unsubscribed market data — mapping query unanswered
+> Daria (Mahi) posted that Compass is receiving market data it's not subscribing to, listing unrecognised markets under `MFX-IG_Q->ValuCY_Live_Q` (JFX_VALUTRADES-SW-NY4) and `MFX-FEED4_Q->ValuCY_Live_Q` (Valutrades, LMAX-ValutradesNWtk1, Currenex-Valutrades, JUMP-CFD, JumpMakerValutrades, Velocity, JFX_VALUTRADES-SW-NY4, Commerz-Valutrades). Asked team to confirm correct market mappings/setup. No reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778465858044369)
+
+> [open] 2026-05-10 — Gateways disconnected — confirmation pending
+> Client (Brandon) asked Mahi to check gateways were disconnected. Nathan replied asking Brandon to confirm which connections were disconnected and whether they remain so. No client response in window. [client-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778390311600029) [nathan-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1778445298015129)
+
+> [resolved] 2026-05-11 — cpty 69942997 yield trade not visible — Echo link provided
+> Client asked team to check cpty 69942997 as yield trade not showing. Rory King provided Echo yield-profile link for valutrades.NYC. Client confirmed resolved. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778502440118219) [rory-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778502646503639)
 
 > [resolved] 2026-05-08 — cpty 77008554 A/B book classification query (mahi-valutrades)
 > Client asked team to advise on cpty 77008554; Daria replied "Hey overnight, A book" with two charts. Client acknowledged ("thanks"). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778219665733729) [daria-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778220819121709)
@@ -67,5 +76,11 @@ last_catchup: 2026-05-08T07:33:19Z
 - 2026-05-05 — cpty 84034427 & 84034562 A/B book classification: client asked Isaac to advise on both. Isaac replied: `84034562` = A book (historic losses, recent improvement and increased volume); `84034427` = B book overall (A on USOUSD, B on NDFUSD — larger volume/PnL in NDFUSD drives B classification). [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777958393137049)
 
 - 2026-05-04 — cpty 89467069 A-book classification check: client asked team to advise on cpty 89467069; Shyam Hari confirmed A-book for JPXJPY and DOWUSD (with charts), client acknowledged. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1777870072809899)
+
+- 2026-05-11 — Full configured-markets list provided: client (directed at Daria) asked for complete list of markets configured. Nathan Burch provided the full breakdown by FIX feed session (fixMarketDataTT1/TT2, fixMarketDataSurya1, fixMarketDataCTrader1, fixMarketDataValutradesFEED1–5, fixMarketDataValutrades2). Notably includes Surya_ISPrime and Surya_Straits under fixMarketDataSurya1 — relevant to the ongoing Surya Strait algo connection issue. [client-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778484353813979) [nathan-list](https://mahifx.slack.com/archives/C09HN93T0G2/p1778539303901029)
+
+- 2026-05-10 — Client requested bounce before market open: client sent a standalone message asking for a process/gateway bounce before market open ("Sorry if not bounced already please bounce before the market open"). No Mahi reply visible. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778432301421509)
+
+- 2026-05-08–12 — Routine A/B book classification queries: several cpty checks answered by overnight team — cpty 39933574 (Nathan: A book, only 22 trades over 3 days, insufficient data), 92518184 (Nathan: A book), 84517632 (Rory: A book), 89468240 (Nathan: B book), 77537069 (Nathan: A book), 77559135 (Nathan: A book). All acknowledged by client. [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778563239391109)
 
 - 2026-05-03 — Pulse upsell in ops thread: following client confirming the MySQL gap fix ("looks good, appreciate help over weekend"), Justin Young suggested moving off MySQL to Pulse (faster, larger retention periods), linking the knowledge base. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777821952617999)
