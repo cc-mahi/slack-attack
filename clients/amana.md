@@ -11,10 +11,19 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-08T07:14:12Z
+last_catchup: 2026-05-12T07:19:01Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-12 — Nikos querying limit fill execution on XAUFUT-M / arber execution profile last-look tightening
+> Nikos asked (06:35 BST) why cpty 5800055 was filled at $4685.71 when offer appeared at that price ~100ms before execution. Nathan explained: 500ms LL delay on ABOOK/Manual Arber Selection execution profile; limit price passed price check at both ends of the window; client filled at limit (not the moved offer). Nikos responded at 08:14 BST: "I will bring it down a bit as we have no interest to provide a good execution experience to those clients" — intends to tighten price check and/or mid distance on the arber execution profile. Change not yet applied. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778564126787019)
+
+> [open] 2026-05-11 — DAX/UKX futures: CMC pricing not arriving (only IG received)
+> Rory flagged (11:15 BST) that DAXFUT-M and UKXFUT-M are only receiving pricing from IG; expected CMC as primary hedging venue per Nikos' LP mappings CSV (sent 10:16 BST). Amana ops checked and saw CMC sending prices — Maynard investigating at 17:12 BST. As of 07:06 BST 2026-05-12, CMC side reports prices being sent and queries whether Mahi is subscribing on symbols DX6M_ / FT6M_; Rory has not yet confirmed. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778494554960779)
+
+> [open] 2026-05-11 — IG latency on XAUUSD/CFDs: discussion on removing IG from price formation
+> Nikos shared lead-lag analysis showing IG running 50–100ms behind on XAUUSD — "should absolutely not be used for price discovery anywhere." Cameron confirmed IG was already removed from CFD futures ref prices (normalisation divergence issue); IG currently in mid formation for CFDs (CMC, Jump, IG) and retained for DOW futures only. Nikos asked whether IG should be stripped from CFDs entirely; Cameron said filtering logic handles latent LPs but acknowledged consistently latent = better to remove. Call agreed for 2026-05-12 to decide. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778511757782779)
 
 > [resolved] 2026-05-07 — XAUFUT-M price spikes: IG/CMC divergence causing client-visible spikes
 > Client-side contact Jake reported XAUFUT-M spikes at 19:02; logs showed MAHI_CMC vs CMC_CFD divergence. Root cause: IG_CENTROID and CMC_CENTROID diverging with no normalisation in place — model oscillated between them. Cameron Hughes had already added benchmarkNormalised config for index futures and XAU futures BMSL earlier in the day (13:08 BST); pricers bounced at 20:06 to pick it up. Cameron Hughes confirmed resolution to Jake at 22:01: "IG and CMC prices diverging, we've enabled normalization now to prevent this happening again." [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778176934.167609)
