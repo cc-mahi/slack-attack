@@ -17,16 +17,28 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-08T07:20:13Z
+last_catchup: 2026-05-12T07:28:05Z
 ---
 
 ## Recent issues
 
+> [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
+> Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
+
+> [resolved] 2026-05-11 — Velocity XFM unhandled fill alert: manual position adjustment
+> Inald Gjoni alerted on `FAILED TO PROCESS FILL FOR UNKNOWN ORDER - MANUAL BOOKING REQUIRED` for 2 lots XFM/USD @ 4679.7 on VELOCITY (MarketTradeId: VR6A00F287001699E.1). Inald asked Louie to confirm whether Velocity executed it. Louie confirmed: filled on Velocity's side — he had made a manual position adjustment to fix a client/insti→LP discrepancy. No Mahi action needed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778502206747279)
+
+> [resolved] 2026-05-11 — B-book Compass homepage: -$250K reval at 21:00 UTC Sunday
+> Matthew Ayub flagged the B-book graph showing a ~$250K drop at Sunday 21:00 UTC then recovery on gold/indices open. Nathan explained: weekend price gap at market re-open — GBP balance in B_CLIENTS_NET was £16.77M; GBPUSD dropped 71.8 pips from Friday close to Sunday open (~-$120K contribution), plus adverse AUD/EUR/CO1 weekend moves. Metals then recovered, and CO1 drove the subsequent upswing. Normal reval behaviour, no system issue. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778457525066839)
+
+> [resolved] 2026-05-10 — Hazelcast cluster stale error alert (admin-1 / trading-1 brief disconnect)
+> Samuel flagged a Hazelcast heartbeat error on Compass. Sam Hewitt traced: on the morning of 09-May, admin-1 and trading-1 briefly lost connection, triggering an error alert that Compass had not auto-cleared even after the cluster recovered. Servers reconnected automatically; no operational impact. Alert cleared by Sam Hewitt. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778447962243699)
+
 > [open] 2026-05-07 — LMAX XAUUSD lot-size mismatch: Compass qty vs LMAX contract size
 > Louie flagged urgent: a 30oz close at LMAX appeared as 3 lots (10x under), and a 10-lot client buy was reflected as 20 lots at LMAX (10x over). Kate explained Compass sends raw FX quantity and LMAX multiplies by its 10oz contract size (config shows `contractSize=10`). Compass quantities are in oz. The two examples appear to represent the same misalignment from opposing angles. Kate offered a call to resolve. No confirmation from Louie that the discrepancy was understood/fixed as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778164543303029)
 
-> [resolved] 2026-05-07 — analyticsFixServer1 5001ms latency alert (FX_MT4_ECN_ZEROTrades)
-> Keshav alerted on `analyticsFixServer1 MahiFXMT4Bridge >>> recv FX_MT4_ECN_ZEROTrades: Incoming FIX message 5001ms latent`. Daria acknowledged; Sam Hewitt confirmed: this is the internal trade analytics bridge (reporting copies of fills), not in the execution path — client trades were unaffected. Spike returned to baseline shortly after. No action needed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778180704781329)
+> [resolved] 2026-05-07 — analyticsFixServer1 5001ms latency alerts (FX_MT4_ECN_ZEROTrades, FX_MT4_CENT2Trades)
+> Keshav alerted on `analyticsFixServer1 MahiFXMT4Bridge >>> recv FX_MT4_ECN_ZEROTrades: Incoming FIX message 5001ms latent` on 05-07, then raised again on 05-08 for `FX_MT4_CENT2Trades` at the same time of day — concerned about back-to-back alerts on different connections. Daria confirmed same explanation for both: analyticsFixServer1 is the internal trade analytics bridge (dropcopy for reporting, not in the execution path), so latency here affects only yield profile reporting, not trade execution. Cameron Hughes acknowledged and said they'd check. No action needed on either. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778268117987849)
 
 > [open] 2026-05-06 — A-book client XAGUSD routing: HR LPs today vs Invast yesterday
 > Louie asked why A-book client `ASV_MT5_228041520` was executed at HR LPs on 2026-05-06 but Invast the day before. Kate traced: a new execution rule `HRP Abook Counterparties (lime)` was created on 2026-05-05 and routes to `LIQUIDITY_POOL_LDN`, whereas yesterday's trades used `Abook Counterparties (lime)` routed to `HEDGING_POOL_LDN`. Kate confirmed the routing is working as the new rule intends; Louie had not replied confirming acceptance as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778082430.457469)
