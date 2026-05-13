@@ -11,16 +11,23 @@ key_people_overrides:
   - {name: "Pavlos Elpidorou", role: "IC Markets team member (Compass/Echo user)", confidence: low}
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
-last_catchup: 2026-05-12T07:14:50Z
+last_catchup: 2026-05-13T07:18:36Z
 ---
 
 ## Recent issues
 
+> [open] 2026-05-12 — signalProcessFI1 memory spike + restart (internal-ic-markets)
+> Inald noted signalProcessFI1 restarted; memory usage had been climbing since ~15:10 BST. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778602202367479) No follow-up or root-cause posted in window.
+
+> [resolved] 2026-05-13 — Indicative pricing on crypto; latency filter config bug fixed by Daria overnight
+> Daria diagnosed the root cause: pricing model looks up filters using its own market rather than the LP market, so the filter override on the icmarkets-crypto-ny env wasn't being applied — Toa rate was being filtered out, causing indicative pricing during periods of low pricing activity. Athena MD queries showed trigger time up to 9s behind transaction time in both Toa APN1 and IC Markets envs. Daria added a filter override for local crypto instruments; pricer processes now logging correct filters. [permalink (internal)](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778636377654129) Daria posted resolution to Joanna (IC side) at 02:33 BST confirming the fix and stating she's confident the issue won't recur this weekend. [permalink (client)](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778636027354749)
+
+> [resolved] 2026-05-12 — BTCUSD/ETHUSD latency complaint: IC provided oneZero logs; root cause is no-maker-quotes on IC hub, not Mahi latency
+> IC responded (2026-05-12 11:13 BST) to Nathan's request for oneZero logs with hub-side evidence: all flagged BTCUSD trades show "No quotes currently on book for symbol BTCUSD (from any non-excluded liquidity source)" — the delay was order enqueue failure at IC's hub due to no maker quotes, not Mahi-side latency. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778580830867009) No Mahi reply yet in-thread; issue is effectively resolved on Mahi's side (no Mahi latency found), though Nathan has not formally closed the thread.
+
 > [resolved] 2026-05-08 — IC requested updated toxic execution account list; Cameron Hughes shared ~170-account list in-thread
 > Kyriakos (IC side) asked for the latest list of accounts in toxic execution. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778260250029739) Cameron Hughes replied with the full list in-thread (~170 account IDs, including 1000137974); IC acknowledged. No follow-up action outstanding.
 
-> [open] 2026-05-06 — BTCUSD/ETHUSD weekend latency complaint; Mahi found no latency, awaiting IC logs
-> Joanna Theophanous (i.theophanous, IC side) reported high latency on several BTCUSD and ETHUSD trades over the weekend (examples attached as image). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778085021583819) Kate Stagg acknowledged. Nathan Burch investigated overnight (01:34 UTC 2026-05-07): all Compass processing within ~100ms, order handling latency dashboard clean — no Mahi-side latency found; shared the order events trace URL and asked IC for further information or oneZero logs. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778114040166719) Cameron Hughes separately escalated to #eod-trading-analytics-handovers asking NZ to look into it; no NZ reply yet in that thread. Thread open pending IC response.
 
 > [open] 2026-05-06 — New IC team member Pavlos Elpidorou: Compass + Echo access requested, not yet confirmed
 > IC asked Mahi to create Compass and Echo accounts for new team member Pavlos Elpidorou (p.elpidorou@icmarketsgroup.com). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778055176495339) Will Carter replied "Morning, will do" but no confirmation of completion was posted in the window. Pavlos joined the channel at 18:31 BST same day — access may have been provisioned but not confirmed on-thread.
@@ -61,3 +68,6 @@ last_catchup: 2026-05-12T07:14:50Z
 - 2026-05-06: BTCUSD/ETHUSD latency complaint from IC — Mahi found nothing on their end; awaiting IC oneZero logs to close.
 - 2026-05-06: New IC team member Pavlos Elpidorou onboarded to the Slack channel; Compass + Echo access creation acknowledged by Will Carter but not confirmed complete.
 - 2026-05-08: IC (Kyriakos) requested updated toxic execution account list; Cameron Hughes shared ~170 accounts including 1000137974.
+- 2026-05-12: signalProcessFI1 memory spike and restart at ~15:10 BST; no root cause posted in window.
+- 2026-05-13: Indicative pricing root cause identified and fixed by Daria overnight — latency filter config bug (pricing model using own market for filter lookup, not LP market; Toa rate excluded). Fixed via filter override on icmarkets-crypto-ny. Both Toa APN1 and IC Markets envs affected during low-activity periods.
+- 2026-05-12: BTCUSD latency complaint closed out — IC's oneZero logs confirm cause was "no maker quotes on hub", not Mahi latency.
