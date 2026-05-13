@@ -18,13 +18,19 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-13T07:25:47Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-11 — IC Markets (MAHI_ICM) feed live; test trades pending Rostro funding
-> Oli (Rostro) asked about ICM feed status into Mahi. Kate confirmed pricing is being received from IC Markets across all FX symbols. Test trades proposed; Oli flagged Rostro hasn't funded the account yet so test trades may not work. Awaiting Rostro credit/funding confirmation before proceeding. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487852170619) [Kate confirms pricing live](https://mahifx.slack.com/archives/C08AQKRU953/p1778488089307679)
+> [resolved] 2026-05-12 — Andreas: IoC order cancellations — "Internalisation Disabled IoC expired"
+> Andreas queried rejections on limit orders. Rory King explained: cancelled with reason "Internalisation Disabled IoC expired" — limit orders were sent to Invast but were off-market at the time, so expired. Client thanked and closed. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778586540808459) [Rory explains](https://mahifx.slack.com/archives/C08AQKRU953/p1778588368663989)
+
+> [open] 2026-05-12 — Senior relationship risk: Mahi meeting with Oli tomorrow; Dave Cooney holding on Ayres outreach
+> Bonnie Cassidy raised management risk concern in `internal-rostro`: "a bit worried about this one" — asked Dave Cooney if he'd caught up with Michael Ayres (the "main boss"). Kate confirmed a call with Oli is scheduled for 2026-05-13. Dave Cooney: let Kate/team catch up with Oli first, then decide whether he reaches out to Ayres. Context: Lochlan (key Mahi champion at Rostro) departed (2026-05-05 entry); Saul Knapp (Rostro exec) also moved to MAS Markets (2026-05-06 Notable topic). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778577012256099) [Dave reply](https://mahifx.slack.com/archives/C08ALS66EDC/p1778577564988679)
+
+> [resolved] 2026-05-12 — IC Markets (MAHI_ICM) hedger test live; plan to swap in as main LP tomorrow
+> Oli (Rostro) asked about ICM feed status into Mahi on 2026-05-11. Kate confirmed pricing live then. On 2026-05-12 Oli asked Mahi to add IC_Markets to face the off-book ("soft") hedger for XAUUSD for a short ~10–20 min test — explicitly not brokered flow. Rory King added IC_MARKETS to hedger, restarted, confirmed trades flowing to IC. After watching flow, Oli asked IC_Markets to be removed from the hedger (16:37 BST); Rory confirmed removal and restart (16:38 BST). Kate internal note (10:03 BST): all SI book flow will be hedged to IC Markets under a rev-share agreement; brokered flow stays with other LPs; if IC drops out, failover runs through PXM to a backup LP. Plan: swap IC in as main LP on 2026-05-13. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778595458637889) [Rory restart](https://mahifx.slack.com/archives/C08AQKRU953/p1778597370725799) [IC removed](https://mahifx.slack.com/archives/C08AQKRU953/p1778600249568359) [Kate internal](https://mahifx.slack.com/archives/C08ALS66EDC/p1778576609945019)
 
 > [resolved] 2026-05-11 — Second-layer spreads wide on VIP and SI (FX and Gold)
 > Alex (Rostro) flagged that second-layer spreads on VIP and normal SI were significantly wider than spread config across most FX and Gold. Kate began investigating. Oli identified the root cause: the benchmark reference LPs were only referencing INVAST_2, which was wide; Oli added Edgewater to the benchmark reference LPs and confirmed spreads looked ok. Kate acknowledged the fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487685725129) [Oli fix](https://mahifx.slack.com/archives/C08AQKRU953/p1778487969268199)
