@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-12T07:31:45Z
+last_catchup: 2026-05-13T07:25:42Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-12 — Routine Heavy LR adds: Centroid 3598260; CP 3595889
+> Trading Ops requested MT5_87018814_Centroid_3598260 → Heavy LR (10:25); Rory King actioned at 10:27. A second request followed for CP 3595889 → Heavy LR (11:03); Rory King actioned at 11:14. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778577912081869) [3595889](https://mahifx.slack.com/archives/C022S6NL82D/p1778580216702899)
 
 > [resolved] 2026-05-12 — Routine No LL add: CP 83037076 (with initial profile error)
 > Trading Ops requested CP 83037076 added to No LL profile. Nathan initially added it to No LR by mistake; Trading Ops caught it and flagged the error; Nathan corrected it to No LL at 07:29. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778564634996039)
