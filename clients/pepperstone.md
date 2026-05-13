@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-13T07:25:44Z
 ---
 
 ## History
@@ -180,4 +180,4 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-11 — Kraken SOW signed on Pepperstone's side; Nicola Perikhanyan handling GTC coordination. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778489350508919)
 - 2026-05-11 — Ruby Wang (Pepper) requested bulk update of 116 accounts to B-sharp execution profile; Nathan Burch applied, accidentally reverted, then re-applied. Resolved same session. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778473107934599)
 - 2026-05-11 — MTM sim for Reece's YP check: initial run (sim #548) produced 41tn USD notional vs expected ~450m due to lot conversion issue. Re-ran as sim #553 with no lot conversion; Rory delivered Echo Yield Profiles link to Reece. Zendesk 22953. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778472938471219)
-- 2026-05-12 — CFD NY/LDN OZ connectivity stalled: LDN xconnect (10.74.101.142) set up by Beeks 2026-05-08 but OZ still can't locate it; LDN taker/LP credentials outstanding from OZ. NY server provisioning still pending new server provision (old servers had issues). Diego pinging Daria/Isaac/Liam for ETA; Daria escalating to Liam for OZ NY ETA; LDN taker side also blocked. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778566455574649)
+- 2026-05-12 — CFD NY/LDN OZ connectivity stalled: LDN xconnect (10.74.101.142) set up by Beeks 2026-05-08 but OZ still can't locate it; LDN taker/LP credentials outstanding from OZ. NY server provisioning still pending new server provision (old servers had issues). Diego pinging Daria/Isaac/Liam for ETA; Daria escalating to Liam for OZ NY ETA; LDN taker side also blocked. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778566455574649) — 2026-05-12 follow-up: Daria asked Liam directly for NY ETA (07:16 UTC); Liam replied he didn't have one, has sent a chaser with Daria now cc'd on the email thread. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778572038848699)
