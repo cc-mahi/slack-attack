@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-12T07:33:51Z
+last_catchup: 2026-05-13T07:08:04Z
 ---
 
 ## Recent issues
