@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-12T07:35:48Z
+last_catchup: 2026-05-13T07:32:08Z
 ---
 
 ## Recent issues
@@ -81,6 +81,10 @@ last_catchup: 2026-05-12T07:35:48Z
 
 - 2026-05-10 — Client requested bounce before market open: client sent a standalone message asking for a process/gateway bounce before market open ("Sorry if not bounced already please bounce before the market open"). No Mahi reply visible. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778432301421509)
 
-- 2026-05-08–12 — Routine A/B book classification queries: several cpty checks answered by overnight team — cpty 39933574 (Nathan: A book, only 22 trades over 3 days, insufficient data), 92518184 (Nathan: A book), 84517632 (Rory: A book), 89468240 (Nathan: B book), 77537069 (Nathan: A book), 77559135 (Nathan: A book). All acknowledged by client. [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778563239391109)
+- 2026-05-12–13 — Routine A/B book classification queries: cpty 88991658 (Rory: B book), 89468356 (Sam: A book for XAUUSD, new account, flagged to keep an eye on), 39933477 (Nathan: A book, only one day of data), 39933478 (Nathan: B book, only a few days of data). All acknowledged by client or pending. [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778585076681959)
+
+- 2026-05-13 — cpty 89468294 yield profile confirmed negative and toxic: client asked if negative-starting yield graph (valutrades.NYC, 2026-04-14 onwards) was expected. Nathan confirmed: expected, yield starts negative when fill price is worse than reference mid. Noted aggregate YP starting and staying mostly negative suggests toxic flow. Client acknowledged. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644533480669) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644837041159)
+
+- 2026-05-13 — XAUUSD yield profile LP query — unanswered: Andri asked Mahi team which LP is used for valuating yield profile for XAUUSD. Nathan replied "checking now"; no answer yet in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778656219150419)
 
 - 2026-05-03 — Pulse upsell in ops thread: following client confirming the MySQL gap fix ("looks good, appreciate help over weekend"), Justin Young suggested moving off MySQL to Pulse (faster, larger retention periods), linking the knowledge base. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777821952617999)
