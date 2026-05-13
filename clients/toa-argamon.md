@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-12T07:32:09Z
+last_catchup: 2026-05-13T07:28:56Z
 ---
 
 ## Status
@@ -63,6 +63,12 @@ last_catchup: 2026-05-12T07:32:09Z
 
 > [resolved] 2025-05-15 — Counterparty 84004149 crypto flow review; brokered LR / EURUSD skew tuning
 > Andrew flagged counterparty 84004149 as consistently bad for Mahi crypto book (up $200k lifetime, but consistently costly over recent weeks). Reviewed with Isaac: XBT flow switches between BBook and sharp brokered week-to-week. Amir added brokered LR to clientDist1; EURUSD signal response reduced (skew was 1 pip on 0.1 spread, dialled down to ~0.2). Separately, counterparty 84004395 flagged as toxic (retail, EURUSD-focused). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1747325182217329)
+
+> [resolved] 2026-05-13 — LD4 XAUUSD signal data gap after system reboot; fixed by restart
+> Elan raised in mahi-argamon-operations that the TOB was showing no signal data for LD4 XAUUSD (~23:45 UTC 2026-05-12). Daria investigated and confirmed signals had stopped being persisted since the last system reboot; a manual restart resolved it and signals are persisting again. No backfill of the gap period possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
+
+> [resolved] 2026-05-13 — XAUAUD scalping loss $5.9k; arb-protection misconfiguration fixed
+> Shyam identified $5.9k retail loss from scalping activity on XAUAUD by two ~6-day-old retail accounts (CPs 105988 and 105990) during FX twilight (22:26–22:42 UTC 2026-05-12): 106 small round-trips of 1–30 oz. Root cause: UBS is the only firm XAUAUD LP at this client; `pricing.arbProtectionParameters` had UBS in `referencePriceMarkets` but not `referencePriceMarketSelectors`, causing the published quote to be clamped into UBS's wide twilight spread instead of using the clean triangulated (XAUUSD × AUDUSD) price. Scalpers harvested the resulting spike. Fix: removed XAUAUD from `arbProtectionParameter` rules; pricing now uses pure triangulated price. CPs 105988/105990 being monitored for activity on other crosses. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
 
 > [resolved] 2026-05-08 — XAUUSD signal reverted neuron → synapse; skew-driven decision
 > Shyam switched XAUUSD signal back to synapse (from neuron, which was set 2026-04-22) in response to skew analysis. Monitoring for CPs picking off pricing; pricing impact review planned for next week. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778211684932129)
