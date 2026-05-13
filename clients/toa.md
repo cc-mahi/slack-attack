@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-12T07:33:50Z
+last_catchup: 2026-05-13T07:28:55Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-05-12T07:33:50Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-05-13 — starfishFilePersisterExternalMarketData LDN down: Pulse signals stale, restart resolved
+> Daria restarted starfishFilePersisterExternalMarketData in LDN (02:37 UTC) after noticing Pulse had no recent signals. Last data coincided with the most recent prior restart; no suspicious config changes. Cause unknown — restart resolved it. No backfill available. Lee acknowledged. https://mahifx.slack.com/archives/C035H1VNCAD/p1778639825532889
 
 > [resolved] 2026-05-11 — marketDataCboe1 down on TOA Argamon CHI: new process, resolved in ~33 min
 > Inald flagged marketDataCboe1 down on TOA Argamon CHI (16:55 UTC). James replied it was a new process he was adding. Inald resolved the ordersCboe alert independently; James confirmed the process was up by 17:29 UTC. https://mahifx.slack.com/archives/C035H1VNCAD/p1778514939388589
@@ -89,12 +92,6 @@ last_catchup: 2026-05-12T07:33:50Z
 
 > [open] 2026-07-04 — Crypto.com crossed data + cancel-ratio alert
 > Crypto.com market data became crossed again on 2026-07-03 (James bounced marketDataCryptoDotCom). 2026-07-04 Daria bounced the MD gateway to fix crossing. Leo raised a 78% cancel-ratio alert (`CRYPTO_DOT_COM/PROP_TRADER_CRYPTO_DOT_COM_1`, 629 of 808 orders cancelled in 15 min). https://mahifx.slack.com/archives/C035H1VNCAD/p1751612943352569
-
-> [resolved] 2025-12-29 — ExternalOrder DB full on APN1-PRI (324 GB); truncated to recover
-> Sam Hewitt identified ExternalOrder tables had grown to 324 GB (total disk 327 GB) on toa-apnortheast1-prod-pri-1, filling messagePersister with alerts. Lee extended the MySQL disk and Sam truncated ExternalOrder and ExternalOrder_properties tables. Recurring disk pressure pattern from Nado trade volume growth. https://mahifx.slack.com/archives/C035H1VNCAD/p1767052175728059
-
-> [resolved] 2026-01-02 — AMQ disk full on APN1-PRI: ~1 hr Nado outage
-> ActiveMQ message store filled disk on toa-apnortheast1-prod-pri-1; messagePersister backpressure took the Nado maker down for ~1 hr. Liam resolved and confirmed recovery in toa-nado-shared. Recurring AMQ disk-full pattern (also hit Dec 2025 and Feb 2026): messagePersister accumulates unbounded until disk is full, then trips all downstream processes. Root cause (retention/size config) not definitively fixed across the window. https://mahifx.slack.com/archives/C035H1VNCAD/p1767376466119649
 
 > [open] 2026-02-16 — Toa APN1 PagerDuty noise: 2064 incidents flagged for review
 > Cameron shared a PD incident review for Toa APN1 covering the prior period: 2064 total incidents, top sources slowNameFactoryLookup (757) and orderBookStuck (465). Most are suppressible bot noise or alert threshold mismatches. Alert tuning work initiated but not closed — no follow-up commit or threshold change observed through window end. https://mahifx.slack.com/archives/C035H1VNCAD/p1771238401696939
