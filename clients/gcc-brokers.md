@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Nael", role: "client trading ops", confidence: low}
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
-last_catchup: 2026-05-12T07:28:08Z
+last_catchup: 2026-05-13T07:23:32Z
 ---
 
 ## Recent issues
@@ -26,7 +26,7 @@ last_catchup: 2026-05-12T07:28:08Z
 > Client reported 116oz gold long filled on Finalto at 15:05 BST; William confirmed booked at 16:26 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778076310926249)
 
 > [open] 2026-05-06 — Fast-hedge for futures requested; tags 4004072/4004241 slipping on gold futures
-> Client asked for fast-hedge setup on futures ASAP — specifically tags 4004072 and 4004241 are experiencing slippage on gold futures. William acknowledged aim to deliver and will keep updated; no timeline given. 2026-05-07: client reiterated "Yes please important for the futures" after go-live of CFD Indices; William confirmed "Futures setup still in progress, will let you know when that's ready to go". [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778060389989769) [2026-05-07 update](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778160477670339)
+> Client asked for fast-hedge setup on futures ASAP — specifically tags 4004072 and 4004241 are experiencing slippage on gold futures. William acknowledged aim to deliver and will keep updated; no timeline given. 2026-05-07: client reiterated "Yes please important for the futures" after go-live of CFD Indices; William confirmed "Futures setup still in progress, will let you know when that's ready to go". 2026-05-12: Nael asked for update; William confirmed "we're in the process of restructuring the existing futures workflow to enable fast hedging. Will need a couple more restarts on our end then it will be ready to go." Client acknowledged. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778060389989769) [2026-05-07 update](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778160477670339) [2026-05-12 update](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778576488756259)
 
 > [resolved] 2026-05-06 — XAGUSD false FI PnL drop on A_CLIENTS (Nathan investigation)
 > Nathan flagged a Graphite signal showing a FI PnL drop on XAGUSD for A_CLIENTS on 2026-05-05. Investigated and confirmed false alarm — XAGUSD is not skewed for A_CLIENTS; only XAUUSD is. Nathan noted that only XAUUSD skew on A_CLIENTS should be reported/billed. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1778107331037799)
