@@ -17,10 +17,13 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-12T07:28:05Z
+last_catchup: 2026-05-13T07:23:31Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-13 — Wagyu XAU spreads 50-60c wide at SGP open: arb protection config tweak applied
+> Mukhammad reported Wagyu XAU spreads running 50–60c after open (twilight target 35c, SGP target 19c). Daria diagnosed: widening driven by arb protection, not MWMS multiplier. Applied a 10c buffer either side of the arb protection reference (UBS|360T|SUCDEN) to allow the model to sit tighter. Spreads reduced to 25–40c. Mukhammad to confirm after twilight whether to revert or keep the buffer permanently. Daria noted the buffer is only active during twilight under current config. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
@@ -119,6 +122,8 @@ last_catchup: 2026-05-12T07:28:05Z
 - 2026-05-07 — Louie requested client simulations from trading data (Athens UTC+3 timezone). Kate confirmed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778141520510569)
 - 2026-05-07 — Kate bounced `hybridHedgerBigBook1` (internal note only; no client-facing context surfaced). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778161010370699)
 - 2026-05-07 — Andrew deployed an analytics component referencing Zendesk 22880 (no thread context). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778177980786529)
+- 2026-05-12 — UBS FA session: Maten Rehimi confirmed FIX adapters not yet built; had emailed wrong UBS address (FX-ClientDelivery@ubs.com). George Moore chased; UBS Jan replied directing to FRECommerce@ubs.com for UAT/PROD and supplied a conformance test sheet to fill in before production go-live. George forwarded to UBS/Exinity chain. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778584018956889)
+- 2026-05-12 — Second client simulation request (Keshav, GMT+3 data): Nathan confirmed will run. Follows Louie's 2026-05-07 simulation request. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778619941428319)
 - 2026-05-06 — UBS FA session setup: partial-fill risk + £99 cross-connect confirmed. Kate flagged Compass has no guarantee of full-amount delivery on FA sessions (sweep across multiple venues possible). Nick Serff confirmed £99/mo Beeks shared cross-connect is fine; Kate clarified the sweep caveat; Nick's final confirmation on whether to proceed under those conditions not yet received as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778072525.036309)
 - 2026-04-29 — UBS reply turnaround flagged by George Moore — Kate apologised for delay, awaiting Charlie's reply; FRCeCommerce@ubs.com supplied as direct route to UBS FRC team. Internal Daria review (04-30): 3 issues escalated, first two looked into, third (this UBS one) was missed — flagged so client could've followed up sooner. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777446054108019)
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
