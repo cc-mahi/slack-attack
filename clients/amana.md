@@ -11,13 +11,28 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-12T07:19:29Z
+last_catchup: 2026-05-14T07:22:30Z
 ---
 
 ## Recent issues
 
+> [open] 2026-05-14 — MT5_8004007 futures trades (NDXFUT/XAUFUT) not visible on markouts
+> Nikos flagged at 07:24 BST that MT5_8004007 traded Nasdaq Fut and XAUFUT but trades do not appear on the markouts screen; Echo link in message filters on cpty 8006315. Nathan replied at 07:35 noting the Echo link uses a different counterparty ID and provided a corrected Echo link for 8004007. Status: open — no resolution yet. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778739868.973049)
+
+> [resolved] 2026-05-13 — Dynamic Arbitrageurs profile disabled; $50/M markup removed; cpty 8001807 lost
+> Nikos raised cpty 8001807 (XAUUSD, 2026-05-07 trade) experiencing excessive slippage. Rory identified 8001807 was auto-classified into the Dynamic Arbitrageurs execution profile (manually whitelisted in January on B-book flow), which fills against the continuity pool with a $50/M markup. Rory removed the three auto-classified cptys (7005095, 8007667, 20077893), then disabled dynamic auto-classification entirely across all channels — continuity-pool + $50/M markup now applies only to Manual Arber Selection cptys. Nikos confirmed he does not want dynamic classification; requested a call 2026-05-14 to review. Nikos: "Unfortunately it cost us this client." [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778678491.192539)
+
+> [open] 2026-05-13 — MAHI FAT feed (Mahi B / corp feed): XAUUSD test trades live; markup placement and EU rollout pending
+> Full test session 2026-05-12/13: B_HOUSE positions flattened 2026-05-12 13:24; XAUUSD (A-book + swapfree) fat-feed test trades confirmed good by Rory 2026-05-13 12:27. Architecture confirmed: same hedger/execution-rule workflow as A-book, only CLIENT_PRICE_LDN (wider/deeper) differs; existing books (ABOOK/SWAPFREE) to absorb the flow — no new book structure. Nikos identified first institutional client (8006187) to migrate. Markup placement discussion open 2026-05-13: Nikos wants slightly wider TOB as company PnL; Rory recommended applying markup in Centroid rather than Mahi. EU index test session (F40/IBX/E50/AEX cash CFDs via Jump/LMAX/CMC) active 2026-05-12–13; F40 had partial-close hedger issue 2026-05-13 17:34 (sent but not hedged) — Rory to investigate. Old Mahi B to be decommissioned once FX flow fully migrated to Mahi A. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778594641.264139)
+
+> [open] 2026-05-13 — XAUUSD spot pricing spikes at market open: LMAX offline ~2min, CMC sole LP
+> Nikos reported pricing spikes at market open 2026-05-12 22:00 UTC and asked Nathan which LPs are aggregating for XAUUSD spot. Nathan confirmed LMAX_CENTROID + CMC_CENTROID; LMAX pricing doesn't come online for ~2 minutes at open, leaving CMC as sole LP during that window. No fix applied yet. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778653248.278349)
+
+> [open] 2026-05-13 — LR on futures: Nikos querying zero yield for cpty 8006187 on Futures P
+> Nikos posted Echo link showing zero LR PnL for FUTURES_P_CLIENTS_LDN for the prior day. Rory clarified (11:04) that LR is present when a wider time range is used, and showed a specific fill with LR at 15:18 UTC 2026-05-12. Nikos remained unsatisfied ("still something is not right"). Status: Nikos not yet convinced LR is correctly applied to all futures trades. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778666029.868209)
+
 > [open] 2026-05-12 — Nikos querying limit fill execution on XAUFUT-M / arber execution profile last-look tightening
-> Nikos asked (06:35 BST) why cpty 5800055 was filled at $4685.71 when offer appeared at that price ~100ms before execution. Nathan explained: 500ms LL delay on ABOOK/Manual Arber Selection execution profile; limit price passed price check at both ends of the window; client filled at limit (not the moved offer). Nikos responded at 08:14 BST: "I will bring it down a bit as we have no interest to provide a good execution experience to those clients" — intends to tighten price check and/or mid distance on the arber execution profile. Change not yet applied. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778564126787019)
+> Nikos asked (06:35 BST) why cpty 5800055 was filled at $4685.71 when offer appeared at that price ~100ms before execution. Nathan explained: 500ms LL delay on ABOOK/Manual Arber Selection execution profile; limit price passed price check at both ends of the window; client filled at limit (not the moved offer). Nikos responded at 08:14 BST: "I will bring it down a bit as we have no interest to provide a good execution experience to those clients" — intends to tighten price check and/or mid distance on the arber execution profile. Change not yet applied. Related: see Dynamic Arbitrageurs resolved entry 2026-05-13. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778564126787019)
 
 > [open] 2026-05-11 — DAX/UKX futures: CMC pricing not arriving (only IG received)
 > Rory flagged (11:15 BST) that DAXFUT-M and UKXFUT-M are only receiving pricing from IG; expected CMC as primary hedging venue per Nikos' LP mappings CSV (sent 10:16 BST). Amana ops checked and saw CMC sending prices — Maynard investigating at 17:12 BST. As of 07:06 BST 2026-05-12, CMC side reports prices being sent and queries whether Mahi is subscribing on symbols DX6M_ / FT6M_; Rory has not yet confirmed. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778494554960779)
