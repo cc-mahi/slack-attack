@@ -9,7 +9,8 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-12T07:37:52Z
+  - {name: "Jackson", role: "VT — GTC credentials contact", confidence: low}
+last_catchup: 2026-05-14T07:34:59Z
 ---
 
 ## Recent issues
@@ -25,6 +26,15 @@ last_catchup: 2026-05-12T07:37:52Z
 
 > [open] 2026-05-05 — Allow Top Up on A_CLIENTS_PREMIUM/Broker Everything Temp disabled after 350 XAU internalisation loss
 > At 16:10 UTC 2026-05-04, counterparty 889 placed a 750 XAU order on DistributionLDN (A_CLIENTS_PREMIUM//Broker Everything Temp, execution rule: broker). Compass brokered 400 XAU; the remaining 350 XAU was internalised via Allow Top Up. Price moved against the book immediately — full 350 XAU hedged to cap further losses but loss already realised. Nathan Burch disabled Allow Top Up for this execution rule as a protective measure, noting counterparties in this classification trade directionally. He flagged this for review: Allow Top Up is currently on for all other execution rules — possibly intended to protect client fills — and the policy should be revisited. By 09:04 UTC+1 2026-05-05 Will confirmed "book has recovered somewhat so far this morning" and endorsed the disable ("that's the right call — thanks Nathan"). Policy review of Allow Top Up across other execution rules remains open. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777957038011259) [recovery confirm](https://mahifx.slack.com/archives/CPDS0M2KF/p1777968282.241929)
+
+> [open] 2026-05-13 — Internalised flow "tough sledding" this week
+> Will Carter shared Echo yield-profile link for internalised flow 2026-05-10–2026-05-15 at 11:13 BST; described it as "tough sledding" / "not good". Brokered flow is recovering on ~1h horizon. Feeds into ongoing concern about monetising internalised flow at current volumes. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778667197.817899)
+
+> [resolved] 2026-05-13 — ~12 new tags added to premium channel / switched to internalise
+> Dan (client ops) requested ~12 Xenfin tags (counterparties 1009/851) be moved onto the premium feed at 11:57 BST; shared Echo yield-profile link for 1009Z13552574/XAUUSD showing "big numbers". William Denny investigated — tag 1034Z442164A2 (and others) had been set to broker-only, causing order cancellations as the premium feed price was not marketable to broker. William switched all listed tags to internalise on the premium channel at 14:32 BST; confirmed done. TOB qty also changed to 100oz for XAU on the prem feed and pricers bounced at 12:25 BST. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778669821.967989) [internalise confirmed](https://mahifx.slack.com/archives/C05NB72AGR2/p1778679123.161089)
+
+> [resolved] 2026-05-13 — EOD flat rule agreed and deployed; hedger bounced
+> Client ops flagged at 12:16 BST that Velocity is sometimes holding positions over the turn and asked for a rule to be flat EOD (e.g. turn off pricing at 09:59:30). Will Carter agreed to put an EOD close rule in; William Denny bounced the hybrid hedger at 12:59 BST to pick up the weekday close rule. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778670981.127809) [hedger bounce](https://mahifx.slack.com/archives/CPDS0M2KF/p1778673544.529789)
 
 > [open] 2026-05-05 — New connection for inventory skewed feed — status unconfirmed
 > William Denny asked in the client channel at 11:59 BST: "can I check on the status of the new connection for the inventory skewed feed?" No reply in window. Context: client was asking about Compass sims and XAU crosses in the same conversation; the inventory skewed feed is a separate pending item. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777978746.882379)
@@ -47,8 +57,8 @@ last_catchup: 2026-05-12T07:37:52Z
 > [open] 2026-04-30 — Internal strategy debate: license risk if flow doesn't grow
 > Internal channel discussion (Andrew Morgan, David Cooney, Will): flow remains minimal, "strong danger of license petering out if we can't sort something". David suggested plugging into Argamon (tight client spreads, wide LP spreads, no flow diversity needs another ingredient — TOA-Argamon CME also raised). Andrew floated partitioning the book into "real retail vs dirt bags" (two models — one defensive, one skew aggressively); is also moving his mid-evaluation feature branch onto velocity as a playground. Will: 200/day is critical mass; last 24h roughly flat post-changes. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777540196996579)
 
-> [open] 2026-04-30 — Compass sims being rerun on combined client trade data
-> William Denny: need to rerun Compass sims to pick up changed hedger + pricing config. Ready for tomorrow (2026-05-01). [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777547238227629)
+> [open] 2026-04-30 — Compass sims pending — hedging changes must finalise first
+> William Denny originally planned to rerun sims to pick up changed hedger + pricing config (ready 2026-05-01). Client (Richard) chased again on 2026-05-06 ("are we still waiting on the sim?") and again on 2026-05-13 ("how are we on the overall data sets we analysed? did we ever get the results?"). William replied 2026-05-13 at 15:32: "investigating hedging improvements internally first — will share Compass sim results once finalised." Sim delivery still blocked on hedging changes. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777547238227629) [2026-05-13 chase](https://mahifx.slack.com/archives/C05NB72AGR2/p1778681191.783379) [2026-05-13 reply](https://mahifx.slack.com/archives/C05NB72AGR2/p1778682744.301589)
 
 > [resolved] 2026-04-30 — XAUUSD priceFormatPipRelative for LMAX — fixOrders2 restarted EOD
 > Shyam: PagerDuty alert needed `priceFormatPipRelative` for XAUUSD & LMAX changed from 0.01 to 0.001. Config change already made; `fixOrders2` restarted at EOD (Will's hedger restart at ~17:08 confirms). LMAX re-added as LP for `hybridHedger1` post-restart. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777520897089699)
@@ -64,6 +74,9 @@ last_catchup: 2026-05-12T07:37:52Z
 
 ## Notable topics
 
+- 2026-05-13 — Call scheduled: Friday 2026-05-16 at 12:00. Client (Richard) asked for a call on 2026-05-14 at 11; William offered Friday at 11; client asked for 12 instead; Will confirmed. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778666138.395599)
+- 2026-05-13 — GTC credentials incoming. Will Carter asked about GTC send credentials at 11:14 BST; client ("Jackson") replied at 16:36 that creds are being emailed over; William thanked. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778686574.613379)
+- 2026-05-13 — VaR drawdown discussion: client asked about VaR numbers for holding positions longer; Will Carter replied drawdowns in the region of -40k; client thought that was "a bit punchy for where we are today" and wants to discuss further. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778668274.923689)
 - 2026-05-11 — Hybrid hedger PnL backstop + longer pull-away — design doc posted by Will Carter. Two-rule hybrid setup: (1) primary dynamic fasthedge with extended pull-away (`minPullAwayPeriodMs: 60000, maxPullAwayPeriodMs: 300000`, IFMS signal); (2) top-priority `VAR-CLEARANCE` backstop using `OwnTradingPerformancePredicate` (inverted: `maxPnlInBase: -1000`, 30s lookback) + `VarTrigger` to cannon-flatten when book is down ≥$1k in last 30s. Seven open questions before backtest (RelativeRisk JSON shape, VaR% reference, monitorParty value, realised-vs-unrealised PnL, IFMS signal direction, re-arm behaviour, backtest harness). Five-phase rollout: config verify → Compass backtest → shadow mode → live conservative → tune. James (MahiMain) offered to add `OwnTradingPerformanceTrigger` to HEDGING service type as Plan B. Pre-backtest, not yet deployed. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778501713.503449)
 - 2026-05-11 — Arb hedger bounced to increase clip size; Will noting possibility of RI. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778502648.313889)
 - 2026-05-10 — Nathan Burch removed USDCNH from SIGNAL-PROXY list and added `riskReportingExtended` override on marketInstruments reference config. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778397244.340729)
