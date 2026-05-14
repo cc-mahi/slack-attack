@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Pavlos Elpidorou", role: "IC Markets Head of Market Risk"}
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
-last_catchup: 2026-05-14T07:19:58Z
+last_catchup: 2026-05-14T07:21:58Z
 ---
 
 ## Recent issues
