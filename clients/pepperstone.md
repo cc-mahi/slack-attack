@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-14T07:32:03Z
 ---
 
 ## History
