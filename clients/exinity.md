@@ -17,10 +17,19 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-12T07:28:05Z
+last_catchup: 2026-05-14T07:27:00Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-14 — Jump/Wedbush test session: support coverage confirmed, meeting details pending
+> George Moore (Exinity) requested Mahi support for a Jump trading test on the Wedbush setup, initially at 3pm UK 13-May; moved to 14-May same time. Kate confirmed Arun will join. Kate asked George to confirm whether the same meeting invite applies — George's final confirmation outstanding as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778657899.272499)
+
+> [resolved] 2026-05-13 — Wagyu XAU spreads 50–60c wide at Singapore open: arb protection buffer applied and reverted
+> Mukhammad reported Wagyu XAU spreads at 50–60c (vs 19c target for SGP, 35c for Twilight). Daria diagnosed widening coming from arb protection; added 10c buffer either side (model can sit up to 10c tighter than UBS/360T/Sucden reference markets). Spreads came back to 25–40c. Next evening Mukhammad asked to revert as spreads stable; Daria restarted pricing models to pick up the revert. Fully resolved. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005.963899)
+
+> [resolved] 2026-05-14 — Client simulation request (GMT+3 data) — results delivered
+> Keshav submitted new client trading data (Athens UTC+3 timezone) for simulation. Shyam delivered two sim runs (CentFX and Revshare) via Echo links on 14-May. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778619941.428319)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
@@ -119,6 +128,7 @@ last_catchup: 2026-05-12T07:28:05Z
 - 2026-05-07 — Louie requested client simulations from trading data (Athens UTC+3 timezone). Kate confirmed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778141520510569)
 - 2026-05-07 — Kate bounced `hybridHedgerBigBook1` (internal note only; no client-facing context surfaced). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778161010370699)
 - 2026-05-07 — Andrew deployed an analytics component referencing Zendesk 22880 (no thread context). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1778177980786529)
+- 2026-05-12 — UBS FA session: conformance test sheet received; Meten awaiting conformance before production. Maten Rehimi (Mahi) emailed FX-ClientDelivery@ubs.com for conformance test but got no reply; George Moore escalated on the UBS/Exinity chain. UBS (Jan) responded: correct mailbox is FRECommerce@ubs.com (FX-CD not monitored); conformance test sheet attached for completing and returning before PROD go-live. Adapters on new FIX sessions still being built and tested. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778584018.956889)
 - 2026-05-06 — UBS FA session setup: partial-fill risk + £99 cross-connect confirmed. Kate flagged Compass has no guarantee of full-amount delivery on FA sessions (sweep across multiple venues possible). Nick Serff confirmed £99/mo Beeks shared cross-connect is fine; Kate clarified the sweep caveat; Nick's final confirmation on whether to proceed under those conditions not yet received as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778072525.036309)
 - 2026-04-29 — UBS reply turnaround flagged by George Moore — Kate apologised for delay, awaiting Charlie's reply; FRCeCommerce@ubs.com supplied as direct route to UBS FRC team. Internal Daria review (04-30): 3 issues escalated, first two looked into, third (this UBS one) was missed — flagged so client could've followed up sooner. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777446054108019)
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
