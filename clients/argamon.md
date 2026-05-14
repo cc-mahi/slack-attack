@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-12T07:19:18Z
+last_catchup: 2026-05-14T07:25:09Z
 ---
 
 ## Status
