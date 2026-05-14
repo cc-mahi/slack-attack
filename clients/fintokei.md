@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-05-12T07:11:15Z
+last_catchup: 2026-05-14T07:13:16Z
 ---
 
 ## Status
@@ -21,6 +21,9 @@ last_catchup: 2026-05-12T07:11:15Z
 
 > [open] 2026-04-16 — `fintokei-ln-trading-1` mysql volume at 90%
 > Cameron flagged in #internal-fintokei (2026-04-16 16:41 BST): archiver retention defaults left in place on `PROD_LIVE_CLIENTDB`, top tables (EnrichedTradeOutputSummary 89GB, HouseOrder 84GB, HOUSE1PositionHistory 67GB) growing fast. LVM has ~1.26TB free so growing the volume buys time, but real fix is archiver overrides matching Funding Pips (POSITION_HISTORY 365→3 days, ORDER_HISTORY 365→30 days). Estimated ~2 weeks until full at current rate. https://mahifx.pagerduty.com/incidents/Q114Z685M3X0C1
+
+> [open] 2026-05-12 — Jan requests new MT5 demo group added to Mahi
+> Jan asked in #mahi-fintokei to add `demo\AXSE Prop\Fintokei\FNTKCONTZRJPY` to Mahi. Kate Stagg confirmed it would be done and asked for platform type; Jan confirmed MT5 demo. Kate acknowledged ("Fab, thank you for confirming") but no completion confirmation in this window. [permalink](https://mahifx.slack.com/archives/C08QWKFARDL/p1778580729147629)
 
 > [resolved] 2026-05-11 — Nathan Burch asks if SYNAPSE_MT5_UAT_BACKUP & SYNAPSE_MT5_UAT FIX connections should be live
 > Nathan queried in #internal-fintokei whether these UAT FIX connections were supposed to be connected. Maten Rehimi confirmed same day they are expected to be down. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1778468805865709)
