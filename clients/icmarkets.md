@@ -8,19 +8,28 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/icmarkets.md (not yet)
 channels_override: null
 key_people_overrides:
-  - {name: "Pavlos Elpidorou", role: "IC Markets team member (Compass/Echo user)", confidence: low}
+  - {name: "Pavlos Elpidorou", role: "IC Markets Head of Market Risk"}
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
-last_catchup: 2026-05-12T07:14:50Z
+last_catchup: 2026-05-14T07:19:58Z
 ---
 
 ## Recent issues
 
+> [open] 2026-05-12 — BTCUSD hedge enqueue failures (no maker quotes, 2026-05-02 trades); awaiting Mahi response
+> IC (message to Nathan Burch) shared oneZero hub logs for several BTCUSD trades from 2026-05-02 showing "Problem enqueuing Hedge executions: No quotes currently on book for symbol BTCUSD (from any non-excluded liquidity source)" across 6+ order IDs. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778580830867009) No reply from Nathan or Mahi team in the thread as of the catchup window.
+
+> [watching] 2026-05-12 — signalProcessFI1 memory spike and restart at IC Markets
+> Inald Gjoni noted signalProcessFI1 restarted at IC Markets; memory usage started climbing ~15:10 BST 2026-05-12. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778602202367479) No follow-up in thread; no client-visible impact reported.
+
+> [open] 2026-05-13 — Pavlos Elpidorou (Head of Market Risk) onboarding call to be scheduled
+> Kyriakos (IC) introduced Pavlos Elpidorou as new Head of Market Risk and requested a call with Will Carter / David Cooney to brief him and walk through Compass and Echo. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778659347695939) A follow-up message (unattributed in log) offered to schedule a call for the following day; David Cooney confirmed availability Thursday or Friday. Compass/Echo access status per prior entry: acknowledged by Will Carter 2026-05-06 but no on-thread confirmation yet.
+
 > [resolved] 2026-05-08 — IC requested updated toxic execution account list; Cameron Hughes shared ~170-account list in-thread
 > Kyriakos (IC side) asked for the latest list of accounts in toxic execution. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778260250029739) Cameron Hughes replied with the full list in-thread (~170 account IDs, including 1000137974); IC acknowledged. No follow-up action outstanding.
 
-> [open] 2026-05-06 — BTCUSD/ETHUSD weekend latency complaint; Mahi found no latency, awaiting IC logs
-> Joanna Theophanous (i.theophanous, IC side) reported high latency on several BTCUSD and ETHUSD trades over the weekend (examples attached as image). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778085021583819) Kate Stagg acknowledged. Nathan Burch investigated overnight (01:34 UTC 2026-05-07): all Compass processing within ~100ms, order handling latency dashboard clean — no Mahi-side latency found; shared the order events trace URL and asked IC for further information or oneZero logs. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778114040166719) Cameron Hughes separately escalated to #eod-trading-analytics-handovers asking NZ to look into it; no NZ reply yet in that thread. Thread open pending IC response.
+> [resolved] 2026-05-06 — BTCUSD/ETHUSD weekend indicative pricing; root cause found and fixed 2026-05-13
+> Joanna Theophanous (i.theophanous, IC side) reported high latency on several BTCUSD and ETHUSD trades over the weekend (examples attached as image). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778085021583819) Nathan Burch found no Mahi-side latency (Compass <100ms, dashboard clean) and awaited IC oneZero logs. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778114040166719) 2026-05-13 resolution: Daria Horton identified root cause as a pricing filter misconfiguration — the model looks up filters via its own market, not the LP market, so the existing filter override wasn't being applied; trigger time was up to 9s behind transaction time during low-activity periods (Athena MD confirmed, both Toa APN1 and IC Markets envs affected). Daria added a local crypto instrument filter override and confirmed correct filter application. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778636377654129) Client-facing message sent to Joanna: "Toa rate was being filtered out, leading to indicative pricing. Corrected configuration now, confident won't recur this weekend." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778636027354749)
 
 > [open] 2026-05-06 — New IC team member Pavlos Elpidorou: Compass + Echo access requested, not yet confirmed
 > IC asked Mahi to create Compass and Echo accounts for new team member Pavlos Elpidorou (p.elpidorou@icmarketsgroup.com). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778055176495339) Will Carter replied "Morning, will do" but no confirmation of completion was posted in the window. Pavlos joined the channel at 18:31 BST same day — access may have been provisioned but not confirmed on-thread.
@@ -61,3 +70,7 @@ last_catchup: 2026-05-12T07:14:50Z
 - 2026-05-06: BTCUSD/ETHUSD latency complaint from IC — Mahi found nothing on their end; awaiting IC oneZero logs to close.
 - 2026-05-06: New IC team member Pavlos Elpidorou onboarded to the Slack channel; Compass + Echo access creation acknowledged by Will Carter but not confirmed complete.
 - 2026-05-08: IC (Kyriakos) requested updated toxic execution account list; Cameron Hughes shared ~170 accounts including 1000137974.
+- 2026-05-13: Indicative pricing root cause resolved — pricing model filter lookup bug (model uses own market not LP market; Toa rate filtered out during low-activity periods). Daria added local crypto instrument filter override; both Toa APN1 and IC Markets envs affected. Fix confirmed applied.
+- 2026-05-13: Pavlos Elpidorou confirmed as Head of Market Risk (was "team member" in prior entry). Call with Will Carter / Cooney to be scheduled for Compass + Echo briefing.
+- 2026-05-12: BTCUSD hedge enqueue failures (no maker quotes) reported by IC for 2026-05-02 trades — no Mahi reply yet; Nathan Burch tagged.
+- 2026-05-12: signalProcessFI1 memory spike and restart at IC Markets (~15:10 BST) — no client impact reported, no follow-up in thread.
