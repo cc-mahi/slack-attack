@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-12T07:33:50Z
+last_catchup: 2026-05-14T07:32:23Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-05-12T07:33:50Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-05-13 — starfishFilePersisterExternalMarketData down on TOA LDN: signals gap in Pulse, restarted by Daria
+> Daria restarted `starfishFilePersisterExternalMarketData` in LDN, restoring signals in Pulse. Last data aligned with the most recent prior restart; no suspicious config changes. Root cause unknown — Daria's best guess is restart-related. Lee acknowledged. No backfill source available for the gap. https://mahifx.slack.com/archives/C035H1VNCAD/p1778639825532889
 
 > [resolved] 2026-05-11 — marketDataCboe1 down on TOA Argamon CHI: new process, resolved in ~33 min
 > Inald flagged marketDataCboe1 down on TOA Argamon CHI (16:55 UTC). James replied it was a new process he was adding. Inald resolved the ordersCboe alert independently; James confirmed the process was up by 17:29 UTC. https://mahifx.slack.com/archives/C035H1VNCAD/p1778514939388589
