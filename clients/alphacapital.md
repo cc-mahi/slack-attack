@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
-last_catchup: 2026-05-12T07:16:59Z
+last_catchup: 2026-05-14T07:15:35Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-13 — Argamon LD Centroid bridge server migration: downtime window Fri 15 – Sat 16 May
+> Argamon (Tom, via David Rapp in #mahi-alphacapitalgroup) notified: LD Centroid bridge instance migrating server, planned downtime 2100 UTC Fri 15 May → 2100 UTC Sat 16 May. New IP 192.109.17.170. No action needed if targeting DNS arguk.centroidsol.com (auto-resolves). Cameron Hughes acknowledged and said "we'll action the changes needed our side" — no detail on what changes Mahi is making. Monitor for disruption to SI hedging flow (Argamon is Alpha's SI hedging destination). [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1778658472423589)
 
 > [open] 2026-05-05 — XAGUSD skew abuse: arbitrageur classifier lag costing ~$35K/week
 > Andrew Morgan (handover to Cameron): /skew-health-check run on alphacapital found 5 of 8 stage-c CPs inception-negative on 3–8 May (CPs: 2685507, 2696788, 2698331, 2697815, 2695337). Cohort detection-lag cost: $24.8K inception leakage across $555M volume in 5 days, ~$35K/week extrapolated. CP 2685507 alone accounts for 63% ($290M traded in single day before being caught, 4-day tag lag). 3 of 5 tagged on Qualifying FX.arbitrageurs.list (Bot wrote 2026-05-05 17:03 UTC); 2 still untagged (2696788, 2695337). Open items: (1) why offline classifier took 4 days on 2685507; (2) whether post-17:03Z trades on 2685507 route through Q1-Arbitrageurs vs Q1-Small-Tickets; (3) curation mechanism behind 13,120-CP arbitrageurs population (no arbitrageurs.badCheck configured); (4) analytics.realtimeArbDetection.* entirely unconfigured; (5) Q1-Arbitrageurs execution profile uses FORCE_INTERNALISATION + 200-300ms last-look with priceCheckThreshold: -1 (Andrew expected continuity-pool routing). Full report: docs/skew-health/alphacapital/2026-05-05-skew-health.md (commit cf26e5e). Context: Cameron Hughes had identified neuron signal as best-performing for XAG and promoted it; Andrew flagged this neuron-wins-while-all-flow-imbalance-signals-bleed pattern as a skew-abuse signature (CPs flipping positions to harvest skew, neuron lights up on reversal). Right fix is classifier auto-tagging, not signal tuning. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778009823301759)
