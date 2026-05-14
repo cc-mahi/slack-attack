@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-12T07:33:51Z
+last_catchup: 2026-05-14T07:32:18Z
 ---
 
 ## Recent issues
+
+> [watching] 2026-05-13 — Intelligence: StarPrime reportedly owned by Vantage
+> Andrew Morgan noted "apparently these guys are owned by vantage" in internal channel; David Cooney confirmed "yep". No further context shared. Ownership link to Vantage not previously reflected in VibePulse or wiki. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778669482861249)
 
 > [resolved] 2026-05-07 — Limit order cancellations due to Arbitrageur misclassification of counterparty RBI_5036_LIVE-97F5F2
 > Umar Bin Aziz reported execution errors on limit orders (~11:20 BST). Rory King diagnosed: counterparty RBI_5036_LIVE-97F5F2 had been classified under the `BBOOK//Arbitrageurs` execution rule after a small number of trades; limit orders were being force-internalised on the continuity pool with markup, with fills breaching the limit price and cancelling. Umar requested removal; Rory blacklisted the counterparty from the Arbitrageurs profile at 12:03 BST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778151195430889)
