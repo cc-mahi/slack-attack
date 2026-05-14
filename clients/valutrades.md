@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-12T07:35:48Z
+last_catchup: 2026-05-14T07:34:59Z
 ---
 
 ## Recent issues
@@ -82,5 +82,13 @@ last_catchup: 2026-05-12T07:35:48Z
 - 2026-05-10 — Client requested bounce before market open: client sent a standalone message asking for a process/gateway bounce before market open ("Sorry if not bounced already please bounce before the market open"). No Mahi reply visible. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778432301421509)
 
 - 2026-05-08–12 — Routine A/B book classification queries: several cpty checks answered by overnight team — cpty 39933574 (Nathan: A book, only 22 trades over 3 days, insufficient data), 92518184 (Nathan: A book), 84517632 (Rory: A book), 89468240 (Nathan: B book), 77537069 (Nathan: A book), 77559135 (Nathan: A book). All acknowledged by client. [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778563239391109)
+
+- 2026-05-13 — XAUUSD yield-profile LP reference markets — JUMP added: Andri asked which LPs are used to value XAUUSD yield profiles. Nathan provided a list (initially incorrect: VELO, EDGE, UBS, ISP×2); client asked to add `JUMP_OZNY4_RETAIL_MARGIN_VT`; Nathan added it and then issued a correction — correct list is COMM, DB, GSPM, JPM, SC, UBS (all `OZNY4_FUND_NWPB_AMB`) + `JUMP_OZNY4_RETAIL_MARGIN_VT`. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1778656219150419) [corrected-list](https://mahifx.slack.com/archives/C09HN93T0G2/p1778704468117649)
+
+- 2026-05-13 — cpty 89468294 yield profile confirmed negative / toxic: client asked if Echo yield-profile chart (valutrades.NYC, 2026-04-14→2026-05-13) showing consistently negative yield from the start was expected. Nathan confirmed expected: fill price worse than reference mid at execution — aggregate starting negative and staying negative suggests toxic flow. Client acknowledged. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644533480669) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644837041159)
+
+- 2026-05-14 — USOil June→July contract roll: client posted standalone notification that USOil contract has been rolled from June to July. Acknowledged (+1). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778721944375639)
+
+- 2026-05-13 — Routine A/B book queries: cpty 88991658 (B book — Rory), 89468356 (A book XAUUSD — Sam, one to watch), 89468294 (A book — Nathan), 39933477 (A book, one day data — Nathan), 39933478 (B book, few days data — Nathan), 69942660 (B book on most recent trend, variable PnL — Rory), 89468253 (A book — Rory), 92596972 (A book — Nathan). All acknowledged. [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778734866220969)
 
 - 2026-05-03 — Pulse upsell in ops thread: following client confirming the MySQL gap fix ("looks good, appreciate help over weekend"), Justin Young suggested moving off MySQL to Pulse (faster, larger retention periods), linking the knowledge base. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777821952617999)
