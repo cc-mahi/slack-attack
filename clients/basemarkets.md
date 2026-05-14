@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Alex", role: "Base Markets — primary client contact (algo / flow)", confidence: low}
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
-last_catchup: 2026-05-12T07:24:36Z
+last_catchup: 2026-05-14T07:22:40Z
 ---
 
 ## Status
@@ -20,12 +20,12 @@ last_catchup: 2026-05-12T07:24:36Z
 
 ## Recent issues
 
-> [open] 2026-05-06 — Tegis MT4/MT5 dual-platform: Centroid workaround adopted, MT5 drop-copy on roadmap with no ETA
+> [open] 2026-05-06 — Tegis MT4/MT5 dual-platform: Centroid workaround in active integration, testing pending
 > Originally: EA on MT4 requires zero-spread exact-fill; Scope MT5 handles real execution. Compass had no lever on fill price. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778162773664489) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778174905149009)
 > **2026-05-11 update:** Kate Stagg proposed Tegis's Centroid as the workaround — Centroid handles MT4 zero-spread / MT5 standard-market-conditions split; Mahi receives market orders via FIX, hedges normally, Centroid translates fills to each platform. Andrew Morgan confirmed this is a valid "Compass broker workflow at a structural loss on the inbound by design" — MT4 accepts whatever limit price, Compass hedges to market, give-up feed into MT5 for real economics. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778494642.927869) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778258653.848549)
 > Distribution FIX creds sent to client on 2026-05-11; infra deploying `clientDistGW1`. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778499833340869)
 > Longer-term: Kate B (client) asked whether Centroid can be removed eventually — MT5 drop-copy (MTB-199, blocked since 2023 on acceptor/initiator architecture call) added to roadmap, no delivery commitment. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517045666329) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517127566459)
-> Call with FastMT requested by client 2026-05-12 (12–2pm or after 5pm UK) to discuss Tegis setup — unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
+> **2026-05-12 update:** Call between Kate Stagg and Aytugan (Centroid/Tegis side) produced 7-step integration plan: (1) Mahi creates taker connection (primary IP 192.109.17.181, backup 185.125.204.132); (2) FIX creds passed to Centroid; (3) Centroid creates maker, Mahi maker goes online; (4) Centroid prepares MAHI1 TEM (zero-spread MT4 orders → Mahi); (5) drop-copy on Netting account in Base MT5 (not Tegis MT5); (6) test account on MT4 with MAHI1 TEM for end-to-end test; (7) after Alex + Anatoly sign-off, switch MT4 accounts from Scope TEM to MAHI1 TEM. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778587371610629) Kate Stagg sent maker creds to Aytugan on 2026-05-12. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778588623913609) Testing/sign-off not yet confirmed.
 
 > [resolved] 2026-05-07 — Client asking for FIX API test/sandbox instance
 > Alex (Base Markets), relayed via Nicola Perikhanyan, asked whether Mahi has a test instance or sandbox for testing FIX API connectivity. Superseded by 2026-05-11 Centroid FIX credential setup — live Distribution FIX creds sent directly to client on 2026-05-11 as part of Tegis/Centroid onboarding. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778164813309659)
@@ -39,10 +39,13 @@ last_catchup: 2026-05-12T07:24:36Z
 > [resolved] 2026-05-12 — Rev share account 110291: partial close internalised instead of brokered to SCOPE_B
 > Account 110291 opened 5 lots short, partially closed in ≤50oz increments — these hit the "internalise 50oz" execution rule rather than the REV_SHARE broker rule (which routes to SCOPE_B). Client closed remainder manually on SCOPE_B. Daria Horton confirmed cause (execution rule ordering), shifted Compass positions to rev share book to net out. Client chose to keep rule order as-is and reconsider separately. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778564784545149) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778567380357959)
 
+> [resolved] 2026-05-13 — Client requested 3 group codes added
+> Client (Kate B) asked for `real\USD-MU-SD-KAJ-X`, `real\USD-MU-SD-KAJ-R`, `real\USD-MU-SD-KAJ-S` to be added. Kate Stagg confirmed. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778666314632929) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778666813240759)
+
 > [resolved] 2026-05-12 — MATUSD showing as indicative / no market data
 > Nathan Burch queried whether MATUSD should be pricing. Kate confirmed it is not on the platform. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778547211274859)
 
 ## Notable topics
 
-- 2026-05-12 — Client requesting call with FastMT today (12–2pm or after 5pm UK) to discuss Tegis setup; unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
+- 2026-05-13 — Centroid integration call recap posted by Aytugan: 7-step plan including Mahi taker IP whitelisting, MAHI1 TEM config, end-to-end MT4 test; Kate Stagg sent maker creds same day. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778587371610629)
 - 2026-04-29 — Alex happy with report; Tegis onboarding underway, ~2 weeks until flow starts hitting Compass. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777467956510609)
