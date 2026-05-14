@@ -11,10 +11,19 @@ key_people_overrides:
   - {name: "Nael", role: "client trading ops", confidence: low}
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
-last_catchup: 2026-05-12T07:28:08Z
+last_catchup: 2026-05-14T07:27:02Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-13 — XAGUSD internalisation proposed; maximumMarketPosition override added
+> Daria flagged XAGUSD as a candidate for internalisation (performance screenshot shared in client channel). Nathan added a `maximumMarketPosition` override (20k) on Finalto only for XAGUSD and XAUUSD — intentionally excludes LMAX and LMAX_DEFENSIVE to avoid double-counting combined LMAX exposure. Daria asked internally whether the trial has been extended; no response in window. [Daria XAGUSD proposal](https://mahifx.slack.com/archives/C09QS1NUA80/p1778732190932909) [Nathan override](https://mahifx.slack.com/archives/C09QS1NUA80/p1778712459189179)
+
+> [resolved] 2026-05-13 — XAUUSD/XAGUSD position divergence; LP position limit raised; positions reconciled
+> Client reported volume stuck from close-by process at ~21:25 BST. Daria investigated and identified a 15k XAUUSD LP position limit was hit; client (Nael) consented to raising the limit. Carl reported positions: XAUUSD Finalto 65oz / LMAX 0 / Client 65oz; XAGUSD Finalto 111,049 / LMAX 124,900 / Client 235,949. Daria requested EOD position snapshots going forward to catch divergence early. Nathan confirmed positions reconciled by 23:33 BST. [client report](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778703945959439) [Daria limit raise](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778705603277839) [Nathan reconciled](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778711637266609)
+
+> [resolved] 2026-05-14 — Hedger performance report: XAUUSD ~$13k ($71/M), XAGUSD ~$920 ($59/M)
+> Daria posted rollover hedger performance summary in client channel. Estimated savings vs previously-paid spreads: XAUUSD ~$13k ($71/M), XAGUSD ~$920 ($59/M). [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778731913293849)
 
 > [resolved] 2026-05-07 — CO1USD, CL1USD and CFD Indices switched to live internalisation
 > William proposed the go-live switch at 13:37 BST; client confirmed at 14:22 BST; William confirmed "all done" at 14:27 BST. Covers CO1USD, CL1USD, and all previously-tested indices (ASXAUD, G30EUR, F40EUR, JPXJPY, UKXGBP, NDXUSD, DOWUSD, SPXUSD). Pricers bounced at 11:22 BST to pick up XAU signals change ahead of the switch. William noted futures fast-hedge setup is still in progress (separate entry). [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778157450972219) [pricers bounce](https://mahifx.slack.com/archives/C09QS1NUA80/p1778149361517089)
@@ -25,8 +34,8 @@ last_catchup: 2026-05-12T07:28:08Z
 > [resolved] 2026-05-06 — 116oz XAUUSD long filled on Finalto, Compass adjustment done
 > Client reported 116oz gold long filled on Finalto at 15:05 BST; William confirmed booked at 16:26 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778076310926249)
 
-> [open] 2026-05-06 — Fast-hedge for futures requested; tags 4004072/4004241 slipping on gold futures
-> Client asked for fast-hedge setup on futures ASAP — specifically tags 4004072 and 4004241 are experiencing slippage on gold futures. William acknowledged aim to deliver and will keep updated; no timeline given. 2026-05-07: client reiterated "Yes please important for the futures" after go-live of CFD Indices; William confirmed "Futures setup still in progress, will let you know when that's ready to go". [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778060389989769) [2026-05-07 update](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778160477670339)
+> [open] 2026-05-06 — Fast-hedge for futures: metals + indices live 2026-05-13; spot commodities pending
+> Client asked for fast-hedge setup on futures ASAP — specifically tags 4004072 and 4004241 slipping on gold futures. 2026-05-07: William confirmed "Futures setup still in progress". 2026-05-12: William told Nael the workflow is being restructured for fast hedging, needs a couple more restarts. 2026-05-13: full test session with client (tag 4036) — XAU, XAG, NDX, SPX, DOW, DAX futures all tested and confirmed hedging to Finalto; William switched metals + indices futures to internalise. Internal: `riskQuantisationOverride` bounced for futures indices (small positions not triggering hedger); dashboard gateway bounced for futures tenant profiles. Client asked about USOIL/UKOIL/NGAS — William confirmed hedger setup "nearly complete" for spot commodities, will advise when ready to test. [original](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778060389989769) [2026-05-13 go-live](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778695014614019) [commodities update](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778695413586369) [internal bounce](https://mahifx.slack.com/archives/C09QS1NUA80/p1778693579315139)
 
 > [resolved] 2026-05-06 — XAGUSD false FI PnL drop on A_CLIENTS (Nathan investigation)
 > Nathan flagged a Graphite signal showing a FI PnL drop on XAGUSD for A_CLIENTS on 2026-05-05. Investigated and confirmed false alarm — XAGUSD is not skewed for A_CLIENTS; only XAUUSD is. Nathan noted that only XAUUSD skew on A_CLIENTS should be reported/billed. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1778107331037799)
