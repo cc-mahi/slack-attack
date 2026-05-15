@@ -15,10 +15,25 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-12T07:31:45Z
+last_catchup: 2026-05-15T07:26:13Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-15 — Routine Heavy LR add (4x Centroid CPs): acknowledged, not yet confirmed
+> Trading Ops requested 4 Centroid accounts added to Heavy LR: MT5_87018814_Centroid_2145764962, MT5_87018814_Centroid_2145764602, MT5_87018814_Centroid_3595585, MT5_87018814_Centroid_3596145. Received `:eyes:` reaction only — no actioned confirmation in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778828708292579)
+
+> [resolved] 2026-05-15 — Routine Medium LR add: 86049919
+> Trading Ops requested CP 86049919 added to Medium LR. Nathan actioned at 07:23. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778825880906259)
+
+> [resolved] 2026-05-14 — Routine Heavy LR add: Centroid 2145764439
+> Trading Ops requested 2145764439 on Heavy LR with tag MT5_87018814_Centroid_2145764439. Nathan actioned at 08:29. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778743582859029)
+
+> [resolved] 2026-05-13 — Routine Heavy LR add: Centroid 2145764883
+> Trading Ops requested 2145764883 on Heavy LR. William Denny confirmed actioned at 14:00. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778670934414159)
+
+> [resolved] 2026-05-12 — Routine Heavy LR adds: Centroid 3598260, 3595889
+> Trading Ops requested MT5_87018814_Centroid_3598260 → Heavy LR; Rory actioned at 10:27. Follow-up request for 3595889 → Heavy LR; Rory actioned at 11:14. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778577912081869) [3595889](https://mahifx.slack.com/archives/C022S6NL82D/p1778580216702899)
 
 > [resolved] 2026-05-12 — Routine No LL add: CP 83037076 (with initial profile error)
 > Trading Ops requested CP 83037076 added to No LL profile. Nathan initially added it to No LR by mistake; Trading Ops caught it and flagged the error; Nathan corrected it to No LL at 07:29. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778564634996039)
@@ -97,7 +112,9 @@ last_catchup: 2026-05-12T07:31:45Z
 
 ## Notable topics
 
-- 2026-05-12 — MT5 Manager 1263 Sunday MemoryException: Maten committed to deploying fix 2026-05-12; outcome to be confirmed. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778516772826009)
+- 2026-05-15 — 4x Centroid Heavy LR requests pending confirmation: MT5_87018814_Centroid_2145764962/2145764602/3595585/3596145 — `:eyes:` reaction only, no actioned confirmation as of end of window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778828708292579)
+- 2026-05-13–15 — High cadence of routine Centroid Heavy LR adds (5 CPs across 4 days this window). Pattern of ongoing daily Centroid arb-classifier adds continuing from prior weeks.
+- 2026-05-12 — MT5 Manager 1263 Sunday MemoryException: Maten committed to deploying fix 2026-05-12; no follow-up confirmation visible in either channel through 2026-05-15. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778516772826009)
 - 2026-05-08 — Arb classifier final steady-state stats: 169 rehabilitated, 0 re-flagged, 14 newly toxic, net active classified 418→263 (−37%). Removal rate tapering to steady state. Per-instrument continuity-pool markup + LL educational comms still outstanding. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778234503953699)
 - 2026-05-08 — LR tag format mismatch on 87047373: CH flagged process risk ("real monetary impact"). Kate process note: provide full CP tag at request time for new counterparties with no trade history. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778235032912509)
 - 2026-05-07 — Arb classifier early post-change data: 135 accounts de-classified as of ~2026-05-06 (Tuesday). Will asked Kate for improvement data; Kate pulling together fuller numbers. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1778142135958489)
