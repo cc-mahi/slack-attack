@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-05-12T07:13:53Z
+last_catchup: 2026-05-15T07:16:08Z
 status: active
 retired_at: null
 retired_reason: null
@@ -44,8 +44,8 @@ retired_reason: null
 > [open] 2026-05-05 — new crypto pairs expansion request (22 pairs; OKB/KCS pending)
 > Benjamin Galindo (@here tagged) requested 22 new crypto pairs: XMR, BCH, ETC, MKR, TON, HBAR, ICP, VET, THETA, EOS, AVAX, ATOM, MANA, SAND, OKB, KCS, GRT, PYTH, EGLD, XTZ, COMP, SNX. Isaac Dann confirmed 20 can be added immediately; OKB and KCS require a code change and deployment. On 2026-05-06 Benjamin confirmed MatchTrade pricing and said he'd check with MT on OKB/KCS availability. On 2026-05-08 Benjamin asked whether Mahi pricing could be used for those instruments instead. On 2026-05-11 Benjamin chased again (tagging Mio Knights) — no Mahi resolution on the OKB/KCS code change yet. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778006518033119)
 
-> [open] 2026-05-08 — client requesting Mahi copy/group trading correlation script
-> BrightFunded (Benjamin Galindo) asked on 2026-05-08 whether Mahi still has a trading correlation script for detecting copy/group trading, intending to combine it with new fingerprinting software for multi-account detection as a weekly review process. Cameron Hughes acknowledged on 2026-05-11 ("Hey Ben, let me check the progress on that one") but no script or timeline confirmed yet. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778240384530379)
+> [resolved] 2026-05-08 — client requesting Mahi copy/group trading correlation script
+> BrightFunded (Benjamin Galindo) asked on 2026-05-08 whether Mahi still has a trading correlation script for detecting copy/group trading, intending to combine it with new fingerprinting software for multi-account detection as a weekly review process. Cameron Hughes acknowledged on 2026-05-11 ("Hey Ben, let me check the progress on that one"). On 2026-05-12 Cameron H delivered the first weekly CSV report (`brightfunded_coordinated_trading_2026-05-05_2026-05-12.csv`) to the client channel; client replied positively ("Thanks mate will let you know if there are any questions"). [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778602892678569)
 
 > [open] 2026-06-03 — second pricing model for qualifying traders (tighter spreads)
 > Jelle raised on a call (2026-06-03) that VWAP on larger-ticket qualifying traders is causing complaints; wants tighter spreads for qualifying flow only without touching funded. Amir proposed a separate qualifying pricing model (same config, tighter tiers and BMSL) — straightforward to set up but needs a new FIX connection (DX + cTrader = 2 additional connections; BF already uses 3 of their contracted FIX connections). As of 2026-06-04/05 Bonnie checking the contract (1 distribution channel, 3 FIX connections specified); Andrew says $500/month for one model, and server load needs a review before proceeding. Bonnie reached out to Syb, who was unaware of the specifics. Not yet contracted or scheduled. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1748947530909369)
@@ -68,3 +68,4 @@ retired_reason: null
 - New cTrader account tags announced by Syb (2026-05-02): `fundedNormalSwapsRedLev` and `fundedSwapFreeRedLev` added for reduced-leverage funded accounts. Kate Stagg acknowledged. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1746194166004499)
 - Crypto pricing went indicative briefly on 2026-05-22 (Match MD login failure ~8 min); Daria noted Pepper LDN could proxy as backup in the continuity pool. Self-recovered. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1747945987365829)
 - Market reopen pricing monitoring (2026-05-05): Shyam Hari asked internal team to keep BrightFunded updated on indicative pricing at reopen and watch pagers; Daria confirmed coverage in place within 4 min. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1778016012506979)
+- Bi-weekly call notes (2026-05-12, Cameron Hughes): client reports account purchases and volumes declining in April; asked if industry-wide trend. New programs performing well and close to sim expectations. Client implementing fingerprinting for multi-account prevention; Mio (client-side) working on abusive trading detection and will reach out to Mahi to collaborate. Crypto expansion pricing concern reiterated — Match pricing too costly, client wants Mahi LP pricing for new instruments. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1778581203791929)
