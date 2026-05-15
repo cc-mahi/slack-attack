@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-12T07:19:18Z
+last_catchup: 2026-05-15T07:09:01Z
 ---
 
 ## Status
@@ -95,6 +95,12 @@ last_catchup: 2026-05-12T07:19:18Z
 
 > [watching] 2026-05-08 — Weekly P&L: $7.5k from 402m (week to date)
 > Daria's mid-week update: 222m internalised, 180m brokered. Brokered flow decays quickly but stays onside (3x spread of internalised: $14/M brokered vs $47/M internalised). Two counterparties (928986, 928994) blacklisted from broker for now — bad couple of weeks but aggregate yield acceptable for internalisation. Net brokered spread $3.4k; internalisation P&L $4.1k (RoS 130%); LR P&L $1.4k mostly on brokered. Skew P&L had initial EURUSD open loss from arb but has fully recovered. Focus on skew and mid improvements (Shyam reviewing). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
+
+> [resolved] 2026-05-13 — XAUAUD retail scalping loss $5.9k (UBS arb-protection misconfiguration)
+> Two new retail accounts (CPs 105988 and 105990, ~6 days old) scalped XAUAUD during FX twilight (22:26–22:42 UTC 2026-05-12): 106 round-trips, 1–30 oz each. Root cause: UBS is sole firm XAUAUD LP; `pricing.arbProtectionParameters` had UBS in reference markets but not referencePriceMarketSelectors, clamping published quote into UBS's wide twilight spread instead of the clean triangulated XAUUSD×AUDUSD price. Fix: removed XAUAUD from arbProtectionParameter rules; pricing now uses pure triangulated price. Shyam monitoring CPs 105988/105990 for activity on other crosses. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+
+> [resolved] 2026-05-13 — toa_argamon.LDN XAUUSD signal data missing on TOB (signal persistence gap post-reboot)
+> Elan flagged missing signal data on toa_argamon.LDN XAUUSD in Echo TOB. Daria diagnosed: signal persistence broke after last system reboot. Restart fixed it; signals persisting again from ~02:30 BST. Historical signal data cannot be backfilled for the gap. Elan satisfied with resolution. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
 
 ## Notable topics
 
