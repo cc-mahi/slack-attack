@@ -9,7 +9,8 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-12T07:37:52Z
+  - {name: "Jackson", role: "VT — ops/technical, sent GTC order credentials", confidence: low}
+last_catchup: 2026-05-15T07:34:59Z
 ---
 
 ## Recent issues
