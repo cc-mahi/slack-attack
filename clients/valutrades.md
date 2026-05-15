@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-12T07:35:48Z
+last_catchup: 2026-05-15T07:34:57Z
 ---
 
 ## Recent issues
@@ -66,6 +66,22 @@ last_catchup: 2026-05-12T07:35:48Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-05-15 — cpty 68560558 yield comparison 13 vs 14 May — client queried why 13-May graph looks bad vs 14-May good for XAUUSD. Nathan explained: in the earlier period (5th–8th) the cpty has toxic flow which drags the aggregate down; on 13th (~90m) and 14th (~100m) flow is good. Individual daily breakdown via Echo recommended. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778828797928809) [nathan-explanation](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778829933281219)
+
+- 2026-05-14 — Quantitative Brokers UAT integration: client asked Liam what IP Mahi would use for the Quantitative Brokers integration development, to get QB to generate UAT credentials. Liam replied with UAT server IP `54.210.37.117`. [client-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778747009073289) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1778748199619179)
+
+- 2026-05-14 — cpty 89468256 yield profile — client asked team to check if graph is expected. Cameron Hughes (Analyst) replied: the trade was a drop copy plotted against aggregate mid from a list of XAUUSD markets (COMM/DB/GSPM/JPM/SC/UBS_OZNY4_FUND_NWPB_AMB and JUMP_OZNY4_RETAIL_MARGIN_VT), and flagged that a riskPath change was made for XAUUSD the previous day that also captures drop copies — checking internally why. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778755151760979) [cameron-h-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778755560946439)
+
+- 2026-05-14 — Deployment/bounce pending — gateway chaser: client sent standalone message "Is this still pending deployment and connection bounce?" at 10:41, then at 12:49 said "Ok we will reach out tomorrow morning when we have more team members online to monitor". Relates to open gateway disconnect issue (2026-05-10). No Mahi reply to the chaser visible. [chaser](https://mahifx.slack.com/archives/C09HN93T0G2/p1778751711118929) [client-defer](https://mahifx.slack.com/archives/C09HN93T0G2/p1778759368049199)
+
+- 2026-05-14 — USOil contract rolled June→July: client notified Mahi team that they have rolled the USOil contract from June to July. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778721944375639)
+
+- 2026-05-13 — XAUUSD yield profile reference markets — updated: Andri asked which LP Mahi uses for XAUUSD yield profile valuation. Nathan listed five markets initially, then corrected at 21:34 to: COMM/DB/GSPM/JPM/SC_OZNY4_FUND_NWPB_AMB and UBS_OZNY4_FUND_NWPB_AMB. Andri also requested JUMP_OZNY4_RETAIL_MARGIN_VT be added; Nathan confirmed added (white_check_mark). [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1778656219150419) [nathan-corrected-list](https://mahifx.slack.com/archives/C09HN93T0G2/p1778704468117649)
+
+- 2026-05-13 — cpty 89468294 yield starts negative — explained: client queried expected behaviour on Echo yield starting negative. Nathan explained: negative start means fill price was worse than reference mid at execution — "The aggregate YP starting negative and staying mostly negative suggests this is toxic flow." Nathan also classified this cpty as A book (separate message). [thread](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644533480669)
+
+- 2026-05-13–15 — Routine A/B book classifications (mahi-valutrades, window): 88991658 (Rory: B), 89468356 (Sam: A, XAUUSD only, limited data — watch), 89468294 (Nathan: A), 39933477 (Nathan: A, 1 day data only), 39933478 (Nathan: B, few days data), 69942660 (Rory: B, variable PnL), 89468253 (Rory: A), 92596972 (Nathan: A), 69942269 (Nathan: B), 89468388 (Rory: A), 89468373 (Rory: B, limited data). All acknowledged. [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778584889121429)
 
 - 2026-05-05 — UAT Compass availability query: Graeme asked `@here` whether a functioning UAT Compass environment is available. Kate replied she would check; Liam noted a UAT environment exists and "we should be able to spin up whatever you need in fairly short order". No definitive confirmation in window. Bonnie flagged the unanswered question internally. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997434492069) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997877227319)
 
