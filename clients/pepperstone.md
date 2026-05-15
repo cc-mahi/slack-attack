@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-15T07:28:51Z
 ---
 
 ## History
@@ -103,8 +103,11 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 > [open] 2026-05-11 — USTUSD hedger B2C2 deprioritisation lag on large order; fill speed concern
 > Stephen flagged that during a ~$500k AUD UST trade (382k units at 1.38), hedgers kept retrying B2C2 despite insufficient-balance errors rather than switching to Crossover/LMAX sooner, leaving the position partially exposed. Marianna clarified the LP wasn't deprioritised fast enough. Daria adjusted hedger config (further restricting B2C2, reordered rules so backstop can fire), increased liquidity layers; Stephen raised TOB to 10k UST. Separately, fills were slow (250 UST parcels) because only the first two layers were inside the client's limit price — Stephen gathering client feedback on acceptable fill timeframe. Daria still simulating the config change. NOP alignment between Compass and B2C2 limits also discussed — Stephen noted treasury deposits/withdrawals make Compass NOP not reflective of underlying. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489962714849) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778536863658599) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778560468492269)
 
+> [open] 2026-05-15 — XAG InvNY1 hedger off again after restarts; automation/alert revisit requested
+> Stephen flagged that XAG (InvNY1 inventory hedger, CFD desk) was off again following restarts. Daria switched it back on and confirmed she would review the notifications. Recurrence of the 2026-05-11 auto-start failure — Kate Stagg had added config for auto-start then, but it has not held. Stephen asked to revisit automation and/or alerting specifically for InvNY1. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778808580296939)
+
 > [resolved] 2026-05-11 — Inventory hedger failed to auto-start after weekend restart
-> MK reported that the inventory hedger (CFD desk) did not come up automatically after the weekend restarts. Kate Stagg added config to ensure auto-start and bounced systemStateMonitor to pick up the alerting config for expected on/off status. MK confirmed resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778506644097019)
+> MK reported that the inventory hedger (CFD desk) did not come up automatically after the weekend restarts. Kate Stagg added config to ensure auto-start and bounced systemStateMonitor to pick up the alerting config for expected on/off status. MK confirmed resolved. Recurred 2026-05-15 (see entry above). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778506644097019)
 
 > [resolved] 2026-05-07 — XETUSD arbitrageur limit order rejections (continuity pool markup)
 > Reece flagged high rejection volume on XETUSD from accounts 1353145/1353144/1353142 in mahi-pepperstone-notifications. Orders were being cancelled before eventually executing once price moved enough. Rory investigated: these accounts are labelled as arbitrageurs — their limit orders are force-internalised on the continuity pool with markup, but the resulting fill would breach the client's limit price, so orders cancel until the market price falls to the limit. Root cause identified; no config change noted yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778168234906839) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778172460768509)
@@ -139,8 +142,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 > [resolved] 2026-04-29 — Inventory XAG Tapaas A/B reporting — tag 1 prefix solution
 > Daria's call: only the new inventory hedgers needed the change. Set up round-robin tag strategy on the inventory hybrids with B-HEDGING and B-HEDGING-LDN trading accounts. MK testing; no dev change required. Supersedes the 2026-04-22 [open] entry. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777447938640189)
 
-> [resolved] 2026-04-27 — Cpty 2075077 not routed to Dynamic Arbitrageurs (root cause: fillAtWssPrice override)
-> Reece's 6-Apr 22:00 UTC XAGUSD fill at 72.55 instead of 73.246: at 22:03:39.307 an LP bid collapse caused B_BOOK to publish a WSS-clamped bid=72.25/offer=72.55; 65ms later the SELL filled at exactly 72.55 — `fillAtWssPrice` was overriding the continuity-pool execution for Dynamic Arbitrageurs. WSS overrides continuity workflow when fired. Brokered workflow unaffected (only internalised orders). Discussion ongoing on whether to switch to continuity / unwind the override; Reece wants to know plan before any change as it impacts client execution. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777305102439059)
+> [open] 2026-04-27 — Cpty 2075077 not routed to Dynamic Arbitrageurs (root cause: fillAtWssPrice override); fix in progress
+> Reece's 6-Apr 22:00 UTC XAGUSD fill at 72.55 instead of 73.246: at 22:03:39.307 an LP bid collapse caused B_BOOK to publish a WSS-clamped bid=72.25/offer=72.55; 65ms later the SELL filled at exactly 72.55 — `fillAtWssPrice` was overriding the continuity-pool execution for Dynamic Arbitrageurs. WSS overrides continuity workflow when fired. Brokered workflow unaffected (only internalised orders). 2026-05-13: Daria notified Pepper that dev have made a change to allow forcibly internalised orders to be excluded from fill-at-WSS-price logic; planned deployment to FX+Metals env during metal close using LDN/NY failover. 2026-05-14: FX env deploy hit an issue and was rolled back (failed over to LDN OK, no trade impact per Stephen). ARB clients fix deferred to early next week pending dev review. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777305102439059) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778708983110969) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778797764931869)
 
 > [open] 2026-04-24 — YTD list of counterparties removed from `reference.lists.counterparty.custom`
 > Reece asked for a full YTD removal list beyond what Audit History surfaces; Kate investigating. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777024868051039)
