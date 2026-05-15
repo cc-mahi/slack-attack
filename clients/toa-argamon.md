@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-12T07:32:09Z
+last_catchup: 2026-05-15T07:30:04Z
 ---
 
 ## Status
@@ -24,6 +24,12 @@ last_catchup: 2026-05-12T07:32:09Z
 - **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
 
 ## Recent issues
+
+> [resolved] 2026-05-13 — XAUAUD arb-protection misconfiguration; $5.9k scalping loss from two new retail CPs
+> CPs 105988 and 105990 (both ~6 days old) executed 106 XAUAUD round-trips over 16 mins during FX twilight (22:26–22:42 UTC on 2026-05-12), 1–30 oz each, harvesting ~$5.9k. Root cause: `pricing.arbProtectionParameters` had UBS in reference markets but not referencePriceMarketSelectors, causing Mahi's quote to clamp to UBS's wide twilight spread rather than the cleaner triangulated XAUUSD × AUDUSD price. Fix: XAUAUD removed from arbProtectionParameter rules; pricing now uses pure triangulated price. Shyam monitoring CPs for attempts on other crosses. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+
+> [resolved] 2026-05-13 — XAUUSD signal data missing in Echo for LD4 after system reboot
+> Argamon flagged XAUUSD signal data not showing in Echo TOB for toa_argamon.LDN. Daria identified signals were not being persisted since the last system reboot; restarted the relevant process, signals persisting again from that point. Backfill of the gap period not possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
 
 > [open] 2025-07-14 — Reactive Markets slow-consumer / Beeks connectivity recurring
 > Argamon raised Reactive connectivity issue with Beeks; hour-long phone call before Beeks escalated to L2, then fixed almost instantly on escalation. Same class of issue had been seen earlier (Reactive slow consumer persisting after Beeks cross-connect applied). Reactive production go-live is in progress (Arun handling; UAT test trades passed 2025-06-30; production test trades underway as of 2025-07-01). GTS Reactive markets added to hybridHedger1 non-LP-reducing rules 2025-07-14. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752458081221389)
