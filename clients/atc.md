@@ -7,19 +7,19 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-12T07:24:37Z
+last_catchup: 2026-05-15T07:19:24Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-11 — GBPUSD open loss $1.8k; Finalto TOB quantity mismatch; remediation options pending ATC decision
-> At market open 2026-05-11, client 27072237 traded GBPUSD at a tighter-than-market spread: Finalto had dropped published quantity to 100k while the model was publishing 300k at TOB, leaving no LP reference at that size and triggering base spreads. Daria proposed four options: (1) reduce TOB qty to 100k; (2) widen base spreads for the first hour (collateral impact); (3) add BMSL/MAHI_BENCHMARK_LDN as reference market; (4) implement a new benchmark-widening type that references smaller quantities. Malik asked whether the hedger could have exited at a lower level to limit the loss; Daria confirmed the hedger cleared the risk fine but the problem was in pricing at execution time (~3s window). Awaiting ATC's preferred approach. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778473221775049) · [Daria options reply](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778534112919499) · [internal TOB analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1778473279858959)
+> [watching] 2026-05-11 — GBPUSD open loss $1.8k; Finalto TOB quantity mismatch; BMSL benchmark applied 2026-05-13
+> At market open 2026-05-11, client 27072237 traded GBPUSD at a tighter-than-market spread: Finalto had dropped published quantity to 100k while the model was publishing 300k at TOB, leaving no LP reference at that size and triggering base spreads. Daria proposed four options: (1) reduce TOB qty to 100k; (2) widen base spreads for the first hour (collateral impact); (3) add BMSL/MAHI_BENCHMARK_LDN as reference market; (4) implement a new benchmark-widening type that references smaller quantities. Malik asked whether the hedger could have exited at a lower level to limit the loss; Daria confirmed the hedger cleared the risk fine but the problem was in pricing at execution time (~3s window). **2026-05-13**: Daria applied option 3 — BMSL added with MAHI_BENCHMARK_LDN. No explicit ATC sign-off or confirmation of resolution recorded yet. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778473221775049) · [Daria options reply](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778534112919499) · [internal TOB analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1778473279858959) · [BMSL applied](https://mahifx.slack.com/archives/C046RNF64VD/p1778632572190249)
 
 > [open] 2026-05-08 — David Manoukian unable to access LN Compass admin portal after IP whitelisting
 > Despite IP `47.41.47.224` being whitelisted (Notable Topics 2026-05-08), David still couldn't reach `atc-ln-admin-1.96yb.prod.mahimarkets.com:8400`. Inald Gjoni ran diagnostics (Test-NetConnection + tracert to `46.235.34.67:8400`), results sent to Beeks. David suspected his own security configuration. No resolution confirmed in window. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778253602532909)
 
-> [open] 2026-05-07 — SI book losing Feb–now; owner unresolved
-> Andrew Morgan reviewed account summary and noted ATC SI book has been losing every month from February to present. He couldn't identify the responsible party ("there's an action there for someone I just dont know who"). Thread handed off to Cameron Hughes (Analyst) to pick up. No root-cause or fix in this window. [permalink](https://mahifx.slack.com/archives/C046RNF64VD/p1778157088950569)
+> [resolved] 2026-05-07 — SI book losing Feb–now; SI disabled 2026-05-13 pending volume recovery
+> Andrew Morgan reviewed account summary and noted ATC SI book has been losing every month from February to present. He couldn't identify the responsible party ("there's an action there for someone I just dont know who"). Thread handed off to Cameron Hughes (Analyst) to pick up. **2026-05-13**: Cameron Hughes disabled SI — all flow now either brokered or goes straight into Compass book. Decision follows Andrew's catch-up with Malik (same day) confirming volumes are a real issue and SI needs to pause until they recover. [original permalink](https://mahifx.slack.com/archives/C046RNF64VD/p1778157088950569) · [SI disabled](https://mahifx.slack.com/archives/C046RNF64VD/p1778685898340249)
 
 > [resolved] 2026-05-06 — LP position adjustment applied in Compass
 > Malik (ATC) posted a screenshot requesting an LP action-item adjustment between LPs. Rory confirmed the adjustments were reflected in Compass at 13:52 UTC 2026-05-06; Malik acknowledged. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778074242656559)
@@ -34,6 +34,10 @@ last_catchup: 2026-05-12T07:24:37Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-05-13 — Andrew catch-up with Malik; business stress signals and pipeline interest. Malik confirmed: (1) volumes down sharply — SI paused until recovery; (2) ATC had one client default, two major accounts stop, ran out of cash, and received unreasonable margin/credit demands; (3) prop-firm build continuing — Jack (ATC) has embraced AI tooling and is building fast; (4) interested in Mahi swap solution for MQ management bridge; (5) interested in NOP management offering; (6) have physical gold dealers whose flow Malik is cautious about — open to Mahi taking a look; (7) copy-trading advice requested (Andrew provided opinion + PDF). [permalink](https://mahifx.slack.com/archives/C046RNF64VD/p1778673012577299)
+
+- 2026-05-12 — UAT server restart. Malik requested a UAT server restart for back-office developer testing; Inald confirmed it was back up. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778583190373309)
 
 - 2026-05-11 — EURUSD position action item self-cleared. Malik flagged an action item showing on the reconciliation report since UK open (client position 8,145,494 EURUSD). Kate investigated; Malik followed up ~4.5h later saying it had cleared up and ATC would look into the cause. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778516831373549)
 
