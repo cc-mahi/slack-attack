@@ -7,12 +7,21 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/valutrades.md (not yet)
 channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-operations"]   # -operations is a distinct operations channel not in VibePulse yaml
 key_people_overrides:
-  - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
+  - {name: "Andri Zamroni", role: "client trading ops — algo connections, rejects, yield profile queries"}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-12T07:35:48Z
+last_catchup: 2026-05-18T07:42:26Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-15 — TT UAT connection not yet live — waiting on OZ to configure passthrough acceptor
+> Graeme asked to get TT UAT connection up on 2026-05-15. Rory (Mahi) replied "will do". Arun Patel clarified: still waiting on OZ to create the new connection for `ttPassthroughGateway1` at 54.210.37.117:9013; no update from OZ on email thread. Same IP/gateway also involved in the USD-volume TT algo bounce (see below). No resolution in window. [client-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1778834709670259) [arun-status](https://mahifx.slack.com/archives/C09HN93T0G2/p1778836581705479)
+
+> [open] 2026-05-15 — cpty 89468337/89468338 yield profile query — unanswered
+> Client asked team to look at Echo yield-profile link for cptys 89468337 and 89468338 (2026-05-13 21:00→2026-05-14 21:00 window) and confirm if expected; sent a screenshot. No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778831983239069)
+
+> [resolved] 2026-05-13 — XAUUSD yield-profile reference LP list corrected; JUMP market added
+> Andri asked which LPs are used for XAUUSD yield-profile valuation. Nathan initially provided an incorrect list; corrected to COMM/DB/GSPM/JPM/SC_OZNY4_FUND_NWPB_AMB + UBS_OZNY4_FUND_NWPB_AMB. Andri requested `JUMP_OZNY4_RETAIL_MARGIN_VT` be added; Nathan added it same day. [thread](https://mahifx.slack.com/archives/C09HN93T0G2/p1778656219150419) [correction](https://mahifx.slack.com/archives/C09HN93T0G2/p1778704468117649)
 
 > [open] 2026-05-11 — Compass receiving unsubscribed market data — mapping query unanswered
 > Daria (Mahi) posted that Compass is receiving market data it's not subscribing to, listing unrecognised markets under `MFX-IG_Q->ValuCY_Live_Q` (JFX_VALUTRADES-SW-NY4) and `MFX-FEED4_Q->ValuCY_Live_Q` (Valutrades, LMAX-ValutradesNWtk1, Currenex-Valutrades, JUMP-CFD, JumpMakerValutrades, Velocity, JFX_VALUTRADES-SW-NY4, Commerz-Valutrades). Asked team to confirm correct market mappings/setup. No reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778465858044369)
@@ -29,8 +38,8 @@ last_catchup: 2026-05-12T07:35:48Z
 > [open] 2026-05-07 — `valu.user` DB access denied on 43.218.202.79 — unanswered
 > Client reported `Error: 1044 (42000): Access denied for user 'valu.user'@'43.218.202.79' to database 'PROD_LIVE_CLIENTDB'`. Note: this IP was whitelisted for `airflow` in the 2026-05-06 DB whitelist run (see below); `valu.user` may require separate whitelisting. No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778151018652949)
 
-> [open] 2026-05-07 — USD volume on TT algo trades incorrect in Echo — fix in progress
-> Graeme (client) chasing fix for USD volume displayed on TT algo trades in Echo. Inald replied: "we are currently working on a fix for this and should hopefully get this out soon." No ETA given. [client-chase](https://mahifx.slack.com/archives/C09HN93T0G2/p1778153944809909)
+> [open] 2026-05-07 — USD volume on TT algo trades incorrect in Echo — deploy/bounce pending client go-ahead
+> Graeme chasing fix for USD volume on TT algo trades. Inald had a potential fix by 2026-05-08 but needed intra-day bounce of fixOrdersTT1/TT2, fixMarketDataTT1, analyticsFixServerValutradesAMB1, ttPassthroughGateway1/2; held back per client's request. Arun confirmed plan 2026-05-14 — client said "tomorrow morning when more team members online to monitor" (2026-05-14). Shyam Hari (Mahi overnight) sent "Hi team, is there any update here?" on 2026-05-18 with no reply yet. [original-chase](https://mahifx.slack.com/archives/C09HN93T0G2/p1778153944809909) [arun-plan](https://mahifx.slack.com/archives/C09HN93T0G2/p1778752343749769) [shyam-followup](https://mahifx.slack.com/archives/C09HN93T0G2/p1779066534133159)
 
 > [resolved] 2026-05-06 — Echo chart data incomplete for VALUTRADES_B_CLIENTS (ops channel) — fixed by Liam same day
 > Garry Bersnov (client) had raised incomplete Echo yield-profile chart data for SPXUSD and other instruments on VALUTRADES_B_CLIENTS on 2026-04-28 (ops thread). Issue persisted after the trading-channel yield-profiles fix (2026-05-02 release); Andri chased again 2026-05-06 10:52 ("Have this been fixed?") and 11:08 ("please give a priority"). Liam replied 10:52 ("tricky to investigate"), identified the bug at 11:09 ("I think I've managed to identify the bug, just working on a fix"), deployed fix and confirmed at 14:41, corrected historic data at 20:59. Client confirmed "Looks good now" 2026-05-07 06:08. [client-chase](https://mahifx.slack.com/archives/C09HN93T0G2/p1778061150922779) [liam-fix](https://mahifx.slack.com/archives/C09HN93T0G2/p1778074877176869) [historic-fixed](https://mahifx.slack.com/archives/C09HN93T0G2/p1778097584848219) [client-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1778130513793059)
@@ -66,6 +75,16 @@ last_catchup: 2026-05-12T07:35:48Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-05-14 — Quantitative Brokers integration — UAT creds requested: Graeme asked Liam Cordelle what IP Mahi would use for dev of the Quantitative Brokers integration, so he could start getting QB to generate UAT credentials. Liam replied: 54.210.37.117 (UAT server IP). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778747009073289)
+
+- 2026-05-14 — XAUUSD drop-copy riskPath change flagged by Cameron Hughes: cpty 89468256 yield query led Cameron Hughes (Analyst, internal) to note that "there was a change made to riskPath for XAUUSD yesterday that also captures drop copies" and that he is checking internally why this was made. Drop copy was plotted against COMM/DB/GSPM/JPM/SC/UBS_OZNY4_FUND_NWPB_AMB + JUMP_OZNY4_RETAIL_MARGIN_VT. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778755560946439)
+
+- 2026-05-15 — cpty 68560558 yield-profile variance explained: client asked why 2026-05-13 yield chart looked bad but 2026-05-14 looked good for XAUUSD. Nathan explained toxic flow 5–8 May vs good flow 13–14 May (90m and 100m traded respectively); resolved satisfactorily. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778828797928809)
+
+- 2026-05-14 — USOil June→July contract roll confirmed: client notified Mahi team of the roll; no issue. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778721944375639)
+
+- 2026-05-12–15 — Routine A/B book classification queries: cptys 88991658 (Rory: B), 89468356 (Sam: A book XAUUSD, watch — recent trades only), 89468294 (Nathan: A), 39933477 (Nathan: A, 1-day data), 39933478 (Nathan: B, few days), 69942660 (Rory: B — variable PnL), 89468253 (Rory: A), 92596972 (Nathan: A), 69942269 (Nathan: B), 89468388 (Rory: A), 89468373 (Rory: B, limited data), 85565594 (Rory: A). [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778852842703539)
 
 - 2026-05-05 — UAT Compass availability query: Graeme asked `@here` whether a functioning UAT Compass environment is available. Kate replied she would check; Liam noted a UAT environment exists and "we should be able to spin up whatever you need in fairly short order". No definitive confirmation in window. Bonnie flagged the unanswered question internally. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997434492069) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997877227319)
 
