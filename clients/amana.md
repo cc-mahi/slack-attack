@@ -7,14 +7,23 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/amana.md (not yet)
 channels_override: null
 key_people_overrides:
-  - {name: "Karen Montero", role: "ops / test trading liaison", confidence: low}
+  - {name: "Karen Montero", role: "ops / test trading liaison"}
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-12T07:19:29Z
+  - {name: "Ali Wehbe", role: "dealer — Compass/Echo access requested", confidence: low}
+  - {name: "Rami Osman", role: "dealer — Compass/Echo access requested", confidence: low}
+  - {name: "Andreas", role: "ops — crude oil futures expiry liaison", confidence: low}
+  - {name: "Hadeel Salah", role: "ops — CFD book reconciliation", confidence: low}
+  - {name: "Rafik Mansour", role: "dealer — Echo/Compass access requested", confidence: low}
+  - {name: "Ahmad Hashem", role: "dealer — Echo/Compass access requested", confidence: low}
+last_catchup: 2026-05-18T07:23:42Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-13 — Dynamic arbitrageur auto-classification disabled; $50/M markup on auto-arber profile removed
+> Nikos raised (14:21 BST) that cpty 8001807 was getting excessive slippage — found to be on the ABOOK Arbitrageurs dynamic profile, filled against continuity pool + $50/M markup that Nikos says was never agreed. Rory confirmed the cpty had been manually whitelisted into the dynamic arber rule in January (B-book era). Rory disabled the dynamic arb classification rule across all channels at 18:11; removed the three auto-classified counterparties (7005095, 8007667, 20077893) from the ABOOK arber whitelist. Markup removed from dynamic arb profile. Manual Arber Selection execution rule is unchanged (no markup applied there). Nikos: "we lost this client because of this"; plans call on 2026-05-14 to review execution rule architecture. No confirmation yet that the call happened or further changes were made. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778678491192539)
 
 > [open] 2026-05-12 — Nikos querying limit fill execution on XAUFUT-M / arber execution profile last-look tightening
 > Nikos asked (06:35 BST) why cpty 5800055 was filled at $4685.71 when offer appeared at that price ~100ms before execution. Nathan explained: 500ms LL delay on ABOOK/Manual Arber Selection execution profile; limit price passed price check at both ends of the window; client filled at limit (not the moved offer). Nikos responded at 08:14 BST: "I will bring it down a bit as we have no interest to provide a good execution experience to those clients" — intends to tighten price check and/or mid distance on the arber execution profile. Change not yet applied. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778564126787019)
