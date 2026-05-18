@@ -9,7 +9,9 @@ channels_override: null
 key_people_overrides:
   - {name: "Alex", role: "Base Markets — primary client contact (algo / flow)", confidence: low}
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
-last_catchup: 2026-05-12T07:24:36Z
+  - {name: "Aytugan Khafizov", role: "Centroid — technical integration contact (FIX / TEM setup)", confidence: low}
+  - {name: "Anatoly", role: "Base Markets — internal sign-off contact (referenced alongside Alex for MT4 account switch confirmation)", confidence: low}
+last_catchup: 2026-05-18T07:25:34Z
 ---
 
 ## Status
@@ -26,6 +28,15 @@ last_catchup: 2026-05-12T07:24:36Z
 > Distribution FIX creds sent to client on 2026-05-11; infra deploying `clientDistGW1`. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778499833340869)
 > Longer-term: Kate B (client) asked whether Centroid can be removed eventually — MT5 drop-copy (MTB-199, blocked since 2023 on acceptor/initiator architecture call) added to roadmap, no delivery commitment. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517045666329) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517127566459)
 > Call with FastMT requested by client 2026-05-12 (12–2pm or after 5pm UK) to discuss Tegis setup — unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
+> **2026-05-12 update:** Post-call recap from Aytugan Khafizov (Centroid technical contact) confirmed 7-step integration plan: (1) Mahi creates taker FIX connection with Centroid IPs whitelisted, (2) Centroid creates a maker from Mahi creds, (3) bridge restart, (4) Centroid builds MAHI1 TEM (inheriting MT4 zero-spread config from current Scope TEM), (5) drop-copy on netting account in Base MT5, (6) end-to-end test on MT4 test account, (7) Alex and Anatoly confirm before switching existing MT4 accounts. Kate Stagg sent maker creds to Centroid. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778587371610629)
+> **2026-05-16:** Centroid restarted; Mahi maker went offline. Client reported IPs not whitelisted (Primary: 192.109.17.181, Backup: 185.125.204.132, DNS: tzouk.centroidsol.com). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778914623299679)
+> **2026-05-18:** Daria Horton confirmed Beeks whitelisting; Aytugan confirmed Mahi maker now connected from Centroid side — proceeding with configuration. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779081321195119)
+
+> [resolved] 2026-05-15 — LMAX FIX connection spamming incorrect password / locking account
+> Client (Kate B) flagged that LMAX FIX session was spamming incorrect password and locking the account. Asked Mahi to turn it off so LMAX could send a new password. Rory King confirmed the NZ team had already disabled it early morning UK time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778848988422949) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778849696126849)
+
+> [resolved] 2026-05-13 — Client requesting three new group codes
+> Kate B requested addition of: `real\USD-MU-SD-KAJ-X`, `real\USD-MU-SD-KAJ-R`, `real\USD-MU-SD-KAJ-S`. Kate Stagg acknowledged. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778666314632929)
 
 > [resolved] 2026-05-07 — Client asking for FIX API test/sandbox instance
 > Alex (Base Markets), relayed via Nicola Perikhanyan, asked whether Mahi has a test instance or sandbox for testing FIX API connectivity. Superseded by 2026-05-11 Centroid FIX credential setup — live Distribution FIX creds sent directly to client on 2026-05-11 as part of Tegis/Centroid onboarding. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778164813309659)
@@ -44,5 +55,7 @@ last_catchup: 2026-05-12T07:24:36Z
 
 ## Notable topics
 
+- 2026-05-18 — Centroid FIX maker session confirmed connected from Centroid side (Aytugan); Daria Horton confirmed Beeks whitelisting complete. Integration proceeding to TEM configuration phase. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779081321195119)
+- 2026-05-12 — Post-call: Aytugan Khafizov (Centroid) posted 7-step integration plan covering Mahi taker FIX setup, MAHI1 TEM build, MT4 test account end-to-end, and final Alex/Anatoly sign-off before account switch. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778587371610629)
 - 2026-05-12 — Client requesting call with FastMT today (12–2pm or after 5pm UK) to discuss Tegis setup; unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
 - 2026-04-29 — Alex happy with report; Tegis onboarding underway, ~2 weeks until flow starts hitting Compass. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777467956510609)
