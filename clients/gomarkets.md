@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-12T07:26:06Z
+last_catchup: 2026-05-18T07:32:09Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-17 — GoMarkets-A-Orders-Centroid session disconnect
+> David (client) reported the A-book Centroid connection was disconnected / unable to connect at ~23:48 UTC. Isaac diagnosed: Mahi received no logon request on GoMarkets-A-Orders-Centroid; same Centroid bridge restart issue seen on another client the same day. Isaac asked for a Centroid restart or logon retry — David requested restart; confirmed successful at 00:06 UTC 2026-05-18. Recurring Centroid session-drop pattern (cf. 2026-04-27 B-Prices, now A-Orders). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779058091343579)
 
 > [open] 2026-05-10 — FX market-open order rejections due to excessive internal latency
 > Will (GoMarkets) reported a burst of order cancellations at FX open: "Forcibly cancelled order due to excessive internal latency. Configured last-look delay was exceeded by 475ms (actual delay 605ms - expected delay 130ms) > max overrun allowed 300ms." Event lasted ~1 second (last cancel at 21:01:01.571 UTC). Nathan confirmed isolated to FX market opening, stable since; reviewing with dev team to prevent recurrence. Client asked whether any config adjustments could help. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778450112481459)
@@ -38,6 +41,10 @@ last_catchup: 2026-05-12T07:26:06Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-18 — Monthly reports pending signoff: Isaac noted March and April 2026 Go Markets monthly reports (generated via /monthly-summary) are sanity-checked and awaiting sign-off. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779065318031379)
+
+- 2026-05-18 — Echo execution profile brokered/internalised view: Will (client) asked how to see whether historical execution profiles result in brokered vs internalised decisions in Echo. Isaac provided a direct Echo link grouped by `trade_type, execution_profile` — Will confirmed sufficient. No action outstanding. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779080603722709)
 
 - 2026-05-12 — LR counterparty-level trading-account query: Erik (GoMarkets) asked whether Liquidity Reduction is set up at the counterparty level listening to any trading account. Nathan confirmed: all counterparties receive the default LR configuration regardless of trading account, except counterparty 440381. No follow-up or action requested. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778570489549959)
 
