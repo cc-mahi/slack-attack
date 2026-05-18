@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-12T07:32:09Z
+last_catchup: 2026-05-18T07:37:51Z
 ---
 
 ## Status
@@ -63,6 +63,15 @@ last_catchup: 2026-05-12T07:32:09Z
 
 > [resolved] 2025-05-15 — Counterparty 84004149 crypto flow review; brokered LR / EURUSD skew tuning
 > Andrew flagged counterparty 84004149 as consistently bad for Mahi crypto book (up $200k lifetime, but consistently costly over recent weeks). Reviewed with Isaac: XBT flow switches between BBook and sharp brokered week-to-week. Amir added brokered LR to clientDist1; EURUSD signal response reduced (skew was 1 pip on 0.1 spread, dialled down to ~0.2). Separately, counterparty 84004395 flagged as toxic (retail, EURUSD-focused). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1747325182217329)
+
+> [open] 2026-05-15 — HRP give-up missing; booking config gap on toa-argamon-ln
+> Levi (HRP) flagged trades not given up — Mahi side not received. James Furness confirmed booking config was missing on toa-argamon-ln (`connectivity.booking.bookingSystemRouting`). Tom asked HRP to book manually; Kate Stagg to fix config. Status: config gap confirmed, manual booking underway, fix not yet verified closed. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
+
+> [resolved] 2026-05-13 — XAUUSD LD4 signal data not persisting after system reboot
+> Elan queried TOB for toa_argamon.LDN showing no signal data on XAUUSD. Daria identified signals were not being persisted since the last system reboot — restarted the relevant process, signals persisting again from ~03:35 BST. Historical backfill not possible; gap accepted. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
+
+> [resolved] 2026-05-13 — XAUAUD scalping by two new retail CPs; arb-protection misconfiguration root cause
+> $5.9k retail loss on XAUAUD between 22:26–22:42 UTC. CPs 105988 and 105990 (~6 days old) did 106 small XAUAUD round-trips (1–30 oz each). Root cause: `pricing.arbProtectionParameters` had UBS in reference markets but not `referencePriceMarketSelectors`, causing published quote to clamp to UBS's wide twilight spread instead of using clean triangulated (XAUUSD × AUDUSD) price — scalpers harvested the gap. Fix: removed XAUAUD from `pricing.arbProtectionParameters`; pricing now uses pure triangulated price. Both CPs being monitored for activity on other crosses. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
 
 > [resolved] 2026-05-08 — XAUUSD signal reverted neuron → synapse; skew-driven decision
 > Shyam switched XAUUSD signal back to synapse (from neuron, which was set 2026-04-22) in response to skew analysis. Monitoring for CPs picking off pricing; pricing impact review planned for next week. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778211684932129)
