@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-12T07:19:18Z
+last_catchup: 2026-05-18T07:21:43Z
 ---
 
 ## Status
@@ -96,6 +96,12 @@ last_catchup: 2026-05-12T07:19:18Z
 > [watching] 2026-05-08 — Weekly P&L: $7.5k from 402m (week to date)
 > Daria's mid-week update: 222m internalised, 180m brokered. Brokered flow decays quickly but stays onside (3x spread of internalised: $14/M brokered vs $47/M internalised). Two counterparties (928986, 928994) blacklisted from broker for now — bad couple of weeks but aggregate yield acceptable for internalisation. Net brokered spread $3.4k; internalisation P&L $4.1k (RoS 130%); LR P&L $1.4k mostly on brokered. Skew P&L had initial EURUSD open loss from arb but has fully recovered. Focus on skew and mid improvements (Shyam reviewing). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
 
+> [resolved] 2026-05-13 — XAUAUD retail $5.9k loss from arb-protection misconfiguration + twilight scalpers
+> Two new retail accounts (CPs 105988, 105990, ~6 days old) ran 106 small XAUAUD round-trips over ~16 mins during FX twilight (22:26–22:42 UTC 2026-05-12), harvesting a pricing spike. Root cause: UBS is sole firm XAUAUD LP; `pricing.arbProtectionParameters` had UBS in reference markets but not `referencePriceMarketSelectors`, clamping the published quote into UBS's wide twilight spread instead of using the clean triangulated XAUUSD×AUDUSD price. Fix: Shyam removed XAUAUD from `arbProtectionParameter` rules; pricing now uses pure triangulated. Both CPs being monitored for activity on other crosses. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+
+> [open] 2026-05-15 — Toa HRP booking config missing — trades unbooked, manual booking required
+> Tom (Argamon) flagged that HRP were missing Toa's side on a set of trades. James Furness found missing booking system routing config on `toa-argamon-ln`. Tom asked HRP to book manually. Config gap may affect other trades in the same session; not confirmed resolved beyond the immediate manual booking. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
+
 ## Notable topics
 
 - 2025-05-14 — Spotex FIX orders missing limit price (tag 44) causing rejects; Daria identified in FIX logs, issue patched by Spotex 2025-05-06. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1746144575233089)
@@ -116,3 +122,4 @@ last_catchup: 2026-05-12T07:19:18Z
 - 2025-06-30 — Reactive UAT test trades passed; production test trades 2025-07-01 with party mapping config updates. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1750269992249569)
 - 2026-05-03 — XAUUSD retail NY4→CHI hedging disabled: retail achieving positive spreads; CHI giving negative spreads so hedging there turned off. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777845150173619)
 - 2026-05-04 — EURUSD mid formation: Elan approved adding all LPs back into mid (NY now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary LPs; backtests show reduced spiky pricing and arb opportunities. Adaptive mid logic also added to betaRetailPricer1 for EURUSD; FI/skew PnL review ongoing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
+- 2026-05-13 — Toa Argamon LDN signal persistence failure: Elan flagged XAUUSD TOB not showing signal data for `toa_argamon.LDN`. Daria found signals weren't being persisted since the last system reboot; fixed with process restart but no backfill of the gap. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
