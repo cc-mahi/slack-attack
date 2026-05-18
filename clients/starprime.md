@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-12T07:33:51Z
+last_catchup: 2026-05-18T07:37:50Z
 ---
 
 ## Recent issues
@@ -29,4 +29,5 @@ last_catchup: 2026-05-12T07:33:51Z
 
 - 2026-05-05 — Inald Gjoni performed rolling restart of pricers to load Timezone Conditions for BenchmarkMinimumSpreadLogic (no-restart component deploy). [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777981565638809)
 - 2026-05-11 — Nathan Burch (Training) changed `price adjustment floor pips` on IFMS from 3 → 0.5 for XAUUSD on CLIENT_PRICE_INSTI; prior to this, price could not form because floor was greater than ceiling. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778463918376889)
+- 2026-05-13 — Andrew Morgan flagged that StarPrime appears to be owned by Vantage (confirmed by David Cooney "yep"); 3 :open_mouth: reactions. Note: VANTAGE is already in the LP panel (external market), so Vantage relationship predates this; the ownership link is new context. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778669482861249)
 - 2026-05-01 — Go-live prep: Cameron Hughes noted a call with Samin arranged for Tuesday to get everything ready pre go-live. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777625477346409)
