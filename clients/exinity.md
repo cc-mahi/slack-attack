@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-12T07:28:05Z
+last_catchup: 2026-05-18T07:34:07Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-17 — Invast NG1 no pricing: Aeron publisher stuck, client rejects
+> Samuel reported no NG1 pricing from Invast (Invast confirmed they were sending); clients experiencing rejects. Nathan diagnosed: Mahi was receiving Invast prices but the Aeron channel publishing to Compass had got stuck, so prices weren't reaching Compass for price construction. Nathan reset the Aeron publisher and confirmed orders filling. Samuel asked why Compass raised no alert; Nathan added NG1USD to the indicative-pricing alert list on CLIENT_PRICE_LDN. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779056584038339)
+
+> [open] 2026-05-18 — UBS FIX conformance test: conformance sheet sent, no Mahi response yet
+> Maten Rehimi had emailed FX-ClientDelivery@ubs.com (wrong/unmonitored mailbox) requesting UBS conformance test. George Moore escalated via the Exinity/UBS chain; UBS (Jan) clarified correct address is FRECommerce@ubs.com and supplied a conformance test sheet to fill in for PROD. George shared the sheet 2026-05-14 and chased again 2026-05-18 ("any update here please?"). As of window close Maten had not confirmed receipt or responded to the conformance sheet. Blocks production UBS FIX setup. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778584018956889)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
@@ -88,8 +94,8 @@ last_catchup: 2026-05-12T07:28:05Z
 > [resolved] 2026-04-26 — Connect_Wagyu metals: spot XAG not ticking + XAU spreads wide (60c)
 > XAG ticking restored within minutes. Daria noted XAU 60c was the configured Twilight base spread (vs 19c during other timezones); offered to add a 19c tier at 100, but Mukhammad opted to wait it out since Twilight was ending — closed without changes to base config. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777241318800319)
 
-> [open] 2026-04-27 — Wagyu XAU client-perceived spread vs published TOB
-> Samuel: TOB shows 30–35c with 20q layer since open, but clients reporting wider spreads. Daria: in line with what we publish on the channel — possible additional markup downstream. Awaiting client investigation. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777328307964599)
+> [watching] 2026-04-27 — Wagyu XAU spreads wide at twilight: recurring arb protection issue
+> Samuel: TOB shows 30–35c with 20q layer since open, but clients reporting wider spreads. Daria: in line with published channel — possible additional markup downstream. Recurring: 2026-05-12 Mukhammad reported 50–60c spreads at SGP open/twilight; Daria diagnosed arb protection triggering off UBS/360T/SUCDEN reference prices and added 10c buffer — spreads came down to 25–40c. Reverted next day (2026-05-13) at Mukhammad's request; re-enabled again 2026-05-14 twilight when spreads hit ~57c (Samuel). Target: 35c twilight, 19c rest of SGP. No permanent fix agreed; Daria noted the arb buffer could be kept long-term for twilight. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899)
 
 > [open] 2026-04-28 — XRPUSD rejects on EXINITY_PROECN_ARU — visible quantity too low
 > Louie: 1 cpty getting continuous ripple rejects; visible quantity on the channel substantially lower than CLIENT_PRICE_RETAIL. Kate temp-increased visible qty; XRPUSD-specific override pending to bring channel in line with model liquidity. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777398508607609)
@@ -124,3 +130,7 @@ last_catchup: 2026-05-12T07:28:05Z
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
 - 2026-05-01 — Nick (Nicola) in Singapore 11–15 May for Finance Magnates expo; any calls requiring her will need scheduling around that window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1777621042911649)
 - 2026-04-30 — Latency notifications (Samuel) traced to a heartbeat received latent from non-Mahi side; Isaac suspects one-off, will recheck Mahi-side latency around the time. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777510067154679)
+- 2026-05-13 — Jump/Wedbush (Reactive) LP test: Exinity arranged Jump connectivity testing on the Wedbush FIX setup for 2026-05-13 15:00 UK (moved to 2026-05-14 15:00). Kate confirmed Arun attending from Mahi. Test proceeded 2026-05-14; venue code issue resolved (correct venue code JLQD supplied by George). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778657899272499)
+- 2026-05-15 — Louie asked for clarification on EURUSD position in BIG_HOUSE (imagined residual risk from XAUUSD flow). Will Carter explained: induced equivalent position via covariance — not a direct hedge, but represents optimal EURUSD exposure to hedge the correlated risk in the book. Link to Compass BIG_HOUSE position view shared. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778851772908919)
+- 2026-05-15 — Matthew Ayub requested yield sims on two datasets (Set A HTML, Set B XLSX; GMT+2 timezone). Nathan started immediately. Sim results not yet confirmed delivered as of window close. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778825885046719)
+- 2026-05-12 — Keshav requested yield sims (new client trading data, GMT+3). Shyam delivered two sim links (CentFX and Revshare) 2026-05-14; Keshav acknowledged. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778619941428319)
