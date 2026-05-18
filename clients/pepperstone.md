@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-18T07:36:50Z
 ---
 
 ## History
@@ -100,8 +100,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Recent issues
 
-> [open] 2026-05-11 — USTUSD hedger B2C2 deprioritisation lag on large order; fill speed concern
-> Stephen flagged that during a ~$500k AUD UST trade (382k units at 1.38), hedgers kept retrying B2C2 despite insufficient-balance errors rather than switching to Crossover/LMAX sooner, leaving the position partially exposed. Marianna clarified the LP wasn't deprioritised fast enough. Daria adjusted hedger config (further restricting B2C2, reordered rules so backstop can fire), increased liquidity layers; Stephen raised TOB to 10k UST. Separately, fills were slow (250 UST parcels) because only the first two layers were inside the client's limit price — Stephen gathering client feedback on acceptable fill timeframe. Daria still simulating the config change. NOP alignment between Compass and B2C2 limits also discussed — Stephen noted treasury deposits/withdrawals make Compass NOP not reflective of underlying. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489962714849) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778536863658599) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778560468492269)
+> [open] 2026-05-11 — USTUSD hedger B2C2 deprioritisation lag / fill speed on large orders
+> Stephen flagged that during a ~$500k AUD UST trade (382k units at 1.38), hedgers kept retrying B2C2 despite insufficient-balance errors rather than switching to Crossover/LMAX sooner, leaving the position partially exposed. Marianna clarified the LP wasn't deprioritised fast enough. Daria adjusted hedger config (further restricting B2C2, reordered rules so backstop can fire), increased liquidity layers; Stephen raised TOB to 10k UST. Fills were slow (250 UST parcels) because only the first two layers were inside the client's limit price. 2026-05-18: second large UST trade — improved (fill clips moved from 250 to 1000 UST) but still too slow. Stephen asking for 10k–20k UST clip sizes and querying whether refresh rate is the lever. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489962714849) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778536863658599) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778560468492269) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779086987830109)
 
 > [resolved] 2026-05-11 — Inventory hedger failed to auto-start after weekend restart
 > MK reported that the inventory hedger (CFD desk) did not come up automatically after the weekend restarts. Kate Stagg added config to ensure auto-start and bounced systemStateMonitor to pick up the alerting config for expected on/off status. MK confirmed resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778506644097019)
@@ -139,8 +139,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 > [resolved] 2026-04-29 — Inventory XAG Tapaas A/B reporting — tag 1 prefix solution
 > Daria's call: only the new inventory hedgers needed the change. Set up round-robin tag strategy on the inventory hybrids with B-HEDGING and B-HEDGING-LDN trading accounts. MK testing; no dev change required. Supersedes the 2026-04-22 [open] entry. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777447938640189)
 
-> [resolved] 2026-04-27 — Cpty 2075077 not routed to Dynamic Arbitrageurs (root cause: fillAtWssPrice override)
-> Reece's 6-Apr 22:00 UTC XAGUSD fill at 72.55 instead of 73.246: at 22:03:39.307 an LP bid collapse caused B_BOOK to publish a WSS-clamped bid=72.25/offer=72.55; 65ms later the SELL filled at exactly 72.55 — `fillAtWssPrice` was overriding the continuity-pool execution for Dynamic Arbitrageurs. WSS overrides continuity workflow when fired. Brokered workflow unaffected (only internalised orders). Discussion ongoing on whether to switch to continuity / unwind the override; Reece wants to know plan before any change as it impacts client execution. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777305102439059)
+> [open] 2026-04-27 — Cpty 2075077: fillAtWssPrice override on Dynamic Arbitrageurs — fix deployed, arb-client behaviour pending dev review
+> Reece's 6-Apr 22:00 UTC XAGUSD fill at 72.55 instead of 73.246: WSS-clamped bid overrode continuity-pool execution for Dynamic Arbitrageurs. Fix: dev changed code so forcibly internalised orders can be excluded from fill-at-WSS-price logic. Daria proposed deploying to FX+Metals env 2026-05-14 using LDN failover; deploy hit an issue and was rolled back same night — no trade impact (failover covered). Modulus counterparty tag fix confirmed deployed 2026-05-15 (separate change). Stephen noted at 00:13 UTC 2026-05-15: "same position on ARB clients, pending update later"; Daria: "should still be able to get it in for early next week — just need dev to have a look." [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777305102439059) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778708983110969) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778797764931869) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778800348797699)
 
 > [open] 2026-04-24 — YTD list of counterparties removed from `reference.lists.counterparty.custom`
 > Reece asked for a full YTD removal list beyond what Audit History surfaces; Kate investigating. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777024868051039)
