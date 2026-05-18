@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "Centroid — technical integration contact (FIX / TEM setup)", confidence: low}
   - {name: "Anatoly", role: "Base Markets — internal sign-off contact (referenced alongside Alex for MT4 account switch confirmation)", confidence: low}
-last_catchup: 2026-05-18T07:25:34Z
+last_catchup: 2026-05-18T07:27:34Z
 ---
 
 ## Status
