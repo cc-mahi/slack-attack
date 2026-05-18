@@ -7,9 +7,10 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/velocity.md (not yet)
 channels_override: null
 key_people_overrides:
-  - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
-  - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-12T07:37:52Z
+  - {name: "Dan Beale", role: "VT client ops — yield profile / Echo lookups, counterparty tag management", confidence: low}
+  - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations"}
+  - {name: "Jackson March", role: "VT — GTC LP credentials liaison", confidence: low}
+last_catchup: 2026-05-18T07:42:28Z
 ---
 
 ## Recent issues
