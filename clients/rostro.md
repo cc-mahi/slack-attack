@@ -15,16 +15,29 @@ key_people_overrides:
   - {name: "Riz Dusoye", role: "trading ops — spreads, Pulse, VIP feed (rizwaan.dusoye@rostro.com)"}
   - {name: "Louiza Ignatiou", role: "ops — FIX sessions, IP whitelisting"}
   - {name: "Daniel Lawrance", role: "CEO (linkedin.com/in/daniel-lawrance-/); B2B bridge discussions", confidence: low}
-  - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
+  - {name: "Sammy", role: "departed — was primary client-side relationship manager / decision-maker; left between 2026-05-12 and 2026-05-14", confidence: low}
+  - {name: "Mike Ayres", role: "senior leadership / decision-maker (described as 'the main boss'); Dave Cooney to reach for Dubai catch-up", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-18T07:37:20Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-11 — IC Markets (MAHI_ICM) feed live; test trades pending Rostro funding
-> Oli (Rostro) asked about ICM feed status into Mahi. Kate confirmed pricing is being received from IC Markets across all FX symbols. Test trades proposed; Oli flagged Rostro hasn't funded the account yet so test trades may not work. Awaiting Rostro credit/funding confirmation before proceeding. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487852170619) [Kate confirms pricing live](https://mahifx.slack.com/archives/C08AQKRU953/p1778488089307679)
+> [open] 2026-05-17 — EURUSD limit order EXPIRED rejects via Scope-X-SI-Orders
+> Rakan (Rostro) flagged clients receiving limit-order rejections via connector RSGL_50323_Advanced2, text=EXPIRED, routed to Scope-X-SI-Orders. Isaac confirmed the counterparty is classified as broker with internalisation disabled; Mahi is passing LP (Invast) rejections on to the client. No config change or resolution confirmed. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779052914673889) [Isaac explains](https://mahifx.slack.com/archives/C08AQKRU953/p1779053008223869)
+
+> [resolved] 2026-05-17 — Centroid FIX session logon failure (Rakan)
+> Rakan flagged Centroid connection appearing disabled; Isaac confirmed the MD feed was not disabled from Mahi's side but no logon had been received. An earlier logon attempt at 15:34 was rejected as the session window starts at 16:30. After troubleshooting source IP (Centroid: 192.109.15.31), Rostro performed a Centroid bridge restart at ~23:07 BST; connections confirmed up. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779051346992939) [resolved after bridge restart](https://mahifx.slack.com/archives/C08AQKRU953/p1779055657073179)
+
+> [open] 2026-05-15 — 6-tag XAUUSD flow: broker-to-IC routing via new liquidity pool (STP classifier bypass)
+> Oli flagged pressure to ensure all XAUUSD flow from 6 particular counterparty tags is routed to IC Markets, but STP classifier execution rules were sending some of it elsewhere. Rather than internalising (which would hurt SI book P&L), Kate proposed a new liquidity pool + execution rules so those tags still get brokered but route exclusively to IC. Kate deploying pricerFA1/2 (new full amount pricer) same day. Config change in progress; no confirmation of completion yet. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778834736180539) [pricerFA deployment](https://mahifx.slack.com/archives/C08ALS66EDC/p1778858523080769)
+
+> [resolved] 2026-05-12 — Limit order IoC rejects (Andreas): internalisation disabled, off-market to Invast
+> Andreas queried rejections. Rory explained: "Internalisation Disabled IoC expired" — limit orders sent to Invast were off-market at time of routing. Client acknowledged. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778586540808459) [Rory explains](https://mahifx.slack.com/archives/C08AQKRU953/p1778588368663989)
+
+> [resolved] 2026-05-11 — IC Markets (MAHI_ICM) feed live; test trades pending Rostro funding
+> Oli (Rostro) asked about ICM feed status into Mahi. Kate confirmed pricing is being received from IC Markets across all FX symbols. Test trades proposed; Oli flagged Rostro hasn't funded the account yet so test trades may not work. Awaiting Rostro credit/funding confirmation before proceeding. Resolved 2026-05-13: IC_MARKETS added to SI hedger for XAUUSD test on 2026-05-12 (hybridHedger1 temporarily off); Oli confirmed good, requested exclusive IC routing from 2026-05-13 morning — Kate actioned, first hedging trade executed with IC_MARKETS confirmed 09:07 BST 2026-05-13. Off-book hedger also pointed to IC (confirmed same day). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487852170619) [Kate confirms pricing live](https://mahifx.slack.com/archives/C08AQKRU953/p1778488089307679) [Oli requests exclusive routing](https://mahifx.slack.com/archives/C08AQKRU953/p1778658000.933659) [Kate confirms first hedge trade](https://mahifx.slack.com/archives/C08AQKRU953/p1778659621525469)
 
 > [resolved] 2026-05-11 — Second-layer spreads wide on VIP and SI (FX and Gold)
 > Alex (Rostro) flagged that second-layer spreads on VIP and normal SI were significantly wider than spread config across most FX and Gold. Kate began investigating. Oli identified the root cause: the benchmark reference LPs were only referencing INVAST_2, which was wide; Oli added Edgewater to the benchmark reference LPs and confirmed spreads looked ok. Kate acknowledged the fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487685725129) [Oli fix](https://mahifx.slack.com/archives/C08AQKRU953/p1778487969268199)
@@ -130,6 +143,8 @@ last_catchup: 2026-05-12T07:31:46Z
 
 ## Notable topics
 
+- 2026-05-14 — Lunch meeting (Oli, Andrew, Will, Kate, LDN): Sammy has left Rostro; Oli under significant pressure, longer hours/higher stress. Rostro made a business decision in January to take no risk. No bonuses paid this year; cuts being made. Rev share agreement with IC Markets: Rostro sends soft FX flow to IC, receives IC crypto (shitcoin) flow. Mike Ayres is pulling the strings — Oli wasn't even aware IC was being onboarded until that week; Dave Cooney to get Mike's details for a Dubai catch-up. Rostro lost their biggest client: a previous rev share partner defaulted on payments leaving Rostro unable to fully pay the client out; that client then routed flow elsewhere — main driver of volume drop. Client expected to route flow back same day. Lochlan left on his own terms (contrary to Reece's earlier suggestion). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778748881187059)
+- 2026-05-14 — Full amount feed request: Rostro asked about setting up a full amount feed. Kate asked internally about pricing (~$500/pm), suggested offering it as a goodwill gesture given relationship context. New pricer (pricerFA1/2) deploying 2026-05-15. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778752625197089)
 - 2026-05-06 — Saul Knapp (Rostro exec) hired as CRO at MAS Markets. Will flagged the article internally with "What is going on at Rostro". No discussion yet. Adds to the senior relationship risk alongside Lochlan's departure (see 2026-05-05 entry). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778069286617949) [source](https://fxnewsgroup.com/forex-news/executives/mas-markets-hires-rostro-exec-saul-knapp-as-cro/)
 - 2026-04-21 — Client call outcomes: (1) they want LR PnL backtesting under different parameter changes — Andrew notes the existing LR sim supports this and will draft a KB article; (2) exploring SI-PnL attribution per client — Kate to check the Exinity script Will C wrote; (3) want a "Big Boys" book with a lower VAR threshold to route large-clip clients and reduce exposure — achievable in next couple of days. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776761460382099)
 - 2026-04-21 — Will/Andrew internal discussion: Rostro LR tuning highlights the value of inverting the sim — "what params get me X $/M across client, with toxic top-5% at 50 $/M and everyone else ≤ 5 $/M" — vs forward parameter search. Declarative-rule direction flagged for future work. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776764246169119)
