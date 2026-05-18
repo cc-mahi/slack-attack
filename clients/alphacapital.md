@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
-last_catchup: 2026-05-12T07:16:59Z
+last_catchup: 2026-05-18T07:18:25Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-15 — signalProcessCFDFI1 down: counter file lock contention with signalProcessFI1
+> Arun Patel: signalProcessCFDFI1 failed to start due to exclusive lock contention on ADWeights.NZDUSD.IFMS counter file held by signalProcessFI1. Resolved by Arun ~50 min later (process started successfully). [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778847108444079)
 
 > [open] 2026-05-05 — XAGUSD skew abuse: arbitrageur classifier lag costing ~$35K/week
 > Andrew Morgan (handover to Cameron): /skew-health-check run on alphacapital found 5 of 8 stage-c CPs inception-negative on 3–8 May (CPs: 2685507, 2696788, 2698331, 2697815, 2695337). Cohort detection-lag cost: $24.8K inception leakage across $555M volume in 5 days, ~$35K/week extrapolated. CP 2685507 alone accounts for 63% ($290M traded in single day before being caught, 4-day tag lag). 3 of 5 tagged on Qualifying FX.arbitrageurs.list (Bot wrote 2026-05-05 17:03 UTC); 2 still untagged (2696788, 2695337). Open items: (1) why offline classifier took 4 days on 2685507; (2) whether post-17:03Z trades on 2685507 route through Q1-Arbitrageurs vs Q1-Small-Tickets; (3) curation mechanism behind 13,120-CP arbitrageurs population (no arbitrageurs.badCheck configured); (4) analytics.realtimeArbDetection.* entirely unconfigured; (5) Q1-Arbitrageurs execution profile uses FORCE_INTERNALISATION + 200-300ms last-look with priceCheckThreshold: -1 (Andrew expected continuity-pool routing). Full report: docs/skew-health/alphacapital/2026-05-05-skew-health.md (commit cf26e5e). Context: Cameron Hughes had identified neuron signal as best-performing for XAG and promoted it; Andrew flagged this neuron-wins-while-all-flow-imbalance-signals-bleed pattern as a skew-abuse signature (CPs flipping positions to harvest skew, neuron lights up on reversal). Right fix is classifier auto-tagging, not signal tuning. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778009823301759)
@@ -51,6 +54,8 @@ last_catchup: 2026-05-12T07:16:59Z
 > Inald: 4s input latency on CLIENT_PRICE_LDN and CLIENT_PRICE_MAHI during NFPs. Root cause: riskPathQualifying on wrong node. Moved to low-latency node 0 same day. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1746190417423999)
 
 ## Notable topics
+
+- 2026-05-13 — Argamon Centroid bridge server migration (2026-05-15/16). David Rapp (Argamon) forwarded Centroid notice: LD Centroid bridge migrating to new IP 192.109.17.170 (DNS arguk.centroidsol.com) with downtime 2100 UTC 2026-05-15 to 2100 UTC 2026-05-16. Cameron Hughes acknowledged and actioned changes on Mahi side. No IP-retarget needed if connecting via DNS. [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1778658472423589)
 
 - 2026-05-10 — clientDistributionGateway3 removal query. Nathan Burch noted the gateway does not appear to be in use and asked if it could be removed; Daria Horton tagged Cameron Hughes for a decision. No resolution visible in window. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778449279618189)
 
