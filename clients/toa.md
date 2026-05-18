@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-12T07:33:50Z
+last_catchup: 2026-05-18T07:39:50Z
 ---
 
 ## Status
@@ -17,6 +17,27 @@ last_catchup: 2026-05-12T07:33:50Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-05-18 — ordersNado1/traderNado1 rejects: restart resolved (PD Q1LU0GA2U21VCB)
+> Shyam (ops) was receiving PD reject alerts; restarted ordersNado1 and traderNado1, no subsequent rejects. No root-cause detail in thread. https://mahifx.slack.com/archives/C035H1VNCAD/p1779064111052849
+
+> [resolved] 2026-05-17 — FX hedging delay alert on Nado disabled: market too illiquid
+> Shyam flagged a PD alert (Q3W3S2ISQLVI1J) and wasn't sure what to check; James replied FX hedging delays on Nado can be ignored (market too illiquid to hedge) and disabled the alert. Backed off to 12h threshold. https://mahifx.slack.com/archives/C035H1VNCAD/p1779056029757649
+
+> [open] 2026-05-15 — HRP-DIRECT_GMGPrices/GMGOrders rejected logons on toa-argamon-ln-trading-1
+> Arun flagged rejected logons for `HRP-DIRECT_GMGPrices` and `HRP-DIRECT_GMGOrders` on `toa-argamon-ln-trading-1:clientDistributionGateway1` — invalid username/password. James confirmed the client put username/pwd in the wrong way round; waiting for them to fix. No follow-up resolution in window. https://mahifx.slack.com/archives/C035H1VNCAD/p1778834376137359
+
+> [watching] 2026-05-14 — pricerRetailPremium1/2 added to Toa-Argamon CHI (new model, instruments TBD)
+> James pre-announced addition of pricerRetailPremium1/2 to the Argamon CHI model. As of 2026-05-17 both processes failing to start because no instruments are configured yet — Lee confirmed still being set up. https://mahifx.slack.com/archives/C035H1VNCAD/p1778780018368259
+
+> [resolved] 2026-05-13 — starfishFilePersisterExternalMarketData LDN down: signals lost, restart recovered
+> Daria restarted starfishFilePersisterExternalMarketData in LDN after noticing signals had dropped out of Pulse. Cause unclear (no suspicious config changes; last data was on the day of a prior restart). No backfill available. Signals restored after restart. https://mahifx.slack.com/archives/C035H1VNCAD/p1778639825532889
+
+> [open] 2026-05-18 — Nado asking whether USDT0/USDC fee reduction (90% or to zero) causes issues for NLP
+> Nado-side message to James asking if USDT0/USDC fee reduction (90% or full: 0 taker, no maker rebates) would create any issue on Mahi/NLP end. No reply in window. https://mahifx.slack.com/archives/C09RGU1T1GE/p1779082689022689
+
+> [resolved] 2026-05-15 — Nado requested NLP take min trade size on alt/RWA markets every 60s: declined (wash trading)
+> Nado asked James if NLP could take minimum trade size on all alt/RWA markets every 60 seconds to fill chart gaps. James declined — Mahi's system cannot do wash trading. Nado asked for clarification on which "system"; James confirmed Mahi's. https://mahifx.slack.com/archives/C09RGU1T1GE/p1778863085229199
 
 > [resolved] 2026-05-11 — marketDataCboe1 down on TOA Argamon CHI: new process, resolved in ~33 min
 > Inald flagged marketDataCboe1 down on TOA Argamon CHI (16:55 UTC). James replied it was a new process he was adding. Inald resolved the ordersCboe alert independently; James confirmed the process was up by 17:29 UTC. https://mahifx.slack.com/archives/C035H1VNCAD/p1778514939388589
