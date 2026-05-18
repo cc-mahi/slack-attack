@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-05-12T07:11:15Z
+last_catchup: 2026-05-18T07:21:44Z
 ---
 
 ## Status
@@ -29,4 +29,6 @@ last_catchup: 2026-05-12T07:11:15Z
 > Jan reached out via #mahi-fintokei reporting an issue closing positions 28614965 and 28618336 on account 6027381, attaching a journal screenshot (UTC+3 timezone). Kate Stagg acknowledged and Will Denny followed up at 16:33 confirming the trades show as filled in Compass. Jan replied 2026-05-06 confirming they resolved it internally. [permalink](https://mahifx.slack.com/archives/C08QWKFARDL/p1777988138576279) [Will Denny follow-up](https://mahifx.slack.com/archives/C08QWKFARDL/p1777995236877329)
 
 ## Notable topics
+
+- 2026-05-12 — Jan requests new MT5 demo group added: `demo\AXSE Prop\Fintokei\FNTKCONTZRJPY`. Kate Stagg confirmed platform type (MT5) and acknowledged. [permalink](https://mahifx.slack.com/archives/C08QWKFARDL/p1778580729147629)
 
