@@ -11,16 +11,17 @@ key_people_overrides:
   - {name: "Nikos", role: "primary desk contact — skew config, LR tuning, futures onboarding"}
   - {name: "Princess Rosete", role: "test trading / ops liaison", confidence: low}
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
-last_catchup: 2026-05-12T07:19:29Z
+last_catchup: 2026-05-19T07:19:44Z
 ---
 
 ## Recent issues
 
 > [open] 2026-05-12 — Nikos querying limit fill execution on XAUFUT-M / arber execution profile last-look tightening
 > Nikos asked (06:35 BST) why cpty 5800055 was filled at $4685.71 when offer appeared at that price ~100ms before execution. Nathan explained: 500ms LL delay on ABOOK/Manual Arber Selection execution profile; limit price passed price check at both ends of the window; client filled at limit (not the moved offer). Nikos responded at 08:14 BST: "I will bring it down a bit as we have no interest to provide a good execution experience to those clients" — intends to tighten price check and/or mid distance on the arber execution profile. Change not yet applied. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778564126787019)
+> 2026-05-13 update: Separate event — cpty 8001807 was complaining of excessive slippage; found to be on the Dynamic Arbitrageurs auto-classification profile (whitelisted in January from B-book flow) and being filled at continuity pool rate + $50/M markup. Rory removed from whitelisting and then Nikos asked to disable the dynamic arbitrageurs rule entirely across all channels — Rory did so (2026-05-13 18:11 BST); only the manual arber list now applies. Three auto-classified cptys (7005095, 8007667, 20077893) removed. Nikos: "it cost us this client." Follow-up call about arber execution mechanics requested for 2026-05-14. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778678491192539)
 
-> [open] 2026-05-11 — DAX/UKX futures: CMC pricing not arriving (only IG received)
-> Rory flagged (11:15 BST) that DAXFUT-M and UKXFUT-M are only receiving pricing from IG; expected CMC as primary hedging venue per Nikos' LP mappings CSV (sent 10:16 BST). Amana ops checked and saw CMC sending prices — Maynard investigating at 17:12 BST. As of 07:06 BST 2026-05-12, CMC side reports prices being sent and queries whether Mahi is subscribing on symbols DX6M_ / FT6M_; Rory has not yet confirmed. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778494554960779)
+> [resolved] 2026-05-11 — DAX/UKX futures: CMC pricing not arriving (only IG received)
+> Rory flagged (11:15 BST) that DAXFUT-M and UKXFUT-M are only receiving pricing from IG; expected CMC as primary hedging venue per Nikos' LP mappings CSV (sent 10:16 BST). Amana ops checked and saw CMC sending prices — Maynard investigating at 17:12 BST. As of 07:06 BST 2026-05-12, CMC side reports prices being sent and queries whether Mahi is subscribing on symbols DX6M_ / FT6M_. 2026-05-12: Rory confirmed CMC pricing now received for UKX and DAX futures (09:15 BST); pricers bounced to include DAX+FTSE in referencePriceMarketSelectors and signalReturnBenchmarkMarketSelector. DAX+FTSE futures test traded and confirmed live 2026-05-15. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778494554960779)
 
 > [open] 2026-05-11 — IG latency on XAUUSD/CFDs: discussion on removing IG from price formation
 > Nikos shared lead-lag analysis showing IG running 50–100ms behind on XAUUSD — "should absolutely not be used for price discovery anywhere." Cameron confirmed IG was already removed from CFD futures ref prices (normalisation divergence issue); IG currently in mid formation for CFDs (CMC, Jump, IG) and retained for DOW futures only. Nikos asked whether IG should be stripped from CFDs entirely; Cameron said filtering logic handles latent LPs but acknowledged consistently latent = better to remove. Call agreed for 2026-05-12 to decide. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778511757782779)
