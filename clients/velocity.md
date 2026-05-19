@@ -9,13 +9,19 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-12T07:37:52Z
+last_catchup: 2026-05-19T07:37:37Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-11 — NWM_HSBC LP disconnection — "Credentials disabled"
-> At 01:51 UTC 2026-05-11, Velocity's FIX session to NWM_HSBC (`VELBINT099HS-price`) logged out with "Credentials disabled, please contact support". Nathan Burch raised in the client channel at 02:54 BST. No thread replies; resolution unconfirmed. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778464467.944329)
+> [open] 2026-05-19 — Dynamic Arbitrageurs execution rule misconfigured — Broker list used instead of Arbitrageur list
+> Will Carter discovered that the Dynamic Arbitrageurs execution rule on A_CLIENTS_PREMIUM was keyed against the Broker classification list, not the Arbitrageur list. This caused far more of Velocity's flow to be force-internalised than intended, and was the root cause of the 20% fill-rate issue reported by the client on 2026-05-18. Will corrected the classification type at ~17:02 BST 2026-05-18 (fill rates jumped to 100% for the affected counterparties immediately after). Justin Young confirmed this is a UI bug: the template loads Broker by default, not Arbitrageur; Justin flagged Velocity's rule as "Invalid Dynamic Arbitrageurs" and the two agreed to call to review the fix and tighten the default. Call arranged for 2026-05-19. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779120743.799159)
+
+> [open] 2026-05-18 — New-client fill rate ~20% due to static sharp-flow classifier
+> Client (Dan/Richard) reported ~20% fill rate on newly-onboarded internalisation accounts at 15:49 BST. Will Carter investigated: 1,270 limit orders cancelled by the static sharp-flow classifier (92% would have been loss-making). Root cause: newly-onboarded accounts wrongly flagged as sharp on the static list before establishing any live behaviour. Two-step fix proposed: (1) short-term loosen borderline cancels slightly; (2) medium-term roll out the live-behaviour classifier (already deployed elsewhere). Will communicated this to client at 17:01 BST. William Denny changed internalise rule so all new 1034 tags internalise by default. Classifier rollout not yet deployed. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779115769.510519)
+
+> [open] 2026-05-11 — NWM_HSBC LP disconnection — "Credentials disabled" (recurred 2026-05-18)
+> At 01:51 UTC 2026-05-11, Velocity's FIX session to NWM_HSBC (`VELBINT099HS-price`) logged out with "Credentials disabled, please contact support". Nathan Burch raised in the client channel at 02:54 BST. Recurred 2026-05-18 at 21:30 UTC: both `VELBINT099HS-order` and `VELBINT099HS-price` received Logout on every Logon attempt (reported by Shyam Hari at 22:53 BST). No resolution confirmed in either instance. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778464467.944329) [2026-05-18 recurrence](https://mahifx.slack.com/archives/C05NB72AGR2/p1779141221.927319)
 
 > [resolved] 2026-05-11 — hybridHedgerSITotal1 went down during Will Carter predicate test
 > Inald Gjoni restarted `hybridHedgerSITotal1` after it went down at ~14:23 BST. Root cause: Will was testing a new `VAR-CLEARANCE-FASTER` predicate on `SI_BOOK_NET`; the party was not whitelisted, causing `IllegalStateException` on rule build for XAGUSD. Will asked Inald to revert to pre-change config and not touch `hybrid1`. Back up by 14:37 BST. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778505824.369029)
