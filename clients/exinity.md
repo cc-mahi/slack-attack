@@ -17,10 +17,25 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-12T07:28:05Z
+last_catchup: 2026-05-19T07:29:16Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-19 — XAUUSD CP: SIGN-ADAPT-IMIFLOW signal not in adjustmentSignalsToPublish — spurious FI PnL losses
+> Shyam Hari flagged internally: a counterparty has been generating negative FI PnL reports daily for the past week with no corresponding large negative trades. Root cause: the configured adjustment signal `SIGN-ADAPT-IMIFLOW` is absent from `adjustmentSignalsToPublish` and not persisted in echo, so it is never active in prod. Reported losses likely reflect referencePriceMarket mid vs signalReturnBenchmarkMarketSelector mid discrepancies rather than real flow. Question open: configure the signal properly or replace it. No reply yet. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779164959389399)
+
+> [open] 2026-05-17 — Invast NG1: no pricing received
+> Samuel reported Invast is sending NG1 pricing but Mahi is not receiving it. Nathan Burch took a look; no resolution or further update visible in this window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779056584038339)
+
+> [open] 2026-05-15 — BIG_HOUSE EURUSD residual position — covariance-induced hedge query
+> Louie asked for clarity on a EURUSD position sitting in BIG_HOUSE while clients are trading XAUUSD. Will Carter explained: these are induced equivalent positions computed via covariance (the hedge model calculates the optimal EURUSD amount to offset a given gold risk level) and they won't map directly to actual LP positions. No outstanding concern but no explicit Louie acknowledgement. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778851772908919)
+
+> [open] 2026-05-12 — UBS conformance test outstanding — Wedbush/FA session setup blocked
+> George Moore asked for an update on UBS FA session progress (shown alongside prior image of Wedbush setup). Maten Rehimi confirmed adapters still need build/test and that he'd emailed FX-ClientDelivery@ubs.com for a conformance test but hadn't heard back. George followed up; UBS replied (via Jan) that FRECommerce@ubs.com is the correct mailbox (FX-CD not monitored) and attached a conformance test sheet to fill in. George shared the conformance sheet 2026-05-14 and chased again 2026-05-18 with no Mahi reply in channel. Blocked on conformance completion. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778584018956889)
+
+> [resolved] 2026-05-12 — Wagyu XAU spreads 50–60c wide at twilight: arb protection buffer applied
+> Mukhammad flagged spreads 50–60c wide at Singapore open (target: 35c twilight, 19c SGP). Daria diagnosed: arb protection tightening against reference markets (UBS/360T/Sucden). Applied 10c arb buffer either side; spreads came down to 25–40c by end of twilight. Mukhammad asked Daria to revert 2026-05-13 (spreads stable that day); Daria reverted. Recurred 2026-05-14 twilight (~57c) — Samuel asked Daria to re-enable; done and confirmed working. Client will discuss internally whether to make the arb buffer permanent. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
@@ -124,3 +139,7 @@ last_catchup: 2026-05-12T07:28:05Z
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
 - 2026-05-01 — Nick (Nicola) in Singapore 11–15 May for Finance Magnates expo; any calls requiring her will need scheduling around that window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1777621042911649)
 - 2026-04-30 — Latency notifications (Samuel) traced to a heartbeat received latent from non-Mahi side; Isaac suspects one-off, will recheck Mahi-side latency around the time. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777510067154679)
+- 2026-05-13/14 — Jump/Wedbush test session: George requested Mahi support for Jump connectivity test on Wedbush setup at 15:00 UK 2026-05-13; rescheduled to same time 2026-05-14; Kate/Arun attended. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778657899272499)
+- 2026-05-14 — Reactive EURUSD on Wedbush/JUMP venue code fixed: subscription was failing with "Symbol 'EURUSD' with venue 'JUMP' does not identify a market"; George provided correct venue code JLQD; Kate updated config and pricing restored. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778753741448759)
+- 2026-05-18 — Client sim requests: Keshav (2026-05-12), Matthew Ayub (two datasets, 2026-05-15, outstanding as of 2026-05-19 morning), Louie (new client data 2026-05-18), Christian Lee (Roco data 2026-05-18) — multiple concurrent sim requests with one set still in progress. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779099106401199)
+- 2026-05-18 — Rory King offered Exinity a call (Louie, Christian, Matthew) to train them on running Echo sims / yield profiles independently via the Guru card process; call scheduled for Wednesday 2026-05-20 at 14:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779103440726729)
