@@ -15,16 +15,30 @@ key_people_overrides:
   - {name: "Riz Dusoye", role: "trading ops — spreads, Pulse, VIP feed (rizwaan.dusoye@rostro.com)"}
   - {name: "Louiza Ignatiou", role: "ops — FIX sessions, IP whitelisting"}
   - {name: "Daniel Lawrance", role: "CEO (linkedin.com/in/daniel-lawrance-/); B2B bridge discussions", confidence: low}
-  - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
+  - {name: "Sammy", role: "departed — was primary client-side relationship manager / decision-maker; no longer at Rostro as of May 2026", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+  - {name: "Mike Ayres", role: "senior decision-maker ('the main boss'); Dave Cooney to arrange Dubai meetup", confidence: low}
+  - {name: "Rakan", role: "ops — Centroid/FIX session queries", confidence: low}
+last_catchup: 2026-05-19T07:31:27Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-11 — IC Markets (MAHI_ICM) feed live; test trades pending Rostro funding
-> Oli (Rostro) asked about ICM feed status into Mahi. Kate confirmed pricing is being received from IC Markets across all FX symbols. Test trades proposed; Oli flagged Rostro hasn't funded the account yet so test trades may not work. Awaiting Rostro credit/funding confirmation before proceeding. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487852170619) [Kate confirms pricing live](https://mahifx.slack.com/archives/C08AQKRU953/p1778488089307679)
+> [resolved] 2026-05-19 — Full Amount (FA) FIX feed: creds issued, ready to connect
+> Kate sent FIX creds for the new Full Amount feed (Scope-X-FA-Orders / Scope-X-FA-Prices, port 9011/9010, same host as Scope-X-SI). pricerFA1/2 deployed 2026-05-15. Kate flagged internally that the feed normally costs $500/month and suggested offering it free as a goodwill gesture — internal +1 received. Awaiting Rostro connection. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779175671.168309) [infra deploy](https://mahifx.slack.com/archives/C08ALS66EDC/p1778858523080769)
+
+> [resolved] 2026-05-17 — Centroid SI session login timeout + client EURUSD limit order EXPIRED
+> Rakan (Centroid/Rostro) flagged (a) Centroid-Retail session appearing disabled and (b) client receiving EXPIRED cancellations on EURUSD limit orders via Scope-X-SI-Orders. Isaac confirmed: (a) the session isn't disabled on Mahi's side — MD feed was timing out because Centroid attempted logon at 15:34 before the configured start time of 16:30, so a retry was needed; (b) a Centroid bridge connectivity issue (logon timeouts from 192.109.15.31) — after Rostro-side Centroid bridge restart all sessions logged back on. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779051792.269059) [bridge restart fixed it](https://mahifx.slack.com/archives/C08AQKRU953/p1779055657073179)
+
+> [open] 2026-05-15 — IC XAUUSD execution rules: 6 specific tags must route exclusively to IC Markets
+> Oli called Kate flagging pressure: 6 specific tags need all XAUUSD flow to go to IC, but STP classifier execution rules are routing some flow to other LPs. To avoid internalising (which could hurt SI book PnL), Kate proposed creating a new liquidity pool + execution rules so those tags still broker but route specifically to IC. Config link shared internally. No confirmation yet that rules are live. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778834736180539)
+
+> [resolved] 2026-05-13 — IC Markets set as exclusive hedger for XAUUSD (SI/off-book flow)
+> Following 2026-05-12 test (IC_MARKETS temporarily added to soft hedger, confirmed working, then removed after ~30 min), Oli confirmed on 2026-05-13 08:41 that Rostro was migrating positions and asked Kate to switch hedger exclusively to IC Markets for non-brokered flow. Kate actioned at 08:56; first IC hedging trade executed by 09:07 BST. Kate also confirmed off-book hedger facing IC. Brokered flow remains on existing LPs (Edgewater, Invast etc). Rev share agreement context: Rostro sends soft FX flow to IC, receives IC crypto flow in return (per lunch meeting intel). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778658000933659) [Kate confirms first trade](https://mahifx.slack.com/archives/C08AQKRU953/p1778659621525469) [internal context](https://mahifx.slack.com/archives/C08ALS66EDC/p1778576609945019)
+
+> [resolved] 2026-05-11 — IC Markets (MAHI_ICM) feed live; test trades completed, hedger migrated
+> Oli (Rostro) asked about ICM feed status. Kate confirmed pricing live across all FX. Test trades ran 2026-05-12 (soft hedger briefly, confirmed working). Fully resolved 2026-05-13: IC set as exclusive hedger for non-brokered XAUUSD flow (see 2026-05-13 entry). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487852170619) [Kate confirms pricing live](https://mahifx.slack.com/archives/C08AQKRU953/p1778488089307679)
 
 > [resolved] 2026-05-11 — Second-layer spreads wide on VIP and SI (FX and Gold)
 > Alex (Rostro) flagged that second-layer spreads on VIP and normal SI were significantly wider than spread config across most FX and Gold. Kate began investigating. Oli identified the root cause: the benchmark reference LPs were only referencing INVAST_2, which was wide; Oli added Edgewater to the benchmark reference LPs and confirmed spreads looked ok. Kate acknowledged the fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487685725129) [Oli fix](https://mahifx.slack.com/archives/C08AQKRU953/p1778487969268199)
@@ -130,6 +144,8 @@ last_catchup: 2026-05-12T07:31:46Z
 
 ## Notable topics
 
+- 2026-05-14 — Lunch meeting (Oli, Andrew, Will, Kate): Sammy has left Rostro; Oli under pressure, no bonuses, cuts underway. In January Rostro made a business decision to take no risk. Rev share with IC Markets: Rostro routes soft FX flow to IC, receives IC crypto (shitcoin) flow in return — this is the strategic driver for IC becoming exclusive hedger. Rostro lost its biggest client after a previous rev share partner defaulted on payments, leaving Rostro unable to pay out — that client routed flow elsewhere, explaining volume drop (expected to return same day). Lochlan left on own terms (contradicts earlier Reece-sourced intel). Mike Ayres is the senior decision-maker; Dave Cooney to arrange Dubai catch-up. Oli not across the IC onboarding detail (Mike has relationship with Angus). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778748881187059)
+- 2026-05-18 — Kate removed pricerCNH1/2 and hybridHedgerCNH1 — no longer in use, server cleanup. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1779108018904749)
 - 2026-05-06 — Saul Knapp (Rostro exec) hired as CRO at MAS Markets. Will flagged the article internally with "What is going on at Rostro". No discussion yet. Adds to the senior relationship risk alongside Lochlan's departure (see 2026-05-05 entry). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1778069286617949) [source](https://fxnewsgroup.com/forex-news/executives/mas-markets-hires-rostro-exec-saul-knapp-as-cro/)
 - 2026-04-21 — Client call outcomes: (1) they want LR PnL backtesting under different parameter changes — Andrew notes the existing LR sim supports this and will draft a KB article; (2) exploring SI-PnL attribution per client — Kate to check the Exinity script Will C wrote; (3) want a "Big Boys" book with a lower VAR threshold to route large-clip clients and reduce exposure — achievable in next couple of days. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776761460382099)
 - 2026-04-21 — Will/Andrew internal discussion: Rostro LR tuning highlights the value of inverting the sim — "what params get me X $/M across client, with toxic top-5% at 50 $/M and everyone else ≤ 5 $/M" — vs forward parameter search. Declarative-rule direction flagged for future work. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1776764246169119)
