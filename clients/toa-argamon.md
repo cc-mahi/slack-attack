@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-12T07:32:09Z
+last_catchup: 2026-05-19T07:37:32Z
 ---
 
 ## Status
@@ -24,6 +24,21 @@ last_catchup: 2026-05-12T07:32:09Z
 - **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
 
 ## Recent issues
+
+> [open] 2026-05-19 — Metals/FX tenant split; all XAUUSD brokered flow now routing to Toa
+> Daria moved all XAUUSD brokered flow to Toa (wider spreads, tougher LR, CME hedging) as of 2026-05-19 early AM. Next step: split metals and FX into separate tenant profiles early next week so they can be classified differently — most brokered FX flow is soft/internalisable but XAUUSD flow is causing signal-follow and broker classifications. Positions to be moved from CLIENTS to CLIENTS_NYC to allow FX/metals split within the same risk-managed book. Multichannel config controls the TOA-BROKER-XAUUSD counterparty list for quick revert if needed. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779154472279389)
+
+> [resolved] 2026-05-18 — CP 90001948 XAUUSD scalp; ~$4k retail loss; auto-classified and brokered
+> New counterparty 90001948 (first day on platform) sold 600oz into Argamon in 10 fills of 300oz, leaving Mahi long through the drop; hedge flatten locked in the loss (~$4k). Classic scalp pattern; CP auto-picked up as SIGNAL_FOLLOW + BROKER so will route to broker from here. Daria flagged a broader cohort of similar-YP traders (offside within 500ms), this one larger than the rest — suggested RI consideration at some point. Mahi made back ~$3k in brokered LR since. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019)
+
+> [resolved] 2026-05-15 — HRP missing give-up; booking config gap
+> Argamon's Tom reported HRP missing Mahi's side on a give-up (order 042dph1onoyo0sg). James Furness investigated — booking system routing config (`connectivity.booking.bookingSystemRouting/042dph1ox5lsosc`) was missing. Tom asked HRP to manually book the trade. Same class as the 2026-04-13 give-up miss. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
+
+> [resolved] 2026-05-13 — XAUAUD arb-protection misconfiguration; scalping losses at FX twilight
+> ~$5.9k retail loss on XAUAUD between 22:30–23:00 UTC, caused by CPs 105988 and 105990 (both ~6 days old) running 106 small round-trips over 16 mins during FX twilight. Root cause: `pricing.arbProtectionParameters` had UBS (only firm XAUAUD LP) in reference markets but not in `referencePriceMarketSelectors`, causing published quote to be clamped into UBS's wide twilight spread instead of the clean triangulated XAUUSD × AUDUSD price. Fix: removed XAUAUD from `pricing.arbProtectionParameters`; pricing now uses pure triangulated price. Both CPs being monitored for attempts on other crosses. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+
+> [resolved] 2026-05-13 — Signal persistence failure post-reboot (LD4 TOB missing signals)
+> Elan queried TOB not showing signal data for LD4 XAUUSD. Daria identified a signal persistence issue since the last system reboot — signals were not being persisted. Fixed after a restart; signals persisting from that point on. Historical signal data cannot be backfilled. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778639685951519)
 
 > [open] 2025-07-14 — Reactive Markets slow-consumer / Beeks connectivity recurring
 > Argamon raised Reactive connectivity issue with Beeks; hour-long phone call before Beeks escalated to L2, then fixed almost instantly on escalation. Same class of issue had been seen earlier (Reactive slow consumer persisting after Beeks cross-connect applied). Reactive production go-live is in progress (Arun handling; UAT test trades passed 2025-06-30; production test trades underway as of 2025-07-01). GTS Reactive markets added to hybridHedger1 non-LP-reducing rules 2025-07-14. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752458081221389)
@@ -120,6 +135,9 @@ last_catchup: 2026-05-12T07:32:09Z
 
 ## Notable topics
 
+- XAUUSD routing restructure (2026-05-19): all brokered XAUUSD flow now going to Toa; metals/FX tenant split planned early next week to separate classification logic — FX flow is soft/internalisable, XAUUSD flow is sharp/broker-worthy. Positions migrating from CLIENTS → CLIENTS_NYC.
+- XAUUSD sharp-flow cohort growing: Daria flagged multiple signal-follow traders with similar yield profiles (all offside within 500ms); CP 90001948 is the largest. RI flag raised informally for this cohort. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779141857043039)
+- XAUAUD arb-protection fix (2026-05-13): misconfigured arbProtectionParameters were distorting published XAUAUD price during FX twilight; removed from config. First observed via CP 105988/105990 scalp loss (~$5.9k). Pure triangulated price now used.
 - Weekly P&L (w/c 2026-05-08): $7.5k from 402m; 222m internalised ($47/M), 180m brokered ($14/M); RoS 130%. Counterparties 928986 and 928994 moved back to internalise (blacklisted from broker routing — aggregate performance OK despite two bad weeks). Skew P&L recovered after EURUSD open arb loss. Shyam actively reviewing skew and mid improvements. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
 - Mid-formation LP set under review — Tom and Daria are both pushing to broaden the price-formation LP set (COMZ, Jane Street) to reduce dependency on HSBC and to fix per-pair indicatives. Decision still sitting with Elan.
 - Reactive direct setup is the strategic remediation for NWPB (Natwest) min-ticket-size filtering of small client orders. Flagged in 2025-04-15 thread; HRP LP mappings being configured as of 2025-07-07; production test trades in progress.
