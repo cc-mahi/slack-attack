@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-05-12T07:11:15Z
+last_catchup: 2026-05-19T07:12:57Z
 ---
 
 ## Status
@@ -18,6 +18,9 @@ last_catchup: 2026-05-12T07:11:15Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [resolved] 2026-05-12 — Jan requests new MT5 group added to Mahi (`FNTKCONTZRJPY`)
+> Jan asked in #mahi-fintokei to add `demo\AXSE Prop\Fintokei\FNTKCONTZRJPY` to Mahi. Kate Stagg asked for format confirmation (MT4/MT5/cTrader); Jan confirmed MT5 format. Kate acknowledged. On 2026-05-18 Jan followed up to confirm group was live — Kate confirmed it was added the previous week. [permalink](https://mahifx.slack.com/archives/C08QWKFARDL/p1778580729147629) [follow-up](https://mahifx.slack.com/archives/C08QWKFARDL/p1779110261883439)
 
 > [open] 2026-04-16 — `fintokei-ln-trading-1` mysql volume at 90%
 > Cameron flagged in #internal-fintokei (2026-04-16 16:41 BST): archiver retention defaults left in place on `PROD_LIVE_CLIENTDB`, top tables (EnrichedTradeOutputSummary 89GB, HouseOrder 84GB, HOUSE1PositionHistory 67GB) growing fast. LVM has ~1.26TB free so growing the volume buys time, but real fix is archiver overrides matching Funding Pips (POSITION_HISTORY 365→3 days, ORDER_HISTORY 365→30 days). Estimated ~2 weeks until full at current rate. https://mahifx.pagerduty.com/incidents/Q114Z685M3X0C1
