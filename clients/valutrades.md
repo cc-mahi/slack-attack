@@ -9,10 +9,37 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-12T07:35:48Z
+last_catchup: 2026-05-19T07:35:22Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-18 — Scale POV algo: client emailed Liam, response pending
+> Client (Graeme) messaged in ops channel that he had dropped Liam an email about a new Scale POV algo and asked for a quick check. Liam replied he would get back later the same afternoon. No further update in window. [client-msg](https://mahifx.slack.com/archives/C09HN93T0G2/p1779103265527209) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1779107435286049)
+
+> [open] 2026-05-15 — TT UAT connection: waiting on Trading Technologies (OZ) to create passthrough acceptor
+> Client (Graeme) asked for TT UAT connection to be brought up. Arun Patel replied still waiting on OZ to create the new connection for the passthrough acceptor at `54.210.37.117:9013` (ttPassthroughGateway1); no confirmation from OZ in window. Preceded by the Quantitative Brokers UAT IP exchange (see below). [client-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778834709670259) [arun-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1778836581705479)
+
+> [open] 2026-05-14 — Quantitative Brokers integration: UAT deployment pending, connection bounce unanswered
+> Client (Graeme) asked Liam for Mahi's UAT server IP to generate UAT creds for QB integration. Liam supplied `54.210.37.117`. Client then asked "Is this still pending deployment and connection bounce?" (10:41); no Mahi reply visible. Client deferred follow-up to next morning. Related to the TT UAT connection entry above. [ip-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778747009073289) [liam-ip](https://mahifx.slack.com/archives/C09HN93T0G2/p1778748199619179) [client-chase](https://mahifx.slack.com/archives/C09HN93T0G2/p1778751711118929)
+
+> [open] 2026-05-14 — cpty 89468256 XAUUSD drop-copy yield profile — riskPath change flagged internally
+> Client asked if yield profile for cpty 89468256 (XAUUSD, 2026-05-12→2026-05-13) is expected. Cameron Hughes (Analyst) explained the trade was a drop copy plotted against aggregate mid of COMM/DB/GSPM/JPM/SC/UBS/JUMP_OZNY4 markets, and noted a riskPath change for XAUUSD was made the previous day (capturing drop copies) — flagging internally why this was made. No client response or internal resolution in window. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778755151760979) [cameron-h-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778755560946439)
+
+> [open] 2026-05-14 — cpty 69942269 aggregate yield profile forming incorrectly — passed to dev
+> Client asked team to check yield profile for cpty 69942269. Nathan Burch replied that the aggregate profile appears to be forming incorrectly (individual trades show as expected); passed to a dev to investigate. No resolution in window. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778744187602549) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778744764710319)
+
+> [open] 2026-05-15 — cpty 89468337 & 89468338 yield profile query — unanswered
+> Client asked team to check yield profile for cptys 89468337 and 89468338 (XAUUSD, 2026-05-13→2026-05-14). No Mahi reply in window. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778831983239069)
+
+> [resolved] 2026-05-15 — cpty 68560558 XAUUSD yield profile: 13-May vs 14-May discrepancy explained
+> Client noted 13-May graph looked bad, 14-May looked good (XAUUSD, cpty 68560558). Nathan explained the aggregate reflects toxic flow from 5th–8th May dragging early windows; on 13th and 14th individually the flow is good (~90m and 100m respectively). Client satisfied. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778828797928809) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778829933281219)
+
+> [resolved] 2026-05-13 — cpty 89468294 yield profile starting negative — toxic flow, expected
+> Client asked if yield starting negative was expected for cpty 89468294. Nathan confirmed: aggregate YP starting and staying negative indicates toxic A-book flow — the fill price was worse than reference mid at execution. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644533480669) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644837041159)
+
+> [resolved] 2026-05-13 — XAUUSD reference LP list confirmed and JUMP market added
+> Andri asked which LPs are used for XAUUSD yield profile valuation. Nathan replied (initial list was incorrect; corrected same evening): COMM/DB/GSPM/JPM/SC_OZNY4_FUND_NWPB_AMB + UBS_OZNY4_FUND_UBSPB_AMB. Client also requested JUMP_OZNY4_RETAIL_MARGIN_VT be added — Nathan confirmed added. [client-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1778656219150419) [nathan-corrected-list](https://mahifx.slack.com/archives/C09HN93T0G2/p1778704468117649)
 
 > [open] 2026-05-11 — Compass receiving unsubscribed market data — mapping query unanswered
 > Daria (Mahi) posted that Compass is receiving market data it's not subscribing to, listing unrecognised markets under `MFX-IG_Q->ValuCY_Live_Q` (JFX_VALUTRADES-SW-NY4) and `MFX-FEED4_Q->ValuCY_Live_Q` (Valutrades, LMAX-ValutradesNWtk1, Currenex-Valutrades, JUMP-CFD, JumpMakerValutrades, Velocity, JFX_VALUTRADES-SW-NY4, Commerz-Valutrades). Asked team to confirm correct market mappings/setup. No reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778465858044369)
@@ -82,5 +109,11 @@ last_catchup: 2026-05-12T07:35:48Z
 - 2026-05-10 — Client requested bounce before market open: client sent a standalone message asking for a process/gateway bounce before market open ("Sorry if not bounced already please bounce before the market open"). No Mahi reply visible. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778432301421509)
 
 - 2026-05-08–12 — Routine A/B book classification queries: several cpty checks answered by overnight team — cpty 39933574 (Nathan: A book, only 22 trades over 3 days, insufficient data), 92518184 (Nathan: A book), 84517632 (Rory: A book), 89468240 (Nathan: B book), 77537069 (Nathan: A book), 77559135 (Nathan: A book). All acknowledged by client. [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778563239391109)
+
+- 2026-05-18 — Shyam Hari ops follow-up: standalone message in ops channel "is there any update here?" — no further context or reply visible. Likely chasing one of the open ops items (gateways or Compass mapping). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1779066534133159)
+
+- 2026-05-14 — USOil contract roll June→July: client notified Mahi in ops channel; acknowledged with +1. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778721944375639)
+
+- 2026-05-12–19 — Routine A/B book classification queries: high volume continues — cptys 88991658 (B), 89468356 (A, XAUUSD, watch), 89468294 (A, toxic yield), 39933477 (A, 1d data only), 39933478 (B, few days data), 69942660 (B on recent trend, variable history), 89468253 (A), 92596972 (A), 89468388 (A), 89468373 (B, limited data), 85565594 (A), 89468351 (A), 92121267 (A). [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778641746800009)
 
 - 2026-05-03 — Pulse upsell in ops thread: following client confirming the MySQL gap fix ("looks good, appreciate help over weekend"), Justin Young suggested moving off MySQL to Pulse (faster, larger retention periods), linking the knowledge base. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777821952617999)
