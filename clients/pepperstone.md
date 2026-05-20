@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-20T07:30:58Z
 ---
 
 ## History
@@ -100,8 +100,29 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Recent issues
 
+> [open] 2026-05-19 — MK/Reece built external classifier; requesting S3-based automated CP list ingestion
+> MK and Reece built their own counterparty classifier (incorporating upstream data Mahi doesn't see: client IDs, deposits, IP fingerprinting) after finding they couldn't configure Mahi's classifier to meet their needs (specifically: persistent-yield logic — all horizons must be offside, not OR). MK asked Daria about automated ingestion — ideally S3-upload-triggered sync to Compass rather than manual JSON upload. Liam flagged product implications and looped in Andrew Morgan; Andrew noted a similar capability was built for Zenfinex (never used), and suggested S3-match against a classification type pulled on an agreed schedule. Liam will add a Jira. Internally: Andrew advised against swapping this ahead of the Kraken SOW — check that Tom/Tamas have signed off before deprioritising the SOW. MK prioritised this over Kraken from her side; Reece would be point of contact. MK currently in Australia for 2 weeks. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779146841798919) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779178548986389)
+
+> [open] 2026-05-18 — Kraken SOW#3 FIX integration: test credentials setup in progress
+> Liam posted to mahi-pepperstone-vnd requesting Kraken Spot UAT FIX test credentials per SOW#3. Pepperstone (Stephen/ops) confirmed whitelisting Mahi IP 3.232.54.170 with Kraken UAT; Kraken asked for a sign-up account. Revealed Pepperstone don't want Kraken to know Mahi is on the other side of this integration — Tom asked that a Pepperstone email register the UAT account rather than Mahi's. Pepperstone's contact will register and send creds once ready. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779111036533119) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779188905427249)
+
+> [open] 2026-05-18 — Crypto LDN restart stagger: timing agreed but FIX session window in dispute
+> Stephen flagged simultaneous NY+LDN crypto trading server restarts (both in "start in off state" since Feb) causing a brief window of very thin liquidity during Sunday downtime. Daria adjusted LDN crypto trading server reboot to 17:25 NY Sunday (was 16:25). Nathan Burch applied the change and updated FIX session start/end times to match. Diego (Pepper) queried the new FIX session times, noting a conflict with their existing logic (they had 16:59 start). As of 2026-05-20 morning Diego said he'd check internally and revert. Not yet confirmed settled. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779075264717449) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779243635956699)
+
+> [open] 2026-05-18 — USTUSD fill clip size still too slow; Stephen wants 10k/20k UST clips
+> Second round of large UST trade completed 2026-05-18. Fill parcel size increased from 250 to 1000 UST vs the first batch. Stephen still considers it too slow — wants clips of at least 10k–20k UST; asked whether refresh rates are the limiting factor. No Mahi reply in thread yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779086987830109)
+
+> [resolved] 2026-05-20 — USDC/USD pricing added for OZ CFD desk
+> Diego (Pepper) asked for USDC/USD pricing on the OZ side from the spot feed (conversion only, no execution). Daria confirmed she'd set it up via continuity pool using B2C2 in both regions; EOD restart scheduled. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779246233079129)
+
+> [resolved] 2026-05-15 — XAG InvNY1 hedger off after restarts; auto-start reviewed
+> Stephen flagged InvNY1 (XAG inventory hedger) was off again after Sunday restarts. Daria confirmed switched back on and said she'd review notifications. This is a recurrence of the 2026-05-11 auto-start issue — alerting config was added that session but apparently didn't catch this one. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778808580296939)
+
+> [resolved] 2026-05-14 — FX env deploy rolled back; counterparty field capture fix deployed via trader restart
+> Sam Hewitt announced FX env deploy starting 2026-05-14 ~22:04 UTC. Daria flagged ~23:29 that it hit an issue and was being rolled back; failover to LDN throughout, no trade impact. Separately, Daria requested a rolling restart of crypto traders (by region) to pick up a counterparty-field-capture fix; Stephen approved, both regions back up by 23:22 UTC. Resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778797764931869) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778796282049649)
+
 > [open] 2026-05-11 — USTUSD hedger B2C2 deprioritisation lag on large order; fill speed concern
-> Stephen flagged that during a ~$500k AUD UST trade (382k units at 1.38), hedgers kept retrying B2C2 despite insufficient-balance errors rather than switching to Crossover/LMAX sooner, leaving the position partially exposed. Marianna clarified the LP wasn't deprioritised fast enough. Daria adjusted hedger config (further restricting B2C2, reordered rules so backstop can fire), increased liquidity layers; Stephen raised TOB to 10k UST. Separately, fills were slow (250 UST parcels) because only the first two layers were inside the client's limit price — Stephen gathering client feedback on acceptable fill timeframe. Daria still simulating the config change. NOP alignment between Compass and B2C2 limits also discussed — Stephen noted treasury deposits/withdrawals make Compass NOP not reflective of underlying. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489962714849) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778536863658599) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778560468492269)
+> Stephen flagged that during a ~$500k AUD UST trade (382k units at 1.38), hedgers kept retrying B2C2 despite insufficient-balance errors rather than switching to Crossover/LMAX sooner, leaving the position partially exposed. Marianna clarified the LP wasn't deprioritised fast enough. Daria adjusted hedger config (further restricting B2C2, reordered rules so backstop can fire), increased liquidity layers; Stephen raised TOB to 10k UST. Separately, fills were slow (250 UST parcels) because only the first two layers were inside the client's limit price — Stephen gathering client feedback on acceptable fill timeframe. Daria still simulating the config change. NOP alignment between Compass and B2C2 limits also discussed — Stephen noted treasury deposits/withdrawals make Compass NOP not reflective of underlying. 2026-05-18: second large UST trade completed; fill clips improved from 250 to 1000 UST but Stephen still considers too slow — see separate [open] entry for the clip-size follow-up. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778489962714849) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778536863658599) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778560468492269)
 
 > [resolved] 2026-05-11 — Inventory hedger failed to auto-start after weekend restart
 > MK reported that the inventory hedger (CFD desk) did not come up automatically after the weekend restarts. Kate Stagg added config to ensure auto-start and bounced systemStateMonitor to pick up the alerting config for expected on/off status. MK confirmed resolved. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778506644097019)
@@ -139,8 +160,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 > [resolved] 2026-04-29 — Inventory XAG Tapaas A/B reporting — tag 1 prefix solution
 > Daria's call: only the new inventory hedgers needed the change. Set up round-robin tag strategy on the inventory hybrids with B-HEDGING and B-HEDGING-LDN trading accounts. MK testing; no dev change required. Supersedes the 2026-04-22 [open] entry. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777447938640189)
 
-> [resolved] 2026-04-27 — Cpty 2075077 not routed to Dynamic Arbitrageurs (root cause: fillAtWssPrice override)
-> Reece's 6-Apr 22:00 UTC XAGUSD fill at 72.55 instead of 73.246: at 22:03:39.307 an LP bid collapse caused B_BOOK to publish a WSS-clamped bid=72.25/offer=72.55; 65ms later the SELL filled at exactly 72.55 — `fillAtWssPrice` was overriding the continuity-pool execution for Dynamic Arbitrageurs. WSS overrides continuity workflow when fired. Brokered workflow unaffected (only internalised orders). Discussion ongoing on whether to switch to continuity / unwind the override; Reece wants to know plan before any change as it impacts client execution. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777305102439059)
+> [open] 2026-04-27 — Cpty 2075077 not routed to Dynamic Arbitrageurs (root cause: fillAtWssPrice override)
+> Reece's 6-Apr 22:00 UTC XAGUSD fill at 72.55 instead of 73.246: at 22:03:39.307 an LP bid collapse caused B_BOOK to publish a WSS-clamped bid=72.25/offer=72.55; 65ms later the SELL filled at exactly 72.55 — `fillAtWssPrice` was overriding the continuity-pool execution for Dynamic Arbitrageurs. WSS overrides continuity workflow when fired. Brokered workflow unaffected (only internalised orders). 2026-05-13: dev made a fix so forcibly internalised orders can be excluded from fill-at-WSS-price logic. 2026-05-14: deploy to FX/Metals env was attempted but rolled back due to an unrelated FX env issue. Deploy to Pepperstone still pending as of 2026-05-15 ("early next week" per Daria). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777305102439059) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778708983110969)
 
 > [open] 2026-04-24 — YTD list of counterparties removed from `reference.lists.counterparty.custom`
 > Reece asked for a full YTD removal list beyond what Audit History surfaces; Kate investigating. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1777024868051039)
@@ -152,7 +173,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 > dynamicOrderSpeeds config has XAGUSD minimum-lag normal-qty 0.5 vs normal-qty 5000, producing a 2500 minimum that blocks allocation. Thread active.
 
 > [open] 2026-04-01 — Proposal: move crypto maintenance/reboots to weekdays
-> Weekend volumes ≥ weekday; weekend reboots left traders off-state. Awaiting Liam + Pepper confirmation.
+> Weekend volumes ≥ weekday; weekend reboots left traders off-state. Awaiting Liam + Pepper confirmation. 2026-05-18 partial progress: LDN crypto restart pushed 1h later to 17:25 NY Sunday to widen the window between NY and LDN downtime (see separate [open] entry for the FIX session timing dispute). Full move to weekdays not yet actioned.
 
 > [resolved] 2026-04-13 — Sebastian Andrews Compass access revoked (compromised device)
 > Suspended same day by Rory King.
@@ -181,3 +202,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-11 — Ruby Wang (Pepper) requested bulk update of 116 accounts to B-sharp execution profile; Nathan Burch applied, accidentally reverted, then re-applied. Resolved same session. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778473107934599)
 - 2026-05-11 — MTM sim for Reece's YP check: initial run (sim #548) produced 41tn USD notional vs expected ~450m due to lot conversion issue. Re-ran as sim #553 with no lot conversion; Rory delivered Echo Yield Profiles link to Reece. Zendesk 22953. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778472938471219)
 - 2026-05-12 — CFD NY/LDN OZ connectivity stalled: LDN xconnect (10.74.101.142) set up by Beeks 2026-05-08 but OZ still can't locate it; LDN taker/LP credentials outstanding from OZ. NY server provisioning still pending new server provision (old servers had issues). Diego pinging Daria/Isaac/Liam for ETA; Daria escalating to Liam for OZ NY ETA; LDN taker side also blocked. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778566455574649)
+- 2026-05-14 — LMAX Digital moving fortnightly maintenance window from Friday evenings to Saturday mornings 08:00–09:00 UTC, effective 2026-05-23. Pepperstone forwarded the notice; Daria confirmed no config changes needed on Mahi side (multi-venue pricing/hedging already in place). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1778757837376979)
+- 2026-05-15 — Modulus counterparty tag fix deployed (Zendesk ref in internal-pepperstone). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1778800348797699)
+- 2026-05-18 — Counterparty 1281396 checked by Stephen: yields on arbitrageur-classified trades showing positive spread, Daria confirmed classification correct. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779081483070399)
+- 2026-05-19 — Pepper don't want Kraken to know Mahi is the integration counterparty on SOW#3; Pepperstone's own contact will register the UAT account to keep Mahi's identity out of Kraken's onboarding records. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779188905427249)
