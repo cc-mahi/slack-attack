@@ -9,7 +9,8 @@ channels_override: null
 key_people_overrides:
   - {name: "Alex", role: "Base Markets — primary client contact (algo / flow)", confidence: low}
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
-last_catchup: 2026-05-12T07:24:36Z
+  - {name: "Aytugan Khafizov", role: "Centroid Solutions — technical contact (Centroid bridge integration)", confidence: low}
+last_catchup: 2026-05-20T07:25:25Z
 ---
 
 ## Status
@@ -20,12 +21,12 @@ last_catchup: 2026-05-12T07:24:36Z
 
 ## Recent issues
 
-> [open] 2026-05-06 — Tegis MT4/MT5 dual-platform: Centroid workaround adopted, MT5 drop-copy on roadmap with no ETA
+> [open] 2026-05-06 — Tegis MT4/MT5 dual-platform: Centroid integration live, Tegis Book + hedger next
 > Originally: EA on MT4 requires zero-spread exact-fill; Scope MT5 handles real execution. Compass had no lever on fill price. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778162773664489) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778174905149009)
-> **2026-05-11 update:** Kate Stagg proposed Tegis's Centroid as the workaround — Centroid handles MT4 zero-spread / MT5 standard-market-conditions split; Mahi receives market orders via FIX, hedges normally, Centroid translates fills to each platform. Andrew Morgan confirmed this is a valid "Compass broker workflow at a structural loss on the inbound by design" — MT4 accepts whatever limit price, Compass hedges to market, give-up feed into MT5 for real economics. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778494642.927869) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778258653.848549)
-> Distribution FIX creds sent to client on 2026-05-11; infra deploying `clientDistGW1`. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778499833340869)
-> Longer-term: Kate B (client) asked whether Centroid can be removed eventually — MT5 drop-copy (MTB-199, blocked since 2023 on acceptor/initiator architecture call) added to roadmap, no delivery commitment. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517045666329) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517127566459)
-> Call with FastMT requested by client 2026-05-12 (12–2pm or after 5pm UK) to discuss Tegis setup — unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
+> **2026-05-11 update:** Kate Stagg proposed Tegis's Centroid as the workaround — Centroid handles MT4 zero-spread / MT5 standard-market-conditions split; Mahi receives market orders via FIX, hedges normally, Centroid translates fills to each platform. Andrew Morgan confirmed valid "Compass broker workflow at structural loss on inbound by design". [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778494642.927869) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778258653.848549) Distribution FIX creds sent 2026-05-11; infra deployed `clientDistGW1`. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778499833340869) MT5 drop-copy (MTB-199) on roadmap, no ETA. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517045666329)
+> **2026-05-12 update:** Aytugan Khafizov (Centroid) call with Kate Stagg — agreed integration steps: Mahi creates taker connection, Centroid creates maker using Distribution FIX creds, bridge restarts, Centroid configures MAHI1 TEM (inherits zero spread from Scope setup), dropcopy on Netting account in Base MT5 (not Tegis MT5); test MT4 account created then switch existing accounts from Scope TEM. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778587371610629) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778588623913609)
+> **2026-05-18 update:** Centroid IP whitelisting resolved via Beeks; Mahi marker confirmed connected from Centroid side. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779081321195119) Rory King re-added fixMD3/fixOrders3 infra. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779120037227099) Kate Stagg call with Kate B confirmed strategy: keep current execute/warehouse/STP flow for existing base flow, set up separate Tegis Book (Compass managed) + hedger, plus hedger on B Book to keep risk below 100k. LMAX Sub1 = Tegis account, Sub2 = base flow; round-robin tag management in orderServiceConfiguration. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779111232980629) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779185342020389)
+> Longer-term: view to move most Tegis flow into the new Book over time, retaining warehouse risk in current setup.
 
 > [resolved] 2026-05-07 — Client asking for FIX API test/sandbox instance
 > Alex (Base Markets), relayed via Nicola Perikhanyan, asked whether Mahi has a test instance or sandbox for testing FIX API connectivity. Superseded by 2026-05-11 Centroid FIX credential setup — live Distribution FIX creds sent directly to client on 2026-05-11 as part of Tegis/Centroid onboarding. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778164813309659)
