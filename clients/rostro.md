@@ -9,22 +9,23 @@ channels_override: null
 key_people_overrides:
   - {name: "Alexandre Goudergues", role: "trading ops (alexandre.goudergues@scopemarkets.com)"}
   - {name: "Will", role: "scheduling contact", confidence: low}
-  - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup"}
+  - {name: "Oliver Ryan", role: "trading ops — classification/routing, hedger setup; primary Mahi contact since Sammy/Lochlan departures; feeling pressure (longer hours, no bonus)"}
   - {name: "Abdullah Almasharfa", role: "ops — PXM/LP connections, subscriptions", confidence: low}
   - {name: "Manglai", role: "FIX/technical ops — XCore config, dropcopy, LP subscriptions"}
   - {name: "Riz Dusoye", role: "trading ops — spreads, Pulse, VIP feed (rizwaan.dusoye@rostro.com)"}
   - {name: "Louiza Ignatiou", role: "ops — FIX sessions, IP whitelisting"}
   - {name: "Daniel Lawrance", role: "CEO (linkedin.com/in/daniel-lawrance-/); B2B bridge discussions", confidence: low}
-  - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
-  - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
+  - {name: "Sammy", role: "departed — was primary client-side relationship manager / decision-maker", confidence: low}
+  - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?)", confidence: low}
+  - {name: "Mike Ayres", role: "described as 'the main boss' pulling the strings at Rostro; Dave Cooney to arrange catch-up in Dubai", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-12T07:31:46Z
+last_catchup: 2026-05-20T07:31:00Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-11 — IC Markets (MAHI_ICM) feed live; test trades pending Rostro funding
-> Oli (Rostro) asked about ICM feed status into Mahi. Kate confirmed pricing is being received from IC Markets across all FX symbols. Test trades proposed; Oli flagged Rostro hasn't funded the account yet so test trades may not work. Awaiting Rostro credit/funding confirmation before proceeding. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487852170619) [Kate confirms pricing live](https://mahifx.slack.com/archives/C08AQKRU953/p1778488089307679)
+> [resolved] 2026-05-20 — IC Markets (MAHI_ICM) hedger go-live: XAUUSD then XAGUSD
+> 2026-05-12: Oli requested IC_MARKETS be added to the hedger for XAUUSD soft (non-brokered) flow for a short test; Rory actioned, test completed, IC removed after ~30 mins. 2026-05-13: Oli requested the hedger exclusively go to IC Markets for all SI and off-book hedging, brokered flow to remain elsewhere; Kate updated config and confirmed first hedging trade with IC_MARKETS executed. 2026-05-15: Oli flagged pressure to ensure all XAUUSD flow for 6 specific tags goes to IC — Kate proposed a new liquidity pool/execution rules so they stay brokered but route to IC rather than internalising. 2026-05-19: Oli asked to make IC Markets the exclusive hedging LP for XAGUSD as well; Rory actioned and confirmed both SI and off-book hedgers for XAGUSD now route exclusively to IC Markets. [2026-05-13 go-live](https://mahifx.slack.com/archives/C08AQKRU953/p1778659621525469) [2026-05-19 XAGUSD](https://mahifx.slack.com/archives/C08AQKRU953/p1779207605504289) [internal 2026-05-15](https://mahifx.slack.com/archives/C08ALS66EDC/p1778834736180539)
 
 > [resolved] 2026-05-11 — Second-layer spreads wide on VIP and SI (FX and Gold)
 > Alex (Rostro) flagged that second-layer spreads on VIP and normal SI were significantly wider than spread config across most FX and Gold. Kate began investigating. Oli identified the root cause: the benchmark reference LPs were only referencing INVAST_2, which was wide; Oli added Edgewater to the benchmark reference LPs and confirmed spreads looked ok. Kate acknowledged the fix. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1778487685725129) [Oli fix](https://mahifx.slack.com/archives/C08AQKRU953/p1778487969268199)
