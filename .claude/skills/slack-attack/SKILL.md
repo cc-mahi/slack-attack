@@ -94,9 +94,27 @@ Slack rate limits: tier-3 endpoints (`conversations.history`, `search.messages`)
 
 For each client just refreshed:
 
-1. `git show <sha> -- clients/<slug>.md` against the SHA the catchup subagent reported on its `Commit:` line. This is exactly what this run added or changed — the subagent has already committed, so the working tree is clean and `git diff` is empty. If a subagent's output had no `Commit:` line (hit a quiet window with no commit, or errored), fall back to the dossier read alone.
-2. Read the full dossier for context (existing `[open]` entries the brief should reference, `key_people_overrides` for names, refs).
+1. `git show <sha> -- clients/<slug>.md` against the SHA the catchup subagent reported on its `Commit:` line. **This diff is the sole source of brief content.** The subagent has already committed, so the working tree is clean and `git diff` is empty. If a subagent's output had no `Commit:` line (hit a quiet window with no commit, or errored), fall back to the dossier read alone.
+2. Read the full dossier **for context only** — names from `key_people_overrides`, refs, and prior `[open]` entries that the diff *touched* (so you can describe the touch correctly: "the limit-order issue is now closed", "the go-live note got refreshed"). Prior entries the diff did not touch are not material for the brief. They exist in the dossier; the reader can scroll the dossier if they want them. The brief is about *what changed this run*, not "what's still in the dossier".
 3. If the commit is purely a `last_catchup` bump (catchup reported a quiet window, or the orchestrator probe-skipped before dispatch), the brief for that client is one line — see "Quiet weeks" below.
+
+**Diff-touch test.** A prior entry counts as "touched by the diff" if and only if one of the following is true in `git show <sha>`:
+- A new entry was added that names it (e.g. a new `[resolved]` line for the same incident, a new follow-up `[open]` entry pointing back to it).
+- Its existing line was edited (summary refresh, status marker change `[open]`→`[resolved]`).
+- A new Notable topic was added that directly references it.
+
+If none of those are true, the entry is **silent in the brief**, even if it's still `[open]` and even if it's recent. "Recent and still open" is the dossier's job to surface, not the brief's.
+
+## Window-anchor sanity check (before writing the brief)
+
+Anchor the window using *only* the catchup subagent's reported window (the ISO range in its summary) — not your own date math, not the dossier's `last_catchup` (that's already been bumped to *now*).
+
+For each client section you're about to write:
+
+1. Note `window_oldest_unix` from the catchup summary (the start of the ISO range it reported, decoded to Unix seconds).
+2. For every Slack permalink you intend to include as `[N]`, decode the first 10 digits of `<TS>` in `/archives/<CID>/p<TS>` to Unix seconds. That must satisfy `entry_ts ≥ window_oldest_unix - 60`. If it doesn't, the link is from outside the current run — **drop the paragraph**, don't paper over it by widening the language.
+
+This is the second line of defence: catchup's pre-commit sanity check stops bad dossier writes; this stops bad brief writes. The two together mean "today's brief never cites something older than today's window".
 
 ## Output — single client (`/slack-attack <slug>`)
 
@@ -109,7 +127,7 @@ Length is fuzzy: a quiet window gets one paragraph (or a one-liner); a heavy wee
 
 <Lead paragraph: the shape of the window — what dominated, what shifted. Skip if quiet.>
 
-<Body paragraphs: what's happening, what's still rough, what just closed. Use natural-language verbs ("hit a snag", "got closed", "is still being debugged") rather than status markers. Embed `[N]` references inline at each claim.>
+<Body paragraphs: what happened *in this run's diff* — new issues, status changes the diff recorded, new Notable topics. Use natural-language verbs ("hit a snag", "got closed", "is still being debugged") rather than status markers. Embed `[N]` references inline at each claim. **Every `[N]` URL must point inside the current catchup window** (see "Window-anchor sanity check" above).>
 [N] https://mahifx.slack.com/archives/.../p...
 [N] https://mahifx.slack.com/archives/.../p...
 
@@ -192,5 +210,6 @@ If the user says yes, run the next batch picking up where you stopped (re-rank b
 
 - Never fabricate a Slack permalink. If catchup didn't surface one for a claim, either drop the claim or surface the parent claim with the link catchup *did* provide.
 - One client section per `**<client>**` header. Don't merge clients into a single super-paragraph.
-- If a client's diff is empty AND the dossier has no recent activity worth referencing, it's a quiet one-liner. Don't pad with old `[open]` items unless they flared in this window.
+- If a client's diff is empty, it's a quiet one-liner. Don't pad with old `[open]` items — "still open" is not the same as "happened this run". The dossier carries them; the brief doesn't restate them.
+- If a client's diff is non-empty, every paragraph and every `[N]` URL must trace to the diff. Prior dossier entries that the diff did not touch are silent in the brief, full stop. See "Diff-touch test" above for what counts as "touched".
 - Match the response length to the activity. Three sentences for a quiet client beats three paragraphs of restated old issues.
