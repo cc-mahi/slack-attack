@@ -10,6 +10,7 @@ The reader / user is **Cameron Copland** (Slack user ID `U099FA0D7CP`, email `ca
 2. **Skills**:
    - **`/catchup <target>`** — worker. Pulls Slack since `last_catchup` and edits one dossier in place (Recent issues + Notable topics). Output is a structured confirmation, not a readable brief.
    - **`/slack-attack [slug]`** — reader-facing entrypoint. Dispatches `/catchup` in subagents (to keep main context clean), then synthesises a natural-language prose brief from the updated dossier(s) for me. With no slug it batches across active clients oldest-first, until the brief is substantial, then prompts to continue.
+   - **`/weekly-overview`** — Monday-morning higher-level digest. Reads the past week's catchup commits across all clients and synthesises a prose summary of the major stories. No fresh Slack pulls; sources strictly from in-repo commits. Runs after the daily `/slack-attack` on Monday.
    - **`/backfill <slug>`** — one-shot lookback worker. Default 12m horizon; populates the dossier's `## History` section with the relationship arc. Suggests an extension run if older history is detected. Run once per client (or twice with `--since YYYY-MM-DD` to extend). Refuses if a wiki page exists upstream.
 
 ## Source-of-truth boundary
@@ -68,9 +69,10 @@ clients/     per-client dossiers (_template.md is the schema)
 channels/    per-channel dossiers for non-client channels
 .claude/
   skills/
-    catchup/       /catchup <target>            — worker, edits Recent issues + Notable topics
-    slack-attack/  /slack-attack [slug]         — orchestrator + reader-facing brief
-    backfill/      /backfill <slug>             — one-shot lookback, populates ## History
+    catchup/          /catchup <target>         — worker, edits Recent issues + Notable topics
+    slack-attack/     /slack-attack [slug]      — orchestrator + reader-facing daily brief
+    weekly-overview/  /weekly-overview          — Monday-morning prose digest of the past week's commits
+    backfill/         /backfill <slug>          — one-shot lookback, populates ## History
   docs/
     slack-conventions.md   channel patterns + skip rules
 ```
