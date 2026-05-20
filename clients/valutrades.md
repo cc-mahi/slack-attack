@@ -9,10 +9,19 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-12T07:35:48Z
+last_catchup: 2026-05-20T07:36:29Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-18 — TT UAT passthrough acceptor pending OZ setup — Shyam chasing
+> Client (Graeme) asked Mahi to get TT UAT connection running on 2026-05-15. Arun Patel replied: still waiting on OZ (TT) to create the passthrough acceptor at `54.210.37.117:9013` (ttPassthroughGateway1) — Liam had confirmed UAT IP as `54.210.37.117` on 2026-05-14. No confirmation from OZ visible. Shyam Hari chased again on 2026-05-18. [graeme-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1778834709670259) [arun-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1778836581705479) [liam-ip](https://mahifx.slack.com/archives/C09HN93T0G2/p1778748199619179) [shyam-chase](https://mahifx.slack.com/archives/C09HN93T0G2/p1779066534133159)
+
+> [open] 2026-05-14 — cpty 69942269 aggregate yield profile forming incorrectly — passed to dev
+> Client asked about cpty 69942269 yield profile (Apr 22–Apr 30 window). Nathan Burch replied that individual trades look expected but the aggregate is forming incorrectly, and said he'd pass to a dev. No resolution visible in window. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778744277423119) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778744764710319)
+
+> [resolved] 2026-05-13 — XAUUSD yield-profile LP reference list corrected; JUMP_OZNY4_RETAIL_MARGIN_VT added
+> Andri (client) asked which LPs are used to value XAUUSD yield profiles. Nathan Burch initially sent an incorrect list; corrected same evening to: COMM_OZNY4_FUND_NWPB_AMB, DB_OZNY4_FUND_NWPB_AMB, GSPM_OZNY4_FUND_NWPB_AMB, JPM_OZNY4_FUND_NWPB_AMB, SC_OZNY4_FUND_NWPB_AMB, UBS_OZNY4_FUND_NWPB_AMB. Client also asked to add JUMP_OZNY4_RETAIL_MARGIN_VT; Nathan added it and confirmed. Cameron Hughes corroborated this full list in the mahi-valutrades channel on 2026-05-14. [andri-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1778656219150419) [nathan-corrected](https://mahifx.slack.com/archives/C09HN93T0G2/p1778704468117649)
 
 > [open] 2026-05-11 — Compass receiving unsubscribed market data — mapping query unanswered
 > Daria (Mahi) posted that Compass is receiving market data it's not subscribing to, listing unrecognised markets under `MFX-IG_Q->ValuCY_Live_Q` (JFX_VALUTRADES-SW-NY4) and `MFX-FEED4_Q->ValuCY_Live_Q` (Valutrades, LMAX-ValutradesNWtk1, Currenex-Valutrades, JUMP-CFD, JumpMakerValutrades, Velocity, JFX_VALUTRADES-SW-NY4, Commerz-Valutrades). Asked team to confirm correct market mappings/setup. No reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778465858044369)
@@ -66,6 +75,24 @@ last_catchup: 2026-05-12T07:35:48Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-05-18 — Scale POV algo request — pending Liam reply: client emailed Liam about a new Scale POV algo and flagged it in the ops channel. Liam acknowledged and said he'd reply later that afternoon. No reply visible in channel. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1779103265527209)
+
+- 2026-05-15 — cpty 89468337 & 89468338 yield profile query — unanswered: client asked team to look at yield profiles for 89468337/89468338 (2026-05-13 window). No reply visible. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778831983239069)
+
+- 2026-05-14 — cpty 89468256 yield profile query — unanswered: client asked team to check yield profile for cpty 89468256. No reply visible. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778755151760979)
+
+- 2026-05-14 — cpty 68560558 XAUUSD yield profile — 13-May vs 14-May discrepancy unanswered: client asked why the 13-May yield profile for cpty 68560558 XAUUSD looks bad while 14-May looks good. Nathan took it to look at, but no follow-up visible. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778828595651029)
+
+- 2026-05-14 — XAUUSD riskPath drop-copy change under investigation: Cameron Hughes noted in mahi-valutrades that the 89468256 XAUUSD trade was a drop copy plotted against the aggregate mid from the standard LP list, and flagged that a riskPath change for XAUUSD made the previous day (2026-05-13) "also captures drop copies" — checking internally why. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778755560946439)
+
+- 2026-05-13 — cpty 89468294 flagged as potentially toxic flow: Nathan Burch replied to client's yield profile query that the aggregate YP starting negative and remaining mostly negative "suggests this is toxic flow". Client acknowledged. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778644533480669)
+
+- 2026-05-13 — Quantitative Brokers (QB) UAT integration in progress: Liam confirmed the Mahi UAT server IP (`54.210.37.117`) to be used for Quantitative Brokers integration dev; client (Graeme) asked so they could get QB to generate UAT credentials. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778747009073289)
+
+- 2026-05-14 — USOil contract rolled Jun→Jul: client notified Mahi; acknowledged. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778721944375639)
+
+- 2026-05-12–20 — Routine A/B book classification queries: high volume of counterparty classification requests; all answered by overnight team (Rory, Nathan, Sam). Notably cpty 89468294 flagged as potentially toxic (see Notable topic above). [sample](https://mahifx.slack.com/archives/CSLM3Q8AD/p1778584889121429)
 
 - 2026-05-05 — UAT Compass availability query: Graeme asked `@here` whether a functioning UAT Compass environment is available. Kate replied she would check; Liam noted a UAT environment exists and "we should be able to spin up whatever you need in fairly short order". No definitive confirmation in window. Bonnie flagged the unanswered question internally. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997434492069) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997877227319)
 
