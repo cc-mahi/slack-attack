@@ -15,12 +15,17 @@ key_people_overrides:
   - {name: "Mukhammad Khamidov", role: "trading ops — Wagyu metals pricing/spreads", confidence: low}
   - {name: "Daniel Kurra", role: "trading ops — pricing channels / hedger config", confidence: low}
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
-  - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
+  - {name: "George Moore", role: "ops — UBS / Jane Street / LP onboarding liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-12T07:28:05Z
+  - {name: "Nick Serff", role: "ops — LP connectivity / session setup", confidence: low}
+  - {name: "Matthew Ayub", role: "ops — yield sims / trading analytics", confidence: low}
+last_catchup: 2026-05-20T07:28:02Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-20 — XAUUSD B-Book Insti position break + missing trade legs around rollover + SI risk anomaly
+> Christian Lee (Exinity) flagged an unexpected XAUUSD position in B-Book Insti with no corresponding client position. Will Carter + Matthew Ayub traced a missing close leg: in leg visible before rollover, out leg only appearing in PrimeXM post-rollover — Mahi did not receive the close leg. Separately, Will Carter queried why risk was sent to SI book at ~01:30 UTC (thought SI was turned off; referenced config audit). George Moore also reported a massive PnL drop in SI FX Insti. Daniel Kurra identified `n/a` being appended to trade IDs as a contributing cause for the missing legs. Will Carter then flagged that risk splitting based on tags (as currently configured) would cause further issues. Nick Serff asked if an EoD restart for enabling tags was connected — Will Carter confirmed no Compass restarts on Mahi side. Two separate tracks being worked: (1) missing trade legs / n/a ID issue, (2) unexpected SI book risk at 01:30 UTC. Active and unresolved at time of this run. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779259759100429)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
