@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-12T07:26:06Z
+last_catchup: 2026-05-20T07:26:04Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-17 — Centroid A-Orders-Centroid session disconnect
+> David (GoMarkets) reported the Mahi A-book connection was disconnected / unable to connect. Isaac diagnosed: no logon request received for GoMarkets-A-Orders-Centroid (same pattern seen on other Centroid bridges that day). Recommended a Centroid bridge restart; client restarted and confirmed successful ~6 minutes later. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779058091343579)
 
 > [open] 2026-05-10 — FX market-open order rejections due to excessive internal latency
 > Will (GoMarkets) reported a burst of order cancellations at FX open: "Forcibly cancelled order due to excessive internal latency. Configured last-look delay was exceeded by 475ms (actual delay 605ms - expected delay 130ms) > max overrun allowed 300ms." Event lasted ~1 second (last cancel at 21:01:01.571 UTC). Nathan confirmed isolated to FX market opening, stable since; reviewing with dev team to prevent recurrence. Client asked whether any config adjustments could help. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778450112481459)
@@ -38,6 +41,14 @@ last_catchup: 2026-05-12T07:26:06Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-19 — StarPrime LP onboarding interest: Isaac noted GoMarkets CEO Kieran was using a lot of "Mahi Terminology" when speaking with StarPrime; Isaac did not disclose either way. Khim (GoMarkets) wants to speak to David Cooney about potentially onboarding StarPrime as an LP. Bonnie offered to set up the call; David said he'd let Khim reach out if interested. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779180443060989)
+
+- 2026-05-19..20 — CLIENT_PRICE_RA config alignment with CLIENT_PRICE_NYC: Kieran (GoMarkets) requested spread config bounce after making changes (Isaac confirmed dynamic, no restart needed). Nathan then confirmed all config for CLIENT_PRICE_RA now matches CLIENT_PRICE_NYC except spread profiles; the A_CLIENTS_RA & B_CLIENTS_RA internalisation market still points to CLIENT_PRICE_NYC pending Kieran's go-ahead to cut over. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779231839635339)
+
+- 2026-05-18 — Echo brokered/internalised decision view per execution profile: Will (GoMarkets) asked if Echo can show whether historical/current profiles resulted in a brokered vs internalised decision, grouped by instrument/execution profile. Isaac confirmed: yes — group by trade type and execution profile to separate internalised and brokered trades; provided Echo link with the filter. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779080603722709)
+
+- 2026-05-18 — March + April 2026 monthly reports signed off: Isaac posted March and April reports (Gamma links) to internal-go as sanity-checked, pending signoff. Will Carter signed off same day ("Good to go, great to have you back"). [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779065318031379)
 
 - 2026-05-12 — LR counterparty-level trading-account query: Erik (GoMarkets) asked whether Liquidity Reduction is set up at the counterparty level listening to any trading account. Nathan confirmed: all counterparties receive the default LR configuration regardless of trading account, except counterparty 440381. No follow-up or action requested. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778570489549959)
 
