@@ -8,17 +8,26 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Clio Constantinou", role: "Infinox sales / risk liaison (FSC EU/CY)", confidence: low}
-  - {name: "Georgia Tzyrkalli", role: "Infinox trading ops — arb classification / blacklist queries; Echo access confirmed 2025-05"}
+  - {name: "Georgia Tzyrkalli", role: "Infinox trading ops — arb classification / blacklist queries; Echo access confirmed 2025-05; primary ops contact as of 2026-05"}
   - {name: "CH", role: "Infinox sales escalation contact — keen on white-label bridge; internal Mahi advocate for bridge deal"}
-  - {name: "Lazaros Zografopoulos", role: "Infinox trading desk — arb classification PnL oversight, pricing oversight"}
+  - {name: "Lazaros Zografopoulos", role: "DEPARTED 2026-05-15 — was Infinox trading desk, arb classification PnL oversight, pricing oversight; access removed from platforms/Slack"}
   - {name: "Kerim Horoz", role: "Infinox London dealing desk — toxic flow triage, LR config, order throttle queries; primary day-to-day ops contact"}
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-12T07:31:45Z
+last_catchup: 2026-05-20T07:30:57Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-20 — US30 spread spike complaint: 35p → 415 points
+> Georgia Tzyrkalli reported client complaints (received 2026-05-19) that US30 spread widened from 35 points to 415 points. Shyam Hari acknowledged and said he would look into it. Georgia followed up with a screenshot showing a 4 USD spread at time of incident. Investigation in progress; no root cause or fix in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779259961824069) [Shyam ack + screenshot](https://mahifx.slack.com/archives/C022S6NL82D/p1779260366428329)
+
+> [resolved] 2026-05-15 — Lazaros Zografopoulos departed Infinox
+> Lazaros posted farewell in #mahi-infinox (2026-05-15, his last day) thanking the Mahi team and requesting his access removed from platforms/Slack after EOD. Kate Stagg acknowledged and confirmed removal. Trading Ops separately sent an access-disable request (2026-05-19); Rory King confirmed account suspended. Lazaros was the main Infinox trading desk contact for arb classification PnL oversight and pricing model formalisation — Georgia Tzyrkalli is now the primary day-to-day ops contact. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778851874368279) [Kate farewell](https://mahifx.slack.com/archives/C022S6NL82D/p1778852585886429) [access suspended](https://mahifx.slack.com/archives/C022S6NL82D/p1779178384279379)
+
+> [resolved] 2026-05-12–20 — Routine Heavy/Medium LR adds (14 Centroid CPs + 87942751 + 86049919)
+> Continuing stream of Centroid CP adds to Heavy LR: 3595889 (2026-05-12), 3598260 (2026-05-12), 2145764883 (2026-05-13), 2145764439 (2026-05-14), 2145764962 / 2145764602 / 3595585 / 3596145 (2026-05-15), 3597188 (2026-05-15), 3598982 (2026-05-18), MT5_plain_b_87942751 all-tags (2026-05-18, Georgia requested all tag variants), 2145764786 (2026-05-19), 3596977 + 2145764786 + 2145765125 (2026-05-19–20), 3595927 (2026-05-20). Also: 86049919 → Medium LR (2026-05-15). All actioned by Nathan Burch / Rory King / Shyam Hari / William Denny. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778580216702899) [2026-05-20 batch](https://mahifx.slack.com/archives/C022S6NL82D/p1779259344391689)
 
 > [resolved] 2026-05-12 — Routine No LL add: CP 83037076 (with initial profile error)
 > Trading Ops requested CP 83037076 added to No LL profile. Nathan initially added it to No LR by mistake; Trading Ops caught it and flagged the error; Nathan corrected it to No LL at 07:29. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778564634996039)
