@@ -8,13 +8,23 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Erik", role: "client ops — reconciliation / position discrepancies", confidence: low}
-  - {name: "Mac", role: "client ops — tenant profile / All Books migration", confidence: low}
+  - {name: "Mac", role: "client ops — tenant profile / All Books migration / config editor", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
-  - {name: "David", role: "client ops — execution-rule / pricing-model questions", confidence: low}
-last_catchup: 2026-05-12T07:26:06Z
+  - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
+  - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
+last_catchup: 2026-05-21T15:48:51Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-17 — Centroid A-Orders FIX disconnect (GoMarkets-A-Orders-Centroid)
+> David (GoMarkets) reported A-book Mahi connection disconnected/unable to connect at ~23:48 UTC. Nathan investigated; Isaac diagnosed Mahi had not received a logon request on the GoMarkets-A-Orders-Centroid session. Isaac advised a Centroid bridge restart as the fix — GoMarkets requested the restart, and it succeeded (~00:06 UTC 2026-05-18). Pattern consistent with the April Centroid B-Prices session failure (2026-04-25 entry). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779058091343579)
+
+> [open] 2026-05-20..21 — CLIENT_PRICE_RA pricing model migration in progress
+> Nathan aligned all CLIENT_PRICE_RA config to match CLIENT_PRICE_NYC (except spread profiles). Remaining step: internalisation market on A_CLIENTS_RA and B_CLIENTS_RA channels still pointed at CLIENT_PRICE_NYC — Kieran (GoMarkets) confirmed he changed internalisation to _RA but TOB sizes unchanged; Isaac confirmed internalisation market change requires an EOD restart to take effect and offered to schedule it. Client confirmed. Silver metal cross also pending EOD restart (see metals crosses entry). EOD restart not yet confirmed complete at window close. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779231839635339)
+
+> [open] 2026-05-21 — New metals crosses config request
+> Kieran (GoMarkets) requested initial setup for metals crosses (via email + Slack). Cameron Hughes (Mahi) added triangulated base spread config for the metal crosses not yet pricing. All crosses now subscribe-able except silver, which requires an EOD restart (pending at window close). Kieran to follow up with Isaac on finer config settings. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779346879467069)
 
 > [open] 2026-05-10 — FX market-open order rejections due to excessive internal latency
 > Will (GoMarkets) reported a burst of order cancellations at FX open: "Forcibly cancelled order due to excessive internal latency. Configured last-look delay was exceeded by 475ms (actual delay 605ms - expected delay 130ms) > max overrun allowed 300ms." Event lasted ~1 second (last cancel at 21:01:01.571 UTC). Nathan confirmed isolated to FX market opening, stable since; reviewing with dev team to prevent recurrence. Client asked whether any config adjustments could help. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778450112481459)
@@ -38,6 +48,10 @@ last_catchup: 2026-05-12T07:26:06Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-21 — GoMarkets March + April monthly reports signed off: Isaac (Mahi) posted sanity-checked March and April 2026 monthly reports; Will Carter signed off same day. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779065318031379)
+
+- 2026-05-18 — Echo brokered/internalised execution profile visibility: Will (GoMarkets) asked whether Echo can show historical/current profile decisions (brokered vs internalised) grouped by instrument/profile. Isaac provided a direct Echo link filtered by trade type (Internalized client trade) and suggested grouping by trade_type + execution_profile. Will confirmed it covered the need. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779080603722709)
 
 - 2026-05-12 — LR counterparty-level trading-account query: Erik (GoMarkets) asked whether Liquidity Reduction is set up at the counterparty level listening to any trading account. Nathan confirmed: all counterparties receive the default LR configuration regardless of trading account, except counterparty 440381. No follow-up or action requested. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778570489549959)
 
