@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-12T07:19:18Z
+last_catchup: 2026-05-21T10:00:41Z
 ---
 
 ## Status
@@ -84,8 +84,8 @@ last_catchup: 2026-05-12T07:19:18Z
 > [open] 2025-07-01 — Contract restructure: Mahi=retail, Toa=crypto/B2B/RI
 > Andrew: contract being split — Mahi manages retail tenant, Toa takes crypto/B2B/RI and connectivity pipeline. Meeting requested to discuss new operational setup and resource shuffle. Toa becoming main crypto LP is expected to resolve many rec complexities. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751381584552799)
 
-> [open] 2026-04-28 — XAUUSD brokerage to Toa expansion
-> Daria added party 104881 to brokered-to-Toa for XAUUSD on argamon.NYC; plan is to migrate the softest of 104881/105048/105153/105681/105773 progressively to see if hedging to CME helps yield. Starting with softest first. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777335260425589)
+> [resolved] 2026-04-28–2026-05-19 — XAUUSD brokerage to Toa expansion → full migration complete
+> Started 2026-04-28 with party 104881 (softest) added to brokered-to-Toa. By 2026-05-19 all XAUUSD brokered flow migrated to Toa (wider spreads, tougher LR, CME hedging). Multichannel config controls revert path (re-add TOA-BROKER-XAUUSD counterparty list to dynamic rules). Daria also plans to split metals and FX into separate tenant profiles early next week to prevent XAUUSD flow from tainting FX signal-follow/broker classifications; will need to move positions from CLIENTS to CLIENTS_NYC. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777335260425589) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779151965234289)
 
 > [open] 2026-05-04 — TOA_CHI/A_EXTERNAL_WASH XAUUSD reject spike (quantity too large) — analytics support question unanswered
 > Alert at 11:59–12:00Z: 98% reject ratio (93/95 orders) on TOA_CHI/A_EXTERNAL_WASH for XAUUSD from 1 counterparty (90000580), error `FIELD_VALIDATION_ERROR: quantity=TOO_LARGE, maximumShowQuantity=TOO_LARGE`. Justin Young forwarded the ZD ticket to internal-argamon asking who's on analytics support today; two +1 reactions but no reply in thread. As of 2026-05-08 still no thread reply — unresolved. Zendesk ticket: https://mahifx.zendesk.com/agent/tickets/22907. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777898434100499)
@@ -95,6 +95,21 @@ last_catchup: 2026-05-12T07:19:18Z
 
 > [watching] 2026-05-08 — Weekly P&L: $7.5k from 402m (week to date)
 > Daria's mid-week update: 222m internalised, 180m brokered. Brokered flow decays quickly but stays onside (3x spread of internalised: $14/M brokered vs $47/M internalised). Two counterparties (928986, 928994) blacklisted from broker for now — bad couple of weeks but aggregate yield acceptable for internalisation. Net brokered spread $3.4k; internalisation P&L $4.1k (RoS 130%); LR P&L $1.4k mostly on brokered. Skew P&L had initial EURUSD open loss from arb but has fully recovered. Focus on skew and mid improvements (Shyam reviewing). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
+
+> [resolved] 2026-05-13 — XAUAUD scalping: arb-protection UBS clamping allowed retail scalpers to harvest $5.9k
+> Two retail CPs (105988, 105990, ~6 days old) executed 106 XAUAUD round-trips over ~16 mins during FX twilight (22:26–22:42 UTC). Root cause: `pricing.arbProtectionParameters` had UBS in reference markets (but not referencePriceMarketSelectors), clamping published XAUAUD into UBS's wide twilight spread rather than using clean triangulated price (XAUUSD × AUDUSD). Fix: removed XAUAUD from arbProtectionParameters. Shyam watching the two CPs for attempts on other crosses. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+
+> [resolved] 2026-05-15 — Toa HRP booking config missing — drop-copy trades not sent to HRP
+> Tom (Argamon) flagged trades on Toa where HRP was missing Argamon's booking side. James Furness found missing config in `connectivity.booking.bookingSystemRouting`. Fixed same day. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
+
+> [open] 2026-05-18–19 — New XAUUSD scalper (CP 90001948) caused ~$4k PnL drop; high traders with similar short-horizon YPs flagged
+> CP 90001948 (first day on platform) sold 600oz in 10 fills of 300oz each, left Mahi long through a drop; hedge flatten chased and locked in ~$4k loss. Auto-profiled as SIGNAL_FOLLOW + BROKER; now brokering from next trades. Kate also flagged a cluster of other CPs with similar yield profiles (all offside within 500ms), $3k brokered LR recovered on 90001948 since classification. Daria: "could consider RI again at some point". [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019)
+
+> [open] 2026-05-19 — TOA_CHI 100% CPU/Aeron meltdown (~10 min pricing drop, XAU rejects)
+> Kate noted ~10 min TOA_CHI pricing drop causing a handful of XAU rejects in mahi-argamon-operations (internalisation disabled during outage). James Furness flagged 100% CPU and Aeron meltdown in CHI around 15:30 BST. Client (Tom) flagged high cancel volume; Kate confirmed rejects were retries on toxic tags being brokered while LP pricing was unavailable (-$950/M at 2min). Pricing came back; root cause investigation ongoing. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779199627807509) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779211745957959)
+
+> [open] 2026-05-21 — Client question on CP 104719 mixed brokering/internalisation — unanswered
+> Argamon (Tom/ops) asked in mahi-argamon-operations why CP 104719 is sometimes internalised and sometimes brokered (e.g. trade 012dr52qh1v brokered, 012dr52qh3k internalised, 12 mins apart). Querying whether it's the 7-day rolling profiling assessment or session-based config. No reply in thread as of run time. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
 
 ## Notable topics
 
@@ -116,3 +131,5 @@ last_catchup: 2026-05-12T07:19:18Z
 - 2025-06-30 — Reactive UAT test trades passed; production test trades 2025-07-01 with party mapping config updates. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1750269992249569)
 - 2026-05-03 — XAUUSD retail NY4→CHI hedging disabled: retail achieving positive spreads; CHI giving negative spreads so hedging there turned off. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777845150173619)
 - 2026-05-04 — EURUSD mid formation: Elan approved adding all LPs back into mid (NY now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary LPs; backtests show reduced spiky pricing and arb opportunities. Adaptive mid logic also added to betaRetailPricer1 for EURUSD; FI/skew PnL review ongoing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
+- 2026-05-13 — Signal persistence failure after system reboot: signals not being persisted post-reboot. Daria restarted and confirmed persisting again; backfill of missing signal data not possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
+- 2026-05-19 — Toa GUI spread-config (XAUUSD / CLIENT_PRICE_INSTI_LIGHT) error on load: JSON name field was incorrectly copied. James fixed the name in the JSON; resolved same day. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779186517949549)
