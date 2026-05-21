@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-12T07:16:57Z
+last_catchup: 2026-05-21T09:55:41Z
 ---
 
 ## Recent issues
@@ -73,3 +73,5 @@ last_catchup: 2026-05-12T07:16:57Z
 - 2026-05-06 — Kate clarified counterparty tag formats for CUSTOM2 list uploads: cTrader tags have no prefix (e.g. `26321335`); MT5 tags use `11734_` prefix (e.g. `11734_26321335`). Ensures client structures daily JSON uploads correctly per venue. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1778074348226569)
 - 2026-05-06 — Yaniv updated CUSTOM2 counterparty list and wants "considerably higher heat" on risk measures (LR, lookback) for flagged traders; Kate making further config tweaks to LR profile and settings. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1778074611379009)
 - 2026-05-05 — CUCUSD alternating ~3800-point price swings reported by client for period before 2026-05-04 12:16 UTC; Mahi investigated but found no issue on their side — client directed to investigate further. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777977791029089)
+- 2026-05-19 — YB spread yield / slippage spike investigated: demo flow $/M spread yield hit $177/M on YB vs $49/M on funded flow through Compass. Kate identified small markup component (SYNAPSE_LIVE_CLIENTS vs 5ERS_MT5_LIVE_LN1 yield diff) but concluded majority is slippage from YB dialling up aggressively. By the time of the Yaniv call (~14:26 BST) yields had realigned — client confirmed they dialled slippage back. Room remains to increase LR further. [analysis](https://mahifx.slack.com/archives/C079M09MGGP/p1779192985774199) [update](https://mahifx.slack.com/archives/C079M09MGGP/p1779197179265719)
+- 2026-05-19 — Yaniv weekly call (Kate): (1) Spreads + commissions + swaps all raised by 5ers → dramatic drop in eval-to-funded pass rate in past month; Kate flagged order book fill impact as a likely contributor. (2) cTrader dropping US clients June 1st — 5ers migrating to YB platform with TradingView front-end. (3) CUSTOM2 LR scope: $/M for CUSTOM2-classified traders not much higher than average funded flow; Kate to increase LR on that classification. (4) XC update requested; Kate noted YB have been blocking progress and will send a written update. (5) Withdrawal-rule simulation: 5ers looking to tweak eval-withdrawal rules; Kate to consult internally on notebook parameters and share back with Yaniv. (6) Yaniv may attend Cyprus meetup. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779201650126839)
