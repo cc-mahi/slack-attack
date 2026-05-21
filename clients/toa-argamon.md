@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-12T07:32:09Z
+last_catchup: 2026-05-21T16:15:57Z
 ---
 
 ## Status
@@ -66,6 +66,18 @@ last_catchup: 2026-05-12T07:32:09Z
 
 > [resolved] 2026-05-08 — XAUUSD signal reverted neuron → synapse; skew-driven decision
 > Shyam switched XAUUSD signal back to synapse (from neuron, which was set 2026-04-22) in response to skew analysis. Monitoring for CPs picking off pricing; pricing impact review planned for next week. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778211684932129)
+
+> [open] 2026-05-19 — TOA_CHI 10-min pricing dropout + 100% CPU / Aeron meltdown; LP pricing gap causing reject storm
+> ~15:07 BST Tom flagged loads of XAUUSD rejects due to internalisation disabled; Kate confirmed LP pricing had dropped out — brokering attempted for toxic tags but no LP price received, causing high cancel/retry volume (yields -$950/M at 2 min). LP pricing recovered shortly after. Separately, James flagged 100% CPU and an Aeron meltdown in CHI around the same time (~18:29 BST message), with screenshots showing the degradation. Root cause not yet posted in thread. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779199627807509)
+
+> [resolved] 2026-05-19 — TOA GUI Insti_light spread config error (JSON copy issue)
+> Elan raised the `CLIENT_PRICE_INSTI_LIGHT` spread config for XAUUSD failing to display in the TOA LDN GUI. James investigated and fixed — misconfigured `name` field in JSON (value copied incorrectly). Resolved same day. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779186517949549)
+
+> [open] 2026-05-21 — CP 104719 channel/profile classification difference query from Tom; awaiting Rory follow-up
+> Tom asked why CP 104719 was brokered for trade `012dr52qh1v` (A_CLIENTS_TOA / CATCHALL Dynamic-Broker) but internalised 12 minutes later for `012dr52qh3k` (A_CLIENTS / CATCHALL Dynamic-Don't B Book). Rory identified different channel classification as the driver. Tom followed up asking what drives the channel difference — no reply yet as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
+
+> [resolved] 2026-05-15 — HRP missing give-up (missing booking config on Toa)
+> Tom flagged HRP was missing Mahi's side of a give-up. James investigated — missing `connectivity.booking.bookingSystemRouting` config on Toa side (not sent). Tom asked HRP to book manually; James confirmed fix applied. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
 
 > [open] 2026-05-04 — XAUUSD TOO_LARGE reject storm on TOA_CHI/A_EXTERNAL_WASH; ZenDesk ticket open, analytics support not yet assigned
 > Emergency alert fired ~12:00Z: 98% reject ratio (93/95 orders) from counterparty 90000580 on XAUUSD in TOA_CHI/A_EXTERNAL_WASH — validation error `quantity=TOO_LARGE, maximumShowQuantity=TOO_LARGE`, burst window 11:59:38–12:00:00Z. Justin Young routed to ZenDesk (ticket 22907) and asked who's on analytics support — no reply in thread as of catchup. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777898434100499)
@@ -120,6 +132,10 @@ last_catchup: 2026-05-12T07:32:09Z
 
 ## Notable topics
 
+- Weekly P&L (w/c 2026-05-12): $5.9k from retail, caused by XAUAUD scalping by two new retail accounts (CPs 105988 + 105990, ~6 days old) — 106 small round-trips during FX twilight. Root cause: XAUAUD `arbProtectionParameters` was clamping the published quote into UBS's wide twilight spread instead of using the clean triangulated price. Fix: Shyam removed XAUAUD from arb protection rules; now using pure triangulated price. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+- CP 90001948 XAUUSD scalp event (2026-05-18): New counterparty, first day on platform — sold 600oz in 10 fills (300oz clips), net flat by end of day, left Mahi long through the drop. $4k PnL drop. Picked up as SIGNAL_FOLLOW+BROKER for auto-broker routing. Daria noted a few other similar-pattern traders and flagged RI consideration. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019)
+- XAUUSD tenant profile split planned: Daria plans to split metals and FX into separate tenant profiles so different flow classifications apply (most FX brokered flow is soft/can be internalised; XAUUSD flow is driving signal-follow and broker classifications incorrectly for FX). Requires moving positions from CLIENTS to CLIENTS_NYC. Targeting early w/c 2026-05-25. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779154472279389)
+- XAUUSD all-brokered-to-Toa mode active (2026-05-19): Daria moved all XAUUSD brokered flow to Toa (wider spreads, tougher LR, CME hedging). Controlled by multichannel config; easy revert by adding TOA-BROKER-XAUUSD counterparty list back to dynamic rules. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779151965234289)
 - Weekly P&L (w/c 2026-05-08): $7.5k from 402m; 222m internalised ($47/M), 180m brokered ($14/M); RoS 130%. Counterparties 928986 and 928994 moved back to internalise (blacklisted from broker routing — aggregate performance OK despite two bad weeks). Skew P&L recovered after EURUSD open arb loss. Shyam actively reviewing skew and mid improvements. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
 - Mid-formation LP set under review — Tom and Daria are both pushing to broaden the price-formation LP set (COMZ, Jane Street) to reduce dependency on HSBC and to fix per-pair indicatives. Decision still sitting with Elan.
 - Reactive direct setup is the strategic remediation for NWPB (Natwest) min-ticket-size filtering of small client orders. Flagged in 2025-04-15 thread; HRP LP mappings being configured as of 2025-07-07; production test trades in progress.
