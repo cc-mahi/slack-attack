@@ -10,21 +10,33 @@ key_people_overrides:
   - {name: "Clio Constantinou", role: "Infinox sales / risk liaison (FSC EU/CY)", confidence: low}
   - {name: "Georgia Tzyrkalli", role: "Infinox trading ops — arb classification / blacklist queries; Echo access confirmed 2025-05"}
   - {name: "CH", role: "Infinox sales escalation contact — keen on white-label bridge; internal Mahi advocate for bridge deal"}
-  - {name: "Lazaros Zografopoulos", role: "Infinox trading desk — arb classification PnL oversight, pricing oversight"}
+  - {name: "Lazaros Zografopoulos", role: "Infinox trading desk — arb classification PnL oversight, pricing oversight. Departed 2026-05-15."}
   - {name: "Kerim Horoz", role: "Infinox London dealing desk — toxic flow triage, LR config, order throttle queries; primary day-to-day ops contact"}
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-12T07:31:45Z
+last_catchup: 2026-05-21T16:02:04Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-20 — US30 spread spike complaints: spread up to 415 points; benchmarking mitigated but outcome pending
+> Georgia Tzyrkalli reported client complaints (2026-05-19) that US30 spread widened from 35p to 415 points. Kate confirmed the blowout was driven by B2BROKER and VANTAGE spreads going wide — Mahi's benchmarking logic tracking them as intended. Trading Ops asked for mitigation; Kate added an internal market to the benchmarking pool (2026-05-20 17:45) to stabilise spreads when external LPs spike. Kate also advised Infinox to query their LPs about the underlying spreads. As of 2026-05-21 15:10, Trading Ops has followed up asking Kate to confirm whether the change has reduced spikes — no reply yet. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779259961824069) [Kate's benchmarking fix](https://mahifx.slack.com/archives/C022S6NL82D/p1779295502768849) [follow-up pending](https://mahifx.slack.com/archives/C022S6NL82D/p1779372618515499)
+
+> [resolved] 2026-05-21 — Extra Heavy LR profile created; UK1_117713 Finior Cap Ship/Boat added then partially reverted
+> CH requested a new LR profile "4x–5x more aggressive than heavy LR" (2026-05-21 07:40), citing clients making profits on Mahi. Kate confirmed it was actioned (08:39). Separately, Clio requested UK1_117713_Finior_Cap_Boat and UK1_117713_Finior_Cap_Ship added to the Extra Heavy LR rule; both were added. Later in the day (16:10) Trading Ops asked for Ship to be removed from Extra Heavy LR and reverted to normal (not Heavy); Kate actioned and confirmed. Boat remains in Extra Heavy LR. Clio also confirmed 87951984 correctly added to Heavy LR. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989) [Extra Heavy created](https://mahifx.slack.com/archives/C022S6NL82D/p1779349153175869) [Ship removal](https://mahifx.slack.com/archives/C022S6NL82D/p1779376231627809) [Ship removal confirmed](https://mahifx.slack.com/archives/C022S6NL82D/p1779376939997339)
+
+> [resolved] 2026-05-19 — Lazaros Zografopoulos departed Infinox (last day 2026-05-15)
+> Lazaros posted a farewell to #mahi-infinox on 2026-05-15, thanking the Mahi team and requesting access removal after EOD. Kate sent warm reply; access removed 2026-05-19 after a follow-up removal request from Trading Ops. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778851874368279) [access removal](https://mahifx.slack.com/archives/C022S6NL82D/p1779178384279379)
+
+> [resolved] 2026-05-12–21 — Routine Heavy/Medium LR adds (Centroid CPs + direct accounts)
+> Multiple routine LR-profile additions actioned across the window: 3595889 (2026-05-12), MT5_87018814_Centroid_3598260 (2026-05-12), 2145764883 → Heavy (2026-05-13), 2145764439 with tag MT5_87018814_Centroid_2145764439 (2026-05-14), batch of 4 Centroid CPs (3597188, 2145764962, 2145764602, 3595585, 3596145; 2026-05-15), 86049919 → Medium LR (2026-05-15), Centroid_3598982 (2026-05-18), 87942751 all-tags (2026-05-18), Centroid_2145764439 (2026-05-19), Centroid_3596977 + Centroid_2145764786 + Centroid_2145765125 (2026-05-19/20), Centroid_3595927 (2026-05-20), Centroid_2145764887 (2026-05-20), Centroid_3600209 (2026-05-20), 87962297 (2026-05-20), Centroid_3599315 (2026-05-21). All actioned by Mahi ops team. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778577912081869)
 
 > [resolved] 2026-05-12 — Routine No LL add: CP 83037076 (with initial profile error)
 > Trading Ops requested CP 83037076 added to No LL profile. Nathan initially added it to No LR by mistake; Trading Ops caught it and flagged the error; Nathan corrected it to No LL at 07:29. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778564634996039)
 
 > [open] 2026-05-11 — MT5 Manager 1263 Sunday bulk-user requests causing MemoryException on Infinox server
-> Infinox Trading Ops reported that Mahi's MT5 Manager 1263 ("Trading Info") makes 1396 all-user requests in 5 minutes every Sunday ~3am, causing MemoryException on their MT5 server (e.g. 2026-04-12: burst of 180 req/4min → memory exhaustion). Today (2026-05-11) the same manager ran 10 spread-out requests without issue, suggesting the Sunday burst pattern is the root cause. Kate acknowledged; Maten Rehimi (Mahi) confirmed a config issue on Mahi's end and committed to deploying a fix on 2026-05-12. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778499641732849) [Maten fix commit](https://mahifx.slack.com/archives/C022S6NL82D/p1778516772826009)
+> Infinox Trading Ops reported that Mahi's MT5 Manager 1263 ("Trading Info") makes 1396 all-user requests in 5 minutes every Sunday ~3am, causing MemoryException on their MT5 server (e.g. 2026-04-12: burst of 180 req/4min → memory exhaustion). Today (2026-05-11) the same manager ran 10 spread-out requests without issue, suggesting the Sunday burst pattern is the root cause. Kate acknowledged; Maten Rehimi (Mahi) confirmed a config issue on Mahi's end and committed to deploying a fix on 2026-05-12. No confirmation of deployment seen in the 2026-05-12..2026-05-21 window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778499641732849) [Maten fix commit](https://mahifx.slack.com/archives/C022S6NL82D/p1778516772826009)
 
 > [resolved] 2026-05-08–11 — Routine Heavy LR adds: Centroid 3597760, 3597758 (2026-05-08); 87960496, Centroid 2145764339 (2026-05-11)
 > Trading Ops requested Centroid CPs 3597760 and 3597758 → Heavy LR (2026-05-08); Cameron Hughes actioned. Sadiq requested 87960496 → Heavy LR (2026-05-11); Nathan actioned. Trading Ops also requested MT5_87018814_Centroid_2145764339 → Heavy LR (2026-05-11); Cameron Hughes actioned. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778258423822569) [2026-05-11 Centroid](https://mahifx.slack.com/archives/C022S6NL82D/p1778495191990969) [87960496](https://mahifx.slack.com/archives/C022S6NL82D/p1778481559271199)
@@ -97,7 +109,10 @@ last_catchup: 2026-05-12T07:31:45Z
 
 ## Notable topics
 
-- 2026-05-12 — MT5 Manager 1263 Sunday MemoryException: Maten committed to deploying fix 2026-05-12; outcome to be confirmed. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778516772826009)
+- 2026-05-21 — Extra Heavy LR profile created at CH's request (4–5× heavier than current Heavy LR). UK1_117713 Finior Cap Ship/Boat added; Ship subsequently reverted to normal (not Heavy) same day. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989)
+- 2026-05-21 — US30 benchmarking mitigation applied (internal market added); Trading Ops follow-up outstanding on whether spikes reduced. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779372618515499)
+- 2026-05-19 — Lazaros Zografopoulos left Infinox (last day 2026-05-15); access removed. Key contact for arb classification / pricing oversight no longer at the firm. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778851874368279)
+- 2026-05-12 — MT5 Manager 1263 Sunday MemoryException: Maten committed to deploying fix 2026-05-12; no confirmation seen in subsequent window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778516772826009)
 - 2026-05-08 — Arb classifier final steady-state stats: 169 rehabilitated, 0 re-flagged, 14 newly toxic, net active classified 418→263 (−37%). Removal rate tapering to steady state. Per-instrument continuity-pool markup + LL educational comms still outstanding. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778234503953699)
 - 2026-05-08 — LR tag format mismatch on 87047373: CH flagged process risk ("real monetary impact"). Kate process note: provide full CP tag at request time for new counterparties with no trade history. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778235032912509)
 - 2026-05-07 — Arb classifier early post-change data: 135 accounts de-classified as of ~2026-05-06 (Tuesday). Will asked Kate for improvement data; Kate pulling together fuller numbers. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1778142135958489)
