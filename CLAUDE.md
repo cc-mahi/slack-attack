@@ -43,7 +43,7 @@ Rules:
 
 ## Slack MCP conventions
 
-- Use `mcp__claude_ai_Slack__slack_search_public_and_private` with `channel_types: "public_channel,private_channel"` — many relevant channels are private.
+- Use `mcp__Slack__slack_search_public_and_private` with `channel_types: "public_channel,private_channel"` — many relevant channels are private.
 - Use `slack_read_channel` (not search) when you need "everything since timestamp X" for a known channel — search has indexing lag.
 - Use `slack_read_thread` with the real `message_ts` (requires `response_format: "detailed"`) to read thread replies.
 - Skip channels: `*-notifications`, `*-bridge-alerts`, `#frontoffice-alerts`, `#dev-alerts`, `#dev-commits`, `#dev-status`. See `.claude/docs/slack-conventions.md`.
