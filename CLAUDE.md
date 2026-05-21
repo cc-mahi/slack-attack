@@ -62,6 +62,28 @@ Rules:
 
 The brief is for me, in the terminal. Prose paragraphs, not bullet checklists. Each claim that's grounded in a Slack thread gets a numbered bare-URL reference (`[N]` inline, URL on its own line below the sentence). Per-client numbering, resets at each client header. Bare URLs only — no labelled markdown links (Ghostty + my ctrl+space,space picker can't open those).
 
+## Brief output (slack-attack daily routine → Slack)
+
+There's also a remote routine — `slack-attack-daily` — that runs the daily flow unattended on weekdays and posts the result to a private Slack channel (`#slack-attack`, channel_id `C0B5V56QACQ`). It maintains **two rolling canvases**:
+
+- **Daily brief canvas** (`F0B4WEV00DV`) — rewritten each weekday morning with the full prose brief (headline summary, per-client sections, quiet/unprocessed lines, run-stats footer).
+- **Weekly overview canvas** (`F0B55HJ7M7V`) — rewritten Monday mornings with the prose digest from `/weekly-overview`.
+
+Each run posts one short summary message to the channel that links to the canvas plus a glance-level headline. Mondays add a second short message for the weekly canvas. An ntfy push fires after delivery so the channel update actually notifies (Slack doesn't notify on self-authored messages).
+
+When the routine writes prose to a canvas it converts the skill's `[N]` + bare-URL refs into inline embedded links `[\[N\]](url)`. Bare URLs are the format for the **local terminal** brief only (Ghostty + my link picker need them); canvases land in Slack where embedded is neater.
+
+## Remote routines
+
+Routine prompt bodies are tracked in this repo under `.claude/routines/<name>.md` so changes are diffable in git. The file in git is the source of truth; the remote routine body is a deploy target. After editing a routine file, **push the body to the remote routine** so the next scheduled fire picks it up:
+
+1. Read the routine file. Frontmatter has the `trigger_id`.
+2. Fetch the current remote body with `RemoteTrigger get` (so you can preserve the rest of `job_config` while replacing just the prompt content).
+3. `RemoteTrigger update` with a body that mirrors the existing `job_config`, replacing only `events[0].data.message.content` with the new prompt body (everything below the frontmatter and intro paragraph in the routine file).
+4. Confirm by re-fetching and diffing.
+
+Don't drop or edit other fields (cron, environment, MCP connections, etc.) unless that's the intent of the change.
+
 ## Layout
 
 ```
@@ -73,6 +95,8 @@ channels/    per-channel dossiers for non-client channels
     slack-attack/     /slack-attack [slug]      — orchestrator + reader-facing daily brief
     weekly-overview/  /weekly-overview          — Monday-morning prose digest of the past week's commits
     backfill/         /backfill <slug>          — one-shot lookback, populates ## History
+  routines/
+    slack-attack-daily.md   prompt body for the daily remote routine (push to remote after editing)
   docs/
     slack-conventions.md   channel patterns + skip rules
 ```
