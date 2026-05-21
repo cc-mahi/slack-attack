@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-12T07:19:18Z
+last_catchup: 2026-05-21T13:18:04Z
 ---
 
 ## Status
@@ -96,6 +96,24 @@ last_catchup: 2026-05-12T07:19:18Z
 > [watching] 2026-05-08 — Weekly P&L: $7.5k from 402m (week to date)
 > Daria's mid-week update: 222m internalised, 180m brokered. Brokered flow decays quickly but stays onside (3x spread of internalised: $14/M brokered vs $47/M internalised). Two counterparties (928986, 928994) blacklisted from broker for now — bad couple of weeks but aggregate yield acceptable for internalisation. Net brokered spread $3.4k; internalisation P&L $4.1k (RoS 130%); LR P&L $1.4k mostly on brokered. Skew P&L had initial EURUSD open loss from arb but has fully recovered. Focus on skew and mid improvements (Shyam reviewing). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
 
+> [resolved] 2026-05-13 — XAUAUD scalping: $5.9k retail loss from arb-protection misconfiguration
+> CPs 105988 and 105990 (both ~6 days on platform) executed 106 small XAUAUD round-trips over ~16 mins during FX twilight. Root cause: `pricing.arbProtectionParameters` had UBS (sole XAUAUD LP) in reference markets but not `referencePriceMarketSelectors`, causing published quote to be clamped into UBS's wide twilight spread rather than using clean triangulated price (XAUUSD × AUDUSD). Shyam removed XAUAUD from arbProtectionParameters; pricing now uses pure triangulated price. Both CPs under monitoring. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+
+> [open] 2026-05-18 — New CP 90001948 XAUUSD scalp + all XAUUSD brokered flow migrated to Toa
+> New CP 90001948 (first day on platform) sold 600oz in 10 × 300oz clips, left Mahi long through a drop — $4k retail PnL hit 2026-05-18. Picked up as SIGNAL_FOLLOW+BROKER; will auto-broker from here. Daria also consolidated: all XAUUSD brokered flow now routing to Toa (wider spreads, tougher LR, CME hedging). Planned follow-on: split metals and FX into separate tenant profiles early next week (moving positions from CLIENTS to CLIENTS_NYC) to prevent XAUUSD flow contaminating FX signal/broker classification. Several other CPs showing similar yield profiles flagged; RI flagged as option. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779141857043039) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779151965234289)
+
+> [resolved] 2026-05-15 — HRP booking config missing on Toa (trades not sent to HRP)
+> Tom flagged trades not being sent to HRP from Toa. James confirmed missing `connectivity.booking.bookingSystemRouting` config on Toa; HRP asked to book manually while fixed. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
+
+> [resolved] 2026-05-19 — Toa insti_light XAUUSD spread config GUI error
+> Elan unable to open XAUUSD spread config for CLIENT_PRICE_INSTI_LIGHT stream in Toa GUI. James fixed — misconfigured JSON name (copy-paste error) on the Toa config. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779186517949549)
+
+> [open] 2026-05-19 — TOA_CHI 100% CPU / Aeron meltdown: ~10 min pricing dropout + toxic-flow LP reject spike
+> ~10 min dropout from TOA_CHI at ~14:30 BST. Separately, during a period where toxic-flow CPs were being auto-brokered, the designated LP had no price — causing high cancel/retry volume (Tom flagged "things going crazy"). Kate: LP pricing dropped out, retries drove reject spike; LP pricing recovered same session. James Furness also flagged 100% CPU causing an Aeron meltdown in CHI around the same time; root cause not yet published. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779199627807509) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779200915226979) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779211745957959)
+
+> [open] 2026-05-21 — CP 104719 dual-channel classification: internalised under A_CLIENTS, brokered under A_CLIENTS_TOA
+> Tom querying why CP 104719 is sometimes internalised, sometimes brokered within 12 minutes of each other. Rory explained: A_CLIENTS_TOA falls under CATCHALL//Dynamic-Broker execution profile; A_CLIENTS falls under CATCHALL//Dynamic-Dont B Book. Tom following up asking what drives the channel-level classification difference — unanswered as of end of window. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
+
 ## Notable topics
 
 - 2025-05-14 — Spotex FIX orders missing limit price (tag 44) causing rejects; Daria identified in FIX logs, issue patched by Spotex 2025-05-06. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1746144575233089)
@@ -116,3 +134,4 @@ last_catchup: 2026-05-12T07:19:18Z
 - 2025-06-30 — Reactive UAT test trades passed; production test trades 2025-07-01 with party mapping config updates. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1750269992249569)
 - 2026-05-03 — XAUUSD retail NY4→CHI hedging disabled: retail achieving positive spreads; CHI giving negative spreads so hedging there turned off. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777845150173619)
 - 2026-05-04 — EURUSD mid formation: Elan approved adding all LPs back into mid (NY now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary LPs; backtests show reduced spiky pricing and arb opportunities. Adaptive mid logic also added to betaRetailPricer1 for EURUSD; FI/skew PnL review ongoing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
+- 2026-05-13 — Toa LD4 TOB signal data missing: Elan flagged signal data not showing in Echo TOB for toa_argamon.LDN XAUUSD. Daria found signals not persisted since last system reboot; fixed after restart. Backfill not possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
