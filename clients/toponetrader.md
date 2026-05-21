@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Shane Kalichurn", role: "Operations; weekly payout reporting"}
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-05-12T07:14:51Z
+last_catchup: 2026-05-21T16:15:57Z
 ---
 
 ## Status
@@ -22,6 +22,9 @@ last_catchup: 2026-05-12T07:14:51Z
 - **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
+
+> [resolved] 2026-05-19 — BTCUSD slippage complaint; expected VWAP fill behaviour
+> Arjie (TOT MatchTrader ops contact) raised a concern about a trader account 19099 (demoTOTusd-B1 group) experiencing 5–10 pip slippage on BTCUSD vs the TOB price. Nathan Burch investigated and confirmed the 65 BTC sell consumed 5 liquidity layers, producing a VWAP fill of $76,944.91 vs TOB $76,992.22 — correct behaviour. Arjie acknowledged and confirmed resolved. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1779154129412389)
 
 > [resolved] 2026-05-11 — Crypto FI skew P&L reporting bug (XBTUSD/XETUSD)
 > XAUUSD yield alert (-$4,932 on Funded FX) triggered a deeper look; Cameron Hughes identified a separate FI bug: `PRICINGBENCHMARKMIDLIFETIMEPNL` on the `_CRYPTO_CLIENTS` book dropped ~-$8.7k at 15:49:05 UTC 2026-05-10 with no fill, and FI cumsums for XBTUSD froze — broken risk-reporting pipeline for crypto books. ZD ticket #22959 raised; an older fix (ZD#20890) identified as deployable. Daria updated `signalReturnBenchmarkMarketSelectors` for XBTUSD and XETUSD on 2026-05-12 and marked ticket solved. Root cause: 3 large trades around 15:46–15:47 UTC where model mid moved faster than reference mids, causing negative skew P&L. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1778555635853379)
