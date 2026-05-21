@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-05-12T07:11:15Z
+last_catchup: 2026-05-21T13:41:56Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-05-12T07:11:15Z
 
 > [resolved] 2026-05-11 — Nathan Burch asks if SYNAPSE_MT5_UAT_BACKUP & SYNAPSE_MT5_UAT FIX connections should be live
 > Nathan queried in #internal-fintokei whether these UAT FIX connections were supposed to be connected. Maten Rehimi confirmed same day they are expected to be down. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1778468805865709)
+
+> [resolved] 2026-05-18 — new MT5 demo group `FNTKCONTZRJPY` added to MAHI
+> Jan requested addition of demo group `demo\\AXSE Prop\\Fintokei\\FNTKCONTZRJPY` (ZRJPY product) on 2026-05-12; Kate acknowledged and confirmed completed by 2026-05-18. [request](https://mahifx.slack.com/archives/C08QWKFARDL/p1778580729147629) [confirmed](https://mahifx.slack.com/archives/C08QWKFARDL/p1779110385964649)
 
 > [resolved] 2026-05-05 — client-side "Jan" reports position close failure on account 6027381
 > Jan reached out via #mahi-fintokei reporting an issue closing positions 28614965 and 28618336 on account 6027381, attaching a journal screenshot (UTC+3 timezone). Kate Stagg acknowledged and Will Denny followed up at 16:33 confirming the trades show as filled in Compass. Jan replied 2026-05-06 confirming they resolved it internally. [permalink](https://mahifx.slack.com/archives/C08QWKFARDL/p1777988138576279) [Will Denny follow-up](https://mahifx.slack.com/archives/C08QWKFARDL/p1777995236877329)
