@@ -10,10 +10,13 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-12T07:16:57Z
+last_catchup: 2026-05-21T09:48:37Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-19 — cTrader US-client cutoff June 1st — migrating to YB + TradingView
+> cTrader stopping US client acceptance from June 1st; 5ers moving affected flow to a YourBourse platform with TradingView front-end. No Mahi action confirmed yet in window; flagged by Yaniv on 2026-05-19 weekly call. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779201650126839)
 
 > [open] 2026-05-11 — New symbols: static spreads + BTCEUR/LTCUSD/ETHEUR spread reduction requested
 > Andreas (2026-05-11 08:04 UTC) flagged that several of the newly-onboarded symbols have static (non-variable) spreads and asked for them to be made variable. Also requested ~30% spread reduction on BTCEUR, LTCUSD, and ETHEUR. Kate confirmed she will sort all of it the same day (2026-05-11). No confirmation of completion received in window. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1778483088074649) [kate-reply](https://mahifx.slack.com/archives/C07AQJS4E80/p1778487677938279)
@@ -73,3 +76,5 @@ last_catchup: 2026-05-12T07:16:57Z
 - 2026-05-06 — Kate clarified counterparty tag formats for CUSTOM2 list uploads: cTrader tags have no prefix (e.g. `26321335`); MT5 tags use `11734_` prefix (e.g. `11734_26321335`). Ensures client structures daily JSON uploads correctly per venue. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1778074348226569)
 - 2026-05-06 — Yaniv updated CUSTOM2 counterparty list and wants "considerably higher heat" on risk measures (LR, lookback) for flagged traders; Kate making further config tweaks to LR profile and settings. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1778074611379009)
 - 2026-05-05 — CUCUSD alternating ~3800-point price swings reported by client for period before 2026-05-04 12:16 UTC; Mahi investigated but found no issue on their side — client directed to investigate further. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777977791029089)
+- 2026-05-19 — Yaniv weekly call (Kate): cTrader stopping US clients from June 1st — 5ers moving to YB platform with TradingView front-end. Eval pass-rate dropped sharply in past month; Kate attributed mainly to order-book fills after 5ers raised spreads/commissions/swaps. Yaniv tweaking withdrawal rules for traders — Kate mentioned rule-simulation notebook and will touch base with Cam on parameters to share with Yaniv. XC still blocked by YB (Kate to send update). LR room on CUSTOM2: $/M not much above funded-flow average — Kate will look into increasing. Yaniv may be in Cyprus and keen to meet. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779201650126839)
+- 2026-05-19 — YB slippage dialled back; spread yields more aligned this week. Demo flow $177/M vs funded flow $49/M through Compass (screenshots shared). Kate flagging room to increase LR further. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779197179265719)
