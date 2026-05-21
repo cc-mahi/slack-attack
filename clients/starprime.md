@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-12T07:33:51Z
+last_catchup: 2026-05-21T16:07:52Z
 ---
 
 ## Recent issues
@@ -29,4 +29,7 @@ last_catchup: 2026-05-12T07:33:51Z
 
 - 2026-05-05 — Inald Gjoni performed rolling restart of pricers to load Timezone Conditions for BenchmarkMinimumSpreadLogic (no-restart component deploy). [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777981565638809)
 - 2026-05-11 — Nathan Burch (Training) changed `price adjustment floor pips` on IFMS from 3 → 0.5 for XAUUSD on CLIENT_PRICE_INSTI; prior to this, price could not form because floor was greater than ceiling. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778463918376889)
+- 2026-05-13 — Andrew Morgan noted (internal-starprime) "apparently these guys are owned by vantage"; David Cooney confirmed. 3 open_mouth reactions. No further context in channel. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778669482861249)
+- 2026-05-19 — Isaac Dann posted in #internal-go: Kieran (Go Markets) was asking about StarPrime, noting their CEO was using "Mahi Terminology"; Isaac did not disclose either way. Khim (Go Markets) wants to talk to Dave Cooney about potentially onboarding StarPrime as an LP. Bonnie Cassidy offered to arrange the call; Dave said he'd reach out himself. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779165368815299)
+- 2026-05-19 — Cameron Hughes listed "Starprime B: signal-down fingerprint" as a standup priority in #internal-trading-operations. No further detail in the thread. [permalink](https://mahifx.slack.com/archives/C0A2K4TH090/p1779186201548519)
 - 2026-05-01 — Go-live prep: Cameron Hughes noted a call with Samin arranged for Tuesday to get everything ready pre go-live. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777625477346409)
