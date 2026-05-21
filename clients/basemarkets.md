@@ -9,12 +9,14 @@ channels_override: null
 key_people_overrides:
   - {name: "Alex", role: "Base Markets — primary client contact (algo / flow)", confidence: low}
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
-last_catchup: 2026-05-12T07:24:36Z
+  - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
+  - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
+last_catchup: 2026-05-21T13:30:44Z
 ---
 
 ## Status
 
-- **Stage:** onboarding — pre-flow, working through Tegis onboarding before flow lands on Compass.
+- **Stage:** onboarding — Centroid/LMAX integration underway; first LMAX test trades executed 2026-05-21 (EURUSD + XAUUSD confirmed both sides).
 - **Integration:** LDN trading + admin (LD5), Athena `basemarkets_ldn`, distribution via CLIENT_PRICE_LDN / CLIENT_PRICE_BETA_LDN / DISTRIBUTION_LDN / DISTRIBUTION_SYNAPSE_LDN. FIX API available; no margin / credit checking yet.
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
@@ -26,12 +28,20 @@ last_catchup: 2026-05-12T07:24:36Z
 > Distribution FIX creds sent to client on 2026-05-11; infra deploying `clientDistGW1`. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778499833340869)
 > Longer-term: Kate B (client) asked whether Centroid can be removed eventually — MT5 drop-copy (MTB-199, blocked since 2023 on acceptor/initiator architecture call) added to roadmap, no delivery commitment. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517045666329) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778517127566459)
 > Call with FastMT requested by client 2026-05-12 (12–2pm or after 5pm UK) to discuss Tegis setup — unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
+> **2026-05-12 update:** Post-call recap from Aytugan (FastMT/Tegis) on 2026-05-12 — plan: Mahi creates taker FIX connection; creds passed to Centroid to create maker; Centroid bridge restart; TEM built in Centroid (MAHI1) to inherit zero spreads from Scope; dropcopy wired to Base MT5 netting account; test account on MT4 with new TEM for E2E testing; after Alex + Anatoly sign off, existing MT4 accounts switch from Scope TEM to MAHI1 TEM. Kate Stagg sent maker creds to Aytugan same day. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778587371610629) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778588623913609)
+> **2026-05-15:** LMAX FIX session locked — client reported spamming incorrect password; Rory King turned off FIX connection; LMAX sent new password 2026-05-18; Rory reviewing. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778848988422949) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778849696126849)
+> **2026-05-16:** Centroid restarted but Mahi maker offline — client asked Mahi to whitelist Centroid IPs (Primary: 192.109.17.181, Backup: 185.125.204.132). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778914623299679)
+> **2026-05-18:** Mahi maker now connected from Centroid side (Aytugan confirmed); Daria Horton confirmed whitelisting with Beeks; fixMD3 + fixOrders3 re-added (Rory King). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779081321195119) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779120037227099)
+> **2026-05-19:** Kate B clarified LMAX account split — Sub1 for Tegis account, Sub2 for Base flow. Kate Stagg to handle via round-robin tag management in orderServiceConfiguration. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779185342020389)
+> **2026-05-18:** Kate Stagg internal note — Tegis book plan: keep existing flow (warehouse some, STP rest, no hedging) in separate book initially; view to move Tegis flow in over time except warehouse risk; also set up hedger on B Book to keep risk below 100k. Next steps: set up Tegis Book + Hedger (Compass managed book), set up hedger on B Book. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779111232980629)
+> **2026-05-21:** LMAX EXPOSURE_CHECK_FAILURE on EURUSD — resolved by Mahi side; second attempt returned silent cancellation (no comment). Kate switched to market order; LMAX test trades (EURUSD + XAUUSD, buy+sell 1k/1 unit) confirmed successful both sides. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779361298941919) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779368034193409) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779368456085189)
 
 > [resolved] 2026-05-07 — Client asking for FIX API test/sandbox instance
 > Alex (Base Markets), relayed via Nicola Perikhanyan, asked whether Mahi has a test instance or sandbox for testing FIX API connectivity. Superseded by 2026-05-11 Centroid FIX credential setup — live Distribution FIX creds sent directly to client on 2026-05-11 as part of Tegis/Centroid onboarding. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778164813309659)
 
-> [open] 2026-05-05 — Pre-flow readiness: cross skew + driver pair hedging workflow
-> Will Carter flagged need to be ready for Monday (2026-05-11) — wants workflow testing to confirm skew is running on the crosses Base Markets trades, with hedging in driver pairs. Aligns with the ~2-week Tegis onboarding timeline from 2026-04-29. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777983387923419)
+> [watching] 2026-05-05 — Pre-flow readiness: cross skew + driver pair hedging workflow; Tegis book setup pending
+> Will Carter flagged need to be ready for Monday (2026-05-11) — wants workflow testing to confirm skew is running on the crosses Base Markets trades, with hedging in driver pairs. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777983387923419)
+> **2026-05-18 update:** Kate Stagg internal — separate Tegis Book to be set up (Compass managed), plus hedger on B Book capped at 100k risk. No completion signal in window yet.
 
 > [open] 2026-04-29 — Client asking about direct API piping for rewritten algo
 > Alex (Base Markets) is planning to rewrite their algo and asked whether they could pipe trades straight into our server (i.e. off MT4/MT5). Andrew Morgan confirmed FIX API connectivity exists, but margin and credit checking are not implemented — flagged as something he'd want to build. No reply yet to Alex. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777470499867149)
@@ -44,5 +54,8 @@ last_catchup: 2026-05-12T07:24:36Z
 
 ## Notable topics
 
+- 2026-05-21 — LMAX test trades (EURUSD + XAUUSD) confirmed successful both sides — first end-to-end LMAX validation completed. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779368456085189)
+- 2026-05-18 — Centroid/Mahi maker session confirmed connected (Aytugan). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779081321195119)
+- 2026-05-13 — Client requested group codes added: real\USD-MU-SD-KAJ-X, real\USD-MU-SD-KAJ-R, real\USD-MU-SD-KAJ-S; Kate Stagg confirmed. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778666314632929)
 - 2026-05-12 — Client requesting call with FastMT today (12–2pm or after 5pm UK) to discuss Tegis setup; unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
 - 2026-04-29 — Alex happy with report; Tegis onboarding underway, ~2 weeks until flow starts hitting Compass. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777467956510609)
