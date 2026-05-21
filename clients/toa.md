@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-12T07:33:50Z
+last_catchup: 2026-05-21T16:15:54Z
 ---
 
 ## Status
@@ -66,7 +66,7 @@ last_catchup: 2026-05-12T07:33:50Z
 > [resolved] 2026-05-12 — Toa-CHI OOM: riskReporting1/riskPath down
 > Both `riskReporting1` and `riskPath` on Toa-CHI came down with native OOM (`mmap failed to map 2113929216 bytes`). Resolved after memory bump and process restarts. Also same day: high VAR alert at TOA APN1 (12,654 USDT) — levelled off after monitoring. https://mahifx.slack.com/archives/C035H1VNCAD/p1747079989606149
 
-> [resolved] 2026-05-15 — signalProcessAP1-1 OOM at TOA APN (recurring, fix in progress)
+> [open] 2026-05-15 — signalProcessAP1-1 OOM at TOA APN (recurring, fix in progress)
 > signalProcessAP1-1 at TOA APN OOM at 8192MB. Reoccurred 2026-05-21 (heap space OOM). James was testing fixes; still in testing on 2026-05-21. https://mahifx.slack.com/archives/C035H1VNCAD/p1747299963170189
 
 > [watching] 2026-05-22 — Crypto infrastructure expansion: new APN boxes, Binance moved to rocky 8
@@ -126,6 +126,27 @@ last_catchup: 2026-05-12T07:33:50Z
 > [resolved] 2026-03-17 to 2026-03-31 — FX perps + Silver + ETF pricing rollout on Nado
 > Silver (XAG) went live 2026-03-17 after network/system issues. FX perps (XXXUSD-PERP format) live on Nado mainnet 2026-03-26 in post-only mode; FX price feed report shared with notes on JPY divergence vs Hyperliquid. ETF pricing (QQQ/SPY) live 2026-03-31; opened for trading 2026-04-02. Oil/CL listed ~2026-03-24. Chaos oracle price weighting change (Tiingo:1/Finnhub:1/Nobi:2) applied 2026-03-25. https://mahifx.slack.com/archives/C09RGU1T1GE/p1774964941888099
 
+> [resolved] 2026-05-13 — starfishFilePersisterExternalMarketData down in LDN: signals missing from Pulse
+> Daria noticed last data in Pulse was from the same day as a prior restart; no suspicious config changes. Restarted starfishFilePersisterExternalMarketData in LDN and signals came back. No source to backfill the gap. https://mahifx.slack.com/archives/C035H1VNCAD/p1778639825.532889
+
+> [open] 2026-05-14 — pricerRetailPremium1/2 not starting on Toa-Argamon CHI: no instruments configured
+> James added new Toa-Argamon CHI model pricerRetailPremium1/2. As of 2026-05-17 the processes were not starting due to no instruments configured; Lee said they're new and still being set up. https://mahifx.slack.com/archives/C035H1VNCAD/p1778780018.368259
+
+> [open] 2026-05-15 — HRP-DIRECT GMG logon rejections on Toa-Argamon LDN: wrong credentials
+> Arun flagged `HRP-DIRECT_GMGPrices` and `HRP-DIRECT_GMGOrders` rejected logons on `toa-argamon-ln-trading-1: clientDistributionGateway1` — invalid username/password. James confirmed GMG put credentials the wrong way round; waiting for them to fix. https://mahifx.slack.com/archives/C035H1VNCAD/p1778834376.137359
+
+> [resolved] 2026-05-17 — FX hedging delay alert on Nado: alert disabled (market too illiquid)
+> Shyam flagged Nado FX hedging delay PD alerts. James confirmed FX market too illiquid to hedge; disabled that alert and backed it off to 12h. https://mahifx.slack.com/archives/C035H1VNCAD/p1779056029.757649
+
+> [open] 2026-05-18 — hedgerHrpCME1 volume breach + firewall shutdown hang on TOA-ARG-CHI
+> Volume breach alert on `hedgerHrpCME1` (TOA-ARG-CHI): 1.01E8 in 1 hour against 1E8 limit. PnL breach alerts followed (-6,557 in 8 min, -14,472 in 1 hr on HRP_CLIENTS_NET). James restarted hedgerHrpCME1. Arun noted repeat volume and PnL breach alerts on 2026-05-19. James confirmed the volume limit was raised; also surfaced a shutdown-hang bug: firewall tripped at 13:58:11 but process didn't come down until 14:09:15 (~10 min out of market, lost money). https://mahifx.slack.com/archives/C035H1VNCAD/p1779118383.172819
+
+> [resolved] 2026-05-19 — marketDataGeneral2 on TOA APN1 SEC stuck in failed-subscription state
+> Weekly PRI reboot at 22:30 UTC cleared the issue on PRI; SEC remained stuck post-reboot. Shyam flagged it; James confirmed SEC's propTrader2 is off so not a major concern. https://mahifx.slack.com/archives/C035H1VNCAD/p1779145326.334939
+
+> [resolved] 2026-05-19 — paidGivenProfileProcess down on toa-argamon-ch-trading-1
+> Shyam flagged PD alert for paidGivenProfileProcess down. Lee confirmed it crashed (not expected). Shyam restarted it successfully; process came back up. https://mahifx.slack.com/archives/C035H1VNCAD/p1779228759.119069
+
 ## Notable topics
 
 - Nado weekly maintenance window moved to 22:30 UTC Mon/Thu (was previously aligned to LDN hours); Toa reboot schedule updated to match — PRI reboots Monday 22:30 UTC, SEC reboots Thursday 22:30 UTC. Calendar reminder updated for NZ support coverage instead of LDN. https://mahifx.slack.com/archives/C035H1VNCAD/p1778185084196589
@@ -139,3 +160,6 @@ last_catchup: 2026-05-12T07:33:50Z
 - traderNado1 crash pattern on order-breach (zero tolerance) recurs under load: FX perp launch (2026-03-26), general crypto activity. Stabilised each time via code version rollforward or ordersNado1 bounce. The breach limit of 0 remains a fragility.
 - FIELD_VALIDATION_ERROR (`TOO_SMALL`) rejects seen 2026-04-30 — likely a Nado min-size change needing config update; unresolved in window.
 - Key Nado contacts in `toa-nado-shared` (not in wiki/people): Ives Luo (ops/listing), Melanie (ops/listing), jeury (eng), Ian (ops), tony (ops), Chang (infra/latency), Jake (exec/business).
+- Nado proposing to reduce USDT0/USDC fee to 0 (0 taker, no maker rebate) to attract USDC depositors swapping to USDT0. James has no objection; may need to widen if flow is toxic. Discussion ongoing as of 2026-05-21. https://mahifx.slack.com/archives/C09RGU1T1GE/p1779082689022689
+- Nado asked NLP to take min trade size on all alt/RWA markets every 60s to fill chart gaps. James declined — Mahi system cannot do wash trading. Suggested using mid price for charts instead. https://mahifx.slack.com/archives/C09RGU1T1GE/p1778863085229199
+- hedgerHrpCME1 shutdown-hang bug (2026-05-18): firewall tripped but process took ~10 min to come down, leaving Toa out of market and losing money. Volume limit also raised following repeated breaches. Root cause (shutdown hang) not resolved in window.
