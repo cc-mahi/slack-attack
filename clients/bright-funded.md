@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-05-12T07:13:53Z
+last_catchup: 2026-05-21T13:41:52Z
 status: active
 retired_at: null
 retired_reason: null
@@ -41,11 +41,11 @@ retired_reason: null
 > [resolved] 2026-05-07 — commercial renegotiation: new fee model agreed
 > Pilot contract ($30k/month + 10% skew PnL) expired; Mahi targeting ~$18k/month based on April active-user counts (~6k active trading counterparties). Extended commercial negotiation across 2026-05-01 to 2026-05-07: Jelle Dijkstra (co-founder) proposed tiered $2.50–$1.50/account with $30k cap; Mahi proposed $12k fixed + $1/active challenge; David Cooney rejected a $32.5k cap ("not fair to clients who pay multiples of that"). Final agreement on 2026-05-07: $12k fixed + $1/active trading user/month (1 active trading user = 1 unique individual trader), no cap. Addendum to be drafted by Mahi legal (NZ) and sent within days. Long-term intent is to move to Option B (consumption/funded-capital model) via addendum once DX and cTrader platform integrations can supply user+challenge+deposit IDs. April was billed at pilot rate per agreement extension. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1746623989396429)
 
-> [open] 2026-05-05 — new crypto pairs expansion request (22 pairs; OKB/KCS pending)
-> Benjamin Galindo (@here tagged) requested 22 new crypto pairs: XMR, BCH, ETC, MKR, TON, HBAR, ICP, VET, THETA, EOS, AVAX, ATOM, MANA, SAND, OKB, KCS, GRT, PYTH, EGLD, XTZ, COMP, SNX. Isaac Dann confirmed 20 can be added immediately; OKB and KCS require a code change and deployment. On 2026-05-06 Benjamin confirmed MatchTrade pricing and said he'd check with MT on OKB/KCS availability. On 2026-05-08 Benjamin asked whether Mahi pricing could be used for those instruments instead. On 2026-05-11 Benjamin chased again (tagging Mio Knights) — no Mahi resolution on the OKB/KCS code change yet. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778006518033119)
+> [open] 2026-05-05 — new crypto pairs expansion (22 pairs; 4 still need deploy, 2 need instrument clarification)
+> Benjamin Galindo requested 22 new crypto pairs; OKB/KCS originally blocked on code change. By 2026-05-18 Isaac Dann confirmed 15 of the 22 are now priced (Kraken/Binance streams, no MWMS/BMSL, 1000 $/M base spread both sides); TONUSD, THETA, OKB, KCS still need a system deploy. MKR is no longer a listed crypto (replaced by SKY at 1:24000 ratio — needs client confirmation on which instrument), and EOS has been relisted as Vaulta at most exchanges (1:1 swap — needs confirmation). Awaiting client response on MKR/EOS and a deploy window for the remaining 4. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778006518033119)
 
-> [open] 2026-05-08 — client requesting Mahi copy/group trading correlation script
-> BrightFunded (Benjamin Galindo) asked on 2026-05-08 whether Mahi still has a trading correlation script for detecting copy/group trading, intending to combine it with new fingerprinting software for multi-account detection as a weekly review process. Cameron Hughes acknowledged on 2026-05-11 ("Hey Ben, let me check the progress on that one") but no script or timeline confirmed yet. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778240384530379)
+> [watching] 2026-05-08 — coordinated trading detection: weekly CSV delivery started
+> BrightFunded asked on 2026-05-08 for Mahi's trading correlation script to combine with their fingerprinting tool for multi-account detection. Cameron Hughes sent the first coordinated-trading CSV on 2026-05-12 (covering 2026-05-05..2026-05-12); Mio acknowledged with ✅. Ongoing weekly delivery implied. Client is also implementing device/payment fingerprinting (Cameron H confirmed it's payment fingerprinting; Daria noted Pepper uses similar approach for A-book routing). [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778602892678569)
 
 > [open] 2026-06-03 — second pricing model for qualifying traders (tighter spreads)
 > Jelle raised on a call (2026-06-03) that VWAP on larger-ticket qualifying traders is causing complaints; wants tighter spreads for qualifying flow only without touching funded. Amir proposed a separate qualifying pricing model (same config, tighter tiers and BMSL) — straightforward to set up but needs a new FIX connection (DX + cTrader = 2 additional connections; BF already uses 3 of their contracted FIX connections). As of 2026-06-04/05 Bonnie checking the contract (1 distribution channel, 3 FIX connections specified); Andrew says $500/month for one model, and server load needs a review before proceeding. Bonnie reached out to Syb, who was unaware of the specifics. Not yet contracted or scheduled. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1748947530909369)
@@ -58,6 +58,7 @@ retired_reason: null
 
 ## Notable topics
 
+- 2026-05-12 bi-weekly call: account purchases and volumes dropped in April — client wants to know if industry-wide; new programs performing well and matching sim results; fingerprinting tool in flight to prevent multi-account holders (BF policy: no holding multiple accounts); Mio will reach out to Mahi to collaborate on abusive-trading detection; Match pricing for new instruments would significantly increase client costs — asked if Mahi LPs can price instead. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1778581203791929)
 - Bi-weekly client call cadence with Cameron Hughes; 2026-04-28 slot was missed (Cameron H had a clashing appointment), rescheduled to 2026-04-29. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1777370681451249)
 - Prop simulation pipeline is now load-bearing for BrightFunded program design — sim outputs (with skew + LR assumed) are driving pricing decisions on both the existing 2-Step/1-Step and the upcoming Futures product. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1775056213954179)
 - Jelle and Syb Dijkstra (BrightFunded co-founders) attended the Mahi anniversary party in person (2026-05-08/09); Andrew noted it as a strong buying signal ahead of commercial close. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1746791790148969)
