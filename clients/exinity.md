@@ -17,10 +17,28 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-12T07:28:05Z
+last_catchup: 2026-05-21T13:41:54Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-21 — XAUUSD FOK limit orders filling far off mid across Hidden Road LPs
+> Matthew Ayub flagged FOK limit orders at ~06:54 UTC showing fills far from mid across multiple Hidden Road LPs; referenced an earlier Jane Street issue (~$40 off mid). Kate traced: 'Published Price Deviation' execution rule setting was deliberately set very high (to prevent wide limits being treated as market orders — see prior thread). Possible changed LP pool behaviour. Investigation ongoing; Matthew requested a call. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779349909925109)
+
+> [open] 2026-05-21 — AP_111000021 missing distribution.riskSplitting entry
+> Will flagged (during 2026-05-20 tagging incident) that AP_111000021 has no entry in `distribution.riskSplitting` — risk for this account is not being split correctly. Unrelated to the tagging incident but would have made it messier. No action confirmed. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779262620774479)
+
+> [resolved] 2026-05-20 — EoD tagging restart corrupted trade IDs (`n/a` suffix): phantom XAUUSD B-Book Insti position + SI FX Insti PnL drop
+> Exinity ran an EoD restart at ~01:30 UTC to enable tags. Restart corrupted outgoing trade IDs by appending `n/a`, breaking ingest of the out-legs of XAUUSD client closes into Compass — PrimeXM saw both legs post-rollover, Compass only saw in-legs. Symptoms from ~06:49 UTC: phantom open XAUUSD position in B-Book Insti (no corresponding client position) and large PnL drop in SI FX Insti (book was meant to be disabled; risk leaked in because closes never landed). Daniel Kurra (Exinity) identified the `n/a` suffix at 07:24 UTC. Mahi confirmed Compass behaved correctly given the malformed IDs. Resolution: Exinity to fix restart procedure; phantom positions to clear once missing out-legs reconciled. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779262956856079)
+
+> [resolved] 2026-05-20 — API_111000023 tags causing risk-splitting complications; workaround applied
+> Daniel Kurra asked Mahi to disable tags for API_111000023 — unable to remove them until EoD and new tags were causing risk-splitting issues. Kate offered a 0% risk-splitting rule for `API_111000023*` as workaround; Daniel confirmed he would set it up. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779274176654809)
+
+> [open] 2026-05-17 — Invast NG1 pricing not received
+> Samuel Ewebiyi reported no pricing from Invast for NG1 despite Invast confirming they were sending. Nathan Burch picked it up. No resolution confirmed in thread. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779056584038339)
+
+> [watching] 2026-05-12 — Wagyu XAUUSD spreads recurring wide during twilight (arb protection)
+> Third occurrence in the window: wide spreads (50-60c) reported 12-May, 14-May, and again 20-May during twilight period. Root cause each time: arb protection widening distribution off reference markets (UBS/360T/Sucden). Daria/Nathan applied a buffer each time and reverted after twilight at client's request. No permanent fix agreed; Exinity said they'd discuss internally whether to keep the long-term config. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
@@ -124,3 +142,11 @@ last_catchup: 2026-05-12T07:28:05Z
 - 2026-04-28 — Exinity / Jane Street test-trade meeting confirmed for 04-29 15:00 UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777378983947659)
 - 2026-05-01 — Nick (Nicola) in Singapore 11–15 May for Finance Magnates expo; any calls requiring her will need scheduling around that window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1777621042911649)
 - 2026-04-30 — Latency notifications (Samuel) traced to a heartbeat received latent from non-Mahi side; Isaac suspects one-off, will recheck Mahi-side latency around the time. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777510067154679)
+- 2026-05-13–14 — Jump/Wedbush conformance testing call: scheduled 13-May 15:00 UK, moved to 14-May (Arun attending for Mahi). Call confirmed and held 14-May. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778657899272499)
+- 2026-05-14 — Reactive/Wedbush EURUSD subscription on JUMP_SW_WB now live; venue code corrected to JLQD (was failing with 'does not identify a market'). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778753741448759)
+- 2026-05-15 — Louie queried EURUSD position in BIG_HOUSE; Will explained these are induced equivalent positions via covariance (not direct hedges). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778851772908919)
+- 2026-05-19 — UBS/Wedbush FIX setup: conformance test sheet sent to Mahi by George; Maten waiting for UBS feedback (emailed wrong mailbox — correct is FRECommerce@ubs.com). Arun picking up on Zendesk 22872; George still chasing as of 18-May. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778584018956889)
+- 2026-05-19 — Shyam flagged XAUUSD channel reporting spurious daily negative FI PnL: SIGN-ADAPT-IMIFLOW signal configured for the CP but not in adjustmentSignalsToPublish, so it's never active in prod. Likely attributable to referencePriceMarket vs signalReturnBenchmarkMarket mid divergence. Awaiting Kate on whether to wire the signal properly or use an alternative. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779164959389399)
+- 2026-05-19–21 — Multiple yield simulation runs: Keshav (CentFX/Revshare, delivered 14-May); Christian/Roco dataset (delivered 20-May); Matt Set A (delivered 19-May, looks good); Matt Set B (negative aggregate spread yield flagged by Kate, under review); Louie dataset (in progress with Rory as of 21-May). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778825885046719)
+- 2026-05-19–21 — Rory invited Louie/Christian/Matthew to a call to walk through running yield sims via Echo independently; Matthew accepted for Wednesday 2pm UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779103440726729)
+- 2026-05-20 — Will Carter noted Exinity haven't communicated their planned system changes (the tagging restart) proactively — flagged desire to sit down with them to understand their roadmap. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779262620774479)
