@@ -14,10 +14,13 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-05-21T13:21:07Z
+last_catchup: 2026-05-22T07:26:15Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-21 — XAUFUT-Q limit buy rejected LIQUIDITY_VIOLATION: last-look cancel
+> Jake (Amana) queried at 17:22 UTC why trade 69491267_1 (limit buy 50oz XAUFUT-Q at 4574.45, tag1=ABOOK) was rejected with LIQUIDITY_VIOLATION. Shyam responded at 22:43 UTC: available offer at execution was 4574.55 — order cancelled by last-look as limit price was off-market at time of fill. Echo trace shared confirming distribution-trace. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779385221000029)
 
 > [open] 2026-05-13 — Client 8001807 XAUUSD slippage complaint: on arber execution profile
 > Nikos raised (14:19 BST) a XAUUSD trade for cpty 8001807 filled at a price that "does not make much sense" — provided Echo link. Internal channel confirms 8001807 is on the ABOOK / XAU,XAG - Arbitrageurs execution profile. Rory stated this causes the slippage (internalise-forcing profile); 21-reply internal thread opened to explain to Nikos how the arber profile fills. No resolution in window — investigation ongoing as of 2026-05-13 19:01. Related to the pre-existing arber tightening intent below. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1778678362340999)
@@ -106,8 +109,8 @@ last_catchup: 2026-05-21T13:21:07Z
 > [open] 2026-04-23 — Gold skew post instant uplift
 > Uplift 2x last week on volume, but skew predictiveness slipped since Wed's instant uplift. Isaac proposing: bump base spread proportion 0.5→1.0, double Twilight base/benchmark, new LDN overrides at 1.2, swap IFMS→IFM. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776976532606559)
 
-> [open] 2026-04-23 — Silver skew pulled pending investigation
-> Silver skew dragging FI PnL down; Will removed while investigating. 2026-05-13 update: Rory re-enabled XAGUSD skew conservatively (3-signal config: gemini + flow-price-thresh + IFMS); parameters halved vs previous iteration, floor adjustment removed, TWILIGHT dampened to 0.15, multipliers reduced to 1.05. Floor adjustments added back same day. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1778662536001789)
+> [watching] 2026-04-23 — Silver skew pulled pending investigation
+> Silver skew dragging FI PnL down; Will removed while investigating. 2026-05-13 update: Rory re-enabled XAGUSD skew conservatively (3-signal config: gemini + flow-price-thresh + IFMS); parameters halved vs previous iteration, floor adjustment removed, TWILIGHT dampened to 0.15, multipliers reduced to 1.05. Floor adjustments added back same day. 2026-05-21 update: Rory confirmed XAG skew net-positive since re-enabling (MidLifetimePnlDiff 2026-04-16→2026-05-21); ~70% of A-book XAGUSD flow attributable to single cpty 39000163. Scaled up further — see Notable topics 2026-05-21 entry. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1778662536001789)
 
 > [open] 2026-04-23 — CMC XAUUSD latency review (Steerco ask)
 > Steerco flagged CMC latency on XAUUSD; Mahi to pull stats. Also on the list: indexes next week, new futures books, start with 121 futures + 121 cash before normalisation. Karen still waiting on email re support. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1776943121111249)
@@ -150,3 +153,5 @@ last_catchup: 2026-05-21T13:21:07Z
 - 2026-05-18 — riskReportingCore1 bounced to add tradePositionParties; EUR and GBP added to covarianceMatrixManagedAssets (futs and CFD hedgers); AEXEUR added to CFD hedger instrumentToProfileMappings. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779183767803859)
 - 2026-05-19 — Hadeel (Amana) working on spread config CSV upload for all spot+futures EU indices; Rory reviewed and uploaded 2026-05-20 (spread_config_futures_indices and spread_config_spot_indices CSVs). [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779201694048219)
 - 2026-05-21 — Dashboard deploy by Justin Young to fix CFD PnL display (Futures P book pulling Futures P Clients LDN negatively). Bank holiday Monday 25 May — emergency support only; Slack less monitored. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779351923713649)
+- 2026-05-21 — XAGUSD skew scaled up after net-positive performance confirmation: Rory bumped fpt ceiling 2→3 pips, gemini ceiling 3→5 pips, IFMS ceiling 1→2 pips; base-spread proportion fpt 0.25→0.35; price-change component 0.025→0.035 @ 500ms; TWILIGHT overrides lifted (gemini 0.1→0.15, fpt 0.15→0.18); multipliers raised (fpt 1.05→1.1, gemini 1.1→1.2); fpt floorAdjustment base lifted 0.1→0.15. Pricers bounced 14:57 BST to pick up changes. Pre-change JSON posted in thread for quick reversion. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779371411159799)
+- 2026-05-21 — GCEX credentials and instrument list shared in mahi-amana by Maynard (Amana) at 19:03 BST (Mahi_GCEX.zip); Will acknowledged. GCEX not previously referenced in VibePulse or canonical sources — appears to be a new LP being onboarded. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779386583250339)
