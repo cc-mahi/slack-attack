@@ -15,13 +15,19 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-21T16:02:04Z
+last_catchup: 2026-05-22T07:32:33Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-20 — US30 spread spike complaints: spread up to 415 points; benchmarking mitigated but outcome pending
-> Georgia Tzyrkalli reported client complaints (2026-05-19) that US30 spread widened from 35p to 415 points. Kate confirmed the blowout was driven by B2BROKER and VANTAGE spreads going wide — Mahi's benchmarking logic tracking them as intended. Trading Ops asked for mitigation; Kate added an internal market to the benchmarking pool (2026-05-20 17:45) to stabilise spreads when external LPs spike. Kate also advised Infinox to query their LPs about the underlying spreads. As of 2026-05-21 15:10, Trading Ops has followed up asking Kate to confirm whether the change has reduced spikes — no reply yet. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779259961824069) [Kate's benchmarking fix](https://mahifx.slack.com/archives/C022S6NL82D/p1779295502768849) [follow-up pending](https://mahifx.slack.com/archives/C022S6NL82D/p1779372618515499)
+> [resolved] 2026-05-22 — Routine Medium LR add: Centroid_2145765158
+> Trading Ops requested MT5_87018814_Centroid_2145765158 added to Medium LR (2026-05-22 03:38). Nathan actioned and confirmed at 03:39. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779417500280389)
+
+> [resolved] 2026-05-21 — 23 CPs bulk-blacklisted from Arbitrageur profile across all books
+> Trading Ops requested 23 counterparties blacklisted from the Arbitrageur profile (20:58). Shyam Hari clarified scope — "all the books from Arbitrageur profile" confirmed by Trading Ops. Shyam actioned across all relevant books and confirmed completion at 22:25. CPs: 87962138, 87961909, 87961906, 87961628, 87957622, 87957459, 87957449, 87957409, 87957005, 87957004, 87956984, 87956983, 87956725, 87956724, 87956253, 87947068, 87943720, 87935268, 87934623, 87934488, 87934486, 87934177, 87932042. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779393504888779)
+
+> [open] 2026-05-20 — US30 spread spike complaints: spread up to 415 points; benchmarking mitigated but spikes still occurring
+> Georgia Tzyrkalli reported client complaints (2026-05-19) that US30 spread widened from 35p to 415 points. Kate confirmed the blowout was driven by B2BROKER and VANTAGE spreads going wide — Mahi's benchmarking logic tracking them as intended. Trading Ops asked for mitigation; Kate added an internal market to the benchmarking pool (2026-05-20 17:45) to stabilise spreads when external LPs spike. Kate also advised Infinox to query their LPs about the underlying spreads. **Update 2026-05-21 17:42**: Trading Ops followed up; Kate confirmed spikes are less frequent and of smaller magnitude post-change but are still occurring — emphasised Mahi's spreads are driven by LP spreads and asked Infinox to check with their LPs. Kate is keeping market widening in place to avoid being caught tight during legitimate spread widening. LPs not yet responded. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779259961824069) [Kate's benchmarking fix](https://mahifx.slack.com/archives/C022S6NL82D/p1779295502768849) [Kate's update 2026-05-21](https://mahifx.slack.com/archives/C022S6NL82D/p1779381730655279)
 
 > [resolved] 2026-05-21 — Extra Heavy LR profile created; UK1_117713 Finior Cap Ship/Boat added then partially reverted
 > CH requested a new LR profile "4x–5x more aggressive than heavy LR" (2026-05-21 07:40), citing clients making profits on Mahi. Kate confirmed it was actioned (08:39). Separately, Clio requested UK1_117713_Finior_Cap_Boat and UK1_117713_Finior_Cap_Ship added to the Extra Heavy LR rule; both were added. Later in the day (16:10) Trading Ops asked for Ship to be removed from Extra Heavy LR and reverted to normal (not Heavy); Kate actioned and confirmed. Boat remains in Extra Heavy LR. Clio also confirmed 87951984 correctly added to Heavy LR. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989) [Extra Heavy created](https://mahifx.slack.com/archives/C022S6NL82D/p1779349153175869) [Ship removal](https://mahifx.slack.com/archives/C022S6NL82D/p1779376231627809) [Ship removal confirmed](https://mahifx.slack.com/archives/C022S6NL82D/p1779376939997339)
@@ -109,6 +115,8 @@ last_catchup: 2026-05-21T16:02:04Z
 
 ## Notable topics
 
+- 2026-05-21 — 23 CPs bulk-blacklisted from Arbitrageur profile across all books by Shyam Hari. Several trade in multiple books; confirmed scope "all books from Arbitrageur profile." [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779393504888779)
+- 2026-05-21 — US30 benchmarking update: spikes less frequent and smaller in magnitude post-change but still occurring. Mahi keeping market widening in place; Infinox asked to query LPs. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779381730655279)
 - 2026-05-21 — Extra Heavy LR profile created at CH's request (4–5× heavier than current Heavy LR). UK1_117713 Finior Cap Ship/Boat added; Ship subsequently reverted to normal (not Heavy) same day. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989)
 - 2026-05-21 — US30 benchmarking mitigation applied (internal market added); Trading Ops follow-up outstanding on whether spikes reduced. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779372618515499)
 - 2026-05-19 — Lazaros Zografopoulos left Infinox (last day 2026-05-15); access removed. Key contact for arb classification / pricing oversight no longer at the firm. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778851874368279)
