@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-21T16:15:54Z
+last_catchup: 2026-05-22T07:35:25Z
 ---
 
 ## Status
@@ -17,6 +17,15 @@ last_catchup: 2026-05-21T16:15:54Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-05-22 — Stork Oracle API token requested and provided (toa-nado-shared)
+> Nado asked if Mahi could get a Stork Oracle API token. Lee/James provided it promptly; Nado specified to use `stork-fast`. An oracle.yaml config file was shared in-thread. Likely preparatory for the Chaos→Stork oracle migration scheduled Thursday 22:30 UTC. https://mahifx.slack.com/archives/C09RGU1T1GE/p1779414775390839
+
+> [watching] 2026-05-22 — Nado extended maintenance + Chaos→Stork oracle migration announced for Thu
+> Weekly Nado maintenance at 22:30 UTC ran extended; Lee noted via their API Telegram channel that this Thursday's maintenance window (22:30 UTC) will include a 2-hour oracle migration: all crypto perp markets moving from Chaos to Stork. Shyam restarted Nado processes; all up by 01:47 UTC except marketDataGeneral2 (low concern per prior pattern — propTrader2 on SEC is off). Shyam set a reminder to perform restarts at 12:30 UTC Thursday. https://mahifx.slack.com/archives/C035H1VNCAD/p1779402945681989
+
+> [resolved] 2026-05-21 — Nado fill-message gap causing position-rec mismatches on APN1 PRI/SEC
+> Mahi noticed internal positions drifting from exchange from ~18:00 UTC; MONUST-PERP largest mismatch ~$52.8k, also SOLUSD-PERP, XBTUST-PERP, XETUST-PERP, ZECUST-PERP. Maten applied JMX adjustments multiple times (both PRI and SEC); Lee turned off trader and bounced GW — mismatches reoccurred. Lee confirmed no changes on Mahi side; checked with Nado and confirmed it was a Nado-side issue. Resolved ~20:29 UTC after Nado fixed their end. https://mahifx.slack.com/archives/C035H1VNCAD/p1779387149498799
 
 > [resolved] 2026-05-11 — marketDataCboe1 down on TOA Argamon CHI: new process, resolved in ~33 min
 > Inald flagged marketDataCboe1 down on TOA Argamon CHI (16:55 UTC). James replied it was a new process he was adding. Inald resolved the ordersCboe alert independently; James confirmed the process was up by 17:29 UTC. https://mahifx.slack.com/archives/C035H1VNCAD/p1778514939388589
@@ -149,6 +158,7 @@ last_catchup: 2026-05-21T16:15:54Z
 
 ## Notable topics
 
+- **Upcoming: Chaos→Stork oracle migration Thursday 22:30 UTC** — all Nado crypto perp markets migrating from Chaos oracle to Stork; 2-hour window. Stork API token already provided to Nado (2026-05-22); `stork-fast` endpoint specified. Ops to restart processes at 12:30 UTC Thursday.
 - Nado weekly maintenance window moved to 22:30 UTC Mon/Thu (was previously aligned to LDN hours); Toa reboot schedule updated to match — PRI reboots Monday 22:30 UTC, SEC reboots Thursday 22:30 UTC. Calendar reminder updated for NZ support coverage instead of LDN. https://mahifx.slack.com/archives/C035H1VNCAD/p1778185084196589
 - Cameron asked whether low-urgency PD alerts requiring prompt action will get missed in the noise; James says most should drop off PD entirely as EOD telemetry. Open design question for pagerbuddy / alert routing. PD noise review (Feb 2026) showed 2064 incidents on APN1 — threshold tuning still pending.
 - `--binaryLogOutputPath` for systemStateMonitor remains commented out (rolled back 2026-03-08); without it pnlDropAlerter forensics rely on slower log digs. PnlDropAlerter fix committed 2026-04-23 (c2cdb3b3) — needs release + config set before binlogs are useful again.
