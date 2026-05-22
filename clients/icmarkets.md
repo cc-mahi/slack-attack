@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
-last_catchup: 2026-05-21T16:02:00Z
+last_catchup: 2026-05-22T07:35:00Z
 ---
 
 ## Recent issues
