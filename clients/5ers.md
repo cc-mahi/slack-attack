@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-21T09:48:37Z
+last_catchup: 2026-05-22T07:19:12Z
 ---
 
 ## Recent issues
@@ -78,3 +78,4 @@ last_catchup: 2026-05-21T09:48:37Z
 - 2026-05-05 — CUCUSD alternating ~3800-point price swings reported by client for period before 2026-05-04 12:16 UTC; Mahi investigated but found no issue on their side — client directed to investigate further. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777977791029089)
 - 2026-05-19 — Yaniv weekly call (Kate): cTrader stopping US clients from June 1st — 5ers moving to YB platform with TradingView front-end. Eval pass-rate dropped sharply in past month; Kate attributed mainly to order-book fills after 5ers raised spreads/commissions/swaps. Yaniv tweaking withdrawal rules for traders — Kate mentioned rule-simulation notebook and will touch base with Cam on parameters to share with Yaniv. XC still blocked by YB (Kate to send update). LR room on CUSTOM2: $/M not much above funded-flow average — Kate will look into increasing. Yaniv may be in Cyprus and keen to meet. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779201650126839)
 - 2026-05-19 — YB slippage dialled back; spread yields more aligned this week. Demo flow $177/M vs funded flow $49/M through Compass (screenshots shared). Kate flagging room to increase LR further. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779197179265719)
+- 2026-05-21 — Yaniv provided payout-sim parameters for consistency-rule modelling: daily drawdown 5%, max drawdown 10%, profit target 10%, no min trading days, trailing drawdown off, consistency % to be tested at 30/40/50%. Cameron Hughes kicking off sims. Andrew Morgan pushed to standardise on `prop-challenge-sim` skill (analytics-python-tools) rather than bespoke notebook runs — decision: anyone on the team should fire the skill and get pass/knockout/payout comparisons against network percentiles; gaps in the skill to be raised and fixed rather than worked around. [kate-params](https://mahifx.slack.com/archives/C079M09MGGP/p1779359102179599) [andrew-skill-push](https://mahifx.slack.com/archives/C079M09MGGP/p1779364056810179)
