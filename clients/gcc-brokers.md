@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Nael", role: "client trading ops", confidence: low}
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
-last_catchup: 2026-05-21T15:45:25Z
+last_catchup: 2026-05-22T07:29:43Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-21 — EUR50 and indices quantity definitions corrected; OMXS30 setup deferred to weekend release
+> Nael reported EUR50 order of 0.1 lots rejected — EUR50 had no quantity definition so was defaulting to increment=1, min=1. Nathan Burch updated EUR50 to increment=0.01, min=0.01. Nael then shared a full LMAX indices quantity spec table; Nathan audited all indices and updated J225/JPXJPY and AUS200/ASXAUD which had non-matching overrides. OMXS30 was not priced — Nathan added it to the codebase but confirmed it can only go into Compass at the next weekend release. All other indices in the list now match LMAX spec. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779397153018939) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779419816310389) [OMXS30 deferred](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779421344026129)
 
 > [open] 2026-05-21 — 4543oz XAUUSD long filled on Finalto, Compass adjustment requested
 > Nael reported 4543oz gold long filled on Finalto at 15:20 BST; William acknowledged. Adjustment status not yet confirmed in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779373250103729)
