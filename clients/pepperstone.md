@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-21T16:07:48Z
+last_catchup: 2026-05-22T07:32:36Z
 ---
 
 ## History
@@ -199,3 +199,5 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-19 — Liam flagged Pepperstone don't want Kraken to know Mahi is the counterparty in the SOW #3 FIX integration. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779188905427249)
 - 2026-05-20 — USDC/USD (Compass symbol USCUSD) pricing added to OZ CFD spot feed (both LDN and NY B2C2 feeds); for conversion use only. Diego to subscribe after EOW. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779246233079129)
 - 2026-05-21 — Weekly CFD crypto PnL review: MK queried low ROS (90k vs 152.2k spread PnL). Isaac identified abnormal flow yield decay to ~95k at 120 mins. MK and Isaac found culprits; one FI arbitrageur account racked up 15k trades before being caught by ARB classifier — now classified. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779329721629439) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779330345418129)
+- 2026-05-22 — MK requested JMX IP whitelist for office IP 104.28.181.137; Nathan routing to Beeks (est. 10–30 min per Isaac). No confirmation yet in-thread. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779422554164899)
+- 2026-05-22 — Isaac added `signalVariationPenalty: 4` to `flow-price-thresh` at crypto env to reduce spiky ticks on the flow signal. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779423087643319)
