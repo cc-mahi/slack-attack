@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-05-21T13:41:52Z
+last_catchup: 2026-05-22T07:27:13Z
 status: active
 retired_at: null
 retired_reason: null
@@ -44,8 +44,8 @@ retired_reason: null
 > [open] 2026-05-05 — new crypto pairs expansion (22 pairs; 4 still need deploy, 2 need instrument clarification)
 > Benjamin Galindo requested 22 new crypto pairs; OKB/KCS originally blocked on code change. By 2026-05-18 Isaac Dann confirmed 15 of the 22 are now priced (Kraken/Binance streams, no MWMS/BMSL, 1000 $/M base spread both sides); TONUSD, THETA, OKB, KCS still need a system deploy. MKR is no longer a listed crypto (replaced by SKY at 1:24000 ratio — needs client confirmation on which instrument), and EOS has been relisted as Vaulta at most exchanges (1:1 swap — needs confirmation). Awaiting client response on MKR/EOS and a deploy window for the remaining 4. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778006518033119)
 
-> [watching] 2026-05-08 — coordinated trading detection: weekly CSV delivery started
-> BrightFunded asked on 2026-05-08 for Mahi's trading correlation script to combine with their fingerprinting tool for multi-account detection. Cameron Hughes sent the first coordinated-trading CSV on 2026-05-12 (covering 2026-05-05..2026-05-12); Mio acknowledged with ✅. Ongoing weekly delivery implied. Client is also implementing device/payment fingerprinting (Cameron H confirmed it's payment fingerprinting; Daria noted Pepper uses similar approach for A-book routing). [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778602892678569)
+> [watching] 2026-05-08 — coordinated trading detection: weekly CSV delivery ongoing
+> BrightFunded asked on 2026-05-08 for Mahi's trading correlation script to combine with their fingerprinting tool for multi-account detection. Cameron Hughes sent the first coordinated-trading CSV on 2026-05-12 (covering 2026-05-05..2026-05-12); second delivery sent 2026-05-21 covering 2026-05-13..2026-05-20 — Mio acknowledged with 🤙. Ongoing weekly cadence established. Client is also implementing device/payment fingerprinting (Cameron H confirmed it's payment fingerprinting; Daria noted Pepper uses similar approach for A-book routing). [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1779380274437499)
 
 > [open] 2026-06-03 — second pricing model for qualifying traders (tighter spreads)
 > Jelle raised on a call (2026-06-03) that VWAP on larger-ticket qualifying traders is causing complaints; wants tighter spreads for qualifying flow only without touching funded. Amir proposed a separate qualifying pricing model (same config, tighter tiers and BMSL) — straightforward to set up but needs a new FIX connection (DX + cTrader = 2 additional connections; BF already uses 3 of their contracted FIX connections). As of 2026-06-04/05 Bonnie checking the contract (1 distribution channel, 3 FIX connections specified); Andrew says $500/month for one model, and server load needs a review before proceeding. Bonnie reached out to Syb, who was unaware of the specifics. Not yet contracted or scheduled. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1748947530909369)
