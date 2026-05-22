@@ -12,19 +12,25 @@ key_people_overrides:
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-last_catchup: 2026-05-21T15:48:51Z
+last_catchup: 2026-05-22T07:31:46Z
 ---
 
 ## Recent issues
 
+> [resolved] 2026-05-22 — Client-reported alert (image) resolved by Isaac within 30 min
+> Kieran (GoMarkets) posted a screenshot alert to the client channel at ~04:24 UTC asking "Does this need action?" — alert content is an image not readable in this context. Isaac (Mahi) responded "Hey, checking" and confirmed "Should be fixed now" by ~04:54 UTC. Likely related to post-EOD-restart monitoring (CLIENT_PRICE_RA internalisation or metals crosses — see entries below). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779423846233199)
+
+> [open] 2026-05-21 — Brokered LR flagged off by lr-health-check
+> Andrew Morgan (Mahi) flagged lr-health-check is reporting brokered LR disabled at GoMarkets (config link: `distribution.liquidityThrottle.brokeredLiquidityReduction`). Isaac replied it previously caused issues but that wouldn't be relevant now, and acknowledged it might add value. Andrew noted benchmarks elsewhere (ATC $26.2K in 3 weeks; Compass Network 45% of PnL in Sept 2025; velocity already $3K back on one CP after Cameron C flipped it on). No config change made yet — Andrew offered support if issues arise when enabling. Next step: someone needs to flip it on. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779385383993569)
+
 > [resolved] 2026-05-17 — Centroid A-Orders FIX disconnect (GoMarkets-A-Orders-Centroid)
 > David (GoMarkets) reported A-book Mahi connection disconnected/unable to connect at ~23:48 UTC. Nathan investigated; Isaac diagnosed Mahi had not received a logon request on the GoMarkets-A-Orders-Centroid session. Isaac advised a Centroid bridge restart as the fix — GoMarkets requested the restart, and it succeeded (~00:06 UTC 2026-05-18). Pattern consistent with the April Centroid B-Prices session failure (2026-04-25 entry). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779058091343579)
 
-> [open] 2026-05-20..21 — CLIENT_PRICE_RA pricing model migration in progress
-> Nathan aligned all CLIENT_PRICE_RA config to match CLIENT_PRICE_NYC (except spread profiles). Remaining step: internalisation market on A_CLIENTS_RA and B_CLIENTS_RA channels still pointed at CLIENT_PRICE_NYC — Kieran (GoMarkets) confirmed he changed internalisation to _RA but TOB sizes unchanged; Isaac confirmed internalisation market change requires an EOD restart to take effect and offered to schedule it. Client confirmed. Silver metal cross also pending EOD restart (see metals crosses entry). EOD restart not yet confirmed complete at window close. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779231839635339)
+> [resolved] 2026-05-20..22 — CLIENT_PRICE_RA pricing model migration
+> Nathan aligned all CLIENT_PRICE_RA config to match CLIENT_PRICE_NYC (except spread profiles). Remaining step: internalisation market on A_CLIENTS_RA and B_CLIENTS_RA channels still pointed at CLIENT_PRICE_NYC — Kieran (GoMarkets) confirmed he changed internalisation to _RA but TOB sizes unchanged; Isaac confirmed internalisation market change requires an EOD restart. EOD restart completed: Kieran flagged an alert (image) to the client channel at ~04:24 UTC 2026-05-22; Isaac investigated and confirmed "Should be fixed now" by ~04:54 UTC. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779231839635339)
 
-> [open] 2026-05-21 — New metals crosses config request
-> Kieran (GoMarkets) requested initial setup for metals crosses (via email + Slack). Cameron Hughes (Mahi) added triangulated base spread config for the metal crosses not yet pricing. All crosses now subscribe-able except silver, which requires an EOD restart (pending at window close). Kieran to follow up with Isaac on finer config settings. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779346879467069)
+> [resolved] 2026-05-21..22 — New metals crosses config request
+> Kieran (GoMarkets) requested initial setup for metals crosses (via email + Slack). Cameron Hughes (Mahi) added triangulated base spread config for the metal crosses not yet pricing. All crosses now subscribe-able except silver, which required an EOD restart. EOD restart completed 2026-05-22 (covered by the CLIENT_PRICE_RA migration restart — see entry above); Kieran to follow up with Isaac on finer config settings. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779346879467069)
 
 > [open] 2026-05-10 — FX market-open order rejections due to excessive internal latency
 > Will (GoMarkets) reported a burst of order cancellations at FX open: "Forcibly cancelled order due to excessive internal latency. Configured last-look delay was exceeded by 475ms (actual delay 605ms - expected delay 130ms) > max overrun allowed 300ms." Event lasted ~1 second (last cancel at 21:01:01.571 UTC). Nathan confirmed isolated to FX market opening, stable since; reviewing with dev team to prevent recurrence. Client asked whether any config adjustments could help. No config change confirmed yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1778450112481459)
