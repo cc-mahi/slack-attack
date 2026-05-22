@@ -9,19 +9,19 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-12T07:37:52Z
+last_catchup: 2026-05-22T07:13:40Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-11 — NWM_HSBC LP disconnection — "Credentials disabled"
-> At 01:51 UTC 2026-05-11, Velocity's FIX session to NWM_HSBC (`VELBINT099HS-price`) logged out with "Credentials disabled, please contact support". Nathan Burch raised in the client channel at 02:54 BST. No thread replies; resolution unconfirmed. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778464467.944329)
+> [resolved] 2026-05-18/19 — NWM_HSBC FIX session disabled deliberately; re-disabled after failed logon
+> On 2026-05-18 at 21:30 UTC, Velocity's VELBINT099HS sessions (`-order` and `-price`) received "Credentials disabled" logout on every logon attempt. Shyam Hari raised at 22:53 BST. On 2026-05-19 at 08:46 BST, Will confirmed this is deliberate — Mahi has disabled VELBINT099HS for the time being; once re-enabled, standard tests will precede going live. Closes the 2026-05-11 open item of the same name (same root cause, now confirmed intentional). [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779141221.927319) [resolution](https://mahifx.slack.com/archives/C05NB72AGR2/p1779176783.793769)
 
 > [resolved] 2026-05-11 — hybridHedgerSITotal1 went down during Will Carter predicate test
 > Inald Gjoni restarted `hybridHedgerSITotal1` after it went down at ~14:23 BST. Root cause: Will was testing a new `VAR-CLEARANCE-FASTER` predicate on `SI_BOOK_NET`; the party was not whitelisted, causing `IllegalStateException` on rule build for XAGUSD. Will asked Inald to revert to pre-change config and not touch `hybrid1`. Back up by 14:37 BST. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778505824.369029)
 
-> [open] 2026-05-08 — XAU crosses: client seeing no pricing (except XAUAUD)
-> Client (Richard) reported at 09:31 BST: "on the xau crosses, I see a price in aud but none of the others?" William investigated; at 11:40 BST asked client to confirm whether they had sent FIX MD subscriptions for XAUCHF, XAUEUR, XAUGBP, XAUJPY, XAUNZD, XAUSGD — no subscription logs visible from client side. XAUAUD working; XAUCNH not yet priced on Mahi side. No resolution confirmed in window. Ties into existing [open] 2026-05-07 XAU crosses test trades item. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778229098.287779) [William ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1778236837.382589)
+> [resolved] 2026-05-15 — XAU crosses test trades completed for XAUEUR, XAUJPY, XAUAUD, XAUGBP, XAUNZD; XAUCHF subscription issue
+> On 2026-05-15 Dan tried to test XAUJPY but got rejected; William found the feed was not switched to internalise for XAU crosses, fixed at 10:19 BST. Tests completed successfully: XAUEUR ✓, XAUJPY ✓, XAUAUD ✓. XAUGBP tested on 2026-05-15 — no MD request from client side (confirmed subscription issue on client side, resolved). XAUCHF pricing was live on Mahi side but no FIX MD request sent by client — resolved same day. XAUSGD and XAUCNH dependent on USDSGD/USDCNH feeds from client — proxied in by 2026-05-18/20; test trades outstanding. 2026-05-18 batch: XAUCHF, XAUGBP, XAUNZD all tested successfully with hedges confirmed. XAUSGD and XAUCNH pricing live as of 2026-05-20. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1778839791.338599) [batch complete](https://mahifx.slack.com/archives/C05NB72AGR2/p1779104736.146229) [XAUSGD/CNH live](https://mahifx.slack.com/archives/C05NB72AGR2/p1779265175.883199)
 
 > [open] 2026-05-05 — Allow Top Up on A_CLIENTS_PREMIUM/Broker Everything Temp disabled after 350 XAU internalisation loss
 > At 16:10 UTC 2026-05-04, counterparty 889 placed a 750 XAU order on DistributionLDN (A_CLIENTS_PREMIUM//Broker Everything Temp, execution rule: broker). Compass brokered 400 XAU; the remaining 350 XAU was internalised via Allow Top Up. Price moved against the book immediately — full 350 XAU hedged to cap further losses but loss already realised. Nathan Burch disabled Allow Top Up for this execution rule as a protective measure, noting counterparties in this classification trade directionally. He flagged this for review: Allow Top Up is currently on for all other execution rules — possibly intended to protect client fills — and the policy should be revisited. By 09:04 UTC+1 2026-05-05 Will confirmed "book has recovered somewhat so far this morning" and endorsed the disable ("that's the right call — thanks Nathan"). Policy review of Allow Top Up across other execution rules remains open. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1777957038011259) [recovery confirm](https://mahifx.slack.com/archives/CPDS0M2KF/p1777968282.241929)
