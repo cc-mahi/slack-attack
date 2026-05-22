@@ -7,10 +7,13 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-21T13:30:37Z
+last_catchup: 2026-05-22T07:23:39Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-22 — SHIUSD/FAUUSD residual position: flatten requested on Mahi and Finalto
+> David Manoukian (01:18 UTC) reported SHIUSD (FAUUSD) is completely flat on Spotex but a residual position remains on the Mahi system and Finalto — requested it be flattened. Shyam Hari acknowledged. No confirmation of execution in window. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779409080214819)
 
 > [resolved] 2026-05-11 — GBPUSD open loss $1.8k; Finalto TOB quantity mismatch; resolved via BMSL addition
 > At market open 2026-05-11, client 27072237 traded GBPUSD at a tighter-than-market spread: Finalto had dropped published quantity to 100k while the model was publishing 300k at TOB, leaving no LP reference at that size and triggering base spreads. Daria proposed four options; Malik's feedback led to option 3 — Daria added BMSL with `MAHI_BENCHMARK_LDN` as reference market on 2026-05-13. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778473221775049) · [Daria options reply](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778534112919499) · [internal TOB analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1778473279858959) · [BMSL added](https://mahifx.slack.com/archives/C046RNF64VD/p1778632572190249)
