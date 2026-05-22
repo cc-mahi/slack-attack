@@ -9,10 +9,25 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-12T07:35:48Z
+last_catchup: 2026-05-22T07:14:12Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-22 — JUMP_OZNY4_RETAIL_MARGIN_VT missing from XAUUSD TOB — drop copy classification issue
+> Andri reported 2026-05-21 that JUMP_OZNY4_RETAIL_MARGIN_VT (added as XAUUSD reference market 2026-05-13) cannot be seen on the Top of Book for XAUUSD, and is generating a negative-looking yield profile for cpty 89468356. Shyam Hari confirmed pricing instruments are visible but TOB wasn't showing it. Isaac Dann responded 2026-05-22 08:01: there are no XAUUSD JUMP_OZNY4_RETAIL_MARGIN_VT positions in Compass — trades are landing in VALUTRADES_A_PTR_CLIENTS and VALUTRADES_A_PTR_EXTERNAL_WASH (drop copy books); Isaac suspects riskPath XAUUSD change (noted by Cameron Hughes 2026-05-14 as recently made) is capturing drop copies and setting JUMP_OZNY4_RETAIL_MARGIN_VT as the market. Flagged to London to investigate. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779363979231249) [isaac-diagnosis](https://mahifx.slack.com/archives/C09HN93T0G2/p1779433269964199)
+
+> [open] 2026-05-21 — TT FIX Production Stunnel certificate expiry — no Mahi reply
+> Client asked for update on TT FIX Production Stunnel cert expiry (raised via email); screenshot attached. Shyam Hari said he'd follow up. No further reply visible. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1779343214820379)
+
+> [open] 2026-05-20 — TT UAT `Scale POV` instrument rejects — FIX account name missing
+> Client (Garry Bersnov) testing TT UAT resting orders connection for Scale POV SOW work; GCM6-JUN26 and GoldJun failing with `IllegalStateException: Unable to find security definition` / `Unknown instrument`. Arun Patel made multiple config changes on 2026-05-20 and 2026-05-21. After Arun's latest fix 2026-05-21 13:02, instrument error changed to `Account does not exist` — Arun confirmed FIX account name (tag 1) needs to be provided by client. Thread awaiting client reply. [parent](https://mahifx.slack.com/archives/C09HN93T0G2/p1779276316989649) [account-missing](https://mahifx.slack.com/archives/C09HN93T0G2/p1779366292597459)
+
+> [resolved] 2026-05-21 — Both SOWs signed: Scale POV + Quantitative Brokers (QB)
+> Client (Graeme Watkins) confirmed both SOWs signed and QB UAT credentials shared 2026-05-21 09:57. Liam Cordelle confirmed QB integration started, Mahi will test TT adapter and get to conformance. Agreed to test Scale POV in PROD (not full UAT end-to-end). [client-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1779353830413069) [liam-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1779356596592969)
+
+> [resolved] 2026-05-13 — XAUUSD yield profile reference LPs clarified — JUMP_OZNY4_RETAIL_MARGIN_VT added
+> Client asked which LP is used for XAUUSD yield profile valuation. Nathan Burch initially listed wrong markets (corrected same night); confirmed correct aggregate: COMM_OZNY4_FUND_NWPB_AMB, DB_OZNY4_FUND_NWPB_AMB, GSPM_OZNY4_FUND_NWPB_AMB, JPM_OZNY4_FUND_NWPB_AMB, SC_OZNY4_FUND_NWPB_AMB, UBS_OZNY4_FUND_NWPB_AMB, plus JUMP_OZNY4_RETAIL_MARGIN_VT added per client request. [query](https://mahifx.slack.com/archives/C09HN93T0G2/p1778656219150419) [correction](https://mahifx.slack.com/archives/C09HN93T0G2/p1778704468117649)
 
 > [open] 2026-05-11 — Compass receiving unsubscribed market data — mapping query unanswered
 > Daria (Mahi) posted that Compass is receiving market data it's not subscribing to, listing unrecognised markets under `MFX-IG_Q->ValuCY_Live_Q` (JFX_VALUTRADES-SW-NY4) and `MFX-FEED4_Q->ValuCY_Live_Q` (Valutrades, LMAX-ValutradesNWtk1, Currenex-Valutrades, JUMP-CFD, JumpMakerValutrades, Velocity, JFX_VALUTRADES-SW-NY4, Commerz-Valutrades). Asked team to confirm correct market mappings/setup. No reply in window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1778465858044369)
