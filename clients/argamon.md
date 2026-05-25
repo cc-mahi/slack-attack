@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-22T07:35:00Z
+last_catchup: 2026-05-25T07:08:57Z
 ---
 
 ## Status
@@ -105,14 +105,17 @@ last_catchup: 2026-05-22T07:35:00Z
 > [resolved] 2026-05-15 — HRP booking config missing on Toa (trades not sent to HRP)
 > Tom flagged trades not being sent to HRP from Toa. James confirmed missing `connectivity.booking.bookingSystemRouting` config on Toa; HRP asked to book manually while fixed. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
 
+> [open] 2026-05-25 — XAUUSD toxic-flow rehab-cycle risk: FX/metals classification split planned
+> Daria flagged a structural rehab-cycle problem: toxic XAUUSD CPs brokered to Toa receive wider spreads + passive hedging, which improves their yield and causes them to lose their toxic classification, after which they get internalised on tight spreads and become toxic again until reclassified. Fix options: static blacklist or tighter rehab criteria for metals. Daria plans to split FX and metal classifications on 2026-05-26 (moving metals positions from CLIENTS to CLIENTS_NYC) so changes can be made independently for metals. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779681392035259)
+
 > [resolved] 2026-05-19 — Toa insti_light XAUUSD spread config GUI error
 > Elan unable to open XAUUSD spread config for CLIENT_PRICE_INSTI_LIGHT stream in Toa GUI. James fixed — misconfigured JSON name (copy-paste error) on the Toa config. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779186517949549)
 
 > [open] 2026-05-19 — TOA_CHI 100% CPU / Aeron meltdown: ~10 min pricing dropout + toxic-flow LP reject spike
 > ~10 min dropout from TOA_CHI at ~14:30 BST. Separately, during a period where toxic-flow CPs were being auto-brokered, the designated LP had no price — causing high cancel/retry volume (Tom flagged "things going crazy"). Kate: LP pricing dropped out, retries drove reject spike; LP pricing recovered same session. James Furness also flagged 100% CPU causing an Aeron meltdown in CHI around the same time; root cause not yet published. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779199627807509) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779200915226979) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779211745957959)
 
-> [open] 2026-05-21 — CP 104719 dual-channel classification: internalised under A_CLIENTS, brokered under A_CLIENTS_TOA
-> Tom querying why CP 104719 is sometimes internalised, sometimes brokered within 12 minutes of each other. Rory explained: A_CLIENTS_TOA falls under CATCHALL//Dynamic-Broker execution profile; A_CLIENTS falls under CATCHALL//Dynamic-Dont B Book. Tom following up asking what drives the channel-level classification difference — unanswered as of end of window. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
+> [resolved] 2026-05-21 — CP 104719 dual-channel classification: internalised under A_CLIENTS, brokered under A_CLIENTS_TOA
+> Tom querying why CP 104719 is sometimes internalised, sometimes brokered within 12 minutes of each other. Rory explained: A_CLIENTS_TOA falls under CATCHALL//Dynamic-Broker execution profile; A_CLIENTS falls under CATCHALL//Dynamic-Dont B Book. Isaac confirmed 2026-05-22: the classification flipped for one order because CP 104719's 28-day yield was hovering near the rehab threshold — a single agent cycle (~few hours) can flip it, and trade B landed in a 2.5-hour window where rehab had succeeded before reclassifying back to broker. Tom satisfied. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
 
 ## Notable topics
 
