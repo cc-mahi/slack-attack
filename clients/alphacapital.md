@@ -9,13 +9,13 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-05-22T07:21:13Z
+last_catchup: 2026-05-25T07:08:56Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-22 — Statement of account request from Jade (unanswered internally)
-> Jade (Alpha Capital, external) posted in #mahi-alphacapitalgroup asking who to contact for a statement of account. Shyam Hari (Mahi Training) responded to Jade saying he'd sort it, and separately posted in #internal-alphacapitalgroup asking the team to create the statement / provide Jade with a contact — no reply yet from the internal team. [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1779427327328109) [internal](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779427896627129)
+> [open] 2026-05-22 — Statement of account request from Jade (Bonnie following up)
+> Jade (Alpha Capital, external) posted in #mahi-alphacapitalgroup asking who to contact for a statement of account. Shyam Hari (Mahi Training) responded to Jade saying he'd sort it, and separately posted in #internal-alphacapitalgroup asking the team to create the statement / provide Jade with a contact. 2026-05-22 10:33 UTC: Bonnie Cassidy replied internally — "I'm not entirely sure what it is that she's requesting but will find out and follow up from there." No further update visible yet. [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1779427327328109) [internal](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779427896627129) [bonnie](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779442392670229)
 
 > [resolved] 2026-05-15 — signalProcessCFDFI1 down: counter file lock contention with signalProcessFI1
 > Arun Patel: signalProcessCFDFI1 failed to start due to both FI1 and CFDFI1 contending for the same ADWeights counter file (NZDUSD IFMS). signalProcessFI1 held the exclusive lock, blocking CFDFI1. Arun had bumped `jvm_max_memory` on CFDFI1 as a prior workaround for allocation stalls; separately flagged whether some signals could be removed from signalProcessFI1/CFDFI1 to free compute and reduce downstream aeron subscriber latency spikes. Process was back up within ~1h. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1778847108444079)
