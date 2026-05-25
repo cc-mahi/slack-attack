@@ -17,10 +17,13 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-22T07:35:00Z
+last_catchup: 2026-05-25T07:18:25Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-24 — XBT `FORCE_INTERNALISATION: No Continuity Pool price` rejects
+> Samuel flagged XBT rejects with this error plus a pending uncleared error. Isaac diagnosed: the counterparty is classified as an arber and was being executed on the continuity pool, which only contains LMAX_WKND; LMAX_WKND went dark briefly, causing the rejects. Client got a fill at 21:06:04 UTC. Isaac cleared the error at ~22:17 UTC. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779656906405779)
 
 > [open] 2026-05-21 — XAUUSD FOK limit orders filling far off mid across Hidden Road LPs
 > Matthew Ayub flagged FOK limit orders at ~06:54 UTC showing fills far from mid across multiple Hidden Road LPs; referenced an earlier Jane Street issue (~$40 off mid). Kate traced: 'Published Price Deviation' execution rule setting was deliberately set very high (to prevent wide limits being treated as market orders — see prior thread). Possible changed LP pool behaviour. Investigation ongoing; Matthew requested a call. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779349909925109)
@@ -37,8 +40,8 @@ last_catchup: 2026-05-22T07:35:00Z
 > [open] 2026-05-17 — Invast NG1 pricing not received
 > Samuel Ewebiyi reported no pricing from Invast for NG1 despite Invast confirming they were sending. Nathan Burch picked it up. No resolution confirmed in thread. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779056584038339)
 
-> [watching] 2026-05-12 — Wagyu XAUUSD spreads recurring wide during twilight (arb protection)
-> Third occurrence in the window: wide spreads (50-60c) reported 12-May, 14-May, and again 20-May during twilight period. Root cause each time: arb protection widening distribution off reference markets (UBS/360T/Sucden). Daria/Nathan applied a buffer each time and reverted after twilight at client's request. No permanent fix agreed; Exinity said they'd discuss internally whether to keep the long-term config. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899)
+> [watching] 2026-05-12 — Wagyu XAUUSD spreads recurring wide (arb protection / MWMS config)
+> Recurring: wide spreads (50-60c) reported 12-May, 14-May, 20-May (arb protection widening), and again 24-May (Mukhammad flagged widening; Isaac diagnosed no arb config component and adjusted MWMS settings to target 35c). Root cause varies: arb protection off reference markets (UBS/360T/Sucden) during twilight, and separately a widening contribution from an MWMS arb-config gap. Daria/Nathan applied buffers on earlier occurrences; Isaac adjusted on 24-May. No permanent fix agreed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
@@ -119,7 +122,7 @@ last_catchup: 2026-05-22T07:35:00Z
 > Samuel asked why DOW trades for cpty `ASV_MT5_228023951` executed at LP price. Sam: cpty was assigned the Dynamic Arbitrageur execution profile on 04-27 (day of the trades), so filled on `CONTINUITY_POOL` which publishes VELOCITY for DOWUSD. Samuel asked when client was added — clarified, but assignment context (who/why on 04-27) not surfaced. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777514645330979)
 
 > [open] 2026-04-27 — "Poor $/M report" alert frequency too high since update
-> Keshav: receiving multiple alerts in short windows; asked for one-per-minute throttle. No reply visible — outstanding. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777290223832409)
+> Keshav originally asked for one-per-minute throttle; no reply then. On 2026-05-25 Mukhammad renewed the request: receiving 5+ momentary alerts per counterparty, asked to reduce to 2 per unique counterparty. Shyam raised with dev. Not yet resolved. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777290223832409) [2026-05-25 permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779668061245269)
 
 > [open] 2026-04-23 — Account ASV_MT5_228000145 missing info + no distribution trace
 > Louie flagged the account is missing information in Compass and has no distribution trace for the last 24h window; William Denny to investigate. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1776974117585849)
