@@ -14,10 +14,18 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-05-22T07:26:15Z
+last_catchup: 2026-05-25T07:08:57Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-22 — FX hedger looping incident during test trading; retesting post bank holiday
+> During FX test trading on 2026-05-22, hybridHedger1 went into a buy/sell loop on USDCHF (and GBPUSD/EURUSD/EURCHF), spamming CMC_CENTROID with trades Amana had not sent — Karen flagged at 15:53 BST. Rory killed the hedger at 15:56, removed FX from hedger config. Root cause: quantity definitions for CMC_CENTROID FX were incorrect (sending sub-minimum order sizes, causing CMC rejections/loop); Will bounced hybridHedger1 at 20:22 to pick up corrected CMC_CENTROID FX quantityDefinitions. Open positions (EURUSD 2k, GBPUSD 1k, USDCHF 1k, EURCHF 1k) confirmed flat at CMC by 16:45 BST. UK bank holiday Monday 25 May; retesting FX from Tuesday. FX spreads (majors from Hadeel's CSV) uploaded; triangulated crosses pending. CMC FX minimum confirmed as 1,000 (Mohamed confirmed min+step = 1,000 at 18:47 BST). [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779461592026719)
+
+> [resolved] 2026-05-22 — NG6M (natural gas futures) expiry: positions confirmed flat
+> Andreas Kleanthous (Amana) notified at 20:00 BST that NG6M expired and client closed all positions. Will confirmed Mahi-side NG1FUT-M positions are flat. Clean expiry. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779476448766999)
+
+
 
 > [resolved] 2026-05-21 — XAUFUT-Q limit buy rejected LIQUIDITY_VIOLATION: last-look cancel
 > Jake (Amana) queried at 17:22 UTC why trade 69491267_1 (limit buy 50oz XAUFUT-Q at 4574.45, tag1=ABOOK) was rejected with LIQUIDITY_VIOLATION. Shyam responded at 22:43 UTC: available offer at execution was 4574.55 — order cancelled by last-look as limit price was off-market at time of fill. Echo trace shared confirming distribution-trace. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779385221000029)
@@ -155,3 +163,6 @@ last_catchup: 2026-05-22T07:26:15Z
 - 2026-05-21 — Dashboard deploy by Justin Young to fix CFD PnL display (Futures P book pulling Futures P Clients LDN negatively). Bank holiday Monday 25 May — emergency support only; Slack less monitored. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779351923713649)
 - 2026-05-21 — XAGUSD skew scaled up after net-positive performance confirmation: Rory bumped fpt ceiling 2→3 pips, gemini ceiling 3→5 pips, IFMS ceiling 1→2 pips; base-spread proportion fpt 0.25→0.35; price-change component 0.025→0.035 @ 500ms; TWILIGHT overrides lifted (gemini 0.1→0.15, fpt 0.15→0.18); multipliers raised (fpt 1.05→1.1, gemini 1.1→1.2); fpt floorAdjustment base lifted 0.1→0.15. Pricers bounced 14:57 BST to pick up changes. Pre-change JSON posted in thread for quick reversion. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779371411159799)
 - 2026-05-21 — GCEX credentials and instrument list shared in mahi-amana by Maynard (Amana) at 19:03 BST (Mahi_GCEX.zip); Will acknowledged. GCEX not previously referenced in VibePulse or canonical sources — appears to be a new LP being onboarded. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779386583250339)
+- 2026-05-22 — FX spreads for majors uploaded by Rory from Hadeel's CSV into CLIENT_PRICE_ABOOK_LDN (and CLIENT_PRICE_LDN per Hadeel confirmation); triangulated crosses still pending. FX hedging confirmed to CMC_CENTROID; no SwapFree FX expected by Nikos but workflow available if needed. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779444921689839)
+- 2026-05-22 — SIXX (silver spot) LP rejections at ~10:44 UTC: "Order rejected. Price is no longer valid" (OrdStatus=8) — Princess raised at 11:49 BST; Rory confirmed risk is covered and no immediate concern, investigating cancellation pattern. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779446923669939)
+- 2026-05-22 — hybridHedgerSwapfree1 bounced by Rory at 17:56 BST to revert unactioned profileDefinitions changes staged on 2026-05-21; precautionary good-order restart. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779469019812579)
