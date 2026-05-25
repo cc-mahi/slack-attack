@@ -18,10 +18,16 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-22T07:37:24Z
+last_catchup: 2026-05-25T07:28:34Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-24 — Scope-X-FA-Orders: logon with incorrect password (asterisks sent instead of password)
+> Isaac flagged that the FA-Orders FIX session received a logon request with password `*********` (asterisks only), while the FA-Prices session connected successfully with the correct credentials. Rostro checked, replied "should be fine now" ~11 minutes later. No Mahi config change needed; likely a client-side credential-store issue. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779656751291069) [client ack](https://mahifx.slack.com/archives/C08AQKRU953/p1779657262433139)
+
+> [open] 2026-05-22 — Rostro querying Mahi DB: profitprofiles gaps, subcounterparty nulls, complete=false backlog
+> Manu (Rostro) posted detailed DB questions: (1) ~10% of trades (3,012/29,107 on 2026-05-14, parties CLIENTS_LDN, B_INSTI_VIP_CLIENTS_LDN, B_INSTI_CLIENTS_LDN) have no row in `profitprofiles` at all — this blocks their subcounterparty classification; (2) `subcounterparty` exists on `yieldprofiles_latest` but is almost always NULL — asked if this is intentional; (3) only 10% of trades reach `complete=true` even a week after execution, and there is a strong correlation: 3,005 of the 3,012 trades missing from `profitprofiles` are `complete=false` — asked whether `complete=true` is a prerequisite for `profitprofiles` ingestion. Will Denny acknowledged and said he'd look into it; no answers yet. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779461849830539) [Will ack](https://mahifx.slack.com/archives/C08AQKRU953/p1779461990568119)
 
 > [resolved] 2026-05-22 — Scope-X-FA-Orders: NullPointerException on login (missing Trading Account "FA")
 > Rostro (Rakan) notified they onboarded the new LP and connected the FA feed pricing side but orders were rejected with `Cannot resolve tradingAccount mapping: Account->TradingAccount mapping` — no trading account named "FA" had been created in User Admin, so clientDistributionGateway1 could not create the handler. Nathan fixed by creating the "FA" Trading Account; EOD/weekend restart scheduled to apply the change. Scope-X-FA-Orders expected to connect after restart. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779400922036409) [Nathan internal diagnosis](https://mahifx.slack.com/archives/C08ALS66EDC/p1779407154882089)
