@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-22T07:32:36Z
+last_catchup: 2026-05-25T07:23:32Z
 ---
 
 ## History
@@ -100,13 +100,16 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Recent issues
 
+> [open] 2026-05-25 — XBT arb classification lag: CPs 1350472/1350482 not caught in time; backgroundJobs cap bumped, real-time detection in dev
+> Gabriel (Pepperstone) flagged that CPs 1350472 and 1350482 (same underlying ID) were arbing XBTUSD and weren't auto-classified quickly enough — both confirmed arbers per the params but weren't caught until they'd already cost spread P&L. Shyam explained the backgroundJobs classifier ranks CPs by PnL and checks only the top-N worst performers (was 1k, now bumped to 10k crypto / 35k FX). CPs that only recently became large arbers fall outside the cap until they breach the threshold. Shyam confirmed new real-time arb detection code is in dev for a future release. Thread still active at 03:26 BST 2026-05-25. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779466071252189)
+
 > [open] 2026-05-20 — Order 012dve37wwfin slippage under Dynamic Arbitrageurs; investigation ongoing
 > Reece flagged order 012dve37wwfin appeared to slip more than the channel should allow. Rory confirmed the order executed under the Dynamic Arbitrageurs execution profile and is still investigating whether the fill price was materially worse than the continuity pool price at the time. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779269797499599)
 
 > [open] 2026-05-19 — MK/Reece external classifier: automated S3 upload feature requested; Kraken SOW prioritisation tension
 > MK and Reece have built their own counterparty classifier (incorporating upstream data Mahi can't see — fingerprinting, IPs, deposit patterns) after being unable to configure Mahi's classifier for persistent-yield AND logic. They're requesting an automated mechanism to push the resulting CP lists into Compass (proposed: Mahi polls an S3 bucket on a schedule). Andrew Morgan confirmed similar functionality was built for Zenfinex (unused). Liam to raise a Jira; Andrew recommends a meeting to signpost upcoming Mahi classification improvements (arb check skew profiles). Separately: MK wanted to prioritise this over the Kraken SOW #3 integration — Andrew pushed back, noting the SOW is contracted work and Tom/Tamas sign-off should be confirmed before swapping priority. Kraken integration stays current. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779146841798919)
 
-> [open] 2026-05-18 — propTrader simultaneous NY+LDN restart causing thin liquidity spikes; LDN reboot time adjusted
+> [resolved] 2026-05-18 — propTrader simultaneous NY+LDN restart causing thin liquidity spikes; LDN reboot time adjusted
 > Stephen flagged that the "start in off state" config causes simultaneous downtime on both primary (NY) and backup (LDN) propTrader during weekend reboots, leaving only very thin residual liquidity. Daria confirmed NY reboot is 15:25 NY Sunday, LDN was 16:25 — only ~30 min window. Agreed: LDN reboot pushed to 17:25 NY Sunday to widen the coverage window. Nathan updated LDN crypto trading and admin server schedules and adjusted FIX connection start/end times accordingly. Diego flagged a potential conflict with existing Pepper FIX config (currently set to start 16:59); Diego confirmed internally and applied changes to both NY and LDN FIX connections by 2026-05-21. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779075264717449)
 
 > [resolved] 2026-05-15 — XAG InvNY1 hedger off again after weekend restart
@@ -200,4 +203,5 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-20 — USDC/USD (Compass symbol USCUSD) pricing added to OZ CFD spot feed (both LDN and NY B2C2 feeds); for conversion use only. Diego to subscribe after EOW. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779246233079129)
 - 2026-05-21 — Weekly CFD crypto PnL review: MK queried low ROS (90k vs 152.2k spread PnL). Isaac identified abnormal flow yield decay to ~95k at 120 mins. MK and Isaac found culprits; one FI arbitrageur account racked up 15k trades before being caught by ARB classifier — now classified. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779329721629439) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779330345418129)
 - 2026-05-22 — MK requested JMX IP whitelist for office IP 104.28.181.137; Nathan routing to Beeks (est. 10–30 min per Isaac). No confirmation yet in-thread. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779422554164899)
+- 2026-05-22 — Tom requested 4 IPs (50.16.243.246, 52.45.193.177, 54.145.122.46, 54.175.203.47) whitelisted for astro worker automations (test + prod) against Mahi DB host 192.81.110.208; Rory whitelisted same day, Tom confirmed access. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779444503985319)
 - 2026-05-22 — Isaac added `signalVariationPenalty: 4` to `flow-price-thresh` at crypto env to reduce spiky ticks on the flow signal. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779423087643319)
