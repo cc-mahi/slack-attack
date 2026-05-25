@@ -9,13 +9,13 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-22T07:14:12Z
+last_catchup: 2026-05-25T07:15:23Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-22 — JUMP_OZNY4_RETAIL_MARGIN_VT missing from XAUUSD TOB — drop copy classification issue
-> Andri reported 2026-05-21 that JUMP_OZNY4_RETAIL_MARGIN_VT (added as XAUUSD reference market 2026-05-13) cannot be seen on the Top of Book for XAUUSD, and is generating a negative-looking yield profile for cpty 89468356. Shyam Hari confirmed pricing instruments are visible but TOB wasn't showing it. Isaac Dann responded 2026-05-22 08:01: there are no XAUUSD JUMP_OZNY4_RETAIL_MARGIN_VT positions in Compass — trades are landing in VALUTRADES_A_PTR_CLIENTS and VALUTRADES_A_PTR_EXTERNAL_WASH (drop copy books); Isaac suspects riskPath XAUUSD change (noted by Cameron Hughes 2026-05-14 as recently made) is capturing drop copies and setting JUMP_OZNY4_RETAIL_MARGIN_VT as the market. Flagged to London to investigate. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779363979231249) [isaac-diagnosis](https://mahifx.slack.com/archives/C09HN93T0G2/p1779433269964199)
+> [open] 2026-05-22 — JUMP_OZNY4_RETAIL_MARGIN_VT missing from XAUUSD TOB — instrument list gap; INSTI variant also requested
+> Andri reported 2026-05-21 that JUMP_OZNY4_RETAIL_MARGIN_VT cannot be seen on the TOB for XAUUSD and is generating a negative yield profile for cpty 89468356. Isaac Dann confirmed 2026-05-22 08:01: no XAUUSD JUMP_OZNY4_RETAIL_MARGIN_VT positions in Compass — trades land in VALUTRADES_A_PTR_CLIENTS and VALUTRADES_A_PTR_EXTERNAL_WASH (drop copy books). Root cause clarified 2026-05-25: Isaac confirmed XAUUSD is not in the instrument subscription list for JUMP_OZNY4_RETAIL_MARGIN_VT on `senderCompID=MFX-IG_Q,targetCompID=ValuCY_Live_Q` — only Futures/Indices subscribed. Isaac offered to add spot XAUUSD with an EOD restart required. Andri also asked to add `JUMP_OZNY4_INSTI_MARGIN_VT` to the same subscription; Isaac replied "How so?" — clarification pending. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779363979231249) [isaac-diagnosis](https://mahifx.slack.com/archives/C09HN93T0G2/p1779433269964199) [isaac-instrument-list](https://mahifx.slack.com/archives/C09HN93T0G2/p1779687711496309) [insti-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1779687828660719) [isaac-clarification](https://mahifx.slack.com/archives/C09HN93T0G2/p1779688732310729)
 
 > [open] 2026-05-21 — TT FIX Production Stunnel certificate expiry — no Mahi reply
 > Client asked for update on TT FIX Production Stunnel cert expiry (raised via email); screenshot attached. Shyam Hari said he'd follow up. No further reply visible. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1779343214820379)
