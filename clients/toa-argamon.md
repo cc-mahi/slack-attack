@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-22T07:35:00Z
+last_catchup: 2026-05-25T07:29:32Z
 ---
 
 ## Status
@@ -73,8 +73,8 @@ last_catchup: 2026-05-22T07:35:00Z
 > [resolved] 2026-05-19 — TOA GUI Insti_light spread config error (JSON copy issue)
 > Elan raised the `CLIENT_PRICE_INSTI_LIGHT` spread config for XAUUSD failing to display in the TOA LDN GUI. James investigated and fixed — misconfigured `name` field in JSON (value copied incorrectly). Resolved same day. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779186517949549)
 
-> [open] 2026-05-21 — CP 104719 channel/profile classification difference query from Tom; awaiting Rory follow-up
-> Tom asked why CP 104719 was brokered for trade `012dr52qh1v` (A_CLIENTS_TOA / CATCHALL Dynamic-Broker) but internalised 12 minutes later for `012dr52qh3k` (A_CLIENTS / CATCHALL Dynamic-Don't B Book). Rory identified different channel classification as the driver. Tom followed up asking what drives the channel difference — no reply yet as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
+> [resolved] 2026-05-21 — CP 104719 channel/profile classification difference query from Tom; explained by Isaac
+> Tom asked why CP 104719 was brokered for trade `012dr52qh1v` (A_CLIENTS_TOA / CATCHALL Dynamic-Broker) but internalised 12 minutes later for `012dr52qh3k` (A_CLIENTS / CATCHALL Dynamic-Don't B Book). Rory identified different channel classification as the driver. Isaac Dann followed up 2026-05-22: both trades fell under the same profile, but CP 104719's 28-day yield is hovering near the rehab threshold — a single agent cycle (~few-hourly) can flip the classification. Order B landed in a 2.5-hour window where rehab had succeeded, then re-brokered afterwards. Tom confirmed resolved. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
 
 > [resolved] 2026-05-15 — HRP missing give-up (missing booking config on Toa)
 > Tom flagged HRP was missing Mahi's side of a give-up. James investigated — missing `connectivity.booking.bookingSystemRouting` config on Toa side (not sent). Tom asked HRP to book manually; James confirmed fix applied. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
@@ -134,6 +134,7 @@ last_catchup: 2026-05-22T07:35:00Z
 
 - Weekly P&L (w/c 2026-05-12): $5.9k from retail, caused by XAUAUD scalping by two new retail accounts (CPs 105988 + 105990, ~6 days old) — 106 small round-trips during FX twilight. Root cause: XAUAUD `arbProtectionParameters` was clamping the published quote into UBS's wide twilight spread instead of using the clean triangulated price. Fix: Shyam removed XAUAUD from arb protection rules; now using pure triangulated price. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
 - CP 90001948 XAUUSD scalp event (2026-05-18): New counterparty, first day on platform — sold 600oz in 10 fills (300oz clips), net flat by end of day, left Mahi long through the drop. $4k PnL drop. Picked up as SIGNAL_FOLLOW+BROKER for auto-broker routing. Daria noted a few other similar-pattern traders and flagged RI consideration. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019)
+- XAUUSD routing rehab-loop risk flagged (2026-05-25): Daria noted that routing toxic XAUUSD flow to Toa (wider spreads, passive hedging) improves yields, which causes those CPs to lose their toxic classification and get re-internalised on tight spreads — where they become toxic again. Cycle repeats. Proposed fix: static brokering list for metals, or a harder rehabilitation barrier. Daria plans to split FX and metals classifications on 2026-05-26 morning (per her message), at which point metal-specific changes can be made cleanly. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779681392035259)
 - XAUUSD tenant profile split planned: Daria plans to split metals and FX into separate tenant profiles so different flow classifications apply (most FX brokered flow is soft/can be internalised; XAUUSD flow is driving signal-follow and broker classifications incorrectly for FX). Requires moving positions from CLIENTS to CLIENTS_NYC. Targeting early w/c 2026-05-25. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779154472279389)
 - XAUUSD all-brokered-to-Toa mode active (2026-05-19): Daria moved all XAUUSD brokered flow to Toa (wider spreads, tougher LR, CME hedging). Controlled by multichannel config; easy revert by adding TOA-BROKER-XAUUSD counterparty list back to dynamic rules. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779151965234289)
 - Weekly P&L (w/c 2026-05-08): $7.5k from 402m; 222m internalised ($47/M), 180m brokered ($14/M); RoS 130%. Counterparties 928986 and 928994 moved back to internalise (blacklisted from broker routing — aggregate performance OK despite two bad weeks). Skew P&L recovered after EURUSD open arb loss. Shyam actively reviewing skew and mid improvements. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
