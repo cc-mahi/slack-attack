@@ -12,10 +12,17 @@ key_people_overrides:
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
-last_catchup: 2026-05-22T07:35:00Z
+  - {name: "Karam", role: "IC Markets — queries execution profiles and Echo dashboards; first name only seen", confidence: low}
+last_catchup: 2026-05-25T07:20:48Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-22 — Trade rejection/cancellation query from Michalis; logs expired, root cause untraced
+> Michalis (IC side) asked why a trade from 2026-05-14 was rejected/cancelled (image shared). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1779435759721649) Rory King investigated: order was cancelled because time-in-force was sent as GTC. Michalis pushed back — the requested price was available at the time. Rory dug further but could not find the trade in Mahi's system, and logs for May 14 had since expired. Advised IC to report similar occurrences promptly so the workflow can be traced in real time. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1779446588534029) No further follow-up in window.
+
+> [resolved] 2026-05-22 — Tag 7902035 LR resistance: machine-gunning orders to avoid VWAP spread
+> Karam (IC side) asked whether Mahi switches accounts automatically between execution profiles, referencing tag 7902035. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1779457354165619) Will Carter explained classification-based liquidity depletion rules; Cameron Hughes confirmed tag 7902035 is not on the classified depletion list but is subject to default LR rules. Tag was machine-gunning orders in milliseconds to avoid paying VWAP spread — system applied LR as protection. Chart of LR relative to trading behaviour shared. IC acknowledged. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1779475924502669)
 
 > [resolved] 2026-05-08 — IC requested updated toxic execution account list; Cameron Hughes shared ~170-account list in-thread
 > Kyriakos (IC side) asked for the latest list of accounts in toxic execution. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1778260250029739) Cameron Hughes replied with the full list in-thread (~170 account IDs, including 1000137974); IC acknowledged. No follow-up action outstanding.
