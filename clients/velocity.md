@@ -9,10 +9,13 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-22T07:13:40Z
+last_catchup: 2026-05-25T07:15:24Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-25 — XAGUSD twilight slippage: WSS 50c cap too tight; widen + indicative mode approved
+> At 04:34 BST (2026-05-24T22:04 UTC open), only UBS was pricing XAGUSD; CLIENT_PRICE_LDN spreads stayed wide (~UBS) but WSS spread cap was 50c, causing published price to be significantly tighter than model — end clients were filled on the wider model price, not the published price. Spreads reached over $10 at peak (XTX started posting one-sided tighter offers but couldn't be referenced in MWMS, so model widened to UBS; later orders were brokered to XTX). A-book booked +$6k on the session. Daria flagged the config gap in both channels at 04:33–04:34 BST and proposed: widen the WSS max-spread cap to ~$3 and switch to indicative mode during TWILIGHT / SNGMON / ROLL timezones. Will approved at 07:59 BST ("good to go ahead and max that change"); Richard confirmed by 08:07 BST ("double holiday, I think we will get away with it"). [internal](https://mahifx.slack.com/archives/CPDS0M2KF/p1779680045769979) [client channel](https://mahifx.slack.com/archives/C05NB72AGR2/p1779680032824609) [approval](https://mahifx.slack.com/archives/CPDS0M2KF/p1779692374004739)
 
 > [resolved] 2026-05-18/19 — NWM_HSBC FIX session disabled deliberately; re-disabled after failed logon
 > On 2026-05-18 at 21:30 UTC, Velocity's VELBINT099HS sessions (`-order` and `-price`) received "Credentials disabled" logout on every logon attempt. Shyam Hari raised at 22:53 BST. On 2026-05-19 at 08:46 BST, Will confirmed this is deliberate — Mahi has disabled VELBINT099HS for the time being; once re-enabled, standard tests will precede going live. Closes the 2026-05-11 open item of the same name (same root cause, now confirmed intentional). [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779141221.927319) [resolution](https://mahifx.slack.com/archives/C05NB72AGR2/p1779176783.793769)
@@ -64,6 +67,8 @@ last_catchup: 2026-05-22T07:13:40Z
 
 ## Notable topics
 
+- 2026-05-25 — Admin server outage at ~04:35 BST causing missing YPs and stats (P&L and VaR) this morning. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779680110033559)
+- 2026-05-25 — Will Carter flagged need for a WSS spread skill to benchmark spreads cross-network with particular focus on metals open (cross-client comparison + actual market benchmarking). [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779692655173109)
 - 2026-05-11 — Hybrid hedger PnL backstop + longer pull-away — design doc posted by Will Carter. Two-rule hybrid setup: (1) primary dynamic fasthedge with extended pull-away (`minPullAwayPeriodMs: 60000, maxPullAwayPeriodMs: 300000`, IFMS signal); (2) top-priority `VAR-CLEARANCE` backstop using `OwnTradingPerformancePredicate` (inverted: `maxPnlInBase: -1000`, 30s lookback) + `VarTrigger` to cannon-flatten when book is down ≥$1k in last 30s. Seven open questions before backtest (RelativeRisk JSON shape, VaR% reference, monitorParty value, realised-vs-unrealised PnL, IFMS signal direction, re-arm behaviour, backtest harness). Five-phase rollout: config verify → Compass backtest → shadow mode → live conservative → tune. James (MahiMain) offered to add `OwnTradingPerformanceTrigger` to HEDGING service type as Plan B. Pre-backtest, not yet deployed. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778501713.503449)
 - 2026-05-11 — Arb hedger bounced to increase clip size; Will noting possibility of RI. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778502648.313889)
 - 2026-05-10 — Nathan Burch removed USDCNH from SIGNAL-PROXY list and added `riskReportingExtended` override on marketInstruments reference config. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778397244.340729)
