@@ -11,16 +11,22 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-05-22T07:35:00Z
+last_catchup: 2026-05-25T07:12:06Z
 ---
 
 ## Status
 
-- **Stage:** onboarding — Centroid/LMAX integration underway; first LMAX test trades executed 2026-05-21 (EURUSD + XAUUSD confirmed both sides).
+- **Stage:** onboarding — Centroid/LMAX integration underway; first LMAX test trades executed 2026-05-21 (EURUSD + XAUUSD confirmed both sides); LMAX sessions test-only as of 2026-05-25 (no live flow yet).
 - **Integration:** LDN trading + admin (LD5), Athena `basemarkets_ldn`, distribution via CLIENT_PRICE_LDN / CLIENT_PRICE_BETA_LDN / DISTRIBUTION_LDN / DISTRIBUTION_SYNAPSE_LDN. FIX API available; no margin / credit checking yet.
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [resolved] 2026-05-24 — BTCUSD pricing dropped after scheduled restarts (~04:45 UTC)
+> Client reported BTCUSD stopped streaming on BaseMarkets MT5 from Mahi GW. Justin Young (Mahi analytics) initially flagged admin server procs down; separately noted BTCUSD feed from Scope hadn't recovered. Justin forced reconnect on the session; feed came back up same morning (~11:07 BST). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779598899205419) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779617214773509)
+
+> [resolved] 2026-05-25 — XAUUSD internalise execution rules tightened to max 10oz
+> Daria Horton switched XAUUSD internalise ERs for both Rev share and A book to max 10oz, at Kate Stagg's request. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779681118400689)
 
 > [open] 2026-05-06 — Tegis MT4/MT5 dual-platform: Centroid workaround adopted, MT5 drop-copy on roadmap with no ETA
 > Originally: EA on MT4 requires zero-spread exact-fill; Scope MT5 handles real execution. Compass had no lever on fill price. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778162773664489) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778174905149009)
@@ -58,4 +64,6 @@ last_catchup: 2026-05-22T07:35:00Z
 - 2026-05-18 — Centroid/Mahi maker session confirmed connected (Aytugan). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779081321195119)
 - 2026-05-13 — Client requested group codes added: real\USD-MU-SD-KAJ-X, real\USD-MU-SD-KAJ-R, real\USD-MU-SD-KAJ-S; Kate Stagg confirmed. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778666314632929)
 - 2026-05-12 — Client requesting call with FastMT today (12–2pm or after 5pm UK) to discuss Tegis setup; unanswered as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778570575730699)
+- 2026-05-25 — New group code `real\USD-MU-RZ-020-X` added by Isaac Dann, confirmed mapped to B_CLIENTS book. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779680278819859)
+- 2026-05-24 — Justin Young (analytics) asked whether LMAX sessions are supposed to be down; Daria confirmed LMAX is still test-only (test trades run last week). [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779612044805469)
 - 2026-04-29 — Alex happy with report; Tegis onboarding underway, ~2 weeks until flow starts hitting Compass. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777467956510609)
