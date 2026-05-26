@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-25T07:23:30Z
+last_catchup: 2026-05-26T07:22:14Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-25 — Routine Medium + Heavy LR adds: Centroid_3592839, Centroid_3584900, Centroid_2145765047
+> Trading Ops requested Centroid_3592839 → Medium LR and Centroid_3584900 → Heavy LR (17:15 BST); Will actioned and confirmed at 17:37. A follow-up request (17:55) added Centroid_2145765047 → Heavy LR; Will confirmed at 17:57. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779725727768249) [Centroid_2145765047 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1779725743150279)
 
 > [resolved] 2026-05-22 — Routine Heavy LR adds: 5 CPs (Centroid × 4 + 86049024 all-tags)
 > Three batches actioned: (1) Centroid_2145765249 + Centroid_2145765047 → Heavy LR (09:04 BST, Rory King actioned). (2) Centroid_3600297 + Centroid_3600376 → Heavy LR (13:12 BST, Will Denny actioned). (3) 86049024 → Heavy LR all-tags: Live06_MT4__86049024, live06_CN_plus_b_86049024, 86049024 (15:38 BST, Rory King actioned). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779437067.518599) [3600297/3600376](https://mahifx.slack.com/archives/C022S6NL82D/p1779451975.132409) [86049024](https://mahifx.slack.com/archives/C022S6NL82D/p1779460690.556689)
