@@ -18,10 +18,13 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-25T07:28:34Z
+last_catchup: 2026-05-26T07:22:16Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-25 — XAGUSD SI limit orders expiring: IC exclusive routing + tight limits
+> Andreas (Rostro, cpty `221_0_n/a`) flagged multiple XAGUSD limit-sell orders (50oz, limits ~77.903–77.919, GTC) all returning EXPIRED via Scope-X-SI-Orders around 14:06 UTC. Will Denny and Daria investigated; Daria's diagnosis: orders hit an execution rule that routes to IC, but IC quotes were too wide relative to the submitted limit prices, causing EXPIRED on each attempt. Daria asked whether to re-route these orders to a different brokering pool — no Rostro response yet. Likely consequence of the 2026-05-19 XAGUSD-to-IC-exclusive change: with only IC available for XAGUSD SI hedging, tight limits expire when IC is momentarily wide. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779732486346569) [Daria diagnosis](https://mahifx.slack.com/archives/C08AQKRU953/p1779741301402989)
 
 > [resolved] 2026-05-24 — Scope-X-FA-Orders: logon with incorrect password (asterisks sent instead of password)
 > Isaac flagged that the FA-Orders FIX session received a logon request with password `*********` (asterisks only), while the FA-Prices session connected successfully with the correct credentials. Rostro checked, replied "should be fine now" ~11 minutes later. No Mahi config change needed; likely a client-side credential-store issue. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779656751291069) [client ack](https://mahifx.slack.com/archives/C08AQKRU953/p1779657262433139)
