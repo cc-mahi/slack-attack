@@ -9,10 +9,13 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-25T07:15:24Z
+last_catchup: 2026-05-26T07:18:02Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-26 — Passive orders appearing in VELOCITY feed — self-referential pricing risk
+> Daria raised at 04:03 BST: Mahi is currently pricing relative to the VELOCITY feed it receives from the client. If Mahi's passive orders end up TOB on that feed, the model would be pricing relative to its own quotes. No reply yet. Proposed mitigations: set up a passive pricing model, or use individual LP feeds in aggregation as the base instead of the client feed. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779764605203909)
 
 > [resolved] 2026-05-25 — XAGUSD twilight slippage: WSS 50c cap too tight; widen + indicative mode approved
 > At 04:34 BST (2026-05-24T22:04 UTC open), only UBS was pricing XAGUSD; CLIENT_PRICE_LDN spreads stayed wide (~UBS) but WSS spread cap was 50c, causing published price to be significantly tighter than model — end clients were filled on the wider model price, not the published price. Spreads reached over $10 at peak (XTX started posting one-sided tighter offers but couldn't be referenced in MWMS, so model widened to UBS; later orders were brokered to XTX). A-book booked +$6k on the session. Daria flagged the config gap in both channels at 04:33–04:34 BST and proposed: widen the WSS max-spread cap to ~$3 and switch to indicative mode during TWILIGHT / SNGMON / ROLL timezones. Will approved at 07:59 BST ("good to go ahead and max that change"); Richard confirmed by 08:07 BST ("double holiday, I think we will get away with it"). [internal](https://mahifx.slack.com/archives/CPDS0M2KF/p1779680045769979) [client channel](https://mahifx.slack.com/archives/C05NB72AGR2/p1779680032824609) [approval](https://mahifx.slack.com/archives/CPDS0M2KF/p1779692374004739)
@@ -67,6 +70,7 @@ last_catchup: 2026-05-25T07:15:24Z
 
 ## Notable topics
 
+- 2026-05-26 — IFMS-B signal adjustment deployed to prod; prior skew signals stripped. Daria observed in beta, activated in prod at 03:57 BST. IFMS (flow-only signal) chosen to avoid over-activity; IFMS-B broker-classified multiplier set to 1 (defensive only). Adjustment range: 2–5c on main channel, 1–3c on B channel; slightly elevated in ROLL and TWILIGHT timezones. Disable path: remove IFMS-B block from signalAdjustmentParameters. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779764276140809)
 - 2026-05-25 — Admin server outage at ~04:35 BST causing missing YPs and stats (P&L and VaR) this morning. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779680110033559)
 - 2026-05-25 — Will Carter flagged need for a WSS spread skill to benchmark spreads cross-network with particular focus on metals open (cross-client comparison + actual market benchmarking). [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779692655173109)
 - 2026-05-11 — Hybrid hedger PnL backstop + longer pull-away — design doc posted by Will Carter. Two-rule hybrid setup: (1) primary dynamic fasthedge with extended pull-away (`minPullAwayPeriodMs: 60000, maxPullAwayPeriodMs: 300000`, IFMS signal); (2) top-priority `VAR-CLEARANCE` backstop using `OwnTradingPerformancePredicate` (inverted: `maxPnlInBase: -1000`, 30s lookback) + `VarTrigger` to cannon-flatten when book is down ≥$1k in last 30s. Seven open questions before backtest (RelativeRisk JSON shape, VaR% reference, monitorParty value, realised-vs-unrealised PnL, IFMS signal direction, re-arm behaviour, backtest harness). Five-phase rollout: config verify → Compass backtest → shadow mode → live conservative → tune. James (MahiMain) offered to add `OwnTradingPerformanceTrigger` to HEDGING service type as Plan B. Pre-backtest, not yet deployed. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1778501713.503449)
