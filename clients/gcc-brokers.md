@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Nael", role: "client trading ops", confidence: low}
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
-last_catchup: 2026-05-25T07:20:46Z
+last_catchup: 2026-05-26T07:05:02Z
 ---
 
 ## Recent issues
