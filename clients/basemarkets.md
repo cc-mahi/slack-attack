@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-05-25T07:12:06Z
+last_catchup: 2026-05-26T07:12:30Z
 ---
 
 ## Status
@@ -21,6 +21,9 @@ last_catchup: 2026-05-25T07:12:06Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [resolved] 2026-05-25 — Trade routed to Scope A unexpectedly; execution rules fixed same day
+> Client (anonymous guest) reported at ~09:44 UTC that a trade went through to Scope A. Daria Horton flagged to Kate Stagg at 20:15 UTC to investigate; by 20:38 UTC Daria confirmed Kate had "sorted the execution rules". No further detail in channel on which rule was misconfigured; likely related to the XAUUSD ER tightening applied the same day (max 10oz internalise). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779702282678919) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779741510024939)
 
 > [resolved] 2026-05-24 — BTCUSD pricing dropped after scheduled restarts (~04:45 UTC)
 > Client reported BTCUSD stopped streaming on BaseMarkets MT5 from Mahi GW. Justin Young (Mahi analytics) initially flagged admin server procs down; separately noted BTCUSD feed from Scope hadn't recovered. Justin forced reconnect on the session; feed came back up same morning (~11:07 BST). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779598899205419) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779617214773509)
