@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-05-25T07:08:57Z
+last_catchup: 2026-05-26T07:05:02Z
 ---
 
 ## Recent issues
