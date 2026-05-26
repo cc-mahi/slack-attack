@@ -14,7 +14,8 @@ key_people_overrides:
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
-last_catchup: 2026-05-25T07:29:32Z
+  - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
+last_catchup: 2026-05-26T07:24:32Z
 ---
 
 ## Status
@@ -24,6 +25,9 @@ last_catchup: 2026-05-25T07:29:32Z
 - **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
 
 ## Recent issues
+
+> [open] 2026-05-25 — EURZAR/USDZAR pricing 25-min late start; all configured LPs dark 21:00–21:30 UTC; LP set expansion proposed
+> William (Argamon) raised that EURZAR and USDZAR ticks were missing from 21:00–21:30 UTC on 2026-05-25, causing ~25-min delayed pricing start. Shyam confirmed all 5 configured LPs (LMAX_DIRECT_NY_RETAIL, XTXM_RCTV_HRP_2, GTSX_RCTV_HRP_1, NWM_RCTV_HRP_1, HSBC_RCTV_HRP_1) were dark for USDZAR during that window, making pricing indicative until ticks resumed at 21:30; EURZAR also affected (triangulated off USDZAR). Shyam proposed adding DB_RCTV_NWPB_1, COMZ_RCTV_NWPB_1, UBS_RCTV_HRP_1, UBS_RCTV_NWPB_1 to the formation — awaiting Argamon/William response. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779745720146389)
 
 > [open] 2025-07-14 — Reactive Markets slow-consumer / Beeks connectivity recurring
 > Argamon raised Reactive connectivity issue with Beeks; hour-long phone call before Beeks escalated to L2, then fixed almost instantly on escalation. Same class of issue had been seen earlier (Reactive slow consumer persisting after Beeks cross-connect applied). Reactive production go-live is in progress (Arun handling; UAT test trades passed 2025-06-30; production test trades underway as of 2025-07-01). GTS Reactive markets added to hybridHedger1 non-LP-reducing rules 2025-07-14. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752458081221389)
