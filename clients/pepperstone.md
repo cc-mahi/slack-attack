@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-25T07:23:32Z
+last_catchup: 2026-05-26T07:22:15Z
 ---
 
 ## History
@@ -100,8 +100,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Recent issues
 
-> [open] 2026-05-25 — XBT arb classification lag: CPs 1350472/1350482 not caught in time; backgroundJobs cap bumped, real-time detection in dev
-> Gabriel (Pepperstone) flagged that CPs 1350472 and 1350482 (same underlying ID) were arbing XBTUSD and weren't auto-classified quickly enough — both confirmed arbers per the params but weren't caught until they'd already cost spread P&L. Shyam explained the backgroundJobs classifier ranks CPs by PnL and checks only the top-N worst performers (was 1k, now bumped to 10k crypto / 35k FX). CPs that only recently became large arbers fall outside the cap until they breach the threshold. Shyam confirmed new real-time arb detection code is in dev for a future release. Thread still active at 03:26 BST 2026-05-25. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779466071252189)
+> [resolved] 2026-05-25/26 — XBT arb classification lag + false rehabilitations: CP 1350468 caught too late; goodCheck tightened
+> Initial report (2026-05-22): CPs 1350472/1350482 arbing XBTUSD not caught in time; backgroundJobs cap bumped to 10k crypto/35k FX (was 1k). 2026-05-25: Gabriel flagged CP 1350468 had traded 7–8m BTC volume with yield -39.75 USD/M, only 1.5% routed to Dynamic Arbitrageurs. Shyam diagnosed root cause: CP was repeatedly being rehabilitated after arb classification — goodCheck was too loose, causing it to oscillate between Dynamic Arb and Catch-All. Shyam proposed tightening goodCheck (analysis window 1d→7d, minYields0ms $5/M→$50/M). Gabriel approved; Shyam implemented changes 2026-05-26 03:46 BST. Real-time arb detection still in dev for a future release. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779466071252189) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779724276226539) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779763599444849)
 
 > [open] 2026-05-20 — Order 012dve37wwfin slippage under Dynamic Arbitrageurs; investigation ongoing
 > Reece flagged order 012dve37wwfin appeared to slip more than the channel should allow. Rory confirmed the order executed under the Dynamic Arbitrageurs execution profile and is still investigating whether the fill price was materially worse than the continuity pool price at the time. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779269797499599)
@@ -205,3 +205,6 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-22 — MK requested JMX IP whitelist for office IP 104.28.181.137; Nathan routing to Beeks (est. 10–30 min per Isaac). No confirmation yet in-thread. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779422554164899)
 - 2026-05-22 — Tom requested 4 IPs (50.16.243.246, 52.45.193.177, 54.145.122.46, 54.175.203.47) whitelisted for astro worker automations (test + prod) against Mahi DB host 192.81.110.208; Rory whitelisted same day, Tom confirmed access. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779444503985319)
 - 2026-05-22 — Isaac added `signalVariationPenalty: 4` to `flow-price-thresh` at crypto env to reduce spiky ticks on the flow signal. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779423087643319)
+- 2026-05-25/26 — Perpetual contracts scoping call: Isaac catchup with MK, Stephen, Diego. Perps across three envs — Oil (CFD), Bitcoin (Crypto), Gold (FX), all 24/7 with Hyper Liquid as LP (CLOB). Open question on passive hedging via OZ vs direct connectivity. Failover/continuity design needed (Crypto env proposed as backup for FX/CFD restarts). NYC CFD servers still pending. S3/classifications feature flagged for MK — Isaac noted Liam is owner but is away; flagged to analytics subteam. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779758966828729)
+- 2026-05-26 — MK requested Crypto JMX IP whitelisted (follow-up to 2026-05-22 FX JMX whitelist; no IP specified yet in thread). Daria acknowledged. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779752427539119)
+- 2026-05-26 — MK requested decommission of B_BOOK_RAZOR and A_BOOK_RAZOR channels — not proceeding with the dual split. No reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779754125791069)
