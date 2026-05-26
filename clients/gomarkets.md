@@ -12,13 +12,19 @@ key_people_overrides:
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-last_catchup: 2026-05-25T07:20:47Z
+last_catchup: 2026-05-26T07:18:05Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-25 — XAUUSD Monday open: clients filled on continuity pool at $40 spread — time-buffer config request
-> Will (GoMarkets) reported that during the volatile 2026-05-25 Sunday-night/Monday FX open, clients had orders triggered while CLIENT_PRICE_NYC was intermittently online, and filled on the continuity pool at a ~$40 XAUUSD spread. He asked whether a time buffer (e.g. 30s) could be applied so pricing doesn't publish until conditions stabilise on Monday opens. Isaac confirmed it can be set up; Will acknowledged. Config change not yet applied. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779686411933879)
+> [watching] 2026-05-26 — GAUUSD + GAUCNH new instruments blocked on adaptive mid fix
+> Isaac (post go-call) noted GAUUSD and GAUCNH need a weekend release to ship. Currently blocked on an adaptive mid fix (Zendesk ticket #22989) — Mahi doesn't want to ship that into Go broken given how reliant the current setup is on adaptive mid. No ETA stated. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779754554652629)
+
+> [watching] 2026-05-26 — Lead-lag analysis requested on IG as Go LP
+> Isaac flagged post go-call that IG's pricing is "horrible generally" and wants a lead-lag analysis to quantify how bad. No analysis produced yet. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779754554652629)
+
+> [resolved] 2026-05-25..26 — XAUUSD Monday open: clients filled on continuity pool at $40 spread — time-buffer config applied
+> Will (GoMarkets) reported that during the volatile 2026-05-25 Sunday-night/Monday FX open, clients had orders triggered while CLIENT_PRICE_NYC was intermittently online, and filled on the continuity pool at a ~$40 XAUUSD spread. He requested a time buffer on Monday opens, and later also on other-day opens. Nathan implemented both: (1) Monday 30s buffer — price forced indicative from 17:00 America/NYT, enabled from 18:00:30; (2) all other days 5s buffer, enabled from 18:00:05. Config applied to both `pricing.forceIndicativeTimetable` and `distribution.node.forceIndicativeTimetable` on the XAUUSD override; the continuity pool price is also suppressed while the pricer is indicative. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779686411933879) [Nathan config note](https://mahifx.slack.com/archives/CNF3WPNSK/p1779760437392339)
 
 > [resolved] 2026-05-22 — Client-reported alert (image) resolved by Isaac within 30 min
 > Kieran (GoMarkets) posted a screenshot alert to the client channel at ~04:24 UTC asking "Does this need action?" — alert content is an image not readable in this context. Isaac (Mahi) responded "Hey, checking" and confirmed "Should be fixed now" by ~04:54 UTC. Likely related to post-EOD-restart monitoring (CLIENT_PRICE_RA internalisation or metals crosses — see entries below). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779423846233199)
@@ -57,6 +63,8 @@ last_catchup: 2026-05-25T07:20:47Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-26 — XAUUSD post-market-close rows in Athena (negative quantities): Will (GoMarkets) queried whether `marketdata_xauusd` rows with `transact_time` just after 21:00:00 UTC are invalid, noting FINALTO and CLIENT_PRICE_NYC both show such records with negative `bid/ask_quantity_2+` values. Isaac explained the Finalto quote may have been sent just before close and arrived after, with negative quantities possibly from volume cancellations. Thread not fully resolved — client acknowledged but no definitive answer on whether to filter these rows. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779770810056639)
 
 - 2026-05-22 — XAU-in-grams unit conversion query: Erik (GoMarkets) asked whether quoting XAU in grams would be live today (unit conversion: price ÷ 31.1035 per troy oz). Rory King (Mahi) acknowledged; William Denny (Mahi) confirmed 1 troy oz = 31.1035g. No Mahi action required — informational. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779447982866569)
 
