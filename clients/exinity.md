@@ -17,10 +17,13 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-25T07:18:25Z
+last_catchup: 2026-05-26T07:15:12Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-25 — NG indicative error while market closed
+> Mukhammad flagged an NG indicative error at ~21:38 UTC; noted market is closed and won't reopen until 22:00 UTC. Isaac acknowledged ("sure thing") immediately. No resolution confirmed in window. May be related to the ongoing Invast NG1 pricing issue (see 2026-05-17 entry). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779745115825149)
 
 > [resolved] 2026-05-24 — XBT `FORCE_INTERNALISATION: No Continuity Pool price` rejects
 > Samuel flagged XBT rejects with this error plus a pending uncleared error. Isaac diagnosed: the counterparty is classified as an arber and was being executed on the continuity pool, which only contains LMAX_WKND; LMAX_WKND went dark briefly, causing the rejects. Client got a fill at 21:06:04 UTC. Isaac cleared the error at ~22:17 UTC. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779656906405779)
