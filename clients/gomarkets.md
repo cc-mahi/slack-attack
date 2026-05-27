@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-last_catchup: 2026-05-26T07:18:05Z
+last_catchup: 2026-05-27T07:23:23Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-26 — B-book classification: ~10b/24b volume tagged "Don't BBook" — threshold tuned
+> GoMarkets (client, ~08:44 UTC) flagged the classification breakdown looks wrong: 24.07b total B-book volume over ~4 weeks, only 4b in "catch all" with ~10b sitting in "Don't BBook". Example: account 50030334 is a mobile trader with fine decay but tagged Don't BBook. Isaac (Mahi) acknowledged and investigated: the default Don't-BBook rehabilitation threshold was too high relative to typical yields vs average spread captured. He lowered the threshold and manually kicked off classification jobs to rerun. Client acknowledged and agreed to review tomorrow. No sign-off yet that the reclassification resolved the balance. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779781437238919) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779784316612839)
+
+> [resolved] 2026-05-26 — Gold not ticking at ~22:01 UTC — ISAM wide spreads, recovered within ~8 min
+> Will (GoMarkets) reported gold was not ticking at ~22:01 UTC. Nathan (Mahi) checked and by ~22:01 UTC Will had already seen it return. Isaac diagnosed: LP (ISAM) benchmarking was cutting in/out due to wide spreads — Invast publishing ~$3 wide; ISAM stabilising. Confirmed stable by ~22:09 UTC. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779832903422559) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779833333588649)
 
 > [watching] 2026-05-26 — GAUUSD + GAUCNH new instruments blocked on adaptive mid fix
 > Isaac (post go-call) noted GAUUSD and GAUCNH need a weekend release to ship. Currently blocked on an adaptive mid fix (Zendesk ticket #22989) — Mahi doesn't want to ship that into Go broken given how reliant the current setup is on adaptive mid. No ETA stated. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779754554652629)
