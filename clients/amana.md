@@ -14,10 +14,19 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-05-26T07:05:02Z
+last_catchup: 2026-05-27T07:06:55Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-27 — LMAX duplicate trade ID: XAGUSD hedge leg not processed
+> Isaac flagged at 07:34 BST that LMAX sent a duplicate trade ID (`69702275`) for a -250 XAGUSD hedge at 75.000 triggered 06:22 UTC — hedger received and processed the fill as 500 but Amana-side confirmation unclear. IoC limit order was 500 @ 75.00; only one leg processed. Isaac asked Nikos to confirm whether actual fill was 250 or 500; awaiting response. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779863644856789)
+
+> [open] 2026-05-27 — XAUFUT-M alerts: Nikos requesting disable
+> Nikos asked Mahi at 06:16 BST to look at XAUFUT-M alerts and disable them. GC6M expired same session (see expiry entry below) — likely related. No Mahi response in window. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779858981434719)
+
+> [resolved] 2026-05-26 — GC6M (gold futures) & BrentOil6N expiry: positions confirmed flat
+> Amana (Andrea) notified at 20:03 BST that GC6M and BrentOil6N expired; client closed all positions. Nathan Burch confirmed at 00:37 BST 2026-05-27: GC6M (XAUFUT-M) flattened in Compass; BrentOil6N was already flat. Clean expiry. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779822180834369)
 
 > [open] 2026-05-22 — FX hedger looping incident during test trading; retesting post bank holiday
 > During FX test trading on 2026-05-22, hybridHedger1 went into a buy/sell loop on USDCHF (and GBPUSD/EURUSD/EURCHF), spamming CMC_CENTROID with trades Amana had not sent — Karen flagged at 15:53 BST. Rory killed the hedger at 15:56, removed FX from hedger config. Root cause: quantity definitions for CMC_CENTROID FX were incorrect (sending sub-minimum order sizes, causing CMC rejections/loop); Will bounced hybridHedger1 at 20:22 to pick up corrected CMC_CENTROID FX quantityDefinitions. Open positions (EURUSD 2k, GBPUSD 1k, USDCHF 1k, EURCHF 1k) confirmed flat at CMC by 16:45 BST. UK bank holiday Monday 25 May; retesting FX from Tuesday. FX spreads (majors from Hadeel's CSV) uploaded; triangulated crosses pending. CMC FX minimum confirmed as 1,000 (Mohamed confirmed min+step = 1,000 at 18:47 BST). [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779461592026719)
@@ -166,3 +175,4 @@ last_catchup: 2026-05-26T07:05:02Z
 - 2026-05-22 — FX spreads for majors uploaded by Rory from Hadeel's CSV into CLIENT_PRICE_ABOOK_LDN (and CLIENT_PRICE_LDN per Hadeel confirmation); triangulated crosses still pending. FX hedging confirmed to CMC_CENTROID; no SwapFree FX expected by Nikos but workflow available if needed. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779444921689839)
 - 2026-05-22 — SIXX (silver spot) LP rejections at ~10:44 UTC: "Order rejected. Price is no longer valid" (OrdStatus=8) — Princess raised at 11:49 BST; Rory confirmed risk is covered and no immediate concern, investigating cancellation pattern. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779446923669939)
 - 2026-05-22 — hybridHedgerSwapfree1 bounced by Rory at 17:56 BST to revert unactioned profileDefinitions changes staged on 2026-05-21; precautionary good-order restart. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779469019812579)
+- 2026-05-26 — VaR spike ~$560k: cpty 8011028 sold then bought 5,000oz XAUUSD within 15s; risk covered within expected timeframes; A-book up ~$16k, skew PnL -$400 from that flow. Nikos was not at his desk. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779802471141379)
