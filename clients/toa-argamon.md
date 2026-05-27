@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-05-26T07:24:32Z
+last_catchup: 2026-05-27T07:27:31Z
 ---
 
 ## Status
@@ -25,6 +25,15 @@ last_catchup: 2026-05-26T07:24:32Z
 - **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
 
 ## Recent issues
+
+> [resolved] 2026-05-27 — CLIENT_PRICE_MARKET switched to CLIENT_PRICE_RETAIL_NYC; YP reval errors fixed
+> Daria switched the default client price market from `CLIENT_PRICE_NYC` to `CLIENT_PRICE_RETAIL_NYC` after YP (yield profile) reval failures — `CLIENT_PRICE_NYC` is the old insti pricing model and was causing `IllegalArgumentException: CLIENT_PRICE_NYC/GBPJPY unavailable` during reval processing. Fix applied in the early hours (01:54 BST). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779843264602109)
+
+> [watching] 2026-05-26 — HRP_CLIENTS_NET PnL drop alert (-$7.7k in 20 min); XAUUSD main contributor
+> PnLDropAlert fired on toa-argamon LDN HRP_CLIENTS_NET: PnL moved from $344,257 to $336,072 (−$7,686) between 11:19–11:39 UTC. Maten attributed to XAUUSD. No remediation action noted; monitoring only. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1779795816962169)
+
+> [resolved] 2026-05-26 — hedgerCBOE1 added to toa-argamon LDN
+> James added hedgerCBOE1 to the toa-argamon LDN configuration (alerts suppressed during change). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319)
 
 > [open] 2026-05-25 — EURZAR/USDZAR pricing 25-min late start; all configured LPs dark 21:00–21:30 UTC; LP set expansion proposed
 > William (Argamon) raised that EURZAR and USDZAR ticks were missing from 21:00–21:30 UTC on 2026-05-25, causing ~25-min delayed pricing start. Shyam confirmed all 5 configured LPs (LMAX_DIRECT_NY_RETAIL, XTXM_RCTV_HRP_2, GTSX_RCTV_HRP_1, NWM_RCTV_HRP_1, HSBC_RCTV_HRP_1) were dark for USDZAR during that window, making pricing indicative until ticks resumed at 21:30; EURZAR also affected (triangulated off USDZAR). Shyam proposed adding DB_RCTV_NWPB_1, COMZ_RCTV_NWPB_1, UBS_RCTV_HRP_1, UBS_RCTV_NWPB_1 to the formation — awaiting Argamon/William response. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779745720146389)
