@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-26T07:05:02Z
+last_catchup: 2026-05-27T07:15:54Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-27 — $30k skew P&L drop on XAUUSD market open; MAHI_LP_11 sole reference price $10 below client LPs
+> Daria Horton reported a ~$30k skew P&L drop on XAUUSD at the LDN open. MAHI_LP_11 (retail feed from Toa Args LDN) was the sole reference price and was up to $10 below StarPrime's LPs for a period; prices eventually re-aligned. LP pricing was chaotic generally — spiky behaviour in early part attributed to CBOE_HR_LDN issues (Invast and Velocity affected similarly); later portion was smooth. Daria noted RBI_5182_60000 is now classified as an arbitrageur. No resolution or further action stated in thread; Daria posted top-of-book Echo links for context. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1779851154348779)
 
 > [resolved] 2026-05-07 — Limit order cancellations due to Arbitrageur misclassification of counterparty RBI_5036_LIVE-97F5F2
 > Umar Bin Aziz reported execution errors on limit orders (~11:20 BST). Rory King diagnosed: counterparty RBI_5036_LIVE-97F5F2 had been classified under the `BBOOK//Arbitrageurs` execution rule after a small number of trades; limit orders were being force-internalised on the continuity pool with markup, with fills breaching the limit price and cancelling. Umar requested removal; Rory blacklisted the counterparty from the Arbitrageurs profile at 12:03 BST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778151195430889)
