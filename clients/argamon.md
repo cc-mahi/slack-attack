@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-05-26T07:09:19Z
+last_catchup: 2026-05-27T07:12:25Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-05-26T07:09:19Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [resolved] 2026-05-27 — YP reval errors fixed: CLIENT_PRICE_NYC → CLIENT_PRICE_RETAIL_NYC
+> Daria switched the default client price market from CLIENT_PRICE_NYC to CLIENT_PRICE_RETAIL_NYC after YP (yield profile) reval jobs were throwing `IllegalArgumentException: CLIENT_PRICE_NYC/GBPJPY unavailable`. CLIENT_PRICE_NYC is the legacy insti model — wrong reference for retail. Fix applied ~02:00 BST 2026-05-27. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779843264602109)
 
 > [open] 2026-04-30 — Retail pricing degradation: wide spreads on majors / LR on retail published rate
 > 2025-05-01: client (Tom) flagged majors 20-tick wide for ~2 hours. Will Carter identified LR was kicking in on the published rate and removed it from published. Separately Amir bounced retail pricers to include FSS markets and replace MWMS/BMSL. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1746108590467959)
