@@ -17,10 +17,19 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-26T07:15:12Z
+last_catchup: 2026-05-27T07:18:13Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-27 — Starfish process error (no client impact)
+> Samuel flagged an error for Starfish at ~03:35 UTC; Shyam acknowledged and had the process back up within ~38 minutes. No client impact confirmed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779852915812469)
+
+> [open] 2026-05-26 — ROCO tags enablement in Compass — n/a suffix risk warning
+> Louie asked whether enabling tags in Compass for ROCO is safe, following the 2026-05-20 incident where tags caused the n/a suffix corruption. Rory confirmed Mahi hasn't changed anything on their side; flagged that if Exinity sends tags with the n/a suffix again, the same SI book risk-splitting issue would recur. Rory advised ensuring riskSplitting config counterparty tags match exactly what Mahi will receive. No client confirmation of how they plan to proceed as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779806405563359)
+
+> [open] 2026-05-26 — UBS_SW_WB connections status unknown
+> George Moore queried the status of UBS_SW_WB connections (screenshot attached). Will Denny said they'd check and revert. No further update in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779792148732949)
 
 > [open] 2026-05-25 — NG indicative error while market closed
 > Mukhammad flagged an NG indicative error at ~21:38 UTC; noted market is closed and won't reopen until 22:00 UTC. Isaac acknowledged ("sure thing") immediately. No resolution confirmed in window. May be related to the ongoing Invast NG1 pricing issue (see 2026-05-17 entry). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779745115825149)
@@ -44,7 +53,7 @@ last_catchup: 2026-05-26T07:15:12Z
 > Samuel Ewebiyi reported no pricing from Invast for NG1 despite Invast confirming they were sending. Nathan Burch picked it up. No resolution confirmed in thread. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779056584038339)
 
 > [watching] 2026-05-12 — Wagyu XAUUSD spreads recurring wide (arb protection / MWMS config)
-> Recurring: wide spreads (50-60c) reported 12-May, 14-May, 20-May (arb protection widening), and again 24-May (Mukhammad flagged widening; Isaac diagnosed no arb config component and adjusted MWMS settings to target 35c). Root cause varies: arb protection off reference markets (UBS/360T/Sucden) during twilight, and separately a widening contribution from an MWMS arb-config gap. Daria/Nathan applied buffers on earlier occurrences; Isaac adjusted on 24-May. No permanent fix agreed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899)
+> Recurring: wide spreads (50-60c) reported 12-May, 14-May, 20-May (arb protection widening), 24-May (Isaac adjusted MWMS to target 35c), and again 26-May post market open (Mukhammad flagged; Daria adjusted MWMS config; spreads stabilised ~23:35 UTC, Mukhammad confirmed "looking much better"). Daria suggested a higher-level model review so config is designed to consistently meet the 35c target; Mukhammad said they'd discuss with the team and revert. No permanent fix agreed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899) [26-May flare](https://mahifx.slack.com/archives/C0456LSHQQK/p1779834170693399)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
 > Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
@@ -156,3 +165,4 @@ last_catchup: 2026-05-26T07:15:12Z
 - 2026-05-19–21 — Multiple yield simulation runs: Keshav (CentFX/Revshare, delivered 14-May); Christian/Roco dataset (delivered 20-May); Matt Set A (delivered 19-May, looks good); Matt Set B (negative aggregate spread yield flagged by Kate, under review); Louie dataset (in progress with Rory as of 21-May). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778825885046719)
 - 2026-05-19–21 — Rory invited Louie/Christian/Matthew to a call to walk through running yield sims via Echo independently; Matthew accepted for Wednesday 2pm UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779103440726729)
 - 2026-05-20 — Will Carter noted Exinity haven't communicated their planned system changes (the tagging restart) proactively — flagged desire to sit down with them to understand their roadmap. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779262620774479)
+- 2026-05-26 — Quarterly steering meeting pencilled in for Wed 10 June. Nicola suggested a pre-Cyprus catch-up with Nick (Exinity) beforehand (less formal, "lunch thing"); Will agreed. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779792272029039)
