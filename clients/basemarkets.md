@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-05-26T07:12:30Z
+last_catchup: 2026-05-27T07:18:10Z
 ---
 
 ## Status
@@ -21,6 +21,9 @@ last_catchup: 2026-05-26T07:12:30Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-05-26 — Tegis Centroid test trades: tag 1 (tradingAccount) missing; flow misrouted to Scope A; hedger not clearing
+> Client (Tegis/Centroid) hit `INVALID_ORDER FIELD_VALIDATION_ERROR {tradingAccount=MISSING_VALUE}` on FIX orders via BaseMarketsCentroidOrders session. Cameron Hughes diagnosed: Centroid wasn't sending tag 1 — Mahi needs it to route to the correct Compass trading account. Centroid team clarified they can pass the MT4 login or group as tag 1; Mahi (Cameron Hughes) confirmed any fixed value acceptable and suggested CENTROID/TEGIS_CENTROID. Test trade with tag 1 = "55" (MT4 account number) went through but initially hit LIQUIDITY_POOL_LDN (Scope A) instead of the Compass-managed Tegis book → LMAX — execution rules didn't recognise account 55. Cameron Hughes updated ERs to internalise in the Tegis book; flow then managed correctly. However the hedger failed to clear the small residual risk; Cameron Hughes asked client to close the test trade while investigating. Client closed trades ~19:00 BST 2026-05-26; client requested another test trade 06:48 UTC 2026-05-27 — Mahi not yet responded in channel as of run time. Open issues: (a) tag 1 value needs confirming for all future Tegis accounts beyond "55"; (b) hedger not clearing investigated but unresolved. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779785262352929) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779785464676889) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779860920465209)
 
 > [resolved] 2026-05-25 — Trade routed to Scope A unexpectedly; execution rules fixed same day
 > Client (anonymous guest) reported at ~09:44 UTC that a trade went through to Scope A. Daria Horton flagged to Kate Stagg at 20:15 UTC to investigate; by 20:38 UTC Daria confirmed Kate had "sorted the execution rules". No further detail in channel on which rule was misconfigured; likely related to the XAUUSD ER tightening applied the same day (max 10oz internalise). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779702282678919) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779741510024939)
