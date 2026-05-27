@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-26T07:05:02Z
+last_catchup: 2026-05-27T07:15:54Z
 ---
 
 ## Status
@@ -17,6 +17,12 @@ last_catchup: 2026-05-26T07:05:02Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-05-26 — PnLDropAlert on Toa-argamon LDN: HRP_CLIENTS_NET down ~8.2k in 20 min, XAUUSD main contributor
+> Maten flagged a PnLDropAlert at 11:39 UTC: `HRP_CLIENTS_NET` fell -8,185 in 20 minutes (threshold -5,000/20min). Maten attributed it to XAUUSD in the follow-up. No intervention or resolution noted in thread. Related book to the hedgerHrpCME1 volume-breach pattern (see 2026-05-18 entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1779795816962169
+
+> [watching] 2026-05-26 — hedgerCBOE1 being added to Toa-argamon LDN
+> James announced adding hedgerCBOE1 to the Toa-argamon LDN instance; asked ops to ignore alerts during setup. https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319
 
 > [resolved] 2026-05-22 — Stork Oracle API token requested and provided (toa-nado-shared)
 > Nado asked if Mahi could get a Stork Oracle API token. Lee/James provided it promptly; Nado specified to use `stork-fast`. An oracle.yaml config file was shared in-thread. Likely preparatory for the Chaos→Stork oracle migration scheduled Thursday 22:30 UTC. https://mahifx.slack.com/archives/C09RGU1T1GE/p1779414775390839
