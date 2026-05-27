@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-26T07:22:14Z
+last_catchup: 2026-05-27T07:23:24Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-27 — XAUUSD spike at market opening: confirmed in line with LPs
+> Georgia reported a XAUUSD spike at market open (2026-05-27 ~22:00 UTC). Shyam Hari confirmed pricing was in line with LPs: continuity pool pricing from 22:00:45 UTC, all LPs dark until ~22:01:25 UTC when pricing resumed. Echo TOB chart shared. Georgia acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779841907096589) [Shyam reply](https://mahifx.slack.com/archives/C022S6NL82D/p1779845969225399)
 
 > [resolved] 2026-05-25 — Routine Medium + Heavy LR adds: Centroid_3592839, Centroid_3584900, Centroid_2145765047
 > Trading Ops requested Centroid_3592839 → Medium LR and Centroid_3584900 → Heavy LR (17:15 BST); Will actioned and confirmed at 17:37. A follow-up request (17:55) added Centroid_2145765047 → Heavy LR; Will confirmed at 17:57. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779725727768249) [Centroid_2145765047 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1779725743150279)
@@ -121,6 +124,7 @@ last_catchup: 2026-05-26T07:22:14Z
 
 ## Notable topics
 
+- 2026-05-27 — XAUUSD spike at market opening confirmed in line with LPs (continuity pool then LP dark until 22:01:25 UTC). Shyam confirmed and shared Echo TOB chart; Georgia acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779841907096589)
 - 2026-05-22 — Extra Heavy LR vol multiplier doubled again after CH judged $82/M initial performance "similar to usual heavy LR." Client still profitable on Mahi; Kate continuing to monitor. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779443052.045959)
 - 2026-05-21 — 23 CPs bulk-blacklisted from Arbitrageur profile across all books by Shyam Hari. Several trade in multiple books; confirmed scope "all books from Arbitrageur profile." [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779393504888779)
 - 2026-05-21 — US30 benchmarking update: spikes less frequent and smaller in magnitude post-change but still occurring. Mahi keeping market widening in place; Infinox asked to query LPs. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779381730655279)
