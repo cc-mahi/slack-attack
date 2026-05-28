@@ -9,10 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-27T07:20:55Z
+last_catchup: 2026-05-28T07:22:15Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-28 — GCQ6-AUG26 (Gold Aug) UAT TT resting orders reject — `Instrument not found`, flagged to dev
+> Andri reported GCQ6-AUG26 rejected in UAT TT resting orders with `Instrument not found by instrument_id=14347306835933645772`; FIX reject 39=4, tag 58. Isaac replied that GCQ6-AUG26 does look to be on the market and flagged with dev to investigate. No resolution yet. Continues the TT UAT SOW testing work (Scale POV). [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779943449938839) [isaac-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1779945540193219)
+
+> [resolved] 2026-05-28 — Surya FIX seq mismatch `Surya_Live_T→MahiFX_Live_T` — reset confirmed
+> Brandon (client) reported seqnum mismatch on `FIX.4.4:Surya_Live_T->MahiFX_Live_T`: session sent seqnum 11424 but Mahi expected 1. Isaac confirmed at 06:27 that the connection appeared logged in and the reset had already been made earlier. Brandon acknowledged. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779944517420659) [isaac-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1779946053563319)
 
 > [open] 2026-05-22 — JUMP_OZNY4_RETAIL_MARGIN_VT missing from XAUUSD TOB — EOD restart done but no price received
 > Andri reported 2026-05-21 that JUMP_OZNY4_RETAIL_MARGIN_VT cannot be seen on the TOB for XAUUSD and is generating a negative yield profile for cpty 89468356. Isaac confirmed 2026-05-22: trades land in drop-copy books, no XAUUSD positions in Compass. Root cause: XAUUSD not in the instrument subscription list for JUMP_OZNY4_RETAIL_MARGIN_VT on `senderCompID=MFX-IG_Q,targetCompID=ValuCY_Live_Q`. Isaac offered to add XAUUSD; EOD restart performed. 2026-05-27 05:42 Andri chased — Isaac confirmed at 05:51 that XAUUSD was subscribed but no price received from JUMP_OZNY4_RETAIL_MARGIN_VT. Current XAUUSD pricing in Echo comes from: LMAX_OZNY4_INSTI_NWPB_VT, JUMP_OZNY4_INSTI_NWPB_VT, EDGE_OZNY4_INSTI_NWPB_VT, COMM_OZNY4_RETAIL_NWPB_VT, CNX_OZNY4_INSTI_NWPB_VT — but not the RETAIL_MARGIN_VT variant. Andri asked if EOD restart was done; Isaac confirmed yes at 06:39. Issue unresolved — JUMP_OZNY4_RETAIL_MARGIN_VT still not feeding XAUUSD. INSTI_MARGIN_VT subscription request still pending clarification from Isaac ("How so?"). [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779363979231249) [isaac-diagnosis](https://mahifx.slack.com/archives/C09HN93T0G2/p1779433269964199) [isaac-instrument-list](https://mahifx.slack.com/archives/C09HN93T0G2/p1779687711496309) [insti-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1779687828660719) [no-price-received](https://mahifx.slack.com/archives/C09HN93T0G2/p1779857474916669) [eod-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1779860348385089)
@@ -81,6 +87,8 @@ last_catchup: 2026-05-27T07:20:55Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-05-28 — cpty 89468255 yield profile query — Isaac confirmed correct: client filled below mid, profiles evaluated against full market. Client sent Echo yield-profile link (valutrades.NYC, 2026-04-28→2026-05-27 window) asking team to advise. Shyam acknowledged; Isaac confirmed profiles are correct — client is being filled below mid and Mahi evaluates yield against the entire market, not just the execution market. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1779930298067129) [isaac-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1779931645060929)
 
 - 2026-05-05 — UAT Compass availability query: Graeme asked `@here` whether a functioning UAT Compass environment is available. Kate replied she would check; Liam noted a UAT environment exists and "we should be able to spin up whatever you need in fairly short order". No definitive confirmation in window. Bonnie flagged the unanswered question internally. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997434492069) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1777997877227319)
 
