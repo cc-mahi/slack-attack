@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-27T07:25:31Z
+last_catchup: 2026-05-28T07:28:13Z
 ---
 
 ## Recent issues
@@ -38,8 +38,8 @@ last_catchup: 2026-05-27T07:25:31Z
 > [open] 2026-05-05 — Client requesting hold-position analysis on internalised flow
 > Richard (or another client-side contact) asked at 11:32 BST: "on the flow we've internalised can we run some analysis on that to see what the outcome would have been if we held onto the position at different intervals? vs where it was hedged." William pointed at the Echo yield profiles for A_CLIENTS_PREMIUM (2026-04-28–2026-05-05) as the relevant data source. Client acknowledged at 13:00. Analysis not delivered in window. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777977153.873319)
 
-> [open] 2026-05-01 — Overnight losses, chunky position offside; LTD equity recovering
-> Client (Richard) flagged at 09:12: "looks like we took a hit overnight / spreads too tight?". Will had already posted Echo yield-profile link at 08:24 and pinged William Denny "need to look into this asap". William confirmed checking at 09:13. Will's read at 09:37: position went offside quickly, "sort of locked in that loss at 10-15 seconds"; told client to "trust the process a bit today, hopefully the yield quality evens out". Root cause (too-tight spreads vs chunky directional flow) under investigation — no resolution in window. 2026-05-07 update (internal): Will Carter: "LTD equity down 5k. Considerably better than last time round with improvements to come." [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777624588186949) [2026-05-07 update](https://mahifx.slack.com/archives/CPDS0M2KF/p1778147786077159)
+> [watching] 2026-05-01 — Overnight losses, chunky position offside; LTD equity recovering
+> Client (Richard) flagged at 09:12: "looks like we took a hit overnight / spreads too tight?". Will had already posted Echo yield-profile link at 08:24 and pinged William Denny "need to look into this asap". William confirmed checking at 09:13. Will's read at 09:37: position went offside quickly, "sort of locked in that loss at 10-15 seconds"; told client to "trust the process a bit today, hopefully the yield quality evens out". Root cause (too-tight spreads vs chunky directional flow) under investigation — no resolution in window. 2026-05-07 update (internal): Will Carter: "LTD equity down 5k. Considerably better than last time round with improvements to come." 2026-05-27 update: Richard asked in client channel "What can we get by way of analysis to show how and why we've turned the corner?" — implies P&L has recovered materially. Will noted as TODO and offered to present on a wider call. Formal analysis not yet produced. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777624588186949) [2026-05-07 update](https://mahifx.slack.com/archives/CPDS0M2KF/p1778147786077159) [turned-the-corner](https://mahifx.slack.com/archives/CPDS0M2KF/p1779882364987109)
 
 > [open] 2026-04-30 — Arb hedger reconfigured to breathe more; EOD hedger restart timed poorly
 > Will put changes into arb hedger at 16:57 to "let initial risk breathe more" and slowed the hybrid down. Hedger restarted at EOD — Will noted "wrong time to restart the hedger", PnL expected to fluctuate more. Feeds into 2026-05-01 overnight losses above. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1777564631716889)
@@ -70,6 +70,10 @@ last_catchup: 2026-05-27T07:25:31Z
 
 ## Notable topics
 
+- 2026-05-28 — Compass/Echo system run-through call completed (Nathan Burch recap) — covered compass dashboards (trading overview, book structures, order events, distribution channel, execution rules, hedger config), LR mechanics, Echo (client + external facing), and TOB. Team appeared positive; keen on LR and TOB. Nathan to grant compass/echo access to call attendees. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779931923362339)
+- 2026-05-28 — Isaac Dann asked (unanswered): `clientDistributionGateway2` uses the same ports as Gateway1 — is one redundant or is there a reason for both? No reply in window. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779935316273099)
+- 2026-05-27 — Richard Holman requested analysis showing "how and why we've turned the corner" — Will noted as TODO, said happy to present on a wider call but busy. Analysis outstanding. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779882364987109)
+- 2026-05-27 — Will Carter posted a photo (IMG_4672.png) labelled "For tomorrow" — no further context, content unknown. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779904143351689)
 - 2026-05-27 — Aussie team requested another system run-through — Daria flagged at 03:40 BST as a positive sign. No further context. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779849646898659)
 - 2026-05-26 — Passive pricing placement philosophy discussion in client channel — extended afternoon discussion (Richard / David Cooney / Will) on where Mahi is leaving passive interest (bid/offer/mid), how aggressive the logic should be, and whether being swept matters when the goal is risk reduction. David Cooney: "if we do a risk-decreasing trade and are immediately underwater by 2 pips we've destroyed the yield distribution — cut profits, running losses." Discussed whether targeting bid/offer or mid, and how much to "pay away" on risk-reducing trades. No resolution; Will: "we're working on it, it's an involved process." [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779807992149989)
 - 2026-05-26 — Xenfin drop copy confirmed working; yield profiles rendering properly. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779785577632999)
