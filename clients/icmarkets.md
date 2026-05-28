@@ -13,13 +13,16 @@ key_people_overrides:
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
   - {name: "Karam", role: "IC Markets — queries execution profiles and Echo dashboards; first name only seen", confidence: low}
-last_catchup: 2026-05-27T07:04:40Z
+last_catchup: 2026-05-28T07:11:27Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-25 — Crypto full licence contract: void received; cause unknown, Nicola following up with Compliance
-> Nicola Perikhanyan reported receiving a void on the crypto full licence contract (signed 2026-05-11) and asked internally if anything had happened over the weekend. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779706977026969) Will Carter and Cooney confirmed no trading or technical issues. Cooney's read: "either an error or first bud manoeuvre" — reserving judgement until facts emerge. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779708596585609) Nicola is following up with Compliance. No resolution in window.
+> [open] 2026-05-27 — XAU pilot extended to 30 June; performance review call + ramp-up plan agreed with Angus
+> Nicola had a call with Angus (IC) 2026-05-27 ahead of the 29 May pilot end. Key outcomes: XAU pilot extended to 30 June (from 29 May); IC cautious due to issues ~1.5 months ago and some client complaints (may need to tone down — under review); Pavlos Elpidorou now leading XAU on IC side (Angus still wants to stay involved); IC definitely want to continue Chinese flow; Mahi to walk IC through what a ramp-up would look like; performance review + vision-setting call to be arranged next week; pricing from previously-sent price list to be discussed at that call. No numbers discussed yet. Staircase Metals licence (incremental) floated internally as an option to propose later. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779877635.192489) Pending: performance-review call scheduling; formal new contract / rate negotiation.
+
+> [resolved] 2026-05-25 — Crypto full licence contract: void received; Compliance confirmed no issue, assumed error
+> Nicola Perikhanyan reported receiving a void on the crypto full licence contract (signed 2026-05-11) and asked internally if anything had happened over the weekend. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779706977026969) Will Carter and Cooney confirmed no trading or technical issues. Cooney's read: "either an error or first bud manoeuvre". [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779708596585609) 2026-05-27 update: Compliance finally responded — no issue acknowledged on the void notification; Nicola concluded it was an error and will assume that. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779867481.209329) Cooney confirmed "Ok great news." [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779883383.716819) Also: Nicola's call with Angus same day reported no indication of any issue on the crypto licence and no complaints from IC side.
 
 > [open] 2026-05-25 — Pavlos Elpidorou: XAUUSD replenishment config change + sweep detection query
 > Pavlos requested XAUUSD replenishment speed be reduced for default China flow from 1M per 2.5s to 500k per 2.5s. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1779718076784319) Will Denny confirmed the replenishment change was done. Pavlos also asked whether sweep detection is currently active on default and toxic groups. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1779718390582889) Nathan Burch replied (23:16 BST): LR is active on both default and toxic groups; toxic groups have harsher LR applied.
@@ -89,7 +92,9 @@ last_catchup: 2026-05-27T07:04:40Z
 - 2026-05-08: IC (Kyriakos) requested updated toxic execution account list; Cameron Hughes shared ~170 accounts including 1000137974.
 - 2026-05-14: IC is migrating MetaTrader servers to their secondary hub (live use, not just failover) — OZFIXTakerMahiFX secondary hub connection resolved by Nathan; MT server move completed EOD 2026-05-16 5pm NYC.
 - 2026-05-18: Dimitrios Lambrou (role unknown) joined the mahi-ic-markets channel.
-- 2026-05-25: Crypto full licence contract received a void; Nicola following up with Compliance. Cooney suspects error or deliberate IC manoeuvre — watching.
+- 2026-05-27: XAU pilot extended to 30 June following Nicola's call with Angus. Performance review + vision-setting call to be arranged next week. IC cautious, some client complaints, wants to step carefully — still committed to Chinese flow. Formal rate/contract negotiation deferred to post-review call.
+- 2026-05-27: Crypto full licence void confirmed as error; Compliance response received, no issue flagged. Cooney: "Ok great news."
+- 2026-05-25: Crypto full licence contract received a void; Nicola following up with Compliance. Cooney suspects error or deliberate IC manoeuvre — resolved 2026-05-27 (see above).
 - 2026-05-25: Cooney asked Andrew Morgan to prepare a "kick arse XAU report" urgently ahead of the XAU pilot trial end on 29 May. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779710063014049)
 - 2026-05-25: Will Carter confirmed BAU on the Slack channel (no trading or technical issues over bank holiday weekend).
 - 2026-05-21: Nia Rose posted bank holiday notice for 25 May; reduced Slack monitoring; emergency contact via support@mahimarkets.com or LN +44 203 397 1985 / NZ +64(3) 2880079. XAU pilot expires 29 May — approaching deadline for next negotiation.
