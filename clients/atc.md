@@ -7,16 +7,22 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-27T07:04:40Z
+last_catchup: 2026-05-28T07:08:50Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-27 — SHIUSD Compass book negative P&L: wide Finalto spreads + aggressive hedging
+> Cameron Hughes flagged Compass book performing badly (paying more spread than earning). Daria diagnosed: Finalto SHIUSD spreads (60c–80c) are double their XAUUSD spreads (30c–40c) and ~4x model spreads (16c–25c). Since the SHIUSD hedging fix on 2026-05-20 (post-SI switch-off), the backstop hedger fires immediately on any risk with constant qty trigger=1 — causing this week's net -$1,781 (received $2,635, paid $4,416). Yield profile is actually positive long-term (4x by 30s), so holding longer could reduce costs. Daria's SI-vs-Inv analysis shows hedging costs too high — options are: (a) hedge SHIUSD through XAUUSD and re-enable SI workflow (previously deprioritised), or (b) discuss raising spreads with ATC (noted as bad route given low volumes). No resolution in window. [internal analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1779941021519309) · [Cameron initial flag](https://mahifx.slack.com/archives/C046RNF64VD/p1779890363013439)
 
 > [open] 2026-05-22 — SHIUSD/FAUUSD residual position: flatten requested on Mahi and Finalto
 > David Manoukian (01:18 UTC) reported SHIUSD (FAUUSD) is completely flat on Spotex but a residual position remains on the Mahi system and Finalto — requested it be flattened. Shyam Hari acknowledged. No confirmation of execution in window. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779409080214819)
 
 > [resolved] 2026-05-11 — GBPUSD open loss $1.8k; Finalto TOB quantity mismatch; resolved via BMSL addition
 > At market open 2026-05-11, client 27072237 traded GBPUSD at a tighter-than-market spread: Finalto had dropped published quantity to 100k while the model was publishing 300k at TOB, leaving no LP reference at that size and triggering base spreads. Daria proposed four options; Malik's feedback led to option 3 — Daria added BMSL with `MAHI_BENCHMARK_LDN` as reference market on 2026-05-13. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778473221775049) · [Daria options reply](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778534112919499) · [internal TOB analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1778473279858959) · [BMSL added](https://mahifx.slack.com/archives/C046RNF64VD/p1778632572190249)
+
+> [open] 2026-05-27 — FAUUSD bad fills at 4444 area: LR applied due to burst of 57 orders in 46ms
+> David Manoukian reported a batch of FAUUSD orders (ref: 7959561907733 / TDE170987699043) filled at ~4444.00 at 08:18:58 EST on 2026-05-27. Nathan Burch investigated: counterparty 27072435 placed 57 market orders between 12:18:57.929–12:18:57.975 UTC (46ms), avg 30.85 oz each. Initial fills were on-market but volume consumed available liquidity; LR was applied to subsequent fills causing worse prices. LR is not included in published price. Investigation complete; no further action noted yet — resolution to be communicated to David. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779895485904019)
 
 > [open] 2026-05-08 — David Manoukian unable to access LN Compass admin portal after IP whitelisting
 > Despite IP `47.41.47.224` being whitelisted (Notable Topics 2026-05-08), David still couldn't reach `atc-ln-admin-1.96yb.prod.mahimarkets.com:8400`. Inald Gjoni ran diagnostics (Test-NetConnection + tracert to `46.235.34.67:8400`), results sent to Beeks. David suspected his own security configuration. No resolution confirmed in window. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778253602532909)
@@ -37,6 +43,10 @@ last_catchup: 2026-05-27T07:04:40Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-05-28 — Spotex Seychelles entity: second FIX session provisioned. Malik requested clarification on whether Mahi's feed can serve two simultaneous Spotex connections (for the new Seychelles entity Spotex is onboarding separately from the existing ATC UK setup). Isaac confirmed one connection per feed limit and immediately created a new `spotex_sc` account with matching FIX creds (Orders/MD on 149.5.84.234 ports 9011/9010). Justin clarified Mahi itself has no concurrent-connection limit — whitelist IP still needed once new server is known. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779903734873049)
+
+- 2026-05-27 — Indicative pricing alerts (false alarm): 50+ instruments flagged, resolved via pricer restart. Cameron Hughes observed JMX-sourced indicative alerts for 50+ instruments (~14:00 BST); confirmed PD was not updating but consistent with false alarm. David confirmed pricing looked fine client-side. Daria restarted CLIENT_PRICE_LDN pricer at ~00:19 BST 2026-05-28; pricing to admin confirmed restored. [internal alert](https://mahifx.slack.com/archives/C046RNF64VD/p1779886486815619) · [pricer fix](https://mahifx.slack.com/archives/C046RNF64VD/p1779920380336229)
 
 - 2026-05-21 — Bank holiday coverage notice. Nia Rose notified ATC that Monday 25 May is a bank holiday; emergency support only, Slack less actively monitored; support via email or LN/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779350406073339)
 
