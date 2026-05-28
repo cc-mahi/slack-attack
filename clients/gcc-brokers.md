@@ -9,12 +9,16 @@ channels_override: null
 key_people_overrides:
   - {name: "Carl", role: "client ops / LMAX + Finalto mappings", confidence: low}
   - {name: "Nael", role: "client trading ops", confidence: low}
-  - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries", confidence: low}
+  - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
-last_catchup: 2026-05-27T07:14:53Z
+  - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
+last_catchup: 2026-05-28T07:16:33Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-27 — GCC demanding $70k cash compensation for 2026-05-15 XAGUSD incident; Mahi holding at 0% share offer
+> Khalil (senior GCC contact above Yousef) is driving a $70k cash demand — 1:1 with the headline incident figure. Yousef has been the messenger. Will Carter posted a formal internal handover at 14:33 BST: Mahi's position is zero cash, 0% Mahi share on Skew, PSM and Brokered LR for the rest of the pilot until ~$25–30k of foregone PnL has accrued. Rationale: $70k exceeds total Mahi earnings from the relationship (~$54k across 3.5 months) and sets a cash precedent that would anchor the July renegotiation (target $360–600k/year). Will sent the formal response to Yousef on 2026-05-27 afternoon (full message text in thread), itemising the value-add ledger ($87.5k Skew PnL, $14k hedger savings, $12B internalised flow, Jan 31 cover) and the proportionality framing. Awaiting Yousef response; billing as normal in the meantime (cc: Nicole Vivian). Risks: Khalil escalating to David/Susan; GCC walking (account flagged at-risk in March 2026). Day-to-day coverage handover to Bonnie Cassidy and William Denny. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1779888805588859) [response-text](https://mahifx.slack.com/archives/C09QS1NUA80/p1779888839513849)
 
 > [open] 2026-05-26 — Tag 334513 gold futures orders rejected: auto-classified Arbitrageur, Finalto book too thin to broker
 > Client (Nael) reported 4 gold futures orders for tag 334513 rejected 2026-05-26. William investigated: tag was auto-classified Arbitrageur due to consistent ~100ms yield drop pattern, so orders were attempted to be brokered; Finalto's order book was thin around the time and couldn't sweep sufficient quantity, so orders were cancelled. William offered to whitelist tag for internalisation but flagged PnL risk. Client asked to keep classification as Arbitrageur for now and will update if that changes. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779786760466559) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779791095115839)
