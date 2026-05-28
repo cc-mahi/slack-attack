@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-27T07:23:26Z
+last_catchup: 2026-05-28T07:26:09Z
 ---
 
 ## History
@@ -212,3 +212,5 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-26/27 — XBTUSD skew adjusted by Isaac: flow-price-thresh now secondary to IFMS (reduced benchmark contribution, active primarily over large price moves). Effect: more consistent skew in steady periods, stronger skew over large moves. Skew at $90/M post-change vs typical $45–60/M; monitoring. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779839829423179)
 - 2026-05-27 — MK requested USD/M markup cap raised from $500 to $1500/side for internal/brokering channels (context: perp exchange fees need baking in). Nathan passed to dev team. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779853365951359)
 - 2026-05-27 — MK asked whether ROS stat can populate for the Inv book (without SI structure). Daria confirmed it will start populating shortly (spread-only this week so ROS inflated; normalises next week). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779840671842489)
+- 2026-05-27 — Crypto pricers restarted for a BMSL config change in PAXGUSD. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779869787021749)
+- 2026-05-27 — Marianna asked Mahi to confirm HRP_PROXY is included in hedging for HYPEUSD on the SI hedgers. Rory confirmed HRP_PROXY exists in execution markets for both hybridHedgerSINYC1 and hybridHedgerSITotalNYC1 in the crypto env. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779870724253409)
