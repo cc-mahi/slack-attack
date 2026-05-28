@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-05-27T07:15:54Z
+last_catchup: 2026-05-28T07:19:00Z
 ---
 
 ## Recent issues
@@ -35,4 +35,5 @@ last_catchup: 2026-05-27T07:15:54Z
 - 2026-05-13 — Andrew Morgan noted (internal-starprime) "apparently these guys are owned by vantage"; David Cooney confirmed. 3 open_mouth reactions. No further context in channel. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778669482861249)
 - 2026-05-19 — Isaac Dann posted in #internal-go: Kieran (Go Markets) was asking about StarPrime, noting their CEO was using "Mahi Terminology"; Isaac did not disclose either way. Khim (Go Markets) wants to talk to Dave Cooney about potentially onboarding StarPrime as an LP. Bonnie Cassidy offered to arrange the call; Dave said he'd reach out himself. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779165368815299)
 - 2026-05-19 — Cameron Hughes listed "Starprime B: signal-down fingerprint" as a standup priority in #internal-trading-operations. No further detail in the thread. [permalink](https://mahifx.slack.com/archives/C0A2K4TH090/p1779186201548519)
+- 2026-05-27 — Will Carter and Cameron Hughes observed StarPrime has resumed sending B Book flow as of a few weeks ago (not much volume); Samin had not mentioned it. Will had believed they were fully off B Book. Echo yield-profile link posted. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1779869052796799)
 - 2026-05-01 — Go-live prep: Cameron Hughes noted a call with Samin arranged for Tuesday to get everything ready pre go-live. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777625477346409)
