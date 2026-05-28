@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Shane Kalichurn", role: "Operations; weekly payout reporting"}
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-05-27T07:04:40Z
+last_catchup: 2026-05-28T07:14:29Z
 ---
 
 ## Status
@@ -22,6 +22,9 @@ last_catchup: 2026-05-27T07:04:40Z
 - **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
+
+> [open] 2026-05-28 — ETHUSD/XETUSD LIMIT order rejections due to 3dp pricing precision
+> Isaac Dann flagged in #mahi-toponetraders that TOT is submitting ETHUSD/XETUSD LIMIT orders with 3 decimal place precision; Mahi prices and executes ETHUSD at 2dp, causing rejections. Pattern traced to mostly one counterparty. No resolution or thread replies yet as of run time. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1779942346326859)
 
 > [resolved] 2026-05-19 — BTCUSD slippage complaint; expected VWAP fill behaviour
 > Arjie (TOT MatchTrader ops contact) raised a concern about a trader account 19099 (demoTOTusd-B1 group) experiencing 5–10 pip slippage on BTCUSD vs the TOB price. Nathan Burch investigated and confirmed the 65 BTC sell consumed 5 liquidity layers, producing a VWAP fill of $76,944.91 vs TOB $76,992.22 — correct behaviour. Arjie acknowledged and confirmed resolved. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1779154129412389)
