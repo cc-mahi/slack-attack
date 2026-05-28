@@ -15,10 +15,16 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-27T07:23:24Z
+last_catchup: 2026-05-28T07:22:19Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-27 — Routine Heavy LR adds: Live03_MT4__83033199, MT5_plain_b_87962659, INF_MT5__87962659, MT5_87018814_Centroid_3591488
+> Three batches actioned: (1) Live03_MT4__83033199 → Heavy LR (15:09 BST); Rory King confirmed at 15:13. (2) MT5_plain_b_87962659 + INF_MT5__87962659 → Heavy LR (16:15 BST); Cameron Hughes actioned and confirmed at 16:18. (3) MT5_87018814_Centroid_3591488 → Heavy LR added as a follow-up reply to batch 2 (18:00 BST); Cameron Hughes confirmed done at 18:19. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779890977070729) [87962659 batch](https://mahifx.slack.com/archives/C022S6NL82D/p1779894905946629) [Centroid_3591488](https://mahifx.slack.com/archives/C022S6NL82D/p1779895125918039)
+
+> [resolved] 2026-05-27 — Routine Medium LR add: Live06_MT4__86047287 + live06_mini#_b_86047287
+> Trading Ops requested both tag variants of CP 86047287 added to Medium LR (15:27 BST). Rory King confirmed actioned at 15:31. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779892043665549)
 
 > [resolved] 2026-05-27 — XAUUSD spike at market opening: confirmed in line with LPs
 > Georgia reported a XAUUSD spike at market open (2026-05-27 ~22:00 UTC). Shyam Hari confirmed pricing was in line with LPs: continuity pool pricing from 22:00:45 UTC, all LPs dark until ~22:01:25 UTC when pricing resumed. Echo TOB chart shared. Georgia acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779841907096589) [Shyam reply](https://mahifx.slack.com/archives/C022S6NL82D/p1779845969225399)
