@@ -14,13 +14,13 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-05-27T07:06:55Z
+last_catchup: 2026-05-28T07:05:32Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-27 — LMAX duplicate trade ID: XAGUSD hedge leg not processed
-> Isaac flagged at 07:34 BST that LMAX sent a duplicate trade ID (`69702275`) for a -250 XAGUSD hedge at 75.000 triggered 06:22 UTC — hedger received and processed the fill as 500 but Amana-side confirmation unclear. IoC limit order was 500 @ 75.00; only one leg processed. Isaac asked Nikos to confirm whether actual fill was 250 or 500; awaiting response. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779863644856789)
+> [resolved] 2026-05-27 — LMAX duplicate trade ID: XAGUSD hedge leg confirmed fully filled
+> Isaac flagged at 07:34 BST that LMAX sent a duplicate trade ID (`69702275`) for a -250 XAGUSD hedge at 75.000 triggered 06:22 UTC. Karen confirmed at 09:38 BST: LMAX filled 500 (not a partial), this was a Mahi→LMAX trade, not partial. Rory acknowledged. No position discrepancy. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779863644856789) [resolution](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779871135709569)
 
 > [open] 2026-05-27 — XAUFUT-M alerts: Nikos requesting disable
 > Nikos asked Mahi at 06:16 BST to look at XAUFUT-M alerts and disable them. GC6M expired same session (see expiry entry below) — likely related. No Mahi response in window. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779858981434719)
