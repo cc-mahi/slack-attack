@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-last_catchup: 2026-05-27T07:23:23Z
+last_catchup: 2026-05-28T07:22:16Z
 ---
 
 ## Recent issues
@@ -69,6 +69,12 @@ last_catchup: 2026-05-27T07:23:23Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-27 — MT4 S1 manager login confirmed: Erik (GoMarkets) asked which manager login is used for MT4 S1 trades (referencing counterparty GoMarketsMT4S1_10150427). William Denny (Mahi) confirmed manager login 856. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779880907803339)
+
+- 2026-05-27 — Test account visibility removed from counterparty view: an unnamed user (GoMarkets) noted they removed some test account visibility from the counterparty analysis view (counterparty GoMarketsMT4S1_10150427 in scope). William Denny (Mahi) said "We'll check on this and revert." No follow-up in window — mildly open. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779880975921579)
+
+- 2026-05-27 — Echo top-of-book chart not loading (XAUUSD ~22:00 UTC 2026-05-26): Erik (GoMarkets) reported the Echo ToB chart not rendering. William Denny checked; Erik self-resolved by resetting cookies. No Mahi action required. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779879622606529)
 
 - 2026-05-26 — XAUUSD post-market-close rows in Athena (negative quantities): Will (GoMarkets) queried whether `marketdata_xauusd` rows with `transact_time` just after 21:00:00 UTC are invalid, noting FINALTO and CLIENT_PRICE_NYC both show such records with negative `bid/ask_quantity_2+` values. Isaac explained the Finalto quote may have been sent just before close and arrived after, with negative quantities possibly from volume cancellations. Thread not fully resolved — client acknowledged but no definitive answer on whether to filter these rows. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779770810056639)
 
