@@ -9,10 +9,13 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-05-27T07:04:40Z
+last_catchup: 2026-05-28T07:05:32Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-28 — GBPUSD price spike (2026-05-27 14:20 UTC): bad Velocity ticks → TOBPN off-market → skew overamplified
+> Nathan Burch: rogue price spike on GBPUSD at 14:20:13 UTC on 2026-05-27. Root cause: bad ticks from Velocity caused crossed bid/offer, which corrupted the TOBPN (top-of-book price node), causing mid formation to be off-market. SIGNPN config skews by 100% of benchmark, so the bad mid produced a disproportionately large skew magnitude. Nathan proposes reducing max skew from 10,000 pips to 2 pips — not yet actioned; awaiting further input. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779945147921969)
 
 > [open] 2026-05-22 — Statement of account request from Jade (Bonnie following up)
 > Jade (Alpha Capital, external) posted in #mahi-alphacapitalgroup asking who to contact for a statement of account. Shyam Hari (Mahi Training) responded to Jade saying he'd sort it, and separately posted in #internal-alphacapitalgroup asking the team to create the statement / provide Jade with a contact. 2026-05-22 10:33 UTC: Bonnie Cassidy replied internally — "I'm not entirely sure what it is that she's requesting but will find out and follow up from there." No further update visible yet. [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1779427327328109) [internal](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779427896627129) [bonnie](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779442392670229)
