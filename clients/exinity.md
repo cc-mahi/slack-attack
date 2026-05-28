@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-05-27T07:18:13Z
+last_catchup: 2026-05-28T07:21:04Z
 ---
 
 ## Recent issues
@@ -25,8 +25,8 @@ last_catchup: 2026-05-27T07:18:13Z
 > [resolved] 2026-05-27 — Starfish process error (no client impact)
 > Samuel flagged an error for Starfish at ~03:35 UTC; Shyam acknowledged and had the process back up within ~38 minutes. No client impact confirmed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779852915812469)
 
-> [open] 2026-05-26 — ROCO tags enablement in Compass — n/a suffix risk warning
-> Louie asked whether enabling tags in Compass for ROCO is safe, following the 2026-05-20 incident where tags caused the n/a suffix corruption. Rory confirmed Mahi hasn't changed anything on their side; flagged that if Exinity sends tags with the n/a suffix again, the same SI book risk-splitting issue would recur. Rory advised ensuring riskSplitting config counterparty tags match exactly what Mahi will receive. No client confirmation of how they plan to proceed as of end of window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779806405563359)
+> [open] 2026-05-26 — ROCO/AP_111000022 tags + asterisk wildcarding: routing confirmed, asterisk verification pending
+> Louie asked whether enabling tags in Compass is safe post-n/a incident (2026-05-26). Rory advised testing first and ensuring riskSplitting config tags match exactly. By 2026-05-27: Exinity added `111000021*` wildcard in Compass config and asked about `API_111000022` (STP/CHUCK feed) — Cameron Hughes confirmed no extra config needed since CHUCK stream routes to A Insti by default; gave green light for 22 account. After Exinity's EOD restart, Mukhammad confirmed (2026-05-28 ~02:11 UTC) trades falling into A Insti House correctly with relevant tags. Isaac verified: correct CHUCK channel, CHUCK (EX-TOXIC) execution profile, no SI or risk splitting applied. Matthew then asked whether the asterisk system was actually exercised here (vs just CHUCK's default A-Insti routing, which would look identical). Isaac investigating and will revert. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779808808345079) [Isaac check](https://mahifx.slack.com/archives/C0456LSHQQK/p1779935249032979) [Matthew follow-up](https://mahifx.slack.com/archives/C0456LSHQQK/p1779948682424449)
 
 > [open] 2026-05-26 — UBS_SW_WB connections status unknown
 > George Moore queried the status of UBS_SW_WB connections (screenshot attached). Will Denny said they'd check and revert. No further update in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779792148732949)
