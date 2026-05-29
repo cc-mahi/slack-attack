@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-05-28T07:19:02Z
+last_catchup: 2026-05-29T07:19:59Z
 ---
 
 ## Status
@@ -22,8 +22,12 @@ last_catchup: 2026-05-28T07:19:02Z
 
 ## Recent issues
 
+> [open] 2026-05-28 — Centroid EURAUD TP order rejected: LIQUIDITY_VIOLATION
+> Client (Tegis/Centroid) reported that a take profit order on EURAUD (2000 lots, tag 1 = "55", account BaseMarketsCentroidOrders) was rejected at 06:18 UTC 2026-05-28 with `LIQUIDITY_VIOLATION`. FIX Execution Report shows OrdStatus=4 (Cancelled), ExecType=4. Client asked for root cause investigation; no Mahi reply in channel as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779958441603849)
+
 > [open] 2026-05-28 — C book limit order cancels: CLIENT_PRICE_LDN non-zero spread vs. 0.1 price check
 > Daria Horton flagged that the new C book is seeing a significant number of order cancels. Root cause: `CLIENT_PRICE_LDN` (the internalisation market used for price checking) has non-zero spreads that are suppressed to choice by the WSS before publishing — good for client pricing, but means the 0.1 price check fires against the wider internalisation price, not the published choice price, cancelling valid limit orders as "off market". Three workarounds discussed: (1) raise the price check threshold (loses protection against genuinely off-market limit orders), (2) restrict client to market orders only (likely to breach limits), (3) switch the internalisation model itself to output choice (Daria's preferred path). No resolution or reply yet as of run time. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1779931902776959)
+> **2026-05-28 22:25 update:** Daria added that market orders are also filling against `CLIENT_PRICE_LDN` rather than the published price — though client is still getting the published price regardless. Daria flagged Cameron Hughes (who handled client comms on this today) via mention. No fix in place yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780003555490009)
 
 > [open] 2026-05-26 — Tegis Centroid test trades: tag 1 (tradingAccount) missing; flow misrouted to Scope A; hedger not clearing
 > Client (Tegis/Centroid) hit `INVALID_ORDER FIELD_VALIDATION_ERROR {tradingAccount=MISSING_VALUE}` on FIX orders via BaseMarketsCentroidOrders session. Cameron Hughes diagnosed: Centroid wasn't sending tag 1 — Mahi needs it to route to the correct Compass trading account. Centroid team clarified they can pass the MT4 login or group as tag 1; Mahi (Cameron Hughes) confirmed any fixed value acceptable and suggested CENTROID/TEGIS_CENTROID. Test trade with tag 1 = "55" (MT4 account number) went through but initially hit LIQUIDITY_POOL_LDN (Scope A) instead of the Compass-managed Tegis book → LMAX — execution rules didn't recognise account 55. Cameron Hughes updated ERs to internalise in the Tegis book; flow then managed correctly. However the hedger failed to clear the small residual risk; Cameron Hughes asked client to close the test trade while investigating. Client closed trades ~19:00 BST 2026-05-26; client requested another test trade 06:48 UTC 2026-05-27 — Mahi not yet responded in channel as of run time. Open issues: (a) tag 1 value needs confirming for all future Tegis accounts beyond "55"; (b) hedger not clearing investigated but unresolved. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779785262352929) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779785464676889) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779860920465209)
@@ -69,6 +73,7 @@ last_catchup: 2026-05-28T07:19:02Z
 
 ## Notable topics
 
+- 2026-05-29 — Sam Hewitt (Mahi NZ) notified channel that Monday 1 June is a NZ Bank Holiday; emergency support cover only; Slack not monitored normally; support email / LN/NZ phone lines available for urgent issues. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1780029447762379)
 - 2026-05-21 — LMAX test trades (EURUSD + XAUUSD) confirmed successful both sides — first end-to-end LMAX validation completed. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779368456085189)
 - 2026-05-18 — Centroid/Mahi maker session confirmed connected (Aytugan). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779081321195119)
 - 2026-05-13 — Client requested group codes added: real\USD-MU-SD-KAJ-X, real\USD-MU-SD-KAJ-R, real\USD-MU-SD-KAJ-S; Kate Stagg confirmed. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778666314632929)
