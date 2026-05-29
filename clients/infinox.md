@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-05-28T07:22:19Z
+last_catchup: 2026-05-29T07:22:24Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-28 — Routine Heavy LR adds: Live06_MT4__86048183, 86048183, live06_CN_standard_b_86048183
+> Trading Ops requested all three tag variants of CP 86048183 added to Heavy LR (14:24 BST). Will Denny confirmed actioned at 14:28 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779974693361579)
 
 > [resolved] 2026-05-27 — Routine Heavy LR adds: Live03_MT4__83033199, MT5_plain_b_87962659, INF_MT5__87962659, MT5_87018814_Centroid_3591488
 > Three batches actioned: (1) Live03_MT4__83033199 → Heavy LR (15:09 BST); Rory King confirmed at 15:13. (2) MT5_plain_b_87962659 + INF_MT5__87962659 → Heavy LR (16:15 BST); Cameron Hughes actioned and confirmed at 16:18. (3) MT5_87018814_Centroid_3591488 → Heavy LR added as a follow-up reply to batch 2 (18:00 BST); Cameron Hughes confirmed done at 18:19. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779890977070729) [87962659 batch](https://mahifx.slack.com/archives/C022S6NL82D/p1779894905946629) [Centroid_3591488](https://mahifx.slack.com/archives/C022S6NL82D/p1779895125918039)
