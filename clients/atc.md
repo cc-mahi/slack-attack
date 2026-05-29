@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-28T07:08:50Z
+last_catchup: 2026-05-29T07:13:44Z
 ---
 
 ## Recent issues
@@ -21,8 +21,8 @@ last_catchup: 2026-05-28T07:08:50Z
 > [resolved] 2026-05-11 — GBPUSD open loss $1.8k; Finalto TOB quantity mismatch; resolved via BMSL addition
 > At market open 2026-05-11, client 27072237 traded GBPUSD at a tighter-than-market spread: Finalto had dropped published quantity to 100k while the model was publishing 300k at TOB, leaving no LP reference at that size and triggering base spreads. Daria proposed four options; Malik's feedback led to option 3 — Daria added BMSL with `MAHI_BENCHMARK_LDN` as reference market on 2026-05-13. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778473221775049) · [Daria options reply](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778534112919499) · [internal TOB analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1778473279858959) · [BMSL added](https://mahifx.slack.com/archives/C046RNF64VD/p1778632572190249)
 
-> [open] 2026-05-27 — FAUUSD bad fills at 4444 area: LR applied due to burst of 57 orders in 46ms
-> David Manoukian reported a batch of FAUUSD orders (ref: 7959561907733 / TDE170987699043) filled at ~4444.00 at 08:18:58 EST on 2026-05-27. Nathan Burch investigated: counterparty 27072435 placed 57 market orders between 12:18:57.929–12:18:57.975 UTC (46ms), avg 30.85 oz each. Initial fills were on-market but volume consumed available liquidity; LR was applied to subsequent fills causing worse prices. LR is not included in published price. Investigation complete; no further action noted yet — resolution to be communicated to David. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779895485904019)
+> [open] 2026-05-27 — FAUUSD bad fills at 4444 area: LR applied; David challenging LR approach for martingale client
+> David Manoukian reported a batch of FAUUSD orders (ref: 7959561907733 / TDE170987699043) filled at ~4444.00 at 08:18:58 EST on 2026-05-27. Nathan Burch investigated: counterparty 27072435 placed 57 market orders between 12:18:57.929–12:18:57.975 UTC (46ms), avg 30.85 oz each. Initial fills were on-market but volume consumed available liquidity; LR was applied to subsequent fills causing worse prices. **2026-05-28/29 update**: David pushed back — this client runs a martingale system (averaging down then closing all legs simultaneously at 1,758 oz on exit) and argued LR should not apply; a normal VWAP fill should be used instead. David also flagged the client is planning to bring in significantly more capital. Nathan replied (2026-05-29 04:14 UTC) confirming LR is appropriate: it doesn't replace VWAP but shifts the starting book price worse; suggested reviewing and raising the LR cap if the client scales up. No decision recorded yet. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779895485904019) · [David martingale challenge](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779976540121959) · [Nathan LR explanation](https://mahifx.slack.com/archives/C04AZM0LPMH/p1780024463264869)
 
 > [open] 2026-05-08 — David Manoukian unable to access LN Compass admin portal after IP whitelisting
 > Despite IP `47.41.47.224` being whitelisted (Notable Topics 2026-05-08), David still couldn't reach `atc-ln-admin-1.96yb.prod.mahimarkets.com:8400`. Inald Gjoni ran diagnostics (Test-NetConnection + tracert to `46.235.34.67:8400`), results sent to Beeks. David suspected his own security configuration. No resolution confirmed in window. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1778253602532909)
@@ -43,6 +43,10 @@ last_catchup: 2026-05-28T07:08:50Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-05-29 — NZ bank holiday Monday 1 June: emergency cover only. Sam Hewitt notified ATC that Monday 1 June is a bank holiday in NZ; emergency support only, Slack less actively monitored; support via support@mahimarkets.com or LN/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1780029564217709)
+
+- 2026-05-28 — UAT server restart (third in recent window). Malik requested UAT restart for back office dev testing; Rory confirmed done by 13:18 BST; Malik acknowledged. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779970709495189)
 
 - 2026-05-28 — Spotex Seychelles entity: second FIX session provisioned. Malik requested clarification on whether Mahi's feed can serve two simultaneous Spotex connections (for the new Seychelles entity Spotex is onboarding separately from the existing ATC UK setup). Isaac confirmed one connection per feed limit and immediately created a new `spotex_sc` account with matching FIX creds (Orders/MD on 149.5.84.234 ports 9011/9010). Justin clarified Mahi itself has no concurrent-connection limit — whitelist IP still needed once new server is known. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779903734873049)
 
