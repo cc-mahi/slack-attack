@@ -12,10 +12,19 @@ key_people_overrides:
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-last_catchup: 2026-05-28T07:22:16Z
+last_catchup: 2026-05-29T07:24:56Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-29 — Quote cancels on distribution channels — investigation open
+> Erik (GoMarkets, 2026-05-29 08:07 UTC) asked whether Mahi sends quote cancels down the distribution channels as per current setup. Sam Hewitt (Mahi) replied asking for more context. No answer yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780038478806569)
+
+> [open] 2026-05-28 — Hedger latency: 15ms decision time on Metals.DYNAMIC-DONT-INTERNALISE-FASTER
+> Erik (GoMarkets, 2026-05-28 09:14 UTC) raised that hedging decisions on metals appear to take ~15ms from signal to order fire, with prices and orders reaching LP within 1-7ms — raising concern that decisions fire on stale prices. He attached a spreadsheet and screenshot of a specific order (Metals.DYNAMIC-DONT-INTERNALISE-FASTER rule). Isaac clarified: (1) the quote was still valid at 11:39:07.161 UTC when the order was sent; (2) the arb hedger round trip to ISAM is 1-2ms, not 6-7ms; (3) a later order's full round trip (new order to fill) was only 4ms — delays are on ISAM's side. Erik replied 2026-05-29 08:18 UTC: he can see ISAM held the arb hedger order for 13ms before rejecting; a second order (012dt6ay7m) reached OZ 6ms after initiation and was immediately rejected as the limit price was already old. The thread remains open — Erik acknowledged Isaac's points but the LP-side execution quality question persists. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779956095119589) [Isaac response](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780007648284789)
+
+> [open] 2026-05-28 — Config editor stuck on hedging.orderServiceConfiguration (unsaved state)
+> Erik (GoMarkets, 2026-05-28 09:19 UTC) flagged an unsaved config at `hedging.orderServiceConfiguration/012dq6i7vb73ih` blocking the editor — revert button not working. Rory King (Mahi) investigated and by 10:03 UTC said "we've found the cause — just cleaning it up, will let you know when good to go again." No explicit resolution confirmation in thread. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779956397719989)
 
 > [open] 2026-05-26 — B-book classification: ~10b/24b volume tagged "Don't BBook" — threshold tuned
 > GoMarkets (client, ~08:44 UTC) flagged the classification breakdown looks wrong: 24.07b total B-book volume over ~4 weeks, only 4b in "catch all" with ~10b sitting in "Don't BBook". Example: account 50030334 is a mobile trader with fine decay but tagged Don't BBook. Isaac (Mahi) acknowledged and investigated: the default Don't-BBook rehabilitation threshold was too high relative to typical yields vs average spread captured. He lowered the threshold and manually kicked off classification jobs to rerun. Client acknowledged and agreed to review tomorrow. No sign-off yet that the reclassification resolved the balance. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779781437238919) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779784316612839)
@@ -23,8 +32,8 @@ last_catchup: 2026-05-28T07:22:16Z
 > [resolved] 2026-05-26 — Gold not ticking at ~22:01 UTC — ISAM wide spreads, recovered within ~8 min
 > Will (GoMarkets) reported gold was not ticking at ~22:01 UTC. Nathan (Mahi) checked and by ~22:01 UTC Will had already seen it return. Isaac diagnosed: LP (ISAM) benchmarking was cutting in/out due to wide spreads — Invast publishing ~$3 wide; ISAM stabilising. Confirmed stable by ~22:09 UTC. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779832903422559) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779833333588649)
 
-> [watching] 2026-05-26 — GAUUSD + GAUCNH new instruments blocked on adaptive mid fix
-> Isaac (post go-call) noted GAUUSD and GAUCNH need a weekend release to ship. Currently blocked on an adaptive mid fix (Zendesk ticket #22989) — Mahi doesn't want to ship that into Go broken given how reliant the current setup is on adaptive mid. No ETA stated. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779754554652629)
+> [open] 2026-05-29 — GAUUSD + GAUCNH new instruments: weekend release in progress (ZD #23044)
+> Kieran (GoMarkets, 2026-05-28 23:12 UTC) asked for status on GAUUSD and GAUCNH; marketing go-live set for Monday 8 June. Isaac replied that triangulation factors are dynamic and the instruments are in the codebase pending a weekend release; NZ bank holiday Monday 1 June means the Compass instance update will need to wait until next weekend. Kieran pushed to release and review on Tuesday; Isaac said "I'll see what I can do" (code complexity for metals). Isaac then confirmed "we should be good to do a release this weekend" (2026-05-29 03:48 UTC) and posted ZD ticket #23044 in internal-go as the weekend release vehicle. Isaac also noted LP fee subscriptions for the new instruments will be set up post-deploy. Previous blocker was adaptive mid fix (ZD #22989 — see 2026-05-26 entry). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780006312436859) [Isaac release confirmation](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780022935647669) [ZD ticket](https://mahifx.slack.com/archives/CNF3WPNSK/p1780025256438269)
 
 > [watching] 2026-05-26 — Lead-lag analysis requested on IG as Go LP
 > Isaac flagged post go-call that IG's pricing is "horrible generally" and wants a lead-lag analysis to quantify how bad. No analysis produced yet. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779754554652629)
@@ -69,6 +78,10 @@ last_catchup: 2026-05-28T07:22:16Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-05-28 — Metals-crosses driver factor changes: auto-apply vs manual notification. Kieran (GoMarkets) asked whether adjustments to the Factor under drivers for metals crosses apply automatically at EOD/EOW or require notification to Mahi. No Mahi reply yet in window. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780006312436859)
+
+- 2026-05-28 — NZ bank holiday 1 June: Sam Hewitt (Mahi) advised emergency-only cover on Monday 1 June; normal support resumes Tuesday. Urgent contact via support@mahimarkets.com or phone. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780029485559649)
 
 - 2026-05-27 — MT4 S1 manager login confirmed: Erik (GoMarkets) asked which manager login is used for MT4 S1 trades (referencing counterparty GoMarketsMT4S1_10150427). William Denny (Mahi) confirmed manager login 856. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779880907803339)
 
