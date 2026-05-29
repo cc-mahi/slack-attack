@@ -9,10 +9,19 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-28T07:28:13Z
+last_catchup: 2026-05-29T07:28:28Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-28 — CFD instruments not persisted in Echo / Compass — gap confirmed, fix agreed
+> Richard asked in client channel whether Mahi processes CFDs from Xenfin drop-copy uploads in Echo. William confirmed only FX + Metals registered in Compass are persisted — CFDs filtered out. Richard noted the gap: "yesterday, we traded 37 FX symbols, echo shows 13." William shared `xenfin_dropcopy_instruments.csv` listing all instruments in the uploads; Richard asked for "all if possible please." William: "Sure we'll get those set up." No timeline given; fix not yet deployed. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779974991147639) [37-vs-13](https://mahifx.slack.com/archives/C05NB72AGR2/p1779975518272319) [will-get-set-up](https://mahifx.slack.com/archives/C05NB72AGR2/p1779981170582279)
+
+> [open] 2026-05-28 — Afternoon internalised P&L spike — Will posted "Jeez"
+> At 15:09 BST Will posted an Echo yield profile link covering internalised client trades 12:50–14:16 UTC (velocity.LDN, all client/hedging parties, grouped by trade type + instrument) followed immediately by "Jeez" — indicating a notable P&L event in that 86-minute window. No further context or resolution posted. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779977382069829) [jeez](https://mahifx.slack.com/archives/CPDS0M2KF/p1779977387860509)
+
+> [open] 2026-05-28 — CFD expansion: VT wants Mahi help on J40 (SA index); IP leakage risk flagged
+> Will's post-call note (13:37 BST): VT's CFD side doesn't market-make J40 (South African index) and currently just relay IG's feed. Plan is to get IG's MD feed and subscribe to VT CFD trades over Xenfin to assess where Mahi can help. Will flagged potential IP leakage risk on the index front. No action taken yet. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779971822652279)
 
 > [watching] 2026-05-26 — Passive orders appearing in VELOCITY feed — self-referential pricing risk
 > Daria raised at 04:03 BST: Mahi is currently pricing relative to the VELOCITY feed it receives from the client. If Mahi's passive orders end up TOB on that feed, the model would be pricing relative to its own quotes. Proposed mitigations: set up a passive pricing model, or use individual LP feeds in aggregation as the base instead of the client feed. Will replied at 09:21 BST: "I dont think so. They can talk a good game but they are really unsophisticated in reality on this side of the business" — soft dismissal that client won't feed Mahi's passives back. No config change made; passive placement philosophy separately discussed in client channel afternoon 2026-05-26 (see Notable topics). [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779764605203909) [Will reply](https://mahifx.slack.com/archives/CPDS0M2KF/p1779783671540499)
@@ -70,9 +79,11 @@ last_catchup: 2026-05-28T07:28:13Z
 
 ## Notable topics
 
+- 2026-05-28 — Post-call TODO list (Will, 11:10 BST): (1) Explainer on "how we turned the corner" — Will to complete next week; (2) Velocity-client skill for richer data beyond yield profiles — Will to discuss with Isaac Dann next week (auto-value-add as starting point); (3) Review whether party 685 is worth turning back on now LR problem is solved; (4) Richard's Echo creds reset — Nathan Burch accidentally nuked them during overnight demo; confirmed fixed by Nathan at 22:24 BST. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779963027453119)
+- 2026-05-28 — Richard's Echo creds reset and sorted. Creds reset during overnight Compass/Echo demo (Nathan Burch); Richard couldn't log in at 12:07 BST; William Denny issued new creds by 12:08 BST; confirmed OK. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779966452795909)
 - 2026-05-28 — Compass/Echo system run-through call completed (Nathan Burch recap) — covered compass dashboards (trading overview, book structures, order events, distribution channel, execution rules, hedger config), LR mechanics, Echo (client + external facing), and TOB. Team appeared positive; keen on LR and TOB. Nathan to grant compass/echo access to call attendees. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779931923362339)
 - 2026-05-28 — Isaac Dann asked (unanswered): `clientDistributionGateway2` uses the same ports as Gateway1 — is one redundant or is there a reason for both? No reply in window. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779935316273099)
-- 2026-05-27 — Richard Holman requested analysis showing "how and why we've turned the corner" — Will noted as TODO, said happy to present on a wider call but busy. Analysis outstanding. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779882364987109)
+- 2026-05-27 — Richard Holman requested analysis showing "how and why we've turned the corner" — Will noted as TODO (post-call 2026-05-28: "Will complete next week"), happy to present on a wider call. Analysis outstanding. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779882364987109)
 - 2026-05-27 — Will Carter posted a photo (IMG_4672.png) labelled "For tomorrow" — no further context, content unknown. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779904143351689)
 - 2026-05-27 — Aussie team requested another system run-through — Daria flagged at 03:40 BST as a positive sign. No further context. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1779849646898659)
 - 2026-05-26 — Passive pricing placement philosophy discussion in client channel — extended afternoon discussion (Richard / David Cooney / Will) on where Mahi is leaving passive interest (bid/offer/mid), how aggressive the logic should be, and whether being swept matters when the goal is risk reduction. David Cooney: "if we do a risk-decreasing trade and are immediately underwater by 2 pips we've destroyed the yield distribution — cut profits, running losses." Discussed whether targeting bid/offer or mid, and how much to "pay away" on risk-reducing trades. No resolution; Will: "we're working on it, it's an involved process." [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779807992149989)
