@@ -10,10 +10,13 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-05-28T07:04:44Z
+last_catchup: 2026-05-29T07:06:16Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-05-28 — New YB-MT5 FIX session (`5ers-Funded-YB-MT5`) not receiving trades — config issue on 5ers side
+> Andreas (2026-05-28 09:03 BST) asked whether trades from login 250 (new FIX session `5ers-Funded-YB-MT5-Prices`/`5ers-Funded-YB-MT5-Orders`) were reaching Mahi. William Denny investigated and could not locate the trades; client confirmed this was a new FIX session not previously in scope. Andreas subsequently identified a misconfiguration on 5ers' side and resolved it. Test trade confirmed: account 298, AUDCAD 0.01 long (Trade ID 012dtjmksn) reached Mahi and was verified by William — skew and LR ran correctly. Trades from login 250 also confirmed arriving after the fix. [thread](https://mahifx.slack.com/archives/C07AQJS4E80/p1779955398886419) [resolution](https://mahifx.slack.com/archives/C07AQJS4E80/p1779977099502669)
 
 > [open] 2026-05-19 — cTrader US-client cutoff June 1st — migrating to YB + TradingView
 > cTrader stopping US client acceptance from June 1st; 5ers moving affected flow to a YourBourse platform with TradingView front-end. No Mahi action confirmed yet in window; flagged by Yaniv on 2026-05-19 weekly call. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779201650126839)
