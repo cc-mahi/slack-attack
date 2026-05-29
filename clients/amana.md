@@ -14,13 +14,16 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-05-28T07:05:32Z
+last_catchup: 2026-05-29T07:10:51Z
 ---
 
 ## Recent issues
 
+> [open] 2026-05-28 — Amana recs don't capture Mahi manual adjustments; Centroid/LMAX non-unique order ID flagging pending
+> Nikos raised (08:07 BST) that Amana's reconciliation reads from the trades table and manual position adjustments (used by Mahi to correct mismatches) don't appear there. Asked whether Mahi could generate a trade instead of an adjustment. Isaac (08:30 BST) explained manual adjustments are preferred for traceability; recommended Pulse EOD currency/trade-position snapshots for recs rather than the trades table. Nikos asked (08:39 BST) where in Pulse manual adjustments are visible — Isaac's response noted EOD snapshots are cleaner but did not directly confirm an adjustments-specific view; question appears open. Separately, Isaac flagged that Centroid/LMAX should be notified about the non-unique order ID that caused the 2026-05-27 XAGUSD duplicate-leg issue — Nikos agreed and asked Isaac to send details to noc@amanacapital.com; status of that email unknown. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779952113833749) [rec-question](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779952614366559) [lmax-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779952459245829)
+
 > [resolved] 2026-05-27 — LMAX duplicate trade ID: XAGUSD hedge leg confirmed fully filled
-> Isaac flagged at 07:34 BST that LMAX sent a duplicate trade ID (`69702275`) for a -250 XAGUSD hedge at 75.000 triggered 06:22 UTC. Karen confirmed at 09:38 BST: LMAX filled 500 (not a partial), this was a Mahi→LMAX trade, not partial. Rory acknowledged. No position discrepancy. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779863644856789) [resolution](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779871135709569)
+> Isaac flagged at 07:34 BST that LMAX sent a duplicate trade ID (`69702275`) for a -250 XAGUSD hedge at 75.000 triggered 06:22 UTC. Karen confirmed at 09:38 BST: LMAX filled 500 (not a partial), this was a Mahi→LMAX trade, not partial. Rory acknowledged. No position discrepancy. 2026-05-28: Nikos confirmed Compass adjustment made; Isaac confirmed booking done after Karen's confirmation. Follow-up rec/ops issues split to separate entry above. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779863644856789) [resolution](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779871135709569)
 
 > [open] 2026-05-27 — XAUFUT-M alerts: Nikos requesting disable
 > Nikos asked Mahi at 06:16 BST to look at XAUFUT-M alerts and disable them. GC6M expired same session (see expiry entry below) — likely related. No Mahi response in window. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779858981434719)
@@ -175,4 +178,5 @@ last_catchup: 2026-05-28T07:05:32Z
 - 2026-05-22 — FX spreads for majors uploaded by Rory from Hadeel's CSV into CLIENT_PRICE_ABOOK_LDN (and CLIENT_PRICE_LDN per Hadeel confirmation); triangulated crosses still pending. FX hedging confirmed to CMC_CENTROID; no SwapFree FX expected by Nikos but workflow available if needed. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779444921689839)
 - 2026-05-22 — SIXX (silver spot) LP rejections at ~10:44 UTC: "Order rejected. Price is no longer valid" (OrdStatus=8) — Princess raised at 11:49 BST; Rory confirmed risk is covered and no immediate concern, investigating cancellation pattern. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779446923669939)
 - 2026-05-22 — hybridHedgerSwapfree1 bounced by Rory at 17:56 BST to revert unactioned profileDefinitions changes staged on 2026-05-21; precautionary good-order restart. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779469019812579)
+- 2026-05-29 — NZ bank holiday Monday 1 June: Sam Hewitt (NZ support) advising emergency-only cover; Slack less monitored; escalate via support@mahimarkets.com or LN +44 203 397 1985 / NZ +64 3 2880079. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780029430319189)
 - 2026-05-26 — VaR spike ~$560k: cpty 8011028 sold then bought 5,000oz XAUUSD within 15s; risk covered within expected timeframes; A-book up ~$16k, skew PnL -$400 from that flow. Nikos was not at his desk. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779802471141379)
