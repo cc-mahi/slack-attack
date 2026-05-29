@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-05-28T07:26:09Z
+last_catchup: 2026-05-29T07:25:32Z
 ---
 
 ## History
@@ -209,8 +209,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-26 — MK requested Crypto JMX IP whitelisted (follow-up to 2026-05-22 FX JMX whitelist; no IP specified yet in thread). Daria acknowledged. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779752427539119)
 - 2026-05-26 — MK requested decommission of B_BOOK_RAZOR and A_BOOK_RAZOR channels — not proceeding with the dual split. No reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779754125791069)
 - 2026-05-26 — propTraderCrypto/propTraderCryptoBackup books briefly off (SPOT_CLIENTS_NYC and SPOT_CLIENTS_LDN). Maten flagged; Reece turned them back on via GUI at 14:30/14:31 UTC from Pepper side. Self-resolved. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779805107028709)
-- 2026-05-26/27 — XBTUSD skew adjusted by Isaac: flow-price-thresh now secondary to IFMS (reduced benchmark contribution, active primarily over large price moves). Effect: more consistent skew in steady periods, stronger skew over large moves. Skew at $90/M post-change vs typical $45–60/M; monitoring. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779839829423179)
+- 2026-05-26/27 — XBTUSD skew adjusted by Isaac: flow-price-thresh now secondary to IFMS (reduced benchmark contribution, active primarily over large price moves). Effect: more consistent skew in steady periods, stronger skew over large moves. Skew at $90/M post-change vs typical $45–60/M. 2026-05-29: Isaac confirmed still at $90/M; month was $47.97/M pre-change. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1779839829423179) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780027977213949)
 - 2026-05-27 — MK requested USD/M markup cap raised from $500 to $1500/side for internal/brokering channels (context: perp exchange fees need baking in). Nathan passed to dev team. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779853365951359)
 - 2026-05-27 — MK asked whether ROS stat can populate for the Inv book (without SI structure). Daria confirmed it will start populating shortly (spread-only this week so ROS inflated; normalises next week). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779840671842489)
 - 2026-05-27 — Crypto pricers restarted for a BMSL config change in PAXGUSD. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779869787021749)
 - 2026-05-27 — Marianna asked Mahi to confirm HRP_PROXY is included in hedging for HYPEUSD on the SI hedgers. Rory confirmed HRP_PROXY exists in execution markets for both hybridHedgerSINYC1 and hybridHedgerSITotalNYC1 in the crypto env. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1779870724253409)
+- 2026-05-29 — Perps go-live planned for next week: Marianna confirmed going live with XAUUSDC-PERP, BRENTOIL-USDC-PERP, WTOIL-USDC-PERP, BTC-USDC-PERP (Compass naming: XAUUSD-PERP, CL1USD-PERP, CO1USD-PERP, XBTUSD-PERP). Isaac set up Binance Futures pricing feed in LDN, proxied to NYC, awaiting HyperLiquid credentials (taker ready post-weekend). Feed available only via OZ NY HUB — Isaac confirmed workable via normalisation/proxying. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780015264487769) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780027351727259)
+- 2026-05-29 — Shyam flagged Pepperstone B · NZDUSD FI PnL loss of -$2,114: price skewed down during large influx of House Sells (~21:09–21:11 UTC 2026-05-28). Internal monitoring note; no action visible in-thread. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780022042490849)
+- 2026-05-29 — Marianna asked if Mahi has a USDH/USD rate to proxy; Isaac replied no. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780026918524119)
+- 2026-05-29 — Sam Hewitt (NZ) advisory: Monday 1 June is a NZ bank holiday; emergency support only, reduced Slack monitoring. Contact support@mahimarkets.com or LN +44 203 397 1985 / NZ +64(3) 2880079. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780029525109529)
