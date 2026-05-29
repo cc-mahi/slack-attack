@@ -9,13 +9,19 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-05-28T07:24:39Z
+last_catchup: 2026-05-29T07:28:27Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-28 — GCQ6-AUG26 (Gold Aug) UAT TT resting orders reject — `Instrument not found`, flagged to dev
-> Andri reported GCQ6-AUG26 rejected in UAT TT resting orders with `Instrument not found by instrument_id=14347306835933645772`; FIX reject 39=4, tag 58. Isaac replied that GCQ6-AUG26 does look to be on the market and flagged with dev to investigate. No resolution yet. Continues the TT UAT SOW testing work (Scale POV). [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779943449938839) [isaac-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1779945540193219)
+> [open] 2026-05-29 — New Prod TT connection email — unanswered
+> During the Scale POV live test session, client asked Liam if he had seen an email about a new Prod TT connection; noted it has been open with no response for weeks. Liam did not reply to this specific question. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1779982068137559)
+
+> [resolved] 2026-05-28 — Scale POV live test on Phillip/Gold connection — first test trades confirmed flowing
+> Liam announced at 09:44 that Scale POV is now configurable. Graeme asked to scope it to Gold on the Phillip connection only, with parameters: Duration 2hr, min participation 1%, max participation 5%, aggression 5, tracked Trend-Mid. Liam configured settings at 15:35–15:38 BST; initial test failed (Liam found a typo, reverted config). Fixed and re-deployed by 16:17; client ran a second test at 16:24. Client confirmed "That looks good too" and "We will leave this live and test with some real trades before moving to other symbols and connections." [liam-announce](https://mahifx.slack.com/archives/C09HN93T0G2/p1779957866479709) [liam-fix](https://mahifx.slack.com/archives/C09HN93T0G2/p1779981435154379) [client-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1779981969299249)
+
+> [open] 2026-05-28 — GCQ6-AUG26 (Gold Aug) UAT TT resting orders — SecurityID fixed manually, TT MD connection broken
+> Andri reported GCQ6-AUG26 rejected in UAT TT resting orders with `Instrument not found by instrument_id=14347306835933645772`; FIX reject 39=4, tag 58. Arun updated config and identified root cause: incorrect Security ID was in use. Fixed manually at 09:15 BST (orders should now work). However, Arun flagged a related issue: the UAT TT MD connection (`AMB_MH_UAT_FIX_MD→TT_SD/AMB_Megatrend`, targeting `fixmarketdata-ext-uat-cert.trade.tt:11703`) is being rejected on logon with `Requested resource not found`. Security IDs will need manual updating if/when they change until the MD connection is fixed. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779943449938839) [arun-fix](https://mahifx.slack.com/archives/C09HN93T0G2/p1779956132465369)
 
 > [resolved] 2026-05-28 — Surya FIX seq mismatch `Surya_Live_T→MahiFX_Live_T` — reset confirmed
 > Brandon (client) reported seqnum mismatch on `FIX.4.4:Surya_Live_T->MahiFX_Live_T`: session sent seqnum 11424 but Mahi expected 1. Isaac confirmed at 06:27 that the connection appeared logged in and the reset had already been made earlier. Brandon acknowledged. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1779944517420659) [isaac-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1779946053563319)
