@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-05-29T07:10:51Z
+last_catchup: 2026-06-01T07:06:21Z
 ---
 
 ## Recent issues
@@ -178,5 +178,7 @@ last_catchup: 2026-05-29T07:10:51Z
 - 2026-05-22 — FX spreads for majors uploaded by Rory from Hadeel's CSV into CLIENT_PRICE_ABOOK_LDN (and CLIENT_PRICE_LDN per Hadeel confirmation); triangulated crosses still pending. FX hedging confirmed to CMC_CENTROID; no SwapFree FX expected by Nikos but workflow available if needed. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779444921689839)
 - 2026-05-22 — SIXX (silver spot) LP rejections at ~10:44 UTC: "Order rejected. Price is no longer valid" (OrdStatus=8) — Princess raised at 11:49 BST; Rory confirmed risk is covered and no immediate concern, investigating cancellation pattern. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1779446923669939)
 - 2026-05-22 — hybridHedgerSwapfree1 bounced by Rory at 17:56 BST to revert unactioned profileDefinitions changes staged on 2026-05-21; precautionary good-order restart. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779469019812579)
+- 2026-06-01 — Nikos querying empty mark outs for client 8011961 / MT5_8011961: Echo date window (2026-05-20 to today) returns no results; Sam Hewitt explained the account last traded 5 May and 18 May so any window starting after that will be empty. Nikos pushed back at 08:06 BST citing MT5 screenshot showing a trade on 28 May; Sam investigating. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780294795845829) [sam-reply](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780296288012179)
+- 2026-05-29 — VaR spike: cpty 39000164 buy/sell 5k oz XAUUSD, 2x ~350k VaR spikes; risk cleared in expected timeframe; PnL upswing $14k. Same pattern as 2026-05-26 (cpty 8011028). [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1780047323501219)
 - 2026-05-29 — NZ bank holiday Monday 1 June: Sam Hewitt (NZ support) advising emergency-only cover; Slack less monitored; escalate via support@mahimarkets.com or LN +44 203 397 1985 / NZ +64 3 2880079. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780029430319189)
 - 2026-05-26 — VaR spike ~$560k: cpty 8011028 sold then bought 5,000oz XAUUSD within 15s; risk covered within expected timeframes; A-book up ~$16k, skew PnL -$400 from that flow. Nikos was not at his desk. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779802471141379)
