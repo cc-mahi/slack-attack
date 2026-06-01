@@ -9,10 +9,13 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-05-29T07:08:49Z
+last_catchup: 2026-06-01T07:06:20Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-01 — signalProcessCFDFI1 crash-loop: ADWeights counter lock (recurrence of 2026-05-15 pattern)
+> Sam Hewitt: `signalProcessCFDFI1` has been crash-looping since ~2026-05-30 08:14 UTC on alphacapital-ln-trading-1. Cycle: process runs ~21 min, hangs on `ADWeights.*.counter` exclusive lock at startup, shutdown hook also hangs on same counter → SIGKILL → repeat (4/4 launches blocked). CFD CLIENT_PRICE (XAUUSD + other CFDs) cycling offline/online with spread whipsaw. Ruled out: Aeron infra (FX sibling `signalProcessFI1` stable ~41h), stale OS lock (ext4 flocks die with process; `lsof` shows no holder). Restart alone does not fix. Recommended: (1) stop wrapper to halt cycling; (2) quarantine/clear `ADWeights.*.counter` files under `…/signals/shared/var/` — resets signal weights, requires eng sign-off. Sam pinged Arun (who had the 2026-05-15 counter-lock incident). No reply yet. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1780278921326309)
 
 > [open] 2026-05-28 — GBPUSD price spike (2026-05-27 14:20 UTC): bad Velocity ticks → TOBPN off-market → skew overamplified
 > Nathan Burch: rogue price spike on GBPUSD at 14:20:13 UTC on 2026-05-27. Root cause: bad ticks from Velocity caused crossed bid/offer, which corrupted the TOBPN (top-of-book price node), causing mid formation to be off-market. SIGNPN config skews by 100% of benchmark, so the bad mid produced a disproportionately large skew magnitude. Nathan proposes reducing max skew from 10,000 pips to 2 pips — not yet actioned; awaiting further input. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779945147921969)
