@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-05-29T07:11:46Z
+last_catchup: 2026-06-01T07:13:24Z
 ---
 
 ## Status
@@ -18,6 +18,9 @@ last_catchup: 2026-05-29T07:11:46Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [resolved] 2026-05-29 — MT5 build 5830 server update: Mahi confirms no gateway impact
+> Jan asked in #mahi-fintokei whether Fintokei's planned weekend update of MT5 servers to build 5830 would cause issues to the gateway. Rory King (Mahi) confirmed no issues expected on Mahi's side. Jan thanked and acknowledged. [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1780059694047829) [Rory confirms OK](https://mahifx.slack.com/archives/C08QWKFARDL/p1780060200072389)
 
 > [open] 2026-05-25 — MT4 bridge update causes trade rejections; rollback done, root cause unconfirmed
 > Adam (@fintokei) raised a <!channel> alert at 02:00 BST: trades being rejected by the MahiFXMT4Bridge before reaching Compass after a weekend bridge update — clients unable to close positions or delete pending orders (example: account 30145252, 176.97 lots BUY JP225). Isaac Dann (Mahi) investigated, requested MT4 logs (248MB log provided), and proposed rollback + setting `UNIFIED REQUEST IDS=N` in the MT4 EB plugin. Adam rolled back and set the flag, but confirmed `UNIFIED REQUEST IDS` was already set to `N`, meaning the config change was not the cause. Isaac noted a dev review is still needed to confirm root cause. Status at 02:46 BST: rollback done, partial traffic flowing, full resolution unconfirmed. [alert](https://mahifx.slack.com/archives/C08QWKFARDL/p1779670858863209) [rollback thread](https://mahifx.slack.com/archives/C08QWKFARDL/p1779672373610029) [dev review flagged](https://mahifx.slack.com/archives/C08QWKFARDL/p1779673574470809)
