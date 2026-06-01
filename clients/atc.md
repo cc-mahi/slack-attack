@@ -7,13 +7,16 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-29T07:13:44Z
+last_catchup: 2026-06-01T07:09:50Z
 ---
 
 ## Recent issues
 
+> [open] 2026-05-29 — Brokering-health alert: counterparty 27072360 misclassified; DONT_BROKER tag removed
+> Brokering-health routine flagged counterparty 27072360 (one of two high-volume tags sitting in DONT_BROKER classification). Andrew Morgan and Cameron Hughes investigated: 27072360 had previously been whitelisted for the broker rule from loss — likely when the counterparty was new. Cameron Hughes removed the whitelist tag (2026-05-29 ~19:59 BST) and will monitor performance over the following week. Andrew linked a full ops investigation doc. [Andrew flag](https://mahifx.slack.com/archives/C046RNF64VD/p1780064986380299) · [Cameron removed tag](https://mahifx.slack.com/archives/C046RNF64VD/p1780081293124219) · [investigation doc](https://github.com/MahiFX/MahiProduct/blob/main/docs/ops/2026-05-29-atc-27072360-classification-routing-investigation.md)
+
 > [open] 2026-05-27 — SHIUSD Compass book negative P&L: wide Finalto spreads + aggressive hedging
-> Cameron Hughes flagged Compass book performing badly (paying more spread than earning). Daria diagnosed: Finalto SHIUSD spreads (60c–80c) are double their XAUUSD spreads (30c–40c) and ~4x model spreads (16c–25c). Since the SHIUSD hedging fix on 2026-05-20 (post-SI switch-off), the backstop hedger fires immediately on any risk with constant qty trigger=1 — causing this week's net -$1,781 (received $2,635, paid $4,416). Yield profile is actually positive long-term (4x by 30s), so holding longer could reduce costs. Daria's SI-vs-Inv analysis shows hedging costs too high — options are: (a) hedge SHIUSD through XAUUSD and re-enable SI workflow (previously deprioritised), or (b) discuss raising spreads with ATC (noted as bad route given low volumes). No resolution in window. [internal analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1779941021519309) · [Cameron initial flag](https://mahifx.slack.com/archives/C046RNF64VD/p1779890363013439)
+> Cameron Hughes flagged Compass book performing badly (paying more spread than earning). Daria diagnosed: Finalto SHIUSD spreads (60c–80c) are double their XAUUSD spreads (30c–40c) and ~4x model spreads (16c–25c). Since the SHIUSD hedging fix on 2026-05-20 (post-SI switch-off), the backstop hedger fires immediately on any risk with constant qty trigger=1 — causing this week's net -$1,781 (received $2,635, paid $4,416). Yield profile is actually positive long-term (4x by 30s), so holding longer could reduce costs. Daria's SI-vs-Inv analysis shows hedging costs too high — options are: (a) hedge SHIUSD through XAUUSD and re-enable SI workflow (previously deprioritised), or (b) discuss raising spreads with ATC (noted as bad route given low volumes). **2026-05-29 update**: Cameron Hughes raised the spread comparison with ATC directly in the client channel; David Manoukian replied 2026-06-01 confirming ATC will reach out to Finalto. Outcome pending. [internal analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1779941021519309) · [Cameron initial flag](https://mahifx.slack.com/archives/C046RNF64VD/p1779890363013439) · [client comms](https://mahifx.slack.com/archives/C04AZM0LPMH/p1780050347309669) · [David confirms Finalto outreach](https://mahifx.slack.com/archives/C04AZM0LPMH/p1780281803419759)
 
 > [open] 2026-05-22 — SHIUSD/FAUUSD residual position: flatten requested on Mahi and Finalto
 > David Manoukian (01:18 UTC) reported SHIUSD (FAUUSD) is completely flat on Spotex but a residual position remains on the Mahi system and Finalto — requested it be flattened. Shyam Hari acknowledged. No confirmation of execution in window. [client permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779409080214819)
@@ -43,6 +46,8 @@ last_catchup: 2026-05-29T07:13:44Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-05-30 — Andrew Morgan / Dave M meeting booked for Monday 2 June 14:00 to discuss new flow. [permalink](https://mahifx.slack.com/archives/C046RNF64VD/p1780128700216719)
 
 - 2026-05-29 — NZ bank holiday Monday 1 June: emergency cover only. Sam Hewitt notified ATC that Monday 1 June is a bank holiday in NZ; emergency support only, Slack less actively monitored; support via support@mahimarkets.com or LN/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1780029564217709)
 
