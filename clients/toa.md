@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-05-29T07:19:49Z
+last_catchup: 2026-06-01T07:24:49Z
 ---
 
 ## Status
@@ -18,11 +18,14 @@ last_catchup: 2026-05-29T07:19:49Z
 
 ## Recent issues
 
+> [watching] 2026-05-29 — TradePositionLimitMonitor being set up on Toa-argamon CHI: spurious alerts to ops
+> James apologised to Leo (Borsi) for alerts on Arg CHI caused by TradePositionLimitMonitor being brought up. A clientDistributionGateway1 restart was also requested on 2026-05-27 (via #eod-restarts) to add a new channel to toa-argamon-ch-trading-1. https://mahifx.slack.com/archives/C035H1VNCAD/p1780070176002959
+
 > [open] 2026-05-26 — PnLDropAlert on Toa-argamon LDN: HRP_CLIENTS_NET down ~8.2k in 20 min, XAUUSD main contributor
 > Maten flagged a PnLDropAlert at 11:39 UTC: `HRP_CLIENTS_NET` fell -8,185 in 20 minutes (threshold -5,000/20min). Maten attributed it to XAUUSD in the follow-up. No intervention or resolution noted in thread. Related book to the hedgerHrpCME1 volume-breach pattern (see 2026-05-18 entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1779795816962169
 
 > [watching] 2026-05-26 — hedgerCBOE1 being added to Toa-argamon LDN
-> James announced adding hedgerCBOE1 to the Toa-argamon LDN instance; asked ops to ignore alerts during setup. https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319
+> James announced adding hedgerCBOE1 to the Toa-argamon LDN instance; asked ops to ignore alerts during setup. 2026-05-29: James noted it is still being set up and will likely be down on weekend checks. https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319
 
 > [resolved] 2026-05-22 — Stork Oracle API token requested and provided (toa-nado-shared)
 > Nado asked if Mahi could get a Stork Oracle API token. Lee/James provided it promptly; Nado specified to use `stork-fast`. An oracle.yaml config file was shared in-thread. Likely preparatory for the Chaos→Stork oracle migration scheduled Thursday 22:30 UTC. https://mahifx.slack.com/archives/C09RGU1T1GE/p1779414775390839
@@ -36,8 +39,8 @@ last_catchup: 2026-05-29T07:19:49Z
 > [resolved] 2026-05-11 — marketDataCboe1 down on TOA Argamon CHI: new process, resolved in ~33 min
 > Inald flagged marketDataCboe1 down on TOA Argamon CHI (16:55 UTC). James replied it was a new process he was adding. Inald resolved the ordersCboe alert independently; James confirmed the process was up by 17:29 UTC. https://mahifx.slack.com/archives/C035H1VNCAD/p1778514939388589
 
-> [resolved] 2026-05-08 — EURUSD-PERP 1% wide on Nado: deliberate RWA depth cut due to absent DMM liquidity
-> Kento (Nado-side) flagged EURUSD book 1% wide at 04:33 UTC. Lee loosened the FX max risk limit to allow one-sided quoting. Later that day (13:26 UTC) Nado clarified the RWA depth was deliberately cut the prior week because NLP cannot hedge risk without DMM liquidity — not a misconfiguration. https://ink-foundation.slack.com/archives/C09RGU1T1GE/p1778214820766959
+> [open] 2026-05-08 — RWA posting cut to close-only on Nado: NLP hedging constraint, crypto majors/spot unaffected
+> Kento (Nado-side) flagged EURUSD book 1% wide at 04:33 UTC 2026-05-08. Lee loosened the FX max risk limit to allow one-sided quoting. Nado clarified RWA depth was deliberately cut the prior week because NLP cannot hedge risk without DMM liquidity. 2026-05-30: James posted in the same thread that RWAs have now been cut entirely to close-only posting ("as agreed yesterday"), with crypto majors/spot continuing as normal. "Yesterday" = ~2026-05-29 (offline discussion). https://mahifx.slack.com/archives/C09RGU1T1GE/p1780139427944659
 
 > [open] 2026-05-06 — Toa Argamon LDN rejects: oncall investigation requested
 > Lee Butts (06:57 UTC) tagged the oncall subteam to investigate rejects on the Toa Argamon LDN instance; stated he was not at a computer. No reply or resolution in thread as of window close. https://mahifx.slack.com/archives/C035H1VNCAD/p1778050635016669
