@@ -12,13 +12,16 @@ key_people_overrides:
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-last_catchup: 2026-05-29T07:24:56Z
+last_catchup: 2026-06-01T07:15:41Z
 ---
 
 ## Recent issues
 
-> [open] 2026-05-29 — Quote cancels on distribution channels — investigation open
-> Erik (GoMarkets, 2026-05-29 08:07 UTC) asked whether Mahi sends quote cancels down the distribution channels as per current setup. Sam Hewitt (Mahi) replied asking for more context. No answer yet. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780038478806569)
+> [open] 2026-06-01 — XAUUSD spread whipsawing 0.10–0.60+; CLIENT_PRICE_NYC cycling offline/online — adaptive mid broken
+> Will (GoMarkets, ~00:32 UTC) reported XAUUSD spread whipsawing from ~0.10 to 0.60+ with very aggressive changes, and CLIENT_PRICE_NYC going offline/online repeatedly between large price swings (Echo link attached). Sam Hewitt (Mahi) picked up immediately; by ~00:45 UTC Will confirmed spreads looked more stable but asked for root cause. Sam replied still investigating. In #internal-go Isaac Dann diagnosed: adaptive mid is broken — it was causing pricers not to come back up pre a hot-fix on the weekend but is still broken; he disabled it and flagged he is investigating. Root cause not yet resolved. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780270363022559) [Isaac internal diagnosis](https://mahifx.slack.com/archives/CNF3WPNSK/p1780271596482309)
+
+> [resolved] 2026-05-29 — Quote cancels on distribution channels — answered
+> Erik (GoMarkets, 2026-05-29 08:07 UTC) asked whether Mahi sends quote cancels down the distribution channels; underlying concern was a quote where BID=ASK appeared on their platform. Erik self-identified root cause as an OZ depletion case before Mahi could investigate. Cameron Hughes (Mahi, 2026-05-29 19:53 UTC) confirmed: Mahi does not send FIX quote-cancels (Z) on distribution — depleted side is deleted rather than a crossed two-way left up, consistent with the OZ depletion case Erik found. Client confirmed ("Great thank you for confirming Cameron"). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780038478806569) [Cameron Hughes answer](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780080814745339)
 
 > [open] 2026-05-28 — Hedger latency: 15ms decision time on Metals.DYNAMIC-DONT-INTERNALISE-FASTER
 > Erik (GoMarkets, 2026-05-28 09:14 UTC) raised that hedging decisions on metals appear to take ~15ms from signal to order fire, with prices and orders reaching LP within 1-7ms — raising concern that decisions fire on stale prices. He attached a spreadsheet and screenshot of a specific order (Metals.DYNAMIC-DONT-INTERNALISE-FASTER rule). Isaac clarified: (1) the quote was still valid at 11:39:07.161 UTC when the order was sent; (2) the arb hedger round trip to ISAM is 1-2ms, not 6-7ms; (3) a later order's full round trip (new order to fill) was only 4ms — delays are on ISAM's side. Erik replied 2026-05-29 08:18 UTC: he can see ISAM held the arb hedger order for 13ms before rejecting; a second order (012dt6ay7m) reached OZ 6ms after initiation and was immediately rejected as the limit price was already old. The thread remains open — Erik acknowledged Isaac's points but the LP-side execution quality question persists. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779956095119589) [Isaac response](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780007648284789)
@@ -79,7 +82,7 @@ last_catchup: 2026-05-29T07:24:56Z
 
 ## Notable topics
 
-- 2026-05-28 — Metals-crosses driver factor changes: auto-apply vs manual notification. Kieran (GoMarkets) asked whether adjustments to the Factor under drivers for metals crosses apply automatically at EOD/EOW or require notification to Mahi. No Mahi reply yet in window. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780006312436859)
+- 2026-05-28 — Metals-crosses driver factor changes: auto-apply vs manual notification — still unanswered. Kieran (GoMarkets) asked whether adjustments to the Factor under drivers for metals crosses apply automatically at EOD/EOW or require notification to Mahi. No Mahi reply as of 2026-06-01. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780006312436859)
 
 - 2026-05-28 — NZ bank holiday 1 June: Sam Hewitt (Mahi) advised emergency-only cover on Monday 1 June; normal support resumes Tuesday. Urgent contact via support@mahimarkets.com or phone. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780029485559649)
 
