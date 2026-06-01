@@ -18,10 +18,13 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-05-29T07:27:34Z
+last_catchup: 2026-06-01T07:19:03Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-29 — Tag 229 FA feed FX routing: no-broker, fast-hedge to IC Markets (pending deployment)
+> Oli (Rostro) requested that tag 229, which will start trading on the FA feed for FX next week, must not broker — if classified as broker/signal-follow, flow should internalise then fast-hedge (not be sent to LP brokering). Routing must go to IC Markets. Cameron Hughes confirmed the FA channel already routes those instruments (XAUUSD, XAGUSD, USDJPY, EURUSD, GBPUSD, AUDUSD, NZDUSD, USDCHF, USDCAD) to SI, and said he'd add a rule to prevent brokering for this tag. Oli confirmed understanding (✅). Config change not yet confirmed deployed. [Oli request](https://mahifx.slack.com/archives/C08AQKRU953/p1780061540704189) [Cameron Hughes response](https://mahifx.slack.com/archives/C08AQKRU953/p1780062187529349) [Oli confirms](https://mahifx.slack.com/archives/C08AQKRU953/p1780063802859709)
 
 > [resolved] 2026-05-27 — cpty 41_0_835653 AUDUSD routing to EW/Invast instead of IC: APAC STP subset rules removed
 > Oli (Rostro) flagged morning of 2026-05-27 that `41_0_835653` traded AUDUSD overnight and was hedged via Edgewater/Invast instead of IC_MARKETS. Oli's expectation: majors for most tags should route to the rev share SI book and hedge IC only. Isaac investigated: the counterparty was hitting a "STP: Trades > $0.5m in APAC" rule in the SI Book subset rules — a timezone+size-based rule, not classification-based. Isaac proposed removing these APAC STP subset rules (flow should be covered by higher-up STP logic and internalised). Oli agreed; Isaac actioned the removal at 08:11 BST 2026-05-27. [Oli query](https://mahifx.slack.com/archives/C08AQKRU953/p1779864528859039) [Isaac diagnosis](https://mahifx.slack.com/archives/C08AQKRU953/p1779865524795099) [Oli agrees](https://mahifx.slack.com/archives/C08AQKRU953/p1779865671145429) [Isaac actioned](https://mahifx.slack.com/archives/C08AQKRU953/p1779865892335789)
