@@ -9,10 +9,13 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-05-29T07:28:28Z
+last_catchup: 2026-06-01T07:22:52Z
 ---
 
 ## Recent issues
+
+> [open] 2026-05-29 — Skew-arb detected; Cameron Hughes proposing to turn skew off
+> Cameron Hughes (17:36 BST) posted a screenshot and noted "Looks like we're still being skew arbed here, running skew health check to confirm." Two minutes later: "If confirmed I'll turn off skew for now to just let LR and increased VWAP make the profit." No reply or confirmation of action in window — status of skew config change unknown. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1780072566297759) [follow-up](https://mahifx.slack.com/archives/CPDS0M2KF/p1780072681411389)
 
 > [open] 2026-05-28 — CFD instruments not persisted in Echo / Compass — gap confirmed, fix agreed
 > Richard asked in client channel whether Mahi processes CFDs from Xenfin drop-copy uploads in Echo. William confirmed only FX + Metals registered in Compass are persisted — CFDs filtered out. Richard noted the gap: "yesterday, we traded 37 FX symbols, echo shows 13." William shared `xenfin_dropcopy_instruments.csv` listing all instruments in the uploads; Richard asked for "all if possible please." William: "Sure we'll get those set up." No timeline given; fix not yet deployed. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1779974991147639) [37-vs-13](https://mahifx.slack.com/archives/C05NB72AGR2/p1779975518272319) [will-get-set-up](https://mahifx.slack.com/archives/C05NB72AGR2/p1779981170582279)
