@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-01T07:05:06Z
+last_catchup: 2026-06-02T07:10:22Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-01 — 1331oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan requested Compass adjustment for 1331oz gold long filled on Finalto at 15:51 BST; William confirmed "Hi Layan, sure" at 15:51 and "This is done" at 15:59 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780325460256019)
 
 > [open] 2026-05-27 — GCC demanding $70k cash compensation for 2026-05-15 XAGUSD incident; Mahi holding at 0% share offer
 > Khalil (senior GCC contact above Yousef) is driving a $70k cash demand — 1:1 with the headline incident figure. Yousef has been the messenger. Will Carter posted a formal internal handover at 14:33 BST: Mahi's position is zero cash, 0% Mahi share on Skew, PSM and Brokered LR for the rest of the pilot until ~$25–30k of foregone PnL has accrued. Rationale: $70k exceeds total Mahi earnings from the relationship (~$54k across 3.5 months) and sets a cash precedent that would anchor the July renegotiation (target $360–600k/year). Will sent the formal response to Yousef on 2026-05-27 afternoon (full message text in thread), itemising the value-add ledger ($87.5k Skew PnL, $14k hedger savings, $12B internalised flow, Jan 31 cover) and the proportionality framing. Awaiting Yousef response; billing as normal in the meantime (cc: Nicole Vivian). Risks: Khalil escalating to David/Susan; GCC walking (account flagged at-risk in March 2026). Day-to-day coverage handover to Bonnie Cassidy and William Denny. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1779888805588859) [response-text](https://mahifx.slack.com/archives/C09QS1NUA80/p1779888839513849)
@@ -115,6 +118,7 @@ last_catchup: 2026-06-01T07:05:06Z
 
 ## Notable topics
 
+- 2026-06-01 — LR on A_CLIENTS channel tuned: William reduced refresh rate from $250k/sec to $50k/sec (then walked back to $100k/sec as less aggressive) to lift LR from ~$1/M. Monitoring underway. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780329833967329)
 - 2026-05-29 — NZ bank holiday 1 June: Sam Hewitt posted standard advisory — Slack less monitored; emergency support via support@mahimarkets.com or London (+44 203 397 1985) / NZ (+64(3) 2880079) phone lines. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780029481215959)
 - 2026-05-28 — FXCubic client-feed throttle review: Youssef asked how many price ticks/sec GCC clients receive via their FXCubic FIX connection. William shared a stats CSV showing ~500/sec from Mahi to GCC, ~100/sec from both LMAX and Finalto. GCC currently throttles outbound to clients at 100ms (10/sec); Youssef asked whether reducing to 50ms or 10ms would improve client experience. William assessed: Finalto interval mean ~20ms / median ~2ms, no current evidence of stale-price rejections or arb — but proposed trial of 50ms then 10ms; client agreed to try next day. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779981594374659)
 - 2026-05-27 — XAUUSD continuity pool P&L bump at market open (~22:00 UTC 2026-05-26): Daria flagged $5.5k P&L bump during the XAUUSD market open window. CLIENT_PRICE_INSTI_MAHI was not pricing (CLIENT_PRICE_INSTI_LDN forced indicative for 15 min after open, 30 min on Sunday, and closed for the last hour before weekend); GCC was publishing the continuity pool (Finalto). Finalto gave better fills than the model price — dist filled at published price + LR and P&L came from the difference. Daria also noted XAUUSD skew P&L took a non-real hit over this period. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1779837414097499)
