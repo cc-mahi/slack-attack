@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-06-01T07:05:06Z
+last_catchup: 2026-06-02T07:07:09Z
 status: active
 retired_at: null
 retired_reason: null
@@ -25,6 +25,12 @@ retired_reason: null
 - **Relationship:** healthy, bi-weekly call cadence with Cameron Hughes; client (Benjamin Galindo) actively engaging on prop sim outputs and a futures expansion ask.
 
 ## Recent issues
+
+> [open] 2026-06-01 — free product pricing: how do Mahi charge for one-time-use accounts?
+> Syb Dijkstra asked on 2026-05-27 how Mahi pricing works for a free version of BrightFunded (one-time use per user). Cameron H and Will Carter both said they'd raise internally; Mio followed up in the same thread on 2026-06-01 asking for an update. Cameron H acknowledged in `mahi-brightfunded` ("I'll raise internally"), then flagged internally that he's unsure of the approach — suggested a lower per-user cost specifically for these accounts, noting BF makes no money on free/test accounts and is worried the bill will blow up. No resolution yet. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1780330801690039)
+
+> [resolved] 2026-06-01 — AVAX/USD and ATOM/USD slippage (base spreads too wide)
+> Benjamin reported significant slippage on AVAX/USD and ATOM/USD at 13:54 BST; Cameron H identified base spreads as too wide and asked Benjamin to check. By 17:44 BST Benjamin confirmed improved but requested a further 50% reduction; Cameron H applied the change and confirmed done at 18:35 BST. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1780318466562819)
 
 > [resolved] 2026-04-13 — log disk near-full from marketDataProxyTx spam
 > Cameron Copland alerted on `/app/fx/log/mahifx` at 88% (and tickstore at 96%) on bright-funded-euwest2-prod-compass-1; Arun Patel matched the log spam pattern to a recent earlier incident, prescribed a rolling restart of `marketDataProxyTx*`. Restart done same hour, logs confirmed recovered. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1776092711480289)
@@ -45,7 +51,7 @@ retired_reason: null
 > Benjamin Galindo requested 22 new crypto pairs; OKB/KCS originally blocked on code change. By 2026-05-18 Isaac Dann confirmed 15 of the 22 are now priced (Kraken/Binance streams, no MWMS/BMSL, 1000 $/M base spread both sides); TONUSD, THETA, OKB, KCS still need a system deploy. MKR is no longer a listed crypto (replaced by SKY at 1:24000 ratio — needs client confirmation on which instrument), and EOS has been relisted as Vaulta at most exchanges (1:1 swap — needs confirmation). Awaiting client response on MKR/EOS and a deploy window for the remaining 4. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1778006518033119)
 
 > [watching] 2026-05-08 — coordinated trading detection: weekly CSV delivery ongoing
-> BrightFunded asked on 2026-05-08 for Mahi's trading correlation script to combine with their fingerprinting tool for multi-account detection. Cameron Hughes sent the first coordinated-trading CSV on 2026-05-12 (covering 2026-05-05..2026-05-12); second delivery sent 2026-05-21 covering 2026-05-13..2026-05-20 — Mio acknowledged with 🤙. Ongoing weekly cadence established. Client is also implementing device/payment fingerprinting (Cameron H confirmed it's payment fingerprinting; Daria noted Pepper uses similar approach for A-book routing). [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1779380274437499)
+> BrightFunded asked on 2026-05-08 for Mahi's trading correlation script to combine with their fingerprinting tool for multi-account detection. Cameron Hughes sent the first coordinated-trading CSV on 2026-05-12 (covering 2026-05-05..2026-05-12); second delivery sent 2026-05-21 covering 2026-05-13..2026-05-20 — Mio acknowledged with 🤙; third delivery sent 2026-05-29 covering 2026-05-22..2026-05-29. On 2026-05-29 Mio requested the output be based on sub-counterparty/account number rather than counterparty (while keeping a counterparty tag column); Cameron H explained the current logic uses sub-IDs where available but not all platforms supply them, and delivered the standard run in the meantime. Ongoing weekly cadence established. Client is also implementing device/payment fingerprinting (Cameron H confirmed it's payment fingerprinting; Daria noted Pepper uses similar approach for A-book routing). [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1779380274437499)
 
 > [open] 2026-06-03 — second pricing model for qualifying traders (tighter spreads)
 > Jelle raised on a call (2026-06-03) that VWAP on larger-ticket qualifying traders is causing complaints; wants tighter spreads for qualifying flow only without touching funded. Amir proposed a separate qualifying pricing model (same config, tighter tiers and BMSL) — straightforward to set up but needs a new FIX connection (DX + cTrader = 2 additional connections; BF already uses 3 of their contracted FIX connections). As of 2026-06-04/05 Bonnie checking the contract (1 distribution channel, 3 FIX connections specified); Andrew says $500/month for one model, and server load needs a review before proceeding. Bonnie reached out to Syb, who was unaware of the specifics. Not yet contracted or scheduled. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1748947530909369)
