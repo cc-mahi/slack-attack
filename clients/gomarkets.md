@@ -8,14 +8,18 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Erik", role: "client ops — reconciliation / position discrepancies", confidence: low}
-  - {name: "Mac", role: "client ops — tenant profile / All Books migration / config editor", confidence: low}
+  - {name: "Mac Nemeth", role: "client ops — tenant profile / All Books migration / config editor / LP feed setup", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-last_catchup: 2026-06-01T07:15:41Z
+  - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
+last_catchup: 2026-06-02T07:22:37Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-02 — LMAX London feed setup: connection configured, pending EOD restart confirmation
+> Mac (GoMarkets, ~02:15 UTC) shared LMAX London FIX credentials in the client channel — new feed offering better spreads than the NY connection, same instruments as current LMAX stream, exclude from pricing models for now (OZ whitelist already done). Nathan confirmed he would set up the connection excluding it from models; confirmed market name `GO Markets_LMAX_LDN` from Mac; reported all set up on Mahi side at ~04:07 UTC pending EOD restart to confirm pricing receipt. ZD #23058 created by Andrew (via /zendesk-triage at 04:36 UTC), assigned to Isaac Dann. EOD restart for fixMarketData2 + fixOrders2 also covers the GAUUSD/GAUCNH instruments (see that entry). Confirmation of pricing receipt expected post-restart. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780366536111909) [Nathan setup reply](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780366671870259)
 
 > [open] 2026-06-01 — XAUUSD spread whipsawing 0.10–0.60+; CLIENT_PRICE_NYC cycling offline/online — adaptive mid broken
 > Will (GoMarkets, ~00:32 UTC) reported XAUUSD spread whipsawing from ~0.10 to 0.60+ with very aggressive changes, and CLIENT_PRICE_NYC going offline/online repeatedly between large price swings (Echo link attached). Sam Hewitt (Mahi) picked up immediately; by ~00:45 UTC Will confirmed spreads looked more stable but asked for root cause. Sam replied still investigating. In #internal-go Isaac Dann diagnosed: adaptive mid is broken — it was causing pricers not to come back up pre a hot-fix on the weekend but is still broken; he disabled it and flagged he is investigating. Root cause not yet resolved. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780270363022559) [Isaac internal diagnosis](https://mahifx.slack.com/archives/CNF3WPNSK/p1780271596482309)
