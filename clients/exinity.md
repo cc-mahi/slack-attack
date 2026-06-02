@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-01T07:05:06Z
+last_catchup: 2026-06-02T07:12:46Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-02 — STP FOK Market order config change requested (post-Wintermute)
+> Daniel Kurra asked Mahi to adjust execution settings so STP sends FOK Market orders rather than the current config, noting Wintermute is no longer in use. Message received a +1 reaction; no explicit Mahi confirmation yet. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780378737519019)
+
+> [open] 2026-06-01 — Arbitrageur execution rule removed by Exinity; criteria review planned
+> Daniel Kurra removed the arbitrageur execution rule and asked Mahi to consult before making any changes to it. Kate (internal) flagged this as an opportunity to work with Exinity to harden the criteria (as with Infinox) so genuine arbers are caught and the rule can be re-enabled on a sounder footing. Kate raising on a 2pm call with Daniel. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780315838504689)
 
 > [resolved] 2026-05-27 — Starfish process error (no client impact)
 > Samuel flagged an error for Starfish at ~03:35 UTC; Shyam acknowledged and had the process back up within ~38 minutes. No client impact confirmed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779852915812469)
@@ -52,11 +58,11 @@ last_catchup: 2026-06-01T07:05:06Z
 > [open] 2026-05-17 — Invast NG1 pricing not received
 > Samuel Ewebiyi reported no pricing from Invast for NG1 despite Invast confirming they were sending. Nathan Burch picked it up. No resolution confirmed in thread. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779056584038339)
 
-> [watching] 2026-05-12 — Wagyu XAUUSD spreads recurring wide (arb protection / MWMS config)
-> Recurring: wide spreads (50-60c) reported 12-May, 14-May, 20-May (arb protection widening), 24-May (Isaac adjusted MWMS to target 35c), and again 26-May post market open (Mukhammad flagged; Daria adjusted MWMS config; spreads stabilised ~23:35 UTC, Mukhammad confirmed "looking much better"). Daria suggested a higher-level model review so config is designed to consistently meet the 35c target; Mukhammad said they'd discuss with the team and revert. No permanent fix agreed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899) [26-May flare](https://mahifx.slack.com/archives/C0456LSHQQK/p1779834170693399)
+> [open] 2026-05-12 — Wagyu XAUUSD spreads recurring wide (arb protection / MWMS config)
+> Recurring: wide spreads (50-60c) reported 12-May, 14-May, 20-May (arb protection widening), 24-May (Isaac adjusted MWMS to target 35c), and again 26-May post market open (Mukhammad flagged; Daria adjusted MWMS config; spreads stabilised ~23:35 UTC, Mukhammad confirmed "looking much better"). Daria suggested a higher-level model review so config is designed to consistently meet the 35c target. 2026-06-01: Daniel sent new MWMS tier config per timezone (0 threshold ratio, BMSL on double LP quantities); Kate confirmed she'll set it up. Daniel followed up 2026-06-02 morning requesting it be done today as a client is requesting additional liquidity; Kate confirmed working on it. Active config work now in progress. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778624005963899) [26-May flare](https://mahifx.slack.com/archives/C0456LSHQQK/p1779834170693399) [MWMS tiers](https://mahifx.slack.com/archives/C0456LSHQQK/p1780330273777659)
 
 > [open] 2026-05-12 — XAU HOUSE positions at Invast/LMAX: Compass exposure not matching LP
-> Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779)
+> Samuel asked why Compass shows XAU positions going to Invast under HOUSE with no corresponding LP position and no order events. Daria traced: the discrepancy stems from manual adjustments — one on 05-07 and another more recent manual adjustment. Samuel also flagged that LMAX XAU exposure in Compass appears double what the LP shows (expected 2014oz, Compass shows ~2x). Daria suggested it may be part of the same set of adjustments and was looking into it as of end of window — no final confirmation of resolution. 2026-06-01: Kate's catch-up with Daniel flagged A HOUSE positions broadly "out of whack over time due to manual adjustments" — Kate to do a sweep and get back to Exinity on tidy-up. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778553846921779) [Kate sweep planned](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
 
 > [resolved] 2026-05-11 — Velocity XFM unhandled fill alert: manual position adjustment
 > Inald Gjoni alerted on `FAILED TO PROCESS FILL FOR UNKNOWN ORDER - MANUAL BOOKING REQUIRED` for 2 lots XFM/USD @ 4679.7 on VELOCITY (MarketTradeId: VR6A00F287001699E.1). Inald asked Louie to confirm whether Velocity executed it. Louie confirmed: filled on Velocity's side — he had made a manual position adjustment to fix a client/insti→LP discrepancy. No Mahi action needed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778502206747279)
