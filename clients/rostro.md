@@ -18,10 +18,13 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-01T07:19:03Z
+last_catchup: 2026-06-02T07:23:05Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-02 — Centroid-B2B FIX sessions not connecting (telnet ok, FIX API failing)
+> Rostro reported that Centroid-B2B-Prices/MahiFX-Prices (port 9031) and Centroid-B2B-Orders/MahiFX-Orders (port 9032), both targeting 46.235.34.54, have confirmed telnet connectivity but cannot establish FIX API sessions. Sam Hewitt (Mahi, Trading Support) acknowledged and is investigating; no resolution in window. New session type — not previously referenced in the dossier; separate from the existing Centroid-Retail connections. [Rostro query](https://mahifx.slack.com/archives/C08AQKRU953/p1780382351497599) [Sam ack](https://mahifx.slack.com/archives/C08AQKRU953/p1780382511986749)
 
 > [open] 2026-05-29 — Tag 229 FA feed FX routing: no-broker, fast-hedge to IC Markets (pending deployment)
 > Oli (Rostro) requested that tag 229, which will start trading on the FA feed for FX next week, must not broker — if classified as broker/signal-follow, flow should internalise then fast-hedge (not be sent to LP brokering). Routing must go to IC Markets. Cameron Hughes confirmed the FA channel already routes those instruments (XAUUSD, XAGUSD, USDJPY, EURUSD, GBPUSD, AUDUSD, NZDUSD, USDCHF, USDCAD) to SI, and said he'd add a rule to prevent brokering for this tag. Oli confirmed understanding (✅). Config change not yet confirmed deployed. [Oli request](https://mahifx.slack.com/archives/C08AQKRU953/p1780061540704189) [Cameron Hughes response](https://mahifx.slack.com/archives/C08AQKRU953/p1780062187529349) [Oli confirms](https://mahifx.slack.com/archives/C08AQKRU953/p1780063802859709)
