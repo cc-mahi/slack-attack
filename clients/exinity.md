@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-01T07:05:06Z
+last_catchup: 2026-06-02T07:17:19Z
 ---
 
 ## Recent issues
@@ -172,4 +172,9 @@ last_catchup: 2026-06-01T07:05:06Z
 - 2026-05-19–21 — Rory invited Louie/Christian/Matthew to a call to walk through running yield sims via Echo independently; Matthew accepted for Wednesday 2pm UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779103440726729)
 - 2026-05-20 — Will Carter noted Exinity haven't communicated their planned system changes (the tagging restart) proactively — flagged desire to sit down with them to understand their roadmap. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779262620774479)
 - 2026-05-26 — Quarterly steering meeting pencilled in for Wed 10 June. Nicola suggested a pre-Cyprus catch-up with Nick (Exinity) beforehand (less formal, "lunch thing"); Will agreed. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779792272029039)
+- 2026-06-01 — XAUFUT pricing model being set up today (Kate, post-Daniel call); will broker initially as with other futures, hedging books planned over the next few weeks. Confirmed in contract. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
+- 2026-06-01 — Exinity want a channel with more stable spreads (outside volatile periods). Kate said this requires another model; Daniel to check internally how much push there is before Mahi moves forward. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
+- 2026-06-01 — XAUUSD kilo pricing raised (Zendesk 23055). Liam pinged Andrew: in dev support queue, more of a feature request. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
+- 2026-06-01 — Exinity still interested in weekend support; asked Mahi for a proposed fee structure. No response in window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
+- 2026-06-01 — Daniel queried whether Mahi can boost LP stack quantities for an internalised client using a broker LP pool. Kate: would need to set up the symbol on the model; asked which instruments. Daniel confirmed CL1 and CO1 on CLIENT_PRICE_LDN; Kate confirmed model setup is the right path. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780323376663259)
 - 2026-05-29 — NZ bank holiday (Monday 1 June): Sam Hewitt advised emergency-only cover; Matthew Ayub asked for a walkthrough of the wide-spread response process ahead of Sunday open, or for someone to be available to assist. No reply yet. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780034840862359)
