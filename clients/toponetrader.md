@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Shane Kalichurn", role: "Operations; weekly payout reporting"}
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-06-01T07:05:06Z
+last_catchup: 2026-06-02T07:25:08Z
 ---
 
 ## Status
@@ -22,6 +22,9 @@ last_catchup: 2026-06-01T07:05:06Z
 - **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
+
+> [resolved] 2026-06-01 — MatchTrader account 10408: 1.7 lot (170 XBT) order rejected; TOB depth raised
+> Arjie raised that account 10408 on MatchTrader could not place a 1.7 lot position despite sufficient margin. Cameron Hughes diagnosed the order size (170 XBT) exceeded Mahi's published TOB depth; he raised the TOB tiers and imported new tiers. Arjie confirmed the large orders were being accepted by 11:03 BST; resolved same morning. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1780303004735039)
 
 > [open] 2026-05-28 — ETHUSD/XETUSD LIMIT order rejections due to 3dp pricing precision
 > Isaac Dann flagged in #mahi-toponetraders that TOT is submitting ETHUSD/XETUSD LIMIT orders with 3 decimal place precision; Mahi prices and executes ETHUSD at 2dp, causing rejections. Pattern traced to mostly one counterparty. No resolution or thread replies yet as of run time. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1779942346326859)
