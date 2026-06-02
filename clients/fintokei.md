@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-06-01T07:13:24Z
+last_catchup: 2026-06-02T07:20:26Z
 ---
 
 ## Status
