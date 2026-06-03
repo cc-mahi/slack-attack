@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-06-02T07:36:02Z
+last_catchup: 2026-06-03T07:21:26Z
 ---
 
 ## Recent issues
@@ -91,6 +91,8 @@ last_catchup: 2026-06-02T07:36:02Z
 
 ## Notable topics
 
+- 2026-06-02 — Tag 885Z66109DA2 flagged by Richard; Andrew Morgan monitoring (humorous register, but real concern). Richard Holman asked Will internally (14:36 BST) "how do you feel about tag 885Z66109DA2" with an Echo link covering internalised trades 2026-05-31–2026-06-05. Andrew Morgan replied at 16:22 BST: not actionable prose, but 2× joy reactions — indicates ongoing monitoring of this sub-counterparty for yield quality. No config change posted. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1780407529520239)
+- 2026-06-02 — Dan (client-side) tried Compass counterparty analysis for 1034ZBEFEA4B4, hit error; William confirmed beta-only. Dan attempted to pull up cpty analysis for 1034ZBEFEA4B4 via Compass at 12:12 BST — got an error message. William Denny replied at 12:13 BST: "This is a beta feature which isn't in prod yet. Echo yield profiles is the best place to evaluate that counterparty" and shared the Echo yield profile link for that cpty covering 2026-05-24–2026-06-05. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1780398750309499) [William reply](https://mahifx.slack.com/archives/C05NB72AGR2/p1780399156293129)
 - 2026-06-01 — Broker tag 889 sharp flow; LR throttle added, then softened. William Denny observed sharp flow from broker tag 889 going offside before 500ms on the premium channel (11:30–12:49 UTC). Added a Heavy XAU LR-by-counterparty rule for 889 (burst=10k, rate limit=20k — harshest tier). Will posted Echo yield profile covering 13:01–14:01 UTC showing the impact ("That's turbo charged it a bit" — `raised_hands` reaction). Will then noted the rule could result in complaints and made it "slightly less aggressive"; also found an existing XAU per-counterparty LR rule already in place ("shouldn't lead to complaints on second thoughts"). Separately, fixed a misconfigured distribution gateway (catch-all/default rule was not at the bottom; re-ordered). [William's post](https://mahifx.slack.com/archives/CPDS0M2KF/p1780318671996469) [Will's turbo comment](https://mahifx.slack.com/archives/CPDS0M2KF/p1780322515171989) [softened](https://mahifx.slack.com/archives/CPDS0M2KF/p1780322618095779) [gateway fix](https://mahifx.slack.com/archives/CPDS0M2KF/p1780322663235689)
 - 2026-06-01 — DTA profile FASTER-LOW-QTY deployed; hybrid hedger bounced. William bounced the hybrid hedger at 11:29 BST to pick up new DTA profile `FASTER-LOW-QTY`, which has smaller min/step sizes and normal quantities for `Friday_Close` and `Weekday_Close` rules, aimed at clearing smaller end-of-day positions. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1780309791451039)
 - 2026-06-01 — Dan (client-side) extracting yield profiles; targeting 5-10s window for more clients. Dan noted at 09:11 BST he'll be extracting yield profiles and getting more clients added — "from memory we're looking at 5-10s window now instead of previous 30s." William confirmed: "great yes good 5-10s yield performance is important for fast hedging." Dan also confirmed all missing pairs have been backfilled from trade data. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1780301509253189)
