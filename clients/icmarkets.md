@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
   - {name: "Karam", role: "IC Markets — queries execution profiles and Echo dashboards; first name only seen", confidence: low}
-last_catchup: 2026-06-02T07:12:58Z
+last_catchup: 2026-06-03T07:04:59Z
 ---
 
 ## Recent issues
