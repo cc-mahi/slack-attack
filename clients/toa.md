@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-02T07:30:33Z
+last_catchup: 2026-06-03T07:21:25Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-06-02T07:30:33Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [watching] 2026-06-02 — propTraderHrp1 being added to Toa-argamon CHI
+> James posted "Adding propTraderHrp1 to toa-argamon CHI" — no further context or ops alerts in thread. Likely infrastructure expansion related to the hedgerCBOE1/TradePositionLimitMonitor CHI buildout from the past week. https://mahifx.slack.com/archives/C035H1VNCAD/p1780423159813489
 
 > [watching] 2026-05-29 — TradePositionLimitMonitor being set up on Toa-argamon CHI: spurious alerts to ops
 > James apologised to Leo (Borsi) for alerts on Arg CHI caused by TradePositionLimitMonitor being brought up. A clientDistributionGateway1 restart was also requested on 2026-05-27 (via #eod-restarts) to add a new channel to toa-argamon-ch-trading-1. https://mahifx.slack.com/archives/C035H1VNCAD/p1780070176002959
@@ -167,7 +170,7 @@ last_catchup: 2026-06-02T07:30:33Z
 
 ## Notable topics
 
-- **Upcoming: Chaos→Stork oracle migration Thursday 22:30 UTC** — all Nado crypto perp markets migrating from Chaos oracle to Stork; 2-hour window. Stork API token already provided to Nado (2026-05-22); `stork-fast` endpoint specified. Ops to restart processes at 12:30 UTC Thursday.
+- **Chaos→Stork oracle migration (2026-05-22 22:30 UTC)** — all Nado crypto perp markets migrated from Chaos to Stork oracle; 2-hour window. Stork API token provided; `stork-fast` endpoint. No post-migration incident signals in channel through 2026-06-03 window — likely completed without issue.
 - Nado weekly maintenance window moved to 22:30 UTC Mon/Thu (was previously aligned to LDN hours); Toa reboot schedule updated to match — PRI reboots Monday 22:30 UTC, SEC reboots Thursday 22:30 UTC. Calendar reminder updated for NZ support coverage instead of LDN. https://mahifx.slack.com/archives/C035H1VNCAD/p1778185084196589
 - Cameron asked whether low-urgency PD alerts requiring prompt action will get missed in the noise; James says most should drop off PD entirely as EOD telemetry. Open design question for pagerbuddy / alert routing. PD noise review (Feb 2026) showed 2064 incidents on APN1 — threshold tuning still pending.
 - `--binaryLogOutputPath` for systemStateMonitor remains commented out (rolled back 2026-03-08); without it pnlDropAlerter forensics rely on slower log digs. PnlDropAlerter fix committed 2026-04-23 (c2cdb3b3) — needs release + config set before binlogs are useful again.
