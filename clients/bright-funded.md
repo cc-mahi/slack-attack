@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-06-02T07:09:09Z
+last_catchup: 2026-06-03T07:06:21Z
 status: active
 retired_at: null
 retired_reason: null
@@ -59,8 +59,8 @@ retired_reason: null
 > [resolved] 2026-05-08 — XBTUSD max price stale (100k cap vs 102k live price)
 > Isaac flagged at 22:22 BST: BTC live price exceeded the Compass max price config (100k cap). Distribution restarted at scheduled BrightFunded downtime (23:30 CET / 21:30 UTC). Config fix applied to `reference.marketInstrumentDefinitions.priceFormatPipRelative`. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1746739332848859)
 
-> [open] 2026-05-26 — PFM ranking slipping; spreads tightened
-> Jelle flagged (screenshot) that BrightFunded is appearing lower and lower in the PFM ranking list. Cameron H confirmed spreads need tightening and got Jelle's go-ahead. Changes applied: US30 reduced to $1 spread, GBPUSD and USDJPY to 0 pip avg spread; pricers bounced in `internal-brightfunded` to pick up MWMS change. As of 18:47 BST the changes had not yet been reflected in PFM — Cameron H said he'd check again soon to confirm. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1779793894044729)
+> [open] 2026-05-26 — PFM ranking slipping; spreads tightened but still not reflecting
+> Jelle flagged (screenshot) that BrightFunded is appearing lower and lower in the PFM ranking list. Cameron H confirmed spreads need tightening and got Jelle's go-ahead. Changes applied: US30 reduced to $1 spread, GBPUSD and USDJPY to 0 pip avg spread; pricers bounced in `internal-brightfunded` to pick up MWMS change. As of 18:47 BST on 2026-05-26 the changes had not yet been reflected in PFM. On 2026-06-02 a new screenshot posted to `mahi-brightfunded` shows BrightFunded "almost last" in spread standings; a Mahi reply noted "This is an issue on PFM side" (2× 👍). Spread tightening changes did not resolve the ranking drop — PFM-side issue identified, no fix visible yet. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1779793894044729) [2026-06-02 update](https://mahifx.slack.com/archives/C08473TFD7Z/p1780414792395589)
 
 > [watching] 2026-05 — recurring pricer memory pressure and latency alerts
 > Multiple pricer bounces through May: 2026-05-08 Arun bumped memory on pricer2/pricerBeta1 for MD latency; 2026-05-14 Maten bumped pricer1 from 2GB→3GB and bounced after CPL latency alerts (EURGBP 992ms on CLIENT_PRICE_LDN); 2026-05-16 Arun bounced pricerBeta1 again for allocation stalls (AeronEventLoop 1477ms); 2026-05-21 MdAnalytics OOM'd and self-restarted. Pattern of memory pressure on the BF eu-west-2 pricer fleet; no root-cause fix yet seen in window. (2026-05-26 pricer bounce was unrelated: spread/MWMS config change for PFM ranking — see entry above.) [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1747218630842229)
