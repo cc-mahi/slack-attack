@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-02T07:10:22Z
+last_catchup: 2026-06-03T07:10:20Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-02 — 1636oz XAUUSD long filled on Finalto, Compass adjustment pending
+> Layan requested Compass adjustment for 1636oz gold long filled on Finalto at 15:12 BST; William acknowledged "Hi Layan, sure" at 15:12 BST but no completion confirmation in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780409523294259)
+
+> [open] 2026-06-02 — A-book performance poor; William investigating
+> William flagged at 14:35 BST: "A Book performance has been bad today as well, investigating this." No follow-up or resolution in window. Will Carter had also noted at 12:03 BST that volumes were "really struggling". [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780407303939239) [volumes](https://mahifx.slack.com/archives/C09QS1NUA80/p1780398232116689)
 
 > [resolved] 2026-06-01 — 1331oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan requested Compass adjustment for 1331oz gold long filled on Finalto at 15:51 BST; William confirmed "Hi Layan, sure" at 15:51 and "This is done" at 15:59 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780325460256019)
@@ -77,8 +83,8 @@ last_catchup: 2026-06-02T07:10:22Z
 > [resolved] 2026-05-06 — 116oz XAUUSD long filled on Finalto, Compass adjustment done
 > Client reported 116oz gold long filled on Finalto at 15:05 BST; William confirmed booked at 16:26 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778076310926249)
 
-> [open] 2026-05-06 — Fast-hedge for futures requested; NGAS last commodity remaining to internalise
-> Client asked for fast-hedge setup on futures ASAP — specifically tags 4004072 and 4004241 are experiencing slippage on gold futures. William acknowledged aim to deliver and will keep updated; no timeline given. 2026-05-07: client reiterated "Yes please important for the futures" after go-live of CFD Indices; William confirmed "Futures setup still in progress, will let you know when that's ready to go". 2026-05-12: William confirmed "restructuring existing futures workflow to enable fast hedging — couple more restarts needed". 2026-05-13: metals + indices futures test trades completed; flow switched to internalise (see separate entry). 2026-05-20: NG1FUT hedged successfully; UKOFUT/USOFUT pending restart for pricing change. 2026-05-26: UKOFUT and USOFUT test-traded and hedged; William confirmed "commodities workflow looks good" and will tweak then switch to internalise — switch to internalisation not yet confirmed. 2026-05-28: William bounced hybridHedgerFutsP1/W1 (internal) to pick up NG1 pip size change; invited Nael (tag 4036) to test-trade NG1 — position opened and closed but hedger needed further review; William confirmed NGAS (NG1 futures) is the last commodity remaining before full internalisation+fast-hedge go-live; all other futures (including XAUFUT) already internalising. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778060389989769) [2026-05-12 update](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778576488756259) [2026-05-20 test](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779267185575169) [2026-05-26 completion](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779791175876139) [2026-05-28 NG1 test](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779981899319359)
+> [resolved] 2026-05-06 — Fast-hedge for futures requested; all futures now internalising as of 2026-06-02
+> Client asked for fast-hedge setup on futures ASAP — specifically tags 4004072 and 4004241 experiencing slippage on gold futures. 2026-05-13: metals + indices futures test-traded and switched to internalise. 2026-05-20: NG1FUT hedged successfully. 2026-05-26: UKOFUT/USOFUT test-traded and hedged. 2026-05-28: hybridHedgerFutsP1/W1 bounced for NG1 pip size change; further NG1FUT review needed. 2026-06-02: William bounced hybridHedgerFutsP1/W1 to add maxSlippage rule (force NG1FUT Finalto price to 3dp to avoid Finalto rejections); Nael (tag 4036) test-traded NG1FUT at ~10:27 BST — hedged successfully; William confirmed "will move that instrument to internalise as well now". Client confirmed "all futures now being internalised" — William confirmed yes. Crypto instruments promised as next step. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1778060389989769) [2026-06-02 NG1 go-live](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780392380808399) [NG1 internalise confirmed](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780392540340019) [all futures confirmed](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780392570055929)
 
 > [resolved] 2026-05-06 — XAGUSD false FI PnL drop on A_CLIENTS (Nathan investigation)
 > Nathan flagged a Graphite signal showing a FI PnL drop on XAGUSD for A_CLIENTS on 2026-05-05. Investigated and confirmed false alarm — XAGUSD is not skewed for A_CLIENTS; only XAUUSD is. Nathan noted that only XAUUSD skew on A_CLIENTS should be reported/billed. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1778107331037799)
@@ -118,6 +124,8 @@ last_catchup: 2026-06-02T07:10:22Z
 
 ## Notable topics
 
+- 2026-06-02 — NG1FUT internalisation complete; crypto test trades promised next: William confirmed all futures now internalising; told Nael "We'll make sure the Crypto instruments are ready to test trade soon". [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780392614316269)
+- 2026-06-02 — hybridHedgerFutsP1/W1 bounced for NG1FUT maxSlippage fix: force rounding of Finalto price to 3dp (priceFormatPip) to avoid raw TOB 4dp rejection. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780391840837769)
 - 2026-06-01 — LR on A_CLIENTS channel tuned: William reduced refresh rate from $250k/sec to $50k/sec (then walked back to $100k/sec as less aggressive) to lift LR from ~$1/M. Monitoring underway. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780329833967329)
 - 2026-05-29 — NZ bank holiday 1 June: Sam Hewitt posted standard advisory — Slack less monitored; emergency support via support@mahimarkets.com or London (+44 203 397 1985) / NZ (+64(3) 2880079) phone lines. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780029481215959)
 - 2026-05-28 — FXCubic client-feed throttle review: Youssef asked how many price ticks/sec GCC clients receive via their FXCubic FIX connection. William shared a stats CSV showing ~500/sec from Mahi to GCC, ~100/sec from both LMAX and Finalto. GCC currently throttles outbound to clients at 100ms (10/sec); Youssef asked whether reducing to 50ms or 10ms would improve client experience. William assessed: Finalto interval mean ~20ms / median ~2ms, no current evidence of stale-price rejections or arb — but proposed trial of 50ms then 10ms; client agreed to try next day. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1779981594374659)
