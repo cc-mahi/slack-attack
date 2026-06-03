@@ -18,13 +18,16 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-02T07:23:05Z
+last_catchup: 2026-06-03T07:16:20Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-02 — Centroid-B2B FIX sessions not connecting (telnet ok, FIX API failing)
-> Rostro reported that Centroid-B2B-Prices/MahiFX-Prices (port 9031) and Centroid-B2B-Orders/MahiFX-Orders (port 9032), both targeting 46.235.34.54, have confirmed telnet connectivity but cannot establish FIX API sessions. Sam Hewitt (Mahi, Trading Support) acknowledged and is investigating; no resolution in window. New session type — not previously referenced in the dossier; separate from the existing Centroid-Retail connections. [Rostro query](https://mahifx.slack.com/archives/C08AQKRU953/p1780382351497599) [Sam ack](https://mahifx.slack.com/archives/C08AQKRU953/p1780382511986749)
+> [open] 2026-06-02 — Rate limit tripped for cpty 10_1_7023544 AUDUSD (>200 orders/s)
+> Alexandre (Rostro) asked to increase the rate limit for cpty `10_1_7023544` after 2 AUDUSD rejects on 2026-06-02. Sam Hewitt investigated and explained the counterparty sent over 200 orders within a few seconds, tripping the 150-orders/second rate limit; fill ratio was >99% overall. Sam said Mahi prefers not to increase this limit (protective mechanism, guards other traders' execution experience) and asked if the counterparty can consolidate rather than sending 200 x 40k AUD orders in rapid succession. Awaiting Rostro/counterparty response. [Alexandre request](https://mahifx.slack.com/archives/C08AQKRU953/p1780434013438449) [Sam explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1780445597565439)
+
+> [resolved] 2026-06-02 — Centroid-B2B FIX sessions not connecting (telnet ok, FIX API failing)
+> Rostro reported that Centroid-B2B-Prices/MahiFX-Prices (port 9031) and Centroid-B2B-Orders/MahiFX-Orders (port 9032), both targeting 46.235.34.54, have confirmed telnet connectivity but cannot establish FIX API sessions. Kate confirmed no FIX logon (35=A) requests received, only telnet tests; asked Rostro to check with Centroid and provide source IPs (192.109.17.159 / 185.125.204.151 confirmed). Rostro went back to Centroid; connection established by 11:42 BST 2026-06-02. [Rostro query](https://mahifx.slack.com/archives/C08AQKRU953/p1780382351497599) [Kate diagnosis](https://mahifx.slack.com/archives/C08AQKRU953/p1780391774295829) [IPs provided](https://mahifx.slack.com/archives/C08AQKRU953/p1780392220615329) [resolved](https://mahifx.slack.com/archives/C08AQKRU953/p1780396965563899)
 
 > [open] 2026-05-29 — Tag 229 FA feed FX routing: no-broker, fast-hedge to IC Markets (pending deployment)
 > Oli (Rostro) requested that tag 229, which will start trading on the FA feed for FX next week, must not broker — if classified as broker/signal-follow, flow should internalise then fast-hedge (not be sent to LP brokering). Routing must go to IC Markets. Cameron Hughes confirmed the FA channel already routes those instruments (XAUUSD, XAGUSD, USDJPY, EURUSD, GBPUSD, AUDUSD, NZDUSD, USDCHF, USDCAD) to SI, and said he'd add a rule to prevent brokering for this tag. Oli confirmed understanding (✅). Config change not yet confirmed deployed. [Oli request](https://mahifx.slack.com/archives/C08AQKRU953/p1780061540704189) [Cameron Hughes response](https://mahifx.slack.com/archives/C08AQKRU953/p1780062187529349) [Oli confirms](https://mahifx.slack.com/archives/C08AQKRU953/p1780063802859709)

@@ -9,10 +9,13 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-02T07:24:57Z
+last_catchup: 2026-06-03T07:16:25Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-02 — Scale POV Gold GCQ6-AUG26 `TT: Submit forbidden` via UBS Algo connection — raised to TT
+> Andri switched Gold Algo to Scale POV and ran a live test trade from ~13:53 BST. During testing at 14:09, GCQ6-AUG26 was rejected with `39=8, 58=TT: Submit forbidden` sent via Surya Strait connection. Rory King (Mahi) asked Andri to clarify what "Strait" is and noted different trading account/counterparty from the filled orders. Kate Stagg then shared full FIX logs confirming rejection via `TT_MHNY4_FUND_UBSPB_AMB_FIX_OR → VALU_AMB_TT, 57=AMB_Megatrend_13`; `58=TT: Submit forbidden`. Client confirmed a second test trade was also rejected and stated "Raising to TT". Open at end of window. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1780405747363139) [kate-fix-logs](https://mahifx.slack.com/archives/C09HN93T0G2/p1780407130214949) [raised-to-tt](https://mahifx.slack.com/archives/C09HN93T0G2/p1780408112572009)
 
 > [open] 2026-05-29 — New Prod TT connection email — unanswered
 > During the Scale POV live test session, client asked Liam if he had seen an email about a new Prod TT connection; noted it has been open with no response for weeks. Liam did not reply to this specific question. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1779982068137559)
