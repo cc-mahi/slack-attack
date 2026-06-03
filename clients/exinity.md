@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-02T07:17:19Z
+last_catchup: 2026-06-03T07:14:23Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-02 — ASV_MT4_PROECN_224001915 counterparty rejects — unanswered
+> Samuel asked Mahi to check and clarify why this CP is being rejected, linking to the Compass order trace. No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780439962424789)
+
+> [open] 2026-06-02 — Jane Street FA feed orders cancelled by JS; Exinity to investigate
+> Daria flagged at ~22:53 UTC that orders were being cancelled by Jane Street on the FA feed — JS was quoting, Compass was sending market orders, all cancelled; no obvious Mahi-side cause. Asked Exinity to investigate with JS directly. Samuel acknowledged. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780440809890099)
 
 > [open] 2026-06-02 — STP FOK Market order config change requested (post-Wintermute)
 > Daniel Kurra asked Mahi to adjust execution settings so STP sends FOK Market orders rather than the current config, noting Wintermute is no longer in use. Message received a +1 reaction; no explicit Mahi confirmation yet. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780378737519019)
@@ -177,4 +183,5 @@ last_catchup: 2026-06-02T07:17:19Z
 - 2026-06-01 — XAUUSD kilo pricing raised (Zendesk 23055). Liam pinged Andrew: in dev support queue, more of a feature request. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
 - 2026-06-01 — Exinity still interested in weekend support; asked Mahi for a proposed fee structure. No response in window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
 - 2026-06-01 — Daniel queried whether Mahi can boost LP stack quantities for an internalised client using a broker LP pool. Kate: would need to set up the symbol on the model; asked which instruments. Daniel confirmed CL1 and CO1 on CLIENT_PRICE_LDN; Kate confirmed model setup is the right path. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780323376663259)
-- 2026-05-29 — NZ bank holiday (Monday 1 June): Sam Hewitt advised emergency-only cover; Matthew Ayub asked for a walkthrough of the wide-spread response process ahead of Sunday open, or for someone to be available to assist. No reply yet. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780034840862359)
+- 2026-06-02 — Andrew shared two Gamma docs for Exinity weekend support: a general overview (why/what/how) and an Exinity-tailored path forward. Both marked as drafts pending feedback incorporation before sending to Exinity. [general](https://gamma.app/docs/MahiMarkets-Weekend-Support-j9k7lum6ho280ps?mode=doc) [exinity-tailored](https://gamma.app/docs/Exinity-Weekend-Support-Options-owwngkx2jhvf2e0?mode=doc) [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780418637349049)
+- 2026-05-29 — NZ bank holiday (Monday 1 June): Sam Hewitt advised emergency-only cover; Matthew Ayub asked for a walkthrough of the wide-spread response process ahead of Sunday open, or for someone to be available to assist. No reply in window; event has now passed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780034840862359)
