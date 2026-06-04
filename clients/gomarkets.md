@@ -13,13 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-03T07:21:02Z
+last_catchup: 2026-06-04T07:25:30Z
 ---
 
 ## Recent issues
 
-> [watching] 2026-06-02 — LMAX London feed setup: EOD restart completed; GAUUSD LMAX_LDN inclusion pending GoMarkets internal discussion
-> Mac (GoMarkets, ~02:15 UTC) shared LMAX London FIX credentials in the client channel — new feed offering better spreads than the NY connection. Nathan set up Mahi side (market name `GO Markets_LMAX_LDN`, excluded from pricing models). EOD restart completed 2026-06-02. On 2026-06-03 Nathan confirmed GAUUSD beta pricer is live aggregating Finalto + LMAX + LMAX_LDN feeds but noted LMAXNY does not send GAUUSD (confirmed expected by Mac). Nathan then asked if LMAX_LDN is suitable for GAUUSD pricing — Mac replied "discussing internally." Follow-up pending. ZD #23058 (Isaac Dann). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780366536111909) [GAUUSD LMAX_LDN thread](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780447701.089979)
+> [watching] 2026-06-02 — LMAX London feed setup: EOD restart completed; GAUUSD pricing strategy resolved
+> Mac (GoMarkets, ~02:15 UTC) shared LMAX London FIX credentials in the client channel — new feed offering better spreads than the NY connection. Nathan set up Mahi side (market name `GO Markets_LMAX_LDN`, excluded from pricing models). EOD restart completed 2026-06-02. On 2026-06-03 Nathan confirmed GAUUSD beta pricer is live aggregating Finalto + LMAX + LMAX_LDN feeds but noted LMAXNY does not send GAUUSD. Nathan advised (2026-06-03 08:38 UTC): use only Finalto for GAUUSD for now as LMAX_LDN is ~40ms slow; once gram-gold setup is ready, switch to that (richer LP pool + continuity/benchmark feed). LMAX_LDN covers FX + XAUUSD/XAGUSD + some metals crosses; NY covers FX/XAUUSD/XAGUSD only. ZD #23058 (Isaac Dann). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780366536111909) [GAUUSD pricing guidance](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780475918245829)
 
 > [open] 2026-06-01 — XAUUSD spread whipsawing 0.10–0.60+; CLIENT_PRICE_NYC cycling offline/online — adaptive mid broken
 > Will (GoMarkets, ~00:32 UTC) reported XAUUSD spread whipsawing from ~0.10 to 0.60+ with very aggressive changes, and CLIENT_PRICE_NYC going offline/online repeatedly between large price swings (Echo link attached). Sam Hewitt (Mahi) picked up immediately; by ~00:45 UTC Will confirmed spreads looked more stable but asked for root cause. Sam replied still investigating. In #internal-go Isaac Dann diagnosed: adaptive mid is broken — it was causing pricers not to come back up pre a hot-fix on the weekend but is still broken; he disabled it and flagged he is investigating. Root cause not yet resolved. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780270363022559) [Isaac internal diagnosis](https://mahifx.slack.com/archives/CNF3WPNSK/p1780271596482309)
@@ -85,6 +85,10 @@ last_catchup: 2026-06-03T07:21:02Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-06-03 — fixOrders2/fixMD2 alert resolved: Erik (GoMarkets, 11:48 UTC) posted an alert screenshot asking "is anything required here?" Rory King (Mahi) replied: old process iteration generating the alert; newer iteration of `fixOrders2`/`fixMD2` is connected, no action required. Rory then bounced `systemStateMonitor` in `#internal-go` to remove the stale processes. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780487336870679)
+
+- 2026-06-03 — Kieran exploring crypto pricing / Binance feed masking for future product: Kieran (GoMarkets, 08:25 UTC) asked whether Mahi can mask the source of a Binance feed — exploring IPO product ideas using crypto pricing. Will Carter (Mahi) confirmed Mahi helps brokers build their own crypto pricing. Kieran said no call needed yet, >6 months away. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780475131357159)
 
 - 2026-06-02 — Go Markets call (Daria): metals crosses + gram gold go live Tuesday 2026-06-10; spreads under review client-side; gram gold setup pending EOD restarts on 2026-06-02. Client wants metals-only hedging book for the new pairs (only metal-edge counterparties expected) — assessed as new book + new hedger, no bespoke code, ~1 day to set up; client decided to wait and see post-launch. Profit share P&L calculation deferred until Isaac returns. Client also chased email-address-based classification (linked to prior internal discussion; ties into Andrew Morgan's classification history work). [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1780359892954759)
 
