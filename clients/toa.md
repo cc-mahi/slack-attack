@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-03T07:21:25Z
+last_catchup: 2026-06-04T07:32:51Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-06-03T07:21:25Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-06-03 — marketDataCryptoDotCom1 on Toa-argamon APN1 being decommissioned
+> Maten bounced marketDataCryptoDotCom1 on Toa-argamon APN1 after XETUSD crossed book; noted the crossed-book alert had been firing every hour and asked if it could be disabled via `marketdata.crossedBookAlertThresholdBps` given Crypto.com isn't in use. James confirmed it was turned off due to issues and suggested killing the gateway. Maten agreed to comment out marketDataCryptoDotCom1/ordersCryptoDotCom1 and do an infra deploy. https://mahifx.slack.com/archives/C035H1VNCAD/p1780488380763669
 
 > [watching] 2026-06-02 — propTraderHrp1 being added to Toa-argamon CHI
 > James posted "Adding propTraderHrp1 to toa-argamon CHI" — no further context or ops alerts in thread. Likely infrastructure expansion related to the hedgerCBOE1/TradePositionLimitMonitor CHI buildout from the past week. https://mahifx.slack.com/archives/C035H1VNCAD/p1780423159813489
