@@ -18,13 +18,13 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-03T07:16:20Z
+last_catchup: 2026-06-04T07:28:36Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-02 — Rate limit tripped for cpty 10_1_7023544 AUDUSD (>200 orders/s)
-> Alexandre (Rostro) asked to increase the rate limit for cpty `10_1_7023544` after 2 AUDUSD rejects on 2026-06-02. Sam Hewitt investigated and explained the counterparty sent over 200 orders within a few seconds, tripping the 150-orders/second rate limit; fill ratio was >99% overall. Sam said Mahi prefers not to increase this limit (protective mechanism, guards other traders' execution experience) and asked if the counterparty can consolidate rather than sending 200 x 40k AUD orders in rapid succession. Awaiting Rostro/counterparty response. [Alexandre request](https://mahifx.slack.com/archives/C08AQKRU953/p1780434013438449) [Sam explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1780445597565439)
+> [resolved] 2026-06-02 — Rate limit tripped for cpty 10_1_7023544 AUDUSD (>200 orders/s)
+> Alexandre (Rostro) asked to increase the rate limit for cpty `10_1_7023544` after 2 AUDUSD rejects on 2026-06-02. Sam Hewitt investigated and explained the counterparty sent over 200 orders within a few seconds, tripping the 150-orders/second rate limit; fill ratio was >99% overall. Sam said Mahi prefers not to increase this limit (protective mechanism, guards other traders' execution experience) and asked if the counterparty can consolidate rather than sending 200 x 40k AUD orders in rapid succession. Alexandre confirmed 2026-06-03 that after investigating, the client was taking advantage of the system — no rate limit amendment needed. [Alexandre request](https://mahifx.slack.com/archives/C08AQKRU953/p1780434013438449) [Sam explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1780445597565439) [resolved](https://mahifx.slack.com/archives/C08AQKRU953/p1780490338361009)
 
 > [resolved] 2026-06-02 — Centroid-B2B FIX sessions not connecting (telnet ok, FIX API failing)
 > Rostro reported that Centroid-B2B-Prices/MahiFX-Prices (port 9031) and Centroid-B2B-Orders/MahiFX-Orders (port 9032), both targeting 46.235.34.54, have confirmed telnet connectivity but cannot establish FIX API sessions. Kate confirmed no FIX logon (35=A) requests received, only telnet tests; asked Rostro to check with Centroid and provide source IPs (192.109.17.159 / 185.125.204.151 confirmed). Rostro went back to Centroid; connection established by 11:42 BST 2026-06-02. [Rostro query](https://mahifx.slack.com/archives/C08AQKRU953/p1780382351497599) [Kate diagnosis](https://mahifx.slack.com/archives/C08AQKRU953/p1780391774295829) [IPs provided](https://mahifx.slack.com/archives/C08AQKRU953/p1780392220615329) [resolved](https://mahifx.slack.com/archives/C08AQKRU953/p1780396965563899)
@@ -190,6 +190,8 @@ last_catchup: 2026-06-03T07:16:20Z
 
 ## Notable topics
 
+- 2026-06-03 — Scope Markets MD appointment: Bonnie flagged Finance Magnates article — John Murphy appointed as retail-focused Scope Markets Managing Director. Adds to the senior leadership churn picture (Lochlan departed, Saul Knapp left for MAS Markets). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1780506845066869)
+- 2026-06-03 — Gold futures on SI requested: Kate speaking with Alex who wants gold futures set up on SI (currently brokering the B2B flow); will follow current futures SI workflow. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1780494738398969)
 - 2026-05-27 — FA feed test trades in progress; Isaac monitoring. Rostro announced "doing a couple test trades on the FA feed" at 08:08 BST. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779865731199699)
 - 2026-05-26 — Abdullah queried Mahi restart on 2026-05-20 09:00–09:40 UTC; Will confirmed liquidityPool restarts at 09:18:16 and 09:21:37 UTC to pick up the IC brokering change (per the 2026-05-19 XAGUSD-to-IC request). [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779782593118049) [Will reply](https://mahifx.slack.com/archives/C08AQKRU953/p1779785001919939)
 - 2026-05-19 — Oli attempted to intro a prospect to Mahi via Kate (WhatsApp), asking for a referral fee; Susan/Will noted this was a sales task and unusual to route via David Cooney. Kate redirected to sales team. Susan suspected Oli was angling for a referral fee. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1779185581811729)
