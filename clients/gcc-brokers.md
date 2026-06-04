@@ -12,16 +12,19 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-03T07:10:20Z
+last_catchup: 2026-06-04T07:19:24Z
 ---
 
 ## Recent issues
 
+> [resolved] 2026-06-03 — 289oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 289oz gold long filled on Finalto at 15:06 BST; William acknowledged "Hi Layan, yes we'll get that adjustment in" at 15:40 BST and confirmed "All done" at 15:42 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780497763685249)
+
 > [open] 2026-06-02 — 1636oz XAUUSD long filled on Finalto, Compass adjustment pending
 > Layan requested Compass adjustment for 1636oz gold long filled on Finalto at 15:12 BST; William acknowledged "Hi Layan, sure" at 15:12 BST but no completion confirmation in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780409523294259)
 
-> [open] 2026-06-02 — A-book performance poor; William investigating
-> William flagged at 14:35 BST: "A Book performance has been bad today as well, investigating this." No follow-up or resolution in window. Will Carter had also noted at 12:03 BST that volumes were "really struggling". [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780407303939239) [volumes](https://mahifx.slack.com/archives/C09QS1NUA80/p1780398232116689)
+> [open] 2026-06-02 — A-book performance poor; root cause identified, no fix deployed
+> William flagged at 14:35 BST on 2026-06-02: "A Book performance has been bad today as well, investigating this." Will Carter had also noted at 12:03 BST that volumes were "really struggling". Will Carter requested an update on 2026-06-03 09:22 BST. William responded 2026-06-03 14:57 BST: caused by very sharp flow going offside before 500ms — 3-10s delayed triggers on hedging meant flow went offside before hedging. PnL improved on 2026-06-03 with better flow, but William will "think about how it could be changed in the event of very toxic flow like this coming in". No config change deployed yet. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780407303939239) [root cause reply](https://mahifx.slack.com/archives/C09QS1NUA80/p1780495057012879) [volumes](https://mahifx.slack.com/archives/C09QS1NUA80/p1780398232116689)
 
 > [resolved] 2026-06-01 — 1331oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan requested Compass adjustment for 1331oz gold long filled on Finalto at 15:51 BST; William confirmed "Hi Layan, sure" at 15:51 and "This is done" at 15:59 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780325460256019)
