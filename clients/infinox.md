@@ -15,10 +15,16 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-03T07:04:59Z
+last_catchup: 2026-06-04T07:25:34Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-03 — EURUSD price spikes (2–2.5 pips): Finalto off-market feed + Velocity absent → two-LP mid filtration failure
+> Trading Ops reported repeated EURUSD price spikes of 2–2.5 pips during ~09:40–10:32 UTC. Kate investigated: Finalto's EURUSD feed went ~5 pips off-market around 08:45 UTC; Velocity was not currently contributing a price, leaving mid formation on just Vantage + Finalto — two feeds are insufficient for filtration to identify the off-market LP. Fix: a third market was added to the EURUSD price formation pool to restore filtration. Kate advised Infinox to raise the off-market quotes with Finalto. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780479666056149) [Kate resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1780482740108069)
+
+> [resolved] 2026-06-03 — Routine Heavy LR adds: 24007117 tag gap (Soho_20987 + Soho_20996), Centroid_3597195, Centroid_2145761746, INF_MT5__87948934, MT5_plain_b_87948934, Centroid_2145758162
+> Trading Ops queried whether 24007117 and two new tag variants (Soho_20987, Soho_20996) were in Heavy LR; Kate confirmed existing tags and added the two new ones (actioned 11:13). Separately: MT5_87018814_Centroid_3597195 added by Rory King (14:54). Then MT5_87018814_Centroid_2145761746 added as a follow-up in the same thread (Rory, 14:56). Finally INF_MT5__87948934, MT5_plain_b_87948934, and MT5_87018814_Centroid_2145758162 requested at 15:04; Will Denny confirmed all done at 15:44. [24007117 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1780481120706859) [Centroid_3597195 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1780494777693349) [15:04 batch](https://mahifx.slack.com/archives/C022S6NL82D/p1780495449747249)
 
 > [resolved] 2026-06-01–02 — Routine Heavy LR adds: Centroid_3601808, Centroid_2145761606
 > Trading Ops requested MT5_87018814_Centroid_3601808 → Heavy LR (2026-06-01 19:04 BST); Cameron Hughes confirmed done at 19:14. Trading Ops requested MT5_87018814_Centroid_2145761606 → Heavy LR (2026-06-02 06:56 BST); Sam Hewitt actioned and confirmed at 07:13. [3601808 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1780337098146919) [2145761606 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1780379786010249)
@@ -136,6 +142,7 @@ last_catchup: 2026-06-03T07:04:59Z
 
 ## Notable topics
 
+- 2026-06-03 — EURUSD mid filtration failure: Velocity absent + Finalto off-market → two-LP formation unable to reject bad print. Fixed by adding a third market. Infinox asked to chase Finalto re off-market quotes. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780479666056149)
 - 2026-05-27 — XAUUSD spike at market opening confirmed in line with LPs (continuity pool then LP dark until 22:01:25 UTC). Shyam confirmed and shared Echo TOB chart; Georgia acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779841907096589)
 - 2026-05-22 — Extra Heavy LR vol multiplier doubled again after CH judged $82/M initial performance "similar to usual heavy LR." Client still profitable on Mahi; Kate continuing to monitor. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779443052.045959)
 - 2026-05-21 — 23 CPs bulk-blacklisted from Arbitrageur profile across all books by Shyam Hari. Several trade in multiple books; confirmed scope "all books from Arbitrageur profile." [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779393504888779)
