@@ -12,11 +12,21 @@ key_people_overrides:
   - {name: "Joanna Theophanous", slack_handle: "i.theophanous", role: "IC Markets ops/client-side contact", confidence: low}
   - {name: "Kyriakos", role: "IC Markets — requested toxic execution account list; first name only seen", confidence: low}
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
-  - {name: "Karam", role: "IC Markets — queries execution profiles and Echo dashboards; first name only seen", confidence: low}
-last_catchup: 2026-06-03T07:04:59Z
+  - {name: "Karam Abo Qoura", role: "IC Markets — queries execution profiles, Echo dashboards, and LR settings for gold flow; risk/analytics contact"}
+  - {name: "Harry Politis", role: "IC Markets — attended 2026-06-03 LR/classification review call with Pavlos and Karam; role unknown", confidence: low}
+last_catchup: 2026-06-04T07:21:24Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-04 — Karam requesting yield analysis on 4 accounts (80056539, 80057758, 80057759, 80057760)
+> Karam Abo Qoura posted in mahi-ic-markets requesting "more insight" on accounts 80056539, 80057758, 80057759, 80057760. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780557080304069) Kate Stagg acknowledged and said analysis would be sent "shortly". No analysis posted in window.
+
+> [open] 2026-06-03 — Signal-follow gold LR too low ($13/M); Rory proposed multiplier/qty changes; IC to respond
+> Will Carter's call with Pavlos, Karam, Harry Politis (2026-06-03 ~15:47 BST) surfaced that signal-follow and broker classifications have identical LR settings for gold — yielding only $13/M vs ~$30/M typical across the Mahi network. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1780498036725439) Rory King posted a specific proposal to IC in mahi-ic-markets (16:08 BST): increase volume multiplier from 1.5x to 2x and halve the rate-limit quantity from 100k to 50k on the signal-follow gold classification. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780499320210649) IC acknowledged with "will get back to you on this matter tomorrow" (17:48 BST). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780505326185579) Awaiting IC sign-off to implement. Also on the call: discussion of Compass Risk Management → Automation → Diagnostics screen (Rory shared walkthrough for Pavlos). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780500150891389)
+
+> [open] 2026-06-03 — Tag 80058628 queried (time-to-zero 5s); confirmed under default LR; no escalation
+> Karam queried tag 80058628 with a "time to zero is 5 sec" complaint. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780481942791349) Rory confirmed the yield profile shows flow comes onside briefly but declines sharply. The counterparty has no specific LR rule and is on the default profile (75,000 per 3 seconds). IC acknowledged and Karam FYI'd Pavlos. No change requested.
 
 > [resolved] 2026-05-28 — ICM crypto NY: XBTUSD/XETUSD/XAUUSD signals stuck since Friday 22 May close; FI PnL flat 6 days; fixed by process restart
 > Detected 2026-05-28 ~12:40 BST by Will Carter: `pricer1` on `icmarkets-crypto-ny-trading-1` had `getLastValidUpdate` frozen at `2026-05-22T21:09:59.597Z` for all three SIGNALS_NYC instruments (XBTUSD, XETUSD, XAUUSD). Root cause (identified by Will Carter via Claude-assisted log analysis): Aeron metadata problem on the subscriber — `pricer1` had been logging `No imageShardMeta available for message` with the same `SessionId: 1581119721` continuously since ~21:53Z on 22 May, meaning the stuck state persisted across the full ~6-day window including the weekend restart cycle. Publisher (`signalProcessFI1` on trading-2) was healthy throughout; the subscriber simply couldn't decode the stream after a Hazelcast cluster blip evicted the imageShardMeta entry. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779969008029299) Fix: `signalProcessFI1` process restart on trading-2 (new Aeron session → fresh meta). Will Carter confirmed "fixed with process restart" at ~12:54 BST; Cameron Hughes confirmed "FI back to normal post fix" at 15:01 BST with screenshot. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1779976889868709) Will Carter also noted he'll adjust the daily check logic to flag trend breaks rather than just FI drops, to catch this class of issue sooner. Liam Cordelle flagged a longer-term Aeron metadata distribution change in flight but "a chunky piece of work so still a while away."
