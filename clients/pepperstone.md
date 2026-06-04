@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-06-03T07:04:59Z
+last_catchup: 2026-06-04T07:28:39Z
 ---
 
 ## History
@@ -99,6 +99,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-06-04 — BTCAUD / crypto AUD crosses ~$300 off vs external exchanges; root cause unclear
+> Stephen Hendrie flagged consistent pattern of OKX, Kraken, and BTCMarkets all showing materially higher BTCAUD than Mahi/Pepperstone — "constant arb on", clients noticed and were buying BTC then withdrawing to those exchanges. Daria confirmed Mahi's triangulated AUD rate is in line with B2C2 (AUDUSD spot-on vs FX env), so B2C2 is either wrong or multiple AU exchanges are wrong. Lee (internal) noted the drift feels like spot vs perp contamination. Daria added Kraken XBTAUD as a reference feed in LDN for direct comparison. Gap appeared to be closing by ~06:00 BST with no config changes; root cause not established. No P&L impact confirmed so far. Daria to keep monitoring and get LDN input. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780533895254089) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780550381630349)
+
+> [resolved] 2026-06-03 — Arb CP 1042650 limit order rejections (continuity pool bid didn't reach limit)
+> Reece queried a series of rejections on limit orders for CP 1042650. Rory confirmed analysis was correct: CP is classified as an arbitrageur, so limit orders are force-internalised on the continuity pool with markup — if the continuity pool bid doesn't reach the client's limit price the order cancels off-market. Reece asked if there's a way to fill at a worse price anyway; Rory confirmed no (can't fill a limit order at a price worse than the client submitted). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780494472104379)
 
 > [open] 2026-06-01 — Quantum Queen (QQ) EA comment-masking; signal-based detection requested
 > Stephen flagged that QQ (a Gold EA previously banned by Pepperstone for sharp yield decay / ~70% win rate) can now bypass the comment-based reject by masking the comment field. Stephen wants to permit a small number of accounts to run QQ openly to generate a clean reference signal, then build a detection mechanism that recognises QQ by how it actually trades and adjusts pricing when it triggers — catching masked flow. Sam Hewitt escalated internally to assess feasibility and resourcing. No Mahi response yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780278118805469) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780278550368929)
@@ -224,3 +230,6 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-05-29 — Shyam flagged Pepperstone B · NZDUSD FI PnL loss of -$2,114: price skewed down during large influx of House Sells (~21:09–21:11 UTC 2026-05-28). Internal monitoring note; no action visible in-thread. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780022042490849)
 - 2026-05-29 — Marianna asked if Mahi has a USDH/USD rate to proxy; Isaac replied no. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780026918524119)
 - 2026-05-29 — Sam Hewitt (NZ) advisory: Monday 1 June is a NZ bank holiday; emergency support only, reduced Slack monitoring. Contact support@mahimarkets.com or LN +44 203 397 1985 / NZ +64(3) 2880079. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780029525109529)
+- 2026-06-03 — Isaac requested Diego get OZ to whitelist source IP `10.72.100.115` for inbound TCP ports 20063-20074 on the NY hub. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780533390829199)
+- 2026-06-03 — Isaac asked Pepperstone whether HyperLiquid pricing and order credentials are ready for perps go-live; Diego checking. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780520842307509)
+- 2026-06-04 — Isaac did a full stop-start on the London CFD env to pick up WAN config changes. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780540158588719)
