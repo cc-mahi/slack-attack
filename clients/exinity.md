@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-04T07:16:38Z
+last_catchup: 2026-06-05T07:16:00Z
 ---
 
 ## Recent issues
@@ -26,7 +26,7 @@ last_catchup: 2026-06-04T07:16:38Z
 > Samuel asked Mahi to check and clarify why this CP is being rejected, linking to the Compass order trace. No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780439962424789)
 
 > [open] 2026-06-02 — Jane Street FA feed orders cancelled by JS; Exinity to investigate
-> Daria flagged at ~22:53 UTC that orders were being cancelled by Jane Street on the FA feed — JS was quoting, Compass was sending market orders, all cancelled; no obvious Mahi-side cause. Asked Exinity to investigate with JS directly. Samuel acknowledged. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780440809890099)
+> Daria flagged at ~22:53 UTC that orders were being cancelled by Jane Street on the FA feed — JS was quoting, Compass was sending market orders, all cancelled; no obvious Mahi-side cause. Asked Exinity to investigate with JS directly. Samuel acknowledged. 2026-06-04: Matthew asked Mahi for FIX logs facing JFX for example order `012dr7106wp` (XAU/USD, 500oz, ~22:28 UTC 2026-06-02). Rory provided internal FIX logs showing a new order sent and a cancel received from HRP-CGW. Matthew flagged those were internal-facing — needed LP-facing FIX logs. Rory (15:42 UTC) replied that the cancellation appears to have happened before reaching JS and redirected Matthew to check with HRP whether JS ever saw the request. Still open. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780440809890099) [FIX log thread](https://mahifx.slack.com/archives/C0456LSHQQK/p1780562512783029)
 
 > [open] 2026-06-02 — STP FOK Market order config change requested (post-Wintermute)
 > Daniel Kurra asked Mahi to adjust execution settings so STP sends FOK Market orders rather than the current config, noting Wintermute is no longer in use. Message received a +1 reaction; no explicit Mahi confirmation yet. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780378737519019)
@@ -153,6 +153,9 @@ last_catchup: 2026-06-04T07:16:38Z
 
 ## Notable topics
 
+- 2026-06-04 — Centroid migration: Kate's catch-up with Daniel and Rory confirms Exinity are planning new FIX connections on the Connect channels to plug into Centroid, with a gradual move away from PXM. (Separate from the Exinity move — Oli at Rostro was flagged as also moving more flow from PXM to Centroid.) EXINITY_STRD_PARTNER channel being repurposed for a new product; initial config to match EXINITY_ECN_ARU; Kate to sweep full config before applying. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780578425042259)
+- 2026-06-04 — Skew PnL storage enabled for crypto/exotic instruments: Daniel requested and Will confirmed enabling skew PnL to be stored for ADAUSD, AEXEUR, AVAXUSD, BCHUSD, BNBUSD, DOGUSD, HISHKD, IBXEUR, LINKUSD, S30SGD, SPMUSD, T50USD, XLCUSD, XRPUSD. Will bounced risk-reporting processes the same evening to pick up global override to 15 for Crypto on FI instrument counts. [Daniel request](https://mahifx.slack.com/archives/C0456LSHQQK/p1780575057104119) [Will bounce](https://mahifx.slack.com/archives/C040V9LNKT5/p1780596154857919)
+- 2026-06-05 — EXINITY_STRD_PARTNER_CFD setup pending (morning): Daniel asked for ETA; Kate confirmed it would be finalised this morning. Linked to the broader Centroid/new-product work. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780643215556399)
 - 2025-07-07 — Oliver Ryan confirmed leaving Exinity for Rostro (following Sammy). MK described as "gutted" about it. Impact on ops/brokerage coverage unclear. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1750751779254969)
 - 2025-06-24 — Large manual client-side position adjustment overnight: 2.71k lots XAUUSD + other instruments; caused 73k VaR swing and 68k PnL impact. Isaac flagged internally; Will told him to ask Exinity directly in future. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1750724808033969)
 - 2025-06-03 — SI_HEDGING_MODEL_ARB and SI_INSTI_HEDGING_MODEL_ARB confirmed inactive — arb config commented out in hiera. Will flagged for check with MK; not rectified in this window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1748935853984529)
