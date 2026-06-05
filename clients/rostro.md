@@ -18,10 +18,13 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-04T07:28:36Z
+last_catchup: 2026-06-05T07:26:30Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-04 — Rate limit tripped: XAUUSD tag 251_0_4016363 (>150 orders/s)
+> Andreas (Rostro) requested a rate-limit increase for XAUUSD tag `251_0_4016363` after rejections. Daria acknowledged and Sam Hewitt investigated: the counterparty sent >150 orders within a few seconds, tripping the 150-orders/second limit. Sam declined to increase (same protective-mechanism reasoning as the 2026-06-02 AUDUSD case) and asked Rostro if the counterparty could consolidate orders. Andreas replied they will "review this internally"; Sam acknowledged. [Andreas query](https://mahifx.slack.com/archives/C08AQKRU953/p1780599484367969) [Sam explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1780612633160849) [client ack](https://mahifx.slack.com/archives/C08AQKRU953/p1780612847737469)
 
 > [resolved] 2026-06-02 — Rate limit tripped for cpty 10_1_7023544 AUDUSD (>200 orders/s)
 > Alexandre (Rostro) asked to increase the rate limit for cpty `10_1_7023544` after 2 AUDUSD rejects on 2026-06-02. Sam Hewitt investigated and explained the counterparty sent over 200 orders within a few seconds, tripping the 150-orders/second rate limit; fill ratio was >99% overall. Sam said Mahi prefers not to increase this limit (protective mechanism, guards other traders' execution experience) and asked if the counterparty can consolidate rather than sending 200 x 40k AUD orders in rapid succession. Alexandre confirmed 2026-06-03 that after investigating, the client was taking advantage of the system — no rate limit amendment needed. [Alexandre request](https://mahifx.slack.com/archives/C08AQKRU953/p1780434013438449) [Sam explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1780445597565439) [resolved](https://mahifx.slack.com/archives/C08AQKRU953/p1780490338361009)
