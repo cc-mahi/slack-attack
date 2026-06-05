@@ -14,10 +14,19 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-06-04T07:25:30Z
+last_catchup: 2026-06-05T07:26:08Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-05 — Amana querying whether MAHI_BLUE removed from TOB chart
+> Amana contact asked at 08:22 BST 2026-06-05 in #mahi-amana whether "mahi_blue" had been removed from the TOB chart, sharing an Echo TOB link for XAUUSD around 23:25–23:26 UTC 2026-06-04. Kate responded at 08:24 BST "Morning Nikos, will check and revert" — no resolution posted yet. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780644125682299)
+
+> [open] 2026-06-04 — XAUUSD multiple CMC rejections flagged by Princess
+> Princess (Amana) asked Rory at 12:42 BST 2026-06-04 whether XAUUSD was OK, noting multiple rejections from CMC, also for swapfree accounts. Rory acknowledged "Checking now" at 12:43 BST. No resolution posted in channel — conversation immediately pivoted to G7 FX go-live testing. Status unclear; no explicit all-clear given. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780573361692169)
+
+> [resolved] 2026-06-04 — CT6N (cotton futures) expiry: Mahi not live with cotton futures
+> Amana contact (Rafik) notified at 17:08 BST 2026-06-04 that CT6N expired and client positions closed; requested Mahi zero out any remaining positions. Rory confirmed at 17:10 BST that Mahi is not yet live with cotton futures — nothing to action. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780589326597699)
 
 > [resolved] 2026-06-03 — EURUSD trades appearing under HOUSE account: EUR287K position flagged
 > Nikos queried at 07:52 BST (2026-06-03) what EURUSD trades are showing under the HOUSE account, with a Compass orders link showing ~EUR287K position. Kate Stagg acknowledged at 07:53 BST ("Checking now"). Rory confirmed at 11:49 BST the HOUSE position was related to the overnight config put in place to hedge non-G8 FX crosses one-to-one — the config had an issue and was being reworked. Pricers bounced by Rory at 17:22 BST to pick up revised config. Position cleared as part of this. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780469548072079)
@@ -194,3 +203,8 @@ last_catchup: 2026-06-04T07:25:30Z
 - 2026-06-03 — Execution aggregation LMAX + CMC requested for FX: Nikos requested enabling LMAX + CMC execution aggregation for FX hedging (currently silver has dual-venue hedging). Rory acknowledged. Planned for 2026-06-04. Gold dual-venue hedging flagged as future goal. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780493773136139)
 - 2026-06-04 — Metal futures hedging to CMC confirmed: Princess queried whether metal futures hedge to CMC; Nathan Burch confirmed yes, CMC_CENTROID. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780549048134859)
 - 2026-05-26 — VaR spike ~$560k: cpty 8011028 sold then bought 5,000oz XAUUSD within 15s; risk covered within expected timeframes; A-book up ~$16k, skew PnL -$400 from that flow. Nikos was not at his desk. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1779802471141379)
+- 2026-06-04 — FX cross-pair hedging resolved by proposal acceptance: Nikos accepted Proposal 1 (G7 USD-denominated pairs first, crosses deferred until Amana fix rec process). Isaac noted Go Markets uses same driver-only hedging approach successfully. G7 pairs (EUR, CHF, JPY, CAD, AUD, NZD vs USD) confirmed live EOD 2026-06-04. Cross-pair config (priority rules) still a longer-term goal. [call-summary](https://mahifx.slack.com/archives/C08T42TMKU3/p1780580375570749) [g7-live](https://mahifx.slack.com/archives/C08T42TMKU3/p1780592828014909)
+- 2026-06-04 — Index rollout: step sizes for remaining CFDs/futures confirmed with Maynard (PH NOC): F40EUR Jump 0.01/0.01, JP225 CMC 0.01/0.01, HSI50 Jump 0.01/0.01, ASX200 Jump 0.01/0.01, MIB CMC 0.01/0.01, SWI20 CMC 0.01/0.01, N25 Jump 0.01/0.01, RTY futs CMC 0.5/0.5, SWIFUT CMC (confirmed by Maynard). All config changes actioned by Rory; EOD restarts requested. Plan: full test of all on 2026-06-05 with view to go live. [step-sizes-thread](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780591836890799)
+- 2026-06-04/05 — Nathan added SWICHF, MIBEUR, AEXEUR, VIXUSD to hybridHedgerCFD1 (non-VaR hedging profile); RTYFUT and SWIFUT (H/M/U/Z roll series) confirmed on hybridHedgerFutsP1 + W1. VaR override flags set (to be deleted if ever moved to VaR-based profile). Isaac proposed creating new covariance matrix for Amana to get newer CFDs into VaR; Daria agreed worthwhile but deferring until Amana CFD data builds up. [hedger-update](https://mahifx.slack.com/archives/C08T42TMKU3/p1780618031516039) [covar-discussion](https://mahifx.slack.com/archives/C08T42TMKU3/p1780614567680129)
+- 2026-06-04 — Erroneous alert received by Princess (13:06 BST); Rory confirmed nothing to action, dismissed immediately. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1780574806123059)
+- 2026-06-05 — Isaac (internal, 00:14 BST) noted Go Markets internalises all crosses and hedges through drivers without a PB, with 4 LPs managed through LPR and no rec problems — argued this proves the Amana driver-only approach workable, with AUDCAD as a large PnL contributor via spread. Supports eventual push to cross-pair hedging once Amana fixes recs. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1780614852478709)
