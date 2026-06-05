@@ -14,13 +14,19 @@ key_people_overrides:
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
   - {name: "Karam Abo Qoura", role: "IC Markets — queries execution profiles, Echo dashboards, and LR settings for gold flow; risk/analytics contact"}
   - {name: "Harry Politis", role: "IC Markets — attended 2026-06-03 LR/classification review call with Pavlos and Karam; role unknown", confidence: low}
-last_catchup: 2026-06-04T07:21:24Z
+last_catchup: 2026-06-05T07:21:10Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-04 — Karam requesting yield analysis on 4 accounts (80056539, 80057758, 80057759, 80057760)
-> Karam Abo Qoura posted in mahi-ic-markets requesting "more insight" on accounts 80056539, 80057758, 80057759, 80057760. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780557080304069) Kate Stagg acknowledged and said analysis would be sent "shortly". No analysis posted in window.
+> [open] 2026-06-05 — Methodology question unanswered: criteria for moving clients to profiles/counterparty
+> Anonymous IC-side message at 14:55 BST 2026-06-04: "Could you also clarify the methodology and criteria used to move clients to different profiles/counterparty? i.e. toxic tag, broker flow, signal flow." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780581339097859) No Mahi reply posted in window. Awaiting response.
+
+> [resolved] 2026-06-04 — Coordinated trading flagged on 4 Karam accounts (80056539–80057760); custom group LR applied
+> Karam's 4-account "yield insight" request (2026-06-04 08:11 BST) prompted Cooney to post a detailed coordination analysis in the client channel: median nearest-other-CP gap of 1.24–1.50s between the accounts, P10 at 0.27–0.56s, and — critically — 100% same-side alignment on all 27 multi-CP 1-second buckets (every coordinated burst is all-BID or all-OFFER). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780560979667059) Cooney flagged that the accounts are "ducking the full application with the splitting across tags" and proposed grouping them for unified LR. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780561040614639) IC (Pavlos) confirmed "Yes please - same client on all accounts." Cameron Hughes applied custom LR to all four and noted that if sub-accounts exist with the pattern "80056539_22", a wildcard rule could catch them. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780563598858719) IC replied: all four are sub-accounts under master BO ID 7150514. Cooney confirmed "thanks cam" internally. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1780563216731409) Custom LR applied; grouping effectively implemented via wildcard rule potential.
+
+> [resolved] 2026-06-04 — Tags 220126788 and 220126725 moved to custom execution on IC request
+> IC (anonymous) asked for tags 220126788 and 220126725 to be put on custom execution. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780560736542799) Kate Stagg confirmed done same morning. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780562503456159)
 
 > [open] 2026-06-03 — Signal-follow gold LR too low ($13/M); Rory proposed multiplier/qty changes; IC to respond
 > Will Carter's call with Pavlos, Karam, Harry Politis (2026-06-03 ~15:47 BST) surfaced that signal-follow and broker classifications have identical LR settings for gold — yielding only $13/M vs ~$30/M typical across the Mahi network. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1780498036725439) Rory King posted a specific proposal to IC in mahi-ic-markets (16:08 BST): increase volume multiplier from 1.5x to 2x and halve the rate-limit quantity from 100k to 50k on the signal-follow gold classification. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780499320210649) IC acknowledged with "will get back to you on this matter tomorrow" (17:48 BST). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780505326185579) Awaiting IC sign-off to implement. Also on the call: discussion of Compass Risk Management → Automation → Diagnostics screen (Rory shared walkthrough for Pavlos). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780500150891389)
@@ -93,6 +99,9 @@ last_catchup: 2026-06-04T07:21:24Z
 
 ## Notable topics
 
+- 2026-06-04: Cooney ran coordination analysis on the 4 Karam accounts (80056539, 80057758, 80057759, 80057760) and found 100% same-side alignment in all multi-CP bursts — highly coordinated flow splitting across tags to evade LR. Custom group LR applied; accounts identified as sub-accounts under master BO ID 7150514.
+- 2026-06-04: Unanswered IC question in client channel: methodology/criteria for moving counterparties between execution profiles (toxic tag, broker flow, signal flow). No Mahi reply yet.
+- 2026-06-04: IC signal-follow gold LR proposal (from Rory 2026-06-03) still awaiting IC sign-off — no response in this window.
 - 2026-05-11: Crypto full licence contract confirmed signed — 12-month term. Includes weekend support; IC billed for May. XAU pilot expires 29 May — next negotiation target. Weekend coverage plan: interns in Dubai + London to monitor Slack (Cooney's call).
 - Compass tag is now a major B-book directional risk concentration at IC (single client running ~$1.1B notional gold, $5M+ peak MtM swings). New LR rule and arb-blacklist in place but worth watching.
 - IC interested in passing reference-client-group on FIX so execution rules can route off it — open product/roadmap question, no IC response yet.
