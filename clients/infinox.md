@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-04T07:25:34Z
+last_catchup: 2026-06-05T07:21:10Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-04–05 — Routine Heavy/Medium LR adds (five batches)
+> Five batches actioned across the window: (1) Heavy LR: MT5_87018814_Centroid_2145765018 + MT5_87018814_Centroid_2145764880 (2026-06-04 12:35 BST; Will Denny confirmed 12:36). (2) Medium LR: MT5_87018814_Centroid_2145764143 + MT5_87018814_Centroid_3599808 + MT5_87018814_Centroid_3599807 (14:13 BST; Will Denny confirmed 14:14). (3) Heavy LR: MT5_87018814_Centroid_2145765018 (14:41 BST; Rory King confirmed 14:43). (4) Heavy LR: 86050496 + live06_CN_plus_b_86050496 + Live06_MT4__86050496 + Live06_MT4__86050497 + live06_CN_plus_b_86050497 + 86050497 (17:31 BST; Will Denny confirmed 17:33). (5) Heavy LR bulk (all known tags): 87962947, 87958300, 87952047, 87948934, 87942751, 83033199 (2026-06-05 07:08 BST; Sam Hewitt confirmed 07:20). [batch 1+2](https://mahifx.slack.com/archives/C022S6NL82D/p1780572914502169) [batch 3](https://mahifx.slack.com/archives/C022S6NL82D/p1780580501542749) [batch 4](https://mahifx.slack.com/archives/C022S6NL82D/p1780590686746059) [batch 5](https://mahifx.slack.com/archives/C022S6NL82D/p1780639694137019)
 
 > [resolved] 2026-06-03 — EURUSD price spikes (2–2.5 pips): Finalto off-market feed + Velocity absent → two-LP mid filtration failure
 > Trading Ops reported repeated EURUSD price spikes of 2–2.5 pips during ~09:40–10:32 UTC. Kate investigated: Finalto's EURUSD feed went ~5 pips off-market around 08:45 UTC; Velocity was not currently contributing a price, leaving mid formation on just Vantage + Finalto — two feeds are insufficient for filtration to identify the off-market LP. Fix: a third market was added to the EURUSD price formation pool to restore filtration. Kate advised Infinox to raise the off-market quotes with Finalto. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780479666056149) [Kate resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1780482740108069)
