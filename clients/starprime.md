@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-06-04T07:32:33Z
+last_catchup: 2026-06-05T07:26:32Z
 ---
 
 ## Recent issues
@@ -30,6 +30,8 @@ last_catchup: 2026-06-04T07:32:33Z
 
 ## Notable topics
 
+- 2026-06-04 — Samin requested B2PRIME_RETAIL added to Echo TOB (routing via MFX-T4); Rory King added it to `persistedMarketsSelectors` and bounced `starfishFilePersisterExternalMarketData1`; confirmed done within a few minutes. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1780571748825339)
+- 2026-06-04 — Cameron Hughes quoted Samin ("got a big meeting next weekend - selling the mahi product") in internal-starprime and noted Samin is looking for NOP docs. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1780572669949409)
 - 2026-05-05 — Inald Gjoni performed rolling restart of pricers to load Timezone Conditions for BenchmarkMinimumSpreadLogic (no-restart component deploy). [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777981565638809)
 - 2026-05-11 — Nathan Burch (Training) changed `price adjustment floor pips` on IFMS from 3 → 0.5 for XAUUSD on CLIENT_PRICE_INSTI; prior to this, price could not form because floor was greater than ceiling. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778463918376889)
 - 2026-05-13 — Andrew Morgan noted (internal-starprime) "apparently these guys are owned by vantage"; David Cooney confirmed. 3 open_mouth reactions. No further context in channel. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1778669482861249)
