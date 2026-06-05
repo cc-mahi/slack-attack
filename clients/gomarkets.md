@@ -13,10 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-04T07:25:30Z
+last_catchup: 2026-06-05T07:18:40Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-04 — HOUSE1TradePosition DB replica lag: large A/B/LP rec breaks
+> Will (GoMarkets, ~21:40 UTC) flagged large breaks in A/B/LP recs — B_CLIENTS CAD/JPY showing -66,000 on HOUSE1TradePosition vs -26,000 on Compass/Tapaas. Sam Hewitt (Mahi) identified a DB replica issue and fixed the replica catch-up by ~23:22 UTC. Will re-ran recs and confirmed much improved (small residual on XAUUSD only, expected). Resolved same session. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780609220282089)
 
 > [watching] 2026-06-02 — LMAX London feed setup: EOD restart completed; GAUUSD pricing strategy resolved
 > Mac (GoMarkets, ~02:15 UTC) shared LMAX London FIX credentials in the client channel — new feed offering better spreads than the NY connection. Nathan set up Mahi side (market name `GO Markets_LMAX_LDN`, excluded from pricing models). EOD restart completed 2026-06-02. On 2026-06-03 Nathan confirmed GAUUSD beta pricer is live aggregating Finalto + LMAX + LMAX_LDN feeds but noted LMAXNY does not send GAUUSD. Nathan advised (2026-06-03 08:38 UTC): use only Finalto for GAUUSD for now as LMAX_LDN is ~40ms slow; once gram-gold setup is ready, switch to that (richer LP pool + continuity/benchmark feed). LMAX_LDN covers FX + XAUUSD/XAGUSD + some metals crosses; NY covers FX/XAUUSD/XAGUSD only. ZD #23058 (Isaac Dann). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780366536111909) [GAUUSD pricing guidance](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780475918245829)
