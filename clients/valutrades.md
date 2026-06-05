@@ -9,10 +9,13 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-04T07:34:53Z
+last_catchup: 2026-06-05T07:34:08Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-04 — Connection issue reported ~22:35 BST — Sam Hewitt fixed, client confirmed reconnected
+> Client posted "Hello MAHI Team" + "Please can you fix this?" with a screenshot (image.png) in #mahi-valutrades at 22:35 BST. Sam Hewitt acknowledged ("checking") at 22:35 and asked client to check at 22:41. Client confirmed "Now connected" at 22:47 and thanked Sam. Resolved within ~12 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780608909361739) [sam-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780608958519529) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780609632425939)
 
 > [open] 2026-06-02 — Scale POV Gold GCQ6-AUG26 `TT: Submit forbidden` via UBS Algo connection — TT claimed fix, still failing
 > Andri switched Gold Algo to Scale POV and ran a live test trade from ~13:53 BST. During testing at 14:09, GCQ6-AUG26 was rejected with `39=8, 58=TT: Submit forbidden` sent via Surya Strait connection. Rory King (Mahi) asked Andri to clarify what "Strait" is and noted different trading account/counterparty from the filled orders. Kate Stagg shared full FIX logs confirming rejection via `TT_MHNY4_FUND_UBSPB_AMB_FIX_OR → VALU_AMB_TT, 57=AMB_Megatrend_13`; `58=TT: Submit forbidden`. Client stated "Raising to TT". **2026-06-03 update:** TT told client they had fixed the issue; client retested and got the same `TT: Submit forbidden` rejection (GCQ6-AUG26 via ScalePOV, account 28836977). Client asked Mahi for FIX log to escalate back to TT. Kate provided the full FIX pair at 13:03 UTC confirming the same reject persists. Still open — TT's claimed fix ineffective. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1780405747363139) [kate-fix-logs](https://mahifx.slack.com/archives/C09HN93T0G2/p1780407130214949) [raised-to-tt](https://mahifx.slack.com/archives/C09HN93T0G2/p1780408112572009) [tt-claimed-fix-still-failing](https://mahifx.slack.com/archives/C09HN93T0G2/p1780491512727679) [kate-fix-log-2](https://mahifx.slack.com/archives/C09HN93T0G2/p1780491838077409)
