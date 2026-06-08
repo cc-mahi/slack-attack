@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-05T07:18:39Z
+last_catchup: 2026-06-08T07:17:13Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-05 — 992oz XAUUSD + 10,000oz XAGUSD long filled on Finalto, Compass adjustments done
+> Layan reported 992oz XAUUSD + 10,000oz XAGUSD filled on Finalto at 15:09 BST; William confirmed "that's done now" at 15:16 BST. Separately, Nael attempted to move 1,500oz XAUUSD from Finalto to LMAX via the CSV adjustment sheet but reported nothing happened. William checked Compass and found the positions were already correctly reflected in the manual adjustment books (+1.5k Finalto, -1.5k LMAX). Confusion about hedger state during adjustments; William held a huddle at 15:34 BST to clarify procedure. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780668561320359) [huddle](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780670075330379)
+
+> [open] 2026-06-05 — XAGFUT/NG1FUT decimal mismatch: Finalto sends 4dp but rejects orders >3dp; workaround deployed
+> William reported Finalto rejected a 5k XAG futures hedging order: Finalto sends 4dp market data for XAGFUT and NG1FUT but rejects limit orders with >3dp ("Price tag must not contain more than 3 decimal places"). William added 1-pip maxSlippage to hedger rules as a rounding workaround and cleared the risk; futures hedgers P+W bounced. GCC asked to raise with Finalto with priority to align decimal places across all instruments. Nael confirmed 15:12 BST Silver Futures is 3dp on Finalto UI, Silver Spot is 4dp (mismatch confirmed); Nael confirmed "will check with Finalto immediately". Finalto response not yet seen. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780655431818729) [internal-bounce](https://mahifx.slack.com/archives/C09QS1NUA80/p1780655879654819)
 
 > [resolved] 2026-06-04 — 1599oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 1599oz gold long filled on Finalto at 15:12 BST; William acknowledged "Hi Layan, will do" at 15:12 BST and confirmed "Done" at 15:30 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780582340123069)
