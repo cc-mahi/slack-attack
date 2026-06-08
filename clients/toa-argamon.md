@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-06-05T07:32:33Z
+last_catchup: 2026-06-08T07:24:13Z
 ---
 
 ## Status
@@ -25,6 +25,15 @@ last_catchup: 2026-06-05T07:32:33Z
 - **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
 
 ## Recent issues
+
+> [open] 2026-06-08 — INST-34 orderRejectThrottle storm; off-market limit orders flooding TOA-ARGAMON-LDN
+> Nathan (Toa ops) flagged counterparty INST-34 triggering `orderRejectThrottle` continuously throughout the day at TOA-ARGAMON-LDN — constant limit orders rejected for being off-market; worst PD alert was 27k orders in 5 min. Lee Butts raising with Argamon; Argamon responded (via quoted reply) that they're discussing withholding these orders with the client and pursuing a Centroid-side fix too. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780889725278749)
+
+> [open] 2026-06-07 — MARKETMAKING_HRP_INSTI-Channel processes down at CHI + LDN; gateway build mismatch
+> Nathan flagged processes down at both argamon-chi and argamon-ldn related to MARKETMAKING_HRP_INSTI-Channel. Maten investigated: default counterparty LR rule had been removed (mid-week change); he restored defaults and clientDist processes came back up. Separately, gateways at LDN were crashing with `NoClassDefFoundError: connectionstatus/ConnectionStatusSource` — caused by a newer gateway build (20260605.090257) deployed without the matching core/distribution build. Maten rolled back gateway component to 20260529.164545 on CHI (copied from LDN); gateways back up. `propTrader1HrpChi1` in CHI still requires configuration — someone (likely Toa-side) said they'd set it up in a few hours (~10:07 BST). Resolution of prop trader setup not yet confirmed. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
+
+> [resolved] 2026-06-05 — Compass upgrade this weekend; Argamon notified
+> Liam notified Argamon in mahi-argamon-operations that their system will be upgraded to the latest Compass version over the weekend, with monitoring at open. Argamon acknowledged. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1780673110439059)
 
 > [resolved] 2026-05-27 — CLIENT_PRICE_MARKET switched to CLIENT_PRICE_RETAIL_NYC; YP reval errors fixed
 > Daria switched the default client price market from `CLIENT_PRICE_NYC` to `CLIENT_PRICE_RETAIL_NYC` after YP (yield profile) reval failures — `CLIENT_PRICE_NYC` is the old insti pricing model and was causing `IllegalArgumentException: CLIENT_PRICE_NYC/GBPJPY unavailable` during reval processing. Fix applied in the early hours (01:54 BST). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779843264602109)
@@ -145,6 +154,8 @@ last_catchup: 2026-06-05T07:32:33Z
 
 ## Notable topics
 
+- propTrader1 HRP switch (2026-06-05): James switched TOA-ARGAMON to use `propTrader1HrpChi1`/`propTrader1HrpLdn1` in internal-toa-ops — likely the config change that preceded the 2026-06-07 MARKETMAKING_HRP_INSTI processes-down event (CHI propTrader not yet set up at that point). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780658564969939)
+- Build hygiene flag: Maten noted after the 2026-06-07 gateway rollback that toa-argamon should retain more than just the latest build so rollbacks can happen without copying from another env. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
 - Weekly P&L (w/c 2026-05-12): $5.9k from retail, caused by XAUAUD scalping by two new retail accounts (CPs 105988 + 105990, ~6 days old) — 106 small round-trips during FX twilight. Root cause: XAUAUD `arbProtectionParameters` was clamping the published quote into UBS's wide twilight spread instead of using the clean triangulated price. Fix: Shyam removed XAUAUD from arb protection rules; now using pure triangulated price. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
 - CP 90001948 XAUUSD scalp event (2026-05-18): New counterparty, first day on platform — sold 600oz in 10 fills (300oz clips), net flat by end of day, left Mahi long through the drop. $4k PnL drop. Picked up as SIGNAL_FOLLOW+BROKER for auto-broker routing. Daria noted a few other similar-pattern traders and flagged RI consideration. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019)
 - XAUUSD routing rehab-loop risk flagged (2026-05-25): Daria noted that routing toxic XAUUSD flow to Toa (wider spreads, passive hedging) improves yields, which causes those CPs to lose their toxic classification and get re-internalised on tight spreads — where they become toxic again. Cycle repeats. Proposed fix: static brokering list for metals, or a harder rehabilitation barrier. Daria plans to split FX and metals classifications on 2026-05-26 morning (per her message), at which point metal-specific changes can be made cleanly. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779681392035259)
