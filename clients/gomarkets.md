@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-05T07:18:40Z
+last_catchup: 2026-06-08T07:17:13Z
 ---
 
 ## Recent issues
@@ -88,6 +88,8 @@ last_catchup: 2026-06-05T07:18:40Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-06-08 — GAUUSD tightening config applied: Will (GoMarkets, ~02:37 UTC) requested GAUUSD `pricing.minimumTightenedSpreadRatioOfBase` be set up to mirror XAUUSD — allowing tightening nodes to bring the 0.030 base target down to 0.010 when models permit (ratio value 0.33). Nathan (Mahi) confirmed he could replicate XAU's setup, applied it by ~04:53 UTC, and noted the model will fine-tune over time. Will confirmed. Resolved same session. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780886274072879)
 
 - 2026-06-03 — fixOrders2/fixMD2 alert resolved: Erik (GoMarkets, 11:48 UTC) posted an alert screenshot asking "is anything required here?" Rory King (Mahi) replied: old process iteration generating the alert; newer iteration of `fixOrders2`/`fixMD2` is connected, no action required. Rory then bounced `systemStateMonitor` in `#internal-go` to remove the stale processes. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780487336870679)
 
