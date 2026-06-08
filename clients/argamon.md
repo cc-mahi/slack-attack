@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-06-05T07:08:36Z
+last_catchup: 2026-06-08T07:08:31Z
 ---
 
 ## Status
@@ -142,3 +142,4 @@ last_catchup: 2026-06-05T07:08:36Z
 - 2026-05-03 — XAUUSD retail NY4→CHI hedging disabled: retail achieving positive spreads; CHI giving negative spreads so hedging there turned off. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777845150173619)
 - 2026-05-04 — EURUSD mid formation: Elan approved adding all LPs back into mid (NY now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary LPs; backtests show reduced spiky pricing and arb opportunities. Adaptive mid logic also added to betaRetailPricer1 for EURUSD; FI/skew PnL review ongoing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
 - 2026-05-13 — Toa LD4 TOB signal data missing: Elan flagged signal data not showing in Echo TOB for toa_argamon.LDN XAUUSD. Daria found signals not persisted since last system reboot; fixed after restart. Backfill not possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
+- 2026-06-05 — Compass upgrade planned for weekend (06-07/08): Liam notified client in mahi-argamon-operations. Client acknowledged. Monitoring planned over market open. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1780673110439059)
