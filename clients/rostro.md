@@ -18,10 +18,13 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-05T07:26:30Z
+last_catchup: 2026-06-08T07:21:31Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-07 — Centroid XC telnet failure: ports 9031/9032 from 192.109.17.159 (NOCINT-819405)
+> Rostro (Chrysovalantis) reported telnet succeeds from 192.109.15.31 to 172.20.201.116 on ports 9010/9011 (FA feed), but fails from 192.109.17.159 on ports 9031/9032 (Centroid-B2B-Prices/Orders). Same port pair as the 2026-06-02 Centroid-B2B FIX incident. Daria chased at 21:35 BST asking if still failing; at 22:07 BST noted "The SI connection is logged on - let us know if there are any issues". No explicit confirmation from Rostro that 9031/9032 telnet is resolved. [Rostro report](https://mahifx.slack.com/archives/C08AQKRU953/p1780819515015889) [Daria chase](https://mahifx.slack.com/archives/C08AQKRU953/p1780864522296289) [Daria SI confirm](https://mahifx.slack.com/archives/C08AQKRU953/p1780866426586869)
 
 > [resolved] 2026-06-04 — Rate limit tripped: XAUUSD tag 251_0_4016363 (>150 orders/s)
 > Andreas (Rostro) requested a rate-limit increase for XAUUSD tag `251_0_4016363` after rejections. Daria acknowledged and Sam Hewitt investigated: the counterparty sent >150 orders within a few seconds, tripping the 150-orders/second limit. Sam declined to increase (same protective-mechanism reasoning as the 2026-06-02 AUDUSD case) and asked Rostro if the counterparty could consolidate orders. Andreas replied they will "review this internally"; Sam acknowledged. [Andreas query](https://mahifx.slack.com/archives/C08AQKRU953/p1780599484367969) [Sam explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1780612633160849) [client ack](https://mahifx.slack.com/archives/C08AQKRU953/p1780612847737469)
