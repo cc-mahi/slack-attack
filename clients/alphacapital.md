@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-06-05T07:08:36Z
+last_catchup: 2026-06-08T07:08:28Z
 ---
 
 ## Recent issues
@@ -64,6 +64,8 @@ last_catchup: 2026-06-05T07:08:36Z
 > Inald: 4s input latency on CLIENT_PRICE_LDN and CLIENT_PRICE_MAHI during NFPs. Root cause: riskPathQualifying on wrong node. Moved to low-latency node 0 same day. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1746190417423999)
 
 ## Notable topics
+
+- 2026-06-05 — Compass version upgrade scheduled for weekend of 2026-06-07/08. Liam Cordelle notified client channel that the system would be upgraded to the latest Compass version over the weekend, with Mahi monitoring the open for issues. [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1780673128888239)
 
 - 2026-05-13 — Argamon LD Centroid bridge IP migration (2026-05-16 weekend). David Rapp (Argamon) notified that the LD Centroid bridge instance was migrating servers Saturday 16 May (downtime 2100 UTC Fri–2100 UTC Sat). Clients targeting the DNS `arguk.centroidsol.com` required no action; those with hardcoded IPs needed to update to `192.109.17.170`. Forwarded to Cameron Hughes and Maten Rehimi in client channel; Cameron Hughes confirmed changes actioned. [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1778658472423589)
 
