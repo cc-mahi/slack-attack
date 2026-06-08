@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-05T07:21:10Z
+last_catchup: 2026-06-08T07:19:22Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-05 — Routine Heavy LR adds: 86049820 all-tags
+> Trading Ops requested all three tag variants of CP 86049820 (live06_CN_plus_b_86049820, Live06_MT4__86049820, 86049820) added to Heavy LR (09:35 BST); Will Denny actioned and confirmed done at 09:37 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780648559687969)
 
 > [resolved] 2026-06-04–05 — Routine Heavy/Medium LR adds (five batches)
 > Five batches actioned across the window: (1) Heavy LR: MT5_87018814_Centroid_2145765018 + MT5_87018814_Centroid_2145764880 (2026-06-04 12:35 BST; Will Denny confirmed 12:36). (2) Medium LR: MT5_87018814_Centroid_2145764143 + MT5_87018814_Centroid_3599808 + MT5_87018814_Centroid_3599807 (14:13 BST; Will Denny confirmed 14:14). (3) Heavy LR: MT5_87018814_Centroid_2145765018 (14:41 BST; Rory King confirmed 14:43). (4) Heavy LR: 86050496 + live06_CN_plus_b_86050496 + Live06_MT4__86050496 + Live06_MT4__86050497 + live06_CN_plus_b_86050497 + 86050497 (17:31 BST; Will Denny confirmed 17:33). (5) Heavy LR bulk (all known tags): 87962947, 87958300, 87952047, 87948934, 87942751, 83033199 (2026-06-05 07:08 BST; Sam Hewitt confirmed 07:20). [batch 1+2](https://mahifx.slack.com/archives/C022S6NL82D/p1780572914502169) [batch 3](https://mahifx.slack.com/archives/C022S6NL82D/p1780580501542749) [batch 4](https://mahifx.slack.com/archives/C022S6NL82D/p1780590686746059) [batch 5](https://mahifx.slack.com/archives/C022S6NL82D/p1780639694137019)
@@ -145,6 +148,7 @@ last_catchup: 2026-06-05T07:21:10Z
 
 ## Notable topics
 
+- 2026-06-05 — Compass upgrade: Liam announced Mahi will upgrade Infinox to the latest Compass version over the weekend of 2026-06-07/08; team will monitor over market open. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780673185694849)
 - 2026-06-03 — EURUSD mid filtration failure: Velocity absent + Finalto off-market → two-LP formation unable to reject bad print. Fixed by adding a third market. Infinox asked to chase Finalto re off-market quotes. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780479666056149)
 - 2026-05-27 — XAUUSD spike at market opening confirmed in line with LPs (continuity pool then LP dark until 22:01:25 UTC). Shyam confirmed and shared Echo TOB chart; Georgia acknowledged. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779841907096589)
 - 2026-05-22 — Extra Heavy LR vol multiplier doubled again after CH judged $82/M initial performance "similar to usual heavy LR." Client still profitable on Mahi; Kate continuing to monitor. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1779443052.045959)
