@@ -10,10 +10,13 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-05T07:06:18Z
+last_catchup: 2026-06-08T07:06:52Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-08 — EURCAD rejects from CP 1770806082_99997 via 5ERS_FUNDED_YB_MT5 — order quantity increment mismatch
+> Nathan Burch (2026-06-08 03:51 UTC) flagged high EURCAD rejects from CP 1770806082_99997 placing qty 999.99; Mahi config accepts FX orders at increment 1.0 minimum 1.0. Nathan asked client whether to reduce FX increment to 0.01 to accept the orders, or raise the misconfiguration with YourBourse. No reply yet. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1780890673528329)
 
 > [resolved] 2026-05-28 — New YB-MT5 FIX session (`5ers-Funded-YB-MT5`) not receiving trades — config issue on 5ers side
 > Andreas (2026-05-28 09:03 BST) asked whether trades from login 250 (new FIX session `5ers-Funded-YB-MT5-Prices`/`5ers-Funded-YB-MT5-Orders`) were reaching Mahi. William Denny investigated and could not locate the trades; client confirmed this was a new FIX session not previously in scope. Andreas subsequently identified a misconfiguration on 5ers' side and resolved it. Test trade confirmed: account 298, AUDCAD 0.01 long (Trade ID 012dtjmksn) reached Mahi and was verified by William — skew and LR ran correctly. Trades from login 250 also confirmed arriving after the fix. [thread](https://mahifx.slack.com/archives/C07AQJS4E80/p1779955398886419) [resolution](https://mahifx.slack.com/archives/C07AQJS4E80/p1779977099502669)
