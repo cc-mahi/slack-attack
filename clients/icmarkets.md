@@ -14,10 +14,13 @@ key_people_overrides:
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
   - {name: "Karam Abo Qoura", role: "IC Markets — queries execution profiles, Echo dashboards, and LR settings for gold flow; risk/analytics contact"}
   - {name: "Harry Politis", role: "IC Markets — attended 2026-06-03 LR/classification review call with Pavlos and Karam; role unknown", confidence: low}
-last_catchup: 2026-06-05T07:21:10Z
+last_catchup: 2026-06-08T07:19:19Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-05 — Compass upgrade deployed during IC maintenance window; trades flowing; minor errors to be resolved
+> Liam Cordelle notified the client channel at 16:24 BST that a Compass upgrade was planned for the evening maintenance window. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780673073994599) By 22:25 BST Liam confirmed the release went smoothly; at 22:46 BST confirmed trades flowing as expected. At 22:50 BST Liam posted a screenshot noting some errors visible but flagged them as ignorable and committed to resolving during the week. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780696211513059) IC acknowledged ("Well noted Liam"). No issues reported by IC.
 
 > [open] 2026-06-05 — Methodology question unanswered: criteria for moving clients to profiles/counterparty
 > Anonymous IC-side message at 14:55 BST 2026-06-04: "Could you also clarify the methodology and criteria used to move clients to different profiles/counterparty? i.e. toxic tag, broker flow, signal flow." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1780581339097859) No Mahi reply posted in window. Awaiting response.
@@ -67,8 +70,8 @@ last_catchup: 2026-06-05T07:21:10Z
 > [resolved] 2026-05-11 — Crypto full licence contract confirmed signed (12 months); weekend support included; XAU pilot expires 29 May
 > Nicola confirmed the 12-month crypto agreement is now signed (11 :tada: reactions). [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778494046358709) Contract includes weekend support — Cooney's plan: get interns in Dubai and London to monitor Slack rather than pulling in the main team. IC will be billed for May (they had a 1-month extension at pilot rate due to impact of Iran/Dubai). [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1778495367683659) XAU pilot expiry is 29 May — next negotiation target per Nicola.
 
-> [open] 2026-05-01 — IC Markets system upgrade aborted; retry next weekend
-> Justin Young started the deploy at 21:59 UTC but pulled it 17 minutes later: "We've identified a last minute issue, we've decided to err on the side of caution and pull the release, we'll try again this time next weekend." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777670185603189) Internal post-mortem: Justin hadn't accounted for the NYC server reboot falling in the middle of the 45-min window — starting before the reboot risked the deploy being killed; starting after left no buffer to fix issues. Failover config also unclear. Plan: discuss with Liam next week; NYC could be deployed with a `norestart` deploy before the reboot. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777670658111869)
+> [resolved] 2026-05-01 — IC Markets system upgrade aborted; eventually deployed 2026-06-05
+> Justin Young started the deploy at 21:59 UTC on 2026-05-01 but pulled it 17 minutes later: "We've identified a last minute issue, we've decided to err on the side of caution and pull the release, we'll try again this time next weekend." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1777670185603189) Internal post-mortem: Justin hadn't accounted for the NYC server reboot falling in the middle of the 45-min window. Plan: NYC could be deployed with a `norestart` deploy before the reboot. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777670658111869) Resolved: Compass upgrade successfully deployed 2026-06-05 during IC's maintenance window by Liam Cordelle (see 2026-06-05 entry).
 
 > [resolved] 2026-04-27 — Zendesk #22850: IC backup, START SLAVE + 69GB dump cleanup
 > Inald flagged ticket — IC backup running on trading1/trading2 with 69GB dumps eating memory; needed START SLAVE post-backup + dump removal. Daria assigned Sam Hewitt, who picked it up. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1777303185515629)
@@ -99,6 +102,7 @@ last_catchup: 2026-06-05T07:21:10Z
 
 ## Notable topics
 
+- 2026-06-05: Compass upgrade deployed successfully during IC maintenance window by Liam Cordelle — trades flowing, minor errors noted as ignorable, to be resolved during week. IC acknowledged. Closes the 2026-05-01 aborted deploy.
 - 2026-06-04: Cooney ran coordination analysis on the 4 Karam accounts (80056539, 80057758, 80057759, 80057760) and found 100% same-side alignment in all multi-CP bursts — highly coordinated flow splitting across tags to evade LR. Custom group LR applied; accounts identified as sub-accounts under master BO ID 7150514.
 - 2026-06-04: Unanswered IC question in client channel: methodology/criteria for moving counterparties between execution profiles (toxic tag, broker flow, signal flow). No Mahi reply yet.
 - 2026-06-04: IC signal-follow gold LR proposal (from Rory 2026-06-03) still awaiting IC sign-off — no response in this window.
