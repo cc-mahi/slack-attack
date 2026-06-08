@@ -11,16 +11,19 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-06-05T07:12:55Z
+last_catchup: 2026-06-08T07:11:11Z
 ---
 
 ## Status
 
-- **Stage:** onboarding — Centroid/LMAX integration underway; first LMAX test trades executed 2026-05-21 (EURUSD + XAUUSD confirmed both sides); go-live target was w/c 2026-06-02 but slipped; Kate Stagg (2026-06-04) says MT4/5 setup teething issues still in progress, now targeting next week (w/c 2026-06-08); Centroid cited as slow.
+- **Stage:** onboarding — Centroid/LMAX integration underway; first LMAX test trades executed 2026-05-21 (EURUSD + XAUUSD confirmed both sides); go-live target was w/c 2026-06-02, slipped to w/c 2026-06-08; MT4/5 setup teething issues still in progress per 2026-06-05; Compass upgraded to latest version over weekend 2026-06-07/08 (Liam Cordelle); admin server failed to start after upgrade, Beeks asked to reboot 2026-06-07.
 - **Integration:** LDN trading + admin (LD5), Athena `basemarkets_ldn`, distribution via CLIENT_PRICE_LDN / CLIENT_PRICE_BETA_LDN / DISTRIBUTION_LDN / DISTRIBUTION_SYNAPSE_LDN. FIX API available; no margin / credit checking yet.
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-06-07 — Admin server did not come up after weekend restarts (Compass upgrade weekend)
+> Liam Cordelle noted at 10:00 UTC 2026-06-07 that the admin server failed to come back up after weekend restarts. Beeks detected the issue but were awaiting Mahi permission to reboot; Liam asked Beeks to restart it. Follow-up planned: Liam to establish a procedure giving Beeks more autonomy on reboots. No resolution confirmation in channel yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359)
 
 > [open] 2026-05-28 — Centroid EURAUD TP order rejected: LIQUIDITY_VIOLATION
 > Client (Tegis/Centroid) reported that a take profit order on EURAUD (2000 lots, tag 1 = "55", account BaseMarketsCentroidOrders) was rejected at 06:18 UTC 2026-05-28 with `LIQUIDITY_VIOLATION`. FIX Execution Report shows OrdStatus=4 (Cancelled), ExecType=4. Client asked for root cause investigation; no Mahi reply in channel as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1779958441603849)
@@ -73,6 +76,7 @@ last_catchup: 2026-06-05T07:12:55Z
 
 ## Notable topics
 
+- 2026-06-05 — Compass upgrade applied over the weekend: Liam Cordelle notified the client channel that the system would be upgraded to the latest Compass version over the weekend (w/c 2026-06-05), with monitoring over market open for issues. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1780673119041699)
 - 2026-06-05 — Fee tier under review: Nicola Perikhanyan noted volumes for Base are being monitored and asked whether growth from Tegis justifies moving up a fee tier (fees were reduced back to the intro offer due to slower-than-expected growth); Kate Stagg replied that MT4/5 teething issues mean they're not live yet, was hoping this week but now likely next week; Nicola resolved to evaluate again in July. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780584640017199)
 - 2026-06-05 — New group code requested: anonymous/guest user in #mahi-base-markets asked to add `real\USD-MU-SD-VIE-R`; Rory King confirmed "sure - we'll get that arranged". [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1780582922690779)
 - 2026-06-03 — Kate Stagg restarted `clientDistGateway1`, noting only the Centroid connection is on this process and it is not live yet — confirms Tegis/Centroid integration remains in pre-live (test-only) state. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780487432576579)
