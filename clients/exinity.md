@@ -17,10 +17,19 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-05T07:16:00Z
+last_catchup: 2026-06-08T07:15:13Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-07 — Velocity error: JUMP_CFD connection unavailable
+> Samuel flagged an error on Velocity (screenshot). Nathan explained: Mahi cannot connect to JUMP_CFD; pricing being received from Velocity. Samuel acknowledged as fine. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780870453281549)
+
+> [open] 2026-06-05 — GDIUSD can't be searched in spread matrix UI
+> Daniel reported GDIUSD can't be found in the spread config UI search. Will confirmed GDIUSD is set up and pricing on CLIENT_PRICE_RETAIL correctly; the issue is UI-only (instrument not registered in the spread matrix search index). Will investigating. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780662450034059)
+
+> [open] 2026-06-05 — GR_Trading 6-month sim requested by Matthew (UTC+3)
+> Matthew requested a yield simulation on 6 months of GR_Trading data (file: 6 Month GR_Trading.xlsx, ~10MB). Will acknowledged and confirmed UTC+3 timezone. No completion confirmation in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780665666223549)
 
 > [open] 2026-06-02 — ASV_MT4_PROECN_224001915 counterparty rejects — unanswered
 > Samuel asked Mahi to check and clarify why this CP is being rejected, linking to the Compass order trace. No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780439962424789)
@@ -180,7 +189,7 @@ last_catchup: 2026-06-05T07:16:00Z
 - 2026-05-19–21 — Multiple yield simulation runs: Keshav (CentFX/Revshare, delivered 14-May); Christian/Roco dataset (delivered 20-May); Matt Set A (delivered 19-May, looks good); Matt Set B (negative aggregate spread yield flagged by Kate, under review); Louie dataset (in progress with Rory as of 21-May). [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1778825885046719)
 - 2026-05-19–21 — Rory invited Louie/Christian/Matthew to a call to walk through running yield sims via Echo independently; Matthew accepted for Wednesday 2pm UK. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779103440726729)
 - 2026-05-20 — Will Carter noted Exinity haven't communicated their planned system changes (the tagging restart) proactively — flagged desire to sit down with them to understand their roadmap. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779262620774479)
-- 2026-05-26 — Quarterly steering meeting pencilled in for Wed 10 June. Nicola suggested a pre-Cyprus catch-up with Nick (Exinity) beforehand (less formal, "lunch thing"); Will agreed. 2026-06-03: Nicola messaged Nick to confirm he's still on; proposed doing it over lunch; confirmation pending. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779792272029039) [follow-up](https://mahifx.slack.com/archives/C040V9LNKT5/p1780480030976259)
+- 2026-05-26 — Quarterly steering meeting pencilled in for Wed 10 June. Nicola suggested a pre-Cyprus catch-up with Nick (Exinity) beforehand (less formal, "lunch thing"); Will agreed. 2026-06-03: Nicola messaged Nick to confirm. 2026-06-05: Nick confirmed lunch next Weds (11 June) at Coya, 13:00. Nicola asked who else to invite from Exinity side; Kate suggested George (Moore). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1779792272029039) [lunch confirmed](https://mahifx.slack.com/archives/C040V9LNKT5/p1780651500609729)
 - 2026-06-01 — XAUFUT pricing model being set up today (Kate, post-Daniel call); will broker initially as with other futures, hedging books planned over the next few weeks. Confirmed in contract. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
 - 2026-06-01 — Exinity want a channel with more stable spreads (outside volatile periods). Kate said this requires another model; Daniel to check internally how much push there is before Mahi moves forward. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
 - 2026-06-01 — XAUUSD kilo pricing raised (Zendesk 23055). Liam pinged Andrew: in dev support queue, more of a feature request. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
