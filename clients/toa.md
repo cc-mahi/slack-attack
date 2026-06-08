@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-05T07:32:51Z
+last_catchup: 2026-06-08T07:24:12Z
 ---
 
 ## Status
@@ -18,11 +18,17 @@ last_catchup: 2026-06-05T07:32:51Z
 
 ## Recent issues
 
+> [open] 2026-06-08 — INST-34 off-market order flood on TOA-ARGAMON-LDN: orderRejectThrottle firing
+> Nathan (Centroid) flagged counterparty INST-34 continuously triggering orderRejectThrottle throughout the day at TOA-ARGAMON-LDN — sending limit orders off-market, worst case 27k orders in 5 min. Lee said he'd raise with Argamon; the Argamon-side reply indicated they are discussing withholding with the client and also a Centroid solution to stop this. https://mahifx.slack.com/archives/C035H1VNCAD/p1780889725278749
+
+> [open] 2026-06-07 — Argamon CHI+LDN processes down: gateway build mismatch + LR rule removal
+> Nathan flagged processes down on argamon-chi and argamon-ldn affecting MARKETMAKING_HRP_INSTI-Channel. Maten found two root causes: (1) default counterparty LR rule had been removed during the week — restored by Maten, clientDist processes recovered; (2) a recent gateway-component deploy introduced `NoClassDefFoundError: ConnectionStatusSource` — gateway on CHI was on `20260605.090257.d35c7a44` while other components were on `20260529.164545.a4526744`. Maten rolled back the CHI gateway to the older build to recover; noted only the latest build was kept on CHI making rollback harder. propTrader1HrpChi1 also not yet configured (see entry above). Maten raised that CHI should retain more than the single latest build to allow faster rollback. https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519
+
 > [resolved] 2026-06-03 — marketDataCryptoDotCom1 on Toa-argamon APN1 being decommissioned
 > Maten bounced marketDataCryptoDotCom1 on Toa-argamon APN1 after XETUSD crossed book; noted the crossed-book alert had been firing every hour and asked if it could be disabled via `marketdata.crossedBookAlertThresholdBps` given Crypto.com isn't in use. James confirmed it was turned off due to issues and suggested killing the gateway. Maten agreed to comment out marketDataCryptoDotCom1/ordersCryptoDotCom1 and do an infra deploy. https://mahifx.slack.com/archives/C035H1VNCAD/p1780488380763669
 
-> [watching] 2026-06-02 — propTraderHrp1 being added to Toa-argamon CHI
-> James posted "Adding propTraderHrp1 to toa-argamon CHI" — no further context or ops alerts in thread. Likely infrastructure expansion related to the hedgerCBOE1/TradePositionLimitMonitor CHI buildout from the past week. https://mahifx.slack.com/archives/C035H1VNCAD/p1780423159813489
+> [open] 2026-06-02 — propTrader1HrpChi1/propTrader1HrpLdn1 being added to Toa-argamon CHI/LDN: not yet configured
+> James posted "Adding propTraderHrp1 to toa-argamon CHI" (2026-06-02), then on 2026-06-05 switched naming to `propTrader1HrpChi1`/`propTrader1HrpLdn1`. On 2026-06-07 Nathan flagged processes down on argamon-chi and argamon-ldn due to MARKETMAKING_HRP_INSTI-Channel — Maten confirmed propTrader1HrpChi1 not yet configured, propTrader1HrpLdn1 also a factor. James said he'd set up propTrader in a few hours. Also connected to the gateway build mismatch (see entry below). https://mahifx.slack.com/archives/C035H1VNCAD/p1780423159813489
 
 > [watching] 2026-05-29 — TradePositionLimitMonitor being set up on Toa-argamon CHI: spurious alerts to ops
 > James apologised to Leo (Borsi) for alerts on Arg CHI caused by TradePositionLimitMonitor being brought up. A clientDistributionGateway1 restart was also requested on 2026-05-27 (via #eod-restarts) to add a new channel to toa-argamon-ch-trading-1. https://mahifx.slack.com/archives/C035H1VNCAD/p1780070176002959
@@ -173,6 +179,7 @@ last_catchup: 2026-06-05T07:32:51Z
 
 ## Notable topics
 
+- **2026-06-05 — Nado xstock spot launch request refused pending renegotiation**: Nado asked James in `toa-nado-shared` to have NLP support xstock spot launch targeting Monday 2026-06-09, saying activity would be low (mainly depth for liquidation). James refused: new development work is on hold pending renegotiation, Mahi is not in a position to support xStocks without development work, and Friday-to-Monday notice is insufficient. https://mahifx.slack.com/archives/C09RGU1T1GE/p1780661003888839
 - **Chaos→Stork oracle migration (2026-05-22 22:30 UTC)** — all Nado crypto perp markets migrated from Chaos to Stork oracle; 2-hour window. Stork API token provided; `stork-fast` endpoint. No post-migration incident signals in channel through 2026-06-03 window — likely completed without issue.
 - Nado weekly maintenance window moved to 22:30 UTC Mon/Thu (was previously aligned to LDN hours); Toa reboot schedule updated to match — PRI reboots Monday 22:30 UTC, SEC reboots Thursday 22:30 UTC. Calendar reminder updated for NZ support coverage instead of LDN. https://mahifx.slack.com/archives/C035H1VNCAD/p1778185084196589
 - Cameron asked whether low-urgency PD alerts requiring prompt action will get missed in the noise; James says most should drop off PD entirely as EOD telemetry. Open design question for pagerbuddy / alert routing. PD noise review (Feb 2026) showed 2064 incidents on APN1 — threshold tuning still pending.
