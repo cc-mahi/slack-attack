@@ -7,7 +7,7 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/instantfunding.md (not yet)
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-08T07:19:09Z
+last_catchup: 2026-06-09T07:21:00Z
 ---
 
 ## Recent issues
@@ -18,6 +18,10 @@ last_catchup: 2026-06-08T07:19:09Z
 
 > [open] 2026-06-03 — Payout rule sim requested (trailing drawdown addition)
 > IF wants to change their payout criteria, including adding a trailing drawdown rule. Kate Stagg to send over the parameters so sims can be kicked off. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780479841433249)
+> 2026-06-08 update: IF provided full rule parameters for two account types. (1) Standard: daily DD 3%, max trailing drawdown 6% equity-based (trailing up to starting balance), profit target 9%, min days N/A, consistency N/A, min withdrawal 1.5% of starting balance at funded, paid every 14 calendar days — penalty mechanic: if account ever goes -1.5% equity, payout split at first payout cut in half. (2) Instant Funding: daily DD 3%, max trailing 6% balance-based, consistency 20%, min withdrawal 3% at funded, same -1.5% equity penalty on first payout split. Kate Stagg tagged Cameron Hughes to build a sim skill and run these. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780932899300319)
+
+> [resolved] 2026-06-08 — New Clarity MT5 account groups whitelisted
+> IF (Patrick) requested whitelisting of new MT5 Clarity account groups (demo + funded, multiple server/CT/MTCH variants). Kate Stagg clarified funded vs eval accounts (funded = groups ending IF_MT5, Micro_IF, or containing "Funded"). Config placed, pending EOD restarts to pick up the additional groups. [permalink](https://mahifx.slack.com/archives/C076RHNUP36/p1780913933693819)
 
 > [resolved] 2026-06-03 — 50% billing discount extended through end of August
 > Nicole Vivian asked if the 50% discount had been extended after Lewis requested a bill revision. David Cooney initially confirmed June + July. 2026-06-04: Bonnie Cassidy called Lewis, agreed to continue discount until end of August; diarised a call with Lewis after August to discuss. Lewis's position: they'd have to look at leaving Mahi if discount removed. Bonnie diarised the August review. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780570419557709)
