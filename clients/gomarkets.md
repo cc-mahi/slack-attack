@@ -13,10 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-08T07:17:13Z
+last_catchup: 2026-06-09T07:20:47Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-09 — LMAX LP position clearing: transitioning hedging to LMAX_LDN
+> Will (GoMarkets, ~23:27 UTC 2026-06-08) began clearing open LMAX positions using trading adjustment hedgers (TRADING_SUB_ADJUSTMENTS + TRADING_ADJUSTMENTS books), targeting GBPUSD first. Initial hedger restart needed (instrument change). Daria (Mahi) reconfigured: `hybridHedgerSubTrading1` set to reducing-only with LMAX only; LMAX removed from `hybridHedgerTrading1`; backstop added with 20s delay allowing position-increase at 26DEGREES/Finalto/ISPRIME if LMAX reduction doesn't fire. Nathan confirmed hedgers restarted and GBPUSD cleared by ~01:51 UTC. Backstop worked well on EURUSD ~200k long LMAX vs ~64k Finalto. Will confirmed still clearing remaining LMAX positions — ongoing. Tied to GAUUSD/GAUCNH go-live prep and LMAX→LMAX_LDN hedging migration. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780961237693669)
 
 > [resolved] 2026-06-04 — HOUSE1TradePosition DB replica lag: large A/B/LP rec breaks
 > Will (GoMarkets, ~21:40 UTC) flagged large breaks in A/B/LP recs — B_CLIENTS CAD/JPY showing -66,000 on HOUSE1TradePosition vs -26,000 on Compass/Tapaas. Sam Hewitt (Mahi) identified a DB replica issue and fixed the replica catch-up by ~23:22 UTC. Will re-ran recs and confirmed much improved (small residual on XAUUSD only, expected). Resolved same session. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780609220282089)
@@ -42,8 +45,8 @@ last_catchup: 2026-06-08T07:17:13Z
 > [resolved] 2026-05-26 — Gold not ticking at ~22:01 UTC — ISAM wide spreads, recovered within ~8 min
 > Will (GoMarkets) reported gold was not ticking at ~22:01 UTC. Nathan (Mahi) checked and by ~22:01 UTC Will had already seen it return. Isaac diagnosed: LP (ISAM) benchmarking was cutting in/out due to wide spreads — Invast publishing ~$3 wide; ISAM stabilising. Confirmed stable by ~22:09 UTC. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779832903422559) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1779833333588649)
 
-> [open] 2026-05-29 — GAUUSD + GAUCNH new instruments: beta pricer live 2026-06-03; go-live Tuesday 2026-06-10 (ZD #23044)
-> Kieran (GoMarkets, 2026-05-28 23:12 UTC) asked for status on GAUUSD and GAUCNH; marketing go-live set for Monday 8 June (later moved to Tuesday 10 June per Daria call). Isaac confirmed weekend release; ZD ticket #23044 posted. By 2026-06-03 Nathan confirmed GAUUSD beta pricer is live aggregating Finalto, LMAX, LMAX_LDN feeds — not yet live to clients. LMAX_LDN suitability for GAUUSD still being discussed client-side (Mac: "discussing internally"). LP fee subscriptions still to be set up post-deploy. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780006312436859) [Isaac release confirmation](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780022935647669) [beta pricer update](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780447701.089979)
+> [open] 2026-05-29 — GAUUSD + GAUCNH new instruments: beta pricer tuning; go-live Tuesday 2026-06-10 (ZD #23044)
+> Kieran (GoMarkets, 2026-05-28 23:12 UTC) asked for status on GAUUSD and GAUCNH; marketing go-live set for Monday 8 June (later moved to Tuesday 10 June per Daria call). Isaac confirmed weekend release; ZD ticket #23044 posted. By 2026-06-03 Nathan confirmed GAUUSD beta pricer is live aggregating Finalto, LMAX, LMAX_LDN feeds — not yet live to clients. 2026-06-09: Nathan sent spread report — BETA shows GAUUSD 10.4× vs live 14.6× (target ~5×); GAUCNH 23.9× vs live 32.6× (target ~10×). Client happy to keep live config as-is while beta is tuned further. Also: Will flagged GAUUSD BETA feed volatile at times (Directional-harmonics signal firing first); Nathan adjusted signals, pricer smoother — continuing tomorrow. LMAX being removed from hedging in favour of LMAX_LDN as part of same migration. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780006312436859) [spread report 2026-06-09](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780972933955779) [GAUUSD volatility thread](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780977858789819)
 
 > [watching] 2026-05-26 — Lead-lag analysis requested on IG as Go LP
 > Isaac flagged post go-call that IG's pricing is "horrible generally" and wants a lead-lag analysis to quantify how bad. No analysis produced yet. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1779754554652629)
@@ -88,6 +91,8 @@ last_catchup: 2026-06-08T07:17:13Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-06-09 — Go Markets call notes (Nathan internal, ~01:25 UTC): spread targets GAUUSD ~5× XAUUSD, GAUCNH ~10× XAUUSD; XAGUSD crosses need widening moved from BMSL to MWMS (crosses triangulated with TWPMD, which fires before BMSL); replacing LMAX with LMAX_LDN for all hedging; future plan to internalise metal crosses — hold FX side internally, hedge only the metal risk outright. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1780964709686399)
 
 - 2026-06-08 — GAUUSD tightening config applied: Will (GoMarkets, ~02:37 UTC) requested GAUUSD `pricing.minimumTightenedSpreadRatioOfBase` be set up to mirror XAUUSD — allowing tightening nodes to bring the 0.030 base target down to 0.010 when models permit (ratio value 0.33). Nathan (Mahi) confirmed he could replicate XAU's setup, applied it by ~04:53 UTC, and noted the model will fine-tune over time. Will confirmed. Resolved same session. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780886274072879)
 
