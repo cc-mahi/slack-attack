@@ -10,13 +10,13 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-08T07:06:52Z
+last_catchup: 2026-06-09T07:07:49Z
 ---
 
 ## Recent issues
 
 > [open] 2026-06-08 — EURCAD rejects from CP 1770806082_99997 via 5ERS_FUNDED_YB_MT5 — order quantity increment mismatch
-> Nathan Burch (2026-06-08 03:51 UTC) flagged high EURCAD rejects from CP 1770806082_99997 placing qty 999.99; Mahi config accepts FX orders at increment 1.0 minimum 1.0. Nathan asked client whether to reduce FX increment to 0.01 to accept the orders, or raise the misconfiguration with YourBourse. No reply yet. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1780890673528329)
+> Nathan Burch (2026-06-08 03:51 UTC) flagged high EURCAD rejects from CP 1770806082_99997 placing qty 999.99; Mahi config accepts FX orders at increment 1.0 minimum 1.0. Andreas replied (08:18 BST 2026-06-08): their setup expects minimum 0.01, increment 0.01. Nathan confirmed he'll update config; asked whether to apply to all FX (22:11 BST). Andreas confirmed: yes, all FX (07:26 BST 2026-06-09). Change requires EOD restart — not yet applied. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1780890673528329) [confirmation](https://mahifx.slack.com/archives/C07AQJS4E80/p1780986381344349)
 
 > [resolved] 2026-05-28 — New YB-MT5 FIX session (`5ers-Funded-YB-MT5`) not receiving trades — config issue on 5ers side
 > Andreas (2026-05-28 09:03 BST) asked whether trades from login 250 (new FIX session `5ers-Funded-YB-MT5-Prices`/`5ers-Funded-YB-MT5-Orders`) were reaching Mahi. William Denny investigated and could not locate the trades; client confirmed this was a new FIX session not previously in scope. Andreas subsequently identified a misconfiguration on 5ers' side and resolved it. Test trade confirmed: account 298, AUDCAD 0.01 long (Trade ID 012dtjmksn) reached Mahi and was verified by William — skew and LR ran correctly. Trades from login 250 also confirmed arriving after the fix. [thread](https://mahifx.slack.com/archives/C07AQJS4E80/p1779955398886419) [resolution](https://mahifx.slack.com/archives/C07AQJS4E80/p1779977099502669)
@@ -74,6 +74,8 @@ last_catchup: 2026-06-08T07:06:52Z
 > Andreas sending test trades through yourbourse→Mahi; Shyam + Isaac monitoring. Isaac's 04-24 update: trades flowing as expected; some cancels from off-market/last-look breaching limit orders but nothing unexpected. 04-28: client switched XAUUSD flow to YB+Mahi too. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1776981907673599)
 
 ## Notable topics
+
+- 2026-06-08 — Andreas requested bid/ask markup file for all symbols; Kate shared `BASE_SPREADS_CLIENT_PRICE_LDN.csv` (base spreads by timezone partition, no per-symbol markup, dynamic widening on top). Andreas asked for a walkthrough; Kate offered 3pm UK time same day. Andreas accepted, meeting invite sent and confirmed. [request](https://mahifx.slack.com/archives/C07AQJS4E80/p1780910322757569) [kate-file](https://mahifx.slack.com/archives/C07AQJS4E80/p1780916594778689) [meeting-confirmed](https://mahifx.slack.com/archives/C07AQJS4E80/p1780922948634059)
 
 - 2026-04-28 — Yaniv weekly call recap: T4B→YB demo flow migration complete; FX order-book tier change applied (100k/200k/300k/500k…, was 100k/400k/500k…); Yaniv keen on further education for Yaron given he's been trialling YB's order book on demo; client now using Claude to surface toxic counterparties from MT trade logs. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1777391713854269)
 - 2026-04-30 — Constantinos requested USDSGD pricing — not previously in environment; Kate confirmed will set up. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1777554437360859)
