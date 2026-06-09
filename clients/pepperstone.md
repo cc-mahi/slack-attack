@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-06-08T07:23:24Z
+last_catchup: 2026-06-09T07:23:42Z
 ---
 
 ## History
@@ -235,5 +235,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-06-04 — Isaac did a full stop-start on the London CFD env to pick up WAN config changes. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780540158588719)
 - 2026-06-04 — Marianna asked for update on S3 bucket access progress (relates to the external classifier S3 upload feature request, see open issue 2026-05-19); Rory replied he'll check internally and revert. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780578395131549)
 - 2026-06-04 — Leo Borsi deployed a Dash update for both pepperstone and pepperstone-crypto envs. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780581350155219)
+- 2026-06-08 — Kraken SOW #3 UAT credentials still not delivered: Liam confirmed integration is blocked because Reece (Pepper) still hasn't provided test credentials. Liam chased last week with no response. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780905943418209)
+- 2026-06-08 — XTX removed from referencePriceMarketSelectors (FX env): Marianna flagged XTX as a skew-sensitive feed that should only be used for hedging, not as a price reference. Rory removed all references and did rolling pricer restart same afternoon; confirmed complete. XTX was already absent from crypto pricing. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780912865095549)
+- 2026-06-08 — New crypto cross pairs requested: HYPE/BTC, HYPE/ETH, XLM/BTC, XLM/ETH — triangulated crosses (no direct feed), 1x widening factor, SI 1 hour. Kate Stagg acknowledged; no ETA yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780916305071409)
+- 2026-06-08 — Stephen queried whether XBTUSD in Crypto env should reference spot liquidity rather than CFD providers (currently referencing CFD referencePriceMarketSelectors). No Mahi reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780909069182079)
 - 2026-06-07 — Daria asked internally for a rough ETA on the Kraken SOW #3 integration, framed as "considering options for the BTCAUD/AUD crosses pricing issue" — i.e. Kraken as a hedging venue is part of the resolution path. No reply yet. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780869999127439)
 - 2026-06-04/05 — CFD NYC FIX credentials exchanged (Isaac → Diego): A_CLIENTS + B_CLIENTS orders/marketdata on host 10.72.100.115 (NYC) and 149.5.84.246 (LDN→NYC failover). Instrument scope clarified: HRP Goldi connections for perps (both Crypto + FX envs); Jump Direct + LMAX 2 for cash indices. Isaac expects pricing available for review and possible test trades by EOD 2026-06-05 if Melbourne firewall change completes on schedule. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780610527787349)
