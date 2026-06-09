@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
   - {name: "Karam Abo Qoura", role: "IC Markets — queries execution profiles, Echo dashboards, and LR settings for gold flow; risk/analytics contact"}
   - {name: "Harry Politis", role: "IC Markets — attended 2026-06-03 LR/classification review call with Pavlos and Karam; role unknown", confidence: low}
-last_catchup: 2026-06-09T07:20:57Z
+last_catchup: 2026-06-09T07:22:58Z
 ---
 
 ## Recent issues
