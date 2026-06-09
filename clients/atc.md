@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-08T07:13:42Z
+last_catchup: 2026-06-09T07:14:24Z
 ---
 
 ## Recent issues
@@ -50,7 +50,9 @@ last_catchup: 2026-06-08T07:13:42Z
 
 ## Notable topics
 
-- 2026-06-07 — Jack Manoukian requests P&L report alongside invoice each month. Nicole Vivian forwarded Jack's email: Jack asks that from May onwards, the P&L report be sent together with the invoice (since the invoice total derives from month-end P&L). He included the April P&L PDF as reference. Nicole tagged the Finance/Reporting team. No reply yet in window. [Nicole forward](https://mahifx.slack.com/archives/C046RNF64VD/p1780865571965479)
+- 2026-06-09 — May P&L report reviewed by Will Carter; ready for sending. Will posted the ATC LDN Report (2026-05-01–2026-06-01 PDF) in #internal-atc and confirmed it matches the account summary; tagged William Denny for dispatch. Closes the 2026-06-07 Jack Manoukian request for P&L alongside invoice. [Will post](https://mahifx.slack.com/archives/C046RNF64VD/p1780989018424339)
+
+- 2026-06-07 — Jack Manoukian requests P&L report alongside invoice each month. Nicole Vivian forwarded Jack's email: Jack asks that from May onwards, the P&L report be sent together with the invoice (since the invoice total derives from month-end P&L). He included the April P&L PDF as reference. Nicole tagged the Finance/Reporting team. [Nicole forward](https://mahifx.slack.com/archives/C046RNF64VD/p1780865571965479)
 
 - 2026-06-05 — Compass upgrade weekend 7–8 June. Liam Cordelle notified ATC in #mahi-atc at 16:25 BST: system will be upgraded to the latest Compass version this weekend, with monitoring over the open. [Liam notice](https://mahifx.slack.com/archives/C04AZM0LPMH/p1780673135180689)
 
