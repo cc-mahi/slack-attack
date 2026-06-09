@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-08T07:17:13Z
+last_catchup: 2026-06-09T07:18:19Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-08 — 4,124oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 4,124oz gold long on Finalto at 15:12 BST; Rory acknowledged "will do" at 15:30 BST; William confirmed "done" at 17:29 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780927951026909)
+
+> [resolved] 2026-06-08 — XAGUSD close-by adjustment: 30k LMAX stalled ~5 min; manual hedger backstop config fixed
+> Nael submitted a 176,100oz XAGUSD close-by adjustment at ~09:07 BST; Finalto leg cleared in ~40s; LMAX cleared 146,100oz quickly then stalled on the final 30,000oz from ~08:04:30 to 08:09:55 UTC (completing 08:11:38 UTC). Nael flagged urgently at 09:07 BST; Rory responded and confirmed risk cleared; William explained the delay was due to spread-reducing logic and hedging throttle. Nael asked to disable hedgers while reviewing — William confirmed OK at 09:15 BST. Shyam posted root cause in internal channel at 06:39 BST on 2026-06-09: (1) `VAR-CLEARANCE` idled once ahead of schedule — parked 30k residual until schedule clock caught up ~5 min; (2) `BACKSTOP` spread cap = 2× base_spread(remaining) — at 30k that resolves to 0.032, below LMAX's ~0.039 silver spread, so backstop never fired. Fix deployed: time-laddered backstops added to both manual hedgers — wider spread tolerance the longer risk sits (Finalto: 200%/500% at 30s/60s; LMAX: 300%/800% at 30s/60s of base spread). [client-permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780906021922689) [root-cause](https://mahifx.slack.com/archives/C09QS1NUA80/p1780983580727989)
 
 > [resolved] 2026-06-05 — 992oz XAUUSD + 10,000oz XAGUSD long filled on Finalto, Compass adjustments done
 > Layan reported 992oz XAUUSD + 10,000oz XAGUSD filled on Finalto at 15:09 BST; William confirmed "that's done now" at 15:16 BST. Separately, Nael attempted to move 1,500oz XAUUSD from Finalto to LMAX via the CSV adjustment sheet but reported nothing happened. William checked Compass and found the positions were already correctly reflected in the manual adjustment books (+1.5k Finalto, -1.5k LMAX). Confusion about hedger state during adjustments; William held a huddle at 15:34 BST to clarify procedure. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780668561320359) [huddle](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780670075330379)
@@ -136,6 +142,7 @@ last_catchup: 2026-06-08T07:17:13Z
 
 ## Notable topics
 
+- 2026-06-09 — Time-laddered backstop fix deployed to both manual hedgers: Shyam added time-laddered spread tolerance to `VAR-CLEARANCE` and `BACKSTOP` rules (Finalto 200%/500%, LMAX 300%/800% at 30s/60s) after 30k XAGUSD stalled on LMAX for ~5 min during 2026-06-08 close-by. Prevents backstop from being priced out when quantity shrinks and base spread drops. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780983580727989)
 - 2026-06-02 — NG1FUT internalisation complete; crypto test trades promised next: William confirmed all futures now internalising; told Nael "We'll make sure the Crypto instruments are ready to test trade soon". [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780392614316269)
 - 2026-06-02 — hybridHedgerFutsP1/W1 bounced for NG1FUT maxSlippage fix: force rounding of Finalto price to 3dp (priceFormatPip) to avoid raw TOB 4dp rejection. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780391840837769)
 - 2026-06-01 — LR on A_CLIENTS channel tuned: William reduced refresh rate from $250k/sec to $50k/sec (then walked back to $100k/sec as less aggressive) to lift LR from ~$1/M. Monitoring underway. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780329833967329)
