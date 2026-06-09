@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Adam Foltyn", role: "client trading ops — LP/pricing escalations", confidence: low}
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory — possibly attending Cyprus event alongside Roman", confidence: low}
-last_catchup: 2026-06-08T07:10:58Z
+last_catchup: 2026-06-09T07:13:41Z
 ---
 
 ## Recent issues
