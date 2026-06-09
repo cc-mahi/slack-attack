@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-08T07:24:12Z
+last_catchup: 2026-06-09T07:31:54Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-06-08T07:24:12Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-06-08 — CBOE new venue XAU wrong increment: self-fixed
+> James flagged CBOE XAU wrong increment on the new venue via PD (Q04VWHPIFICMKE) at 11:36 UTC; posted "Should be fixed" 7 minutes later — self-resolved, no ops intervention needed. Related to the hedgerCBOE1 being brought up on Toa-argamon LDN (see 2026-05-26 entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1780918597116949
 
 > [open] 2026-06-08 — INST-34 off-market order flood on TOA-ARGAMON-LDN: orderRejectThrottle firing
 > Nathan (Centroid) flagged counterparty INST-34 continuously triggering orderRejectThrottle throughout the day at TOA-ARGAMON-LDN — sending limit orders off-market, worst case 27k orders in 5 min. Lee said he'd raise with Argamon; the Argamon-side reply indicated they are discussing withholding with the client and also a Centroid solution to stop this. https://mahifx.slack.com/archives/C035H1VNCAD/p1780889725278749
