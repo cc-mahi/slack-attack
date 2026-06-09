@@ -17,16 +17,19 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-08T07:15:13Z
+last_catchup: 2026-06-09T07:16:23Z
 ---
 
 ## Recent issues
 
+> [open] 2026-06-08 — Books reval'd on erroneous tick around roll (NZDUSD)
+> Matthew Ayub flagged at ~22:10 UTC that books were getting reval'd on an erroneous tick coming through over roll. Daria investigated: DB_SW_WB, VELOCITY, and 360T all continued pricing into roll; traced to NZDUSD ticks around rollover where price dipped, causing P&L swings. P&L has since changed with updated ticks from these LPs. No explicit resolution confirmed in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780953021152939)
+
 > [resolved] 2026-06-07 — Velocity error: JUMP_CFD connection unavailable
 > Samuel flagged an error on Velocity (screenshot). Nathan explained: Mahi cannot connect to JUMP_CFD; pricing being received from Velocity. Samuel acknowledged as fine. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780870453281549)
 
-> [open] 2026-06-05 — GDIUSD can't be searched in spread matrix UI
-> Daniel reported GDIUSD can't be found in the spread config UI search. Will confirmed GDIUSD is set up and pricing on CLIENT_PRICE_RETAIL correctly; the issue is UI-only (instrument not registered in the spread matrix search index). Will investigating. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780662450034059)
+> [resolved] 2026-06-05 — GDIUSD can't be searched in spread matrix UI
+> Daniel reported GDIUSD can't be found in the spread config UI search. Will confirmed GDIUSD is set up and pricing on CLIENT_PRICE_RETAIL correctly; the issue is UI-only (instrument not registered in the spread matrix search index). 2026-06-08: Justin Young confirmed it's a small UI bug related to filtering and exporting; fix in next release. Compass direct link provided as workaround. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780662450034059) [resolved](https://mahifx.slack.com/archives/C0456LSHQQK/p1780925797046619)
 
 > [open] 2026-06-05 — GR_Trading 6-month sim requested by Matthew (UTC+3)
 > Matthew requested a yield simulation on 6 months of GR_Trading data (file: 6 Month GR_Trading.xlsx, ~10MB). Will acknowledged and confirmed UTC+3 timezone. No completion confirmation in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780665666223549)
