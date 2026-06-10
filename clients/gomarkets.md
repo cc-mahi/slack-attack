@@ -13,13 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-09T07:20:47Z
+last_catchup: 2026-06-10T07:20:41Z
 ---
 
 ## Recent issues
 
 > [open] 2026-06-09 — LMAX LP position clearing: transitioning hedging to LMAX_LDN
-> Will (GoMarkets, ~23:27 UTC 2026-06-08) began clearing open LMAX positions using trading adjustment hedgers (TRADING_SUB_ADJUSTMENTS + TRADING_ADJUSTMENTS books), targeting GBPUSD first. Initial hedger restart needed (instrument change). Daria (Mahi) reconfigured: `hybridHedgerSubTrading1` set to reducing-only with LMAX only; LMAX removed from `hybridHedgerTrading1`; backstop added with 20s delay allowing position-increase at 26DEGREES/Finalto/ISPRIME if LMAX reduction doesn't fire. Nathan confirmed hedgers restarted and GBPUSD cleared by ~01:51 UTC. Backstop worked well on EURUSD ~200k long LMAX vs ~64k Finalto. Will confirmed still clearing remaining LMAX positions — ongoing. Tied to GAUUSD/GAUCNH go-live prep and LMAX→LMAX_LDN hedging migration. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780961237693669)
+> Will (GoMarkets, ~23:27 UTC 2026-06-08) began clearing open LMAX positions using trading adjustment hedgers (TRADING_SUB_ADJUSTMENTS + TRADING_ADJUSTMENTS books), targeting GBPUSD first. Initial hedger restart needed (instrument change). Daria (Mahi) reconfigured: `hybridHedgerSubTrading1` set to reducing-only with LMAX only; LMAX removed from `hybridHedgerTrading1`; backstop added with 20s delay allowing position-increase at 26DEGREES/Finalto/ISPRIME if LMAX reduction doesn't fire. Nathan confirmed hedgers restarted and GBPUSD cleared by ~01:51 UTC. Backstop worked well on EURUSD ~200k long LMAX vs ~64k Finalto. Will confirmed still clearing remaining LMAX positions — ongoing. Tied to GAUUSD/GAUCNH go-live prep and LMAX→LMAX_LDN hedging migration. Update 2026-06-10: client greenlit Nathan's request to add LMAX_LDN to full brokering/hedging LP pool for all products. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780961237693669) [LMAX_LDN brokering approval](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781058487541289)
 
 > [resolved] 2026-06-04 — HOUSE1TradePosition DB replica lag: large A/B/LP rec breaks
 > Will (GoMarkets, ~21:40 UTC) flagged large breaks in A/B/LP recs — B_CLIENTS CAD/JPY showing -66,000 on HOUSE1TradePosition vs -26,000 on Compass/Tapaas. Sam Hewitt (Mahi) identified a DB replica issue and fixed the replica catch-up by ~23:22 UTC. Will re-ran recs and confirmed much improved (small residual on XAUUSD only, expected). Resolved same session. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780609220282089)
@@ -91,6 +91,8 @@ last_catchup: 2026-06-09T07:20:47Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-06-10 — LMAX_LDN approved for full LP brokering/hedging pool: Nathan (Mahi, ~03:28 UTC) asked client team whether LMAX_LDN can be added to the brokering/hedging LP pool. Client confirmed "yes go for it" and "you can use for all products" (~03:51–03:52 UTC). This greenlights adding LMAX_LDN as a brokering LP across all instruments, advancing the LMAX→LMAX_LDN migration. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781058487541289)
 
 - 2026-06-09 — Go Markets call notes (Nathan internal, ~01:25 UTC): spread targets GAUUSD ~5× XAUUSD, GAUCNH ~10× XAUUSD; XAGUSD crosses need widening moved from BMSL to MWMS (crosses triangulated with TWPMD, which fires before BMSL); replacing LMAX with LMAX_LDN for all hedging; future plan to internalise metal crosses — hold FX side internally, hedge only the metal risk outright. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1780964709686399)
 
