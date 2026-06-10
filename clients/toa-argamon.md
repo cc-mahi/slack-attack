@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-06-09T07:30:58Z
+last_catchup: 2026-06-10T07:38:43Z
 ---
 
 ## Status
@@ -26,11 +26,20 @@ last_catchup: 2026-06-09T07:30:58Z
 
 ## Recent issues
 
+> [open] 2026-06-09 — Centroid HRP FIX logon not receiving response; netcat connectivity check pending
+> Levi (Argamon) reported in mahi-argamon-operations that Centroid cannot get a logon response on either the market session (HRP-CENTROID2Prices) or trading session (HRP-CENTROID2Orders) — Centroid sent FIX.4.4 Logon (tag 35=A) out but received no reply. Kate checked and asked Levi to netcat to 170.75.204.26 ports 9010 and 9011. As of 00:23 BST 2026-06-10 Levi was requesting netcat results from Centroid; no resolution yet. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119)
+
+> [resolved] 2026-06-09 — hedgerHrpCME1 PnL breach alert; self-resolved hedge fluctuation
+> Cameron posted PD alert for PnL breach on `hedgerHrpCME1` at toa-argamon-ch-trading-1 (15:51 BST). James investigated: PnL was hedge-side fluctuation that matched from client flow — no real loss. `propTrader1HrpChi1` also flagged not running (confirmed not configured yet, consistent with open 2026-06-07 entry). James restarted the process. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781016700103829)
+
+> [resolved] 2026-06-09 — marketDataNado2 OOM; self-recovered
+> Cameron posted PD alert for OOM on `marketDataNado2`; noted it appeared to have self-recovered. No further action taken. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780991529998909)
+
 > [open] 2026-06-08 — INST-34 orderRejectThrottle storm; off-market limit orders flooding TOA-ARGAMON-LDN
 > Nathan (Toa ops) flagged counterparty INST-34 triggering `orderRejectThrottle` continuously throughout the day at TOA-ARGAMON-LDN — constant limit orders rejected for being off-market; worst PD alert was 27k orders in 5 min. Lee Butts raising with Argamon; Argamon responded (via quoted reply) that they're discussing withholding these orders with the client and pursuing a Centroid-side fix too. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780889725278749)
 
-> [open] 2026-06-07 — MARKETMAKING_HRP_INSTI-Channel processes down at CHI + LDN; gateway build mismatch
-> Nathan flagged processes down at both argamon-chi and argamon-ldn related to MARKETMAKING_HRP_INSTI-Channel. Maten investigated: default counterparty LR rule had been removed (mid-week change); he restored defaults and clientDist processes came back up. Separately, gateways at LDN were crashing with `NoClassDefFoundError: connectionstatus/ConnectionStatusSource` — caused by a newer gateway build (20260605.090257) deployed without the matching core/distribution build. Maten rolled back gateway component to 20260529.164545 on CHI (copied from LDN); gateways back up. `propTrader1HrpChi1` in CHI still requires configuration — someone (likely Toa-side) said they'd set it up in a few hours (~10:07 BST). Resolution of prop trader setup not yet confirmed. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
+> [open] 2026-06-07 — MARKETMAKING_HRP_INSTI-Channel processes down at CHI + LDN; gateway build mismatch; propTrader1HrpChi1 still unconfigured
+> Nathan flagged processes down at both argamon-chi and argamon-ldn related to MARKETMAKING_HRP_INSTI-Channel. Maten investigated: default counterparty LR rule had been removed (mid-week change); he restored defaults and clientDist processes came back up. Separately, gateways at LDN were crashing with `NoClassDefFoundError: connectionstatus/ConnectionStatusSource` — caused by a newer gateway build (20260605.090257) deployed without the matching core/distribution build. Maten rolled back gateway component to 20260529.164545 on CHI (copied from LDN); gateways back up. `propTrader1HrpChi1` in CHI still requires configuration — James confirmed 2026-06-09 it is "not configured yet". [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
 
 > [resolved] 2026-06-05 — Compass upgrade this weekend; Argamon notified
 > Liam notified Argamon in mahi-argamon-operations that their system will be upgraded to the latest Compass version over the weekend, with monitoring at open. Argamon acknowledged. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1780673110439059)
@@ -154,6 +163,7 @@ last_catchup: 2026-06-09T07:30:58Z
 
 ## Notable topics
 
+- referencePriceMarketSelectors tuned for XAU/EUR/GBP (2026-06-10): Shyam updated LP sets for three instruments after lead-lag and TOB analysis over large price moves and opens. XAU: removed NWM_RCTV_HRP_1 and MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
 - propTrader1 HRP switch (2026-06-05): James switched TOA-ARGAMON to use `propTrader1HrpChi1`/`propTrader1HrpLdn1` in internal-toa-ops — likely the config change that preceded the 2026-06-07 MARKETMAKING_HRP_INSTI processes-down event (CHI propTrader not yet set up at that point). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780658564969939)
 - Build hygiene flag: Maten noted after the 2026-06-07 gateway rollback that toa-argamon should retain more than just the latest build so rollbacks can happen without copying from another env. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
 - Weekly P&L (w/c 2026-05-12): $5.9k from retail, caused by XAUAUD scalping by two new retail accounts (CPs 105988 + 105990, ~6 days old) — 106 small round-trips during FX twilight. Root cause: XAUAUD `arbProtectionParameters` was clamping the published quote into UBS's wide twilight spread instead of using the clean triangulated price. Fix: Shyam removed XAUAUD from arb protection rules; now using pure triangulated price. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
