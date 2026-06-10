@@ -9,10 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-09T07:33:01Z
+last_catchup: 2026-06-10T07:34:15Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-10 — cpty 89468479 yield profile starts below zero — Rory checking
+> Client posted Echo yield-profile link (valutrades.NYC, 2026-06-08→2026-06-09, cpty 89468479) asking "Why does it start below zero?" at 08:06 BST. Rory King replied "Hi overnight, checking" at 08:07. No answer in window — unanswered as of run time. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075168367929) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075254808079)
+
+> [open] 2026-06-10 — cpty 85551594 toxic yield profile — B-book classification queried, Nathan flagging to dev
+> Client asked team to advise on cpty 85551594 at 06:33 BST. Nathan Burch confirmed B-book at 06:41. Client then sent Echo yield-profile link (valutrades.NYC, 2026-06-08→2026-06-09 window) and asked Nathan to check the graph. Nathan replied at 07:58: "that is quite a toxic yield profile and I'd suggest A-booking that flow. I am not sure why the PnL graph suggests otherwise. I will raise this with dev and get back to you." — classification vs yield-profile mismatch, Nathan actively raising with dev. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781069589815059) [nathan-b-book](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781070079269269) [nathan-raise-dev](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781074722756569)
 
 > [resolved] 2026-06-04 — Connection issue reported ~22:35 BST — Sam Hewitt fixed, client confirmed reconnected
 > Client posted "Hello MAHI Team" + "Please can you fix this?" with a screenshot (image.png) in #mahi-valutrades at 22:35 BST. Sam Hewitt acknowledged ("checking") at 22:35 and asked client to check at 22:41. Client confirmed "Now connected" at 22:47 and thanked Sam. Resolved within ~12 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780608909361739) [sam-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780608958519529) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780609632425939)
@@ -99,6 +105,12 @@ last_catchup: 2026-06-09T07:33:01Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-10 — QB integration progress check-in: Graeme asked Liam for an update on the Quantitative Brokers algo integration; Liam confirmed on track for the discussed date, asked Graeme to confirm if there's a QB conformance process and to kick it off. Graeme said "Let me check with them." [graeme-checkin](https://mahifx.slack.com/archives/C09HN93T0G2/p1780999540262169) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1780999580634929)
+
+- 2026-06-09 — Surya Strait Tag 1 clarification — Andri asked what Tag 1 is used for Surya Philip (Rory confirmed `1=SYE8000`) then asked about Surya Strait; Cameron Hughes (Analyst) checked accounts under Surya/TT, could not find Strait specifically (possibly renamed), asked for an example trade. Andri confirmed no trades on Strait yet to provide. Related to the ongoing Surya Strait algo connection open issue. [andri-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1780994299110339) [cameron-check](https://mahifx.slack.com/archives/C09HN93T0G2/p1780994683205169) [liam-tag1-passthrough](https://mahifx.slack.com/archives/C09HN93T0G2/p1780998251336349)
+
+- 2026-06-09 — cpty 69565751 A/B classification — Rory King confirmed A book with chart. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781004243972759) [rory-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781005145808129)
 
 - 2026-06-03 — cpty 92569728 A/B book classification query — Kate confirmed A Book with chart. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780493775611609) [kate-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1780494293070929)
 
