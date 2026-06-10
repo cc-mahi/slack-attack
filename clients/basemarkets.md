@@ -11,16 +11,19 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-06-09T07:13:41Z
+last_catchup: 2026-06-10T07:13:11Z
 ---
 
 ## Status
 
-- **Stage:** onboarding — Centroid/LMAX integration underway; first LMAX test trades executed 2026-05-21 (EURUSD + XAUUSD confirmed both sides); go-live target was w/c 2026-06-02, slipped to w/c 2026-06-08; MT4/5 setup teething issues still in progress per 2026-06-05; Compass upgraded to latest version over weekend 2026-06-07/08 (Liam Cordelle); admin server failed to start after upgrade, Beeks asked to reboot 2026-06-07.
+- **Stage:** onboarding — blocked again as of 2026-06-09: Centroid give-up workflow broken (double-risk + MT5 zero-spread PnL issues); alternative MT4→MT5→Compass→LMAX workflow proposed by Kate Stagg; go-live target slipped further, no new date set; Compass upgraded to latest version weekend 2026-06-07/08 (Liam Cordelle).
 - **Integration:** LDN trading + admin (LD5), Athena `basemarkets_ldn`, distribution via CLIENT_PRICE_LDN / CLIENT_PRICE_BETA_LDN / DISTRIBUTION_LDN / DISTRIBUTION_SYNAPSE_LDN. FIX API available; no margin / credit checking yet.
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-06-09 — Centroid give-up workflow broken; alternative MT4→MT5→Compass workflow proposed
+> Kate Stagg post-call notes (2026-06-09): Centroid give-up has two showstopper issues: (1) Centroid sends zero-spread fill price to MT5 — PnL can't be tracked correctly; (2) Centroid sends one order from MT4 and one from MT5 to Compass — double execution risk. Alternative proposed: MT4 order (zero spreads) → passes to Base MT5 → STP'd to Compass → filled with spread → spread-paid fill confirmed in MT5 → client still sees zero-spread in MT4. Liam Cordelle noted a structural concern: previously Tegis P&L was against the market (STP to Scope); under the new model Base takes the other side, with Compass hedging to LMAX — mismatch risk due to internalisation and driver hedging. Kate to raise with Kate B (client); Liam signalled acceptable if there's no P&L share agreement between Tegis and Base. No resolution yet. Also discussed: separate Tegis pricing model with greater TOB quantity, aligned to LMAX (hedger) rather than Scope. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780997666453149)
 
 > [open] 2026-06-07 — Admin server did not come up after weekend restarts (Compass upgrade weekend)
 > Liam Cordelle noted at 10:00 UTC 2026-06-07 that the admin server failed to come back up after weekend restarts. Beeks detected the issue but were awaiting Mahi permission to reboot; Liam asked Beeks to restart it. Follow-up planned: Liam to establish a procedure giving Beeks more autonomy on reboots. No resolution confirmation in channel yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359)
