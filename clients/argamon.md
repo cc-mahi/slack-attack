@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-06-09T07:10:36Z
+last_catchup: 2026-06-10T07:09:07Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-06-09T07:10:36Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [open] 2026-06-09 — Centroid FIX logon failure: CENTROID2 Prices + Orders sessions not receiving logon response
+> Argamon ops (likely Levi) flagged Centroid unable to connect to the FIX integration sessions — both HRP-CENTROID2Prices and HRP-CENTROID2Orders sessions sending Logon (35=A) but receiving no response. Kate acknowledged and is investigating; separately asked Argamon to netcat 170.75.204.26:9010/9011. Argamon side replied (00:23 BST 2026-06-10) they would request results from Centroid — no resolution yet. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781003145893419)
 
 > [resolved] 2026-05-27 — YP reval errors fixed: CLIENT_PRICE_NYC → CLIENT_PRICE_RETAIL_NYC
 > Daria switched the default client price market from CLIENT_PRICE_NYC to CLIENT_PRICE_RETAIL_NYC after YP (yield profile) reval jobs were throwing `IllegalArgumentException: CLIENT_PRICE_NYC/GBPJPY unavailable`. CLIENT_PRICE_NYC is the legacy insti model — wrong reference for retail. Fix applied ~02:00 BST 2026-05-27. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779843264602109)
@@ -143,3 +146,4 @@ last_catchup: 2026-06-09T07:10:36Z
 - 2026-05-04 — EURUSD mid formation: Elan approved adding all LPs back into mid (NY now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary LPs; backtests show reduced spiky pricing and arb opportunities. Adaptive mid logic also added to betaRetailPricer1 for EURUSD; FI/skew PnL review ongoing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
 - 2026-05-13 — Toa LD4 TOB signal data missing: Elan flagged signal data not showing in Echo TOB for toa_argamon.LDN XAUUSD. Daria found signals not persisted since last system reboot; fixed after restart. Backfill not possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
 - 2026-06-05 — Compass upgrade planned for weekend (06-07/08): Liam notified client in mahi-argamon-operations. Client acknowledged. Monitoring planned over market open. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1780673110439059)
+- 2026-06-10 — Reference price market selector (LP set) changes for XAU/EUR/GBP: Shyam updated referencePriceMarketSelectors after lead-lag and TOB analysis over large price moves and opens. XAU: removed NWM_RCTV_HRP_1 + MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
