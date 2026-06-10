@@ -18,13 +18,19 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-09T07:23:42Z
+last_catchup: 2026-06-10T07:32:34Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-09 — CMC 4-second cancel: order group 012dvm189vu
-> Nathan Burch (Mahi) flagged at 08:16 BST that a cancel from CMC took ~4 seconds to come back on order group `012dvm189vu` earlier today. No response yet. Same slow-cancel pattern seen previously on Edgewater (2026-05-04 entry) and Invast (2026-04-22 entry). [Nathan flag](https://mahifx.slack.com/archives/C08AQKRU953/p1780989364475589)
+> [open] 2026-06-09 — CMC blocking tag 239_0_0 on DAX/G30 hedging: toxic syndicated flow
+> Alexandre (Rostro) reported urgently ~19:58 BST that CMC is rejecting brokered/hedged orders with tag `239_0_0` (CMC sees it as `219_5_239_0_0`). Rory blacklisted `239_0_0` from `hybridHedgerCFDSI1`; Rostro B-booked client flow during the incident. Daria noted the hedger-side tag issue is fixed, but brokered flow from 2026-06-08 still uses the old tag and will continue to be rejected — alternatives needed there. Alexandre confirmed CMC blocked it because "the flow was extremely toxic, syndicated Asian flow spreading across LPs and futures market to generate market impact." Rostro asked Mahi to monitor G30 only this evening; Daria confirmed she would. There was a small 0.1 DAX long residual in the SI book during the incident; Rory confirmed it. Status: hedger fix deployed, brokered-flow alternative still open. [Alexandre urgent](https://mahifx.slack.com/archives/C08AQKRU953/p1781031536394079) [Rory blacklist](https://mahifx.slack.com/archives/C08AQKRU953/p1781034971339559) [Daria note on brokered](https://mahifx.slack.com/archives/C08AQKRU953/p1781037566115719) [Alexandre toxic flow explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1781076688336779)
+
+> [open] 2026-06-09 — Invast firewall trip: 2 orders cancelled (>5s response, orders 63696022/63696015)
+> Inald (Mahi) flagged at 19:18 BST that 2 orders were cancelled from INVAST because the firewall tripped due to response time >5s (orders 63696022-1 and 63696015-1). No client-side query; internal flag only. No resolution or further discussion in window. [Inald flag](https://mahifx.slack.com/archives/C08AQKRU953/p1781029087522429)
+
+> [open] 2026-06-09 — CMC 4-second cancel: order group 012dvm189vu (AX.M26)
+> Nathan Burch (Mahi) flagged at 08:16 BST that a cancel from CMC took ~4 seconds to come back on order group `012dvm189vu` (instrument AX.M26, 0.5 lots). Abdullah (Rostro) asked for details; Kate provided FIX logs at 11:18 BST showing fill acknowledged then expired ~3s later (submit 06:21:04.153 → expired 06:21:08.256 UTC). Abdullah suggested possible CMC speedbump/last-look mechanism. No resolution confirmed. [Nathan flag](https://mahifx.slack.com/archives/C08AQKRU953/p1780989364475589) [Kate FIX logs](https://mahifx.slack.com/archives/C08AQKRU953/p1781000326614049)
 
 > [open] 2026-06-08 — riskReportingExtended1 OOM loop: heap exhausted by AllEntriesQueueStream buffers
 > Kate flagged at 14:13 BST that riskReportingExtended1 had stopped; process came back briefly then OOM-looped. Kate pinged <@U099FA0D7CP> at 16:22 BST. Cameron diagnosed from heap dump: ~82% of the 4G heap (3.4G) retained by ~54k `AllEntriesQueueStream` buffers (~1.1M `MarketDataOrderBook` / 16.7M `MarketDataNewOrder` objects); `GraphExecutor.main.streams.totalEventsQueued` trended from 174k Saturday → 1.19M Friday → 1.39M Monday, sustained >1.2M for ~7h until ZGC allocation-stalled (worst 67s) and entered OOM/restart loop. No code/config change since Apr 13 — build unchanged. Stopgap: heap bump 4096→6144 committed to MfxCompassInfrastructure ([commit](https://github.com/MahiFX/MfxCompassInfrastructure/commit/809875358f56edb20c98156a3e690980e4b53541)) but NOT yet deployed — pre-existing Puppet drift (81 user/dotfiles changes, 56 nagios config changes etc.) means the puppet apply carries significant side-changes; Cameron asked Kate if okay to proceed. Proper fix is dev-side: bound `AllEntriesQueueStream` retention / window order-book streams / cull the 54k stream count. Related to the existing `riskreportingmetrics stale` entry (same process). [Kate alert](https://mahifx.slack.com/archives/C08ALS66EDC/p1780924395103519) [Kate pages Cameron](https://mahifx.slack.com/archives/C08ALS66EDC/p1780932129786389) [Cameron OOM analysis](https://mahifx.slack.com/archives/C08ALS66EDC/p1780945383276569)
@@ -202,6 +208,7 @@ last_catchup: 2026-06-09T07:23:42Z
 
 ## Notable topics
 
+- 2026-06-09 — Call notes (Kate): three new asks surfaced: (1) new client Rostro want to onboard with partial B-book — can be handled with risk splitting; (2) Alex asking whether Mahi has an Aeron API socket for streaming market data to a listener; (3) Rostro asking about pricing clients in HRP — what info is needed and whether it is charged as a new product/workflow. No Mahi answers yet. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1781001678366999)
 - 2026-06-03 — Scope Markets MD appointment: Bonnie flagged Finance Magnates article — John Murphy appointed as retail-focused Scope Markets Managing Director. Adds to the senior leadership churn picture (Lochlan departed, Saul Knapp left for MAS Markets). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1780506845066869)
 - 2026-06-03 — Gold futures on SI requested: Kate speaking with Alex who wants gold futures set up on SI (currently brokering the B2B flow); will follow current futures SI workflow. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1780494738398969)
 - 2026-05-27 — FA feed test trades in progress; Isaac monitoring. Rostro announced "doing a couple test trades on the FA feed" at 08:08 BST. [permalink](https://mahifx.slack.com/archives/C08AQKRU953/p1779865731199699)
