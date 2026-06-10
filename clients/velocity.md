@@ -9,10 +9,16 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-06-09T07:35:12Z
+last_catchup: 2026-06-10T07:36:16Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-09 — Premium feed fill rate crisis: 45% overall; 0/113 fills on tag 1034Z128FB30C
+> Dan (client-side) escalated at 17:08 BST: one 1034-prefix tag had 0 fills from 113 attempts; at 17:14 BST: "the prem feed is sitting at 45% for today" and "we cannot have a fill overall fill rate of 45%"; "getting massive complaints." William Denny confirmed 1034* tags yield goes offside by 500ms (Echo link shared). Will Carter posted Echo link at 17:34 BST showing same story across XAUUSD A_CLIENTS_PREMIUM filled vs cancelled; response: "There's not a lot we can do with that on the spreads you want to show. System saved a big loss by not filling it." Internal diagnosis at ~17:28 BST: dynamic arb had been doing cancelling; Will removed dynamic arb rules ("Lets remove that"); Cameron Hughes noted no LR PnL vs last week, 889 not trading (see Notable topics). Will also flagged less inception yield this week with no major changes — asked William and Cameron Hughes to check if pricing is off. As of 17:21 BST William told Dan Echo shows fill vs cancel split by adding Order→Event Type. At 10:20 BST 2026-06-10 Dan is back asking for a fill rate summary page by tag; Rory King acknowledged and will revert. [Dan complaint 17:08](https://mahifx.slack.com/archives/C05NB72AGR2/p1781021283889889) [45% fill rate 17:14](https://mahifx.slack.com/archives/C05NB72AGR2/p1781021354050509) [Will Echo link 17:34](https://mahifx.slack.com/archives/C05NB72AGR2/p1781022887199379) [internal dynamic arb removal 17:28](https://mahifx.slack.com/archives/CPDS0M2KF/p1781022536341839) [Dan 10:20 2026-06-10](https://mahifx.slack.com/archives/C05NB72AGR2/p1781076017162089)
+
+> [open] 2026-06-09 — Pricing Predictiveness data unavailable for XAUUSD CLIENT_PRICE_B_LDN
+> William Denny reported at 15:29 BST: unable to load Pricing Predictiveness data for XAUUSD CLIENT_PRICE_B_LDN at velocity — "no yield / cumulative data on both 1k and 60k views." Liam Cordelle suggested Inald. Justin Young directed to open a Zendesk ticket. Status: unresolved as of window close; this is the same diagnostic gap Will flagged internally (needs to check if pricing is off). [thread](https://mahifx.slack.com/archives/CC59PPM8X/p1781015390162819) [internal context](https://mahifx.slack.com/archives/CPDS0M2KF/p1781022494507319)
 
 > [open] 2026-06-08 — FX LR too tight; all bursts removed from counterparty LR
 > Will Carter flagged at 14:49 BST: "Same story in FX. Way too tight for LR to do anything meaningful down the stack." At 15:36 BST: "Removed all bursts from counterparty LR." No further context on whether this resolves the issue or is a first step. [14:49](https://mahifx.slack.com/archives/CPDS0M2KF/p1780926594667089) [15:36](https://mahifx.slack.com/archives/CPDS0M2KF/p1780929371865219)
