@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-09T07:31:54Z
+last_catchup: 2026-06-10T07:34:11Z
 ---
 
 ## Status
@@ -17,6 +17,12 @@ last_catchup: 2026-06-09T07:31:54Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-06-09 — hedgerHrpCME1 PnL breach on toa-argamon-ch-trading-1: hedge fluctuation, restarted
+> Cameron paged PnL breach on hedgerHrpCME1 (PD Q2I20ZTM5HNOCK) at 15:51 UTC. Cameron also noted both hedgerHrpCME1 and propTrader1HrpChi1 were down on toa-argamon-ch-trading-1. James confirmed propTrader1HrpChi1 is still not configured (consistent with 2026-06-02 open entry), and that the PnL drop was hedge-side fluctuation only — matched by client-side gain. James restarted. Resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1781016700103829
+
+> [resolved] 2026-06-09 — marketDataNado2 OOM on TOA APN: self-recovered
+> Cameron posted OOM for marketDataNado2 (PD Q2XJ5CCYPGPD56) at 08:52 UTC; noted it looks to have self-recovered. No follow-up or intervention needed. +1 reaction only. https://mahifx.slack.com/archives/C035H1VNCAD/p1780991529998909
 
 > [resolved] 2026-06-08 — CBOE new venue XAU wrong increment: self-fixed
 > James flagged CBOE XAU wrong increment on the new venue via PD (Q04VWHPIFICMKE) at 11:36 UTC; posted "Should be fixed" 7 minutes later — self-resolved, no ops intervention needed. Related to the hedgerCBOE1 being brought up on Toa-argamon LDN (see 2026-05-26 entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1780918597116949
@@ -182,6 +188,7 @@ last_catchup: 2026-06-09T07:31:54Z
 
 ## Notable topics
 
+- **2026-06-09 — Nado FX markets empty confirmed as intentional RWA cut**: Nado asked James in `toa-nado-shared` why FX markets were basically empty. James confirmed RWAs have been cut to close-only as agreed with Zach — consistent with the 2026-05-08 open entry. No new development work or reversal indicated. https://mahifx.slack.com/archives/C09RGU1T1GE/p1781015707695679
 - **2026-06-05 — Nado xstock spot launch request refused pending renegotiation**: Nado asked James in `toa-nado-shared` to have NLP support xstock spot launch targeting Monday 2026-06-09, saying activity would be low (mainly depth for liquidation). James refused: new development work is on hold pending renegotiation, Mahi is not in a position to support xStocks without development work, and Friday-to-Monday notice is insufficient. https://mahifx.slack.com/archives/C09RGU1T1GE/p1780661003888839
 - **Chaos→Stork oracle migration (2026-05-22 22:30 UTC)** — all Nado crypto perp markets migrated from Chaos to Stork oracle; 2-hour window. Stork API token provided; `stork-fast` endpoint. No post-migration incident signals in channel through 2026-06-03 window — likely completed without issue.
 - Nado weekly maintenance window moved to 22:30 UTC Mon/Thu (was previously aligned to LDN hours); Toa reboot schedule updated to match — PRI reboots Monday 22:30 UTC, SEC reboots Thursday 22:30 UTC. Calendar reminder updated for NZ support coverage instead of LDN. https://mahifx.slack.com/archives/C035H1VNCAD/p1778185084196589
