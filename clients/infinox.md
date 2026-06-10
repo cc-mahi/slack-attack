@@ -14,11 +14,21 @@ key_people_overrides:
   - {name: "Kerim Horoz", role: "Infinox London dealing desk — toxic flow triage, LR config, order throttle queries; primary day-to-day ops contact"}
   - {name: "Sadiq", role: "Infinox trading ops — XAUUSD spread complaints, MT4/MT5 config queries", confidence: low}
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
+  - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-09T07:20:58Z
+last_catchup: 2026-06-10T07:25:10Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-10 — Routine Heavy LR add: MT5_87018814_Centroid_3601179
+> Andreas Kazelas (Infinox) requested MT5_87018814_Centroid_3601179 → Heavy LR (04:18 BST); Nathan Burch confirmed added at 04:19 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781061505082189)
+
+> [resolved] 2026-06-09 — Routine Heavy LR add: INF_MT5__87967877 + MT5_plain_b_87967877
+> Trading Ops requested both tag variants of CP 87967877 → Heavy LR (18:50 BST); Rory King confirmed actioned at 18:52 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781027411388439)
+
+> [resolved] 2026-06-09 — Routine No LR add: MT5_IXCOPY_Plus_87963027/87963026/87963024
+> Trading Ops requested three IXCOPY CPs added to No LR profile; trades not yet sent at time of request (10:49 BST). Kate Stagg confirmed all three added at 10:51 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780998549720919)
 
 > [resolved] 2026-06-09 — Routine Heavy LR add: Centroid_3602681 + Latency LL adds: Centroid_3600862, Centroid_3600863
 > Trading Ops requested Centroid_3602681 → Heavy LR (07:06 BST); Nathan Burch added and confirmed at 07:09. Separate request: Centroid_3600862 + Centroid_3600863 → Latency LL execution profile (08:15 BST); Rory King confirmed both added at 08:17. [3602681 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1780985208971639) [LatencyLL thread](https://mahifx.slack.com/archives/C022S6NL82D/p1780989336192029)
@@ -154,6 +164,8 @@ last_catchup: 2026-06-09T07:20:58Z
 
 ## Notable topics
 
+- 2026-06-09 — Lazaros Zografopoulos (departed 2026-05-15) has landed at a new employer; Daria Horton posted a screenshot to #internal-infinox; Andrew commented "they couldn't deserve each other more… until Exness become a client." New firm not confirmed from text alone. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1780994401467489)
+- 2026-06-09 — New contact: Andreas Kazelas (andreas.kazelas@infinox.com) submitting LR/profile requests — first appearance in the window; added to key_people_overrides (low confidence on full role). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781061505082189)
 - 2026-06-09 — Latency LL execution profile adds: Centroid_3600862 + Centroid_3600863 added by Rory King (08:17 BST). New profile type for Infinox — previously all routine adds have been LR profile variants. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780989336192029)
 - 2026-06-05 — Compass upgrade: Liam announced Mahi will upgrade Infinox to the latest Compass version over the weekend of 2026-06-07/08; no issues reported in either channel post-upgrade (as of 2026-06-09 morning). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780673185694849)
 - 2026-06-03 — EURUSD mid filtration failure: Velocity absent + Finalto off-market → two-LP formation unable to reject bad print. Fixed by adding a third market. Infinox asked to chase Finalto re off-market quotes. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780479666056149)
