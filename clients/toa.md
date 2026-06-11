@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-10T07:34:11Z
+last_catchup: 2026-06-11T07:31:15Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-06-10T07:34:11Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-06-10/11 — HRP_CLIENTS_NET 50k drop + hedger oscillation overnight: CBOE hedger turned off
+> Nathan flagged HRP_CLIENTS_NET dropped ~50k at 23:33 BST 2026-06-10 — hedgers tripped PnL firewall and were turned off. Lee restarted hedger (~23:42 BST, PD Q170LHEGM93L3S; also Q0NUIYV443BS3H). Further oscillation: Daria noted -$2000/M in 10s (~01:40 BST); Lee found CME+CBOE hedgers trading back and forth far beyond client vol. Root cause: Elan (Nado-side) had been changing spread config. Lee turned off the CBOE hedger, kept CME on (~01:43–01:54 BST). Lee performed manual PnL adjustment back down at ~04:43 BST. Nathan acknowledged missing the hedger-down PD alert (saw prior PnL drop notification and mistook the new one for a reversion). https://mahifx.slack.com/archives/C035H1VNCAD/p1781131334130099
 
 > [resolved] 2026-06-09 — hedgerHrpCME1 PnL breach on toa-argamon-ch-trading-1: hedge fluctuation, restarted
 > Cameron paged PnL breach on hedgerHrpCME1 (PD Q2I20ZTM5HNOCK) at 15:51 UTC. Cameron also noted both hedgerHrpCME1 and propTrader1HrpChi1 were down on toa-argamon-ch-trading-1. James confirmed propTrader1HrpChi1 is still not configured (consistent with 2026-06-02 open entry), and that the PnL drop was hedge-side fluctuation only — matched by client-side gain. James restarted. Resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1781016700103829
@@ -36,8 +39,8 @@ last_catchup: 2026-06-10T07:34:11Z
 > [resolved] 2026-06-03 — marketDataCryptoDotCom1 on Toa-argamon APN1 being decommissioned
 > Maten bounced marketDataCryptoDotCom1 on Toa-argamon APN1 after XETUSD crossed book; noted the crossed-book alert had been firing every hour and asked if it could be disabled via `marketdata.crossedBookAlertThresholdBps` given Crypto.com isn't in use. James confirmed it was turned off due to issues and suggested killing the gateway. Maten agreed to comment out marketDataCryptoDotCom1/ordersCryptoDotCom1 and do an infra deploy. https://mahifx.slack.com/archives/C035H1VNCAD/p1780488380763669
 
-> [open] 2026-06-02 — propTrader1HrpChi1/propTrader1HrpLdn1 being added to Toa-argamon CHI/LDN: not yet configured
-> James posted "Adding propTraderHrp1 to toa-argamon CHI" (2026-06-02), then on 2026-06-05 switched naming to `propTrader1HrpChi1`/`propTrader1HrpLdn1`. On 2026-06-07 Nathan flagged processes down on argamon-chi and argamon-ldn due to MARKETMAKING_HRP_INSTI-Channel — Maten confirmed propTrader1HrpChi1 not yet configured, propTrader1HrpLdn1 also a factor. James said he'd set up propTrader in a few hours. Also connected to the gateway build mismatch (see entry below). https://mahifx.slack.com/archives/C035H1VNCAD/p1780423159813489
+> [open] 2026-06-02 — propTrader1HrpChi1/propTrader1HrpLdn1 being added to Toa-argamon CHI/LDN: crash-looping on order breaches
+> James posted "Adding propTraderHrp1 to toa-argamon CHI" (2026-06-02), then on 2026-06-05 switched naming to `propTrader1HrpChi1`/`propTrader1HrpLdn1`. On 2026-06-07 Nathan flagged processes down on argamon-chi and argamon-ldn due to MARKETMAKING_HRP_INSTI-Channel — Maten confirmed propTrader1HrpChi1 not yet configured, propTrader1HrpLdn1 also a factor. James said he'd set up propTrader in a few hours. On 2026-06-10 Cameron paged propTrader1HrpChi1 down on toa-argamon-ch-trading-1 (maximum order breaches, PD Q1RIF57OL9YM72) — brought it up; killed itself again and was left down. James fixed ordersCOMEX1 party filter and noted it's prop trading (not hedging) so fine to leave down for now. James also noted he will review increasing the breach limits (PD Q0D0YW82XRX02J, 13:21 BST). https://mahifx.slack.com/archives/C035H1VNCAD/p1781078300294379
 
 > [watching] 2026-05-29 — TradePositionLimitMonitor being set up on Toa-argamon CHI: spurious alerts to ops
 > James apologised to Leo (Borsi) for alerts on Arg CHI caused by TradePositionLimitMonitor being brought up. A clientDistributionGateway1 restart was also requested on 2026-05-27 (via #eod-restarts) to add a new channel to toa-argamon-ch-trading-1. https://mahifx.slack.com/archives/C035H1VNCAD/p1780070176002959
@@ -45,8 +48,8 @@ last_catchup: 2026-06-10T07:34:11Z
 > [open] 2026-05-26 — PnLDropAlert on Toa-argamon LDN: HRP_CLIENTS_NET down ~8.2k in 20 min, XAUUSD main contributor
 > Maten flagged a PnLDropAlert at 11:39 UTC: `HRP_CLIENTS_NET` fell -8,185 in 20 minutes (threshold -5,000/20min). Maten attributed it to XAUUSD in the follow-up. No intervention or resolution noted in thread. Related book to the hedgerHrpCME1 volume-breach pattern (see 2026-05-18 entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1779795816962169
 
-> [watching] 2026-05-26 — hedgerCBOE1 being added to Toa-argamon LDN
-> James announced adding hedgerCBOE1 to the Toa-argamon LDN instance; asked ops to ignore alerts during setup. 2026-05-29: James noted it is still being set up and will likely be down on weekend checks. https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319
+> [open] 2026-05-26 — hedgerCBOE1 being added to Toa-argamon LDN: turned off after overnight oscillation
+> James announced adding hedgerCBOE1 to the Toa-argamon LDN instance; asked ops to ignore alerts during setup. 2026-05-29: still being set up, likely down on weekend checks. 2026-06-10/11: overnight CBOE+CME hedger oscillation incident (see entry above) — Lee found the two hedgers trading back and forth beyond client vol, attributed to Nado-side spread config changes by Elan. Lee turned the CBOE hedger off and kept CME on pending investigation. https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319
 
 > [resolved] 2026-05-22 — Stork Oracle API token requested and provided (toa-nado-shared)
 > Nado asked if Mahi could get a Stork Oracle API token. Lee/James provided it promptly; Nado specified to use `stork-fast`. An oracle.yaml config file was shared in-thread. Likely preparatory for the Chaos→Stork oracle migration scheduled Thursday 22:30 UTC. https://mahifx.slack.com/archives/C09RGU1T1GE/p1779414775390839
