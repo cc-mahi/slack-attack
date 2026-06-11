@@ -9,10 +9,13 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-06-10T07:08:54Z
+last_catchup: 2026-06-11T07:12:35Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-10 — CLIENT_PRICE_LDN mass latency alerts: starfishFilePersister backpressure during tick bursts
+> Cameron Copland: ~240 `distribution.marketDataLatency.CLIENT_PRICE_LDN.*` alerts fired in bursts since 11:03 UTC, recurring every ~15 min (worst ~9s staleness). LP feed latency stayed at ms-level throughout, but Aeron publish retries for CLIENT_PRICE_LDN exploded during each burst and `starfishFilePersisterExternalMarketData1` POOL-0 queue spiked from ~170 → ~26k at the same minutes (12:30 UTC = US data window). Hypothesis: persister falls behind on tick bursts and backpressures the full CLIENT_PRICE_LDN publication stream. Liam Cordelle replied: (1) check if alerts are busting through the summariser (should be low-priority — may have been changed); (2) look for allocation stalls on the box; (3) backgroundJobs may be under heavy memory pressure. No fix actioned yet. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1781100905794369) [pagerduty](https://mahifx.pagerduty.com/incidents/Q1CTD2XEHVAGWV)
 
 > [open] 2026-06-01 — signalProcessCFDFI1 crash-loop: ADWeights counter lock (recurrence of 2026-05-15 pattern)
 > Sam Hewitt: `signalProcessCFDFI1` has been crash-looping since ~2026-05-30 08:14 UTC on alphacapital-ln-trading-1. Cycle: process runs ~21 min, hangs on `ADWeights.*.counter` exclusive lock at startup, shutdown hook also hangs on same counter → SIGKILL → repeat (4/4 launches blocked). CFD CLIENT_PRICE (XAUUSD + other CFDs) cycling offline/online with spread whipsaw. Ruled out: Aeron infra (FX sibling `signalProcessFI1` stable ~41h), stale OS lock (ext4 flocks die with process; `lsof` shows no holder). Restart alone does not fix. Recommended: (1) stop wrapper to halt cycling; (2) quarantine/clear `ADWeights.*.counter` files under `…/signals/shared/var/` — resets signal weights, requires eng sign-off. Sam pinged Arun (who had the 2026-05-15 counter-lock incident). No reply yet. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1780278921326309)
