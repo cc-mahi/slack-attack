@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-06-10T07:13:11Z
+last_catchup: 2026-06-11T07:15:18Z
 ---
 
 ## Status
@@ -79,6 +79,7 @@ last_catchup: 2026-06-10T07:13:11Z
 
 ## Notable topics
 
+- 2026-06-10 — Infra deploying pricerVIP1/2 for new Tegis flow: Kate Stagg noted infra is adding pricerVIP1/2 processes for the Tegis flow — a forward step in getting the Tegis/Centroid integration ready for live traffic. No further detail or completion signal in window. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781084659562139)
 - 2026-06-05 — Compass upgrade applied over the weekend: Liam Cordelle notified the client channel that the system would be upgraded to the latest Compass version over the weekend (w/c 2026-06-05), with monitoring over market open for issues. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1780673119041699)
 - 2026-06-05 — Fee tier under review: Nicola Perikhanyan noted volumes for Base are being monitored and asked whether growth from Tegis justifies moving up a fee tier (fees were reduced back to the intro offer due to slower-than-expected growth); Kate Stagg replied that MT4/5 teething issues mean they're not live yet, was hoping this week but now likely next week; Nicola resolved to evaluate again in July. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780584640017199)
 - 2026-06-05 — New group code requested: anonymous/guest user in #mahi-base-markets asked to add `real\USD-MU-SD-VIE-R`; Rory King confirmed "sure - we'll get that arranged". [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1780582922690779)
