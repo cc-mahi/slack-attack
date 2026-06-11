@@ -10,10 +10,13 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-10T07:07:28Z
+last_catchup: 2026-06-11T07:10:42Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-10 — flowImbalanceNoTrades false alerts + CachingEventLogger table overflow after 20260601 analytics release
+> Cameron Copland (12:31 BST) flagged three `flowImbalanceNoTrades` PagerDuty alerts from `riskReportingExtended1` during London hours; gateway logs showed 50+ fills/min on `clientDistributionGatewayFunded4` at each alert time, so trade events are arriving at the analytics graph with minutes of lag — not a real no-trades condition. Started after Saturday's reboot picked up the 20260601 analytics release (previous release was Dec 29). Since that build, the process logs `CachingEventLogger table overflow` every minute and `GraphiteQueryService` queries take 30–100s. Host is 6 cores at load ~35 all month, so little headroom for the increased query workload. Maten Rehimi (12:41 BST) responded: root cause was a disk space issue on the AF box; deleted large log files and checked no other AF was affected. Planning to reduce AF log retention to prevent recurrence. Resolution of the false-alert / CachingEventLogger symptoms pending follow-up. [thread](https://mahifx.slack.com/archives/C079M09MGGP/p1781091087448019)
 
 > [open] 2026-06-08 — EURCAD rejects from CP 1770806082_99997 via 5ERS_FUNDED_YB_MT5 — order quantity increment mismatch
 > Nathan Burch (2026-06-08 03:51 UTC) flagged high EURCAD rejects from CP 1770806082_99997 placing qty 999.99; Mahi config accepts FX orders at increment 1.0 minimum 1.0. Andreas replied (08:18 BST 2026-06-08): their setup expects minimum 0.01, increment 0.01. Nathan confirmed he'll update config; asked whether to apply to all FX (22:11 BST). Andreas confirmed: yes, all FX (07:26 BST 2026-06-09). Change requires EOD restart — not yet applied. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1780890673528329) [confirmation](https://mahifx.slack.com/archives/C07AQJS4E80/p1780986381344349)
