@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-10T07:20:04Z
+last_catchup: 2026-06-11T07:17:38Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-10 — EXINITY_STRD_PARTNER FIX sessions rejecting: wrong password
+> Kate posted FIX credentials for the new EXINITY_STRD_PARTNER channel at 10:01 BST (credentials in Slack — not reproduced here). Nathan flagged at 21:25 BST that both ExinitySTRDPARTNER-Prices and ExinitySTRDPARTNER-Orders FIX logon attempts are being rejected "Invalid username and/or password" — Exinity is connecting with the wrong password rather than the correct one Kate shared. No reply from Exinity in window. [creds posted](https://mahifx.slack.com/archives/C0456LSHQQK/p1781082094879859) [wrong-password alert](https://mahifx.slack.com/archives/C0456LSHQQK/p1781123124672649)
+
+> [open] 2026-06-10 — CMC Markets LP onboarding: source IP for whitelisting
+> George Moore asked Mahi to confirm the source IP to whitelist for a new LP connection to CMC Markets. Kate asked whether Exinity is connecting via a tech provider (and if so which one). No reply from George in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781079251850269)
 
 > [open] 2026-06-08 — Books reval'd on erroneous tick around roll (NZDUSD)
 > Matthew Ayub flagged at ~22:10 UTC that books were getting reval'd on an erroneous tick coming through over roll. Daria investigated: DB_SW_WB, VELOCITY, and 360T all continued pricing into roll; traced to NZDUSD ticks around rollover where price dipped, causing P&L swings. P&L has since changed with updated ticks from these LPs. No explicit resolution confirmed in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780953021152939)
@@ -165,6 +171,7 @@ last_catchup: 2026-06-10T07:20:04Z
 
 ## Notable topics
 
+- 2026-06-10 — XAUFUT contract codes confirmed: August = XAUFUT-Q, December = XAUFUT-Z (CME convention per https://www.cmegroup.com/month-codes.html). Kate asked Exinity to confirm when ready to test the XAUFUT workflow. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781083063243879)
 - 2026-06-04 — Centroid migration: Kate's catch-up with Daniel and Rory confirms Exinity are planning new FIX connections on the Connect channels to plug into Centroid, with a gradual move away from PXM. (Separate from the Exinity move — Oli at Rostro was flagged as also moving more flow from PXM to Centroid.) EXINITY_STRD_PARTNER channel being repurposed for a new product; initial config to match EXINITY_ECN_ARU; Kate to sweep full config before applying. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780578425042259)
 - 2026-06-04 — Skew PnL storage enabled for crypto/exotic instruments: Daniel requested and Will confirmed enabling skew PnL to be stored for ADAUSD, AEXEUR, AVAXUSD, BCHUSD, BNBUSD, DOGUSD, HISHKD, IBXEUR, LINKUSD, S30SGD, SPMUSD, T50USD, XLCUSD, XRPUSD. Will bounced risk-reporting processes the same evening to pick up global override to 15 for Crypto on FI instrument counts. [Daniel request](https://mahifx.slack.com/archives/C0456LSHQQK/p1780575057104119) [Will bounce](https://mahifx.slack.com/archives/C040V9LNKT5/p1780596154857919)
 - 2026-06-05 — EXINITY_STRD_PARTNER_CFD setup pending (morning): Daniel asked for ETA; Kate confirmed it would be finalised this morning. Linked to the broader Centroid/new-product work. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780643215556399)
