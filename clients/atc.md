@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-10T07:13:11Z
+last_catchup: 2026-06-11T07:15:19Z
 ---
 
 ## Recent issues
@@ -50,6 +50,8 @@ last_catchup: 2026-06-10T07:13:11Z
 
 ## Notable topics
 
+- 2026-06-11 — Spotex MT5 SC FIX credentials passed to ATC. David Manoukian posted the Spotex-issued MT5 Seychelles FIX creds (username `spotex_mt5_sc`, no host/port from Spotex) asking Mahi to fill in host and port. Isaac Dann immediately replied with the full connection details (Orders: 149.5.84.234:9011; Market Data: 149.5.84.234:9010 — same server as existing Spotex connections). David confirmed he will pass to Spotex. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781141398762719)
+
 - 2026-06-09 — May P&L report reviewed by Will Carter; ready for sending. Will posted the ATC LDN Report (2026-05-01–2026-06-01 PDF) in #internal-atc and confirmed it matches the account summary; tagged William Denny for dispatch. Closes the 2026-06-07 Jack Manoukian request for P&L alongside invoice. [Will post](https://mahifx.slack.com/archives/C046RNF64VD/p1780989018424339)
 
 - 2026-06-09 — Seychelles entity progress: ATC abandoning Cayman for brokerage, moving to Seychelles as market maker (generates price via Mahi, distributes across all ATC companies). LPs connecting via BVI entities — Finalto (account 836) and Velocity both already connected via BVI; FXCM testing still needed (2 accounts). Legal work for Seychelles still in progress. ATC asked to send EOD positions to Mahi for reconciliation; Finalto open position 2.69 FAU micro lots noted. [Cameron Hughes call notes](https://mahifx.slack.com/archives/C046RNF64VD/p1781007690004239)
@@ -62,7 +64,7 @@ last_catchup: 2026-06-10T07:13:11Z
 
 - 2026-06-05 — Spotex Seychelles entity: additional MT4 and MT5 FIX sessions provisioned. Following the 2026-05-28 `spotex_sc` account creation, Malik asked whether the Seychelles feed would work for both MT4 and MT5 simultaneously. Justin confirmed separate sessions needed for each; Cameron checked and found existing MT4/MT5 creds created by Isaac at original config time; Malik confirmed these are what's needed. Liam confirmed those creds were not in use; Cameron sent to Malik in DM. [Spotex SC thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1779903734873049)
 
-- 2026-06-05 — FXCM LP test trades started. Cameron Hughes began FXCM test trade run (Zendesk 22885) at ~18:08 BST: hybridHedger1 taken off temporarily; first attempt hit `tag1 required` error; trading account added to outbound.session config; fixOrders bounced. Outcome not confirmed in window. [FXCM test trades](https://mahifx.slack.com/archives/C046RNF64VD/p1780679290430589)
+- 2026-06-05/10 — FXCM LP test trades completed successfully. Cameron Hughes began FXCM test trade run (Zendesk 22885) at ~18:08 BST 2026-06-05: hybridHedger1 taken off temporarily; first attempt hit `tag1 required` error; trading account added to outbound.session config; fixOrders bounced. **2026-06-10 update**: Cameron disabled hybridHedger1 at ~15:02 BST for test trades; after adding a value to the FIX account, test trades worked; hedger restored at ~15:47 BST. FXCM LP connection confirmed live. [FXCM test trades start](https://mahifx.slack.com/archives/C046RNF64VD/p1780679290430589) · [hedger off for test](https://mahifx.slack.com/archives/C046RNF64VD/p1781100146973429) · [test confirmed, hedger back on](https://mahifx.slack.com/archives/C046RNF64VD/p1781102855454409)
 
 - 2026-06-05 — ATC Seychelles Spotex FIX creds confusion. Dave M asked for new Spotex Seychelles FIX credentials (already created 2026-05-28 by Isaac). Andrew/Liam confirmed Isaac's original `spotex_sc` creds were not in use; Andrew took it to a call with Malik and Dave M at ~16:09 BST to sort; Cameron sent creds to Malik by DM. Separately, Andrew relayed that a $1.5M deposit is coming in this weekend. [Andrew note](https://mahifx.slack.com/archives/C046RNF64VD/p1780672059164829) · [deposit](https://mahifx.slack.com/archives/C046RNF64VD/p1780674985544669)
 
