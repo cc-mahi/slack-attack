@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-06-10T07:38:43Z
+last_catchup: 2026-06-11T07:33:39Z
 ---
 
 ## Status
@@ -25,6 +25,15 @@ last_catchup: 2026-06-10T07:38:43Z
 - **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
 
 ## Recent issues
+
+> [open] 2026-06-11 — HRP PnL firewall breach ($50k drop); CBOE/CME hedger toggle; Elan spread config interference; manual PnL adjustment applied
+> Nathan (01:33 BST) reported HRP_CLIENTS_NET dropped ~$50k with hedgers tripping PnL firewall — attributed to big XAU PnL reval; risk cleared and hedgers re-enabled. Daria flagged −$2,000/M in 10s (01:40 BST). Lee investigated hedgers going back and forth far more than client volume justified; turned off CME hedger (01:44), then flipped to turn off new CBOE hedger and restore CME (01:54). Lee subsequently concluded it was not a hedging issue — "Elan has been mucking around in spread config" (02:47 BST). Lee applied a manual PnL adjustment to correct the earlier jump (04:43 BST). Root cause (Elan's spread config changes) identified but no config rollback confirmed in thread. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781138037921729)
+
+> [resolved] 2026-06-11 — USDCHF pricing gap at ROLL; MAHI_BENCHMARK_LDN added; CP fast-hedge tagged
+> Shyam identified ~$1k PnL drop where CP 90002035 obtained favourable USDCHF buy prices over ROLL — distribution price was slightly below market because most LPs were unstable during that ~15-min erratic period. Shyam added `MAHI_BENCHMARK_LDN` as an LP for USDCHF price formation; the CP has since been tagged fast-hedge, which prevents this going forward. Before/after backtest confirms the LP addition keeps distribution price higher and more in line with market over roll. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781148840004809)
+
+> [resolved] 2026-06-10 — propTrader1HrpChi1 max-order-breach crash; ordersCOMEX1 party filter fix
+> Cameron posted propTrader1HrpChi1 down on toa-argamon-ch-trading-1 due to maximum number of order breaches (08:58 BST) — brought back up, killed itself again. James fixed ordersCOMEX1 party filter; noted if it dies again leave it down — it's prop trading not hedging so doesn't need to run. (Updates/closes the open 2026-06-07 entry re: propTrader1HrpChi1 still unconfigured.) [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781078300294379)
 
 > [open] 2026-06-09 — Centroid HRP FIX logon not receiving response; netcat connectivity check pending
 > Levi (Argamon) reported in mahi-argamon-operations that Centroid cannot get a logon response on either the market session (HRP-CENTROID2Prices) or trading session (HRP-CENTROID2Orders) — Centroid sent FIX.4.4 Logon (tag 35=A) out but received no reply. Kate checked and asked Levi to netcat to 170.75.204.26 ports 9010 and 9011. As of 00:23 BST 2026-06-10 Levi was requesting netcat results from Centroid; no resolution yet. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119)
@@ -38,8 +47,8 @@ last_catchup: 2026-06-10T07:38:43Z
 > [open] 2026-06-08 — INST-34 orderRejectThrottle storm; off-market limit orders flooding TOA-ARGAMON-LDN
 > Nathan (Toa ops) flagged counterparty INST-34 triggering `orderRejectThrottle` continuously throughout the day at TOA-ARGAMON-LDN — constant limit orders rejected for being off-market; worst PD alert was 27k orders in 5 min. Lee Butts raising with Argamon; Argamon responded (via quoted reply) that they're discussing withholding these orders with the client and pursuing a Centroid-side fix too. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780889725278749)
 
-> [open] 2026-06-07 — MARKETMAKING_HRP_INSTI-Channel processes down at CHI + LDN; gateway build mismatch; propTrader1HrpChi1 still unconfigured
-> Nathan flagged processes down at both argamon-chi and argamon-ldn related to MARKETMAKING_HRP_INSTI-Channel. Maten investigated: default counterparty LR rule had been removed (mid-week change); he restored defaults and clientDist processes came back up. Separately, gateways at LDN were crashing with `NoClassDefFoundError: connectionstatus/ConnectionStatusSource` — caused by a newer gateway build (20260605.090257) deployed without the matching core/distribution build. Maten rolled back gateway component to 20260529.164545 on CHI (copied from LDN); gateways back up. `propTrader1HrpChi1` in CHI still requires configuration — James confirmed 2026-06-09 it is "not configured yet". [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
+> [resolved] 2026-06-07 — MARKETMAKING_HRP_INSTI-Channel processes down at CHI + LDN; gateway build mismatch; propTrader1HrpChi1 now configured
+> Nathan flagged processes down at both argamon-chi and argamon-ldn related to MARKETMAKING_HRP_INSTI-Channel. Maten investigated: default counterparty LR rule had been removed (mid-week change); he restored defaults and clientDist processes came back up. Separately, gateways at LDN were crashing with `NoClassDefFoundError: connectionstatus/ConnectionStatusSource` — caused by a newer gateway build (20260605.090257) deployed without the matching core/distribution build. Maten rolled back gateway component to 20260529.164545 on CHI (copied from LDN); gateways back up. `propTrader1HrpChi1` configured 2026-06-10: James fixed ordersCOMEX1 party filter; process should be left down if it crashes again (prop trading, not hedging — see 2026-06-10 entry). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
 
 > [resolved] 2026-06-05 — Compass upgrade this weekend; Argamon notified
 > Liam notified Argamon in mahi-argamon-operations that their system will be upgraded to the latest Compass version over the weekend, with monitoring at open. Argamon acknowledged. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1780673110439059)
@@ -163,6 +172,7 @@ last_catchup: 2026-06-10T07:38:43Z
 
 ## Notable topics
 
+- CBOE hedger toggled off after PnL firewall breach (2026-06-11): New CBOE hedger at TOA-ARGAMON tripped during overnight XAU reval event — Lee turned off CBOE and restored CME after determining hedgers were over-trading relative to client volume. Separately established that root cause was Elan's spread config changes, not hedging. CBOE hedger remains off for now. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781138596048159)
 - referencePriceMarketSelectors tuned for XAU/EUR/GBP (2026-06-10): Shyam updated LP sets for three instruments after lead-lag and TOB analysis over large price moves and opens. XAU: removed NWM_RCTV_HRP_1 and MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
 - propTrader1 HRP switch (2026-06-05): James switched TOA-ARGAMON to use `propTrader1HrpChi1`/`propTrader1HrpLdn1` in internal-toa-ops — likely the config change that preceded the 2026-06-07 MARKETMAKING_HRP_INSTI processes-down event (CHI propTrader not yet set up at that point). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780658564969939)
 - Build hygiene flag: Maten noted after the 2026-06-07 gateway rollback that toa-argamon should retain more than just the latest build so rollbacks can happen without copying from another env. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
