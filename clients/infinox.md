@@ -16,10 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-10T07:27:10Z
+last_catchup: 2026-06-11T07:23:23Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-11 — Extra Heavy LR upgrades: Centroid_2145761746 + Centroid_2145758162 (promoted from Heavy LR), Centroid_3602256 + Centroid_3599729 (new adds to Extra Heavy)
+> Trading Ops requested two CPs already in Heavy LR (MT5_87018814_Centroid_2145761746, MT5_87018814_Centroid_2145758162) be promoted to Extra Heavy LR (06:26 BST); Nathan Burch confirmed completed at 07:55. Separate request (07:46 BST): two additional CPs (MT5_87018814_Centroid_3602256, MT5_87018814_Centroid_3599729) added directly to Extra Heavy LR; Nathan confirmed both added at 07:55. Escalation pattern: Extra Heavy profile continues to grow since creation 2026-05-21. [Heavy→ExtraHeavy thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781155598297759) [new ExtraHeavy thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781160388394809)
+
+> [resolved] 2026-06-11 — Routine Heavy LR add: Centroid_3599808
+> Andreas Kazelas requested MT5_87018814_Centroid_3599808 → Heavy LR (04:19 BST); Nathan Burch confirmed added at 04:20 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781147940364829)
+
+> [resolved] 2026-06-10 — Routine Heavy LR adds: INF_MT5__87964757 + MT5_+_b_87964757; Centroid_2145761372; Centroid_3594384 + Centroid_3594574
+> Three batches: (1) MT5_87018814_Centroid_3594384 + MT5_87018814_Centroid_3594574 → Heavy LR (09:44 BST); Will Denny confirmed done at 09:46. (2) MT5_87018814_Centroid_2145761372 → Heavy LR (16:26 BST); Rory King confirmed actioned at 16:27. (3) INF_MT5__87964757 + MT5_+_b_87964757 → Heavy LR (18:06 BST); Nathan Burch confirmed at 21:10. [Centroid_3594384 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781081091602129) [Centroid_2145761372 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781105215263439) [87964757 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781111195215449)
 
 > [resolved] 2026-06-10 — Routine Heavy LR add: MT5_87018814_Centroid_3601179
 > Andreas Kazelas (Infinox) requested MT5_87018814_Centroid_3601179 → Heavy LR (04:18 BST); Nathan Burch confirmed added at 04:19 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781061505082189)
@@ -164,6 +173,7 @@ last_catchup: 2026-06-10T07:27:10Z
 
 ## Notable topics
 
+- 2026-06-11 — Extra Heavy LR profile growing: two CPs promoted from Heavy LR + two new direct adds, all confirmed by Nathan Burch. Profile created 2026-05-21 at CH's request; volume multiplier already doubled 2026-05-22; now expanding CP scope. [thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781155598297759)
 - 2026-06-09 — Lazaros Zografopoulos (departed 2026-05-15) has landed at a new employer; Daria Horton posted a screenshot to #internal-infinox; Andrew commented "they couldn't deserve each other more… until Exness become a client." New firm not confirmed from text alone. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1780994401467489)
 - 2026-06-09 — New contact: Andreas Kazelas (andreas.kazelas@infinox.com) submitting LR/profile requests — first appearance in the window; added to key_people_overrides (low confidence on full role). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781061505082189)
 - 2026-06-09 — Latency LL execution profile adds: Centroid_3600862 + Centroid_3600863 added by Rory King (08:17 BST). New profile type for Infinox — previously all routine adds have been LR profile variants. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1780989336192029)
