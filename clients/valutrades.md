@@ -9,13 +9,13 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-10T07:36:51Z
+last_catchup: 2026-06-11T07:31:37Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-10 — cpty 89468479 yield profile starts below zero — Rory checking
-> Client posted Echo yield-profile link (valutrades.NYC, 2026-06-08→2026-06-09, cpty 89468479) asking "Why does it start below zero?" at 08:06 BST. Rory King replied "Hi overnight, checking" at 08:07. No answer in window — unanswered as of run time. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075168367929) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075254808079)
+> [open] 2026-06-10 — cpty 89468479 yield profile starts below zero — partial explanation, further investigation ongoing
+> Client posted Echo yield-profile link (valutrades.NYC, 2026-06-08→2026-06-09, cpty 89468479) asking "Why does it start below zero?" at 08:06 BST. Rory King replied "Hi overnight, checking" at 08:07. 2026-06-10 09:09 client chased ("Hi team any update?"); Rory replied at 09:13 ("will have something shortly"), Kate Stagg followed at 09:45: "it looks like most of these trades were brokered to ISP_OZNY4_INSTI_MARGIN_VT so the fill price was determined by the LP. We will look into their pricing at that time in more detail." — partial explanation (LP-determined pricing via IS Prime), deeper investigation of LP pricing still pending. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075168367929) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075254808079) [client-chase](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781078950575229) [kate-isp-explanation](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781081145098579)
 
 > [open] 2026-06-10 — cpty 85551594 toxic yield profile — B-book classification queried, Nathan flagging to dev
 > Client asked team to advise on cpty 85551594 at 06:33 BST. Nathan Burch confirmed B-book at 06:41. Client then sent Echo yield-profile link (valutrades.NYC, 2026-06-08→2026-06-09 window) and asked Nathan to check the graph. Nathan replied at 07:58: "that is quite a toxic yield profile and I'd suggest A-booking that flow. I am not sure why the PnL graph suggests otherwise. I will raise this with dev and get back to you." — classification vs yield-profile mismatch, Nathan actively raising with dev. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781069589815059) [nathan-b-book](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781070079269269) [nathan-raise-dev](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781074722756569)
@@ -105,6 +105,12 @@ last_catchup: 2026-06-10T07:36:51Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-11 — cpty 84587278 & 84563592 A/B book classification: client asked team to advise on both. Nathan Burch answered: 84563592 = B book, 84587278 = A book (with charts). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781160652448929) [nathan-84563592-b](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781161093108749) [nathan-84587278-a](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781161155687159)
+
+- 2026-06-10 — cpty 30033389 A/B book classification: client queried; William Denny confirmed B Book (with chart). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781105066197859) [william-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781105785076319)
+
+- 2026-06-10 — QB integration: Liam asked Graeme if QB responded about conformance, and asked Graeme to name the Market for the PROD connection Liam is setting up for OZ. [liam-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1781115001223319)
 
 - 2026-06-10 — QB integration progress check-in: Graeme asked Liam for an update on the Quantitative Brokers algo integration; Liam confirmed on track for the discussed date, asked Graeme to confirm if there's a QB conformance process and to kick it off. Graeme said "Let me check with them." [graeme-checkin](https://mahifx.slack.com/archives/C09HN93T0G2/p1780999540262169) [liam-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1780999580634929)
 
