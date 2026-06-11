@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-06-10T07:09:07Z
+last_catchup: 2026-06-11T07:12:39Z
 ---
 
 ## Status
@@ -25,8 +25,11 @@ last_catchup: 2026-06-10T07:09:07Z
 
 ## Recent issues
 
+> [watching] 2026-06-11 — USDCHF ~$1k PnL loss at NY roll: MAHI_BENCHMARK_LDN added as LP
+> CP 90002035 (unclassified) bought USDCHF at favourable prices during a ~15-min window over NY roll where most LPs were unstable and distribution price dipped slightly below market. Buys hedged ~4 mins later; by then YP was negative. Shyam added MAHI_BENCHMARK_LDN to USDCHF LP set and CP received fast-hedge tag to prevent recurrence. Before/after backtest (Jenkins #655/#656) confirms distribution price would have stayed more aligned with market. No further action expected. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781148840004809)
+
 > [open] 2026-06-09 — Centroid FIX logon failure: CENTROID2 Prices + Orders sessions not receiving logon response
-> Argamon ops (likely Levi) flagged Centroid unable to connect to the FIX integration sessions — both HRP-CENTROID2Prices and HRP-CENTROID2Orders sessions sending Logon (35=A) but receiving no response. Kate acknowledged and is investigating; separately asked Argamon to netcat 170.75.204.26:9010/9011. Argamon side replied (00:23 BST 2026-06-10) they would request results from Centroid — no resolution yet. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781003145893419)
+> Argamon ops (Levi) flagged Centroid unable to connect to the FIX integration sessions. Netcat to 44.198.0.236:9010/9011 confirmed ports reachable. Inald identified root cause 2026-06-10 13:55 BST: Centroid were using PROD credentials (SenderCompId HRP-CENTROID2Prices/HRP-CENTROID2Orders) instead of the UAT environment creds (centroid_prices/centroid_orders targeting mahi_prices/mahi_orders on 44.198.0.236). Inald provided correct UAT creds; Levi confirmed passing to Centroid at 14:17 BST. No confirmation yet that UAT logon succeeded. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781003145893419)
 
 > [resolved] 2026-05-27 — YP reval errors fixed: CLIENT_PRICE_NYC → CLIENT_PRICE_RETAIL_NYC
 > Daria switched the default client price market from CLIENT_PRICE_NYC to CLIENT_PRICE_RETAIL_NYC after YP (yield profile) reval jobs were throwing `IllegalArgumentException: CLIENT_PRICE_NYC/GBPJPY unavailable`. CLIENT_PRICE_NYC is the legacy insti model — wrong reference for retail. Fix applied ~02:00 BST 2026-05-27. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779843264602109)
