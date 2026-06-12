@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-11T07:20:12Z
+last_catchup: 2026-06-12T07:17:28Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-11 — XPTUSD abnormal spreads; config fix + pricer bounce resolved in ~20 min
+> Nael reported XPTUSD spreads "not normal at all" and "very low" at 10:09 BST — LMAX and Finalto minimum spread showing 150+. Cameron Hughes bounced pricers at 10:19 BST to pick up MWMS changes for XPD and XPT, then made a config change to bring TOB ($2) in line with LP spreads (too-frequent widening), then reverted from pool pricing back to model pricing. Nael confirmed "much better now" at 10:27 BST. [client-permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781168985256809) [internal-bounce](https://mahifx.slack.com/archives/C09QS1NUA80/p1781169575044879)
 
 > [resolved] 2026-06-10 — 736oz XAUUSD short filled on Finalto, Compass adjustment done
 > Layan reported 736oz gold short filled on Finalto at 15:17 BST; William acknowledged "Hi Layan, adjusting" at 15:18 BST and confirmed "all done" at 15:21 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781101072404299)
@@ -148,6 +151,7 @@ last_catchup: 2026-06-11T07:20:12Z
 
 ## Notable topics
 
+- 2026-06-11 — XAU futures two large VaR spikes ($140k and $230k) then net +$8k; Rory flagged PnL drop alerts from futures-vs-spot reval mismatch: Cameron Hughes confirmed up $8k after two large XAU futures VaR spikes. Rory observed PnL drop alerts caused by futures momentarily being revalled against spot (same pattern as Amana) before correcting to contract price. Rory asked whether `reference.directMidMarkets` could suppress these false alerts — no response yet. [cam-internal](https://mahifx.slack.com/archives/C09QS1NUA80/p1781203245782619) [rory-alert](https://mahifx.slack.com/archives/C09QS1NUA80/p1781203645125219)
 - 2026-06-09 — Time-laddered backstop fix deployed to both manual hedgers: Shyam added time-laddered spread tolerance to `VAR-CLEARANCE` and `BACKSTOP` rules (Finalto 200%/500%, LMAX 300%/800% at 30s/60s) after 30k XAGUSD stalled on LMAX for ~5 min during 2026-06-08 close-by. Prevents backstop from being priced out when quantity shrinks and base spread drops. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780983580727989)
 - 2026-06-02 — NG1FUT internalisation complete; crypto test trades promised next: William confirmed all futures now internalising; told Nael "We'll make sure the Crypto instruments are ready to test trade soon". [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1780392614316269)
 - 2026-06-02 — hybridHedgerFutsP1/W1 bounced for NG1FUT maxSlippage fix: force rounding of Finalto price to 3dp (priceFormatPip) to avoid raw TOB 4dp rejection. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1780391840837769)
