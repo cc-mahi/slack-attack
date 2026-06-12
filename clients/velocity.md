@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-06-11T07:30:48Z
+last_catchup: 2026-06-12T07:20:39Z
 ---
 
 ## Recent issues
@@ -121,6 +121,10 @@ last_catchup: 2026-06-11T07:30:48Z
 
 ## Notable topics
 
+- 2026-06-11 — Weekly group call kicked; Will arranged 1:1 with Richard instead. Will's internal note: "at the risk of having to engage with Dan." [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1781164217369539)
+- 2026-06-11 — Richard asked Rory King to add Jackson to the `mahi-velocity-notifications` channel; Rory acknowledged. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1781165075541319)
+- 2026-06-11 — Will follow-on note (12:01 BST) re TOA/MWMS lead-lag work: "Seeing if we can get the external leg via the drop copies. The flatter yields might just be LPs with less impact." Linked to ongoing ref market overhaul. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1781175666814619)
+- 2026-06-11 — Inald: Core & analytics restarts (riskReporting + AFP), followed by a dash deploy at ~12:01 BST. Will given heads-up. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1781174387218679)
 - 2026-06-10 — `mahi-velocity-notifications` channel set up (C0B9QGBLSDS); Richard and Dan added. William deployed Slack notifications webhook and bounced systemNotificationProcessor1/2; later also bounced systemNotificationProcessors to exclude `highvar` from external notifications to reduce client noise. [channel setup](https://mahifx.slack.com/archives/CPDS0M2KF/p1781100697673309)
 - 2026-06-10 — restAdmin bounced (Inald, 10:19 BST); Will asked for heads-up in future as "we were in the middle of working on this system." [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1781083190937889)
 - 2026-06-09 — Dashboard deploy (Justin Young, 06:53 BST). No context given. [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1780984401954649)
