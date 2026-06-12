@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-06-11T07:12:39Z
+last_catchup: 2026-06-12T07:15:10Z
 ---
 
 ## Status
@@ -150,3 +150,4 @@ last_catchup: 2026-06-11T07:12:39Z
 - 2026-05-13 — Toa LD4 TOB signal data missing: Elan flagged signal data not showing in Echo TOB for toa_argamon.LDN XAUUSD. Daria found signals not persisted since last system reboot; fixed after restart. Backfill not possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
 - 2026-06-05 — Compass upgrade planned for weekend (06-07/08): Liam notified client in mahi-argamon-operations. Client acknowledged. Monitoring planned over market open. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1780673110439059)
 - 2026-06-10 — Reference price market selector (LP set) changes for XAU/EUR/GBP: Shyam updated referencePriceMarketSelectors after lead-lag and TOB analysis over large price moves and opens. XAU: removed NWM_RCTV_HRP_1 + MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
+- 2026-06-12 — XAUUSD over-hedge investigation (26 May): Argamon ops (Levi) asked in mahi-argamon-operations how to narrow a search for a potential 1-lot XAUUSD over-hedge on 26 May. Shyam confirmed no over-hedge from Mahi's side; Levi noted they believe it's retail but lack data beyond EOD position rec to confirm. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781234757662239)
