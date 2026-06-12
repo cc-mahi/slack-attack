@@ -14,10 +14,15 @@ key_people_overrides:
   - {name: "Dimitrios Lambrou", role: "IC Markets — joined mahi-ic-markets channel 2026-05-18; role unknown", confidence: low}
   - {name: "Karam Abo Qoura", role: "IC Markets — queries execution profiles, Echo dashboards, and LR settings for gold flow; risk/analytics contact"}
   - {name: "Harry Politis", role: "IC Markets — attended 2026-06-03 LR/classification review call with Pavlos and Karam; role unknown", confidence: low}
-last_catchup: 2026-06-11T07:23:24Z
+  - {name: "Neophytos Poullou", role: "IC Markets — joined mahi-ic-markets 2026-06-11 on Pavlos request; role unknown", confidence: low}
+  - {name: "Ioannis", role: "IC Markets — queried OKX OPENAI/USDT + ANTHROPIC/USDT instrument availability 2026-06-11; first name only", confidence: low}
+last_catchup: 2026-06-12T07:17:29Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-11 — OKX OPENAI/USDT + ANTHROPIC/USDT instrument query; subscription not yet confirmed
+> Ioannis (IC side) asked in mahi-ic-markets whether Mahi can see OPENAI/USDT and ANTHROPIC/USDT on OKX. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781166654445689) Rory replied: not currently subscribing to these instruments; asked IC if they'd like Mahi to subscribe. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781170490938779) No IC reply in window. Open: awaiting IC confirmation on whether to subscribe.
 
 > [open] 2026-06-11 — XAUUSD coordinated cluster (BO 7039301, 7 accounts); group LR being set up
 > Cooney posted overnight (03:28 BST) in the client channel: LR applied to 7 XAUUSD tags (15014976, 15027420, 15027424, 15027425, 15027426, 15027427, 20069878) across 4 clusters, trading ~40,000 oz swings together (~$170/M LR). Shared 4 cluster charts + PnL trajectory showing coordinated same-direction bursts; all accounts confirmed to be under the same BO 7039301. Cooney asked IC if they'd like them treated as a group. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781144929532799) IC confirmed yes (08:03–08:04 BST). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781161456587829) Cooney replied "will get that sorted." Internally (08:06 BST) Cooney asked team to create the group LR profile; Rory confirmed he'd create a new counterparty group for the tags. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1781161607171069) Rory also raised a broader concern (08:18 BST): manually adding accounts to `liquidityRefresh.counterparty` is not a full solution — a proper BO-group LR workflow is needed to capture new accounts in the same BO group automatically; asked for an update on whether that's in progress. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1781162300759789) Open: group LR profile being created by Rory; proper BO-group LR workflow still not in place.
@@ -117,6 +122,9 @@ last_catchup: 2026-06-11T07:23:24Z
 
 ## Notable topics
 
+- 2026-06-12: Andrew Morgan published a new mahimarkets.com-hosted shareable link for the XAU end-of-pilot report (https://r.mahimarkets.com/bonelike-dropout-press-7134/) — crediting James for HTML hosting setup. Prior tiiny.site link was the draft; this is the clean shareable URL ahead of the Cyprus meeting with IC next week.
+- 2026-06-11: Neophytos Poullou (IC side, role unknown) joined mahi-ic-markets; Pavlos requested their channel access and a new Compass/Echo account. Rory confirmed. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781162980307079)
+- 2026-06-11: IC (Ioannis) queried OKX instrument availability for OPENAI/USDT and ANTHROPIC/USDT; Rory confirmed not currently subscribed and asked IC if they want Mahi to subscribe — no IC reply yet. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781166654445689)
 - 2026-06-11: New XAUUSD coordinated cluster (7 accounts, BO 7039301) flagged by Cooney overnight; ~$170/M LR already applied; IC confirmed group treatment; Rory creating group LR profile. Separately, Rory flagged the BO-group LR workflow gap — individual per-account additions to `liquidityRefresh.counterparty` don't scale; proper group-level capture needed.
 - 2026-06-10: XBTUSD spreads updated (improved depth referencing LMAX + comms) now live on CLIENT_PRICE_NYC and CLIENT_PRICE_ap-east-1. XETUSD deeper-stack widened to Pepperstone level. Rory's pre-upload question on whether to reduce counterparty LR multipliers (BO Tags/Defensive LR-Crypto/DYNAMIC-SIGNALFOLLOW/DYNAMIC-BROKER/TOXIC-COORDINATED from 4–5x down to 2x) was thumbs-upped by Cooney but not explicitly answered in thread; spreads went live regardless.
 - 2026-06-09: Pavlos's four Compass/Echo technical questions answered by Rory in client channel. Key: unclassified flow visible via Echo Catch-All filter; last-look is in Execution Rules (not fully dynamic); China gold futures feasible with or without hedging; MT4/MT5 group routing TBD pending IC review of accounts CSV. IC replied "will review and revert."
