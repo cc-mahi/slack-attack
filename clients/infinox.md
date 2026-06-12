@@ -16,10 +16,13 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-11T07:23:23Z
+last_catchup: 2026-06-12T07:24:27Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-12 — Routine Heavy LR adds: Centroid_3603236, Centroid_3577621, Centroid_3599312, Centroid_3598900
+> Trading Ops requested four CPs (MT5_87018814_Centroid_3603236, MT5_87018814_Centroid_3577621, MT5_87018814_Centroid_3599312, MT5_87018814_Centroid_3598900) added to Heavy LR (07:42 BST); Shyam Hari confirmed all added at 07:47 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781246536038209)
 
 > [resolved] 2026-06-11 — Extra Heavy LR upgrades: Centroid_2145761746 + Centroid_2145758162 (promoted from Heavy LR), Centroid_3602256 + Centroid_3599729 (new adds to Extra Heavy)
 > Trading Ops requested two CPs already in Heavy LR (MT5_87018814_Centroid_2145761746, MT5_87018814_Centroid_2145758162) be promoted to Extra Heavy LR (06:26 BST); Nathan Burch confirmed completed at 07:55. Separate request (07:46 BST): two additional CPs (MT5_87018814_Centroid_3602256, MT5_87018814_Centroid_3599729) added directly to Extra Heavy LR; Nathan confirmed both added at 07:55. Escalation pattern: Extra Heavy profile continues to grow since creation 2026-05-21. [Heavy→ExtraHeavy thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781155598297759) [new ExtraHeavy thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781160388394809)
@@ -107,33 +110,6 @@ last_catchup: 2026-06-11T07:23:23Z
 
 > [resolved] 2026-05-08 — 87047373 Heavy LR rule not applying due to tag format mismatch
 > Georgia checked if CP 87047373 was in Heavy LR. Kate found it was added (per CH's earlier request) as the bare account number but all trades arrive under tag `MT5_87047373_n/a` — LR was never actually firing. CH escalated: "real monetary impact — how did this happen?" Kate explained: the CP was added before any trades flowed so there was no Echo history to verify the tag format against. Fix applied; Kate proposed process improvement: for new counterparties (no trade history), the team should provide the full tag as it will appear in Compass to guarantee the rule matches from day one. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778233793577969) [Kate process note](https://mahifx.slack.com/archives/C022S6NL82D/p1778235032912509)
-
-> [resolved] 2025-07-02 — Arb signal manipulation via ms-duration trades: CP 86043118 added to whitelist
-> Daily checks flagged Infinox FX at −$725K (−$78/M) on $9.3B with arb CPs −$625 and EURUSD FI −$406. Sam Hewitt traced to CP 86043118 manipulating the FI signal by taking ms-holding-period XAUUSD trades to skew pricing, then trading at favourable continuity-pool prices while Mahi was offside. Added 86043118 to the Arbitrageur FX B-Book whitelist. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1751497632525109)
-
-> [resolved] 2025-07-11 — Party structure + drop-copy topology to be clarified on upcoming call
-> David Cooney flagged need to clarify Infinox's party structure (which flow arrives via which drop-copy FIX session). Mio Knights agreed to raise on the next call. Separately, Echo credentials issued to Infinox users 2025-07-09 (Amir confirmed sent). [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1752229175947479)
-
-> [open] 2025-07-02 — Bridge upsell: CH confirmed interest; Aditya call productive; deal not yet scoped
-> Mahi bridge pitch has been building since April (Amir drafted April-15 narrative: replace PXM at ~$40K/M and YourBourse crypto whitelabel; bridge is 25c vs PXM's 50c). Will met CH in Cyprus 2025-06-19: CH very interested in white-label bridge for institutional business — asked to "validate bridge in our environment first." YourBourse described as worthless ("f8ck all flow"). Aditya (new Infinox hire, ~2mo in, B2B focus) met Andrew Morgan 2025-07-02: productive call, bridge raised, crypto licence + FI cap noted as expansion levers; Aditya recommends also engaging CH more. Aditya is too early for a commercial deal but is a strong internal advocate. CH eyes lit up on whitelabel optionality per Will (2025-07-02). No formal proposal or timeline agreed. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1750321004954889)
-
-> [resolved] 2025-06-13 — May billing understated by CFD skew PnL
-> Andrew flagged May's bill likely understates by the CFD skew PnL (billing thread in #commissions). Confirmed understated with Bonnie. April CFD skew ~$55.7K, March $7.3K — same methodology may have missed those. Andrew noted some leniency may apply for Mar/Apr if CFDs weren't fully live then. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1749824752223979)
-
-> [resolved] 2025-06-03 — ADS/IS Prime reference-market lag distorting yield profiles + offside XAUUSD fills
-> Amir identified ADS and IS Prime running >500ms behind Mahi's pricing model, making yield profiles look worse than they were (fills appearing "offside" vs lagged reference markets, not vs actual model price at execution). Fix: FX riskPaths reconfigured to use same markets as FX pricers; bounced 2025-06-03. Offside XAUUSD trades confirmed as no clear arb pattern (tags trading across price moves, not systematic). Will flagged Infinox want spreads as tight as Vantage — rationale questioned internally. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1748942380107489)
-
-> [resolved] 2025-05-27–29 — XAUUSD spread complaint: Mahi wider than Vantage on MT4; resolved by TOB revert + spread drop
-> Sadiq complained 2025-05-27 that Mahi XAUUSD spread was higher than Vantage (Vantage 4pip, Mahi floor 8pip). Clients already complaining. Internal debate: Amir warned halving TOB spread would substantially cut spread revenue; Will questioned rationale (Vantage tightening doesn't make it right). MT4-specific issue identified: clients seeing 2nd tier instead of TOB — PXM bridge suspected (MT5 fine). Amir tightened second tier as temporary fix; TOB reverted to 100 (from 50) and Amir dropped XAUUSD base spread by further pip to $0.04 TOB. Sadiq confirmed resolved 2025-05-29. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1748417607237339)
-
-> [resolved] 2025-05-21 — API client 87899203 XAUUSD toxic flow — STP only viable option
-> Kerim flagged API client 87899203 sending toxic XAUUSD flow (>$5K profit in <30s trigger). David confirmed: yield profiles initially sharp but revert, only 3 sets of risk, overall PnL marginally positive. Amir concluded: flow −ve 1-2min out, even 10x LR spread can't save it, B-booking too risky; STP only realistic but LP would likely reject. Tag issue also blocking (PXM FIX tag 448 missing for some API clients — code 526 workaround still pending from Kerim). No action taken; Kerim to provide more tagging info. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1747816500994819)
-
-> [resolved] 2025-05-19 — Echo demo + training session held (Georgia Tzyrkalli)
-> CH requested Echo demo 2025-05-16 for Georgia + Andreas; CH/Andreas no-showed 2025-05-19 call. Georgia attended. Will shared training materials and counterparty PnL time-series analysis card. Will flagged internally: Georgia's LinkedIn does not show Infinox employment (regulator concern noted — caution around "skew" language). Georgia invited to #mahi-infinox 2025-05-20 per CH's request; confirmed her @infinox.com address. Echo credentials issued to Georgia 2025-05-22. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1747664819977889)
-
-> [resolved] 2025-05-08 — EURUSD order burst from 87906376 + 87049913: PD queue overflow alerts
-> Daria flagged ~1K EURUSD orders in 1h from CPs 87906376 and 87049913 triggered two PagerDuty alerts (clientDistributionGateway1 queue depth 769/1024, request publisher overflow). Latency spikes visible but not severe. Both CPs were already throttle-listed; Daria extended throttle config to include them. Liam noted Infinox infra generally un-tuned; no further action required at the time. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1746671103701289)
 
 > [resolved] 2026-05-06 — Lazaros formalising Mahi pricing model — David Cooney confirmed
 > Lazaros posted a mathematical formalisation of Mahi's pricing process (variable experimentation / shock impulse model, images attached) in #mahi-infinox and asked David Cooney to confirm whether it captures the intended behaviour. David confirmed 2026-05-07 with detailed notes: core decay/impulse/clip model is correct; three corrections — (1) clamped gaussian not truncated normal (nextGaussian() + hard clamp, ~4.6% pile-up at ±maxDelta), (2) truncation bound is ±maxDelta not ±1 (Lazaros had ±1 which happens to match current config but breaks if param retuned), (3) missing the gearing layer (chain is XAUUSD spot → GearedPricingNode → RandomJitterPricingNode; jitter operates on geared price, not raw XAUUSD). Lazaros acknowledged all three corrections and posted rolling-volatility charts showing visible impact of recent changes. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1778080716715819) [David's confirmation](https://mahifx.slack.com/archives/C022S6NL82D/p1778141254032319) [Lazaros ack](https://mahifx.slack.com/archives/C022S6NL82D/p1778168875968749)
