@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-11T07:20:00Z
+last_catchup: 2026-06-12T07:12:02Z
 ---
 
 ## Recent issues
