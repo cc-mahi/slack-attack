@@ -17,10 +17,19 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-11T07:19:39Z
+last_catchup: 2026-06-12T07:15:09Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-12 — XAUUSD JANE_STREET_FA rejects: two A-book counterparties (unanswered)
+> Mukhammad reported at 00:20 BST that JANE_STREET_FA is rejecting XAUUSD orders for `FX_MT4_ECN_218004615` and `FX_MT4_ECN_218004832` under A-book. Linked example order `012dr710f0r` and asked if related to the earlier JS FA cancels issue (see 2026-06-02 entry). No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781220045940339)
+
+> [resolved] 2026-06-11 — Centroid test trade not landing in SI: clientDistributionInsti7 missing from riskSplitting override
+> Daniel flagged that test trades from Centroid were not falling into SI as expected per riskSplitting config. Rory diagnosed: trades went down `clientDistributionInsti7` but riskSplitting rules were configured for `clientDistributionInsti3` only. Rory added `clientDistributionInsti7` alongside `clientDistributionInsti3` in the override; Daniel confirmed the fix. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781180099930889) [fix applied](https://mahifx.slack.com/archives/C0456LSHQQK/p1781186419347139)
+
+> [open] 2026-06-11 — XAUFUT test trades: no execution rule for XAU futures on EXINITY CONNECT channel
+> Louie asked if it's OK to send gold futures test trades on connect channels. Rory checked and found no specific XAU futures execution rule under EXINITY CONNECT — only a global catch-all rule covers XAUFUT. Louie said no rush, will revert after reviewing the workflow with Exinity. Execution rule gap to be addressed before live testing. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781166827724399)
 
 > [open] 2026-06-10 — EXINITY_STRD_PARTNER FIX sessions rejecting: wrong password
 > Kate posted FIX credentials for the new EXINITY_STRD_PARTNER channel at 10:01 BST (credentials in Slack — not reproduced here). Nathan flagged at 21:25 BST that both ExinitySTRDPARTNER-Prices and ExinitySTRDPARTNER-Orders FIX logon attempts are being rejected "Invalid username and/or password" — Exinity is connecting with the wrong password rather than the correct one Kate shared. No reply from Exinity in window. [creds posted](https://mahifx.slack.com/archives/C0456LSHQQK/p1781082094879859) [wrong-password alert](https://mahifx.slack.com/archives/C0456LSHQQK/p1781123124672649)
@@ -205,5 +214,6 @@ last_catchup: 2026-06-11T07:19:39Z
 - 2026-06-01 — XAUUSD kilo pricing raised (Zendesk 23055). Liam pinged Andrew: in dev support queue, more of a feature request. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
 - 2026-06-01 — Exinity still interested in weekend support; asked Mahi for a proposed fee structure. No response in window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780322660374449)
 - 2026-06-01 — Daniel queried whether Mahi can boost LP stack quantities for an internalised client using a broker LP pool. Kate: would need to set up the symbol on the model; asked which instruments. Daniel confirmed CL1 and CO1 on CLIENT_PRICE_LDN; Kate confirmed model setup is the right path. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780323376663259)
+- 2026-06-12 — Weekend support proposal received by Exinity and under review (Andrew, internal). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1781170438204179)
 - 2026-06-02 — Andrew shared two Gamma docs for Exinity weekend support: a general overview (why/what/how) and an Exinity-tailored path forward. Both marked as drafts pending feedback incorporation before sending to Exinity. [general](https://gamma.app/docs/MahiMarkets-Weekend-Support-j9k7lum6ho280ps?mode=doc) [exinity-tailored](https://gamma.app/docs/Exinity-Weekend-Support-Options-owwngkx2jhvf2e0?mode=doc) [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780418637349049)
 - 2026-05-29 — NZ bank holiday (Monday 1 June): Sam Hewitt advised emergency-only cover; Matthew Ayub asked for a walkthrough of the wide-spread response process ahead of Sunday open, or for someone to be available to assist. No reply in window; event has now passed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780034840862359)
