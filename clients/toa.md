@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-11T07:31:15Z
+last_catchup: 2026-06-12T07:12:57Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-06-11T07:31:15Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-06-11 — CHI signalProcess down ~2 hours: NPE on tenant profile rename, restart didn't stick
+> James flagged (14:36 BST) that the CHI signal process had been down again for ~2 hours (PD Q0CHFO1JC1E7FN), having apparently not stayed up after an earlier restart attempt. Root cause identified in earlier thread (12:58 BST, PD Q06RQ6VCT3R4XR): `NullPointerException: No classification store for HRP - available: [HRP-MM, NATWEST-M, HRP-PROP]` — James diagnosed as renaming a tenant profile taking out models. Liam confirmed there's an NPE-safe version but it wasn't applied everywhere. James fixed and asked Cameron to flag any further alerts. No resolution commit or config change noted. https://mahifx.slack.com/archives/C035H1VNCAD/p1781184985655469
 
 > [resolved] 2026-06-10/11 — HRP_CLIENTS_NET 50k drop + hedger oscillation overnight: CBOE hedger turned off
 > Nathan flagged HRP_CLIENTS_NET dropped ~50k at 23:33 BST 2026-06-10 — hedgers tripped PnL firewall and were turned off. Lee restarted hedger (~23:42 BST, PD Q170LHEGM93L3S; also Q0NUIYV443BS3H). Further oscillation: Daria noted -$2000/M in 10s (~01:40 BST); Lee found CME+CBOE hedgers trading back and forth far beyond client vol. Root cause: Elan (Nado-side) had been changing spread config. Lee turned off the CBOE hedger, kept CME on (~01:43–01:54 BST). Lee performed manual PnL adjustment back down at ~04:43 BST. Nathan acknowledged missing the hedger-down PD alert (saw prior PnL drop notification and mistook the new one for a reversion). https://mahifx.slack.com/archives/C035H1VNCAD/p1781131334130099
