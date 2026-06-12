@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-06-11T07:33:39Z
+last_catchup: 2026-06-12T07:15:08Z
 ---
 
 ## Status
@@ -25,6 +25,12 @@ last_catchup: 2026-06-11T07:33:39Z
 - **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
 
 ## Recent issues
+
+> [resolved] 2026-06-12 — XAUUSD over-hedge query (26 May); Shyam confirmed no over-hedge from Mahi side
+> Levi (Argamon) raised in mahi-argamon-operations that they were trying to investigate a potential over-hedge of 1 XAUUSD on 26 May and asked for help narrowing the search. Shyam asked whether it was retail; Levi confirmed yes (though no position rec data yet). Shyam investigated and confirmed no over-hedge from Mahi side. Resolved same morning. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781234757662239)
+
+> [resolved] 2026-06-11 — CHI signal process NPE (No classification store for HRP); tenant profile rename cause; process restarted; up by ~14:38 BST
+> James (12:58 BST) spotted a PD alert for the CHI signal process killed with `NullPointerException: No classification store for HRP - available: [HRP-MM, NATWEST-M, HRP-PROP]`. James identified the root cause: renaming a tenant profile can take out models. Liam confirmed there's an NPE-safe version of the code but it wasn't changed everywhere (the Distribution subsystem had it but not here). Process went down again (~14:36 BST, PD Q0CHFO1JC1E7FN — had been down 2h at that point). James restarted and it was up by 14:38 BST. James @mentioned Cameron Copland to flag any further alerts he missed. Underlying NPE-safe fix not yet rolled out to all affected paths. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781179106111309)
 
 > [open] 2026-06-11 — HRP PnL firewall breach ($50k drop); CBOE/CME hedger toggle; Elan spread config interference; manual PnL adjustment applied
 > Nathan (01:33 BST) reported HRP_CLIENTS_NET dropped ~$50k with hedgers tripping PnL firewall — attributed to big XAU PnL reval; risk cleared and hedgers re-enabled. Daria flagged −$2,000/M in 10s (01:40 BST). Lee investigated hedgers going back and forth far more than client volume justified; turned off CME hedger (01:44), then flipped to turn off new CBOE hedger and restore CME (01:54). Lee subsequently concluded it was not a hedging issue — "Elan has been mucking around in spread config" (02:47 BST). Lee applied a manual PnL adjustment to correct the earlier jump (04:43 BST). Root cause (Elan's spread config changes) identified but no config rollback confirmed in thread. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781138037921729)
@@ -172,6 +178,7 @@ last_catchup: 2026-06-11T07:33:39Z
 
 ## Notable topics
 
+- CHI signal process NPE root cause: tenant profile rename (2026-06-11): James identified that renaming a tenant profile kills models referencing the old name. Liam confirmed the NPE-safe version exists (used in Distribution) but not deployed everywhere — an open code hygiene issue. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781179106111309)
 - CBOE hedger toggled off after PnL firewall breach (2026-06-11): New CBOE hedger at TOA-ARGAMON tripped during overnight XAU reval event — Lee turned off CBOE and restored CME after determining hedgers were over-trading relative to client volume. Separately established that root cause was Elan's spread config changes, not hedging. CBOE hedger remains off for now. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781138596048159)
 - referencePriceMarketSelectors tuned for XAU/EUR/GBP (2026-06-10): Shyam updated LP sets for three instruments after lead-lag and TOB analysis over large price moves and opens. XAU: removed NWM_RCTV_HRP_1 and MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
 - propTrader1 HRP switch (2026-06-05): James switched TOA-ARGAMON to use `propTrader1HrpChi1`/`propTrader1HrpLdn1` in internal-toa-ops — likely the config change that preceded the 2026-06-07 MARKETMAKING_HRP_INSTI processes-down event (CHI propTrader not yet set up at that point). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780658564969939)
