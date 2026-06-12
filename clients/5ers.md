@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-11T07:10:42Z
+last_catchup: 2026-06-12T07:20:36Z
 ---
 
 ## Recent issues
@@ -77,6 +77,8 @@ last_catchup: 2026-06-11T07:10:42Z
 > Andreas sending test trades through yourbourse→Mahi; Shyam + Isaac monitoring. Isaac's 04-24 update: trades flowing as expected; some cancels from off-market/last-look breaching limit orders but nothing unexpected. 04-28: client switched XAUUSD flow to YB+Mahi too. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1776981907673599)
 
 ## Notable topics
+
+- 2026-06-11 — Andreas requested XAG/XAUUSD spread increase (~4-5 points); Kate was away. Cameron Hughes handled: confirmed XAG TOB 0.01→0.014 and XAUUSD TOB 0.2→0.24 with Andreas; change actioned same day; client confirmed "All good thanks!" [request](https://mahifx.slack.com/archives/C07AQJS4E80/p1781177175731659) [actioned](https://mahifx.slack.com/archives/C07AQJS4E80/p1781183335831909)
 
 - 2026-06-08 — Andreas requested bid/ask markup file for all symbols; Kate shared `BASE_SPREADS_CLIENT_PRICE_LDN.csv` (base spreads by timezone partition, no per-symbol markup, dynamic widening on top). Andreas asked for a walkthrough; Kate offered 3pm UK time same day. Andreas accepted, meeting invite sent and confirmed. [request](https://mahifx.slack.com/archives/C07AQJS4E80/p1780910322757569) [kate-file](https://mahifx.slack.com/archives/C07AQJS4E80/p1780916594778689) [meeting-confirmed](https://mahifx.slack.com/archives/C07AQJS4E80/p1780922948634059)
 
