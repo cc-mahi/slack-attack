@@ -16,13 +16,17 @@ key_people_overrides:
   - {name: "Harry Politis", role: "IC Markets — attended 2026-06-03 LR/classification review call with Pavlos and Karam; role unknown", confidence: low}
   - {name: "Neophytos Poullou", role: "IC Markets — joined mahi-ic-markets 2026-06-11 on Pavlos request; role unknown", confidence: low}
   - {name: "Ioannis", role: "IC Markets — queried OKX OPENAI/USDT + ANTHROPIC/USDT instrument availability 2026-06-11; first name only", confidence: low}
-last_catchup: 2026-06-12T07:17:29Z
+  - {name: "Konstantinos Haitas", role: "IC Markets — joined mahi-ic-markets 2026-06-12; Compass/Echo access requested by Kyriakos; role unknown", confidence: low}
+last_catchup: 2026-06-15T07:23:12Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-11 — OKX OPENAI/USDT + ANTHROPIC/USDT instrument query; subscription not yet confirmed
-> Ioannis (IC side) asked in mahi-ic-markets whether Mahi can see OPENAI/USDT and ANTHROPIC/USDT on OKX. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781166654445689) Rory replied: not currently subscribing to these instruments; asked IC if they'd like Mahi to subscribe. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781170490938779) No IC reply in window. Open: awaiting IC confirmation on whether to subscribe.
+> [resolved] 2026-06-12 — New IC member Konstantinos Haitas; Compass/Echo access requested; 7d markouts provided for account 8009966
+> Konstantinos Haitas joined mahi-ic-markets 2026-06-12. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781258833717759) Kyriakos requested Compass/Echo access for Konstantinos Haitas and Dimitrios Lambrou; Rory confirmed "will do." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781258868861609) Separately, Kyriakos (IC) asked Rory for 7d markouts for account 8009966 (MT503), noting Echo is hard to navigate. Rory provided Echo link in thread. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781258933957089)
+
+> [resolved] 2026-06-11 — OKX OPENAI/USDT + ANTHROPIC/USDT instrument query; added to roadmap
+> Ioannis (IC side) asked in mahi-ic-markets whether Mahi can see OPENAI/USDT and ANTHROPIC/USDT on OKX. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781166654445689) Rory initially replied not subscribing and asked if IC wanted them subscribed. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781170490938779) 2026-06-12: Ioannis clarified the question was about feasibility, not requesting subscription yet. Rory investigated internally (Andrew confirmed OKX single stock tokens require additional scoping — latency concern since OKX servers are NYC-only; not in current contract). [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1781271933132229) Rory replied to IC (15:52 BST): single stock tokens require more scoping, added to roadmap. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781275951565339) IC (Ioannis) acknowledged 2026-06-15. No further action pending.
 
 > [open] 2026-06-11 — XAUUSD coordinated cluster (BO 7039301, 7 accounts); group LR being set up
 > Cooney posted overnight (03:28 BST) in the client channel: LR applied to 7 XAUUSD tags (15014976, 15027420, 15027424, 15027425, 15027426, 15027427, 20069878) across 4 clusters, trading ~40,000 oz swings together (~$170/M LR). Shared 4 cluster charts + PnL trajectory showing coordinated same-direction bursts; all accounts confirmed to be under the same BO 7039301. Cooney asked IC if they'd like them treated as a group. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781144929532799) IC confirmed yes (08:03–08:04 BST). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781161456587829) Cooney replied "will get that sorted." Internally (08:06 BST) Cooney asked team to create the group LR profile; Rory confirmed he'd create a new counterparty group for the tags. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1781161607171069) Rory also raised a broader concern (08:18 BST): manually adding accounts to `liquidityRefresh.counterparty` is not a full solution — a proper BO-group LR workflow is needed to capture new accounts in the same BO group automatically; asked for an update on whether that's in progress. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1781162300759789) Open: group LR profile being created by Rory; proper BO-group LR workflow still not in place.
@@ -122,6 +126,8 @@ last_catchup: 2026-06-12T07:17:29Z
 
 ## Notable topics
 
+- 2026-06-15: OKX single stock tokens (OPENAI/USDT, ANTHROPIC/USDT) confirmed not feasible without scoping — OKX servers are NYC-only which makes latency a concern; not covered in current IC contract. Rory added to roadmap and IC acknowledged. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781275951565339)
+- 2026-06-12: Konstantinos Haitas joined mahi-ic-markets; Compass/Echo access requested alongside Dimitrios Lambrou. Rory acknowledged. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781258868861609)
 - 2026-06-12: Andrew Morgan published a new mahimarkets.com-hosted shareable link for the XAU end-of-pilot report (https://r.mahimarkets.com/bonelike-dropout-press-7134/) — crediting James for HTML hosting setup. Prior tiiny.site link was the draft; this is the clean shareable URL ahead of the Cyprus meeting with IC next week.
 - 2026-06-11: Neophytos Poullou (IC side, role unknown) joined mahi-ic-markets; Pavlos requested their channel access and a new Compass/Echo account. Rory confirmed. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781162980307079)
 - 2026-06-11: IC (Ioannis) queried OKX instrument availability for OPENAI/USDT and ANTHROPIC/USDT; Rory confirmed not currently subscribed and asked IC if they want Mahi to subscribe — no IC reply yet. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781166654445689)
