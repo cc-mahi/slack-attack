@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-12T07:17:28Z
+last_catchup: 2026-06-15T07:33:10Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-12 — 6,286oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 6,286oz gold long filled on Finalto at 15:11 BST; Rory acknowledged "Hi Layan, will do" at 15:12 BST; Nathan confirmed "this has been completed" at 00:03 BST on 2026-06-15. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781273515072669)
 
 > [resolved] 2026-06-11 — XPTUSD abnormal spreads; config fix + pricer bounce resolved in ~20 min
 > Nael reported XPTUSD spreads "not normal at all" and "very low" at 10:09 BST — LMAX and Finalto minimum spread showing 150+. Cameron Hughes bounced pricers at 10:19 BST to pick up MWMS changes for XPD and XPT, then made a config change to bring TOB ($2) in line with LP spreads (too-frequent widening), then reverted from pool pricing back to model pricing. Nael confirmed "much better now" at 10:27 BST. [client-permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781168985256809) [internal-bounce](https://mahifx.slack.com/archives/C09QS1NUA80/p1781169575044879)
