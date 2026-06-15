@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-06-12T07:20:35Z
+last_catchup: 2026-06-15T07:23:16Z
 ---
 
 ## History
@@ -99,6 +99,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-06-15 — Echo Spread time zone plot broken for main session; Marianna flagged, Shyam investigating
+> Marianna raised in `mahi-pepperstone-vnd` that the time zone spread plot in Echo Spread has been broken for the main session "for a while". Shyam replied he will look into it. No timeline yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781506074069289)
 
 > [open] 2026-06-11 — Reece querying XAUUSD trades at max spread (150 cents); follow-on S3 bid/ask question unanswered
 > Reece asked Mahi to pull all client trades executed while XAUUSD spreads were at max (150 cents), focusing on Friday 5 June (NFP day). Rory delivered a CSV by 16:32 UTC. Reece confirmed receipt then asked whether Mahi posts a bid/ask-at-execution table to S3 for self-querying — no reply yet in the thread. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781189767821629)
@@ -253,5 +256,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-06-09 — Internal: Isaac asking whether there is an implementation plan for the S3 classifier upload feature (MK's request, see open issue 2026-05-19) that can be shared as an update with Pepperstone. No reply in-window. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1781041799830899)
 - 2026-06-11/12 — FX deploy completed (NY then LDN). Sam Hewitt kicked off NY at ~23:15 BST 2026-06-11, LDN complete by 00:01 BST 2026-06-12. Picks up new crypto crosses, WSS changes, markup limit raise. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781211942247609)
 - 2026-06-12 — CFD LP feed clarifications (Daria, pre-go-live): (1) two Jump + LMAX feeds per region believed to be a mistake in the OZ request — Pepperstone checking; (2) IG LDN connection should be used in LDN env (IG prices from London, not NY). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781237298527569) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781237631697269)
+- 2026-06-12/14 — GldI perp pricing gap resolved: Pepperstone flagged no GldI price for perps in Compass (tried switching Gold subscription to Diego's name, bounced connection, no joy — asked whether OZ or Compass side). Isaac fixed perp market mapping and added remaining instruments by 2026-06-14 23:45 BST. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781258601251199) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781477146818009)
+- 2026-06-15 — CFD instrument volume data exchanged for signal tuning: Daria requested approximate daily/weekly volumes per instrument for CFD env; Pepperstone provided an xlsx (Apr–Jun monthly volumes). Daria confirmed useful and requested a CSV of trades for ~2 weeks for the top 10 instruments to tune signals ahead of go-live. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781495714603579)
 - 2026-06-10/11 — Crypto deploy completed (NYC then LDN); FX deploy deferred to tomorrow during Roll. Sam Hewitt executed Crypto NYC starting ~23:54 BST, LDN by 00:52 BST. FX deploy held back due to active incident (XAUUSD losses). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781128821285299)
 - 2026-06-09/10 — Internal: Isaac posted Q1 2026 Crypto spread stats (Jan–Mar, LDN+NYC): XBTUSD $14.56B vol 93.6% internalisation, spread earned +$265.63/M; XETUSD $1.25B 70.3% internalisation +$689.93/M. Notes spreads on everything bar BTC/ETH are very high; proposes spread tightening as a growth lever (more flow, maintain ROS via ROI + PSM). Flagged as bookmarked, not high priority given other SOWs. Daria added a note to prioritise a XAUUSD spread review — current spread formation mostly BMSL (base spread 0), Pepperstone has previously raised this on a quarterly. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1781047518323269) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1781048171828259)
