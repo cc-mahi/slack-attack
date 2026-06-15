@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-12T07:15:09Z
+last_catchup: 2026-06-15T07:16:08Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-12 — SOLUSD arb incident: -$283k loss from Daniel's skew config; arb protection re-disabled at client request
+> Daniel Kurra applied a SOLUSD skew config that caused sharp pricing spikes overnight into the London open. Counterparty ASV_MT5_228041422 (CATCHALL/Crypto execution, 9/9 off-side in 30d) traded into mispriced bursts; total impact -$283,109 with -$189k in a 25-minute window 06:50–07:15 UTC. Caught by automated daily checks. Mahi actions: bounced pricers to fix skew config, deployed real-time arb classification, added arbitrageur protection across all instruments (had previously only covered XBTUSD per an earlier client request). Cameron Hughes notified Exinity team at 14:22 UTC, explicitly noting the -$283k loss and that arbitrageur protection would have prevented it. Daniel responded asking to disable arb protection again (complaints from normal clients in the past), requesting future config changes not be made without their prior approval. Cameron Hughes warned of the loss risk; Daniel confirmed proceed; protection disabled 16:11 UTC. Arb protection is now off again; full audit of changes and call offered by Mahi. [Mahi notification](https://mahifx.slack.com/archives/C0456LSHQQK/p1781270567575609) [Daniel response](https://mahifx.slack.com/archives/C0456LSHQQK/p1781272931785129) [internal alert](https://mahifx.slack.com/archives/C040V9LNKT5/p1781260566554069)
+
+> [open] 2026-06-12 — HYBRID hedger ~18d down; A-book unhedged $5.2M idle
+> Automated daily checks (11:35 BST) flagged sole HYBRID hedger has been down for approximately 18 days. A-book unhedged with $5.2M idle. A-book fill rate also poor at 17.3% ($1.8B cancelled vs $35M traded, noted as worse than the prior Wednesday). Rory assigned to chase a named infra owner for the HYBRID hedger. No resolution in window. [internal alert](https://mahifx.slack.com/archives/C040V9LNKT5/p1781260566554069)
 
 > [open] 2026-06-12 — XAUUSD JANE_STREET_FA rejects: two A-book counterparties (unanswered)
 > Mukhammad reported at 00:20 BST that JANE_STREET_FA is rejecting XAUUSD orders for `FX_MT4_ECN_218004615` and `FX_MT4_ECN_218004832` under A-book. Linked example order `012dr710f0r` and asked if related to the earlier JS FA cancels issue (see 2026-06-02 entry). No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781220045940339)
@@ -58,8 +64,8 @@ last_catchup: 2026-06-12T07:15:09Z
 > [open] 2026-06-02 — STP FOK Market order config change requested (post-Wintermute)
 > Daniel Kurra asked Mahi to adjust execution settings so STP sends FOK Market orders rather than the current config, noting Wintermute is no longer in use. Message received a +1 reaction; no explicit Mahi confirmation yet. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780378737519019)
 
-> [open] 2026-06-01 — Arbitrageur execution rule removed by Exinity; criteria review planned
-> Daniel Kurra removed the arbitrageur execution rule and asked Mahi to consult before making any changes to it. Kate (internal) flagged this as an opportunity to work with Exinity to harden the criteria (as with Infinox) so genuine arbers are caught and the rule can be re-enabled on a sounder footing. Kate raising on a 2pm call with Daniel. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780315838504689)
+> [open] 2026-06-01 — Arbitrageur execution rule: recurring conflict between Exinity and Mahi over scope
+> Daniel Kurra removed the arbitrageur execution rule on 2026-06-01, asking Mahi not to make changes without approval. Kate planned a 2pm call to review criteria. 2026-06-12: after the -$283k SOLUSD arb incident (see above), Mahi re-added arb protection across all instruments as an incident response. Daniel promptly asked Mahi to disable it again (citing complaints from normal clients), and it was disabled at ~16:11 UTC. Root tension: Exinity's prior request had scoped arb protection to XBTUSD only; Mahi's fleet-wide addition was incident-driven but reversed at client direction within hours. [original](https://mahifx.slack.com/archives/C040V9LNKT5/p1780315838504689) [Daniel disable request](https://mahifx.slack.com/archives/C0456LSHQQK/p1781272931785129)
 
 > [resolved] 2026-05-27 — Starfish process error (no client impact)
 > Samuel flagged an error for Starfish at ~03:35 UTC; Shyam acknowledged and had the process back up within ~38 minutes. No client impact confirmed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1779852915812469)
