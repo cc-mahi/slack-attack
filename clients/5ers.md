@@ -10,10 +10,13 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-12T07:20:36Z
+last_catchup: 2026-06-15T07:18:24Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-12 — Stale FIX orders alert from YB (2026-06-11 16:47 UTC) — connectivity drop, no unhedged exposure confirmed but 5 re-hedges unverified
+> Andreas flagged 16 stale FIX order alerts from YourBourse (2026-06-11 ~16:47 UTC) across XAUUSD, US30, NAS100, EURUSD, NAS100 — YB's Liquidity Manager warned of potential unhedged exposure. Rory King investigated and confirmed none of the 16 orders reached Mahi: last received seq was 116848 at 16:47:18.276; all 16 stale orders (seq 116850–116871) were sent after the `5ers-Funded-YB-MT5-Prices` and `5ers-Funded-YB-MT5-Orders` sessions disconnected due to heartbeat timeout at 16:47:27/16:47:31 UTC. YB reconnected with reset sequence numbers, so missed messages were not retransmitted — no double-fill risk on Mahi side. Re-hedge matching: Rory found fills matching most lost trades arriving within minutes of reconnect, but could not confirm 1:1. Asked YB to verify 5 specific trace_ids not matched: XAUUSD sell 78, one US30 buy 2.5, one NAS100 sell 0.30, XAUUSD buy 1, EURUSD sell 500k. No YB response in window. [client-alert](https://mahifx.slack.com/archives/C07AQJS4E80/p1781250515110489) [rory-findings](https://mahifx.slack.com/archives/C07AQJS4E80/p1781263567460059)
 
 > [open] 2026-06-10 — flowImbalanceNoTrades false alerts + CachingEventLogger table overflow after 20260601 analytics release
 > Cameron Copland (12:31 BST) flagged three `flowImbalanceNoTrades` PagerDuty alerts from `riskReportingExtended1` during London hours; gateway logs showed 50+ fills/min on `clientDistributionGatewayFunded4` at each alert time, so trade events are arriving at the analytics graph with minutes of lag — not a real no-trades condition. Started after Saturday's reboot picked up the 20260601 analytics release (previous release was Dec 29). Since that build, the process logs `CachingEventLogger table overflow` every minute and `GraphiteQueryService` queries take 30–100s. Host is 6 cores at load ~35 all month, so little headroom for the increased query workload. Maten Rehimi (12:41 BST) responded: root cause was a disk space issue on the AF box; deleted large log files and checked no other AF was affected. Planning to reduce AF log retention to prevent recurrence. Resolution of the false-alert / CachingEventLogger symptoms pending follow-up. [thread](https://mahifx.slack.com/archives/C079M09MGGP/p1781091087448019)
