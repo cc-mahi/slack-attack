@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-12T07:12:57Z
+last_catchup: 2026-06-15T07:27:58Z
 ---
 
 ## Status
@@ -18,8 +18,11 @@ last_catchup: 2026-06-12T07:12:57Z
 
 ## Recent issues
 
-> [open] 2026-06-11 — CHI signalProcess down ~2 hours: NPE on tenant profile rename, restart didn't stick
-> James flagged (14:36 BST) that the CHI signal process had been down again for ~2 hours (PD Q0CHFO1JC1E7FN), having apparently not stayed up after an earlier restart attempt. Root cause identified in earlier thread (12:58 BST, PD Q06RQ6VCT3R4XR): `NullPointerException: No classification store for HRP - available: [HRP-MM, NATWEST-M, HRP-PROP]` — James diagnosed as renaming a tenant profile taking out models. Liam confirmed there's an NPE-safe version but it wasn't applied everywhere. James fixed and asked Cameron to flag any further alerts. No resolution commit or config change noted. https://mahifx.slack.com/archives/C035H1VNCAD/p1781184985655469
+> [resolved] 2026-06-14 — TOA CHI disk at 99%: partition expanded by Lee
+> Shyam flagged (08:08 BST) disk space at 99% on TOA CHI. Lee gave the partition more disk by 08:16 BST — resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1781420916036159
+
+> [open] 2026-06-11/14 — signalProcess NPE on tenant profile rename: CHI fixed, LDN recurred
+> James flagged (14:36 BST 2026-06-11) that the CHI signal process had been down again for ~2 hours (PD Q0CHFO1JC1E7FN). Root cause: `NullPointerException: No classification store for HRP - available: [HRP-MM, NATWEST-M, HRP-PROP]` — renaming a tenant profile takes out models. Liam confirmed NPE-safe version not applied everywhere. James fixed CHI and asked Cameron to flag further alerts. 2026-06-14 22:29 BST: signalProcess1 crash-looping on toa-argamon-ln with the same NPE (PD Q18NGRWKYCWN6Q). Lee added a tenant profile for HRP-MM via Compass (https://toa-argamon-ln-admin-1.w8et.prod.toalabs.xyz:8400/configuration/edit/multiTenant.compassTenantProfiles/042dphabx9dzm) and confirmed running again at 22:37 BST. NPE-safe version still not universally applied — same issue could recur on other regions. https://mahifx.slack.com/archives/C035H1VNCAD/p1781472569145469
 
 > [resolved] 2026-06-10/11 — HRP_CLIENTS_NET 50k drop + hedger oscillation overnight: CBOE hedger turned off
 > Nathan flagged HRP_CLIENTS_NET dropped ~50k at 23:33 BST 2026-06-10 — hedgers tripped PnL firewall and were turned off. Lee restarted hedger (~23:42 BST, PD Q170LHEGM93L3S; also Q0NUIYV443BS3H). Further oscillation: Daria noted -$2000/M in 10s (~01:40 BST); Lee found CME+CBOE hedgers trading back and forth far beyond client vol. Root cause: Elan (Nado-side) had been changing spread config. Lee turned off the CBOE hedger, kept CME on (~01:43–01:54 BST). Lee performed manual PnL adjustment back down at ~04:43 BST. Nathan acknowledged missing the hedger-down PD alert (saw prior PnL drop notification and mistook the new one for a reversion). https://mahifx.slack.com/archives/C035H1VNCAD/p1781131334130099
