@@ -13,10 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-12T07:12:02Z
+last_catchup: 2026-06-15T07:18:26Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-15 — Acc 71200507 arber classification: USDJPY zero-spread fills triggering profiling
+> Kieran (GoMarkets, ~02:16 UTC) raised that acc 71200507 was complaining about fills — flow appears fine but the account was being auto-assigned to various execution profiles because GoMarkets targets zero spread on USDJPY, meaning the zero spread occasionally undercuts market at t=0 producing negative spread, which triggers arber-style classification. Kieran shared Echo yield profile link. Shyam Hari (Mahi) investigated and resolved same session (~04:31 UTC): lowered the minimum $/M arber threshold to -$4/M to give enough room for zero-spread trades not to flag as arbing, and blacklisted the account from arber classification. Will monitor and adjust as needed. Kieran confirmed ("thank you"). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781489774447359)
 
 > [open] 2026-06-09 — LMAX LP position clearing: transitioning hedging to LMAX_LDN
 > Will (GoMarkets, ~23:27 UTC 2026-06-08) began clearing open LMAX positions using trading adjustment hedgers (TRADING_SUB_ADJUSTMENTS + TRADING_ADJUSTMENTS books), targeting GBPUSD first. Initial hedger restart needed (instrument change). Daria (Mahi) reconfigured: `hybridHedgerSubTrading1` set to reducing-only with LMAX only; LMAX removed from `hybridHedgerTrading1`; backstop added with 20s delay allowing position-increase at 26DEGREES/Finalto/ISPRIME if LMAX reduction doesn't fire. Nathan confirmed hedgers restarted and GBPUSD cleared by ~01:51 UTC. Backstop worked well on EURUSD ~200k long LMAX vs ~64k Finalto. Will confirmed still clearing remaining LMAX positions — ongoing. Tied to GAUUSD/GAUCNH go-live prep and LMAX→LMAX_LDN hedging migration. Update 2026-06-10: client greenlit Nathan's request to add LMAX_LDN to full brokering/hedging LP pool for all products. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1780961237693669) [LMAX_LDN brokering approval](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781058487541289)
