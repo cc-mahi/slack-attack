@@ -18,13 +18,22 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-12T07:19:27Z
+last_catchup: 2026-06-15T07:27:58Z
 ---
 
 ## Recent issues
 
+> [resolved] 2026-06-15 — BRENT.U26 instrument mapping query
+> Andreas asked whether BRENT.U26 maps to LCOU6. Nathan confirmed 2026-06-15 that Mahi subscribes to BR.U26, mapped in Compass as UKOFUT-U (not LCOU6). [Andreas query](https://mahifx.slack.com/archives/C08AQKRU953/p1781304815411879) [Nathan reply](https://mahifx.slack.com/archives/C08AQKRU953/p1781478998320769)
+
+> [open] 2026-06-12 — Compass access removal for savvas.savvides@rostro.com
+> Oli requested removal of Compass access for savvas.savvides@rostro.com. Rory noted the same user is also linked to savvas.s@scopemarkets.com and asked Oli to confirm removal for both — no confirmation in window. [Oli request](https://mahifx.slack.com/archives/C08AQKRU953/p1781265528510529) [Rory query](https://mahifx.slack.com/archives/C08AQKRU953/p1781265619412119)
+
+> [resolved] 2026-06-12 — Tag 49_0_ USDJPY not routing to non-rev-share book
+> Oli flagged tag 49_ was not going to the non-rev-share book for USDJPY. Rory checked: 49_0_ was absent from the riskSplitting config. Confirmed with Oli that all 49_0_ tags should go non-rev-share; Rory added them to config and confirmed monitoring. [Oli flag](https://mahifx.slack.com/archives/C08AQKRU953/p1781251926369279) [Rory fix](https://mahifx.slack.com/archives/C08AQKRU953/p1781253024717519)
+
 > [resolved] 2026-06-12 — WS30 spread widening vs CMC: no MWMS in place on INV feed
-> Oli (~07:53 BST) flagged WS30 spread widening on the INV feed with no MWMS configured, posted a video showing it pricing against CMC. Said "there's no BMSL" either. Shyam and Daria investigated; Daria asked Oli to check the feed at 08:14 BST; Oli confirmed "better" and asked how it was resolved. No explicit explanation given to client in channel. [Oli query](https://mahifx.slack.com/archives/C08AQKRU953/p1781247211036469) [Oli: looks like CMC](https://mahifx.slack.com/archives/C08AQKRU953/p1781247402900129) [Daria fix check](https://mahifx.slack.com/archives/C08AQKRU953/p1781248466378529) [Oli: better](https://mahifx.slack.com/archives/C08AQKRU953/p1781247650259939)
+> Oli (~07:53 BST) flagged WS30 spread widening on the INV feed with no MWMS configured, posted a video showing it pricing against CMC. Said "there's no BMSL" either. Shyam and Daria investigated; Daria asked Oli to check the feed at 08:14 BST; Oli confirmed "better". Root cause (Daria, ~08:22 BST): maximal price improvement on TOB in the signal config was interacting with the CMC spread to cause widening; Daria allowed it to go further inside the CMC price while investigating. [Oli query](https://mahifx.slack.com/archives/C08AQKRU953/p1781247211036469) [Oli: looks like CMC](https://mahifx.slack.com/archives/C08AQKRU953/p1781247402900129) [Daria fix check](https://mahifx.slack.com/archives/C08AQKRU953/p1781248466378529) [Oli: better](https://mahifx.slack.com/archives/C08AQKRU953/p1781247650259939) [Daria root cause](https://mahifx.slack.com/archives/C08AQKRU953/p1781248939495859)
 
 > [resolved] 2026-06-11 — Andreas slippage query on XAUUSD order 63896080-1
 > Andreas (~20:35 BST) asked Mahi to check FIX logs for slippage. Nathan replied at 23:01 BST confirming no slippage: client sold 1 XAU at 14:00:31.610 UTC, published bid at time of trade was $4082.60, filled at $4082.60 at 14:00:31.614 UTC — no slippage. [Andreas query](https://mahifx.slack.com/archives/C08AQKRU953/p1781206550075189) [Nathan resolution](https://mahifx.slack.com/archives/C08AQKRU953/p1781215295627599)
