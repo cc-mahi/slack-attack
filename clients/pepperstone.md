@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-06-15T07:25:17Z
+last_catchup: 2026-06-16T07:23:28Z
 ---
 
 ## History
@@ -99,6 +99,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [resolved] 2026-06-15 — Marianna: "allow top up = no" on exec rules reverts to yes; Rory confirmed intended for internalise rules
+> Marianna flagged that selecting "allow top up: no" on execution rules in the Crypto env reverts back to yes. Rory investigated and confirmed this is intended behaviour for any execution rule where the execution style is set to internalise. Marianna accepted the explanation ("doesnt matter for internalised trades"). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781522780871919)
 
 > [open] 2026-06-15 — Echo Spread time zone plot broken for main session; Marianna flagged, Shyam investigating
 > Marianna raised in `mahi-pepperstone-vnd` that the time zone spread plot in Echo Spread has been broken for the main session "for a while". Shyam replied he will look into it. No timeline yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781506074069289)
@@ -260,3 +263,6 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-06-15 — CFD instrument volume data exchanged for signal tuning: Daria requested approximate daily/weekly volumes per instrument for CFD env; Pepperstone provided an xlsx (Apr–Jun monthly volumes). Daria confirmed useful and requested a CSV of trades for ~2 weeks for the top 10 instruments to tune signals ahead of go-live. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781495714603579)
 - 2026-06-10/11 — Crypto deploy completed (NYC then LDN); FX deploy deferred to tomorrow during Roll. Sam Hewitt executed Crypto NYC starting ~23:54 BST, LDN by 00:52 BST. FX deploy held back due to active incident (XAUUSD losses). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781128821285299)
 - 2026-06-09/10 — Internal: Isaac posted Q1 2026 Crypto spread stats (Jan–Mar, LDN+NYC): XBTUSD $14.56B vol 93.6% internalisation, spread earned +$265.63/M; XETUSD $1.25B 70.3% internalisation +$689.93/M. Notes spreads on everything bar BTC/ETH are very high; proposes spread tightening as a growth lever (more flow, maintain ROS via ROI + PSM). Flagged as bookmarked, not high priority given other SOWs. Daria added a note to prioritise a XAUUSD spread review — current spread formation mostly BMSL (base spread 0), Pepperstone has previously raised this on a quarterly. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1781047518323269) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1781048171828259)
+- 2026-06-15 — Marianna triggered crypto NYC pricer restart (BMSL change, PEPPERSTONE-CRYPTO NYC), then a second restart for mwms; both acknowledged by Rory. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781532805604079)
+- 2026-06-15 — Isaac notified team of rolling distribution gateway restart in crypto env to pick up Perp instruments into distribution (short failover between envs); Pepperstone +1'd. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781561780975949)
+- 2026-06-16 — Daria asked whether LP1 is basis for pricing in CFD env (e.g. Velocity for WS30, Invast for SPX) and what LP2 is for; Pepperstone confirmed LP1 = primary pricing/normalisation peg, LP2 = backup if LP1 fails. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781587712666549)
