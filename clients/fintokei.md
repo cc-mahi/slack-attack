@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-06-15T07:15:04Z
+last_catchup: 2026-06-16T07:19:30Z
 ---
 
 ## Status
@@ -18,6 +18,9 @@ last_catchup: 2026-06-15T07:15:04Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [resolved] 2026-06-15 — Slippage complaint: account 6032915, 6 simultaneous fills on 2026-06-14 ~22:00 UTC
+> Pau (Fintokei) raised a complaint that one of 6 simultaneously-filled positions for FintokeiMT5C_6032915 received significantly higher slippage. Rory King (Mahi) acknowledged and investigated. Cameron Hughes (Mahi) explained: FINTOKEI market spreads blew out briefly, causing Mahi's pricing model to defensively widen in response, and the trade came in on that wider published spread. Pau reacted with `:thankyou:`. [complaint](https://mahifx.slack.com/archives/C08QWKFARDL/p1781524010061899) [CH explanation](https://mahifx.slack.com/archives/C08QWKFARDL/p1781524666634919)
 
 > [resolved] 2026-05-29 — MT5 build 5830 server update: Mahi confirms no gateway impact
 > Jan asked in #mahi-fintokei whether Fintokei's planned weekend update of MT5 servers to build 5830 would cause issues to the gateway. Rory King (Mahi) confirmed no issues expected on Mahi's side. Jan thanked and acknowledged. [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1780059694047829) [Rory confirms OK](https://mahifx.slack.com/archives/C08QWKFARDL/p1780060200072389)
