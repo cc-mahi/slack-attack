@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-15T07:29:59Z
+last_catchup: 2026-06-16T07:24:58Z
 ---
 
 ## Recent issues
@@ -105,6 +105,8 @@ last_catchup: 2026-06-15T07:29:59Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-16 — cpty 68566853 A/B book classification: client asked team to advise; Shyam Hari confirmed B Book with charts. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781587498858329) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781588031307539)
 
 - 2026-06-15 — US100 contract rolled June→September for AMB: client posted FYI in both #mahi-valutrades and #mahi-valutrades-operations that the US100 contract has been rolled from June to September for AMB. [ops-permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1781495446016609)
 
