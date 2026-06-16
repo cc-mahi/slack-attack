@@ -7,16 +7,22 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-15T07:27:58Z
+last_catchup: 2026-06-16T07:25:11Z
 ---
 
 ## Status
 
-- **Stage:** live and expanding rapidly. Nado (Vertex 2.0) launched 2025-11-21 as primary crypto venue replacing Vertex. Spot markets (WETH, kBTC, USDC, BNB) + BTC/ETH perps at launch; dozens of new perps added Dec 2025–Apr 2026 (HYPE, MONAD, ZEC, XAUT, Lighter, DOGE, kBONK, kPEPE, UNI, XPL, ASTER, ONDO, and more). FX perps live 2026-03-26; Silver (XAG) 2026-03-17; Oil (CL/WTI) ~2026-03-24; ETF pricing (QQQ/SPY) 2026-03-31; Mag7 perps 2026-04-08. CVEX wound down September 2025 (rebranded as Pascal/Jetstream). NLP is the primary liquidity provider for Nado spot and perp markets. Argamon Tokyo live on minor coins 2026-04-14+ (Eugen setting up pricerInstiLight1/2).
+- **Stage:** Nado winding down — James confirmed 2026-06-15 positions being unwound and switch-off planned for the weekend. NLP switched to Close Only 2026-06-15 (James confirmed in `toa-nado-shared`). Prior to wind-down: Nado had been live and expanding rapidly since 2025-11-21 launch with dozens of perp/spot/FX/ETF/Mag7 markets added through Apr 2026. CVEX wound down September 2025 (rebranded as Pascal/Jetstream). Argamon Tokyo live on minor coins 2026-04-14+.
 - **Integration:** Mahi infra hosting Toa's pricing/distribution across APN1, CHI, EUW2, USE2; CHAOS_ORACLE quoting ETF prices, CFD feeds weekday-only. Replace workflow (cancel-and-place) deployed mainnet 2026-02-23 via Lee. Nado's `/ws/v2` (faster, async responses) piloted on testnet by Lee — intermittent connection-reset under load (affects both old+new endpoint; likely proxy/limit issue). NLP fee structure: 0/-3bps maker/taker; vault cap targeting 10M. Recurring AMQ disk and DB space issues on APN1; Binance instability operationally managed by ops team.
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-06-15 — Nado winding down: positions being unwound, switch-off this weekend
+> James announced in `internal-toa-ops` (12:49 BST): "Nado wrapping up, positions now being unwound and we will switch off this weekend". NLP was switched to Close Only earlier the same morning (James confirmed in `toa-nado-shared` 09:12 BST). This is a major status change — the entire Nado operation is being wound down. https://mahifx.slack.com/archives/C035H1VNCAD/p1781524142261449
+
+> [resolved] 2026-06-15 — Position mismatch PD Q1GOE30M5EZ0L3: 15,024 USD, JMX-resolved
+> Inald flagged PD alert Q1GOE30M5EZ0L3 at 09:35 BST (15,024 USD mismatch). Resolved by Inald via JMX adjustments on exchangeAccounting by 09:40 BST — self-contained, no further follow-up. https://mahifx.slack.com/archives/C035H1VNCAD/p1781512502031929
 
 > [resolved] 2026-06-14 — TOA CHI disk at 99%: partition expanded by Lee
 > Shyam flagged (08:08 BST) disk space at 99% on TOA CHI. Lee gave the partition more disk by 08:16 BST — resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1781420916036159
@@ -197,6 +203,7 @@ last_catchup: 2026-06-15T07:27:58Z
 
 ## Notable topics
 
+- **2026-06-15 — Nado wind-down confirmed**: James posted in `internal-toa-ops` that Nado is "wrapping up", positions are being unwound, and the switch-off is planned for this weekend. In `toa-nado-shared` earlier the same morning, James confirmed NLP has been switched to Close Only "as agreed". This supersedes all prior "live and expanding" status. https://mahifx.slack.com/archives/C035H1VNCAD/p1781524142261449
 - **2026-06-09 — Nado FX markets empty confirmed as intentional RWA cut**: Nado asked James in `toa-nado-shared` why FX markets were basically empty. James confirmed RWAs have been cut to close-only as agreed with Zach — consistent with the 2026-05-08 open entry. No new development work or reversal indicated. https://mahifx.slack.com/archives/C09RGU1T1GE/p1781015707695679
 - **2026-06-05 — Nado xstock spot launch request refused pending renegotiation**: Nado asked James in `toa-nado-shared` to have NLP support xstock spot launch targeting Monday 2026-06-09, saying activity would be low (mainly depth for liquidation). James refused: new development work is on hold pending renegotiation, Mahi is not in a position to support xStocks without development work, and Friday-to-Monday notice is insufficient. https://mahifx.slack.com/archives/C09RGU1T1GE/p1780661003888839
 - **Chaos→Stork oracle migration (2026-05-22 22:30 UTC)** — all Nado crypto perp markets migrated from Chaos to Stork oracle; 2-hour window. Stork API token provided; `stork-fast` endpoint. No post-migration incident signals in channel through 2026-06-03 window — likely completed without issue.
