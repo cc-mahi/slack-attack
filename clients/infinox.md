@@ -16,10 +16,16 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-15T07:23:14Z
+last_catchup: 2026-06-16T07:22:58Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-15 — NAS100 price spike complaint: B2Broker/Vantage feed glitch (54-point dislocation, ~12:50 GMT+3)
+> Trading Ops reported NAS100 price dropped from 30268 to 30214 in a few ms and reverted, ~12:50 GMT+3 (09:50 UTC). Rory King investigated; confirmed B2Broker/Vantage fed its whole market ~55 points lower for a fraction of a second before snapping back — isolated feed glitch, not a genuine index move or Mahi pricing fault. Mahi's model widened with B2Broker's quoting as intended. Rory shared Echo TOB link. Infinox acknowledged: "more like an off market price rather than real market movement." Rory confirmed. [parent](https://mahifx.slack.com/archives/C022S6NL82D/p1781532682572419) [Rory resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1781542537125799)
+
+> [resolved] 2026-06-15 — Routine Heavy LR add: Centroid_3603078
+> Andreas Kazelas requested MT5_87018814_Centroid_3603078 → Heavy LR (09:16 BST); Rory King confirmed actioned at 09:23 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781511371091619)
 
 > [resolved] 2026-06-15 — Routine Heavy LR adds: Centroid_3602541, Centroid_3602123, Centroid_3602139, Centroid_3600002, Centroid_2145764469, Centroid_3600748
 > Andreas Kazelas requested six CPs (MT5_87018814_Centroid_* format) added to Heavy LR (07:27 BST); Shyam Hari confirmed all added at 07:29 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781504857404069)
@@ -155,6 +161,8 @@ last_catchup: 2026-06-15T07:23:14Z
 
 ## Notable topics
 
+- 2026-06-15 — NAS100 feed glitch resolved: B2Broker/Vantage momentary 55-point dislocation caused spike; Rory King confirmed isolated feed issue and shared Echo TOB. Infinox satisfied. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781532682572419)
+- 2026-06-15 — Will Carter CP classification review (internal): 3 new CPs (Centroid_2145758162, MT5_plain_b_87968501, MT5_plain_b_87969201) flagged too early to classify (first trades 2026-06-10, 5.1d). MT5_plain_b_87963848 (24d active, $1.2M, 1 drop trade) flagged as unclassified — suggested clientABook or broker based on yield. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1781517794604179)
 - 2026-06-15 — Heavy LR volume continues: Andreas Kazelas submitted another 6-CP batch to Heavy LR; Shyam Hari confirmed all added within 2 min (07:27–07:29 BST). Routine cadence of daily/near-daily adds ongoing. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781504857404069)
 - 2026-06-11 — Extra Heavy LR profile growing: two CPs promoted from Heavy LR + two new direct adds, all confirmed by Nathan Burch. Profile created 2026-05-21 at CH's request; volume multiplier already doubled 2026-05-22; now expanding CP scope. [thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781155598297759)
 - 2026-06-09 — Lazaros Zografopoulos (departed 2026-05-15) has landed at a new employer; Daria Horton posted a screenshot to #internal-infinox; Andrew commented "they couldn't deserve each other more… until Exness become a client." New firm not confirmed from text alone. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1780994401467489)
