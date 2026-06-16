@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-06-15T07:15:04Z
+last_catchup: 2026-06-16T07:23:30Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-15 — XAUUSD MFX-RETAIL spread flickering 5–26c; pillar liquidity spike triggering wide quotes
+> Shahid Afrid flagged at ~20:06 BST with screen recording: spread oscillating 5–26c on MFX-RETAIL XAUUSD. Shyam Hari (Mahi) investigated. Samin diagnosed the spread widening as triggered when TOB liquidity jumped 100→200 around spread pillars. Samin tested by slightly widening 2nd/3rd/4th layer then reverted; reported stable at ~20:53 BST. However Samin also noted spread remained at 5c when TOB should be 3c before self-resolving ("sorted"). No Mahi-side root cause stated in channel. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781550411644169)
 
 > [open] 2026-05-27 — $30k skew P&L drop on XAUUSD market open; MAHI_LP_11 sole reference price $10 below client LPs
 > Daria Horton reported a ~$30k skew P&L drop on XAUUSD at the LDN open. MAHI_LP_11 (retail feed from Toa Args LDN) was the sole reference price and was up to $10 below StarPrime's LPs for a period; prices eventually re-aligned. LP pricing was chaotic generally — spiky behaviour in early part attributed to CBOE_HR_LDN issues (Invast and Velocity affected similarly); later portion was smooth. Daria noted RBI_5182_60000 is now classified as an arbitrageur. No resolution or further action stated in thread; Daria posted top-of-book Echo links for context. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1779851154348779)
@@ -30,6 +33,7 @@ last_catchup: 2026-06-15T07:15:04Z
 
 ## Notable topics
 
+- 2026-06-15 — Samin requested Compass read access to `pricing.filter.list`; Daria Horton responded she'd raise with dev and noted the key only contains reduced filters for XAUUSD / CLIENT_PRICE_LDN. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781557677597789)
 - 2026-06-04 — Samin requested B2PRIME_RETAIL added to Echo TOB (routing via MFX-T4); Rory King added it to `persistedMarketsSelectors` and bounced `starfishFilePersisterExternalMarketData1`; confirmed done within a few minutes. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1780571748825339)
 - 2026-06-04 — Cameron Hughes quoted Samin ("got a big meeting next weekend - selling the mahi product") in internal-starprime and noted Samin is looking for NOP docs. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1780572669949409)
 - 2026-05-05 — Inald Gjoni performed rolling restart of pricers to load Timezone Conditions for BenchmarkMinimumSpreadLogic (no-restart component deploy). [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777981565638809)
