@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-06-15T07:33:09Z
+last_catchup: 2026-06-16T07:25:01Z
 ---
 
 ## Recent issues
@@ -121,6 +121,7 @@ last_catchup: 2026-06-15T07:33:09Z
 
 ## Notable topics
 
+- 2026-06-16 — Dan (client-side) asked Mahi to review tag 515; MTD yield profile looks good from inception to 30s and client wants it assessed for internalisation suitability. Cameron Hughes acknowledged; Rory King replied that they want to take a closer look at yields given "previous instances where drop copy yield performance isn't perfectly matching up with the reality of internalising" — no decision yet. [Dan ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1781510269035169) [Rory response](https://mahifx.slack.com/archives/C05NB72AGR2/p1781518288043269)
 - 2026-06-15 — Nathan Burch diagnosed J40ZAR Echo gap: internal J40ZAR→Z40ZAR remapping applies to MD feed only, not Xenfin CSV trades processor. Two resolution paths offered (client-side CSV symbol change vs Mahi dev fix); client reply pending. William was OOO 2026-06-12; Rory King handled initial triage. [Nathan reply](https://mahifx.slack.com/archives/C05NB72AGR2/p1781488161610399)
 - 2026-06-11 — Weekly group call kicked; Will arranged 1:1 with Richard instead. Will's internal note: "at the risk of having to engage with Dan." [permalink](https://mahifx.slack.com/archives/CPDS0M2KF/p1781164217369539)
 - 2026-06-11 — Richard asked Rory King to add Jackson to the `mahi-velocity-notifications` channel; Rory acknowledged. [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1781165075541319)
