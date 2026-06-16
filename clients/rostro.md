@@ -18,10 +18,16 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-15T07:29:57Z
+last_catchup: 2026-06-16T07:23:29Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-15 — LP exclusion per tag for brokered flow
+> Owen (Rostro) asked whether a specific LP can be excluded from brokered flow for specific counterparty tags only, rather than removing it from all brokered flow. Rory explained this isn't dynamically adjustable: the feasible approach is to create a new liquidity pool with the LP removed and set a specific execution rule scoped to the listed tags, but pool changes require EOD restarts and can't be adjusted dynamically. Rostro thanked Rory and said they'll discuss internally and come back. [Owen query](https://mahifx.slack.com/archives/C08AQKRU953/p1781534505304739) [Rory reply](https://mahifx.slack.com/archives/C08AQKRU953/p1781539808111929) [Rostro: will come back](https://mahifx.slack.com/archives/C08AQKRU953/p1781548598626129)
+
+> [resolved] 2026-06-15 — Tag 109_* limit orders EXPIRED: 1,336 rejections on EURUSD/XAUUSD
+> Rakan (Rostro) flagged ~1,336 limit order rejections with no fills on EURUSD (cpty 109_1_2798) and XAUUSD (cpty 109_1_2930) via Scope-X-SI-Orders; FIX logs showed orders acked then immediately EXPIRED with code 78=99. Cameron Hughes investigated and explained: these tags are classified as arbitrageurs and routed to brokering per the 109-arb execution rule; the LP cancelled the orders (price not within limit tolerance), and Mahi cancelled consequently. Client acknowledged. This is a recurring pattern for 109_* tags under arb classification — see also 2026-05-20 G30 mass rejections entry. [Rakan query with FIX logs](https://mahifx.slack.com/archives/C08AQKRU953/p1781544621372779) [Cameron Hughes explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1781547757361909)
 
 > [resolved] 2026-06-15 — BRENT.U26 instrument mapping query
 > Andreas asked whether BRENT.U26 maps to LCOU6. Nathan confirmed 2026-06-15 that Mahi subscribes to BR.U26, mapped in Compass as UKOFUT-U (not LCOU6). [Andreas query](https://mahifx.slack.com/archives/C08AQKRU953/p1781304815411879) [Nathan reply](https://mahifx.slack.com/archives/C08AQKRU953/p1781478998320769)
