@@ -16,10 +16,22 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-16T07:22:58Z
+last_catchup: 2026-06-17T07:24:40Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-17 — Routine Heavy LR adds: Centroid_2145765830, Centroid_3603858, Centroid_885683
+> Trading Ops requested three CPs (MT5_87018814_Centroid_2145765830, MT5_87018814_Centroid_3603858, MT5_87018814_Centroid_885683) added to Heavy LR (00:56 BST); Shyam Hari confirmed all added at 00:59 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781654213792979)
+
+> [resolved] 2026-06-16 — NAS100 + SPX500 price spike complaints: LP-driven (B2Broker/Vantage); SPX pricing adjusted
+> Trading Ops reported spikes on NAS100 (19:55 GMT+3) and SPX500 (11:13 GMT+3) and asked Mahi to investigate before market open, noting client complaints on SPX. Daria Horton acknowledged at 21:29 BST; Trading Ops escalated ("prioritize this — complaints from clients") asking whether switching to Mahi pool would remove spikes. Isaac Dann investigated and confirmed both spikes driven by B2Broker and Vantage feeds; published NAS100 (NDXUSD) prices did not spike, and SPX500 offer was stable — only bid dropped with Vantage. Shyam Hari adjusted SPX pricing (01:59 BST 2026-06-17) so LP-driven spikes should no longer recur, mirroring the earlier NDX fix. Trading Ops thanked the team (02:44 BST). [initial complaint](https://mahifx.slack.com/archives/C022S6NL82D/p1781641478563249) [Isaac analysis](https://mahifx.slack.com/archives/C022S6NL82D/p1781645371927979) [Shyam SPX fix](https://mahifx.slack.com/archives/C022S6NL82D/p1781657964434699)
+
+> [resolved] 2026-06-16 — Extra Heavy LR add: Centroid_2145766205; Heavy LR add: Centroid_2145765830
+> Trading Ops requested MT5_87018814_Centroid_2145766205 → Extra Heavy LR (16:55 BST); Rory King confirmed done at 16:56. Separate request: MT5_87018814_Centroid_2145765830 → Heavy LR (16:56 BST); Rory King confirmed done at 16:57. [Extra Heavy thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781625330710919) [Heavy thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781625407476339)
+
+> [resolved] 2026-06-16 — Routine Heavy LR adds: Centroid_3603482, Centroid_3602415
+> Trading Ops requested MT5_87018814_Centroid_3603482 + MT5_87018814_Centroid_3602415 → Heavy LR (09:24 BST); Will Denny confirmed both added at 09:27 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781598291429449)
 
 > [resolved] 2026-06-15 — NAS100 price spike complaint: B2Broker/Vantage feed glitch (54-point dislocation, ~12:50 GMT+3)
 > Trading Ops reported NAS100 price dropped from 30268 to 30214 in a few ms and reverted, ~12:50 GMT+3 (09:50 UTC). Rory King investigated; confirmed B2Broker/Vantage fed its whole market ~55 points lower for a fraction of a second before snapping back — isolated feed glitch, not a genuine index move or Mahi pricing fault. Mahi's model widened with B2Broker's quoting as intended. Rory shared Echo TOB link. Infinox acknowledged: "more like an off market price rather than real market movement." Rory confirmed. [parent](https://mahifx.slack.com/archives/C022S6NL82D/p1781532682572419) [Rory resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1781542537125799)
@@ -161,6 +173,7 @@ last_catchup: 2026-06-16T07:22:58Z
 
 ## Notable topics
 
+- 2026-06-17 — SPX500 pricing adjusted to suppress LP-driven spikes (B2Broker/Vantage); Shyam Hari confirmed fix applied mirroring earlier NDX adjustment. Isaac Dann analysis: NAS100 (NDXUSD) pricing was already stable; SPX500 bid was dropping with Vantage. Client satisfied. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781657964434699)
 - 2026-06-15 — NAS100 feed glitch resolved: B2Broker/Vantage momentary 55-point dislocation caused spike; Rory King confirmed isolated feed issue and shared Echo TOB. Infinox satisfied. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781532682572419)
 - 2026-06-15 — Will Carter CP classification review (internal): 3 new CPs (Centroid_2145758162, MT5_plain_b_87968501, MT5_plain_b_87969201) flagged too early to classify (first trades 2026-06-10, 5.1d). MT5_plain_b_87963848 (24d active, $1.2M, 1 drop trade) flagged as unclassified — suggested clientABook or broker based on yield. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1781517794604179)
 - 2026-06-15 — Heavy LR volume continues: Andreas Kazelas submitted another 6-CP batch to Heavy LR; Shyam Hari confirmed all added within 2 min (07:27–07:29 BST). Routine cadence of daily/near-daily adds ongoing. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781504857404069)
