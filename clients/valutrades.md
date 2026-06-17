@@ -9,10 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-16T07:24:58Z
+last_catchup: 2026-06-17T07:31:04Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-16 — Overnight client issue in #mahi-valutrades — "please advise?" with screenshot, mid-investigation
+> Client posted "Hello Team" + "please advise?" with an attached image at 22:44 BST. Shyam Hari acknowledged at 22:44 ("Hi overnight, checking now") then posted "Please check now" at 22:50 — no client confirmation or resolution visible in the window. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781646252369139) [shyam-check-now](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781646628293809)
+
+> [open] 2026-06-16 — Mahi receiving child-order execution reports from TT algo, causing alerting — client asked to disable two options
+> Inald Gjoni (Mahi) posted at 10:42 BST: "we're currently receiving execution reports that are causing alerting on our side (due to receiving the child order ER's)" — asked client to disable the first two options (screenshot attached), noting this was actioned in the past to resolve the issue. No client reply in window. [inald-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1781602920588249)
 
 > [open] 2026-06-10 — cpty 89468479 yield profile starts below zero — partial explanation, further investigation ongoing
 > Client posted Echo yield-profile link (valutrades.NYC, 2026-06-08→2026-06-09, cpty 89468479) asking "Why does it start below zero?" at 08:06 BST. Rory King replied "Hi overnight, checking" at 08:07. 2026-06-10 09:09 client chased ("Hi team any update?"); Rory replied at 09:13 ("will have something shortly"), Kate Stagg followed at 09:45: "it looks like most of these trades were brokered to ISP_OZNY4_INSTI_MARGIN_VT so the fill price was determined by the LP. We will look into their pricing at that time in more detail." — partial explanation (LP-determined pricing via IS Prime), deeper investigation of LP pricing still pending. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075168367929) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781075254808079) [client-chase](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781078950575229) [kate-isp-explanation](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781081145098579)
@@ -105,6 +111,12 @@ last_catchup: 2026-06-16T07:24:58Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-17 — USOil contract rolled Jul→Aug for AMB: client posted FYI that USOil contract has been rolled from July to August for AMB. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1781655707030909)
+
+- 2026-06-16 — QB certification complete, PROD credentials posted: Liam confirmed QB conformance/certification done at 15:23 BST; QB will work on PROD connectivity and reach out to UBS, email confirmation to follow. Liam then posted PROD credentials for QB_MHNY4_FUND_UBSPB_AMB (senderCompId: oz_amb_qb_passthrough, targetCompId: mahi_amb_qb_passthrough, port 9036) at 16:03 BST. [liam-cert-done](https://mahifx.slack.com/archives/C09HN93T0G2/p1781619828689909) [liam-creds](https://mahifx.slack.com/archives/C09HN93T0G2/p1781622206621089)
+
+- 2026-06-16 — cpty 96001180 A/B book classification: client asked team to advise; William Denny confirmed A book with chart. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781608917886629) [william-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781609150601689)
 
 - 2026-06-16 — cpty 68566853 A/B book classification: client asked team to advise; Shyam Hari confirmed B Book with charts. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781587498858329) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781588031307539)
 
