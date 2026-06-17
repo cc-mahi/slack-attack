@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-06-16T07:19:30Z
+last_catchup: 2026-06-17T07:28:54Z
 ---
 
 ## Status
@@ -18,6 +18,12 @@ last_catchup: 2026-06-16T07:19:30Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [open] 2026-06-16 — New model pricing question: setup fee vs monthly cost, unanswered
+> Kate Stagg (Mahi) asked in #internal-fintokei whether to charge for a new model for Fintokei — they previously got one set up at no cost as a goodwill gesture. Kate's suggestion: one-off setup fee, no monthly cost (unusual commercial structure). No reply yet. [question](https://mahifx.slack.com/archives/C08R694QVNX/p1781610571053819)
+
+> [open] 2026-06-16 — BMSL timezone deploy requested via Zendesk #23102
+> Kate Stagg (Mahi) raised a Zendesk ticket for a BMSL timezone deploy for Fintokei. [ticket](https://mahifx.zendesk.com/agent/tickets/23102) [internal note](https://mahifx.slack.com/archives/C08R694QVNX/p1781610590423249)
 
 > [resolved] 2026-06-15 — Slippage complaint: account 6032915, 6 simultaneous fills on 2026-06-14 ~22:00 UTC
 > Pau (Fintokei) raised a complaint that one of 6 simultaneously-filled positions for FintokeiMT5C_6032915 received significantly higher slippage. Rory King (Mahi) acknowledged and investigated. Cameron Hughes (Mahi) explained: FINTOKEI market spreads blew out briefly, causing Mahi's pricing model to defensively widen in response, and the trade came in on that wider published spread. Pau reacted with `:thankyou:`. [complaint](https://mahifx.slack.com/archives/C08QWKFARDL/p1781524010061899) [CH explanation](https://mahifx.slack.com/archives/C08QWKFARDL/p1781524666634919)

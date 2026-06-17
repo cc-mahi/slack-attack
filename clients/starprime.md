@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
-last_catchup: 2026-06-16T07:23:30Z
+last_catchup: 2026-06-17T07:28:55Z
 ---
 
 ## Recent issues
@@ -33,6 +33,7 @@ last_catchup: 2026-06-16T07:23:30Z
 
 ## Notable topics
 
+- 2026-06-17 — Samin asked whether Echo can show how many times counterparties RBI_5182_60002 / RBI_5182_60004 have cycled through execution rules and what % of time in each ER. Shyam Hari pointed to Echo execution profile + order date grouping view; Samin confirmed helpful. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781675765649179)
 - 2026-06-15 — Samin requested Compass read access to `pricing.filter.list`; Daria Horton responded she'd raise with dev and noted the key only contains reduced filters for XAUUSD / CLIENT_PRICE_LDN. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781557677597789)
 - 2026-06-04 — Samin requested B2PRIME_RETAIL added to Echo TOB (routing via MFX-T4); Rory King added it to `persistedMarketsSelectors` and bounced `starfishFilePersisterExternalMarketData1`; confirmed done within a few minutes. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1780571748825339)
 - 2026-06-04 — Cameron Hughes quoted Samin ("got a big meeting next weekend - selling the mahi product") in internal-starprime and noted Samin is looking for NOP docs. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1780572669949409)
