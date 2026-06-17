@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-16T07:25:11Z
+last_catchup: 2026-06-17T07:31:03Z
 ---
 
 ## Status
@@ -203,6 +203,7 @@ last_catchup: 2026-06-16T07:25:11Z
 
 ## Notable topics
 
+- **2026-06-16 — GBPUSD arb on Argamon LDN: Elan suggests MWMS+BMSL timezone stack**: Daria relayed (23:35 BST) that Elan (Nado-side) messaged about GBPUSD arb on Toa-Argamon LDN — suggesting adding timezone MWMS in addition to BMSL rather than reducing the sampling on BMSL, to get spreads to widen faster. Post-Nado-wind-down engagement on Argamon LDN spread config. https://mahifx.slack.com/archives/C035H1VNCAD/p1781649328090949
 - **2026-06-15 — Nado wind-down confirmed**: James posted in `internal-toa-ops` that Nado is "wrapping up", positions are being unwound, and the switch-off is planned for this weekend. In `toa-nado-shared` earlier the same morning, James confirmed NLP has been switched to Close Only "as agreed". This supersedes all prior "live and expanding" status. https://mahifx.slack.com/archives/C035H1VNCAD/p1781524142261449
 - **2026-06-09 — Nado FX markets empty confirmed as intentional RWA cut**: Nado asked James in `toa-nado-shared` why FX markets were basically empty. James confirmed RWAs have been cut to close-only as agreed with Zach — consistent with the 2026-05-08 open entry. No new development work or reversal indicated. https://mahifx.slack.com/archives/C09RGU1T1GE/p1781015707695679
 - **2026-06-05 — Nado xstock spot launch request refused pending renegotiation**: Nado asked James in `toa-nado-shared` to have NLP support xstock spot launch targeting Monday 2026-06-09, saying activity would be low (mainly depth for liquidation). James refused: new development work is on hold pending renegotiation, Mahi is not in a position to support xStocks without development work, and Friday-to-Monday notice is insufficient. https://mahifx.slack.com/archives/C09RGU1T1GE/p1780661003888839
