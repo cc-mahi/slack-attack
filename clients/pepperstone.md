@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-06-16T07:23:28Z
+last_catchup: 2026-06-17T07:24:39Z
 ---
 
 ## History
@@ -99,6 +99,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-06-16 — FX/Metals system failure ~17:10–17:42 BST; NY_3/NY_4 feeds down, kill switch tripped, RCA ongoing
+> Diego (Pepper OZ) flagged NY_3 and NY_4 FX/Metals connections returning no order confirmations at 17:10 BST — hundreds of outtrades accumulating. Liam took down NYC gateways to force failover to LDN at 17:14 BST; LDN also showed a cancel spike. FX env back up by 17:39 BST; Liam said "something might have tripped into a bad state and got stuck." Arun flagged kill switch tripped on both LDN and NYC at 17:42 BST. Hedgers were left OFF during the incident and turned back on by 18:06 BST (William Denny). Crypto env appeared unaffected (Cameron Hughes confirmed blotter normal; Liam noted data feeding from FX env may have caused superficial symptoms). Root cause: "we have isolated the processes that caused system failure, building out the event timeline to find cause and determine how to detect and prevent in future" (Isaac to Diego, 06:13 BST 2026-06-17 — second update following earlier chase). RCA not yet published. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781626246642399) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781627967034099) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1781628130831779) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781673183112239)
 
 > [resolved] 2026-06-15 — Marianna: "allow top up = no" on exec rules reverts to yes; Rory confirmed intended for internalise rules
 > Marianna flagged that selecting "allow top up: no" on execution rules in the Crypto env reverts back to yes. Rory investigated and confirmed this is intended behaviour for any execution rule where the execution style is set to internalise. Marianna accepted the explanation ("doesnt matter for internalised trades"). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781522780871919)
@@ -266,3 +269,6 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-06-15 — Marianna triggered crypto NYC pricer restart (BMSL change, PEPPERSTONE-CRYPTO NYC), then a second restart for mwms; both acknowledged by Rory. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781532805604079)
 - 2026-06-15 — Isaac notified team of rolling distribution gateway restart in crypto env to pick up Perp instruments into distribution (short failover between envs); Pepperstone +1'd. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781561780975949)
 - 2026-06-16 — Daria asked whether LP1 is basis for pricing in CFD env (e.g. Velocity for WS30, Invast for SPX) and what LP2 is for; Pepperstone confirmed LP1 = primary pricing/normalisation peg, LP2 = backup if LP1 fails. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781587712666549)
+- 2026-06-16 — Tom requested IP 188.240.176.20 whitelisted on PROD_LIVE_CLIENTDB (192.81.110.208:3306); Rory whitelisted and asked Tom to confirm — no confirmation yet in-thread. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781600569484769)
+- 2026-06-16 — Marianna doing rolling pricer restarts to get index perps pricing in Crypto env (~15:24 BST). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781619864860289)
+- 2026-06-17 — CFD WSS timezone/DST question: Nathan asked whether WSS OOH limit hours in instrument spreadsheet are fixed UTC or track each market's local time across DST. Pepperstone confirmed UTC doesn't track DST (e.g. ASX shifts 23:00→00:00 UTC, NYSE 13:30→14:30 UTC). Daria asked for OOH times expressed in original timezones (so Mahi can configure with DST-aware tz, set once); Stephen agreed to provide. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1781661082422449)
