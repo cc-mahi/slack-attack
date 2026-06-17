@@ -17,10 +17,13 @@ key_people_overrides:
   - {name: "Neophytos Poullou", role: "IC Markets — joined mahi-ic-markets 2026-06-11 on Pavlos request; role unknown", confidence: low}
   - {name: "Ioannis", role: "IC Markets — queried OKX OPENAI/USDT + ANTHROPIC/USDT instrument availability 2026-06-11; first name only", confidence: low}
   - {name: "Konstantinos Haitas", role: "IC Markets — joined mahi-ic-markets 2026-06-12; Compass/Echo access requested by Kyriakos; role unknown", confidence: low}
-last_catchup: 2026-06-16T07:22:57Z
+last_catchup: 2026-06-17T07:26:45Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-16 — Pavlos requests cumulative depth spread multiplier change (FX+Metals 2nd+ levels → 1.2× ISAM); simulation in progress
+> Pavlos (IC side, sender field blank but addressed to Will) asked to amend the cumulative spread multiplier for all FX + Metals above the 2nd market depth level to 1.2× the ISAM spread, and requested a simulation before any change is made. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781605466219889) Will Carter replied: "Sounds good Pavlos. We will show you before and after via simulation." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781605505931079) IC asked in thread whether the simulation had run (18:10 BST); Will replied: "It's in progress guys - we will have an update tomorrow." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781605505931079) Open: simulation in progress, update expected 2026-06-17.
 
 > [open] 2026-06-15 — IC sent full BO cluster list; Will to implement BO-level group LR
 > Following the 14:28 BST trading-team call, an IC contact sent Will a spreadsheet (BOs.xlsx) listing BOs with corresponding clients, explicitly requesting "please treat these clients as clusters at the BO level." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781532436765789) Will replied "we will take a look at what we can do currently with this." [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781532482185959) This is IC formalising the BO-group LR request raised after the 2026-06-11 coordinated cluster incident (where Rory flagged that per-account LR additions don't scale). Open: Will and team to work through the BOs.xlsx and implement BO-level group LR; no timeline given.
@@ -132,6 +135,7 @@ last_catchup: 2026-06-16T07:22:57Z
 
 ## Notable topics
 
+- 2026-06-16: Pavlos requested cumulative spread multiplier change — FX+Metals above 2nd depth level to 1.2× ISAM. Will agreed to simulate first; simulation in progress as of 18:19 BST, update expected 2026-06-17. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781605505931079)
 - 2026-06-15: IC sent full BO cluster list (BOs.xlsx) to Will following trading-team call — explicitly requesting BO-level cluster treatment across the fleet. Will to action. This is IC formalising the scalability request Rory raised 2026-06-11.
 - 2026-06-15: Will had another call with IC's trading team (14:28 BST); described value blocked by pricing on one server, walked through options, team was engaged. Post-call internally, Cooney said he and "barbie" (likely Nicola) need to go see Angus directly for a frank conversation about what IC needs to get the FX/metals expansion done — "in parallel with the Cyprus stuff." [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1781531534551299)
 - 2026-06-15: Pavlos MWMS/BMSL spread config walkthrough — Will explained how top-of-book tracks ISPRIME_OZ (MWMS) and depth stack mirrors ISPRIME_OZ spread per cumulative-quantity tier (BMSL); offered screen-share. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1781537538699179)

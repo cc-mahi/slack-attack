@@ -12,13 +12,19 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-16T07:22:16Z
+last_catchup: 2026-06-17T07:26:46Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-15 — 5,212oz XAUUSD long filled on Finalto, Compass adjustment pending
-> Layan reported 5,212oz gold long filled on Finalto at 15:10 BST; Rory acknowledged "Hi Layan, will do" at 15:10 BST. No completion confirmation yet. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781532606027979)
+> [resolved] 2026-06-16 — 2,336oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 2,336oz gold long filled on Finalto at 15:19 BST; William confirmed "this has been done" at 16:35 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781619554232999)
+
+> [resolved] 2026-06-16 — Finalto defensive feed: 3 hedger order IDs queried; no Mahi action needed
+> Nael asked about IDs 62616952, 98582117, 66229658 at 13:42 BST. William identified them as XAUUSD hedger trades sent to Finalto on 2026-06-15 at 12:14:20 UTC. Finalto had emailed GCC to say two new accounts were added to their Defensive Feed, citing those order IDs. Nael confirmed Finalto handles defensive feed filtering internally — no action required on Mahi side. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781613749969279)
+
+> [resolved] 2026-06-15 — 5,212oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 5,212oz gold long filled on Finalto at 15:10 BST; Rory acknowledged at 15:10 BST; Rory confirmed "apologies delay on this one — this has now been actioned" at 09:33 BST on 2026-06-16. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781532606027979)
 
 > [resolved] 2026-06-12 — 6,286oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 6,286oz gold long filled on Finalto at 15:11 BST; Rory acknowledged "Hi Layan, will do" at 15:12 BST; Nathan confirmed "this has been completed" at 00:03 BST on 2026-06-15. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1781273515072669)
