@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-16T07:13:31Z
+last_catchup: 2026-06-17T07:11:34Z
 ---
 
 ## Recent issues
