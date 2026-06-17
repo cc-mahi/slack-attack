@@ -11,12 +11,12 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-06-16T07:17:58Z
+last_catchup: 2026-06-17T07:15:29Z
 ---
 
 ## Status
 
-- **Stage:** onboarding — blocked again as of 2026-06-09: Centroid give-up workflow broken (double-risk + MT5 zero-spread PnL issues); alternative MT4→MT5→Compass→LMAX workflow proposed by Kate Stagg; go-live target slipped further, no new date set; Compass upgraded to latest version weekend 2026-06-07/08 (Liam Cordelle).
+- **Stage:** onboarding → **go-live imminent** — Tegis flow going live as of 2026-06-16: Kate Stagg confirmed "happy to go live" with current copy-trade setup despite known execution price delta; drop copies will tag `BaseMarketsMT5_10101`; Centroid give-up still pending (for accurate MT5 PnL) but not blocking. Compass upgraded to latest version weekend 2026-06-07/08 (Liam Cordelle).
 - **Integration:** LDN trading + admin (LD5), Athena `basemarkets_ldn`, distribution via CLIENT_PRICE_LDN / CLIENT_PRICE_BETA_LDN / DISTRIBUTION_LDN / DISTRIBUTION_SYNAPSE_LDN. FIX API available; no margin / credit checking yet.
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
@@ -79,6 +79,7 @@ last_catchup: 2026-06-16T07:17:58Z
 
 ## Notable topics
 
+- 2026-06-16 — Tegis flow going live: Kate Stagg confirmed they're happy to go live with the current copy-trade setup. Drop copies will use counterparty tag `BaseMarketsMT5_10101`, but Mahi receives the real execution counterparty on the actual trades. Slight execution price differences expected due to copy-trade limitations (demonstrated via Compass orders link). Give-up still unresolved — will enable accurate PnL reporting in MT5 once sorted, but not blocking go-live. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781604793310659)
 - 2026-06-15 — Hedger turned off for client position reconciliation: Cameron Hughes noted a rec of client positions and turned off the hedger for the booking. No thread replies or resolution detail in channel. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781526123658979)
 - 2026-06-12 — C Book reconciled; hybridHedgerC1 bounced + order speed scalings tuned: Cameron Hughes reconciled the C Book position to match Kate's figures from the client side. Separately, Cameron Hughes noted the hedger was sitting on risk too long and adjusted order speed scalings, then bounced `hybridHedgerC1`. No confirmation of whether the underlying internalisation price-check cancel issue (2026-05-28) is resolved. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781283034694469) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781266318400319)
 - 2026-06-10 — Infra deploying pricerVIP1/2 for new Tegis flow: Kate Stagg noted infra is adding pricerVIP1/2 processes for the Tegis flow — a forward step in getting the Tegis/Centroid integration ready for live traffic. No further detail or completion signal in window. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781084659562139)
