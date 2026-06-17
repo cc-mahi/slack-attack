@@ -12,8 +12,8 @@ key_people_overrides:
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
-  - {name: "Andreas H", role: "client ops — joined channel 2026-06-02; role unknown", confidence: low}
-last_catchup: 2026-06-16T07:22:17Z
+  - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
+last_catchup: 2026-06-17T07:24:41Z
 ---
 
 ## Recent issues
@@ -94,6 +94,8 @@ last_catchup: 2026-06-16T07:22:17Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-06-16 — Andreas.H Compass/Echo access provisioned: Andreas.H (GoMarkets) requested read-only Compass/Echo access for Andreas.H@gomarkets.com; approved by client team same session; William Denny (Mahi) confirmed read-only (upgradeable to admin later), set up by ~10:16 UTC and DM'd credentials. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781595302395629)
 
 - 2026-06-16 — LMAX NYC pricing feed under review: Nathan's call notes (~00:23 UTC) indicate GoMarkets are reviewing whether to keep LMAX NYC as a pricing feed — weighing the cost of the feed against the number of pricing LPs they have. Intent is to use NYC only for pricing (not hedging), as LDN hedging rates are better. No decision reached yet. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1781569435650479)
 
