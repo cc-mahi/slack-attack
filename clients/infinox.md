@@ -16,10 +16,13 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-17T07:24:40Z
+last_catchup: 2026-06-18T07:13:40Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-18 — Routine Heavy + Extra Heavy LR adds: 83038408, Centroid_2145766170, Centroid_3603254, Centroid_3600130, Centroid_3604043
+> Four Heavy LR adds: 83038408 (17:51 BST, Rory King confirmed 17:57), MT5_87018814_Centroid_2145766170 (19:51 BST, Will Denny confirmed 20:04), MT5_87018814_Centroid_3603254 (01:51 BST, Shyam Hari confirmed 01:53), MT5_87018814_Centroid_3600130 (02:54 BST, Shyam Hari confirmed 03:00). One Extra Heavy LR add: MT5_87018814_Centroid_3604043 (07:10 BST, Shyam Hari confirmed 07:17 — "they have been added"). Extra Heavy profile continues to expand. [83038408](https://mahifx.slack.com/archives/C022S6NL82D/p1781715102704899) [Centroid_2145766170](https://mahifx.slack.com/archives/C022S6NL82D/p1781722291804869) [Centroid_3603254](https://mahifx.slack.com/archives/C022S6NL82D/p1781743887605799) [Centroid_3600130](https://mahifx.slack.com/archives/C022S6NL82D/p1781747678732119) [Centroid_3604043](https://mahifx.slack.com/archives/C022S6NL82D/p1781763024083369)
 
 > [resolved] 2026-06-17 — Routine Heavy LR adds: Centroid_2145765830, Centroid_3603858, Centroid_885683
 > Trading Ops requested three CPs (MT5_87018814_Centroid_2145765830, MT5_87018814_Centroid_3603858, MT5_87018814_Centroid_885683) added to Heavy LR (00:56 BST); Shyam Hari confirmed all added at 00:59 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781654213792979)
@@ -173,6 +176,7 @@ last_catchup: 2026-06-17T07:24:40Z
 
 ## Notable topics
 
+- 2026-06-18 — Extra Heavy LR continues expanding: Centroid_3604043 added (now 5th day running with at least one Extra Heavy or Heavy LR add). Profile created 2026-05-21, vol multiplier doubled 2026-05-22, CP scope steadily growing. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781763024083369)
 - 2026-06-17 — SPX500 pricing adjusted to suppress LP-driven spikes (B2Broker/Vantage); Shyam Hari confirmed fix applied mirroring earlier NDX adjustment. Isaac Dann analysis: NAS100 (NDXUSD) pricing was already stable; SPX500 bid was dropping with Vantage. Client satisfied. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781657964434699)
 - 2026-06-15 — NAS100 feed glitch resolved: B2Broker/Vantage momentary 55-point dislocation caused spike; Rory King confirmed isolated feed issue and shared Echo TOB. Infinox satisfied. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781532682572419)
 - 2026-06-15 — Will Carter CP classification review (internal): 3 new CPs (Centroid_2145758162, MT5_plain_b_87968501, MT5_plain_b_87969201) flagged too early to classify (first trades 2026-06-10, 5.1d). MT5_plain_b_87963848 (24d active, $1.2M, 1 drop trade) flagged as unclassified — suggested clientABook or broker based on yield. [permalink](https://mahifx.slack.com/archives/C01QGUXPKEY/p1781517794604179)
