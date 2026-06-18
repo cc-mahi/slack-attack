@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-17T07:11:34Z
+last_catchup: 2026-06-18T07:11:13Z
 ---
 
 ## Recent issues
@@ -186,6 +186,7 @@ last_catchup: 2026-06-17T07:11:34Z
 
 ## Notable topics
 
+- 2026-06-17 — UBS conformance (Zendesk 22872) signed off; one outstanding question before prod connection details. UBS asked Exinity to confirm which precious metals locos are required, noting they will need additional tags if non-"default" locos are needed. Awaiting Exinity/Mahi response. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1781687458834039)
 - 2026-06-15 — Daniel Kurra requested a catch-up call with Kate and Rory; confirmed for 11:30 BST and held. No post-call notes in channel. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781512034441669)
 - 2026-06-10 — XAUFUT contract codes confirmed: August = XAUFUT-Q, December = XAUFUT-Z (CME convention per https://www.cmegroup.com/month-codes.html). Kate asked Exinity to confirm when ready to test the XAUFUT workflow. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781083063243879)
 - 2026-06-04 — Centroid migration: Kate's catch-up with Daniel and Rory confirms Exinity are planning new FIX connections on the Connect channels to plug into Centroid, with a gradual move away from PXM. (Separate from the Exinity move — Oli at Rostro was flagged as also moving more flow from PXM to Centroid.) EXINITY_STRD_PARTNER channel being repurposed for a new product; initial config to match EXINITY_ECN_ARU; Kate to sweep full config before applying. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780578425042259)
