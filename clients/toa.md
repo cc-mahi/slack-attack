@@ -7,19 +7,22 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-17T07:31:03Z
+last_catchup: 2026-06-18T07:14:21Z
 ---
 
 ## Status
 
-- **Stage:** Nado winding down — James confirmed 2026-06-15 positions being unwound and switch-off planned for the weekend. NLP switched to Close Only 2026-06-15 (James confirmed in `toa-nado-shared`). Prior to wind-down: Nado had been live and expanding rapidly since 2025-11-21 launch with dozens of perp/spot/FX/ETF/Mag7 markets added through Apr 2026. CVEX wound down September 2025 (rebranded as Pascal/Jetstream). Argamon Tokyo live on minor coins 2026-04-14+.
+- **Stage:** Nado wound down — James confirmed 2026-06-17 17:59 BST: "Nado flat - traders/order processes stopped". NLP switched to Close Only 2026-06-15; USDC position fully closed 2026-06-17. Prior to wind-down: Nado had been live and expanding rapidly since 2025-11-21 launch with dozens of perp/spot/FX/ETF/Mag7 markets added through Apr 2026. CVEX wound down September 2025 (rebranded as Pascal/Jetstream). Argamon Tokyo live on minor coins 2026-04-14+.
 - **Integration:** Mahi infra hosting Toa's pricing/distribution across APN1, CHI, EUW2, USE2; CHAOS_ORACLE quoting ETF prices, CFD feeds weekday-only. Replace workflow (cancel-and-place) deployed mainnet 2026-02-23 via Lee. Nado's `/ws/v2` (faster, async responses) piloted on testnet by Lee — intermittent connection-reset under load (affects both old+new endpoint; likely proxy/limit issue). NLP fee structure: 0/-3bps maker/taker; vault cap targeting 10M. Recurring AMQ disk and DB space issues on APN1; Binance instability operationally managed by ops team.
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
 
-> [open] 2026-06-15 — Nado winding down: positions being unwound, switch-off this weekend
-> James announced in `internal-toa-ops` (12:49 BST): "Nado wrapping up, positions now being unwound and we will switch off this weekend". NLP was switched to Close Only earlier the same morning (James confirmed in `toa-nado-shared` 09:12 BST). This is a major status change — the entire Nado operation is being wound down. https://mahifx.slack.com/archives/C035H1VNCAD/p1781524142261449
+> [resolved] 2026-06-15/17 — Nado fully wound down: traders/order processes stopped
+> James announced 2026-06-15 12:49 BST that Nado was "wrapping up, positions now being unwound and we will switch off this weekend". NLP switched to Close Only 09:12 BST same day. 2026-06-17 17:59 BST James confirmed in `internal-toa-ops`: "Nado flat - traders/order processes stopped". During close-out, a Nado-side incident occurred on USDC spot (see entry below). USDC position fully closed 2026-06-17. https://mahifx.slack.com/archives/C035H1VNCAD/p1781715548.624489
+
+> [resolved] 2026-06-17 — USDC close-out exploited during Nado wind-down: position now closed
+> Nado (unidentified ops contact) flagged in `toa-nado-shared` 16:35 BST that NLP Pool 1 had sent a large volume of USDC sell orders at ~$0.90 (10% discount) — ~$400K notional. James explained: MM was set to join the ToB offer to close long USDC position, someone cleared the bids and walked the ToB offer down to exploit this, then began hitting Mahi's passive offer. James confirmed this was not Mahi-initiated manipulation — Mahi was 100% passive. USDC position fully closed by 16:41 BST; Mahi will not post again in this contract. Incident images shared by James. https://mahifx.slack.com/archives/C09RGU1T1GE/p1781710547126509
 
 > [resolved] 2026-06-15 — Position mismatch PD Q1GOE30M5EZ0L3: 15,024 USD, JMX-resolved
 > Inald flagged PD alert Q1GOE30M5EZ0L3 at 09:35 BST (15,024 USD mismatch). Resolved by Inald via JMX adjustments on exchangeAccounting by 09:40 BST — self-contained, no further follow-up. https://mahifx.slack.com/archives/C035H1VNCAD/p1781512502031929
