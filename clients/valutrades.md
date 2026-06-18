@@ -9,10 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-17T07:31:04Z
+last_catchup: 2026-06-18T07:17:29Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-18 — TT UAT resting orders: NQU6-SEP26 "Unknown instrument" reject — checking
+> Andri reported NQU6-SEP26 (Nasdaq Sep 26) rejecting on `valu_tt_uat_resting_orders` with `39=8, 58=Unknown instrument: NQU6-SEP26`. Shyam Hari acknowledged and is checking. No resolution in window. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1781765162150169) [shyam-checking](https://mahifx.slack.com/archives/C09HN93T0G2/p1781765208844309)
+
+> [resolved] 2026-06-17 — Overnight connection issue — Shyam fixed, client confirmed reconnected
+> Client posted "Hello Mahi Team, please can you fix this?" + screenshot at 22:33 BST. Shyam Hari acknowledged at 22:33 ("checking now") and asked client to check at 22:38. Client confirmed "thank you, connected now" at 23:03 — resolved in ~30 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781732025999279) [shyam-check](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781732315481389) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781733813842479)
 
 > [open] 2026-06-16 — Overnight client issue in #mahi-valutrades — "please advise?" with screenshot, mid-investigation
 > Client posted "Hello Team" + "please advise?" with an attached image at 22:44 BST. Shyam Hari acknowledged at 22:44 ("Hi overnight, checking now") then posted "Please check now" at 22:50 — no client confirmation or resolution visible in the window. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781646252369139) [shyam-check-now](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781646628293809)
@@ -111,6 +117,12 @@ last_catchup: 2026-06-17T07:31:04Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-18 — cpty 89468426 A/B book classification: client asked team to advise; Shyam Hari confirmed A book with chart (XAUUSD). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781760303509299) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781760918926369)
+
+- 2026-06-17 — CME expansion and commercial scoping discussion in #internal-valutrades: Bonnie relayed a request from Graeme Watkins asking for pricing numbers by end of day (screenshot). Andrew Morgan replied he'd want to meet to scope requirements before putting a number on it, and noted CME connectivity is something he's been wanting to pursue for Valutrades. Bonnie confirmed she'd pass the message on. [bonnie-relay](https://mahifx.slack.com/archives/CP7A1F8BT/p1781693547477679) [andrew-cme](https://mahifx.slack.com/archives/CP7A1F8BT/p1781694473319289) [andrew-scoping](https://mahifx.slack.com/archives/CP7A1F8BT/p1781696750456169)
+
+- 2026-06-17 — cpty 65578115 A/B book classification: client asked team to advise; William Denny confirmed A book (only 330 XAUUSD trades over 2 weeks, worth monitoring). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781701020300429) [william-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781705416039669)
 
 - 2026-06-17 — USOil contract rolled Jul→Aug for AMB: client posted FYI that USOil contract has been rolled from July to August for AMB. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1781655707030909)
 
