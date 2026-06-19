@@ -103,10 +103,13 @@ channels/    per-channel dossiers for non-client channels
 
 ## Setup
 
-After cloning, wire up the commit-msg hook:
+After cloning, wire up the git hooks (one command enables both):
 
 ```
 git config core.hooksPath .githooks
 ```
 
-Enforces conventional commits (`feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert`), 72-char subject, no trailing period.
+- **`commit-msg`** — enforces conventional commits (`feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert`), 72-char subject, no trailing period.
+- **`pre-commit`** — runs `scripts/check-dossier-dates --staged`, blocking any commit whose dossier entries are dated >180d from the Slack permalink they cite, or dated in the future. This is the enforced backstop against the recurring year-off catchup corruption (old Slack messages stamped with the current year). Run `scripts/check-dossier-dates clients/*.md channels/*.md` to audit by hand.
+
+**The remote `slack-attack-daily` routine's checkout must also have `core.hooksPath=.githooks` set**, or the pre-commit guard won't fire there — and the routine is exactly where the corruption has been landing.

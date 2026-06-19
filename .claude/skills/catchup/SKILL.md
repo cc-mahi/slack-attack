@@ -79,9 +79,11 @@ Triggers to expand:
 How to expand, in order:
 
 1. **Widen the channel reads** on the target's resolved channels. Bump `oldest` to 60d, then 90d if still incoherent. Re-run `slack_read_channel`.
-2. **Search the slug across all channels** with `slack_search_public_and_private` (default context on, no narrow window) to surface earlier mentions in #sales, #frontoffice, #internal-trading-daily-checks, etc. Apply the cross-channel rule (trigger, not truth) — but use these to decide *where to read next*, not what to write directly.
+2. **Search the slug across all channels** with `slack_search_public_and_private` (default context on) to surface earlier mentions in #sales, #frontoffice, #internal-trading-daily-checks, etc. **Always bound the search in time**: pass `after: <oldest_unix>` and `before: <now_unix>` (the bash-anchored values from "Sanity-check the window" below), or the `after:YYYY-MM-DD`/`before:YYYY-MM-DD` query modifiers. An unbounded search is the root of the recurring year-off corruption — Slack happily returns year-old threads, which then get stamped with the current year. Never search without an `after` bound. Apply the cross-channel rule (trigger, not truth) — but use these to decide *where to read next*, not what to write directly.
 3. **Read parent threads.** If the in-window message has a `thread_ts` referencing earlier replies, fetch them with `slack_read_thread`.
 4. **Follow the breadcrumb.** Once you've located the earlier event referenced (e.g. the original "we're pausing flow" message), read its surrounding context — the decisions and follow-ups around it usually answer the ambiguity.
+
+**Discard out-of-window results.** Whatever the source (search or channel read), drop any returned message whose `ts` falls outside `[oldest_unix, now_unix]` before using it — a result older than `oldest` is out of window by definition and must not become a Recent issues entry. Decode `ts` to a date and compare; don't eyeball it. This is the in-window content rule that the time bounds (above) and the pre-commit hook (below) backstop.
 
 Stopping rule:
 
@@ -172,6 +174,8 @@ Inspect the dossier and your date conversions before retrying.
 ## Sanity-check before commit
 
 After writing dossier edits and before staging / committing, verify each newly-added entry's Slack permalink timestamp falls within the window you just sanity-checked above. This is the second line of defence: the pre-read check catches bad windows; this catches bad writes (entries dated outside the legitimate window, e.g. agent confusion fabricating a year offset on entry dates).
+
+**This check is now enforced mechanically.** A `pre-commit` git hook (`.githooks/pre-commit` → `scripts/check-dossier-dates`) rejects any commit whose dossier entries are dated more than ~180d from the Slack permalink they cite, or dated in the future. So a year-off write will be blocked at commit regardless — but don't rely on it: run the check yourself and **ABORT cleanly** (leave the dossier dirty, don't bump `last_catchup`) rather than letting the hook fail. The hook is the backstop; a clean self-abort is the intended path. Run `scripts/check-dossier-dates <dossier>` to validate by hand. (The hook only fires where `core.hooksPath=.githooks` is configured — confirm it's set in the remote routine's checkout, not just locally.)
 
 Procedure:
 

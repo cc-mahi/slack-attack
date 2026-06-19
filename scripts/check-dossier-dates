@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+"""Validate dossier entry dates against their cited Slack permalinks.
+
+The recurring corruption this guards against: a /catchup run ingests
+year-old Slack messages (e.g. via an unbounded search) and stamps them with
+the *current* year, producing entries dated months/years away from the
+message they actually cite. See clients/pepperstone.md history and the
+"Sanity-check before commit" section of .claude/skills/catchup/SKILL.md.
+
+The invariant enforced here needs no window context, so it works the same in
+a hook, in CI, or run by hand:
+
+  For every entry in `Recent issues` / `Recent topics` / `Notable topics`
+  that cites at least one Slack permalink, the entry's label date must equal
+  the date of one of its cited permalinks (UTC), or fall within the span of
+  the cited permalink dates. A label date in the future (vs the system clock)
+  is always a violation, permalink or not.
+
+`History` (backfill's deliberately wide-window domain) and non-permalinked
+prose (Status, key_people_overrides) are exempt — matching the skill's scope.
+
+Usage:
+  scripts/check-dossier-dates clients/*.md channels/*.md
+  scripts/check-dossier-dates --staged          # files staged for commit
+
+Exit status: 0 = clean, 1 = violations found, 2 = usage/IO error.
+"""
+
+import datetime as dt
+import re
+import subprocess
+import sys
+
+# Sections whose entries cite permalinks and are subject to the check.
+TARGET_SECTIONS = ("recent issues", "recent topics", "notable topics")
+
+HEADING_RE = re.compile(r"^#{1,6}\s+(.*?)\s*$")
+# Recent issues: "> [open] 2026-06-18 — ..."
+ISSUE_RE = re.compile(r"^>\s*\[[a-z]+\]\s+(\d{4}-\d{2}-\d{2})\b")
+# Notable / Recent topics: "- 2026-06-18 — ..."
+BULLET_RE = re.compile(r"^-\s+(\d{4}-\d{2}-\d{2})\b")
+# Slack permalink: .../archives/<CID>/p<16+ digits>; first 10 digits = unix secs.
+PERMALINK_RE = re.compile(r"/archives/[A-Z0-9]+/p(\d{10})\d+")
+
+# How far an entry's label may sit from its NEAREST cited permalink before we
+# call it corrupt. The bug is a year substitution (month/day kept, wrong year)
+# => always ~365 days off. Legit entries sit within a few weeks of a cited
+# message: an issue opened on day X may cite follow-up permalinks weeks later,
+# or cite a related earlier message. Recent issues are trimmed at ~90 days, so
+# 180 days sits squarely in the empty gap between "legit lifecycle drift" and
+# "off by a year" — wide enough to never flag a real entry, tight enough to
+# catch every year-off. The future-date check below stays exact (no entry can
+# legitimately be dated after today), so short-range future typos are caught
+# there regardless of this threshold.
+MAX_LABEL_DRIFT_DAYS = 180
+
+
+def permalink_dates(block):
+    out = []
+    for secs in PERMALINK_RE.findall(block):
+        out.append(dt.datetime.fromtimestamp(int(secs), tz=dt.timezone.utc).date())
+    return out
+
+
+def check_file(path, today):
+    """Return a list of violation strings for one file."""
+    try:
+        with open(path, encoding="utf-8") as fh:
+            lines = fh.readlines()
+    except OSError as exc:
+        return [f"{path}: cannot read ({exc})"]
+
+    violations = []
+    in_target = False
+    i = 0
+    n = len(lines)
+    while i < n:
+        line = lines[i].rstrip("\n")
+
+        heading = HEADING_RE.match(line)
+        if heading:
+            in_target = heading.group(1).strip().lower() in TARGET_SECTIONS
+            i += 1
+            continue
+
+        if not in_target:
+            i += 1
+            continue
+
+        lineno = i + 1  # 1-based; label is always on this line
+        block_lines = [line]
+        issue = ISSUE_RE.match(line)
+        bullet = BULLET_RE.match(line)
+        if issue:
+            label = issue.group(1)
+            # Continuation lines of a Recent-issues entry start with ">".
+            j = i + 1
+            while j < n and lines[j].lstrip().startswith(">") and not ISSUE_RE.match(lines[j].rstrip("\n")):
+                block_lines.append(lines[j].rstrip("\n"))
+                j += 1
+            i = j
+        elif bullet:
+            label = bullet.group(1)
+            i += 1
+        else:
+            i += 1
+            continue
+
+        label_date = dt.date.fromisoformat(label)
+        block = "\n".join(block_lines)
+        pdates = permalink_dates(block)
+
+        if label_date > today:
+            violations.append(
+                f"{path}:{lineno}: future-dated entry {label} "
+                f"(today is {today.isoformat()})"
+                + (f"; cited permalink(s): {', '.join(d.isoformat() for d in sorted(set(pdates)))}" if pdates else "; no permalink")
+            )
+            continue
+
+        if not pdates:
+            # Can't check consistency without a permalink; future-date check
+            # above already passed. Skill requires a permalink but a few legacy
+            # entries lack one — don't fail the commit on those.
+            continue
+
+        nearest = min(abs((label_date - p).days) for p in pdates)
+        if nearest > MAX_LABEL_DRIFT_DAYS:
+            cited = ", ".join(d.isoformat() for d in sorted(set(pdates)))
+            violations.append(
+                f"{path}:{lineno}: label {label} is {nearest}d from its nearest "
+                f"cited permalink [{cited}] — likely year-off date bug"
+            )
+
+    return violations
+
+
+def staged_dossier_files():
+    out = subprocess.run(
+        ["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"],
+        capture_output=True, text=True, check=True,
+    ).stdout.splitlines()
+    return [f for f in out if re.match(r"^(clients|channels)/.+\.md$", f)]
+
+
+def main(argv):
+    args = argv[1:]
+    if not args:
+        print(__doc__.strip().splitlines()[0], file=sys.stderr)
+        print("usage: check-dossier-dates [--staged | FILE ...]", file=sys.stderr)
+        return 2
+
+    if args == ["--staged"]:
+        try:
+            files = staged_dossier_files()
+        except subprocess.CalledProcessError as exc:
+            print(f"check-dossier-dates: git failed: {exc}", file=sys.stderr)
+            return 2
+        if not files:
+            return 0
+    else:
+        files = args
+
+    today = dt.datetime.now(dt.timezone.utc).date()
+    all_violations = []
+    for path in files:
+        all_violations.extend(check_file(path, today))
+
+    if all_violations:
+        print("Dossier date check FAILED — entry dates inconsistent with their Slack permalinks:\n", file=sys.stderr)
+        for v in all_violations:
+            print(f"  {v}", file=sys.stderr)
+        print(
+            "\nEach Recent issues / Recent topics / Notable topics entry must be dated to "
+            "match the Slack message it cites. A mismatch is almost always the year-off "
+            "ingestion bug (old messages stamped with the current year).",
+            file=sys.stderr,
+        )
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))
