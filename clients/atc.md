@@ -7,10 +7,30 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-18T07:10:33Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-29 — Trader PAMM 804854 claiming worst fills at ATC vs competing brokers; investigation open
+> Malik relayed via Amir call: large trader claims fills always worst at ATC, submitted a PAMM vs Levels Jul 14 spreadsheet comparison and provided MT Manager access. GBPJPY account 804854 is internalised by Mahi (0.3 pip slippage confirmed on Mahi side; Spotex may add further slippage on top). Mahi investigating whether slippage is attributable to Spotex or Mahi's own execution.
+> [Amir call note](https://mahifx.slack.com/archives/C046RNF64VD/p1753780606429069) · [Dave fill complaint](https://mahifx.slack.com/archives/C04AZM0LPMH/p1753200050415439) · [Amir investigation](https://mahifx.slack.com/archives/C04AZM0LPMH/p1753201762022559)
+
+> [resolved] 2026-07-17 — Arb counterparty 27071286 detected and whitelisted
+> Will flagged -$1.9k from arb CPs on the 2026-07-16 daily check. Andrew identified CP 27071286 as needing Arbitrage classification — was flying under radar. Added to whitelist manually 2026-07-17 11:26 BST; bug noted (doesn't show as Arbitrageur on diagnostics). Subsequent trades both positive spread, both hit the arbitrageurs rule. Resolved by 2026-07-18 per Will: "only flagged arber, looks resolved."
+> [Andrew flag](https://mahifx.slack.com/archives/C046RNF64VD/p1752747818907369) · [whitelisted](https://mahifx.slack.com/archives/C046RNF64VD/p1752748014037559) · [resolved](https://mahifx.slack.com/archives/C046RNF64VD/p1752833325952499)
+
+> [resolved] 2026-07-03 — Distribution latency false alarm (Spotex reconnect)
+> Justin flagged massive distribution latency ~14:43 BST. Investigation confirmed Spotex reconnected at 13:39:54, which triggered a false latency alert — system is fine. Known issue (Liam has a fix in more recent releases, not yet deployed to ATC; tracked Zendesk 20746). No Fast Market changes required.
+> [latency alert](https://mahifx.slack.com/archives/C046RNF64VD/p1751550190919029) · [false alarm confirmed](https://mahifx.slack.com/archives/C046RNF64VD/p1751551204962529) · [Zendesk 20746](https://mahifx.zendesk.com/agent/tickets/20746)
+
+> [watching] 2026-06-30 — SI book losses from skew-on-wrong-side; CPs 27071286 and 77765002 monitored
+> Amir analysed losses from CPs 27071286 and 77765002: USDCHF risk offside (0.5 pip skew reduced the spread taken), EURUSD skew went wrong side at inception. Neither CP historically a skew abuser. EURUSD FI hit $40k for June (~40% of monthly P&L). Whale 77765002 also took SI off-book losses 2026-07-01 (EURUSD+USDCHF moved against the house); Amir flagged as "one to monitor — may need moving to Compass book if losses regular." Tag 77765002 moved out of SI by Amir 2026-07-02: "borderline tag, too much risk at smaller volumes."
+> [loss analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1751284786493969) · [77765002 SI losses](https://mahifx.slack.com/archives/C046RNF64VD/p1751367951225709) · [77765002 moved out of SI](https://mahifx.slack.com/archives/C046RNF64VD/p1751445629467109)
+
+> [watching] 2026-06-23 — Brent/WTI symbol issue: Spotex sending wrong oil on one trade; not fully resolved
+> Dave reported a bad fill 2026-06-19 (TDE170981215777). Amir diagnosed: trade appeared in Compass as Brent (CO1USD) not WTI (CL1USD); no changes on Mahi side; asked Spotex to confirm. Cameron Hughes later found the trade was actually CL1USD (WTI) at fair price — XTI was volatile with drops from Velocity that day. Spotex's explanation remains unclear; Dave also unhappy Velocity still receiving lots of trades, Mahi explaining most toxic tags are still routed to Velocity as backstop.
+> [Dave complaint](https://mahifx.slack.com/archives/C04AZM0LPMH/p1750356839165419) · [Amir Brent diagnosis](https://mahifx.slack.com/archives/C04AZM0LPMH/p1750695858430709) · [Cameron Hughes WTI finding](https://mahifx.slack.com/archives/C04AZM0LPMH/p1750793407737179)
 
 > [resolved] 2026-06-16 — USDJPY orders not going through on new connection; pairs list and routing under investigation
 > David Manoukian reported at 17:14 BST that USDJPY orders are not going through on "this connection" (context suggests the newly provisioned FXCM or Spotex Seychelles FIX connection); asked what pairs are enabled. Cameron Hughes confirmed "checking with the dev team", said "This should be up now" at 17:26 BST; David checked and confirmed USDJPY still failing at 17:34 BST. Cameron investigated. **2026-06-17 update**: Malik followed up at 11:34 BST asking for further updates; Justin Young confirmed "should be gtg" at 11:52 BST, noting back-office guys weren't connected to test; Malik said he'd ask them to login and test at 11:53 BST; Malik confirmed "all working, thank you" at 12:08 BST. [David report](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781626490088169) · [Cameron investigating](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781627035895069) · [David confirms failure](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781627663984069) · [Malik followup](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781692455769809) · [Justin gtg](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781693526651209) · [Malik confirmed working](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781694536412439)
@@ -52,6 +72,28 @@ last_catchup: 2026-06-18T07:10:33Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-07-30 — Strong FX Compass 24h: $50.1k from $958.3M ($52/M); FI P&L=$44.5k, LR P&L=$19.8k ($41/M). Daria: "the FI and LR P&L on this 😮‍💨". [daily check](https://mahifx.slack.com/archives/C046RNF64VD/p1753916329041269)
+
+- 2026-07-30 — NYC→LDN server migration targeting this weekend or 24 Aug. Justin asked Malik to collect LP LDN credentials 2026-07-21; Justin drafted Finalto migration message 2026-07-29 (new credentials for Finalto account 30433 LDN; NYC session to be retired after cutover). Malik keen for Bridge feature later but "preggers with Spotex atm." [LP credentials request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1753090917077789) · [Finalto migration note](https://mahifx.slack.com/archives/C04AZM0LPMH/p1753806517257329) · [Bridge later](https://mahifx.slack.com/archives/C046RNF64VD/p1753885585809329)
+
+- 2026-07-30 — Andrew: volumes 3.65 yards last 28d (73% increase on prior period), still way down vs the 15-yards threshold at which the $25→$45k+10% fee renegotiation applies. [Andrew note](https://mahifx.slack.com/archives/C046RNF64VD/p1753887128268109)
+
+- 2026-07-25 — MT5 UAT testing: Dave began MT5 testing via Spotex on UAT. Old UAT server decommissioned; Justin issued new spotex2 UAT credentials; IP 192.54.136.152 whitelisted; Liam explained simulated pricing (not realistic). [credentials issued](https://mahifx.slack.com/archives/C04AZM0LPMH/p1753450972468939) · [Dave MT5 start](https://mahifx.slack.com/archives/C04AZM0LPMH/p1753377166250109)
+
+- 2026-07-17 — New China account 27072192 pointed to Finalto (Dave request). [request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1752773133808749)
+
+- 2026-07-14 — Dave working remotely; IP 76.81.102.6 whitelisted by Amir; manual LP trade executed on Dave's request (1M GBPUSD Praxis→Finalto, split 2×500k). Compass manual trading bug noted (wrong market on order form, fix in progress). [manual trade](https://mahifx.slack.com/archives/C04AZM0LPMH/p1752508665661439) · [IP whitelist](https://mahifx.slack.com/archives/C04AZM0LPMH/p1752509207773289)
+
+- 2026-07-10 — Dave requested tighter spreads on GBPCAD, CADCHF, EURUSD (~0.50 vs market ~0.20); Isaac improved spreads on 4 instruments. June P&L report requested by Jack Manoukian (delivered by Amir by end of week). [Dave request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1752169093963079) · [Isaac fix](https://mahifx.slack.com/archives/C04AZM0LPMH/p1752187923287889) · [Jack PnL request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1752073488906989)
+
+- 2026-07-08 — Large single trade from client NY_15050447: +$1.3M credit to client; $2M deposited, $11.7M unrealised P&L. [trade](https://mahifx.slack.com/archives/C046RNF64VD/p1751977172834319)
+
+- 2026-07-02 — Tag 77765002 moved out of SI (borderline, too much risk at current lower volumes). [move](https://mahifx.slack.com/archives/C046RNF64VD/p1751445629467109)
+
+- 2026-06-25 — New China gold trader account 27072170 pointed directly to Finalto. [request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1750854916824999)
+
+- 2026-06-18 — Amir Malik call: Velocity relationship breakdown — swap rates $7k/day worse than Finalto, spreads also worse on XAUUSD; Dave doesn't want to execute with Velocity unless absolutely necessary; ATC moving everything to Seychelles, FXCM ~1 month from go-live; Velocity only kept as last-resort backstop. [Amir call notes](https://mahifx.slack.com/archives/C046RNF64VD/p1750247452296509)
 
 - 2026-06-18 — Broker ER for counterparty 27072198 removed by Daria; flow has been soft over recent weeks. Daria removed the broker execution rule for 27072198 (01:05 BST) noting flow has been soft over recent weeks — the classifier will re-broker the CP if needed. Echo link shows weekly yield history. [Daria note](https://mahifx.slack.com/archives/C046RNF64VD/p1781741147860189)
 
