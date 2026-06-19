@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-06-18T07:17:29Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
@@ -121,6 +121,8 @@ last_catchup: 2026-06-18T07:17:29Z
 
 ## Notable topics
 
+- 2026-06-18 — Simulation timezone confirmed; other instruments yield profiles pending. Jackson confirmed the simulation dataset (from email sent 2026-06-16) is UTC+0 client perspective. William ran MarkToMarket sim #741 for XAUUSD only and asked whether other instrument yield profiles are also wanted — no reply yet. [thread](https://mahifx.slack.com/archives/C05NB72AGR2/p1781622590238579)
+- 2026-06-18 — Weekly call missed; rescheduled to next week. Client (unidentified) couldn't make the 10am call; William said they'd catch up next week. [thread](https://mahifx.slack.com/archives/C05NB72AGR2/p1781772911843839)
 - 2026-06-18 — New tag internalisation review: Jackson submitted tags 667, 1036, 952, 1064 ("30s P&L look good") for assessment. William acknowledged and asked for context (client vs hedging flow, HFT or not); explained the 25 $/M yield-slope-over-10s cutoff criterion for fast-hedge suitability. Jackson confirmed all four are institutional brokers, not HFT. Assessment ongoing. [Jackson request](https://mahifx.slack.com/archives/C05NB72AGR2/p1781711255735449) [William criteria](https://mahifx.slack.com/archives/C05NB72AGR2/p1781711574460959) [Jackson reply](https://mahifx.slack.com/archives/C05NB72AGR2/p1781712391694139)
 - 2026-06-17 — Simulation yield profiles posted; Jackson's timezone confirmation pending. William ran MarkToMarket sim (Jenkins job #741) on Jackson's dataset and posted XAUUSD yield profiles (13:37 BST) assuming UTC+0 client perspective; asked Jackson to confirm timezone. Jackson said they'd get confirmation; as of 07:25 BST 2026-06-18 Jackson separately confirmed the tags from the same dataset "are all retail brokers." Timezone itself not yet confirmed in channel. William also responded to Jackson's tag-context reply with "Hi Dan" (likely a slip). [simulation YPs](https://mahifx.slack.com/archives/C05NB72AGR2/p1781699864574569) [Jackson timezone](https://mahifx.slack.com/archives/C05NB72AGR2/p1781705091801169) [Jackson retail-broker reply](https://mahifx.slack.com/archives/C05NB72AGR2/p1781763915283599)
 - 2026-06-16 — Dan (client-side) asked Mahi to review tag 515; MTD yield profile looks good from inception to 30s and client wants it assessed for internalisation suitability. Cameron Hughes acknowledged; Rory King replied that they want to take a closer look at yields given "previous instances where drop copy yield performance isn't perfectly matching up with the reality of internalising." 2026-06-16 follow-up (08:44 BST): Will Carter said "we'll want to gather a bit more data on 515 / while we figure out a better way of classifying clients from the existing book" — no decision yet. Dan also asked for review of tags 50528/657/791; Will posted figures 687/416/122 (likely yield profile numbers for those tags). [Dan ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1781510269035169) [Rory response](https://mahifx.slack.com/archives/C05NB72AGR2/p1781518288043269) [Will response 2026-06-16](https://mahifx.slack.com/archives/C05NB72AGR2/p1781595872692669)
