@@ -10,10 +10,13 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-18T07:06:24Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-18 — Dev GW oil CFD pricing stuck (XTIUSD/XBRUSD) on new cTrader connection
+> Cameron Hughes working with Yaniv on the Dev/cTrader connection: BTCUSD and ETHUSD trades now working, but XTIUSD (CL1USD) was off-quotes since June 17 and XBRUSD trades were being rejected. Cameron confirmed XTIUSD was being sent from Compass, asked Yaniv to disable/enable the Dev GW — Yaniv did so and confirmed pricing restored. XBRUSD resolved separately. By 13:59 BST, Cameron confirmed "Everything is now in place to go live with pricing in all stages and execution for funded flow." Yaniv planned gradual go-live next day (one asset at a time). [oil-fix](https://mahifx.slack.com/archives/C07AQJS4E80/p1750241066366539) [cameron-all-clear](https://mahifx.slack.com/archives/C07AQJS4E80/p1750251598711169)
 
 > [open] 2026-06-12 — Stale FIX orders alert from YB (2026-06-11 16:47 UTC) — connectivity drop, no unhedged exposure confirmed but 5 re-hedges unverified
 > Andreas flagged 16 stale FIX order alerts from YourBourse (2026-06-11 ~16:47 UTC) across XAUUSD, US30, NAS100, EURUSD, NAS100 — YB's Liquidity Manager warned of potential unhedged exposure. Rory King investigated and confirmed none of the 16 orders reached Mahi: last received seq was 116848 at 16:47:18.276; all 16 stale orders (seq 116850–116871) were sent after the `5ers-Funded-YB-MT5-Prices` and `5ers-Funded-YB-MT5-Orders` sessions disconnected due to heartbeat timeout at 16:47:27/16:47:31 UTC. YB reconnected with reset sequence numbers, so missed messages were not retransmitted — no double-fill risk on Mahi side. Re-hedge matching: Rory found fills matching most lost trades arriving within minutes of reconnect, but could not confirm 1:1. Asked YB to verify 5 specific trace_ids not matched: XAUUSD sell 78, one US30 buy 2.5, one NAS100 sell 0.30, XAUUSD buy 1, EURUSD sell 500k. No YB response in window. [client-alert](https://mahifx.slack.com/archives/C07AQJS4E80/p1781250515110489) [rory-findings](https://mahifx.slack.com/archives/C07AQJS4E80/p1781263567460059)
@@ -80,6 +83,8 @@ last_catchup: 2026-06-18T07:06:24Z
 > Andreas sending test trades through yourbourse→Mahi; Shyam + Isaac monitoring. Isaac's 04-24 update: trades flowing as expected; some cancels from off-market/last-look breaching limit orders but nothing unexpected. 04-28: client switched XAUUSD flow to YB+Mahi too. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1776981907673599)
 
 ## Notable topics
+
+- 2026-06-18 — cTrader Dev connection confirmed ready for live; Yaniv proceeding with gradual go-live (one asset at a time) from June 19. Cameron Hughes gave the all-clear: pricing in all stages and funded-flow execution in place. [confirmation](https://mahifx.slack.com/archives/C07AQJS4E80/p1750251598711169)
 
 - 2026-06-11 — Andreas requested XAG/XAUUSD spread increase (~4-5 points); Kate was away. Cameron Hughes handled: confirmed XAG TOB 0.01→0.014 and XAUUSD TOB 0.2→0.24 with Andreas; change actioned same day; client confirmed "All good thanks!" [request](https://mahifx.slack.com/archives/C07AQJS4E80/p1781177175731659) [actioned](https://mahifx.slack.com/archives/C07AQJS4E80/p1781183335831909)
 
