@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-06-18T07:07:43Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
@@ -219,6 +219,8 @@ last_catchup: 2026-06-18T07:07:43Z
 
 ## Notable topics
 
+- 2026-06-19 — Isaac drop copy / MT manager account request: Isaac asked Karen in #mahi-amana to set up MT4/MT5 manager accounts at Amana so Mahi can receive a drop copy feed for pricing optimisation. Karen acknowledged and said she will raise at the Friday sync call. Separate from, but complementary to, the B-book FX onboarding track below. [isaac-request](https://mahifx.slack.com/archives/C08SYSMP0EB/p1750289650111549) [karen-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1750307207475479)
+- 2026-06-18 — Amir Davies weekly call summary: B-book FX connectivity onboarding: servers arrived and in setup at Beeks; Amana opted to connect LPs directly into Compass (no Centroid LP aggregation on the LP side); starting with CMC or Infinox for FX majors as a B-book "beta test" (Amana not aware Mahi works with Infinox); internet connectivity first, then XC; position rec still to set up; MT manager credentials and full instrument list still outstanding from Amana side. This is a parallel B-book FX track managed by Amir Davies, distinct from the Nikos/futures work. [call-summary](https://mahifx.slack.com/archives/C08T42TMKU3/p1750247037447649)
 - 2026-05-01 — Nikos requesting additional LPs enabled for mid-aggregation / pricing discovery; Rory to confirm config link once done. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1777632975290609)
 - 2026-05-01 — DOWFUT-M MWMS pricing blowing out wider than CMC_CENTROID (second layer in CMC_CENTROID 500pts wide vs TOB 25/50); Will bodged with BMSL, not blocking overall rollout. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1777629122174899)
 - 2026-04-30 — Will/Nikos call: management very happy with performance, "numbers are amazing", goal is all flow into Mahi. A-book onboarding expected done EOW. B-book pricing plan: 3 tiers (gold/silver/bronze rate formation); tagging strategies for LP-moaning-on-tag scenarios also discussed. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1777549918317059)
