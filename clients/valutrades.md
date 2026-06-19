@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-18T07:17:29Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
@@ -117,6 +117,10 @@ last_catchup: 2026-06-18T07:17:29Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-19 — Routine A/B book classification queries (batch): 89467404 (David: B, surprising given yield profiles), 9256774 (Isaac: no recent trades — nothing to classify), 95543864 (David: A — new strategy since April), 88992691 (David: G30=A, HSI=A), 89466094 (David: G30=B, HSIKKHD borderline, small dataset, watchlist), 65596295 (David: XAUUSD=B, NDF since April is two stories — reval from core long makes PnL look A but yield profiles say B; NDF needs further watching), 65586197 (same trading pattern as 65596295). [89467404-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750304017097749) [89467404-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750304726313989) [95543864-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750308365795679) [95543864-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750308615704979) [88992691-89466094-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750310863172829) [65596295-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750316327163869)
+
+- 2026-06-18 — Routine A/B book classification queries (batch): 95557361 (Mio: B book — asked twice), 84592965 (Cameron Hughes: A book), 96574046 (Mio: B book, one to keep an eye on), 85022888 (Mio: B book). [95557361-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750244206202549) [95557361-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750244697361239) [84592965-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750249486082299) [84592965-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750250333292069) [96574046-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750256987097589) [96574046-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750257437671659) [85022888-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750262409654599) [85022888-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750263497120569)
 
 - 2026-06-18 — cpty 89468426 A/B book classification: client asked team to advise; Shyam Hari confirmed A book with chart (XAUUSD). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781760303509299) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781760918926369)
 
