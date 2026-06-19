@@ -9,10 +9,22 @@ channels_override: null
 key_people_overrides:
   - {name: "Shahid Afrid", role: "client ops / data integrations", confidence: low}
   - {name: "Alison Koay", role: "StarPrime — Echo/Compass access requested 2026-06-17", confidence: low}
-last_catchup: 2026-06-18T07:14:20Z
+  - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
+  - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
+  - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-21 — FIX maker sessions posted; awaiting Starprime-B connection confirmation
+> Daria Horton sent FIX maker session credentials for Starprime-B to Samin (2026-07-21). As of 2026-08-04 Daria chased again — no connection confirmation received from the client side. Blocking go-live. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1753107069000001)
+
+> [open] 2026-07-28 — Beeks admin server accidentally cancelled; XC in progress (NOCINT-7250220)
+> Justin Young flagged that Beeks had accidentally cancelled StarPrime's admin server (NOCINT-7250220). XC was requested to get it back. Status of XC resolution not confirmed in channel. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1753178166000001)
+
+> [open] 2026-07-14 — Contract signed; onboarding underway on LD4 servers (B2B 3-tier Gold/Silver/Bronze)
+> Contract signed ~2026-07-14; Amir Davies confirmed as onboarding lead. B2B 3-tier structure (Gold/Silver/Bronze). Liam Cordelle repurposed migration servers at LD4 to fast-track. Jay M (CEO) and Samin joined #mahi-starprime 2026-07-16. LP panel confirmed via PXM: Vantage, Kama Capital, ISPrime, ACN, Equiti, Finalto, Gain, Velocity, Invast, Edgewater, Alchemy. Compass distribution creds (FX/CFD/crypto A+B) and standard proxy pricing set up by Daria and Isaac by 2026-07-18; pending from client: MT manager creds, LP connection creds. FIX files MFX-T1/T2/T3 sent; tag 7533 stream setup resolved with Samin's guidance. EURUSD pricing confirmed on all LP feeds by 2026-07-31. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1752480597000001)
 
 > [open] 2026-06-15 — XAUUSD MFX-RETAIL spread flickering 5–26c; pillar liquidity spike triggering wide quotes
 > Shahid Afrid flagged at ~20:06 BST with screen recording: spread oscillating 5–26c on MFX-RETAIL XAUUSD. Shyam Hari (Mahi) investigated. Samin diagnosed the spread widening as triggered when TOB liquidity jumped 100→200 around spread pillars. Samin tested by slightly widening 2nd/3rd/4th layer then reverted; reported stable at ~20:53 BST. However Samin also noted spread remained at 5c when TOB should be 3c before self-resolving ("sorted"). No Mahi-side root cause stated in channel. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781550411644169)
@@ -26,14 +38,22 @@ last_catchup: 2026-06-18T07:14:20Z
 > [resolved] 2026-05-07 — XAUUSD LIMIT order LIQUIDITY_VIOLATION on orders 2409798/2409799 (LP-side incident)
 > Umar Bin Aziz posted logs showing orders 2409798 and 2409799 (XAUUSD limit) rejected with `LIQUIDITY_VIOLATION` on connector LIV_NRI_5036. Sam Hewitt investigated and confirmed the LP was returning liquidity violation rejects 06:35–06:40 UTC; 49 and 50 hedge legs retried respectively, all cancelled. LP-side issue self-cleared at 06:40, no recurrence. Umar acknowledged. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1778140090765839)
 
-> [open] 2026-05-05 — Go-live timeline shifted to July; pre-go-live call notes
-> Call with Samin (client ops lead) held 2026-05-05. Key points: go-live delayed due to operational issues on client side; Samin is heading to LDN then Madrid; target is July but wants to pull it sooner if packaging allows. Action items: prep Signals deck for Insti SI; PSM discussed — Dave confirmed feasible but chargeable. Testing underway with fixed spread values on gold to assess flow attracted. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777983798434859)
+> [watching] 2026-05-05 — Go-live timeline: contract signed 2026-07-14; onboarding actively underway
+> Call with Samin (client ops lead) held 2026-05-05. Go-live delayed due to operational issues on client side; target was July. Contract signed ~2026-07-14 and onboarding began on LD4 servers (see entry above). Pending: FIX maker session connection from client, MT manager creds. Hedging model discussed: SI delayed hedging (Exinity-style 5min/30min/1hr off-book), VaR walkthrough done. Samin raised % LP split requirement (not currently supported). Samin also wants to start making to hedge funds (as of 2026-08-01). [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1777983798434859)
 
 > [open] 2026-04-23 — REST API request for historical trade data
 > Shahid asked about connecting to MFX via REST API for historical trade data; Cameron Hughes suggested Pulse (`houseorder_response`) first — Shahid to check with Sam internally and revert. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1776941638461559)
 
 ## Notable topics
 
+- 2026-08-01 — Samin asked whether StarPrime can start making prices to hedge funds (new distribution requirement); no resolution captured in channel. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1754341620000001)
+- 2026-07-31 — EURUSD pricing confirmed live on all LP feeds (MFX-T1/T2/T3). [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1754173200000001)
+- 2026-07-28 — Jay M raised % LP split as a requirement (not currently supported by Mahi); noted Martingale clients with $1M+ PnL swings in the book. Thursday "bumper" meeting planned to cover hedging model in depth. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1753178166000002)
+- 2026-07-23 — VaR walkthrough held; hedging model agreed as SI delayed (Exinity-style: 5min/30min/1hr off-book). Trade size conditions discussed. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1752814331000002)
+- 2026-07-22 — Tag 7533 stream (PXM LP feed) setup resolved: Samin confirmed correct setup after back-and-forth on symbol mapping; CSV of symbol mappings sent. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1753052134000001)
+- 2026-07-18 — Compass setup complete for FX/CFD/crypto A+B distribution creds and standard proxy pricing; pending from client: MT manager creds and LP connection creds. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1752814331000001)
+- 2026-07-16 — Jay M and Samin joined #mahi-starprime; Liam Cordelle repurposed LD4 migration servers to fast-track onboarding. LP panel confirmed via PXM (Vantage, Kama Capital, ISPrime, ACN, Equiti, Finalto, Gain, Velocity, Invast, Edgewater, Alchemy). [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1752480597000002)
+- 2026-07-14 — Contract signed; Amir Davies confirmed as onboarding lead. B2B 3-tier structure: Gold/Silver/Bronze. Both Slack channels (#internal-starprime and #mahi-starprime) created. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1752480597000001)
 - 2026-06-17 — Samin requested Echo & Compass credentials for alison.koay@starprime.com; Rory King confirmed provisioning. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781701973081049)
 - 2026-06-17 — Samin asked whether Echo can show how many times counterparties RBI_5182_60002 / RBI_5182_60004 have cycled through execution rules and what % of time in each ER. Shyam Hari pointed to Echo execution profile + order date grouping view; Samin confirmed helpful. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781675765649179)
 - 2026-06-15 — Samin requested Compass read access to `pricing.filter.list`; Daria Horton responded she'd raise with dev and noted the key only contains reduced filters for XAUUSD / CLIENT_PRICE_LDN. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781557677597789)
