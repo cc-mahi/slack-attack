@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Neophytos Poullou", role: "IC Markets — joined mahi-ic-markets 2026-06-11 on Pavlos request; role unknown", confidence: low}
   - {name: "Ioannis", role: "IC Markets — queried OKX OPENAI/USDT + ANTHROPIC/USDT instrument availability 2026-06-11; first name only", confidence: low}
   - {name: "Konstantinos Haitas", role: "IC Markets — joined mahi-ic-markets 2026-06-12; Compass/Echo access requested by Kyriakos; role unknown", confidence: low}
-last_catchup: 2026-06-18T07:13:39Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
