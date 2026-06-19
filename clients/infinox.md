@@ -16,10 +16,13 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-18T07:13:40Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-19 — XAUUSD slippage complaint (Sadiq): xcore price-timestamp discrepancy, not Mahi slippage
+> Sadiq (Infinox trading ops) reported slippage on XAUUSD trades and shared a three-way comparison (Mahi report / xcore / client side), claiming PXM and client figures match but differ from Mahi's. Mio Knights responded with Mahi's slippage CSV showing discrepancies (e.g. Order ID 113556920: Infinox reported −0.1 USD, Mahi recorded +0.25 USD). Cameron Hughes investigated via Echo ToB: Mahi received and executed the trade at 07:36:54.091 at price 3415.91, matching Mahi's published price at trade time and the client-side report (trade placed at 07:36:54.085, price 3415.91). Root cause: xcore's slippage calculation uses Mahi's price ~10ms before the trade, not the fill price — manufacturing apparent slippage that wasn't real. Sadiq acknowledged. [Sadiq complaint](https://mahifx.slack.com/archives/C022S6NL82D/p1750246502114489) [Mio CSV](https://mahifx.slack.com/archives/C022S6NL82D/p1750252762093429) [Cameron Hughes resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1750258367528109)
 
 > [resolved] 2026-06-18 — Routine Heavy + Extra Heavy LR adds: 83038408, Centroid_2145766170, Centroid_3603254, Centroid_3600130, Centroid_3604043
 > Four Heavy LR adds: 83038408 (17:51 BST, Rory King confirmed 17:57), MT5_87018814_Centroid_2145766170 (19:51 BST, Will Denny confirmed 20:04), MT5_87018814_Centroid_3603254 (01:51 BST, Shyam Hari confirmed 01:53), MT5_87018814_Centroid_3600130 (02:54 BST, Shyam Hari confirmed 03:00). One Extra Heavy LR add: MT5_87018814_Centroid_3604043 (07:10 BST, Shyam Hari confirmed 07:17 — "they have been added"). Extra Heavy profile continues to expand. [83038408](https://mahifx.slack.com/archives/C022S6NL82D/p1781715102704899) [Centroid_2145766170](https://mahifx.slack.com/archives/C022S6NL82D/p1781722291804869) [Centroid_3603254](https://mahifx.slack.com/archives/C022S6NL82D/p1781743887605799) [Centroid_3600130](https://mahifx.slack.com/archives/C022S6NL82D/p1781747678732119) [Centroid_3604043](https://mahifx.slack.com/archives/C022S6NL82D/p1781763024083369)
@@ -176,6 +179,7 @@ last_catchup: 2026-06-18T07:13:40Z
 
 ## Notable topics
 
+- 2026-06-19 — Recurrent slippage complaint pattern: Sadiq raised XAUUSD slippage using xcore report figures that don't match Mahi's fill timestamps. Cameron Hughes resolved via Echo ToB: xcore uses Mahi's price 10ms before the trade, not the fill price — apparent slippage is a xcore calculation artefact. This is a second such complaint style from Infinox (prior instance involved PXM report discrepancy); the xcore timing issue may recur. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1750258367528109)
 - 2026-06-18 — Extra Heavy LR continues expanding: Centroid_3604043 added (now 5th day running with at least one Extra Heavy or Heavy LR add). Profile created 2026-05-21, vol multiplier doubled 2026-05-22, CP scope steadily growing. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781763024083369)
 - 2026-06-17 — SPX500 pricing adjusted to suppress LP-driven spikes (B2Broker/Vantage); Shyam Hari confirmed fix applied mirroring earlier NDX adjustment. Isaac Dann analysis: NAS100 (NDXUSD) pricing was already stable; SPX500 bid was dropping with Vantage. Client satisfied. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781657964434699)
 - 2026-06-15 — NAS100 feed glitch resolved: B2Broker/Vantage momentary 55-point dislocation caused spike; Rory King confirmed isolated feed issue and shared Echo TOB. Infinox satisfied. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781532682572419)
