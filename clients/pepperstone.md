@@ -13,7 +13,11 @@ key_people_overrides:
   - {name: "Reece", role: "ops / counterparty admin", confidence: low}
   - {name: "Saif Nouri", role: "unknown — joined mahi-pepperstone-vnd 2026-05-11", confidence: low}
   - {name: "Ruby Wang", role: "ops / exchange trading", confidence: low}
-last_catchup: 2026-06-18T07:13:42Z
+  - {name: "Georgios Voulgaropoulos", role: "OZ network/infrastructure (Ralich contact)", confidence: low}
+  - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
+  - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
+  - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## History
@@ -80,7 +84,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 #### Pepperstone
 
-- **Tom** — Exchange/product owner. Primary commercial/integration counterpart 2021–2025. Less visible post-Modulus go-live as Stephen takes over.
+- **Tom** — Exchange/product owner → COO (promoted Aug 2026). Primary commercial/integration counterpart 2021–2025. Less visible post-Modulus go-live as Stephen takes over; re-engaged commercially post-COO.
 - **Stephen Hendrie** — Exchange/product lead since A-Book go-live (2025). Primary integration owner for crypto.
 - **Marianna Konstantinidi (MK)** — Trading ops, ex-Exinity. CFD licence sponsor (2026-Q1), pushed the deal commercially.
 - **Reece** — Ops / counterparty admin. Owns counterparty-classification and execution-rule conversations.
@@ -99,6 +103,30 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [resolved] 2026-10-03 — Tom Williams promoted to COO; Nicola's London drinks notes confirm Sep 26 catch-up
+> Will flagged Tom's COO promotion (internal, Aug 18). Nicola's notes from the Sep 25-26 London drinks with Tom, Kate Domican, and Rob Bowen: Tom happy, proud of the brand/Tamas relationship; notes MK (Marianna Konstantinidi) is joining Pepperstone unbeknownst to Kate; Kate considering a move to Dubai/BaseMarkets; Tom wants monthly catch-up cadence with Mahi; interest in CFDs and gold; LATAM — 60-person Chile office. Monthly catch-up request to be actioned. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1755501833270919) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1758892207546789)
+
+> [resolved] 2026-09-08 — OZ NY HUB outages (Sep 2-3); Beeks primary hardware failure + separate OZ HUB crash
+> Sep 2: Beeks primary hardware issue in NY; failover worked, back up same evening. Sep 3: separate OZ NY HUB outage. Both resolved same day. Ongoing resilience concern given two separate NY infrastructure events within 24 hours. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1756843748216869)
+
+> [watching] 2026-08-28 — OZ/Beeks network latency: ~10s delayed quotes post-news; Beeks confirmed packet loss on OZ side; NanoFIX migration Aug 31
+> Pepperstone seeing ~10s delayed quotes after news events. Mahi-side latency 1-4ms (95th pct). Beeks confirmed packet loss on OZ side; some connections possibly going over internet. Georgios Voulgaropoulos (Ralich at OZ) personally involved. OZ FIX adapters migrated to NanoFIX Aug 31 as remediation. Latency watch ongoing. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755052355923559) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1756261579000000)
+
+> [resolved] 2026-08-22 — 5 cross-pairs moved to direct pricing + new FI signals deployed; Tom confirmed spread levels maintained
+> EURJPY, AUDCAD, GBPAUD, XAUAUD, EURAUD moved from triangulated to direct pricing. New FI signals also deployed. Tom confirmed current spread levels to be maintained. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755831756325889)
+
+> [resolved] 2026-08-20 — OZ NY HUB full outage; pepperstone-live.onezero.com unreachable; NYC failovers in LDN also disconnected; back up ~16:35 BST
+> [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755702821281529)
+
+> [resolved] 2026-08-19 — Crypto env P&L fix deployed (LDN then NYC); second deploy required; fixed
+> Liam flagged P&L issue Aug 18 in vendor channel. Fix deployed Aug 19 LDN then NYC; second deploy needed for full resolution. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755530293559229)
+
+> [resolved] 2026-08-15 — XAUUSD TWILIGHT pricing overhaul deployed; Deutsche/UBS removed, BMSL reintroduced, defensive references added
+> Mio flagged need Aug 14 (internal). Isaac deployed Aug 15: Deutsche/UBS removed as reference markets (erratic during moves); base spread TOB 0.08→0.14 in twilight; benchmark ratio 0.3→0.7 in twilight; BMSL reintroduced at TOB; Finalto and Invast DEF added as defensive references. Backtests show improved skew PnL. This resolves the TWILIGHT arbitrageur overclassification issue raised around Aug 19 (Ruby's query about classification changes). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755227003450239) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1755133793000000)
+
+> [resolved] 2026-08-08 — XAUUSD spreads blow-out (gold tariffs); ISPRIME spreads 0.1→1.4; arb protection pulled then restored
+> ISPRIME spreads spiked massively during gold tariff event. BMSL temporary config changes applied; Daria stabilised pricing; arb protection pulled then restored. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1754608971698109)
 
 > [open] 2026-06-18 — Crypto LDN server critically low on memory; process consolidation underway, Beeks upgrade request pending
 > Isaac flagged critical memory headroom on Pepperstone Crypto LDN server at ~02:55 BST 2026-06-18, triggered by an earlier brief distribution outage where LDN clientDist was shut off to force failover to NYC (one counterparty had 4 cancels, filled in LDN 4s later, minimal impact). Isaac requesting a memory upgrade via Beeks and Pepper. Mitigations already applied: Daria removed UAT Modulus/trading processes from the crypto env; also consolidating non-B risk paths in FX env. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1781747755775059)
@@ -211,6 +239,13 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-10-03 — 3-year MSA confirmed locked in (Jul 28 dossier entry now confirmed resolved via Nicola's message: "It's official.... Pepperstone are locked in for 3 years 🔥"). New fee $115,088/mo from Aug 1 per 3rd Addendum (2025-07-16).
+- 2026-09-26 — Tom Williams now COO. Kate Domican on his team; considering Dubai/BaseMarkets move. MK (Marianna) joining Pepperstone — unbeknownst to Kate at time of drinks. Tom wants monthly Mahi catch-up.
+- 2026-09-08 — Binance SBE paid-given feed integration underway (Andrew + Isaac). Ongoing; Arun also working B2C2 direct connection (FIX tag 271 mdEntrySize).
+- 2026-08-31 — Antonio Aguilar (antonio.aguilar@pepperstone.com) granted Compass/Echo read-only access. Role not confirmed.
+- 2026-08-22 — XAUUSD TWILIGHT pricing overhaul resolves arbitrageur overclassification; 5 crosses moved to direct pricing. Spread levels locked per Tom.
+- 2026-07-31 — Crypto A-Book fully live.
+- 2026-07-28 — 3-year MSA locked in (Nicola confirmed). $115,088/mo from Aug 1.
 - 2026-04-28 — Pepper exchange release planned 22:00 SGT; propTraderModulusUAT enabled in NY to catch issues pre-prod. Daria flagged a missed-fill on partial-fill-around-logout for monitoring. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777361423971719)
 - 2026-04-28 — Crypto cancel-reject loop on orders 012dzkfuvfl / 012dzkfupe6 — Pepper-side restart causing Failure_General rejects; not genuine, Daria switched it off. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777364442933499)
 - 2026-04-27 — Isaac flagged Pepper CFD signal process needs a subset instrument list (proposed "CFD-Majors"/"CFD-Signals": DOW, SPX, NDX, G30, CL1, CO1) — full instrument list too big; needs feedback on expected volumes. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777328246477439)
