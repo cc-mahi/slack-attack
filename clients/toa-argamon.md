@@ -10,21 +10,75 @@ key_people_overrides:
   - {name: "Tom McLean", role: "Argamon-side analyst — primary day-to-day contact in mahi-argamon-operations"}
   - {name: "Levi Ulman", role: "Argamon ops — give-up / rejection queries, Centroid migration lead"}
   - {name: "Joanna Theofanous", role: "Argamon-side ops — recurring contact in mahi-argamon-operations for alerts and client trade queries"}
-  - {name: "Jonah Ink", role: "Argamon — escalation contact; involved in currency rec disputes and P&L attribution", confidence: low}
+  - {name: "Jonah Ink", role: "Argamon — escalation contact; involved in currency rec disputes and P&L attribution; departed Aug 2026", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon — analytics / reconciliation; participates in position rec and currency rec calls", confidence: low}
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-06-18T07:13:00Z
+last_catchup: 2026-06-19T07:06:24Z
 ---
 
 ## Status
 
-- **Stage:** live (Argamon is a client of Toa; LDN/APN1/CHI single-box setups). Contract split underway: Mahi retains retail tenant; Toa takes B2B/Crypto/RI — insti contract signed to Toa 2025-07-09.
-- **Integration:** NYC retail tenant primary. Centroid migration in flight (from OneZero) before Aug 2025. Reactive Markets production setup in progress. XTX-Algo live from 2025-07-08. Lucera for insti (replacing Centroid path). NY4→TKY dedicated WAN link established 2025-06-16 for Toa connectivity.
-- **Relationship:** ops-heavy; multiple daily interactions across pricing, hedging, reconciliation, and new LP onboarding. Currency P&L rec dispute escalated to Elan/Jonah calls in late June–July 2025. Retail contract renegotiation pending (Elan wants tighter spreads; Mahi pushing for fixed-fee conversion first).
+- **Stage:** live (Argamon is a client of Toa; LDN/APN1/CHI single-box setups). Contract split confirmed 2026-07-01: Mahi retains retail tenant; Toa takes B2B/Crypto/RI. Connectivity pipeline falls to Toa.
+- **Integration:** NYC retail tenant primary. Centroid migration complete (from OneZero; test trades through July 2026). Reactive Markets in production — NatWest slow-consumer issue ongoing (Beeks escalation required). XTX-Algo live from 2026-07-08 (confirmed). Lucera for insti (NatWest maker session live). FSS markets decommissioned 2026-07-24. NatWest PB NOP limits set 2026-08-04. 26Degrees recurring brokering issues (stuck orders, duplicate trade IDs).
+- **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [open] 2026-08-27 — 26Degrees duplicate trade ID killed hybridHedger; ~$6k retail loss; dynamic-mid restart fix
+> 26Degrees sent a duplicate trade ID which caused hybridHedger to crash. ~$6k retail loss during the ~10-min outage. Root cause of slow restart: dynamic mid subscribing too many markets. Liam changed mid style to PRICING_MID, reducing restart time from ~10 min to ~1 min. 26Degrees switched back GTC→IOC on 2026-08-29. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1756321563066389)
+
+> [open] 2026-08-26 — 26Degrees brokering disabled; stuck order 012dr73mxzj; Zendesk 21328
+> 26Degrees brokering had to be disabled due to a stuck order (012dr73mxzj) that was force-cancelled via JMX. Zendesk ticket 21328 opened. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1756197490495109)
+
+> [open] 2026-08-11 — Elan considering switching off NY Insti routing around Mahi; Zendesk 21238
+> Elan flagged he is considering switching off the NY Insti routing that goes around Mahi. Liam noted this probably suits Mahi given they aren't supposed to be doing Insti anymore (Toa is now the insti vehicle). Zendesk 21238. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1754902798818409)
+
+> [resolved] 2026-08-04 — NatWest PB NOP limits set at 40m USD per Elan request
+> Liam configured the market list and PB NOP config at 40m USD NOP limit per Elan's request. Only using Reactive NW markets. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1754304532621039)
+
+> [open] 2026-07-29 — PB NOP UI dev work requested: HRP and NatWest users to see only their own NOP/kill-switch; Zendesk 21166
+> Argamon requesting UI work so HRP users and NatWest users see only their own NOP/kill-switch in the GUI. Liam identified significant UI changes needed. Dave chatted with Elan — may be solvable with a hack to hide NatWest NOP from Hidden Road users. Zendesk 21166. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1753780318658499)
+
+> [resolved] 2026-07-29 — Centroid broker-orders NPE (TradingAccount mapping); Liam fixed via config reload
+> NPE on FIX.4.4:MahiFX-Centroid-Broker-Orders→Argamon-Centroid-Broker-Orders: `TradingAccount mapping: Account->TradingAccount`. Config had been added before the trading account existed. Liam tweaked and reverted config to force a reload; resolved. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1753779667961769)
+
+> [resolved] 2026-07-24 — FSS markets decommissioned at Argamon (14 markets removed)
+> Full FSS cull complete: COMMERZ_FSS, JPM, NATWEST_FSS, XTX_2, XTX_STD, DEUTSCHE_FSS, HSBC, JPM_INST, JUMP, UBS, XTX_DARK, XTX, HCTECH, LMAX all removed. RI hedgers not running post-release (expected per Will). Environment significantly cleaned up. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1753334480526809)
+
+> [watching] 2026-07-21 — Argamon Crypto -$2.6k from $3.6m (-$729/M); CP 84004149 sharp FX+crypto risk
+> Daria flagged CP 84004149 doing lots of FX + crypto risk, resulting in -$2.6k from $3.6m notional (-$729/M) on the crypto book. Will noted this is sharp risk. Flagged for investigation. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1753053359267329)
+
+> [resolved] 2026-07-21 — MT4→OZ issue left -12.9m JPY open; position appreciated ~50 pips; closed via OZ→Compass hedges
+> An MT4→OZ connection issue left a -12.9m JPY position open. The position appreciated approximately 50 pips before it was closed out via OZ→Compass hedges. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1753131641988199)
+
+> [resolved] 2026-07-14 — Reactive slow-consumer recurrence; Beeks L2 escalation required; GTS markets added to non-LP-reducing rules
+> Argamon raised Reactive connectivity issue again with Beeks — hour on the phone before L2 escalation, then fixed almost instantly on escalation. GTS Reactive markets added to hybridHedger1 non-LP-reducing rules following this event. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752458081221389)
+
+> [resolved] 2026-07-09 — Insti contract signed to Toa; Lucera credentials issued; pricing review before go-live
+> Nicola confirmed insti contract is signed to Toa. Lucera credentials issued (production). Pricing review needed before going live with new Reactive feeds. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752075272632989)
+
+> [resolved] 2026-07-08 — XTX-Algo confirmed live; all test trades good
+> fixOrdersXtxAlgo confirmed live on 2026-07-08; all test trades passed. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751978544253569)
+
+> [resolved] 2026-07-07 — Reactive HRP/NatWest streams disconnected after Beeks weekend change; switched to OZ takers
+> Reactive HRP and NatWest streams disconnected following a Beeks weekend change. Isaac switched hedgers back to OZ takers while Beeks investigated. NatWest slow consumption issue isolated but not yet fixed. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1751845142867209)
+
+> [resolved] 2026-07-02 — Currency rec crisis resolved; adjustments applied; Argamon to submit regular rec reports going forward
+> Multi-call resolution with Elan, Jonah, Alex, Levi, Isaac: adjustments applied to realign Compass positions. Going forward Argamon will regularly submit rec reports and Mahi will adjust Compass positions. Argamon had misread their rec (both client+LP out); retail book recovered to +$19k. Elan raised ~$125k attribution question; Mahi pushed back that attribution would need senior discussion. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751424351939279)
+
+> [resolved] 2026-07-01 — Contract split confirmed: Mahi=retail tenant, Toa=B2B/Crypto/RI; connectivity pipeline to Toa
+> Andrew Morgan formally confirmed the split: Mahi retains retail tenant; Toa takes B2B/Crypto/RI. Connectivity pipeline falls to Toa. Resourcing shuffle between teams pending meeting. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751381584552799)
+
+> [resolved] 2026-06-27 — Lucera conformance completed; maker session via NatWest being set up
+> Elan confirmed Lucera completed conformance. Isaac setting up maker session hedging via NatWest. FIX credentials issued 2026-07-04 in production. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1751005957276989)
+
+> [resolved] 2026-06-22 — Spotex timeout + position break; client fill adjusted; hedgers closed position
+> Elan flagged a Spotex timeout; client ended up long with HSBC fill. Daria adjusted the client fill out of book; hedgers closed the resulting position. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1750629998286959)
+
+> [resolved] 2026-06-19 — Position break from Beeks outage (Mon 16 Jun); Argamon rec requested; books to be monitored
+> Trades were dropped on reconnect following the Beeks outage on Monday 16 June, creating a position break. Daria asked Argamon for a rec to realign. Amir asked to monitor and adjust CLIENTS/HEDGING_MANUAL books. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1750316141620449)
 
 > [resolved] 2026-06-12 — XAUUSD over-hedge query (26 May); Shyam confirmed no over-hedge from Mahi side
 > Levi (Argamon) raised in mahi-argamon-operations that they were trying to investigate a potential over-hedge of 1 XAUUSD on 26 May and asked for help narrowing the search. Shyam asked whether it was retail; Levi confirmed yes (though no position rec data yet). Shyam investigated and confirmed no over-hedge from Mahi side. Resolved same morning. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781234757662239)
@@ -41,8 +95,8 @@ last_catchup: 2026-06-18T07:13:00Z
 > [resolved] 2026-06-10 — propTrader1HrpChi1 max-order-breach crash; ordersCOMEX1 party filter fix
 > Cameron posted propTrader1HrpChi1 down on toa-argamon-ch-trading-1 due to maximum number of order breaches (08:58 BST) — brought back up, killed itself again. James fixed ordersCOMEX1 party filter; noted if it dies again leave it down — it's prop trading not hedging so doesn't need to run. (Updates/closes the open 2026-06-07 entry re: propTrader1HrpChi1 still unconfigured.) [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781078300294379)
 
-> [open] 2026-06-09 — Centroid HRP FIX logon not receiving response; netcat connectivity check pending
-> Levi (Argamon) reported in mahi-argamon-operations that Centroid cannot get a logon response on either the market session (HRP-CENTROID2Prices) or trading session (HRP-CENTROID2Orders) — Centroid sent FIX.4.4 Logon (tag 35=A) out but received no reply. Kate checked and asked Levi to netcat to 170.75.204.26 ports 9010 and 9011. As of 00:23 BST 2026-06-10 Levi was requesting netcat results from Centroid; no resolution yet. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119)
+> [resolved] 2026-06-09 — Centroid HRP FIX logon not receiving response; resolved (Centroid live per July test trades)
+> Levi (Argamon) reported in mahi-argamon-operations that Centroid cannot get a logon response on either the market session (HRP-CENTROID2Prices) or trading session (HRP-CENTROID2Orders) — Centroid sent FIX.4.4 Logon (tag 35=A) out but received no reply. Kate checked and asked Levi to netcat to 170.75.204.26 ports 9010 and 9011. Issue subsequently resolved — Centroid went live with HRP as test trades confirmed operational through July 2026. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119)
 
 > [resolved] 2026-06-09 — hedgerHrpCME1 PnL breach alert; self-resolved hedge fluctuation
 > Cameron posted PD alert for PnL breach on `hedgerHrpCME1` at toa-argamon-ch-trading-1 (15:51 BST). James investigated: PnL was hedge-side fluctuation that matched from client flow — no real loss. `propTrader1HrpChi1` also flagged not running (confirmed not configured yet, consistent with open 2026-06-07 entry). James restarted the process. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781016700103829)
@@ -71,44 +125,23 @@ last_catchup: 2026-06-18T07:13:00Z
 > [open] 2026-05-25 — EURZAR/USDZAR pricing 25-min late start; all configured LPs dark 21:00–21:30 UTC; LP set expansion proposed
 > William (Argamon) raised that EURZAR and USDZAR ticks were missing from 21:00–21:30 UTC on 2026-05-25, causing ~25-min delayed pricing start. Shyam confirmed all 5 configured LPs (LMAX_DIRECT_NY_RETAIL, XTXM_RCTV_HRP_2, GTSX_RCTV_HRP_1, NWM_RCTV_HRP_1, HSBC_RCTV_HRP_1) were dark for USDZAR during that window, making pricing indicative until ticks resumed at 21:30; EURZAR also affected (triangulated off USDZAR). Shyam proposed adding DB_RCTV_NWPB_1, COMZ_RCTV_NWPB_1, UBS_RCTV_HRP_1, UBS_RCTV_NWPB_1 to the formation — awaiting Argamon/William response. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779745720146389)
 
-> [open] 2025-07-14 — Reactive Markets slow-consumer / Beeks connectivity recurring
-> Argamon raised Reactive connectivity issue with Beeks; hour-long phone call before Beeks escalated to L2, then fixed almost instantly on escalation. Same class of issue had been seen earlier (Reactive slow consumer persisting after Beeks cross-connect applied). Reactive production go-live is in progress (Arun handling; UAT test trades passed 2025-06-30; production test trades underway as of 2025-07-01). GTS Reactive markets added to hybridHedger1 non-LP-reducing rules 2025-07-14. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752458081221389)
+> [watching] 2025-07-14 — Reactive Markets slow-consumer / Beeks connectivity recurring
+> Argamon raised Reactive connectivity issue with Beeks; hour-long phone call before Beeks escalated to L2, then fixed almost instantly on escalation. Recurred 2026-07-14 (see new entry — same pattern, same fix). Reactive production go-live is in progress (Arun handling; UAT test trades passed 2025-06-30; production test trades underway as of 2025-07-01). GTS Reactive markets added to hybridHedger1 non-LP-reducing rules 2025-07-14. NatWest slow consumption issue isolated on 2026-07-07 but not yet fixed for NatWest specifically. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752458081221389)
 
 > [open] 2025-07-09 — Retail contract conversion to fixed fee pending; Elan wants spread tightening
 > Daria flagged that Elan wants to significantly tighten spreads, which would eat into retail P&L under current billing; pushing to get contract converted to fixed fee before moving reduced spreads to production. No resolution yet. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1752015694887489)
 
-> [open] 2025-07-08 — XTX-Algo live; HRP booking duplicate issue
-> XTX-Algo (fixOrdersXtxAlgo) went live 2025-07-08 after successful test trades. Daria removed XTXM_RCTV_HRP_1 from hedgers on 2025-07-03 after XTX sent duplicate trade reports causing HRP booking issues. NY4→TKY dedicated WAN link established 2025-06-16 (latency now more consistent; cross-connect intermittently times out requiring manual failover to internet route). HRP party-block mappings require command-line restart. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751978544253569)
+> [resolved] 2025-07-08 — XTX-Algo live; HRP booking duplicate issue resolved
+> XTX-Algo (fixOrdersXtxAlgo) went live 2025-07-08 after successful test trades. Daria removed XTXM_RCTV_HRP_1 from hedgers on 2025-07-03 after XTX sent duplicate trade reports causing HRP booking issues. NY4→TKY dedicated WAN link established 2025-06-16 (latency now more consistent; cross-connect intermittently times out requiring manual failover to internet route). HRP party-block mappings require command-line restart. XTX-Algo confirmed fully live 2026-07-08 (see new entry). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751978544253569)
 
-> [resolved] 2025-07-02 — Currency position reconciliation crisis (JPY/AUD breaks); ~$125k P&L dispute
-> Argamon opened a formal rec thread 2025-06-23 flagging multi-week USDJPY and AUD currency breaks across client-vs-LP and internal-vs-external Compass positions. Multiple calls with Elan, Jonah, Alex, Isaac, Daria across 2025-06-24 to 2025-07-02: crypto JPY hedging (XBTJPY/ETHJPY) was implicated; AUD break partially attributed to large EURAUD traders whose P&L was included in Compass client positions but not Argamon platform positions; Argamon misread initial rec report causing unintended open risk from 2025-06-20 adjustment. Final position: currency adjustments applied; Argamon to regularly adjust Compass positions based on rec reports going forward; Toa migration expected to consolidate visibility. Elan asked whether ~$125k was a real loss attributable to retail or crypto — Mahi pushed back that attribution would need senior discussion. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751424351939279)
-
-> [resolved] 2025-06-27 — Lucera conformance complete; insti maker session to be set up via Natwest
-> Elan confirmed Lucera completed conformance 2025-06-27 and requested a maker session hedging via Natwest. Isaac setting up; Lucera credentials issued 2025-07-09 per Daria. Insti contract formally moved to Toa 2025-07-09 (signed). [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1751005957276989)
-
-> [resolved] 2025-06-22 — Compass 25.2 upgrade; first attempt failed, rollback, successful 2025-06-22
-> Compass 25.2 upgrade attempted weekend 2025-06-14/15: distribution processes failed to start (SBE metadata mismatch, missing `enableFileBasedMessagePersistence`); rolled back. Redeploy 2025-06-22 successful. Post-upgrade: Argamon requested full redeploy and failover to OZ for process restart. Aeron issue from 25.2 seen at Amana also cautioned against restarts without prior deploy. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1749805003282489)
 
 > [open] 2025-06-16 — Position breaks after Beeks outage; ongoing rec with Argamon
 > Beeks outage 2025-05-25/26 (DNS/public connectivity broken on trading-1 and -2; fixed ~2h after ticket NOCINT-710359). Trades dropped on reconnection created position break. Daria asked Argamon for position rec 2025-06-16 to realign Compass. Subsequent rec work revealed deeper currency breaks (see 2025-06-23 entry). compassDB query performance also degraded — slow queries against HOUSE1TradePositionHistory taking >30s; Justin bumped `net_read_timeout` to 240s. Argamon also requesting Pulse or broader DB access for trade-by-trade rec. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1748216407505139)
 
-> [resolved] 2025-06-09 — XPTUSD retail losses ~$13k; hybrid hedger not clearing risk fast enough
-> Amir flagged -$13.3k retail P&L from $51.2m volume (−$260/M); VaR above $20k for 1 min. Will identified XPTUSD risk not cleared quickly enough — hybrid did 10M while client flow was only 1.1M. Isaac changed mid used by hybrid hedger to allow it to fire. VaR threshold lowered from $80k to $20k. UBS added for XPT pricing 2025-06-06. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1749459127167139)
 
 > [open] 2025-05-28 — Centroid migration (from OneZero) in flight; FIX tag-ordering issue blocking counterparty ID
 > Argamon notified 2025-05-19 of planned migration from OneZero to Centroid before Aug 1 (currently one Mahi insti session; requesting retail + crypto sessions). Centroid test trades 2025-05-28 rejected due to FIX tag ordering (447/448/452 dependent on 453, but Centroid cannot reorder via maker API). Liam suggested tag 109 as workaround; Lee confirmed tag 109 works (tested 2025-06-05). Isaac setting up retail + crypto Centroid channels. HRP party-block mappings require new LP setup per Guru card process. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1748473150880459)
 
-> [resolved] 2025-05-23 — Crypto over-hedging bug; hedging ~2x client volumes
-> Andrew flagged XBTUSD hedge volume ~7.84M vs internalised client flow ~3.9M for the week. Root cause: over-active "Broker-Wintermute-FASTERx500%" execution rule firing beyond inbound flow; delayed dynamic broker-LMAX hedging rule also implicated. Both rules removed 2025-05-23. Cameron and Andrew investigated whether broker-then-hedge double-counting was occurring; concluded execution-rule ordering was the cause. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1748012505591119)
-
-> [resolved] 2025-05-22 — ACG (Alpha Capital Group) routing via OZ→Argamon; NOP limit and insti channel issues
-> ACG (INST-26) flow coming through A_CLIENTS channel, executed on retail model instead of insti. Amir set up a price-check execution rule ($200/M, −$100/M mid distance). Argamon asked to request OZ route flow down an insti connection. NOP limit raised from 10k → 10M for testing; test trades confirmed booked correctly. ACG delayed go-live to Monday 2025-05-26; Amir confirmed no trades since, workflow was sound. Ongoing: Amir to follow up with ACG for live flow. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1747918313029609)
-
-> [resolved] 2025-05-15 — TOA feed 2-min delays; signalProcess consolidation; TOA MD stopped
-> Andrew identified TOA FIX session causing 2-min delays in ArgamonPrices. TOA market data feed stopped 2025-05-15 (Andrew: "stop and delete evidence"). Positions open at Binance/Toa complicated permanent removal — Amir flagged needing Argamon to close TOA positions before removing feed/orders connection. XRP/XLC hedging temporarily moved back to standard Wintermute/LMAX rules while Toa positions unwound. Separately, signal processes consolidated (all into signalProcessFI1 + SIGNALS_NYC); FSS markets added to price formation; MWMS and BMSL markets replaced. TOA hedging later restored for XRP/LTC by 2025-06-26. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1747315634169499)
-
-> [resolved] 2025-05-15 — Counterparty 84004149 crypto flow review; brokered LR / EURUSD skew tuning
-> Andrew flagged counterparty 84004149 as consistently bad for Mahi crypto book (up $200k lifetime, but consistently costly over recent weeks). Reviewed with Isaac: XBT flow switches between BBook and sharp brokered week-to-week. Amir added brokered LR to clientDist1; EURUSD signal response reduced (skew was 1 pip on 0.1 spread, dialled down to ~0.2). Separately, counterparty 84004395 flagged as toxic (retail, EURUSD-focused). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1747325182217329)
 
 > [resolved] 2026-05-08 — XAUUSD signal reverted neuron → synapse; skew-driven decision
 > Shyam switched XAUUSD signal back to synapse (from neuron, which was set 2026-04-22) in response to skew analysis. Monitoring for CPs picking off pricing; pricing impact review planned for next week. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778211684932129)
@@ -178,25 +211,23 @@ last_catchup: 2026-06-18T07:13:00Z
 
 ## Notable topics
 
+- Jonah Ink departed Argamon (Aug 2026): Will relayed Isaac's intel — Jonah has left. Escalation contact for rec disputes and P&L attribution now unclear. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1754902798818409)
+- Elan considering switching off NY Insti routing around Mahi (2026-08-11): Zendesk 21238. Liam noted this suits Mahi since Toa is the insti vehicle. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1754902798818409)
+- 26Degrees recurring brokering issues: stuck orders (2026-08-26, force-cancelled via JMX, Zendesk 21328) and duplicate trade IDs crashing hybridHedger (2026-08-27, ~$6k retail loss). Dynamic-mid startup performance fixed (PRICING_MID reduces restart from ~10 min to ~1 min). 26D switched back GTC→IOC 2026-08-29. Pattern of recurring 26D disruptions. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1756321563066389)
+- PB NOP UI work pending (Zendesk 21166, 2026-07-29): Argamon wants HRP and NatWest users to see only their own NOP/kill-switch. Liam flagged significant UI work; Dave/Elan may have a hack (hide NatWest NOP from HRP users). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1753780318658499)
+- FSS cull complete (2026-07-24): 14 markets decommissioned from Argamon (COMMERZ_FSS, JPM, NATWEST_FSS, XTX_2, XTX_STD, DEUTSCHE_FSS, HSBC, JPM_INST, JUMP, UBS, XTX_DARK, XTX, HCTECH, LMAX). RI hedgers not running post-release (expected per Will). Environment significantly cleaned up. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1753334480526809)
+- XTX-Algo hedger confirmed live (2026-07-08): All test trades passed. Separately: XTX_ALGO not suitable for brokering (IOC timeout); PRICING_MID style adopted to fix slow dynamic-mid restarts. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751978544253569)
+- Contract split confirmed (2026-07-01): Mahi=retail tenant, Toa=B2B/Crypto/RI; connectivity pipeline falls to Toa; insti contract signed to Toa. Resourcing shuffle between teams pending. Retail contract conversion to fixed-fee still pending before Elan's planned spread tightening. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751381584552799)
+- Currency position rec is a formal recurring process (resolved 2026-07-02): Argamon submits rec reports; Mahi adjusts Compass positions to match. Root causes include crypto JPY hedging currency exposure and large EURAUD trader P&L included in Compass but not client platform. Will Carter proposed argamon_rec.ipynb in analytics-python-tools. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1751424351939279)
+- Reactive Markets production progressing (recurring): NatWest slow consumer isolated (not yet fixed). Beeks escalation required each incident — pattern is: hour on phone with L1, L2 escalation, fixed instantly. HSBC_RCTV_HRP_1 noted as slow consumer. HRP/NatWest streams disconnected after Beeks weekend change (2026-07-07) required switch to OZ takers. GTS Reactive markets added to hybridHedger1 non-LP-reducing rules 2026-07-14. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1751845142867209)
 - CHI signal process NPE root cause: tenant profile rename (2026-06-11): James identified that renaming a tenant profile kills models referencing the old name. Liam confirmed the NPE-safe version exists (used in Distribution) but not deployed everywhere — an open code hygiene issue. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781179106111309)
-- CBOE hedger toggled off after PnL firewall breach (2026-06-11): New CBOE hedger at TOA-ARGAMON tripped during overnight XAU reval event — Lee turned off CBOE and restored CME after determining hedgers were over-trading relative to client volume. Separately established that root cause was Elan's spread config changes, not hedging. CBOE hedger remains off for now. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781138596048159)
-- referencePriceMarketSelectors tuned for XAU/EUR/GBP (2026-06-10): Shyam updated LP sets for three instruments after lead-lag and TOB analysis over large price moves and opens. XAU: removed NWM_RCTV_HRP_1 and MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
-- propTrader1 HRP switch (2026-06-05): James switched TOA-ARGAMON to use `propTrader1HrpChi1`/`propTrader1HrpLdn1` in internal-toa-ops — likely the config change that preceded the 2026-06-07 MARKETMAKING_HRP_INSTI processes-down event (CHI propTrader not yet set up at that point). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780658564969939)
+- CBOE hedger toggled off after PnL firewall breach (2026-06-11): New CBOE hedger at TOA-ARGAMON tripped during overnight XAU reval event — Lee turned off CBOE and restored CME after determining hedgers were over-trading relative to client volume. Separately established that root cause was Elan's spread config changes, not hedging. CBOE hedger remains off. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1781138596048159)
+- referencePriceMarketSelectors tuned for XAU/EUR/GBP (2026-06-10): Shyam updated LP sets for three instruments after lead-lag and TOB analysis. XAU: removed NWM_RCTV_HRP_1 and MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
 - Build hygiene flag: Maten noted after the 2026-06-07 gateway rollback that toa-argamon should retain more than just the latest build so rollbacks can happen without copying from another env. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1780814743280519)
-- Weekly P&L (w/c 2026-05-12): $5.9k from retail, caused by XAUAUD scalping by two new retail accounts (CPs 105988 + 105990, ~6 days old) — 106 small round-trips during FX twilight. Root cause: XAUAUD `arbProtectionParameters` was clamping the published quote into UBS's wide twilight spread instead of using the clean triangulated price. Fix: Shyam removed XAUAUD from arb protection rules; now using pure triangulated price. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
-- CP 90001948 XAUUSD scalp event (2026-05-18): New counterparty, first day on platform — sold 600oz in 10 fills (300oz clips), net flat by end of day, left Mahi long through the drop. $4k PnL drop. Picked up as SIGNAL_FOLLOW+BROKER for auto-broker routing. Daria noted a few other similar-pattern traders and flagged RI consideration. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019)
-- XAUUSD routing rehab-loop risk flagged (2026-05-25): Daria noted that routing toxic XAUUSD flow to Toa (wider spreads, passive hedging) improves yields, which causes those CPs to lose their toxic classification and get re-internalised on tight spreads — where they become toxic again. Cycle repeats. Proposed fix: static brokering list for metals, or a harder rehabilitation barrier. Daria plans to split FX and metals classifications on 2026-05-26 morning (per her message), at which point metal-specific changes can be made cleanly. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779681392035259)
-- XAUUSD tenant profile split planned: Daria plans to split metals and FX into separate tenant profiles so different flow classifications apply (most FX brokered flow is soft/can be internalised; XAUUSD flow is driving signal-follow and broker classifications incorrectly for FX). Requires moving positions from CLIENTS to CLIENTS_NYC. Targeting early w/c 2026-05-25. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779154472279389)
-- XAUUSD all-brokered-to-Toa mode active (2026-05-19): Daria moved all XAUUSD brokered flow to Toa (wider spreads, tougher LR, CME hedging). Controlled by multichannel config; easy revert by adding TOA-BROKER-XAUUSD counterparty list back to dynamic rules. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779151965234289)
-- Weekly P&L (w/c 2026-05-08): $7.5k from 402m; 222m internalised ($47/M), 180m brokered ($14/M); RoS 130%. Counterparties 928986 and 928994 moved back to internalise (blacklisted from broker routing — aggregate performance OK despite two bad weeks). Skew P&L recovered after EURUSD open arb loss. Shyam actively reviewing skew and mid improvements. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
-- Mid-formation LP set under review — Tom and Daria are both pushing to broaden the price-formation LP set (COMZ, Jane Street) to reduce dependency on HSBC and to fix per-pair indicatives. Decision still sitting with Elan.
-- Reactive direct setup is the strategic remediation for NWPB (Natwest) min-ticket-size filtering of small client orders. Flagged in 2025-04-15 thread; HRP LP mappings being configured as of 2025-07-07; production test trades in progress.
-- Centroid LDN distribution issues are a CTO-level dig (James Furness) — backpressure root-caused via pcap; further work likely needed and may generalise to other NY-local clients distributing via Centroid. Argamon simultaneously migrating to Centroid from OneZero before Aug 2025, creating CPU-saturation risk; LP feed pruning flagged.
-- XAUUSD sharp-flow / signal-follow risk — signal-follow whitelist cleaned 2025-05-01 and DFSN signal added to retail pricing model. May need monitoring if similar sniping recurs.
-- Contract restructure: Mahi retains retail tenant; Toa taking B2B/Crypto/RI. Insti contract signed to Toa 2025-07-09. Retail contract conversion to fixed-fee pending before Elan's planned spread tightening.
-- Currency position rec with Argamon is now a formal recurring process — Argamon to submit regular rec reports; Mahi adjusts Compass positions to match. Root causes include crypto JPY hedging creating currency exposure Argamon didn't anticipate, and client P&L included in Compass but not client platform positions (large EURAUD traders). Will Carter proposed argamon_rec.ipynb notebook in analytics-python-tools for this.
-- Reactive Markets (Argamon via Mahi) — XTX-Algo live 2025-07-08; NY4→TKY dedicated WAN live 2025-06-16; production Reactive test trades in progress. XTXM_RCTV_HRP_1 temporarily pulled due to HRP booking duplicate issue. Slow-consumer issue with Beeks cross-connect is recurring.
-- Lucera for insti — conformance completed 2025-06-27; Daria issued credentials 2025-07-09; pricing review needed before going live (new Reactive feeds to be used).
-- Insti model change: not doing insti via Centroid — moved toward Lucera instead (Natwest drop copy 5-month delay was blocking factor). Per Daria/Elan call 2025-05-20.
-- Compass DB access / Pulse — Argamon requesting broader DB access (HouseOrder/ExternalOrder tables) for trade-by-trade rec. Liam flagged this should require a Pulse contract. Slow HOUSE1TradePositionHistory queries addressed (timeout bumped to 240s).
-- Argamon requested shared project tracking system 2025-07-07 — Daria pushed back; not proceeding at this stage.
+- Weekly P&L (w/c 2026-05-12): $5.9k retail loss from XAUAUD scalping (CPs 105988 + 105990). Root cause: `arbProtectionParameters` clamping published quote into UBS's wide twilight spread. Fix: removed XAUAUD from arb protection; now uses pure triangulated price. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
+- XAUUSD routing rehab-loop risk (2026-05-25): Routing toxic flow to Toa improves yields → loses toxic classification → gets re-internalised → becomes toxic again. Daria proposed static brokering list for metals or harder rehab barrier; FX/metals tenant profile split planned. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779681392035259)
+- Reactive direct setup is the strategic remediation for NWPB min-ticket-size filtering. Flagged 2025-04-15; HRP LP mappings configured; production test trades in progress.
+- Centroid LDN distribution issues (James Furness dig) — backpressure root-caused via pcap; Centroid migration from OneZero complete. CPU-saturation at high load; LP feed pruning applied.
+- XAUUSD sharp-flow / signal-follow risk — whitelist cleaned 2025-05-01; DFSN signal added; monitoring ongoing.
+- Insti model: Lucera replacing Centroid path (NatWest drop copy 5-month delay was blocking factor). Conformance complete; NatWest maker session live. Pricing review before full go-live.
+- Compass DB access / Pulse — Argamon requested broader DB access for rec. Liam: Pulse contract required. Slow HOUSE1TradePositionHistory queries addressed.
