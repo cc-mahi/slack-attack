@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-06-19T07:06:24Z
+last_catchup: 2026-06-22T07:15:48Z
 status: active
 retired_at: null
 retired_reason: null
@@ -25,6 +25,9 @@ retired_reason: null
 - **Relationship:** healthy, bi-weekly call cadence with Cameron Hughes; client (Benjamin Galindo) actively engaging on prop sim outputs and a futures expansion ask.
 
 ## Recent issues
+
+> [resolved] 2026-06-19 — XAUUSD Match Trade pricing gap (US Juneteenth holiday)
+> Rory King flagged at 18:05 BST that XAUUSD pricing was not being received from Match Trade; Benjamin Galindo (BF) suggested US bank holiday as the cause; Rory confirmed it was Juneteenth and apologised. Self-resolved, no config change needed. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1781888749613119)
 
 > [resolved] 2026-06-16 — BTC spread widened unexpectedly (distribution.markupProfiles misconfiguration)
 > Jelle flagged BTC spread was very wide at 09:02 BST; William Denny and Cameron H both jumped on it. Cameron H identified that `distribution.markupProfiles` for the internal model had somehow been changed to match the continuity pool — no recent config trace found. Widening was at distribution level, not model level. Fix applied by 13:59 BST; Jelle confirmed "Yes, it's fixed now" shortly after. Separately, Jelle also asked to decrease BTC base spreads — Cameron H confirmed "yeah sure, have any values in mind?"; client responded with target values at 13:07 ("Is it done?"), Cameron H applied the change at 13:59, and client confirmed "Yes, perfect!" at 08:14 BST on 2026-06-17. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1781596943927769) [resolved](https://mahifx.slack.com/archives/C08473TFD7Z/p1781680448615449)
