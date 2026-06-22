@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
-last_catchup: 2026-06-19T07:06:24Z
+last_catchup: 2026-06-22T07:08:01Z
 ---
 
 ## Recent issues
@@ -23,6 +23,7 @@ last_catchup: 2026-06-19T07:06:24Z
 
 > [open] 2026-06-10 — flowImbalanceNoTrades false alerts + CachingEventLogger table overflow after 20260601 analytics release
 > Cameron Copland (12:31 BST) flagged three `flowImbalanceNoTrades` PagerDuty alerts from `riskReportingExtended1` during London hours; gateway logs showed 50+ fills/min on `clientDistributionGatewayFunded4` at each alert time, so trade events are arriving at the analytics graph with minutes of lag — not a real no-trades condition. Started after Saturday's reboot picked up the 20260601 analytics release (previous release was Dec 29). Since that build, the process logs `CachingEventLogger table overflow` every minute and `GraphiteQueryService` queries take 30–100s. Host is 6 cores at load ~35 all month, so little headroom for the increased query workload. Maten Rehimi (12:41 BST) responded: root cause was a disk space issue on the AF box; deleted large log files and checked no other AF was affected. Planning to reduce AF log retention to prevent recurrence. Resolution of the false-alert / CachingEventLogger symptoms pending follow-up. [thread](https://mahifx.slack.com/archives/C079M09MGGP/p1781091087448019)
+> 2026-06-21 update — Isaac Dann noted (23:54 BST) that this same alert (`riskReportingExtended1 - marketData.signals.flowImbalanceNoTrades - FM-T-0-300000`) can also indicate the MT5 STP analytics bridge being down; recommended checking `analyticsFixServer1` status in Compass then `echo-euwest2-prod-mt4-1`. Not yet confirmed resolved. [isaac-note](https://mahifx.slack.com/archives/C079M09MGGP/p1782082495560909)
 
 > [open] 2026-06-08 — EURCAD rejects from CP 1770806082_99997 via 5ERS_FUNDED_YB_MT5 — order quantity increment mismatch
 > Nathan Burch (2026-06-08 03:51 UTC) flagged high EURCAD rejects from CP 1770806082_99997 placing qty 999.99; Mahi config accepts FX orders at increment 1.0 minimum 1.0. Andreas replied (08:18 BST 2026-06-08): their setup expects minimum 0.01, increment 0.01. Nathan confirmed he'll update config; asked whether to apply to all FX (22:11 BST). Andreas confirmed: yes, all FX (07:26 BST 2026-06-09). Change requires EOD restart — not yet applied. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1780890673528329) [confirmation](https://mahifx.slack.com/archives/C07AQJS4E80/p1780986381344349)
@@ -83,6 +84,8 @@ last_catchup: 2026-06-19T07:06:24Z
 > Andreas sending test trades through yourbourse→Mahi; Shyam + Isaac monitoring. Isaac's 04-24 update: trades flowing as expected; some cancels from off-market/last-look breaching limit orders but nothing unexpected. 04-28: client switched XAUUSD flow to YB+Mahi too. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1776981907673599)
 
 ## Notable topics
+
+- 2026-06-21 — Isaac Dann added diagnostic note to the ongoing flowImbalanceNoTrades open issue: alert from `riskReportingExtended1` can also indicate the MT5 STP analytics bridge being down — check `analyticsFixServer1` in Compass then `echo-euwest2-prod-mt4-1`. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1782082495560909)
 
 - 2026-06-18 — cTrader Dev connection confirmed ready for live; Yaniv proceeding with gradual go-live (one asset at a time) from June 19. Cameron Hughes gave the all-clear: pricing in all stages and funded-flow execution in place. [confirmation](https://mahifx.slack.com/archives/C07AQJS4E80/p1750251598711169)
 
