@@ -7,10 +7,18 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-19T07:06:24Z
+last_catchup: 2026-06-22T07:12:52Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-22 — CP 27072471 trading 1000+oz orders; dipping hedging window; losses flagged; under watch
+> Daria flagged losses this morning unrelated to recent hedging changes: CP 27072471 placing single orders over 1000oz, exploiting the 500ms–1s mark where Mahi is hedging (paying wider spreads at Velocity ~73c, Finalto $1–$1.30 vs CPL 30c at 1k), then reverting. Not a hedging-config issue. Daria updated twilight base spreads (not TOB) to be slightly wider than liquid timezones. Tagged Cameron Hughes to monitor today. Hedging sim builds 38–42 with different max VaR levels queued for review.
+> [Daria analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1782092102362309) · [watch tagged to Cameron Hughes](https://mahifx.slack.com/archives/C046RNF64VD/p1782100607522419)
+
+> [open] 2026-06-19 — 2,000oz offsetting XAUUSD positions (short Velocity / long Finalto); Velocity margin >110%; no Compass visibility
+> David Manoukian reported 2,000oz short XAUUSD at Velocity and 2,000oz long at Finalto — margin usage at Velocity over 110%, with swap charges accumulating post-roll. Rory acknowledged and flagged for hedger configuration review. 2026-06-21: Daria unable to see the 2,000oz Velocity position in Compass, requested full position snapshot (metals, FX, CFDs) from David before open; no reply in window.
+> [David report](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781893363286879) · [Rory ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781893966952229) · [Daria reconciliation request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1782073729454259)
 
 > [open] 2026-07-29 — Trader PAMM 804854 claiming worst fills at ATC vs competing brokers; investigation open
 > Malik relayed via Amir call: large trader claims fills always worst at ATC, submitted a PAMM vs Levels Jul 14 spreadsheet comparison and provided MT Manager access. GBPJPY account 804854 is internalised by Mahi (0.3 pip slippage confirmed on Mahi side; Spotex may add further slippage on top). Mahi investigating whether slippage is attributable to Spotex or Mahi's own execution.
@@ -72,6 +80,8 @@ last_catchup: 2026-06-19T07:06:24Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-06-22 — Hedging sim builds 38–42 queued for max VaR review. Daria flagged these as ready to review today alongside the 27072471 watch. [Daria note](https://mahifx.slack.com/archives/C046RNF64VD/p1782100607522419)
 
 - 2026-07-30 — Strong FX Compass 24h: $50.1k from $958.3M ($52/M); FI P&L=$44.5k, LR P&L=$19.8k ($41/M). Daria: "the FI and LR P&L on this 😮‍💨". [daily check](https://mahifx.slack.com/archives/C046RNF64VD/p1753916329041269)
 
