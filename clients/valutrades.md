@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-19T07:06:24Z
+last_catchup: 2026-06-22T07:27:17Z
 ---
 
 ## Recent issues
@@ -117,6 +117,8 @@ last_catchup: 2026-06-19T07:06:24Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-19 — cpty 88570142 A/B book classification: client asked team to advise; William Denny confirmed A book — PnL positive but too erratic to internalise, worth monitoring as more trades come in. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781865473032039) [william-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781866028469049)
 
 - 2026-06-19 — Routine A/B book classification queries (batch): 89467404 (David: B, surprising given yield profiles), 9256774 (Isaac: no recent trades — nothing to classify), 95543864 (David: A — new strategy since April), 88992691 (David: G30=A, HSI=A), 89466094 (David: G30=B, HSIKKHD borderline, small dataset, watchlist), 65596295 (David: XAUUSD=B, NDF since April is two stories — reval from core long makes PnL look A but yield profiles say B; NDF needs further watching), 65586197 (same trading pattern as 65596295). [89467404-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750304017097749) [89467404-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750304726313989) [95543864-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750308365795679) [95543864-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750308615704979) [88992691-89466094-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750310863172829) [65596295-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1750316327163869)
 
