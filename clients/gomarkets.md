@@ -13,10 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-06-19T07:06:24Z
+last_catchup: 2026-06-22T07:18:19Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-22 — Stuck hedger positions on FX crosses (EURSGD, GBPCAD, USDSGD): execution rule brokering in B Book
+> Kieran (GoMarkets, ~04:49 UTC) flagged the system has been left long/short on low-traded FX crosses since the hedger ran unexpectedly: EURSGD hedged 20–21 June leaving residual positions, same for GBPCAD; USDSGD long/short since 9 June. He proposed an auto-clear rule (if hedged volume < 30% of position over 5d, clear automatically). Isaac (Mahi, ~04:50 UTC) acknowledged and said Mahi shouldn't be trading EURSGD or GBPCAD — the B Book isn't risk-managed from Mahi's perspective and all rules should have been internalise-only. The brokering logic should be removed from the B Book; alternatively LPR rules could clear via crosses but that adds complexity. Isaac recommended clearing manually and removing the execution rule. Client (04:57 UTC) confirmed the rule is Kieran's own and suggested Erik and Kieran discuss it; Isaac agreed to raise it in broader SC plans on a call. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782100197028099) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782100605466809)
 
 > [open] 2026-06-17 — Acc 434598 arber classification: EURUSD mobile trader mis-profiled; broader arber review flagged
 > Kieran (GoMarkets, ~07:32 UTC) flagged account 434598 — a EURUSD mobile trader — complaining for the same zero-spread arber-profiling reason as acc 71200507 resolved the prior day. Kieran shared Echo yield profile link. William Denny (Mahi) blacklisted the account from arbers and said Mahi will review arber classification to see what can be done more broadly. No systematic fix confirmed yet — pattern suggests the zero-spread / arber threshold issue affects multiple accounts. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781681572068909)
