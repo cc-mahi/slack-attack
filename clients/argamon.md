@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-06-19T07:06:24Z
+last_catchup: 2026-06-22T07:10:14Z
 ---
 
 ## Status
@@ -24,6 +24,12 @@ last_catchup: 2026-06-19T07:06:24Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [watching] 2026-06-22 — CP 90000580 switched back to internalised; going offside
+> Daria switched CP 90000580 back to internalised last week at Elan's request (it had been forcibly brokered to Toa). Up $6k from 90000580's trading this morning but internalised flow is going offside within 2 minutes (vs. onside over the last few weeks as brokered). Daria notes classifier expected to pick up as toxic and revert to brokered automatically. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782092790487579)
+
+> [resolved] 2026-06-21 — XAUUSD twilight base spread losses: TOB config fix approved
+> Another $1.5k retail loss in the XAUUSD twilight window. NY4 retail model TOB was 100oz at 8c (had been matched to the Toa retail model, now 25oz at 25c). Daria reached out to Elan; approved fix: drop TOB quantity to 25oz or 50oz, increase TOB spread to 15c, then mirror NYC beyond. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782081899504989)
 
 > [watching] 2026-06-11 — USDCHF ~$1k PnL loss at NY roll: MAHI_BENCHMARK_LDN added as LP
 > CP 90002035 (unclassified) bought USDCHF at favourable prices during a ~15-min window over NY roll where most LPs were unstable and distribution price dipped slightly below market. Buys hedged ~4 mins later; by then YP was negative. Shyam added MAHI_BENCHMARK_LDN to USDCHF LP set and CP received fast-hedge tag to prevent recurrence. Before/after backtest (Jenkins #655/#656) confirms distribution price would have stayed more aligned with market. No further action expected. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781148840004809)
