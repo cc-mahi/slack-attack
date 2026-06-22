@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-19T07:06:24Z
+last_catchup: 2026-06-22T07:24:59Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-06-19T07:06:24Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-06-21 — CLS-OFIMB removed from registry: 13 processes down on Toa Args CHI/LDN, redeployed
+> Isaac (09:02 BST) removed CLS-OFIMB from the signal registry because 13 processes were not coming back up on Toa Args CHI and LDN. propTrader1HrpLdn1 and signalProcess1 still down after the removal — Isaac noted it looked signal-versioning related; also flagged a possible duplicate feature in ML/XGBoost training in a separate message. James confirmed a redeploy was needed (11:20 BST) and completed it by 12:11 BST — CHI and LDN admin/trading confirmed OK; only propTrader1HrpLdn1 remains down (expected, per existing open entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1782028930298559
 
 > [open] 2026-07-21 — marketDataTT2 stopped on TOA CHI: v25.2 options MD bug
 > Lee stopped marketDataTT2 at Toa CHI pending a fix for an issue with version 25.2 and options market data. No ETA given. https://mahifx.slack.com/archives/C035H1VNCAD/p1753075908322289
@@ -57,8 +60,8 @@ last_catchup: 2026-06-19T07:06:24Z
 > [resolved] 2026-06-14 — TOA CHI disk at 99%: partition expanded by Lee
 > Shyam flagged (08:08 BST) disk space at 99% on TOA CHI. Lee gave the partition more disk by 08:16 BST — resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1781420916036159
 
-> [open] 2026-06-11/14 — signalProcess NPE on tenant profile rename: CHI fixed, LDN recurred
-> James flagged (14:36 BST 2026-06-11) that the CHI signal process had been down again for ~2 hours (PD Q0CHFO1JC1E7FN). Root cause: `NullPointerException: No classification store for HRP - available: [HRP-MM, NATWEST-M, HRP-PROP]` — renaming a tenant profile takes out models. Liam confirmed NPE-safe version not applied everywhere. James fixed CHI and asked Cameron to flag further alerts. 2026-06-14 22:29 BST: signalProcess1 crash-looping on toa-argamon-ln with the same NPE (PD Q18NGRWKYCWN6Q). Lee added a tenant profile for HRP-MM via Compass (https://toa-argamon-ln-admin-1.w8et.prod.toalabs.xyz:8400/configuration/edit/multiTenant.compassTenantProfiles/042dphabx9dzm) and confirmed running again at 22:37 BST. NPE-safe version still not universally applied — same issue could recur on other regions. https://mahifx.slack.com/archives/C035H1VNCAD/p1781472569145469
+> [resolved] 2026-06-11/14/21 — signalProcess NPE on tenant profile rename: resolved by redeploy, recurring pattern
+> James flagged (14:36 BST 2026-06-11) that the CHI signal process had been down again for ~2 hours (PD Q0CHFO1JC1E7FN). Root cause: `NullPointerException: No classification store for HRP - available: [HRP-MM, NATWEST-M, HRP-PROP]` — renaming a tenant profile takes out models. Liam confirmed NPE-safe version not applied everywhere. James fixed CHI and asked Cameron to flag further alerts. 2026-06-14 22:29 BST: signalProcess1 crash-looping on toa-argamon-ln with the same NPE (PD Q18NGRWKYCWN6Q). Lee added a tenant profile for HRP-MM via Compass (https://toa-argamon-ln-admin-1.w8et.prod.toalabs.xyz:8400/configuration/edit/multiTenant.compassTenantProfiles/042dphabx9dzm) and confirmed running again at 22:37 BST. 2026-06-21 09:02 BST: Isaac removed CLS-OFIMB from registry (13 processes not coming back up on Toa Args CHI/LDN); signalProcess1 among those down — flagged as signal-versioning related. James redeployed ~12:11 BST; confirmed CHI and LDN sorted. Only propTrader1HrpLdn1 still down (expected — see 2026-06-02 entry). NPE-safe version still not universally applied — same issue will recur on further tenant profile renames. https://mahifx.slack.com/archives/C035H1VNCAD/p1782028930298559
 
 > [resolved] 2026-06-10/11 — HRP_CLIENTS_NET 50k drop + hedger oscillation overnight: CBOE hedger turned off
 > Nathan flagged HRP_CLIENTS_NET dropped ~50k at 23:33 BST 2026-06-10 — hedgers tripped PnL firewall and were turned off. Lee restarted hedger (~23:42 BST, PD Q170LHEGM93L3S; also Q0NUIYV443BS3H). Further oscillation: Daria noted -$2000/M in 10s (~01:40 BST); Lee found CME+CBOE hedgers trading back and forth far beyond client vol. Root cause: Elan (Nado-side) had been changing spread config. Lee turned off the CBOE hedger, kept CME on (~01:43–01:54 BST). Lee performed manual PnL adjustment back down at ~04:43 BST. Nathan acknowledged missing the hedger-down PD alert (saw prior PnL drop notification and mistook the new one for a reversion). https://mahifx.slack.com/archives/C035H1VNCAD/p1781131334130099
@@ -215,6 +218,7 @@ last_catchup: 2026-06-19T07:06:24Z
 
 ## Notable topics
 
+- **2026-06-21 — CLS-OFIMB signal removed; ML/XGBoost duplicate feature flagged**: Isaac removed CLS-OFIMB from the Toa Args signal registry to recover 13 downed processes. In a separate message Isaac noted a possible duplicate feature on the ML/XGBoost training — no thread or follow-up; context sparse. https://mahifx.slack.com/archives/C035H1VNCAD/p1782028966717029
 - **2026-07-21 — marketDataTT2 stopped on TOA CHI (v25.2 options MD bug)**: Lee stopped the process pending a fix — no ETA, currently blocking options MD on CHI. https://mahifx.slack.com/archives/C035H1VNCAD/p1753075908322289
 - **2026-07-16 — Vertex fully closed; toa-crypto-1 AWS box shut down**: Vertex exchange formally closed. James turned off traderVertex1 and terminated the `toa-apnortheast1-prod-crypto-1` AWS instance. Vertex had been briefly reactivated 2026-07-09 to assist with their shutdown sequence (they begged for MM help). https://mahifx.slack.com/archives/C035H1VNCAD/p1752175088390839
 - **2026-07-10/18 — CVEX recurring crash (500 unknown on replace): CVEX fixing their end ~week of 2026-07-21**: Mahi's code fix (e60cf03) handles the duplicate-cancel path but cannot handle CVEX returning HTTP 500 unknown on a replace (can't know if old or new order is live). CVEX acknowledged and said they're releasing a fix the following week. https://mahifx.slack.com/archives/C035H1VNCAD/p1752166120327089
