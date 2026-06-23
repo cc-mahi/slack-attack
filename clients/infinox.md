@@ -16,7 +16,7 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-22T07:18:22Z
+last_catchup: 2026-06-23T07:23:34Z
 ---
 
 ## Recent issues
@@ -24,8 +24,8 @@ last_catchup: 2026-06-22T07:18:22Z
 > [open] 2026-06-22 — Heavy LR add in-flight: Centroid_2145764934, Live06_MT4__86051474, live06_CN_plus_b_86051474
 > Trading Ops requested three CPs added to Heavy LR (08:01 BST); Kate Stagg acknowledged ("sure we will action this") at 08:02 BST. No confirmation received in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782111696025489)
 
-> [watching] 2026-06-19 — All Infinox members left #mahi-infinox (Slack Connect channel vacated)
-> Slackbot reported "Infinox Global has been disconnected because all members from that organization have left this channel" at 17:00 BST. Bonnie Cassidy noted it in #internal-infinox at 19:09 BST ("Bit odd that all the Infinox members have left the channel...:scream:") — no explanation or follow-up in either channel within the window. Trading Ops continued posting routine LR requests to #mahi-infinox after this event (2026-06-22 08:01 BST), suggesting a new Slack Connect invite may have been issued or the account reconnected — unclear. [Slackbot message](https://mahifx.slack.com/archives/C022S6NL82D/p1781884847801799) [Bonnie internal note](https://mahifx.slack.com/archives/C01QGUXPKEY/p1781892556954129)
+> [resolved] 2026-06-19 — All Infinox members left #mahi-infinox (Slack Connect channel vacated — Infinox Global account; Infinox Capital still active)
+> Slackbot reported "Infinox Global has been disconnected because all members from that organization have left this channel" at 17:00 BST. Bonnie Cassidy noted it in #internal-infinox at 19:09 BST. **Update 2026-06-22**: Liam clarified (#internal-infinox, 09:55 BST): "It was just Infinox Global. I think they all use the Infinox Capital Slack account now." The channel reconnect via Infinox Capital explains why Trading Ops resumed posting LR requests on 2026-06-22 08:01 BST without apparent disruption. [Slackbot message](https://mahifx.slack.com/archives/C022S6NL82D/p1781884847801799) [Bonnie internal note](https://mahifx.slack.com/archives/C01QGUXPKEY/p1781892556954129) [Liam clarification](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782118521899489)
 
 > [resolved] 2026-06-19 — Routine Heavy LR adds: Centroid_3603614, Centroid_3600698, Centroid_2145766239
 > Three batches actioned: (1) Centroid_3603614 → Heavy LR (08:19 BST); Will Denny confirmed added at 08:22. (2) Centroid_3600698 → Heavy LR (09:01 BST); Will Denny confirmed done at 09:01. (3) Centroid_2145766239 → Heavy LR (16:04 BST); Will Denny confirmed done at 16:23. [3603614 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781853552148529) [3600698 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781856068882939) [2145766239 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1781881491568949)
@@ -188,7 +188,7 @@ last_catchup: 2026-06-22T07:18:22Z
 
 ## Notable topics
 
-- 2026-06-19 — All Infinox-side members left #mahi-infinox (Slack Connect channel). Slackbot reported the disconnect at 17:00 BST; Bonnie flagged it internally. No explanation followed in window. Trading Ops resumed posting LR requests to the channel on 2026-06-22 morning, suggesting a reconnect may have occurred. [Slackbot](https://mahifx.slack.com/archives/C022S6NL82D/p1781884847801799) [Bonnie](https://mahifx.slack.com/archives/C01QGUXPKEY/p1781892556954129)
+- 2026-06-22 — #mahi-infinox Slack Connect disconnect resolved: Liam clarified that the 2026-06-19 departure was Infinox Global; all staff now use the Infinox Capital account instead, which remains connected. No channel disruption in practice. [Liam](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782118521899489)
 - 2026-06-22 — Heavy LR add in-flight (Kate acknowledged, not yet confirmed): Centroid_2145764934 + Live06_MT4__86051474 + live06_CN_plus_b_86051474. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782111696025489)
 - 2026-06-19 — Recurrent slippage complaint pattern: Sadiq raised XAUUSD slippage using xcore report figures that don't match Mahi's fill timestamps. Cameron Hughes resolved via Echo ToB: xcore uses Mahi's price 10ms before the trade, not the fill price — apparent slippage is a xcore calculation artefact. This is a second such complaint style from Infinox (prior instance involved PXM report discrepancy); the xcore timing issue may recur. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1750258367528109)
 - 2026-06-18 — Extra Heavy LR continues expanding: Centroid_3604043 added (now 5th day running with at least one Extra Heavy or Heavy LR add). Profile created 2026-05-21, vol multiplier doubled 2026-05-22, CP scope steadily growing. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1781763024083369)
