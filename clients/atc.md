@@ -7,18 +7,18 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-22T07:12:52Z
+last_catchup: 2026-06-23T07:14:29Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-22 — CP 27072471 trading 1000+oz orders; dipping hedging window; losses flagged; under watch
-> Daria flagged losses this morning unrelated to recent hedging changes: CP 27072471 placing single orders over 1000oz, exploiting the 500ms–1s mark where Mahi is hedging (paying wider spreads at Velocity ~73c, Finalto $1–$1.30 vs CPL 30c at 1k), then reverting. Not a hedging-config issue. Daria updated twilight base spreads (not TOB) to be slightly wider than liquid timezones. Tagged Cameron Hughes to monitor today. Hedging sim builds 38–42 with different max VaR levels queued for review.
-> [Daria analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1782092102362309) · [watch tagged to Cameron Hughes](https://mahifx.slack.com/archives/C046RNF64VD/p1782100607522419)
+> [open] 2026-06-22 — CP 27072471 trading 1000+oz orders; BMSL changes deployed; losses continuing
+> Daria flagged losses this morning unrelated to recent hedging changes: CP 27072471 placing single orders over 1000oz, exploiting the 500ms–1s mark where Mahi is hedging (paying wider spreads at Velocity ~73c, Finalto $1–$1.30 vs CPL 30c at 1k), then reverting. Not a hedging-config issue. Daria updated twilight base spreads (not TOB) to be slightly wider than liquid timezones. Tagged Cameron Hughes to monitor. Hedging sim builds 38–42 with different max VaR levels queued for review. **2026-06-22 afternoon**: Separately, Cameron Hughes also flagging Finalto XAUUSD spreads now terrible — bleeding Compass PnL; he and William Denny investigating, backtests 745/746 run. Daria noted MAHI_GOLD SHIUSD ties to CLIENT_PRICE_LDN XAUUSD so any XAUUSD widening flows through; Cameron removed Velocity from MWMS. Daria proposed reviewing BMSL (27072471 trading >1000oz, BMSL inactive up to 2000oz); put comparison config (without MAHI_BENCHMARK_LDN) in beta for 1 week. **2026-06-23 00:53–02:25 BST**: XAUUSD BMSL changes deployed live — widening past TOB now references aggregate of FINALTO, VELOCITY, MAHI_BENCHMARK_LDN, reaching ~50c at 1000oz (20c tighter than Velocity; Finalto wasn't quoting at this level). Flows through to SHIUSD. Max VaR also bumped to $500. **2026-06-23 04:08 BST**: CP 27072471 still hitting — another $1k loss, same large-trade pattern; spread was better at 58c but losses continuing.
+> [Daria analysis](https://mahifx.slack.com/archives/C046RNF64VD/p1782092102362309) · [watch tagged to Cameron Hughes](https://mahifx.slack.com/archives/C046RNF64VD/p1782100607522419) · [Cameron XAUUSD bleed flag](https://mahifx.slack.com/archives/C046RNF64VD/p1782143663942429) · [backtests 745/746](https://mahifx.slack.com/archives/C046RNF64VD/p1782143791827259) · [BMSL discussion thread](https://mahifx.slack.com/archives/C046RNF64VD/p1782159967417879) · [BMSL live](https://mahifx.slack.com/archives/C046RNF64VD/p1782172396900569) · [maxVaR $500](https://mahifx.slack.com/archives/C046RNF64VD/p1782177913603539) · [continuing $1k loss](https://mahifx.slack.com/archives/C046RNF64VD/p1782184104833209)
 
 > [open] 2026-06-19 — 2,000oz offsetting XAUUSD positions (short Velocity / long Finalto); Velocity margin >110%; no Compass visibility
-> David Manoukian reported 2,000oz short XAUUSD at Velocity and 2,000oz long at Finalto — margin usage at Velocity over 110%, with swap charges accumulating post-roll. Rory acknowledged and flagged for hedger configuration review. 2026-06-21: Daria unable to see the 2,000oz Velocity position in Compass, requested full position snapshot (metals, FX, CFDs) from David before open; no reply in window.
-> [David report](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781893363286879) · [Rory ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781893966952229) · [Daria reconciliation request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1782073729454259)
+> David Manoukian reported 2,000oz short XAUUSD at Velocity and 2,000oz long at Finalto — margin usage at Velocity over 110%, with swap charges accumulating post-roll. Rory acknowledged and flagged for hedger configuration review. 2026-06-21: Daria unable to see the 2,000oz Velocity position in Compass, requested full position snapshot (metals, FX, CFDs) from David before open; no reply in window. **2026-06-22 23:07 BST**: David acknowledged in #mahi-atc ("Sorry, I will try to prep for this and get you the data you need"); Daria thanked him. Snapshot not yet delivered in window.
+> [David report](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781893363286879) · [Rory ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781893966952229) · [Daria reconciliation request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1782073729454259) · [David ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1782166019885879)
 
 > [open] 2026-07-29 — Trader PAMM 804854 claiming worst fills at ATC vs competing brokers; investigation open
 > Malik relayed via Amir call: large trader claims fills always worst at ATC, submitted a PAMM vs Levels Jul 14 spreadsheet comparison and provided MT Manager access. GBPJPY account 804854 is internalised by Mahi (0.3 pip slippage confirmed on Mahi side; Spotex may add further slippage on top). Mahi investigating whether slippage is attributable to Spotex or Mahi's own execution.
@@ -80,6 +80,8 @@ last_catchup: 2026-06-22T07:12:52Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-06-23 — XAUUSD/SHIUSD BMSL changes live: widening past TOB now references aggregate of FINALTO, VELOCITY, MAHI_BENCHMARK_LDN (~50c at 1000oz). Beta config without MAHI_BENCHMARK_LDN running in parallel for 1-week comparison. Max VaR bumped to $500. Daria deployed overnight. [BMSL live](https://mahifx.slack.com/archives/C046RNF64VD/p1782172396900569) · [maxVaR $500](https://mahifx.slack.com/archives/C046RNF64VD/p1782177913603539)
 
 - 2026-06-22 — Hedging sim builds 38–42 queued for max VaR review. Daria flagged these as ready to review today alongside the 27072471 watch. [Daria note](https://mahifx.slack.com/archives/C046RNF64VD/p1782100607522419)
 
