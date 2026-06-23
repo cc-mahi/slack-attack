@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-06-22T07:12:38Z
+last_catchup: 2026-06-23T07:14:37Z
 ---
 
 ## Status
@@ -79,6 +79,7 @@ last_catchup: 2026-06-22T07:12:38Z
 
 ## Notable topics
 
+- 2026-06-22 — Tegis position migration plan: hedger off vs on debate: Kate Stagg outlined the plan for moving Tegis positions from Scope's MT5 to Base's MT5. Client (Kate B) has a ~2-hour window to close all Scope positions and open them in Base's MT5; as each opens Mahi will execute and hedge to LMAX. Two options discussed: (1) turn off the hedger until all positions are open then hedge residual risk in one go (preferred — allows risk to net off first); (2) keep hedger on throughout so risk is hedged incrementally. No decision recorded in thread. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782145182187599)
 - 2026-06-16 — Tegis flow going live: Kate Stagg confirmed they're happy to go live with the current copy-trade setup. Drop copies will use counterparty tag `BaseMarketsMT5_10101`, but Mahi receives the real execution counterparty on the actual trades. Slight execution price differences expected due to copy-trade limitations (demonstrated via Compass orders link). Give-up still unresolved — will enable accurate PnL reporting in MT5 once sorted, but not blocking go-live. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781604793310659)
 - 2026-06-15 — Hedger turned off for client position reconciliation: Cameron Hughes noted a rec of client positions and turned off the hedger for the booking. No thread replies or resolution detail in channel. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781526123658979)
 - 2026-06-12 — C Book reconciled; hybridHedgerC1 bounced + order speed scalings tuned: Cameron Hughes reconciled the C Book position to match Kate's figures from the client side. Separately, Cameron Hughes noted the hedger was sitting on risk too long and adjusted order speed scalings, then bounced `hybridHedgerC1`. No confirmation of whether the underlying internalisation price-check cancel issue (2026-05-28) is resolved. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781283034694469) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1781266318400319)
