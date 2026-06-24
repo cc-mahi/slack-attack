@@ -9,13 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-23T07:09:04Z
+last_catchup: 2026-06-24T07:19:41Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-18 — TT UAT resting orders: NQU6-SEP26 "Unknown instrument" reject — checking
-> Andri reported NQU6-SEP26 (Nasdaq Sep 26) rejecting on `valu_tt_uat_resting_orders` with `39=8, 58=Unknown instrument: NQU6-SEP26`. Shyam Hari acknowledged and is checking. No resolution in window. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1781765162150169) [shyam-checking](https://mahifx.slack.com/archives/C09HN93T0G2/p1781765208844309)
+> [resolved] 2026-06-23 — ScalePOV minParticipation decimal/integer bug — Liam fixed, gateway restarted, confirmed working
+> Andri reported urgent at 13:01 BST: ScalePOV minParticipation set to 0.5 on `oz_surya_retail_margin_tt_passthrough` but Compass showing as 0. Kate Stagg helped investigate — tracking parameter also missing from the UI (requires "Add/Remove Fields"). Liam acknowledged at 13:14 BST: "that one is my fault. It's set on our side such that it can only be an integer value, but decimals are allowed according to the spec." Fixed config and changed to 0.5%; gateway restarted at ~13:50 BST after waiting for a trigger-free window. Andri confirmed "looks good" at 13:52 BST. Gold and Oil orders then flowing via ScalePOV, but Nasdaq (NQU6-SEP26) still failing (see entry below) and Surya Strait rejecting with `TT: Submit forbidden` (see Surya Strait entry). [andri-urgent](https://mahifx.slack.com/archives/C09HN93T0G2/p1782216081741499) [liam-bug-acknowledged](https://mahifx.slack.com/archives/C09HN93T0G2/p1782216857398099) [liam-fixed](https://mahifx.slack.com/archives/C09HN93T0G2/p1782219030321499) [andri-looks-good](https://mahifx.slack.com/archives/C09HN93T0G2/p1782219158695799)
+
+> [open] 2026-06-18 — TT UAT resting orders: NQU6-SEP26 "Unknown instrument" reject — still unresolved
+> Andri originally reported NQU6-SEP26 (Nasdaq Sep 26) rejecting on `valu_tt_uat_resting_orders` with `39=8, 58=Unknown instrument: NQU6-SEP26`. Shyam Hari acknowledged and was checking. **2026-06-23 update:** During ScalePOV testing after the minParticipation gateway restart, Andri re-tested: Gold and Oil succeeded but NQU6-SEP26 again failed with `58=Instrument not found by instrument_id=17279216272585970934` (tag 39=4, `valu_tt_uat_resting_orders`). No resolution; NQU6-SEP26 instrument ID lookup still broken in UAT TT resting orders. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1781765162150169) [shyam-checking](https://mahifx.slack.com/archives/C09HN93T0G2/p1781765208844309) [2026-06-23-retest-fail](https://mahifx.slack.com/archives/C09HN93T0G2/p1782220706546449)
 
 > [resolved] 2026-06-17 — Overnight connection issue — Shyam fixed, client confirmed reconnected
 > Client posted "Hello Mahi Team, please can you fix this?" + screenshot at 22:33 BST. Shyam Hari acknowledged at 22:33 ("checking now") and asked client to check at 22:38. Client confirmed "thank you, connected now" at 23:03 — resolved in ~30 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781732025999279) [shyam-check](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781732315481389) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781733813842479)
@@ -107,8 +110,8 @@ last_catchup: 2026-06-23T07:09:04Z
 > [open] 2026-04-25 — Post-26.3 deploy: `signalProxyTx1` crashing on valutrades-ny-trading-1 — duplicate consumer
 > `MarketMetaDataSubscriber.SIGNALS_NYC2: Consumer for 393 already registered: AFM-Broker. New consumer AFM-Signal` — caused by a new code default in `signalsToPublish`. Leonardo workaround: global override on `connectivity.marketData.marketMetadata.proxy.coe.signalsToPublish`; process is back up. Asked for confirmation this is the right fix or if there's a better one. [permalink](https://mahifx.slack.com/archives/CP7A1F8BT/p1777123880055949)
 
-> [open] 2026-04-23 — Surya Strait algo connection not live — tag to send unclear
-> Andri asked about connection status for the Surya Strait algo and what tag to send; Isaac + Daria investigating, Daria asked Andri to clarify which connection. No resolution visible in the 24h window. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1776918937609649)
+> [open] 2026-04-23 — Surya Strait algo connection: `TT: Submit forbidden` on ScalePOV — FIX logs shared with client to raise to TT
+> Andri originally asked about Surya Strait algo connection status and tag to send; Isaac + Daria investigating. **2026-06-09 update:** Tag 1 for Surya Philip confirmed as `1=SYE8000`; Strait tag still unconfirmed, no trades on Strait yet to trace. **2026-06-23 update (active investigation):** During ScalePOV testing post-minParticipation fix, Philip connection tested fine (Liam confirmed 14:30 BST). Surya Strait (`TT_MHNY4_RETAIL_MARGIN_SURYA_OR`) still rejecting GCQ6-AUG26 (Gold Aug26, account 28836976) with `58=TT: Submit forbidden` (same error class as pre-June-12). Liam noted: "The previous error was 'EXT GW: RCM-X: min participation is required for SCALEPOV'. Where we are now getting 'TT: Submit forbidden'. We may need advice from TT." Client requested FIX logs to escalate; Liam provided them at 15:03 BST. Client acknowledged: "Thanks Liam". Earlier test on Strait showed tag 1 missing (caused Mahi-side failure); subsequent Strait retry also hit `TT: Submit forbidden`. Still blocked — TT escalation now in client hands. [original](https://mahifx.slack.com/archives/C09HN93T0G2/p1776918937609649) [2026-06-09-strait-tag1](https://mahifx.slack.com/archives/C09HN93T0G2/p1780994683205169) [2026-06-23-submit-forbidden-liam](https://mahifx.slack.com/archives/C09HN93T0G2/p1782221376623599) [2026-06-23-fix-logs-provided](https://mahifx.slack.com/archives/C09HN93T0G2/p1782223396876999) [client-thanks](https://mahifx.slack.com/archives/C09HN93T0G2/p1782223775040139)
 
 > [open] 2026-04-23 — TT reject on UBS Algo Gold order — `Exceeds max product long position`
 > Andri reported Gold (GCM6) algo order rejected by TT with `3: TT: Exceeds max product long position`; Kate supplied the raw FIX pair for investigation (TT_POV strategy, 162 contracts, UBS Algo cpty). Needs follow-up on position-limit config. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1776949025272839)
@@ -117,6 +120,8 @@ last_catchup: 2026-06-23T07:09:04Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-24 — Compass link briefly unavailable overnight — resolved by Isaac: Client posted in #mahi-valutrades at 02:44 BST unable to open a Compass trading-orders link (`valutrades-ny-admin-1.ext.m7bs.beeks.prod.mahimarkets.com`). Isaac confirmed "Looks to be working from my end" at 02:46 BST; client confirmed "Now all good. Thanks" at 02:53 BST. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782265474735129) [isaac-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782265578560769) [client-resolved](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782265988309889)
 
 - 2026-06-19 — cpty 88570142 A/B book classification: client asked team to advise; William Denny confirmed A book — PnL positive but too erratic to internalise, worth monitoring as more trades come in. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781865473032039) [william-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1781866028469049)
 
