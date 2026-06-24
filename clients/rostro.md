@@ -18,10 +18,13 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-06-23T07:26:06Z
+last_catchup: 2026-06-24T07:25:56Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-23 — hybridHedgerFutPSI1 double PnL firewall breach (SI_FUT_P_HEDGING_MODEL_HYBRID)
+> At 13:32 UTC Arun flagged hybridHedgerFutPSI1 tripped the 24h `pnlLimitPerDay` firewall: SI_FUT_P_HEDGING_MODEL_HYBRID swung from +278,981 to +25,194 (raw) → unrealised breach of -253,787 over 24h. Arun rebooted. At 13:36 UTC it tripped again on the per-minute firewall: -108,509 in 1 minute (13:35–13:36 UTC). Kate noted she will change the reval parameters, referencing the same reval issue seen at Amana in futures books ([Amana Slack](https://mahifx.slack.com/archives/C08T42TMKU3/p1781860768466959), [Zendesk #23128](https://mahifx.zendesk.com/agent/tickets/23128)). Parameter change not yet confirmed deployed. [Arun first breach](https://mahifx.slack.com/archives/C08ALS66EDC/p1782221567242749) [Arun second breach](https://mahifx.slack.com/archives/C08ALS66EDC/p1782221823313489) [Kate reval fix](https://mahifx.slack.com/archives/C08ALS66EDC/p1782221993388899)
 
 > [resolved] 2026-06-17 — Off-book 15min VaR: Rostro query on lowering VaR threshold
 > Alexandre (Rostro) asked at 19:51 BST how to lower the VaR on the Off-book 15min feed, noting they are "looking to protect the pnl". Sent a screenshot of the current config. William confirmed the setting is correct and changes are dynamic (implemented on the spot). Alexandre thanked and closed. [Alexandre query](https://mahifx.slack.com/archives/C08AQKRU953/p1781722284086649) [Will confirms dynamic](https://mahifx.slack.com/archives/C08AQKRU953/p1781722949089099)
@@ -238,6 +241,7 @@ last_catchup: 2026-06-23T07:26:06Z
 
 ## Notable topics
 
+- 2026-06-23 — Call notes (Kate): four new asks: (1) choice base spreads (zero base + volatility widening + MWMS) on EURUSD/GBPUSD/USDJPY for INV and VIP models; (2) SI for oil spot and futures by end of week — pricing/hedging to check, then add to risk splitting; (3) route Chinese retail STP flow (currently via PXM) through Compass to classify and broker toxic to Edgewater defensive / softer to standard Edgewater — limited near-term value-add but billable volume; (4) personalised XAUUSD feed for a ME prospect — Mahi will run M2M sim when data received, pushed back on changes until flow confirmed. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1782204138328269)
 - 2026-06-09 — Call notes (Kate): three new asks surfaced: (1) new client Rostro want to onboard with partial B-book — can be handled with risk splitting; (2) Alex asking whether Mahi has an Aeron API socket for streaming market data to a listener; (3) Rostro asking about pricing clients in HRP — what info is needed and whether it is charged as a new product/workflow. No Mahi answers yet. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1781001678366999)
 - 2026-06-03 — Scope Markets MD appointment: Bonnie flagged Finance Magnates article — John Murphy appointed as retail-focused Scope Markets Managing Director. Adds to the senior leadership churn picture (Lochlan departed, Saul Knapp left for MAS Markets). [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1780506845066869)
 - 2026-06-03 — Gold futures on SI requested: Kate speaking with Alex who wants gold futures set up on SI (currently brokering the B2B flow); will follow current futures SI workflow. [permalink](https://mahifx.slack.com/archives/C08ALS66EDC/p1780494738398969)
