@@ -16,13 +16,22 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-23T07:23:34Z
+last_catchup: 2026-06-24T07:25:51Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-22 — Heavy LR add in-flight: Centroid_2145764934, Live06_MT4__86051474, live06_CN_plus_b_86051474
-> Trading Ops requested three CPs added to Heavy LR (08:01 BST); Kate Stagg acknowledged ("sure we will action this") at 08:02 BST. No confirmation received in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782111696025489)
+> [open] 2026-06-23 — Heavy LR adds: MT5_plain_b_87972828 + MT5_plain_b_87973885 + Centroid_3596189; Sam Hewitt acknowledging but no explicit confirmation in window
+> Three CPs requested in two batches: (1) MT5_plain_b_87972828 + MT5_plain_b_87973885 requested 21:50 BST; Sam Hewitt replied "adding now" at 21:51 — no final confirm. (2) Centroid_3596189 requested 04:33 BST (24 Jun); Sam Hewitt replied "adding now" — no separate confirm. Likely actioned; await confirmation if needed. [87972828+87973885 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1782247823.456829) [Centroid_3596189](https://mahifx.slack.com/archives/C022S6NL82D/p1782271987.217269)
+
+> [resolved] 2026-06-23 — Routine Heavy LR adds: Centroid_2145766323 + Centroid_3601188 (×2 requests)
+> Three adds actioned: (1) MT5_87018814_Centroid_2145766323 → Heavy LR (12:30 BST); Rory King confirmed "Done" at 12:32. (2) MT5_87018814_Centroid_3601188 → Heavy LR (10:14 BST); Kate Stagg actioned at 10:16. (3) Same CP Centroid_3601188 requested again at 21:11 BST (possible duplicate or different tag); Daria Horton acknowledged, Sam Hewitt confirmed added at 21:48. [Centroid_2145766323](https://mahifx.slack.com/archives/C022S6NL82D/p1782214233.865169) [Centroid_3601188 morning](https://mahifx.slack.com/archives/C022S6NL82D/p1782206045.245639) [Centroid_3601188 evening](https://mahifx.slack.com/archives/C022S6NL82D/p1782245502.762279)
+
+> [resolved] 2026-06-23 — NAS100 spike at 10:42 GMT: Vantage off-market price; Mahi distributed price unaffected
+> Trading Ops asked Mahi to check NAS100 spike at 10:42 GMT (29517 → 29445, ~72 USD drop). Rory King and Kate Stagg investigated. Kate confirmed Vantage sent a very off-market price at that time but Mahi's distributed price remained aligned with the market. Trading Ops acknowledged they got ticks on "some suffixes" and were just verifying validity; satisfied with the explanation. Pattern consistent with prior NAS100/SPX Vantage-sourced anomalies. [parent](https://mahifx.slack.com/archives/C022S6NL82D/p1782222536.141379) [Kate resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1782225389.747939)
+
+> [resolved] 2026-06-22 — Heavy LR add: Centroid_2145764934, Live06_MT4__86051474, live06_CN_plus_b_86051474
+> Trading Ops requested three CPs added to Heavy LR (08:01 BST); Kate Stagg confirmed "actioned" at 08:46 BST. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782111696025489)
 
 > [resolved] 2026-06-19 — All Infinox members left #mahi-infinox (Slack Connect channel vacated — Infinox Global account; Infinox Capital still active)
 > Slackbot reported "Infinox Global has been disconnected because all members from that organization have left this channel" at 17:00 BST. Bonnie Cassidy noted it in #internal-infinox at 19:09 BST. **Update 2026-06-22**: Liam clarified (#internal-infinox, 09:55 BST): "It was just Infinox Global. I think they all use the Infinox Capital Slack account now." The channel reconnect via Infinox Capital explains why Trading Ops resumed posting LR requests on 2026-06-22 08:01 BST without apparent disruption. [Slackbot message](https://mahifx.slack.com/archives/C022S6NL82D/p1781884847801799) [Bonnie internal note](https://mahifx.slack.com/archives/C01QGUXPKEY/p1781892556954129) [Liam clarification](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782118521899489)
@@ -188,6 +197,9 @@ last_catchup: 2026-06-23T07:23:34Z
 
 ## Notable topics
 
+- 2026-06-23 — **Infinox in advanced talks to acquire Admirals**: Will Carter shared a Finance Magnates exclusive in #internal-infinox (16:14 BST); reactions from David Cooney (exploding_head). Material M&A news — Admirals is a regulated multi-asset broker with European presence. Significant potential change to Infinox's scale and footprint; worth monitoring for Mahi relationship implications. [Will Carter post](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782227667.526559)
+- 2026-06-23 — NAS100 Vantage spike (10:42 GMT): recurrent pattern — Vantage feed aberrations, Mahi distributed price unaffected; client satisfied with explanation. Third LP-sourced spike investigation in 10 days (NAS100 2026-06-15, SPX500 2026-06-17, NAS100 2026-06-23). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782222536.141379)
+- 2026-06-23 — Heavy LR adds continuing at high cadence: Centroid_3601188 requested twice in one day (morning + evening); possible tag duplication or parallel ops staff submitting. Adds now spanning nights as well (21:11, 21:50, 04:33 BST). [evening batch](https://mahifx.slack.com/archives/C022S6NL82D/p1782245502.762279)
 - 2026-06-22 — #mahi-infinox Slack Connect disconnect resolved: Liam clarified that the 2026-06-19 departure was Infinox Global; all staff now use the Infinox Capital account instead, which remains connected. No channel disruption in practice. [Liam](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782118521899489)
 - 2026-06-22 — Heavy LR add in-flight (Kate acknowledged, not yet confirmed): Centroid_2145764934 + Live06_MT4__86051474 + live06_CN_plus_b_86051474. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782111696025489)
 - 2026-06-19 — Recurrent slippage complaint pattern: Sadiq raised XAUUSD slippage using xcore report figures that don't match Mahi's fill timestamps. Cameron Hughes resolved via Echo ToB: xcore uses Mahi's price 10ms before the trade, not the fill price — apparent slippage is a xcore calculation artefact. This is a second such complaint style from Infinox (prior instance involved PXM report discrepancy); the xcore timing issue may recur. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1750258367528109)
