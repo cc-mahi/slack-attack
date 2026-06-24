@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-06-23T07:34:50Z
+last_catchup: 2026-06-24T07:25:56Z
 ---
 
 ## Recent issues
@@ -20,8 +20,8 @@ last_catchup: 2026-06-23T07:34:50Z
 > [resolved] 2026-06-23 — PXM order-splitting causing spurious LR on second leg (machine-gun misclassification)
 > Samin flagged that when a client trades a ticket larger than TOB volume, PXM splits it into legs (_1 and _2) before sending to MFX. MFX treats the rapid second leg as machine-gun behaviour and applies LR (15dpm observed on NDXUSD, counterparty RBI_5173_100142). Samin asked for base order IDs to be treated as a single ticket. Daria's resolution: ask PXM to send the order as "full" (not swept), so Compass receives the entire order and applies VWAP across published layers internally rather than the LR path. Samin applied the setting change in PXM ("Boosted"), confirmed a single ticket passed through. Daria validated the VWAP fill (4123.01) matched the stack. Resolved same session. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782193030739099)
 
-> [open] 2026-06-23 — Shahid Afrid asking how to self-investigate execution stacks
-> Shahid asked Daria to guide them on how to investigate execution themselves to see the stack that got filled. No response captured in window — open and awaiting Daria's reply. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782199529459729)
+> [resolved] 2026-06-23 — Shahid Afrid asking how to self-investigate execution stacks
+> Shahid asked Daria to guide them on how to investigate execution themselves to see the stack that got filled. Daria replied 2026-06-23 21:42 BST: historical stacks aren't directly in Compass or Echo, but Echo's TOB VWAP function shows the VWAP per LP feed — CLIENT_PRICE_LDN VWAP was 4123.012 at trade time, matching the fill. Screenshot shared. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782199529459729) [Daria's reply](https://mahifx.slack.com/archives/C096422RPKK/p1782247350241439)
 
 > [open] 2026-07-21 — FIX maker sessions posted; awaiting Starprime-B connection confirmation
 > Daria Horton sent FIX maker session credentials for Starprime-B to Samin (2026-07-21). As of 2026-08-04 Daria chased again — no connection confirmation received from the client side. Blocking go-live. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1753107069000001)
