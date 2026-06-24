@@ -17,10 +17,13 @@ key_people_overrides:
   - {name: "Neophytos Poullou", role: "IC Markets — joined mahi-ic-markets 2026-06-11 on Pavlos request; role unknown", confidence: low}
   - {name: "Ioannis", role: "IC Markets — queried OKX OPENAI/USDT + ANTHROPIC/USDT instrument availability 2026-06-11; first name only", confidence: low}
   - {name: "Konstantinos Haitas", role: "IC Markets — joined mahi-ic-markets 2026-06-12; Compass/Echo access requested by Kyriakos; role unknown", confidence: low}
-last_catchup: 2026-06-23T07:23:33Z
+last_catchup: 2026-06-24T07:24:43Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-23 — pricerBeta1 down after BMSL config change: non-ascending cumulativeQuantityToReferencePriceMultiplier keys
+> Arun Patel posted internally (10:48 BST) that pricerBeta1 was down because `pricing.benchmarkMinimumSpreadLogicParameters.cumulativeQuantityToReferencePriceMultiplier` keys were not in ascending order — a config validation failure following the BMSL depth multiplier change applied 2026-06-17 (Rory, 1.2× above 100oz). ✅ reaction on the message indicates resolved without explicit follow-up comment. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1782208091730399)
 
 > [resolved] 2026-06-22 — Cyprus meeting with IC happened; Andrew sent post-meeting email + microsite to attendees
 > Andrew Morgan confirmed (12:27 BST) that an email was sent to Cyprus lunch attendees covering next steps; the IC microsite was framed as a write-up of what was discussed. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1782127642075089) Closes the 2026-06-15 Notable topic where Cooney said he and Nicola needed to go see Angus directly. The XAU pilot (extended to 30 June) performance-review / vision-setting call and face-to-face appear to have now occurred. No further detail visible in the window.
@@ -150,6 +153,7 @@ last_catchup: 2026-06-23T07:23:33Z
 
 ## Notable topics
 
+- 2026-06-23: pricerBeta1 down briefly after BMSL config change — non-ascending `cumulativeQuantityToReferencePriceMultiplier` keys; flagged by Arun Patel, resolved same morning (✅). [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1782208091730399)
 - 2026-06-22: Cyprus meeting happened — Andrew Morgan sent post-meeting email + IC microsite to attendees; next steps in motion. Closes the "Cooney/'barbie' need to see Angus" thread from 2026-06-15. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1782127642075089)
 - 2026-06-22: Cameron Copland bounced riskPath on IC admin hosts to apply latest real-time arb code. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1782145863777159)
 - 2026-06-22: David Cooney posted something in internal channel "here is a little thing i whisked up after lunch" (joy reaction; no attachment/content visible in Slack read). [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1782128510759419)
