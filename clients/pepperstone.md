@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-06-23T07:25:59Z
+last_catchup: 2026-06-24T07:26:46Z
 ---
 
 ## History
@@ -239,6 +239,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-06-23 — MK requested FI PnL breakdown (Crypto May/June, FX+Metals May/June, XAUUSD May/June). Isaac delivered same session: Crypto $303k May / $425k June (uplift driven by late-May XBTUSD skew changes; XBTUSD NYC $52.32/M → $108.37/M); FX+Metals $1.85M May / $1.10M June; XAUUSD $1.71M May / $982k June. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782240789438949)
 - 2026-06-22 — Perp pricing call (Isaac + Tom): Tom happy with spot-mid formation logic keeping basis inline with perps. However Pepperstone unhappy with HyperLiquid hedging latency — considering switching hedging venue to Binance (still via OZ). Isaac noted Mahi has a direct Binance connection but they want it routed via OZ. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782097593522169)
 - 2026-06-22 — Isaac sorting LDN-NYC CFD hub connectivity on NOCINT-821618. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782084266457449)
 - 2026-10-03 — 3-year MSA confirmed locked in (Jul 28 dossier entry now confirmed resolved via Nicola's message: "It's official.... Pepperstone are locked in for 3 years 🔥"). New fee $115,088/mo from Aug 1 per 3rd Addendum (2025-07-16).
