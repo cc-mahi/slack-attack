@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-06-24T07:12:55Z
+last_catchup: 2026-06-25T07:18:40Z
 ---
 
 ## Status
@@ -59,6 +59,8 @@ last_catchup: 2026-06-24T07:12:55Z
 > LR fully disabled per Fintokei's request on ~2025-07-08 due to slippage-sensitive client base. Global LR applied gently from 2025-07-15. As of Feb 2026 Daria (Mahi) flagged LR PnL still very low (~$5.9k on 58.9B volume, ~$0.1/M); Kate Stagg said she'd discuss with Roman (Fintokei) in March 2026 whether to include LR in published price. No resolution confirmed. [LR apply](https://mahifx.slack.com/archives/C08R694QVNX/p1752589418837899) [Feb 2026 flag](https://mahifx.slack.com/archives/C08R694QVNX/p1770762875006809) [Mar 2026 follow-up](https://mahifx.slack.com/archives/C08R694QVNX/p1773318229000979)
 
 ## Notable topics
+
+- **2026-06-24 — pricerLSB1/2 added to infra** — Kate Stagg noted infra deploying to add `pricerLSB1/2` to the Fintokei stack, setting up in preparation for alerting. Dashboard restarted shortly after. Routine topology addition; no client impact flagged. [infra deploy](https://mahifx.slack.com/archives/C08R694QVNX/p1782298252000339)
 
 - **Weekly FI PnL snapshots** — Kate Stagg started posting weekly FI PnL snapshots in #mahi-fintokei from ~2025-11-24, running ~$310–313k/week (~$5/M). [first snapshot](https://mahifx.slack.com/archives/C08QWKFARDL/p1764004819102009)
 
