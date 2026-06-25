@@ -14,16 +14,28 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-06-24T07:13:34Z
+last_catchup: 2026-06-25T07:09:58Z
 ---
 
 ## Status
 
 - **Stage**: live — full production; A-book (spot+futures+CFD indices+FX), fat feed, B-book expansion in progress
-- **Integration**: FIX live on multiple sessions (A-book light/fat, BBOOK_CLIENTS_FAT, swapfree); B-book XAGUSD first 5 clients live 2026-06-22; XAGUSD swapfree live clients enabled 2026-06-23; more B-book clients targeted w/c 29 June; hybridHedgerB1 deployed 2026-06-23 (configuration in progress)
+- **Integration**: FIX live on multiple sessions (A-book light/fat, BBOOK_CLIENTS_FAT, swapfree); B-book XAGUSD ALL clients enabled 2026-06-24 (no automated hedger — dealers covering risk manually); XAG futures to B-book week of 2026-06-29; XAUUSD to be split to off-book before B-book go-live; hybridHedgerB1 deployed 2026-06-23, B-book CMC tag test ~complete 2026-06-25
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [open] 2026-06-25 — B-book CMC tag test: account naming confirmed, test ~complete; LMAX deferred to LDN hours
+> Isaac started B-book hedger tag testing from ~03:47 BST. Initial attempt with `1=CMC_CBOOK` hit an invalid-account rejection; Amana confirmed the correct Centroid account names are `Mahi_CMC_CBOOK` and `Mahi_CMC_TEM`. Isaac corrected and bought/sold 50 XAGUSD with CMC (90001=555 tag confirmed correct on both sides). Amana side had a coverage account permission issue at ~04:31 BST (Princess not yet available); by 05:42 BST Amana confirmed "looks ok now." At 06:29 BST Isaac proposed testing LMAX — Amana confirmed ready but Isaac deferred to London hours at 07:08 BST. [test-open](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782355777.181429) [cmc-ok](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782362542.684849) [lmax-deferred](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782367698.770019)
+
+> [open] 2026-06-24 — DAXFUT-U pricing gap: CMC pricing not received after contract roll M→U
+> Karen flagged at 15:25 BST that DAXFUT-U (Sep contract) pricing is absent (both M and U contracts listed in subscription). Rory confirmed M contract has expired and CMC pricing for U is not being received; Jump and IG pricing being received. Rory said a market data process restart at EOD should resolve it. Amana confirmed subscriptions are sending (no errors) and moved to direct LP pricing in the interim. As of end of window, pricing still not received from CMC. [karen-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782311130.644499) [rory-analysis](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782311303.610619) [amana-direct-lp](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782312502.313149)
+
+> [resolved] 2026-06-24 — XAG B-book position rec update: Hadeel submitted CSV, Shyam adjusted positions
+> Hadeel notified at 14:28 BST that Amana planned to update B-book XAG positions after market close. At 22:38 BST she sent the Position_Reconciliation_XAG_BBOOK.csv (current positions from client perspective, clients net long). Daria and Shyam handled: Shyam confirmed positions adjusted at 22:59 BST. Hadeel confirmed OK at 23:07 BST. Clean rec. [hadeel-notify](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782307680.405499) [csv-sent](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782337130.747269) [shyam-done](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782338385.787889)
+
+> [open] 2026-06-24 — XAGUSD B-book: all clients enabled; no automated hedger yet
+> Karen notified at 11:25 BST that all XAGUSD clients are now routing to MahiB. Rory confirmed at 11:27 BST: no automated hedger is set up on the B-book yet — dealers covering risk manually. Nikos and Karen confirmed they are happy to proceed on this basis. Separate from this, Nikos (11:56 BST) confirmed he is still waiting on Rory to confirm XAG futures can be enabled for B-book (blocked on the PnL reval fix). Rory's 11:59 BST response: changes are in place and being monitored, awaiting sufficient data to confirm correctness before enabling futures. [karen-all-clients](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782296706.301979) [rory-no-hedger](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782296831.872199) [nikos-futs-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782298610.763579) [rory-collecting-data](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782298354.511379)
 
 > [resolved] 2026-06-23 — SI6N (XAGFUT-N) + NG6N expiry: positions confirmed flat
 > Rafik (Amana) notified at 20:09 BST that Silver July (SI6N) and Natural Gas July (NG6N) expired and all client positions were closed. Isaac confirmed at 23:57 BST: no positions for either on Mahi's end. Separately, an indicative-pricing alert for XAGFUT-N fired at ~03:19 BST 2026-06-24 — Amana asked whether it was correct; Isaac confirmed XAGFUT-N = SI6N which had expired, and removed the alert. [expiry-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782241781648659) [alert-dismissed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782267699947249)
