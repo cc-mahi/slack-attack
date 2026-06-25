@@ -7,14 +7,18 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-24T07:16:23Z
+last_catchup: 2026-06-25T07:13:15Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-24 — Arb CP benefiting from stale continuity pool + LR not applied on force-internalisation
-> Nathan investigated a counterparty classified as arbitrager that benefited from stale (~20ms) continuity pool pricing. Three problems: (1) stale continuity pool bid price used as reference ($1.14369 actual vs $1.14347 real) — if actual bid had been used, limit orders would have been cancelled; (2) client price was wider than continuity pool at this time, meaning client-price-as-reference would also have cancelled the orders; (3) LR is not applied on force-internalisation path — ~540k LR had built up against this seller but arb execution always fails the price check and falls to force-internalisation off the raw continuity pool, bypassing LR entirely. Root cause investigation open; no fix deployed yet.
-> [Nathan investigation](https://mahifx.slack.com/archives/C046RNF64VD/p1782265089631289)
+> [open] 2026-06-25 — Finalto `unhandledTradeReport` flood; 29 fills with `ClientOrderId: null`; Zendesk 23136
+> Cameron Copland flagged 8 `unhandledTradeReport` errors in 5 minutes at 18:40 BST 2026-06-24, rising to 29 total. All inbound fills from Finalto with `ClientOrderId: null` — matches the known pattern of ex-Compass trades. Zendesk 23136 filed. Root cause not yet resolved.
+> [Cameron flag](https://mahifx.slack.com/archives/C046RNF64VD/p1782322837324759) · [Zendesk 23136](https://mahifx.zendesk.com/agent/tickets/23136)
+
+> [open] 2026-06-24 — Arb CP benefiting from stale continuity pool + LR not applied on force-internalisation; 27072471 put on temp broker ER
+> Nathan investigated a counterparty classified as arbitrager that benefited from stale (~20ms) continuity pool pricing. Three problems: (1) stale continuity pool bid price used as reference ($1.14369 actual vs $1.14347 real) — if actual bid had been used, limit orders would have been cancelled; (2) client price was wider than continuity pool at this time, meaning client-price-as-reference would also have cancelled the orders; (3) LR is not applied on force-internalisation path — ~540k LR had built up against this seller but arb execution always fails the price check and falls to force-internalisation off the raw continuity pool, bypassing LR entirely. **2026-06-24 update**: Daria placed 27072471 on a temp broker execution rule while investigation continues — classifier is indecisive this week (teetering on/off dynamic broker); yield decays 5-10s under current hedging causing losses; Daria suspects market impact from hedging but expects it should take >5m even in SNG; William Denny also reviewing. Plan: slow hedging to try to monetise with wider BMSL spreads already deployed. Cameron Hughes also confirmed 27072471 is a martingale CP (distinct from the Dave M / Nathan investigation arb counterparty). Andrew reposted ATC-Pathway.pdf context on the martingale tag set.
+> [Nathan investigation](https://mahifx.slack.com/archives/C046RNF64VD/p1782265089631289) · [Daria temp broker ER](https://mahifx.slack.com/archives/C046RNF64VD/p1782289613829969) · [Cameron Hughes martingale note](https://mahifx.slack.com/archives/C046RNF64VD/p1782292374940739) · [Andrew ATC-Pathway context](https://mahifx.slack.com/archives/C046RNF64VD/p1782291265202229)
 
 > [open] 2026-06-23 — Finalto fill rate 50%; hedger relaxed to backstop-only
 > William noted Finalto execution consistently poor — 50% fill rate on the day. Tried 2-pip maxSlippage in BACKSTOP + VAR-CLEARANCE rules (both Finalto-whitelisted only) to improve fill rate. Context: Finalto-whitelisted BACKSTOP repeatedly rejected; SUPER BACKSTOP falls through to Velocity — defeating the purpose of the whitelist. Subsequently bounced hybridHedger1 again, relaxing max spread + spread percentile gates on inactive rules (var reduction / LP reducing rules), leaving system relying on backstop rules only.
@@ -88,6 +92,8 @@ last_catchup: 2026-06-24T07:16:23Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-06-25 — Daria asked Cameron Hughes for FXCM status update (03:43 BST). No response in window. [Daria query](https://mahifx.slack.com/archives/C046RNF64VD/p1782355437854999)
 
 - 2026-06-23 — Seychelles entity structure confirmed; third martingale master tag added; BVI LP connections needed. Cameron Hughes call with Malik + Dave M: ATC UK, Caymans, Seychelles are three separate entities; Caymans migrating to Seychelles entity shortly. Hard rule: Seychelles flow hedges to BVI LPs only (never UK LPs), for legal reasons. Need new BVI LP markets for both Finalto and Velocity alongside existing UK connections. Cannot test-trade yet (no funds loaded). XAUUSD depth buffed for new clients. Dave agreed Mahi can match LP spreads on XAUUSD/SHI at all times to avoid PnL bleed — pushed back initially, landed on "fine, just don't blow out too badly". New accounts depositing gradually as profitability is confirmed. Third martingale master tag added: **27072473** (alongside 27072402 and 27072435). Also confirmed: the 241-account family driving recent PnL drops is also a martingaler. [call notes](https://mahifx.slack.com/archives/C046RNF64VD/p1782223734450169) · [new tags](https://mahifx.slack.com/archives/C046RNF64VD/p1782207539035669)
 
