@@ -16,13 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-24T07:25:51Z
+last_catchup: 2026-06-25T07:20:38Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-23 — Heavy LR adds: MT5_plain_b_87972828 + MT5_plain_b_87973885 + Centroid_3596189; Sam Hewitt acknowledging but no explicit confirmation in window
-> Three CPs requested in two batches: (1) MT5_plain_b_87972828 + MT5_plain_b_87973885 requested 21:50 BST; Sam Hewitt replied "adding now" at 21:51 — no final confirm. (2) Centroid_3596189 requested 04:33 BST (24 Jun); Sam Hewitt replied "adding now" — no separate confirm. Likely actioned; await confirmation if needed. [87972828+87973885 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1782247823.456829) [Centroid_3596189](https://mahifx.slack.com/archives/C022S6NL82D/p1782271987.217269)
+> [open] 2026-06-25 — Heavy LR adds: INF_MT5__87922481 + MT5_+_b_87922481; no Mahi ack yet
+> Trading Ops requested both tag variants of CP 87922481 → Heavy LR at 07:15 BST. No Mahi acknowledgement in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782368116.866169)
+
+> [resolved] 2026-06-25 — Centroid_3596189 → Toxic XAUUSD - Harsher profile; Isaac Dann confirming
+> Trading Ops requested MT5_87018814_Centroid_3596189 be added to the Toxic XAUUSD - Harsher profile at 07:25 BST. Isaac Dann replied "we will put this in place" at 07:26 BST (white_check_mark reaction). New profile type — first time Toxic XAUUSD - Harsher has appeared for Infinox (prior adds have been Heavy/Extra Heavy LR and Latency LL). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782368739.948289) [Isaac confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782368792.058749)
+
+> [resolved] 2026-06-23 — Heavy LR adds: MT5_plain_b_87972828 + MT5_plain_b_87973885 + Centroid_3596189; all confirmed
+> Three CPs requested in two batches: (1) MT5_plain_b_87972828 + MT5_plain_b_87973885 requested 21:50 BST; Sam Hewitt replied "adding now" at 21:51. (2) Centroid_3596189 requested 04:33 BST (24 Jun); Sam Hewitt replied "adding now." **Update 2026-06-24**: Trading Ops re-requested Centroid_3596189 at 13:20 BST; Will Denny replied "same counterparty as your msg earlier — can see that's been added in so all good." Confirmed done. [87972828+87973885 thread](https://mahifx.slack.com/archives/C022S6NL82D/p1782247823.456829) [Centroid_3596189 original](https://mahifx.slack.com/archives/C022S6NL82D/p1782271987.217269) [Will Denny confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782303603.122249)
 
 > [resolved] 2026-06-23 — Routine Heavy LR adds: Centroid_2145766323 + Centroid_3601188 (×2 requests)
 > Three adds actioned: (1) MT5_87018814_Centroid_2145766323 → Heavy LR (12:30 BST); Rory King confirmed "Done" at 12:32. (2) MT5_87018814_Centroid_3601188 → Heavy LR (10:14 BST); Kate Stagg actioned at 10:16. (3) Same CP Centroid_3601188 requested again at 21:11 BST (possible duplicate or different tag); Daria Horton acknowledged, Sam Hewitt confirmed added at 21:48. [Centroid_2145766323](https://mahifx.slack.com/archives/C022S6NL82D/p1782214233.865169) [Centroid_3601188 morning](https://mahifx.slack.com/archives/C022S6NL82D/p1782206045.245639) [Centroid_3601188 evening](https://mahifx.slack.com/archives/C022S6NL82D/p1782245502.762279)
@@ -197,6 +203,8 @@ last_catchup: 2026-06-24T07:25:51Z
 
 ## Notable topics
 
+- 2026-06-25 — **New profile type for Infinox: Toxic XAUUSD - Harsher.** Trading Ops requested Centroid_3596189 be added to this profile; Isaac Dann confirmed. This is the first Toxic XAUUSD - Harsher add seen (prior requests were Heavy/Extra Heavy LR and Latency LL). Escalation in treatment intensity: Extra Heavy LR created 2026-05-21, vol multiplier doubled 2026-05-22, now a new harsher profile variant emerging. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782368739.948289) [Isaac confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782368792.058749)
+- 2026-06-25 — Heavy LR adds still coming overnight: INF_MT5__87922481 + MT5_+_b_87922481 requested at 07:15 BST; no ack in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782368116.866169)
 - 2026-06-23 — **Infinox in advanced talks to acquire Admirals**: Will Carter shared a Finance Magnates exclusive in #internal-infinox (16:14 BST); reactions from David Cooney (exploding_head). Material M&A news — Admirals is a regulated multi-asset broker with European presence. Significant potential change to Infinox's scale and footprint; worth monitoring for Mahi relationship implications. [Will Carter post](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782227667.526559)
 - 2026-06-23 — NAS100 Vantage spike (10:42 GMT): recurrent pattern — Vantage feed aberrations, Mahi distributed price unaffected; client satisfied with explanation. Third LP-sourced spike investigation in 10 days (NAS100 2026-06-15, SPX500 2026-06-17, NAS100 2026-06-23). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782222536.141379)
 - 2026-06-23 — Heavy LR adds continuing at high cadence: Centroid_3601188 requested twice in one day (morning + evening); possible tag duplication or parallel ops staff submitting. Adds now spanning nights as well (21:11, 21:50, 04:33 BST). [evening batch](https://mahifx.slack.com/archives/C022S6NL82D/p1782245502.762279)
