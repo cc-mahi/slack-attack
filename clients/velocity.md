@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
-last_catchup: 2026-06-24T07:19:30Z
+last_catchup: 2026-06-25T07:24:49Z
 ---
 
 ## Recent issues
@@ -121,6 +121,7 @@ last_catchup: 2026-06-24T07:19:30Z
 
 ## Notable topics
 
+- 2026-06-24 — Dataset inventory request: Richard asked how many datasets uploaded; William compiled list. Richard (client-side) asked at 10:04 BST "any quick way of seeing how many datasets we've uploaded?" William responded he'd get a number plus names by 10:08–10:11 BST; at 11:16 BST William sent `velocity-datasets.csv` listing all received datasets. At 07:47 BST 2026-06-25 client replied "thanks, did SQB come from Dan?" — flagging a specific dataset (SQB) for provenance clarification; no Mahi reply yet. [Richard ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1782291886138259) [William csv](https://mahifx.slack.com/archives/C05NB72AGR2/p1782296198058129) [SQB question](https://mahifx.slack.com/archives/C05NB72AGR2/p1782370054154539)
 - 2026-06-19 — Additional simulation yield profiles sent to Jackson. William sent yield profiles for top 10 instruments + XAUUSD from sim #740 (2026-05-18–2026-05-30, UTC+0 client perspective) to Jackson at 10:24 BST. No reply in channel. [William sim send](https://mahifx.slack.com/archives/C05NB72AGR2/p1781861090016369)
 - 2026-06-18 — Simulation timezone confirmed; other instruments yield profiles pending. Jackson confirmed the simulation dataset (from email sent 2026-06-16) is UTC+0 client perspective. William ran MarkToMarket sim #741 for XAUUSD only and asked whether other instrument yield profiles are also wanted — no reply yet. [thread](https://mahifx.slack.com/archives/C05NB72AGR2/p1781622590238579)
 - 2026-06-18 — Weekly call missed; rescheduled to next week. Client (unidentified) couldn't make the 10am call; William said they'd catch up next week. [thread](https://mahifx.slack.com/archives/C05NB72AGR2/p1781772911843839)
