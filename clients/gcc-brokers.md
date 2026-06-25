@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-24T07:24:43Z
+last_catchup: 2026-06-25T07:19:50Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-24 — LMAX XAUUSD flow CSV requested; tag numbers missing from William's export
+> Nael requested a CSV of all XAUUSD flow sent to LMAX from 1 May to today, including client account/tag numbers, at 13:22 BST. Rory acknowledged; William delivered `lmax_trades.csv` at 16:13 BST. Nael confirmed receipt at 07:57 BST on 2026-06-25 but flagged that account (tag) numbers are not included — asked William to re-check. No response yet. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782303746045639) [tag-missing-reply](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782370756825539)
+
+> [resolved] 2026-06-24 — 109oz XAUUSD short filled on LMAX, Compass adjustment done
+> Layan reported 109oz gold short filled on LMAX at 15:56 BST; William confirmed "This is done" at 16:11 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782312980961469)
 
 > [resolved] 2026-06-23 — 442oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 442oz gold long filled on Finalto at 15:09 BST; William confirmed "This is done" at 15:16 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782223799447539)
