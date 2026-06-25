@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-06-24T07:25:43Z
+last_catchup: 2026-06-25T07:21:56Z
 ---
 
 ## Status
@@ -26,6 +26,9 @@ last_catchup: 2026-06-24T07:25:43Z
 
 ## Recent issues
 
+> [open] 2026-06-25 — HRP_CLIENTS_NET two PnL drop alerts (~$9k each); ~07:08 UTC; no resolution posted
+> Arun (Toa ops) flagged two back-to-back PnLDropAlerts on TOA-ARG LDN HRP_CLIENTS_NET at 08:10 BST: −$8,961 over 20 minutes (06:48–07:08 UTC, raw 364,990→356,030) and −$9,018 over 8 minutes (06:59–07:07 UTC, raw 364,930→355,912). Eyes reaction only; no diagnosis or resolution in thread as of catchup. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1782371422081669)
+
 > [resolved] 2026-06-23 — Centroid UAT IP whitelist + credentials issued for incremental MD refresh testing
 > Levi (Argamon) requested 185.125.204.156 be whitelisted for Centroid's incremental MD refresh UAT testing. Isaac coordinated with Beeks to whitelist and issued UAT FIX credentials (MD: host 192.81.110.53, SenderCompID Argamon-Centroid-UAT-Prices / MahiFX-Centroid-UAT-Prices, port 9010). Later in thread Levi also requested Orders session — Isaac confirmed all good and asked whether orders should go into retail book or a separate unused book (unanswered as of catchup). [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782182611235909)
 
@@ -35,8 +38,11 @@ last_catchup: 2026-06-24T07:25:43Z
 > [resolved] 2026-06-21 — Twilight XAUUSD TOB spread config approved: 25–50oz at 15c, mirror NYC beyond
 > Daria raised $1.5k twilight XAUUSD loss and reached out to Elan. NY4 retail model TOB was 100oz at 8c (matched to Toa retail model at 25oz/25c). Proposed dropping TOB qty to 25oz or 50oz, increasing spread to 15c, then mirroring NYC beyond — Elan approved same night. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782081899504989)
 
+> [resolved] 2026-06-25 — All brokered XAUUSD flow reverted to LPs from NY4 (retail) — Elan's request
+> Daria reverted all brokered XAUUSD flow back to go to LPs from the NY4 (retail) environment at Elan's request (02:59 BST). Closes out the CP 90000580 re-internalisation watch: flow was going offside within 2 minutes when internalised; now fully back on LP routing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782352799253379)
+
 > [watching] 2026-06-22 — CP 90000580 re-internalised; flow going offside in 2 min vs onside when brokered
-> Daria switched CP 90000580 back to internalised late last week (had been forcibly brokered per Elan's request). Up $6k from 90000580's trading on 2026-06-22 morning, but internalised flow is going offside within 2 minutes — opposite of the onside aggregate brokered trades over recent weeks. If classifier picks up as toxic, will revert to brokered automatically. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782092790487579)
+> Daria switched CP 90000580 back to internalised late last week (had been forcibly brokered per Elan's request). Up $6k from 90000580's trading on 2026-06-22 morning, but internalised flow is going offside within 2 minutes — opposite of the onside aggregate brokered trades over recent weeks. Reverted fully to LPs at Elan's request 2026-06-25 — see entry above. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782092790487579)
 
 > [open] 2026-08-27 — 26Degrees duplicate trade ID killed hybridHedger; ~$6k retail loss; dynamic-mid restart fix
 > 26Degrees sent a duplicate trade ID which caused hybridHedger to crash. ~$6k retail loss during the ~10-min outage. Root cause of slow restart: dynamic mid subscribing too many markets. Liam changed mid style to PRICING_MID, reducing restart time from ~10 min to ~1 min. 26Degrees switched back GTC→IOC on 2026-08-29. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1756321563066389)
@@ -204,7 +210,7 @@ last_catchup: 2026-06-24T07:25:43Z
 ## Notable topics
 
 - Centroid UAT incremental MD refresh testing (2026-06-23): Levi requested IP whitelist + FIX credentials for Centroid's incremental snapshot→incremental MD refresh UAT. Isaac issued UAT credentials and Beeks whitelisted 185.125.204.156. Orders session also added; Isaac asked whether orders should land in retail book or unused book — no response yet as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782182611235909)
-- CP 90000580 re-internalised; 2-min offside pattern (2026-06-22): Daria switched back from forced brokering to internalised per Elan's original request. Flow going offside in 2 minutes; brokered aggregate was onside over recent weeks. Classifier will auto-revert to brokered if toxic. Relates to the ongoing XAUUSD routing rehab-loop risk (2026-05-25 Notable topic). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782092790487579)
+- CP 90000580 XAUUSD brokering resolved (2026-06-25): After re-internalising on 2026-06-22 (flow going offside in 2 min), Daria reverted all brokered XAUUSD flow back to LPs from NY4 retail environment at Elan's request (02:59 BST). Closes the rehab-loop watch for now. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782352799253379)
 - Twilight XAUUSD TOB spread config tightened (2026-06-21): NY4 retail model was 100oz at 8c during twilight after matching to Toa retail model. After $1.5k loss, Elan approved reducing TOB qty to 25–50oz at 15c and mirroring NYC spread beyond. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782081899504989)
 - Jonah Ink departed Argamon (Aug 2026): Will relayed Isaac's intel — Jonah has left. Escalation contact for rec disputes and P&L attribution now unclear. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1754902798818409)
 - Elan considering switching off NY Insti routing around Mahi (2026-08-11): Zendesk 21238. Liam noted this suits Mahi since Toa is the insti vehicle. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1754902798818409)
