@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-06-24T07:17:10Z
+last_catchup: 2026-06-25T07:21:55Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-06-24T07:17:10Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-06-25 — PnLDropAlert on TOA-ARG LDN: HRP_CLIENTS_NET two consecutive drops, no response yet
+> Arun (08:10 BST) flagged two PnL breach alerts on TOA-ARG LDN: -8,961 in 20 minutes (06:48–07:08 UTC) and -9,018 in 8 minutes (06:59–07:07 UTC), both on HRP_CLIENTS_NET. Only an `eyes` reaction as of window close — no investigation or intervention noted. Recurrence of the XAUUSD-driven HRP_CLIENTS_NET drop pattern (see 2026-05-26 and 2026-06-10/11 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1782371422081669
 
 > [resolved] 2026-06-21 — CLS-OFIMB removed from registry: 13 processes down on Toa Args CHI/LDN, redeployed
 > Isaac (09:02 BST) removed CLS-OFIMB from the signal registry because 13 processes were not coming back up on Toa Args CHI and LDN. propTrader1HrpLdn1 and signalProcess1 still down after the removal — Isaac noted it looked signal-versioning related; also flagged a possible duplicate feature in ML/XGBoost training in a separate message. James confirmed a redeploy was needed (11:20 BST) and completed it by 12:11 BST — CHI and LDN admin/trading confirmed OK; only propTrader1HrpLdn1 remains down (expected, per existing open entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1782028930298559
