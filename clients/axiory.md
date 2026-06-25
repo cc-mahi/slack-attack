@@ -10,7 +10,8 @@ key_people_overrides:
   - {name: "Adam Foltyn", role: "client trading ops — LP/pricing escalations", confidence: low}
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory — possibly attending Cyprus event alongside Roman", confidence: low}
-last_catchup: 2026-06-24T07:10:06Z
+  - {name: "Jan", role: "Axiory TY office — data/ops requests (surname unknown)", confidence: low}
+last_catchup: 2026-06-25T07:13:21Z
 ---
 
 ## Recent issues
@@ -22,6 +23,9 @@ last_catchup: 2026-06-24T07:10:06Z
 > Adam Foltyn pulled MAHI pricing on US Oil → GER40/HKD50/US30/US100 → all FX to backup at LD4 open. Restored 04-27 after Sam Hewitt restarted the publishing process; Adam confirmed pricing recovered and switched back. Root cause (Daria, 04-28): a hazelcast WAN replication `Update overrides[distribution.distributionChannels]` at 2026-04-20 00:48:48 UTC set the LDN dist channel's internalisation market to `CLIENT_PRICE_TKY` (override last edited 2024) — surprise it didn't trigger sooner; Kate to watch LDN for similar oddities. Adam pinged 04-29 asking for RCA update — no reply yet, RCA write-up still owed. 2026-05-02: Adam confirmed `_z` suffix symbols switched back to MAHI pricing and included in give-ups as agreed — full pricing restoration complete. [permalink](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777254243398619) [internal-rca](https://mahifx.slack.com/archives/C06KQT6EU3W/p1777276704165709) [resolution](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777738779200109)
 
 ## Notable topics
+
+> 2026-06-24 — Jan (Axiory TY) requested AUDCAD spread data for 2026-06-23 21:00–21:15 UTC; Rory King provided CSV same day
+> Routine data pull; no issue flagged. [request](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782297771004419) [response](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782304953826109)
 
 > 2026-05-22 — Client call: low-spreads campaign had no volume impact; PSM interest; Compass routing still blocked by double-bubble cost
 > Kate's call notes: the low-spreads/commissions campaign Axiory ran produced no increase in volumes or account numbers — no plans to repeat. Roman interested in PSM setup. Compass routing conversation re-visited: Roman views it as still in the pipeline but "double bubble" (paying both PXM and Compass fees via XCore) remains the blocker; Kate to check whether the PXM fee-reduction agreement for clients sending flow could resolve this, and follow up with Roman. Roman planning to attend Cyprus (possibly with Magda). [permalink](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779449151258899)
