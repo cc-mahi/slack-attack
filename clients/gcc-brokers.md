@@ -12,13 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-25T07:19:50Z
+last_catchup: 2026-06-26T07:20:13Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-24 — LMAX XAUUSD flow CSV requested; tag numbers missing from William's export
-> Nael requested a CSV of all XAUUSD flow sent to LMAX from 1 May to today, including client account/tag numbers, at 13:22 BST. Rory acknowledged; William delivered `lmax_trades.csv` at 16:13 BST. Nael confirmed receipt at 07:57 BST on 2026-06-25 but flagged that account (tag) numbers are not included — asked William to re-check. No response yet. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782303746045639) [tag-missing-reply](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782370756825539)
+> [resolved] 2026-06-25 — 484oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 484oz gold long filled on Finalto at 15:04 BST; William confirmed "This is done" at 17:27 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782396268921949)
+
+> [resolved] 2026-06-24/25 — LMAX XAUUSD flow CSV delivered; LMAX defensive feed context surfaced
+> Nael requested CSV of all XAUUSD flow sent to LMAX since 1 May including client account/tag numbers at 13:22 BST on 2026-06-24. William delivered `lmax_trades.csv` at 16:13 BST but without tags. Nael flagged tags missing at 07:59 BST on 2026-06-25 with context: LMAX has requested the full flow breakdown because it has been "quite sharp lately" and GCC wants to move those client tags to LMAX's defensive feed. William clarified that since flow is internalised-then-fast-hedged there won't always be a 1:1 counterparty-to-risk mapping, then delivered `lmax_trades_withCpty.csv` at 10:37 BST. Nael confirmed "all clear" at 11:04 BST. Nael then requested transact date column added; William delivered `lmax_trades_v3.csv` at 11:18 BST. Later Nael flagged the transact time was missing the hour (Excel formatting issue); William delivered `lmax_trades_v3.xlsx` at 17:24 BST — resolved. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782303746045639) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782381876915669) [xlsx-final](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782404659502499)
 
 > [resolved] 2026-06-24 — 109oz XAUUSD short filled on LMAX, Compass adjustment done
 > Layan reported 109oz gold short filled on LMAX at 15:56 BST; William confirmed "This is done" at 16:11 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782312980961469)
