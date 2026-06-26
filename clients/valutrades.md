@@ -9,10 +9,19 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-06-25T07:24:49Z
+last_catchup: 2026-06-26T07:32:13Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-26 — Client requesting Rory and Kate's email addresses — unanswered
+> Posted in #mahi-valutrades at 08:32 BST with no reply in window. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782459136115809)
+
+> [open] 2026-06-25 — ac 89468280 A/B book classification — William Denny yet to confirm
+> Client asked team to advise at 13:21 BST; William Denny replied "Hi overnight, sure" but client chased at 14:06 BST ("still checking?") with no resolution in window. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782390066795849) [william-ack](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782390081007269) [client-chase](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782392787323779)
+
+> [resolved] 2026-06-25 — XAUUSD not pricing on surya_prices_a — client-side/oneZero issue
+> Client posted urgently at ~21:06 BST that a symbol was not pricing (screenshot in both #mahi-valutrades and #mahi-valutrades-operations). Isaac confirmed XAUUSD was firm from Mahi on all published channels; asked which FIX connection — client replied `surya_prices_a`. Isaac at 21:37 said price appeared subscribed but quotes were not sending; offered gateway restart or asked client to resubscribe. Client at 21:39: "All good think we found issue on oneZero side." [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1782418025075809) [isaac-checking](https://mahifx.slack.com/archives/C09HN93T0G2/p1782418893117029) [isaac-surya-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1782419178231389) [isaac-no-quotes](https://mahifx.slack.com/archives/C09HN93T0G2/p1782419875575999) [client-resolved](https://mahifx.slack.com/archives/C09HN93T0G2/p1782419962830959)
 
 > [resolved] 2026-06-23 — ScalePOV minParticipation decimal/integer bug — Liam fixed, gateway restarted, confirmed working
 > Andri reported urgent at 13:01 BST: ScalePOV minParticipation set to 0.5 on `oz_surya_retail_margin_tt_passthrough` but Compass showing as 0. Kate Stagg helped investigate — tracking parameter also missing from the UI (requires "Add/Remove Fields"). Liam acknowledged at 13:14 BST: "that one is my fault. It's set on our side such that it can only be an integer value, but decimals are allowed according to the spec." Fixed config and changed to 0.5%; gateway restarted at ~13:50 BST after waiting for a trigger-free window. Andri confirmed "looks good" at 13:52 BST. Gold and Oil orders then flowing via ScalePOV, but Nasdaq (NQU6-SEP26) still failing (see entry below) and Surya Strait rejecting with `TT: Submit forbidden` (see Surya Strait entry). [andri-urgent](https://mahifx.slack.com/archives/C09HN93T0G2/p1782216081741499) [liam-bug-acknowledged](https://mahifx.slack.com/archives/C09HN93T0G2/p1782216857398099) [liam-fixed](https://mahifx.slack.com/archives/C09HN93T0G2/p1782219030321499) [andri-looks-good](https://mahifx.slack.com/archives/C09HN93T0G2/p1782219158695799)
@@ -120,6 +129,10 @@ last_catchup: 2026-06-25T07:24:49Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-06-25 — QB UAT "Algo Params over FIX" testing session launched: Liam posted full QB UAT FIX credentials (`mahi_qb_uat_resting_orders` / `valu_qb_uat_resting_orders`, port 9014, host 54.210.37.117) with supported algo format tables for TT (POV, ScalePOV, TWAP+) and QB (Bolt). Marks the start of UAT-side testing of algo-params-over-FIX functionality for both TT and QB connections. [liam-creds](https://mahifx.slack.com/archives/C09HN93T0G2/p1782387495701069)
+
+- 2026-06-25 — Batch cpty A/B classification (William Denny): 69943249=A, 69943246=A, 69943248=A, 69943247=B, 69943251=A (all with charts). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782374785522829) [william-answers](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782376347677829)
 
 - 2026-06-24 — QB PROD connection `fixOrdersQB1` added to Compass — Liam posted in #internal-valutrades "Adding fixOrdersQB1 here. Might be some alerts"; +1 reaction. This marks QB PROD FIX connectivity going live following the conformance/certification completed 2026-06-16. [liam-fixOrdersQB1](https://mahifx.slack.com/archives/CP7A1F8BT/p1782293694013669)
 
