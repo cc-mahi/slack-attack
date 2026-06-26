@@ -13,16 +13,16 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-06-25T07:19:48Z
+last_catchup: 2026-06-26T07:20:14Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-25 — hybridHedgerSubTrading1 + hybridHedgerTrading1 stuck in "Unknown" after restart
-> Will (GoMarkets, ~05:22 UTC) reported restarting both hybridHedgerSubTrading1 and hybridHedgerTrading1 but both are stuck in "Unknown" status and haven't come back up. Isaac (Mahi, ~05:23 UTC) replied "I'll check this shortly." No resolution confirmed in the window — active incident. This follows the LP netting/LMAX clearing work earlier the same morning. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782364941343059) [Isaac ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782364986667849)
+> [resolved] 2026-06-25 — hybridHedgerSubTrading1 + hybridHedgerTrading1 stuck in "Unknown" after restart
+> Will (GoMarkets, ~05:22 UTC) reported both hedger processes stuck in Unknown after restart. Isaac (Mahi, ~05:23 UTC) acknowledged. Resolved ~21:46 UTC: Isaac identified the issue was with the configured markets and reconfigured them as LMAX_LDN|ISPRIME|26DEGREES|FINALTO (position-reducing trades only). Will confirmed the setup works. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782364941343059) [Isaac fix](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782423990011159)
 
-> [open] 2026-06-24 — ISPRIME set to reducing-only due to high margin
-> Will (GoMarkets, ~21:18 UTC) asked Mahi to temporarily set ISPRIME to reducing-only flow because ISPRIME margin was running high and client didn't want to push it further. Isaac (Mahi, ~21:19 UTC) confirmed he'd adjust the NOP settings. Will said he'd advise when it could revert to normal flow. No revert confirmed in window — still reducing-only as of window close. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782335933191119) [Isaac ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782335954988329)
+> [resolved] 2026-06-24 — ISPRIME set to reducing-only due to high margin
+> Will (GoMarkets, ~21:18 UTC 2026-06-24) asked Mahi to temporarily set ISPRIME to reducing-only flow because ISPRIME margin was running high. Isaac (Mahi) adjusted NOP settings. Resolved 2026-06-25 ~21:15 UTC: Will confirmed ISPRIME is good to receive normal flow again and asked for settings reversion; Isaac confirmed "this has been amended" ~21:17 UTC. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782335933191119) [revert request](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782422158952989) [Isaac ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782422245648879)
 
 > [open] 2026-06-22 — Stuck hedger positions on FX crosses (EURSGD, GBPCAD, USDSGD): execution rule brokering in B Book
 > Kieran (GoMarkets, ~04:49 UTC) flagged the system has been left long/short on low-traded FX crosses since the hedger ran unexpectedly: EURSGD hedged 20–21 June leaving residual positions, same for GBPCAD; USDSGD long/short since 9 June. He proposed an auto-clear rule (if hedged volume < 30% of position over 5d, clear automatically). Isaac (Mahi, ~04:50 UTC) acknowledged and said Mahi shouldn't be trading EURSGD or GBPCAD — the B Book isn't risk-managed from Mahi's perspective and all rules should have been internalise-only. The brokering logic should be removed from the B Book; alternatively LPR rules could clear via crosses but that adds complexity. Isaac recommended clearing manually and removing the execution rule. Client (04:57 UTC) confirmed the rule is Kieran's own and suggested Erik and Kieran discuss it; Isaac agreed to raise it in broader SC plans on a call. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782100197028099) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782100605466809)
