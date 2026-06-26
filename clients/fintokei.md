@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-06-25T07:18:40Z
+last_catchup: 2026-06-26T07:17:53Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-06-25T07:18:40Z
 
 > [open] 2026-06-16 — BMSL timezone deploy requested via Zendesk #23102
 > Kate Stagg (Mahi) raised a Zendesk ticket for a BMSL timezone deploy for Fintokei. Feature = per-TradingTimeZone overrides on pricing.benchmarkMinimumSpread (commit 66192190, in release/26.3). Triaged P3 Dev: Fintokei pricer needs upgrading to release/26.3 before this can be applied; same feature in flight for Velocity (#23080). [ticket](https://mahifx.zendesk.com/agent/tickets/23102) [internal note](https://mahifx.slack.com/archives/C08R694QVNX/p1781610590423249)
+
+> [resolved] 2026-06-25 — XAUUSD price drop complaint: clients query 2026-06-24 12:25:02–03 UTC move
+> Jan (Fintokei) posted in #mahi-fintokei asking Mahi to verify whether a sharp XAUUSD price drop at 2026-06-24 12:25:02–03 UTC was a genuine market move or a platform issue, citing multiple client complaints. Kate Stagg investigated and confirmed genuine market move (~4032 to ~4020), sharing an Echo ToB screenshot. Jan thanked and closed. [complaint](https://mahifx.slack.com/archives/C08QWKFARDL/p1782378741888539) [Kate response](https://mahifx.slack.com/archives/C08QWKFARDL/p1782379413206499)
 
 > [resolved] 2026-06-15 — Slippage complaint: account 6032915, 6 simultaneous fills on 2026-06-14 ~22:00 UTC
 > Pau (Fintokei) raised a complaint that one of 6 simultaneously-filled positions for FintokeiMT5C_6032915 received significantly higher slippage. Rory King (Mahi) acknowledged and investigated. Cameron Hughes (Mahi) explained: FINTOKEI market spreads blew out briefly, causing Mahi's pricing model to defensively widen in response, and the trade came in on that wider published spread. Pau reacted with `:thankyou:`. [complaint](https://mahifx.slack.com/archives/C08QWKFARDL/p1781524010061899) [CH explanation](https://mahifx.slack.com/archives/C08QWKFARDL/p1781524666634919)
