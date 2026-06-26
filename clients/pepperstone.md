@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-06-25T07:21:05Z
+last_catchup: 2026-06-26T07:27:36Z
 ---
 
 ## History
@@ -103,6 +103,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-06-26 — XAUUSD-PERP 0 spreads appearing randomly; HRP_GOLDI_NYC one-sided; spread config patched temporarily
+> Ruby (Pepperstone) flagged 0 spreads on XAUUSD-PERP at ~01:00 BST. Isaac identified two causes: (1) HRP_GOLDI_NYC going one-sided causing model spread to drop to zero; (2) no markup applied in SNG channel. Daria patched spread config per layer as a temporary fix. Discussion on adding Binance as a spread reference benchmark (more quotes for model to price from); Isaac confirmed Binance feed exists but was not yet set as spread reference — agreed to add it. Still live at end of window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782431997282909)
 
 > [resolved] 2026-10-03 — Tom Williams promoted to COO; Nicola's London drinks notes confirm Sep 26 catch-up
 > Will flagged Tom's COO promotion (internal, Aug 18). Nicola's notes from the Sep 25-26 London drinks with Tom, Kate Domican, and Rob Bowen: Tom happy, proud of the brand/Tamas relationship; notes MK (Marianna Konstantinidi) is joining Pepperstone unbeknownst to Kate; Kate considering a move to Dubai/BaseMarkets; Tom wants monthly catch-up cadence with Mahi; interest in CFDs and gold; LATAM — 60-person Chile office. Monthly catch-up request to be actioned. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1755501833270919) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1758892207546789)
@@ -239,6 +242,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-06-26 — Marianna requested JMX IP whitelist for 3 new IPs (104.30.161.198, 104.30.161.197, 104.30.176.130); Rory confirmed "will do". [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782393574533169)
+- 2026-06-26 — Isaac asked internally for status on MXC-67 (Jira ticket; no context given). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782434735083999)
 - 2026-06-23 — MK requested FI PnL breakdown (Crypto May/June, FX+Metals May/June, XAUUSD May/June). Isaac delivered same session: Crypto $303k May / $425k June (uplift driven by late-May XBTUSD skew changes; XBTUSD NYC $52.32/M → $108.37/M); FX+Metals $1.85M May / $1.10M June; XAUUSD $1.71M May / $982k June. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782240789438949)
 - 2026-06-22 — Perp pricing call (Isaac + Tom): Tom happy with spot-mid formation logic keeping basis inline with perps. However Pepperstone unhappy with HyperLiquid hedging latency — considering switching hedging venue to Binance (still via OZ). Isaac noted Mahi has a direct Binance connection but they want it routed via OZ. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782097593522169)
 - 2026-06-22 — Isaac sorting LDN-NYC CFD hub connectivity on NOCINT-821618. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782084266457449)
@@ -291,7 +296,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-06-04 — Isaac did a full stop-start on the London CFD env to pick up WAN config changes. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780540158588719)
 - 2026-06-04 — Marianna asked for update on S3 bucket access progress (relates to the external classifier S3 upload feature request, see open issue 2026-05-19); Rory replied he'll check internally and revert. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780578395131549)
 - 2026-06-04 — Leo Borsi deployed a Dash update for both pepperstone and pepperstone-crypto envs. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780581350155219)
-- 2026-06-08 — Kraken SOW #3 UAT credentials still not delivered: Liam confirmed integration is blocked because Reece (Pepper) still hasn't provided test credentials. Liam chased last week with no response. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780905943418209)
+- 2026-06-08 / 2026-06-26 — Kraken SOW #3: previously blocked on UAT credentials from Reece (Pepper). 2026-06-26: Tom queried directly whether the connection is set up yet; Isaac replied connection is built and in review, still needs UAT deploy + connectivity test, will get dev ETA. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1780905943418209) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782432974539369)
 - 2026-06-08 — XTX removed from referencePriceMarketSelectors (FX env): Marianna flagged XTX as a skew-sensitive feed that should only be used for hedging, not as a price reference. Rory removed all references and did rolling pricer restart same afternoon; confirmed complete. XTX was already absent from crypto pricing. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780912865095549)
 - 2026-06-08 — New crypto cross pairs requested: HYPE/BTC, HYPE/ETH, XLM/BTC, XLM/ETH — triangulated crosses (no direct feed), 1x widening factor, SI 1 hour. Kate Stagg acknowledged; no ETA yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780916305071409)
 - 2026-06-08 — Stephen queried whether XBTUSD in Crypto env should reference spot liquidity rather than CFD providers (currently referencing CFD referencePriceMarketSelectors). No Mahi reply yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1780909069182079)
