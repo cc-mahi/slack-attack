@@ -16,10 +16,22 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-25T07:20:38Z
+last_catchup: 2026-06-26T07:22:44Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-25 — MT5_87968028 execution delay query: 184ms reported vs 100ms bridge limit; Mahi FIX logs show 83ms fill
+> Sadiq asked whether Heavy LR adds execution delay (16:07 BST); Will Denny clarified LR has no delay — last-look delay is in execution rules (16:33 BST). Sadiq then queried a specific order: MT5 Deal 1371825270 / CP MT5_87968028, bridge showing 184ms but bridge execution limit is 100ms (16:52 BST). Will asked for transact time (16:54); Sadiq provided 13:01 GMT same day (19:11 BST). Kate Stagg pulled FIX logs: Mahi side shows 83ms fill (order received 13:01:10.116 UTC, execution report 13:01:10.196–13:01:10.200 UTC). No Sadiq acknowledgement in window — root cause of 184ms bridge reading vs 83ms Mahi fill not yet reconciled. [Sadiq query](https://mahifx.slack.com/archives/C022S6NL82D/p1782402724.515299) [Kate FIX logs](https://mahifx.slack.com/archives/C022S6NL82D/p1782411697.366479)
+
+> [resolved] 2026-06-25 — Toxic XAUUSD Harsher: 3 more CPs added (Centroid_2145766579, Centroid_2145766040, Centroid_3602706)
+> Trading Ops requested MT5_87018814_Centroid_2145766579, MT5_87018814_Centroid_2145766040, MT5_87018814_Centroid_3602706 → Toxic XAUUSD Harsher (14:16 BST); Rory King confirmed "This is done" at 14:17 BST. Third batch into this profile (first was single CP 2026-06-25 07:25 BST per yesterday's entry; prior window had Centroid_3596189). Profile is growing rapidly alongside Extra Heavy LR. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782393366.118749) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782393462.118169)
+
+> [resolved] 2026-06-25 — Heavy LR adds: Centroid_2145763929 + Centroid_2145763265
+> Trading Ops requested both CPs → Heavy LR (11:29 BST); Rory King confirmed "Both done" at 11:31 BST. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782383366.880709) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782383491.661209)
+
+> [resolved] 2026-06-25 — Heavy LR add: MT5_87968028 + MT5_87968028_Cov
+> Sadiq requested MT5_87968028 and MT5_87968028_Cov → Heavy LR (09:09 BST); Will Denny confirmed "Those are added in now" at 09:11 BST. Note: MT5_87968028 subsequently subject to execution delay query (see open entry above). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782374958.615699)
 
 > [open] 2026-06-25 — Heavy LR adds: INF_MT5__87922481 + MT5_+_b_87922481; no Mahi ack yet
 > Trading Ops requested both tag variants of CP 87922481 → Heavy LR at 07:15 BST. No Mahi acknowledgement in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782368116.866169)
@@ -203,6 +215,8 @@ last_catchup: 2026-06-25T07:20:38Z
 
 ## Notable topics
 
+- 2026-06-25 — **Toxic XAUUSD Harsher profile expanding rapidly: 3 more CPs added in a single batch** (Centroid_2145766579, Centroid_2145766040, Centroid_3602706), confirmed by Rory King within 1 min. Combined with the Centroid_3596189 add from yesterday's window, this profile is now accumulating CPs at a similar pace to Extra Heavy LR. Escalation trajectory: Heavy LR → Extra Heavy LR (vol mult doubled 2026-05-22) → Toxic XAUUSD Harsher (new profile, now 4+ CPs within 2 days). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782393366.118749)
+- 2026-06-25 — **LR vs last-look clarification (Sadiq):** Sadiq asked whether Heavy LR adds execution delay; Will Denny clarified LR does not add delay — last-look delay is applied separately in execution rules. Separately, Sadiq queried a 184ms execution time on MT5_87968028 against a 100ms bridge limit; Kate Stagg's FIX logs showed 83ms fill on Mahi's side — discrepancy unresolved. Possible bridge-side timing artefact or last-look interaction. [Will clarification](https://mahifx.slack.com/archives/C022S6NL82D/p1782401638.312399) [Kate FIX logs](https://mahifx.slack.com/archives/C022S6NL82D/p1782411697.366479)
 - 2026-06-25 — **New profile type for Infinox: Toxic XAUUSD - Harsher.** Trading Ops requested Centroid_3596189 be added to this profile; Isaac Dann confirmed. This is the first Toxic XAUUSD - Harsher add seen (prior requests were Heavy/Extra Heavy LR and Latency LL). Escalation in treatment intensity: Extra Heavy LR created 2026-05-21, vol multiplier doubled 2026-05-22, now a new harsher profile variant emerging. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782368739.948289) [Isaac confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782368792.058749)
 - 2026-06-25 — Heavy LR adds still coming overnight: INF_MT5__87922481 + MT5_+_b_87922481 requested at 07:15 BST; no ack in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782368116.866169)
 - 2026-06-23 — **Infinox in advanced talks to acquire Admirals**: Will Carter shared a Finance Magnates exclusive in #internal-infinox (16:14 BST); reactions from David Cooney (exploding_head). Material M&A news — Admirals is a regulated multi-asset broker with European presence. Significant potential change to Infinox's scale and footprint; worth monitoring for Mahi relationship implications. [Will Carter post](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782227667.526559)
