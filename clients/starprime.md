@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-06-26T07:08:29Z
+last_catchup: 2026-06-29T07:10:15Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-29 — Counterparty RBI_5036_5036 stuck in Arbitrageurs ER; Samin querying rehabilitation dynamics
+> Samin flagged at 07:55 BST that counterparty RBI_5036_5036 (XAUUSD) appears stuck in the Arbitrageurs execution rule and hasn't rehabilitated back to Dynamic Brokers 2 despite two days of positive markouts. Samin's hypothesis: individual trades within those days may have reset the rehab clock, or the 20dpm spread deduction may be causing the yield to dip negative at 5s/10s on 21–22 May, preventing the threshold from clearing. Asked Mahi to confirm ER reversal is functioning correctly ("ER must be dynamic"). William Denny acknowledged 08:04 BST; no resolution yet in channel. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782716127534459)
+
+> [resolved] 2026-06-26 — DOWUSD CPR flicker at session open; Velocity as sole benchmark not pricing for first seconds
+> Samin flagged at 09:36 BST that CLIENT_PRICE_LDN on DOWUSD "spazzed out" at market open (2026-06-25 ~22:00 UTC), with the CPR unable to decide on the correct mid. William Denny investigated and replied 17:03 BST: Velocity were not pricing for the first couple of seconds after open; as they are the primary benchmark market for DOWUSD, all other markets normalise against them — with no Velocity price, CPR flickered. Recommendation: start the DOWUSD session slightly later, once Velocity begins pricing. Samin acknowledged 2026-06-29 06:10 BST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782462963653769)
 
 > [resolved] 2026-06-23 — PXM order-splitting causing spurious LR on second leg (machine-gun misclassification)
 > Samin flagged that when a client trades a ticket larger than TOB volume, PXM splits it into legs (_1 and _2) before sending to MFX. MFX treats the rapid second leg as machine-gun behaviour and applies LR (15dpm observed on NDXUSD, counterparty RBI_5173_100142). Samin asked for base order IDs to be treated as a single ticket. Daria's resolution: ask PXM to send the order as "full" (not swept), so Compass receives the entire order and applies VWAP across published layers internally rather than the LR path. Samin applied the setting change in PXM ("Boosted"), confirmed a single ticket passed through. Daria validated the VWAP fill (4123.01) matched the stack. Resolved same session. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782193030739099)
@@ -55,6 +61,8 @@ last_catchup: 2026-06-26T07:08:29Z
 
 ## Notable topics
 
+- 2026-06-29 — Samin querying whether Arbitrageurs ER rehab is working for RBI_5036_5036 XAUUSD — asks Mahi to confirm "ER must be dynamic"; William acknowledged, investigation ongoing. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782716127534459)
+- 2026-06-26 — DOWUSD CPR flicker at open diagnosed: Velocity (primary benchmark) not pricing for first seconds → session should start slightly later. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782462963653769)
 - 2026-06-23 — PXM "Boosted" mode confirmed as the fix for order-splitting LR issue: Daria advised sending orders as "full" (not swept legs) so Compass VWAP fills correctly without triggering LR on the second leg. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782193030739099)
 - 2026-06-23 — Shahid Afrid asked Daria for guidance on self-service execution investigation (how to view the fill stack themselves). Unanswered in window. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782199529459729)
 - 2026-06-19 — Samin confirmed spread PnL includes FI and LR (William Denny answered yes). [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1781856637768089)
