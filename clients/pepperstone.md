@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-06-26T07:27:36Z
+last_catchup: 2026-06-29T07:13:20Z
 ---
 
 ## History
@@ -103,6 +103,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-06-28 — CFD Maker adapters offline Sunday (LR config + sessions not defined); connections restored; perp env split still open
+> Saif Nouri (OZ) forwarded a OneZero alert at 23:50 BST: all 4 CFD Maker adapters (A/B_CFD_LD, A/B_CFD_NY) failing to connect on both LDN and NY OZ hubs. Isaac replied: CFD env hadn't been added to Sunday environment checks yet, and distribution connections were offline due to an LR config issue. Connections brought back up by 00:21 BST 2026-06-29. Thread also surfaced two unresolved design questions: (1) session schedule — CFD 24/5 vs 24/7 for perps (Saif/Diego noted perps should be 24/7); (2) perp environment split — Isaac noted perps are currently all in Crypto env, plan to split to CFD env for go-live (then FX), requires new Gold i / Binance creds per env. Diego to discuss with team; MK tagged. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782687039852799)
+
+> [open] 2026-06-27 — Weekend timezone markup not applied to perp dist profiles; code fix PR #1045 up, no deploy yet
+> Marianna flagged at 12:18 BST 2026-06-27 that weekend markup dist profiles were not applying for perps (working Friday, broken Saturday). Her troubleshooting ruled out: markup value, normal-timezone config, WSS, JMX markup node (markup node visible in config but not kicking in for WKND). Isaac diagnosed at 23:11 BST 2026-06-28: root cause isolated to Weekend timezone — the per-instrument `EnumMap<TradingTimeZone, markup>` is built in three steps; step 3 (lines 172-182) back-fills WEEKEND with hardcoded zero, never consulting config. Fix: replace CUSTOM_TRADING_TIME_ZONES with OPTIONAL_TRADING_TIME_ZONES (= WEEKEND + CUSTOM1-7) in step 2. PR https://github.com/MahiFX/MahiMain/pull/1045 raised 2026-06-29 02:06 BST. No deploy yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782559084207049) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782684969634699)
 
 > [open] 2026-06-26 — XAUUSD-PERP 0 spreads appearing randomly; HRP_GOLDI_NYC one-sided; spread config patched temporarily
 > Ruby (Pepperstone) flagged 0 spreads on XAUUSD-PERP at ~01:00 BST. Isaac identified two causes: (1) HRP_GOLDI_NYC going one-sided causing model spread to drop to zero; (2) no markup applied in SNG channel. Daria patched spread config per layer as a temporary fix. Discussion on adding Binance as a spread reference benchmark (more quotes for model to price from); Isaac confirmed Binance feed exists but was not yet set as spread reference — agreed to add it. Still live at end of window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782431997282909)
