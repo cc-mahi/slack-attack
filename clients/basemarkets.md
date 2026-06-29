@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-06-26T07:15:32Z
+last_catchup: 2026-06-29T07:13:16Z
 ---
 
 ## Status
@@ -21,6 +21,9 @@ last_catchup: 2026-06-26T07:15:32Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [resolved] 2026-06-26 — Mahi Remote Gateway log flooding on MT5 backup host; binary updated weekend 2026-06-28
+> Client (Anton) reported the Mahi Remote Gateway on the backup MT5 host was filling logs with errors (the backup connects to the gateway on the primary host via 127.0.0.1, so the primary was the active node). Maten Rehimi diagnosed and provided an updated MT5 binary to throttle the log noise. Anton scheduled the update for the weekend; on 2026-06-27 confirmed the Remote Gateway was updated on both Primary and Failover MT5 hosts. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782458212368589) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782545430908519)
 
 > [open] 2026-06-09 — Centroid give-up workflow broken; alternative MT4→MT5→Compass workflow proposed
 > Kate Stagg post-call notes (2026-06-09): Centroid give-up has two showstopper issues: (1) Centroid sends zero-spread fill price to MT5 — PnL can't be tracked correctly; (2) Centroid sends one order from MT4 and one from MT5 to Compass — double execution risk. Alternative proposed: MT4 order (zero spreads) → passes to Base MT5 → STP'd to Compass → filled with spread → spread-paid fill confirmed in MT5 → client still sees zero-spread in MT4. Liam Cordelle noted a structural concern: previously Tegis P&L was against the market (STP to Scope); under the new model Base takes the other side, with Compass hedging to LMAX — mismatch risk due to internalisation and driver hedging. Kate to raise with Kate B (client); Liam signalled acceptable if there's no P&L share agreement between Tegis and Base. No resolution yet. Also discussed: separate Tegis pricing model with greater TOB quantity, aligned to LMAX (hedger) rather than Scope. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780997666453149)
@@ -79,6 +82,7 @@ last_catchup: 2026-06-26T07:15:32Z
 
 ## Notable topics
 
+- 2026-06-26 — MT5 execution bridge deploy scheduled for weekend of 2026-06-28: Maten Rehimi noted an MT5 execution bridge update was planned for this weekend, using MT4Bridge-Multibranch-Build/develop build 512. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782483928879589)
 - 2026-06-25 — Tegis position migration rescheduled to Monday (2026-06-30): Kate Stagg updated the plan — the original intent to route Scope flow to Mahi tonight and switch positions was abandoned (Kate travelling); the migration will now happen on Monday over the two-hour trading break, as it's cleaner to execute when no trades are coming in. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782389742548349)
 - 2026-06-24 — Stop-out routing via Centroid → Mahi tested successfully on coverage account 10102; same applied to 10101: Sergei Pankin (Tegis/Centroid) flagged that stop-out orders from the coverage MT5 account can be natively routed via Centroid to Mahi. Live test on account 10102 confirmed end-to-end: SO order → Centroid Gateway → new A-book TEM → Mahi, with counterparty tag `BaseMarketsMT5_10102` correctly received by Kate Stagg. An initial attempt routed to B-book TEM by mistake (Centroid misconfiguration); corrected with a new TEM set to A-book execution, no markups/delays, matching the copy-trade execution rules. After successful confirmation both sides, the same setup was applied to account 10101 in the same session. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782289760127139) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782310482426869) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782318571245309)
 - 2026-06-22 — Tegis position migration plan: hedger off vs on debate: Kate Stagg outlined the plan for moving Tegis positions from Scope's MT5 to Base's MT5. Client (Kate B) has a ~2-hour window to close all Scope positions and open them in Base's MT5; as each opens Mahi will execute and hedge to LMAX. Two options discussed: (1) turn off the hedger until all positions are open then hedge residual risk in one go (preferred — allows risk to net off first); (2) keep hedger on throughout so risk is hedged incrementally. No decision recorded in thread. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782145182187599)
