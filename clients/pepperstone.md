@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-06-29T07:13:20Z
+last_catchup: 2026-06-30T07:11:50Z
 ---
 
 ## History
