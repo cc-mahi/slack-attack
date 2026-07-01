@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-06-30T07:10:24Z
+last_catchup: 2026-07-01T07:31:14Z
 ---
 
 ## Status
@@ -209,6 +209,9 @@ last_catchup: 2026-06-30T07:10:24Z
 
 ## Notable topics
 
+- Centroid UAT IP updated to 192.109.23.20 (2026-06-30): Argamon requested the Centroid UAT IP be updated from 185.125.204.156 to 192.109.23.20 for the ongoing incremental MD refresh testing. Addressed to Isaac Dann in mahi-argamon-operations; ✅ actioned (no reply needed). [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
+- PXM_LD4_A monitoring disabled on APN1 (2026-06-29): Maten disabled PD monitoring for PXM_LD4_A distribution connection on Toa Argamon APN1 — had been disconnected since config was added; disabled to reduce PD noise. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1782721198480769)
+- Booking rejects PD alert = test trades (2026-06-29): PD incident Q3H4ARZS4AW58Y fired for booking rejects; James confirmed these are test trades. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1782727722330439)
 - Centroid UAT incremental MD refresh testing (2026-06-23): Levi requested IP whitelist + FIX credentials for Centroid's incremental snapshot→incremental MD refresh UAT. Isaac issued UAT credentials and Beeks whitelisted 185.125.204.156. Orders session also added; Isaac asked whether orders should land in retail book or unused book — no response yet as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782182611235909)
 - CP 90000580 XAUUSD brokering resolved (2026-06-25): After re-internalising on 2026-06-22 (flow going offside in 2 min), Daria reverted all brokered XAUUSD flow back to LPs from NY4 retail environment at Elan's request (02:59 BST). Closes the rehab-loop watch for now. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782352799253379)
 - Twilight XAUUSD TOB spread config tightened (2026-06-21): NY4 retail model was 100oz at 8c during twilight after matching to Toa retail model. After $1.5k loss, Elan approved reducing TOB qty to 25–50oz at 15c and mirroring NYC spread beyond. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782081899504989)
