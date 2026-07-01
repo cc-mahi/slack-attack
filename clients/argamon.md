@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-06-30T07:09:03Z
+last_catchup: 2026-07-01T07:08:39Z
 ---
 
 ## Status
@@ -159,3 +159,4 @@ last_catchup: 2026-06-30T07:09:03Z
 - 2026-06-12 — XAUUSD over-hedge investigation (26 May): Argamon ops (Levi) asked in mahi-argamon-operations how to narrow a search for a potential 1-lot XAUUSD over-hedge on 26 May. Shyam confirmed no over-hedge from Mahi's side; Levi noted they believe it's retail but lack data beyond EOD position rec to confirm. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781234757662239)
 - 2026-06-18 — JPY crypto hedging mechanism explained: Tom asked how BTCJPY client flow is hedged given Mahi hedges as BTCUSD — what happens to the JPY exposure? Isaac: USDJPY hedged through same HRP feeds as retail. Amir: Compass hedging is bucketed by asset (not 1-to-1 per client trade); there is no direct mapping between a specific client JPY crypto trade and a specific USDJPY hedge leg. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1750233313457629)
 - 2026-06-23 — Centroid UAT incremental MD refresh testing: IP 185.125.204.156 whitelisted, new pricing-only FIX credentials created (Argamon-Centroid-UAT-Prices / MahiFX-Centroid-UAT-Prices on 192.81.110.53:9010). Centroid advancing UAT work ahead of OneZero→Centroid migration. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782182611235909)
+- 2026-06-30 — Centroid UAT IP update: Argamon ops requested whitelist of new IP 192.109.23.20 for existing UAT session, replacing previously whitelisted IP. Isaac ✅. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
