@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-06-30T07:11:26Z
+last_catchup: 2026-07-01T07:22:11Z
 ---
 
 ## Recent issues
+
+> [open] 2026-06-29 — Database recs errors: incorrect numbers, unanswered
+> Mukhammad asked at ~21:23 UTC whether there's a database issue or ongoing work — getting incorrect numbers on recs "since earlier today". No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1782768234486719)
+
+> [resolved] 2026-06-29 — SI_INSTI_CLIENT_RISK_TRANSFER -2000oz XAUUSD position break
+> Louie flagged urgently at ~18:26 UTC: -2000oz sitting in SI house, API_111000021 | 3630 the only account expected to route there, but hedged SI orders showed a -2508oz discrepancy. Will traced: a riskSplitting config change made that day at 08:46 UTC caused 70 of 260 trades to split into SI_INSTI_CLIENT_RISK_TRANSFER — net -2000oz in the SI book while total B_INSTI_CLIENTS activity nets to zero. 2026-06-30 AM: Matthew asked Isaac to book a 2000oz adjustment in DISTRIBUTION_INSTI_LDN; Isaac confirmed the adjustment at 3989.49 and risk was cleared. [Louie query](https://mahifx.slack.com/archives/C0456LSHQQK/p1782757610279149) [Will trace](https://mahifx.slack.com/archives/C0456LSHQQK/p1782758916847019) [resolved](https://mahifx.slack.com/archives/C0456LSHQQK/p1782796221164699)
 
 > [resolved] 2026-06-24 — Background jobs error alert: all clear
 > Samuel posted a Compass background jobs error alert screenshot at ~22:23 UTC. Nathan checked immediately and confirmed all is good on Mahi's end; Samuel confirmed resolved. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1782336202710669)
