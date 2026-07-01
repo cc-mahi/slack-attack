@@ -12,10 +12,19 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-06-30T07:09:36Z
+last_catchup: 2026-07-01T07:22:54Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-06-30 — 1,442oz XAUUSD short filled on Finalto, Compass adjustment done
+> Layan reported 1,442oz gold short filled on Finalto at 15:11 BST; William confirmed "This is done" at 15:31 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782828718135909)
+
+> [open] 2026-06-30 — A-book hedger loss ~$11k at 30s; VaR clearance speeds and backstop tuned
+> Isaac flagged a ~$11k A-book loss at 30 seconds: flow went offside before the VaR clearance rules could exit risk — trades were too small and the hedger was clearing too slowly. Isaac made three config changes: (1) XAUUSD VaR/sec raised 500→1500; (2) VaR clearance rule speeds raised 100→150ms; LMAX and Finalto VaR clearance raised 150→250ms; (3) added a 10-second delay to the backstop rule that triggers at 5000% max VaR ($5000 VaR threshold). Backstop was already clearing well after 30s. No client-side report yet. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782783499457139)
+
+> [resolved] 2026-06-29 — 5,812oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 5,812oz gold long filled on Finalto at 15:10 BST; William confirmed "Done" at 15:12 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782742231955019)
 
 > [resolved] 2026-06-25 — 484oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 484oz gold long filled on Finalto at 15:04 BST; William confirmed "This is done" at 17:27 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782396268921949)
