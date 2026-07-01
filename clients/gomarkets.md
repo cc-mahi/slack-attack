@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-06-30T07:09:36Z
+last_catchup: 2026-07-01T07:23:06Z
 ---
 
 ## Recent issues
@@ -106,6 +106,10 @@ last_catchup: 2026-06-30T07:09:36Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-07-01 — Mac (macauleyn@gomarkets.com) Echo password reset: Mac reported being logged out of Echo and unable to match credentials with Compass account; Nathan reset it immediately. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782863598469879)
+
+- 2026-06-30 — Kieran IP whitelist for Compass access: Kieran (GoMarkets) requested IP 61.69.180.213 whitelisted for Compass access; Sam Hewitt confirmed it was done the following morning. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782858616156069)
 
 - 2026-06-17 — profitprofiles data quality: missing trades, open_close_pnl deviation, commission gaps; crypto/indices/commodities not captured. Erik (GoMarkets, ~15:04 UTC) raised two related issues: (1) Crypto, Indices, and Commodity counterparty activity is not captured in `gomarkets_nyc.profitprofiles` — William confirmed setup is needed and asked whether client wants this done; client asked if there is an extra cost; William to check. (2) 58 trades missing for account GoMarketsMT5_15001091 between 1/6–16/6 (identified via MT5 Deals report red rows); `open_close_pnl` deviates continuously from the `profit` column beyond a simple USD conversion; commission on position-opening trades is not being populated. Client noted the data appears to be in beta / unknown state and wants clarification. William said "We'll check this internally." No resolution as of window end. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781708654554079) [missing-trades follow-up](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781712621381839)
 
