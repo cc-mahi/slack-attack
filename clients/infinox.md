@@ -16,10 +16,49 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-06-30T07:09:52Z
+last_catchup: 2026-07-01T07:23:40Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-01 — SP500 15 USD spike at 15:37:35 GMT on 2026-06-30: Vantage+B2B off-market ticks, not published to clients
+> Georgia reported client complaints about a 15 USD SP500 drop at 15:37:35 GMT on 2026-06-30. Shyam investigated: Vantage and B2B both spiked off-market, causing a 1ms internal pricing spike. The spike was NOT published to clients — Mahi's price feed throttles updates to every 10ms, so it never made it out. No client trades impacted. Georgia acknowledged. [Georgia complaint](https://mahifx.slack.com/archives/C022S6NL82D/p1782872965541889) [Shyam resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1782876862230609)
+
+> [resolved] 2026-07-01 — Toxic XAUUSD Harsher add: Centroid_2145765838 (Georgia; Nathan confirmed)
+> Georgia requested MT5_87018814_Centroid_2145765838 → Toxic XAUUSD Harsher at 01:00 BST; Nathan confirmed done within 2 min. Note: same CP was also added via a separate Trading Ops request at 10:12 BST on 2026-06-30 (Will confirmed then) — possible duplicate request or Trading Ops re-confirming. [Georgia request](https://mahifx.slack.com/archives/C022S6NL82D/p1782864057135009) [Nathan confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782864137596209)
+
+> [open] 2026-06-30 — USDJPY (and EURUSD) arb: Shyam proposes realtime arb detection; no decision yet
+> Shyam posted internal note: Infinox has been getting arbed on USDJPY for ~2 weeks. IFMS/harmonics signals go noisy under arb activity; CPs execute under CATCHALL//CATCHALL until classified, then stop trading. Shyam proposes implementing realtime arb detection, acknowledging prior complaints about classification intensity. Echo yield profiles and TOB links shared. Follow-up same day: also happening on EURUSD (Shyam reply, 01:44 BST 2026-07-01). No decision or ack from Will/Kate in window. [Shyam internal note](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782786935402209)
+
+> [resolved] 2026-07-01 — Coordinated EURUSD arb burst: 4 new CPs (86054477/79/80/81) whitelisted; badCheck threshold tightened
+> Shyam flagged 4 new unclassified CPs (86054477, 86054479, 86054480, 86054481) arbing EURUSD in coordinated bursts ~10:00 and ~11:00 BST. $1,126 FI PnL impact. Cause: Minimum $/M threshold for badCheck was -$2, too loose to catch them. Shyam upped threshold to -$1 for the 30-min FX B-Book check and manually whitelisted all 4 as arbers. [Shyam internal note](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782866494277159)
+
+> [resolved] 2026-06-30 — Toxic XAUUSD Harsher adds: Centroid_2145764152 + Centroid_3590781 (Andreas Kazelas; Will confirmed)
+> Andreas Kazelas requested MT5_87018814_Centroid_2145764152 + MT5_87018814_Centroid_3590781 → Toxic XAUUSD Harsher (15:04 BST); Will Denny confirmed done at 15:06 BST. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782828265476849) [Will confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782828415620449)
+
+> [resolved] 2026-06-30 — Toxic XAUUSD Harsher adds: live06_CN_standard_b_86050916 + Live06_MT4__86050916 + 86050916; Kate confirmed
+> Trading Ops requested all three tag variants of CP 86050916 → Toxic XAUUSD Harsher (08:40 BST); Kate Stagg confirmed actioned at 08:43 BST. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782805252406509)
+
+> [resolved] 2026-06-30 — Toxic XAUUSD Harsher adds: INF_MT5__87956477 + MT5_plain_b_87956477 + MT5_plain_b_87959179 + INF_MT5__87959179 (4 CPs); Will confirmed
+> Trading Ops requested INF_MT5__87956477 + MT5_plain_b_87956477 → Toxic XAUUSD Harsher (10:34 BST); follow-up in thread added MT5_plain_b_87959179 + INF_MT5__87959179. Will Denny confirmed all 4 done at 10:46 BST. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782812073404299) [Will confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782812788750889)
+
+> [resolved] 2026-06-30 — Toxic XAUUSD Harsher add: Centroid_2145765838; Will confirmed
+> Trading Ops requested MT5_87018814_Centroid_2145765838 → Toxic XAUUSD Harsher (10:12 BST); Will Denny confirmed done at 10:29 BST. (Georgia submitted a duplicate request at 01:00 BST on 2026-07-01; Nathan re-actioned.) [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782810731207389) [Will confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782811751373649)
+
+> [resolved] 2026-06-30 — MT5_87957738 downgraded: Heavy LR → Reduced LR (both tag variants); Will confirmed after initial error
+> Trading Ops requested MT5_87957738_Cov_87957738 + MT5_87957738_n/a be removed from Heavy LR and added to Reduced LR (10:43 BST). Will Denny said done at 10:46 but ops still saw them in Heavy LR; Will rechecked and confirmed done at 10:55 BST. **Notable:** first downgrade from Heavy LR seen in this dossier — all prior requests have been upgrades. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782812631177879) [Will final confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782813345071749)
+
+> [resolved] 2026-06-30 — Heavy LR add: 86053147 all-tags (86053147 + live06_CN_standard_b_86053147 + Live06_MT4__86053147); Will confirmed
+> Trading Ops requested all three tag variants of CP 86053147 → Heavy LR (09:32 BST); Will Denny confirmed done at 09:33 BST. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782808356795169) [Will confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782808430840579)
+
+> [resolved] 2026-06-30 — Medium LR adds: INF_MT5__87960729 + MT5_CN_Standard_b_87960729 + MT5_CN_Standard_b_87960727 + INF_MT5__87960727; Sam Hewitt confirmed
+> Trading Ops requested 4 CPs (two accounts, two tag variants each) → Medium LR (07:06 BST); Sam Hewitt confirmed adding at 07:08 BST (white_check_mark reaction). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782799616376979)
+
+> [resolved] 2026-06-30 — Classification query: 87954981/87956552/87956553 not in Arbitrageur profile
+> Clio asked if 87954981, 87956552, 87956553 are classified as Arbitrageurs. Cameron Hughes checked and couldn't find their trades in Echo; Clio provided example trades. Nathan Burch replied with current classifications: 87954981=Unclassified, 87956552=broker+signal-follow, 87956553=B-book. None classified as Arbitrageur. [Clio query](https://mahifx.slack.com/archives/C022S6NL82D/p1782841670090639) [Nathan reply](https://mahifx.slack.com/archives/C022S6NL82D/p1782856533022669)
+
+> [resolved] 2026-06-29 — Toxic XAUUSD Harsher add: Centroid_3602352 + Heavy LR add: Centroid_3596252; Kate confirmed both
+> Andreas Kazelas requested MT5_87018814_Centroid_3596252 → Heavy LR (15:12 BST); Kate confirmed at 15:12. Andreas then requested MT5_87018814_Centroid_3602352 → Toxic XAUUSD Harsher (15:14 BST); Kate confirmed both actioned at 15:15. [Heavy LR request](https://mahifx.slack.com/archives/C022S6NL82D/p1782742343659399) [Harsher request](https://mahifx.slack.com/archives/C022S6NL82D/p1782742486019919) [Kate confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782742549631029)
 
 > [open] 2026-06-25 — MT5_87968028 execution delay query: 184ms reported vs 100ms bridge limit; Mahi FIX logs show 83ms fill
 > Sadiq asked whether Heavy LR adds execution delay (16:07 BST); Will Denny clarified LR has no delay — last-look delay is in execution rules (16:33 BST). Sadiq then queried a specific order: MT5 Deal 1371825270 / CP MT5_87968028, bridge showing 184ms but bridge execution limit is 100ms (16:52 BST). Will asked for transact time (16:54); Sadiq provided 13:01 GMT same day (19:11 BST). Kate Stagg pulled FIX logs: Mahi side shows 83ms fill (order received 13:01:10.116 UTC, execution report 13:01:10.196–13:01:10.200 UTC). No Sadiq acknowledgement in window — root cause of 184ms bridge reading vs 83ms Mahi fill not yet reconciled. [Sadiq query](https://mahifx.slack.com/archives/C022S6NL82D/p1782402724.515299) [Kate FIX logs](https://mahifx.slack.com/archives/C022S6NL82D/p1782411697.366479)
@@ -33,8 +72,8 @@ last_catchup: 2026-06-30T07:09:52Z
 > [resolved] 2026-06-25 — Heavy LR add: MT5_87968028 + MT5_87968028_Cov
 > Sadiq requested MT5_87968028 and MT5_87968028_Cov → Heavy LR (09:09 BST); Will Denny confirmed "Those are added in now" at 09:11 BST. Note: MT5_87968028 subsequently subject to execution delay query (see open entry above). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782374958.615699)
 
-> [open] 2026-06-25 — Heavy LR adds: INF_MT5__87922481 + MT5_+_b_87922481; no Mahi ack yet
-> Trading Ops requested both tag variants of CP 87922481 → Heavy LR at 07:15 BST. No Mahi acknowledgement in window. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782368116.866169)
+> [watching] 2026-06-25 — Heavy LR adds: INF_MT5__87922481 + MT5_+_b_87922481; no Mahi ack seen
+> Trading Ops requested both tag variants of CP 87922481 → Heavy LR at 07:15 BST. No Mahi acknowledgement seen in any subsequent window (6+ days). No follow-up from Trading Ops either — may have been actioned informally or forgotten. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782368116866169)
 
 > [resolved] 2026-06-25 — Centroid_3596189 → Toxic XAUUSD - Harsher profile; Isaac Dann confirming
 > Trading Ops requested MT5_87018814_Centroid_3596189 be added to the Toxic XAUUSD - Harsher profile at 07:25 BST. Isaac Dann replied "we will put this in place" at 07:26 BST (white_check_mark reaction). New profile type — first time Toxic XAUUSD - Harsher has appeared for Infinox (prior adds have been Heavy/Extra Heavy LR and Latency LL). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782368739.948289) [Isaac confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782368792.058749)
@@ -215,6 +254,10 @@ last_catchup: 2026-06-30T07:09:52Z
 
 ## Notable topics
 
+- 2026-07-01 — **USDJPY + EURUSD arb pressure intensifying: Shyam proposes realtime arb detection.** Two-week pattern of USDJPY arbing under CATCHALL//CATCHALL; IFMS/harmonics signals going noisy. Now also hitting EURUSD. 4 new coordinated EURUSD arbers (86054477/79/80/81) burst-traded ~10:00 and ~11:00 BST 2026-07-01 ($1,126 FI PnL) — Shyam tightened badCheck threshold from -$2 to -$1/M and manually whitelisted them. Wider proposal to implement realtime arb detection unresolved — no decision from Will/Kate in window. Context: Infinox previously pushed back on arb classification intensity (April 2026 slippage storm). [Shyam USDJPY note](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782786935402209) [Shyam EURUSD arb](https://mahifx.slack.com/archives/C01QGUXPKEY/p1782866494277159)
+- 2026-06-30 — **Toxic XAUUSD Harsher profile: 7+ CPs added in a single day** (Centroid_2145765838 ×2, INF+plain_b_87956477 ×2, INF+plain_b_87959179 ×2, 86050916 ×3, Centroid_2145764152, Centroid_3590781). Plus Centroid_3602352 and Centroid_3596252 on 2026-06-29. Profile is growing at pace comparable to Extra Heavy LR at its peak. [representative batch](https://mahifx.slack.com/archives/C022S6NL82D/p1782812073404299)
+- 2026-06-30 — **First Heavy→Reduced LR downgrade seen**: MT5_87957738_Cov + MT5_87957738_n/a moved from Heavy LR → Reduced LR. All prior LR changes have been upgrades; this is the first demotion. Will initially failed to remove from Heavy — Trading Ops caught and chased. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782812631177879)
+- 2026-07-01 — SP500 Vantage+B2B off-market spike (15:37:35 GMT 2026-06-30): 1ms internal spike, 10ms throttle prevented publication; no client trades affected. Resolved by Shyam. Fourth LP-sourced spike investigation in ~3 weeks (NAS100 2026-06-15, SPX500 2026-06-17, NAS100 2026-06-23, SP500 2026-07-01). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1782872965541889)
 - 2026-06-25 — **Toxic XAUUSD Harsher profile expanding rapidly: 3 more CPs added in a single batch** (Centroid_2145766579, Centroid_2145766040, Centroid_3602706), confirmed by Rory King within 1 min. Combined with the Centroid_3596189 add from yesterday's window, this profile is now accumulating CPs at a similar pace to Extra Heavy LR. Escalation trajectory: Heavy LR → Extra Heavy LR (vol mult doubled 2026-05-22) → Toxic XAUUSD Harsher (new profile, now 4+ CPs within 2 days). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782393366.118749)
 - 2026-06-25 — **LR vs last-look clarification (Sadiq):** Sadiq asked whether Heavy LR adds execution delay; Will Denny clarified LR does not add delay — last-look delay is applied separately in execution rules. Separately, Sadiq queried a 184ms execution time on MT5_87968028 against a 100ms bridge limit; Kate Stagg's FIX logs showed 83ms fill on Mahi's side — discrepancy unresolved. Possible bridge-side timing artefact or last-look interaction. [Will clarification](https://mahifx.slack.com/archives/C022S6NL82D/p1782401638.312399) [Kate FIX logs](https://mahifx.slack.com/archives/C022S6NL82D/p1782411697.366479)
 - 2026-06-25 — **New profile type for Infinox: Toxic XAUUSD - Harsher.** Trading Ops requested Centroid_3596189 be added to this profile; Isaac Dann confirmed. This is the first Toxic XAUUSD - Harsher add seen (prior requests were Heavy/Extra Heavy LR and Latency LL). Escalation in treatment intensity: Extra Heavy LR created 2026-05-21, vol multiplier doubled 2026-05-22, now a new harsher profile variant emerging. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1782368739.948289) [Isaac confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1782368792.058749)
