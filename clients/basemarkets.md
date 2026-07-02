@@ -11,19 +11,19 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-07-01T07:15:25Z
+last_catchup: 2026-07-02T07:13:58Z
 ---
 
 ## Status
 
-- **Stage:** **live** — C Book with LMAX hedging went live 2026-06-30 (Isaac Dann confirmed ~01:44 UTC); Tegis positions migrated from Scope to Base MT5 on 2026-06-29 evening. Drop copies tag `BaseMarketsMT5_10101`. Centroid give-up still pending (accurate MT5 PnL) but not blocking. Compass upgraded to latest version weekend 2026-06-07/08 (Liam Cordelle).
+- **Stage:** **live** — C Book with LMAX hedging went live 2026-06-29 evening BST; Tegis positions migrated from Scope MT5 to Base MT5; hedger on. Drop copies tag `BaseMarketsMT5_10101`; Centroid give-up still pending (for accurate MT5 PnL) but not blocking. Compass upgraded to latest version weekend 2026-06-07/08 (Liam Cordelle).
 - **Integration:** LDN trading + admin (LD5), Athena `basemarkets_ldn`, distribution via CLIENT_PRICE_LDN / CLIENT_PRICE_BETA_LDN / DISTRIBUTION_LDN / DISTRIBUTION_SYNAPSE_LDN. FIX API available; no margin / credit checking yet.
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
 
-> [resolved] 2026-06-29 — Tegis C Book position migration completed; C Book with LMAX hedging live
-> Kate B (client) shared the Compass Positions spreadsheet at ~22:43 BST 2026-06-29 for Isaac Dann to import. Isaac uploaded positions, client confirmed hedger on, Isaac turned on hedger at ~22:54 BST. Kate Stagg added group `real-SC` to C book execution; Isaac confirmed a test trade (1k USDJPY @ 161.942, House Sell) routed correctly. By 01:44 UTC 2026-06-30, Isaac confirmed in internal channel: "C Book with LMAX hedging is live now, client positions have been imported, trades are coming in and hedger is on." [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782773648669479) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
+> [resolved] 2026-06-29 — Tegis position migration completed; C Book with LMAX hedging live
+> Kate B (client) provided Compass Positions.xlsx at ~22:43 BST 2026-06-29. Isaac Dann added group `real-SC` to C Book execution rules, ran a test trade (1k USDJPY @ 161.942, House Sell, via C BOOK/Catch-All ER) to confirm flow, uploaded client positions, and turned the hedger on at ~22:54 BST. Isaac announced in internal channel at 01:44 BST 2026-06-30: "C Book with LMAX hedging is live now, client positions have been imported, trades are coming in and hedger is on." Kate Stagg acknowledged. Migration happened a day ahead of the Monday 2026-06-30 plan (see Notable topics 2026-06-25). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782773004128469) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
 
 > [resolved] 2026-06-26 — Mahi Remote Gateway log flooding on MT5 backup host; binary updated weekend 2026-06-28
 > Client (Anton) reported the Mahi Remote Gateway on the backup MT5 host was filling logs with errors (the backup connects to the gateway on the primary host via 127.0.0.1, so the primary was the active node). Maten Rehimi diagnosed and provided an updated MT5 binary to throttle the log noise. Anton scheduled the update for the weekend; on 2026-06-27 confirmed the Remote Gateway was updated on both Primary and Failover MT5 hosts. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782458212368589) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782545430908519)
@@ -70,9 +70,10 @@ last_catchup: 2026-07-01T07:15:25Z
 > [resolved] 2026-05-07 — Client asking for FIX API test/sandbox instance
 > Alex (Base Markets), relayed via Nicola Perikhanyan, asked whether Mahi has a test instance or sandbox for testing FIX API connectivity. Superseded by 2026-05-11 Centroid FIX credential setup — live Distribution FIX creds sent directly to client on 2026-05-11 as part of Tegis/Centroid onboarding. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1778164813309659)
 
-> [watching] 2026-05-05 — Pre-flow readiness: cross skew + driver pair hedging workflow; Tegis book setup pending
+> [resolved] 2026-05-05 — Pre-flow readiness: cross skew + driver pair hedging workflow; Tegis book setup pending
 > Will Carter flagged need to be ready for Monday (2026-05-11) — wants workflow testing to confirm skew is running on the crosses Base Markets trades, with hedging in driver pairs. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777983387923419)
-> **2026-05-18 update:** Kate Stagg internal — separate Tegis Book to be set up (Compass managed), plus hedger on B Book capped at 100k risk. No completion signal in window yet.
+> **2026-05-18 update:** Kate Stagg internal — separate Tegis Book to be set up (Compass managed), plus hedger on B Book capped at 100k risk.
+> **2026-06-29 resolved:** C Book with LMAX hedging confirmed live; positions imported, hedger on (see 2026-06-29 entry).
 
 > [open] 2026-04-29 — Client asking about direct API piping for rewritten algo
 > Alex (Base Markets) is planning to rewrite their algo and asked whether they could pipe trades straight into our server (i.e. off MT4/MT5). Andrew Morgan confirmed FIX API connectivity exists, but margin and credit checking are not implemented — flagged as something he'd want to build. No reply yet to Alex. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777470499867149)
@@ -85,8 +86,7 @@ last_catchup: 2026-07-01T07:15:25Z
 
 ## Notable topics
 
-- 2026-06-30 — C Book / LMAX hedging confirmed live (Isaac Dann): positions imported from Scope, trades flowing, hedger on. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
-- 2026-06-29 — Group `real-SC` added for C book execution ahead of Tegis position migration: Kate B (client) requested the group; Isaac Dann actioned during the migration session. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459)
+- 2026-06-29 — Tegis position migration completed ahead of schedule; C Book live with LMAX hedging: Kate B provided Compass Positions.xlsx; Isaac Dann added `real-SC` group to C Book execution rules, ran final test trade, uploaded positions, turned hedger on. Isaac announced go-live in internal channel at 01:44 BST 2026-06-30. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
 - 2026-06-26 — MT5 execution bridge deploy scheduled for weekend of 2026-06-28: Maten Rehimi noted an MT5 execution bridge update was planned for this weekend, using MT4Bridge-Multibranch-Build/develop build 512. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782483928879589)
 - 2026-06-25 — Tegis position migration rescheduled to Monday (2026-06-30): Kate Stagg updated the plan — the original intent to route Scope flow to Mahi tonight and switch positions was abandoned (Kate travelling); the migration will now happen on Monday over the two-hour trading break, as it's cleaner to execute when no trades are coming in. **Resolved: migration completed 2026-06-29 evening.** [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782389742548349)
 - 2026-06-24 — Stop-out routing via Centroid → Mahi tested successfully on coverage account 10102; same applied to 10101: Sergei Pankin (Tegis/Centroid) flagged that stop-out orders from the coverage MT5 account can be natively routed via Centroid to Mahi. Live test on account 10102 confirmed end-to-end: SO order → Centroid Gateway → new A-book TEM → Mahi, with counterparty tag `BaseMarketsMT5_10102` correctly received by Kate Stagg. An initial attempt routed to B-book TEM by mistake (Centroid misconfiguration); corrected with a new TEM set to A-book execution, no markups/delays, matching the copy-trade execution rules. After successful confirmation both sides, the same setup was applied to account 10101 in the same session. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782289760127139) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782310482426869) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782318571245309)
