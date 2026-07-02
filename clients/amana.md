@@ -14,16 +14,40 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-07-01T07:08:45Z
+last_catchup: 2026-07-02T07:13:47Z
 ---
 
 ## Status
 
 - **Stage**: live — full production; A-book (spot+futures+CFD indices+FX), fat feed, B-book expansion in progress
-- **Integration**: FIX live on multiple sessions (A-book light/fat, BBOOK_CLIENTS_FAT, swapfree); B-book XAGUSD ALL clients enabled 2026-06-24; hybridHedgerB1 went live 2026-06-29 (3.5M USD notional limit on silver, risk-limit hedger only — hybridHedgerBClose1 kept off; arbHedgerB1 turned off after erroneous trade at go-live); CMC swapfree (CMC_FREEFIX_CENTROID) confirmed as primary B-book hedging venue; XAUUSD B-book off-book split (B_OFF_BOOK_CLIENTS) tested 2026-06-30 — client migration blocked by Amana cybersec attack; XAUUSD B-book go-live target 2026-07-02; VaR per-book thresholds configured (B-book 500K, others 200K)
+- **Integration**: FIX live on multiple sessions (A-book light/fat, BBOOK_CLIENTS_FAT, swapfree); B-book XAGUSD ALL clients enabled 2026-06-24; hybridHedgerB1 live from 2026-06-29 11:26 BST (3.5M USD notional limit on silver); hybridHedgerBClose1 and arbHedgerB1 deliberately kept off pending correct tuning; XAUUSD B_OFF_BOOK_CLIENTS split set up 2026-06-30; first XAUUSD B-book trade live 2026-07-01 10:34 BST (light feed only); full client XAUUSD B-book rollout planned 2026-07-02; B-book riskreportingmetrics WTD/MTD PnL incorrect due to pre-go-live cumulative data (fix in progress — delete or force-zero options under discussion)
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [open] 2026-07-01/02 — B-book riskreportingmetrics PnL WTD/MTD wrong; options: delete data or force 0
+> riskreportingmetrics.B_CLIENTS_NET contains cumulative pre-go-live PnL data making WTD/MTD figures incorrect. Two options under discussion: (a) delete the pre-go-live rows (Nikos's preference); (b) rebase/force to 0 with a SQL script (Isaac provided 2026-07-01). Sam Hewitt acknowledged 07:58 BST 2026-07-02 — resolution in progress. [b-clients-query](https://mahifx.slack.com/archives/C08T42TMKU3/p1782832761497809) [pnl-rebase](https://mahifx.slack.com/archives/C08T42TMKU3/p1782898662085819)
+
+> [open] 2026-07-01 — CMC lag on XAUUSD causing visible price spikes
+> Nikos flagged at ~13:22 UTC that CMC was lagging behind JUMP/LMAX on XAUUSD; when CMC updated, the pricer switched reference mid causing a visible spike. Ongoing monitoring; no resolution confirmed. [nikos-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782921177101529)
+
+> [resolved] 2026-07-01 — Manual hedge rejections: default tag 555 routing to wrong CMC connection
+> Mohamad flagged A-book FX manual hedges being rejected because default Compass manual order tag 555 pointed to the B-book CMC connection. Cameron Hughes investigated; Isaac changed the default tag from 555 (B-book CMC) to 556 (A-book), preventing A-book hedges from mis-routing. Residual USDCHF/USDCAD closed after the fix. [mohamad-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782930335741599) [isaac-fix](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782939683542029)
+
+> [resolved] 2026-07-01 — LCC6N (London cocoa July) expiry: Rory confirmed Mahi flat
+> Andreas (Amana) notified at 15:09 BST that LCC6N was expiring. Rory confirmed at 15:11 BST: no exposure on Mahi's end. Clean expiry. [expiry-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782914986685279) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782915071836909)
+
+> [resolved] 2026-07-01 — hybridHedgerFutsW1 down: firewall breach; realised PnL limit raised 100K→200K
+> hybridHedgerFutsW1 went down due to a firewall configuration breach. Separately, realised PnL limit was raised from 100K to 200K as part of hedger config review. Resolved same day. [internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1782913147401969)
+
+> [open] 2026-06-30/07-02 — XAUUSD B-book go-live: off-book split set up; first trade 2026-07-01; full rollout 2026-07-02
+> B_OFF_BOOK_CLIENTS partition set up 2026-06-30 to allow XAUUSD to go B-book without mixing risk with XAGUSD. Go-live delayed from 2026-06-30 because Amana's NOC was diverted by a cybersecurity attack. First XAUUSD B-book trade executed at 10:34 BST 2026-07-01 (light feed only). Full client rollout planned for 2026-07-02; metals futures B-book to follow. [off-book-setup](https://mahifx.slack.com/archives/C08T42TMKU3/p1782819101840319) [rory-live](https://mahifx.slack.com/archives/C08T42TMKU3/p1782899689162879) [first-trade](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782898482610429)
+
+> [resolved] 2026-06-29 — CMC morning outage: XAUUSD/GBPUSD rejections at go-live
+> CMC had a config issue starting ~08:37 BST on B-book go-live day; hedgers stopped; XAUUSD/GBPUSD rejections visible. Resolved ~08:51 BST — CMC back. [outage](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782718624137229)
+
+> [watching] 2026-06-29 — arbHedgerB1 misfiring on B-book go-live day: off pending tuning
+> arbHedgerB1 made unexpected trades at ~12:57 BST on go-live day. Rory turned it off. Kept deliberately off since; hybridHedgerBClose1 also not turned on. Both pending correct configuration before re-enabling. [rory-off](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782734365942759) [rory-hedger-config](https://mahifx.slack.com/archives/C08T42TMKU3/p1782734319089919)
 
 > [resolved] 2026-06-28 — Weekend A-book + B-book position recs: Isaac adjusted
 > Hadeel (Amana) shared ABook and BBook position rec CSVs at 08:17 BST 2026-06-28 (Positions_Recs_All_ABOOK_Symbols.csv + Positions_Recs_XAG_BBOOK.csv). Sam Hewitt acknowledged; Hadeel asked Mahi to confirm once updated. Isaac confirmed "the required adjustments have been made" at 22:26 BST. Amana confirmed at 05:59 BST 2026-06-29. Clean rec. [hadeel-csv](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782631025.595499) [isaac-done](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782678986.042919)
@@ -46,14 +70,9 @@ last_catchup: 2026-07-01T07:08:45Z
 > [resolved] 2026-06-24 — XAG B-book position rec update: Hadeel submitted CSV, Shyam adjusted positions
 > Hadeel notified at 14:28 BST that Amana planned to update B-book XAG positions after market close. At 22:38 BST she sent the Position_Reconciliation_XAG_BBOOK.csv (current positions from client perspective, clients net long). Daria and Shyam handled: Shyam confirmed positions adjusted at 22:59 BST. Hadeel confirmed OK at 23:07 BST. Clean rec. [hadeel-notify](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782307680.405499) [csv-sent](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782337130.747269) [shyam-done](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782338385.787889)
 
-> [resolved] 2026-06-29 — CMC configuration outage: limit order rejections across XAUUSD/other instruments
-> Amana flagged CMC rejections from ~08:37 BST — "Your request cannot be processed." Nikos stopped hedgers. CMC confirmed the issue was on their side; resolved by ~08:50 BST. [nikos-stop](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782718624137229)
-
-> [open] 2026-06-29 — arbHedgerB1 erroneous trade at B-book go-live: turned off (no risk floor, wrong LP)
-> At go-live Rory turned on hybridHedgerB1 only (risk-limit hedger). Nikos later queried an erroneous arb hedge attempt; Rory confirmed arbHedgerB1 had no risk floor set and was incorrectly pointed at CMC_CENTROID instead of CMC_FREEFIX_CENTROID. Both issues corrected; arbHedgerB1 turned off pending proper tuning. hybridHedgerBClose1 also kept off (Isaac noted B arb and close hedgers out of MFX). [nikos-query](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782734272458519) [rory-hedger-on](https://mahifx.slack.com/archives/C08T42TMKU3/p1782728816755159)
-
-> [open] 2026-06-24 — XAGUSD B-book: all clients enabled; automated hedger live 2026-06-29
-> Karen notified at 11:25 BST that all XAGUSD clients are now routing to MahiB. Rory confirmed at 11:27 BST: no automated hedger set up yet — dealers covering risk manually. Nikos and Karen confirmed happy to proceed. 2026-06-29 update: hybridHedgerB1 went live after Amana made +30K XAGUSD position adjustment (notional below 3.5M USD trigger). hybridHedgerBClose1 kept off; arbHedgerB1 turned off (see entry above). [karen-all-clients](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782296706.301979) [rory-no-hedger](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782296831.872199) [hedger-go-live](https://mahifx.slack.com/archives/C08T42TMKU3/p1782728816755159)
+> [resolved] 2026-06-24 — XAGUSD B-book: all clients enabled; hybridHedgerB1 live from 2026-06-29
+> Karen notified at 11:25 BST that all XAGUSD clients are now routing to MahiB. Rory confirmed at 11:27 BST: no automated hedger is set up on the B-book yet — dealers covering risk manually. Nikos and Karen confirmed they are happy to proceed on this basis. Separate from this, Nikos (11:56 BST) confirmed he is still waiting on Rory to confirm XAG futures can be enabled for B-book (blocked on the PnL reval fix). Rory's 11:59 BST response: changes are in place and being monitored, awaiting sufficient data to confirm correctness before enabling futures. [karen-all-clients](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782296706.301979) [rory-no-hedger](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782296831.872199) [nikos-futs-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782298610.763579) [rory-collecting-data](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782298354.511379)
+> 2026-06-29 update: hybridHedgerB1 live from 11:26 BST. arbHedgerB1 and hybridHedgerBClose1 deliberately kept off pending correct tuning. [go-live](https://mahifx.slack.com/archives/C08T42TMKU3/p1782728816755159) [rory-hedger](https://mahifx.slack.com/archives/C08T42TMKU3/p1782734319089919)
 
 > [resolved] 2026-06-23 — SI6N (XAGFUT-N) + NG6N expiry: positions confirmed flat
 > Rafik (Amana) notified at 20:09 BST that Silver July (SI6N) and Natural Gas July (NG6N) expired and all client positions were closed. Isaac confirmed at 23:57 BST: no positions for either on Mahi's end. Separately, an indicative-pricing alert for XAGFUT-N fired at ~03:19 BST 2026-06-24 — Amana asked whether it was correct; Isaac confirmed XAGFUT-N = SI6N which had expired, and removed the alert. [expiry-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782241781648659) [alert-dismissed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782267699947249)
@@ -302,6 +321,12 @@ last_catchup: 2026-07-01T07:08:45Z
 
 ## Notable topics
 
+- 2026-07-01 — XAUUSD B-book: first live trade 10:34 BST on light feed; full client rollout planned 2026-07-02, then metals futures B-book. [rory-internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1782899689162879)
+- 2026-07-01 — Manual order default tag changed 555→556: Cameron Hughes/Isaac changed the default Compass manual order tag from 555 (B-book CMC connection) to 556 (A-book) to prevent mis-routing of A-book FX hedges. [isaac-fix](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782939683542029)
+- 2026-06-30 — Isaac FI projections for B-book: XAGUSD B-book ~$46/M FI; XAUUSD B-book conservative ~$5-6/M with potential upside. Estimated additional billing $50-90K/month + $250-300K total uplift for Amana. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1782859271712469)
+- 2026-06-30 — Nikos queried running risk management sims externally: Rory clarified only M2M and pricing backtests available from Compass externally; risk management sims are not. [permalink](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782827135317199)
+- 2026-06-29/30 — Amana cybersecurity attack: NOC team diverted 2026-06-30, delaying XAUUSD B-book go-live. [nikos-note](https://mahifx.slack.com/archives/C08T42TMKU3/p1782819101840319)
+- 2026-06-29 — David Cooney critical of dealing operations doc: David questioned Isaac's dealing operations document for Amana, saying it "implies we can do and would support this hedge unwinding nonsense." Expressed frustration at Amana's complexity demands. [internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1782729337522929)
 - 2026-06-29 — B-book XAGUSD hedger go-live: Monday 2026-06-29 confirmed as go-live day. Nikos (via Muhammad) accepted Isaac's 2-hedger config (hybridHedgerB1 + hybridHedgerBClose1), 3.5M USD notional limit on silver. Pre-go-live steps: Amana to provide hedge position + open price with CMC swapfree; Mahi to zero out B-book PnL before turning algo on. Isaac posted hedger config guide 2026-06-29 00:52 BST. [go-live-day](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782481336.054009) [nikos-steps](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782481519.269739) [rory-call](https://mahifx.slack.com/archives/C08T42TMKU3/p1782477543.132589) [isaac-guide](https://mahifx.slack.com/archives/C08T42TMKU3/p1782690724.278859)
 - 2026-06-26 — MT5 drop copy idea raised by Nikos: Nikos proposed using MT5 drop copies so Amana dealers can trade outside Compass and have that execution routed through Mahi. Rory told him Mahi needs more clarity before committing. Concept distinct from the existing MT4/MT5 manager account request (drop copy for pricing optimisation). [rory-call](https://mahifx.slack.com/archives/C08T42TMKU3/p1782477543.132589)
 - 2026-06-26 — B-book hedger E2E test: Mahi side complete but Amana back-office routing was off. Nikos confirmed Amana need to correct back-office logic for how hedges reflect to coverage accounts across all B-book hedging accounts, then a further E2E test is needed (CMC + CMC swapfree). Isaac confirmed Mahi will send test trades when Amana is ready. Risk limits + LowSlow delay still need reverting on Mahi side. [nikos-backoffice](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782454687.081209) [isaac-internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1782453694.933909)
