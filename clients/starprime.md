@@ -12,10 +12,19 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-01T07:24:39Z
+last_catchup: 2026-07-02T07:13:31Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-02 — CFDs (8 index symbols) added to WSS spread-config; confirmed live
+> Samin added DOW/E50/F40/G30/JPX/NDX/SPX/UKX to DISTRIBUTION_WSS spread-config and shared the Compass spread-config link. Sam Hewitt confirmed WSS profile change live (config v18, 06:07 UTC): all 8 index CFDs landed with full 8-timezone set and single-level books, structure matching existing FX/metals entries. No pricer errors since the change. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782972502172549)
+
+> [resolved] 2026-07-01 — Indices pricing incident: SPX500/all Indices lost price due to continuity pool LPs with too-wide mids; Velocity-only referencePriceMarket applied for all Indices
+> Samin flagged SPX500 pricing loss at 13:12 BST citing an Echo TOB screenshot showing pricing gone wrong ("We cant have continuity pool attached to Indicies as the mids are too far apart between LPs"). William confirmed no explicit override existed for SPXUSD/DOWUSD — all candidate markets were being used; when continuity pool LPs engaged, the mids diverged and pricing collapsed. Decision: Velocity as sole referencePriceMarket for all Indices (SPXUSD, DOWUSD, and all others), no continuity pool — if Velocity stops pricing DISTRIBUTION_LDN goes indicative. Samin accepted this trade-off ("I think i'll rather have pricing halted then send out a price far away"). Changes applied at EOD Jul 1 (pricer1 bounced Jul 1, pricer2 21:04 UTC). On Jul 2 morning Samin also removed LOCAL-CFD from pricing.mid.benchmarkNormalised; Sam Hewitt confirmed Velocity-only selector live and normalisation off for Indices (only crypto still normalised). [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782907941960989)
+
+> [open] 2026-07-01 — XAUUSD ref price speed: MAHI_LP_11 edit suspected to make Mahi slower than LPs; unresolved
+> Samin queried at 10:34 BST that MAHI_LP_11 (CPR ref price for XAUUSD) appeared slower than other LPs after a recent edit — shared Echo TOB link showing an hour where Starprime was no longer the quickest. William acknowledged but investigation was absorbed into the SPX500 Indices incident later that day and no resolution confirmed in channel. Also clarified same session: benchmarkNormalisation is NOT active for XAUUSD (only CFD/Crypto); FINALTO/EDGEWATER/EQUITI/INVAST are failover LPs for XAUUSD continuity pool if MAHI_LP_11 cuts out. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782898484615229)
 
 > [open] 2026-06-29 — Counterparty RBI_5036_5036 stuck in Arbitrageurs ER; Samin querying rehabilitation dynamics
 > Samin flagged at 07:55 BST that counterparty RBI_5036_5036 (XAUUSD) appears stuck in the Arbitrageurs execution rule and hasn't rehabilitated back to Dynamic Brokers 2 despite two days of positive markouts. Samin's hypothesis: individual trades within those days may have reset the rehab clock, or the 20dpm spread deduction may be causing the yield to dip negative at 5s/10s on 21–22 May, preventing the threshold from clearing. Asked Mahi to confirm ER reversal is functioning correctly ("ER must be dynamic"). William Denny acknowledged 08:04 BST; no resolution yet in channel. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782716127534459)
@@ -61,6 +70,9 @@ last_catchup: 2026-07-01T07:24:39Z
 
 ## Notable topics
 
+- 2026-07-02 — Sam Hewitt confirmed Indices Velocity-only config live: referencePriceMarketSelectors now sources Velocity only for LOCAL-CFD instruments on pricer1/pricer2; pricing.mid.benchmarkNormalised LOCAL-CFD removed (Indices now unnormalised, only crypto remains); pricers bounced (pricer1 Jul 1, pricer2 21:04 UTC). [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782972586144089)
+- 2026-07-02 — CFD WSS live: 8 index symbols (DOW/E50/F40/G30/JPX/NDX/SPX/UKX) in DISTRIBUTION_WSS spread-config, config v18, full 8-timezone set, single-level books matching FX/metals structure. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782973174146359)
+- 2026-07-01 — William clarified: benchmarkNormalisation is only active for CFD/Crypto (not XAUUSD); XAUUSD failover LPs in continuity pool if MAHI_LP_11 cuts out are FINALTO|EDGEWATER|EQUITI|INVAST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782912270044729)
 - 2026-06-29 — Samin querying whether Arbitrageurs ER rehab is working for RBI_5036_5036 XAUUSD — asks Mahi to confirm "ER must be dynamic"; William acknowledged, investigation ongoing. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782716127534459)
 - 2026-06-26 — DOWUSD CPR flicker at open diagnosed: Velocity (primary benchmark) not pricing for first seconds → session should start slightly later. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782462963653769)
 - 2026-06-23 — PXM "Boosted" mode confirmed as the fix for order-splitting LR issue: Daria advised sending orders as "full" (not swept legs) so Compass VWAP fills correctly without triggering LR on the second leg. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782193030739099)
