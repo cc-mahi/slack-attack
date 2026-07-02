@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-07-01T07:22:14Z
+last_catchup: 2026-07-02T07:13:59Z
 ---
 
 ## Status
@@ -19,8 +19,11 @@ last_catchup: 2026-07-01T07:22:14Z
 
 ## Recent issues
 
-> [open] 2026-06-16 — New model CLIENT_PRICE_LSB_LDN: set up; commercial question unresolved
-> Kate Stagg (Mahi) asked in #internal-fintokei whether to charge for a new model for Fintokei — they previously got one set up at no cost as a goodwill gesture. Kate's suggestion: one-off setup fee, no monthly cost (unusual commercial structure). Billing-impact scan (2026-06-17) flagged: no setup fee provision in current per-user contract; Daria to confirm whether as-is or needs addendum. **2026-06-30**: model `CLIENT_PRICE_LSB_LDN` is now set up and ready for review — Fintokei will subscribe with suffix `_t` following weekend server restarts. Commercial question (fee/addendum) still unresolved. [original question](https://mahifx.slack.com/archives/C08R694QVNX/p1781610571053819) [model ready](https://mahifx.slack.com/archives/C08R694QVNX/p1782815433338759)
+> [open] 2026-06-30 — New model CLIENT_PRICE_LSB_LDN set up for review; Fintokei to subscribe post-weekend restarts
+> Kate Stagg posted in #internal-fintokei that the new pricing model CLIENT_PRICE_LSB_LDN is set up and ready for review. Fintokei will subscribe with suffix `_t` following their weekend server restarts. Commercial pricing question on this model (setup fee vs monthly cost) remains unresolved per 2026-06-16 entry. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1782815433338759)
+
+> [open] 2026-06-16 — New model pricing question: setup fee vs monthly cost, unanswered
+> Kate Stagg (Mahi) asked in #internal-fintokei whether to charge for a new model for Fintokei — they previously got one set up at no cost as a goodwill gesture. Kate's suggestion: one-off setup fee, no monthly cost (unusual commercial structure). Billing-impact scan (2026-06-17) flagged: no setup fee provision in current per-user contract; Daria to confirm whether as-is or needs addendum. No resolution yet. [question](https://mahifx.slack.com/archives/C08R694QVNX/p1781610571053819)
 
 > [open] 2026-06-16 — BMSL timezone deploy requested via Zendesk #23102
 > Kate Stagg (Mahi) raised a Zendesk ticket for a BMSL timezone deploy for Fintokei. Feature = per-TradingTimeZone overrides on pricing.benchmarkMinimumSpread (commit 66192190, in release/26.3). Triaged P3 Dev: Fintokei pricer needs upgrading to release/26.3 before this can be applied; same feature in flight for Velocity (#23080). [ticket](https://mahifx.zendesk.com/agent/tickets/23102) [internal note](https://mahifx.slack.com/archives/C08R694QVNX/p1781610590423249)
