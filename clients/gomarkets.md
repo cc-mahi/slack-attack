@@ -8,15 +8,21 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Erik", role: "client ops — reconciliation / position discrepancies", confidence: low}
-  - {name: "Mac Nemeth", role: "client ops — tenant profile / All Books migration / config editor / LP feed setup", confidence: low}
+  - {name: "Mac Nemeth", role: "client ops — tenant profile / All Books migration / config editor / LP feed setup; email macauleyn@gomarkets.com confirmed 2026-07-01", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-07-01T07:23:06Z
+last_catchup: 2026-07-02T07:14:05Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-01 — Echo account password reset for Mac (macauleyn@gomarkets.com)
+> Mac (GoMarkets, ~23:53 UTC 2026-06-30) requested a password reset link for Echo (macauleyn@gomarkets.com), noting it was out of sync with their Compass credentials. Nathan Burch (Mahi) reset it immediately. Mac confirmed ("Thank you"). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782863598469879)
+
+> [resolved] 2026-06-30 — Compass IP whitelist: 61.69.180.213
+> Kieran (GoMarkets, ~22:30 UTC) requested IP 61.69.180.213 be whitelisted for Compass access. Sam Hewitt (Mahi) acknowledged immediately in-channel and confirmed whitelisted ~01:55 UTC 2026-07-01. Kieran confirmed ("looks good thanks") ~08:04 UTC. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782858616156069) [resolution](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782870891050769)
 
 > [resolved] 2026-06-25 — hybridHedgerSubTrading1 + hybridHedgerTrading1 stuck in "Unknown" after restart
 > Will (GoMarkets, ~05:22 UTC) reported both hedger processes stuck in Unknown after restart. Isaac (Mahi, ~05:23 UTC) acknowledged. Resolved ~21:46 UTC: Isaac identified the issue was with the configured markets and reconfigured them as LMAX_LDN|ISPRIME|26DEGREES|FINALTO (position-reducing trades only). Will confirmed the setup works. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782364941343059) [Isaac fix](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782423990011159)
