@@ -7,7 +7,11 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/fundingpips.md (not yet)
 channels_override: null
 key_people_overrides: []
+<<<<<<< HEAD
 last_catchup: 2026-07-01T07:22:43Z
+=======
+last_catchup: 2026-07-02T07:04:39Z
+>>>>>>> 0941b7a (chore(catchup): bump bright-funded fundingpips last_catchup (probe-skip, no human activity))
 ---
 
 ## Status
