@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory — possibly attending Cyprus event alongside Roman", confidence: low}
   - {name: "Jan", role: "Axiory TY office — data/ops requests (surname unknown)", confidence: low}
-last_catchup: 2026-07-01T07:15:48Z
+last_catchup: 2026-07-02T07:13:57Z
 ---
 
 ## Recent issues
@@ -26,6 +26,9 @@ last_catchup: 2026-07-01T07:15:48Z
 > Adam Foltyn pulled MAHI pricing on US Oil → GER40/HKD50/US30/US100 → all FX to backup at LD4 open. Restored 04-27 after Sam Hewitt restarted the publishing process; Adam confirmed pricing recovered and switched back. Root cause (Daria, 04-28): a hazelcast WAN replication `Update overrides[distribution.distributionChannels]` at 2026-04-20 00:48:48 UTC set the LDN dist channel's internalisation market to `CLIENT_PRICE_TKY` (override last edited 2024) — surprise it didn't trigger sooner; Kate to watch LDN for similar oddities. Adam pinged 04-29 asking for RCA update — no reply yet, RCA write-up still owed. 2026-05-02: Adam confirmed `_z` suffix symbols switched back to MAHI pricing and included in give-ups as agreed — full pricing restoration complete. [permalink](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777254243398619) [internal-rca](https://mahifx.slack.com/archives/C06KQT6EU3W/p1777276704165709) [resolution](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777738779200109)
 
 ## Notable topics
+
+> 2026-06-29 — Jan (Axiory TY) raised XAUUSD demo execution price discrepancy; Mahi provided pricing data
+> Jan flagged that two demo-account positions (accounts 20059963 and 20053970) closed on 2026-06-26 at prices differing from the Mahi price feed. Rory and Kate investigated: no matching drop copies found (expected — demo server, execution is on Axiory's side, not Mahi's). Jan acknowledged the demo-execution clarification. Rory delivered a XAUUSD pricing CSV for the relevant window (2026-06-26 ~15:00–16:00 UTC) — no Mahi pricing issue identified. [request](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782736112200869) [resolution](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782826684107249)
 
 > 2026-06-24 — Jan (Axiory TY) requested AUDCAD spread data for 2026-06-23 21:00–21:15 UTC; Rory King provided CSV same day
 > Routine data pull; no issue flagged. [request](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782297771004419) [response](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782304953826109)
