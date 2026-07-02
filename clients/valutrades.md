@@ -9,13 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-01T07:31:16Z
+last_catchup: 2026-07-02T07:13:28Z
 ---
 
 ## Recent issues
 
-> [resolved] 2026-06-30 — Overnight connection issue — Sam Hewitt fixed, client confirmed reconnected
-> Client posted "Hello Team / please can you fix this?" + screenshot at ~22:39 BST. Sam Hewitt acknowledged at 22:40 ("taking a look now") and asked client to check at 22:41. Client replied "looks good now / thanks" at 22:42 with +1 reaction — resolved within ~3 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782855540128479) [sam-ack](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782855602273749) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782855728291369)
+> [resolved] 2026-07-01 — Overnight connection issue — Sam fixed in ~2 minutes
+> Client posted "Hello OZ Team" + "please can you fix this for us?" (image) in #mahi-valutrades at 22:23 BST. Sam Hewitt acknowledged at 22:24 ("Hi Overnight, checking") and posted "please check now" at 22:26. Client confirmed "looks good" and "thank you" by 22:26. Resolved in ~2 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782941024736499) [sam-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782941062303189) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782941185226439)
+
+> [resolved] 2026-06-30 — Overnight connection issue — Sam fixed in ~3 minutes
+> Client posted "Hello Team" + "please can you fix this" (image) in #mahi-valutrades at 22:39 BST. Sam Hewitt acknowledged at 22:40 ("taking a look now") and posted "please check now" at 22:41. Client confirmed "looks good now" and "thanks" at 22:42. Resolved in ~3 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782855540128479) [sam-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782855602273749) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782855728291369)
 
 > [open] 2026-06-26 — Client requesting Rory and Kate's email addresses — unanswered
 > Posted in #mahi-valutrades at 08:32 BST with no reply in window. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782459136115809)
@@ -133,9 +136,11 @@ last_catchup: 2026-07-01T07:31:16Z
 
 ## Notable topics
 
-- 2026-06-30 — OZ→TT latency investigation: client asked for per-order breakdown of Mahi's processing time from OZ receipt to TT and back. Liam provided: OZ→TT end-to-end p95 5ms (mean 2ms, 57 orders); TT→OZ exec reports p95 4ms (mean 2ms, 1,183 reports); round-trip OZ→TT p95 25ms; Mahi→TT processing p95 13ms. Client confirmed "no concern with those" for this order type. Liam noted dedicated connectivity to TT is available if needed. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1782825736058309) [liam-latency](https://mahifx.slack.com/archives/C09HN93T0G2/p1782827086497909)
+- 2026-07-01 — QB PROD FIX TCP connection established, pending symbol mappings: Client asked Liam to try connecting QB PROD; Liam confirmed TCP connection established but needed Tag 50 (SenderSubID). Client provided tag 1 = `UBS_QBAlgo`, tag 50 = `Abahirwani`; Liam confirmed "Connected now" at 15:24 BST. Liam noted symbol mappings still needed to be able to trade — client is chasing QB for symbology. Client mentioned meeting Liam in Greenwich. [client-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1782913077674909) [liam-connected](https://mahifx.slack.com/archives/C09HN93T0G2/p1782915865774059) [client-chasing-symbology](https://mahifx.slack.com/archives/C09HN93T0G2/p1782917628255329)
 
-- 2026-06-29 — Routine A/B classification queries (batch): 88991891 (Rory: A book — historically B but more recent flow sharper), 88904101 (Rory: A book — trending better past month but still overall A on prior gold flow), 88901927 (Rory: A book — historically B but more recent flow sharper, classification upgrade). [88991891-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782733499092659) [88991891-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782733903025379) [88904101-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782742746838949) [88904101-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782743266583809) [88901927-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782743946488499) [88901927-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782744248959299)
+- 2026-06-30 — Latency analysis: Mahi oneZero↔TT routing — client requested hop-by-hop breakdown to document latency; Liam provided metrics for previous day (N=57 orders). Compass processing (oneZero→TT end-to-end): p95 5ms, max 5ms, mean 2ms. TT→oneZero exec reports (N=1,183): p95 4ms, max 7ms. Round-trip Mahi-sent to Mahi-received: p95 25ms, max 39ms. One-way send to TT generates confirm: p95 13ms, max 30ms. Liam noted latencies are low vs. overall order lifetimes and offered dedicated TT connectivity if of interest. Client: "no concern with those" for this order type. [client-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1782825736058309) [liam-numbers](https://mahifx.slack.com/archives/C09HN93T0G2/p1782827086497909) [client-satisfied](https://mahifx.slack.com/archives/C09HN93T0G2/p1782828025350509)
+
+- 2026-06-29 — Batch A/B classification (Rory King): 88991891 (historically B, recent sharper flow → A for now), 88904101 (trending better but still A — gold flow), 88901927 (historically B, recent sharper → A for now). All answered with yield-profile charts. [88991891-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782733499092659) [88991891-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782733903025379) [88904101-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782742746838949) [88904101-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782743266583809) [88901927-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782743946488499) [88901927-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782744248959299)
 
 - 2026-06-25 — QB UAT "Algo Params over FIX" testing session launched: Liam posted full QB UAT FIX credentials (`mahi_qb_uat_resting_orders` / `valu_qb_uat_resting_orders`, port 9014, host 54.210.37.117) with supported algo format tables for TT (POV, ScalePOV, TWAP+) and QB (Bolt). Marks the start of UAT-side testing of algo-params-over-FIX functionality for both TT and QB connections. [liam-creds](https://mahifx.slack.com/archives/C09HN93T0G2/p1782387495701069)
 
