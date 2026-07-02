@@ -12,16 +12,19 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-01T07:22:54Z
+last_catchup: 2026-07-02T07:14:00Z
 ---
 
 ## Recent issues
 
+> [resolved] 2026-07-01 — 800oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 800oz gold long filled on Finalto at 15:09 BST; William confirmed "This is done" at 15:56 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782914956443639)
+
+> [open] 2026-06-30 — A-book hedger loss -$11k; VaR clearance and backstop tuned
+> Isaac Dann flagged a loss at GCC at 02:38 BST: flow went offside -$11k at 30 seconds; VaR clearance rules too slow for small-size trades. Config changes applied: XAUUSD VaR per second raised from 500→1500; VaR clearance rule speed raised 100→150; LMAX and Finalto VaR clearance speed raised 150→250; 10-second delay added to backstop rule triggering at 5,000% max VaR ($5k VaR absolute, hedger max VaR = 100). Backstop cleared well after 30 seconds per Isaac. No stability follow-up in window. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782783499457139)
+
 > [resolved] 2026-06-30 — 1,442oz XAUUSD short filled on Finalto, Compass adjustment done
 > Layan reported 1,442oz gold short filled on Finalto at 15:11 BST; William confirmed "This is done" at 15:31 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782828718135909)
-
-> [open] 2026-06-30 — A-book hedger loss ~$11k at 30s; VaR clearance speeds and backstop tuned
-> Isaac flagged a ~$11k A-book loss at 30 seconds: flow went offside before the VaR clearance rules could exit risk — trades were too small and the hedger was clearing too slowly. Isaac made three config changes: (1) XAUUSD VaR/sec raised 500→1500; (2) VaR clearance rule speeds raised 100→150ms; LMAX and Finalto VaR clearance raised 150→250ms; (3) added a 10-second delay to the backstop rule that triggers at 5000% max VaR ($5000 VaR threshold). Backstop was already clearing well after 30s. No client-side report yet. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782783499457139)
 
 > [resolved] 2026-06-29 — 5,812oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 5,812oz gold long filled on Finalto at 15:10 BST; William confirmed "Done" at 15:12 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1782742231955019)
@@ -193,6 +196,8 @@ last_catchup: 2026-07-01T07:22:54Z
 
 ## Notable topics
 
+- 2026-07-01 — Post-pilot terms status queried by Bonnie: Bonnie Cassidy asked Andrew Morgan whether Will Carter's post-pilot commercial options have been signed off and sent to GCC — the link to Will's draft was not working for her. No Andrew response visible in window. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782904963870779)
+- 2026-07-01 — SI sims requested for GCC: David Cooney asked William to run SI sims for GCC, saying they are "happy with everything now and are looking to take it to the next level." William agreed. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782898825530209)
 - 2026-06-22 — Post-pilot volume-band ladder drafted: Will Carter published the first-cut post-pilot commercial options — volume bands to lock GCC in long-term, cheap entry near current pilot economics with $/M banding down toward the Kama/Rostro curve as volumes scale. Built so the same band shape can drop onto Rostro and Kama. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782128277829829)
 - 2026-06-15 — Post-pilot deal framing: Will Carter noted positive PnL start to the week ("no slippage, fair-ish VWAPs for full-amount gold tickets") and outlined post-pilot commercial thinking: lock GCC in for a long-term deal with volume bands to capture growth, noting existing volumes constrain how much more can be charged but the system is now working well in the background. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1781512339189479)
 - 2026-06-11 — XAU futures two large VaR spikes ($140k and $230k) then net +$8k; Rory flagged PnL drop alerts from futures-vs-spot reval mismatch: Cameron Hughes confirmed up $8k after two large XAU futures VaR spikes. Rory observed PnL drop alerts caused by futures momentarily being revalled against spot (same pattern as Amana) before correcting to contract price. Rory asked whether `reference.directMidMarkets` could suppress these false alerts — no response yet. [cam-internal](https://mahifx.slack.com/archives/C09QS1NUA80/p1781203245782619) [rory-alert](https://mahifx.slack.com/archives/C09QS1NUA80/p1781203645125219)
