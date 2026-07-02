@@ -12,11 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-<<<<<<< HEAD
-last_catchup: 2026-07-01T07:21:53Z
-=======
 last_catchup: 2026-07-02T07:04:39Z
->>>>>>> 0941b7a (chore(catchup): bump bright-funded fundingpips last_catchup (probe-skip, no human activity))
 status: active
 retired_at: null
 retired_reason: null
