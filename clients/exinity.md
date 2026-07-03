@@ -17,10 +17,13 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-07-02T07:13:59Z
+last_catchup: 2026-07-03T07:23:07Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-02 — Wintermute FIX session ~28-second stall (heartbeat only, no order impact)
+> Mukhammad posted an alert at ~22:19 UTC. Nathan diagnosed: ~28-second stall on the Wintermute FIX session between 22:13:17–22:13:45 UTC. Only heartbeat messages affected; no order-related FIX messages (new orders, cancels, fills) exchanged during the window. Latency returned to normal and has stayed within normal ranges since. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1783030757667549)
 
 > [resolved] 2026-06-29 — SI_INSTI_CLIENT_RISK_TRANSFER 2k oz XAUUSD position break: config change + manual fix
 > Louie flagged urgent ~18:26 UTC: -2000 oz sitting in SI house for API_111000021 | 3630 with no corresponding gold exposure on their side. Will Denny traced: a risk-splitting config change made earlier that day (08:46 UTC) caused 70 of the 260 trades from that counterparty to route into SI_INSTI_CLIENT_RISK_TRANSFER instead of B_INSTI_CLIENTS, creating the net short position. B_INSTI_CLIENTS side netted to zero across all 260 trades. 2026-06-30 06:09 BST: Isaac made a 2000 oz XAUUSD manual adjustment into SI_INSTI_CLIENT_RISK_TRANSFER at 3989.49; risk cleared 06:10 BST. Matthew acknowledged. [Louie alert](https://mahifx.slack.com/archives/C0456LSHQQK/p1782757610279149) [Will diagnosis](https://mahifx.slack.com/archives/C0456LSHQQK/p1782758916847019)
@@ -153,27 +156,6 @@ last_catchup: 2026-07-02T07:13:59Z
 
 > [open] 2026-05-01 — BIG_INSTI_HOUSE position break: 20L DOWFUT-M / 20S DOWUSD
 > Christian Lee (Exinity ops) reported a DOWFUT-M vs DOWUSD mismatch in BIG_INSTI_HOUSE with no visible root cause on their side. Rory King (Mahi) traced it: counterparty MT5_111000009 executed back-to-back futures+spot trades on 2026-03-17 at 13:42 UTC — bought 20 lots DOWFUT-M (Jun futures) and sold 20 lots DOWUSD (spot CFD) within 16 seconds into BIG_INSTI_CLIENTS book, creating the persistent house position. Subsequent 23–26 March DOWFUT-M activity netted to zero. Louie asked whether zeroing BIG_INSTI_HOUSE positions would impact other books; Rory confirmed BIG_INSTI_HOUSE adjustments are isolated (child books only, no impact to Big House / B Insti House etc). As of end of window Louie had not confirmed the fix was applied. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1777632218017979)
-
-> [open] 2025-07-07 — CFD licence (Addendum 5) under commercial review — client says unviable
-> Justin (Exinity exec) messaged Nicola requesting a call "early next week" to discuss Addendum 5: "this addition is currently unviable as an offering (for the last few months we have lost money)". Andrew/Nicola discussed internally: need profitability review (actual vs potential value-add if tuned), roadmap, and risk mgmt assessment. Notice period is 1 month per main agreement. Exinity on a multi-year contract for core services; CFD is Addendum 5 only. Call not yet confirmed as of this window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1751880944781859)
-
-> [open] 2025-06-09 — AWS→Beeks ip route not persisting post server migration
-> Post-migration (17/18 May), the route `10.42.48.0/23 via 172.16.17.1` keeps dropping on reboot. Isaac ran `ip route add` manually on 2025-05-26 and again on 2025-06-09; Liam thought he'd fixed it permanently but hadn't. Liam asked Hussain in #dev-infra to investigate. Recurring outage risk for Exinity→AWS connectivity. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1748217672472889)
-
-> [open] 2025-06-09 — FI PnL reporting inaccuracies — riskReporting1 on admin box (Zendesk 20871)
-> MK frustrated for 2+ months re: FI PnL figures (especially XAUUSD, USDJPY, EURUSD spikes not matching backtests). Root cause: `riskReporting1` on admin server introduces latency vs trades/pricing on trading boxes, producing spurious spikes/drops. Liam moved riskReporting1 to trading box on 2025-06-09. Cameron ran backtests showing true FI PnL significantly higher than reported (e.g. full wk 2 Jun: backtest ~$76.8k vs reported lower). MK still not satisfied with revised figures as of 2025-06-17; ongoing. Separately, USDJPY FI PnL artifact explained by Liam: RHS-tracked PnL revalued to USD via live USDJPY rate, causing apparent swings with no trading — fix planned (track in USD from trade time). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1749541669220569)
-
-> [open] 2025-05-25 — Post-server-migration connectivity: Wagyu/Chuck/Fillet FIX sessions down; PXM Insti on failover
-> Migration weekend 17/18 May mostly successful (DB, config, infra). Immediately post-migration: proxies from Exinity to Beeks broken (AWS route missing — see ip route entry above), fixDropCopyGateway1 not connected, PXM Insti connections down (Exinity using "not a great" failover feed). Wagyu/Chuck/Fillet FIX sessions also not connecting on 2025-05-25 due to IP changes (same aws route issue). Dists back to echo/compass confirmed restored 2025-05-29. FIX sessions status unclear beyond that window. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1747605219503169)
-
-> [open] 2025-05-07 — hybridHedgerSI1 volume breach → 170k PnL drop; risk-splitting rule fix needed
-> hybridHedgerSI1 breached $250m/hr limit (same as prior incident), died at ~16:35 UTC. Kate diagnosed: two ASV counterparties (ASV_MT4_STANDARD1_236001796, ASV_MT4_STANDARD1_144171674) traded AUDCHF — hitting the generic off-book split rule rather than their cpty-specific SI-book rule; risk held in off-book 10 mins, transferred to SI book while offside, hedger then died mid-hedge. Loss ~170k on the drop + lock-in on hedging. Limit bumped 250m→300m immediately; MK later requested 500m (agreed, requires restart), then 600m/hr (agreed 12 May). MK to fix cpty-specific risk-splitting rule order so AUDCHF skips off-book for these cptys. Internal: Andrew flagged volume limits may be counterproductive at default levels; Kate agreed clients should be aware and able to waive. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1746636145861299)
-
-> [resolved] 2025-05-05 — VELOCITY_DEFENSIVE subscription symbol change causing rejects
-> MK flagged rejects on `VELOCITY_DEFENSIVE` market after subscription symbol change; asked to prioritise investigation. Kate responded the same morning: "all good to ignore — have fixed, only needed an order process bounce". [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1746439309559879)
-
-> [resolved] 2025-05-01 — EXINITYCONNECTCHUCK-MD FIX session disconnect
-> Matthew Ayub (Exinity) reported urgent FIX session alert for EXINITYCONNECTCHUCK-MD. Daria checked: connections timed out waiting for heartbeat, logon not re-attempted. PXM confirmed issue on their side; resolved shortly after. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1746079067640769)
 
 > [resolved] 2026-04-30 — CPL pricing outage: Xenfin NOP concentration limit → one-sided MD
 > Oliver Ryan reported dashboard not updating and 34 critical errors; Client Price London had no pricing. Mahi diagnosed: all Xenfin inbound MD feeds went one-sided. MK later confirmed: hit AUD concentration limit at Xenfin → feeds went one-sided → CPL lost pricing for multiple assets. Mahi added LMAX temporarily to restore CPL. Kate (internal): Xenfin has a setting where hitting NOP → one-sided, cannot be turned off but they'll alert Exinity if it happens again. Config reverted once PXM stable. Amir flagged LMAX as a permanent backup reference market to mitigate single point of failure. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1746021050790359)

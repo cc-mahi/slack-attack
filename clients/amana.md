@@ -14,22 +14,39 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-07-02T07:13:47Z
+last_catchup: 2026-07-03T07:10:35Z
 ---
 
 ## Status
 
 - **Stage**: live — full production; A-book (spot+futures+CFD indices+FX), fat feed, B-book expansion in progress
-- **Integration**: FIX live on multiple sessions (A-book light/fat, BBOOK_CLIENTS_FAT, swapfree); B-book XAGUSD ALL clients enabled 2026-06-24; hybridHedgerB1 live from 2026-06-29 11:26 BST (3.5M USD notional limit on silver); hybridHedgerBClose1 and arbHedgerB1 deliberately kept off pending correct tuning; XAUUSD B_OFF_BOOK_CLIENTS split set up 2026-06-30; first XAUUSD B-book trade live 2026-07-01 10:34 BST (light feed only); full client XAUUSD B-book rollout planned 2026-07-02; B-book riskreportingmetrics WTD/MTD PnL incorrect due to pre-go-live cumulative data (fix in progress — delete or force-zero options under discussion)
+- **Integration**: FIX live on multiple sessions (A-book light/fat, BBOOK_CLIENTS_FAT, swapfree); B-book XAGUSD ALL clients enabled 2026-06-24; hybridHedgerB1 live from 2026-06-29 11:26 BST (3.5M USD notional limit on silver); hybridHedgerBClose1 and arbHedgerB1 deliberately kept off pending correct tuning; XAUUSD B_OFF_BOOK_CLIENTS split set up 2026-06-30; first XAUUSD B-book trade live 2026-07-01 10:34 BST (light feed only); XAUUSD B-book mobile client rollout in progress 2026-07-03; riskreportingmetrics WTD/MTD PnL wrong due to pre-go-live data — deletion won't fix (PnL derives from open positions + realised PnL); correct fix = USD PnL adjustment at go-live timestamp; XAUUSD B_OFF_BOOK_CLIENTS will use USD PnL offset at import to prevent recurrence
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
 
+> [open] 2026-07-03 — XAUUSD B-book mobile client rollout: in progress
+> Nikos announced at 08:09 BST 2026-07-03 that Amana is moving mobile clients XAUUSD pricing and execution to Mahi B-book ("PLEASE KEEP AN EYE FOR ANY ISSUES"). Cameron Hughes acknowledged. [nikos-announce](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062549305299) [cam-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062690662239)
+
+> [open] 2026-07-02 — NFP arb cpty 8006187 + econ news config call planned 2026-07-03
+> Cpty 8006187 traded long 2,398oz XAUUSD + short 2,838oz XAUFUT-Q within 182ms of NFP release (12:30:00.425–12:30:00.607 UTC 2026-07-02). Hedger covered in ~5s; Amana +60k A-book, -60k futs book. Rory (internal): would have lost 25k+ had risk been held 10s. Nikos asked about econ news widening/spread/depth config; Rory confirmed parameters available (pricing.econNewsBaseSpreadOverride, econNewsTightMillisAfter, econNewsWideMillisBefore, econNewsWideningFactors) and shared Compass config links. Nikos: "Ok I am gonna put a call to go through those tomorrow." [rory-public](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783000901937459) [econ-config-links](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783003595793419) [rory-internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1783006880614989)
+
+> [resolved] 2026-07-02 — XAGUSD pre-close price spike: LMAX temporarily indicative; skew was cause
+> Hadeel flagged XAGUSD pricing anomaly at 20:58–20:59 UTC 2026-07-02 via Echo TOB link. Cameron Hughes confirmed at 16:56 BST: LMAX went temporarily indicative; their bid spiked down and model pricing followed. Isaac (23:42 BST 2026-07-02): mid formation was actually steady — spike was from skew, not mid. Config adjustments made mid-June have significantly improved XAGUSD smoothness and PnL (skew made £8k/$41M across all books past week). Isaac will reduce roll-hour aggressiveness further. [hadeel-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782976713683909) [cameron-reply](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783007801004839) [isaac-analysis](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783032150437589)
+
+> [resolved] 2026-07-02 — Account 8011508 MAHI_FAT_LIVE LIQUIDITYVIOLATION: intended behaviour
+> Maynard (Amana) flagged repeated LIQUIDITYVIOLATION rejections on account 8011508 on MAHI_FAT_LIVE at 15:08 BST. Rory confirmed at 15:14 BST: account is on Manual Arber Selection execution rule with 500ms last-look; rejections are correct (client attempting off-market limit orders). Intended behaviour. [maynard-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783001305909919) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783001655029909)
+
+> [resolved] 2026-07-02/03 — Exec time 80ms vs 50ms last-look: brief queue burst
+> Nikos queried at 13:18 BST 2026-07-02 why exec time was 80ms when last-look is 50ms. Shyam responded at 00:25 BST 2026-07-03: brief burst of order flow on XAUUSD (several accounts within same ~2s) briefly queued processing; order filled well with no worsened price; firewalls/alerting/monitoring in place if latency exceeds acceptable range. [nikos-query](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782994715460619) [shyam-reply](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783034751561399)
+
 > [open] 2026-07-01/02 — B-book riskreportingmetrics PnL WTD/MTD wrong; options: delete data or force 0
 > riskreportingmetrics.B_CLIENTS_NET contains cumulative pre-go-live PnL data making WTD/MTD figures incorrect. Two options under discussion: (a) delete the pre-go-live rows (Nikos's preference); (b) rebase/force to 0 with a SQL script (Isaac provided 2026-07-01). Sam Hewitt acknowledged 07:58 BST 2026-07-02 — resolution in progress. [b-clients-query](https://mahifx.slack.com/archives/C08T42TMKU3/p1782832761497809) [pnl-rebase](https://mahifx.slack.com/archives/C08T42TMKU3/p1782898662085819)
+> 2026-07-03 update: Isaac (02:17 BST) confirmed deletion won't work — PnL derives from open trade positions + realised PnL; wiping data leaves first value unchanged. Only viable options: (a) rebase SQL method; (b) make a USD PnL adjustment in the book using the book's USD value at go-live timestamp (causes immediate PnL drop, lines up going forward). For XAUUSD, Isaac will use B_OFF_BOOK_CLIENTS warehousing with a USD PnL offset at import to avoid recurrence. Nikos needs to supply the go-live timestamp. [isaac-clarify](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783041423356919)
 
-> [open] 2026-07-01 — CMC lag on XAUUSD causing visible price spikes
+> [open] 2026-07-01/02 — CMC lag on XAUUSD causing visible price spikes; XAGUSD config change done
 > Nikos flagged at ~13:22 UTC that CMC was lagging behind JUMP/LMAX on XAUUSD; when CMC updated, the pricer switched reference mid causing a visible spike. Ongoing monitoring; no resolution confirmed. [nikos-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782921177101529)
+> 2026-07-02 update: Nikos asked at 13:24 BST if XAGUSD config change could be applied first, XAUUSD tomorrow. Cameron Hughes confirmed XAGUSD done at 13:47 BST. XAUUSD config change to follow 2026-07-03. [xagusd-done](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782996473844529) [config-thread](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782995070152109)
 
 > [resolved] 2026-07-01 — Manual hedge rejections: default tag 555 routing to wrong CMC connection
 > Mohamad flagged A-book FX manual hedges being rejected because default Compass manual order tag 555 pointed to the B-book CMC connection. Cameron Hughes investigated; Isaac changed the default tag from 555 (B-book CMC) to 556 (A-book), preventing A-book hedges from mis-routing. Residual USDCHF/USDCAD closed after the fix. [mohamad-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782930335741599) [isaac-fix](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782939683542029)
@@ -40,8 +57,8 @@ last_catchup: 2026-07-02T07:13:47Z
 > [resolved] 2026-07-01 — hybridHedgerFutsW1 down: firewall breach; realised PnL limit raised 100K→200K
 > hybridHedgerFutsW1 went down due to a firewall configuration breach. Separately, realised PnL limit was raised from 100K to 200K as part of hedger config review. Resolved same day. [internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1782913147401969)
 
-> [open] 2026-06-30/07-02 — XAUUSD B-book go-live: off-book split set up; first trade 2026-07-01; full rollout 2026-07-02
-> B_OFF_BOOK_CLIENTS partition set up 2026-06-30 to allow XAUUSD to go B-book without mixing risk with XAGUSD. Go-live delayed from 2026-06-30 because Amana's NOC was diverted by a cybersecurity attack. First XAUUSD B-book trade executed at 10:34 BST 2026-07-01 (light feed only). Full client rollout planned for 2026-07-02; metals futures B-book to follow. [off-book-setup](https://mahifx.slack.com/archives/C08T42TMKU3/p1782819101840319) [rory-live](https://mahifx.slack.com/archives/C08T42TMKU3/p1782899689162879) [first-trade](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782898482610429)
+> [open] 2026-06-30/07-03 — XAUUSD B-book go-live: off-book split set up; first trade 2026-07-01; mobile client rollout 2026-07-03
+> B_OFF_BOOK_CLIENTS partition set up 2026-06-30 to allow XAUUSD to go B-book without mixing risk with XAGUSD. Go-live delayed from 2026-06-30 because Amana's NOC was diverted by a cybersecurity attack. First XAUUSD B-book trade executed at 10:34 BST 2026-07-01 (light feed only). Full client rollout was planned for 2026-07-02 but mobile client migration announced at 08:09 BST 2026-07-03 by Nikos; metals futures B-book to follow. [off-book-setup](https://mahifx.slack.com/archives/C08T42TMKU3/p1782819101840319) [rory-live](https://mahifx.slack.com/archives/C08T42TMKU3/p1782899689162879) [first-trade](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782898482610429) [mobile-rollout](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062549305299)
 
 > [resolved] 2026-06-29 — CMC morning outage: XAUUSD/GBPUSD rejections at go-live
 > CMC had a config issue starting ~08:37 BST on B-book go-live day; hedgers stopped; XAUUSD/GBPUSD rejections visible. Resolved ~08:51 BST — CMC back. [outage](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782718624137229)
@@ -321,6 +338,9 @@ last_catchup: 2026-07-02T07:13:47Z
 
 ## Notable topics
 
+- 2026-07-03 — XAUUSD B-book mobile client rollout: Nikos announced at 08:09 BST that Amana is moving mobile clients XAUUSD pricing and execution to Mahi B-book. [announce](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062549305299)
+- 2026-07-02 — NFP arb cpty 8006187: +60k A-book/-60k futs within 182ms of NFP; would have lost 25k+ at 10s. Econ news widening config call with Nikos planned 2026-07-03. [rory-analysis](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783000901937459)
+- 2026-07-02 — XAGUSD skew: skew made £8k/$41M across all books past week; Isaac reducing roll-hour aggressiveness further. [isaac](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783032150437589)
 - 2026-07-01 — XAUUSD B-book: first live trade 10:34 BST on light feed; full client rollout planned 2026-07-02, then metals futures B-book. [rory-internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1782899689162879)
 - 2026-07-01 — Manual order default tag changed 555→556: Cameron Hughes/Isaac changed the default Compass manual order tag from 555 (B-book CMC connection) to 556 (A-book) to prevent mis-routing of A-book FX hedges. [isaac-fix](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782939683542029)
 - 2026-06-30 — Isaac FI projections for B-book: XAGUSD B-book ~$46/M FI; XAUUSD B-book conservative ~$5-6/M with potential upside. Estimated additional billing $50-90K/month + $250-300K total uplift for Amana. [permalink](https://mahifx.slack.com/archives/C08T42TMKU3/p1782859271712469)
