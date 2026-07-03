@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-07-01T07:31:14Z
+last_catchup: 2026-07-03T07:06:06Z
 ---
 
 ## Status
@@ -209,6 +209,7 @@ last_catchup: 2026-07-01T07:31:14Z
 
 ## Notable topics
 
+- Build push to Toa Chicago blocked pending release branch + regression (2026-07-03): David Cooney requested latest build be pushed to Toa Chicago to support Lee's options connectivity work. Lee Butts replied it needs a new release branch cut and regression testing first — not ready to go. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1783049787092519)
 - Centroid UAT IP updated to 192.109.23.20 (2026-06-30): Argamon requested the Centroid UAT IP be updated from 185.125.204.156 to 192.109.23.20 for the ongoing incremental MD refresh testing. Addressed to Isaac Dann in mahi-argamon-operations; ✅ actioned (no reply needed). [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
 - PXM_LD4_A monitoring disabled on APN1 (2026-06-29): Maten disabled PD monitoring for PXM_LD4_A distribution connection on Toa Argamon APN1 — had been disconnected since config was added; disabled to reduce PD noise. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1782721198480769)
 - Booking rejects PD alert = test trades (2026-06-29): PD incident Q3H4ARZS4AW58Y fired for booking rejects; James confirmed these are test trades. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1782727722330439)
