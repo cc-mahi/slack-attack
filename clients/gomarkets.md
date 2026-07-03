@@ -13,10 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-07-02T07:14:05Z
+last_catchup: 2026-07-03T07:23:07Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-02 — LR counterparty profile intermittent misfire on XAU (counterparty 200045)
+> Erik tested C/R liquidity reduction on XAU for counterparty 200045, expecting 0-burst so LR fires immediately then replenishes at 20s intervals, but found it "sometimes hits, sometimes doesn't." Rory King (Mahi, ~12:47 UTC) acknowledged and said he'd investigate. No resolution in window. Config ref: `distribution.liquidityThrottle.liquidityRefreshProfiles.counterparty/012dq650aw4irv`. Separate from the fleet-wide brokered LR flag (2026-05-21 entry). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782997607784629)
 
 > [resolved] 2026-07-01 — Echo account password reset for Mac (macauleyn@gomarkets.com)
 > Mac (GoMarkets, ~23:53 UTC 2026-06-30) requested a password reset link for Echo (macauleyn@gomarkets.com), noting it was out of sync with their Compass credentials. Nathan Burch (Mahi) reset it immediately. Mac confirmed ("Thank you"). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782863598469879)
@@ -113,11 +116,17 @@ last_catchup: 2026-07-02T07:14:05Z
 
 ## Notable topics
 
+- 2026-07-03 — Pre-sales markout analysis for potential client: GoMarkets asked if they can send a trading statement for a prospect to get markout analysis. Isaac confirmed, ran Jenkins MarkToMarket job #781, and delivered an Echo simulation link (~01:52 UTC). Client confirmed access. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783034194667109)
+
+- 2026-07-02 — LP order sizing 1k minimum step for FX (LMAX_LDN): Erik flagged USDCAD orders to LMAX_LDN placed at irregular sizes (e.g. 372,110, 372,090 units); requested minimum step of 1k. Kate Stagg (Mahi) confirmed config applied; EOD restarts will activate. Resolved same session. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782984357591219)
+
+- 2026-07-02 — Compass yield-profile dashboard: default group-by feature request: Erik asked if dashboards can default to "group by counterparty." Kate explained instrument default is faster (finite instruments vs variable counterparty count); offered to take feedback to the UI dev team. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783002141063719)
+
 - 2026-07-01 — Mac (macauleyn@gomarkets.com) Echo password reset: Mac reported being logged out of Echo and unable to match credentials with Compass account; Nathan reset it immediately. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782863598469879)
 
 - 2026-06-30 — Kieran IP whitelist for Compass access: Kieran (GoMarkets) requested IP 61.69.180.213 whitelisted for Compass access; Sam Hewitt confirmed it was done the following morning. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782858616156069)
 
-- 2026-06-17 — profitprofiles data quality: missing trades, open_close_pnl deviation, commission gaps; crypto/indices/commodities not captured. Erik (GoMarkets, ~15:04 UTC) raised two related issues: (1) Crypto, Indices, and Commodity counterparty activity is not captured in `gomarkets_nyc.profitprofiles` — William confirmed setup is needed and asked whether client wants this done; client asked if there is an extra cost; William to check. (2) 58 trades missing for account GoMarketsMT5_15001091 between 1/6–16/6 (identified via MT5 Deals report red rows); `open_close_pnl` deviates continuously from the `profit` column beyond a simple USD conversion; commission on position-opening trades is not being populated. Client noted the data appears to be in beta / unknown state and wants clarification. William said "We'll check this internally." No resolution as of window end. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781708654554079) [missing-trades follow-up](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781712621381839)
+- 2026-06-17 — profitprofiles data quality: missing trades, open_close_pnl deviation, commission gaps; crypto/indices/commodities not captured. Erik (GoMarkets, ~15:04 UTC) raised two related issues: (1) Crypto, Indices, and Commodity counterparty activity is not captured in `gomarkets_nyc.profitprofiles` — William confirmed setup is needed and asked whether client wants this done; client asked if there is an extra cost; William to check. (2) 58 trades missing for account GoMarketsMT5_15001091 between 1/6–16/6 (identified via MT5 Deals report red rows); `open_close_pnl` deviates continuously from the `profit` column beyond a simple USD conversion; commission on position-opening trades is not being populated. Client noted the data appears to be in beta / unknown state and wants clarification. William said "We'll check this internally." No resolution as of window end. Update 2026-07-02: Erik flagged continued missing trades in MT Analytics and posted a screenshot showing timeout/dropped-trade notifications; Kate Stagg said she'd investigate — no resolution. Separately, on the `open_close_pnl` deviation: Rory King clarified that Echo `openClosePnL` is measured vs mid at risk-start (not dealt price); MT5 Profit is vs dealt prices — different metrics by design, not a data error. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781708654554079) [missing-trades follow-up](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781712621381839) [2026-07-02 timeouts](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782985645760399) [openClosePnL clarification](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782989148579799)
 
 - 2026-06-16 — Andreas.H Compass/Echo access provisioned: Andreas.H (GoMarkets) requested read-only Compass/Echo access for Andreas.H@gomarkets.com; approved by client team same session; William Denny (Mahi) confirmed read-only (upgradeable to admin later), set up by ~10:16 UTC and DM'd credentials. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1781595302395629)
 
