@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-02T07:13:50Z
+last_catchup: 2026-07-03T07:13:45Z
 ---
 
 ## Recent issues
@@ -94,6 +94,8 @@ last_catchup: 2026-07-02T07:13:50Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-07-02 — LIQUIDITY_POOL_SC created for SC entity brokering; waiting on Malik re: tag1 for routing execution rules. Cameron Hughes stood up the pool in anticipation of SC flow that may need to be brokered. [Cameron note](https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589)
 
 - 2026-07-01 — FXCM restart issue over weekend; self-resolved. Cameron Hughes noted FXCM has issues with restarts over the weekend under current config; he restarted it manually and it came back fine. [Cameron note](https://mahifx.slack.com/archives/C046RNF64VD/p1782916343253469)
 
