@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-07-02T07:13:36Z
+last_catchup: 2026-07-03T07:27:34Z
 ---
 
 ## Status
@@ -24,8 +24,8 @@ last_catchup: 2026-07-02T07:13:36Z
 
 ## Recent issues
 
-> [open] 2026-07-01 — Pricing incident (Finalto/MAHI_LP_5) at ~07:43 BST
-> Cameron Hughes flagged in #internal-toponetrader that the same pricing feedback loop incident seen at Infinox also hit TOT at ~07:43 BST, caused by MAHI_LP_5 (Finalto). Screenshot attached; no resolution thread or follow-up in channel. #mahi-toponetraders was quiet — no client-facing communication about the incident. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1782927073351899)
+> [resolved] 2026-07-01 — Pricing incident (Finalto/MAHI_LP_5) at ~07:43 BST; LP removed 2026-07-02
+> Cameron Hughes flagged in #internal-toponetrader that the same pricing feedback loop incident seen at Infinox also hit TOT at ~07:43 BST, caused by MAHI_LP_5 (Finalto). On 2026-07-02, Liam confirmed MAHI_LP_5 is the Finalto LP from Infinox and recommended swapping it out given the feeds are untrusted; Cameron Hughes confirmed it had been removed from price formation and bounced the pricers. No client-facing communication in #mahi-toponetraders. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1782927073351899) [resolution](https://mahifx.slack.com/archives/C08TG143F4L/p1782991925017169)
 
 > [resolved] 2026-06-01 — MatchTrader account 10408: 1.7 lot (170 XBT) order rejected; TOB depth raised
 > Arjie raised that account 10408 on MatchTrader could not place a 1.7 lot position despite sufficient margin. Cameron Hughes diagnosed the order size (170 XBT) exceeded Mahi's published TOB depth; he raised the TOB tiers and imported new tiers. Arjie confirmed the large orders were being accepted by 11:03 BST; resolved same morning. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1780303004735039)
