@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-02T07:13:13Z
+last_catchup: 2026-07-03T07:17:36Z
 ---
 
 ## History
@@ -103,6 +103,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-07-02 — Aeron continuity pool blackouts recurring (GBPUSD/EURUSD); three new occurrences; Compass 26.4 fix pending
+> Three separate FORCE_INTERNALISATION cancel bursts in FX NYC on 2026-07-02: GBPUSD at 07:41 UTC (CP 1109144), EURUSD at 08:22 UTC, EURUSD at 09:30 UTC (CP 1369888). Same mechanism as 2026-07-01 XAUUSD incident: Aeron stream 32 multicast image stopped reaching gateway2 → continuity book cleared to empty → orders cancelled. Client (Marios) flagged more rejections at ~12:46 UTC ("same comment again"); William confirmed he was investigating by 15:09 BST. Internal note (William, 16:50 BST): client has been notified twice now and expressed concern; William reassured them the two incidents are not the same business-logic issue but share a root cause. Fix expected in Compass 26.4 release. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783007436513209) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782996418720519)
+
+> [open] 2026-07-02 — Perps soft-launched without Mahi heads-up; risk splitting + tenet profile gaps fixed on the fly
+> Isaac noticed perp trades (Gold/XAUUSD-PERP, US500, Nas100, WTI, Brent) coming through live at ~21:24 UTC 2026-07-02 and asked if they were test trades. Pepperstone confirmed live, noted "it's been a week now". Communication gap — Mahi not given advance notice. Isaac fixed two config gaps immediately: (1) risk splitting from LDN not configured; (2) tenet profile not set up. Confirmed no major blockers for the rest of perps to go live. Pepperstone described it as a soft launch ("not expecting much flow") and flagged need to monitor at least one weekend of perp pricing before full rollout. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783027460969609)
 
 > [resolved] 2026-07-01 — XAUUSD FORCE_INTERNALISATION rejections 15:10-15:20 UTC; Aeron publishing fault traced; alerting improvement underway
 > Reece flagged "LIQUIDITY_VIOLATION: FORCE_INTERNALISATION: No Continuity Pool price" cancels on XAUUSD (order 1154180509) between 15:10-15:20 UTC 2026-07-01. William confirmed resolved by ~18:57 BST. Nathan traced root cause to an internal Aeron fault: the publishing stream for the continuity pool stopped refreshing on Mahi's side. Dev team notified; alerting improvements underway to catch this earlier if it recurs. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782920054381549)
@@ -257,6 +263,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-07-02 — Crypto Pepperstone deploy (NYC + LDN) completed: Diego authorized ~22:40 BST; Sam Hewitt executed NYC by 22:58 BST, LDN complete 23:21 BST. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783030873378589)
 - 2026-07-01 — CFD go-live testing plan activated: MK posted Mahi_CFD_GoLive_Tracker.xlsx with batched instrument rollout; testing begins 2026-07-02; first batch targeting go-live EOW if tests pass. MK proposing a separate group chat to centralise per-batch communications. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782919210420079)
 - 2026-06-30 — USDCLP WSS timezone config updated: MK asked what CUSTOM1/CUSTOM2 correspond to; Kate shared full schedule (CUSTOM1/2 = intraweek trading sessions for USDCLP). MK requested amended intraweek config (image); Kate updated Beta and pushed to prod EOD 2026-06-30. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782828170782199)
 - 2026-06-29/07-01 — Tom requesting Crypto env PROD_LIVE_CLIENTDB access (pepperstone-crypto-ny-admin-1:3306): IPs 188.240.176.20, 50.16.243.246, 52.45.193.177, 104.28.20.60-66 whitelisted. William granted read-only DB grants 2026-06-30; pending Pepper-side connectivity verification — Tom still confirming credentials (latest reply 2026-07-01 20:11 BST). Extends the MFXPulse/Athena access request from 2026-06-17 to cover the Crypto env. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782731133990719)
