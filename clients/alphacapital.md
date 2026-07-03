@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-07-02T07:14:08Z
+last_catchup: 2026-07-03T07:10:32Z
 ---
 
 ## Recent issues
@@ -60,6 +60,8 @@ last_catchup: 2026-07-02T07:14:08Z
 
 
 ## Notable topics
+
+- 2026-07-02 — Compass Bridge Operator (Restricted) access provisioned for David Rapp / FastMT on alphacap-broker instance. Justin Young created the new restricted role (alphacap-broker-ln-admin-1) in response to the long-standing FastMT markup-visibility request. Cameron Hughes approved ("Looks good I think"); Andrew Morgan: caveat it as a cut-down view and invite feedback. Cameron Hughes will also create a standard Compass account for David Rapp and ask FastMT who else needs accounts. Justin flagged the Channel Explorer rework is coming soon (embedded analytics, better UX) — suggested mentioning it on handover. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782978915962429) [follow-up](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782992195022159)
 
 - 2026-06-05 — Compass version upgrade scheduled for weekend of 2026-06-07/08. Liam Cordelle notified client channel that the system would be upgraded to the latest Compass version over the weekend, with Mahi monitoring the open for issues. [permalink](https://mahifx.slack.com/archives/C070016ND6X/p1780673128888239)
 
