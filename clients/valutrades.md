@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-02T07:13:28Z
+last_catchup: 2026-07-03T07:25:22Z
 ---
 
 ## Recent issues
@@ -135,6 +135,8 @@ last_catchup: 2026-07-02T07:13:28Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-02 — QB PROD first test trade (GCQ6) succeeded; E2E test via oneZero scheduled 2026-07-03 ~9am BST: Client confirmed exchange symbology format (CLN6/GCQ6/NQU6) and signalled readiness for a prod test. Liam's first attempt rejected by QB: `QB: Static data not enabled` (tag 1=HOUSE, tag 50=UBS_QBAlgo). Client noted tags wrong — received 50=UBS_QBALGO / 1=HOUSE vs expected 50=ABAHIRWANI / 1=UBS_QBAlgo. Liam corrected and confirmed "Bought and sold 1x GCQ6" at 16:53 BST. Discussion then moved to the oneZero→Mahi→QB E2E path: client confirmed TT-style exchange symbology from oneZero, Liam confirmed setup done at 17:54 BST, E2E test from client's system targeted for 2026-07-03 ~9am BST. [client-symbology](https://mahifx.slack.com/archives/C09HN93T0G2/p1782978357557899) [liam-test-reject](https://mahifx.slack.com/archives/C09HN93T0G2/p1782998354684849) [client-wrong-tags](https://mahifx.slack.com/archives/C09HN93T0G2/p1783003643943479) [liam-filled](https://mahifx.slack.com/archives/C09HN93T0G2/p1783007611446929) [client-e2e-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1783010453674419) [liam-set-up](https://mahifx.slack.com/archives/C09HN93T0G2/p1783011294564789)
 
 - 2026-07-01 — QB PROD FIX TCP connection established, pending symbol mappings: Client asked Liam to try connecting QB PROD; Liam confirmed TCP connection established but needed Tag 50 (SenderSubID). Client provided tag 1 = `UBS_QBAlgo`, tag 50 = `Abahirwani`; Liam confirmed "Connected now" at 15:24 BST. Liam noted symbol mappings still needed to be able to trade — client is chasing QB for symbology. Client mentioned meeting Liam in Greenwich. [client-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1782913077674909) [liam-connected](https://mahifx.slack.com/archives/C09HN93T0G2/p1782915865774059) [client-chasing-symbology](https://mahifx.slack.com/archives/C09HN93T0G2/p1782917628255329)
 
