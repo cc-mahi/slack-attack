@@ -10,10 +10,16 @@ key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
   - {name: "Russell", role: "VT client-side — raised tag 889 slippage complaints 2026-06-25", confidence: low}
-last_catchup: 2026-07-02T07:13:20Z
+last_catchup: 2026-07-03T07:27:35Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-02 — VT proposing quarterly PnL payout; contract says monthly; Andrew Morgan to weigh in
+> William raised from the 02/07 meeting: VT want to shift PnL payout from monthly to quarterly. Daria confirmed the contract specifies monthly (50% of Net Trading Revenue over $20k minimum fee, per month). No benefit to Mahi in shifting it. VT gave no reason. Andrew Morgan flagged as required to weigh in on both this and the RI question below. [William meeting notes](https://mahifx.slack.com/archives/CPDS0M2KF/p1782986042158549) [Daria contract quote](https://mahifx.slack.com/archives/CPDS0M2KF/p1783026895010619)
+
+> [open] 2026-07-02 — Two new XAU flows (Alpfin + EWB): separate pricing channels; split connection structure pending
+> 02/07 meeting: VT want to onboard Alpfin flow (tighter overnight 15c TOB — currently MWMS/KAMA widens to ~20c; William asked Alpfin to confirm 20c overnight instead, else likely to hurt PnL) and EWB flow (wider 20c TOB during LD hours — client confirmed 20c viable; EWB sim #753 shows $25/M drop at 5s vs current $15/M, but wider TOB may absorb it). VT say 5 feeds available in the contract. Client is "papered up" on their end; William creating a separate liq session. VT asked about split pricing on the same connection — William confirmed technically possible (per-counterparty tag routing to different channels) but requires structural changes on Mahi's side; checking internally. [William meeting notes](https://mahifx.slack.com/archives/CPDS0M2KF/p1782986042158549) [EWB 20c confirmed](https://mahifx.slack.com/archives/C05NB72AGR2/p1782984988044989) [split pricing discussion](https://mahifx.slack.com/archives/C05NB72AGR2/p1783008172185589)
 
 > [resolved] 2026-07-01 — A_CLIENTS_PREMIUM fill price source reverted to pass-through; slippage fix
 > Daria switched the fill price source on the A_CLIENTS_PREMIUM execution rule from "published" back to pass-through at 22:00 BST. Root cause: published price includes the pending quantity of the order while it's filling, so the published stack has less liquidity; orders arriving at TOB quantity end up filled on the second layer, causing slippage. "Pass-through" uses the actual execution price and avoids this. Pending quantity protection retained (Daria noted could have disabled it instead but kept as protection against simultaneous orders). Distinct mechanism from the tag 889 LR slippage issue (still open). Compass ER: `A_CLIENTS_PREMIUM/012dqkjaln0jb7`. [Daria's note](https://mahifx.slack.com/archives/CPDS0M2KF/p1782939622175779)
@@ -140,6 +146,8 @@ last_catchup: 2026-07-02T07:13:20Z
 
 ## Notable topics
 
+- 2026-07-02 — VT interest in risk-increasing (RI) trades following their profitable retail clients (not broker clients). Daria noted RI can be done but requires a specific RI contract and 50% profit share; recommended focus first on growing the book before pursuing RI. Andrew Morgan needs to weigh in. [meeting notes](https://mahifx.slack.com/archives/CPDS0M2KF/p1782986042158549) [Daria RI note](https://mahifx.slack.com/archives/CPDS0M2KF/p1783026895010619)
+- 2026-07-02 — EWB self-serve sim results shared: Dan asked for results on the EWB_Data self-serve sim at 08:41 BST; Cameron Hughes acknowledged; William directed Dan to Echo simulation results page (velocity.SIM, covering 2026-06-02–2026-07-02, sim #753). [Dan ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1782978067704819) [William results link](https://mahifx.slack.com/archives/C05NB72AGR2/p1782979532874639)
 - 2026-07-01 — Dan confirmed EWB_Data timezone (GMT) and new MT4 statement dataset timezone (GMT+3 DST / GMT+2 NDST); initially gave the wrong answer (EWB) before correcting to the new set. William will run the sim on the new dataset. Ongoing sim pipeline: self-serve (EWB_Data ✓ running) + Mahi-cleaned MT4 statement (pending). [permalink](https://mahifx.slack.com/archives/C05NB72AGR2/p1782891719979089)
 - 2026-06-29 — Self-serve sim capability enabled for client (Dan). First use: EWB_Data submitted same day. Confirmed via William at 10:49 BST: "Have checked with the team, you should be able to run sims now." [William confirm](https://mahifx.slack.com/archives/C05NB72AGR2/p1782726553465249)
 - 2026-06-26 — Weekly meeting notes (2026-06-25): client happy with performance; volume growth is the key target. They're aiming for retail-only flow on the premium feed (previous problematic flow was from institutional broker). New AlpFin dataset incoming to assess for internalisation. J40 drop copy Echo fix still in progress on Mahi dev side; client wants yields once visible. CFD expansion keen on both sides — contract change needed; Mahi asked for full symbol list. [meeting notes](https://mahifx.slack.com/archives/CPDS0M2KF/p1782384165358919)
