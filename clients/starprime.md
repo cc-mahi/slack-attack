@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-02T07:13:31Z
+last_catchup: 2026-07-03T07:25:22Z
 ---
 
 ## Recent issues
@@ -70,6 +70,8 @@ last_catchup: 2026-07-02T07:13:31Z
 
 ## Notable topics
 
+- 2026-07-03 — NDXUSD session-open pricing query resolved: Samin questioned what was driving CLIENT_PRICE_LDN on NDXUSD before Velocity priced at the 22:00 UTC open (2026-07-02). Sam Hewitt clarified: pre-close, CLIENT_PRICE republishes the last mid as an indicative snapshot (zero qty, non-tradeable); Velocity's first firm tick was 22:00:02.695 and CLIENT_PRICE tracked it from the same millisecond. No fills in the window, no client impact. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1783057297073889)
+- 2026-07-02 — Samin asked whether skew can be differentiated per distribution: CPR currently 4c wide with 1c skew; he wants a tier-2 bbook FIX feed at 10c wide with 3c skew. William confirmed skew is pricer-level only — cannot vary between distributions of the same price. William offered a different price model as a workaround; Samin deferred ("more complications"). No action taken, discussion open-ended. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782996387573669)
 - 2026-07-02 — Sam Hewitt confirmed Indices Velocity-only config live: referencePriceMarketSelectors now sources Velocity only for LOCAL-CFD instruments on pricer1/pricer2; pricing.mid.benchmarkNormalised LOCAL-CFD removed (Indices now unnormalised, only crypto remains); pricers bounced (pricer1 Jul 1, pricer2 21:04 UTC). [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782972586144089)
 - 2026-07-02 — CFD WSS live: 8 index symbols (DOW/E50/F40/G30/JPX/NDX/SPX/UKX) in DISTRIBUTION_WSS spread-config, config v18, full 8-timezone set, single-level books matching FX/metals structure. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782973174146359)
 - 2026-07-01 — William clarified: benchmarkNormalisation is only active for CFD/Crypto (not XAUUSD); XAUUSD failover LPs in continuity pool if MAHI_LP_11 cuts out are FINALTO|EDGEWATER|EQUITI|INVAST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782912270044729)
