@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
   - {name: "Russell", role: "VT client-side — raised tag 889 slippage complaints 2026-06-25", confidence: low}
-last_catchup: 2026-07-03T07:27:35Z
+last_catchup: 2026-07-06T07:10:09Z
 ---
 
 ## Recent issues
@@ -24,8 +24,8 @@ last_catchup: 2026-07-03T07:27:35Z
 > [resolved] 2026-07-01 — A_CLIENTS_PREMIUM fill price source reverted to pass-through; slippage fix
 > Daria switched the fill price source on the A_CLIENTS_PREMIUM execution rule from "published" back to pass-through at 22:00 BST. Root cause: published price includes the pending quantity of the order while it's filling, so the published stack has less liquidity; orders arriving at TOB quantity end up filled on the second layer, causing slippage. "Pass-through" uses the actual execution price and avoids this. Pending quantity protection retained (Daria noted could have disabled it instead but kept as protection against simultaneous orders). Distinct mechanism from the tag 889 LR slippage issue (still open). Compass ER: `A_CLIENTS_PREMIUM/012dqkjaln0jb7`. [Daria's note](https://mahifx.slack.com/archives/CPDS0M2KF/p1782939622175779)
 
-> [open] 2026-06-30 — New MT4 statement dataset: Python cleaning done, sim pending
-> Client asked at 13:17 BST "do you have a macro that puts an MT4 statement into your format?" — had just received a "decent size" statement and wanted a quick conversion path. William offered Python cleaning on Mahi's side; client sent to William's email by ~13:38 BST. William asked timezone at 15:49 BST; client confirmed the new dataset is GMT+3 with DST (GMT+2 NDST) at 09:02 BST 2026-07-01 (separately clarified EWB_Data was GMT, distinct from this dataset). William acknowledged and will run the sim. [Dan asks](https://mahifx.slack.com/archives/C05NB72AGR2/p1782821852455899) [William timezone ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1782830987145319) [timezone confirm](https://mahifx.slack.com/archives/C05NB72AGR2/p1782892947321629) [William will run](https://mahifx.slack.com/archives/C05NB72AGR2/p1782895938410239)
+> [resolved] 2026-06-30/07-03 — New MT4 statement dataset: sim run, yield profiles sent to Dan
+> Client asked at 13:17 BST "do you have a macro that puts an MT4 statement into your format?" — had just received a "decent size" statement and wanted a quick conversion path. William offered Python cleaning on Mahi's side; client sent to William's email by ~13:38 BST. William asked timezone at 15:49 BST; client confirmed the new dataset is GMT+3 with DST (GMT+2 NDST) at 09:02 BST 2026-07-01 (separately clarified EWB_Data was GMT, distinct from this dataset). 2026-07-03 update: William posted MT4 yield profiles split across two MarkToMarket sims (Jenkins #769 UTC+2 Feb16–Mar8, #770 UTC+3 Mar9–Jun30) to Dan at 10:09 BST. No client reply yet. [Dan asks](https://mahifx.slack.com/archives/C05NB72AGR2/p1782821852455899) [William timezone ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1782830987145319) [timezone confirm](https://mahifx.slack.com/archives/C05NB72AGR2/p1782892947321629) [William will run](https://mahifx.slack.com/archives/C05NB72AGR2/p1782895938410239) [sim results sent](https://mahifx.slack.com/archives/C05NB72AGR2/p1783069780838419)
 
 > [resolved] 2026-06-30 — IP whitelist 209.198.129.254 completed
 > Richard requested IP 209.198.129.254 be whitelisted at 19:51 BST 2026-06-30. Nathan Burch confirmed Beeks completed the whitelist at 00:45 BST 2026-07-01; no issues reported. [request](https://mahifx.slack.com/archives/C05NB72AGR2/p1782845508503349) [resolution](https://mahifx.slack.com/archives/C05NB72AGR2/p1782863136718239)
