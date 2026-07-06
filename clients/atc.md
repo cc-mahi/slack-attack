@@ -7,10 +7,14 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-03T07:13:45Z
+last_catchup: 2026-07-06T07:06:40Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-05 — Full outage after weekend restart: LIQUIDITY_POOL_SC config referenced nonexistent MarketType enum
+> All ATC processes went down on restart with `No enum constant com.x.marketmodel.MarketType.LIQUIDITY_POOL_SC` — the SC liquidity pool config added ahead of a release (deployed release was still 20260612135923 from 12 June, predating the SC work). Nathan Burch removed all ten config keys referencing `LIQUIDITY_POOL_SC` (execution rules, market instrument overrides, markets, multi-pool market selector, external markets selectors, list mappings, market instruments, market throttle) via the config editor and restarted; all processes booted cleanly. Lee Butts confirmed the approach. **2026-07-06 update**: Nathan confirmed root cause — `LIQUIDITY_POOL_SC` had been configured with type `LIQUIDITY_POOL_SC`, which doesn't exist in the codebase (should be `LIQUIDITY_POOL`), on `reference.externalMarketsSelectors`.
+> [outage report](https://mahifx.slack.com/archives/C880RR6RJ/p1783243482985569) · [fix applied](https://mahifx.slack.com/archives/C046RNF64VD/p1783244813366319) · [root cause confirmed](https://mahifx.slack.com/archives/C046RNF64VD/p1783311666516509)
 
 > [open] 2026-06-25 — Finalto `unhandledTradeReport` flood; 29 fills with `ClientOrderId: null`; Zendesk 23136
 > Cameron Copland flagged 8 `unhandledTradeReport` errors in 5 minutes at 18:40 BST 2026-06-24, rising to 29 total. All inbound fills from Finalto with `ClientOrderId: null` — matches the known pattern of ex-Compass trades. Zendesk 23136 filed. Root cause not yet resolved.
@@ -94,6 +98,10 @@ last_catchup: 2026-07-03T07:13:45Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-07-03 — June PnL report circulated with verify links. William Denny posted FX/CFD/CFD-brokered yield profiles plus FX and CFD skew PnL Graphite links for June, with the ATC PnL Report June.pdf attached. [report](https://mahifx.slack.com/archives/C046RNF64VD/p1783092406200529)
+
+- 2026-07-03 — Arb hedger clip size increased: max trade as multiple of max VaR raised 0.25 → 1. William Denny bounced the arb hedger to allow bigger clips. [bounce](https://mahifx.slack.com/archives/C046RNF64VD/p1783070846395559)
 
 - 2026-07-02 — LIQUIDITY_POOL_SC created for SC entity brokering; waiting on Malik re: tag1 for routing execution rules. Cameron Hughes stood up the pool in anticipation of SC flow that may need to be brokered. [Cameron note](https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589)
 
