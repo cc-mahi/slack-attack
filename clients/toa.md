@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-03T07:20:15Z
+last_catchup: 2026-07-06T07:09:36Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-07-03T07:20:15Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-07-04 — toa-apnortheast1-prod-sec-1 stopped: no longer required for Nado
+> James (11:25 BST) stopped `toa-apnortheast1-prod-sec-1` as no longer required for Nado (wound down 2026-06-17). `toa-apnortheast1-prod-pri-1` continues, feeding IC Markets, rebooted in alignment with an IC Markets reboot. https://mahifx.slack.com/archives/C035H1VNCAD/p1783160733134849
 
 > [resolved] 2026-06-29 — Booking rejects PD (Q3H4ARZS4AW58Y): test trades, no action
 > James (11:09 BST) confirmed booking rejects triggering PD alert Q3H4ARZS4AW58Y are test trades — no action required. https://mahifx.slack.com/archives/C035H1VNCAD/p1782727722330439
