@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-03T07:23:05Z
+last_catchup: 2026-07-06T07:07:56Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-03 — SI sim results delivered: 2hr window $105/M vs current fast-hedge A-book $11/M
+> William ran SI (Skew + Inventory) sims on XAUUSD flow into CLIENTS_LDN (98% of flow) since 4 May across Jenkins builds 606–611, 595–596. 2hr SI window is best-performing ($105/M), 1hr next ($70/M), both well above the current fast-hedge A-book ($11/M). William's read: sharp flow means B-book PnL is consistently decreasing, so risk management stays crucial even with SI. Separately sanity-checked a $250k 2hr SI PnL spike on 4 May — confirmed legitimate soft flow, not an error. Delivers on David Cooney's 2026-07-01 request ("happy with everything now, looking to take it to the next level"); no decision yet on switching GCC to SI hedging. [sim-results](https://mahifx.slack.com/archives/C09QS1NUA80/p1783081002827819) [spike-check](https://mahifx.slack.com/archives/C09QS1NUA80/p1783081149212709)
+
+> [resolved] 2026-07-03 — 1,024oz XAUUSD long filled on Finalto, Compass adjustment done
+> Client reported 1,024oz gold long filled on Finalto at 15:09 BST; William confirmed "This is done" at 15:12 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783087740971599)
 
 > [open] 2026-07-02 — 1,416oz XAUUSD long filled on Finalto, Compass adjustment in progress
 > Layan reported 1,416oz gold long filled on Finalto at 15:08 BST; William acknowledged "Hi Layan, adjusting" at 15:08 BST. No completion confirmation in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783001309991439)
