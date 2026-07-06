@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-03T07:17:36Z
+last_catchup: 2026-07-06T07:09:22Z
 ---
 
 ## History
@@ -103,6 +103,18 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-07-06 — LD CFD environment access blocked for Ruby Wang (IP not whitelisted); Beeks + Cloud team follow-up in progress
+> Ruby (Pepperstone) reported unable to open the LD CFD environment at 04:29 BST 2026-07-06 (NY CFD fine). Nathan Burch checked: a Beeks ticket to whitelist office IPs was raised last Friday and Beeks confirmed completion that morning, but Ruby still can't connect — Nathan following up with Beeks. Ruby asked other team members to check in the meantime. 07:23 BST: Mahi asked the internal Cloud team to whitelist on Mahi's end too; Ruby confirmed she'll wait for it. Still open at end of window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783072323512349) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783308585302019)
+
+> [open] 2026-07-06 — MODULUS_LDN reject ratio alert (GetCustomers lock failures); Ruby's question unanswered
+> Ruby forwarded a frontoffice alert into `mahi-pepperstone-vnd` at 02:21 BST: reject ratio 12% (15 of 126 orders) on MODULUS_LDN/SPOT_CLIENTS_LDN, cause "Failed to acquire lock in GetCustomers()" (XLCAUD/XRPAUD). Asked if anything's worth checking; no Mahi reply in this window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783300898493129)
+
+> [resolved] 2026-07-05 — Crypto perp negative inception yields traced to Binance in reference price selectors; fixed to HyperLiquid-only
+> Marianna flagged negative inception yields on CO1USD-PERP and XAUUSD-PERP on 2026-07-03, asking if Echo references were correct. William Denny initially linked it to how perps are priced via normalisation. Isaac Dann resolved 2026-07-05: root cause was Binance being included in the reference price market selectors alongside HyperLiquid; fixed by restricting the riskPath process to HL only. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783072822852299) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783284355836849)
+
+> [resolved] 2026-06-27 — Weekend timezone markup not applied to perp dist profiles; PR #1045 fix confirmed working
+> Marianna flagged at 12:18 BST 2026-06-27 that weekend markup dist profiles were not applying for perps (working Friday, broken Saturday). Her troubleshooting ruled out: markup value, normal-timezone config, WSS, JMX markup node (markup node visible in config but not kicking in for WKND). Isaac diagnosed at 23:11 BST 2026-06-28: root cause isolated to Weekend timezone — the per-instrument `EnumMap<TradingTimeZone, markup>` is built in three steps; step 3 (lines 172-182) back-fills WEEKEND with hardcoded zero, never consulting config. Fix: replace CUSTOM_TRADING_TIME_ZONES with OPTIONAL_TRADING_TIME_ZONES (= WEEKEND + CUSTOM1-7) in step 2. PR https://github.com/MahiFX/MahiMain/pull/1045 raised 2026-06-29 02:06 BST. 2026-07-05: Marianna asked whether a separate instrument-list change was for this issue; Isaac confirmed it wasn't but noted the weekend markup fix "looks to be working now" — PR #1045 deployed and functioning. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782559084207049) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782684969634699) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783077505837239) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783284701153779)
 
 > [open] 2026-07-02 — Aeron continuity pool blackouts recurring (GBPUSD/EURUSD); three new occurrences; Compass 26.4 fix pending
 > Three separate FORCE_INTERNALISATION cancel bursts in FX NYC on 2026-07-02: GBPUSD at 07:41 UTC (CP 1109144), EURUSD at 08:22 UTC, EURUSD at 09:30 UTC (CP 1369888). Same mechanism as 2026-07-01 XAUUSD incident: Aeron stream 32 multicast image stopped reaching gateway2 → continuity book cleared to empty → orders cancelled. Client (Marios) flagged more rejections at ~12:46 UTC ("same comment again"); William confirmed he was investigating by 15:09 BST. Internal note (William, 16:50 BST): client has been notified twice now and expressed concern; William reassured them the two incidents are not the same business-logic issue but share a root cause. Fix expected in Compass 26.4 release. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783007436513209) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782996418720519)
@@ -263,6 +275,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-07-03 — Pepperstone appointed Reed Sayer as Head of UK (external news, shared internally by Bonnie). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783078241061249)
 - 2026-07-02 — Crypto Pepperstone deploy (NYC + LDN) completed: Diego authorized ~22:40 BST; Sam Hewitt executed NYC by 22:58 BST, LDN complete 23:21 BST. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783030873378589)
 - 2026-07-01 — CFD go-live testing plan activated: MK posted Mahi_CFD_GoLive_Tracker.xlsx with batched instrument rollout; testing begins 2026-07-02; first batch targeting go-live EOW if tests pass. MK proposing a separate group chat to centralise per-batch communications. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782919210420079)
 - 2026-06-30 — USDCLP WSS timezone config updated: MK asked what CUSTOM1/CUSTOM2 correspond to; Kate shared full schedule (CUSTOM1/2 = intraweek trading sessions for USDCLP). MK requested amended intraweek config (image); Kate updated Beta and pushed to prod EOD 2026-06-30. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782828170782199)
