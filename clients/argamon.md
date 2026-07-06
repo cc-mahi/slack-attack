@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-07-03T07:13:43Z
+last_catchup: 2026-07-06T07:06:07Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-07-03T07:13:43Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [open] 2026-07-06 — Toa LDN position rec break: 101k AUDCAD out, suspected over-hedge on INST-34 trades
+> Levi investigating a Toa LDN rec break (101k AUDCAD out, doesn't look like real risk). Flagged INST-34 trades that went via `MARKETMAKING_HRP_RETAIL` channel instead of the usual `MARKETMAKING_HRP_RETAIL_GMG` as a possible cause. Lee Butts confirmed party/market are identical across the four channels so nothing obvious explains the missing 101k; Levi troubleshooting further on Argamon's side. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783309851586399)
 
 > [resolved] 2026-06-22 — CP 90000580 switched back to internalised; going offside → all brokered XAUUSD reverted to LPs
 > Daria switched CP 90000580 back to internalised at Elan's request (it had been forcibly brokered to Toa). Up $6k from 90000580's trading on 2026-06-22 but internalised flow was going offside within 2 minutes (vs. onside as brokered). 2026-06-25: Daria reverted ALL brokered XAUUSD flow back to going to LPs from the NY4 (retail) environment, at Elan's request. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782092790487579) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782352799253379)
@@ -88,3 +91,4 @@ last_catchup: 2026-07-03T07:13:43Z
 - 2026-06-23 — Centroid UAT incremental MD refresh testing: IP 185.125.204.156 whitelisted, new pricing-only FIX credentials created (Argamon-Centroid-UAT-Prices / MahiFX-Centroid-UAT-Prices on 192.81.110.53:9010). Centroid advancing UAT work ahead of OneZero→Centroid migration. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782182611235909)
 - 2026-07-03 — Toa Chicago deploy blocked pending release branch + regression: David Cooney requested pushing latest build to Toa Chicago to support options connectivity Lee Butts is writing. Lee replied it needs a new release branch cut and regression testing first — not ready to go. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1783049787092519)
 - 2026-06-30 — Centroid UAT IP update: Argamon ops requested whitelist of new IP 192.109.23.20 for existing UAT session, replacing previously whitelisted IP. Isaac ✅. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
+- 2026-07-06 — NOMU_RCTV_NWPB_1 test-trade FIELD_VALIDATION_ERROR: needed UI enablement; Isaac fixed within the same exchange, client confirmed working. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783315711421619)
