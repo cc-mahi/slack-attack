@@ -13,13 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-07-03T07:23:07Z
+last_catchup: 2026-07-06T07:07:47Z
 ---
 
 ## Recent issues
 
-> [open] 2026-07-02 — LR counterparty profile intermittent misfire on XAU (counterparty 200045)
-> Erik tested C/R liquidity reduction on XAU for counterparty 200045, expecting 0-burst so LR fires immediately then replenishes at 20s intervals, but found it "sometimes hits, sometimes doesn't." Rory King (Mahi, ~12:47 UTC) acknowledged and said he'd investigate. No resolution in window. Config ref: `distribution.liquidityThrottle.liquidityRefreshProfiles.counterparty/012dq650aw4irv`. Separate from the fleet-wide brokered LR flag (2026-05-21 entry). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782997607784629)
+> [resolved] 2026-07-02 — LR counterparty profile intermittent misfire on XAU (counterparty 200045)
+> Erik tested C/R liquidity reduction on XAU for counterparty 200045, expecting 0-burst so LR fires immediately then replenishes at 20s intervals, but found it "sometimes hits, sometimes doesn't." Rory King (Mahi, ~12:47 UTC) acknowledged and said he'd investigate. Root cause found by Cameron Hughes (Mahi, 2026-07-03 ~14:31 UTC): the volume multiplier field being left empty in the JSON was resolving to NaN; set to 1. Erik confirmed 2026-07-03 ~15:36 UTC the reduction now adds up correctly and will resume tuning Monday. Config ref: `distribution.liquidityThrottle.liquidityRefreshProfiles.counterparty/012dq650aw4irv`. Separate from the fleet-wide brokered LR flag (2026-05-21 entry). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782997607784629) [fix](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783089074423199) [confirmation](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783092980545379)
 
 > [resolved] 2026-07-01 — Echo account password reset for Mac (macauleyn@gomarkets.com)
 > Mac (GoMarkets, ~23:53 UTC 2026-06-30) requested a password reset link for Echo (macauleyn@gomarkets.com), noting it was out of sync with their Compass credentials. Nathan Burch (Mahi) reset it immediately. Mac confirmed ("Thank you"). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782863598469879)
