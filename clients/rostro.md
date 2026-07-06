@@ -18,10 +18,19 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-07-03T07:25:20Z
+last_catchup: 2026-07-06T07:09:05Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-05 — Client-side Compass connectivity: resolved by VPN
+> Rostro (~20:46 BST) asked if Mahi was experiencing issues after failing to connect to Compass. Nathan Burch started looking into it; five minutes later Rostro confirmed "nevermind, seems like I had to be on the VPN to connect" (👍). Client-side, no Mahi action needed. [Rostro query](https://mahifx.slack.com/archives/C08AQKRU953/p1783280777320809) [Rostro: VPN fixed it](https://mahifx.slack.com/archives/C08AQKRU953/p1783281077984229)
+
+> [resolved] 2026-07-03 — New Centroid-SI-Retail FIX session provisioned (separate from existing B2B SI feed)
+> Oli asked (~09:03 BST) whether an existing heartbeat-only connection was still in use; Rory King confirmed it was connected but idle and offered to decommission or keep it — Rostro then asked instead for a brand-new API/session for the retail Centroid bridge (existing `Centroid-B2B` session serves the B2B bridge only). Rory agreed to create a new connection on the same channel. Shyam delivered the credentials 2026-07-06 00:30 BST: host `46.235.34.54`, orders port 9032 / market data port 9031, `Centroid-SI-Retail` username, carrying the same SI feed as `Centroid-B2B` but as a distinct FIX session for the retail bridge. [Oli: is this in use?](https://mahifx.slack.com/archives/C08AQKRU953/p1783066055976049) [Rostro requests new retail session](https://mahifx.slack.com/archives/C08AQKRU953/p1783083499250449) [Shyam delivers creds](https://mahifx.slack.com/archives/C08AQKRU953/p1783294213608309)
+
+> [resolved] 2026-07-03 — VIP feed spread parameter change: EURUSD/USDJPY/GBPUSD base spreads to 0, new Vol-10 signal
+> Kate (13:53 BST, internal) set base spreads to 0 on the VIP feed for EURUSD, USDJPY, and GBPUSD, introducing a new Vol-10 signal alongside the existing Vol-25 signal so pricing spends less time at choice. Internal note, no client back-and-forth in this window. [Kate's change](https://mahifx.slack.com/archives/C08ALS66EDC/p1783083202862269)
 
 > [resolved] 2026-07-02 — Cpty 160_0_100029 off-book hedger not pointing to IC (USDJPY)
 > Oli (~14:20 BST) flagged cpty `160_0_100029` (rev-share book) was being hedged at IC sometimes and Edgewater otherwise on USDJPY. Kate investigated and found the Off Book hedger was not configured to face IC_MARKETS exclusively. Kate made the change and bounced the hedger; confirmed at 14:26 BST "All Off Book hedged flow is now pointed to IC_MARKETS". Rostro confirmed (ok_hand). See also the 2026-05-07 VIP skew entry — same tag, distinct symptom (that was execution rule ordering; this was hedger LP config). [Oli query](https://mahifx.slack.com/archives/C08AQKRU953/p1782998444072939) [Kate fix confirmed](https://mahifx.slack.com/archives/C08AQKRU953/p1782998774865449)
