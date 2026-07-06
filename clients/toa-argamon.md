@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-07-03T07:06:06Z
+last_catchup: 2026-07-06T07:09:26Z
 ---
 
 ## Status
@@ -25,6 +25,9 @@ last_catchup: 2026-07-03T07:06:06Z
 - **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [open] 2026-07-06 — Toa LDN position rec break: 101k AUDCAD out, suspected over-hedge tied to INST-34 trades
+> Position rec on Toa LDN shows 101k AUDCAD out — doesn't look like real risk, appears to be an over-hedge in markets. Flagged as possibly related to INST-34 trades that traded 101k via `MARKETMAKING_HRP_RETAIL` while the rest of their flow went through `MARKETMAKING_HRP_RETAIL_GMG`. Lee Butts checked: party (book) and market are the same across all four channels, nothing jumps out that would explain the missing 101k. Argamon side continuing to troubleshoot; no resolution as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783309851586399)
 
 > [open] 2026-06-25 — HRP_CLIENTS_NET two PnL drop alerts (~$9k each); ~07:08 UTC; no resolution posted
 > Arun (Toa ops) flagged two back-to-back PnLDropAlerts on TOA-ARG LDN HRP_CLIENTS_NET at 08:10 BST: −$8,961 over 20 minutes (06:48–07:08 UTC, raw 364,990→356,030) and −$9,018 over 8 minutes (06:59–07:07 UTC, raw 364,930→355,912). Eyes reaction only; no diagnosis or resolution in thread as of catchup. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1782371422081669)
@@ -209,6 +212,7 @@ last_catchup: 2026-07-03T07:06:06Z
 
 ## Notable topics
 
+- NOMU_RCTV_NWPB_1 test trade FIELD_VALIDATION_ERROR (2026-07-06): Argamon test-traded NOMU_RCTV_NWPB_1 and hit a validation error; Isaac Dann enabled it in the UI and confirmed working shortly after. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783315711421619)
 - Build push to Toa Chicago blocked pending release branch + regression (2026-07-03): David Cooney requested latest build be pushed to Toa Chicago to support Lee's options connectivity work. Lee Butts replied it needs a new release branch cut and regression testing first — not ready to go. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1783049787092519)
 - Centroid UAT IP updated to 192.109.23.20 (2026-06-30): Argamon requested the Centroid UAT IP be updated from 185.125.204.156 to 192.109.23.20 for the ongoing incremental MD refresh testing. Addressed to Isaac Dann in mahi-argamon-operations; ✅ actioned (no reply needed). [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
 - PXM_LD4_A monitoring disabled on APN1 (2026-06-29): Maten disabled PD monitoring for PXM_LD4_A distribution connection on Toa Argamon APN1 — had been disconnected since config was added; disabled to reduce PD noise. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1782721198480769)
