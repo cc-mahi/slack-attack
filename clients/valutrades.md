@@ -9,10 +9,13 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-03T07:25:22Z
+last_catchup: 2026-07-06T07:09:58Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-03 — QB PROD trades not visible on Mahi blotter/Compass — Tag 1 fix + manual DB adjustment
+> Client asked Liam to confirm a QB oil buy/sell was working; Liam checked and found the trade wasn't visible because no Tag 1 was received from the client side. Liam asked client to send `1=UBS_QBAlgo` to match the QB side; client added the account mapping in oneZero and sent a fresh test trade, which appeared correctly in the Mahi blotter by 13:21 BST ("Looking good, can see it in the blotter now too"). Separately at 17:46 BST the client reported a CLQ6-AUG26 fill to UBS_QBAlgo not showing in MFXCompass; Liam adjusted the trade directly in the DB and client confirmed "looks good" at 17:53 BST. Both instances resolved same day during ongoing QB PROD go-live testing. [client-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1783080180033009) [tag1-fix-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1783080442935809) [blotter-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1783081282932479) [clq6-not-shown](https://mahifx.slack.com/archives/C09HN93T0G2/p1783097214693889) [liam-db-fix](https://mahifx.slack.com/archives/C09HN93T0G2/p1783097565922339) [client-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1783097634291779)
 
 > [resolved] 2026-07-01 — Overnight connection issue — Sam fixed in ~2 minutes
 > Client posted "Hello OZ Team" + "please can you fix this for us?" (image) in #mahi-valutrades at 22:23 BST. Sam Hewitt acknowledged at 22:24 ("Hi Overnight, checking") and posted "please check now" at 22:26. Client confirmed "looks good" and "thank you" by 22:26. Resolved in ~2 minutes. [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782941024736499) [sam-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782941062303189) [client-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1782941185226439)
@@ -135,6 +138,8 @@ last_catchup: 2026-07-03T07:25:22Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-03 — Graeme Watkins requesting meeting on hedging large gold orders (10k-50k oz): Bonnie Cassidy forwarded a message from Graeme asking to meet with Andrew Morgan and/or Will Carter next week, specifically to discuss hedging large gold orders (10k-50k ounces at a time) and what Mahi can do to optimise for Valutrades. Andrew replied he could do Wednesday or Thursday afternoon. Follow-on from the 2026-06-17 CME expansion/commercial scoping discussion. [bonnie-forward](https://mahifx.slack.com/archives/CP7A1F8BT/p1783072860014849) [andrew-reply](https://mahifx.slack.com/archives/CP7A1F8BT/p1783072990693599)
 
 - 2026-07-02 — QB PROD first test trade (GCQ6) succeeded; E2E test via oneZero scheduled 2026-07-03 ~9am BST: Client confirmed exchange symbology format (CLN6/GCQ6/NQU6) and signalled readiness for a prod test. Liam's first attempt rejected by QB: `QB: Static data not enabled` (tag 1=HOUSE, tag 50=UBS_QBAlgo). Client noted tags wrong — received 50=UBS_QBALGO / 1=HOUSE vs expected 50=ABAHIRWANI / 1=UBS_QBAlgo. Liam corrected and confirmed "Bought and sold 1x GCQ6" at 16:53 BST. Discussion then moved to the oneZero→Mahi→QB E2E path: client confirmed TT-style exchange symbology from oneZero, Liam confirmed setup done at 17:54 BST, E2E test from client's system targeted for 2026-07-03 ~9am BST. [client-symbology](https://mahifx.slack.com/archives/C09HN93T0G2/p1782978357557899) [liam-test-reject](https://mahifx.slack.com/archives/C09HN93T0G2/p1782998354684849) [client-wrong-tags](https://mahifx.slack.com/archives/C09HN93T0G2/p1783003643943479) [liam-filled](https://mahifx.slack.com/archives/C09HN93T0G2/p1783007611446929) [client-e2e-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1783010453674419) [liam-set-up](https://mahifx.slack.com/archives/C09HN93T0G2/p1783011294564789)
 
