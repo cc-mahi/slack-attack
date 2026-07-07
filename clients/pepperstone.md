@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-06T07:09:22Z
+last_catchup: 2026-07-07T07:10:57Z
 ---
 
 ## History
@@ -103,6 +103,15 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-07-06/07 — CFD NYC XAUUSD spread widening after Friday's market-width override; BMSL multiplier cut to 0.8x, base-target-spread approach proposed
+> Ruby flagged NYC XAUUSD spreads running wider than the ~12pt target set Friday via `marketWidthMinimumSpreadParameters`, and LDN pricing cheaper than NYC. Daria traced the extra widening to BMSL (aggregating Invast/Finalto/ISPrime vs the 40oz spread) and cut the NY BMSL multiplier from 1.0x to 0.8x; Shyam restarted the NY pricers to pick it up. Daria separately proposed switching TOB from LP-benchmarked spreads to a base-target-spread approach modulated by volatility/flow-predictive signals (rest of the stack stays LP-benchmarked) — Pepperstone keen, Daria to run supporting analysis. LDN-vs-NYC gap resolved as expected feed/liquidity difference, not a bug — day-average spreads were in line. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783397108924359)
+
+> [resolved] 2026-07-06/07 — MK's PEPPERSTONE NYC LR surplus/refresh rule barely moving spread; traced to $25/M USD cap
+> MK wanted a 10k USDCLP surplus refreshing 10k/500ms on a distribution rule but saw no spread widening or PnL. Daria found the published-price LR cap is the tightest of global-base/global-counter/channel-base/channel-counter — here the $25/M USD channel cap — so only the first 10k layer reprices to the cap, capping the effect regardless of surplus/refresh settings. MK to raise the channel USD cap. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783353273547609)
+
+> [open] 2026-07-06 — Crypto NYC spot-arb window from B2C2 XLCUSD/XLCAUD bid drop; LMAX proposed as second normalisation reference
+> B2C2's XLCUSD/XLCAUD bids dropped ~$4 below market at 13:05 UTC 2026-07-06, pulling down the B2C2_DIRECT_NYC mid that the NY spot pricing model normalises to and opening an arb window (~$600 P&L over ~5 minutes per Daria). Daria proposed adding LMAX as a second mid reference for the NY normalisation — backtests show reduced (not eliminated) opportunity — and is awaiting Pepperstone's go-ahead to add it. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783396645192439)
 
 > [open] 2026-07-06 — LD CFD environment access blocked for Ruby Wang (IP not whitelisted); Beeks + Cloud team follow-up in progress
 > Ruby (Pepperstone) reported unable to open the LD CFD environment at 04:29 BST 2026-07-06 (NY CFD fine). Nathan Burch checked: a Beeks ticket to whitelist office IPs was raised last Friday and Beeks confirmed completion that morning, but Ruby still can't connect — Nathan following up with Beeks. Ruby asked other team members to check in the meantime. 07:23 BST: Mahi asked the internal Cloud team to whitelist on Mahi's end too; Ruby confirmed she'll wait for it. Still open at end of window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783072323512349) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783308585302019)
@@ -275,6 +284,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-07-07 — Pepperstone emailed Binance taker feed credentials to Mahi (perp/HyperLiquid pricing context, see 2026-05-29 Recent issues history). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783393492145979)
 - 2026-07-03 — Pepperstone appointed Reed Sayer as Head of UK (external news, shared internally by Bonnie). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783078241061249)
 - 2026-07-02 — Crypto Pepperstone deploy (NYC + LDN) completed: Diego authorized ~22:40 BST; Sam Hewitt executed NYC by 22:58 BST, LDN complete 23:21 BST. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783030873378589)
 - 2026-07-01 — CFD go-live testing plan activated: MK posted Mahi_CFD_GoLive_Tracker.xlsx with batched instrument rollout; testing begins 2026-07-02; first batch targeting go-live EOW if tests pass. MK proposing a separate group chat to centralise per-batch communications. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782919210420079)
