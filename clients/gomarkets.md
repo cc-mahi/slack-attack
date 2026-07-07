@@ -13,10 +13,19 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-07-06T07:07:47Z
+last_catchup: 2026-07-07T07:09:35Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-06 — 26DEGREES cherry-picking XAUUSD hedging flow; 10 counterparties blacklisted to test
+> Andrew Morgan (Mahi, internal-go, ~12:56 UTC) flagged 26DEGREES accepting only favourably-marked-up hedging flow and cancelling flow that goes offside for them on XAUUSD, suggesting they be dropped from hedger config. Rory King (Mahi) posted the yield-profile evidence to the client channel ~13:46 UTC asking whether GoMarkets wanted 26DEGREES removed from XAUUSD hedging. Will (GoMarkets, ~03:42 UTC 2026-07-07) opted to keep them in the hedger for now, having blacklisted 10 counterparties (based on 2 weeks of trade/cancel-rate tagging) to test whether specific accounts were being filled defensively; will revisit if cancels persist. Isaac Dann (Mahi) separately reviewed brokered-vs-internalised yield and added an execution rule to the RADEX ruleset to internalise broker-classified XAUUSD orders under 400k base notional — part of broader work tied to GoMarkets onboarding more toxic clients with per-channel markup routing. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783341970523629) [Will's blacklist reply](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783392120105789) [Andrew's internal flag](https://mahifx.slack.com/archives/CNF3WPNSK/p1783339012311319)
+
+> [resolved] 2026-07-07 — LMAX_LDN missing from HEDGING_MODEL_ARB_NYC arb hedger flow
+> Kieran (GoMarkets, ~04:08 UTC) asked why LMAX_LDN wasn't receiving arb hedger flow. Isaac Dann (Mahi) confirmed it was missed during the LMAX→LMAX_LDN market swap and added it to the arb hedger immediately (~04:12 UTC); will monitor fills/cancels on LMAX_LDN going forward. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783393708565039)
+
+> [resolved] 2026-07-07 — NZDUSD pricing jumpy — noisy signal, config adjusted + pricers restarted
+> GoMarkets (~05:30 UTC) reported NZDUSD very jumpy. Isaac Dann (Mahi) diagnosed noisy signals, adjusted config and restarted pricers (~06:07 UTC); confirmed beta still a little jumpy but no longer crossing. Client confirmed ("nice thank you"). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783398609493309)
 
 > [resolved] 2026-07-02 — LR counterparty profile intermittent misfire on XAU (counterparty 200045)
 > Erik tested C/R liquidity reduction on XAU for counterparty 200045, expecting 0-burst so LR fires immediately then replenishes at 20s intervals, but found it "sometimes hits, sometimes doesn't." Rory King (Mahi, ~12:47 UTC) acknowledged and said he'd investigate. Root cause found by Cameron Hughes (Mahi, 2026-07-03 ~14:31 UTC): the volume multiplier field being left empty in the JSON was resolving to NaN; set to 1. Erik confirmed 2026-07-03 ~15:36 UTC the reduction now adds up correctly and will resume tuning Monday. Config ref: `distribution.liquidityThrottle.liquidityRefreshProfiles.counterparty/012dq650aw4irv`. Separate from the fleet-wide brokered LR flag (2026-05-21 entry). [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1782997607784629) [fix](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783089074423199) [confirmation](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783092980545379)
