@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-07-06T07:09:21Z
+last_catchup: 2026-07-07T07:11:43Z
 ---
 
 ## Status
@@ -23,6 +23,9 @@ last_catchup: 2026-07-06T07:09:21Z
 - **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
+
+> [open] 2026-07-06 — USDJPY spread reported jumping 1→16 pts (client-side); Mahi feed confirmed tight
+> Lars forwarded a report from Daniel (TOT) that USDJPY spread intermittently jumps from 1 to 16 points, reported around 4am EST during the London session. Rory King and Cameron Hughes picked it up; Shyam Hari confirmed Mahi's published USDJPY spread for the full 6 Jul London session (07:00–13:00 UTC) stayed consistently tight (avg 0.6pt, max 2pt across 91,851 ticks), indicating the jump happens downstream of Mahi's pricing. Awaiting specific trade/time detail from the client to dig further. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1783353697503159)
 
 > [resolved] 2026-07-01 — Pricing incident (Finalto/MAHI_LP_5) at ~07:43 BST; LP removed 2026-07-02
 > Cameron Hughes flagged in #internal-toponetrader that the same pricing feedback loop incident seen at Infinox also hit TOT at ~07:43 BST, caused by MAHI_LP_5 (Finalto). On 2026-07-02, Liam confirmed MAHI_LP_5 is the Finalto LP from Infinox and recommended swapping it out given the feeds are untrusted; Cameron Hughes confirmed it had been removed from price formation and bounced the pricers. No client-facing communication in #mahi-toponetraders. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1782927073351899) [resolution](https://mahifx.slack.com/archives/C08TG143F4L/p1782991925017169)
