@@ -17,13 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-07-06T07:07:17Z
+last_catchup: 2026-07-07T07:09:03Z
 ---
 
 ## Recent issues
 
 > [open] 2026-07-06 — XBT/XET rejects at session start: CROSSOVER pricing feed dropped 24 June, normalisation failing over to continuity pool
-> Samuel flagged rejects on XBT/XET for two counterparties (`ASV_MT4_PROECN_232008724`, `ASV_MT5_15181721`) at session start. Shyam diagnosed two separate causes: (1) the order rejects happened because LMAX_WKND was dark at the time — pricing was coming off the continuity pool, which itself prices off LMAX_WKND, so with no firm price there was nothing to fill against; (2) XET/XBT pricing is normalised against CROSSOVER, which stopped sending price ticks on 24 June and is now rejecting the session with an "account disabled" message — pricing has been failing over to the continuity pool since, with clients still getting filled throughout. Two fix options offered: restore the CROSSOVER feed, or re-point normalisation to LMAX_WKND or ROUTE28 (both already referenced for these instruments). Samuel to discuss internally and revert. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1783308073325469)
+> Samuel flagged rejects on XBT/XET for two counterparties (`ASV_MT4_PROECN_232008724`, `ASV_MT5_15181721`) at session start. Shyam diagnosed two separate causes: (1) the order rejects happened because LMAX_WKND was dark at the time — pricing was coming off the continuity pool, which itself prices off LMAX_WKND, so with no firm price there was nothing to fill against; (2) XET/XBT pricing is normalised against CROSSOVER, which stopped sending price ticks on 24 June and is now rejecting the session with an "account disabled" message — pricing has been failing over to the continuity pool since, with clients still getting filled throughout. Two fix options offered: restore the CROSSOVER feed, or re-point normalisation to LMAX_WKND or ROUTE28 (both already referenced for these instruments). Samuel to discuss internally and revert. Separately, Kate found `signalReturnBenchmarkMarketSelector` for XBT and XET was still set to Wintermute (no longer in `referencePriceMarketSelectors`), warping recent skew PnL on both instruments; updated and flagged to Daniel. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1783308073325469) [Kate benchmark-selector fix](https://mahifx.slack.com/archives/C040V9LNKT5/p1783355885639799)
+
+> [open] 2026-07-06 — TRUMP pricing inconsistency at 4 July market open: Mahi asking if Exinity even sources TRUMP from us
+> Christian Lee reported inconsistent TRUMP pricing at the 4 July market open, with a screenshot. Nathan checked and doesn't believe Mahi prices TRUMP at all; asked Christian to confirm they're sourcing the price from Mahi. Awaiting Exinity reply. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1783358561848549)
 
 > [resolved] 2026-07-02 — Wintermute FIX session ~28-second stall (heartbeat only, no order impact)
 > Mukhammad posted an alert at ~22:19 UTC. Nathan diagnosed: ~28-second stall on the Wintermute FIX session between 22:13:17–22:13:45 UTC. Only heartbeat messages affected; no order-related FIX messages (new orders, cancels, fills) exchanged during the window. Latency returned to normal and has stayed within normal ranges since. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1783030757667549)
