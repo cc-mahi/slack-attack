@@ -9,13 +9,14 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-07-06T07:05:40Z
+last_catchup: 2026-07-07T07:07:19Z
 ---
 
 ## Recent issues
 
-> [watching] 2026-06-30 — XAGUSD FI PnL drop flagged (small, no action yet)
+> [open] 2026-06-30 — XAGUSD FI/skew PnL drop; skew floor lowered 2026-07-07
 > Cameron Hughes flagged a drop in XAGUSD FI PnL, noting it is "very small relative to rest of the funded flow". Posted with screenshots; no thread discussion, no fix actioned. Potentially a recurrence of the Apr-23 XAG bleed pattern (signal was switched from neuron to synapse at that time). Worth monitoring whether it develops. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782821826950699)
+> 2026-07-07 update — Shyam Hari: XAG skew PnL continuing to drop; min skew floor was oversized (2 pips = $0.02), lowered to [1 pip](https://alphacapital-ln-admin-1.s5e9.prod.mahimarkets.com:8400/configuration/edit/pricing.adjustmentSignalParameters/012dq42gld8avib). Flagged may need to move off the neuron signal if flow keeps picking it off. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1783393617807039)
 
 > [watching] 2026-06-26 — False FI PnL drop on EURGBP (2026-06-25): news last-look delay interaction; FI PnL calculation methodology flagged for review
 > Shyam Hari: false FI PnL drop on EURGBP at ~12:29–12:31 UTC 2026-06-25. Price was skewed up at execution *time* when House bought, but execution *price* was fine because `newsAdditionalLastLookDelay` kicked in over a news event. Root cause explained/benign, but Shyam then flagged a follow-up: "Potentially need to review which prices we use for FI PnL calculations" — open question, no action taken yet. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782445628932189) [TOB](https://echo.mahimarkets.com/topOfBook#clientId=alphacapital.LDN;from=2026-06-25T12:28:59.859Z;instrumentId=EURGBP;to=2026-06-25T12:31:01.859Z) [config](https://alphacapital-ln-admin-1.s5e9.prod.mahimarkets.com:8400/configuration/edit/distribution.liquidityThrottle.newsAdditionalLastLookDelay/012dq4frml1nmv)
