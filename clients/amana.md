@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
-last_catchup: 2026-07-06T07:06:19Z
+last_catchup: 2026-07-07T07:07:29Z
 ---
 
 ## Status
@@ -25,11 +25,18 @@ last_catchup: 2026-07-06T07:06:19Z
 
 ## Recent issues
 
+> [open] 2026-07-07 — Cpty 8011508 XAU rejections recur; same Manual Arber Selection / 500ms last-look setup as 2026-07-02
+> Amana flagged a burst of rejections from counterparty 8011508 on XAU at 04:40 BST. Isaac investigated: counterparty is sending limit orders off-market (offer 4132.37 vs requested 4132.23) and remains on the restricted *ABOOK/Manual Arber Selection* execution rule (500ms last-look) — same setup confirmed intentional on 2026-07-02. Isaac asked Amana to confirm this should stay in place; no reply yet in-window. [amana-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783395643330219) [isaac-detail](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783396540010789)
+
+> [open] 2026-07-06 — USDJPY apparent no-liquidity rejection: Amana disputes "no prices in market" explanation
+> Princess asked whether FX pricing reference is CMC-only; Rory confirmed LMAX + CMC both feed reference, spreads formed off CMC only. Princess then flagged a client's no-liquidity rejection where CMC/LMAX appeared to be sending little price around 07:31:24; Rory attributed an unrelated EURUSD/8010376 cancel to a failed mid-distance check, but that wasn't the trade in question — the no-liquidity case turned out to be USDJPY. Princess pushed back: "That does not make sense. I doubt there were no prices in the market." No further reply in-window. [fx-ref-q](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783325302586999) [usdjpy-doubt](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783330326900619)
+
 > [resolved] 2026-07-03 — XAUUSD fat feed spread spiked to 30pts; TOB/ROLL config adjusted
 > Karen flagged at 15:59 BST that Mahi fat XAUUSD spread was showing 30pts vs CMC's 8pts, with a client complaining. Rory investigated live; suspected the ROLL/TOB config (0.4 on Fat) after confirming CMC's own TOB was 100. Nikos asked Rory to reduce TOB from 250→100 pending London close; Rory applied the change at 16:09 BST and confirmed spreads back in line (8pts raw, 14pts client-facing). Nikos noted they'd revert the change back up after the weekend. [karen-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783090753635629) [rory-fixed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783091402990399)
 
 > [open] 2026-07-03 — XAUUSD B-book mobile client rollout: in progress
 > Nikos announced at 08:09 BST 2026-07-03 that Amana is moving mobile clients XAUUSD pricing and execution to Mahi B-book ("PLEASE KEEP AN EYE FOR ANY ISSUES"). Cameron Hughes acknowledged. Princess confirmed at 08:22 BST that it's enabled, tagging Cameron Hughes to check. No issues reported in-window since. [nikos-announce](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062549305299) [cam-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062690662239) [princess-enabled](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783063316970139)
+> 2026-07-06 update: Amana enabled XAUUSD MahiB Fat flow for a further set of clients (cptys 7009175, 8005682, 8006773, 8000601, 39000374, 8010614, 8004180, 8004489), asking Mahi to co-monitor. Rory confirmed 8000601's trade routed correctly down the BBOOK_CLIENTS_FAT channel; Karen confirmed all flow looking good by 15:34 BST. [fat-enabled](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783341934365399) [tags-shared](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783345741821629) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783345864096049) [karen-good](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783348498531449)
 
 > [resolved] 2026-07-02 — NFP arb cpty 8006187 + econ news config call planned 2026-07-03
 > Cpty 8006187 traded long 2,398oz XAUUSD + short 2,838oz XAUFUT-Q within 182ms of NFP release (12:30:00.425–12:30:00.607 UTC 2026-07-02). Hedger covered in ~5s; Amana +60k A-book, -60k futs book. Rory (internal): would have lost 25k+ had risk been held 10s. Nikos asked about econ news widening/spread/depth config; Rory confirmed parameters available (pricing.econNewsBaseSpreadOverride, econNewsTightMillisAfter, econNewsWideMillisBefore, econNewsWideningFactors) and shared Compass config links. Nikos: "Ok I am gonna put a call to go through those tomorrow." [rory-public](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783000901937459) [econ-config-links](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783003595793419) [rory-internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1783006880614989)
