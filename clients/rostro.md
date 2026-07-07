@@ -18,10 +18,17 @@ key_people_overrides:
   - {name: "Sammy", role: "primary client-side relationship manager / decision-maker", confidence: low}
   - {name: "Lochlan", role: "departed — was championing Mahi at Rostro; moved to OZ (OneZero?); Dave Cooney to reach Mike Ayres as replacement contact", confidence: low}
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
-last_catchup: 2026-07-06T07:09:05Z
+  - {name: "Andreas", role: "Rostro ops — recurring FIX/slippage/subscription queries", confidence: low}
+last_catchup: 2026-07-07T07:11:06Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-07 — Andreas: slippage query on cpty 10_135_700908, order 65455505-1 (arbitrageur classification)
+> Andreas asked (07:40 BST) for Mahi to check FIX logs and explain slippage on a batch of retail orders (65455013-1, 65455023-1, 65455505-1). Nathan Burch replied (07:56 BST) with a Compass trades link: the counterparty is classified as an arbitrageur, so fills are against the continuity price plus markup, which accounts for the observed slippage. No further client response in window. [Andreas query](https://mahifx.slack.com/archives/C08AQKRU953/p1783406416426549) [Nathan explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1783407416529649)
+
+> [open] 2026-07-06 — Alex: reported 28c VIP model spread spike on XAUUSD, not reproducible on Mahi side
+> Alex (11:40 BST) asked Kate to check what caused a 28-cent spike on the VIP model spread in XAUUSD (screenshot attached). Kate dug into pricer binlogs down to market-data level around 08:26 UTC — TOB was tight and stable throughout (~12–15c), no widening seen, and LR didn't fire. Kate asked Alex (13:35 BST) to confirm where the 28c spike was observed, since it looks like any widening occurred downstream of Mahi. Awaiting Alex's reply. [Alex query](https://mahifx.slack.com/archives/C08AQKRU953/p1783334419698419) [Kate: no spike found, asks for source](https://mahifx.slack.com/archives/C08AQKRU953/p1783341317782729)
 
 > [resolved] 2026-07-05 — Client-side Compass connectivity: resolved by VPN
 > Rostro (~20:46 BST) asked if Mahi was experiencing issues after failing to connect to Compass. Nathan Burch started looking into it; five minutes later Rostro confirmed "nevermind, seems like I had to be on the VPN to connect" (👍). Client-side, no Mahi action needed. [Rostro query](https://mahifx.slack.com/archives/C08AQKRU953/p1783280777320809) [Rostro: VPN fixed it](https://mahifx.slack.com/archives/C08AQKRU953/p1783281077984229)
