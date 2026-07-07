@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-07-06T07:06:27Z
+last_catchup: 2026-07-07T07:08:26Z
 ---
 
 ## Status
@@ -21,6 +21,9 @@ last_catchup: 2026-07-06T07:06:27Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-07-06 — Client requesting hedger on rev share book; Tegis eyeing MT5 move
+> Kate Stagg (internal) relayed a client catch-up: Tegis flow is performing well with a good monetisation window and PnL steadily ticking up. Tegis are reportedly looking to move to MT5 — hope is that Base absorbs the architectural changes on their side rather than requiring further work from Mahi. Client also asked for a hedger to be set up on the rev share book, similar to the existing Tegis workflow, covering the rest of their flow. No reply or follow-up in channel yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1783348750050239)
 
 > [resolved] 2026-06-29 — Tegis position migration completed; C Book with LMAX hedging live
 > Kate B (client) provided Compass Positions.xlsx at ~22:43 BST 2026-06-29. Isaac Dann added group `real-SC` to C Book execution rules, ran a test trade (1k USDJPY @ 161.942, House Sell, via C BOOK/Catch-All ER) to confirm flow, uploaded client positions, and turned the hedger on at ~22:54 BST. Isaac announced in internal channel at 01:44 BST 2026-06-30: "C Book with LMAX hedging is live now, client positions have been imported, trades are coming in and hedger is on." Kate Stagg acknowledged. Migration happened a day ahead of the Monday 2026-06-30 plan (see Notable topics 2026-06-25). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782773004128469) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
@@ -86,6 +89,7 @@ last_catchup: 2026-07-06T07:06:27Z
 
 ## Notable topics
 
+- 2026-07-06 — Tegis flow healthy, PnL ticking up; client asked for rev-share book hedger + Tegis eyeing MT5 move: Kate Stagg relayed a client catch-up covering three points — Tegis flow monetising well, Tegis potentially moving to MT5 (hoping Base absorbs the architecture change), and a request for a hedger on the rev share book mirroring the Tegis setup. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1783348750050239)
 - 2026-06-29 — Tegis position migration completed ahead of schedule; C Book live with LMAX hedging: Kate B provided Compass Positions.xlsx; Isaac Dann added `real-SC` group to C Book execution rules, ran final test trade, uploaded positions, turned hedger on. Isaac announced go-live in internal channel at 01:44 BST 2026-06-30. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
 - 2026-06-26 — MT5 execution bridge deploy scheduled for weekend of 2026-06-28: Maten Rehimi noted an MT5 execution bridge update was planned for this weekend, using MT4Bridge-Multibranch-Build/develop build 512. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782483928879589)
 - 2026-06-25 — Tegis position migration rescheduled to Monday (2026-06-30): Kate Stagg updated the plan — the original intent to route Scope flow to Mahi tonight and switch positions was abandoned (Kate travelling); the migration will now happen on Monday over the two-hour trading break, as it's cleaner to execute when no trades are coming in. **Resolved: migration completed 2026-06-29 evening.** [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782389742548349)
