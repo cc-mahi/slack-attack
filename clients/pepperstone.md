@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-07T07:10:57Z
+last_catchup: 2026-07-08T07:07:55Z
 ---
 
 ## History
@@ -284,6 +284,8 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-07-07/08 — Diego (Pepperstone) asked for the CFD instrument list to subscribe in OZ; chased ~14h later ("any updates?"); Nathan Burch delivered the OZ→Compass instrument mapping spreadsheet, then confirmed continued forwards/rolling-contract price updates from Pepperstone's side won't cause issues at roll. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783413469718239) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783466675805839)
+- 2026-07-07 — Marianna asked for the inception spread calculation methodology on the yield page; Rory answered same session with the `yield_0ms` / accounting-quantity formula. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783416215906739)
 - 2026-07-07 — Pepperstone emailed Binance taker feed credentials to Mahi (perp/HyperLiquid pricing context, see 2026-05-29 Recent issues history). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783393492145979)
 - 2026-07-03 — Pepperstone appointed Reed Sayer as Head of UK (external news, shared internally by Bonnie). [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783078241061249)
 - 2026-07-02 — Crypto Pepperstone deploy (NYC + LDN) completed: Diego authorized ~22:40 BST; Sam Hewitt executed NYC by 22:58 BST, LDN complete 23:21 BST. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783030873378589)
