@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-07T09:31:35Z
+last_catchup: 2026-07-08T07:07:08Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-07 — XAUUSD slippage query for CP 334513 explained (VWAP fill on liquidity pool, not TOB)
+> Nael flagged client complaint of -$2.5 slippage on stop order [PGyAEMPVOQ7qF](https://gcc-brokers-ln-admin-1.u67r.prod.mahimarkets.com:8400/trading/orders/?instruments=%5B%27XAUUSD%27%5D_&anyIds=%5B%27PGyAEMPVOQ7qF%27%5D_), asking whether it originated from the LP or Mahi. Nathan Burch explained CP 334513 is a Dynamic-broker AFLOW account, always brokered on LIQUIDITY_POOL_LDN not CLIENT_PRICE_LDN; the 3k oz trade filled at a VWAP after a ~$4/sec gold move, not against TOB — client price was $4098.09, fill was $4097.85 on the liquidity pool. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783454538562399) [explanation](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783459284212989)
+
+> [resolved] 2026-07-07 — 851oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 851oz gold long filled on Finalto at 15:23 BST; William Denny confirmed "This is done" at 15:26 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783434224667549)
 
 > [open] 2026-07-06 — Yield profiles broken; riskPath component deploy fixed, cause unconfirmed
 > Daria flagged yield profiles (YPs) broken; the underlying issue had apparently already been fixed overnight, so Sam Hewitt ran a component deploy for riskPath to pick it up — confirmed done at 22:43 BST. Liam Cordelle asked "What was the cause?" the next morning (09:35 BST) — unanswered in window. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1783373052160039) [fix-confirmed](https://mahifx.slack.com/archives/C09QS1NUA80/p1783374223063879) [cause-query](https://mahifx.slack.com/archives/C09QS1NUA80/p1783413301226859)
