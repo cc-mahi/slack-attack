@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-07T07:30:00Z
+last_catchup: 2026-07-08T07:09:43Z
 ---
 
 ## Recent issues
@@ -138,6 +138,8 @@ last_catchup: 2026-07-07T07:30:00Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-08 — cpty 92549025 A/B book classification: client asked team to advise; Nathan Burch confirmed A book (with chart) within ~6 minutes. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1783494003391929)
 
 - 2026-07-03 — Graeme Watkins requesting meeting on hedging large gold orders (10k-50k oz): Bonnie Cassidy forwarded a message from Graeme asking to meet with Andrew Morgan and/or Will Carter next week, specifically to discuss hedging large gold orders (10k-50k ounces at a time) and what Mahi can do to optimise for Valutrades. Andrew replied he could do Wednesday or Thursday afternoon. Follow-on from the 2026-06-17 CME expansion/commercial scoping discussion. [bonnie-forward](https://mahifx.slack.com/archives/CP7A1F8BT/p1783072860014849) [andrew-reply](https://mahifx.slack.com/archives/CP7A1F8BT/p1783072990693599)
 
