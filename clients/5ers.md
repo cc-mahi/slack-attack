@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
-last_catchup: 2026-07-07T07:07:03Z
+last_catchup: 2026-07-08T07:04:39Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-07 — Cross-connect (XC) setup delayed — YourBourse (Maksim) unresponsive to Beeks since July 3rd
+> Kate Stagg (13:08 BST) flagged frustration at how long the XC is taking to get set up, attributing the main hold-up to YourBourse — Maksim hasn't replied to Beeks since 2026-07-03. Arun to send Beeks an email and suggest a call between Beeks and YB to get it over the line. No further detail in-window on what the XC is for or its urgency. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1783426138434659)
 
 > [resolved] 2026-07-03 — Stale FIX orders (XAUUSD, JPN225) via connector #11748 — YourBourse-end connection drops, no unhedged exposure
 > Linos (07:15 BST) shared 6 stale FIX order log lines from 03:57–03:59 UTC: XAUUSD buys at 4175–4177 and JPN225 sell 43 lots at 69212.0, all via connector #11748, trace_ids spanning CPs 11734_ and 1770806082_. Sam Hewitt replied asking what Linos would like checked; client confirmed (09:37 BST) these were the stale orders in question. Sam's 2026-07-06 trace: none of the six orders reached Mahi or were executed — no unhedged exposure. Root cause: the YourBourse connector (#11748) price+order FIX sessions dropped twice in a ~2.5min window (03:57:01 and 03:58:32 UTC), both drops originating at the connector end (TCP closed from 213.196.24.180, fresh re-logons with reset sequence numbers seconds later); orders sent during the dead-connection windows triggered YB's 15s stale-alert timeout. Mahi pricing was firm and continuous throughout (708k XAUUSD + 159k JPN225 updates, no gaps >5s, zero indicative ticks) — the quoted IDs were just the last live quotes before each drop. Sam asked YourBourse to check the connector's logs/network around those two timestamps. Distinct from the 2026-06-12 YourBourse stale-orders episode (separate connection). [client-alert](https://mahifx.slack.com/archives/C07AQJS4E80/p1783059350209809) [sam-q](https://mahifx.slack.com/archives/C07AQJS4E80/p1783060786087699) [sam-rca](https://mahifx.slack.com/archives/C07AQJS4E80/p1783313577498919)
