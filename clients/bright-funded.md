@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-07-07T07:17:00Z
+last_catchup: 2026-07-08T07:06:25Z
 status: active
 retired_at: null
 retired_reason: null
@@ -70,6 +70,9 @@ retired_reason: null
 
 > [watching] 2026-05 — recurring pricer memory pressure and latency alerts
 > Multiple pricer bounces through May: 2026-05-08 Arun bumped memory on pricer2/pricerBeta1 for MD latency; 2026-05-14 Maten bumped pricer1 from 2GB→3GB and bounced after CPL latency alerts (EURGBP 992ms on CLIENT_PRICE_LDN); 2026-05-16 Arun bounced pricerBeta1 again for allocation stalls (AeronEventLoop 1477ms); 2026-05-21 MdAnalytics OOM'd and self-restarted. Pattern of memory pressure on the BF eu-west-2 pricer fleet; no root-cause fix yet seen in window. (2026-05-26 pricer bounce was unrelated: spread/MWMS config change for PFM ranking — see entry above.) [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1747218630842229)
+
+> [resolved] 2026-07-07 — June payout reduction analysis (LR + FI) delivered
+> Client sent account numbers for April/May/June payouts (`Payouts_April_May_June_2026.xlsx`, CC Syb Dijkstra, Jelle Dijkstra, Mio Knights); Cameron Hughes replied with the June payout-cohort reduction estimate: ≈$25.4k total — LR $18.5k (exact, per counterparty) + FI ≈$6.9k (estimated via FI/LR ratio on funded flow), both legitimate Mahi levers, excluding any further reduction from pass-rate changes. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1783419861147459) [response](https://mahifx.slack.com/archives/C08473TFD7Z/p1783437715656899)
 
 ## Notable topics
 
