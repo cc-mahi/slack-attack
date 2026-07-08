@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-07T07:11:16Z
+last_catchup: 2026-07-08T07:08:02Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-07 — Samin's request for `distribution.pools.marketInstrumentOverrides` config-edit access answered with a workaround
+> Samin asked for access to the STARPRIME LDN Compass config-edit page for `distribution.pools.marketInstrumentOverrides`. Rory King replied that this key is functionally identical to the constituent override available on the Distribution → Liquidity Pools screen (CONTINUITY_POOL_LDN), pointing Samin there instead of granting the config-edit page directly. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1783414466549229) [Rory's reply](https://mahifx.slack.com/archives/C096422RPKK/p1783415205074809)
 
 > [open] 2026-07-06 — DOWUSD/Indices arb-ER order rejections; continuity pool found dark for hours, root cause open
 > Samin flagged DOWUSD order rejections (Echo TOB link, ~22:15–22:17 UTC 2026-07-05) and separately asked whether a last-look reject was active on the arb execution rule. Nathan confirmed: the counterparty is classified as an Arbitrageur, executed on continuity-pool price + markup with a last-look delay; the client's limit breached that price and was cancelled. Samin queried why Indices fail over to the continuity pool at all given Velocity-only ref pricing (Indices should halt, not fail over) and flagged a reject reason showing `FORCE_INTERNALISATION: No Continuity Pool price`, restating Indices shouldn't have a continuity pool given LP mid divergence risk. Nathan recommended leaving the Arbitrageur config as-is (protective), then found the continuity pool was actually dark for several hours that day — called it unusual — and is investigating why; London team logging on to assist. Samin reiterated Indices shouldn't fail over to continuity pool even under the arb rule and asked if the "no failover when primary ref market stops pricing" setting is a factor; Nathan doesn't think so. Unresolved as of 08:07 BST. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1783316520804539) [related thread](https://mahifx.slack.com/archives/C096422RPKK/p1783316758780119)
