@@ -16,10 +16,16 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-08T07:07:37Z
+last_catchup: 2026-07-09T07:19:22Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-09 — Order 1376587694 execution profile query; Rory King investigating
+> Ops asked whether order 1376587694 executed under any profile (08:17 BST); Rory King acknowledged, looking into it. No resolution yet in window. [query](https://mahifx.slack.com/archives/C022S6NL82D/p1783581428104519) [Rory ack](https://mahifx.slack.com/archives/C022S6NL82D/p1783581462754249)
+
+> [resolved] 2026-07-09 — Routine Heavy LR add: Centroid_3607096
+> Andreas Kazelas requested MT5_87018814_Centroid_3607096 → Heavy LR (06:38 BST); Nathan Burch confirmed actioning immediately. [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1783575488855139)
 
 > [resolved] 2026-07-07/08 — Vantage-following price spikes on US30/DOW; arb protection disabled fleet-wide across VANTAGE-CFDs
 > Client (Infinox Ops) reported US30 spikes at 11:27 GMT+3 in #mahi-infinox (16:51 BST 07-07); William Denny traced it to Vantage's DOWUSD pricing spiking, which the pricing model followed as its primary normalisation reference — same root cause as the earlier SPX/NDX arb-protection issue. Shyam Hari adjusted US30 arb protection to match US500/NAS100 (01:29 BST 07-08); Infinox Ops acknowledged. Separately in #internal-infinox, a large DOWUSD spike (17:36 BST) prompted the same fix on DOW itself (01:35 BST). Daria Horton pushed to pre-empt rather than fix instrument-by-instrument ("we shouldn't wait for it to happen on every CFD"); Shyam turned off `arbProtectionParams` for all VANTAGE-CFDs (03:57 BST 07-08). Third and broadest fix in this recurring pattern (SPX/NDX → US30/DOW → all Vantage-CFDs). [client report](https://mahifx.slack.com/archives/C022S6NL82D/p1783439479812959) [Shyam US30 fix](https://mahifx.slack.com/archives/C022S6NL82D/p1783470595099369) [DOW thread](https://mahifx.slack.com/archives/C01QGUXPKEY/p1783442176712739) [Daria pre-empt](https://mahifx.slack.com/archives/C01QGUXPKEY/p1783476839980939) [fleet-wide fix](https://mahifx.slack.com/archives/C01QGUXPKEY/p1783479437616619)
