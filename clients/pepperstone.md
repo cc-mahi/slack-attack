@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-08T07:07:55Z
+last_catchup: 2026-07-09T07:23:21Z
 ---
 
 ## History
@@ -103,6 +103,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [resolved] 2026-07-09 — XAUT/PAXG skew minimums bumped down to close tokenised-gold arb opportunity
+> Isaac dropped the skew minimums on XAUT and PAXG (the tXAU normalisation legs) after identifying they were opening Mahi to arb opportunities. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783567608786239)
+
+> [open] 2026-07-08 — Marianna asking for Compass PnL/VAR calculation methodology (account summary + trading overview pages)
+> Marianna asked in mahi-pepperstone-vnd for the PnL and VAR calc Compass uses on the account summary and trading overview pages, or a pointer to Guru docs if it's covered there. Only an "eyes" reaction so far; Daria forwarded it internally same day asking "MK building her own UI?" — no answer sent back to Marianna in this window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783501421984459) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783543308901159)
 
 > [open] 2026-07-06/07 — CFD NYC XAUUSD spread widening after Friday's market-width override; BMSL multiplier cut to 0.8x, base-target-spread approach proposed
 > Ruby flagged NYC XAUUSD spreads running wider than the ~12pt target set Friday via `marketWidthMinimumSpreadParameters`, and LDN pricing cheaper than NYC. Daria traced the extra widening to BMSL (aggregating Invast/Finalto/ISPrime vs the 40oz spread) and cut the NY BMSL multiplier from 1.0x to 0.8x; Shyam restarted the NY pricers to pick it up. Daria separately proposed switching TOB from LP-benchmarked spreads to a base-target-spread approach modulated by volatility/flow-predictive signals (rest of the stack stays LP-benchmarked) — Pepperstone keen, Daria to run supporting analysis. LDN-vs-NYC gap resolved as expected feed/liquidity difference, not a bug — day-average spreads were in line. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783397108924359)
@@ -284,6 +290,7 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 ## Notable topics
 
+- 2026-07-09 — Isaac Dann advisory: Friday 10 July is a local NZ Bank Holiday; emergency support only, reduced Slack monitoring — support@mahimarkets.com or LN +44 203 397 1985 / NZ +64(3) 2880079. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783571738019859)
 - 2026-07-07/08 — Diego (Pepperstone) asked for the CFD instrument list to subscribe in OZ; chased ~14h later ("any updates?"); Nathan Burch delivered the OZ→Compass instrument mapping spreadsheet, then confirmed continued forwards/rolling-contract price updates from Pepperstone's side won't cause issues at roll. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783413469718239) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783466675805839)
 - 2026-07-07 — Marianna asked for the inception spread calculation methodology on the yield page; Rory answered same session with the `yield_0ms` / accounting-quantity formula. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783416215906739)
 - 2026-07-07 — Pepperstone emailed Binance taker feed credentials to Mahi (perp/HyperLiquid pricing context, see 2026-05-29 Recent issues history). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783393492145979)
