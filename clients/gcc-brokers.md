@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-08T07:07:08Z
+last_catchup: 2026-07-09T07:16:49Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-08 — XPD/XPT spreads too wide at open; TOB quantity mismatch (LP 100 vs model 500) fixed
+> Nael flagged XPT/XPD spreads too high vs LPs at 23:04 BST. Shyam Hari diagnosed internally: at open, LP TOB quantity for XPD/XPT was 100 while the pricing model was set to 500 — at 500 only Finalto had both a bid and offer (wide), so MWMS widened significantly off that single wide reference. Shyam added a 100-quantity level to both instruments to match LP TOB depth; spreads stayed wide ~15 mins. Nael confirmed "looks more stable now" at 00:19 BST. [client-report](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783548242509669) [client-resolved](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783552779921099) [internal-root-cause](https://mahifx.slack.com/archives/C09QS1NUA80/p1783558608348999)
+
+> [resolved] 2026-07-08 — 995oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 995oz gold long filled on Finalto at 15:24 BST; William confirmed "this has been done" at 16:00 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783520697927639)
 
 > [resolved] 2026-07-07 — XAUUSD slippage query for CP 334513 explained (VWAP fill on liquidity pool, not TOB)
 > Nael flagged client complaint of -$2.5 slippage on stop order [PGyAEMPVOQ7qF](https://gcc-brokers-ln-admin-1.u67r.prod.mahimarkets.com:8400/trading/orders/?instruments=%5B%27XAUUSD%27%5D_&anyIds=%5B%27PGyAEMPVOQ7qF%27%5D_), asking whether it originated from the LP or Mahi. Nathan Burch explained CP 334513 is a Dynamic-broker AFLOW account, always brokered on LIQUIDITY_POOL_LDN not CLIENT_PRICE_LDN; the 3k oz trade filled at a VWAP after a ~$4/sec gold move, not against TOB — client price was $4098.09, fill was $4097.85 on the liquidity pool. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783454538562399) [explanation](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783459284212989)
@@ -220,6 +226,7 @@ last_catchup: 2026-07-08T07:07:08Z
 
 ## Notable topics
 
+- 2026-07-09 — NZ bank holiday 10 July: Isaac Dann posted standard advisory — Slack less monitored, emergency support via support@mahimarkets.com or London/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783571806173609)
 - 2026-07-01 — Post-pilot terms status queried by Bonnie: Bonnie Cassidy asked Andrew Morgan whether Will Carter's post-pilot commercial options have been signed off and sent to GCC — the link to Will's draft was not working for her. No Andrew response visible in window. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782904963870779)
 - 2026-07-01 — SI sims requested for GCC: David Cooney asked William to run SI sims for GCC, saying they are "happy with everything now and are looking to take it to the next level." William agreed. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782898825530209)
 - 2026-06-22 — Post-pilot volume-band ladder drafted: Will Carter published the first-cut post-pilot commercial options — volume bands to lock GCC in long-term, cheap entry near current pilot economics with $/M banding down toward the Kama/Rostro curve as volumes scale. Built so the same band shape can drop onto Rostro and Kama. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1782128277829829)
