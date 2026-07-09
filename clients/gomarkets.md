@@ -13,10 +13,13 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-07-08T07:07:02Z
+last_catchup: 2026-07-09T07:19:22Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-08 — CLIENT_PRICE_NYC internal messaging feed stalled ~15s; XAUUSD order rejected "Price too old"
+> Client ops (GoMarkets, ~22:03 UTC) flagged a rejection alert on XAUUSD (counterparty 81132357, DISTRIBUTION_NYC) at 16:40:53 UTC with Internal Cancel Reason "Price too old", asking for root cause. Nathan Burch (Mahi, ~23:45 UTC) diagnosed: CLIENT_PRICE_NYC is distributed internally over a messaging feed that stalled and restarted ~16:40:41–16:40:55 UTC (~15s), going stale; RA pricing streams weren't affected as they don't subscribe to that feed. The client traded into the stale price during the stall; a trade-confirmation sanity check caught the stale reference price and cancelled rather than confirmed the orders. Nathan raised a dev ticket to find the exact cause. Will (GoMarkets, ~23:50 UTC) asked whether an alert exists for stale/restarted pricing messaging, flagging they'd want to fail over to another pricing feed if it stayed stale — the existing indicative-pricing alert in `mahi-gomarkets-notifications` is a different case. Nathan (~00:02 UTC 2026-07-09) is looking into it. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783548227880549) [Nathan's diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783554300940579) [Will's alert ask](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783554645361229)
 
 > [open] 2026-07-06 — 26DEGREES cherry-picking XAUUSD hedging flow; 10 counterparties blacklisted to test
 > Andrew Morgan (Mahi, internal-go, ~12:56 UTC) flagged 26DEGREES accepting only favourably-marked-up hedging flow and cancelling flow that goes offside for them on XAUUSD, suggesting they be dropped from hedger config. Rory King (Mahi) posted the yield-profile evidence to the client channel ~13:46 UTC asking whether GoMarkets wanted 26DEGREES removed from XAUUSD hedging. Will (GoMarkets, ~03:42 UTC 2026-07-07) opted to keep them in the hedger for now, having blacklisted 10 counterparties (based on 2 weeks of trade/cancel-rate tagging) to test whether specific accounts were being filled defensively; will revisit if cancels persist. Isaac Dann (Mahi) separately reviewed brokered-vs-internalised yield and added an execution rule to the RADEX ruleset to internalise broker-classified XAUUSD orders under 400k base notional — part of broader work tied to GoMarkets onboarding more toxic clients with per-channel markup routing. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783341970523629) [Will's blacklist reply](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783392120105789) [Andrew's internal flag](https://mahifx.slack.com/archives/CNF3WPNSK/p1783339012311319)
@@ -124,6 +127,10 @@ last_catchup: 2026-07-08T07:07:02Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-07-09 — NZ Bank Holiday Friday 10 July: Isaac Dann (Mahi, ~04:35 UTC) advised Friday 10 July is a local NZ Bank Holiday; emergency-only cover, Slack not monitored as usual — urgent items via support@mahimarkets.com or phone. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783571732291939)
+
+- 2026-07-09 — Internal call held with Erik and Kieran, notes pending: Isaac Dann (Mahi, `#internal-go`, ~06:47 UTC) flagged a call had taken place with Erik and Kieran and notes would follow; no content posted in this window. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1783579650785709)
 
 - 2026-07-03 — Pre-sales markout analysis for potential client: GoMarkets asked if they can send a trading statement for a prospect to get markout analysis. Isaac confirmed, ran Jenkins MarkToMarket job #781, and delivered an Echo simulation link (~01:52 UTC). Client confirmed access. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783034194667109)
 
