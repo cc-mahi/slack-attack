@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-07-08T07:03:59Z
+last_catchup: 2026-07-09T07:13:53Z
 ---
 
 ## Status
@@ -18,6 +18,9 @@ last_catchup: 2026-07-08T07:03:59Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [open] 2026-07-08 — Liquidity Violation cancellation query (account 6058190): stale JPXJPY price, dev investigating
+> Pau (Fintokei) asked in #mahi-fintokei whether an order cancelled with "Liquidity Violation" meant there wasn't enough liquidity to fill it. William Denny (Mahi) acknowledged; Shyam Hari (Mahi) answered next day — the true cause was a brief stale JPXJPY price at order arrival, triggering the stale-price protection (not an actual liquidity shortfall). Shyam raised it with the dev team to investigate the stale pricing further. Distinct root cause from the 2025-11-10 "Liquidity violation" entry below (that one was the Mid Distance Check). [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1783508183263049) [Shyam's answer](https://mahifx.slack.com/archives/C08QWKFARDL/p1783555246008349)
 
 > [open] 2026-06-30 — New model CLIENT_PRICE_LSB_LDN set up for review; Fintokei to subscribe post-weekend restarts
 > Kate Stagg posted in #internal-fintokei that the new pricing model CLIENT_PRICE_LSB_LDN is set up and ready for review. Fintokei will subscribe with suffix `_t` following their weekend server restarts. Commercial pricing question on this model (setup fee vs monthly cost) remains unresolved per 2026-06-16 entry. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1782815433338759)
