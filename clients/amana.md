@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
-last_catchup: 2026-07-08T07:05:15Z
+last_catchup: 2026-07-09T07:08:50Z
 ---
 
 ## Status
@@ -25,6 +25,12 @@ last_catchup: 2026-07-08T07:05:15Z
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [resolved] 2026-07-08 — WS6Q (White Sugar August future) settlement: Mahi confirmed no open positions
+> Amana notified at 16:03 BST that WS6Q was settling and asked positions be zeroed; Rory confirmed no open positions in the contract. Clean expiry. [settlement-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523012035619) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523177734449)
+
+> [resolved] 2026-07-08 — CMC GCXX rejection burst: risk covered, no action needed
+> Princess flagged multiple CMC rejections on GCXX at 09:19 BST; Rory confirmed at 09:21 BST risk had been covered and all fine. [princess-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783498765544409) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783498890627789)
 
 > [open] 2026-07-07 — XAUUSD fat feed spread complaint: CMC/ABOOK quantity mismatch; Isaac proposes benchmark fix
 > Maynard flagged at 20:41 BST that a client reported high spread on XAUUSD fat. Isaac investigated (21:52 BST): CMC was pricing 250oz at a 0.4 spread, which the Fat stream benchmarks off — but Fat TOB is 250 while ABOOK's price-qty TOB is 100, so the wider quoted spread is the expected outcome of the current setup, not a fault. Isaac proposed changing the benchmarking so Fat references CMC's price at qty 100 to determine the Fat spread at qty 250, aligning Fat with ABOOK LDN's spread at a higher quantity. He also flagged that CMC's TOB quantity (normally 250) briefly dropped to ≤100 and asked Amana to check with CMC if that's expected. Amana said they'd check internally first and revert — no reply yet in-window. [maynard-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783453285196629) [isaac-diagnosis](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783457551924779)
