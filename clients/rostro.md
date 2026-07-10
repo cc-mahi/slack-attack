@@ -20,10 +20,13 @@ key_people_overrides:
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
   - {name: "Andreas", role: "Rostro ops — recurring FIX/slippage/subscription queries", confidence: low}
   - {name: "Chrysovalantis Karageorgiou", role: "Rostro ops — FIX/telnet connectivity, X-connect", confidence: low}
-last_catchup: 2026-07-09T07:23:21Z
+last_catchup: 2026-07-10T07:16:56Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-09 — UKOIL/CO1USD retail pricing source change history queried
+> Oli asked (09:20 BST) "fairly important... trying to piece together — when did we change UKOIL pricing from CMC to IC Markets". William Denny replied: changed to IC Markets on 3 July, and since 7 July IC Markets + CMC are both reference markets; confirmed this is on the retail feed. Oli then asked why the 3 July change was made; William said he'd check with the team and revert — no answer given in window. [Oli: piecing together UKOIL history](https://mahifx.slack.com/archives/C08AQKRU953/p1783585253153159) [William: 3 Jul / 7 Jul detail](https://mahifx.slack.com/archives/C08AQKRU953/p1783586298557709) [Oli: why 3 Jul?](https://mahifx.slack.com/archives/C08AQKRU953/p1783586384846519) [William: will check and revert](https://mahifx.slack.com/archives/C08AQKRU953/p1783586413538679) [William: confirms retail feed](https://mahifx.slack.com/archives/C08AQKRU953/p1783587807266049)
 
 > [open] 2026-07-08 — FX book risk sitting unhedged after a book transfer
 > Oli flagged (09:46 BST) "a lot of risk sitting in fx book that's been transferred and not hedging" and asked if the hedger was okay. Rory King checked and confirmed it was slowly clearing; last update in window was Rory "watching at the moment to make sure it does clear" — no final all-clear confirmed yet. [Oli: hedger okay?](https://mahifx.slack.com/archives/C08AQKRU953/p1783500398288989) [Oli: risk sitting, not hedging](https://mahifx.slack.com/archives/C08AQKRU953/p1783500424340339) [Rory: watching to confirm clear](https://mahifx.slack.com/archives/C08AQKRU953/p1783500546491589)
