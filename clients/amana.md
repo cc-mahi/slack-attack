@@ -15,7 +15,8 @@ key_people_overrides:
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
-last_catchup: 2026-07-09T07:08:50Z
+  - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
+last_catchup: 2026-07-10T07:07:00Z
 ---
 
 ## Status
@@ -25,6 +26,12 @@ last_catchup: 2026-07-09T07:08:50Z
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [resolved] 2026-07-09 — USDJPY A-book pricing/hedging switched from CMC to LMAX
+> Hadeel asked Rory to update USDJPY (A-book) pricing and hedging to follow LMAX instead of CMC, per an earlier conversation. Rory actioned via config changes to referencePriceMarketSelectors, marketWidthMinimumSpread, benchmarkMinimumSpreadParameters, hedging.executionMarkets, and hedging.arb.markets (both regular and fat pricing models); tested clean on the beta pricer, achieving tighter spreads than before. Omar confirmed OK. [hadeel-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783603264987219) [rory-actioned](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783618039048539) [omar-ok](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783618814667939) [rory-config-detail](https://mahifx.slack.com/archives/C08T42TMKU3/p1783616935952729)
+
+> [open] 2026-07-09 — B-book silver futures enablement + A-book indices move requested
+> Nikos asked Isaac/Rory to check whether test trades are needed before enabling B-book silver futures next week, and separately asked to move all A-book indices over to B-book once the setup is ready. Rory acknowledged ("Well received Nikos"); no substantive reply yet in-window. [nikos-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611611558779) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611648414369)
 
 > [resolved] 2026-07-08 — WS6Q (White Sugar August future) settlement: Mahi confirmed no open positions
 > Amana notified at 16:03 BST that WS6Q was settling and asked positions be zeroed; Rory confirmed no open positions in the contract. Clean expiry. [settlement-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523012035619) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523177734449)
