@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-09T07:23:21Z
+last_catchup: 2026-07-10T07:16:56Z
 ---
 
 ## History
@@ -103,6 +103,12 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [resolved] 2026-07-09 — NZDUSD FI PnL loss traced to LP feed dropout at NY roll; B-book blank fills not the PnL driver
+> Reece flagged a big FI PnL loss in NZDUSD on 2026-07-08 21:00-22:00 UTC, with 1000+ "blank" trades (no yields) around the same window. Rory investigated: LP feeds dropped out at the 17:00 NY roll, dislocating the price book for ~9 minutes (21:18-21:27 UTC); the B-book couldn't stamp an inception price on fills during that gap, producing the blank yields. A-book/STP fills over the same window priced and yielded fine (0% blank) — market-wide feeds weren't affected, just the B-book's benchmark mark. The NZDUSD B-book was marked down ~$13k as the market moved through the dislocation window; Rory attributed this to the flow being marked during the dislocation, not to the blank trades themselves. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783603090442559)
+
+> [open] 2026-07-09 — Marianna questioning Echo spread PnL vs internal Tableau numbers; Rory awaiting her calc methodology
+> Marianna asked what reference markets Echo uses for XBT/ETH (Rory: LMAX and B2C2), then asked whether anything obviously explains Echo's spread PnL looking over-reported versus her internal numbers. Rory asked her to confirm how spread is calculated on the Tableau side to narrow down the discrepancy — no reply from Marianna in this window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783590753215139)
 
 > [resolved] 2026-07-09 — XAUT/PAXG skew minimums bumped down to close tokenised-gold arb opportunity
 > Isaac dropped the skew minimums on XAUT and PAXG (the tXAU normalisation legs) after identifying they were opening Mahi to arb opportunities. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783567608786239)
