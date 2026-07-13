@@ -10,10 +10,13 @@ key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
   - {name: "Russell", role: "VT client-side — raised tag 889 slippage complaints 2026-06-25", confidence: low}
-last_catchup: 2026-07-10T07:19:58Z
+last_catchup: 2026-07-13T07:15:39Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-10 — Premium channel PnL down ~$550 for the week; XAU top-up throttle reduced 100k/s→50k/s
+> William Denny reported weekly premium channel PnL down ~$550, driven by lack of flow during the Asia session (book goes wide there vs previous weeks). 6-week avg inception yield fell from $55/M to $27/M this week; LR PnL fell from $12/M (6wk avg) to $4.8/M. Counterparties 889 and 911 produce the bulk of counterparty-level LR PnL; 1034*-prefix counterparties contribute nothing, so William decreased the premium channel XAU top-up from 100k/s to 50k/s to lift this. 90% of hedging flow runs through KAMA, which widened from -$15/M to -$17/M this week; arb hedging volume also flagged as low, to be improved. [William's PnL update](https://mahifx.slack.com/archives/CPDS0M2KF/p1783701574574809)
 
 > [open] 2026-07-08 — Batch of 508-prefix tags assessed and approved for premium feed
 > Dan asked (11:10 BST) whether any tags starting with 508 could go on PREM pricing, flagging 508ZBF0795E2 as their biggest (a retail broker). William confirmed it suitable (11:16 BST) — flat from inception 27/5–08/7, ramps at 30s. William followed up at 16:19 BST with 9 more 508* counterparties assessed suitable via Echo yield profile link: 508Z56C48F98, 508Z92BD6570, 508ZC5DE9CAA, 508ZF937E68A, 508Z3AEFAA98, 508ZDCC97D73, 508ZC6AF1A94, 508ZFFF3D710, 508Z2EDC888A. Dan will move them once "the new api is ready." William offered to keep checking for further standout tags. 2026-07-09 update: morning huddle scheduling only — Dan will compile a further list of suggested tags and send across; William offered to review once received (happy to chat live or take the list). No new tags or decisions in window. [Dan ask](https://mahifx.slack.com/archives/C05NB72AGR2/p1783505419622119) [William 508ZBF0795E2 confirm](https://mahifx.slack.com/archives/C05NB72AGR2/p1783505788641029) [9 more CPs](https://mahifx.slack.com/archives/C05NB72AGR2/p1783523959998669) [Dan: once new api ready](https://mahifx.slack.com/archives/C05NB72AGR2/p1783524015830079) [2026-07-09 huddle](https://mahifx.slack.com/archives/C05NB72AGR2/p1783589484650909)
