@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-07-10T07:04:18Z
+last_catchup: 2026-07-13T07:06:45Z
 ---
 
 ## Status
@@ -19,11 +19,17 @@ last_catchup: 2026-07-10T07:04:18Z
 
 ## Recent issues
 
+> [open] 2026-07-13 — LSB pricing model live but z-suffix trades executing on wrong (wide) price
+> Following Fintokei's go-live request to deploy the new tighter pricing model to all "z"-suffix symbols (Kate Stagg thread, 2026-07-10), Shyam Hari (Mahi) found on 2026-07-13 that z-suffix trades are being quoted on the new tight `CLIENT_PRICE_LSB_LDN` stream but executed/filled against the older wide `CLIENT_PRICE_LDN` model — clients see a ~5 spread but get filled ~3.5 wider, confirmed tick-exact on every z-suffix trade that day. The suffix-routing fix apparently covers the FIX/price path but not order execution on the internal MT5-bridge path. Added to Zendesk #23168. [go-live request](https://mahifx.slack.com/archives/C08R694QVNX/p1783670615074879) [bug found](https://mahifx.slack.com/archives/C08R694QVNX/p1783914394599609)
+
+> [resolved] 2026-07-12 — BTCUSDz/JP225z reduced-spread query: timing misunderstanding
+> Pau (Fintokei) asked why BTCUSDz still showed a ~1310 spread despite the weekend pricing-model deploy. Shyam Hari (Mahi) investigated; Pau self-corrected — the reduced spreads are only active from Tokyo-session open (00:00 UTC) through London-session close, not round the clock. [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1783891256446189) [self-correction](https://mahifx.slack.com/archives/C08QWKFARDL/p1783893035420049)
+
 > [open] 2026-07-08 — Liquidity Violation cancellation query (account 6058190): stale JPXJPY price, dev investigating
 > Pau (Fintokei) asked in #mahi-fintokei whether an order cancelled with "Liquidity Violation" meant there wasn't enough liquidity to fill it. William Denny (Mahi) acknowledged; Shyam Hari (Mahi) answered next day — the true cause was a brief stale JPXJPY price at order arrival, triggering the stale-price protection (not an actual liquidity shortfall). Shyam raised it with the dev team to investigate the stale pricing further. Distinct root cause from the 2025-11-10 "Liquidity violation" entry below (that one was the Mid Distance Check). [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1783508183263049) [Shyam's answer](https://mahifx.slack.com/archives/C08QWKFARDL/p1783555246008349)
 
-> [open] 2026-06-30 — New model CLIENT_PRICE_LSB_LDN set up for review; Fintokei to subscribe post-weekend restarts
-> Kate Stagg posted in #internal-fintokei that the new pricing model CLIENT_PRICE_LSB_LDN is set up and ready for review. Fintokei will subscribe with suffix `_t` following their weekend server restarts. Commercial pricing question on this model (setup fee vs monthly cost) remains unresolved per 2026-06-16 entry. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1782815433338759)
+> [resolved] 2026-06-30 — New model CLIENT_PRICE_LSB_LDN set up for review; Fintokei to subscribe post-weekend restarts
+> Kate Stagg posted in #internal-fintokei that the new pricing model CLIENT_PRICE_LSB_LDN is set up and ready for review. Fintokei will subscribe with suffix `_t` following their weekend server restarts. Superseded 2026-07-10: Fintokei confirmed go-live and requested the model be deployed to all "z"-suffix symbols that weekend — see the 2026-07-13 entry above for the execution-routing bug that surfaced afterward. Commercial pricing question on this model (setup fee vs monthly cost) remains unresolved per 2026-06-16 entry. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1782815433338759)
 
 > [open] 2026-06-16 — New model pricing question: setup fee vs monthly cost, unanswered
 > Kate Stagg (Mahi) asked in #internal-fintokei whether to charge for a new model for Fintokei — they previously got one set up at no cost as a goodwill gesture. Kate's suggestion: one-off setup fee, no monthly cost (unusual commercial structure). Billing-impact scan (2026-06-17) flagged: no setup fee provision in current per-user contract; Daria to confirm whether as-is or needs addendum. No resolution yet. [question](https://mahifx.slack.com/archives/C08R694QVNX/p1781610571053819)
@@ -68,6 +74,8 @@ last_catchup: 2026-07-10T07:04:18Z
 > LR fully disabled per Fintokei's request on ~2025-07-08 due to slippage-sensitive client base. Global LR applied gently from 2025-07-15. As of Feb 2026 Daria (Mahi) flagged LR PnL still very low (~$5.9k on 58.9B volume, ~$0.1/M); Kate Stagg said she'd discuss with Roman (Fintokei) in March 2026 whether to include LR in published price. No resolution confirmed. [LR apply](https://mahifx.slack.com/archives/C08R694QVNX/p1752589418837899) [Feb 2026 flag](https://mahifx.slack.com/archives/C08R694QVNX/p1770762875006809) [Mar 2026 follow-up](https://mahifx.slack.com/archives/C08R694QVNX/p1773318229000979)
 
 ## Notable topics
+
+- **2026-07-10/11 — routine Compass release over the weekend** — Leonardo Borsi announced a routine Compass version release (performance/stability/UI enhancements) for the weekend of 2026-07-11/12, confirmed complete 2026-07-11. Context for the same-weekend LSB deploy above; no separate client impact flagged. [announcement](https://mahifx.slack.com/archives/C08QWKFARDL/p1783700706200019) [completed](https://mahifx.slack.com/archives/C08QWKFARDL/p1783768170222219)
 
 - **2026-06-24 — pricerLSB1/2 added to infra** — Kate Stagg noted infra deploying to add `pricerLSB1/2` to the Fintokei stack, setting up in preparation for alerting. Dashboard restarted shortly after. Routine topology addition; no client impact flagged. [infra deploy](https://mahifx.slack.com/archives/C08R694QVNX/p1782298252000339)
 
