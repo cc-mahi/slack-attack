@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-10T07:09:29Z
+last_catchup: 2026-07-13T07:10:24Z
 ---
 
 ## Recent issues
@@ -98,6 +98,8 @@ last_catchup: 2026-07-10T07:09:29Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-07-10 — Spotex SC test trades completed: FINALTO_BVI and FXCM test trades done, closing out the 2026-07-08 delay; fixOrders1 bounced around the same time. Cameron Hughes. [test trades done](https://mahifx.slack.com/archives/C046RNF64VD/p1783682669011829) · [fixOrders1 bounce](https://mahifx.slack.com/archives/C046RNF64VD/p1783682434493459)
 
 - 2026-07-09 — Cameron Copland asked whether `hybridHedgerSC1` should be up, flagging a PagerDuty incident; Cameron Hughes confirmed it was fine and he was bringing it back up himself (fixOrders1 bounced shortly after, dashboard deploy followed). [Cameron Copland query](https://mahifx.slack.com/archives/C046RNF64VD/p1783613433456299) · [Cameron Hughes ack](https://mahifx.slack.com/archives/C046RNF64VD/p1783613440733169)
 
