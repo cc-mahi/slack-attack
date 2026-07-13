@@ -16,7 +16,7 @@ key_people_overrides:
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
   - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
-last_catchup: 2026-07-10T07:07:00Z
+last_catchup: 2026-07-13T07:10:24Z
 ---
 
 ## Status
@@ -27,11 +27,18 @@ last_catchup: 2026-07-10T07:07:00Z
 
 ## Recent issues
 
+> [resolved] 2026-07-12 — XAU B-book position rec: adjustment confirmed made
+> Hadeel (Amana) requested an update to XAU B-book positions at 15:04 BST, sharing Positions_Recs_XAU_BBOOK.csv (client-perspective positions). Shyam acknowledged at 19:55 BST; Isaac confirmed the adjustment had been made at 22:08 BST. Clean rec. [hadeel-request](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783865098391319) [shyam-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783882522552709) [isaac-done](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783890512531239)
+
+> [open] 2026-07-10 — Echo invite request for Rafik Mansour pending
+> Amana asked whether an Echo invite had been sent for rafik.mansour@amanacapital.com; Rory said he'd check. No confirmation posted in-window. [amana-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783698155923919) [rory-checking](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783698316014659)
+
 > [resolved] 2026-07-09 — USDJPY A-book pricing/hedging switched from CMC to LMAX
 > Hadeel asked Rory to update USDJPY (A-book) pricing and hedging to follow LMAX instead of CMC, per an earlier conversation. Rory actioned via config changes to referencePriceMarketSelectors, marketWidthMinimumSpread, benchmarkMinimumSpreadParameters, hedging.executionMarkets, and hedging.arb.markets (both regular and fat pricing models); tested clean on the beta pricer, achieving tighter spreads than before. Omar confirmed OK. [hadeel-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783603264987219) [rory-actioned](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783618039048539) [omar-ok](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783618814667939) [rory-config-detail](https://mahifx.slack.com/archives/C08T42TMKU3/p1783616935952729)
 
 > [open] 2026-07-09 — B-book silver futures enablement + A-book indices move requested
 > Nikos asked Isaac/Rory to check whether test trades are needed before enabling B-book silver futures next week, and separately asked to move all A-book indices over to B-book once the setup is ready. Rory acknowledged ("Well received Nikos"); no substantive reply yet in-window. [nikos-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611611558779) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611648414369)
+> 2026-07-10 update: Amana asked Mahi to confirm whether B-book silver futures needs test trading (10:43 BST). Rory confirmed Mahi will work on the setup that day and let them know if testing is required (10:44 BST); Karen acknowledged (10:45 BST). Still open — testing outcome not yet confirmed. [amana-confirm-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783676609813869) [rory-setup](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783676668671249)
 
 > [resolved] 2026-07-08 — WS6Q (White Sugar August future) settlement: Mahi confirmed no open positions
 > Amana notified at 16:03 BST that WS6Q was settling and asked positions be zeroed; Rory confirmed no open positions in the contract. Clean expiry. [settlement-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523012035619) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523177734449)
@@ -369,6 +376,7 @@ last_catchup: 2026-07-10T07:07:00Z
 
 ## Notable topics
 
+- 2026-07-13 — Isaac tuned XAUUSD skew signal levers (IFMS + flow-price-thresh: priceChange/nrmsdMoreThreshold/ceiling/floor adjustments) aiming to improve skew $/M. [isaac-tuning](https://mahifx.slack.com/archives/C08T42TMKU3/p1783916043482729)
 - 2026-07-03 — XAUUSD B-book mobile client rollout: Nikos announced at 08:09 BST that Amana is moving mobile clients XAUUSD pricing and execution to Mahi B-book. [announce](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062549305299)
 - 2026-07-02 — NFP arb cpty 8006187: +60k A-book/-60k futs within 182ms of NFP; would have lost 25k+ at 10s. Econ news widening config call with Nikos planned 2026-07-03. [rory-analysis](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783000901937459)
 - 2026-07-02 — XAGUSD skew: skew made £8k/$41M across all books past week; Isaac reducing roll-hour aggressiveness further. [isaac](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783032150437589)
