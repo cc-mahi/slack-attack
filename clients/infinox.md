@@ -16,10 +16,16 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-10T07:04:18Z
+last_catchup: 2026-07-13T07:06:48Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-13 — Routine Heavy LR batch: 8 CPs under MT5_87018814_Centroid_*
+> Andreas Kazelas requested 8 CPs (Centroid_3603873, Centroid_3604303, Centroid_3598708, Centroid_3598709, Centroid_3598710, Centroid_2145765250, Centroid_3607275, Centroid_3598361) → Heavy LR (06:46 BST); Shyam Hari confirmed "They have been added" (07:06 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1783921564057909) [Shyam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1783922765969409)
+
+> [open] 2026-07-10 — XAUUSD order 202960755 slippage query; William offered shorter last-look, no reply yet
+> Andreas Kazelas asked why order 202960755 (MT5_87923310, clOrdID 1087546_1, fill 2026-07-08 06:05:01) filled with slippage (10:59 BST). William Denny explained it hit the "Unclassified Big XAUUSD" execution rule with a 200ms last-look window, during which the market moved against the client, and asked whether Andreas would prefer a smaller last-look time (12:33 BST). No reply from Andreas in window. [query](https://mahifx.slack.com/archives/C022S6NL82D/p1783677564059549) [William explanation](https://mahifx.slack.com/archives/C022S6NL82D/p1783683182235719)
 
 > [open] 2026-07-09 — Order 1376587694 execution profile query; Rory King investigating
 > Ops asked whether order 1376587694 executed under any profile (08:17 BST); Rory King acknowledged, looking into it. No resolution yet in window. [query](https://mahifx.slack.com/archives/C022S6NL82D/p1783581428104519) [Rory ack](https://mahifx.slack.com/archives/C022S6NL82D/p1783581462754249)
