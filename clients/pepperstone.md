@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-10T07:16:56Z
+last_catchup: 2026-07-13T07:15:13Z
 ---
 
 ## History
@@ -103,6 +103,15 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [resolved] 2026-07-13 — CFD env pricing gap to OZ; no subscription requests visible, fixed same session
+> Diego reported no pricing coming through to OZ on the CFD env (no subscription requests visible). Nathan Burch investigated; Diego confirmed "looking good now" ~15 minutes later. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783902676241149)
+
+> [open] 2026-07-10 — Kraken SOW #3: conformance passed, now waiting on Pepperstone for PROD credentials
+> Liam confirmed conformance testing passed as of the prior Wednesday and Mahi is now waiting on Pepperstone to supply PROD credentials; Reece (Pepperstone) acknowledged he's on it, working with Kraken directly. Progression of the SOW #3 integration tracked since 2026-05-18 (see Notable topics). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783689715983359)
+
+> [open] 2026-07-10/13 — CPI-event stale pricing (XAUUSD, 2026-07-02) still unexplained; no binlogs to trace root cause
+> Follow-up on Reece's 2026-07-02 report of model/dist price going stale ~6s at a time around the CPI print, tracking the Invast price while Finalto/ISPrime priced normally (backtest showed underlying pricing was fine). William Denny confirmed Mahi has no binlogs extending back far enough to identify the source and will keep monitoring. Liam separately probed whether it was just a capture/logging artifact; Reece confirmed the stale pricing was seen directly on MT5, so it's a real pricing issue, not a logging quirk — Liam stood down that theory and deferred to the ongoing investigation. Reece asked (2026-07-13) for more logs/monitoring to catch recurrences; no fix shipped yet. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783685411415899) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783904727814179)
 
 > [resolved] 2026-07-09 — NZDUSD FI PnL loss traced to LP feed dropout at NY roll; B-book blank fills not the PnL driver
 > Reece flagged a big FI PnL loss in NZDUSD on 2026-07-08 21:00-22:00 UTC, with 1000+ "blank" trades (no yields) around the same window. Rory investigated: LP feeds dropped out at the 17:00 NY roll, dislocating the price book for ~9 minutes (21:18-21:27 UTC); the B-book couldn't stamp an inception price on fills during that gap, producing the blank yields. A-book/STP fills over the same window priced and yielded fine (0% blank) — market-wide feeds weren't affected, just the B-book's benchmark mark. The NZDUSD B-book was marked down ~$13k as the market moved through the dislocation window; Rory attributed this to the flow being marked during the dislocation, not to the blank trades themselves. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783603090442559)
