@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
-last_catchup: 2026-07-10T07:04:52Z
+last_catchup: 2026-07-13T07:04:17Z
 ---
 
 ## Recent issues
