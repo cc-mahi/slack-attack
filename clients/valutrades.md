@@ -9,10 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-10T07:19:53Z
+last_catchup: 2026-07-13T07:15:46Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-13 — Unmapped "Velocity" market source streaming on FIX MD feed `MFX-IG_Q→ValuCY_Live_Q` — awaiting Mahi reply
+> Shyam Hari (client) reported the market-data feed between senderCompID `MFX-IG_Q` and targetCompID `ValuCY_Live_Q` is showing an additional, unmapped source tag (`282=Velocity`) streaming prices multiple times per snapshot alongside the usual sources (EDGE, JUMP, CNX, LMAX, COMM). Asked Mahi to confirm whether this is intentional (so it can be mapped properly) or unintentional. No reply in window. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1783904800812039)
+
+> [resolved] 2026-07-10 — GCQ6-AUG26 (GoldAug) UAT rejects post-restart — fractional quantity not supported, client kept as-is
+> Client (Brandon) reported after a restart that NQ and Oil algo orders worked but GoldAug (GCQ6-AUG26) was not. Rory King acknowledged and looked into it; Arun Patel confirmed the rejections were because the order requested a fractional quantity (5.5) and both UAT and PROD only accept whole amounts, then offered to diverge UAT config from prod to allow fractional sizes. Client declined ("Oh no lets keep it as is then, thanks for checking"). [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1783671637259179) [rory-ack](https://mahifx.slack.com/archives/C09HN93T0G2/p1783671796775329) [arun-diagnosis](https://mahifx.slack.com/archives/C09HN93T0G2/p1783693657106719) [client-decline](https://mahifx.slack.com/archives/C09HN93T0G2/p1783693750654119) [arun-ack](https://mahifx.slack.com/archives/C09HN93T0G2/p1783693780959999)
 
 > [resolved] 2026-07-03 — QB PROD trades not visible on Mahi blotter/Compass — Tag 1 fix + manual DB adjustment
 > Client asked Liam to confirm a QB oil buy/sell was working; Liam checked and found the trade wasn't visible because no Tag 1 was received from the client side. Liam asked client to send `1=UBS_QBAlgo` to match the QB side; client added the account mapping in oneZero and sent a fresh test trade, which appeared correctly in the Mahi blotter by 13:21 BST ("Looking good, can see it in the blotter now too"). Separately at 17:46 BST the client reported a CLQ6-AUG26 fill to UBS_QBAlgo not showing in MFXCompass; Liam adjusted the trade directly in the DB and client confirmed "looks good" at 17:53 BST. Both instances resolved same day during ongoing QB PROD go-live testing. [client-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1783080180033009) [tag1-fix-request](https://mahifx.slack.com/archives/C09HN93T0G2/p1783080442935809) [blotter-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1783081282932479) [clq6-not-shown](https://mahifx.slack.com/archives/C09HN93T0G2/p1783097214693889) [liam-db-fix](https://mahifx.slack.com/archives/C09HN93T0G2/p1783097565922339) [client-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1783097634291779)
