@@ -13,10 +13,16 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-07-10T07:12:18Z
+last_catchup: 2026-07-13T07:11:52Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-13 — Kieran chased Erik's arber flag; large XAU skews drew a fresh client pricing complaint
+> Kieran (GoMarkets, ~05:31 UTC) asked Mahi for the latest on Erik's 2026-07-10 arber flag (below). Shyam Hari (Mahi, ~05:32 UTC) acknowledged and said he was checking. Kieran then separately flagged that skews were large on XAUUSD that day and he had a client complaining about the price, sharing a top-of-book chart (Echo link). Shyam (~06:35 UTC) confirmed Mahi would review; Kieran thanked him. No resolution confirmed in-window on either thread. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920676462209) [Shyam checking](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920756624449) [skew complaint](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920800483359) [Shyam ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920908311019)
+
+> [resolved] 2026-07-10 — Acc 15001642 arber classification: XAU skew-exploit system flagged, ~$50/M captured before blocked
+> Erik (GoMarkets, ~13:50 UTC) flagged account 15001642 appeared to run a system that selectively traded only when Mahi's XAU price diverged ~20c from mid, hedging elsewhere and closing on convergence. Kate Stagg (Mahi, ~13:51 UTC) said Mahi would take a look. Erik followed up (~13:52 UTC) confirming Mahi had already flagged the account as an arbitrageur — while classified Catch-All it captured ~$50/M against real market mid (Echo yield-profile link) — and noted no further activity was expected from the account. Recurring pattern alongside the 2026-06-17/06-15 arber-classification entries below. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783691406777639) [Kate ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783691509149339) [Erik follow-up](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783691571820169)
 
 > [open] 2026-07-08 — CLIENT_PRICE_NYC internal messaging feed stalled ~15s; XAUUSD order rejected "Price too old"
 > Client ops (GoMarkets, ~22:03 UTC) flagged a rejection alert on XAUUSD (counterparty 81132357, DISTRIBUTION_NYC) at 16:40:53 UTC with Internal Cancel Reason "Price too old", asking for root cause. Nathan Burch (Mahi, ~23:45 UTC) diagnosed: CLIENT_PRICE_NYC is distributed internally over a messaging feed that stalled and restarted ~16:40:41–16:40:55 UTC (~15s), going stale; RA pricing streams weren't affected as they don't subscribe to that feed. The client traded into the stale price during the stall; a trade-confirmation sanity check caught the stale reference price and cancelled rather than confirmed the orders. Nathan raised a dev ticket to find the exact cause. Will (GoMarkets, ~23:50 UTC) asked whether an alert exists for stale/restarted pricing messaging, flagging they'd want to fail over to another pricing feed if it stayed stale — the existing indicative-pricing alert in `mahi-gomarkets-notifications` is a different case. Nathan (~00:02 UTC 2026-07-09) is looking into it. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783548227880549) [Nathan's diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783554300940579) [Will's alert ask](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783554645361229)
@@ -127,6 +133,8 @@ last_catchup: 2026-07-10T07:12:18Z
 > Erik reports client positions on DIST_NYC are ~1.4k oz less than actual exposure on XAU. Root cause: client trades filled against OZ failover when Mahi execution had issues — Tapaas keeps tracking client-side, Mahi doesn't. LP positions still aligned at Mahi level. Erik has isolated most of the missing trades since April and is proposing a 30-min corrective-import automation. William: "we'll look into that". [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1776964441437749)
 
 ## Notable topics
+
+- 2026-07-12 — LMAX NYC feed-value study informs pricing-feed review: Isaac Dann (Mahi, `#internal-go`, ~21:22 UTC) ran a 5-day predictive-R² study on Go's two LMAX subscriptions — LMAX NY4 is one of Go's most predictive feeds (adds +15% to +518% R², instrument-dependent, on top of all other feeds combined), while LMAX_LDN adds next to zero unique information (a ~100ms-delayed echo of LMAX at the NYC engine). Isaac plans to push for keeping both — LMAX for pricing, LMAX_LDN purely as hedge-execution venue — which speaks directly to the open 2026-06-16 "LMAX NYC pricing feed under review" question. [permalink](https://mahifx.slack.com/archives/CNF3WPNSK/p1783891356384359)
 
 - 2026-07-09 — NZ Bank Holiday Friday 10 July: Isaac Dann (Mahi, ~04:35 UTC) advised Friday 10 July is a local NZ Bank Holiday; emergency-only cover, Slack not monitored as usual — urgent items via support@mahimarkets.com or phone. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783571732291939)
 
