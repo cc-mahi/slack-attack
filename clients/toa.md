@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-10T07:04:18Z
+last_catchup: 2026-07-13T07:11:38Z
 ---
 
 ## Status
@@ -17,6 +17,12 @@ last_catchup: 2026-07-10T07:04:18Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-07-13 — TOA-ARGAMON LDN PnL drop: hedger lagged fill on XAG down-move, missing broker rule fixed
+> Shyam (01:32 BST) flagged a PnL drop on LDN — hedger struggled to get a fill on XAG on a downward price move, letting the trader profit before hedging caught up (PD Q2X4BKV1EM27NV). Lee confirmed shortly after: a XAG broker rule was missing; Elan has sorted it. https://mahifx.slack.com/archives/C035H1VNCAD/p1783902727651359
+
+> [resolved] 2026-07-12 — Argamon CHI/LDN processes down after weekend restart: unresolved PropSignal.ZSDRaw config type
+> Shyam (07:46 BST) flagged hedgerHrpCME1, hedgerHrpFxEBS1, propTrader1HrpChi1 (CHI) and hedgerHRP1, hedgerCBOE1 (LDN) down since the weekend restart. Root cause: `pricing.adjustmentSignalRegistry` referenced a signal type (`PropSignal.ZSDRaw`, the `ZSDR-12H`/`-T1`/`-T2` entries) the deployed build doesn't know — every process failed to construct with "Could not resolve type id 'PropSignal.ZSDRaw'". James redeployed by 10:03 BST — resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1783838785176749
 
 > [resolved] 2026-07-04 — toa-apnortheast1-prod-sec-1 stopped: no longer required for Nado
 > James (11:25 BST) stopped `toa-apnortheast1-prod-sec-1` as no longer required for Nado (wound down 2026-06-17). `toa-apnortheast1-prod-pri-1` continues, feeding IC Markets, rebooted in alignment with an IC Markets reboot. https://mahifx.slack.com/archives/C035H1VNCAD/p1783160733134849
