@@ -9,13 +9,16 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-13T07:15:46Z
+last_catchup: 2026-07-14T07:14:35Z
 ---
 
 ## Recent issues
 
-> [open] 2026-07-13 — Unmapped "Velocity" market source streaming on FIX MD feed `MFX-IG_Q→ValuCY_Live_Q` — awaiting Mahi reply
-> Shyam Hari (client) reported the market-data feed between senderCompID `MFX-IG_Q` and targetCompID `ValuCY_Live_Q` is showing an additional, unmapped source tag (`282=Velocity`) streaming prices multiple times per snapshot alongside the usual sources (EDGE, JUMP, CNX, LMAX, COMM). Asked Mahi to confirm whether this is intentional (so it can be mapped properly) or unintentional. No reply in window. [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1783904800812039)
+> [resolved] 2026-07-13 — Unmapped "Velocity" market source streaming on FIX MD feed `MFX-IG_Q→ValuCY_Live_Q` — client asked to add as mapped maker, Mahi agreed
+> Shyam Hari (client) reported the market-data feed between senderCompID `MFX-IG_Q` and targetCompID `ValuCY_Live_Q` is showing an additional, unmapped source tag (`282=Velocity`) streaming prices multiple times per snapshot alongside the usual sources (EDGE, JUMP, CNX, LMAX, COMM). Asked Mahi to confirm whether this is intentional (so it can be mapped properly) or unintentional. **2026-07-13 update:** client followed up in #mahi-valutrades-operations asking "Can we add a maker Velocity in the mappings please?"; Shyam Hari confirmed "We will add them in." [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1783904800812039) [client-followup](https://mahifx.slack.com/archives/C09HN93T0G2/p1783947276694639) [shyam-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1783970306507159)
+
+> [resolved] 2026-07-13 — SURYA_RETAIL TT connection settings — Liam chased a missed config request, credentials provided, client confirmed fixed same day
+> Liam Cordelle followed up in #mahi-valutrades-operations on a previously missed request to configure settings on the SURYA_RETAIL TT connection. Client then asked Liam to confirm the TT credentials for the connection; Liam provided Comp IDs `SURYA_RETAIL_MARGIN` // `TT_MHNY4_RETAIL_MARGIN_SURYA_OR` and username `puran@surya-am.com`. Client confirmed "that should be fixed now" at 20:07 BST (+1 reaction). [liam-followup](https://mahifx.slack.com/archives/C09HN93T0G2/p1783936646861979) [client-creds-ask](https://mahifx.slack.com/archives/C09HN93T0G2/p1783947316959089) [liam-creds](https://mahifx.slack.com/archives/C09HN93T0G2/p1783948977766319) [client-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1783969655383479)
 
 > [resolved] 2026-07-10 — GCQ6-AUG26 (GoldAug) UAT rejects post-restart — fractional quantity not supported, client kept as-is
 > Client (Brandon) reported after a restart that NQ and Oil algo orders worked but GoldAug (GCQ6-AUG26) was not. Rory King acknowledged and looked into it; Arun Patel confirmed the rejections were because the order requested a fractional quantity (5.5) and both UAT and PROD only accept whole amounts, then offered to diverge UAT config from prod to allow fractional sizes. Client declined ("Oh no lets keep it as is then, thanks for checking"). [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1783671637259179) [rory-ack](https://mahifx.slack.com/archives/C09HN93T0G2/p1783671796775329) [arun-diagnosis](https://mahifx.slack.com/archives/C09HN93T0G2/p1783693657106719) [client-decline](https://mahifx.slack.com/archives/C09HN93T0G2/p1783693750654119) [arun-ack](https://mahifx.slack.com/archives/C09HN93T0G2/p1783693780959999)
@@ -144,6 +147,12 @@ last_catchup: 2026-07-13T07:15:46Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-14 — cpty 88888009 & 88994951 A/B book classification: client asked team to advise; Shyam Hari confirmed both A book (88994951 hasn't traded since last year but looked A; 88888009's recent trading behaviour suggests A book). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784006905584739) [shyam-88994951](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784008048091399) [shyam-88888009](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784008098806319)
+
+- 2026-07-14 — cpty 92549025 A/B classification re-check: client asked Mahi to check again; Shyam Hari confirmed A book (consistent with the 2026-07-08 answer). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784000943403339) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784001406796529)
+
+- 2026-07-13 — cpty 39934798 A/B book classification: client asked team to check; Rory King suggested A book for now given limited trade data ("not a lot of trade data for this counterparty tag"). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1783935010585819) [rory-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1783935656039579)
 
 - 2026-07-08 — cpty 92549025 A/B book classification: client asked team to advise; Nathan Burch confirmed A book (with chart) within ~6 minutes. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839) [nathan-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1783494003391929)
 
