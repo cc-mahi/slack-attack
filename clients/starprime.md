@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-13T07:17:08Z
+last_catchup: 2026-07-14T07:13:11Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-14 — New RBF connectors not showing pricing through CPR; Mahi checking
+> Samin flagged at 06:49 BST that the new RBF connectors aren't showing pricing coming through, despite pricing being connected to CPR. This follows the new RBF 3-tier connections and hybrid hedger Cameron Hughes set up on 2026-07-09 (infra was deploying to pick up the new RBF hybrid/arb hedgers — see Notable topics). Shyam Hari acknowledged and said Mahi will check. Unresolved as of end of window. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1784008140943029) [Shyam's reply](https://mahifx.slack.com/archives/C096422RPKK/p1784008176483919)
 
 > [resolved] 2026-07-07 — Samin's request for `distribution.pools.marketInstrumentOverrides` config-edit access answered with a workaround
 > Samin asked for access to the STARPRIME LDN Compass config-edit page for `distribution.pools.marketInstrumentOverrides`. Rory King replied that this key is functionally identical to the constituent override available on the Distribution → Liquidity Pools screen (CONTINUITY_POOL_LDN), pointing Samin there instead of granting the config-edit page directly. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1783414466549229) [Rory's reply](https://mahifx.slack.com/archives/C096422RPKK/p1783415205074809)
