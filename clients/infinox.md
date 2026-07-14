@@ -16,10 +16,13 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-13T07:06:48Z
+last_catchup: 2026-07-14T07:12:56Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-13/14 — SPX500/US30 market-open volatility; Vantage off-market opening ticks; Shyam offered indicative-suppression fix
+> Trading Ops asked whether the rapid SPX500/US30 fluctuations immediately after market open (screenshots attached) were market-wide (23:29 BST 07-13). Shyam Hari explained Vantage's first few ticks at open come in lower and off-market before snapping back in line within the first second, and offered to add pricing logic making VANTAGE-normalised instruments indicative for ~1s after open to suppress this (00:06 BST 07-14). Trading Ops said they'd discuss internally (00:07 BST) — no decision yet. Same Vantage-open-tick root cause as the recurring SPX/NDX/US30/DOW arb-protection pattern (see 2026-07-07/08 entry below), this time proposing a structural suppression fix rather than another arb-protection tweak. [client query](https://mahifx.slack.com/archives/C022S6NL82D/p1783981796123619) [Shyam explanation + fix offer](https://mahifx.slack.com/archives/C022S6NL82D/p1783984003575259) [client ack](https://mahifx.slack.com/archives/C022S6NL82D/p1783984071260009)
 
 > [resolved] 2026-07-13 — Routine Heavy LR batch: 8 CPs under MT5_87018814_Centroid_*
 > Andreas Kazelas requested 8 CPs (Centroid_3603873, Centroid_3604303, Centroid_3598708, Centroid_3598709, Centroid_3598710, Centroid_2145765250, Centroid_3607275, Centroid_3598361) → Heavy LR (06:46 BST); Shyam Hari confirmed "They have been added" (07:06 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1783921564057909) [Shyam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1783922765969409)

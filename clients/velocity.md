@@ -10,7 +10,7 @@ key_people_overrides:
   - {name: "Dan", role: "client ops — yield profile / Echo lookups", confidence: low}
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
   - {name: "Russell", role: "VT client-side — raised tag 889 slippage complaints 2026-06-25", confidence: low}
-last_catchup: 2026-07-13T07:15:39Z
+last_catchup: 2026-07-14T07:03:23Z
 ---
 
 ## Recent issues
