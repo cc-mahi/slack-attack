@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Antonio Aguilar", email: "antonio.aguilar@pepperstone.com", role: "unknown — granted Compass/Echo read-only access 2026-08", confidence: low}
   - {name: "Kate Domican", role: "Pepperstone commercial/relationship (attended London drinks Sep 2026)", confidence: low}
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
-last_catchup: 2026-07-13T07:15:13Z
+last_catchup: 2026-07-14T07:13:08Z
 ---
 
 ## History
@@ -103,6 +103,15 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-07-13/14 — MK proposing switch of Pepperstone Crypto book from SI to Inventory hedging; Isaac's risk sims show inventory-cap approach only beats SI by riding directional windfalls, not sustainable edge
+> Daria flagged (2026-07-13 23:28 BST) that MK wants to switch crypto from SI to inventory, per Zendesk 23187. Isaac ran 24-seed Monte Carlo sims (Jan–Jun 2026 production-classified flow) comparing SI at various caps against production SI (XBT 3h, XET 1h): the touted "140% RoS" figure only appears at a $25M cap on XBT, riding the day-1 book's pre-existing $8.4M short into H1's sell-off — the same cap family on XET (same six months) prints -49% at $4M before flipping to +4% at $6M, "adjacent ceilings, opposite outcomes, same book." Decomposing PnL into spread-engine earnings (~$7.0-7.4M XBT, ~$1.3-1.6M XET, stable across all methods since client fills are identical) versus revaluation, higher caps load up to 79% of daily PnL variance as reval noise versus 0-7% for SI — "it is difficult to quantify future earnings from holding more risk... neither of which we have reliable signals for that justify holding more risk." Isaac is looking for input on how to communicate this to Pepperstone; no reply from the team in this window. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783981698651339) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1783996146298249)
+
+> [open] 2026-07-14 — Binance Perp feed via OZ rejecting all subscriptions (no pipeline configured); OZ says config missing, deferred to later this week
+> Isaac asked whether Binance Perp market mappings via OZ match HRP GOLDI after getting a `No pipeline configured for the symbol(s) for taker Mahi_Crypto_NY_A_Binance` rejection on all messages. OZ confirmed the config is missing on their end — they'd been focused on CFD testing — and will move to the Binance setup later this week. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783998922333099)
+
+> [resolved] 2026-07-13 — Marianna: LR field in order ticket shows most-stringent source; per-CP LR capped by channel/Dist LR settings
+> Marianna asked whether the LR field in the order ticket would show per-CP LR, then whether per-CP LR or Dist LR/caps take priority. Rory confirmed the ticket shows whichever LR source is most stringent — here per-CP was the overall source but capped by the channel LR settings — so an aggressive per-CP LR setting is always capped by the "nicer" Dist caps. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783949428863699)
 
 > [resolved] 2026-07-13 — CFD env pricing gap to OZ; no subscription requests visible, fixed same session
 > Diego reported no pricing coming through to OZ on the CFD env (no subscription requests visible). Nathan Burch investigated; Diego confirmed "looking good now" ~15 minutes later. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1783902676241149)
@@ -286,22 +295,6 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 
 > [open] 2026-04-21 — tXAUUSD post-normalisation-persistence review
 > Weekend review: XAUT mids cluster better than PaxG (Wintermute drifts from B2C2/HRP). Isaac proposes dual-rate model — a 24/7 normalised rate (all XAUT+PAXG sources, single basis) included in tXAUUSD mid-formation during the week, with Primary tracking B2C2+HRP PAXG blend for XAU-close→XAU-open tracking. Beta prices ~10s above gold open at 7s into open, resolves quickly. Supersedes prior `[open] 2026-04-17` tXAUUSD entry. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1776743136995659)
-
-> [open] 2026-04-14 — XAGUSD allocation blocked by minimum-lag qty mismatch
-> dynamicOrderSpeeds config has XAGUSD minimum-lag normal-qty 0.5 vs normal-qty 5000, producing a 2500 minimum that blocks allocation. Thread active.
-
-> [open] 2026-04-01 — Proposal: move crypto maintenance/reboots to weekdays
-> Weekend volumes ≥ weekday; weekend reboots left traders off-state. Awaiting Liam + Pepper confirmation.
-
-> [resolved] 2026-04-13 — Sebastian Andrews Compass access revoked (compromised device)
-> Suspended same day by Rory King.
-
-> [resolved] 2026-04-13 — Arb/XAUUSD crash ~11:02 UTC (PagerDuty Q1MAQYLK2ESYP8)
-
-> [watching] 2026-04-10 — USDILS toxic flow (acct 51331195), NY first-hour pattern (cf. prior NZD/CHF)
-
-> [resolved] 2026-03-24 — XAUUSD non-execution 11:00–11:02 UTC
-> LP pricing flapping through sanity checks; Mahi pricing indicative during the period.
 
 ## Notable topics
 
