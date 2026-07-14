@@ -7,7 +7,7 @@ refs:
   wiki: null                                                 # no ../MahiProduct/wiki/clients/360capital.md
 channels_override: null                                      # no internal-360capital / mahi-360capital — analytics-only relationship
 key_people_overrides: []
-last_catchup: 2026-07-13T07:04:17Z
+last_catchup: 2026-07-14T07:05:18Z
 ---
 
 ## Status
