@@ -20,10 +20,13 @@ key_people_overrides:
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
   - {name: "Andreas", role: "Rostro ops — recurring FIX/slippage/subscription queries", confidence: low}
   - {name: "Chrysovalantis Karageorgiou", role: "Rostro ops — FIX/telnet connectivity, X-connect", confidence: low}
-last_catchup: 2026-07-13T07:15:14Z
+last_catchup: 2026-07-14T07:13:09Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-13 — New price feed requested: "VIP's twin brother" with lower floor (8c), more volatile spread
+> Oli asked (16:46 BST) for a new price feed modelled on the existing VIP feed but with the floor moved down to 8 cents (vs VIP's ~12/13c average) and a more volatile spread that brings the average back up. Kate acknowledged and said Mahi will discuss internally how to set it up — no config change yet. [Oli: request](https://mahifx.slack.com/archives/C08AQKRU953/p1783957561976449) [Kate: will discuss internally](https://mahifx.slack.com/archives/C08AQKRU953/p1783957663261639)
 
 > [open] 2026-07-09 — UKOIL/CO1USD retail pricing source change history queried
 > Oli asked (09:20 BST) "fairly important... trying to piece together — when did we change UKOIL pricing from CMC to IC Markets". William Denny replied: changed to IC Markets on 3 July, and since 7 July IC Markets + CMC are both reference markets; confirmed this is on the retail feed. Oli then asked why the 3 July change was made; William said he'd check with the team and revert — no answer given in window. [Oli: piecing together UKOIL history](https://mahifx.slack.com/archives/C08AQKRU953/p1783585253153159) [William: 3 Jul / 7 Jul detail](https://mahifx.slack.com/archives/C08AQKRU953/p1783586298557709) [Oli: why 3 Jul?](https://mahifx.slack.com/archives/C08AQKRU953/p1783586384846519) [William: will check and revert](https://mahifx.slack.com/archives/C08AQKRU953/p1783586413538679) [William: confirms retail feed](https://mahifx.slack.com/archives/C08AQKRU953/p1783587807266049)
