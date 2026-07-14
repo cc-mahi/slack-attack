@@ -16,7 +16,7 @@ key_people_overrides:
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
   - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
-last_catchup: 2026-07-13T07:10:24Z
+last_catchup: 2026-07-14T07:06:56Z
 ---
 
 ## Status
@@ -26,6 +26,15 @@ last_catchup: 2026-07-13T07:10:24Z
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [open] 2026-07-13 — XAUUSD/GCXX/DAXX rejection burst ("Boundary price"): cause under investigation
+> Karen flagged a wave of CMC rejections at 15:18-15:23 BST — "Boundary price" rejections on XAUUSD and Gold Futures (GCXX), with most of the volume on DAXX (DAX index future). Rory confirmed no outstanding risk in spot or futures gold currently but said Mahi will look into the cause of the cancellations. [karen-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783952294776569) [rory-noaction-investigating](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783952543261959)
+
+> [resolved] 2026-07-13 — B_OFF_BOOK_NET VaR alert: threshold raised then critical alerts removed after repeat false positives
+> Amana forwarded an internal EMERGENCY alert (B_OFF_BOOK_NET High VaR: 500184.67) and asked Mahi to fix it at 13:28 BST. Rory bumped the book's critical VaR threshold from 500K to 1M via `compassTenantProfiles` at 13:34 BST, then removed critical VaR alerts from the book entirely at 15:03 BST, offering to reinstate a specific value if Amana wants one. Earlier the same morning (08:49-08:53 BST) a separate VaR alert was confirmed a false positive on a B-book with nothing to action. [amana-fix-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783945727621939) [var-threshold-bump-internal](https://mahifx.slack.com/archives/C08T42TMKU3/p1783946040886389) [rory-alerts-removed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783951403926969) [earlier-false-positive](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783929193523599)
+
+> [open] 2026-07-13 — SPXFUT-U/NDX futures: no CMC pricing after E-mini contract roll, small uncleared position
+> Rory flagged at 09:04 BST that Mahi isn't receiving CMC_CENTROID pricing for SPXFUT-U, leaving a small uncleared position in the futures W book. Follow-up confirmed Amana is subscribing to the new E-mini contract (E-miniSP6U_, rolled from E-miniSP6M_) and only Jump/IG are pricing, not CMC; Rory said the subscription can only refresh at EOD and offered to manually cover with another LP meanwhile. Karen relayed to Nikos for confirmation; Nikos said to leave it, it's only a 50K position. Rory flagged again at 14:58 BST that the same gap is now also hitting NDX futures, expecting normal hedging to resume after that evening's EOD restarts. [rory-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783929870794099) [subscription-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783934568357339) [rory-eod-manual-cover](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783934817545589) [nikos-leave-it](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783940647907329) [rory-recur-spx-ndx](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783951138435979)
 
 > [resolved] 2026-07-12 — XAU B-book position rec: adjustment confirmed made
 > Hadeel (Amana) requested an update to XAU B-book positions at 15:04 BST, sharing Positions_Recs_XAU_BBOOK.csv (client-perspective positions). Shyam acknowledged at 19:55 BST; Isaac confirmed the adjustment had been made at 22:08 BST. Clean rec. [hadeel-request](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783865098391319) [shyam-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783882522552709) [isaac-done](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783890512531239)
@@ -39,6 +48,7 @@ last_catchup: 2026-07-13T07:10:24Z
 > [open] 2026-07-09 — B-book silver futures enablement + A-book indices move requested
 > Nikos asked Isaac/Rory to check whether test trades are needed before enabling B-book silver futures next week, and separately asked to move all A-book indices over to B-book once the setup is ready. Rory acknowledged ("Well received Nikos"); no substantive reply yet in-window. [nikos-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611611558779) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611648414369)
 > 2026-07-10 update: Amana asked Mahi to confirm whether B-book silver futures needs test trading (10:43 BST). Rory confirmed Mahi will work on the setup that day and let them know if testing is required (10:44 BST); Karen acknowledged (10:45 BST). Still open — testing outcome not yet confirmed. [amana-confirm-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783676609813869) [rory-setup](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783676668671249)
+> 2026-07-13 update: Hedging approach confirmed — silver futures hedged in spot; sits in the existing gold-spot "off book" for testing only (invisible to the hedger), moves to the proper book (eventually merged with XAG) once verified live. Nikos also asked Hadeel to update the silver futures position before fully going live. [rory-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783935495393539) [nikos-confirm](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783936428305409) [nikos-hadeel-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783936454600029) [rory-ok](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783936620478759)
 
 > [resolved] 2026-07-08 — WS6Q (White Sugar August future) settlement: Mahi confirmed no open positions
 > Amana notified at 16:03 BST that WS6Q was settling and asked positions be zeroed; Rory confirmed no open positions in the contract. Clean expiry. [settlement-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523012035619) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523177734449)
