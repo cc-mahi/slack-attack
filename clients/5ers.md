@@ -11,13 +11,14 @@ key_people_overrides:
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
-last_catchup: 2026-07-14T07:03:23Z
+last_catchup: 2026-07-15T07:04:41Z
 ---
 
 ## Recent issues
 
 > [open] 2026-07-07 — Cross-connect (XC) setup delayed — YourBourse (Maksim) unresponsive to Beeks since July 3rd
 > Kate Stagg (13:08 BST) flagged frustration at how long the XC is taking to get set up, attributing the main hold-up to YourBourse — Maksim hasn't replied to Beeks since 2026-07-03. Arun to send Beeks an email and suggest a call between Beeks and YB to get it over the line. No further detail in-window on what the XC is for or its urgency. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1783426138434659)
+> 2026-07-14 update — still blocked. Kate's weekly-call notes record Yaron will now contact YB re the XC; separately Kate (12:20 BST) messaged Yaniv again as they're "once again blocked by no response from Maksim/YB." [call-notes](https://mahifx.slack.com/archives/C079M09MGGP/p1784034120307669) [kate-blocked](https://mahifx.slack.com/archives/C079M09MGGP/p1784028024422329)
 
 > [resolved] 2026-07-03 — Stale FIX orders (XAUUSD, JPN225) via connector #11748 — YourBourse-end connection drops, no unhedged exposure
 > Linos (07:15 BST) shared 6 stale FIX order log lines from 03:57–03:59 UTC: XAUUSD buys at 4175–4177 and JPN225 sell 43 lots at 69212.0, all via connector #11748, trace_ids spanning CPs 11734_ and 1770806082_. Sam Hewitt replied asking what Linos would like checked; client confirmed (09:37 BST) these were the stale orders in question. Sam's 2026-07-06 trace: none of the six orders reached Mahi or were executed — no unhedged exposure. Root cause: the YourBourse connector (#11748) price+order FIX sessions dropped twice in a ~2.5min window (03:57:01 and 03:58:32 UTC), both drops originating at the connector end (TCP closed from 213.196.24.180, fresh re-logons with reset sequence numbers seconds later); orders sent during the dead-connection windows triggered YB's 15s stale-alert timeout. Mahi pricing was firm and continuous throughout (708k XAUUSD + 159k JPN225 updates, no gaps >5s, zero indicative ticks) — the quoted IDs were just the last live quotes before each drop. Sam asked YourBourse to check the connector's logs/network around those two timestamps. Distinct from the 2026-06-12 YourBourse stale-orders episode (separate connection). [client-alert](https://mahifx.slack.com/archives/C07AQJS4E80/p1783059350209809) [sam-q](https://mahifx.slack.com/archives/C07AQJS4E80/p1783060786087699) [sam-rca](https://mahifx.slack.com/archives/C07AQJS4E80/p1783313577498919)
@@ -94,6 +95,8 @@ last_catchup: 2026-07-14T07:03:23Z
 > Andreas sending test trades through yourbourse→Mahi; Shyam + Isaac monitoring. Isaac's 04-24 update: trades flowing as expected; some cancels from off-market/last-look breaching limit orders but nothing unexpected. 04-28: client switched XAUUSD flow to YB+Mahi too. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1776981907673599)
 
 ## Notable topics
+
+- 2026-07-14 — Weekly call (Kate): Yaniv requested a 1.2x fast-markets multiplier on metals and CFDs (on top of existing dynamic widening) — set up and confirmed same day. Call notes also flag 5ers hoping to launch new prop-challenge programs today with stricter rules but cheaper pricing, aiming for higher volumes; Cameron Hughes asked (15:12 BST) whether the new rules are based on the payout sims already run for Yaniv — unanswered in-window. [call-notes](https://mahifx.slack.com/archives/C079M09MGGP/p1784034120307669) [multiplier-confirmed](https://mahifx.slack.com/archives/C07AQJS4E80/p1784034004524299) [cameron-question](https://mahifx.slack.com/archives/C079M09MGGP/p1784038329316089)
 
 - 2026-06-21 — Isaac Dann added diagnostic note to the ongoing flowImbalanceNoTrades open issue: alert from `riskReportingExtended1` can also indicate the MT5 STP analytics bridge being down — check `analyticsFixServer1` in Compass then `echo-euwest2-prod-mt4-1`. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1782082495560909)
 
