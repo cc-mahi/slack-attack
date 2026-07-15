@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-14T07:03:23Z
+last_catchup: 2026-07-15T07:16:23Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-07-14T07:03:23Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-07-15 — Sec-1 alerting noise needs infra fix; separate false PnL-drop alert flagged
+> Shyam flagged frequent false PnL drop alerts (23:09 BST 2026-07-14), then asked (02:18 BST 2026-07-15) whether alerting tied to the intentionally-stopped `toa-apnortheast1-prod-sec-1` (PD Q1P54YYVHR2XRC, see 2026-07-04 stop entry) could be fixed or removed. Lee suggested JMX suppression as a stopgap — the proper fix needs an infra release during the IC maintenance window. https://mahifx.slack.com/archives/C035H1VNCAD/p1784078287263179 https://mahifx.slack.com/archives/C035H1VNCAD/p1784066981569519
 
 > [resolved] 2026-07-13 — TOA-ARGAMON LDN PnL drop: hedger lagged fill on XAG down-move, missing broker rule fixed
 > Shyam (01:32 BST) flagged a PnL drop on LDN — hedger struggled to get a fill on XAG on a downward price move, letting the trader profit before hedging caught up (PD Q2X4BKV1EM27NV). Lee confirmed shortly after: a XAG broker rule was missing; Elan has sorted it. https://mahifx.slack.com/archives/C035H1VNCAD/p1783902727651359
