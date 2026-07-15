@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-07-14T07:03:23Z
+last_catchup: 2026-07-15T07:09:58Z
 ---
 
 ## Status
@@ -21,6 +21,12 @@ last_catchup: 2026-07-14T07:03:23Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-07-14 — Second hybridHedgerC1/LMAX outage same day (~17 min); Base not yet re-notified
+> Second LMAX connectivity outage hit at 16:50 BST (PagerDuty), ~17 minutes this time. Cameron Copland held off restarting the hedger while LMAX was still down, confirmed LMAX itself was the cause (not our side), then restarted the hedger once LMAX recovered. Kate Stagg flagged "worth flagging to Base again" given the repeat — no follow-up message to Base visible in `mahi-base-markets` as of run time (the only client-facing message this window was the first incident's 10:32 note). [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784044249314479) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784045814569439)
+
+> [resolved] 2026-07-14 — hybridHedgerC1 down: LMAX ~10min connectivity outage; ClOrdID-length bug found on reconnect safety-cancel
+> First outage of the day: hedger lost its LMAX FIX session 08:52–09:01 UTC (order-confirmation timeout) and self-paused. One in-flight order, USDCHF sell 50k @ 0.81264 (ClOrdID `012dvrbdj`, sent 08:51:50 UTC), got no ExecutionReport during the outage; the post-reconnect safety-cancel for it was rejected by LMAX because the ClOrdID (23 chars) exceeded LMAX's 20-char tag-11 limit. Reconnect also reset FIX sequence numbers, so any queued ER from LMAX was likely lost. Cameron Copland posted the full timeline and root cause to `internal-base-markets`, then messaged Base directly in `mahi-base-markets` asking them to check with LMAX. LMAX confirmed the order was cancelled (not filled) — no reconciliation needed. Kate Stagg noted she'd check whether other clients also saw the outage. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784019325075299) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784021546330409) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784025804877879)
 
 > [open] 2026-07-06 — Client requesting hedger on rev share book; Tegis eyeing MT5 move
 > Kate Stagg (internal) relayed a client catch-up: Tegis flow is performing well with a good monetisation window and PnL steadily ticking up. Tegis are reportedly looking to move to MT5 — hope is that Base absorbs the architectural changes on their side rather than requiring further work from Mahi. Client also asked for a hedger to be set up on the rev share book, similar to the existing Tegis workflow, covering the rest of their flow. No reply or follow-up in channel yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1783348750050239)
