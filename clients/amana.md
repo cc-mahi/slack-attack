@@ -16,7 +16,7 @@ key_people_overrides:
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
   - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
-last_catchup: 2026-07-14T07:06:56Z
+last_catchup: 2026-07-15T07:09:58Z
 ---
 
 ## Status
@@ -26,6 +26,18 @@ last_catchup: 2026-07-14T07:06:56Z
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [open] 2026-07-14 — Futures W book PnL incorrect for prior day; dev team investigating
+> Hadeel flagged at 11:15 BST that PnL on the futures book for the previous day looked incorrect, sharing an Account Summary screenshot from Compass. Rory said he'd look into it; when chased at 13:07 BST he confirmed Mahi's dev team is on it. No resolution posted in-window. [hadeel-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784024111354679) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784024127896519) [rory-devteam](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784030843431149)
+
+> [resolved] 2026-07-14 — USDJPY LMAX rejections: hedger sending below-minimum fractional size; restarted and fixed
+> Amana flagged (15:33 BST) a wave of "Below Minimum volume" rejections from Mahi LMAX on USDJPY (client sending 993.511 vs 1000 minimum). Rory checked, turned the hedger off (15:34 BST), confirmed fractional sizing shouldn't be sent given other FX mins are also 1000, then restarted the hedger (15:35 BST). Amana confirmed the USDJPY rejections stopped at 15:40 BST. [amana-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784039592002209) [rory-off](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784039652886629) [rory-restart](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784039749266919) [amana-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784040036278919)
+
+> [resolved] 2026-07-14 — Client confusion over new Echo-linked PnL-drilldown screen; alpha feature, "View in Echo" still available
+> Amana asked why highlighting PnL/volume no longer opens the familiar Echo yield-profiles screen directly but a new profiles screen instead ("whats this wizardy?"). Rory pointed to the "View in Echo" link to get the old view and explained the new feature is in alpha and being improved. [amana-question](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784035191675279) [rory-viewinecho](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784035365594219) [rory-alpha](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784035960520379)
+
+> [watching] 2026-07-14 — Internal flag: Amana owns Centroid, which is building a Compass-like product
+> Kate Stagg (internal) noted Amana and Centroid are commonly owned (both under 180 Capital), and that Centroid is reportedly trying to build a Compass competitor — flagging that Amana therefore has visibility into Compass. Assessed as not an acute worry but one to watch. No action taken. [kate-flag](https://mahifx.slack.com/archives/C08T42TMKU3/p1784043112277589) [kate-detail](https://mahifx.slack.com/archives/C08T42TMKU3/p1784043172779379)
 
 > [open] 2026-07-13 — XAUUSD/GCXX/DAXX rejection burst ("Boundary price"): cause under investigation
 > Karen flagged a wave of CMC rejections at 15:18-15:23 BST — "Boundary price" rejections on XAUUSD and Gold Futures (GCXX), with most of the volume on DAXX (DAX index future). Rory confirmed no outstanding risk in spot or futures gold currently but said Mahi will look into the cause of the cancellations. [karen-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783952294776569) [rory-noaction-investigating](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783952543261959)
@@ -95,6 +107,7 @@ last_catchup: 2026-07-14T07:06:56Z
 > [open] 2026-07-01/02 — CMC lag on XAUUSD causing visible price spikes; XAGUSD config change done
 > Nikos flagged at ~13:22 UTC that CMC was lagging behind JUMP/LMAX on XAUUSD; when CMC updated, the pricer switched reference mid causing a visible spike. Ongoing monitoring; no resolution confirmed. [nikos-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782921177101529)
 > 2026-07-02 update: Nikos asked at 13:24 BST if XAGUSD config change could be applied first, XAUUSD tomorrow. Cameron Hughes confirmed XAGUSD done at 13:47 BST. XAUUSD config change to follow 2026-07-03. [xagusd-done](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782996473844529) [config-thread](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782995070152109)
+> 2026-07-14 update: Recurred on XAUFUT — Nikos flagged another case of CMC latency, asked Rory to check whether the earlier Silver fix would help and to implement it for GC (gold) if so. Rory said he'd look further (09:09 BST); Mahi is running backtests to find the right configuration but hadn't landed on one by 17:45 BST. Still open. [nikos-recur](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784014346052219) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784016584721479) [nikos-gc-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784017641476289) [rory-backtesting](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784034994020049) [rory-update](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784047513251009)
 
 > [resolved] 2026-07-01 — Manual hedge rejections: default tag 555 routing to wrong CMC connection
 > Mohamad flagged A-book FX manual hedges being rejected because default Compass manual order tag 555 pointed to the B-book CMC connection. Cameron Hughes investigated; Isaac changed the default tag from 555 (B-book CMC) to 556 (A-book), preventing A-book hedges from mis-routing. Residual USDCHF/USDCAD closed after the fix. [mohamad-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782930335741599) [isaac-fix](https://mahifx.slack.com/archives/C08SYSMP0EB/p1782939683542029)
