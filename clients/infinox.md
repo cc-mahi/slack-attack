@@ -16,10 +16,16 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-14T07:12:56Z
+last_catchup: 2026-07-15T07:22:17Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-14 — Routine Toxic XAUUSD Harsher batch (AM): Centroid_3607233/3607234, Centroid_3607189, Centroid_3605913
+> Andreas Kazelas requested Centroid_3607233 + Centroid_3607234 (duplicated in message) → Toxic XAUUSD Harsher (08:37 BST); Kate Stagg noted only two unique tags and confirmed both added (08:42 BST). Andreas separately requested Centroid_3607189 ("sorry my mistake", 09:04 BST); Rory King confirmed actioned (09:10 BST). Andreas also requested Centroid_3605913 (10:04 BST); Rory King confirmed actioned (10:24 BST). [3607233/3607234 request](https://mahifx.slack.com/archives/C022S6NL82D/p1784014628882449) [Kate confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784014922579819) [3607189 request](https://mahifx.slack.com/archives/C022S6NL82D/p1784016283911999) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784016651325019) [3605913 request](https://mahifx.slack.com/archives/C022S6NL82D/p1784019886160159) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784021067648459)
+
+> [resolved] 2026-07-14 — Routine Toxic XAUUSD Harsher batch (PM): MT5_plain_b_87944250/87978738 (Georgia), 83038408/Live03_MT4__83038408 (Clio)
+> Georgia Tzyrkalli requested MT5_plain_b_87944250 + MT5_plain_b_87978738 → Toxic XAUUSD Harsher (15:15 BST); Rory King confirmed "Both done" (15:20 BST). Clio Constantinou separately requested 83038408 + Live03_MT4__83038408 → same profile (16:21 BST); Rory King confirmed "Both have been actioned" (16:24 BST). [Georgia request](https://mahifx.slack.com/archives/C022S6NL82D/p1784038559812059) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784038827491759) [Clio request](https://mahifx.slack.com/archives/C022S6NL82D/p1784042494995919) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784042653164549)
 
 > [open] 2026-07-13/14 — SPX500/US30 market-open volatility; Vantage off-market opening ticks; Shyam offered indicative-suppression fix
 > Trading Ops asked whether the rapid SPX500/US30 fluctuations immediately after market open (screenshots attached) were market-wide (23:29 BST 07-13). Shyam Hari explained Vantage's first few ticks at open come in lower and off-market before snapping back in line within the first second, and offered to add pricing logic making VANTAGE-normalised instruments indicative for ~1s after open to suppress this (00:06 BST 07-14). Trading Ops said they'd discuss internally (00:07 BST) — no decision yet. Same Vantage-open-tick root cause as the recurring SPX/NDX/US30/DOW arb-protection pattern (see 2026-07-07/08 entry below), this time proposing a structural suppression fix rather than another arb-protection tweak. [client query](https://mahifx.slack.com/archives/C022S6NL82D/p1783981796123619) [Shyam explanation + fix offer](https://mahifx.slack.com/archives/C022S6NL82D/p1783984003575259) [client ack](https://mahifx.slack.com/archives/C022S6NL82D/p1783984071260009)
