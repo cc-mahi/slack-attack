@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory — possibly attending Cyprus event alongside Roman", confidence: low}
   - {name: "Jan", role: "Axiory TY office — data/ops requests (surname unknown)", confidence: low}
-last_catchup: 2026-07-14T07:03:23Z
+last_catchup: 2026-07-15T07:07:30Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-14 — GBPAUD spread blowout (21:12:59 UTC 07/13); traced to client's own PXM aggregation failing over to Finalto
+> Jan (Axiory TY) raised a client claim: GBPAUD spread blew out to ~146–166 pips for ~1.5s at 2026-07-13 21:12:59 UTC. Rory King acknowledged same morning. Kate Stagg's investigation (2026-07-14): the aggregated feed is built in Axiory's own PrimeXM, upstream of Mahi, at Axiory's request — AXIORY_POOL (TKY) and AXIORY_POOL_LDN (LDN) both quoted the wide spread because 26D dropped out at the same moment and PXM appears to have failed over to Finalto, which sent a bad quote (bid ~1.9242–1.9248, ask spiked ~1.9388–1.9398) then froze for 11.6s. Kate suggested Jan confirm with PXM directly; screenshots provided. No reply from Jan yet — thread open. [claim](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784017690112589) [ack](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784017797279159) [investigation](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784049533759789)
 
 > [open] 2026-06-29 — XAUUSD demo-server pricing discrepancy query from Jan (Axiory TY); pricing data provided, resolution pending
 > Jan (Axiory TY) raised a complaint on behalf of clients: XAUUSD positions on Axiory's MT5 demo server closed at prices differing significantly from Mahi's price feed (2026-06-26 ~15:06–15:39 UTC). Thirteen orders across accounts 20059963 and 20053970, all closing at 4086.64 or 4087.33. Rory King investigated and could not find drop copies (demo server — execution is on Axiory's side, not Mahi's). Jan clarified the trades are demo-side only. Kate Stagg confirmed no drop copies found and Rory provided a CSV of CLIENT_PRICE_TKY pricing data for the relevant window (2026-06-30). Jan thanked; no further reply yet — thread open. [complaint](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782736112200869) [pricing-data-sent](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782826684107249)
@@ -26,6 +29,9 @@ last_catchup: 2026-07-14T07:03:23Z
 > Adam Foltyn pulled MAHI pricing on US Oil → GER40/HKD50/US30/US100 → all FX to backup at LD4 open. Restored 04-27 after Sam Hewitt restarted the publishing process; Adam confirmed pricing recovered and switched back. Root cause (Daria, 04-28): a hazelcast WAN replication `Update overrides[distribution.distributionChannels]` at 2026-04-20 00:48:48 UTC set the LDN dist channel's internalisation market to `CLIENT_PRICE_TKY` (override last edited 2024) — surprise it didn't trigger sooner; Kate to watch LDN for similar oddities. Adam pinged 04-29 asking for RCA update — no reply yet, RCA write-up still owed. 2026-05-02: Adam confirmed `_z` suffix symbols switched back to MAHI pricing and included in give-ups as agreed — full pricing restoration complete. [permalink](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777254243398619) [internal-rca](https://mahifx.slack.com/archives/C06KQT6EU3W/p1777276704165709) [resolution](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777738779200109)
 
 ## Notable topics
+
+> 2026-07-14 — GBPAUD spread blowout traced upstream to Axiory's own PrimeXM aggregation, not Mahi
+> Client claim on a 1.5s GBPAUD spread spike resolved to a root cause outside Mahi's pricing: Axiory's PXM aggregation (built at their request) failed over to a bad Finalto quote when 26D momentarily dropped out. Mahi's own AXIORY_POOL feeds correctly reflected what PXM sent. [claim](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784017690112589) [investigation](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784049533759789)
 
 > 2026-06-29 — Jan (Axiory TY) raised XAUUSD demo execution price discrepancy; Mahi provided pricing data
 > Jan flagged that two demo-account positions (accounts 20059963 and 20053970) closed on 2026-06-26 at prices differing from the Mahi price feed. Rory and Kate investigated: no matching drop copies found (expected — demo server, execution is on Axiory's side, not Mahi's). Jan acknowledged the demo-execution clarification. Rory delivered a XAUUSD pricing CSV for the relevant window (2026-06-26 ~15:00–16:00 UTC) — no Mahi pricing issue identified. [request](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782736112200869) [resolution](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782826684107249)
