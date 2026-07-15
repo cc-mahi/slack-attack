@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-07-14T07:12:00Z
+last_catchup: 2026-07-15T07:13:28Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-14 — Retail model pricing instability: high load caused indicative-pricing rejections + B-book volume/PnL reporting gap
+> Daniel Kurra flagged a retail-model pricing issue ~14:11 BST; Rory traced it to high load on a process destabilising the retail model pricer, and capacity on that process has since been increased. Fallout: clients saw rejects with a "Mid price indicative" message (an existing safety behaviour — treating pricing as indicative rather than filling at possibly-latent prices — not a bug), and Matthew flagged the B-book graph showing unusually low volume for the same window. Shyam supplied EOD headline figures for the affected NY trading day (13 Jul 21:00 → 14 Jul 21:00 UTC): B_CLIENTS (B-Book) -$2,043,083 PnL on $8,087.8M volume / 432,575 fills; CLIENTS (A-Book) +$2,881 on $70.7M / 1,057 fills; B_INSTI_CLIENTS -$20,414 on $7.1M / 950 fills; HYBRID_CFD_CLIENTS +$9,491 on $27.9M / 9,885 fills — flagging that trade volume looks understated and that reinstating the dropped overview volume figure likely isn't retroactively fixable (checking with dev). Daniel separately asked Mahi to review load capacity on other active processes, namely the skew-signals process Kate had flagged as near its limit; Rory agreed to review. Awaiting Rory's confirmation of the granularity Exinity needs on the volume/PnL figures. [Daniel initial](https://mahifx.slack.com/archives/C0456LSHQQK/p1784034689133999) [priority](https://mahifx.slack.com/archives/C0456LSHQQK/p1784036400737189) [rejections](https://mahifx.slack.com/archives/C0456LSHQQK/p1784036860020649) [Rory root cause](https://mahifx.slack.com/archives/C0456LSHQQK/p1784048509293199) [Matthew EOD request](https://mahifx.slack.com/archives/C0456LSHQQK/p1784049851812089) [Rory understated volume](https://mahifx.slack.com/archives/C0456LSHQQK/p1784050617847739) [Shyam headline figures](https://mahifx.slack.com/archives/C0456LSHQQK/p1784066211995129)
+
+> [open] 2026-07-14 — Fresh "Critical Connection Issues" alert cluster; Mahi points at client-side network, not heartbeat noise this time
+> Christian Lee reported Critical Connection Issues (screenshot). Louie Davidson asked whether Mahi had changed parameters, questioning the sudden alert frequency. Liam Cordelle confirmed no changes on Mahi's side — other connections on the same process aren't showing similar latency — and asked Exinity to check their own side, offering a Beeks network analysis if Exinity can supply a packet capture showing the latency isn't on their end. No reply from Exinity in window. Distinct from the 2026-07-13 cluster (resolved as heartbeat-only, see below) — this one is pointed at Exinity's network path rather than Mahi's. [Christian](https://mahifx.slack.com/archives/C0456LSHQQK/p1784022048327039) [Louie](https://mahifx.slack.com/archives/C0456LSHQQK/p1784022081319739) [Liam](https://mahifx.slack.com/archives/C0456LSHQQK/p1784022578146429)
 
 > [open] 2026-07-13 — Replica DB rebuild recurs a third time (06-22, 06-29, 07-13); root cause still not identified
 > Mukhammad asked if we had a "DB failure again" and whether the root cause from last time had been found. Shyam confirmed the replica is undergoing a rebuild again, that the team attempted a fix over the weekend, and that they'll continue investigating root cause. Third occurrence of the same replica-rebuild pattern in three weeks (see 2026-06-22 and 2026-06-29 entries below) — still unresolved at a root-cause level despite the weekend fix attempt. [Mukhammad](https://mahifx.slack.com/archives/C0456LSHQQK/p1783979757373589) [Shyam](https://mahifx.slack.com/archives/C0456LSHQQK/p1783980901118179)
@@ -204,6 +210,7 @@ last_catchup: 2026-07-14T07:12:00Z
 
 ## Notable topics
 
+- 2026-07-14 — Arun Patel bounced `riskReporting2` (internal note only; no client-facing context surfaced). [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1784044469757109)
 - 2026-06-17 — UBS conformance (Zendesk 22872): locos confirmed London (2026-06-23 thread); weekend deploy scheduled, testing arranged for next week (UBS_FA_WB and UBS_SW_WB). See 2026-06-21 Recent issues entry. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1781687458834039)
 - 2026-06-15 — Daniel Kurra requested a catch-up call with Kate and Rory; confirmed for 11:30 BST and held. No post-call notes in channel. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781512034441669)
 - 2026-06-10 — XAUFUT contract codes confirmed: August = XAUFUT-Q, December = XAUFUT-Z (CME convention per https://www.cmegroup.com/month-codes.html). Kate asked Exinity to confirm when ready to test the XAUFUT workflow. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781083063243879)
