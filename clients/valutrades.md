@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-14T07:14:35Z
+last_catchup: 2026-07-15T07:25:11Z
 ---
 
 ## Recent issues
@@ -147,6 +147,12 @@ last_catchup: 2026-07-14T07:14:35Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-15 — Batch A/B book classification (overnight team): cpty 69943504 (Nathan: new account, first trade 2026-07-14, only 48 trades since, house down $5,811 — suggested A-booking for now and re-evaluating with more data), 96096589 (Shyam: A book — vast majority of trading on NDF), 69085742 (Shyam: A book — XAUUSD). [69943504-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784081531475219) [69943504-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784081930669659) [96096589-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784083713597389) [96096589-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784084551327809) [69085742-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784090651637479) [69085742-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784091044355989)
+
+- 2026-07-14 — Batch A/B book classification (overnight team): cpty 92596030 (Rory: very limited trade data, all in the past week — profitable on NDFUSD/SPFUSD/DJFUSD, offside on JPFUSD after 5s; recommended waiting for more data before deciding), 88993765 (Rory: A book, with chart). [92596030-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784013460713599) [92596030-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784017540170579) [88993765-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784027214134649) [88993765-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784028154155689)
+
+- 2026-07-14 — Algo settings UAT testing readiness query, unanswered: Liam Cordelle asked in #mahi-valutrades-operations "did we have any luck with the setup so we can start testing this?"; Graeme Watkins followed up addressing Garry Bersnov directly, "when is IT ready for testing algo settings in UAT?" No reply from either side visible in window. [liam-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784045193272999) [graeme-garry](https://mahifx.slack.com/archives/C09HN93T0G2/p1784048702219459)
 
 - 2026-07-14 — cpty 88888009 & 88994951 A/B book classification: client asked team to advise; Shyam Hari confirmed both A book (88994951 hasn't traded since last year but looked A; 88888009's recent trading behaviour suggests A book). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784006905584739) [shyam-88994951](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784008048091399) [shyam-88888009](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784008098806319)
 
