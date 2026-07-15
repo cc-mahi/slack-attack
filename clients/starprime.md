@@ -12,13 +12,14 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-14T07:13:11Z
+last_catchup: 2026-07-15T07:25:13Z
 ---
 
 ## Recent issues
 
 > [open] 2026-07-14 — New RBF connectors not showing pricing through CPR; Mahi checking
 > Samin flagged at 06:49 BST that the new RBF connectors aren't showing pricing coming through, despite pricing being connected to CPR. This follows the new RBF 3-tier connections and hybrid hedger Cameron Hughes set up on 2026-07-09 (infra was deploying to pick up the new RBF hybrid/arb hedgers — see Notable topics). Shyam Hari acknowledged and said Mahi will check. Unresolved as of end of window. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1784008140943029) [Shyam's reply](https://mahifx.slack.com/archives/C096422RPKK/p1784008176483919)
+> Follow-up (internal-starprime, same day, 15:47–16:32 BST): nagios fired on hybridHedgerRBF1 and arbHedgerRBF1; Cameron Copland found the hybrid hedger config from the 2026-07-09 infra deploy wasn't applied on disk and asked whether the deploy had rolled back or this was intentional, then bumped signalProcess1 memory directly on box to avoid the config drift. Cameron Hughes then bounced both hybridHedgerRBF1 and arbHedgerRBF1. No confirmation in channel yet that this restored RBF pricing through CPR — still open. [Cameron's nagios flag](https://mahifx.slack.com/archives/C095MJHC68J/p1784040471264339) [Cameron Hughes bounce](https://mahifx.slack.com/archives/C095MJHC68J/p1784043151674469)
 
 > [resolved] 2026-07-07 — Samin's request for `distribution.pools.marketInstrumentOverrides` config-edit access answered with a workaround
 > Samin asked for access to the STARPRIME LDN Compass config-edit page for `distribution.pools.marketInstrumentOverrides`. Rory King replied that this key is functionally identical to the constituent override available on the Distribution → Liquidity Pools screen (CONTINUITY_POOL_LDN), pointing Samin there instead of granting the config-edit page directly. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1783414466549229) [Rory's reply](https://mahifx.slack.com/archives/C096422RPKK/p1783415205074809)
