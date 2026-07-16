@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-07-15T07:18:22Z
+last_catchup: 2026-07-16T15:15:50Z
 ---
 
 ## Status
@@ -23,6 +23,9 @@ last_catchup: 2026-07-15T07:18:22Z
 - **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
+
+> [open] 2026-07-15 — Compass upgrade scheduled: maintenance window Sat 18 Jul 10:00–11:00 UK
+> Liam requested and TOT confirmed a maintenance window to upgrade Compass to the latest version, Saturday 18 July 10:00–11:00 UK time; expected ~15min with no pricing feed within that hour. Client confirmed the plan. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784120689018969)
 
 > [open] 2026-07-06 — USDJPY spread reported jumping 1→16 pts (client-side); Mahi feed confirmed tight
 > Lars forwarded a report from Daniel (TOT) that USDJPY spread intermittently jumps from 1 to 16 points, reported around 4am EST during the London session. Rory King and Cameron Hughes picked it up; Shyam Hari confirmed Mahi's published USDJPY spread for the full 6 Jul London session (07:00–13:00 UTC) stayed consistently tight (avg 0.6pt, max 2pt across 91,851 ticks), indicating the jump happens downstream of Mahi's pricing. Awaiting specific trade/time detail from the client to dig further. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1783353697503159)
