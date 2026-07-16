@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
-last_catchup: 2026-07-15T07:04:41Z
+last_catchup: 2026-07-16T07:04:52Z
 ---
 
 ## Recent issues
@@ -95,6 +95,8 @@ last_catchup: 2026-07-15T07:04:41Z
 > Andreas sending test trades through yourbourse→Mahi; Shyam + Isaac monitoring. Isaac's 04-24 update: trades flowing as expected; some cancels from off-market/last-look breaching limit orders but nothing unexpected. 04-28: client switched XAUUSD flow to YB+Mahi too. [permalink](https://mahifx.slack.com/archives/C07AQJS4E80/p1776981907673599)
 
 ## Notable topics
+
+- 2026-07-15 — Liam Cordelle requested a Compass upgrade maintenance window, Saturday July 18, 10:00–11:00 UK time (~15min expected downtime, longer window held in case of issues). Client confirmed same day they'll notify their traders. [request](https://mahifx.slack.com/archives/C07AQJS4E80/p1784120682561319) [client-confirms](https://mahifx.slack.com/archives/C07AQJS4E80/p1784123978391419)
 
 - 2026-07-14 — Weekly call (Kate): Yaniv requested a 1.2x fast-markets multiplier on metals and CFDs (on top of existing dynamic widening) — set up and confirmed same day. Call notes also flag 5ers hoping to launch new prop-challenge programs today with stricter rules but cheaper pricing, aiming for higher volumes; Cameron Hughes asked (15:12 BST) whether the new rules are based on the payout sims already run for Yaniv — unanswered in-window. [call-notes](https://mahifx.slack.com/archives/C079M09MGGP/p1784034120307669) [multiplier-confirmed](https://mahifx.slack.com/archives/C07AQJS4E80/p1784034004524299) [cameron-question](https://mahifx.slack.com/archives/C079M09MGGP/p1784038329316089)
 
