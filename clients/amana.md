@@ -16,7 +16,7 @@ key_people_overrides:
   - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
   - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
-last_catchup: 2026-07-15T07:09:58Z
+last_catchup: 2026-07-16T07:07:21Z
 ---
 
 ## Status
@@ -27,8 +27,11 @@ last_catchup: 2026-07-15T07:09:58Z
 
 ## Recent issues
 
-> [open] 2026-07-14 — Futures W book PnL incorrect for prior day; dev team investigating
-> Hadeel flagged at 11:15 BST that PnL on the futures book for the previous day looked incorrect, sharing an Account Summary screenshot from Compass. Rory said he'd look into it; when chased at 13:07 BST he confirmed Mahi's dev team is on it. No resolution posted in-window. [hadeel-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784024111354679) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784024127896519) [rory-devteam](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784030843431149)
+> [resolved] 2026-07-15 — Cancel reason clarification: "Off Market" vs "Last Look" semantics
+> Nikos asked whether "Off Market" cancels reflect off-market-at-receipt or off-market-at-end-of-last-look-window. Rory initially conflated the two, then corrected: Off Market cancels an order immediately off-market on receipt, while Last Look cancels if still off-market at the end of the last-look window. Rory shared a Guru card reference (Yield Profiles - Group By Cancel Reason) for future guidance. [nikos-q1](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124432826069) [nikos-q2](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124474872979) [rory-initial](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124534900399) [nikos-followup](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124555090569) [rory-correction](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124867992799)
+
+> [resolved] 2026-07-14/15 — Futures W book PnL incorrect for prior day; root cause found (SPXFUT-U pricing gap default-to-lifetime-PnL)
+> Hadeel flagged at 11:15 BST 07-14 that PnL on the futures book for the previous day looked incorrect, sharing an Account Summary screenshot from Compass. Rory said he'd look into it; when chased at 13:07 BST he confirmed Mahi's dev team is on it. Nikos chased again 07-15 at 09:49 BST; Rory confirmed at 09:59 BST the cause was coincidental with the SPXFUT-U pricing gap from Monday — with no price to mark those futures positions against during the trading day, the value defaulted to the book's lifetime PnL. Nikos confirmed satisfied ("no fundamental issue there") at 10:01 BST; Rory still to check numbers generated subsequently. [hadeel-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784024111354679) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784024127896519) [rory-devteam](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784030843431149) [nikos-chase](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784105377681479) [rory-rootcause](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784105954816869) [nikos-satisfied](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784106061657219)
 
 > [resolved] 2026-07-14 — USDJPY LMAX rejections: hedger sending below-minimum fractional size; restarted and fixed
 > Amana flagged (15:33 BST) a wave of "Below Minimum volume" rejections from Mahi LMAX on USDJPY (client sending 993.511 vs 1000 minimum). Rory checked, turned the hedger off (15:34 BST), confirmed fractional sizing shouldn't be sent given other FX mins are also 1000, then restarted the hedger (15:35 BST). Amana confirmed the USDJPY rejections stopped at 15:40 BST. [amana-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784039592002209) [rory-off](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784039652886629) [rory-restart](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784039749266919) [amana-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784040036278919)
