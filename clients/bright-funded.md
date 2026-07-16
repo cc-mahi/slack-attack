@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-07-15T07:09:35Z
+last_catchup: 2026-07-16T14:59:53Z
 status: active
 retired_at: null
 retired_reason: null
@@ -73,6 +73,12 @@ retired_reason: null
 
 > [resolved] 2026-07-07 — June payout reduction analysis (LR + FI) delivered
 > Client sent account numbers for April/May/June payouts (`Payouts_April_May_June_2026.xlsx`, CC Syb Dijkstra, Jelle Dijkstra, Mio Knights); Cameron Hughes replied with the June payout-cohort reduction estimate: ≈$25.4k total — LR $18.5k (exact, per counterparty) + FI ≈$6.9k (estimated via FI/LR ratio on funded flow), both legitimate Mahi levers, excluding any further reduction from pass-rate changes. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1783419861147459) [response](https://mahifx.slack.com/archives/C08473TFD7Z/p1783437715656899)
+
+> [open] 2026-07-15 — Compass upgrade maintenance window requested (Sat 2026-07-18, 10:00–11:00 UK)
+> Liam Cordelle asked BrightFunded in the client channel for a maintenance window to upgrade Compass to the latest version — Saturday 18 July, 10–11am UK time; expected downtime ~15 minutes, wider window kept for contingency. Awaiting client confirmation. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1784120677952649)
+
+> [open] 2026-07-15 — Aeron proxy log disk near-full at bright-funded, rolling bounce needed
+> Liam Cordelle flagged the Mahi-central Aeron proxy processes may need a rolling bounce, plus non-critical logs cleared and processes bounced at bright-funded after the log disk filled up; Maten looked into it the same evening. No resolution confirmed yet — same failure class as the 2026-04-13 marketDataProxyTx log-disk incident above. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1784141395979309)
 
 ## Notable topics
 
