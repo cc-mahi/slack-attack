@@ -16,10 +16,31 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-15T07:22:17Z
+last_catchup: 2026-07-16T15:05:56Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-16 — EURUSD abnormal-tick client complaint (14/07 21:08:56 GMT+3); Kate confirmed feed clean
+> Georgia flagged a client complaint about an abnormal EURUSD tick at 21:08:56 on 2026-07-14 and asked for tick data (11:16 BST). Kate checked the EURUSD distribution feed and confirmed pricing was clean and orderly through that window — no spike or bad tick at that time, so the anomaly didn't originate from Mahi's feed (11:24 BST). Georgia thanked her for the prompt turnaround. [Georgia request](https://mahifx.slack.com/archives/C022S6NL82D/p1784196974796529) [Kate resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1784197451097989)
+
+> [resolved] 2026-07-16 — Routine Toxic XAUUSD Harsher add: MT5_87018814_Centroid_3606440
+> Andreas Kazelas requested the CP added to Toxic XAUUSD - Harsher (08:18 BST); Rory King confirmed actioned (09:19 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1784186288910139) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784189954192409)
+
+> [resolved] 2026-07-15 — Routine No LL add: MT5_plain_b_87980404
+> Trading Ops requested MT5_plain_b_87980404 added to No LL execution profile (17:04 BST); Cameron Hughes confirmed actioned (17:37 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1784131444784989) [Cameron confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784133448801319)
+
+> [resolved] 2026-07-15 — Execution-profile last-look delay reduced to 50ms for Centroid group (Clio); mirrors CATCHALL defaults
+> Clio confirmed the execution profile screenshot with Kate (15:28 BST) and asked to reduce the last-look delay to 50ms (15:31 BST); Kate actioned immediately (15:32 BST), noting the prior 100ms value matched the default CATCHALL rule. Clio thanked her; Kate noted the parameters are dynamic and Infinox can request further changes anytime. [Clio screenshot](https://mahifx.slack.com/archives/C022S6NL82D/p1784125712345629) [Kate done](https://mahifx.slack.com/archives/C022S6NL82D/p1784125922318029) [Clio thanks](https://mahifx.slack.com/archives/C022S6NL82D/p1784126049853049)
+
+> [resolved] 2026-07-15 — MT5_87018814_Centroid_* accounts excluded from Automated Classification
+> Georgia asked to exclude accounts tagged MT5_87018814_Centroid_* from Automated Classification and to remove any already classified, flagged priority by Trading Ops shortly after (15:30–15:43 BST); Kate implemented via new LR/execution rules ensuring these accounts get default execution regardless of classification (15:51 BST). Andreas clarified the request was scoped to MT5_87018814_Centroid_* specifically, not bare Centroid_* (16:13 BST); Kate reverted the broader scope accordingly (16:15 BST). [Georgia request](https://mahifx.slack.com/archives/C022S6NL82D/p1784122243791649) [priority flag](https://mahifx.slack.com/archives/C022S6NL82D/p1784122986160179) [Kate implementation](https://mahifx.slack.com/archives/C022S6NL82D/p1784123516584779) [Andreas scope clarification](https://mahifx.slack.com/archives/C022S6NL82D/p1784124828349679) [Kate reverted to Centroid-only](https://mahifx.slack.com/archives/C022S6NL82D/p1784124901278379)
+
+> [open] 2026-07-15 — Batch of accounts (spreadsheet) requested removed from any special profile; no confirmation seen
+> Andreas Kazelas attached a spreadsheet (Remove.xlsx) listing accounts to be removed from any special profile (13:42 BST); Kate acknowledged and said the team would check and remove them (13:43 BST). No confirmation of completion seen in window — may be superseded by, or distinct from, the same-afternoon Centroid classification-exclusion request above. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1784119331555229) [Kate ack](https://mahifx.slack.com/archives/C022S6NL82D/p1784119391842599)
+
+> [resolved] 2026-07-15 — XAUUSD raw-tick request (02/06/2026) + proof price never reached 4525 after 16:08 GMT+3
+> Ops asked for raw XAUUSD ticks for 2026-06-02 (08:23 BST); Kate asked for a time range (08:33 BST); Ops specified 16:08 GMT+3 until EOD (08:33 BST), needed for a client-facing proof that price never reached 4525 after that time (08:44 BST). Kate delivered the ticks CSV and a proof screenshot (09:00 BST). [ticks request](https://mahifx.slack.com/archives/C022S6NL82D/p1784100204041149) [proof requirement](https://mahifx.slack.com/archives/C022S6NL82D/p1784101475972259) [Kate delivery](https://mahifx.slack.com/archives/C022S6NL82D/p1784102404560309)
 
 > [resolved] 2026-07-14 — Routine Toxic XAUUSD Harsher batch (AM): Centroid_3607233/3607234, Centroid_3607189, Centroid_3605913
 > Andreas Kazelas requested Centroid_3607233 + Centroid_3607234 (duplicated in message) → Toxic XAUUSD Harsher (08:37 BST); Kate Stagg noted only two unique tags and confirmed both added (08:42 BST). Andreas separately requested Centroid_3607189 ("sorry my mistake", 09:04 BST); Rory King confirmed actioned (09:10 BST). Andreas also requested Centroid_3605913 (10:04 BST); Rory King confirmed actioned (10:24 BST). [3607233/3607234 request](https://mahifx.slack.com/archives/C022S6NL82D/p1784014628882449) [Kate confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784014922579819) [3607189 request](https://mahifx.slack.com/archives/C022S6NL82D/p1784016283911999) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784016651325019) [3605913 request](https://mahifx.slack.com/archives/C022S6NL82D/p1784019886160159) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784021067648459)
@@ -293,6 +314,7 @@ last_catchup: 2026-07-15T07:22:17Z
 
 ## Notable topics
 
+- 2026-07-15 — **Infinox excluded MT5_87018814_Centroid_* accounts from Automated Classification.** Georgia requested exclusion plus declassification of any already-flagged accounts, flagged priority; Kate implemented via LR/execution rules ensuring default execution regardless of classification, scope narrowed to the MT5_87018814_Centroid_* prefix after Andreas clarified. [Georgia request](https://mahifx.slack.com/archives/C022S6NL82D/p1784122243791649)
 - 2026-07-06 — **CH/David discount-dispute call rescheduled.** Monday's call didn't happen ("CH's meeting ran over"); pushed to Tuesday morning (2026-07-07). Bonnie chased David for status internally. Still open. [Kate](https://mahifx.slack.com/archives/C01QGUXPKEY/p1783342964295669)
 - 2026-07-06 — **Andrew Morgan opened a review of FI signal party assignment by instrument.** Queried whether `pricing.adjustmentSignalProcessFlowImbalanceOptimisationParty` config is still correct; Kate to review and adjust as needed. [Andrew](https://mahifx.slack.com/archives/C01QGUXPKEY/p1783353826108009)
 - 2026-07-06 — **First Heavy→Reduced LR downgrade pair (MT5_87957738, from 2026-06-30) fully removed from LR.** Continuation of the earlier demotion — now off LR entirely. [removal](https://mahifx.slack.com/archives/C022S6NL82D/p1783349865119379)
