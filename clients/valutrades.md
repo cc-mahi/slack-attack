@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-15T07:25:11Z
+last_catchup: 2026-07-16T15:18:39Z
 ---
 
 ## Recent issues
@@ -147,6 +147,14 @@ last_catchup: 2026-07-15T07:25:11Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-16 — cpty 89468310 A/B book classification: client asked team to advise; Shyam Hari confirmed A book (with charts). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784179123556409) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784179565364689)
+
+- 2026-07-16 — USOil contract rolled Aug→Sept for AMB: client posted FYI in #mahi-valutrades-operations. [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1784179185554299)
+
+- 2026-07-16 — IT team scheduled to perform UAT testing today: follow-up signal in #mahi-valutrades-operations to the 2026-07-14 unanswered algo-settings UAT testing readiness query (Liam Cordelle / Graeme Watkins). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1784174125018399)
+
+- 2026-07-15 — Andrew Morgan / Graeme Watkins catch-up: Andrew posted in #internal-valutrades that he had "a good catch up with Graeme again yesterday", where Graeme showed him Valutrades' in-house developed yield profile and the market impact they're having working their risk — follow-on from the 2026-07-03 hedging-large-gold-orders meeting request. [permalink](https://mahifx.slack.com/archives/CP7A1F8BT/p1784103784625269)
 
 - 2026-07-15 — Batch A/B book classification (overnight team): cpty 69943504 (Nathan: new account, first trade 2026-07-14, only 48 trades since, house down $5,811 — suggested A-booking for now and re-evaluating with more data), 96096589 (Shyam: A book — vast majority of trading on NDF), 69085742 (Shyam: A book — XAUUSD). [69943504-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784081531475219) [69943504-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784081930669659) [96096589-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784083713597389) [96096589-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784084551327809) [69085742-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784090651637479) [69085742-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784091044355989)
 
