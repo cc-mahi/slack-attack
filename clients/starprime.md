@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-15T07:25:13Z
+last_catchup: 2026-07-16T15:10:13Z
 ---
 
 ## Recent issues
