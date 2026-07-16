@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-07-15T07:12:51Z
+last_catchup: 2026-07-16T07:15:06Z
 ---
 
 ## Status
@@ -18,6 +18,9 @@ last_catchup: 2026-07-15T07:12:51Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [open] 2026-07-15 — SL execution delay query: account 6029722, ~1.876s gap during US news
+> Pau (Fintokei) flagged in #mahi-fintokei that a stop loss on account 6029722 (position 33169975) triggered at 15:30:02.056 on 2026-07-14 during US news but wasn't placed for execution until 15:30:03.931 — a ~1.876s gap after the MT5 server processed the request in 0.004s. Asked whether gateway delay from the news event explains it. Rory King (Mahi) acknowledged same day; investigation pending. [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1784109810336399) [ack](https://mahifx.slack.com/archives/C08QWKFARDL/p1784109838387739)
 
 > [open] 2026-07-13 — LSB pricing model live but z-suffix trades executing on wrong (wide) price
 > Following Fintokei's go-live request to deploy the new tighter pricing model to all "z"-suffix symbols (Kate Stagg thread, 2026-07-10), Shyam Hari (Mahi) found on 2026-07-13 that z-suffix trades are being quoted on the new tight `CLIENT_PRICE_LSB_LDN` stream but executed/filled against the older wide `CLIENT_PRICE_LDN` model — clients see a ~5 spread but get filled ~3.5 wider, confirmed tick-exact on every z-suffix trade that day. The suffix-routing fix apparently covers the FIX/price path but not order execution on the internal MT5-bridge path. Added to Zendesk #23168. [go-live request](https://mahifx.slack.com/archives/C08R694QVNX/p1783670615074879) [bug found](https://mahifx.slack.com/archives/C08R694QVNX/p1783914394599609)
