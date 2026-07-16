@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-07-15T07:09:58Z
+last_catchup: 2026-07-16T07:11:35Z
 ---
 
 ## Status
@@ -95,6 +95,7 @@ last_catchup: 2026-07-15T07:09:58Z
 
 ## Notable topics
 
+- 2026-07-15 — Base Markets CEO featured in FinanceMagnates thought-leadership piece: Bonnie Cassidy shared a FinanceMagnates piece with CEO Alex Kolpokchi ("we're building a broker that puts client value first"); no internal discussion in thread. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784128677665039)
 - 2026-07-09 — Isaac Dann (Mahi NZ) notified channel that Friday 10 July is a NZ Bank Holiday; emergency support cover only, Slack not monitored normally, support email/ticketing and LN/NZ phone lines available for urgent issues. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1783571793611179)
 - 2026-07-06 — Tegis flow healthy, PnL ticking up; client asked for rev-share book hedger + Tegis eyeing MT5 move: Kate Stagg relayed a client catch-up covering three points — Tegis flow monetising well, Tegis potentially moving to MT5 (hoping Base absorbs the architecture change), and a request for a hedger on the rev share book mirroring the Tegis setup. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1783348750050239)
 - 2026-06-29 — Tegis position migration completed ahead of schedule; C Book live with LMAX hedging: Kate B provided Compass Positions.xlsx; Isaac Dann added `real-SC` group to C Book execution rules, ran final test trade, uploaded positions, turned hedger on. Isaac announced go-live in internal channel at 01:44 BST 2026-06-30. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
