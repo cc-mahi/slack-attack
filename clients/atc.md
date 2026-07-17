@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-16T07:11:05Z
+last_catchup: 2026-07-17T07:08:19Z
 ---
 
 ## Recent issues
@@ -98,6 +98,10 @@ last_catchup: 2026-07-16T07:11:05Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-07-16 — CP 27072180 (ATC FX Compass, XAUUSD) flagged by the automated FI check for a $1,742 12h loss; already sitting on the `CATCHALL//Arbitrageurs` execution profile with all 12 trades on-side (0/12 neg-FI) and a clean 30d yield. Will Carter confirmed it had already been flagged and moved to arbitrageur execution — no further action. [daily check](https://mahifx.slack.com/archives/C046RNF64VD/p1784199194937119) · [Will confirmation](https://mahifx.slack.com/archives/C046RNF64VD/p1784199463991029)
+
+- 2026-07-16 — Cameron Hughes bounced `hybridHedgerPraxisCFD1` to pick up a reduction of `maxVarRelativeRisk` in the Backstop rule. [bounce](https://mahifx.slack.com/archives/C046RNF64VD/p1784213684723569)
 
 - 2026-07-14 — Liam Cordelle asked in #internal-atc whether there's a Slack thread or email chain relating to Zendesk 23180, unsure where issues were originally reported or where to route follow-up questions; no reply in window. [Liam's question](https://mahifx.slack.com/archives/C046RNF64VD/p1784033236657429)
 
