@@ -13,10 +13,17 @@ key_people_overrides:
   - {name: "David", role: "client ops — execution-rule / pricing-model questions / FIX connectivity", confidence: low}
   - {name: "Kieran", role: "client ops — pricing config / metals crosses / internalisation setup", confidence: low}
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
-last_catchup: 2026-07-16T15:02:23Z
+  - {name: "Will", role: "client ops (GoMarkets) — asked about Radex Catch-All execution-profile brokered/internalised trigger logic", confidence: low}
+last_catchup: 2026-07-17T07:11:23Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-17 — Will asked how Radex/Catch-All decides brokered vs internalised
+> Will (GoMarkets, ~00:54 UTC) asked whether the Radex Catch-All execution profile's brokered-vs-internalised decision is VaR/risk-threshold driven, noting between 2026-06-28 and today only 3 trades were brokered vs 49.4k internalised (Echo link shared). Nathan Burch (Mahi, ~01:58 UTC) explained the profile runs FirstLook: internalisation is attempted first and only falls back to brokering if the internal leg is rejected; the internal leg succeeds only if, after the 30–50ms last-look hold, price has moved no more than 0.1bps × current price against the house and the fill sits no worse than 0.1bps beyond current TOB mid. Will confirmed. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784249640688429) [Nathan explanation](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784253502687879) [confirmation](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784254218684649)
+
+> [resolved] 2026-07-16 — Erik flagged an accidental USDJPY hedge via Manual_Hedges, no Mahi-side action needed
+> Erik (GoMarkets, ~17:15 UTC) reported a 5m USDJPY leg was accidentally hedged via Manual_Hedges (iSAM 162.4877@5m) while the hedger was separately hedging the same risk (buying 162.48087@4.983m); a teammate then hedged the opposite side again via B_Manual_Hedges. Erik said he didn't think anything needed doing on the Mahi side, only netting on Tapaas, and raised it for clarity. Kate Stagg (Mahi, ~17:29 UTC) confirmed it looked fine after review. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784222153231509) [Kate ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784222973842339)
 
 > [open] 2026-07-13 — Kieran chased Erik's arber flag; large XAU skews drew a fresh client pricing complaint
 > Kieran (GoMarkets, ~05:31 UTC) asked Mahi for the latest on Erik's 2026-07-10 arber flag (below). Shyam Hari (Mahi, ~05:32 UTC) acknowledged and said he was checking. Kieran then separately flagged that skews were large on XAUUSD that day and he had a client complaining about the price, sharing a top-of-book chart (Echo link). Shyam (~06:35 UTC) confirmed Mahi would review; Kieran thanked him. Update 2026-07-13 ~08:39 UTC: Kate Stagg (Mahi) posted to the client channel that config had been updated to reduce skew while Mahi investigates and tunes further. No final resolution confirmed in-window. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920676462209) [Shyam checking](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920756624449) [skew complaint](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920800483359) [Shyam ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783920908311019) [skew reduced](https://mahifx.slack.com/archives/C09J1DP2QQH/p1783931991400179)
