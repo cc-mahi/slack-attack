@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-16T15:18:39Z
+last_catchup: 2026-07-17T07:21:20Z
 ---
 
 ## Recent issues
@@ -147,6 +147,10 @@ last_catchup: 2026-07-16T15:18:39Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-17 — cpty 95507026 A/B book classification: client asked team to advise; Shyam Hari confirmed A book (with charts). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784271069554339) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784271522214759)
+
+- 2026-07-17 — cpty 88993765 A/B book classification re-check: client asked team to advise; Shyam Hari confirmed A book (consistent with the 2026-07-14 answer). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784257113553619) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784258576541899)
 
 - 2026-07-16 — cpty 89468310 A/B book classification: client asked team to advise; Shyam Hari confirmed A book (with charts). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784179123556409) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784179565364689)
 
