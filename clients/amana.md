@@ -13,10 +13,10 @@ key_people_overrides:
   - {name: "Mohamad El Masri", role: "ops — manual hedging / rec break liaison", confidence: low}
   - {name: "Hadeel Salah", role: "dealer / ops — spread config uploads, index instrument setup", confidence: low}
   - {name: "Clifford Jay Cana", role: "PH NOC — monitoring / ops", confidence: low}
-  - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions", confidence: low}
+  - {name: "Andreas Kleanthous", role: "Amana ops — futures expiry / positions"}
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
   - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
-last_catchup: 2026-07-16T07:07:21Z
+last_catchup: 2026-07-17T07:05:42Z
 ---
 
 ## Status
@@ -26,6 +26,9 @@ last_catchup: 2026-07-16T07:07:21Z
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [resolved] 2026-07-16 — CrudeOilQ6 futures expiration: no open positions, clean close
+> Andreas notified (21:00 CEST) that Amana had closed all open CrudeOilQ6 positions on their side and asked Mahi to zero out any remaining. Shyam confirmed at 23:31 CEST no open CrudeOilQ6 positions on Compass. Clean expiry. [andreas-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784228453254419) [shyam-checking](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784230094392229) [shyam-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784237473712359)
 
 > [resolved] 2026-07-15 — Cancel reason clarification: "Off Market" vs "Last Look" semantics
 > Nikos asked whether "Off Market" cancels reflect off-market-at-receipt or off-market-at-end-of-last-look-window. Rory initially conflated the two, then corrected: Off Market cancels an order immediately off-market on receipt, while Last Look cancels if still off-market at the end of the last-look window. Rory shared a Guru card reference (Yield Profiles - Group By Cancel Reason) for future guidance. [nikos-q1](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124432826069) [nikos-q2](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124474872979) [rory-initial](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124534900399) [nikos-followup](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124555090569) [rory-correction](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784124867992799)
@@ -64,6 +67,7 @@ last_catchup: 2026-07-16T07:07:21Z
 > Nikos asked Isaac/Rory to check whether test trades are needed before enabling B-book silver futures next week, and separately asked to move all A-book indices over to B-book once the setup is ready. Rory acknowledged ("Well received Nikos"); no substantive reply yet in-window. [nikos-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611611558779) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783611648414369)
 > 2026-07-10 update: Amana asked Mahi to confirm whether B-book silver futures needs test trading (10:43 BST). Rory confirmed Mahi will work on the setup that day and let them know if testing is required (10:44 BST); Karen acknowledged (10:45 BST). Still open — testing outcome not yet confirmed. [amana-confirm-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783676609813869) [rory-setup](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783676668671249)
 > 2026-07-13 update: Hedging approach confirmed — silver futures hedged in spot; sits in the existing gold-spot "off book" for testing only (invisible to the hedger), moves to the proper book (eventually merged with XAG) once verified live. Nikos also asked Hadeel to update the silver futures position before fully going live. [rory-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783935495393539) [nikos-confirm](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783936428305409) [nikos-hadeel-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783936454600029) [rory-ok](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783936620478759)
+> 2026-07-16 update: Nikos chased status on both silver futures and the remaining CFD indices. Rory confirmed ready to test and go live with silver futures the next day, confirming the plan is still to start with a handful of clients before full flow, sent to the same "off book" as spot gold (unhedged). Nikos confirmed — pricing goes live in the off book first, with the rest of the silver clients moved next week (Mon/Tue, possibly Tue if he's off Monday). On CFD indices, Rory flagged needing to revisit the prior alignment discussion; Nikos separately said lead tester Princess Rosete can share her tracking sheet and that he wants all indices moved to Mahi this month. Still open — silver futures go-live and indices timeline both pending. [nikos-chase](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784210818042059) [rory-status](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784211149915999) [nikos-confirm-plan](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784211210841019) [nikos-indices](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784211316868749)
 
 > [resolved] 2026-07-08 — WS6Q (White Sugar August future) settlement: Mahi confirmed no open positions
 > Amana notified at 16:03 BST that WS6Q was settling and asked positions be zeroed; Rory confirmed no open positions in the contract. Clean expiry. [settlement-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523012035619) [rory-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783523177734449)
