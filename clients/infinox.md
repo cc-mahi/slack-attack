@@ -16,10 +16,13 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-16T15:05:56Z
+last_catchup: 2026-07-17T07:13:56Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-16 — Routine LR downgrade: MT5_87951984_Cov_87951984 + MT5_87951984_n/a Heavy→Medium LR
+> Trading Ops requested both tags moved to Medium LR (19:48 BST); Shyam Hari noted both were currently in Heavy LR and asked Ops to confirm the downgrade (20:23 BST), Ops confirmed (20:23 BST), Shyam actioned both (20:25 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1784227706776299) [Shyam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784229913112049)
 
 > [resolved] 2026-07-16 — EURUSD abnormal-tick client complaint (14/07 21:08:56 GMT+3); Kate confirmed feed clean
 > Georgia flagged a client complaint about an abnormal EURUSD tick at 21:08:56 on 2026-07-14 and asked for tick data (11:16 BST). Kate checked the EURUSD distribution feed and confirmed pricing was clean and orderly through that window — no spike or bad tick at that time, so the anomaly didn't originate from Mahi's feed (11:24 BST). Georgia thanked her for the prompt turnaround. [Georgia request](https://mahifx.slack.com/archives/C022S6NL82D/p1784196974796529) [Kate resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1784197451097989)
