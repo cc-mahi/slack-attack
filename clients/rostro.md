@@ -20,10 +20,13 @@ key_people_overrides:
   - {name: "Manu", role: "Rostro-side — SI PnL allocation; sending questions on Pulse parameters", confidence: low}
   - {name: "Andreas", role: "Rostro ops — recurring FIX/slippage/subscription queries", confidence: low}
   - {name: "Chrysovalantis Karageorgiou", role: "Rostro ops — FIX/telnet connectivity, X-connect", confidence: low}
-last_catchup: 2026-07-16T15:10:41Z
+last_catchup: 2026-07-17T07:16:02Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-16 — FOK broker orders to IC rejected: fallout from top-up-rule fix (order 66142206-50, XAUUSD)
+> Rostro asked (21:50 CEST) why order 66142206-50 (XAUUSD, FOK) was cancelled (FIX EXPIRED). Daria traced it to the order being routed for IC brokering, but IC isn't configured to accept FOK orders — flagged this is worth checking across all LPs/markets generally. Rostro asked (22:49) whether blacklisting the client from the Broker classification would let the order fill instead; Daria explained that would fall through to internalisation (counterparty only has Broker/Don't-B-Book classifications), but the Broker classification is warranted since the counterparty is offside in aggregate at 500ms — noted they'd previously been successfully brokered to IC and kept digging. Internal follow-up (23:19 CEST, #internal-rostro): root cause is that top-up used to broker FOKs as IOCs, letting Compass top up a partial LP fill to satisfy the client's FOK — turning off top-up per the CLIENTS_NET fix above removed that path, so FOKs now go straight to IC, which cancels them since IC doesn't accept FOK orders. Daria asked (23:23 CEST) whether IC can be enabled for FOK so brokering can continue; not yet answered. [Rostro: query](https://mahifx.slack.com/archives/C08AQKRU953/p1784231449762949) [Daria: root cause](https://mahifx.slack.com/archives/C08AQKRU953/p1784231843143629) [Rostro: alt fix?](https://mahifx.slack.com/archives/C08AQKRU953/p1784234980418339) [Daria: reply + screenshot](https://mahifx.slack.com/archives/C08AQKRU953/p1784235462560629) [Daria internal: top-up link](https://mahifx.slack.com/archives/C08ALS66EDC/p1784236796715989) [Daria: IC FOK ask](https://mahifx.slack.com/archives/C08AQKRU953/p1784236993693339)
 
 > [resolved] 2026-07-16 — Risk sitting in CLIENTS_NET (internal): top-up execution rule left flow unsplit
 > Kate flagged internally (16:16 CEST) that risk was sitting in `CLIENTS_NET` when all internalised flow should risk-split to SI. Traced to a top-up trade; Kate manually traded out of the resulting position and turned off top-up on the rule responsible. [Kate: flag](https://mahifx.slack.com/archives/C08ALS66EDC/p1784211406453229) [Kate: resolved](https://mahifx.slack.com/archives/C08ALS66EDC/p1784213241333109)
