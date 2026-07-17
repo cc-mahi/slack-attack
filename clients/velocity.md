@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Richard Holman", role: "VT — sets pricing/hedging policy expectations", confidence: low}
   - {name: "Russell", role: "VT client-side — raised tag 889 slippage complaints 2026-06-25", confidence: low}
   - {name: "Liv Mottershead", role: "VT — recent hire into Richard's team (ex-MFP), 2026-07-16", confidence: low}
-last_catchup: 2026-07-16T15:18:31Z
+last_catchup: 2026-07-17T07:03:26Z
 ---
 
 ## Recent issues
