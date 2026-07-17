@@ -20,7 +20,7 @@ key_people_overrides:
   - {name: "Andreas Xenofontos", role: "IC Markets — joined mahi-ic-markets 2026-07-02; role unknown", confidence: low}
   - {name: "Nouri Dalati", role: "IC Markets — technical/infra contact; proposed FIX-routing options for China crypto flow, leads CNH connection setup"}
   - {name: "Angus", role: "IC Markets — senior decision-maker above Pavlos on commercial/pricing sign-off; surname not yet seen", confidence: low}
-last_catchup: 2026-07-16T15:05:55Z
+last_catchup: 2026-07-17T07:03:26Z
 ---
 
 ## Recent issues
