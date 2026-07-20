@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-17T07:03:26Z
+last_catchup: 2026-07-20T07:08:08Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-07-17T07:03:26Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-07-17 — pricerInsti2 down on Toa-argamon LDN: USDCAD PSM-W signal missing definition
+> Leonardo (15:40 CEST) flagged pricerInsti2 repeatedly failing to construct on `toa-argamon-ln-trading-1` — `IllegalArgumentException: For instrument: USDCAD no definition exists for: PSM-W at index 0`. James identified a newly-introduced default on `pricing.adjustmentSignalParametersForWidening`; overrode with an empty array to fix. Process back up within 10 minutes. https://mahifx.slack.com/archives/C035H1VNCAD/p1784295651254059
 
 > [open] 2026-07-15 — Sec-1 alerting noise needs infra fix; separate false PnL-drop alert flagged
 > Shyam flagged frequent false PnL drop alerts (23:09 BST 2026-07-14), then asked (02:18 BST 2026-07-15) whether alerting tied to the intentionally-stopped `toa-apnortheast1-prod-sec-1` (PD Q1P54YYVHR2XRC, see 2026-07-04 stop entry) could be fixed or removed. Lee suggested JMX suppression as a stopgap — the proper fix needs an infra release during the IC maintenance window. https://mahifx.slack.com/archives/C035H1VNCAD/p1784078287263179 https://mahifx.slack.com/archives/C035H1VNCAD/p1784066981569519
@@ -106,7 +109,7 @@ last_catchup: 2026-07-17T07:03:26Z
 > Maten bounced marketDataCryptoDotCom1 on Toa-argamon APN1 after XETUSD crossed book; noted the crossed-book alert had been firing every hour and asked if it could be disabled via `marketdata.crossedBookAlertThresholdBps` given Crypto.com isn't in use. James confirmed it was turned off due to issues and suggested killing the gateway. Maten agreed to comment out marketDataCryptoDotCom1/ordersCryptoDotCom1 and do an infra deploy. https://mahifx.slack.com/archives/C035H1VNCAD/p1780488380763669
 
 > [open] 2026-06-02 — propTrader1HrpChi1/propTrader1HrpLdn1 being added to Toa-argamon CHI/LDN: crash-looping on order breaches
-> James posted "Adding propTraderHrp1 to toa-argamon CHI" (2026-06-02), then on 2026-06-05 switched naming to `propTrader1HrpChi1`/`propTrader1HrpLdn1`. On 2026-06-07 Nathan flagged processes down on argamon-chi and argamon-ldn due to MARKETMAKING_HRP_INSTI-Channel — Maten confirmed propTrader1HrpChi1 not yet configured, propTrader1HrpLdn1 also a factor. James said he'd set up propTrader in a few hours. On 2026-06-10 Cameron paged propTrader1HrpChi1 down on toa-argamon-ch-trading-1 (maximum order breaches, PD Q1RIF57OL9YM72) — brought it up; killed itself again and was left down. James fixed ordersCOMEX1 party filter and noted it's prop trading (not hedging) so fine to leave down for now. James also noted he will review increasing the breach limits (PD Q0D0YW82XRX02J, 13:21 BST). https://mahifx.slack.com/archives/C035H1VNCAD/p1781078300294379
+> James posted "Adding propTraderHrp1 to toa-argamon CHI" (2026-06-02), then on 2026-06-05 switched naming to `propTrader1HrpChi1`/`propTrader1HrpLdn1`. On 2026-06-07 Nathan flagged processes down on argamon-chi and argamon-ldn due to MARKETMAKING_HRP_INSTI-Channel — Maten confirmed propTrader1HrpChi1 not yet configured, propTrader1HrpLdn1 also a factor. James said he'd set up propTrader in a few hours. On 2026-06-10 Cameron paged propTrader1HrpChi1 down on toa-argamon-ch-trading-1 (maximum order breaches, PD Q1RIF57OL9YM72) — brought it up; killed itself again and was left down. James fixed ordersCOMEX1 party filter and noted it's prop trading (not hedging) so fine to leave down for now. James also noted he will review increasing the breach limits (PD Q0D0YW82XRX02J, 13:21 BST). https://mahifx.slack.com/archives/C035H1VNCAD/p1781078300294379 Still unconfigured as of 2026-07-19 — Isaac flagged propTrader1HrpLdn1 down again at Toa Args LDN; James confirmed "expected, hasn't been configured yet". https://mahifx.slack.com/archives/C035H1VNCAD/p1784454116161199
 
 > [watching] 2026-05-29 — TradePositionLimitMonitor being set up on Toa-argamon CHI: spurious alerts to ops
 > James apologised to Leo (Borsi) for alerts on Arg CHI caused by TradePositionLimitMonitor being brought up. A clientDistributionGateway1 restart was also requested on 2026-05-27 (via #eod-restarts) to add a new channel to toa-argamon-ch-trading-1. https://mahifx.slack.com/archives/C035H1VNCAD/p1780070176002959
