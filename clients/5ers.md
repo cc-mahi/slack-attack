@@ -11,10 +11,16 @@ key_people_overrides:
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
-last_catchup: 2026-07-17T07:03:26Z
+last_catchup: 2026-07-20T07:04:15Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-20 — AUDUSD ~200-point spread widening overnight (04:30–05:08 GMT+3) — tied to the same release
+> Client flagged 200-point AUDUSD spreads overnight, screenshot attached. Isaac Dann (08:49 CEST) confirmed the cause was identified and resolved, attributing it to "the release" (the same Compass upgrade window as the 2026-07-18 crypto outage below) and said it should not recur. [client-report](https://mahifx.slack.com/archives/C07AQJS4E80/p1784529360943039) [isaac-resolved](https://mahifx.slack.com/archives/C07AQJS4E80/p1784530152823509)
+
+> [resolved] 2026-07-18 — Crypto trading outage during scheduled Compass release — B2Broker normalisation reset, no price formed
+> Liam's release fell inside B2Broker's routine downtime window (08:00–10:00 UTC / 09:00–11:00 UK) for 5ers' crypto primary LP. Pricing normally continues through B2Broker outages by holding against the last-seen price, but the release reset that normalisation state, leaving no price formed; client (11:46 CEST) reported traders unable to open crypto trades. Liam restarted and confirmed pricing + a test trade flowing by ~12:00 CEST; client confirmed at 12:02 that trades were coming through again and asked Mahi to review settings to prevent recurrence — Isaac/Liam accepted. Liam raised the fix question internally: Andrew Morgan suggested `pricing.mid.benchmarkNormalisedPersistMaxHours` (defaults off) set to ~4h, not yet tested in a real env; Daria Horton has it enabled on Pepperstone CFDs beta to compare/test; Liam noted the same issue may have come up at Pepperstone too. [client-alert](https://mahifx.slack.com/archives/C07AQJS4E80/p1784367992335349) [liam-diagnosis](https://mahifx.slack.com/archives/C07AQJS4E80/p1784368692443619) [liam-confirmed](https://mahifx.slack.com/archives/C07AQJS4E80/p1784368834198829) [client-thanks](https://mahifx.slack.com/archives/C07AQJS4E80/p1784368968389989) [internal-thread](https://mahifx.slack.com/archives/C079M09MGGP/p1784368762723699) [andrew-suggestion](https://mahifx.slack.com/archives/C079M09MGGP/p1784396863107769) [daria-beta-test](https://mahifx.slack.com/archives/C079M09MGGP/p1784492234974079)
 
 > [open] 2026-07-07 — Cross-connect (XC) setup delayed — YourBourse (Maksim) unresponsive to Beeks since July 3rd
 > Kate Stagg (13:08 BST) flagged frustration at how long the XC is taking to get set up, attributing the main hold-up to YourBourse — Maksim hasn't replied to Beeks since 2026-07-03. Arun to send Beeks an email and suggest a call between Beeks and YB to get it over the line. No further detail in-window on what the XC is for or its urgency. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1783426138434659)
