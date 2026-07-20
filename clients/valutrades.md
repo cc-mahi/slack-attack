@@ -9,10 +9,13 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-17T07:21:20Z
+last_catchup: 2026-07-20T07:08:28Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-19 — Unmapped "GSFX" market source streaming on FIX MD feed `MahiFX13_Live_Q→ValuCY_Live_Q` — client asked to confirm if it should be added as a mapped market
+> Isaac Dann (Mahi) reported `GSFX_OZNY4_FUND_UBSPB_AMB` publishing on the `MahiFX13_Live_Q→ValuCY_Live_Q` connection and asked whether the client wants it added as a mapped market. No client reply in window — same pattern as the 2026-07-13 "Velocity" mapping request (resolved below). [isaac-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784495165519809)
 
 > [resolved] 2026-07-13 — Unmapped "Velocity" market source streaming on FIX MD feed `MFX-IG_Q→ValuCY_Live_Q` — client asked to add as mapped maker, Mahi agreed
 > Shyam Hari (client) reported the market-data feed between senderCompID `MFX-IG_Q` and targetCompID `ValuCY_Live_Q` is showing an additional, unmapped source tag (`282=Velocity`) streaming prices multiple times per snapshot alongside the usual sources (EDGE, JUMP, CNX, LMAX, COMM). Asked Mahi to confirm whether this is intentional (so it can be mapped properly) or unintentional. **2026-07-13 update:** client followed up in #mahi-valutrades-operations asking "Can we add a maker Velocity in the mappings please?"; Shyam Hari confirmed "We will add them in." [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1783904800812039) [client-followup](https://mahifx.slack.com/archives/C09HN93T0G2/p1783947276694639) [shyam-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1783970306507159)
@@ -147,6 +150,8 @@ last_catchup: 2026-07-17T07:21:20Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-20 — cpty 92596030 A/B book classification re-check: client asked team to advise ("please advise for 92596030?"); Isaac Dann confirmed A book — low volumes across a range of instruments, yields suggest A Book (follow-on from the 2026-07-14 "wait for more data" note). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784524024610249) [isaac-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784525826979779)
 
 - 2026-07-17 — cpty 95507026 A/B book classification: client asked team to advise; Shyam Hari confirmed A book (with charts). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784271069554339) [shyam-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784271522214759)
 
