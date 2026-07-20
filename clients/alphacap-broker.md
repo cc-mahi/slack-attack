@@ -8,10 +8,13 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact", confidence: low}
-last_catchup: 2026-07-17T07:03:26Z
+last_catchup: 2026-07-20T07:04:17Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-17 — Rapp requesting tick-level CFD data feed for new "My Alpha Risk Tool"
+> Cameron Hughes relayed a call with David Rapp: ACG building a client-facing analytics/risk tool (pitched as similar to Tradezella) and want tick-by-tick CFD price data, both historical backfill and live, partly to prove the client's trading behaviour used the correct (`.s`) feeds. Liam Cordelle: backfill should come straight from S3 as Parquet (~12 months retained; this has been given to ACG before and apparently lost); live feed needs FIX. Cam then asked whether they need a new connection for live — Liam: they can't reuse an existing FIX connection twice, so either ACG siphons off an existing feed or Mahi provisions a new connection. Cam still owes Rapp a call time for tomorrow and an answer on the connection question. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784280180924189) [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784281130919229)
 
 > [open] 2026-07-02 — Go-live still not achieved; hedger infra being configured
 > Maten deployed latest 26.3 at 14:41 BST noting "system is not live". Cameron Hughes then set up hybridHedger1 (17:48), bounced the hedger (19:09), and deployed infra to pick up arbHedger1 (19:13). Go-live target was early May; system remains pre-live as of 2026-07-02. Related open: Argamon symbol gap and instrument subscription entries below. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1782999700915419) [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1783016002665639)
