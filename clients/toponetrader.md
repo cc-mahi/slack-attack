@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-07-17T07:19:53Z
+last_catchup: 2026-07-20T07:08:10Z
 ---
 
 ## Status
@@ -24,8 +24,8 @@ last_catchup: 2026-07-17T07:19:53Z
 
 ## Recent issues
 
-> [open] 2026-07-15 — Compass upgrade scheduled: maintenance window Sat 18 Jul 10:00–11:00 UK
-> Liam requested and TOT confirmed a maintenance window to upgrade Compass to the latest version, Saturday 18 July 10:00–11:00 UK time; expected ~15min with no pricing feed within that hour. Client confirmed the plan. Arjie followed up 2026-07-17 asking Liam to confirm no trades will be force-closed over the weekend during the window — awaiting Liam's reply. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784120689018969) [follow-up](https://mahifx.slack.com/archives/C08U853T684/p1784264906388369)
+> [resolved] 2026-07-15–18 — Compass upgrade: maintenance window Sat 18 Jul 10:00–11:00 UK completed
+> Liam confirmed to Arjie that positions held over the weekend would stay open with no impact during the ~15min pricing gap. Release completed successfully 2026-07-18 ~10:17 UK; client acknowledged. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784120689018969) [confirmation](https://mahifx.slack.com/archives/C08U853T684/p1784275950431989) [completion](https://mahifx.slack.com/archives/C08U853T684/p1784366260301619)
 
 > [open] 2026-07-06 — USDJPY spread reported jumping 1→16 pts (client-side); Mahi feed confirmed tight
 > Lars forwarded a report from Daniel (TOT) that USDJPY spread intermittently jumps from 1 to 16 points, reported around 4am EST during the London session. Rory King and Cameron Hughes picked it up; Shyam Hari confirmed Mahi's published USDJPY spread for the full 6 Jul London session (07:00–13:00 UTC) stayed consistently tight (avg 0.6pt, max 2pt across 91,851 ticks), indicating the jump happens downstream of Mahi's pricing. Awaiting specific trade/time detail from the client to dig further. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1783353697503159)
