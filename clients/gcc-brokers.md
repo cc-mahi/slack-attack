@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-17T07:11:15Z
+last_catchup: 2026-07-20T07:06:38Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-17 — 72oz XAUUSD short filled on Finalto, Compass adjustment done
+> Client reported 72oz gold short filled on Finalto at 16:15 CEST; Rory King confirmed "This has been actioned" at 16:21 CEST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784297733174289) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784298097316269)
 
 > [resolved] 2026-07-16 — 2,598oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 2,598oz gold long filled on Finalto at 15:13 BST; Rory King confirmed "This has been actioned" at 15:16 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784211218778849)
@@ -24,7 +27,7 @@ last_catchup: 2026-07-17T07:11:15Z
 > Nael asked what TOB and market-depth layers are being applied on XAUUSD and whether it's the same for all clients. Rory King pointed to the live spread-config admin view and confirmed the pricing model is applied uniformly across all clients. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784196719988309) [answer](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784198029767509)
 
 > [open] 2026-07-16 — Automated FI check flags -$1,410 XAUUSD loss on GCC Brokers A; CP 4004089 negative-FI recurrence, new CP 4004389 escalated
-> Daily Checks Bot flagged a sustained FI PnL bleed on GCC Brokers A XAUUSD (-$1,410, 05:05–07:45 UTC) across 3 counterparties: CP 4004089 (3 trades, $3.6M, 3/3 negative-FI, REVIEW — the same tag reclassified to Dynamic Signal Follow after the 2026-05-04 A-book PnL drop, so this reads as a recurrence of that pattern) and CP 4004389 (new client, first trade same day, 64 trades/$2.4M, 33/64 negative-FI, ESCALATE). Will Carter forwarded the report into the internal channel, remarked "Looks like brokered trades," then noted "Good timing. Speaking tomorrow" (with a screenshot) — reads as a scheduled client call the finding is timely for. No classification change made in window. [daily-checks](https://mahifx.slack.com/archives/C033JJE41RP/p1784189766356609) [forwarded](https://mahifx.slack.com/archives/C09QS1NUA80/p1784199208307289) [will-comments](https://mahifx.slack.com/archives/C09QS1NUA80/p1784199436965919)
+> Daily Checks Bot flagged a sustained FI PnL bleed on GCC Brokers A XAUUSD (-$1,410, 05:05–07:45 UTC) across 3 counterparties: CP 4004089 (3 trades, $3.6M, 3/3 negative-FI, REVIEW — the same tag reclassified to Dynamic Signal Follow after the 2026-05-04 A-book PnL drop, so this reads as a recurrence of that pattern) and CP 4004389 (new client, first trade same day, 64 trades/$2.4M, 33/64 negative-FI, ESCALATE). Will Carter forwarded the report into the internal channel, remarked "Looks like brokered trades," then noted "Good timing. Speaking tomorrow" (with a screenshot) — reads as a scheduled client call the finding is timely for. No classification change made in window. 2026-07-17: Will reported the call slipped to Monday (Youssef travelling), adding "System is flying here atm" — no classification change, no client-side follow-up yet. [daily-checks](https://mahifx.slack.com/archives/C033JJE41RP/p1784189766356609) [forwarded](https://mahifx.slack.com/archives/C09QS1NUA80/p1784199208307289) [will-comments](https://mahifx.slack.com/archives/C09QS1NUA80/p1784199436965919) [call-slipped](https://mahifx.slack.com/archives/C09QS1NUA80/p1784303642207949)
 
 > [resolved] 2026-07-15 — 1,617oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 1,617oz gold long filled on Finalto at 15:54 BST; Rory King confirmed "this has been actioned" at 15:58 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784127269681249)
