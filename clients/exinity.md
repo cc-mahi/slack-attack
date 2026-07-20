@@ -17,7 +17,7 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-07-17T07:03:26Z
+last_catchup: 2026-07-20T07:06:04Z
 ---
 
 ## Recent issues
@@ -73,8 +73,8 @@ last_catchup: 2026-07-17T07:03:26Z
 > [open] 2026-06-12 — SOLUSD arb incident: -$283k loss from Daniel's skew config; arb protection re-disabled at client request
 > Daniel Kurra applied a SOLUSD skew config that caused sharp pricing spikes overnight into the London open. Counterparty ASV_MT5_228041422 (CATCHALL/Crypto execution, 9/9 off-side in 30d) traded into mispriced bursts; total impact -$283,109 with -$189k in a 25-minute window 06:50–07:15 UTC. Caught by automated daily checks. Mahi actions: bounced pricers to fix skew config, deployed real-time arb classification, added arbitrageur protection across all instruments (had previously only covered XBTUSD per an earlier client request). Cameron Hughes notified Exinity team at 14:22 UTC, explicitly noting the -$283k loss and that arbitrageur protection would have prevented it. Daniel responded asking to disable arb protection again (complaints from normal clients in the past), requesting future config changes not be made without their prior approval. Cameron Hughes warned of the loss risk; Daniel confirmed proceed; protection disabled 16:11 UTC. Arb protection is now off again; full audit of changes and call offered by Mahi. [Mahi notification](https://mahifx.slack.com/archives/C0456LSHQQK/p1781270567575609) [Daniel response](https://mahifx.slack.com/archives/C0456LSHQQK/p1781272931785129) [internal alert](https://mahifx.slack.com/archives/C040V9LNKT5/p1781260566554069)
 
-> [open] 2026-06-12 — HYBRID hedger ~18d down; A-book unhedged $5.2M idle
-> Automated daily checks (11:35 BST) flagged sole HYBRID hedger has been down for approximately 18 days. A-book unhedged with $5.2M idle. A-book fill rate also poor at 17.3% ($1.8B cancelled vs $35M traded, noted as worse than the prior Wednesday). Rory assigned to chase a named infra owner for the HYBRID hedger. No resolution in window. [internal alert](https://mahifx.slack.com/archives/C040V9LNKT5/p1781260566554069)
+> [resolved] 2026-06-12 — HYBRID hedger ~18d down; A-book unhedged $5.2M idle — root cause found + fixed 2026-07-17
+> Automated daily checks (11:35 BST) flagged sole HYBRID hedger has been down for approximately 18 days. A-book unhedged with $5.2M idle. A-book fill rate also poor at 17.3% ($1.8B cancelled vs $35M traded, noted as worse than the prior Wednesday). Rory assigned to chase a named infra owner for the HYBRID hedger. 2026-07-17: Andrew Morgan traced the process's startup failure to `HybridHedgerProcess` throwing `IllegalArgumentException: Risk base USD must be the first entry in liquidInstruments (if present)` (got `[EUR, USD, UST, USC, JPY, GBP, AUD, HKD]`) — the process could never construct given the liquidInstruments ordering, explaining the persistent downtime. Confirmed fixed ~3 minutes later. [internal alert](https://mahifx.slack.com/archives/C040V9LNKT5/p1781260566554069) [Andrew diagnosis](https://mahifx.slack.com/archives/C040V9LNKT5/p1784301259187489) [Andrew fixed](https://mahifx.slack.com/archives/C040V9LNKT5/p1784301452091339)
 
 > [open] 2026-06-12 — XAUUSD JANE_STREET_FA rejects: two A-book counterparties (unanswered)
 > Mukhammad reported at 00:20 BST that JANE_STREET_FA is rejecting XAUUSD orders for `FX_MT4_ECN_218004615` and `FX_MT4_ECN_218004832` under A-book. Linked example order `012dr710f0r` and asked if related to the earlier JS FA cancels issue (see 2026-06-02 entry). No Mahi reply in window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1781220045940339)
