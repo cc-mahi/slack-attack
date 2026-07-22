@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-20T07:04:40Z
+last_catchup: 2026-07-22T07:25:26Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-21 — New makers requested: CMC_RETAIL (MFX-T3), ISPRIME_VIP (MFX-T5)
+> Samin asked Mahi to add two new makers into Compass — CMC_RETAIL via MFX-T3 and ISPRIME_VIP via MFX-T5 — and to add them into Echo as well. Isaac Dann confirmed Mahi will action. No confirmation of completion in channel yet. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1784611757968059) [Isaac's ack](https://mahifx.slack.com/archives/C096422RPKK/p1784611824142059)
 
 > [open] 2026-07-14 — New RBF connectors not showing pricing through CPR; Mahi checking
 > Samin flagged at 06:49 BST that the new RBF connectors aren't showing pricing coming through, despite pricing being connected to CPR. This follows the new RBF 3-tier connections and hybrid hedger Cameron Hughes set up on 2026-07-09 (infra was deploying to pick up the new RBF hybrid/arb hedgers — see Notable topics). Shyam Hari acknowledged and said Mahi will check. Unresolved as of end of window. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1784008140943029) [Shyam's reply](https://mahifx.slack.com/archives/C096422RPKK/p1784008176483919)
@@ -80,6 +83,7 @@ last_catchup: 2026-07-20T07:04:40Z
 
 ## Notable topics
 
+- 2026-07-21 — Will Carter noted Samin is planning to reconnect with Mahi next week; flagged it as an opportunity to do some housekeeping in #internal-starprime — removing redundant books and hedgers. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1784616169057259)
 - 2026-07-09 — Cameron Hughes sent new RBF 3-tier connections to Samin and set up new hybrid hedger; infra deploying to pick up the new RBF hybrid and arb hedgers. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1783611021848749) [earlier note](https://mahifx.slack.com/archives/C095MJHC68J/p1783601925506239)
 - 2026-07-03 — NDXUSD session-open pricing query resolved: Samin questioned what was driving CLIENT_PRICE_LDN on NDXUSD before Velocity priced at the 22:00 UTC open (2026-07-02). Sam Hewitt clarified: pre-close, CLIENT_PRICE republishes the last mid as an indicative snapshot (zero qty, non-tradeable); Velocity's first firm tick was 22:00:02.695 and CLIENT_PRICE tracked it from the same millisecond. No fills in the window, no client impact. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1783057297073889)
 - 2026-07-02 — Samin asked whether skew can be differentiated per distribution: CPR currently 4c wide with 1c skew; he wants a tier-2 bbook FIX feed at 10c wide with 3c skew. William confirmed skew is pricer-level only — cannot vary between distributions of the same price. William offered a different price model as a workaround; Samin deferred ("more complications"). No action taken, discussion open-ended. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1782996387573669)
