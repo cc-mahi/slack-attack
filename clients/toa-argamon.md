@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-07-20T07:04:40Z
+last_catchup: 2026-07-22T07:35:14Z
 ---
 
 ## Status
@@ -25,6 +25,12 @@ last_catchup: 2026-07-20T07:04:40Z
 - **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [open] 2026-07-22 — Recurring HRP_CLIENTS_NET PnL breach alerts + hedgerHrpCME1 limit issues (Toa LDN/CHI)
+> Four PnL-drop/hedger alerts over ~26h at Toa Argamon: hedgerHrpCME1 bumped 1-day PnL limit to bring it back up in CHI (07-21 06:52 BST, Isaac); PnL drop -$4,862 at Toa Args LDN (07-21 19:31 BST, Inald, PD Q3WD6WVC5H84HE, eyes reaction only); hedgerHrpCME1 down from an unrealised position breach, restarted (07-22 00:54 BST, Lee, PD Q3O4AG2XRUJZDU); another PnLDropAlert on HRP_CLIENTS_NET, -$6,179 in 20 min (07-22 08:04 BST, Arun, +1 reaction only). No root-cause diagnosis posted for any of the four; continues the same unexplained pattern as the 2026-06-25 and 2026-05-26 HRP_CLIENTS_NET drop-alert entries below. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784703854590099)
+
+> [open] 2026-07-21 — PrimeXM ClientID FIX tag config for Argamon LDN sessions; pending restart + test
+> Levi (Argamon) asked whether ClientID can be sent via tag 448 (with tag 452=3) instead of tag 109 for PrimeXM's LDN onboarding — PrimeXM can't configure tag 109 for ClientID. Lee confirmed party-role field mapping works and applied the config change scoped to argamon's PXM sessions only (Toa LDN); needs a restart, live after EOD the next day. Levi to test after restart. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
 
 > [open] 2026-07-06 — Toa LDN position rec break: 101k AUDCAD out, suspected over-hedge tied to INST-34 trades
 > Position rec on Toa LDN shows 101k AUDCAD out — doesn't look like real risk, appears to be an over-hedge in markets. Flagged as possibly related to INST-34 trades that traded 101k via `MARKETMAKING_HRP_RETAIL` while the rest of their flow went through `MARKETMAKING_HRP_RETAIL_GMG`. Lee Butts checked: party (book) and market are the same across all four channels, nothing jumps out that would explain the missing 101k. Argamon side continuing to troubleshoot; no resolution as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783309851586399)
