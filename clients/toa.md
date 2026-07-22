@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-20T07:08:08Z
+last_catchup: 2026-07-22T07:35:09Z
 ---
 
 ## Status
@@ -17,6 +17,18 @@ last_catchup: 2026-07-20T07:08:08Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-07-22 — PnLDropAlert on TOA-ARG LDN: HRP_CLIENTS_NET -6,179 in 20 min, no response yet
+> Arun (08:04 BST) flagged a PnL breach alert on TOA-ARG LDN: -6,179 in 20 minutes on HRP_CLIENTS_NET (threshold -5,000/20min), PnL change +2,239. Only a +1 reaction as of window close — no investigation noted. Recurrence of the HRP_CLIENTS_NET drop pattern (see 2026-06-25, 2026-05-26 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1784703854590099
+
+> [resolved] 2026-07-22 — hedgerHrpCME1 down from unrealised position breach on TOA-ARG LDN: restarted
+> Lee (00:54 BST) reported hedgerHrpCME1 down from an unrealised position breach; restarted (PD Q3O4AG2XRUJZDU). https://mahifx.slack.com/archives/C035H1VNCAD/p1784678064330609
+
+> [open] 2026-07-21 — PnL drop at TOA-ARG LDN: -4,862, eyes only, no follow-up
+> Inald (19:31 BST) flagged a PnL drop at TOA-ARG LDN of -4,862 via PagerDuty (Q3WD6WVC5H84HE). Only an eyes reaction — no investigation or resolution noted in window. Second HRP_CLIENTS_NET-style PnL drop within a day, alongside the 2026-07-22 08:04 entry above. https://mahifx.slack.com/archives/C035H1VNCAD/p1784658667099309
+
+> [resolved] 2026-07-21 — hedgerHrpCME1 PnL limit bumped on TOA-ARG CHI to bring it back up
+> Isaac (06:52 BST) bumped the 1-day PnL limit on hedgerHrpCME1 in CHI to get it back up. Continuation of the recurring hedgerHrpCME1 volume/PnL-limit pattern (see 2026-05-18 entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1784613134154519
 
 > [resolved] 2026-07-17 — pricerInsti2 down on Toa-argamon LDN: USDCAD PSM-W signal missing definition
 > Leonardo (15:40 CEST) flagged pricerInsti2 repeatedly failing to construct on `toa-argamon-ln-trading-1` — `IllegalArgumentException: For instrument: USDCAD no definition exists for: PSM-W at index 0`. James identified a newly-introduced default on `pricing.adjustmentSignalParametersForWidening`; overrode with an empty array to fix. Process back up within 10 minutes. https://mahifx.slack.com/archives/C035H1VNCAD/p1784295651254059
