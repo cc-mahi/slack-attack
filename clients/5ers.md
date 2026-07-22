@@ -11,10 +11,16 @@ key_people_overrides:
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
-last_catchup: 2026-07-20T07:04:15Z
+last_catchup: 2026-07-22T07:04:43Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-20 — Evening recurrence: severe spread spikes across AUDUSD, EURCAD, USDCHF, GBPAUD, AUDJPY — same release, fix redeployed + spread caps reduced
+> Hours after the overnight AUDUSD widening below was called resolved, the client raised an "Urgent!" escalation at 19:19 BST reporting spikes across multiple pairs with screenshots, and reported at least two further recurrences over the next ~30min (19:45 "just happened again" on AUDJPY, then GBPAUD). William Denny investigated live, confirmed "our spreads blew out around that time" checking bid vs mid, and by 20:56 Isaac Dann told Yaron the incidents were isolated to 17:36–17:42 UTC and a fix to the root cause had been deployed at that time, so reoccurrence "isn't possible now." Kate followed up next day (2026-07-21 16:36) confirming the fix plus reduced spread caps (so wide spreads are less likely to reach clients) and tightened release-time checks; spreads reported back to normal since. Client thanked Kate the following morning. Same underlying release-related root cause as the AUDUSD entry below — recurred more severely and across more pairs in the evening after the morning's "resolved" call. [client-urgent](https://mahifx.slack.com/archives/C07AQJS4E80/p1784571565341179) [william-investigating](https://mahifx.slack.com/archives/C07AQJS4E80/p1784573761426379) [isaac-isolated](https://mahifx.slack.com/archives/C07AQJS4E80/p1784577372412519) [kate-followup](https://mahifx.slack.com/archives/C07AQJS4E80/p1784648178816179) [client-thanks](https://mahifx.slack.com/archives/C07AQJS4E80/p1784701087784329)
+
+> [open] 2026-07-21 — Client requested a safeguard mechanism to disregard anomalous/spiked quotes — protect against wrongful stop-outs
+> Following the spread-spike recurrences above, Andreas (08:54 BST) asked Isaac whether there's a way to disregard quotes that deviate significantly from the real market price, flagging that clients were wrongfully stopped out during the spikes and it's causing them issues. Kate acknowledged (08:57) and said the team would look into it and revert. Her same-day follow-up (16:36, see entry above) addressed the spread-spike fix and reduced caps but didn't explicitly confirm a dedicated reject/disregard mechanism for anomalous quotes — status of this specific ask unclear, flagged open. [andreas-ask](https://mahifx.slack.com/archives/C07AQJS4E80/p1784620495737399) [kate-ack](https://mahifx.slack.com/archives/C07AQJS4E80/p1784620674931169)
 
 > [resolved] 2026-07-20 — AUDUSD ~200-point spread widening overnight (04:30–05:08 GMT+3) — tied to the same release
 > Client flagged 200-point AUDUSD spreads overnight, screenshot attached. Isaac Dann (08:49 CEST) confirmed the cause was identified and resolved, attributing it to "the release" (the same Compass upgrade window as the 2026-07-18 crypto outage below) and said it should not recur. [client-report](https://mahifx.slack.com/archives/C07AQJS4E80/p1784529360943039) [isaac-resolved](https://mahifx.slack.com/archives/C07AQJS4E80/p1784530152823509)
