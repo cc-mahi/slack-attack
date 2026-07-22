@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-07-20T07:04:40Z
+last_catchup: 2026-07-22T07:07:41Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-07-20T07:04:40Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [open] 2026-07-21 — PrimeXM LDN onboarding: ClientID via tag 448/452 instead of Tag109, config change pending restart
+> Levi (Argamon) raised that PrimeXM can't configure Tag109 for ClientID on the new LDN onboarding; PrimeXM's suggested workaround is tag 448 with tag 452=3 (ClientID), which most other clients already use. Lee Butts confirmed Mahi can map counterparty via party role fields, configurable on the distribution FIX connection config — scoped to the Argamon PrimeXM sessions only (not all PXM sessions). Config change applied 2026-07-21; needs a restart, active from EOD 2026-07-21. Levi to place a test trade after restart to confirm. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
 
 > [open] 2026-07-06 — Toa LDN position rec break: 101k AUDCAD out, suspected over-hedge on INST-34 trades
 > Levi investigating a Toa LDN rec break (101k AUDCAD out, doesn't look like real risk). Flagged INST-34 trades that went via `MARKETMAKING_HRP_RETAIL` channel instead of the usual `MARKETMAKING_HRP_RETAIL_GMG` as a possible cause. Lee Butts confirmed party/market are identical across the four channels so nothing obvious explains the missing 101k; Levi troubleshooting further on Argamon's side. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783309851586399)
