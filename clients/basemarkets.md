@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-07-20T07:04:40Z
+last_catchup: 2026-07-22T07:12:33Z
 ---
 
 ## Status
@@ -21,6 +21,12 @@ last_catchup: 2026-07-20T07:04:40Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [resolved] 2026-07-21 — JPN225 distributed spread stuck at 0.5 due to wide-spread suppression; corrected to 30.0 across all timezones
+> Client flagged that JPN225's distributed price was stuck showing a 0.5 spread even though the client-price model itself had the correct spread. William Denny traced it to wide-spread suppression configured on `DISTRIBUTION_WSS` for JPXJPY and raised the suppression threshold from 0.5 to 30.0 — first for the LDN-NYC timezone to confirm the fix (client then saw the client-price-model spread of 13.2), then applied the same change across all remaining timezones. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784632293973289) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784632657581129)
+
+> [open] 2026-07-20 — Crypto pricing stopped Sunday 07:44–12:42 (GMT+3); bridge issue under investigation
+> Client reported crypto stopped pricing on Sunday between 07:44 and 12:42 (GMT+3), with no corresponding break visible in Scope's own pricing. Rory King confirmed it looks like a bridge-side issue and said the team is investigating further; no root cause or resolution posted in-channel yet. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784549745534049) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784561352760939)
 
 > [open] 2026-07-14 — Second hybridHedgerC1/LMAX outage same day (~17 min); Base not yet re-notified
 > Second LMAX connectivity outage hit at 16:50 BST (PagerDuty), ~17 minutes this time. Cameron Copland held off restarting the hedger while LMAX was still down, confirmed LMAX itself was the cause (not our side), then restarted the hedger once LMAX recovered. Kate Stagg flagged "worth flagging to Base again" given the repeat — no follow-up message to Base visible in `mahi-base-markets` as of run time (the only client-facing message this window was the first incident's 10:32 note). [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784044249314479) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784045814569439)
