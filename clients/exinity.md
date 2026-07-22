@@ -17,10 +17,16 @@ key_people_overrides:
   - {name: "Keshav Woottum", role: "ops — alerts/reporting cadence", confidence: low}
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
-last_catchup: 2026-07-20T07:06:04Z
+last_catchup: 2026-07-22T07:14:59Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-21 — Poor $/M whitelist reset for second rule (-$15/M minimum)
+> Christian Lee asked Mahi to reset Exinity's Poor $/M whitelist. William Denny confirmed which rule (second rule, Minimum Dollars Per Million = -$15/M) before clearing all counterparties from it; Christian confirmed the ask, Will actioned it same evening. [Christian ask](https://mahifx.slack.com/archives/C0456LSHQQK/p1784654527463269) [Will clarify](https://mahifx.slack.com/archives/C0456LSHQQK/p1784656760067669) [Will resolved](https://mahifx.slack.com/archives/C0456LSHQQK/p1784658251160269)
+
+> [open] 2026-07-20 — Connectivity alert reported (screenshot); no Mahi reply in window
+> Christian Lee reported a connectivity alert with a screenshot, asking Mahi to investigate and confirm if there's an issue. No reply from Mahi in this window. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1784574856706579)
 
 > [resolved] 2026-07-15 — Aeron driver warning: leftover EOD-restart artifact
 > Samuel Ewebiyi flagged a warning on the Aeron driver (screenshot) at 23:49 BST. Shyam confirmed it was a leftover artifact from an EOD restart, processes have all been running fine, and cleared the error message ~00:13 BST 2026-07-16. [Samuel](https://mahifx.slack.com/archives/C0456LSHQQK/p1784155741898759) [Shyam checking](https://mahifx.slack.com/archives/C0456LSHQQK/p1784155769045349) [Shyam resolved](https://mahifx.slack.com/archives/C0456LSHQQK/p1784157212928789)
