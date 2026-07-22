@@ -9,13 +9,19 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-20T07:08:28Z
+last_catchup: 2026-07-22T07:38:05Z
 ---
 
 ## Recent issues
 
-> [open] 2026-07-19 — Unmapped "GSFX" market source streaming on FIX MD feed `MahiFX13_Live_Q→ValuCY_Live_Q` — client asked to confirm if it should be added as a mapped market
-> Isaac Dann (Mahi) reported `GSFX_OZNY4_FUND_UBSPB_AMB` publishing on the `MahiFX13_Live_Q→ValuCY_Live_Q` connection and asked whether the client wants it added as a mapped market. No client reply in window — same pattern as the 2026-07-13 "Velocity" mapping request (resolved below). [isaac-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784495165519809)
+> [open] 2026-07-19 — Unmapped "GSFX" market source streaming on FIX MD feed `MahiFX13_Live_Q→ValuCY_Live_Q` — client replied but didn't confirm whether to map it
+> Isaac Dann (Mahi) reported `GSFX_OZNY4_FUND_UBSPB_AMB` publishing on the `MahiFX13_Live_Q→ValuCY_Live_Q` connection and asked whether the client wants it added as a mapped market — same pattern as the 2026-07-13 "Velocity" mapping request (resolved below). **2026-07-20 update:** client replied "Thats a really old maker suprised you havent seen that before?" — doesn't explicitly confirm add/don't-add, so still awaiting a clear decision. [isaac-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784495165519809) [client-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1784543058186979)
+
+> [open] 2026-07-22 — New TT algo (tag 58 param) config format questions — unanswered
+> Client asked whether tag 58 parameter order for the new algo (json config shows `TTScalePOVStrategy` with durationMinutes/maxParticipation/minParticipation/aggression/tracking) should follow UI order or the json field order, whether `@type` should match the strategy name, and if any other requirements apply. No Mahi reply in window. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784704899328709)
+
+> [resolved] 2026-07-21 — cpty 92573314 A/B book classification — Rory confirmed A-book
+> Client asked "please advise for 92573314?" at 14:20 BST; Rory King acknowledged ("Hi overnight, checking") at 14:21 and confirmed "92573314 - A book" (with supporting screenshot) at 14:25 BST. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784640053863789) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784640102279699) [rory-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784640306869679)
 
 > [resolved] 2026-07-13 — Unmapped "Velocity" market source streaming on FIX MD feed `MFX-IG_Q→ValuCY_Live_Q` — client asked to add as mapped maker, Mahi agreed
 > Shyam Hari (client) reported the market-data feed between senderCompID `MFX-IG_Q` and targetCompID `ValuCY_Live_Q` is showing an additional, unmapped source tag (`282=Velocity`) streaming prices multiple times per snapshot alongside the usual sources (EDGE, JUMP, CNX, LMAX, COMM). Asked Mahi to confirm whether this is intentional (so it can be mapped properly) or unintentional. **2026-07-13 update:** client followed up in #mahi-valutrades-operations asking "Can we add a maker Velocity in the mappings please?"; Shyam Hari confirmed "We will add them in." [client-report](https://mahifx.slack.com/archives/C09HN93T0G2/p1783904800812039) [client-followup](https://mahifx.slack.com/archives/C09HN93T0G2/p1783947276694639) [shyam-confirm](https://mahifx.slack.com/archives/C09HN93T0G2/p1783970306507159)
