@@ -16,10 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-20T07:07:03Z
+last_catchup: 2026-07-22T07:22:28Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-21/22 — GOLDX3/XAUUSDx3 gearing queries: tick-frequency explained, Monday first-tick timing still under investigation
+> Georgia asked Isaac to compare GOLDx3's tick frequency against standard XAUUSD (~2x as many ticks as XAUUSD) and separately asked why GOLDX3's first tick on Monday 2026-07-20 came at 01:10 instead of the expected 01:00. Isaac confirmed XAUUSDx3 is deliberately configured to start at 18:10 Sunday NY time, then answered the tick-frequency question directly the next day: a 3x geared instrument always ticks more often than the ungeared one because its amplified moves defeat minimum-change suppression more frequently — that part is resolved, but the specific Monday 01:10-vs-01:00 first-tick discrepancy is still being checked. [compare-ticks query](https://mahifx.slack.com/archives/C022S6NL82D/p1784673730662679) [first-tick query](https://mahifx.slack.com/archives/C022S6NL82D/p1784674332648889) [Sunday-start reply](https://mahifx.slack.com/archives/C022S6NL82D/p1784674391484919) [tick-frequency answer](https://mahifx.slack.com/archives/C022S6NL82D/p1784679990146509)
+
+> [resolved] 2026-07-21 — EURGBP arb continues under harmonics-only signal; new arber whitelisted, signal moved to price-thresh-dyn
+> Shyam reported still being arbed on EURGBP even with IFMS removed (harmonics only, per the 2026-07-20 fix below) — skew sizing already small. Whitelisted new arber MT5_plain_b_87981417 and changed the EURGBP adjustment signal to price-thresh-dyn-0.6-3000, which simple skew analysis suggests is more profitable and which the CP can't arb with their own flow. Direct continuation of the 2026-07-20 EURGBP entry below — recurring pattern, no realtime arb detection yet in place. [Shyam report](https://mahifx.slack.com/archives/C01QGUXPKEY/p1784606374899359)
+
+> [resolved] 2026-07-21 — Routine Toxic XAUUSD Harsher add: live06_CN_plus_b_86054006
+> Trading Ops requested the CP added to Toxic XAUUSD - Harsher (18:39 BST); William Denny confirmed "This is done" (18:54 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1784655585491269)
 
 > [resolved] 2026-07-20 — EURGBP arbed twice (Friday) by 2 CPs exploiting IFMS skew; IFMS removed for EURGBP, harmonics only
 > Shyam Hari reported being arbed on EURGBP a couple of times on Friday (2026-07-17) by 2 different counterparties picking off the pricing skew from IFMS. Removed IFMS from the EURGBP adjustment-signal config, leaving harmonics in place. [Shyam report](https://mahifx.slack.com/archives/C01QGUXPKEY/p1784521382961489) [TOB/YP evidence](https://mahifx.slack.com/archives/C01QGUXPKEY/p1784521475987589)
@@ -320,6 +329,8 @@ last_catchup: 2026-07-20T07:07:03Z
 
 ## Notable topics
 
+- 2026-07-21/22 — **GOLDX3/XAUUSDx3 gearing queries from Infinox.** Tick-frequency difference vs standard XAUUSD explained (3x geared instrument ticks more often — amplified moves defeat minimum-change suppression more frequently); Monday 2026-07-20 first-tick timing discrepancy (01:10 vs expected 01:00) still under investigation by Isaac. [Isaac](https://mahifx.slack.com/archives/C022S6NL82D/p1784679990146509)
+- 2026-07-21 — **EURGBP arb persists under harmonics-only signal.** New CP (MT5_plain_b_87981417) whitelisted as arber; EURGBP signal swapped to price-thresh-dyn-0.6-3000. Continues the pattern of recurring EURUSD/USDJPY/EURGBP arb mitigations with no realtime detection in place. [Shyam](https://mahifx.slack.com/archives/C01QGUXPKEY/p1784606374899359)
 - 2026-07-20 — **EURGBP joins the recurring arb-mitigation pattern.** Shyam removed IFMS from EURGBP's adjustment-signal config after 2 CPs arbed the pricing skew twice on Friday (2026-07-17), leaving harmonics only. Same shape as the EURUSD/USDJPY IFMS mitigations in late June/early July — no realtime arb detection in place. [Shyam](https://mahifx.slack.com/archives/C01QGUXPKEY/p1784521382961489)
 - 2026-07-15 — **Infinox excluded MT5_87018814_Centroid_* accounts from Automated Classification.** Georgia requested exclusion plus declassification of any already-flagged accounts, flagged priority; Kate implemented via LR/execution rules ensuring default execution regardless of classification, scope narrowed to the MT5_87018814_Centroid_* prefix after Andreas clarified. [Georgia request](https://mahifx.slack.com/archives/C022S6NL82D/p1784122243791649)
 - 2026-07-06 — **CH/David discount-dispute call rescheduled.** Monday's call didn't happen ("CH's meeting ran over"); pushed to Tuesday morning (2026-07-07). Bonnie chased David for status internally. Still open. [Kate](https://mahifx.slack.com/archives/C01QGUXPKEY/p1783342964295669)
