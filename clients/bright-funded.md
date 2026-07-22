@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-07-20T07:06:03Z
+last_catchup: 2026-07-22T07:14:54Z
 status: active
 retired_at: null
 retired_reason: null
@@ -79,6 +79,9 @@ retired_reason: null
 
 > [open] 2026-07-15 — Aeron proxy log disk near-full at bright-funded, rolling bounce needed
 > Liam Cordelle flagged the Mahi-central Aeron proxy processes may need a rolling bounce, plus non-critical logs cleared and processes bounced at bright-funded after the log disk filled up; Maten looked into it the same evening. No resolution confirmed yet — same failure class as the 2026-04-13 marketDataProxyTx log-disk incident above. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1784141395979309)
+
+> [resolved] 2026-07-20 — GBPUSD spread unexpectedly wide (widening config lost over weekend restarts)
+> Client flagged at 15:38 BST that GBPUSD spread was very high; Cameron Hughes confirmed by 16:07 that some widening-based config had been deleted over the weekend (it had been causing restart issues) and was added back in. Client confirmed by 16:31 it was back to prior settings; Mio Knights flagged for a double-check. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1784559373888569)
 
 ## Notable topics
 
