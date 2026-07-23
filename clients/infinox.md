@@ -16,10 +16,16 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-22T07:22:28Z
+last_catchup: 2026-07-23T07:08:09Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-22/23 — Sunday-open XAUUSD tick anomaly (Vantage 4104 @ 01:00:05 GMT+3): Isaac traced to LP consensus lag, not bad feed
+> Trading Ops asked for XAUUSD ticks covering the first 10 minutes after Sunday open, flagging a Vantage tick at 01:00:05 GMT+3 priced at 4104 as low vs market, then a follow-up abnormal gap-jump pattern (~$10 gaps) through the first minute. Isaac Dann pulled TOB data and confirmed no firm LP consensus for the first ~25s of open, with Mahi's published price not going firm until ~45s in amid continued cross-LP disagreement; concluded the anomaly reflects poor LP pricing continuity/mid quality at open rather than a bad feed. Same open-volatility family as the recurring Vantage-following spike pattern already tracked (see 2026-07-07/08 entry below) and adjacent to the GOLDX3 Monday first-tick-timing question still open below. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1784758235439739) [Isaac clarifying q](https://mahifx.slack.com/archives/C022S6NL82D/p1784758328483669) [TOB evidence + read](https://mahifx.slack.com/archives/C022S6NL82D/p1784761779772119) [Isaac conclusion](https://mahifx.slack.com/archives/C022S6NL82D/p1784762927005559)
+
+> [resolved] 2026-07-22 — Routine Toxic XAUUSD Harsher add: MT5_87018814_Centroid_3607956 + Centroid_3608129
+> Trading Ops requested both CPs added to Toxic XAUUSD - Harsher profile (08:24 BST); William Denny confirmed "This is done" (08:27 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1784705043306339) [William confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1784705244496019)
 
 > [open] 2026-07-21/22 — GOLDX3/XAUUSDx3 gearing queries: tick-frequency explained, Monday first-tick timing still under investigation
 > Georgia asked Isaac to compare GOLDx3's tick frequency against standard XAUUSD (~2x as many ticks as XAUUSD) and separately asked why GOLDX3's first tick on Monday 2026-07-20 came at 01:10 instead of the expected 01:00. Isaac confirmed XAUUSDx3 is deliberately configured to start at 18:10 Sunday NY time, then answered the tick-frequency question directly the next day: a 3x geared instrument always ticks more often than the ungeared one because its amplified moves defeat minimum-change suppression more frequently — that part is resolved, but the specific Monday 01:10-vs-01:00 first-tick discrepancy is still being checked. [compare-ticks query](https://mahifx.slack.com/archives/C022S6NL82D/p1784673730662679) [first-tick query](https://mahifx.slack.com/archives/C022S6NL82D/p1784674332648889) [Sunday-start reply](https://mahifx.slack.com/archives/C022S6NL82D/p1784674391484919) [tick-frequency answer](https://mahifx.slack.com/archives/C022S6NL82D/p1784679990146509)
