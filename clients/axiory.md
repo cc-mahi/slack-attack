@@ -11,10 +11,13 @@ key_people_overrides:
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory — possibly attending Cyprus event alongside Roman", confidence: low}
   - {name: "Jan", role: "Axiory TY office — data/ops requests (surname unknown)", confidence: low}
-last_catchup: 2026-07-22T07:14:00Z
+last_catchup: 2026-07-23T07:06:29Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-22 — Billing dispute: June invoice billed 29.5B combined FX+metals+CFD volume against the CFD/indices tier, not isolated CFD flow
+> Roman queried why the last invoice billed 29.5B volume on indices when Axiory's actual CFD flow is far smaller. Will Carter confirmed a known gap: the CFD/FX split was computed cleanly in March (CFD FI $3,514 vs FX & metals $146k) but May and June reverted to billing the CFD tier off total combined volume, because the split was left "TBC" (open item 9) in the June billing-prep. Kate Stagg found only 5 CFD instruments should be summed (G30EUR, DOWUSD, NDXUSD, HSIHKD, CL1USD), not the 13 previously assumed, and pulled isolated per-month LDN+TKY volumes: June 3.63b+184m, May 4.47b+163m, April 3.02b+110m, March 3.11b+415m. She also flagged spread PnL looks poor on PXM_BROKERS_CLIENTS and will dig into signal performance. Daria Horton (late 07-22) asked Kate to confirm the exact parties/instruments to sum and correct `/billing-prep` in MahiProduct — the Grafana dashboard had been double-counting by summing HOUSE, CLIENTS_NET etc without party filtering — and has updated the process to publish all open items to Slack rather than just the worst ones. Open: awaiting Kate's confirmed party/instrument list and the billing-prep correction. [thread](https://mahifx.slack.com/archives/C06KQT6EU3W/p1784710795537379)
 
 > [resolved] 2026-07-15 — XAUUSD slippage complaint (account 2045069, position 34001138); traced to PXM-side, client confirmed resolved
 > Jan (Axiory TY) reported a client-side slippage of 0.21 on XAUUSD (account 2045069, position 34001138, ~13:25:28 BST). Rory King reviewed and found the trade in line with Mahi's pricing feed (screenshot provided), pointed Jan to raise the observed slippage with PXM directly. Jan confirmed same day it's resolved. [complaint](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784117573849439) [response](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784118263061489)
