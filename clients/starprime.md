@@ -12,13 +12,17 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-22T07:25:26Z
+last_catchup: 2026-07-23T07:08:39Z
 ---
 
 ## Recent issues
 
+> [resolved] 2026-07-22 — XAUUSD IoC limit order rejected LIQUIDITY_VIOLATION
+> Shahid queried a client XAUUSD IoC limit buy order rejection (order 3174198-2, limit 4107.01). William Denny explained the order was cancelled as offside — Mahi's published bid was 4107.88 at the time. Shahid reacted (raised hands), no further follow-up. [Shahid's ask](https://mahifx.slack.com/archives/C096422RPKK/p1784744362795279) [William's explanation](https://mahifx.slack.com/archives/C096422RPKK/p1784745583882039)
+
 > [open] 2026-07-21 — New makers requested: CMC_RETAIL (MFX-T3), ISPRIME_VIP (MFX-T5)
 > Samin asked Mahi to add two new makers into Compass — CMC_RETAIL via MFX-T3 and ISPRIME_VIP via MFX-T5 — and to add them into Echo as well. Isaac Dann confirmed Mahi will action. No confirmation of completion in channel yet. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1784611757968059) [Isaac's ack](https://mahifx.slack.com/archives/C096422RPKK/p1784611824142059)
+> Update 2026-07-23: both makers now set up in Compass (CMC_RETAIL → MFX-T3/fixMarketData3/Q035, ISPRIME_VIP → MFX-T5/fixMarketData5/Q108) but books not yet reaching Mahi from PrimeXM. Isaac found Mahi hadn't sent instrument subscriptions and will restart at EOD to pick them up; Shahid then clarified PrimeXM needs `TAG7533=CMC_RETAIL` / `TAG7533=ISPRIME_VIP` subscription tags sent. Still open, blocked on the EOD restart. [FIX log ask](https://mahifx.slack.com/archives/C096422RPKK/p1784783812816279) [Isaac's finding](https://mahifx.slack.com/archives/C096422RPKK/p1784784263392699) [Shahid's tag clarification](https://mahifx.slack.com/archives/C096422RPKK/p1784785721199299)
 
 > [open] 2026-07-14 — New RBF connectors not showing pricing through CPR; Mahi checking
 > Samin flagged at 06:49 BST that the new RBF connectors aren't showing pricing coming through, despite pricing being connected to CPR. This follows the new RBF 3-tier connections and hybrid hedger Cameron Hughes set up on 2026-07-09 (infra was deploying to pick up the new RBF hybrid/arb hedgers — see Notable topics). Shyam Hari acknowledged and said Mahi will check. Unresolved as of end of window. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1784008140943029) [Shyam's reply](https://mahifx.slack.com/archives/C096422RPKK/p1784008176483919)
@@ -83,6 +87,7 @@ last_catchup: 2026-07-22T07:25:26Z
 
 ## Notable topics
 
+- 2026-07-22 — Andrew Morgan flagged (internal-starprime) a news piece on StarTrader launching 24/7 US stock CFDs and expanding their 24/5 lineup, asking who provides their feeds and noting "seems like we should be offering this product" — a potential upsell/product signal, no follow-up in window. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1784734311199849)
 - 2026-07-21 — Will Carter noted Samin is planning to reconnect with Mahi next week; flagged it as an opportunity to do some housekeeping in #internal-starprime — removing redundant books and hedgers. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1784616169057259)
 - 2026-07-09 — Cameron Hughes sent new RBF 3-tier connections to Samin and set up new hybrid hedger; infra deploying to pick up the new RBF hybrid and arb hedgers. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1783611021848749) [earlier note](https://mahifx.slack.com/archives/C095MJHC68J/p1783601925506239)
 - 2026-07-03 — NDXUSD session-open pricing query resolved: Samin questioned what was driving CLIENT_PRICE_LDN on NDXUSD before Velocity priced at the 22:00 UTC open (2026-07-02). Sam Hewitt clarified: pre-close, CLIENT_PRICE republishes the last mid as an indicative snapshot (zero qty, non-tradeable); Velocity's first firm tick was 22:00:02.695 and CLIENT_PRICE tracked it from the same millisecond. No fills in the window, no client impact. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1783057297073889)
