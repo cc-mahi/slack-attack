@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-22T07:35:09Z
+last_catchup: 2026-07-23T07:09:16Z
 ---
 
 ## Status
@@ -18,8 +18,11 @@ last_catchup: 2026-07-22T07:35:09Z
 
 ## Recent issues
 
-> [open] 2026-07-22 — PnLDropAlert on TOA-ARG LDN: HRP_CLIENTS_NET -6,179 in 20 min, no response yet
-> Arun (08:04 BST) flagged a PnL breach alert on TOA-ARG LDN: -6,179 in 20 minutes on HRP_CLIENTS_NET (threshold -5,000/20min), PnL change +2,239. Only a +1 reaction as of window close — no investigation noted. Recurrence of the HRP_CLIENTS_NET drop pattern (see 2026-06-25, 2026-05-26 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1784703854590099
+> [resolved] 2026-07-22/23 — hedgerCBOE1 moved from Toa-argamon LDN to Chicago
+> New ordersCboe1/hedgerCBOE1 processes stood up in Chicago (17:24 BST 2026-07-22); Lee Butts confirmed them live and the London hedgerCBOE1 book turned off (04:23 BST 2026-07-23). Closes out the LDN CBOE hedger left off since the 2026-06-10/11 overnight oscillation (see 2026-05-26 entry below). https://mahifx.slack.com/archives/C035H1VNCAD/p1784737477542119 https://mahifx.slack.com/archives/C035H1VNCAD/p1784777020413939
+
+> [open] 2026-07-22 — PnLDropAlert on TOA-ARG LDN: HRP_CLIENTS_NET breached repeatedly through the day, no root-cause found
+> Arun flagged a first HRP_CLIENTS_NET breach at 08:04 BST (-6,179 in 20 min, PnL change +2,239), then five more through the day (14:23, 14:38 ×3, 15:06, 17:32 BST) ranging -4,231 to -12,103 across the 8min/20min/1hr thresholds. Inald's 18:02 BST PD alert (Q0JW6TOZVZTDVG) was confirmed a duplicate of the same pattern and cleared. Only +1 reactions and James's "Lumpy today!" comment in thread — no root-cause investigation opened. Recurrence of the HRP_CLIENTS_NET drop pattern (see 2026-06-25, 2026-05-26 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1784703854590099 https://mahifx.slack.com/archives/C035H1VNCAD/p1784726609243179
 
 > [resolved] 2026-07-22 — hedgerHrpCME1 down from unrealised position breach on TOA-ARG LDN: restarted
 > Lee (00:54 BST) reported hedgerHrpCME1 down from an unrealised position breach; restarted (PD Q3O4AG2XRUJZDU). https://mahifx.slack.com/archives/C035H1VNCAD/p1784678064330609
@@ -129,8 +132,8 @@ last_catchup: 2026-07-22T07:35:09Z
 > [open] 2026-05-26 — PnLDropAlert on Toa-argamon LDN: HRP_CLIENTS_NET down ~8.2k in 20 min, XAUUSD main contributor
 > Maten flagged a PnLDropAlert at 11:39 UTC: `HRP_CLIENTS_NET` fell -8,185 in 20 minutes (threshold -5,000/20min). Maten attributed it to XAUUSD in the follow-up. No intervention or resolution noted in thread. Related book to the hedgerHrpCME1 volume-breach pattern (see 2026-05-18 entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1779795816962169
 
-> [open] 2026-05-26 — hedgerCBOE1 being added to Toa-argamon LDN: turned off after overnight oscillation
-> James announced adding hedgerCBOE1 to the Toa-argamon LDN instance; asked ops to ignore alerts during setup. 2026-05-29: still being set up, likely down on weekend checks. 2026-06-10/11: overnight CBOE+CME hedger oscillation incident (see entry above) — Lee found the two hedgers trading back and forth beyond client vol, attributed to Nado-side spread config changes by Elan. Lee turned the CBOE hedger off and kept CME on pending investigation. https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319
+> [resolved] 2026-05-26 — hedgerCBOE1 being added to Toa-argamon LDN: turned off after overnight oscillation, moved to Chicago
+> James announced adding hedgerCBOE1 to the Toa-argamon LDN instance; asked ops to ignore alerts during setup. 2026-05-29: still being set up, likely down on weekend checks. 2026-06-10/11: overnight CBOE+CME hedger oscillation incident (see entry above) — Lee found the two hedgers trading back and forth beyond client vol, attributed to Nado-side spread config changes by Elan. Lee turned the CBOE hedger off and kept CME on pending investigation. Closed out 2026-07-22/23: new ordersCboe1/hedgerCBOE1 processes stood up in Chicago instead; Lee confirmed them live and the London hedgerCBOE1 book turned off (see 2026-07-22 entry below). https://mahifx.slack.com/archives/C035H1VNCAD/p1779805776124319
 
 > [resolved] 2026-05-22 — Stork Oracle API token requested and provided (toa-nado-shared)
 > Nado asked if Mahi could get a Stork Oracle API token. Lee/James provided it promptly; Nado specified to use `stork-fast`. An oracle.yaml config file was shared in-thread. Likely preparatory for the Chaos→Stork oracle migration scheduled Thursday 22:30 UTC. https://mahifx.slack.com/archives/C09RGU1T1GE/p1779414775390839
