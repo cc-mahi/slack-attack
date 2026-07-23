@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-07-22T07:14:54Z
+last_catchup: 2026-07-23T07:07:08Z
 status: active
 retired_at: null
 retired_reason: null
@@ -82,6 +82,9 @@ retired_reason: null
 
 > [resolved] 2026-07-20 — GBPUSD spread unexpectedly wide (widening config lost over weekend restarts)
 > Client flagged at 15:38 BST that GBPUSD spread was very high; Cameron Hughes confirmed by 16:07 that some widening-based config had been deleted over the weekend (it had been causing restart issues) and was added back in. Client confirmed by 16:31 it was back to prior settings; Mio Knights flagged for a double-check. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1784559373888569)
+
+> [open] 2026-07-23 — bridge license expiring in 6 days (PagerDuty alert)
+> Sam Hewitt flagged a PagerDuty alert that the BrightFunded bridge license is running out in 6 days, asking how to resolve it and why only this bridge triggered the alert. No replies yet in window. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1784778809724569)
 
 ## Notable topics
 
