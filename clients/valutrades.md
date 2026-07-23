@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-22T07:38:05Z
+last_catchup: 2026-07-23T07:09:41Z
 ---
 
 ## Recent issues
@@ -17,8 +17,8 @@ last_catchup: 2026-07-22T07:38:05Z
 > [open] 2026-07-19 — Unmapped "GSFX" market source streaming on FIX MD feed `MahiFX13_Live_Q→ValuCY_Live_Q` — client replied but didn't confirm whether to map it
 > Isaac Dann (Mahi) reported `GSFX_OZNY4_FUND_UBSPB_AMB` publishing on the `MahiFX13_Live_Q→ValuCY_Live_Q` connection and asked whether the client wants it added as a mapped market — same pattern as the 2026-07-13 "Velocity" mapping request (resolved below). **2026-07-20 update:** client replied "Thats a really old maker suprised you havent seen that before?" — doesn't explicitly confirm add/don't-add, so still awaiting a clear decision. [isaac-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784495165519809) [client-reply](https://mahifx.slack.com/archives/C09HN93T0G2/p1784543058186979)
 
-> [open] 2026-07-22 — New TT algo (tag 58 param) config format questions — unanswered
-> Client asked whether tag 58 parameter order for the new algo (json config shows `TTScalePOVStrategy` with durationMinutes/maxParticipation/minParticipation/aggression/tracking) should follow UI order or the json field order, whether `@type` should match the strategy name, and if any other requirements apply. No Mahi reply in window. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784704899328709)
+> [open] 2026-07-22 — New TT algo (tag 58 param) config format questions — Liam replied with format, tag choice pending client's internal review
+> Client asked whether tag 58 parameter order for the new algo (json config shows `TTScalePOVStrategy` with durationMinutes/maxParticipation/minParticipation/aggression/tracking) should follow UI order or the json field order, whether `@type` should match the strategy name, and if any other requirements apply. **2026-07-22 update:** Liam Cordelle replied with the equivalent semicolon-delimited string (`SCALEPOV;0.5;5;5;120;5`) per the format in the 2026-06-25 QB UAT credentials message, and asked whether the client would prefer tag 58 over the originally-discussed Parties-block format (453/448/447/452). Client apologised for missing the earlier chat and said they'd review internally and update on which tag to use; then clarified tag 58 (448) is required OZ→Mahi, and asked whether the algo-string parameters have a set order. Liam confirmed yes, per the original linked message. Tag choice still pending client confirmation. [client-query](https://mahifx.slack.com/archives/C09HN93T0G2/p1784704899328709) [liam-format](https://mahifx.slack.com/archives/C09HN93T0G2/p1784708280586489) [client-review](https://mahifx.slack.com/archives/C09HN93T0G2/p1784711904980939) [liam-flexible](https://mahifx.slack.com/archives/C09HN93T0G2/p1784712082680629) [client-tag58](https://mahifx.slack.com/archives/C09HN93T0G2/p1784714790779169) [client-order-q](https://mahifx.slack.com/archives/C09HN93T0G2/p1784714815701979) [liam-order-confirmed](https://mahifx.slack.com/archives/C09HN93T0G2/p1784716836765629)
 
 > [resolved] 2026-07-21 — cpty 92573314 A/B book classification — Rory confirmed A-book
 > Client asked "please advise for 92573314?" at 14:20 BST; Rory King acknowledged ("Hi overnight, checking") at 14:21 and confirmed "92573314 - A book" (with supporting screenshot) at 14:25 BST. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784640053863789) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784640102279699) [rory-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784640306869679)
@@ -156,6 +156,8 @@ last_catchup: 2026-07-22T07:38:05Z
 > Andri changed POV algo parameters via the trading-tech config UI (Liam confirmed dynamic, no restart needed). [permalink](https://mahifx.slack.com/archives/C09HN93T0G2/p1777352230999959)
 
 ## Notable topics
+
+- 2026-07-22 — cpty 89468663 A/B book classification: client asked team to advise ("please advise Ac 89468663"); Rory King confirmed B book. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784719170596249) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784719179554119) [rory-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784719475152559)
 
 - 2026-07-20 — cpty 92596030 A/B book classification re-check: client asked team to advise ("please advise for 92596030?"); Isaac Dann confirmed A book — low volumes across a range of instruments, yields suggest A Book (follow-on from the 2026-07-14 "wait for more data" note). [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784524024610249) [isaac-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784525826979779)
 
