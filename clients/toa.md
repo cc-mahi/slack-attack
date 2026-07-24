@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-23T07:09:16Z
+last_catchup: 2026-07-24T07:08:06Z
 ---
 
 ## Status
@@ -17,6 +17,15 @@ last_catchup: 2026-07-23T07:09:16Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-07-23 — External reject alert recurs on COMEX_CHI TOA-ARG CHI: PD fired again in the evening, no detail added
+> A second PagerDuty alert (Q35436RM6IKFR9) fired for external rejects on COMEX_CHI at Toa Args CHI, 17:55 BST — no message detail or thread beyond the PD notification. Likely a recurrence of the same morning's HRP_HEDGING_CME_CHI position-limit reject-ratio issue (see entry below); not confirmed. https://mahifx.slack.com/archives/C035H1VNCAD/p1784825710136429
+
+> [resolved] 2026-07-23 — hedgerHrpCME1 PnL breach on TOA-ARG CHI: restarted, back online
+> Arun (14:37 BST) reported hedgerHrpCME1 down on a 24h PnL profit-limit breach (850,263 raw, PnL change -493,422). Restarted and confirmed online in the same message. Continuation of the recurring hedgerHrpCME1 PnL-limit pattern (see 2026-07-21, 2026-05-18 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1784813820185659
+
+> [open] 2026-07-23 — COMEX_CHI/HRP_HEDGING_CME_CHI reject ratio: CME position limit hit on Account 52700F0001
+> Arun (09:55 BST) flagged a 25% reject ratio (46/181 orders) on COMEX_CHI/HRP_HEDGING_CME_CHI at TOA-ARG CHI — CME rejecting with "Pre Trade Position Limit Violation" on Account 52700F0001, LONG limit 500 contracts for product MGC (micro gold). Lee suggested raising it with Argamon directly; Arun agreed, then separately flagged (10:39 BST) a possible misconfiguration on Mahi's side, linking an external Argamon-channel message, but thought it unlikely. No resolution confirmed in window. https://mahifx.slack.com/archives/C035H1VNCAD/p1784796910360759 https://mahifx.slack.com/archives/C035H1VNCAD/p1784799548311919
 
 > [resolved] 2026-07-22/23 — hedgerCBOE1 moved from Toa-argamon LDN to Chicago
 > New ordersCboe1/hedgerCBOE1 processes stood up in Chicago (17:24 BST 2026-07-22); Lee Butts confirmed them live and the London hedgerCBOE1 book turned off (04:23 BST 2026-07-23). Closes out the LDN CBOE hedger left off since the 2026-06-10/11 overnight oscillation (see 2026-05-26 entry below). https://mahifx.slack.com/archives/C035H1VNCAD/p1784737477542119 https://mahifx.slack.com/archives/C035H1VNCAD/p1784777020413939
