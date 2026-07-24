@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
   - {name: "Will", role: "client ops (GoMarkets) — asked about Radex Catch-All execution-profile brokered/internalised trigger logic", confidence: low}
   - {name: "William Rozet", role: "client ops (GoMarkets) — pricing config / NOK-cross arb incident; email williamr@gomarkets.com confirmed 2026-07-20", confidence: low}
-last_catchup: 2026-07-23T07:07:42Z
+last_catchup: 2026-07-24T07:07:06Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-24 — EURNOK spike at ~06:00 UTC traced to EUR news event; Finalto offer spike drove mid via WSS/continuity-pool failover, one bad tick reached clients
+> Mac (GoMarkets, ~07:34 UTC) reported an EURNOK spike at 06:00 UTC and said ticks weren't loading in Echo. Isaac Dann (Mahi, ~07:37 UTC) acknowledged and checked; by ~07:51 UTC he found a EUR news event ~47 min prior caused Finalto's offer to spike sharply while all other LPs went indicative, and the model failed over to the continuity pool, with the mid brought in via WSS causing the spike (recovered quickly once other markets went firm again). Client confirmed (~08:05 UTC) only one bad tick was actually sent out to clients. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784874883586769) [Isaac ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784875070701399) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784875868794889) [client confirms](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784876752376779)
 
 > [open] 2026-07-22 — XAUUSD gold-open volatility: mid jumping aggressively over spread; Isaac diagnosing continuity-pool/pricer mix
 > William Rozet (GoMarkets, ~23:00 UTC 2026-07-22) reported gold was volatile on the open with the mid moving aggressively back and forth over spread, 26DEGREES quoting north of $20 and ISPRIME capping at $5 repeatedly, and nothing obvious in the signals; asked whether it was config-driven or LP-side (spreads widening / LPs going dark). Isaac Dann (Mahi, ~23:01 UTC) acknowledged it looked like an issue "across the board" that morning and said he'd review; by ~00:00 UTC 2026-07-23 he reported the issue looked "mixed between the continuity pool and pricer," still investigating pricing improvements. No resolution confirmed in-window. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784761236297259) [Isaac ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784761284946989) [Isaac thread update](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784764844559609)
