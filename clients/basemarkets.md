@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-07-23T07:04:26Z
+last_catchup: 2026-07-24T07:05:47Z
 ---
 
 ## Status
@@ -45,6 +45,7 @@ last_catchup: 2026-07-23T07:04:26Z
 
 > [open] 2026-06-09 — Centroid give-up workflow broken; alternative MT4→MT5→Compass workflow proposed
 > Kate Stagg post-call notes (2026-06-09): Centroid give-up has two showstopper issues: (1) Centroid sends zero-spread fill price to MT5 — PnL can't be tracked correctly; (2) Centroid sends one order from MT4 and one from MT5 to Compass — double execution risk. Alternative proposed: MT4 order (zero spreads) → passes to Base MT5 → STP'd to Compass → filled with spread → spread-paid fill confirmed in MT5 → client still sees zero-spread in MT4. Liam Cordelle noted a structural concern: previously Tegis P&L was against the market (STP to Scope); under the new model Base takes the other side, with Compass hedging to LMAX — mismatch risk due to internalisation and driver hedging. Kate to raise with Kate B (client); Liam signalled acceptable if there's no P&L share agreement between Tegis and Base. No resolution yet. Also discussed: separate Tegis pricing model with greater TOB quantity, aligned to LMAX (hedger) rather than Scope. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780997666453149)
+> **2026-07-23 update:** Kate Stagg reported Tegis is now testing a new client-side plug-in that calculates their own zero-spread execution price for PnL tracking — cleaner than the current setup. Mechanism: Mahi distributes `CLIENT_PRICE_VIP_LDN` with zero spreads on the bridge (suffix `.z`), trades route to the `C_CLIENTS` channel for execution with real spreads, and the plug-in derives the zero-spread price so Base can track actual execution prices in their MT5. Nothing further needed on Mahi's side beyond group values if Tegis adds new ones. Still pending Tegis's own testing/sign-off before moving to prod. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784810446334549)
 
 > [open] 2026-06-07 — Admin server did not come up after weekend restarts (Compass upgrade weekend)
 > Liam Cordelle noted at 10:00 UTC 2026-06-07 that the admin server failed to come back up after weekend restarts. Beeks detected the issue but were awaiting Mahi permission to reboot; Liam asked Beeks to restart it. Follow-up planned: Liam to establish a procedure giving Beeks more autonomy on reboots. No resolution confirmation in channel yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359)
