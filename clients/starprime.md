@@ -12,13 +12,14 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-23T07:08:39Z
+last_catchup: 2026-07-24T07:08:03Z
 ---
 
 ## Recent issues
 
 > [resolved] 2026-07-22 — XAUUSD IoC limit order rejected LIQUIDITY_VIOLATION
 > Shahid queried a client XAUUSD IoC limit buy order rejection (order 3174198-2, limit 4107.01). William Denny explained the order was cancelled as offside — Mahi's published bid was 4107.88 at the time. Shahid reacted (raised hands), no further follow-up. [Shahid's ask](https://mahifx.slack.com/archives/C096422RPKK/p1784744362795279) [William's explanation](https://mahifx.slack.com/archives/C096422RPKK/p1784745583882039)
+> Follow-up 2026-07-23: Shahid asked William to double-check the client was caught on the ARB execution rule; William confirmed yes — executed under the B Book Arbitrageurs rule as the counterparty is Arbitrageur-classified on FX B Book. [Shahid's follow-up](https://mahifx.slack.com/archives/C096422RPKK/p1784796746597259) [William's confirmation](https://mahifx.slack.com/archives/C096422RPKK/p1784803325562089)
 
 > [open] 2026-07-21 — New makers requested: CMC_RETAIL (MFX-T3), ISPRIME_VIP (MFX-T5)
 > Samin asked Mahi to add two new makers into Compass — CMC_RETAIL via MFX-T3 and ISPRIME_VIP via MFX-T5 — and to add them into Echo as well. Isaac Dann confirmed Mahi will action. No confirmation of completion in channel yet. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1784611757968059) [Isaac's ack](https://mahifx.slack.com/archives/C096422RPKK/p1784611824142059)
