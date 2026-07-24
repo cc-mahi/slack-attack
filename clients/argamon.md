@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-07-23T07:05:37Z
+last_catchup: 2026-07-24T07:05:16Z
 ---
 
 ## Status
@@ -25,8 +25,8 @@ last_catchup: 2026-07-23T07:05:37Z
 
 ## Recent issues
 
-> [open] 2026-07-23 — Order group 012dr82wyoe: client filled worse than brokered-out price, config question unanswered
-> Tom asked about order group ID 012dr82wyoe: what configuration caused the price to drop below the stack in a screenshot movement, and why the client was filled at 1.19775 while the trade was brokered out to Jane St at 1.20232 — unusual for the brokered price to come back materially better than Mahi's own. Isaac acknowledged and said the London team would dig into it today; no resolution yet. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784789549855939)
+> [resolved] 2026-07-23 — Order group 012dr82wyoe: client filled worse than brokered-out price, AUDNZD widening factor tightened
+> Tom asked about order group ID 012dr82wyoe: what configuration caused the price to drop below the stack in a screenshot movement, and why the client was filled at 1.19775 while the trade was brokered out to Jane St at 1.20232. Isaac explained 2026-07-23 22:54: brokered fills use model price, not published WSS/LP price (else Mahi absorbs slippage when WSS favours the client); the stack drop was AUDUSD-driven; AUDNZD's model spread carries a 2.00 widening factor in ROLL/SNGMON that pushes the broker-only override wide unnecessarily since execution is already protected. Tom agreed 2026-07-24 04:19 to reduce the widening factor to 1 and leave WSS as-is; Isaac actioned it 04:22, Elan reacted. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784789549855939) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784843672378519) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784863374723599)
 
 > [open] 2026-07-21 — PrimeXM LDN onboarding: ClientID via tag 448/452 instead of Tag109, config change pending restart
 > Levi (Argamon) raised that PrimeXM can't configure Tag109 for ClientID on the new LDN onboarding; PrimeXM's suggested workaround is tag 448 with tag 452=3 (ClientID), which most other clients already use. Lee Butts confirmed Mahi can map counterparty via party role fields, configurable on the distribution FIX connection config — scoped to the Argamon PrimeXM sessions only (not all PXM sessions). Config change applied 2026-07-21; needs a restart, active from EOD 2026-07-21. Levi to place a test trade after restart to confirm. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
@@ -84,6 +84,9 @@ last_catchup: 2026-07-23T07:05:37Z
 
 > [open] 2026-04-28 — XAUUSD brokerage to Toa expansion
 > Daria added party 104881 to brokered-to-Toa for XAUUSD on argamon.NYC; plan is to migrate the softest of 104881/105048/105153/105681/105773 progressively to see if hedging to CME helps yield. Starting with softest first. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777335260425589)
+
+> [watching] 2026-07-24 — Retail NY volume down ~50% month-on-month, P&L soft again
+> Daria flagged retail NY environment P&L down again this month, tracking the volume drop: ~$800-900m/week last month vs ~$400m/week this month. No thread response yet; no action assigned. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539)
 
 ## Notable topics
 
