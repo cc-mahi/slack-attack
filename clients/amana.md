@@ -17,7 +17,8 @@ key_people_overrides:
   - {name: "Maynard Notario", role: "PH NOC — rejections / spread monitoring", confidence: low}
   - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
   - {name: "Ali Wehbe", role: "ops — energy futures/oils product specs, new instrument onboarding", confidence: low}
-last_catchup: 2026-07-24T07:05:14Z
+  - {name: "Rafik Mansour", role: "ops — futures expiry/settlement notifications", confidence: low}
+last_catchup: 2026-07-27T07:08:46Z
 ---
 
 ## Status
@@ -27,6 +28,12 @@ last_catchup: 2026-07-24T07:05:14Z
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [open] 2026-07-26/27 — XAGFUT-U B-book positions rec: updated snapshot requested, awaiting Amana reply
+> Hadeel asked (09:10 BST 07-26) for XAGFUT-U Bbook positions to be updated, sharing Positions_Recs_XAGFUT_BBOOK.csv (client-perspective positions). Daria Horton replied a day later (04:09 BST 07-27), apologising for the delay and asking if Amana could supply an updated EOD snapshot to reconcile against — no reply yet in-window. [hadeel-request](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785053419677169) [daria-eod-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785121763665199)
+
+> [resolved] 2026-07-24/26 — NG6Q (natural gas) futures settlement: Mahi confirmed no open positions
+> Rafik notified (20:04 BST 07-24) that NG6Q was settling and asked positions be zeroed; Will Denny acknowledged same evening. Shyam confirmed at 23:13 BST 07-26 no open NG6Q positions. Clean expiry. [settlement-notif](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784919843394939) [will-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784919919197429) [shyam-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785104005272819)
 
 > [open] 2026-07-24 — CMC rejection burst on gold: risk confirmed cleared, Amana wants explicit reconfirmation
 > Amana flagged (07:37 BST) multiple rejections from CMC with a screenshot, asking if everything was good on Mahi's end. Isaac Dann replied the risk has cleared; Amana acknowledged ("noted, thanks for checking") but then followed up in-thread asking Isaac to explicitly confirm "this means everything is okay now on your end right" — last message in window, no reply yet. [amana-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784875031077199) [isaac-cleared](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784875110241009) [amana-clarify-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1784875690857609)
