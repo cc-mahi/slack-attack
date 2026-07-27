@@ -19,7 +19,7 @@ key_people_overrides:
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
   - {name: "Mariapaz Bobadilla", role: "Pepperstone OZ", confidence: low}
   - {name: "Tom Smith", email: "thomas.smith@pepperstone.com", role: "Pepperstone technical/ops — recurring DB/credentials requests (FX/Crypto/CFD PROD_LIVE_CLIENTDB, MFXPulse access). Distinct Slack ID and email from Tom Williams (COO) — verify prior 'Tom' History references aren't conflating the two", confidence: low}
-last_catchup: 2026-07-24T07:07:32Z
+last_catchup: 2026-07-27T07:09:47Z
 ---
 
 ## History
