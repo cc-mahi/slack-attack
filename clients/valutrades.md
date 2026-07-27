@@ -9,7 +9,7 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-07-24T07:08:50Z
+last_catchup: 2026-07-27T07:10:54Z
 ---
 
 ## Recent issues
@@ -157,7 +157,7 @@ last_catchup: 2026-07-24T07:08:50Z
 
 ## Notable topics
 
-- 2026-07-24 — Batch A/B book classification (overnight team): cpty 69510539 (Nathan Burch: A book), cpty 69943544 (Isaac Dann: A book); cpty 88900976 asked at 07:16 BST, unanswered at window end. [69510539-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784867788092749) [69510539-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784868042494189) [69943544-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784873054757859) [69943544-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784873562367629) [88900976-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784873803567159)
+- 2026-07-24 — Batch A/B book classification (overnight team): cpty 69510539 (Nathan Burch: A book), cpty 69943544 (Isaac Dann: A book), cpty 88900976 (William Denny: A book, confirmed 08:35 BST after initially unanswered). [69510539-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784867788092749) [69510539-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784868042494189) [69943544-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784873054757859) [69943544-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784873562367629) [88900976-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784873803567159) [88900976-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784878542656759)
 
 - 2026-07-22 — cpty 89468663 A/B book classification: client asked team to advise ("please advise Ac 89468663"); Rory King confirmed B book. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784719170596249) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784719179554119) [rory-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1784719475152559)
 
