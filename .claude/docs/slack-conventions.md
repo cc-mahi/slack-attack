@@ -43,6 +43,7 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `dev` | C8568C6HG |
 | `internal-argamon` | C06U76A7ZJR |
 | `mahi-argamon-operations` | C06TW3D8NMV |
+| `mahi-argamon-trading` | C083GP5F1CL |
 | `internal-atc` | C046RNF64VD |
 | `mahi-atc` | C04AZM0LPMH |
 | `internal-axiory` | C06KQT6EU3W |
