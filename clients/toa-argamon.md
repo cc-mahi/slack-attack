@@ -5,7 +5,7 @@ refs:
   billing: null
   hosts: ../MahiProduct/data/client-hosts.json          # entry: toa-argamon
   wiki: null
-channels_override: null
+channels_override: [internal-argamon, mahi-argamon-operations, internal-toa-ops, mahi-argamon-trading]
 key_people_overrides:
   - {name: "Tom McLean", role: "Argamon-side analyst — primary day-to-day contact in mahi-argamon-operations"}
   - {name: "Levi Ulman", role: "Argamon ops — give-up / rejection queries, Centroid migration lead"}
@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-07-23T07:09:15Z
+last_catchup: 2026-07-27T07:08:08Z
 ---
 
 ## Status
@@ -26,12 +26,19 @@ last_catchup: 2026-07-23T07:09:15Z
 
 ## Recent issues
 
-> [open] 2026-07-23 — Order 012dr82wyoe (CP 90001344): client filled worse than brokered price; config query on stack drop
-> Tom (Argamon) asked why an order dropped below the stack per his screenshot, and why the client was filled at 1.19775 while the same order was brokered out to Jane St at 1.20232 — the brokered price was materially better than the client fill, which Tom said he hadn't seen before. Isaac told him the London team would dig into it today; no diagnosis yet. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784789549855939)
+> [open] 2026-07-23 — COMEX_CHI/HRP_HEDGING_CME_CHI reject storm; MGC position-limit violation, recurred 07-24 with different reason code
+> Arun flagged a high reject ratio (25%, 46/181 orders) on COMEX_CHI/HRP_HEDGING_CME_CHI at Toa Argamon CHI — CME rejecting on a "Pre Trade Position Limit Violation" for account 52700F0001, LONG limit of 500 MGC contracts. Discussed in mahi-argamon-trading with Elan/team: nobody could explain why the limit suddenly applied ("we have plenty of margin", "no notice of change") — both MGC and GC nominally have a 40m USD limit which doesn't obviously map to a 500-contract cap. James Furness suggested dropping `MaxLocalInstrumentRisk` to trigger hedgerHRP1 to aggress instead of increasing the CME position, and noted rejects should let the position "stand down" on their own; no fix confirmed applied. Recurred 2026-07-24 16:36 BST: further external rejects on the same market/hedger (38%, 59/154 orders), this time a GC2 Futures Exposure Limit Violation rather than the MGC position limit — still no root cause or resolution posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784796910360759)
+
+> [watching] 2026-07-24 — Retail NY env volume drop-off; ~$800-900m/week last month vs ~$400m/week this month
+> Daria flagged in internal-argamon that P&L is down again this month in the retail NY environment, tracking a decent drop-off in volume — roughly half of last month's weekly run-rate. No further discussion or explanation in-thread as of catchup. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539)
+
+> [resolved] 2026-07-23 — Order 012dr82wyoe (CP 90001344): client filled worse than brokered price; config query on stack drop
+> Tom (Argamon) asked why an order dropped below the stack per his screenshot, and why the client was filled at 1.19775 while the same order was brokered out to Jane St at 1.20232 — the brokered price was materially better than the client fill, which Tom said he hadn't seen before. Isaac explained brokered fills use the model price, not the published/LP price, so cases where WSS would have given a better fill than our LPs aren't passed through (we'd absorb the slippage otherwise); the stack drop was triggered by a followed AUDUSD move. Isaac flagged the AUDNZD ROLL/SNGMON widening factor (2.00) as overly wide given the broker-only override already protects execution — Tom agreed 2026-07-24 to reduce the widening factor to 1 and leave WSS as is; Isaac actioned the change same day. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784843672378519)
 
 > [open] 2026-07-22 — Recurring HRP_CLIENTS_NET PnL breach alerts + hedgerHrpCME1 limit issues (Toa LDN/CHI)
 > Four PnL-drop/hedger alerts over ~26h at Toa Argamon: hedgerHrpCME1 bumped 1-day PnL limit to bring it back up in CHI (07-21 06:52 BST, Isaac); PnL drop -$4,862 at Toa Args LDN (07-21 19:31 BST, Inald, PD Q3WD6WVC5H84HE, eyes reaction only); hedgerHrpCME1 down from an unrealised position breach, restarted (07-22 00:54 BST, Lee, PD Q3O4AG2XRUJZDU); another PnLDropAlert on HRP_CLIENTS_NET, -$6,179 in 20 min (07-22 08:04 BST, Arun, +1 reaction only). No root-cause diagnosis posted for any of the four; continues the same unexplained pattern as the 2026-06-25 and 2026-05-26 HRP_CLIENTS_NET drop-alert entries below. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784703854590099)
 > Continued through the afternoon of 2026-07-22: four more PnLDropAlerts on HRP_CLIENTS_NET (14:23, 14:38 ×2, 15:07, 17:32 BST — deltas from -$4.2k to -$12.1k over 8min/20min/1hr windows), still no diagnosis (James: "lumpy today"). Inald flagged another drop at 18:02 BST, treated as a dupe of an earlier uncleared alert. Mitigation applied 2026-07-23 04:23 BST: Lee moved CBOE hedging from London to Chicago — ordersCboe1/hedgerCBOE1 now running in Chicago, London hedgerCBOE1 book switched off. Root cause still not diagnosed. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784726609243179)
+> Continued 2026-07-23 14:37 BST: hedgerHrpCME1 in Toa Argamon CHI came down on a PnL breach ($850,263 in 24h, raw change -$1,598,165 → $356,841); Arun restarted it and confirmed back online. Same unexplained pattern as the entries above — no root cause posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784813820185659)
 
 > [open] 2026-07-21 — PrimeXM ClientID FIX tag config for Argamon LDN sessions; pending restart + test
 > Levi (Argamon) asked whether ClientID can be sent via tag 448 (with tag 452=3) instead of tag 109 for PrimeXM's LDN onboarding — PrimeXM can't configure tag 109 for ClientID. Lee confirmed party-role field mapping works and applied the config change scoped to argamon's PXM sessions only (Toa LDN); needs a restart, live after EOD the next day. Levi to test after restart. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
