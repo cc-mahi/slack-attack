@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-24T07:08:06Z
+last_catchup: 2026-07-27T07:10:29Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-07-24T07:08:06Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-07-24 — Third COMEX_CHI/HRP_HEDGING_CME_CHI reject-ratio recurrence: GC2 gold futures exposure limit, no follow-up
+> Arun (16:36 BST) flagged a further reject-ratio alert on COMEX_CHI/HRP_HEDGING_CME_CHI: 38% (59/154 orders) rejected in 15 minutes. First reject was GCQ6 (COMEX gold futures) with reason code 104 "GC2 Futures Exposure Limit Violation: SHORT Order Quantity: 1 exceeds AvailableShortExposureQty: 0" — a different limit type than the 2026-07-23 MGC micro-gold position-limit reject, but same recurring pattern on this hedger. No thread replies or resolution noted. https://mahifx.slack.com/archives/C035H1VNCAD/p1784907369531299
 
 > [open] 2026-07-23 — External reject alert recurs on COMEX_CHI TOA-ARG CHI: PD fired again in the evening, no detail added
 > A second PagerDuty alert (Q35436RM6IKFR9) fired for external rejects on COMEX_CHI at Toa Args CHI, 17:55 BST — no message detail or thread beyond the PD notification. Likely a recurrence of the same morning's HRP_HEDGING_CME_CHI position-limit reject-ratio issue (see entry below); not confirmed. https://mahifx.slack.com/archives/C035H1VNCAD/p1784825710136429
