@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-24T07:04:19Z
+last_catchup: 2026-07-27T07:06:47Z
 ---
 
 ## Recent issues
@@ -174,6 +174,8 @@ last_catchup: 2026-07-24T07:04:19Z
 - 2026-06-14 — G30EUR backstop risk not clearing; Velocity spreads 8+; twilight base spread raised and recalibrated. At ~22:22 BST Daria flagged G30EUR risk not clearing (`OK_NoLiquidityInsideCappedWorstPrice`); self-cleared at 22:29 BST. Root cause: 10x backstop cap insufficient as Velocity TPEUR spreads exceeded 8 against ATC's base spread of 0.6. Daria raised twilight base spread to 1.0 to get it clearing. By 00:35 BST 2026-06-15 base spreads had been updated across all timezones based on actual published spreads over the past week (all within previous minimums but more reasonable). [G30EUR risk not clearing](https://mahifx.slack.com/archives/C046RNF64VD/p1781475722834739) · [spread/cap note](https://mahifx.slack.com/archives/C046RNF64VD/p1781476458100679) · [base spreads updated](https://mahifx.slack.com/archives/C046RNF64VD/p1781480154981729)
 
 - 2026-06-11 — Spotex MT5 SC FIX credentials passed to ATC. David Manoukian posted the Spotex-issued MT5 Seychelles FIX creds (username `spotex_mt5_sc`, no host/port from Spotex) asking Mahi to fill in host and port. Isaac Dann immediately replied with the full connection details (Orders: 149.5.84.234:9011; Market Data: 149.5.84.234:9010 — same server as existing Spotex connections). David confirmed he will pass to Spotex. [client thread](https://mahifx.slack.com/archives/C04AZM0LPMH/p1781141398762719)
+
+- 2026-07-26 — Jack Manoukian asked William Denny to upload the June PnL Report; recurring monthly ask, no reply in window. [Jack's request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1785103149085659)
 
 - 2026-06-09 — May P&L report reviewed by Will Carter; ready for sending. Will posted the ATC LDN Report (2026-05-01–2026-06-01 PDF) in #internal-atc and confirmed it matches the account summary; tagged William Denny for dispatch. Closes the 2026-06-07 Jack Manoukian request for P&L alongside invoice. [Will post](https://mahifx.slack.com/archives/C046RNF64VD/p1780989018424339)
 
