@@ -15,10 +15,13 @@ key_people_overrides:
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
   - {name: "Will", role: "client ops (GoMarkets) — asked about Radex Catch-All execution-profile brokered/internalised trigger logic", confidence: low}
   - {name: "William Rozet", role: "client ops (GoMarkets) — pricing config / NOK-cross arb incident; email williamr@gomarkets.com confirmed 2026-07-20", confidence: low}
-last_catchup: 2026-07-24T07:07:06Z
+last_catchup: 2026-07-27T07:09:15Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-27 — Classification report stuck in loading state (acc 529787)
+> Will (GoMarkets, ~06:50 UTC) asked whether the classification report was available, noting it gets stuck in a loading state when run for account 529787 (two screenshots attached). Sam Hewitt (Mahi, ~07:09 UTC) said he'd take a look, then confirmed (~07:19 UTC) he's seeing the same stuck loading state himself and would investigate internally, promising an update once resolved. No resolution confirmed in-window. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1785131442641109) [Sam ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1785132565185179) [Sam confirms repro](https://mahifx.slack.com/archives/C09J1DP2QQH/p1785133195468049)
 
 > [resolved] 2026-07-24 — EURNOK spike at ~06:00 UTC traced to EUR news event; Finalto offer spike drove mid via WSS/continuity-pool failover, one bad tick reached clients
 > Mac (GoMarkets, ~07:34 UTC) reported an EURNOK spike at 06:00 UTC and said ticks weren't loading in Echo. Isaac Dann (Mahi, ~07:37 UTC) acknowledged and checked; by ~07:51 UTC he found a EUR news event ~47 min prior caused Finalto's offer to spike sharply while all other LPs went indicative, and the model failed over to the continuity pool, with the mid brought in via WSS causing the spike (recovered quickly once other markets went firm again). Client confirmed (~08:05 UTC) only one bad tick was actually sent out to clients. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784874883586769) [Isaac ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784875070701399) [Isaac diagnosis](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784875868794889) [client confirms](https://mahifx.slack.com/archives/C09J1DP2QQH/p1784876752376779)
