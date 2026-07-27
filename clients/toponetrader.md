@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-07-24T07:04:19Z
+last_catchup: 2026-07-27T07:08:09Z
 ---
 
 ## Status
@@ -23,6 +23,9 @@ last_catchup: 2026-07-24T07:04:19Z
 - **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
+
+> [open] 2026-07-25–27 — MatchTrader BTCUSD order arrived at Mahi 100x oversized (1.2 lots → 120 BTC)
+> Daniel (TOT) flagged account 17202's BTCUSD sell as filling well outside the candle range. Shyam Hari found the order arrived at Mahi already sized at 120 BTC and confirmed $63,900.20 was the correct VWAP for that size — no pricing or slippage issue on Mahi's side. Daniel confirmed the trader only opened 1.2 lots on the platform. Shyam asked Daniel to raise a likely lot-size multiplier bug with MatchTrader; awaiting their response. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784987610439809) [diagnosis](https://mahifx.slack.com/archives/C08U853T684/p1785122677439389)
 
 > [resolved] 2026-07-15–18 — Compass upgrade: maintenance window Sat 18 Jul 10:00–11:00 UK completed
 > Liam confirmed to Arjie that positions held over the weekend would stay open with no impact during the ~15min pricing gap. Release completed successfully 2026-07-18 ~10:17 UK; client acknowledged. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784120689018969) [confirmation](https://mahifx.slack.com/archives/C08U853T684/p1784275950431989) [completion](https://mahifx.slack.com/archives/C08U853T684/p1784366260301619)
