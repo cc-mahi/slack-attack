@@ -12,10 +12,19 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-27T07:07:05Z
+last_catchup: 2026-07-28T07:10:57Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-28 — ISPRIME_RETAIL removed from execution markets/NOP limits but flow still hitting it
+> Samin updated `hedging.executionMarkets` and `hedging.rules.execution.maximumMarketPosition` directly in Compass, apparently as part of removing ISPRIME_RETAIL. Samin then flagged flow was still hitting ISPRIME_RETAIL despite the removal; also asked whether an EOD restart is needed — Sam Hewitt believes the config is dynamic and doesn't require one. Sam Hewitt acknowledged and said Mahi will double-check. Unresolved as of end of window. [Samin's execution-markets edit](https://mahifx.slack.com/archives/C096422RPKK/p1785221057658669) [Samin's NOP-limits edit](https://mahifx.slack.com/archives/C096422RPKK/p1785218489986799) [ISPRIME_RETAIL still hitting flag](https://mahifx.slack.com/archives/C096422RPKK/p1785221804903319) [Sam's ack](https://mahifx.slack.com/archives/C096422RPKK/p1785221906703309)
+
+> [open] 2026-07-28 — Samin requested flattening all SI book positions
+> Samin asked Sam Hewitt to flatten all positions in the SI book. Sam Hewitt confirmed the team will look into it shortly. Unresolved as of end of window. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1785219847188709) [Sam's reply](https://mahifx.slack.com/archives/C096422RPKK/p1785221686587669)
+
+> [resolved] 2026-07-28 — Risk splitting missing for INSTI Tier 1/2/3 channels; test trade landed in wrong book
+> Samin reported a test SI trade landed in INSTI_CLIENTS_LDN (Insti FX Compass Book) instead of the Non Rev Share FX SI Book. Sam Hewitt diagnosed: the live risk-splitting rule only covers A_CLIENTS and A_INSTI_CLIENTS channels, not A_INSTI_TIER1/2/3_CLIENTS, so no split ran on the tier-1 test trade. Samin asked for the tier channels to be mapped to SI; Sam Hewitt added a new entry routing A_INSTI_TIER1/2/3_CLIENTS 100% to SI_CLIENT_RISK_TRANSFER (offset INSTI_CLIENTS_LDN_SPLIT), flagging that the existing OFF_BOOK_CLIENTS_1 counterparty carve-out on A_INSTI_CLIENTS does not carry over to the tier channels. Samin confirmed the re-test worked. [Samin's report](https://mahifx.slack.com/archives/C096422RPKK/p1785216547664249) [Sam's diagnosis](https://mahifx.slack.com/archives/C096422RPKK/p1785217879871339) [Sam's fix confirmation](https://mahifx.slack.com/archives/C096422RPKK/p1785218922263309) [Samin confirms working](https://mahifx.slack.com/archives/C096422RPKK/p1785219752619009)
 
 > [resolved] 2026-07-22 — XAUUSD IoC limit order rejected LIQUIDITY_VIOLATION
 > Shahid queried a client XAUUSD IoC limit buy order rejection (order 3174198-2, limit 4107.01). William Denny explained the order was cancelled as offside — Mahi's published bid was 4107.88 at the time. Shahid reacted (raised hands), no further follow-up. [Shahid's ask](https://mahifx.slack.com/archives/C096422RPKK/p1784744362795279) [William's explanation](https://mahifx.slack.com/archives/C096422RPKK/p1784745583882039)
