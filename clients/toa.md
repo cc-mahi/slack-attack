@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-27T07:10:29Z
+last_catchup: 2026-07-28T07:11:46Z
 ---
 
 ## Status
@@ -17,6 +17,12 @@ last_catchup: 2026-07-27T07:10:29Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-07-27 — PnL drop at TOA-ARG LDN HRP_CLIENTS_NET ~-7k, no follow-up
+> Sam Hewitt (23:23 BST) flagged a PnL drop at Toa Argamon LDN on HRP_CLIENTS_NET of ~-7k, with a screenshot. No thread replies or resolution noted — another instance of the recurring HRP_CLIENTS_NET drop pattern (see 2026-07-22, 2026-06-25, 2026-05-26 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1785190997465499
+
+> [open] 2026-07-27 — External order rejects on TOA Argamon LDN: rate-limit related, no follow-up
+> Inald (09:19 BST) flagged external order rejects at Toa Argamon LDN via PagerDuty (Q2DH0JLUWV2U3K), attributing it to hitting rate limits. Only a +1 reaction — no thread discussion or resolution noted in window. https://mahifx.slack.com/archives/C035H1VNCAD/p1785140358840599
 
 > [open] 2026-07-24 — Third COMEX_CHI/HRP_HEDGING_CME_CHI reject-ratio recurrence: GC2 gold futures exposure limit, no follow-up
 > Arun (16:36 BST) flagged a further reject-ratio alert on COMEX_CHI/HRP_HEDGING_CME_CHI: 38% (59/154 orders) rejected in 15 minutes. First reject was GCQ6 (COMEX gold futures) with reason code 104 "GC2 Futures Exposure Limit Violation: SHORT Order Quantity: 1 exceeds AvailableShortExposureQty: 0" — a different limit type than the 2026-07-23 MGC micro-gold position-limit reject, but same recurring pattern on this hedger. No thread replies or resolution noted. https://mahifx.slack.com/archives/C035H1VNCAD/p1784907369531299
