@@ -18,10 +18,16 @@ key_people_overrides:
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
   - {name: "Evgenii Ishchenko", role: "trading ops — escalated XAUUSD negative-slippage complaint pattern", confidence: low}
-last_catchup: 2026-07-27T07:09:13Z
+last_catchup: 2026-07-28T07:09:30Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-28 — FIX latency alert screenshot: confirmed all clear
+> Samuel Ewebiyi flagged a FIX latency message with a screenshot at 05:33 BST. Nathan Burch checked and confirmed all good on Mahi's end; Samuel confirmed all fine on their side too. [Samuel](https://mahifx.slack.com/archives/C0456LSHQQK/p1785213201043879) [Nathan](https://mahifx.slack.com/archives/C0456LSHQQK/p1785213483433039) [Samuel confirms](https://mahifx.slack.com/archives/C0456LSHQQK/p1785213612799769)
+
+> [open] 2026-07-27 — Order investigation: 1254ms delay on XAUUSD order (ASV_MT4_STANDARD1_37118433); logs no longer available, still reconciling
+> Louie Davidson asked Mahi to investigate an order (~1529472312555521712, XAUUSD, DISTRIBUTION_2_LDN) reporting a 1254ms delay. Rory King confirmed the trade's logs are no longer stored (past retention), so reconciliation will take longer; investigation ongoing, no resolution in window. [Louie](https://mahifx.slack.com/archives/C0456LSHQQK/p1785156608400869) [Rory](https://mahifx.slack.com/archives/C0456LSHQQK/p1785170040354569)
 
 > [open] 2026-07-26 — TOB page (360T) not updating market data for any LP
 > Samuel Ewebiyi reported the TOB page (`/trading/tob?m=360T`) showing no price updates for any LP, with a screenshot. Shyam Hari checked and could see market data from the same link, asking Samuel to confirm; Samuel confirmed still not seeing updates and said he'd monitor for a bit. Shyam said he'd check why it's happening. No resolution confirmed in window. [Samuel](https://mahifx.slack.com/archives/C0456LSHQQK/p1785102637777689) [Shyam checking](https://mahifx.slack.com/archives/C0456LSHQQK/p1785102899886189) [Samuel confirms](https://mahifx.slack.com/archives/C0456LSHQQK/p1785103039763019) [Shyam will investigate](https://mahifx.slack.com/archives/C0456LSHQQK/p1785103478709149)
