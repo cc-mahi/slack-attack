@@ -12,10 +12,25 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-27T07:09:13Z
+last_catchup: 2026-07-28T07:09:53Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-27 — 2,437oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 2,437oz gold long filled on Finalto at 15:16 BST; Rory King confirmed "this is done" at 15:44 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785161811067709) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785163496882289)
+
+> [open] 2026-07-27 — USOIL weekend-gap loss on tag 4004076: -$60k negative balance wiped at LP position; client asked for risk-handling input
+> Youssef Bouz forwarded an incident: tag 4004076 held 20,000 USOIL (20 lots, ~$70k equity) over the weekend; the gap-down open wiped the position, leaving a -$60k negative balance absorbed at Mahi's LP position. Youssef asked whether there's a better way to handle weekend-gap risk beyond raising margins. Will Carter flagged it alongside an Isaac Dann note that the client "got stopped out" (linking an Isaac CFD-book P&L note from 2026-07-26 evening as related); Daria Horton asked "what did you suggest?" — unanswered in window. [forwarded-incident](https://mahifx.slack.com/archives/C09QS1NUA80/p1785153062972769) [daria-question](https://mahifx.slack.com/archives/C09QS1NUA80/p1785208083823309) [related-note](https://mahifx.slack.com/archives/C09QS1NUA80/p1785105283910049)
+
+> [open] 2026-07-27 — Finalto gold spreads found 2.3–4.1x wider than market; retail-feed segmentation recommended to Youssef ahead of his Finalto call
+> Rory King's session-by-session analysis of GCC's gold flow found Finalto quoting ~21c/oz London, ~25c/oz US, ~39c/oz Asia vs ~9c/oz available in the wider market — 2.3x–4.1x wider, consistent all week and worst in Asian hours. 86% of gold orders are <100oz (~69% of notional), aligning with the 8–10c retail feed Youssef referenced on a prior call. Recommended asks: move most tags off the smart-routing/defensive feed, put <100oz flow onto the retail feed, a deeper systematic feed for larger clips, firm/streaming pricing with Asian-session coverage, and a review in 2–3 weeks. Estimated value drag on internalisation profit from the Finalto-vs-LMAX gap: ~$6.2k/week (~$320k/yr). Youssef taking the analysis to a Finalto call the next morning (2026-07-28). [analysis](https://mahifx.slack.com/archives/C09QS1NUA80/p1785169902865189)
+
+> [open] 2026-07-27 — CP 334520 blacklisted from SI after notional-flow uplift; being watched for reversion
+> Rory King pulled counterparty 334520 out of Systematic Internalisation after an uplift in its notional flow over Friday/Monday, trending more negative; the CP was previously internalising a decent share of its flow, so Rory flagged watching whether it reverts to stronger internalisation metrics this week. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1785180029052449)
+
+> [open] 2026-07-27 — Internal debate on GCC's contract notice period (3 vs 12 months) ahead of Nicole's contracting
+> Following the 2026-07-22 commercial terms lock-in, Bonnie Cassidy raised whether the notice period should stay at three months (screenshot shared, content not captured), floating it to the team. Will Carter argued for the agreed 12-month term given GCC already has an increased notional floor for bad-volume months; Bonnie speculated the client wants a shorter notice so they aren't on the hook for three months if they "blow up." Will agreed to check with Nicole Vivian whether a special condition could trigger a shorter notice — no resolution in window. [bonnie-raises](https://mahifx.slack.com/archives/C09QS1NUA80/p1785163289120989) [will-argues-12mo](https://mahifx.slack.com/archives/C09QS1NUA80/p1785163369137319) [bonnie-speculates](https://mahifx.slack.com/archives/C09QS1NUA80/p1785163433677609) [will-checks-nicole](https://mahifx.slack.com/archives/C09QS1NUA80/p1785163838153619)
 
 > [resolved] 2026-07-24 — 532oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 532oz gold long filled on Finalto at 15:15 BST; William Denny confirmed "this is done" at 16:06 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784902541736989) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1784905571945269)
