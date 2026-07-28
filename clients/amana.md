@@ -18,7 +18,7 @@ key_people_overrides:
   - {name: "Omar Maatouk", role: "ops — pricing/hedging config requests, rejection reports", confidence: low}
   - {name: "Ali Wehbe", role: "ops — energy futures/oils product specs, new instrument onboarding", confidence: low}
   - {name: "Rafik Mansour", role: "ops — futures expiry/settlement notifications", confidence: low}
-last_catchup: 2026-07-27T07:08:46Z
+last_catchup: 2026-07-28T07:07:40Z
 ---
 
 ## Status
@@ -28,6 +28,12 @@ last_catchup: 2026-07-27T07:08:46Z
 - **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
+
+> [open] 2026-07-27 — Fractional limit-order fills on metals A-book: price check set to 0, monitoring effect
+> Amana asked (10:02 BST) for a fix to fractional-oz fills on limit orders; Rory explained the fractional display comes from the price-check filling past top-of-book combined with `quantityDefinition`'s high precision (0.000001, set per Amana's own earlier request), and proposed zeroing the price check on the affected A-book execution rules so limit orders only fill to the quoted size relative to available quantity and cancel the balance. After a call, Amana agreed ("we always fill the client to the size that is available in the book irrespective of any of the signals" / "that sounds good rory"); Rory applied the change and confirmed internally he'd monitor its effect on incoming flow for the rest of the day — no confirmation yet that the fix is holding. [amana-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785142923096449) [rory-options](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785143036318809) [call-request](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785153628997479) [call-confirmed](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785153928401349) [rory-explain-detail](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785157696729209) [amana-agree1](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785158204549679) [amana-agree2](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785158165927139) [rory-actioned](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785158532754259) [rory-internal-monitor](https://mahifx.slack.com/archives/C08T42TMKU3/p1785160339959879)
+
+> [resolved] 2026-07-27 — XAUFUT-V stale "Client Pricing Indicative" EMERGENCY alert: fixed via misaligned XAGFUT-Z monitoring removed
+> Amana flagged (09:10 BST) wanting the recurring XAUFUT alert disabled; Rory started investigating, then Amana escalated over the next ~3 hours as the critical alert kept firing ("any update? it has been showing critical error since the morning", "why is it taking so long to fix an alert? Having false critical alerts means that no one is looking at alerts"). Rory confirmed the instrument is still considered live in config even though there's no trading or positions on Amana's side, then traced the cause to a misalignment from adding XAGFUT-Z to be monitored; he removed it and restarted the relevant processes at 12:38 BST (bouncing `systemStateMonitor` internally), closing out the EMERGENCY alert with Amana's confirming reaction. [amana-flag](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785139839319959) [rory-ack](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785140103711819) [escalation1](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785146885366489) [escalation2](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785150697852339) [rory-stillinvestigating](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785150985361549) [rory-rootcause-fix](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785152317503319) [rory-internal-bounce](https://mahifx.slack.com/archives/C08T42TMKU3/p1785151822387269)
 
 > [open] 2026-07-26/27 — XAGFUT-U B-book positions rec: updated snapshot requested, awaiting Amana reply
 > Hadeel asked (09:10 BST 07-26) for XAGFUT-U Bbook positions to be updated, sharing Positions_Recs_XAGFUT_BBOOK.csv (client-perspective positions). Daria Horton replied a day later (04:09 BST 07-27), apologising for the delay and asking if Amana could supply an updated EOD snapshot to reconcile against — no reply yet in-window. [hadeel-request](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785053419677169) [daria-eod-ask](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785121763665199)
@@ -453,6 +459,7 @@ last_catchup: 2026-07-27T07:08:46Z
 
 ## Notable topics
 
+- 2026-07-27 — Metals futures expiry schedule confirmed with Ali: next active gold contract is December (GC6Z), already enabled since July 21 — Amana offering only December expiries for gold and silver until then; no 2027 futures data from their LP yet, Amana will prepare 2027 OTC futures starting/expiry (Oct–Nov 2026) once available. New subscription mappings needed for 2027 contracts. [ali-schedule](https://mahifx.slack.com/archives/C08SYSMP0EB/p1785151833896579)
 - 2026-07-22 — Signal process wouldn't restart after adding XAU Futs: FileNotFoundException ("Too many open files") in FileCounter.start hitting the FD limit while creating persisted stat counters; Isaac removed PSM-T/PSM-W from publishing as a temp fix, noting the process is running close to max counters generally. [isaac-fd-limit](https://mahifx.slack.com/archives/C08T42TMKU3/p1784683810524019)
 - 2026-07-13 — Isaac tuned XAUUSD skew signal levers (IFMS + flow-price-thresh: priceChange/nrmsdMoreThreshold/ceiling/floor adjustments) aiming to improve skew $/M. [isaac-tuning](https://mahifx.slack.com/archives/C08T42TMKU3/p1783916043482729)
 - 2026-07-03 — XAUUSD B-book mobile client rollout: Nikos announced at 08:09 BST that Amana is moving mobile clients XAUUSD pricing and execution to Mahi B-book. [announce](https://mahifx.slack.com/archives/C08SYSMP0EB/p1783062549305299)
