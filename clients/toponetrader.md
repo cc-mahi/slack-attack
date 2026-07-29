@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-07-28T07:06:13Z
+last_catchup: 2026-07-29T07:23:55Z
 ---
 
 ## Status
@@ -24,8 +24,8 @@ last_catchup: 2026-07-28T07:06:13Z
 
 ## Recent issues
 
-> [open] 2026-07-25–27 — MatchTrader BTCUSD order arrived at Mahi 100x oversized (1.2 lots → 120 BTC)
-> Daniel (TOT) flagged account 17202's BTCUSD sell as filling well outside the candle range. Shyam Hari found the order arrived at Mahi already sized at 120 BTC and confirmed $63,900.20 was the correct VWAP for that size — no pricing or slippage issue on Mahi's side. Daniel confirmed the trader only opened 1.2 lots on the platform. Shyam asked Daniel to raise a likely lot-size multiplier bug with MatchTrader; awaiting their response. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784987610439809) [diagnosis](https://mahifx.slack.com/archives/C08U853T684/p1785122677439389)
+> [open] 2026-07-25–29 — MatchTrader BTCUSD order arrived at Mahi 100x oversized (1.2 lots → 120 BTC)
+> Daniel (TOT) flagged account 17202's BTCUSD sell as filling well outside the candle range. Shyam Hari found the order arrived at Mahi already sized at 120 BTC and confirmed $63,900.20 was the correct VWAP for that size — no pricing or slippage issue on Mahi's side. Daniel confirmed the trader only opened 1.2 lots on the platform; MatchTrade support initially pointed back at "the bridge side," and Shyam confirmed to Broker Support that the bridge provider was MatchTrade itself. Shyam also flagged in #internal-toponetrader that no fractional crypto orders have come through this channel at all, suggesting other traders are affected the same way. On 2026-07-29 Broker Support identified the root cause: a trading-session multiplier misconfigured at 100x on BTCUSD, and asked TOT to set it to 0.01 and confirm whether other symbols show the same discrepancy. Awaiting confirmation the fix is applied. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784987610439809) [diagnosis](https://mahifx.slack.com/archives/C08U853T684/p1785122677439389) [other-traders-flagged](https://mahifx.slack.com/archives/C08TG143F4L/p1785301912854039) [root-cause](https://mahifx.slack.com/archives/C08VCTZ7ZN2/p1785304369359649)
 
 > [resolved] 2026-07-15–18 — Compass upgrade: maintenance window Sat 18 Jul 10:00–11:00 UK completed
 > Liam confirmed to Arjie that positions held over the weekend would stay open with no impact during the ~15min pricing gap. Release completed successfully 2026-07-18 ~10:17 UK; client acknowledged. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784120689018969) [confirmation](https://mahifx.slack.com/archives/C08U853T684/p1784275950431989) [completion](https://mahifx.slack.com/archives/C08U853T684/p1784366260301619)
