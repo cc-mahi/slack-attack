@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-07-28T07:06:13Z
+last_catchup: 2026-07-29T07:10:38Z
 ---
 
 ## Status
@@ -21,6 +21,9 @@ last_catchup: 2026-07-28T07:06:13Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-07-29 — AUDUSD third-tier spread not achieving target; BMSL multiplier drop to 0.6 confirmed by client
+> Client changed the AUDUSD spread config on `CLIENT_PRICE_LDN` aiming for 0 @ 500k / 5 @ next 500k, but the third layer wasn't landing on the desired figure, and asked whether BMSL also needed editing. Sam Hewitt explained the published number is a volume-weighted spread: with the first two 500k tiers at choice, hitting an effective 0.5-pip third tier requires a 0.25-pip volume-weighted value, set via the Cumulative Quantity To Reference Spread Multiplier in the BMSL config — recommended dropping the multiplier to 0.6 and offered to apply it. Client confirmed "Yes please"; change not yet confirmed applied as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785304870167229) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785308740698439) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785308833979019)
 
 > [resolved] 2026-07-21 — JPN225 distributed spread stuck at 0.5 due to wide-spread suppression; corrected to 30.0 across all timezones
 > Client flagged that JPN225's distributed price was stuck showing a 0.5 spread even though the client-price model itself had the correct spread. William Denny traced it to wide-spread suppression configured on `DISTRIBUTION_WSS` for JPXJPY and raised the suppression threshold from 0.5 to 30.0 — first for the LDN-NYC timezone to confirm the fix (client then saw the client-price-model spread of 13.2), then applied the same change across all remaining timezones. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784632293973289) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1784632657581129)
@@ -102,6 +105,8 @@ last_catchup: 2026-07-28T07:06:13Z
 
 ## Notable topics
 
+- 2026-07-28 — Tegis asked whether Mahi recommends Beeks for MT5-go-live VPS provisioning: relayed via Kate Stagg from Kate B/Alex. Andrew Morgan noted he has an outstanding query with Martyna and Beeks about Beeks' recent price rises and suspects the two questions are linked — no VPS recommendation given yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1785252735199349) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1785272669991699)
+- 2026-07-28 — Infra deploying `hybridHedgerCFD1`: William Denny noted the deploy; no further detail in window. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1785246225604349)
 - 2026-07-15 — Base Markets CEO featured in FinanceMagnates thought-leadership piece: Bonnie Cassidy shared a FinanceMagnates piece with CEO Alex Kolpokchi ("we're building a broker that puts client value first"); no internal discussion in thread. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1784128677665039)
 - 2026-07-09 — Isaac Dann (Mahi NZ) notified channel that Friday 10 July is a NZ Bank Holiday; emergency support cover only, Slack not monitored normally, support email/ticketing and LN/NZ phone lines available for urgent issues. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1783571793611179)
 - 2026-07-06 — Tegis flow healthy, PnL ticking up; client asked for rev-share book hedger + Tegis eyeing MT5 move: Kate Stagg relayed a client catch-up covering three points — Tegis flow monetising well, Tegis potentially moving to MT5 (hoping Base absorbs the architecture change), and a request for a hedger on the rev share book mirroring the Tegis setup. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1783348750050239)
