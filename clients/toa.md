@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-28T07:11:46Z
+last_catchup: 2026-07-29T07:24:06Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-07-28T07:11:46Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-07-28 — Two more HRP_CLIENTS_NET PnL drops on TOA-ARG LDN, no follow-up
+> Inald flagged two further PnL-drop PagerDuty alerts at Toa Argamon LDN on HRP_CLIENTS_NET: -4.5k at 11:18 BST (Q0HT9L4SQ0KKGT) and -6.45k at 11:25 BST (Q0OCBP55HJ8JEL). Only a +1 reaction on the second — no thread discussion or resolution. Continues the recurring HRP_CLIENTS_NET drop pattern (see 2026-07-27, 2026-07-22, 2026-06-25, 2026-05-26 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1785233888832469 https://mahifx.slack.com/archives/C035H1VNCAD/p1785234357012699
 
 > [open] 2026-07-27 — PnL drop at TOA-ARG LDN HRP_CLIENTS_NET ~-7k, no follow-up
 > Sam Hewitt (23:23 BST) flagged a PnL drop at Toa Argamon LDN on HRP_CLIENTS_NET of ~-7k, with a screenshot. No thread replies or resolution noted — another instance of the recurring HRP_CLIENTS_NET drop pattern (see 2026-07-22, 2026-06-25, 2026-05-26 entries). https://mahifx.slack.com/archives/C035H1VNCAD/p1785190997465499
