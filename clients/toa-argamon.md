@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-07-28T07:11:53Z
+last_catchup: 2026-07-29T07:24:03Z
 ---
 
 ## Status
@@ -31,6 +31,7 @@ last_catchup: 2026-07-28T07:11:53Z
 
 > [open] 2026-07-27 — Another HRP_CLIENTS_NET PnL drop (~-$7k) at Toa Argamon LDN
 > Sam Hewitt flagged a further PnL drop of roughly -$7k at Toa Argamon LDN HRP Clients Net (23:23 BST, screenshot attached). No thread discussion or diagnosis — continues the same unexplained recurring pattern as the 2026-07-22, 2026-06-25, and earlier HRP_CLIENTS_NET drop-alert entries below. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785190997465499)
+> Continued 2026-07-28: two more PagerDuty PnL-drop incidents at Toa Argamon LDN (Inald) — -$4.5k at 11:18 BST and a further -$6.45k on HRP Clients at 11:25 BST. +1 reaction only, no diagnosis posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785233888832469)
 
 > [open] 2026-07-23 — COMEX_CHI/HRP_HEDGING_CME_CHI reject storm; MGC position-limit violation, recurred 07-24 with different reason code
 > Arun flagged a high reject ratio (25%, 46/181 orders) on COMEX_CHI/HRP_HEDGING_CME_CHI at Toa Argamon CHI — CME rejecting on a "Pre Trade Position Limit Violation" for account 52700F0001, LONG limit of 500 MGC contracts. Discussed in mahi-argamon-trading with Elan/team: nobody could explain why the limit suddenly applied ("we have plenty of margin", "no notice of change") — both MGC and GC nominally have a 40m USD limit which doesn't obviously map to a 500-contract cap. James Furness suggested dropping `MaxLocalInstrumentRisk` to trigger hedgerHRP1 to aggress instead of increasing the CME position, and noted rejects should let the position "stand down" on their own; no fix confirmed applied. Recurred 2026-07-24 16:36 BST: further external rejects on the same market/hedger (38%, 59/154 orders), this time a GC2 Futures Exposure Limit Violation rather than the MGC position limit — still no root cause or resolution posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784796910360759)
