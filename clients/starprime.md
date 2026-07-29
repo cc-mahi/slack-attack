@@ -12,10 +12,19 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-28T07:10:57Z
+last_catchup: 2026-07-29T07:21:10Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-28 — CLIENT_PRICE_INST indicative flashing traced to LatencyFilter tripping on relabelled MAHI_LP_11; Zendesk #23262 filed
+> Following a call-notes TODO from Will Carter (Samin flagged CLIENT_PRICE_INST flashing indicative, alongside updating benchmark LPs for BMSL/MWMS and locating the NOP-reducing-arb netting setting — see Notable topics), Kate Stagg diagnosed the indicative flashing as the `LatencyFilter` tripping on MAHI_LP_11 (Argamon's CLIENT_PRICE_RETAIL_LDN proxied in). Arun Patel found root cause: the Market table row for MAHI_LP_11 is typed ECN rather than CLIENT_PRICE, so the filter keys on `triggerTime` (stamped by Argamon's pricer, routinely ~1.6s stale) instead of `transactTime`; a post-26.3 change stopped the rolling median tracking samples ≥1s, pinning the threshold at ~2s and binning ~46% of ticks permanently. Zendesk ticket filed. Unresolved as of end of window. [Kate's diagnosis](https://mahifx.slack.com/archives/C095MJHC68J/p1785256718164939) [Arun's root cause](https://mahifx.slack.com/archives/C095MJHC68J/p1785257888634349) [Zendesk ticket #23262](https://mahifx.slack.com/archives/C095MJHC68J/p1785258337028519)
+
+> [open] 2026-07-28 — Call-notes TODO from Samin: benchmark LP updates for BMSL/MWMS, NOP-reducing-arb netting question
+> Will Carter posted a TODO list from a call with Samin: update the benchmark LPs feeding BMSL and MWMS to CMC_RETAIL/ISPRIME_VIP/STARTRADER1/KAMA_RETAIL/B2PRIME_RETAIL (ref market MAHI_LP_11, 1c skew + PSM signals on CLIENT_PRICE_INSTI_LDN); and locate where the "NOP reducing arb" netting setting lives (net-to-zero between two crossed LPs). NOP caps left under Samin's own control. No completion confirmed in channel yet. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1785230290345739) [Samin's notes pt1](https://mahifx.slack.com/archives/C095MJHC68J/p1785230345829739) [Samin's notes pt2](https://mahifx.slack.com/archives/C095MJHC68J/p1785230383341149)
+
+> [open] 2026-07-28 — Kama Capital Retail rebrands to KAMA_CAPITAL_RETAIL_PXM on MFX-T2 ahead of EOD restart
+> Shahid Afrid flagged that after today's EOD restart, Kama Capital Retail on MFX-T2 renames to KAMA_CAPITAL_RETAIL_PXM — new TAG1, and marketdata needs to subscribe to the new name. Daria Horton confirmed Mahi updated the market mapping and would restart at EOD to pick it up. Completion not confirmed in channel yet. [Shahid's notice](https://mahifx.slack.com/archives/C096422RPKK/p1785230540154379) [Daria's confirmation](https://mahifx.slack.com/archives/C096422RPKK/p1785269366206029)
 
 > [open] 2026-07-28 — ISPRIME_RETAIL removed from execution markets/NOP limits but flow still hitting it
 > Samin updated `hedging.executionMarkets` and `hedging.rules.execution.maximumMarketPosition` directly in Compass, apparently as part of removing ISPRIME_RETAIL. Samin then flagged flow was still hitting ISPRIME_RETAIL despite the removal; also asked whether an EOD restart is needed — Sam Hewitt believes the config is dynamic and doesn't require one. Sam Hewitt acknowledged and said Mahi will double-check. Unresolved as of end of window. [Samin's execution-markets edit](https://mahifx.slack.com/archives/C096422RPKK/p1785221057658669) [Samin's NOP-limits edit](https://mahifx.slack.com/archives/C096422RPKK/p1785218489986799) [ISPRIME_RETAIL still hitting flag](https://mahifx.slack.com/archives/C096422RPKK/p1785221804903319) [Sam's ack](https://mahifx.slack.com/archives/C096422RPKK/p1785221906703309)
