@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
   - {name: "Will", role: "client ops (GoMarkets) — asked about Radex Catch-All execution-profile brokered/internalised trigger logic", confidence: low}
   - {name: "William Rozet", role: "client ops (GoMarkets) — pricing config / NOK-cross arb incident; email williamr@gomarkets.com confirmed 2026-07-20", confidence: low}
-last_catchup: 2026-07-29T07:15:40Z
+last_catchup: 2026-07-30T07:09:23Z
 ---
 
 ## Recent issues
