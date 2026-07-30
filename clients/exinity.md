@@ -18,7 +18,7 @@ key_people_overrides:
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
   - {name: "Evgenii Ishchenko", role: "trading ops — escalated XAUUSD negative-slippage complaint pattern", confidence: low}
-last_catchup: 2026-07-29T07:13:16Z
+last_catchup: 2026-07-30T07:08:58Z
 ---
 
 ## Recent issues
