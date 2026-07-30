@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Jay M", email: "jay@starprime.com", role: "CEO / co-founder", confidence: low}
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
-last_catchup: 2026-07-29T07:21:10Z
+last_catchup: 2026-07-30T07:10:02Z
 ---
 
 ## Recent issues
+
+> [open] 2026-07-30 — Legacy unused hedgers removed from infra pending Samin sign-off (hybridHedgerInternalSI1/2/3, hybridHedgerGrand1, arbHedgerGrand1)
+> Nathan Burch removed these hedgers from MFXCompassInfra and ran an infra deploy, having found no flow or references to the associated books; he'll strip the remaining config/books tomorrow unless flagged otherwise. Will Carter confirmed the hedgers were set up as part of Samin's initial go-live plan but never used, and will run the removal past Samin. Connects to Will's earlier housekeeping note (see Notable topics, 2026-07-21). Unresolved as of end of window. [Nathan's removal](https://mahifx.slack.com/archives/C095MJHC68J/p1785383442840909) [Will's confirmation](https://mahifx.slack.com/archives/C095MJHC68J/p1785386664184539)
+
+> [open] 2026-07-29 — SI model turned back on; per-Maker XAUUSD position matching underway, blocked on call handover
+> Samin announced (16:03 BST) the SI model is being turned back on, with per-Maker XAUUSD positions to be sent at EOD so LP management/adjustments could resume the next day; a few clients were moved over shortly after, pending incoming flow. The next morning (06:31–07:24 BST) Samin asked for adjustments via Makers to bring SI House in line with a shared position screenshot — accuracy doesn't need to be exact, just close enough to trigger LP management functions. Sam Hewitt arranged a call but hit connectivity issues and may hand off to the LDN team. Unresolved as of end of window. [Samin's SI-on announcement](https://mahifx.slack.com/archives/C096422RPKK/p1785337426075419) [clients moved over](https://mahifx.slack.com/archives/C096422RPKK/p1785338303067089) [Samin's morning ask](https://mahifx.slack.com/archives/C096422RPKK/p1785389484569099) [SI House target + call ask](https://mahifx.slack.com/archives/C096422RPKK/p1785389759879939) [Sam's connectivity flag](https://mahifx.slack.com/archives/C096422RPKK/p1785392265700739)
 
 > [open] 2026-07-28 — CLIENT_PRICE_INST indicative flashing traced to LatencyFilter tripping on relabelled MAHI_LP_11; Zendesk #23262 filed
 > Following a call-notes TODO from Will Carter (Samin flagged CLIENT_PRICE_INST flashing indicative, alongside updating benchmark LPs for BMSL/MWMS and locating the NOP-reducing-arb netting setting — see Notable topics), Kate Stagg diagnosed the indicative flashing as the `LatencyFilter` tripping on MAHI_LP_11 (Argamon's CLIENT_PRICE_RETAIL_LDN proxied in). Arun Patel found root cause: the Market table row for MAHI_LP_11 is typed ECN rather than CLIENT_PRICE, so the filter keys on `triggerTime` (stamped by Argamon's pricer, routinely ~1.6s stale) instead of `transactTime`; a post-26.3 change stopped the rolling median tracking samples ≥1s, pinning the threshold at ~2s and binning ~46% of ticks permanently. Zendesk ticket filed. Unresolved as of end of window. [Kate's diagnosis](https://mahifx.slack.com/archives/C095MJHC68J/p1785256718164939) [Arun's root cause](https://mahifx.slack.com/archives/C095MJHC68J/p1785257888634349) [Zendesk ticket #23262](https://mahifx.slack.com/archives/C095MJHC68J/p1785258337028519)
@@ -106,6 +112,7 @@ last_catchup: 2026-07-29T07:21:10Z
 
 ## Notable topics
 
+- 2026-07-29 — Samin requested inviting john.chen@startraderprime.com to Slack; Rory King agreed to help provide XAUUSD positions at makers at EOD. [permalink](https://mahifx.slack.com/archives/C096422RPKK/p1785344470498469)
 - 2026-07-22 — Andrew Morgan flagged (internal-starprime) a news piece on StarTrader launching 24/7 US stock CFDs and expanding their 24/5 lineup, asking who provides their feeds and noting "seems like we should be offering this product" — a potential upsell/product signal, no follow-up in window. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1784734311199849)
 - 2026-07-21 — Will Carter noted Samin is planning to reconnect with Mahi next week; flagged it as an opportunity to do some housekeeping in #internal-starprime — removing redundant books and hedgers. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1784616169057259)
 - 2026-07-09 — Cameron Hughes sent new RBF 3-tier connections to Samin and set up new hybrid hedger; infra deploying to pick up the new RBF hybrid and arb hedgers. [permalink](https://mahifx.slack.com/archives/C095MJHC68J/p1783611021848749) [earlier note](https://mahifx.slack.com/archives/C095MJHC68J/p1783601925506239)
