@@ -16,10 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-29T07:18:53Z
+last_catchup: 2026-07-30T07:09:37Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-30 — Routine Toxic XAUUSD Harsher add: MT5_87018814_Centroid_3609458
+> Trading Ops requested the CP added to Toxic XAUUSD - Harsher (07:32 BST); Sam Hewitt confirmed "this has now been added" (07:34 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785393177146429) [Sam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785393276836029)
+
+> [resolved] 2026-07-30 — FI PnL flat for ~2 weeks: `flow-1000-thresh-98` signal accidentally dropped from registry in 7/16 release; Shyam re-added it
+> Shyam Hari flagged FI PnL had been quiet the last 2 weeks, traced to the `flow-1000-thresh-98` signal being removed from `pricing.adjustmentSignalRegistry` during a 2026-07-16 release, despite still being referenced by the XAUUSD `flow-price-thresh` skew signal's parameters. Re-added the signal to the registry; expects FI PnL generation to resume. Zendesk ticket #23271 filed; also the motivating case for the new `/signal-registry-impact` check (now folded into `/config-changeset`) that flags a registry removal still referenced elsewhere before it ships. [Shyam report + fix](https://mahifx.slack.com/archives/C01QGUXPKEY/p1785382878038749)
+
+> [resolved] 2026-07-29 — Routine Heavy LR add: 86052705 + live06_CN_standard_b_86052705 + Live06_MT4__86052705
+> Trading Ops requested all three tag variants added to Heavy LR (09:13 BST); William Denny confirmed "This is done" (09:14 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785312796123919) [William confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785312892619349)
 
 > [resolved] 2026-07-28 — Trading Ops asked whether Heavy/Extra Heavy LR applies beyond XAUUSD; Nathan clarified per-counterparty scope + per-currency-leg buckets
 > Trading Ops asked whether Heavy LR and other LR profiles apply to symbols beyond Gold, e.g. XAGUSD or FX pairs (19:32 BST). Rory King acknowledged and said he'd confirm and revert (19:40 BST). Nathan Burch answered in-thread (23:38 BST): LR profiles are assigned per counterparty, not per instrument, so a CP on Heavy LR carries it across all instruments; "liquidity buckets" are tracked per currency leg and side rather than per instrument, so a XAUUSD trade draws from both the XAU and USD allowances. Gold and silver draw separate metal allowances (heavy gold trading doesn't consume the silver allowance), but trading both in the same direction consumes the same USD allowance. [question](https://mahifx.slack.com/archives/C022S6NL82D/p1785263573582319) [Rory ack](https://mahifx.slack.com/archives/C022S6NL82D/p1785264022073499) [Nathan answer](https://mahifx.slack.com/archives/C022S6NL82D/p1785278281279739)
