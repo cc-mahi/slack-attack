@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-07-30T07:07:01Z
+last_catchup: 2026-07-31T07:05:51Z
 ---
 
 ## Status
@@ -85,8 +85,8 @@ last_catchup: 2026-07-30T07:07:01Z
 > [open] 2026-04-28 — XAUUSD brokerage to Toa expansion
 > Daria added party 104881 to brokered-to-Toa for XAUUSD on argamon.NYC; plan is to migrate the softest of 104881/105048/105153/105681/105773 progressively to see if hedging to CME helps yield. Starting with softest first. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777335260425589)
 
-> [watching] 2026-07-24 — Retail NY volume down ~50% month-on-month, P&L soft again
-> Daria flagged retail NY environment P&L down again this month, tracking the volume drop: ~$800-900m/week last month vs ~$400m/week this month. No thread response yet; no action assigned. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539)
+> [open] 2026-07-24 — Retail NY volume down ~50% month-on-month, P&L soft again; max VaR cut to $1k in response
+> Daria flagged retail NY environment P&L down again this month, tracking the volume drop: ~$800-900m/week last month vs ~$400m/week this month. 2026-07-31: Daria dropped max VaR down to $1k in the same thread — a risk-reduction step given the lighter, presumably lower-quality volume (VaR has moved between $1k-$6k here before depending on conditions). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785466064628219)
 
 ## Notable topics
 
