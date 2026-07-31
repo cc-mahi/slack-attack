@@ -18,10 +18,16 @@ key_people_overrides:
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
   - {name: "Evgenii Ishchenko", role: "trading ops — escalated XAUUSD negative-slippage complaint pattern", confidence: low}
-last_catchup: 2026-07-30T07:08:58Z
+last_catchup: 2026-07-31T07:07:01Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-30 — Echo/Price Forensics pricing cutoff at 21:00 UTC for FED-announcement trade investigation
+> Daniel Kurra was investigating an XAUUSD trade execution (counterparty ASV_MT5_228058568, ~18:00:05 UTC, coinciding with a FED announcement) and found Echo/CLIENT_PRICE_RETAIL pricing cutting off at 21:00 UTC. Daria Horton explained: 21:00 UTC is XAUUSD's close (explaining the cutoff), and the FED-announcement window has heavy tick volume that can be slow to load in Echo — pointed Daniel to the newer Price Forensics page in Compass instead, which loaded the data and showed the order was received toward the end of the move and filled at the published price. Daniel confirmed. [Daniel](https://mahifx.slack.com/archives/C0456LSHQQK/p1785451602155629) [Daria](https://mahifx.slack.com/archives/C0456LSHQQK/p1785452491512019) [Daniel confirms](https://mahifx.slack.com/archives/C0456LSHQQK/p1785481076540039)
+
+> [open] 2026-07-30 — Quote delay reported: 216ms hop time on Exinity's network trace to Mahi
+> Keshav Woottum flagged Exinity's network team seeing quote delays, with an `mtr` trace showing a 216ms average hop time from `eq-noc1` to `172.21.225.1`. Rory King said he'd investigate and confirm; Inald Gjoni asked Keshav for more detail on what `172.21.225.1` is — if it's a cross-connect, Beeks and a ticket would be needed on Mahi's side. No resolution confirmed in window. [Keshav](https://mahifx.slack.com/archives/C0456LSHQQK/p1785423855202799) [Inald](https://mahifx.slack.com/archives/C0456LSHQQK/p1785425576643399)
 
 > [resolved] 2026-07-28 — Internal decision to stop forwarding FIX-latency alerts to Exinity
 > Following Samuel's FIX-latency screenshot flag that morning (see entry below), Liam Cordelle proposed quietly turning off that class of alert to Exinity — they only ever ask if there's a problem, the answer is always no, and Mahi gets the same alert internally anyway. Kate Stagg agreed it was worth trying; Liam confirmed done. Internal-only change, not communicated to Exinity. [Liam proposal](https://mahifx.slack.com/archives/C040V9LNKT5/p1785228145942549) [Kate agrees](https://mahifx.slack.com/archives/C040V9LNKT5/p1785228502604559) [Liam done](https://mahifx.slack.com/archives/C040V9LNKT5/p1785228576886089)
