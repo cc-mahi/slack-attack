@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-30T07:09:52Z
+last_catchup: 2026-07-31T07:07:37Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-30 — 122oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 122oz gold long filled on Finalto at 15:48 BST; Rory King confirmed "this adjustment has been actioned" at 15:52 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785422916776729) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785423143893949)
 
 > [open] 2026-07-29 — Finalto FOMC fill ratio collapsed to 2.7% at the print vs LMAX's 69–87% all day; TOB-distance analysis clears Mahi's hedge orders, escalating to Finalto via Youssef/Nael
 > Rory King's post-FOMC review found Finalto filled only 65 of 521 XAUUSD hedge orders (11.4% fill, 6.0% of hedged ounces) vs LMAX's 76% fill / 87.6% of ounces with zero rejects; Finalto's fill ratio degraded through the session (42.9% at 09:00 UTC down to 2.7% at 18:00 UTC), worst exactly at the print, adding a median 1.3s (p90 4.0s) of unhedged carry on 67% of hedged ounces. A follow-up TOB-distance breakdown showed none of the 218 FINALTO rejects were priced outside Finalto's own displayed top of book (median −$0.357, no positive distances) — ruling out stale/optimistic limits on Mahi's side. Rory to pass both analyses to Youssef and Nael to raise with Finalto. Daria Horton followed up (2026-07-30 03:16/03:18 BST) asking whether cancels are being mislabelled as rejects, for send-to-response latency, and for a per-LP yield/fill-ratio comparison — citing a similar pattern at ATC where a latent LP got picked off by the arb hedger — unanswered in window. [fomc-fill-ratio](https://mahifx.slack.com/archives/C09QS1NUA80/p1785352468874599) [tob-distance-table](https://mahifx.slack.com/archives/C09QS1NUA80/p1785355245702659) [daria-followup-1](https://mahifx.slack.com/archives/C09QS1NUA80/p1785377760502969) [daria-followup-2](https://mahifx.slack.com/archives/C09QS1NUA80/p1785377885837659)
