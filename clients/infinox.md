@@ -16,10 +16,16 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-30T07:09:37Z
+last_catchup: 2026-07-31T07:08:10Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-30 — AUDUSD skew turned off after multiple skew-arb events this week
+> Shyam Hari turned off skew on AUDUSD (23:42 BST), citing multiple skew arb events over the week with arbers' own-flow volumes running magnitudes higher than normal. Same recurring arb-mitigation shape as the EURUSD/USDJPY/EURGBP entries above/below — another instrument added to the pattern, still no realtime arb detection in place. [Shyam fix](https://mahifx.slack.com/archives/C01QGUXPKEY/p1785451327052339)
+
+> [resolved] 2026-07-30 — Routine Toxic XAUUSD Harsher add: INF_MT5__87981272 + MT5_plain_b_87981272
+> Trading Ops requested both tag variants added to Toxic XAUUSD - Harsher (18:36 BST); Sam Hewitt confirmed "these counterparties have now been applied" (22:07 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785432981282459) [Sam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785445650522909)
 
 > [resolved] 2026-07-30 — Routine Toxic XAUUSD Harsher add: MT5_87018814_Centroid_3609458
 > Trading Ops requested the CP added to Toxic XAUUSD - Harsher (07:32 BST); Sam Hewitt confirmed "this has now been added" (07:34 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785393177146429) [Sam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785393276836029)
