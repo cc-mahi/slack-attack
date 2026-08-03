@@ -20,10 +20,14 @@ key_people_overrides:
   - {name: "Andreas Xenofontos", role: "IC Markets — joined mahi-ic-markets 2026-07-02; role unknown", confidence: low}
   - {name: "Nouri Dalati", role: "IC Markets — technical/infra contact; proposed FIX-routing options for China crypto flow, leads CNH connection setup"}
   - {name: "Angus", role: "IC Markets — senior decision-maker above Pavlos on commercial/pricing sign-off; surname not yet seen", confidence: low}
-last_catchup: 2026-07-31T08:00:00Z
+  - {name: "Kok Hou Chan", role: "joined mahi-ic-markets 2026-08-03; role unknown", confidence: low}
+last_catchup: 2026-08-03T07:33:38Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-03 — CLIENT_PRICE_NYC XAUUSD indicative pricing traced to legacy MAHI_CONTINUITY config; removal planned pending LDN sign-off
+> Daria Horton flagged internally (00:28 BST) that CLIENT_PRICE_NYC had indicative XAUUSD pricing overnight due to MAHI_CONTINUITY (the continuity model from Args), likely a legacy setting predating CLIENT_PRICE_FX_NYC's introduction for riskPath. Plan is to remove XAUUSD from CPN the following day absent objections from LDN overnight. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1785713337221469) No thread replies in window — removal not yet confirmed done.
 
 > [open] 2026-07-23 — Karam requests pre-rollover LR sim on tag 80059893; flags 14-account coordinated-trading suspect list for pooled LR
 > Karam asked (14:12 BST) for a simulation of different liquidity reduction settings 30 minutes before rollover on tag 80059893. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1784812321693949) Rory King asked whether there were particular LR parameters in mind. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1784812466969259) Karam clarified (15:19 BST) the idea is simply to introduce slightly higher LR during illiquid hours, no specific parameter set yet. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1784816399208249) Rory confirmed he'd run the analysis and report back. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1784816420884089) Karam separately flagged (18:33 BST) 14 accounts suspected of coordinated trading, asking Mahi to check whether pooling them under a shared LR profile is warranted: 90058452, 90058532, 90058496, 90058588, 90058461, 20067021, 20071104, 80055131, 80059253, 80055154, 80057541, 80059893, 80059178, 90057049 (note: 80059893 overlaps with the rollover-LR tag above). [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1784827987160019) Rory acknowledged, analysis pending on both requests. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1784828298499189) internal-ic-markets carried zero messages this window. Open: rollover LR sim result and coordinated-trading pool analysis both outstanding.
@@ -189,6 +193,7 @@ last_catchup: 2026-07-31T08:00:00Z
 
 ## Notable topics
 
+- 2026-08-03: Kok Hou Chan (role unknown) joined mahi-ic-markets; no further activity in window. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1785729307335779)
 - 2026-07-15: IC meeting on 24/7 Gold — Angus's opening push to reclassify weekend XAU as Crypto was superseded by team alignment on a wholly new crypto-licensed 24/7 Gold product; Shanghai Exchange feed greenlit to combat "hit and run" front-running; IC to approach Pyth directly, Pavlos to revert on commercials within two weeks. Andrew followed up with a positioning email to Angus. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1784122704033069)
 - 2026-07-14: IC began routing BTCUSD/ETHUSD from Chinese-server OR/ORH/ORL groups through the new Mahi_CNH connection; Shyam confirmed the team would be online to monitor shortly. [permalink](https://mahifx.slack.com/archives/C07UBJNUWG1/p1784011078992979)
 - 2026-07-13: IC (Pavlos, via Andrew Morgan) proposed Pyth 24/7 Gold index as the primary weekend/24-7 pricing reference (PAXG as a divergence tripwire only), wants both feeds streamed live for calibration before committing size, and plans a clean weekday break to the ISAM feed; Angus cc'd. [permalink](https://mahifx.slack.com/archives/C07TZ00FK1Q/p1783938408311839)
