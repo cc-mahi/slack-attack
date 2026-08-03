@@ -15,10 +15,14 @@ key_people_overrides:
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
   - {name: "Will", role: "client ops (GoMarkets) — asked about Radex Catch-All execution-profile brokered/internalised trigger logic", confidence: low}
   - {name: "William Rozet", role: "client ops (GoMarkets) — pricing config / NOK-cross arb incident; email williamr@gomarkets.com confirmed 2026-07-20", confidence: low}
-last_catchup: 2026-07-31T07:07:34Z
+  - {name: "Alexandros Paraskevopoulos", role: "client ops (GoMarkets) — joined channel 2026-08-03, Compass/Echo read-only user requested by Erik same day; email uncertain (Slack rendering mangled it, likely alex.p@gomarkets.com)", confidence: low}
+last_catchup: 2026-08-03T07:14:02Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-03 — New joiner Alexandros Paraskevopoulos: Compass/Echo read-only user requested
+> Alexandros Paraskevopoulos (GoMarkets) joined the client channel (~06:55 UTC). Erik Ogkanesian (GoMarkets, ~07:02 UTC) asked Mahi to create a read-only Compass/Echo user for him (email rendered mangled by Slack markup, likely alex.p@gomarkets.com — same naming pattern as prior Andreas.H/Mac Nemeth requests). Not actioned in-window. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1785740564716179)
 
 > [open] 2026-07-27 — Classification report stuck in loading state (acc 529787)
 > Will (GoMarkets, ~06:50 UTC) asked whether the classification report was available, noting it gets stuck in a loading state when run for account 529787 (two screenshots attached). Sam Hewitt (Mahi, ~07:09 UTC) said he'd take a look, then confirmed (~07:19 UTC) he's seeing the same stuck loading state himself and would investigate internally, promising an update once resolved. No resolution confirmed in-window. [permalink](https://mahifx.slack.com/archives/C09J1DP2QQH/p1785131442641109) [Sam ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1785132565185179) [Sam confirms repro](https://mahifx.slack.com/archives/C09J1DP2QQH/p1785133195468049)
