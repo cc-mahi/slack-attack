@@ -16,10 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-07-31T07:08:10Z
+last_catchup: 2026-08-03T07:13:59Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-03 — Routine Heavy LR add: MT5_87018814_Centroid_3601928
+> Trading Ops requested the CP added to Heavy LR (07:18 BST); Nathan Burch confirmed "adding them now" (07:22 BST) then "has been added to the heavy LR profile" (07:26 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785737937671459) [Nathan confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785738388809969)
+
+> [resolved] 2026-08-02 — GBPUSD spikes at 00:33/00:36 flagged; Sam Hewitt confirmed market-wide drop, client satisfied
+> Trading Ops reported GBPUSD spikes at 00:33 and 00:36 with a screenshot, asking Mahi to check and revert (22:38 BST). Sam Hewitt acknowledged (22:40 BST) and followed up ~1hr later with screenshots showing the drop was market-wide during that timeframe, not a Mahi-specific issue (23:49 BST). Trading Ops thanked him, no further questions (23:52 BST). [report](https://mahifx.slack.com/archives/C022S6NL82D/p1785706693602209) [Sam ack](https://mahifx.slack.com/archives/C022S6NL82D/p1785706859032869) [Sam resolution](https://mahifx.slack.com/archives/C022S6NL82D/p1785710968337009)
+
+> [resolved] 2026-07-31 — Account 87960496 (all counterparty tags) removed from Heavy LR
+> Trading Ops requested the account and all its counterparty tags removed from Heavy LR (16:58 BST); William Denny confirmed "This has been done now" (17:00 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785513508897759) [William confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785513624867359)
 
 > [resolved] 2026-07-30 — AUDUSD skew turned off after multiple skew-arb events this week
 > Shyam Hari turned off skew on AUDUSD (23:42 BST), citing multiple skew arb events over the week with arbers' own-flow volumes running magnitudes higher than normal. Same recurring arb-mitigation shape as the EURUSD/USDJPY/EURGBP entries above/below — another instrument added to the pattern, still no realtime arb detection in place. [Shyam fix](https://mahifx.slack.com/archives/C01QGUXPKEY/p1785451327052339)
