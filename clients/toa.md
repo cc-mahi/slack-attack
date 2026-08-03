@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-31T07:09:24Z
+last_catchup: 2026-08-03T07:24:58Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-07-31T07:09:24Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-07-31 — hazelcastNode down on toa-apnortheast1-prod-pri-1: OOM, self-recovered, low criticality
+> Inald (15:43 BST) flagged hazelcastNode down on `toa-apnortheast1-prod-pri-1` — `java.lang.OutOfMemoryError: Java heap space`. Confirmed back up minutes later (15:45 BST). James noted the node now only serves the Mahi/IC feed, so low criticality either way. https://mahifx.slack.com/archives/C035H1VNCAD/p1785509004772039
 
 > [resolved] 2026-07-30 — Three HRP_CLIENTS_NET PnL-drop PagerDuty alerts at TOA-ARG LDN, confirmed same event, recovered
 > Inald flagged a -5,333 PnL drop on HRP_CLIENTS_NET (15:01 BST, PD Q077AOWF6YDYXL), then two more PD alerts minutes later (Q22KQA1AVNQ1NQ, Q2GV1K2TZO3522). James confirmed all three were the same event seen across different horizon checks and that PnL had recovered almost completely. Continues the recurring HRP_CLIENTS_NET drop pattern (see 2026-07-28, 2026-07-27, 2026-07-22, 2026-06-25, 2026-05-26 entries) — this is the first instance with an explicit recovery confirmation. https://mahifx.slack.com/archives/C035H1VNCAD/p1785420088687629
