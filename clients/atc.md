@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-07-31T08:00:00Z
+last_catchup: 2026-08-03T07:29:34Z
 ---
 
 ## Recent issues
@@ -98,6 +98,8 @@ last_catchup: 2026-07-31T08:00:00Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-07-31 — Malik Khan flagged unsolicited interest in perpetual futures ("perps") as a potential new product/flow, per Andrew Morgan's internal note. No further detail or follow-up in this window. [permalink](https://mahifx.slack.com/archives/C046RNF64VD/p1785492330530849)
 
 - 2026-07-27 — June PnL report delivered: William Denny posted the ATC PnL Report June.pdf to Jack Manoukian in #mahi-atc, closing the 2026-07-26 recurring monthly request. [report delivered](https://mahifx.slack.com/archives/C04AZM0LPMH/p1785141506417979)
 
