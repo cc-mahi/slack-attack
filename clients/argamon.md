@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-07-31T07:05:51Z
+last_catchup: 2026-08-03T07:09:04Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-07-31T07:05:51Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [open] 2026-08-03 — pricerContinuity indicative in XAUUSD for ~1hr; scope-check against IC Markets CPN issue
+> Daria flagged that Argamon's pricerContinuity was indicative in XAUUSD for about an hour on the morning of 2026-08-03, and asked Isaac Dann whether this config is only in use at Go Markets besides Argamon — referencing a parallel issue she'd just raised in #internal-ic-markets, where CLIENT_PRICE_NYC went indicative in XAUUSD due to MAHI_CONTINUITY (a continuity model believed configured onto XAUUSD before CLIENT_PRICE_FX_NYC existed for riskPath; she plans to remove XAUUSD from CPN pending LDN sign-off). No reply yet in either thread. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785713138617559)
 
 > [resolved] 2026-07-23 — Order group 012dr82wyoe: client filled worse than brokered-out price, AUDNZD widening factor tightened
 > Tom asked about order group ID 012dr82wyoe: what configuration caused the price to drop below the stack in a screenshot movement, and why the client was filled at 1.19775 while the trade was brokered out to Jane St at 1.20232. Isaac explained 2026-07-23 22:54: brokered fills use model price, not published WSS/LP price (else Mahi absorbs slippage when WSS favours the client); the stack drop was AUDUSD-driven; AUDNZD's model spread carries a 2.00 widening factor in ROLL/SNGMON that pushes the broker-only override wide unnecessarily since execution is already protected. Tom agreed 2026-07-24 04:19 to reduce the widening factor to 1 and leave WSS as-is; Isaac actioned it 04:22, Elan reacted. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784789549855939) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784843672378519) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784863374723599)
