@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-07-31T07:07:37Z
+last_catchup: 2026-08-03T07:13:57Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-07-31 — 1,274oz XAUUSD long filled on Finalto, Compass adjustment done
+> Client reported 1,274oz gold long filled on Finalto at 15:18 BST; Rory King confirmed "This has been actioned" at 16:01 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785507520606629) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785510109875439)
 
 > [resolved] 2026-07-30 — 122oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 122oz gold long filled on Finalto at 15:48 BST; Rory King confirmed "this adjustment has been actioned" at 15:52 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785422916776729) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785423143893949)
