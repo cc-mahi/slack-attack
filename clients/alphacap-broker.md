@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact", confidence: low}
-last_catchup: 2026-07-31T08:00:00Z
+last_catchup: 2026-08-03T07:06:07Z
 ---
 
 ## Recent issues
@@ -21,6 +21,7 @@ last_catchup: 2026-07-31T08:00:00Z
 > Progress (Jul 15): Cameron Hughes bounced distribution (17:00 BST) and pricers (17:12 BST) — continued infra tuning, still pre-live. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784131235651969) [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784131972024809)
 > Progress (Jul 21): Cameron Hughes created a fastMT restricted bridge operator account — continued MT5 admin/bridge setup via FastMT. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784632078364659)
 > Progress (Jul 24): Cameron Hughes bounced fixOrdersArgamon1 (15:17 BST) and distribution (15:47 BST) — continued infra tuning, still pre-live. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784902658062159) [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784904465078969)
+> Progress (Aug 3): Daria Horton fixed a market-data gap into systemStateMonitor via aeronMediaDriver restarts — continued infra tuning, still pre-live. [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1785712977454729)
 
 > [open] 2026-04-29 — Argamon symbol coverage gap blocking go-live
 > Will Carter framed minimum path to go-live; Andrew confirmed "they need it all" but the go-live spreadsheet's instruments are all available direct from Argamon. Cam working through CFDs/crypto where Argamon proxies LP — externalisation a problem for proxied LP, hence CPL/dist setups instead. Phased asset-class approach agreed (FX + Metals first, CFDs/crypto phase 2/3). [permalink](https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679)
