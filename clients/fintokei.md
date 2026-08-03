@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-07-31T08:00:00Z
+last_catchup: 2026-08-03T07:33:31Z
 ---
 
 ## Status
@@ -18,6 +18,9 @@ last_catchup: 2026-07-31T08:00:00Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [resolved] 2026-08-03 — MD not reaching systemStateMonitor on fintokei-ln-trading; restart fixed
+> Daria Horton (Mahi) flagged in #internal-fintokei that market data wasn't making it through to systemStateMonitor on the Fintokei stack; a systemStateMonitor restart appeared to resolve it. No further detail or client impact noted. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1785713006438349)
 
 > [open] 2026-07-15 — SL execution delay query: account 6029722, ~1.876s gap during US news
 > Pau (Fintokei) flagged in #mahi-fintokei that a stop loss on account 6029722 (position 33169975) triggered at 15:30:02.056 on 2026-07-14 during US news but wasn't placed for execution until 15:30:03.931 — a ~1.876s gap after the MT5 server processed the request in 0.004s. Asked whether gateway delay from the news event explains it. Rory King (Mahi) acknowledged same day; investigation pending. [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1784109810336399) [ack](https://mahifx.slack.com/archives/C08QWKFARDL/p1784109838387739)
