@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-07-31T07:09:28Z
+last_catchup: 2026-08-03T07:24:59Z
 ---
 
 ## Status
@@ -25,6 +25,12 @@ last_catchup: 2026-07-31T07:09:28Z
 - **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [open] 2026-08-03 — pricerContinuity indicative in XAUUSD for ~1hr at Toa Argamon; scope question to Isaac unanswered
+> Daria flagged pricerContinuity was indicative in XAUUSD for about an hour that morning and asked Isaac Dann whether it's only being used at Go, referencing a similar post in another client's channel for comparison. No reply as of catchup. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785713138617559)
+
+> [resolved] 2026-07-31 — hazelcastNode OOM at Toa Argamon APN1; confirmed non-critical (Mahi/IC feed only)
+> Inald flagged hazelcastNode down on toa-apnortheast1-prod-pri-1 (`OutOfMemoryError: Java heap space`); back up shortly after. James Furness confirmed it's only used for the Mahi/IC feed now. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785509004772039)
 
 > [open] 2026-07-27 — External order rejects at Toa Argamon LDN from hitting rate limits; PagerDuty incident
 > Inald flagged external order rejects at Toa Argamon LDN, apparently from hitting rate limits — PagerDuty incident opened (Q2DH0JLUWV2U3K). Single +1 reaction, no root-cause or follow-up posted as of catchup. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785140358840599)
