@@ -57,9 +57,4 @@ last_catchup: 2026-08-03T07:37:00Z
 > [resolved] 2026-01-02–06 — Crypto expansion to MatchTrader
 > Lars requested all crypto symbols activated on MatchTrader (same list as MT5). Target launch Wednesday Jan 7. Testing on Jan 6 showed only BTC/ETH visible; Cameron Hughes worked through symbol configs and decimal place issues with Shane and Lars; all 34 crypto instruments confirmed active and testable by Jan 7. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1767370386895999)
 
-> [open] 2025-10-22 — TradeLocker integration stalled
-> Ivan Juren left TradeLocker. Liam Cordelle chasing new contact (Kristijan) for re-engagement. Implementation was reportedly "far along" per a Sep 18 email from TL, but no progress since. No ETA. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1761145850804539)
-
 ## Notable topics
-
-- 2025-11-05 — Matt's business metrics strong: avg weekly sales $24k (up from ~$4k), payout ratio 35% (trending down), consistency rule effective. Planning separate Top One Crypto site. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1762360910675469)

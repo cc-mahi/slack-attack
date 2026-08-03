@@ -21,9 +21,6 @@ last_catchup: 2026-08-03T07:06:25Z
 > [open] 2026-04-22 — 360capital data re-import
 > Hussain Bani standup: "Imported 360capital" alongside 5ers and pepperstone CFD bootstrap work. Suggests parquet-store / analytics data refresh; no thread, no follow-up signal in the slack-attack window. Earliest signal in this window — older context not searched. https://mahifx.slack.com/archives/C025QLNQ3AR/p1776888433004469
 
-> [watching] 2025-10-22 — sales-sheet status conflict
-> Bonnie flagged that someone overwrote 360 Capital's sales-sheet entry to say they "dropped off just before going live"; she reverted it because they did in fact go live. Nicola confirmed she hadn't touched 360 — origin of the bad edit unidentified. Worth keeping eyes on if status is queried again. https://mahifx.slack.com/archives/C8YMBES8N/p1761133493462989
-
 ## Notable topics
 
 - Analytics-only client with no internal/client Slack channel pair — catchup signal will always be cross-channel (`#sales`, `#dev-status`, `#internal-trading-analytics`, `#dev-mq-bridge`). No `slack:` block in VibePulse `360capital.yaml`.

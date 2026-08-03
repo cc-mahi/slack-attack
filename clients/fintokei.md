@@ -67,18 +67,6 @@ last_catchup: 2026-08-03T07:33:31Z
 > [resolved] 2026-05-05 — client-side "Jan" reports position close failure on account 6027381
 > Jan reached out via #mahi-fintokei reporting an issue closing positions 28614965 and 28618336 on account 6027381, attaching a journal screenshot (UTC+3 timezone). Kate Stagg acknowledged and Will Denny followed up at 16:33 confirming the trades show as filled in Compass. Jan replied 2026-05-06 confirming they resolved it internally. [permalink](https://mahifx.slack.com/archives/C08QWKFARDL/p1777988138576279) [Will Denny follow-up](https://mahifx.slack.com/archives/C08QWKFARDL/p1777995236877329)
 
-> [open] 2025-12-02 — Adam (Fintokei) unable to see live pricing in Compass
-> Adam raised in #mahi-fintokei that he couldn't see live pricing in Compass. Bonnie (Mahi) acknowledged and said she was checking. No resolution confirmed in thread. [report](https://mahifx.slack.com/archives/C08QWKFARDL/p1764682062781469)
-
-> [resolved] 2025-11-10 — Pau (Fintokei) reports orders cancelled with "Liquidity violation"
-> Pau raised an issue where orders were cancelled with a "Liquidity violation" message. Kate Stagg (Mahi) investigated and identified the cause as the "Mid Distance Check" — the price had moved at the time of the order, triggering the protection. [report](https://mahifx.slack.com/archives/C08QWKFARDL/p1762789306265089)
-
-> [resolved] 2025-11-06 — Graphite disk full on fintokei server
-> Flagged in #internal-fintokei: Graphite disk full. Andrew Morgan (Mahi) deleted Signals stats (not mid diff pnl) to free space; Liam Cordelle resized the disk. Resolved same day. [disk full](https://mahifx.slack.com/archives/C08R694QVNX/p1762439401659699) [deleting stats](https://mahifx.slack.com/archives/C08R694QVNX/p1762439520375309)
-
-> [watching] 2025-07-08 — LR disabled per client request; still very low utilisation as of early 2026
-> LR fully disabled per Fintokei's request on ~2025-07-08 due to slippage-sensitive client base. Global LR applied gently from 2025-07-15. As of Feb 2026 Daria (Mahi) flagged LR PnL still very low (~$5.9k on 58.9B volume, ~$0.1/M); Kate Stagg said she'd discuss with Roman (Fintokei) in March 2026 whether to include LR in published price. No resolution confirmed. [LR apply](https://mahifx.slack.com/archives/C08R694QVNX/p1752589418837899) [Feb 2026 flag](https://mahifx.slack.com/archives/C08R694QVNX/p1770762875006809) [Mar 2026 follow-up](https://mahifx.slack.com/archives/C08R694QVNX/p1773318229000979)
-
 ## Notable topics
 
 - **2026-07-10/11 — routine Compass release over the weekend** — Leonardo Borsi announced a routine Compass version release (performance/stability/UI enhancements) for the weekend of 2026-07-11/12, confirmed complete 2026-07-11. Context for the same-weekend LSB deploy above; no separate client impact flagged. [announcement](https://mahifx.slack.com/archives/C08QWKFARDL/p1783700706200019) [completed](https://mahifx.slack.com/archives/C08QWKFARDL/p1783768170222219)
@@ -90,4 +78,3 @@ last_catchup: 2026-08-03T07:33:31Z
 - **Crypto addendum executed** — crypto addendum fully executed 2025-09-02, live from start of that week. [confirmed](https://mahifx.slack.com/archives/C08R694QVNX/p1756813051563939)
 
 - **Beeks admin server recurring outages (mid-2025)** — recurring NIC / connectivity outages on Beeks admin server escalated to Beeks company owner Gordon. NICs replaced weekend of ~2025-07-05; resolved mid-July 2025. [escalation](https://mahifx.slack.com/archives/C08R694QVNX/p1751447125404229)
-
