@@ -18,7 +18,7 @@ key_people_overrides:
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
   - {name: "Evgenii Ishchenko", role: "trading ops — escalated XAUUSD negative-slippage complaint pattern", confidence: low}
-last_catchup: 2026-07-31T07:07:01Z
+last_catchup: 2026-08-03T07:09:00Z
 ---
 
 ## Recent issues
@@ -285,3 +285,5 @@ last_catchup: 2026-07-31T07:07:01Z
 - 2026-06-02 — Andrew shared two Gamma docs for Exinity weekend support: a general overview (why/what/how) and an Exinity-tailored path forward. Both marked as drafts pending feedback incorporation before sending to Exinity. [general](https://gamma.app/docs/MahiMarkets-Weekend-Support-j9k7lum6ho280ps?mode=doc) [exinity-tailored](https://gamma.app/docs/Exinity-Weekend-Support-Options-owwngkx2jhvf2e0?mode=doc) [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1780418637349049)
 - 2026-05-29 — NZ bank holiday (Monday 1 June): Sam Hewitt advised emergency-only cover; Matthew Ayub asked for a walkthrough of the wide-spread response process ahead of Sunday open, or for someone to be available to assist. No reply in window; event has now passed. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1780034840862359)
 - 2026-07-09 — NZ bank holiday (Friday 10 July): Isaac gave the standard emergency-only cover notice — Slack won't be monitored as usual, urgent items to support@mahimarkets.com or the LN/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1783571801517579)
+- 2026-07-31 — Arun Patel shifted weekend restart timings by 20 minutes (admin-1 10:05→10:35, trading-2 10:20→10:50, trading-1 10:40→11:10) ahead of new crypto-session downtime. Internal-only; no client-facing context surfaced. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1785511492840679)
+- 2026-08-03 — Nathan Burch: `fixOrders4` wouldn't start back up from the weekend restart; moved `fixOrders4` and `pricer2` on trading2 from node0 to node1 (node0 only had ~220 huge pages free). Internal note only; no client-facing context surfaced. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1785713866549739)
