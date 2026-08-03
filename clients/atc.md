@@ -5,7 +5,7 @@ refs:
   billing: ../MahiProduct/data/billing/clients.json     # entry: atc
   hosts: ../MahiProduct/data/client-hosts.json          # entry: atc
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
-channels_override: null
+channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
 last_catchup: 2026-08-03T07:29:34Z
 ---

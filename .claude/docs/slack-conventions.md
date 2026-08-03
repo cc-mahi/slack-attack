@@ -46,6 +46,7 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-argamon-trading` | C083GP5F1CL |
 | `internal-atc` | C046RNF64VD |
 | `mahi-atc` | C04AZM0LPMH |
+| `internal-atc-prop` | C0AQ3PVTX6D |
 | `internal-axiory` | C06KQT6EU3W |
 | `mahi-axiory` | C06KHNQQYMR |
 | `internal-base-markets` | C09D05EPCTV |
@@ -60,6 +61,10 @@ Populate here as we discover them (from search results) — avoids re-resolving.
 | `mahi-fundingpips` | C073FHA6TAR |
 | `internal-gcc-brokers` | C09QS1NUA80 |
 | `mahi-gcc-brokers` | C09PNC1MFAA |
+| `internal-gtcfx` | C0AKAPLU78W |
+| `mahi-gtcfx` | C0AKRP8C049 |
+| `internal-tmgm` | C03AP1L0Z7B |
+| `mahi-tmgm` | C03AP4AVCCR |
 | `internal-ig-group` | C032ZTENY7Q |
 | `internal-infinox` | C01QGUXPKEY |
 | `mahi-infinox` | C022S6NL82D |

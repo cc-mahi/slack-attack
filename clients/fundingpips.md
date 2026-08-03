@@ -8,6 +8,24 @@ refs:
 channels_override: null
 key_people_overrides: []
 last_catchup: 2026-08-03T07:35:00Z
+status: retired
+retired_at: 2026-04-16
+retired_reason: |
+  Client terminated. Mahmoud Makahleh (via Bonnie, #internal-fundingpips 2026-04-16): "business has slowed
+  and we are forced to cut expenses, i don't think we will be able to use Mahi this year, perhaps next year
+  we can start fresh on the brokerage side". Context: lost ~$10m on their futures business (David Cooney,
+  same day). Had already gone MIA — no incoming flow from 2026-04-15, never switched Mahi back on despite
+  being offered two months free. Servers stopped rather than deleted 2026-05-05 (Isaac: "I've gone for
+  option A for now, can decide to delete everything later"); channel silent since. Pulse ingestion stopped
+  2026-05-05. Hiera/infra config deleted 2026-07-27 alongside the other churned clients (Justin Young,
+  #dev-infra).
+  Note: still listed live in ../MahiProduct/data/fleet.txt (last reviewed 2026-05-21) and still iterated by
+  fleet routines, which is why skew-health findings kept appearing against fundingpips hosts through July —
+  stale roster references, not an active relationship.
+  https://mahifx.slack.com/archives/C073X2B83CH/p1776335111242749
+  https://mahifx.slack.com/archives/C073X2B83CH/p1776335278724049
+  https://mahifx.slack.com/archives/C073X2B83CH/p1777944196442699
+  https://mahifx.slack.com/archives/C8X18LPH9/p1785147320434669
 ---
 
 ## Status

@@ -36,10 +36,10 @@ The reader is **Cameron Copland** (Slack user ID `U099FA0D7CP`). Direct mentions
 
 If `clients/<slug>.md` doesn't exist:
 
-1. Check `../VibePulse/.claude/clients/<slug>.yaml`. If absent, try common variants (hyphen/underscore, with/without `-crypto`/`-cfd` suffix). If VibePulse has nothing and `../MahiProduct/data/billing/clients.json` has nothing, report the slug as unknown and stop.
+1. Check `../VibePulse/.claude/clients/<slug>.yaml`. If absent, try common variants (hyphen/underscore, with/without `-crypto`/`-cfd` suffix). **Pre-live clients often have no VibePulse yaml and no billing entry** — before giving up, check `../MahiProduct/data/client-hosts.json`, the "Signed but not yet live" section of `../MahiProduct/data/fleet.txt`, and `../MahiProduct/data/onboarding/<slug>.json` (note the tracker sometimes uses a different slug than infra — e.g. `tmgm.json` ↔ `trademax`). Only report the slug as unknown and stop if *none* of those know it.
 2. Copy `clients/_template.md` → `clients/<slug>.md`.
-3. Fill `refs:` — point `vibepulse` at the yaml(s), `billing`/`hosts` at the MahiProduct catalogues, `wiki` at `../MahiProduct/wiki/clients/<slug>.md` if it exists else `null`.
-4. Leave `channels_override: null`, `key_people_overrides: []`, `last_catchup: null`.
+3. Fill `refs:` — point `vibepulse` at the yaml(s), `billing`/`hosts` at the MahiProduct catalogues, `wiki` at `../MahiProduct/wiki/clients/<slug>.md` if it exists else `null`. Set any the upstream doesn't cover to `null` with a short trailing comment saying why. For a pre-live client add an `onboarding:` ref pointing at its tracker JSON, and `aliases:` if the tracker slug differs from this one.
+4. `key_people_overrides: []`, `last_catchup: null`. Leave `channels_override: null` **unless** there's no VibePulse yaml to resolve channels from — then set it explicitly to the resolved `[internal-<x>, mahi-<x>]` pair, since channel resolution has nothing else to read.
 5. Leave `Recent issues` and `Notable topics` empty — the current `/catchup` run will populate them.
 6. **Status section:** if `wiki:` is set (MahiProduct has it), delete the `## Status` section entirely — the wiki is canonical. If `wiki: null`, keep the section and populate from VibePulse + the catchup window's signals (stage, integration, relationship — three bullets, one line each). Don't fabricate; if a field is unknown, write `unknown` and move on.
 7. Note the bootstrap in the run summary ("bootstrapped `clients/<slug>.md` from VibePulse").
