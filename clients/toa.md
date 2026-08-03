@@ -87,31 +87,31 @@ last_catchup: 2026-08-03T07:24:58Z
 > [resolved] 2026-06-21 — CLS-OFIMB removed from registry: 13 processes down on Toa Args CHI/LDN, redeployed
 > Isaac (09:02 BST) removed CLS-OFIMB from the signal registry because 13 processes were not coming back up on Toa Args CHI and LDN. propTrader1HrpLdn1 and signalProcess1 still down after the removal — Isaac noted it looked signal-versioning related; also flagged a possible duplicate feature in ML/XGBoost training in a separate message. James confirmed a redeploy was needed (11:20 BST) and completed it by 12:11 BST — CHI and LDN admin/trading confirmed OK; only propTrader1HrpLdn1 remains down (expected, per existing open entry). https://mahifx.slack.com/archives/C035H1VNCAD/p1782028930298559
 
-> [open] 2026-07-21 — marketDataTT2 stopped on TOA CHI: v25.2 options MD bug
+> [open] 2025-07-21 — marketDataTT2 stopped on TOA CHI: v25.2 options MD bug
 > Lee stopped marketDataTT2 at Toa CHI pending a fix for an issue with version 25.2 and options market data. No ETA given. https://mahifx.slack.com/archives/C035H1VNCAD/p1753075908322289
 
-> [open] 2026-07-16/18 — Binance FUTURES_UM XBTUSC-PERP cancel timeout + CDC 401 on Toa Argamon
+> [open] 2025-07-16/18 — Binance FUTURES_UM XBTUSC-PERP cancel timeout + CDC 401 on Toa Argamon
 > 2026-07-16 20:39 BST: Inald flagged BINANCE_FUTURES_UM XBTUSC-PERP cancel timeout after 60000ms (PD Q0QH1BOUJY4XD4). Inald applied JMX position adjustment; James restarted GW/trader. Same evening: exchangeAccounting1 CDC connectivity issues (401 Unauthorized from CDC private API + timeout on blocking read). Daria bounced the process; resolved by 07:45 BST 2026-07-18. https://mahifx.slack.com/archives/C035H1VNCAD/p1752694801694079
 
-> [resolved] 2026-07-16 — Vertex fully closed: traderVertex1 off, toa-crypto-1 AWS box shut down
+> [resolved] 2025-07-16 — Vertex fully closed: traderVertex1 off, toa-crypto-1 AWS box shut down
 > James confirmed Vertex closed 2026-07-16 15:11 BST. traderVertex1 turned off. `toa-apnortheast1-prod-crypto-1` AWS instance shut down 16:01 BST. Background: James had brought Vertex back temporarily from 2026-07-09 to help during their shutdown sequence (they requested MM support). https://mahifx.slack.com/archives/C035H1VNCAD/p1752175088390839
 
-> [open] 2026-07-10/18 — CVEX crash loop: partial fix deployed, CVEX-side 500 unknown still causing crashes
+> [open] 2025-07-10/18 — CVEX crash loop: partial fix deployed, CVEX-side 500 unknown still causing crashes
 > Recurring traderCvex1 crashes on order-breach (breach limit 0) across EUW2. Root cause: unsolicited cancel during pending replace causes LayeringOrderService to try to cancel again, reaching breach limit. James committed fix e60cf03 2026-07-11 (duplicate OrderCancelled event lets trader continue without dying). However, CVEX returning HTTP 500 unknown on replace still causes breach trips because Mahi cannot know if old or new order remains active. CVEX said they are fixing this the week of 2026-07-21. Lee also hit a self-match cancel loop 2026-07-15 (had to bounce GW twice). https://mahifx.slack.com/archives/C035H1VNCAD/p1752166120327089
 
-> [resolved] 2026-07-11 — ruleActiveTooLong at Toa APN: bad CDC MaxLocalInstrumentRisk config
+> [resolved] 2025-07-11 — ruleActiveTooLong at Toa APN: bad CDC MaxLocalInstrumentRisk config
 > Isaac flagged ruleActiveTooLong alerts on Toa APN (SOL/USD position ~$300 VaR, failure reasons: OK_BoundingEliminatedAllMarkets and OK_MarketMinimumsAndAllocationConstraintsFilteredAllLiquidity). James identified bad config scaling MaxLocalInstrumentRisk down, preventing increasing risk on CDC and blocking hedging. Config removed; resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1752196775901609
 
-> [watching] 2026-07-10 — Wintermute→Toa BTC position move: manual trades requested
+> [watching] 2025-07-10 — Wintermute→Toa BTC position move: manual trades requested
 > Isaac Dann (overnight ops) flagged ~9 BTC at Wintermute with opposite positions at Toa; asked how to move. Lee said manual trades are fine, suggested up to 1 BTC at a time. No further escalation. https://mahifx.slack.com/archives/C035H1VNCAD/p1752103790390549
 
-> [resolved] 2026-07-07 — CVEX gateway self-inflicted outage: Lee rolled back, resolved in ~2h
+> [resolved] 2025-07-07 — CVEX gateway self-inflicted outage: Lee rolled back, resolved in ~2h
 > Lee flagged CVEX gateways down at 06:57 BST — self-inflicted by component deploys chasing a bug, leaving no working previous version on the server. Lee rolled back (symlink reversal) by 09:10 BST. Post-recovery: minor auto-resolving alerts. Lee noted Kraken MD bounce generates spurious alerts (not breaking subscriptions). https://mahifx.slack.com/archives/C035H1VNCAD/p1751867847352309
 
-> [resolved] 2026-06-26 — Toa Argamon Tokyo relaunched on minor coins
+> [resolved] 2025-06-26 — Toa Argamon Tokyo relaunched on minor coins
 > Lee confirmed 2026-06-26 09:48 BST that Toa Argamon Tokyo is live again on some minor coins; treat alerts as per other live envs. https://mahifx.slack.com/archives/C035H1VNCAD/p1750927682432399
 
-> [resolved] 2026-06-18 — Binance TKY margin rejection: test trading, underfunded account
+> [resolved] 2025-06-18 — Binance TKY margin rejection: test trading, underfunded account
 > Daria flagged orders rejected on BINANCE_FUTURES_UM on the second TKY box with "Margin is insufficient". James confirmed test trading with underfunded account — turned off and resolved. https://mahifx.slack.com/archives/C035H1VNCAD/p1750232673228519
 
 > [resolved] 2026-06-15/17 — Nado fully wound down: traders/order processes stopped
@@ -207,40 +207,40 @@ last_catchup: 2026-08-03T07:24:58Z
 > [resolved] 2026-04-29 — Toa asking for NLP depth/size update post SLA reductions
 > Toa-side asked James to update the shared NLP depth/size sheet given recent SLA reductions. James replied in-thread with a canvas doc (Toa Capital Slack canvas F0B0LF4TJ0J) containing the past-24h avg depth/size NLP is currently servicing. https://mahifx.slack.com/archives/C09RGU1T1GE/p1777452146937409
 
-> [open] 2026-04-30 — CVEX EUW2 risk limit hit: BTC-30MAY25 quoting stopped
+> [open] 2025-04-30 — CVEX EUW2 risk limit hit: BTC-30MAY25 quoting stopped
 > `noRecentOpenOrderUpdates.CVEX-BTC-30MAY25` PD fired after no two-way orders since 13:53 UTC; Justin identified Toa at the risk limit with no way to close risk. James noted alerting will need to be backed off given the limit is a structural cap. Justin resolved the PD alert at 17:54. Alerting threshold calibration for CVEX contracts at max risk remains open. https://mahifx.slack.com/archives/C035H1VNCAD/p1746030941556329
 
 > [resolved] 2026-05-04 — noRecentOpenOrders PD on APN1: XETUST-PERP, XBTUST-PERP, SOLUST-PERP
 > Three Nado instruments fired `noRecentOpenOrders` PD alerts on TOA APN1 following a reboot. James confirmed processes looked live; Leo verified all procs up on both boxes; resolved within 6 minutes of the alert. https://mahifx.slack.com/archives/C035H1VNCAD/p1777904442214679
 
-> [resolved] 2026-05-05 — traderVertexSei1 crash loop on APN1: VERTEX cancel timeouts
+> [resolved] 2025-05-05 — traderVertexSei1 crash loop on APN1: VERTEX cancel timeouts
 > traderVertexSei1 crashed 3+ times in quick succession (`Exceeded maximum number of order breaches (0): [VERTEX cancel timed out: ...]`). Inald handled: turned off books, bounced ordersVertex1, restarted traders; stable after fourth attempt. paidGivenProfileProcess also came down and was restored. https://mahifx.slack.com/archives/C035H1VNCAD/p1746454824352989
 
-> [resolved] 2026-05-12 — Toa-CHI OOM: riskReporting1/riskPath down
+> [resolved] 2025-05-12 — Toa-CHI OOM: riskReporting1/riskPath down
 > Both `riskReporting1` and `riskPath` on Toa-CHI came down with native OOM (`mmap failed to map 2113929216 bytes`). Resolved after memory bump and process restarts. Also same day: high VAR alert at TOA APN1 (12,654 USDT) — levelled off after monitoring. https://mahifx.slack.com/archives/C035H1VNCAD/p1747079989606149
 
-> [open] 2026-05-15 — signalProcessAP1-1 OOM at TOA APN (recurring, fix in progress)
+> [open] 2025-05-15 — signalProcessAP1-1 OOM at TOA APN (recurring, fix in progress)
 > signalProcessAP1-1 at TOA APN OOM at 8192MB. Reoccurred 2026-05-21 (heap space OOM). James was testing fixes; still in testing on 2026-05-21. https://mahifx.slack.com/archives/C035H1VNCAD/p1747299963170189
 
-> [watching] 2026-05-22 — Crypto infrastructure expansion: new APN boxes, Binance moved to rocky 8
+> [watching] 2025-05-22 — Crypto infrastructure expansion: new APN boxes, Binance moved to rocky 8
 > Lee moved traderBinance1 to new rocky 8 `toa-apnortheast1-prod-crypto-2` box 2026-05-22 (alerts now route to existing Toa APN PD service). New `toa-apnortheast1-prod-crypto-01` box being built in parallel; alerts suppressed until declared live. Recurring limit-price-breach and self-trade alerts on crypto-2 flagged by Lee as spammy (can resolve). https://mahifx.slack.com/archives/C035H1VNCAD/p1747885755306959
 
-> [watching] 2026-05-18 — traderCvex CVEX order-breach crash loop: partial fix deployed
+> [watching] 2025-05-18 — traderCvex CVEX order-breach crash loop: partial fix deployed
 > traderCvex crashing repeatedly on order breach exceptions (`Exceeded maximum number of order breaches (0): [CVEX replace order timed out ...]`) across EUW1 and EUW2. Multiple instances: 2026-05-18 (Daria), 2026-06-27 (Maten, twice), 2026-06-30 (Maten), 2026-07-04 (ongoing thread). James committed fix e60cf03 2026-07-11 for duplicate OrderCancelled path; CVEX returning HTTP 500 unknown on replace still causes breach trips. CVEX fixing their end week of 2026-07-21. See also 2026-07-10/18 entry above. https://mahifx.slack.com/archives/C035H1VNCAD/p1747601897439739
 
-> [resolved] 2026-06-23 — ordersVertex1 fails to start: Vertex contract load timeout (APN-TOA)
+> [resolved] 2025-06-23 — ordersVertex1 fails to start: Vertex contract load timeout (APN-TOA)
 > ordersVertex1 failing on APN1 with `Error loading contract data: Timed out after 60 seconds waiting for response for {"type":"contracts"}`. traderVertexSei1 also down as a result. Stable after several restart attempts; Arun confirmed orders and trades flowing. https://mahifx.slack.com/archives/C035H1VNCAD/p1750688652805529
 
-> [resolved] 2026-06-24 — Crypto.com FIX migration: temporarily offline
+> [resolved] 2025-06-24 — Crypto.com FIX migration: temporarily offline
 > CDC would not allow two simultaneous FIX sessions; James turned off Crypto.com while migrating connections to the new `toa-apnortheast1-prod-crypto-2` server. CVEX also turned off during the transition. Both back live 2026-06-26. https://mahifx.slack.com/archives/C035H1VNCAD/p1750764060944289
 
-> [resolved] 2026-07-01 — CVEX EUW2 MD feed died: cancel-ratio alert, fix deployed
+> [resolved] 2025-07-01 — CVEX EUW2 MD feed died: cancel-ratio alert, fix deployed
 > CVEX market data feed died (failing to peg bids/offers), causing 99% cancel-ratio PD alert. James restarted MD feed; Lee deployed a fix later the same evening. https://mahifx.slack.com/archives/C035H1VNCAD/p1751363641150399
 
-> [open] 2026-07-02 — High VaR with increased Argamon crypto flow: threshold needs tuning
+> [open] 2025-07-02 — High VaR with increased Argamon crypto flow: threshold needs tuning
 > High VaR alert (~50k now at critical threshold) following increased crypto flow from Argamon. James bumped critical VaR limit to 50k temporarily. Acknowledged that thresholds need tuning to match the new Argamon volume. https://mahifx.slack.com/archives/C035H1VNCAD/p1751443836066739
 
-> [open] 2026-07-04 — Crypto.com crossed data + cancel-ratio alert
+> [open] 2025-07-04 — Crypto.com crossed data + cancel-ratio alert
 > Crypto.com market data became crossed again on 2026-07-03 (James bounced marketDataCryptoDotCom). 2026-07-04 Daria bounced the MD gateway to fix crossing. Leo raised a 78% cancel-ratio alert (`CRYPTO_DOT_COM/PROP_TRADER_CRYPTO_DOT_COM_1`, 629 of 808 orders cancelled in 15 min). https://mahifx.slack.com/archives/C035H1VNCAD/p1751612943352569
 
 > [resolved] 2026-03-26 — traderNado1 crash loop on FX perp launch day; stabilised on code version 26.3

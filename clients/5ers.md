@@ -43,7 +43,7 @@ last_catchup: 2026-08-03T07:05:58Z
 > [resolved] 2026-07-03 — Pending order cancellations (clients 2882, 912) — orders never reached Compass
 > Client flagged pending orders for accounts 2882 and 912 were cancelled, with logs attached for 2882. William Denny (17:34 BST): traced and found these orders never reached Compass, so Mahi is unable to investigate the cancel reason — points to a cause upstream of Mahi (bridge/YourBourse side). [client-alert](https://mahifx.slack.com/archives/C07AQJS4E80/p1783078938461849) [william-reply](https://mahifx.slack.com/archives/C07AQJS4E80/p1783096495627659)
 
-> [resolved] 2026-06-18 — Dev GW oil CFD pricing stuck (XTIUSD/XBRUSD) on new cTrader connection
+> [resolved] 2025-06-18 — Dev GW oil CFD pricing stuck (XTIUSD/XBRUSD) on new cTrader connection
 > Cameron Hughes working with Yaniv on the Dev/cTrader connection: BTCUSD and ETHUSD trades now working, but XTIUSD (CL1USD) was off-quotes since June 17 and XBRUSD trades were being rejected. Cameron confirmed XTIUSD was being sent from Compass, asked Yaniv to disable/enable the Dev GW — Yaniv did so and confirmed pricing restored. XBRUSD resolved separately. By 13:59 BST, Cameron confirmed "Everything is now in place to go live with pricing in all stages and execution for funded flow." Yaniv planned gradual go-live next day (one asset at a time). [oil-fix](https://mahifx.slack.com/archives/C07AQJS4E80/p1750241066366539) [cameron-all-clear](https://mahifx.slack.com/archives/C07AQJS4E80/p1750251598711169)
 
 > [open] 2026-06-12 — Stale FIX orders alert from YB (2026-06-11 16:47 UTC) — connectivity drop, no unhedged exposure confirmed but 5 re-hedges unverified
@@ -119,7 +119,7 @@ last_catchup: 2026-08-03T07:05:58Z
 
 - 2026-06-21 — Isaac Dann added diagnostic note to the ongoing flowImbalanceNoTrades open issue: alert from `riskReportingExtended1` can also indicate the MT5 STP analytics bridge being down — check `analyticsFixServer1` in Compass then `echo-euwest2-prod-mt4-1`. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1782082495560909)
 
-- 2026-06-18 — cTrader Dev connection confirmed ready for live; Yaniv proceeding with gradual go-live (one asset at a time) from June 19. Cameron Hughes gave the all-clear: pricing in all stages and funded-flow execution in place. [confirmation](https://mahifx.slack.com/archives/C07AQJS4E80/p1750251598711169)
+- 2025-06-18 — cTrader Dev connection confirmed ready for live; Yaniv proceeding with gradual go-live (one asset at a time) from June 19. Cameron Hughes gave the all-clear: pricing in all stages and funded-flow execution in place. [confirmation](https://mahifx.slack.com/archives/C07AQJS4E80/p1750251598711169)
 
 - 2026-06-11 — Andreas requested XAG/XAUUSD spread increase (~4-5 points); Kate was away. Cameron Hughes handled: confirmed XAG TOB 0.01→0.014 and XAUUSD TOB 0.2→0.24 with Andreas; change actioned same day; client confirmed "All good thanks!" [request](https://mahifx.slack.com/archives/C07AQJS4E80/p1781177175731659) [actioned](https://mahifx.slack.com/archives/C07AQJS4E80/p1781183335831909)
 

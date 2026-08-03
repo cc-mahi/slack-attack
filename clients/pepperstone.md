@@ -266,28 +266,28 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 > [open] 2026-06-26 — XAUUSD-PERP 0 spreads appearing randomly; HRP_GOLDI_NYC one-sided; spread config patched temporarily
 > Ruby (Pepperstone) flagged 0 spreads on XAUUSD-PERP at ~01:00 BST. Isaac identified two causes: (1) HRP_GOLDI_NYC going one-sided causing model spread to drop to zero; (2) no markup applied in SNG channel. Daria patched spread config per layer as a temporary fix. Discussion on adding Binance as a spread reference benchmark (more quotes for model to price from); Isaac confirmed Binance feed exists but was not yet set as spread reference — agreed to add it. Still live at end of window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782431997282909)
 
-> [resolved] 2026-10-03 — Tom Williams promoted to COO; Nicola's London drinks notes confirm Sep 26 catch-up
+> [resolved] 2025-10-03 — Tom Williams promoted to COO; Nicola's London drinks notes confirm Sep 26 catch-up
 > Will flagged Tom's COO promotion (internal, Aug 18). Nicola's notes from the Sep 25-26 London drinks with Tom, Kate Domican, and Rob Bowen: Tom happy, proud of the brand/Tamas relationship; notes MK (Marianna Konstantinidi) is joining Pepperstone unbeknownst to Kate; Kate considering a move to Dubai/BaseMarkets; Tom wants monthly catch-up cadence with Mahi; interest in CFDs and gold; LATAM — 60-person Chile office. Monthly catch-up request to be actioned. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1755501833270919) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1758892207546789)
 
-> [resolved] 2026-09-08 — OZ NY HUB outages (Sep 2-3); Beeks primary hardware failure + separate OZ HUB crash
+> [resolved] 2025-09-08 — OZ NY HUB outages (Sep 2-3); Beeks primary hardware failure + separate OZ HUB crash
 > Sep 2: Beeks primary hardware issue in NY; failover worked, back up same evening. Sep 3: separate OZ NY HUB outage. Both resolved same day. Ongoing resilience concern given two separate NY infrastructure events within 24 hours. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1756843748216869)
 
-> [watching] 2026-08-28 — OZ/Beeks network latency: ~10s delayed quotes post-news; Beeks confirmed packet loss on OZ side; NanoFIX migration Aug 31
+> [watching] 2025-08-28 — OZ/Beeks network latency: ~10s delayed quotes post-news; Beeks confirmed packet loss on OZ side; NanoFIX migration Aug 31
 > Pepperstone seeing ~10s delayed quotes after news events. Mahi-side latency 1-4ms (95th pct). Beeks confirmed packet loss on OZ side; some connections possibly going over internet. Georgios Voulgaropoulos (Ralich at OZ) personally involved. OZ FIX adapters migrated to NanoFIX Aug 31 as remediation. Latency watch ongoing. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755052355923559) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1756261579000000)
 
-> [resolved] 2026-08-22 — 5 cross-pairs moved to direct pricing + new FI signals deployed; Tom confirmed spread levels maintained
+> [resolved] 2025-08-22 — 5 cross-pairs moved to direct pricing + new FI signals deployed; Tom confirmed spread levels maintained
 > EURJPY, AUDCAD, GBPAUD, XAUAUD, EURAUD moved from triangulated to direct pricing. New FI signals also deployed. Tom confirmed current spread levels to be maintained. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755831756325889)
 
-> [resolved] 2026-08-20 — OZ NY HUB full outage; pepperstone-live.onezero.com unreachable; NYC failovers in LDN also disconnected; back up ~16:35 BST
+> [resolved] 2025-08-20 — OZ NY HUB full outage; pepperstone-live.onezero.com unreachable; NYC failovers in LDN also disconnected; back up ~16:35 BST
 > [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755702821281529)
 
-> [resolved] 2026-08-19 — Crypto env P&L fix deployed (LDN then NYC); second deploy required; fixed
+> [resolved] 2025-08-19 — Crypto env P&L fix deployed (LDN then NYC); second deploy required; fixed
 > Liam flagged P&L issue Aug 18 in vendor channel. Fix deployed Aug 19 LDN then NYC; second deploy needed for full resolution. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755530293559229)
 
-> [resolved] 2026-08-15 — XAUUSD TWILIGHT pricing overhaul deployed; Deutsche/UBS removed, BMSL reintroduced, defensive references added
+> [resolved] 2025-08-15 — XAUUSD TWILIGHT pricing overhaul deployed; Deutsche/UBS removed, BMSL reintroduced, defensive references added
 > Mio flagged need Aug 14 (internal). Isaac deployed Aug 15: Deutsche/UBS removed as reference markets (erratic during moves); base spread TOB 0.08→0.14 in twilight; benchmark ratio 0.3→0.7 in twilight; BMSL reintroduced at TOB; Finalto and Invast DEF added as defensive references. Backtests show improved skew PnL. This resolves the TWILIGHT arbitrageur overclassification issue raised around Aug 19 (Ruby's query about classification changes). [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1755227003450239) [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1755133793000000)
 
-> [resolved] 2026-08-08 — XAUUSD spreads blow-out (gold tariffs); ISPRIME spreads 0.1→1.4; arb protection pulled then restored
+> [resolved] 2025-08-08 — XAUUSD spreads blow-out (gold tariffs); ISPRIME spreads 0.1→1.4; arb protection pulled then restored
 > ISPRIME spreads spiked massively during gold tariff event. BMSL temporary config changes applied; Daria stabilised pricing; arb protection pulled then restored. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1754608971698109)
 
 > [open] 2026-06-18 — Crypto LDN server critically low on memory; process consolidation underway, Beeks upgrade request pending
@@ -413,11 +413,11 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - 2026-06-23 — MK requested FI PnL breakdown (Crypto May/June, FX+Metals May/June, XAUUSD May/June). Isaac delivered same session: Crypto $303k May / $425k June (uplift driven by late-May XBTUSD skew changes; XBTUSD NYC $52.32/M → $108.37/M); FX+Metals $1.85M May / $1.10M June; XAUUSD $1.71M May / $982k June. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1782240789438949)
 - 2026-06-22 — Perp pricing call (Isaac + Tom): Tom happy with spot-mid formation logic keeping basis inline with perps. However Pepperstone unhappy with HyperLiquid hedging latency — considering switching hedging venue to Binance (still via OZ). Isaac noted Mahi has a direct Binance connection but they want it routed via OZ. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782097593522169)
 - 2026-06-22 — Isaac sorting LDN-NYC CFD hub connectivity on NOCINT-821618. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1782084266457449)
-- 2026-10-03 — 3-year MSA confirmed locked in (Jul 28 dossier entry now confirmed resolved via Nicola's message: "It's official.... Pepperstone are locked in for 3 years 🔥"). New fee $115,088/mo from Aug 1 per 3rd Addendum (2025-07-16).
-- 2026-09-26 — Tom Williams now COO. Kate Domican on his team; considering Dubai/BaseMarkets move. MK (Marianna) joining Pepperstone — unbeknownst to Kate at time of drinks. Tom wants monthly Mahi catch-up.
-- 2026-09-08 — Binance SBE paid-given feed integration underway (Andrew + Isaac). Ongoing; Arun also working B2C2 direct connection (FIX tag 271 mdEntrySize).
-- 2026-08-31 — Antonio Aguilar (antonio.aguilar@pepperstone.com) granted Compass/Echo read-only access. Role not confirmed.
-- 2026-08-22 — XAUUSD TWILIGHT pricing overhaul resolves arbitrageur overclassification; 5 crosses moved to direct pricing. Spread levels locked per Tom.
+- 2025-10-03 — 3-year MSA confirmed locked in (Jul 28 dossier entry now confirmed resolved via Nicola's message: "It's official.... Pepperstone are locked in for 3 years 🔥"). New fee $115,088/mo from Aug 1 per 3rd Addendum (2025-07-16).
+- 2025-09-26 — Tom Williams now COO. Kate Domican on his team; considering Dubai/BaseMarkets move. MK (Marianna) joining Pepperstone — unbeknownst to Kate at time of drinks. Tom wants monthly Mahi catch-up.
+- 2025-09-08 — Binance SBE paid-given feed integration underway (Andrew + Isaac). Ongoing; Arun also working B2C2 direct connection (FIX tag 271 mdEntrySize).
+- 2025-08-31 — Antonio Aguilar (antonio.aguilar@pepperstone.com) granted Compass/Echo read-only access. Role not confirmed.
+- 2025-08-22 — XAUUSD TWILIGHT pricing overhaul resolves arbitrageur overclassification; 5 crosses moved to direct pricing. Spread levels locked per Tom.
 - 2026-07-31 — Crypto A-Book fully live.
 - 2026-07-28 — 3-year MSA locked in (Nicola confirmed). $115,088/mo from Aug 1.
 - 2026-04-28 — Pepper exchange release planned 22:00 SGT; propTraderModulusUAT enabled in NY to catch issues pre-prod. Daria flagged a missed-fill on partial-fill-around-logout for monitoring. [permalink](https://mahifx.slack.com/archives/C033K2P0RPT/p1777361423971719)
