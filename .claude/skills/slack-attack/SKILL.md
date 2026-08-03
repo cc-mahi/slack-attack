@@ -66,7 +66,7 @@ Known acceptable miss: a bot message that *is* notable (a critical alert in a no
 When the probe finds zero human messages, the orchestrator (not a subagent) does the bump itself:
 
 1. `Edit` `clients/<slug>.md` frontmatter — replace the `last_catchup:` line with the current ISO-8601 UTC timestamp. No body changes.
-2. `git add clients/<slug>.md && git commit -m "chore(catchup): bump <slug> last_catchup (probe-skip, no human activity)"`.
+2. `git add clients/<slug>.md && git commit -m "chore(catchup): bump <slug> (probe-skip, no activity)"`. Keep it exactly this short — `.githooks/commit-msg` caps the subject at 72 chars, and the older `bump <slug> last_catchup (probe-skip, no human activity)` wording overflowed for any slug of 9+ characters (i.e. most of them).
 3. The client's brief section is the standard quiet one-liner (see "Quiet weeks").
 
 ## Dispatching catchup

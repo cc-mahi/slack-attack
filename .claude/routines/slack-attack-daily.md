@@ -31,6 +31,8 @@ Known IDs:
 
 1. Sanity-check the workspace. cd into the slack-attack clone. Verify sibling clones exist at ../VibePulse and ../MahiProduct — if either is missing, note it in the run-stats footer (step 8) but continue (catchup will degrade gracefully).
 
+   **Enable the git hooks first: `git config core.hooksPath .githooks`.** A fresh clone does not carry this, so without it the `pre-commit` dossier-date guard does not fire — and this routine is where the year-off corruption has historically landed. Run it unconditionally; it's idempotent. Then confirm with `git config --get core.hooksPath` and, if it still isn't `.githooks`, say so verbatim in the run-stats footer, because every dossier commit that run is unguarded.
+
 2. Capture the run start. Record `RUN_START_SHA=$(git rev-parse HEAD)` and `RUN_START_TS=$(date +%s)`. You will use these in step 8 to count what landed and compute wall time.
 
 3. Catch up all active clients in batches. Invoke /slack-attack (no arg) repeatedly. Each batch processes the top 3 staleness-ranked clients; the orchestrator probe-skips any candidate showing zero non-bot activity since last_catchup (a frontmatter-only last_catchup bump rather than spinning up a full subagent). Continue batches until scripts/rank-clients shows no client with last_catchup older than today's UTC start, or you have completed 12 batches (whichever comes first). The batch cap is sized to cover the full active client set with headroom (currently ~26 actives, 12 × 3 = 36 capacity); raise it if `scripts/rank-clients | wc -l` ever approaches that ceiling.

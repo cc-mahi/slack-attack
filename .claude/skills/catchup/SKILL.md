@@ -204,7 +204,15 @@ The check doesn't apply to the `History` section (that's `/backfill`'s domain, d
 Once the dossier edit is in place **and the sanity-check has passed**, commit it as part of the same run — don't leave it staged or wait for the user to commit. The reader will see the change either by `git pull` (if a remote agent ran the catchup) or by reviewing the new commit locally.
 
 - Stage only the files this run actually touched: the target dossier (`clients/<slug>.md` or `channels/<name>.md`) and `.claude/docs/slack-conventions.md` if a newly-resolved channel ID was cached. Never `git add -A` — it'll sweep up unrelated work.
-- Commit message is conventional: `chore(catchup): refresh <slug> dossier (<oldest>..<now>)`. For a quiet window, `chore(catchup): bump <slug> last_catchup (quiet window)`. For a bootstrap, `chore(catchup): bootstrap <slug> dossier from VibePulse`.
+- Commit message is conventional **and the subject must be ≤72 chars** — `.githooks/commit-msg` rejects anything longer, so use these forms and put detail in the body, not the subject. Dates in the subject are `YYYY-MM-DD` only; the full ISO window goes in the body.
+
+  | Case | Subject |
+  |---|---|
+  | Refresh | `chore(catchup): refresh <slug> (<YYYY-MM-DD>..<YYYY-MM-DD>)` |
+  | Quiet window | `chore(catchup): bump <slug> (quiet window)` |
+  | Bootstrap | `chore(catchup): bootstrap <slug> dossier` |
+
+  Body for a refresh carries the precise window, e.g. `Window 2026-07-04T09:16:12Z..2026-08-03T09:16:12Z.` Worst case today is the longest slug (`alphacap-broker`, 15 chars) at 64 chars, leaving 8 spare — if a longer slug ever appears, shorten the parenthetical, never the `chore(catchup):` prefix (the daily routine counts commits by that prefix).
 - Don't push. Pushing is the caller's call — the local user just needs the commit on disk; the remote agent (when running this from a routine) handles its own push after all dispatched catchups have committed.
 - If `git status` shows unrelated dirty files in the working tree, leave them — only stage the catchup-owned paths. If the catchup-owned path itself has unrelated edits already staged or modified, stop and surface that in the output instead of guessing.
 
