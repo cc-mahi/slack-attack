@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-08-03T07:33:00Z
+last_catchup: 2026-08-04T07:21:12Z
 status: active
 retired_at: null
 retired_reason: null
@@ -32,8 +32,8 @@ retired_reason: null
 > [resolved] 2026-06-16 — BTC spread widened unexpectedly (distribution.markupProfiles misconfiguration)
 > Jelle flagged BTC spread was very wide at 09:02 BST; William Denny and Cameron H both jumped on it. Cameron H identified that `distribution.markupProfiles` for the internal model had somehow been changed to match the continuity pool — no recent config trace found. Widening was at distribution level, not model level. Fix applied by 13:59 BST; Jelle confirmed "Yes, it's fixed now" shortly after. Separately, Jelle also asked to decrease BTC base spreads — Cameron H confirmed "yeah sure, have any values in mind?"; client responded with target values at 13:07 ("Is it done?"), Cameron H applied the change at 13:59, and client confirmed "Yes, perfect!" at 08:14 BST on 2026-06-17. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1781596943927769) [resolved](https://mahifx.slack.com/archives/C08473TFD7Z/p1781680448615449)
 
-> [resolved] 2026-06-01 — free product pricing: how do Mahi charge for one-time-use accounts?
-> Syb Dijkstra asked on 2026-05-27 how Mahi pricing works for a free version of BrightFunded (one-time use per user). Cameron H and Will Carter both said they'd raise internally; Mio followed up in the same thread on 2026-06-01 asking for an update. Cameron H resolved on 2026-06-09: free/demo one-time-use accounts will NOT be charged — Mahi charges on unique active accounts per month and the free ones will be excluded. Only requirement: a flag/tag on the account to allow automatic exclusion. Ball is in BF's court to confirm how to identify these accounts. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1780330801690039) [resolution](https://mahifx.slack.com/archives/C08473TFD7Z/p1781009677311779)
+> [open] 2026-06-01 — free product pricing: how do Mahi charge for one-time-use accounts? (tagging mechanism still unresolved)
+> Syb Dijkstra asked on 2026-05-27 how Mahi pricing works for a free version of BrightFunded (one-time use per user). Cameron H and Will Carter both said they'd raise internally; Mio followed up in the same thread on 2026-06-01 asking for an update. Cameron H resolved the pricing question on 2026-06-09: free/demo one-time-use accounts will NOT be charged — Mahi charges on unique active accounts per month and the free ones will be excluded. Only requirement: a flag/tag on the account to allow automatic exclusion. The identification mechanism itself has dragged since: balance-based exclusion ruled out (Cameron H can't see initial balances), then a "demo"-tagged platform group was proposed, then BF found the shared-group approach unworkable at volume and asked about FIX-tag-based tagging instead, requiring BF dev work. Benjamin Galindo asked what tags Mahi currently receives (2026-07-22); Cameron H apologised for the delay on 2026-08-03 and proposed picking it up on the rescheduled monthly call (same day as the Instant Funding sim ask below). Still open — no tagging mechanism agreed. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1780330801690039) [2026-07-15 balance/group discussion](https://mahifx.slack.com/archives/C08473TFD7Z/p1784111864975349) [2026-08-03 pickup](https://mahifx.slack.com/archives/C08473TFD7Z/p1785749063384439)
 
 > [resolved] 2026-06-01 — AVAX/USD and ATOM/USD slippage (base spreads too wide)
 > Benjamin reported significant slippage on AVAX/USD and ATOM/USD at 13:54 BST; Cameron H identified base spreads as too wide and asked Benjamin to check. By 17:44 BST Benjamin confirmed improved but requested a further 50% reduction; Cameron H applied the change and confirmed done at 18:35 BST. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1780318466562819)
@@ -76,6 +76,9 @@ retired_reason: null
 
 > [open] 2026-07-23 — bridge license expiring in 6 days (PagerDuty alert)
 > Sam Hewitt flagged a PagerDuty alert that the BrightFunded bridge license is running out in 6 days, asking how to resolve it and why only this bridge triggered the alert. No replies yet in window. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1784778809724569)
+
+> [open] 2026-08-03 — Instant Funding Challenge Plan: sim scope for evaluation-free accounts
+> Jelle Dijkstra flagged BrightFunded is planning to launch an Instant Funding Challenge Plan (no evaluation) and asked whether sims can cover the extra rules that come with it — consistency rules, no weekend-holding, a profit buffer before payout eligibility, minimum profitable days at 0.25%, and biggest-loss-not-exceeding-biggest-win. Cameron Hughes confirmed feasible, to be discussed in more depth on the rescheduled monthly call. Monthly catch-up itself was pushed from its usual slot to 12:00/12:30 UK on 2026-08-04 at Jelle's request; Will Carter confirmed. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1785767012079019) [reschedule](https://mahifx.slack.com/archives/C08473TFD7Z/p1785742901124689)
 
 ## Notable topics
 
