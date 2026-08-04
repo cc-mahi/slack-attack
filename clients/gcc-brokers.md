@@ -12,10 +12,19 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-08-03T07:13:57Z
+last_catchup: 2026-08-04T07:15:08Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-03/04 — Contract signing in progress; Youssef following up with GCC's signatory today
+> Will Carter flagged the new contract to Bonnie Cassidy; forwarded Youssef Bouz confirming "On it, will follow up with her today." Continues the 2026-07-22 terms-lock-in / 2026-07-27 notice-period threads — signature still pending. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1785826746761379)
+
+> [open] 2026-08-03 — LR-driven spread spike recurs on tag 700154 (large gold client); Youssef pushes for the fix flagged on 2026-07-20
+> Youssef Bouz reported tag 700154's 3,000oz XAUUSD sell order caused a visible spread spike across Mahi's shared feed, recurring after a similar large clip earlier the same session; flagged it as the same Liquidity Reduction pattern raised on 2026-07-20 where a fix was promised. Youssef framed 700154 as a large, growth-capable client Mahi is trying to incentivise, and asked for better execution on its larger clips. Will Carter acknowledged ("that is really helpful context... low hanging fruit we can pick for this client") and committed to look into it — no fix confirmed in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785788237524399) [will-response](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785788962664379)
+
+> [resolved] 2026-08-03 — 553oz XAUUSD long filled on LMAX, Compass adjustment done
+> Layan reported 553oz gold long filled on LMAX at 15:43 BST; Rory King confirmed "confirming this adjustment is done" at 15:56 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785768210324549) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785768997906449)
 
 > [resolved] 2026-07-31 — 1,274oz XAUUSD long filled on Finalto, Compass adjustment done
 > Client reported 1,274oz gold long filled on Finalto at 15:18 BST; Rory King confirmed "This has been actioned" at 16:01 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785507520606629) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785510109875439)
@@ -337,6 +346,8 @@ last_catchup: 2026-08-03T07:13:57Z
 
 ## Notable topics
 
+- 2026-08-03 — Youssef expressed appreciation for progress and direction/control gained, working to rebuild trading pace and volume. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1785790040020179)
+- 2026-08-03 — Routine dashboard deploy: Justin Young deployed a dashboard-only release to gcc-brokers PROD (`release/26.3`); succeeded, other components untouched. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1785772218788759) [succeeded](https://mahifx.slack.com/archives/C09QS1NUA80/p1785775359026159)
 - 2026-07-26 — Sunday-night CFD book note: Isaac Dann posted an Echo top-of-book link flagging a "10k start to the week" in the CFD book (CL1USD). [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1785105283910049)
 - 2026-07-24 — Routine dashboard deploy: Justin Young deployed a dashboard-only release to gcc-brokers PROD (`release/26.3` tip `90e51786`); succeeded, other components untouched. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1784915557903359) [succeeded](https://mahifx.slack.com/archives/C09QS1NUA80/p1784920151530569)
 - 2026-07-09 — NZ bank holiday 10 July: Isaac Dann posted standard advisory — Slack less monitored, emergency support via support@mahimarkets.com or London/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1783571806173609)
