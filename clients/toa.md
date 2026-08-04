@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-03T07:24:58Z
+last_catchup: 2026-08-04T07:17:41Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-08-03T07:24:58Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-08-03 — Firewall breach on hedgerCBOE1 on toa-argamon-ch: limit raised, restarted
+> Cameron Copland (12:40 BST) flagged a PagerDuty firewall-breach alert on hedgerCBOE1 at toa-argamon-ch (Q2ZBUKVK0KICRP). James Furness raised the `hedging.orderServiceConfiguration` limit and restarted the hedger within 6 minutes; Cameron confirmed he'd been checking it was safe to bring back before James's fix landed. https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839
 
 > [resolved] 2026-07-31 — hazelcastNode down on toa-apnortheast1-prod-pri-1: OOM, self-recovered, low criticality
 > Inald (15:43 BST) flagged hazelcastNode down on `toa-apnortheast1-prod-pri-1` — `java.lang.OutOfMemoryError: Java heap space`. Confirmed back up minutes later (15:45 BST). James noted the node now only serves the Mahi/IC feed, so low criticality either way. https://mahifx.slack.com/archives/C035H1VNCAD/p1785509004772039
