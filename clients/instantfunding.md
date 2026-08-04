@@ -7,7 +7,7 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/instantfunding.md (not yet)
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-03T07:37:00Z
+last_catchup: 2026-08-04T07:15:24Z
 ---
 
 ## Recent issues
