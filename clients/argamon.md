@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-08-03T07:09:04Z
+last_catchup: 2026-08-04T07:13:24Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-08-03T07:09:04Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [open] 2026-08-03 — LMAX FIX session breach: 200-message threshold hit on order 012dseuuwa, LMAX removed from liquidity pool
+> Tom flagged hundreds of LMAX rejections ("unknown order") alongside Firewall breach messages in order events. LMAX's session was breached (>200 messages, on order 012dseuuwa) and LMAX asked Argamon to check for missed trades since 14:00 UTC. Cameron Hughes removed LMAX from the liquidity pool and bounced the SOR pool config in internal-argamon to pick it up (Daria noted removing a market + restarting the Aggs excludes it from the SOR's pool without a full SOR restart, though re-adding it later does need one). Spamming stopped by ~16:13 BST; only internalised trades were affected during the disruption, no brokered exposure. Still open: confirming why so many orders were sent (brokered flow potentially passing on spammed orders received) and adding LMAX's message-rate limits into Mahi's system to prevent recurrence. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785767168919819) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785769495761459) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785769758242259)
 
 > [open] 2026-08-03 — pricerContinuity indicative in XAUUSD for ~1hr; scope-check against IC Markets CPN issue
 > Daria flagged that Argamon's pricerContinuity was indicative in XAUUSD for about an hour on the morning of 2026-08-03, and asked Isaac Dann whether this config is only in use at Go Markets besides Argamon — referencing a parallel issue she'd just raised in #internal-ic-markets, where CLIENT_PRICE_NYC went indicative in XAUUSD due to MAHI_CONTINUITY (a continuity model believed configured onto XAUUSD before CLIENT_PRICE_FX_NYC existed for riskPath; she plans to remove XAUUSD from CPN pending LDN sign-off). No reply yet in either thread. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785713138617559)
