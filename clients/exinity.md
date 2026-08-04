@@ -18,10 +18,16 @@ key_people_overrides:
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
   - {name: "Evgenii Ishchenko", role: "trading ops — escalated XAUUSD negative-slippage complaint pattern", confidence: low}
-last_catchup: 2026-08-03T07:09:00Z
+last_catchup: 2026-08-04T07:13:37Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-04 — XAU rejects on FX_MT5_LIVE01_212089281 traced to Jane Street, not Mahi
+> Samuel Ewebiyi asked why cpty FX_MT5_LIVE01_212089281 faced XAU rejects. Sam Hewitt: these are coming through Jane Street — Exinity should ask Jane Street why they're rejecting on their end. [Samuel](https://mahifx.slack.com/archives/C0456LSHQQK/p1785811769417579) [Sam Hewitt](https://mahifx.slack.com/archives/C0456LSHQQK/p1785818359140329)
+
+> [resolved] 2026-08-03 — Compass error alert: part of a notifications edit, resolved same evening
+> Mukhammad Khamidov flagged a Compass error (screenshot) ~23:35 BST. Sam Hewitt confirmed it was part of a notifications edit and it was back up. [Mukhammad](https://mahifx.slack.com/archives/C0456LSHQQK/p1785796528134479) [Sam Hewitt](https://mahifx.slack.com/archives/C0456LSHQQK/p1785796606161579)
 
 > [resolved] 2026-07-30 — Echo/Price Forensics pricing cutoff at 21:00 UTC for FED-announcement trade investigation
 > Daniel Kurra was investigating an XAUUSD trade execution (counterparty ASV_MT5_228058568, ~18:00:05 UTC, coinciding with a FED announcement) and found Echo/CLIENT_PRICE_RETAIL pricing cutting off at 21:00 UTC. Daria Horton explained: 21:00 UTC is XAUUSD's close (explaining the cutoff), and the FED-announcement window has heavy tick volume that can be slow to load in Echo — pointed Daniel to the newer Price Forensics page in Compass instead, which loaded the data and showed the order was received toward the end of the move and filled at the published price. Daniel confirmed. [Daniel](https://mahifx.slack.com/archives/C0456LSHQQK/p1785451602155629) [Daria](https://mahifx.slack.com/archives/C0456LSHQQK/p1785452491512019) [Daniel confirms](https://mahifx.slack.com/archives/C0456LSHQQK/p1785481076540039)
@@ -276,3 +282,4 @@ last_catchup: 2026-08-03T07:09:00Z
 - 2026-07-09 — NZ bank holiday (Friday 10 July): Isaac gave the standard emergency-only cover notice — Slack won't be monitored as usual, urgent items to support@mahimarkets.com or the LN/NZ phone lines. [permalink](https://mahifx.slack.com/archives/C0456LSHQQK/p1783571801517579)
 - 2026-07-31 — Arun Patel shifted weekend restart timings by 20 minutes (admin-1 10:05→10:35, trading-2 10:20→10:50, trading-1 10:40→11:10) ahead of new crypto-session downtime. Internal-only; no client-facing context surfaced. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1785511492840679)
 - 2026-08-03 — Nathan Burch: `fixOrders4` wouldn't start back up from the weekend restart; moved `fixOrders4` and `pricer2` on trading2 from node0 to node1 (node0 only had ~220 huge pages free). Internal note only; no client-facing context surfaced. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1785713866549739)
+- 2026-08-03 — Compass dashboard deploy (PROD, dashboard component only, `exinity-ln-admin-1`): Yield Profiles and Price Forensics moved out of alpha for all users (gated per-surface by entitlement role), dashboard protobuf registry key renamed "echo"→"dashboard-ui", query-share payload format tag bumped. Ran clean, ~3 min downtime, `core`/`admin` untouched. Internal-only; no client-facing context surfaced. [permalink](https://mahifx.slack.com/archives/C040V9LNKT5/p1785772195931579)
