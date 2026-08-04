@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-08-03T07:33:00Z
+last_catchup: 2026-08-04T07:14:15Z
 ---
 
 ## Status
@@ -39,6 +39,7 @@ last_catchup: 2026-08-03T07:33:00Z
 
 > [open] 2026-07-06 — Client requesting hedger on rev share book; Tegis eyeing MT5 move
 > Kate Stagg (internal) relayed a client catch-up: Tegis flow is performing well with a good monetisation window and PnL steadily ticking up. Tegis are reportedly looking to move to MT5 — hope is that Base absorbs the architectural changes on their side rather than requiring further work from Mahi. Client also asked for a hedger to be set up on the rev share book, similar to the existing Tegis workflow, covering the rest of their flow. No reply or follow-up in channel yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1783348750050239)
+> **2026-08-03 update:** Kate B (client) chased progress on the A Book / CFD book hedger. William Denny confirmed both hedgers are in place and the next step is testing the workflow, and asked to switch the A Book hedger on given it already has positions to hedge. Kate B pushed back — those A Book positions "aren't accurate", with rev share positions appearing to have landed in the A book instead — so the hedger wasn't switched on. Call booked for 15:00 BST same day to work through it; no outcome posted in-channel yet. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785747685391939) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785754442921159) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785754705028839)
 
 > [resolved] 2026-06-29 — Tegis position migration completed; C Book with LMAX hedging live
 > Kate B (client) provided Compass Positions.xlsx at ~22:43 BST 2026-06-29. Isaac Dann added group `real-SC` to C Book execution rules, ran a test trade (1k USDJPY @ 161.942, House Sell, via C BOOK/Catch-All ER) to confirm flow, uploaded client positions, and turned the hedger on at ~22:54 BST. Isaac announced in internal channel at 01:44 BST 2026-06-30: "C Book with LMAX hedging is live now, client positions have been imported, trades are coming in and hedger is on." Kate Stagg acknowledged. Migration happened a day ahead of the Monday 2026-06-30 plan (see Notable topics 2026-06-25). [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782767688053459) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1782773004128469) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969)
