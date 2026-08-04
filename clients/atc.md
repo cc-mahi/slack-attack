@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
-last_catchup: 2026-08-03T07:29:34Z
+last_catchup: 2026-08-04T07:14:27Z
 ---
 
 ## Recent issues
@@ -78,6 +78,10 @@ last_catchup: 2026-08-03T07:29:34Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-08-03 — July 2026 PnL report delivered: William Denny posted the ATC PnL Report July 2026.pdf in #internal-atc with FX/CFD/CFD-brokered Echo yield links and FX/CFD Skew PnL Graphite links. Summary: FX volume $1.7b, total PnL $26.2k ($15.6/M, all A-book); CFD volume $327.0m, total PnL $31.6k ($96.6/M), brokering ratio 0.7%. [report](https://mahifx.slack.com/archives/C046RNF64VD/p1785752131244719)
+
+- 2026-08-03 — Perps follow-up: Andrew Morgan noted "Covered perps" (closing the loop on the 2026-07-31 flag) and that Jack Manoukian is in town from 17 August with a meeting still to be scheduled; a scheduling link was sent to Malik. [Andrew note](https://mahifx.slack.com/archives/C046RNF64VD/p1785749552182239) · [sent to Malik](https://mahifx.slack.com/archives/C046RNF64VD/p1785750204031479)
 
 - 2026-07-31 — Malik Khan flagged unsolicited interest in perpetual futures ("perps") as a potential new product/flow, per Andrew Morgan's internal note. No further detail or follow-up in this window. [permalink](https://mahifx.slack.com/archives/C046RNF64VD/p1785492330530849)
 
