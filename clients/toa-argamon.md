@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-08-03T07:24:59Z
+last_catchup: 2026-08-04T07:17:36Z
 ---
 
 ## Status
@@ -25,6 +25,13 @@ last_catchup: 2026-08-03T07:24:59Z
 - **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [open] 2026-08-03 — LMAX session-breach / rejection storm on order 012dseuuwa at Toa Argamon; LMAX pulled from liquidity pool, root cause pending
+> Tom flagged hundreds of LMAX rejections ("unknown order") from ~15:26 BST; Cameron Hughes confirmed firewall breach messages in the order events and asked Tom to check with LMAX while Mahi checked its side. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785767168919819)
+> LMAX's reply (relayed by Tom) confirmed a 200-message session breach on order 012dseuuwa, with a logon seq-no mismatch (141=Y, seq 1) meaning some fills may have been missed — LMAX attached a CSV of trades since 14:00 UTC. Cameron Hughes removed LMAX from the liquidity pool (16:04 BST) and bounced the SOR to pick up the change (per Daria Horton's tip: pull the market from the pool and restart the Aggs rather than restarting the SOR directly — only internalised trades hit during the brief downtime). Spamming stopped by 16:13 BST, but Cameron Hughes flagged the brokered-flow root cause ("potentially passing on spammed orders we were receiving") still needs checking, and Tom's request for LMAX's message limits (to configure a local cap) is unanswered as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785771644018009)
+
+> [resolved] 2026-08-03 — hedgerCBOE1 firewall breach at Toa Argamon CHI; limit increased, hedger restarted
+> Cameron flagged a PagerDuty firewall breach on hedgerCBOE1 at toa-argamon-ch (12:40 BST); James Furness increased the hedging order-service limit and restarted the hedger within six minutes. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839)
 
 > [open] 2026-08-03 — pricerContinuity indicative in XAUUSD for ~1hr at Toa Argamon; scope question to Isaac unanswered
 > Daria flagged pricerContinuity was indicative in XAUUSD for about an hour that morning and asked Isaac Dann whether it's only being used at Go, referencing a similar post in another client's channel for comparison. No reply as of catchup. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785713138617559)
@@ -174,6 +181,8 @@ last_catchup: 2026-08-03T07:24:59Z
 
 ## Notable topics
 
+- hedgerHrpCME1 briefly toggled off for a test trade at Toa Argamon CHI (2026-08-04 02:05–02:07 BST): Lee Butts turned it off deliberately, back on two minutes later. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785805505726159)
+- SOR-restart tip from Daria Horton (2026-08-03): removing a market from a liquidity pool + restarting the Aggs keeps it out of the pool the SOR sees without a full SOR restart — doesn't work the other way round for adding a market back. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785788178957159)
 - NOMU_RCTV_NWPB_1 test trade FIELD_VALIDATION_ERROR (2026-07-06): Argamon test-traded NOMU_RCTV_NWPB_1 and hit a validation error; Isaac Dann enabled it in the UI and confirmed working shortly after. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783315711421619)
 - Build push to Toa Chicago blocked pending release branch + regression (2026-07-03): David Cooney requested latest build be pushed to Toa Chicago to support Lee's options connectivity work. Lee Butts replied it needs a new release branch cut and regression testing first — not ready to go. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1783049787092519)
 - Centroid UAT IP updated to 192.109.23.20 (2026-06-30): Argamon requested the Centroid UAT IP be updated from 185.125.204.156 to 192.109.23.20 for the ongoing incremental MD refresh testing. Addressed to Isaac Dann in mahi-argamon-operations; ✅ actioned (no reply needed). [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
