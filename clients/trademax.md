@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Bailey White", role: "TMGM — owns the integration decision; paused the project 2026-07-10 and set the XAU-only starting scope"}
   - {name: "Nik Teh", role: "TMGM — hub/FIX side; made the drop-copy Tag1 account-identifier change"}
   - {name: "Rainer", role: "TMGM — queried why account identifiers were needed on drop-copy", confidence: low}
-last_catchup: 2026-08-03T09:16:12Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-04T07:08:17Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
@@ -23,8 +23,10 @@ last_catchup: 2026-08-03T09:16:12Z                         # ISO8601; updated by
 
 ## Recent issues
 
-> [open] 2026-07-28 — XAU-only scope confirmed deliberate by Bailey; no date yet for switching to Mahi pricing
-> Shyam asked in the client channel whether TMGM could start sending trade reports for the other metals and FX (pricing is configured, but skew needs the flow to verify against). Bailey: "we wanted to start just with XAUUSD for now. It's the majority of flow anyway." So XAU-only is a client choice, not a gap. Shyam's follow-on question internally — "Do we know when they would be wanting to switch to our pricing for XAU?" — is still unanswered, and it's the actual gate on this being a live relationship rather than a parallel-run. [client-ask](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785203695028909) [internal-question](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785210700737189)
+> [open] 2026-08-04 — XAU judged ready to go live pending Zendesk sanity checks; question now is who pushes it forward
+> Follow-on from the 2026-07-28 open question ("when would they switch to our pricing for XAU?"). Shyam's update: XAU is ready for go-live pending some non-critical system sanity checks tracked in [Zendesk #23273](https://mahifx.zendesk.com/agent/tickets/23273), and skewing looks profitable under the new measurement system. He flagged the ball is in Mahi's court and asked whether LDN or NZ should be pushing it forward. Will Carter confirmed ("yes, think so") and said the data looks good enough to go share the potential with Bailey. Still no committed switch date. [xau-ready](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785808720153749) [will-confirms](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785823818044729)
+>
+> Original 2026-07-28 context: Shyam asked in the client channel whether TMGM could start sending trade reports for the other metals and FX (pricing is configured, but skew needs the flow to verify against). Bailey: "we wanted to start just with XAUUSD for now. It's the majority of flow anyway." So XAU-only is a client choice, not a gap. [client-ask](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785203695028909) [internal-question](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785210700737189)
 
 > [open] 2026-07-27 — FX majors pricing set up on B stream; skew review outstanding, maxAgeOfTradeMs may need raising
 > Shyam completed FX-Majors subscriptions + pricing, all on the B stream, with skew still to review. Separately flagged raising `analytics.maxAgeOfTradeMs` from 30s because of the latency being seen on the PTR feed. Arun infra-deployed and started `fiReportingProcess1` the same day. Neither item closed in this window. [fx-setup](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785128295723979) [todo-list](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784869049607509)
