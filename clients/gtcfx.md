@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Jack Zheng", role: "GTC — CEO; Mahi sent a personal message to reinforce the pitch 2026-07-30", confidence: low}
   - {name: "Ralich", role: "OneZero — agreed to waive OZ's per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: "Lochlan", role: "OneZero — alternative escalation route if the fee negotiation stalls (internal only, not shared with GTC)", confidence: low}
-last_catchup: 2026-08-04T07:07:44Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-05T07:07:32Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
