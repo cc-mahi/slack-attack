@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-04T07:17:41Z
+last_catchup: 2026-08-05T07:13:28Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-08-04T07:17:41Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-08-05 — Second hedgerCBOE1 firewall breach in three days at toa-argamon-ch-trading-1
+> Sam Hewitt (05:14 BST) flagged hedgerCBOE1 tripping its firewall at `toa-argamon-ch-trading-1` (PagerDuty Q1RWU3QB0SZF17) and restarted it in the same message. No thread discussion. Second recurrence of the CBOE hedger firewall-breach pattern within three days (see 2026-08-03 entry below). https://mahifx.slack.com/archives/C035H1VNCAD/p1785903258220179
 
 > [resolved] 2026-08-03 — Firewall breach on hedgerCBOE1 on toa-argamon-ch: limit raised, restarted
 > Cameron Copland (12:40 BST) flagged a PagerDuty firewall-breach alert on hedgerCBOE1 at toa-argamon-ch (Q2ZBUKVK0KICRP). James Furness raised the `hedging.orderServiceConfiguration` limit and restarted the hedger within 6 minutes; Cameron confirmed he'd been checking it was safe to bring back before James's fix landed. https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839
