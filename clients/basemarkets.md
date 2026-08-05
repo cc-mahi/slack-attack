@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-08-04T07:14:15Z
+last_catchup: 2026-08-05T07:10:51Z
 ---
 
 ## Status
@@ -21,6 +21,9 @@ last_catchup: 2026-08-04T07:14:15Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [resolved] 2026-08-04 — DOWUSD erroneous tick fill; Scope indicative blip caused LP jump, normalisation now applied
+> Kate (client) flagged a fill on `BaseMarkets_111136` that looked like it hit an erroneous tick. Cameron Hughes acknowledged and picked it up; Shyam Hari diagnosed that both Scope feeds went indicative for ~20ms, causing the pricing model to jump to another LP's levels for a ~50ms window, and this order landed on that tick. Shyam configured normalisation on DOWUSD and other indices so the other LP's book gets adjusted onto the Scope basis before use, holding the price closer to Scope if it goes indicative again rather than jumping venues. Client thanked the team for the update and fix. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785868411470579) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785903796363739) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785904143814759)
 
 > [open] 2026-07-29 — AUDUSD third-tier spread not achieving target; BMSL multiplier drop to 0.6 confirmed by client
 > Client changed the AUDUSD spread config on `CLIENT_PRICE_LDN` aiming for 0 @ 500k / 5 @ next 500k, but the third layer wasn't landing on the desired figure, and asked whether BMSL also needed editing. Sam Hewitt explained the published number is a volume-weighted spread: with the first two 500k tiers at choice, hitting an effective 0.5-pip third tier requires a 0.25-pip volume-weighted value, set via the Cumulative Quantity To Reference Spread Multiplier in the BMSL config — recommended dropping the multiplier to 0.6 and offered to apply it. Client confirmed "Yes please"; change not yet confirmed applied as of run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785304870167229) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785308740698439) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785308833979019)
