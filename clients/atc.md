@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
-last_catchup: 2026-08-04T07:14:27Z
+last_catchup: 2026-08-05T07:09:25Z
 ---
 
 ## Recent issues
