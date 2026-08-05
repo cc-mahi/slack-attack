@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Clarice Frost", email: "clarice.frost@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Allan Maira", email: "allan.maira@startrader.com", role: "overnight ops", confidence: low}
   - {name: "Umar Bin Aziz", email: "umar.aziz@starprime.com", role: "client ops (execution/pricing incident reporting)", confidence: low}
-last_catchup: 2026-08-04T07:16:30Z
+last_catchup: 2026-08-05T07:13:27Z
 ---
 
 ## Recent issues
@@ -21,6 +21,7 @@ last_catchup: 2026-08-04T07:16:30Z
 > [open] 2026-08-03 — SI Book weekend risk (400oz XAU, gambling client); hedger timing gap flagged, Friday market-close risk-clear rule agreed
 > Samin reported the SI Book carried risk over the weekend from a gambling client's 400oz XAU trade (accepted 20:59:27 UTC 2026-07-31), noting 4 of 5 LPs via the hedger were still pricing for at least another 15 seconds after the fill. He asked why the two SIGNAL FOLLOW candidates weren't hedged within their 6,000ms rule (FAST HEDGE is 30,000ms) and whether wider-than-usual spreads were the cause, then asked for a new rule clearing all book risk in the last minute before market close (10ms window) to avoid holding risk over weekends. Nathan Burch said points 1–2 (timing root cause) are being looked into and confirmed point 3 (close-window risk-clear rule) is buildable; Samin then found an existing `Friday_Close` hedger config himself (`hybridHedgerSI1/All/Friday_Close`) before Nathan could point him to it. Root-cause on the hedge-timing gap still open as of end of window; also flagged the hedger is otherwise working as wanted day-to-day, so no other changes wanted. [Samin's report](https://mahifx.slack.com/archives/C096422RPKK/p1785738242641539) [BACKSTOP ask](https://mahifx.slack.com/archives/C096422RPKK/p1785738429365349) [Nathan's reply](https://mahifx.slack.com/archives/C096422RPKK/p1785738993109709) [Samin finds Friday_Close config](https://mahifx.slack.com/archives/C096422RPKK/p1785739049445829)
 > Follow-up 2026-08-03 (09:17 BST): Will Carter reconfirmed the weekend/Friday-close rule is trivial to add into the hedger with time-and-day guards, and flagged there may be other levers too on the hedge-timing root cause. Points 1–2 still pending as of end of window. [Will's reply](https://mahifx.slack.com/archives/C096422RPKK/p1785745071111659)
+> Follow-up 2026-08-04 (09:09 BST): Cameron Hughes bounced `hybridHedgerSI1` to pick up the EOW close changes — the Friday-close config change now live. Root-cause on the underlying hedge-timing gap (points 1–2) not confirmed in window. [Cameron's bounce note](https://mahifx.slack.com/archives/C095MJHC68J/p1785830974481279)
 
 > [open] 2026-08-03 — CLIENT_PRICE_INSTI distribution requested in Echo client-side view
 > Samin asked for CLIENT_PRICE_INSTI distribution to be visible in Echo client-side, matching the existing DISTRIBUTION_LDN/B_CLIENTS view. Nathan Burch acknowledged and said he'd action it now. No completion confirmed in channel yet. [Samin's ask](https://mahifx.slack.com/archives/C096422RPKK/p1785736869312689) [Nathan's ack](https://mahifx.slack.com/archives/C096422RPKK/p1785737066259139)
