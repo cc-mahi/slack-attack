@@ -16,10 +16,13 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-08-04T07:15:50Z
+last_catchup: 2026-08-05T07:12:04Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-05 — Routine Heavy LR add: MT5_87018814_Centroid_2145766310
+> Trading Ops requested the CP added to Heavy LR (07:13 BST); Nathan Burch confirmed "adding them now" (07:14 BST) then "has been added to Heavy LR" (07:19 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785910421253289) [Nathan confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785910764648639)
 
 > [resolved] 2026-08-03 — Routine Heavy LR add: batch of 11 MT5_87018814_Centroid_* tags
 > Trading Ops requested 11 Centroid tag variants (3611110, 3608129, 3607956, 3605307, 3601808, 3598834, 3598832, 3596314, 3594821, 3594615, 3593313) added to Heavy LR (11:35 BST); William Denny confirmed "This change has been made now" (11:38 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785753307645509) [William confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785753480743409)
