@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-08-04T07:17:36Z
+last_catchup: 2026-08-05T07:13:35Z
 ---
 
 ## Status
@@ -25,6 +25,9 @@ last_catchup: 2026-08-04T07:17:36Z
 - **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [resolved] 2026-08-05 — hedgerCBOE1 firewall breach recurs at Toa Argamon CHI; restarted
+> Sam Hewitt flagged another PagerDuty firewall breach on hedgerCBOE1 at toa-argamon-ch-trading-1 (05:14 BST) and restarted it — second occurrence in three days, continuing the same pattern as the 2026-08-03 hedgerCBOE1 firewall-breach entry below. No further thread discussion. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785903258220179)
 
 > [open] 2026-08-03 — LMAX session-breach / rejection storm on order 012dseuuwa at Toa Argamon; LMAX pulled from liquidity pool, root cause pending
 > Tom flagged hundreds of LMAX rejections ("unknown order") from ~15:26 BST; Cameron Hughes confirmed firewall breach messages in the order events and asked Tom to check with LMAX while Mahi checked its side. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785767168919819)
