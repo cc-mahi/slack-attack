@@ -7,13 +7,14 @@ refs:
   wiki: null                                             # ../MahiProduct/wiki/clients/instantfunding.md (not yet)
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-05T07:12:30Z
+last_catchup: 2026-08-06T07:17:01Z
 ---
 
 ## Recent issues
 
 > [open] 2026-08-04 — DB replica down over weekend, rebuilt via fast resync method
 > Sam Hewitt (Mahi infra): Instant Funding's replica was down over the weekend (~1-2 Aug); rebuilt using the new fast resync method. Talking to Hussain about applying the same fix Infinox had to Instant Funding and GTCFX, which also went down. Notable against the dossier's offboarding status — replica infra was still live and actively maintained past the nominal 31 July Beeks-hosting termination / ~1 August effective-exit date; unclear whether this is a wind-down remnant or ongoing support through actual exit. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1785879014285709)
+> 2026-08-06 update: Sam Hewitt confirms Instant Funding removed from raindrop Nagios/Sunday Checks — monitoring decommission progressing alongside the offboarding. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1785982831416769)
 
 > [open] 2026-07-01 — IF served notice: running out of money, offboarding by 31 July
 > Bonnie announced to internal channel: IF have served notice, citing they're running out of money after culling key staff who could have helped. Lewis informed Bonnie on 19 June; formal termination letter received 2026-07-01. One month's notice per contract — effective date nominally 19 July (from Lewis's original email), though Mahi may hold to 1 August if being magnanimous ("depends if we want to be dicks about it"). Liam actioned Beeks hosting termination immediately (30-day notice, effective 31 July). May invoice was paid; June invoice outstanding — Susan wants it chased in the formal acknowledgment letter. Susan's stance: "Do the month but they are last on the list for any support." Andrew verified the financial narrative was accurate. Susan noted David had given discounts and helped many times — this is on IF's decisions, not Mahi's services. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1782899168223089) [Beeks termination](https://mahifx.slack.com/archives/C07K2E5P0G2/p1782908559971509) [June invoice thread](https://mahifx.slack.com/archives/C07K2E5P0G2/p1782902838604579)
