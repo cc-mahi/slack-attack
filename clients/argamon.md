@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-08-05T07:09:25Z
+last_catchup: 2026-08-06T07:10:41Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-08-05T07:09:25Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [open] 2026-08-05 — TOA GBPUSD last-look config gap: NatWest/Lucera escalation over cancelled orders, scoped by Trading Account not channel
+> Client escalated hard ("client going nuts") over a cancelled GBPUSD order (group 042dr11a1pg, held 46ms, cancelled on last look / TOB a tick from request price) routed via TOA. Elan's prior fix for this client (10ms last look, 0.4bps movement allowance) had only been added to the SWI profile on INSTI channels, but the flow was arriving on a RETAIL channel — James Furness copied the edit into the RETAIL execution-rule editor and the client thanked him. Recurred same night (~00:01 BST 2026-08-06): James found the config is actually keyed by Trading Account, not channel — the flow is arriving under `CLIENTS_HRP_CENTROID`, not `CLIENTS_NATWEST_LUCERA` as ops had assumed. Ops (Tom) noted to check that section going forward; no confirmation yet that `CLIENTS_HRP_CENTROID` has the matching last-look config applied. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940058925549) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940818905689) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785971278909679)
 
 > [open] 2026-08-03 — LMAX FIX session breach: 200-message threshold hit on order 012dseuuwa, LMAX removed from liquidity pool
 > Tom flagged hundreds of LMAX rejections ("unknown order") alongside Firewall breach messages in order events. LMAX's session was breached (>200 messages, on order 012dseuuwa) and LMAX asked Argamon to check for missed trades since 14:00 UTC. Cameron Hughes removed LMAX from the liquidity pool and bounced the SOR pool config in internal-argamon to pick it up (Daria noted removing a market + restarting the Aggs excludes it from the SOR's pool without a full SOR restart, though re-adding it later does need one). Spamming stopped by ~16:13 BST; only internalised trades were affected during the disruption, no brokered exposure. Still open: confirming why so many orders were sent (brokered flow potentially passing on spammed orders received) and adding LMAX's message-rate limits into Mahi's system to prevent recurrence. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785767168919819) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785769495761459) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785769758242259)

@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory — possibly attending Cyprus event alongside Roman", confidence: low}
   - {name: "Jan", role: "Axiory TY office — data/ops requests (surname unknown)", confidence: low}
-last_catchup: 2026-08-05T07:10:21Z
+last_catchup: 2026-08-06T07:11:05Z
 ---
 
 ## Recent issues
