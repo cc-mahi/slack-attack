@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-05T07:13:28Z
+last_catchup: 2026-08-06T07:17:34Z
 ---
 
 ## Status
@@ -17,6 +17,12 @@ last_catchup: 2026-08-05T07:13:28Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-08-06 — hedgerCBOE1 taken offline then restarted with firewall limits raised (per Zendesk), addressing the recurring breach pattern
+> Lee Butts took hedgerCBOE1's book offline at 03:33 BST ("ignore the 'should be on' alerts"), then at 06:41 BST fired it back up with firewall limits increased "for now until they're fixed as per zd" — a Zendesk-tracked fix rather than a bare restart. Third recurrence of the hedgerCBOE1 firewall-breach pattern in four days (see 2026-08-05 and 2026-08-03 entries below), this time addressed with a limit change. https://mahifx.slack.com/archives/C035H1VNCAD/p1785983600535619 https://mahifx.slack.com/archives/C035H1VNCAD/p1785994918152899
+
+> [resolved] 2026-08-06 — hedgerHrpCME1 tripped again at TOA-ARG CHI: restarted
+> Sam Hewitt (00:37 BST) flagged hedgerHrpCME1 tripping at Toa Argamon CHI (PagerDuty Q3BAT8OWDYXAC0) and restarted it in the same message. Continuation of the recurring hedgerHrpCME1 pattern (see 2026-07-23, 2026-07-22, 2026-07-21 entries below). https://mahifx.slack.com/archives/C035H1VNCAD/p1785973058427919
 
 > [resolved] 2026-08-05 — Second hedgerCBOE1 firewall breach in three days at toa-argamon-ch-trading-1
 > Sam Hewitt (05:14 BST) flagged hedgerCBOE1 tripping its firewall at `toa-argamon-ch-trading-1` (PagerDuty Q1RWU3QB0SZF17) and restarted it in the same message. No thread discussion. Second recurrence of the CBOE hedger firewall-breach pattern within three days (see 2026-08-03 entry below). https://mahifx.slack.com/archives/C035H1VNCAD/p1785903258220179
