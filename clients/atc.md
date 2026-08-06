@@ -7,10 +7,14 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
-last_catchup: 2026-08-05T07:09:25Z
+last_catchup: 2026-08-06T07:14:30Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-05 — Micro vs standard gold rebalance action item; confirmed offsetting XAU/FAU position, no action needed
+> Malik Khan flagged a recurring "action item" notification distinguishing micro vs standard gold, asking if a rebalance was needed. Cameron Hughes checked: the diff nets to -6706 XAU / +6706 FAU (offsetting), leaving only -25 net — likely a position awaiting hedge while the notification was sent. Malik reacted :+1: to confirm all good.
+> [Malik flag](https://mahifx.slack.com/archives/C04AZM0LPMH/p1785942841117079) · [Cameron resolution](https://mahifx.slack.com/archives/C04AZM0LPMH/p1785943854826139)
 
 > [resolved] 2026-07-05 — Full outage after weekend restart: LIQUIDITY_POOL_SC config referenced nonexistent MarketType enum
 > All ATC processes went down on restart with `No enum constant com.x.marketmodel.MarketType.LIQUIDITY_POOL_SC` — the SC liquidity pool config added ahead of a release (deployed release was still 20260612135923 from 12 June, predating the SC work). Nathan Burch removed all ten config keys referencing `LIQUIDITY_POOL_SC` (execution rules, market instrument overrides, markets, multi-pool market selector, external markets selectors, list mappings, market instruments, market throttle) via the config editor and restarted; all processes booted cleanly. Lee Butts confirmed the approach. **2026-07-06 update**: Nathan confirmed root cause — `LIQUIDITY_POOL_SC` had been configured with type `LIQUIDITY_POOL_SC`, which doesn't exist in the codebase (should be `LIQUIDITY_POOL`), on `reference.externalMarketsSelectors`.
@@ -78,6 +82,8 @@ last_catchup: 2026-08-05T07:09:25Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-08-05 — Prop firm server provisioning question raised. Cameron Hughes relayed two questions from Jack Manoukian: planning server implementation + timeline for prop integration/testing, and whether ATC uses Mahi servers for the prop or must source directly from Beeks. Liam Cordelle asked clarifying questions (MT5 vs FastMT, a Beeks Windows server), referencing an earlier internal-atc-prop thread suggesting MT5 may already be set up. No resolution in window. [Jack's questions relayed](https://mahifx.slack.com/archives/C046RNF64VD/p1785946744005019) · [Liam clarifying](https://mahifx.slack.com/archives/C046RNF64VD/p1785948506673949)
 
 - 2026-08-03 — July 2026 PnL report delivered: William Denny posted the ATC PnL Report July 2026.pdf in #internal-atc with FX/CFD/CFD-brokered Echo yield links and FX/CFD Skew PnL Graphite links. Summary: FX volume $1.7b, total PnL $26.2k ($15.6/M, all A-book); CFD volume $327.0m, total PnL $31.6k ($96.6/M), brokering ratio 0.7%. [report](https://mahifx.slack.com/archives/C046RNF64VD/p1785752131244719)
 
