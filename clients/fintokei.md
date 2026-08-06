@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
-last_catchup: 2026-08-05T07:11:03Z
+last_catchup: 2026-08-06T07:14:45Z
 ---
 
 ## Status
@@ -18,6 +18,9 @@ last_catchup: 2026-08-05T07:11:03Z
 - Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
+
+> [open] 2026-08-05 — Liquidity Violation recurs: JPXJPY order query (account 6056302), same pattern as 2026-07-08
+> Pau (Fintokei) asked in #mahi-fintokei whether an order cancellation on account 6056302 (JPXJPY, DISTRIBUTION_SYNAPSE_LDN) was "the same issue as the last time" — referencing the 2026-07-08 stale-JPXJPY-price Liquidity Violation entry below (account 6058190). Rory King (Mahi) acknowledged same day ("will check and let you know what we find"); investigation pending — no findings yet. [question](https://mahifx.slack.com/archives/C08QWKFARDL/p1785919175208259) [ack](https://mahifx.slack.com/archives/C08QWKFARDL/p1785919331725949)
 
 > [resolved] 2026-08-03 — MD not reaching systemStateMonitor on fintokei-ln-trading; restart fixed
 > Daria Horton (Mahi) flagged in #internal-fintokei that market data wasn't making it through to systemStateMonitor on the Fintokei stack; a systemStateMonitor restart appeared to resolve it. No further detail or client impact noted. [permalink](https://mahifx.slack.com/archives/C08R694QVNX/p1785713006438349)
