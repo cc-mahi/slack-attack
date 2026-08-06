@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-08-05T07:13:35Z
+last_catchup: 2026-08-06T07:18:56Z
 ---
 
 ## Status
@@ -26,8 +26,13 @@ last_catchup: 2026-08-05T07:13:35Z
 
 ## Recent issues
 
-> [resolved] 2026-08-05 — hedgerCBOE1 firewall breach recurs at Toa Argamon CHI; restarted
+> [resolved] 2026-08-05 — SWI (Swiss client) GBPUSD last-look cancellation at Toa Argamon LDN; custom profile fixed on wrong channel
+> Tom (Argamon) escalated urgently — a Swiss client complaint over a cancelled GBPUSD order (group 042dr11a1pg), held 46ms then cancelled on last-look with TOB a tick from the request price. A custom SWI last-look profile (10ms, 0.4bps movement) that Elan had added the day before to fix the same client's complaint hadn't applied to this order because it was configured on the INSTI channel while this flow actually arrives on the RETAIL channel. James Furness copied Elan's edit into the RETAIL execution-rule-editor (~15:40 BST), live same afternoon. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940058925549)
+> Follow-up 2026-08-06 00:01 BST: Tom asked whether scoping the SWI profile to the Lucera trading account would have picked it up automatically; James clarified the flow arrives under trading account `CLIENTS_HRP_CENTROID` and the profile is scoped by channel, not trading account — Tom noted to check that going forward. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785971278909679)
+
+> [open] 2026-08-05 — hedgerCBOE1 firewall breach recurs at Toa Argamon CHI; restarted, then taken off/on again 2026-08-06 with limits raised pending a proper fix
 > Sam Hewitt flagged another PagerDuty firewall breach on hedgerCBOE1 at toa-argamon-ch-trading-1 (05:14 BST) and restarted it — second occurrence in three days, continuing the same pattern as the 2026-08-03 hedgerCBOE1 firewall-breach entry below. No further thread discussion. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785903258220179)
+> Continued 2026-08-06: Lee Butts took hedgerCBOE1's book off "for the time being" at 03:33 BST (told the team to ignore the "should be on" alerts), then fired it back up at 06:41 BST having increased the firewall limits, "until they're fixed as per zd" — referencing an unspecified Zendesk ticket tracking the underlying fix. Third occurrence in four days; root cause still not posted, now with a numbered ticket presumably tracking it. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785983600535619)
 
 > [open] 2026-08-03 — LMAX session-breach / rejection storm on order 012dseuuwa at Toa Argamon; LMAX pulled from liquidity pool, root cause pending
 > Tom flagged hundreds of LMAX rejections ("unknown order") from ~15:26 BST; Cameron Hughes confirmed firewall breach messages in the order events and asked Tom to check with LMAX while Mahi checked its side. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785767168919819)
@@ -64,6 +69,7 @@ last_catchup: 2026-08-05T07:13:35Z
 > Four PnL-drop/hedger alerts over ~26h at Toa Argamon: hedgerHrpCME1 bumped 1-day PnL limit to bring it back up in CHI (07-21 06:52 BST, Isaac); PnL drop -$4,862 at Toa Args LDN (07-21 19:31 BST, Inald, PD Q3WD6WVC5H84HE, eyes reaction only); hedgerHrpCME1 down from an unrealised position breach, restarted (07-22 00:54 BST, Lee, PD Q3O4AG2XRUJZDU); another PnLDropAlert on HRP_CLIENTS_NET, -$6,179 in 20 min (07-22 08:04 BST, Arun, +1 reaction only). No root-cause diagnosis posted for any of the four; continues the same unexplained pattern as the 2026-06-25 and 2026-05-26 HRP_CLIENTS_NET drop-alert entries below. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784703854590099)
 > Continued through the afternoon of 2026-07-22: four more PnLDropAlerts on HRP_CLIENTS_NET (14:23, 14:38 ×2, 15:07, 17:32 BST — deltas from -$4.2k to -$12.1k over 8min/20min/1hr windows), still no diagnosis (James: "lumpy today"). Inald flagged another drop at 18:02 BST, treated as a dupe of an earlier uncleared alert. Mitigation applied 2026-07-23 04:23 BST: Lee moved CBOE hedging from London to Chicago — ordersCboe1/hedgerCBOE1 now running in Chicago, London hedgerCBOE1 book switched off. Root cause still not diagnosed. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784726609243179)
 > Continued 2026-07-23 14:37 BST: hedgerHrpCME1 in Toa Argamon CHI came down on a PnL breach ($850,263 in 24h, raw change -$1,598,165 → $356,841); Arun restarted it and confirmed back online. Same unexplained pattern as the entries above — no root cause posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784813820185659)
+> Continued 2026-08-06 00:37 BST: hedgerHrpCME1 at Toa Argamon CHI tripped again (PagerDuty Q3BAT8OWDYXAC0); Sam Hewitt restarted it. No diagnosis posted — same unexplained pattern. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785973058427919)
 
 > [open] 2026-07-21 — PrimeXM ClientID FIX tag config for Argamon LDN sessions; pending restart + test
 > Levi (Argamon) asked whether ClientID can be sent via tag 448 (with tag 452=3) instead of tag 109 for PrimeXM's LDN onboarding — PrimeXM can't configure tag 109 for ClientID. Lee confirmed party-role field mapping works and applied the config change scoped to argamon's PXM sessions only (Toa LDN); needs a restart, live after EOD the next day. Levi to test after restart. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
