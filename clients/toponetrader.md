@@ -13,7 +13,7 @@ key_people_overrides:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-08-05T07:13:35Z
+last_catchup: 2026-08-06T07:18:15Z
 ---
 
 ## Status
