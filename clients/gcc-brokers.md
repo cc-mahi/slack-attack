@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-08-05T07:11:33Z
+last_catchup: 2026-08-06T07:16:18Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-05 — 1,663oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 1,663oz gold long filled on Finalto at 16:12 BST; William Denny confirmed "this is done" at 16:15 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785942735137899) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785942930601249)
 
 > [open] 2026-08-04 — Risk build-up as Finalto non-stop rejected orders; cleared via LMAX, but Finalto flagged struggling "across the network"
 > Client raised urgent risk they couldn't clear (~11:00 BST), initially suspecting a margin issue; Cameron Hughes found Finalto had been continually rejecting for an extended period and forwarded Finalto's reject logs for escalation. Risk was cleared (~20 min later) by hedging on LMAX instead, with limited PnL impact. Will Carter clarified it was "a bit of false panic" — Compass had already adjusted settings so large risk defaults to LMAX for reliable risk management — but noted Finalto is "struggling across the network" more broadly, separate from this specific case; unclear if related to the 2026-07-29 FOMC fill-ratio collapse or 2026-07-27 wide-spread pattern already tracked on Finalto. Isaac Dann bumped DTA scaling to 5x and removed Finalto from the backstop before restarting the hedger. No confirmation yet that the underlying Finalto rejection issue itself has been diagnosed or resolved. [risk-flagged](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785837653095629) [cam-diagnoses-finalto](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785837689818949) [reject-logs](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785840386912379) [will-clarifies](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785838616281429) [finalto-network-wide](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785838637446139) [isaac-dta-fix](https://mahifx.slack.com/archives/C09QS1NUA80/p1785837732728369)
