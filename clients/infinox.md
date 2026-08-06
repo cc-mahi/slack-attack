@@ -16,10 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-08-05T07:12:04Z
+last_catchup: 2026-08-06T07:16:49Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-05/06 — New symbol request: XAUUSD.Ultra with 8–10pt spread, no widening; Isaac clarified current config, Sadiq now pushing for a no-widen build
+> Sadiq requested a new XAUUSD.Ultra symbol held within an 8–10 point spread range, not fixed (12:27 BST). Isaac Dann asked how it should differ from standard XAUUSD, noting current config already sits at 8pt min widening to 10pt (14:18 BST); Sadiq pushed back that it sometimes stays fixed at 10 or goes above (14:27–14:31 BST). Isaac detailed the widening exceptions — protective arb config, illiquid-timezone base spread of 12, LP-benchmark matching when spreads run >100pips wider than 0.08, high-weight news events — and offered to build a new model with none of these if that's the desired outcome (15:34 BST). Sadiq thanked him next morning and asked how quickly a true no-widen XAUUSD.Ultra could be built (06:58 BST 08-06) — no answer yet in window. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785929209596699) [Isaac clarifying q](https://mahifx.slack.com/archives/C022S6NL82D/p1785935887042979) [Sadiq pushback](https://mahifx.slack.com/archives/C022S6NL82D/p1785936690770469) [Isaac detail + offer](https://mahifx.slack.com/archives/C022S6NL82D/p1785940467666039) [Sadiq follow-up](https://mahifx.slack.com/archives/C022S6NL82D/p1785995908511279)
+
+> [resolved] 2026-08-05 — Routine Toxic XAUUSD Harsher add: 86054969 + 86053294 (all tag variants)
+> Trading Ops requested both CPs and their live06_CN_standard_b_/Live06_MT4__ tag variants added to Toxic XAUUSD - Harsher (18:01 BST); Cameron Hughes confirmed "will do" (18:08 BST) and "done" (18:14 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785949263152199) [Cameron confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785950085207589)
+
+> [resolved] 2026-08-05 — Routine Toxic XAUUSD Harsher add: MT5_87018814_Centroid_3610645
+> Trading Ops requested the CP added to Toxic XAUUSD - Harsher (13:44 BST); Rory King confirmed "This has been actioned" (13:45 BST). [permalink](https://mahifx.slack.com/archives/C022S6NL82D/p1785933932566689)
 
 > [resolved] 2026-08-05 — Routine Heavy LR add: MT5_87018814_Centroid_2145766310
 > Trading Ops requested the CP added to Heavy LR (07:13 BST); Nathan Burch confirmed "adding them now" (07:14 BST) then "has been added to Heavy LR" (07:19 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1785910421253289) [Nathan confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1785910764648639)

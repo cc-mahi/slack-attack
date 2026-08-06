@@ -19,7 +19,7 @@ key_people_overrides:
   - {name: "Rob Bowen", role: "Pepperstone (attended London drinks Sep 2026)", confidence: low}
   - {name: "Mariapaz Bobadilla", role: "Pepperstone OZ", confidence: low}
   - {name: "Tom Smith", email: "thomas.smith@pepperstone.com", role: "Pepperstone technical/ops — recurring DB/credentials requests (FX/Crypto/CFD PROD_LIVE_CLIENTDB, MFXPulse access). Distinct Slack ID and email from Tom Williams (COO) — verify prior 'Tom' History references aren't conflating the two", confidence: low}
-last_catchup: 2026-08-05T07:12:25Z
+last_catchup: 2026-08-06T07:17:41Z
 ---
 
 ## History
@@ -105,6 +105,9 @@ Extended lookback to relationship origin (2021). Underlying commercial arc ancho
 - **Isaac Dann** — Crypto pricing/normalisation lead 2025+. tXAU and Wintermute work.
 
 ## Recent issues
+
+> [open] 2026-08-05 — LMAX_NYC/LMAX_LDN crypto market mapping changed on Pepperstone's side 2026-07-30, causing a mismatch with Mahi's config; no B2C2 market data as a result, awaiting confirmation before a restart to correct it
+> Nathan Burch noticed the LMAX_NYC/LMAX_LDN market mapping on the crypto environments was changed by Pepperstone on 2026-07-30 ~21:14 UTC to `OZLD6HUBXBTPR1`, while Mahi's current mapping still points at `OZLD6PepHUBMaster` — the mismatch means Mahi isn't receiving any market data from LMAX. He asked whether the change was expected and whether to correct Mahi's mapping to match, flagging that a `fixMarketData` process restart would be needed and would interrupt B2C2 market data if done intraday. No reply yet in this window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1785970741079119)
 
 > [open] 2026-08-05 — APTUSD trades executing on OZ failover outside Mahi's environment, creating mismatches; traced to Mahi receiving no market data for APTUSD, so no client_price_nyc / no B-book channel pricing at all
 > Ruby flagged APTUSD trades being executed on failover creating mismatches. Nathan Burch initially checked and found the trades he could see had gone through Mahi's primary distribution gateway; Ruby clarified she meant executions happening outside Mahi's environment, in OZ, and separately noted no liquidity for client_price_nyc and no channel pricing for B-book at all, with screenshots attached. Nathan explained Mahi currently isn't receiving any market data for APTUSD so can't form a price to publish, and asked whether Pepperstone is expecting market data from an LP — no answer yet in this window. [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1785908838434149) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1785908888392739) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1785910202494459) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1785911958693939) [permalink](https://mahifx.slack.com/archives/C06AR8MT8NT/p1785912855492559)
