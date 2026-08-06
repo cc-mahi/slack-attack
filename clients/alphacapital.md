@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-08-05T07:08:24Z
+last_catchup: 2026-08-06T07:10:13Z
 ---
 
 ## Recent issues
