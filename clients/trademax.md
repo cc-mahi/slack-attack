@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Bailey White", role: "TMGM — owns the integration decision; paused the project 2026-07-10 and set the XAU-only starting scope"}
   - {name: "Nik Teh", role: "TMGM — hub/FIX side; made the drop-copy Tag1 account-identifier change"}
   - {name: "Rainer", role: "TMGM — queried why account identifiers were needed on drop-copy", confidence: low}
-last_catchup: 2026-08-05T07:07:47Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-06T07:07:53Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
@@ -22,6 +22,9 @@ last_catchup: 2026-08-05T07:07:47Z                         # ISO8601; updated by
 - **Relationship:** internal urgency is high (Andrew: "This is an urgent setup request", Bailey pushing back on delays). Nicola runs the commercial cadence; Andrew + Will + Shyam + Isaac on the technical side. Bailey flagged 2026-08-05 that Mahi's backtest-quoted value-add figure has now been wrong twice, and wants verification metrics supplied upfront rather than after connecting — a live credibility point on the go-live figure.
 
 ## Recent issues
+
+> [open] 2026-08-05 — Daria traces the skew-widening-beyond-1c to the default PSM config; Will delivered the promised management snapshot
+> Will Carter shared the internal snapshot artifact in #internal-tmgm, closing the loop on Nicola's 2026-08-04 ask for something to shut down the "pause" narrative with TMGM management. In the same thread, Daria Horton flagged that the additional widening beyond the intended 1c — the behaviour Bailey escalated on the same day (below) — looked to be caused by the `pricing.adjustmentSignalParametersForWidening` default PSM config on the trademax-ny-admin box. Not yet confirmed as the fix; doesn't itself close Bailey's ask for upfront metrics. [snapshot](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785940268689659) [daria-diagnosis](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785962312370109)
 
 > [open] 2026-08-05 — Bailey escalates on backtest-quoted value-add accuracy — "second time" it's been wrong; wants metrics upfront, not verified after connecting
 > Shyam sent Bailey the promised go-live update: XAU pricing/skew is running smoothly, generating ~$102k / $2.77/M on ~$36.8bn notional over the past week (skew fixed at 1c), ready to go live pending the client connecting to the Taker A/B sessions and confirming a source IP for whitelisting. Bailey immediately queried how $2.77/M was reached on a 1c fixed skew. Shyam admitted the applied skew had occasionally run wider than the intended 1c (median still 1c), said it's now hard-capped at 1c, and asked to get the distribution sessions connected so Bailey can verify output himself. Bailey pushed back hard: wants max/mean/median skew + skew-accuracy metrics supplied upfront rather than having to back-calculate them post-connection, and flagged this is **the second time** the quoted DPM value-add from Mahi's backtests has been wrong — calling the figure essential to the go/no-go decision. No resolution yet. [update](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785893559913079) [bailey-query](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785894364316109) [shyam-admits](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785903510781339) [bailey-escalates](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785905261981809)
