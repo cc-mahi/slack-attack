@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
-last_catchup: 2026-08-06T07:14:30Z
+last_catchup: 2026-08-07T07:18:25Z
 ---
 
 ## Recent issues
@@ -82,6 +82,8 @@ last_catchup: 2026-08-06T07:14:30Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-08-06 — Prop firm server progress: agreement signed with MQ; call covered install/Level-2 pricing. Malik Khan (forwarded via Cameron Hughes) confirmed ATC signed the server agreement with MQ, details to follow once received. Same-day call with Malik: Compass could go on the existing ATC UK server or a new one for the prop unit (no Seychelles preference for prop); FXCM initially couldn't offer Level 2 pricing but agreed to set it up after Malik pushed back (~10–15 days to configure); current VELOCITY_BVI config needs sending over; Malik to come back on the meta server for the prop unit. Follow-up to the 2026-08-05 provisioning question below. [call notes](https://mahifx.slack.com/archives/C046RNF64VD/p1786029348121979) · [MQ agreement signed](https://mahifx.slack.com/archives/C046RNF64VD/p1786038294898459)
 
 - 2026-08-05 — Prop firm server provisioning question raised. Cameron Hughes relayed two questions from Jack Manoukian: planning server implementation + timeline for prop integration/testing, and whether ATC uses Mahi servers for the prop or must source directly from Beeks. Liam Cordelle asked clarifying questions (MT5 vs FastMT, a Beeks Windows server), referencing an earlier internal-atc-prop thread suggesting MT5 may already be set up. No resolution in window. [Jack's questions relayed](https://mahifx.slack.com/archives/C046RNF64VD/p1785946744005019) · [Liam clarifying](https://mahifx.slack.com/archives/C046RNF64VD/p1785948506673949)
 
