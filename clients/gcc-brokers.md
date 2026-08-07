@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-08-06T07:16:18Z
+last_catchup: 2026-08-07T07:26:05Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-06 — 2,554oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 2,554oz gold long filled on Finalto at 15:32 BST; Rory King confirmed "this has been actioned" at 16:28 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786026755098999) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786030125801789)
+
+> [open] 2026-08-06 — $8k PnL drop on tag 700106 tied to Finalto cancels from LP-reducing rules, hedging delayed 5s
+> Rory King flagged an 8k PnL drop from counterparty tag 700106, whose flow (profitable in aggregate over the prior two weeks) went offside very quickly (within 1s). Coincided with a large number of cancels from Finalto as a result of the LP's reducing rules; those rules delayed hedging by 5 seconds before fills started coming through from both LMAX and Finalto. Continues the pattern of Finalto reliability issues already tracked (2026-08-04 non-stop rejects, 2026-07-29 FOMC fill-ratio collapse, 2026-07-27 wide-spread pattern) — no confirmation yet whether this is the same underlying cause. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1786023089729289)
 
 > [resolved] 2026-08-05 — 1,663oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 1,663oz gold long filled on Finalto at 16:12 BST; William Denny confirmed "this is done" at 16:15 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785942735137899) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785942930601249)
