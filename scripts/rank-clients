@@ -59,6 +59,8 @@ def parse_frontmatter(path: Path) -> dict:
             inner = v[1:-1].strip()
             out[k.strip()] = [s.strip().strip('"').strip("'") for s in inner.split(",") if s.strip()]
         else:
+            if not v.startswith(("[", '"', "'")) and " #" in v:
+                v = v[:v.index(" #")].strip()
             out[k.strip()] = v.strip('"').strip("'")
     return out
 
