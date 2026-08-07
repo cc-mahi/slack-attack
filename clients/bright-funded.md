@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-08-06T07:14:38Z
+last_catchup: 2026-08-07T07:23:05Z
 status: active
 retired_at: null
 retired_reason: null
@@ -26,11 +26,14 @@ retired_reason: null
 
 ## Recent issues
 
+> [resolved] 2026-08-06 — average/median volume traded per account (all phases) requested and delivered
+> Benjamin Galindo asked for average and median volume traded by account across all phases, for all time or at least the last 12 months. Mio Knights offered to sample-calculate but deferred to Cameron Hughes for the full dataset; Cameron H pulled the figures via Echo and delivered `brightfunded_volume_by_counterparty_party_20260805.csv` and `brightfunded_volume_by_party_20260805.csv` the same day. Benjamin confirmed "Perfect thanks!". [request](https://mahifx.slack.com/archives/C08473TFD7Z/p1786006380243479) [delivered](https://mahifx.slack.com/archives/C08473TFD7Z/p1786020375902519)
+
 > [open] 2026-08-05 — NZDUSD pricing jump investigation (client stop filled beyond level)
 > Mio reported a client complaint: around 2026-07-22 21:05:01 UTC, NZDUSD spread widened ~3.5x with a ~19-pip price move in the same instant, causing a client stop to fill materially beyond its set level; BF checked trades and ruled out LR/LL slippage, asked for a pricing backtest. Cameron Hughes acknowledged same day. Nathan Burch diagnosed root cause on 2026-08-06 01:43 BST: CLIENT_PRICE_LDN went indicative at 21:00 UTC when its reference markets dropped offline, the distributed price failed over to the continuity pool (a narrower reference set) for 5 minutes, then jumped back to the client-price reference markets at 21:05 when they resumed — a 20-pip offer jump / 13-pip bid jump on the transition back. Nathan proposed two fixes to cap the reversion jump: (1) add a tight-quoting continuity-pool market into the mid formation with the spread capped to a proportion of that market, or (2) include a tight-quoting continuity-pool market directly in client-price mid formation. No decision yet. [complaint](https://mahifx.slack.com/archives/C08473TFD7Z/p1785945381761189) [ack](https://mahifx.slack.com/archives/C08473TFD7Z/p1785945940006609) [root-cause + fix options](https://mahifx.slack.com/archives/C08473TFD7Z/p1785976982578609)
 
-> [open] 2026-08-05 — July payout data sent for LR+FI reduction analysis
-> BF sent `Payouts_July_2026.xlsx` (funded accounts for July), continuing the monthly payout-reduction analysis cadence established with the June delivery (see 2026-07-07 resolved entry below). No response from Cameron Hughes yet in window. Separately, Cameron H circulated an internal-only "BrightFunded July 2026 Pricing Performance Review" report in `internal-brightfunded` the same day — likely feeding the payout-reductions section BF asked to see added to the Gamma deck (2026-08-04 call notes, above). [payouts file](https://mahifx.slack.com/archives/C08473TFD7Z/p1785914928544339) [internal report](https://mahifx.slack.com/archives/C084G40JXEE/p1785943281858959)
+> [resolved] 2026-08-05 — July payout data sent for LR+FI reduction analysis
+> BF sent `Payouts_July_2026.xlsx` (funded accounts for July), continuing the monthly payout-reduction analysis cadence established with the June delivery (see 2026-07-07 resolved entry below). Cameron H circulated the internal-only "BrightFunded July 2026 Pricing Performance Review" report in `internal-brightfunded` the same day — feeding the payout-reductions section BF asked to see added to the Gamma deck (2026-08-04 call notes, above) — then posted the client-facing `BrightFunded-July-2026-Pricing-Performance-Review.pdf` to `mahi-brightfunded` on 2026-08-06, cc Syb Dijkstra, Jelle Dijkstra, Benjamin Galindo, Mio Knights; acknowledged with two ✅ reactions. [payouts file](https://mahifx.slack.com/archives/C08473TFD7Z/p1785914928544339) [internal report](https://mahifx.slack.com/archives/C084G40JXEE/p1785943281858959) [client report delivered](https://mahifx.slack.com/archives/C08473TFD7Z/p1786024428300339)
 
 > [resolved] 2026-06-19 — XAUUSD Match Trade pricing gap (US Juneteenth holiday)
 > Rory King flagged at 18:05 BST that XAUUSD pricing was not being received from Match Trade; Benjamin Galindo (BF) suggested US bank holiday as the cause; Rory confirmed it was Juneteenth and apologised. Self-resolved, no config change needed. [permalink](https://mahifx.slack.com/archives/C08473TFD7Z/p1781888749613119)
