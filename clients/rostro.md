@@ -22,7 +22,7 @@ key_people_overrides:
   - {name: "Chrysovalantis Karageorgiou", role: "Rostro ops — FIX/telnet connectivity, X-connect", confidence: low}
   - {name: "Rakan", role: "Rostro ops — FIX rejection queries", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro (sam.steele@rostro.com); billing/contract-band thread contact", confidence: low}
-last_catchup: 2026-08-06T07:17:26Z
+last_catchup: 2026-08-07T07:35:16Z
 ---
 
 ## Recent issues
