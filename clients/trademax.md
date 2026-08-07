@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Bailey White", role: "TMGM — owns the integration decision; paused the project 2026-07-10 and set the XAU-only starting scope"}
   - {name: "Nik Teh", role: "TMGM — hub/FIX side; made the drop-copy Tag1 account-identifier change"}
   - {name: "Rainer", role: "TMGM — queried why account identifiers were needed on drop-copy", confidence: low}
-last_catchup: 2026-08-06T07:07:53Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-07T07:11:06Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
@@ -22,6 +22,9 @@ last_catchup: 2026-08-06T07:07:53Z                         # ISO8601; updated by
 - **Relationship:** internal urgency is high (Andrew: "This is an urgent setup request", Bailey pushing back on delays). Nicola runs the commercial cadence; Andrew + Will + Shyam + Isaac on the technical side. Bailey flagged 2026-08-05 that Mahi's backtest-quoted value-add figure has now been wrong twice, and wants verification metrics supplied upfront rather than after connecting — a live credibility point on the go-live figure.
 
 ## Recent issues
+
+> [open] 2026-08-06 — Nicola and Will plan to send Bailey the report before his weekend
+> Nicola asked if the report was ready to share with Bailey before he heads into the weekend; Will confirmed he'd send it that evening. Likely the deliverable following on from Bailey's 2026-08-05 ask for upfront skew-accuracy metrics, though not confirmed sent or received within this window. [permalink](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1786028495097819)
 
 > [open] 2026-08-05 — Daria traces the skew-widening-beyond-1c to the default PSM config; Will delivered the promised management snapshot
 > Will Carter shared the internal snapshot artifact in #internal-tmgm, closing the loop on Nicola's 2026-08-04 ask for something to shut down the "pause" narrative with TMGM management. In the same thread, Daria Horton flagged that the additional widening beyond the intended 1c — the behaviour Bailey escalated on the same day (below) — looked to be caused by the `pricing.adjustmentSignalParametersForWidening` default PSM config on the trademax-ny-admin box. Not yet confirmed as the fix; doesn't itself close Bailey's ask for upfront metrics. [snapshot](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785940268689659) [daria-diagnosis](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785962312370109)
