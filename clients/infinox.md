@@ -16,10 +16,13 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-08-07T07:30:16Z
+last_catchup: 2026-08-10T08:38:36Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-10 — Routine Toxic XAUUSD add: MT5_87018814_Centroid_3611274; Isaac actioning, not yet confirmed done
+> Trading Ops requested the CP added to Toxic XAUUSD (08:32 BST); Isaac Dann replied "actioning now" (08:54 BST) — no completion confirmation yet in window. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1786347164130769) [Isaac actioning](https://mahifx.slack.com/archives/C022S6NL82D/p1786348494519229)
 
 > [resolved] 2026-08-06 — Routine Heavy LR add: 86053528/86053527/86053526 (all tag variants)
 > Trading Ops requested CP 86053528 (+ Live06_MT4__/live06_mini#_b_ tags), 86053527 (+ live06_mini#_b_/Live06_MT4__/live06_CN_standard_b_ tags), and 86053526 (+ same three tag variants) added to Heavy LR (14:36 BST); Cameron Hughes confirmed "Done" (14:43 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1786023413984169) [Cameron confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1786023786813909)
