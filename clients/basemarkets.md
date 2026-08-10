@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-08-07T07:23:13Z
+last_catchup: 2026-08-10T08:30:35Z
 ---
 
 ## Status
@@ -21,6 +21,15 @@ last_catchup: 2026-08-07T07:23:13Z
 - **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
+
+> [open] 2026-08-10 — A book hedger order rejections on XAUUSD; sub-1oz sizing suspected, 1oz-increment override applied, client reports still failing
+> Client (Alex, via `mahi-base-markets`) reported lots of rejections on A book hedger orders at 08:07 BST, including the counterparty trade for account 111488. Kate Stagg confirmed cancels were coming from Scope and said the risk had cleared, with further investigation to follow if a Scope-side check was needed. Client came back saying orders were still being rejected, and it looked like they were sending less than one ounce of gold; Kate Stagg then added an override to hedge XAUUSD in 1oz increments. No confirmation posted after the override that the rejections have actually stopped. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786345651023279) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786346307641039) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786347675315349) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786348300386209)
+
+> [open] 2026-08-10 — Scope harshly classifying/cancelling Base's Rostro-brokered flow; internalisation with longer last look proposed
+> Isaac Dann (internal) flagged that Scope is currently harsh on Base's flow: orders tagged `199_0_*` are hitting broker rules whenever they're unclassified or harshly classified, and when Rostro brokers Base's flow it's breaching Base's own limits and getting cancelled. Isaac raised internalising Base's flow instead — potentially on a longer-than-default last look — so Rostro isn't hit with anything toxic and Base actually gets fills, given Mahi's relationship with both parties. No reply posted yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786349367512409)
+
+> [open] 2026-08-07 — Fast hedging go-live on FX A Book + CFD A Book for Base's '-S' (STP) accounts; R (rev share) group being phased into S
+> William Denny confirmed Mahi is ready to go live with fast hedging on FX (A Book) and CFDs (A CFD Book) for flow from Base's '-S' trading accounts, following a chat with Kate B (client) — the -S flow started getting fast-hedged the same day. Base runs four trading-account groups: S (STP), X (B-booking), R (rev share, also STP), T (toxic); R is being phased out with flow moving to S, and R flow — currently mostly brokered, with small XAU tickets internalised — is moving to fast-hedge treatment too. Same day William noted CFD routing into the CFD_CLIENTS book depends on `multiChannelConfig`'s list of trading accounts, and asked Kate to flag new '-S' accounts as they're added so that list stays current. Two hedger tuning bounces accompanied the rollout: `hybridHedgerCFD`'s trigger-var level changed for testing (08:58 BST), and the main hybrid hedger bounced later that day with spread-predicate percentiles decreased and backstop delay increased to be less aggressive (17:11 BST). [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786092251603289) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786093926551809) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786089517385429) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786119104453929)
 
 > [resolved] 2026-08-04 — DOWUSD erroneous tick fill; Scope indicative blip caused LP jump, normalisation now applied
 > Kate (client) flagged a fill on `BaseMarkets_111136` that looked like it hit an erroneous tick. Cameron Hughes acknowledged and picked it up; Shyam Hari diagnosed that both Scope feeds went indicative for ~20ms, causing the pricing model to jump to another LP's levels for a ~50ms window, and this order landed on that tick. Shyam configured normalisation on DOWUSD and other indices so the other LP's book gets adjusted onto the Scope basis before use, holding the price closer to Scope if it goes indicative again rather than jumping venues. Client thanked the team for the update and fix. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785868411470579) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785903796363739) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1785904143814759)
@@ -101,6 +110,7 @@ last_catchup: 2026-08-07T07:23:13Z
 
 > [open] 2026-04-29 — Client asking about direct API piping for rewritten algo
 > Alex (Base Markets) is planning to rewrite their algo and asked whether they could pipe trades straight into our server (i.e. off MT4/MT5). Andrew Morgan confirmed FIX API connectivity exists, but margin and credit checking are not implemented — flagged as something he'd want to build. No reply yet to Alex. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1777470499867149)
+> **2026-08-07 update:** Client relayed that Tegis are recoding their algo to move away from MT4/MT5 EAs and trade directly via APIs, and asked whether there's a Mahi test instance they could connect to. William Denny replied he'd look into it — no further detail posted in-channel by run time. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786090125951309) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786091613108329)
 
 > [resolved] 2026-05-12 — Rev share account 110291: partial close internalised instead of brokered to SCOPE_B
 > Account 110291 opened 5 lots short, partially closed in ≤50oz increments — these hit the "internalise 50oz" execution rule rather than the REV_SHARE broker rule (which routes to SCOPE_B). Client closed remainder manually on SCOPE_B. Daria Horton confirmed cause (execution rule ordering), shifted Compass positions to rev share book to net out. Client chose to keep rule order as-is and reconsider separately. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778564784545149) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778567380357959)
