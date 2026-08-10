@@ -22,10 +22,16 @@ key_people_overrides:
   - {name: "Chrysovalantis Karageorgiou", role: "Rostro ops — FIX/telnet connectivity, X-connect", confidence: low}
   - {name: "Rakan", role: "Rostro ops — FIX rejection queries", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro (sam.steele@rostro.com); billing/contract-band thread contact", confidence: low}
-last_catchup: 2026-08-07T07:35:16Z
+last_catchup: 2026-08-10T08:41:23Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-07 — Abdullah: XAUUSD ~20s pricing gap (03-Aug) traced to publish-tolerance suppression near CME close — tolerance review offered, no client decision yet
+> Abdullah asked (15:54 BST) why XAU/USD stopped publishing for ~20.238s on 2026-08-03 20:45:23–20:45:44 UTC on the Mahi-ScopeX-SI stream, noting the client has seen similar intermittent gaps recently. William Denny confirmed (17:43 BST) FIX session, network, boxes and pricing were all healthy — LP feeds kept sending genuine updates, but in the run-up to the 21:00 UTC CME close every LP's top of book sat within a cent of each other (IC Markets frozen, aggregate pinned at 4056.46/4056.56), so the publisher's move-tolerance (5% of spread, ~1c) correctly suppressed the recompute. Same pattern for the other gaps: 23 of 32 episodes over the past two weeks fall in the same 20:00–21:00 UTC pre-close hour, rest in 23:00/04:00 windows. William offered to review the tolerance setting if Rostro want continuous pricing through those windows; Abdullah only cc'd Alexandre FYI (2026-08-10) — no decision yet. [Abdullah: gap query](https://mahifx.slack.com/archives/C08AQKRU953/p1786114451322899) [William: tolerance-suppression explanation + offer](https://mahifx.slack.com/archives/C08AQKRU953/p1786121030146159) [Abdullah: cc Alexandre FYI](https://mahifx.slack.com/archives/C08AQKRU953/p1786345835238139)
+
+> [resolved] 2026-08-07 — Alexandre: USDJPY IoC limit cancels (tag 150_0_n/a_100029) — Arbitrageur/SI Book rev-share profile, markup breached bid
+> Alexandre linked a Compass orders view (16:55 BST) on a USDJPY IoC limit sell that cancelled for counterparty 150_0_n/a_100029. Nathan Burch explained (2026-08-10 00:40 BST): the CP is classified Arbitrageur on the Retail A Book and executes on the SI Book's "Arb: Rev share XAU XAG G7" profile against LIQUIDITY_POOL_IC rather than the published DISTRIBUTION_INV/A_CLIENTS price, with a $10/M markup on brokered A_CLIENTS trades — with the markup applied, the limit breached the bid and all orders cancelled. [Alexandre: orders link](https://mahifx.slack.com/archives/C08AQKRU953/p1786118123713719) [Nathan: Arb/SI Book markup explanation](https://mahifx.slack.com/archives/C08AQKRU953/p1786318854496759)
 
 > [resolved] 2026-08-05 — Oliver: rate limit raised to 300 for tag 148_0_n/a_43886 — actioned
 > Oliver asked (11:02 BST) to raise the per-counterparty rate limit to 300 for tag `148_0_n/a_43886`. Isaac Dann actioned it immediately (11:03 BST); Oliver thanked. [Oliver: request](https://mahifx.slack.com/archives/C08AQKRU953/p1785924130284329) [Isaac: actioned](https://mahifx.slack.com/archives/C08AQKRU953/p1785924182649079) [Oliver: thanks](https://mahifx.slack.com/archives/C08AQKRU953/p1785924186859059)
