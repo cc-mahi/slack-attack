@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-07T07:45:00Z
+last_catchup: 2026-08-10T08:44:28Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-08-07T07:45:00Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-08-10 — hedgerHRP1 tripped on pnlBreach: restarted within seconds
+> Shyam Hari (00:38 BST) flagged hedgerHRP1 tripping due to a pnlBreach and restarted it immediately; confirmed back up 20 seconds later. Quiet window otherwise — no other human discussion in `internal-toa-ops` or `toa-nado-shared` since last catchup. https://mahifx.slack.com/archives/C035H1VNCAD/p1786318696421319
 
 > [resolved] 2026-08-06 — hedgerCBOE1 taken offline then restarted with firewall limits raised (per Zendesk), addressing the recurring breach pattern
 > Lee Butts took hedgerCBOE1's book offline at 03:33 BST ("ignore the 'should be on' alerts"), then at 06:41 BST fired it back up with firewall limits increased "for now until they're fixed as per zd" — a Zendesk-tracked fix rather than a bare restart. Third recurrence of the hedgerCBOE1 firewall-breach pattern in four days (see 2026-08-05 and 2026-08-03 entries below), this time addressed with a limit change. https://mahifx.slack.com/archives/C035H1VNCAD/p1785983600535619 https://mahifx.slack.com/archives/C035H1VNCAD/p1785994918152899
