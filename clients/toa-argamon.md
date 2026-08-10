@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-08-07T07:45:00Z
+last_catchup: 2026-08-10T08:44:33Z
 ---
 
 ## Status
@@ -34,9 +34,10 @@ last_catchup: 2026-08-07T07:45:00Z
 > Sam Hewitt flagged another PagerDuty firewall breach on hedgerCBOE1 at toa-argamon-ch-trading-1 (05:14 BST) and restarted it — second occurrence in three days, continuing the same pattern as the 2026-08-03 hedgerCBOE1 firewall-breach entry below. No further thread discussion. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785903258220179)
 > Continued 2026-08-06: Lee Butts took hedgerCBOE1's book off "for the time being" at 03:33 BST (told the team to ignore the "should be on" alerts), then fired it back up at 06:41 BST having increased the firewall limits, "until they're fixed as per zd" — referencing an unspecified Zendesk ticket tracking the underlying fix. Third occurrence in four days; root cause still not posted, now with a numbered ticket presumably tracking it. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785983600535619)
 
-> [open] 2026-08-03 — LMAX session-breach / rejection storm on order 012dseuuwa at Toa Argamon; LMAX pulled from liquidity pool, root cause pending
+> [resolved] 2026-08-03 — LMAX session-breach / rejection storm on order 012dseuuwa at Toa Argamon; LMAX pulled from liquidity pool, root cause pending
 > Tom flagged hundreds of LMAX rejections ("unknown order") from ~15:26 BST; Cameron Hughes confirmed firewall breach messages in the order events and asked Tom to check with LMAX while Mahi checked its side. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785767168919819)
 > LMAX's reply (relayed by Tom) confirmed a 200-message session breach on order 012dseuuwa, with a logon seq-no mismatch (141=Y, seq 1) meaning some fills may have been missed — LMAX attached a CSV of trades since 14:00 UTC. Cameron Hughes removed LMAX from the liquidity pool (16:04 BST) and bounced the SOR to pick up the change (per Daria Horton's tip: pull the market from the pool and restart the Aggs rather than restarting the SOR directly — only internalised trades hit during the brief downtime). Spamming stopped by 16:13 BST, but Cameron Hughes flagged the brokered-flow root cause ("potentially passing on spammed orders we were receiving") still needs checking, and Tom's request for LMAX's message limits (to configure a local cap) is unanswered as of catchup. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785771644018009)
+> Continued 2026-08-07 14:52 BST: Cameron Hughes added a brokering market throttle to LMAX (limit 150/s) plus a matching hedging throttle, then added LMAX back to the liquidity pool for pickup over the weekend — addresses Tom's earlier request for a local message cap. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786110724833399)
 
 > [resolved] 2026-08-03 — hedgerCBOE1 firewall breach at Toa Argamon CHI; limit increased, hedger restarted
 > Cameron flagged a PagerDuty firewall breach on hedgerCBOE1 at toa-argamon-ch (12:40 BST); James Furness increased the hedging order-service limit and restarted the hedger within six minutes. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839)
@@ -70,6 +71,7 @@ last_catchup: 2026-08-07T07:45:00Z
 > Continued through the afternoon of 2026-07-22: four more PnLDropAlerts on HRP_CLIENTS_NET (14:23, 14:38 ×2, 15:07, 17:32 BST — deltas from -$4.2k to -$12.1k over 8min/20min/1hr windows), still no diagnosis (James: "lumpy today"). Inald flagged another drop at 18:02 BST, treated as a dupe of an earlier uncleared alert. Mitigation applied 2026-07-23 04:23 BST: Lee moved CBOE hedging from London to Chicago — ordersCboe1/hedgerCBOE1 now running in Chicago, London hedgerCBOE1 book switched off. Root cause still not diagnosed. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784726609243179)
 > Continued 2026-07-23 14:37 BST: hedgerHrpCME1 in Toa Argamon CHI came down on a PnL breach ($850,263 in 24h, raw change -$1,598,165 → $356,841); Arun restarted it and confirmed back online. Same unexplained pattern as the entries above — no root cause posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784813820185659)
 > Continued 2026-08-06 00:37 BST: hedgerHrpCME1 at Toa Argamon CHI tripped again (PagerDuty Q3BAT8OWDYXAC0); Sam Hewitt restarted it. No diagnosis posted — same unexplained pattern. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785973058427919)
+> Continued 2026-08-10 00:38 BST: hedgerHRP1 tripped on a PnL breach; Shyam Hari restarted it, back up 20 seconds later. No diagnosis posted — same unexplained pattern. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1786318696421319)
 
 > [open] 2026-07-21 — PrimeXM ClientID FIX tag config for Argamon LDN sessions; pending restart + test
 > Levi (Argamon) asked whether ClientID can be sent via tag 448 (with tag 452=3) instead of tag 109 for PrimeXM's LDN onboarding — PrimeXM can't configure tag 109 for ClientID. Lee confirmed party-role field mapping works and applied the config change scoped to argamon's PXM sessions only (Toa LDN); needs a restart, live after EOD the next day. Levi to test after restart. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
