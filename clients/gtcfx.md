@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Jack Zheng", role: "GTC — CEO; Mahi sent a personal message to reinforce the pitch 2026-07-30", confidence: low}
   - {name: "Ralich", role: "OneZero — agreed to waive OZ's per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: "Lochlan", role: "OneZero — alternative escalation route if the fee negotiation stalls (internal only, not shared with GTC)", confidence: low}
-last_catchup: 2026-08-07T07:10:36Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-10T08:35:54Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
@@ -25,6 +25,9 @@ last_catchup: 2026-08-07T07:10:36Z                         # ISO8601; updated by
 - **Relationship:** warm and actively managed — David Cooney has the OneZero/Ralich relationship (Ralich cleared Mahi risk-management on joint Mahi/OZ clients, on condition it isn't broadcast); Kate Stagg runs day-to-day; message reinforced to CEO Jack Zheng on the weekly call and well received.
 
 ## Recent issues
+
+> [open] 2026-08-10 — trading-2 MySQL disk hit 90%; ~30GB/day growth on both trading servers, `mysql_optimize_enable=false` question unanswered
+> Shyam extended `vg03-mysql` on trading-2 from 885G to 1.2T after it hit 90%. He flagged the growth rate on trading 1 and 2 as fast (~30GB/day) and asked whether `mysql_optimize_enable` being set to false is still expected — unanswered at window close, and worth resolving before B-book flow lands on the pending go-live. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786321203578909)
 
 > [open] 2026-08-03 — `marketDataProxyTx` won't start; needs listen config and may be obsolete
 > Daria found the process needs a `connectivity.marketData.proxy.listen` config to start up, then noted to Isaac that it looks like it was configured to proxy out HRP_ARG and asked whether the process is still needed at all given how long it's been. Unanswered. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785713908035349)
