@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-08-07T07:26:05Z
+last_catchup: 2026-08-10T08:36:02Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-07 — 1,214oz XAUUSD long filled on Finalto, Compass adjustment done
+> Layan reported 1,214oz gold long filled on Finalto at 19:46 BST; Sam Hewitt confirmed "this adjustment has now been made" on 2026-08-09 at 23:12 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786128404633489) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786313524695899)
+
+> [resolved] 2026-08-07 — NFP timezone guard disabled Finalto LPR rules on hybridHedger1; PnL up ~$13k
+> Following the 2026-08-06 tag 700106 delay ($8k drop tied to a 5s hedging lag from Finalto's LP-reducing rules), Rory King placed a timezone guard ahead of the NFP print to disable the Finalto LPR rules on hybridHedger1 and focus hedging at LMAX instead, bouncing hybridHedger1 to pick it up. Reported PnL up ~$13k off the print; plans a comparison against FOMC and other US data announcements to build the case for keeping Finalto further removed from major prints going forward. Reverted the change after the print. [guard-applied](https://mahifx.slack.com/archives/C09QS1NUA80/p1786101786034949) [will-acks](https://mahifx.slack.com/archives/C09QS1NUA80/p1786101850305329) [pnl-result](https://mahifx.slack.com/archives/C09QS1NUA80/p1786107635791789) [reverted](https://mahifx.slack.com/archives/C09QS1NUA80/p1786115844168399)
 
 > [resolved] 2026-08-06 — 2,554oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 2,554oz gold long filled on Finalto at 15:32 BST; Rory King confirmed "this has been actioned" at 16:28 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786026755098999) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786030125801789)
@@ -32,8 +38,8 @@ last_catchup: 2026-08-07T07:26:05Z
 > [resolved] 2026-08-04 — 392oz XAUUSD long filled on Finalto, Compass adjustment done
 > Layan reported 392oz gold long filled on Finalto at 15:21 BST; Rory King confirmed "confirming this has been actioned" at 15:23 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785853263931789) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785853435838059)
 
-> [open] 2026-08-03/04 — Contract signing in progress; Youssef following up with GCC's signatory today
-> Will Carter flagged the new contract to Bonnie Cassidy; forwarded Youssef Bouz confirming "On it, will follow up with her today." Continues the 2026-07-22 terms-lock-in / 2026-07-27 notice-period threads — signature still pending. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1785826746761379)
+> [resolved] 2026-08-03/07 — Contract fully signed
+> Will Carter flagged the new contract to Bonnie Cassidy; forwarded Youssef Bouz confirming "On it, will follow up with her today." Continues the 2026-07-22 terms-lock-in / 2026-07-27 notice-period threads. 2026-08-07: Bonnie Cassidy confirmed "just received the fully signed agreement from these guys" — closes out the contract signing saga. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1785826746761379) [signed](https://mahifx.slack.com/archives/C09QS1NUA80/p1786093528852429)
 
 > [resolved] 2026-08-03/04 — LR-driven spread spike on tag 700154 fixed by removing LR from published price
 > Youssef Bouz reported tag 700154's 3,000oz XAUUSD sell order caused a visible spread spike across Mahi's shared feed, recurring after a similar large clip earlier the same session; flagged it as the same Liquidity Reduction pattern raised on 2026-07-20. Youssef additionally objected that a single client's large order shouldn't spike the feed for every other client sharing it. Daria Horton's follow-up analysis (2026-08-04 morning) found GCC's underlying LP feeds are themselves quite wide, so tightening the back of the stack would cost meaningful spread P&L given 700154's volume; recommended tightening the LR cap on the channel, or not publishing LR at all (risk: slippage complaints). Rory King removed LR from the A_CLIENTS channel's published price and made channel LR settings less punitive overall, confirmed acceptable with Youssef as an interim fix pending an LP-side solution; 700154 traded again and the distributed price stayed unmoved with the fill VWAPed as expected, clearing risk in ~20s. Client confirmed happy ("glad we got rid of that LR spread spike... thanks for your effort"). Rory then removed LR from the published price of other channels too "for good order". [initial-report](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785788237524399) [will-response](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785788962664379) [daria-analysis](https://mahifx.slack.com/archives/C09QS1NUA80/p1785828186289209) [lr-removed-a-clients](https://mahifx.slack.com/archives/C09QS1NUA80/p1785839894419099) [700154-retest](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785847265207109) [client-confirms](https://mahifx.slack.com/archives/C09PNC1MFAA/p1785848621061179) [lr-removed-other-channels](https://mahifx.slack.com/archives/C09QS1NUA80/p1785849590729399)
