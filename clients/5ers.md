@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Yaron", role: "client stakeholder — feed reliability + spread escalations", confidence: low}
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
-last_catchup: 2026-08-07T07:15:07Z
+last_catchup: 2026-08-10T08:24:55Z
 ---
 
 ## Recent issues
@@ -132,3 +132,5 @@ last_catchup: 2026-08-07T07:15:07Z
 - 2026-05-19 — YB slippage dialled back; spread yields more aligned this week. Demo flow $177/M vs funded flow $49/M through Compass (screenshots shared). Kate flagging room to increase LR further. [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1779197179265719)
 - 2026-06-04 — Consistency-rule payout sims completed and ready to share with Yaniv. Kate (11:26 BST) posted results at 30/40/50% consistency thresholds (other params: 5% daily DD, 10% max DD, 10% profit target, no min trading days, trailing DD off): 30% → Mahi $302.50k ($22.59/CP), LP $373.18k, KO ratio 1.19; 40% → Mahi $757.16k ($56.53/CP), LP $886.34k, KO ratio 1.19; 50% → Mahi $1.21m ($90.27/CP), LP $1.51m, KO ratio 1.19. Cameron Hughes also ran a no-consistency-rule baseline: Mahi $4.66m ($347.71/CP), LP $5.63m, KO ratio 1.19; noted "doing the qualifying stuff alongside FundedNext data". [kate-sim-results](https://mahifx.slack.com/archives/C079M09MGGP/p1780568808807369) [no-consistency-baseline](https://mahifx.slack.com/archives/C079M09MGGP/p1780580382340259)
 - 2026-05-21 — Yaniv provided payout-sim parameters for consistency-rule modelling: daily drawdown 5%, max drawdown 10%, profit target 10%, no min trading days, trailing drawdown off, consistency % to be tested at 30/40/50%. Cameron Hughes kicking off sims. Andrew Morgan pushed to standardise on `prop-challenge-sim` skill (analytics-python-tools) rather than bespoke notebook runs — decision: anyone on the team should fire the skill and get pass/knockout/payout comparisons against network percentiles; gaps in the skill to be raised and fixed rather than worked around. [kate-params](https://mahifx.slack.com/archives/C079M09MGGP/p1779359102179599) [andrew-skill-push](https://mahifx.slack.com/archives/C079M09MGGP/p1779364056810179)
+
+- 2026-08-07 — Will Carter noted 5ers have bought 2 CFD brokers; per Will, Velocity will be seeing them in a couple of weeks (relationship between "Velocity" here and the Velocity client account not clarified in-window). [permalink](https://mahifx.slack.com/archives/C079M09MGGP/p1786105529551219)
