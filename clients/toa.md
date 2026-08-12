@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-10T08:44:28Z
+last_catchup: 2026-08-12T07:37:50Z
 ---
 
 ## Status
@@ -17,6 +17,18 @@ last_catchup: 2026-08-10T08:44:28Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-08-11 — PnL drop limits raised on TOA-ARG LDN: acknowledged policy response to increased risk-taking
+> James Furness (12:49 BST) raised the `monitoring.pnlDrop` limits on toa-argamon-ln, noting "we are running more risk now so PnL is expected to be more volatile" — a deliberate threshold change rather than a one-off fix, addressing the recurring HRP_CLIENTS_NET PnL-drop alert pattern seen repeatedly through July (see 2026-07-28, 2026-07-27, 2026-07-22, 2026-06-25 entries below). https://mahifx.slack.com/archives/C035H1VNCAD/p1786448940184149
+
+> [watching] 2026-08-11 — A few small PnL drops flagged, no incident detail
+> Shyam Hari (07:28 BST) flagged "a few small PnL drops" with no further detail or PagerDuty reference — likely the kind of volatility James's same-day limit increase (above) was pre-empting. https://mahifx.slack.com/archives/C035H1VNCAD/p1786429682725339
+
+> [resolved] 2026-08-10 — PnL drop at TOA-ARG LDN on ROLL: recovering
+> Shyam Hari (22:08 BST) flagged a PnL drop at Toa Argamon LDN on ROLL (PagerDuty Q1H9PAZZR1LEQM), noting it looked to be recovering. https://mahifx.slack.com/archives/C035H1VNCAD/p1786396084992549
+
+> [open] 2026-08-10 — PnL breach + throttling reject on INST-38 at TOA-ARG LDN, no follow-up
+> Arun Patel (19:34 BST) flagged a PnL breach (-7,245 in 8 minutes, HRP_CLIENTS_NET) alongside a throttling order reject (high rate of OrderRejected events) for counterparty INST-38 at Toa Argamon LDN. Only a +1 reaction — no thread discussion or resolution noted in window. https://mahifx.slack.com/archives/C035H1VNCAD/p1786386863993939
 
 > [resolved] 2026-08-10 — hedgerHRP1 tripped on pnlBreach: restarted within seconds
 > Shyam Hari (00:38 BST) flagged hedgerHRP1 tripping due to a pnlBreach and restarted it immediately; confirmed back up 20 seconds later. Quiet window otherwise — no other human discussion in `internal-toa-ops` or `toa-nado-shared` since last catchup. https://mahifx.slack.com/archives/C035H1VNCAD/p1786318696421319
