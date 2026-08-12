@@ -12,19 +12,26 @@ key_people_overrides:
   - {name: "Marios Lysandrou", role: "GTC — supplies group mappings / instrument specs; sets up connections with OneZero"}
   - {name: "Andreas", role: "GTC — joined the Compass/Echo walkthrough", confidence: low}
   - {name: "Jack Zheng", role: "GTC — CEO; Mahi sent a personal message to reinforce the pitch 2026-07-30", confidence: low}
+  - {name: "Bruce", role: "GTC — joins Manglai on final pricing review ahead of go-live", confidence: low}
   - {name: "Ralich", role: "OneZero — agreed to waive OZ's per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: "Lochlan", role: "OneZero — alternative escalation route if the fee negotiation stalls (internal only, not shared with GTC)", confidence: low}
-last_catchup: 2026-08-10T08:35:54Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-12T07:23:00Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
 
-- **Stage:** pre-live, go-live targeted 2026-08-10/11 (Manglai, 2026-07-28; delay reason unstated, he's on holiday until then). Signed 2026-05-14. Listed under "Signed but not yet live" in `../MahiProduct/data/fleet.txt`.
+- **Stage:** pre-live, go-live plan now: final B-Book test trades 2026-08-12, then live with AUDUSD first, phased FX rollout ahead of XAUUSD (Kate/GTC call, 2026-08-11) — slipped past the 10–11 Aug target. Signed 2026-05-14. Listed under "Signed but not yet live" in `../MahiProduct/data/fleet.txt`.
 - **Integration:** LDN only (`gtcfx-ln-admin-1.zlt5`), on 3 Beeks hosts repurposed from trademax (freed by the trademax LDN→NYC region swap, 2026-05-04), cluster zlt5 / cage LD5. Agreed flow: GTC MT4/5 → GTC OneZero hub → Mahi (A/B book) → GMG (FCA entity) → HRP & LPs for hedge flow. Hedged flow routes to Finalto and Swift, STP'd flow to HRP LPs; HRP stays STP-only at GTC's preference. Spreads benchmarked on FINALTO/SWIFT with `MAHI_BENCHMARK_LDN|FINALTO|HRP_XTX|HRP_MEX|HRP_ARG` mid formation and adaptive mid on signalled markets. A Book exec rules split ABOOK (standard) / ABOOK_TX (toxic); GTC agreed Mahi can risk-manage on classification. ~2,900 MT groups, so per-group trading-account mapping was abandoned in favour of A/B trading accounts with the Compass classifier setting last-look window, LR params and STP pool per counterparty.
 - **Risks / open threads:** GMG is still on PrimeXM, which Mahi flags as a system-integrity problem in the agreed path and wants moved. `marketDataProxyTx` won't start without listen config and may be an obsolete HRP_ARG proxy. Counterparty tags still missing on the B Book connections. Design questions unresolved from 2026-07-15: failover, whether HRP can be included in A Book hedging, NOP limits on Finalto/Swift/HRP, and whether LR belongs in the published price (global vs per-channel).
 - **Relationship:** warm and actively managed — David Cooney has the OneZero/Ralich relationship (Ralich cleared Mahi risk-management on joint Mahi/OZ clients, on condition it isn't broadcast); Kate Stagg runs day-to-day; message reinforced to CEO Jack Zheng on the weekly call and well received.
 
 ## Recent issues
+
+> [open] 2026-08-11 — Go-live plan set: test trades 2026-08-12, then live with AUDUSD first, phased FX rollout ahead of XAUUSD
+> Call to close out outstanding items: OZ's B Book fee waiver confirmed directly with GTC; Manglai and Bruce doing final pricing review; final B-Book test trades planned for the next morning, then aiming to go live with AUDUSD flow, adding more FX pairs as they get comfortable before bringing on XAUUSD. Isaac to set up weekly meetings. Supersedes the 07-29 10–11 Aug target — go-live has slipped again pending the test trades. [call-notes](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786450385776069) [client-summary](https://mahifx.slack.com/archives/C0AKRP8C049/p1786454325286629)
+
+> [open] 2026-08-11 — CBCX instrument spec still outstanding; confirmed not a go-live blocker
+> Kate's follow-up recap flagged the CBCX instrument spec (minimum/incremental quantities, pricing precision) is still not in hand, three weeks after the LP was added (2026-07-28) — now explicitly called out as not blocking go-live. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786454325286629)
 
 > [open] 2026-08-10 — trading-2 MySQL disk hit 90%; ~30GB/day growth on both trading servers, `mysql_optimize_enable=false` question unanswered
 > Shyam extended `vg03-mysql` on trading-2 from 885G to 1.2T after it hit 90%. He flagged the growth rate on trading 1 and 2 as fast (~30GB/day) and asked whether `mysql_optimize_enable` being set to false is still expected — unanswered at window close, and worth resolving before B-book flow lands on the pending go-live. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786321203578909)
@@ -35,8 +42,8 @@ last_catchup: 2026-08-10T08:35:54Z                         # ISO8601; updated by
 > [open] 2026-07-31 — GMG still on PrimeXM — system-integrity concern in the agreed flow path
 > David relayed the confirmed path (GTC MT4/5 → GTC OZ hub → Mahi A/B → GMG as FCA entity → HRP & LPs for hedge flow) and flagged that GMG remaining on PrimeXM "introduces some system integrity issues for us", asking for support in moving that business over. No plan yet. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785484125462009)
 
-> [open] 2026-07-29 — Go-live targeted 10–11 Aug; Manglai declined to start earlier
-> Manglai confirmed a 10–11 August target and said he's happy with pricing after the spread changes. Kate asked what's driving the delay and offered to help speed it up, but he's on holiday for a week from Wednesday and wants to go live once he's back — he'd already pushed back on Kate's suggestion of getting the B Book live on 2026-07-28. [go-live-date](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785317790537099) [pushback](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785164995327769)
+> [resolved] 2026-07-29 — Go-live targeted 10–11 Aug; Manglai declined to start earlier
+> Manglai confirmed a 10–11 August target and said he's happy with pricing after the spread changes. Kate asked what's driving the delay and offered to help speed it up, but he's on holiday for a week from Wednesday and wants to go live once he's back — he'd already pushed back on Kate's suggestion of getting the B Book live on 2026-07-28. Superseded by the 2026-08-11 call, which reset the plan to test trades on 08-12 then AUDUSD-first go-live. [go-live-date](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785317790537099) [pushback](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785164995327769)
 
 > [open] 2026-07-28 — CBCX added as a further LP; instrument spec requested before test trades
 > GTC sent credentials for one more LP (CBCX) via onetimesecret. Kate confirmed Mahi is connected and receiving market data, and asked for CBCX's instrument spec (minimum and incremental quantities, pricing precision) before test trades can run. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1785225476074889)
@@ -79,6 +86,7 @@ last_catchup: 2026-08-10T08:35:54Z                         # ISO8601; updated by
 
 ## Notable topics
 
+- 2026-08-11 — Isaac shared AUDUSD price forensics from around the NFP print for GTC's review, continuing the same value-evidence approach as the 07-27 skew PnL share; Mahi offered to go deeper on pricing/spreads around market open or news events if useful. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786447489080299)
 - 2026-07-27 — Value evidence shared with the client: running flow-predictive skew off the drop copies already set up, Mahi told GTC that in the ~12 hours since market open, had they been executing on Mahi's price, that was **$200k of skew P&L on XAUUSD alone** — and off the PXM drop copy only. Got an :eyes: reaction and no pushback. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1785149280652629)
 - 2026-07-14 — Volume shape explains the fee fight: A Book is 8–10 yards/month, B Book around 800 yards/month. The B Book is where essentially all the value sits, which is why the OZ per-million STP fee was the headline blocker rather than a detail. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784026634191269)
 - 2026-07-28 — The OZ fee waiver is precedent-setting and deliberately quiet: it covers any joint Mahi/OZ client, but OZ asked Mahi not to publicise it, specifically to avoid other brokers concluding that any risk-management system can be plugged in. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785244685921069)
