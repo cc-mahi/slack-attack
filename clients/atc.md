@@ -7,10 +7,14 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
-last_catchup: 2026-08-10T08:30:36Z
+last_catchup: 2026-08-12T07:13:25Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-11 — EURUSD/USDCHF/GBPUSD pricing spikes from stale skew config override; historical data cleanup demanded
+> David Manoukian reported EURUSD "jumping back and forth creating spikes" at 21:27 BST 2026-08-11, spreading to USDCHF on MT5 too ("our data source is corrupted"). Daria Horton found a cause and restarted pricers ~21:33 BST; David confirmed improvement and asked the setting be disabled on all symbols and historical data fixed. By 06:17 BST 2026-08-12 David escalated again — GBPUSD also affected, prices "still not natural," demanding it be fixed and that ATC may need to "hire an outside expert to come in and fix all the historical data." Daria's internal write-up (07:53 BST) named the actual root cause: EURUSD/USDCHF had OR-IMI-IMS and IFMS skew signals both floored at 0.5 pips plus harmonics at 0.2 — up to 1.2 pips of skew each way, in place for a long time, "potentially pre move to LDN." Removed OR-IMI-IMS, dropped the remaining floors to 0.1. Separately found elevated twilight skew on GBPUSD/AUDUSD — lowered IFMS floor 0.2→0.1, cut the benchmark-relative multiplier 1.2x→0.7x (applied on the global config too), and removed an nrmsd threshold that had been doubling twilight skew. Will Carter flagged the same pattern is "running away from us at a few places" and will pick up a fleet-wide review. David's historical-data-fix request not yet actioned in window.
+> [David initial report](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786480031117319) · [Daria restart/root cause](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786480422231719) · [David: data messed up for weeks](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786480473485919) · [David demands fix + outside expert](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786511905085389) · [Shyam ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786512063076359) · [Daria skew fix detail](https://mahifx.slack.com/archives/C046RNF64VD/p1786517598542869) · [Will: fleet-wide review](https://mahifx.slack.com/archives/C046RNF64VD/p1786517661998239)
 
 > [resolved] 2026-08-05 — Micro vs standard gold rebalance action item; confirmed offsetting XAU/FAU position, no action needed
 > Malik Khan flagged a recurring "action item" notification distinguishing micro vs standard gold, asking if a rebalance was needed. Cameron Hughes checked: the diff nets to -6706 XAU / +6706 FAU (offsetting), leaving only -25 net — likely a position awaiting hedge while the notification was sent. Malik reacted :+1: to confirm all good.
@@ -82,6 +86,8 @@ last_catchup: 2026-08-10T08:30:36Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-08-11 — Jack Manoukian sent new MT5 prop trading license, asked Mahi to prepare the Beeks server, and whether ATC gets server access + can port existing MT5-brokerage symbols to the MT5 prop unit. Cameron Hughes clarified a Compass instance already exists and asked for access clarity; confirmed existing symbols can carry over even with new prop pricing/instruments. Liam Cordelle flagged possible crossed wires — Jack may expect Mahi to manage ATC's MT5 directly rather than just the bridge Mahi offered; ties into the unanswered 2026-08-07 "who manages prop test-account MT5 terms" question. Cameron to DM Jack for clarification. [Jack's request](https://mahifx.slack.com/archives/C046RNF64VD/p1786449133875349) · [crossed wires flag](https://mahifx.slack.com/archives/C046RNF64VD/p1786449457875469) · [Cameron to DM Jack](https://mahifx.slack.com/archives/C046RNF64VD/p1786449587496769)
 
 - 2026-08-07 — Prop firm server questions continued. Liam Cordelle confirmed (partial answer to the 2026-08-06 call's "same server or new" question) that prop servers are already provisioned and ready and waiting. Separately, Cameron Hughes raised three follow-up questions on the MT5 (Mahi-managed) / TradingView (ATC-side) split: whether both pick up Mahi pricing from the same source, whether TradingView back-office trades need to flow into Compass, and who manages prop test-account terms (spreads/comms/rules) on the MT5 side — no reply in window. [Liam — servers ready](https://mahifx.slack.com/archives/C046RNF64VD/p1786091049734129) · [Cameron Hughes questions](https://mahifx.slack.com/archives/C046RNF64VD/p1786109677956549)
 
