@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-08-10T08:44:33Z
+last_catchup: 2026-08-12T07:38:03Z
 ---
 
 ## Status
@@ -25,6 +25,9 @@ last_catchup: 2026-08-10T08:44:33Z
 - **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [resolved] 2026-08-10 — Alpha Cap broker taker account limited to EURUSD; XAUUSD trade query answered
+> Isaac Dann asked in mahi-argamon-trading whether the Alpha Cap broker account should be able to trade XAUUSD; Nevio (Toa) explained only EURUSD is currently enabled for taker testing purposes. Isaac acknowledged. [permalink](https://mahifx.slack.com/archives/C083GP5F1CL/p1786378134867679)
 
 > [resolved] 2026-08-05 — SWI (Swiss client) GBPUSD last-look cancellation at Toa Argamon LDN; custom profile fixed on wrong channel
 > Tom (Argamon) escalated urgently — a Swiss client complaint over a cancelled GBPUSD order (group 042dr11a1pg), held 46ms then cancelled on last-look with TOB a tick from the request price. A custom SWI last-look profile (10ms, 0.4bps movement) that Elan had added the day before to fix the same client's complaint hadn't applied to this order because it was configured on the INSTI channel while this flow actually arrives on the RETAIL channel. James Furness copied Elan's edit into the RETAIL execution-rule-editor (~15:40 BST), live same afternoon. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940058925549)
@@ -72,6 +75,8 @@ last_catchup: 2026-08-10T08:44:33Z
 > Continued 2026-07-23 14:37 BST: hedgerHrpCME1 in Toa Argamon CHI came down on a PnL breach ($850,263 in 24h, raw change -$1,598,165 → $356,841); Arun restarted it and confirmed back online. Same unexplained pattern as the entries above — no root cause posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1784813820185659)
 > Continued 2026-08-06 00:37 BST: hedgerHrpCME1 at Toa Argamon CHI tripped again (PagerDuty Q3BAT8OWDYXAC0); Sam Hewitt restarted it. No diagnosis posted — same unexplained pattern. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1785973058427919)
 > Continued 2026-08-10 00:38 BST: hedgerHRP1 tripped on a PnL breach; Shyam Hari restarted it, back up 20 seconds later. No diagnosis posted — same unexplained pattern. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1786318696421319)
+> Continued 2026-08-10 19:34–22:08 BST: another PnL breach at Toa Arg LDN (-$7,245 in 8 min, Arun Patel — also flagging an `INST-38` order-reject throttle storm alongside it, echoing the INST-34 pattern from the 2026-06-08 entry below), followed by a ROLL-time PnL drop that recovered on its own (Shyam Hari, PD Q1H9PAZZR1LEQM). Same unexplained pattern — no root cause posted. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1786386863993939)
+> Continued 2026-08-11: Shyam flagged a few more small PnL drops (07:28 BST); James Furness raised the `monitoring.pnlDrop` limits (12:49 BST) — "we are running more risk now so PnL is expected to be more volatile," treating the volatility as expected going forward rather than root-causing it. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1786448940184149)
 
 > [open] 2026-07-21 — PrimeXM ClientID FIX tag config for Argamon LDN sessions; pending restart + test
 > Levi (Argamon) asked whether ClientID can be sent via tag 448 (with tag 452=3) instead of tag 109 for PrimeXM's LDN onboarding — PrimeXM can't configure tag 109 for ClientID. Lee confirmed party-role field mapping works and applied the config change scoped to argamon's PXM sessions only (Toa LDN); needs a restart, live after EOD the next day. Levi to test after restart. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
