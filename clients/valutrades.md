@@ -9,13 +9,22 @@ channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-o
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries", confidence: low}
-last_catchup: 2026-08-10T08:46:56Z
+last_catchup: 2026-08-12T07:42:33Z
 ---
 
 ## Recent issues
 
-> [open] 2026-08-10 — cpty 69597281 A/B book classification — unanswered
-> Client posted "Hello Team please advise for Ac `69597281`" at 09:44 BST; no Mahi reply in window. [permalink](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786351462485789)
+> [open] 2026-08-11 — NQU6-SEP26 UBS Algo order cancelled at old 30-min setting despite change to 60 min — William investigating, Liam shared FIX cancel evidence
+> Client (Brandon) reported an order was cancelled after ~30 minutes even though settings had been changed to 60 minutes, matching the previous (not current) duration setting; screenshot posted in both #mahi-valutrades-operations and #mahi-valutrades. William Denny acknowledged ("Hi Brandon, will look into this and revert"). Liam Cordelle shared the FIX cancel request as evidence (`valu_tt_resting_orders`→`mahi_resting_orders`, order 55253, NQU6-SEP26, `35=F` sent 10:55:59 UTC). No resolution in window. [ops-image-1](https://mahifx.slack.com/archives/C09HN93T0G2/p1786446762050329) [ops-image-2](https://mahifx.slack.com/archives/C09HN93T0G2/p1786447866528099) [ops-30min-note](https://mahifx.slack.com/archives/C09HN93T0G2/p1786447898001239) [client-report](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786448075934399) [william-ack](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786448163827239) [liam-fix-evidence](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786448362572809)
+
+> [resolved] 2026-08-10 — cpty 68594484 A/B book classification — Rory: NDFUSD B book, XAUUSD suggested A book (recent flow sharper)
+> Client asked "Hi Team please also for Ac 68594484?" at 12:36 BST; Rory King replied at 12:47: "68594484 - NDFUSD B book; XAUUSD historically B book but recent flow is sharper so would suggest A book for now" (with charts); client thanked at 13:17. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786361812013069) [rory-reply](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786362464965619) [client-thanks](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786364271188929)
+
+> [resolved] 2026-08-10 — cpty 96523286 A/B book classification — Rory confirmed A book
+> Client asked "Hello Team what do you recommend for Ac 96523286?" at 12:30 BST; William Denny acknowledged ("Hi overnight, checking") at 12:30; Rory King confirmed "96523286 - A book" (with screenshot) at 12:40 BST. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786361431667959) [william-ack](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786361444161139) [rory-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786362050460849)
+
+> [resolved] 2026-08-10 — cpty 69597281 A/B book classification — Rory confirmed A book
+> Client posted "Hello Team please advise for Ac `69597281`" at 09:44 BST; Rory King acknowledged ("Hi overnight, checking") at 09:58 and confirmed "69597281 - A book" (with screenshots) at 10:00 BST; client thanked at 10:13. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786351462485789) [rory-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786352294871969) [rory-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786352438373919) [client-thanks](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786353191023649)
 
 > [resolved] 2026-08-07 — cpty 89465879 yield profile starts below zero — Sam confirmed expected (offside vs mid), drop-copy limits fill-price-source visibility
 > Client sent Echo yield-profile link (valutrades.NYC, cpty 89465879, 2026-08-05→2026-08-06 window) asking "graph begins from minus... is it expected?" at ~04:32 BST. Sam Hewitt acknowledged ("taking a look") at 04:33 and confirmed at 05:14 that yes, this is expected — the trades were offside relative to mid (screenshots shown) — and since these were drop-copies, Mahi doesn't have full information on the fill price source. [client-query](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786073543162749) [client-followup](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786073548755789) [client-screenshot](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786073560757449) [sam-checking](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786073631485389) [sam-confirmed](https://mahifx.slack.com/archives/CSLM3Q8AD/p1786076072121469)
