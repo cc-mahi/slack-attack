@@ -23,7 +23,7 @@ key_people_overrides:
   - {name: "Kok Hou Chan", role: "joined mahi-ic-markets 2026-08-03; role unknown", confidence: low}
   - {name: "Vasilis", role: "IC Markets — intermediary between Pavlos and Angus in commercial sign-off chain per May renewal brief; surname not yet seen", confidence: low}
   - {name: "Chi-Loong Ho", role: "IC Markets — forwarded OKX/Pyth sourcing questions via James Furness 2026-08-03; Will Carter to respond post-commercial-call; role/affiliation not yet clear", confidence: low}
-last_catchup: 2026-08-10T08:38:36Z
+last_catchup: 2026-08-12T07:26:00Z
 ---
 
 ## Recent issues
