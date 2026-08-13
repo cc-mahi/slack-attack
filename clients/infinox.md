@@ -16,10 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-08-12T07:27:00Z
+last_catchup: 2026-08-13T07:13:17Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-12 — Georgia asked how to check if a CP is on LR rules; Kate walked through JSON config search
+> Georgia Tzyrkalli asked for the best way to check whether a client is on LR rules and whether the config can be exported to check (15:58 BST). Kate Stagg advised searching the counterparty in the JSON config via ctrl-F, or converting to the standard view first (with a caution that this is resource-intensive and may crash the browser on large configs) (16:08 BST). Georgia thanked her (16:11 BST). [question](https://mahifx.slack.com/archives/C022S6NL82D/p1786546695705279) [Kate answer](https://mahifx.slack.com/archives/C022S6NL82D/p1786547308211449)
+
+> [open] 2026-08-12 — Removal request: MT5_87018814_Centroid_3609458 from Toxic XAUUSD - Harsher; Kate acknowledged, not yet confirmed done
+> Georgia Tzyrkalli requested the tag removed from the Toxic XAUUSD - Harsher profile (15:55 BST); Kate Stagg replied "sure will do this now" (15:55 BST) but the thread moved on to Georgia's LR-check question before any completion confirmation appeared in window. [request](https://mahifx.slack.com/archives/C022S6NL82D/p1786546513866229) [Kate ack](https://mahifx.slack.com/archives/C022S6NL82D/p1786546530176129)
+
+> [resolved] 2026-08-12 — Routine No LL execution profile add: MT5_plain_b_87984629
+> Trading Ops requested the CP added to the No LL execution profile (10:31 BST); Rory King confirmed "this counterparty has been added to the above execution rule" (10:32 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1786527078528789) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1786527176446539)
 
 > [resolved] 2026-08-12 — Routine Toxic XAUUSD Harsher adds: MT5_87018814_Centroid_3610385 + Centroid_2145767760
 > Trading Ops requested CP 3610385 added to Toxic XAUUSD Harsher (01:07 BST); Shyam Hari confirmed "They have been added" (01:12 BST). Trading Ops requested Centroid_2145767760 in the same thread (01:16 BST); Shyam confirmed added (01:17 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1786493233634549) [Shyam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1786493521576619) [2145767760 request](https://mahifx.slack.com/archives/C022S6NL82D/p1786493768449279) [Shyam confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1786493862065429)

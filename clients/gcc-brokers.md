@@ -12,10 +12,16 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-08-12T07:22:58Z
+last_catchup: 2026-08-13T07:12:45Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-12 — Finalto LPR rules parked ahead of CPI print, hedger reinstated after
+> Rory King bounced hybridHedger1 to park Finalto's Liquidity-Reducing rules ahead of the CPI print and focus hedging at LMAX — the same tactic used for the 2026-08-07 NFP print — then bounced the hedger again shortly after to reinstate the rules. No PnL comparison reported in window. [guard-applied](https://mahifx.slack.com/archives/C09QS1NUA80/p1786537175225449) [reinstated](https://mahifx.slack.com/archives/C09QS1NUA80/p1786539439072379)
+
+> [resolved] 2026-08-12 — 320oz XAUUSD short filled on Finalto, Compass adjustment done
+> Client reported 320oz gold short filled on Finalto at 15:17 BST; Rory King confirmed "This has been done" at 15:40 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786544242116449) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786545620297079)
 
 > [resolved] 2026-08-11 — 48oz XAUUSD short filled on Finalto, Compass adjustment done
 > Layan reported 48oz gold short filled on Finalto at 15:36 BST; William Denny confirmed "this is done" at 15:54 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786459006318249) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786460079342509)
