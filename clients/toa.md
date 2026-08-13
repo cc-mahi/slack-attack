@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-12T07:37:50Z
+last_catchup: 2026-08-13T07:14:21Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-08-12T07:37:50Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [resolved] 2026-08-12 — Velocity gateways stopped on Toa Argamon LDN
+> Lee Butts (23:56 BST) stopped the Velocity (LP) gateways on toa-argamon LDN. No thread discussion beyond a +1 acknowledgement — quiet window otherwise, no other human discussion in `internal-toa-ops` or `toa-nado-shared` since last catchup. https://mahifx.slack.com/archives/C035H1VNCAD/p1786575362566819
 
 > [resolved] 2026-08-11 — PnL drop limits raised on TOA-ARG LDN: acknowledged policy response to increased risk-taking
 > James Furness (12:49 BST) raised the `monitoring.pnlDrop` limits on toa-argamon-ln, noting "we are running more risk now so PnL is expected to be more volatile" — a deliberate threshold change rather than a one-off fix, addressing the recurring HRP_CLIENTS_NET PnL-drop alert pattern seen repeatedly through July (see 2026-07-28, 2026-07-27, 2026-07-22, 2026-06-25 entries below). https://mahifx.slack.com/archives/C035H1VNCAD/p1786448940184149
