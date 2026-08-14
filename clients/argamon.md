@@ -14,7 +14,7 @@ key_people_overrides:
   - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-08-13T07:11:41Z
+last_catchup: 2026-08-14T07:56:12Z
 ---
 
 ## Status
@@ -24,6 +24,9 @@ last_catchup: 2026-08-13T07:11:41Z
 - Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
+
+> [open] 2026-08-14 — XAUUSD CPI loss: hedger held short as spread cap (40c) trailed hedging pool ($4.50+); news-based MWMS added; PSM-style widening planned with Elan Monday
+> Daria: retail NY volumes down and getting more toxic (client's business model); plans to catch up with Elan Monday to discuss charging more spread — suggesting PSM-style widening on XAUUSD (currently fixed at 8c) while still targeting tight on average. Separately, a loss this week came from XAUUSD trading over CPI: published spreads capped out at 40c while the hedging pool widened to at least $4.50, so the hedger wouldn't fire and the book was held short through the drop. News-based MWMS already added for 100-weight events in response. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849)
 
 > [open] 2026-08-05 — TOA GBPUSD last-look config gap: NatWest/Lucera escalation over cancelled orders, scoped by Trading Account not channel
 > Client escalated hard ("client going nuts") over a cancelled GBPUSD order (group 042dr11a1pg, held 46ms, cancelled on last look / TOB a tick from request price) routed via TOA. Elan's prior fix for this client (10ms last look, 0.4bps movement allowance) had only been added to the SWI profile on INSTI channels, but the flow was arriving on a RETAIL channel — James Furness copied the edit into the RETAIL execution-rule editor and the client thanked him. Recurred same night (~00:01 BST 2026-08-06): James found the config is actually keyed by Trading Account, not channel — the flow is arriving under `CLIENTS_HRP_CENTROID`, not `CLIENTS_NATWEST_LUCERA` as ops had assumed. Ops (Tom) noted to check that section going forward; no confirmation yet that `CLIENTS_HRP_CENTROID` has the matching last-look config applied. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940058925549) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940818905689) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785971278909679)
