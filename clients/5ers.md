@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Andreas", role: "client trading ops — YourBourse gateway, spread/order-book settings", confidence: low}
   - {name: "Linos", role: "client trading ops — instrument requests, connectivity escalations", confidence: low}
   - {name: "Aleksandr Valeev", role: "YourBourse (vendor) — FIX connectivity / network diagnostics", confidence: low}
-last_catchup: 2026-08-13T07:11:16Z
+last_catchup: 2026-08-14T07:53:32Z
 ---
 
 ## Recent issues
