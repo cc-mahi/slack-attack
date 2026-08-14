@@ -7,7 +7,7 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
-last_catchup: 2026-08-13T07:12:18Z
+last_catchup: 2026-08-14T07:58:59Z
 ---
 
 ## Recent issues
@@ -88,6 +88,10 @@ last_catchup: 2026-08-13T07:12:18Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-08-13 — July PnL report delivered to client channel. Jack Manoukian asked William Denny to upload the July PnL report to #mahi-atc; Shyam Hari acknowledged and William posted the ATC PnL Report July 2026.pdf same evening (closes the loop on the report already circulated internally on 2026-08-03). [Jack's request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786648517605309) · [Shyam ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786648579917359) · [report delivered](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786648707776189)
+
+- 2026-08-13 — UAT server restart requested. Malik Khan asked for a UAT restart; William Denny acknowledged and said he'd action it. No completion confirmation in window. [request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786639867450249) · [ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786639899977789)
 
 - 2026-08-12 — Prop firm meeting date narrowing + Beeks MT5 install question. Bonnie Cassidy relayed that Jack and Malik are in town and available either 19 or 26 August (Malik to confirm), continuing the 2026-08-03 scheduling thread. Separately relayed a question on whether Mahi can install MT5 on the Beeks server, noting ATC would be happy for Mahi to do it. No reply in window. [meeting dates](https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1786538869654309) · [Beeks MT5 install question](https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1786538678568649)
 
