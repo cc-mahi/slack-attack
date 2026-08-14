@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Bailey White", role: "TMGM — owns the integration decision; paused the project 2026-07-10 and set the XAU-only starting scope"}
   - {name: "Nik Teh", role: "TMGM — hub/FIX side; made the drop-copy Tag1 account-identifier change"}
   - {name: "Rainer", role: "TMGM — queried why account identifiers were needed on drop-copy", confidence: low}
-last_catchup: 2026-08-13T07:11:19Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-14T08:15:00Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
