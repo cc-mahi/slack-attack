@@ -8,7 +8,7 @@ refs:
 channels_override: null
 key_people_overrides:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact", confidence: low}
-last_catchup: 2026-08-13T07:11:24Z
+last_catchup: 2026-08-14T07:53:36Z
 ---
 
 ## Recent issues
