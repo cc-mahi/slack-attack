@@ -11,7 +11,7 @@ key_people_overrides:
   - {name: "Kate B", role: "Base Markets — client contact (onboarding / MT4 setup queries)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis — integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-08-13T07:12:13Z
+last_catchup: 2026-08-14T07:59:02Z
 ---
 
 ## Status
@@ -32,6 +32,7 @@ last_catchup: 2026-08-13T07:12:13Z
 > [open] 2026-08-10 — Scope harshly classifying/cancelling Base's Rostro-brokered flow; internalisation with longer last look proposed
 > Isaac Dann (internal) flagged that Scope is currently harsh on Base's flow: orders tagged `199_0_*` are hitting broker rules whenever they're unclassified or harshly classified, and when Rostro brokers Base's flow it's breaching Base's own limits and getting cancelled. Isaac raised internalising Base's flow instead — potentially on a longer-than-default last look — so Rostro isn't hit with anything toxic and Base actually gets fills, given Mahi's relationship with both parties. No reply posted yet. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786349367512409)
 > **2026-08-11 update:** Daria Horton proposed changing the hybrid's tag to constant so Rostro builds a classification on its own side, while brokered orders retain the actual counterparty for accurate classification. William Denny then bounced the hybrid hedger with hedger counterparty set to `BaseMarkets_110071`, since Rostro had blacklisted the prior tag from Broker and Signal follow after Kate B raised the poor execution with them directly; noted a brand-new tag would instead need to route through the Broker: Toxic Pool New Tags rule for unclassified flow. Still open — no confirmation posted that Base's flow is now filling cleanly. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786405400817669) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786458858603469)
+> **2026-08-14 update:** Daria Horton bumped max slippage on VAR-CLEARANCE to 30 pips and Backstop to 50 on `hybridHedger1` after more cancels (-$4k on one instance, +$2k on another) — root cause confirmed as `199_0_BaseMarkets_110071` (the retagged counterparty) having a Broker classification under the Non Rev Share Clients tenant profile at Rostro, blacklisted on Retail A Book, tagging William Denny to extend the blacklist. Pending that, Daria iterated a DTA (dynamic spread analytics) override on `hybridHedger1`/XAUUSD to cap the limit price off LP + reference mid rather than trusting SCOPE_B while flow is brokered, tuning the min-distance-from-mean-spread parameter up to its ceiling (4.9, can't go to 5+). Once the blacklist extension lands, Daria plans to delete the DTA override and revert to the prior config. Still open. [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786674039915789) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786682286990419) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786682724761889)
 
 > [open] 2026-08-07 — Fast hedging go-live on FX A Book + CFD A Book for Base's '-S' (STP) accounts; R (rev share) group being phased into S
 > William Denny confirmed Mahi is ready to go live with fast hedging on FX (A Book) and CFDs (A CFD Book) for flow from Base's '-S' trading accounts, following a chat with Kate B (client) — the -S flow started getting fast-hedged the same day. Base runs four trading-account groups: S (STP), X (B-booking), R (rev share, also STP), T (toxic); R is being phased out with flow moving to S, and R flow — currently mostly brokered, with small XAU tickets internalised — is moving to fast-hedge treatment too. Same day William noted CFD routing into the CFD_CLIENTS book depends on `multiChannelConfig`'s list of trading accounts, and asked Kate to flag new '-S' accounts as they're added so that list stays current. Two hedger tuning bounces accompanied the rollout: `hybridHedgerCFD`'s trigger-var level changed for testing (08:58 BST), and the main hybrid hedger bounced later that day with spread-predicate percentiles decreased and backstop delay increased to be less aggressive (17:11 BST). [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786092251603289) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786093926551809) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786089517385429) [permalink](https://mahifx.slack.com/archives/C09D05EPCTV/p1786119104453929)
@@ -123,6 +124,9 @@ last_catchup: 2026-08-13T07:12:13Z
 
 > [resolved] 2026-05-12 — MATUSD showing as indicative / no market data
 > Nathan Burch queried whether MATUSD should be pricing. Kate confirmed it is not on the platform. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1778547211274859)
+
+> [open] 2026-08-14 — Client asking whether Mahi supports cent accounts for an IB
+> Client (via `mahi-base-markets`) said an IB is insisting on cent accounts and asked, reluctantly, whether Mahi could support this. Nathan Burch acknowledged and said Mahi would get back to them shortly; no substantive answer posted yet. [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786684311920829) [permalink](https://mahifx.slack.com/archives/C09D8V41JAG/p1786685982873149)
 
 ## Notable topics
 
