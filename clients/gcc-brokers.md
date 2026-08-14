@@ -12,10 +12,13 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-08-13T07:12:45Z
+last_catchup: 2026-08-14T08:03:20Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-13 — 4,039oz XAUUSD long filled on Finalto, Compass adjustment acknowledged
+> Layan reported 4,039oz gold long filled on Finalto at 15:31 BST; Rory King acknowledged "Hi Layan, will do" at 15:36 BST — no explicit completion confirmation in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786631464279749) [ack](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786631793232989)
 
 > [open] 2026-08-12 — Finalto LPR rules parked ahead of CPI print, hedger reinstated after
 > Rory King bounced hybridHedger1 to park Finalto's Liquidity-Reducing rules ahead of the CPI print and focus hedging at LMAX — the same tactic used for the 2026-08-07 NFP print — then bounced the hedger again shortly after to reinstate the rules. No PnL comparison reported in window. [guard-applied](https://mahifx.slack.com/archives/C09QS1NUA80/p1786537175225449) [reinstated](https://mahifx.slack.com/archives/C09QS1NUA80/p1786539439072379)
