@@ -15,11 +15,14 @@ key_people_overrides:
   - {name: "Andreas H", role: "client ops — Compass/Echo read-only access provisioned 2026-06-16", confidence: low}
   - {name: "Will", role: "client ops (GoMarkets) — asked about Radex Catch-All execution-profile brokered/internalised trigger logic", confidence: low}
   - {name: "William Rozet", role: "client ops (GoMarkets) — pricing config / NOK-cross arb incident; email williamr@gomarkets.com confirmed 2026-07-20", confidence: low}
-  - {name: "Alexandros Paraskevopoulos", role: "client ops (GoMarkets) — joined channel 2026-08-03, Compass/Echo read-only user requested by Erik same day; email uncertain (Slack rendering mangled it, likely alex.p@gomarkets.com)", confidence: low}
-last_catchup: 2026-08-13T07:12:44Z
+  - {name: "Alexandros Paraskevopoulos", role: "client ops (GoMarkets) — joined channel 2026-08-03, Compass/Echo read-only user requested by Erik same day; email alex.p@gomarkets.com confirmed 2026-08-13", confidence: low}
+last_catchup: 2026-08-14T08:03:32Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-13 — Account 73104824 moved A→B book: exposure migration + LP hedge removal requested
+> Alexandros Paraskevopoulos (GoMarkets, ~10:59 BST) reported trading account 73104824 had been moved from A-book to B-book and asked Mahi to move the client exposure across and remove the relevant LP hedges for the open positions held at the time, attaching a positions file. Isaac Dann (Mahi, ~11:00 BST) asked whether the attached positions were from the Client or House perspective; Alexandros confirmed Client perspective (~11:01 BST). No confirmation of the migration/hedge-removal being actioned in-window. [Alexandros's request](https://mahifx.slack.com/archives/C09J1DP2QQH/p1786615191562579) [Isaac's clarifying question](https://mahifx.slack.com/archives/C09J1DP2QQH/p1786615239200529) [Alexandros confirms client perspective](https://mahifx.slack.com/archives/C09J1DP2QQH/p1786615261800619)
 
 > [resolved] 2026-08-13 — IB onboarding: how to limit price impact/slippage from correlated flow
 > Kieran Hauenstein (GoMarkets, ~03:27 BST) asked ahead of onboarding an IB expected to bring ~100 clients trading in the same direction at once (e.g. 50 lots of XAUUSD together) — wanted to know the best way to limit price impact/slippage, floating a new execution rule keyed on tags. Shyam Hari (Mahi) acknowledged (~03:30 BST) then recommended (~04:01 BST) a dedicated feed for this flow: publish a larger top-of-book quantity, widen the spread, and turn off liquidity reduction, so there's enough depth to absorb the flow arriving together and the wider spread holds the price against slippage away from top of book. Kieran confirmed it was helpful. [Kieran's question](https://mahifx.slack.com/archives/C09J1DP2QQH/p1786588056744999) [Shyam's ack](https://mahifx.slack.com/archives/C09J1DP2QQH/p1786588205544709) [Shyam's recommendation](https://mahifx.slack.com/archives/C09J1DP2QQH/p1786590108412849) [Kieran confirms](https://mahifx.slack.com/archives/C09J1DP2QQH/p1786591473557199)
