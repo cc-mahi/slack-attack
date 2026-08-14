@@ -18,10 +18,16 @@ key_people_overrides:
   - {name: "George Moore", role: "ops — UBS / Jane Street test-trade liaison", confidence: low}
   - {name: "Christian Lee", role: "ops — house position / book break investigations", confidence: low}
   - {name: "Evgenii Ishchenko", role: "trading ops — escalated XAUUSD negative-slippage complaint pattern", confidence: low}
-last_catchup: 2026-08-13T07:12:30Z
+last_catchup: 2026-08-14T08:01:48Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-13 — LLW/CPI window saw 300+ms delays; Mahi to discuss internally
+> Louie Davidson flagged 300+ms delays during yesterday's LLW over the CPI release, acknowledging T1 data load but asking if improvements can be made. Kate Stagg said she'd chat internally and get back to him; no further reply in window. [Louie](https://mahifx.slack.com/archives/C0456LSHQQK/p1786625243627509) [Kate](https://mahifx.slack.com/archives/C0456LSHQQK/p1786625271138049)
+
+> [resolved] 2026-08-13 — Big Insti Clients book added to Compass overview page
+> Daniel Kurra asked for the Big Insti Clients book to be added to the Compass overview page. Rory King actioned it same day; Daniel confirmed it looked good. [Daniel](https://mahifx.slack.com/archives/C0456LSHQQK/p1786616576882619) [Rory](https://mahifx.slack.com/archives/C0456LSHQQK/p1786617428271039) [Daniel confirms](https://mahifx.slack.com/archives/C0456LSHQQK/p1786617483001859)
 
 > [open] 2026-08-06 — HRP STP slippage on published vs fill price traced to a 360T cancel-then-move-then-UBS-fill sequence; no config change, Mahi to review client experience
 > Matthew Ayub flagged (urgent) slippage between published and fill price on some HRP STP'd orders, citing counterparty API_111000028. William Denny traced it to the Liquidity Pool going wider than the published price on the EXINITY_CONNECT_CHUCK channel (Price Source = Pool); Matthew queried why published price hadn't widened with the pool in that case. William then found the actual mechanism on the specific example: 360T cancelled the first 1oz market-order broker attempt, the market moved before the retry filled with UBS, and the published price was consistent with the pool throughout — so no fault, but William committed to review how to improve the client experience. Matthew accepted, noting he'd keep an eye on it given hedger restarts that night, especially if the offending LP stack was about to be replaced. [Matthew urgent](https://mahifx.slack.com/archives/C0456LSHQQK/p1786025941816479) [William checking](https://mahifx.slack.com/archives/C0456LSHQQK/p1786025974761869) [William pool explanation](https://mahifx.slack.com/archives/C0456LSHQQK/p1786026318235949) [Matthew confirm with DK](https://mahifx.slack.com/archives/C0456LSHQQK/p1786027276844539) [Matthew pool price ask](https://mahifx.slack.com/archives/C0456LSHQQK/p1786028409428419) [William will grab](https://mahifx.slack.com/archives/C0456LSHQQK/p1786028524463779) [Matthew options question](https://mahifx.slack.com/archives/C0456LSHQQK/p1786030154600339) [William root cause](https://mahifx.slack.com/archives/C0456LSHQQK/p1786030641995749) [Matthew keep an eye](https://mahifx.slack.com/archives/C0456LSHQQK/p1786031255410239) [William ok](https://mahifx.slack.com/archives/C0456LSHQQK/p1786035028467179)
