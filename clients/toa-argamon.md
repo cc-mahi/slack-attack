@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-08-13T07:14:23Z
+last_catchup: 2026-08-14T08:11:48Z
 ---
 
 ## Status
@@ -25,6 +25,15 @@ last_catchup: 2026-08-13T07:14:23Z
 - **Relationship:** ops-heavy; multiple daily interactions. Jonah Ink departed Aug 2026. Elan considering switching off NY Insti routing around Mahi (suits both parties given Toa handles insti). Retail contract renegotiation (fixed-fee conversion) still pending.
 
 ## Recent issues
+
+> [open] 2026-08-14 — XAUUSD spread widening (PSM-style) planned; Daria/Elan catching up Monday on declining, more-toxic volumes
+> Daria flagged Argamon's XAUUSD spread is fixed at 8c and volumes have dropped over the last couple of months while getting more toxic (client's business model, not ours); plans to discuss PSM-style widening with Elan on Monday afternoon, aiming to still target tight-on-average pricing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849)
+
+> [resolved] 2026-08-14 — XAUUSD CPI-driven loss this week; spread cap (40c) held hedger back while pool widened to $4.50; news-based MWMS added
+> Daria reported a loss this week from XAUUSD trading over a CPI release — published spreads capped out at 40c while the hedging pool widened to at least $4.50, so the hedger wouldn't fire and the book was held short through the drop. Fix already applied: news-based MWMS added for 100-weight events to catch this going forward. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849)
+
+> [open] 2026-08-14 — PagerDuty flag: expiring licence at Toa Argamon
+> Shyam Hari flagged a PagerDuty incident for an expiring licence; no further detail or discussion in thread as of catchup. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1786673244064039)
 
 > [resolved] 2026-08-10 — Alpha Cap broker taker account limited to EURUSD; XAUUSD trade query answered
 > Isaac Dann asked in mahi-argamon-trading whether the Alpha Cap broker account should be able to trade XAUUSD; Nevio (Toa) explained only EURUSD is currently enabled for taker testing purposes. Isaac acknowledged. [permalink](https://mahifx.slack.com/archives/C083GP5F1CL/p1786378134867679)
