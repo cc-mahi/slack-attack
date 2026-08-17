@@ -16,17 +16,29 @@ key_people_overrides:
   - {name: "Ralich", role: "OneZero — agreed to waive OZ's per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: "Lochlan", role: "OneZero — alternative escalation route if the fee negotiation stalls (internal only, not shared with GTC)", confidence: low}
   - {name: "John (Jun Yang)", role: "GTC — given Compass access on Manglai's request, post go-live", confidence: low}
-last_catchup: 2026-08-13T07:12:55Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-08-17T08:22:33Z                         # ISO8601; updated by /catchup
 ---
 
 ## Status
 
-- **Stage:** LIVE — AUDUSD B Book flow went live 2026-08-12 (routed via OZ-2/OZ-3; PXM connection switching 2026-08-13), after final test trades that morning. Phased FX rollout continuing before XAUUSD. Signed 2026-05-14. Still listed under "Signed but not yet live" in `../MahiProduct/data/fleet.txt` as of last check — that upstream now disagrees with observed state; flagging rather than editing MahiProduct.
+- **Stage:** LIVE — AUDUSD B Book flow went live 2026-08-12 (routed via OZ-2/OZ-3; PXM connection switching 2026-08-13), after final test trades that morning. Phased FX rollout continuing before XAUUSD; EURGBP targeted next, pending PXM readiness. PXM B Book needed its own dedicated connection (set up 2026-08-13, separate from PXM A Book) and a PXM B Book test trade requested 2026-08-14 was still unconfirmed as of 2026-08-17. Signed 2026-05-14. Still listed under "Signed but not yet live" in `../MahiProduct/data/fleet.txt` as of last check — that upstream now disagrees with observed state; flagging rather than editing MahiProduct.
 - **Integration:** LDN only (`gtcfx-ln-admin-1.zlt5`), on 3 Beeks hosts repurposed from trademax (freed by the trademax LDN→NYC region swap, 2026-05-04), cluster zlt5 / cage LD5. Agreed flow: GTC MT4/5 → GTC OneZero hub → Mahi (A/B book) → GMG (FCA entity) → HRP & LPs for hedge flow. Hedged flow routes to Finalto and Swift, STP'd flow to HRP LPs; HRP stays STP-only at GTC's preference. Spreads benchmarked on FINALTO/SWIFT with `MAHI_BENCHMARK_LDN|FINALTO|HRP_XTX|HRP_MEX|HRP_ARG` mid formation and adaptive mid on signalled markets. A Book exec rules split ABOOK (standard) / ABOOK_TX (toxic); GTC agreed Mahi can risk-manage on classification. ~2,900 MT groups, so per-group trading-account mapping was abandoned in favour of A/B trading accounts with the Compass classifier setting last-look window, LR params and STP pool per counterparty.
 - **Risks / open threads:** GMG is still on PrimeXM, which Mahi flags as a system-integrity problem in the agreed path and wants moved. `marketDataProxyTx` won't start without listen config and may be an obsolete HRP_ARG proxy. Counterparty tags still missing on the B Book connections. Design questions unresolved from 2026-07-15: failover, whether HRP can be included in A Book hedging, NOP limits on Finalto/Swift/HRP, and whether LR belongs in the published price (global vs per-channel).
 - **Relationship:** warm and actively managed — David Cooney has the OneZero/Ralich relationship (Ralich cleared Mahi risk-management on joint Mahi/OZ clients, on condition it isn't broadcast); Kate Stagg runs day-to-day; message reinforced to CEO Jack Zheng on the weekly call and well received.
 
 ## Recent issues
+
+> [resolved] 2026-08-17 — PagerDuty enabled for GTCFX monitoring
+> Daria enabled PD alerting on the client. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786935212042289)
+
+> [open] 2026-08-14 — PXM B Book test trade requested; Mahi confirmation still outstanding
+> Kate asked GTC to send a PXM B Book test trade for review; GTC didn't confirm until 2026-08-17, asking Kate to check everything looks good — unconfirmed at window close. [request](https://mahifx.slack.com/archives/C0AKRP8C049/p1786698327327689) [reply](https://mahifx.slack.com/archives/C0AKRP8C049/p1786950477714529)
+
+> [open] 2026-08-13 — EURGBP go-live date pending PXM readiness
+> Kate asked when GTC would be ready to go live with EURGBP flow; Manglai said he'd do it the next day once PXM is ready — not confirmed by window close. [ask](https://mahifx.slack.com/archives/C0AKRP8C049/p1786624757240889) [reply](https://mahifx.slack.com/archives/C0AKRP8C049/p1786630153275259)
+
+> [resolved] 2026-08-13 — PXM B Book needed its own connection; tag1 ABOOK/BBOOK requested for billing
+> Manglai asked if one PXM connection could serve both A and B Book; Kate said no and asked for tag1 values of ABOOK/BBOOK so Mahi can route flow correctly and to help PXM bill A vs B Book separately. GTC set up a second connection, confirmed ready after restart. [ask](https://mahifx.slack.com/archives/C0AKRP8C049/p1786610016283829) [confirmed](https://mahifx.slack.com/archives/C0AKRP8C049/p1786615852457899)
 
 > [resolved] 2026-08-12 — Live: AUDUSD B Book flow now routed to Mahi
 > Final test trades ran through the day on OZ-2/OZ-3 (Manglai working through failover testing alongside), Kate confirming fills looked good and asking GTC to also test PXM ahead of go-live (switching over 2026-08-13). AUDUSD B Book flow went live at 16:00 BST — Kate's "We're live 🎉", celebrated internally by Liam Cordelle. Supersedes the 2026-08-11 go-live plan entry. [test-thread](https://mahifx.slack.com/archives/C0AKRP8C049/p1786532446702139) [live](https://mahifx.slack.com/archives/C0AKRP8C049/p1786546834686359) [internal](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786547564896539)
@@ -35,7 +47,7 @@ last_catchup: 2026-08-13T07:12:55Z                         # ISO8601; updated by
 > Kate flagged at day's end that no test trades had been seen down the OZ-1 connection despite AUDUSD going live on OZ-2/OZ-3, and asked GTC for a confirmatory test there too — not blocking, but unresolved at window close. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786547531261129)
 
 > [open] 2026-08-11 — CBCX instrument spec still outstanding; confirmed not a go-live blocker
-> Kate's follow-up recap flagged the CBCX instrument spec (minimum/incremental quantities, pricing precision) is still not in hand, three weeks after the LP was added (2026-07-28) — now explicitly called out as not blocking go-live. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786454325286629)
+> Kate's follow-up recap flagged the CBCX instrument spec (minimum/incremental quantities, pricing precision) is still not in hand, three weeks after the LP was added (2026-07-28) — now explicitly called out as not blocking go-live. Kate asked 2026-08-14 whether GTC is happy for Mahi to send CBCX test trades; no reply seen by window close. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786454325286629) [test-trade-ask](https://mahifx.slack.com/archives/C0AKRP8C049/p1786701839018699)
 
 > [open] 2026-08-10 — trading-2 MySQL disk hit 90%; ~30GB/day growth on both trading servers, `mysql_optimize_enable=false` question unanswered
 > Shyam extended `vg03-mysql` on trading-2 from 885G to 1.2T after it hit 90%. He flagged the growth rate on trading 1 and 2 as fast (~30GB/day) and asked whether `mysql_optimize_enable` being set to false is still expected — unanswered at window close, and worth resolving before B-book flow lands on the pending go-live. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786321203578909)
