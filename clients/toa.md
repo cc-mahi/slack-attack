@@ -7,7 +7,7 @@ refs:
   wiki: null
 channels_override: null
 key_people_overrides: []
-last_catchup: 2026-08-14T08:11:00Z
+last_catchup: 2026-08-17T08:49:40Z
 ---
 
 ## Status
@@ -17,6 +17,9 @@ last_catchup: 2026-08-14T08:11:00Z
 - **Relationship:** sister company (same CTO — James Furness); James and Lee effectively dedicated. Ops team (Inald, Arun, Maten, Daria, Isaac, Liam) handles 24/7 crypto on-call. Slack: `internal-toa-ops`, `toa-nado-shared` (cross-workspace, ink-foundation).
 
 ## Recent issues
+
+> [open] 2026-08-17 — EBS decommission on TOA-ARG CHI knocked LDN insti pricing indicative on four FX pairs, fix in progress
+> Daria Horton (07:58 BST) flagged USDJPY, USDCHF, USDMXN, and USDCAD indicative on `CLIENT_PRICE_INSTI_LDN` in Args LDN with no clear cause from JMX — following on from her 2026-08-16 04:42 BST check that `marketDataEBS1` being down on Toa Args CHI looked consistent with recent config changes removing `ordersEBS` (Lee confirmed 04:43 BST it should have been removed entirely). Isaac Dann (09:00–09:44 BST) traced it to LDN insti pricing depending on `EBS_IMP_CHI` from CHI, which was removed that morning as part of the same decommission; config is behind and he's reviewing for a historic value to substitute. Lee suggested CBOE as a good EBS replacement. Still open as of the last message in window. https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://mahifx.slack.com/archives/C035H1VNCAD/p1786956262843259
 
 > [resolved] 2026-08-12 — Velocity gateways stopped on Toa Argamon LDN
 > Lee Butts (23:56 BST) stopped the Velocity (LP) gateways on toa-argamon LDN. No thread discussion beyond a +1 acknowledgement — quiet window otherwise, no other human discussion in `internal-toa-ops` or `toa-nado-shared` since last catchup. https://mahifx.slack.com/archives/C035H1VNCAD/p1786575362566819
