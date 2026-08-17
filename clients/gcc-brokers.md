@@ -12,13 +12,22 @@ key_people_overrides:
   - {name: "Youssef Bouz", role: "client — CFD internalisation rollout; swap-free account queries; incident compensation messenger", confidence: low}
   - {name: "Layan", role: "client ops — reports Finalto gold fills for Compass adjustment", confidence: low}
   - {name: "Khalil", role: "senior GCC contact above Youssef; driving $70k cash compensation demand post-2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-08-14T08:03:20Z
+last_catchup: 2026-08-17T08:38:01Z
 ---
 
 ## Recent issues
 
-> [open] 2026-08-13 — 4,039oz XAUUSD long filled on Finalto, Compass adjustment acknowledged
-> Layan reported 4,039oz gold long filled on Finalto at 15:31 BST; Rory King acknowledged "Hi Layan, will do" at 15:36 BST — no explicit completion confirmation in window. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786631464279749) [ack](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786631793232989)
+> [watching] 2026-08-17 — CFD book +$22k over weekend on XBTUSD bursts; Daria's price-forensics review finds LR cap bypassed when clips land in the same quote
+> Daria Horton reviewed three XBTUSD clip-burst events over the weekend (7×10, 6+7×10, 6×10 XBT lots). Where clips arrived spaced apart, LR capped client impact and less spread was paid; where clips arrived within the same quote, prior trades were still pending and their full quantity was removed from the stack regardless of the LR cap, so those bursts paid additional spread — Mahi got tighter LP fills and pocketed the difference. No client-facing issue; flagged as a mechanism note continuing the 2026-08-03/04 LR-cap thread. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1786925819064679)
+
+> [open] 2026-08-14 — Youssef's own STP-bridge P&L report shows ~2x Compass's reported figure; Will attributes gap to full-book vs A-book-only comparison, flags tag 700106 for better monetization
+> Youssef Bouz forwarded a comparison to Will Carter: Compass shows GCC's August P&L so far at ~$40K (A Book) + $1.6K (SI), but GCC's own pre-Compass STP report (per-order P&L from their FXCubic bridge, LP execution price vs client execution price after markup) shows ~$85K for August, and ~$166K vs ~$99.7K ($91K+$8.7K) for July — roughly double. Youssef also noted large (>1,000oz) XAUUSD orders executing at good slippage all week. Isaac Dann questioned whether Compass's PnL figure excludes markup; Will Carter judged Youssef's comparison likely mixes GCC's full book against Compass's A-book-only figure, and separately flagged counterparty tag 700106 as having room to monetize better. No reply sent back to Youssef in window. [permalink](https://mahifx.slack.com/archives/C09QS1NUA80/p1786712998616739) [isaac-question](https://mahifx.slack.com/archives/C09QS1NUA80/p1786713109346729) [will-diagnosis](https://mahifx.slack.com/archives/C09QS1NUA80/p1786713166369699) [tag-700106](https://mahifx.slack.com/archives/C09QS1NUA80/p1786713093978949)
+
+> [resolved] 2026-08-14 — 440oz XAUUSD long filled on Finalto, Compass adjustment done
+> Client reported 440oz gold long filled on Finalto at 15:13 BST; William Denny confirmed "This is done" at 15:14 BST. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786716794824329) [resolution](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786716897524929)
+
+> [open] 2026-08-13 — 4,039oz XAUUSD long filled on Finalto, Compass adjustment acknowledged; Nael followed up asking if done, still unconfirmed
+> Layan reported 4,039oz gold long filled on Finalto at 15:31 BST; Rory King acknowledged "Hi Layan, will do" at 15:36 BST. Nael followed up the next day (2026-08-14 13:41 BST) asking "this is done?"; Kate Stagg replied "will check" — no completion confirmation seen through 2026-08-17. [permalink](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786631464279749) [ack](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786631793232989) [nael-followup](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786711297379569) [kate-will-check](https://mahifx.slack.com/archives/C09PNC1MFAA/p1786711322450359)
 
 > [open] 2026-08-12 — Finalto LPR rules parked ahead of CPI print, hedger reinstated after
 > Rory King bounced hybridHedger1 to park Finalto's Liquidity-Reducing rules ahead of the CPI print and focus hedging at LMAX — the same tactic used for the 2026-08-07 NFP print — then bounced the hedger again shortly after to reinstate the rules. No PnL comparison reported in window. [guard-applied](https://mahifx.slack.com/archives/C09QS1NUA80/p1786537175225449) [reinstated](https://mahifx.slack.com/archives/C09QS1NUA80/p1786539439072379)
