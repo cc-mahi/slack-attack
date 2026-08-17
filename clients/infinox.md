@@ -16,10 +16,19 @@ key_people_overrides:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR requests", confidence: low}
   - {name: "Aditya", role: "Infinox new hire ~2mo as of 2025-07 — B2B focus, internal advocate for Mahi bridge; surname unknown", confidence: low}
-last_catchup: 2026-08-14T08:06:00Z
+last_catchup: 2026-08-17T08:41:10Z
 ---
 
 ## Recent issues
+
+> [resolved] 2026-08-17 — Routine Heavy LR add: MT5_87018814_Centroid_3611574
+> Trading Ops requested the CP added to Heavy LR (08:57 BST); Rory King confirmed "This is done" (09:21 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1786953467317219) [Rory confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1786954877129329)
+
+> [open] 2026-08-14 — Invoice query: CH asking about the $25k/month Expected Trade Volume surcharge clause; Cameron Hughes pulled ~170bn/4wk internally, no reply to client confirmed in window
+> Bonnie Cassidy relayed a question from CH (client) about the latest invoice — the contract clause adding a $25,000/month MFX Compass fee once Customer Expected Trade Volume exceeds 120bn — asking Trading Ops to help interpret the volume calculation (12:05 BST). Cameron Hughes queried whether the volume figure is executed volume (excluding drop copies) and reported approx. 170bn over the past 4 weeks (12:31–12:34 BST) — comfortably over the 120bn threshold. No reply back to the client appears in this window. [Bonnie relay](https://mahifx.slack.com/archives/C01QGUXPKEY/p1786705553386879) [Cameron Hughes vol query](https://mahifx.slack.com/archives/C01QGUXPKEY/p1786707176871899) [Cameron Hughes figure](https://mahifx.slack.com/archives/C01QGUXPKEY/p1786707251052539)
+
+> [resolved] 2026-08-14 — Routine Toxic XAUUSD Harsher add: MT5_87018814_Centroid_2145761286
+> Trading Ops requested the CP added to Toxic XAUUSD Harsher profile (11:01 BST); Kate Stagg confirmed "this has been actioned" (11:02 BST). [request](https://mahifx.slack.com/archives/C022S6NL82D/p1786701663107229) [Kate confirm](https://mahifx.slack.com/archives/C022S6NL82D/p1786701729433119)
 
 > [resolved] 2026-08-12 — Georgia asked how to check if a CP is on LR rules; Kate walked through JSON config search
 > Georgia Tzyrkalli asked for the best way to check whether a client is on LR rules and whether the config can be exported to check (15:58 BST). Kate Stagg advised searching the counterparty in the JSON config via ctrl-F, or converting to the standard view first (with a caution that this is resource-intensive and may crash the browser on large configs) (16:08 BST). Georgia thanked her (16:11 BST). [question](https://mahifx.slack.com/archives/C022S6NL82D/p1786546695705279) [Kate answer](https://mahifx.slack.com/archives/C022S6NL82D/p1786547308211449)
