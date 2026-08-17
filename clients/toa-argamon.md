@@ -15,7 +15,7 @@ key_people_overrides:
   - {name: "Elan Bension", role: "Argamon — senior contact / decision-maker; calls on insti model, LP config, retail contract renegotiation"}
   - {name: "Alex", role: "Argamon analytics — assists on Wintermute rec and crypto JPY position work (likely Alexander Karnadi)", confidence: low}
   - {name: "William", role: "Argamon ops — raised EURZAR/USDZAR LP dark event in mahi-argamon-operations 2026-05-25; surname unknown", confidence: low}
-last_catchup: 2026-08-14T08:11:48Z
+last_catchup: 2026-08-17T08:49:40Z
 ---
 
 ## Status
@@ -26,8 +26,16 @@ last_catchup: 2026-08-14T08:11:48Z
 
 ## Recent issues
 
+> [open] 2026-08-17 — LDN insti pricing (USDJPY/USDCHF/USDMXN/USDCAD) turned indicative on CLIENT_PRICE_INSTI_LDN; traced to EBS_IMP_CHI removal, config behind
+> Daria flagged the four pairs going indicative on CLIENT_PRICE_INSTI_LDN in Args LDN with no obvious cause from the JMX; Isaac initially suspected index pricing falling back to LVPPN (seen before on issues), then traced it to LDN insti pricing relying on EBS_IMP_CHI from CHI, which was removed that morning as part of the EBS decommission — config looks behind and Isaac is reviewing for a historic value to substitute. Lee suggested CBOE as a good EBS replacement. Ties to the CHI EBS/`ordersEBS` removal noted below (2026-08-16). [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919)
+
+> [resolved] 2026-08-16 — marketDataEBS1 down at Toa Argamon CHI confirmed expected (EBS decommission cleanup)
+> Daria asked if marketDataEBS1 being down on CHI was expected given recent config changes and `ordersEBS` being removed; Lee confirmed yes, it should have been removed altogether. [permalink](https://mahifx.slack.com/archives/C035H1VNCAD/p1786851729127629)
+
 > [open] 2026-08-14 — XAUUSD spread widening (PSM-style) planned; Daria/Elan catching up Monday on declining, more-toxic volumes
 > Daria flagged Argamon's XAUUSD spread is fixed at 8c and volumes have dropped over the last couple of months while getting more toxic (client's business model, not ours); plans to discuss PSM-style widening with Elan on Monday afternoon, aiming to still target tight-on-average pricing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849)
+> Continued 2026-08-17 (Monday catchup held): spread changes are off the table for now — plan instead is to hold more risk by stripping out the fast-hedge and don't-b-book rules, letting VaR-triggered rules manage the risk. Screenshot of fast-hedge-classified flow since 4 July shown; not every week will look this good. Revisiting again next week; if hedging cost proves too high to lift profitability, will look at giving more flow to Toa since they can hedge it passively. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786937814080389)
+> Also 2026-08-17: TOA_CHI back in the XAUUSD hedging markets — Elan raised the feed's base spread (was 9c) to better match the ~30c hedging pool. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786939378841759)
 
 > [resolved] 2026-08-14 — XAUUSD CPI-driven loss this week; spread cap (40c) held hedger back while pool widened to $4.50; news-based MWMS added
 > Daria reported a loss this week from XAUUSD trading over a CPI release — published spreads capped out at 40c while the hedging pool widened to at least $4.50, so the hedger wouldn't fire and the book was held short through the drop. Fix already applied: news-based MWMS added for 100-weight events to catch this going forward. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849)
