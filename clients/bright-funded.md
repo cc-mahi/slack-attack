@@ -12,7 +12,7 @@ key_people_overrides:
   - {name: "Jelle Dijkstra", role: "BrightFunded — co-founder, led commercial renegotiation May 2026"}
   - {name: "Syb Dijkstra", role: "BrightFunded — co-founder, attended Mahi anniversary party May 2026"}
   - {name: "Mio Knights", role: "BrightFunded — CC'd on weekly call coordination", confidence: low}
-last_catchup: 2026-08-14T08:01:00Z
+last_catchup: 2026-08-17T08:34:12Z
 status: active
 retired_at: null
 retired_reason: null
@@ -25,6 +25,9 @@ retired_reason: null
 - **Relationship:** healthy, bi-weekly call cadence with Cameron Hughes; client (Benjamin Galindo) actively engaging on prop sim outputs and a futures expansion ask.
 
 ## Recent issues
+
+> [resolved] 2026-08-16 — widening signal floor/ceiling misconfigured (floor > ceiling blocked pricer widening)
+> Daria Horton found `pricing.adjustmentSignalParametersForWidening` floor pips set to 1.0 but ceiling at 0.1, so pricers never started widening on this signal; reset floor to 0.1 same message. [permalink](https://mahifx.slack.com/archives/C084G40JXEE/p1786861137007649)
 
 > [resolved] 2026-08-06 — average/median volume traded per account (all phases) requested and delivered
 > Benjamin Galindo asked for average and median volume traded by account across all phases, for all time or at least the last 12 months. Mio Knights offered to sample-calculate but deferred to Cameron Hughes for the full dataset; Cameron H pulled the figures via Echo and delivered `brightfunded_volume_by_counterparty_party_20260805.csv` and `brightfunded_volume_by_party_20260805.csv` the same day. Benjamin confirmed "Perfect thanks!". [request](https://mahifx.slack.com/archives/C08473TFD7Z/p1786006380243479) [delivered](https://mahifx.slack.com/archives/C08473TFD7Z/p1786020375902519)
