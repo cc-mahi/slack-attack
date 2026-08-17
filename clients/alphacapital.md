@@ -9,7 +9,7 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-08-14T07:56:07Z
+last_catchup: 2026-08-17T08:25:52Z
 ---
 
 ## Recent issues
@@ -24,6 +24,7 @@ last_catchup: 2026-08-14T07:56:07Z
 
 > [open] 2026-06-24 — Oils instruments turned off: price spikes being arbed, very low volumes
 > Cameron Hughes: bounced pricers to pick up signal params change on oils, then turned oils off due to price spikes being arbed and very low volumes. No further thread discussion. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782303349490299)
+> 2026-08-14 update — Cameron Hughes bounced pricers to pick up a CO1USD signal change (switched to IFMS + price). No further discussion — possibly reconfiguring oils ahead of re-enabling, but not stated explicitly. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1786707493633689)
 
 > [open] 2026-06-22 — Arber CP manually whitelisted; riskPath changed from BLACKWELL to VELOCITY; IFMS signal concern
 > Shyam Hari: whitelisted a CP as an arber after it wasn't auto-detected (inception yield was positive, apparently because riskPath reference market was set to BLACKWELL which never gives a price). Changed riskPath reference market to VELOCITY (which is also the normalisation market). Also flagged that IFMS signal config may need reviewing — doesn't look like it's performing well. Screenshots posted (no further discussion yet). Zendesk ticket 23123. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782104351858689) [ticket](https://mahifx.zendesk.com/agent/tickets/23123)
