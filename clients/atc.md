@@ -7,10 +7,14 @@ refs:
   wiki: ../MahiProduct/wiki/clients/atc-brokers.md
 channels_override: [internal-atc, mahi-atc, internal-atc-prop]   # VibePulse atc.yaml omits the prop tenant's channel
 key_people_overrides: []
-last_catchup: 2026-08-14T07:58:59Z
+last_catchup: 2026-08-17T08:32:32Z
 ---
 
 ## Recent issues
+
+> [open] 2026-08-17 — FXCM connection logout requests; user/password rejected, unconfirmed if expected
+> Daria Horton posted in #mahi-atc (07:26 BST) that Mahi is receiving FXCM logout requests with `user not recognised or password incorrect`, quoting the raw FIX logout message, and asked whether this is expected. No reply in window.
+> [Daria's question](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786947960799679)
 
 > [open] 2026-08-11 — EURUSD/USDCHF/GBPUSD pricing spikes from stale skew config override; historical data cleanup demanded
 > David Manoukian reported EURUSD "jumping back and forth creating spikes" at 21:27 BST 2026-08-11, spreading to USDCHF on MT5 too ("our data source is corrupted"). Daria Horton found a cause and restarted pricers ~21:33 BST; David confirmed improvement and asked the setting be disabled on all symbols and historical data fixed. By 06:17 BST 2026-08-12 David escalated again — GBPUSD also affected, prices "still not natural," demanding it be fixed and that ATC may need to "hire an outside expert to come in and fix all the historical data." Daria's internal write-up (07:53 BST) named the actual root cause: EURUSD/USDCHF had OR-IMI-IMS and IFMS skew signals both floored at 0.5 pips plus harmonics at 0.2 — up to 1.2 pips of skew each way, in place for a long time, "potentially pre move to LDN." Removed OR-IMI-IMS, dropped the remaining floors to 0.1. Separately found elevated twilight skew on GBPUSD/AUDUSD — lowered IFMS floor 0.2→0.1, cut the benchmark-relative multiplier 1.2x→0.7x (applied on the global config too), and removed an nrmsd threshold that had been doubling twilight skew. Will Carter flagged the same pattern is "running away from us at a few places" and will pick up a fleet-wide review. David's historical-data-fix request not yet actioned in window.
@@ -88,6 +92,8 @@ last_catchup: 2026-08-14T07:58:59Z
 > Malik flagged an action item on the reconciliation report showing a EUR position mismatch. Cameron investigated: likely a transient Compass book position caught mid-report. Malik confirmed the report cleared ~2 hours later; no outside-Compass manual trades on ATC's side. [permalink](https://mahifx.slack.com/archives/C04AZM0LPMH/p1777554973786509)
 
 ## Notable topics
+
+- 2026-08-16 — SC channel monitoring toggled off pending expected connection; same morning, an XAUUSD P&L spike/drop pre metal-open flagged and confirmed false. Daria Horton turned off monitoring on the Seychelles (SC) channels, noting it can go back on once they're expected to be connected; separately flagged and closed out a false-alarm P&L spike/drop as an artefact of XAUUSD pricing ahead of metal market open. [monitoring off](https://mahifx.slack.com/archives/C046RNF64VD/p1786914455775059) · [can re-enable](https://mahifx.slack.com/archives/C046RNF64VD/p1786914472717889) · [P&L spike false alarm](https://mahifx.slack.com/archives/C046RNF64VD/p1786918675815069)
 
 - 2026-08-13 — July PnL report delivered to client channel. Jack Manoukian asked William Denny to upload the July PnL report to #mahi-atc; Shyam Hari acknowledged and William posted the ATC PnL Report July 2026.pdf same evening (closes the loop on the report already circulated internally on 2026-08-03). [Jack's request](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786648517605309) · [Shyam ack](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786648579917359) · [report delivered](https://mahifx.slack.com/archives/C04AZM0LPMH/p1786648707776189)
 
