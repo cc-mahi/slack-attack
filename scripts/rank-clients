@@ -7,8 +7,8 @@ Sources (union):
 
 VibePulse yamls are *not* an enumeration source — they include internal infra
 (mahi-central), aliases (pepperstone-crypto), and stale onboardings, so unioning
-them in produces noise. Use /seed-client to bring a VibePulse-only entity into
-the rotation explicitly.
+them in produces noise. To bring a VibePulse-only entity into the rotation, run
+`/catchup <slug>` (it bootstraps the dossier).
 
 Output: tab-separated rows, columns:
   slug    last_catchup    days_since    note

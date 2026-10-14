@@ -21,7 +21,7 @@ The reader is **Cameron Copland** (Slack `U099FA0D7CP`). When the brief says "yo
 
 ## Active-client enumeration and ranking
 
-Run `scripts/rank-clients` from the repo root. It enumerates the union of `clients/*.md`, `../VibePulse/.claude/clients/*.yaml`, and `../MahiProduct/data/billing/clients.json`, and returns tab-separated rows sorted oldest-`last_catchup`-first (with never-caught-up clients sorted to the very top, since they're effectively the most stale):
+Run `scripts/rank-clients` from the repo root. It enumerates the union of `clients/*.md` and `../MahiProduct/data/billing/clients.json` (billing slugs resolve through each dossier's `aliases:`; VibePulse yamls are deliberately *not* a source — they include infra and stale onboardings), and returns tab-separated rows sorted oldest-`last_catchup`-first (with never-caught-up clients sorted to the very top, since they're effectively the most stale):
 
 ```
 slug    last_catchup    days_since    note

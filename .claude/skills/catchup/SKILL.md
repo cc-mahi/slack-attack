@@ -56,9 +56,9 @@ If `channels/<name>.md` doesn't exist:
 
 For each target channel:
 
-1. `oldest` = `last_catchup` on the dossier; if null (freshly bootstrapped or just-reset dossier), 30d ago; else 24h ago. The wider null-case window is so initial population picks up real history — 24h on a brand-new dossier produced empty `Recent issues` sections.
+1. `oldest` = `last_catchup` on the dossier; if null (freshly bootstrapped or just-reset dossier), 30d ago. The null-case window is so initial population picks up real history — 24h on a brand-new dossier produced empty `Recent issues` sections.
 2. Resolve channel_id: prefer `.claude/docs/slack-conventions.md` cache; else `slack_search_channels` with `channel_types: "public_channel,private_channel"`. Write any newly-resolved ID back to the cache. If a client target's internal channel is missing from the cache, **don't skip it** — search for it and cache it on first sight. Absence-by-omission is the failure mode that cost us the axiory LD4 root-cause diagnosis on 2026-04-27.
-3. `slack_read_channel` with `oldest`, `limit: 100`. Note if hit the limit — there's more.
+3. `slack_read_channel` with `oldest`, `limit: 100`. If the response carries a `next_cursor`, keep paginating with it until you reach `oldest` — after a gap of days or weeks one page won't cover the window, and stopping early silently drops the oldest part of it. Report any channel that needed more than one page under "Hit channel limit on".
 4. For notable threads, `slack_read_thread` with the real `message_ts` (needs `response_format: "detailed"` when searching).
 
 Skip channels matching the skip list in `.claude/docs/slack-conventions.md`.
