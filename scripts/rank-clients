@@ -55,12 +55,14 @@ def parse_frontmatter(path: Path) -> dict:
             continue
         k, _, v = line.partition(":")
         v = v.strip()
+        # Strip trailing `# comment` before any shape check, so `aliases: [x]  # note`
+        # still parses as a list. Quoted scalars are left alone.
+        if not v.startswith(('"', "'")) and " #" in v:
+            v = v[:v.index(" #")].strip()
         if v.startswith("[") and v.endswith("]"):
             inner = v[1:-1].strip()
             out[k.strip()] = [s.strip().strip('"').strip("'") for s in inner.split(",") if s.strip()]
         else:
-            if not v.startswith(("[", '"', "'")) and " #" in v:
-                v = v[:v.index(" #")].strip()
             out[k.strip()] = v.strip('"').strip("'")
     return out
 
