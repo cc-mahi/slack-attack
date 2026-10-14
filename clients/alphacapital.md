@@ -10,15 +10,40 @@ channels_override: null
 key_people_overrides:
   - {name: "Gerry", role: "Analytics/risk, Alpha Capital (last name unknown)", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and exact role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-08-17T08:25:52Z
+last_catchup: 2026-10-14T09:00:57Z
 ---
 
 ## Recent issues
 
-> [open] 2026-06-30 — XAGUSD FI/skew PnL drop; skew floor lowered 2026-07-07
+> [open] 2026-10-13 — Routing needed for new Alpha MT5 demo groups
+> Cameron Hughes: after discussing routing and DX with Gerard McConnell, some flow wasn't reaching Mahi; Gerard updated feeds for new groups created a few weeks earlier (ACGd demo Alpha Direct, Qualified High Risk, Swing High Risk, Alpha One groups routed to Mahi Grads MT5 ML / Alpha1 Q1 MT5 ML; Swing Pro/Raw EA to Mahi Q2 MT5 ML). Gerard asked Mahi to confirm routing exists for these groups before he puts them live; Cameron will put it in config on Mahi's end. No confirmation visible yet. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791894322304399)
+
+> [open] 2026-10-06 — Prices->TempDXPrices FIX session spamming bad-credential logons on clientDistributionGateway2
+> Arun: session `Prices->TempDXPrices` repeatedly rejected (`Invalid username and/or password`) on clientDistributionGateway2, generating many alerts on Mahi's side; asked for it to be flagged to Alpha. Cameron Hughes flagged to Gerard; Arun said not urgent. No fix confirmed. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791277536831499)
+
+> [open] 2026-09-08 — Alpha Capital invoices overdue (ACG Markets and ACG Broker); payment chase ongoing
+> Susan Cooney flagged a large billing issue (Alpha futures business hit by Ninja Trader cancelling the contract on one day's notice, new challenge sales fell ~$30M to ~$6M/month per David Cooney; Alpha going live with own broker 21 Sept). George (Alpha) promised to clear half of the arrears the following week and the balance by end of September. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1788856330954559) 2026-09-29: Nicole Vivian said July and August still owed ($179,744 total); David Cooney relayed that George sent two Wise payments and another 90k that Friday. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790720761202929) 2026-10-05: Nicole said outstanding was ACG Markets $249,815 and ACG Broker $19,632. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791239170320529) 2026-10-06: Nicole confirmed two payments (83k and 6k) received, clearing July; August still overdue and September bill not due until 20 Oct. Nicole's view (2026-09-14): wants to see payments before extending product offering. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791318273980089)
+
+> [open] 2026-09-24 — Alpha Trader / DX Trade platform scope question; direct bridge routing off T4B
+> Gerard McConnell (via Cameron Hughes): Alpha Trader (own platform) is being built, temporarily 3-6 months on a DX Trade backend; Mahi has no direct DX Trade connection yet; long-term goal is MT5 native, cTrader, Alpha Trader, probably DX Trade; asked what the Compass document achieves. Nathan Burch logged the DX Trade platform-scope question as open on the MahiProduct wiki. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790264746444999) Earlier (2026-08-26) Gerard asked whether DXtrade, cTrader and TradeLocker can feed direct; Cameron agreed to start with DXtrade and cTrader and sent bridge docs; Andrew Morgan noted flow is currently via T4B while Alpha builds its draw-down engine and that the Mahi build-out has a long estimate. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787749386714689) [andrew](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787742327035009) 2026-09-16 Gerard said routing and stop-out rules for new plans require access via the Mahi bridge, not T4B. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789565762703289)
+
+> [open] 2026-09-14 — Alpha prop asks about 24/7 weekend trading (XAU, XAG, WTI, SPX, NDX)
+> Gerard McConnell asked what Mahi infrastructure could support for weekend trading with reduced leverage and smaller contract sizes. Andrew Morgan: first prop-side ask, validates weekend-pricing prepositioning; plan is explanatory material without commercials; Cameron has a bespoke draft in review. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789378377294579)
+
+> [resolved] 2026-09-16 — Counterparty classifier switched to run against Pulse; reverted then re-enabled after Netty fix
+> Liam Cordelle switched the classifier to Pulse (new feature, backup of classifications taken first, override `analytics.counterpartyClassificationYieldProfilesFromPulse`). Daria Horton reverted on 2026-09-17 after PagerDuty alerts while classifications were churning. Liam: it exposed a Netty dependency issue (genuine bug); rebuilt, redeployed and turned back on. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789570480455089) [thread](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789656162589149)
+
+> [resolved] 2026-09-15 — MAHI_BENCHMARK_LDN added to continuity pool for NDXUSD and DOWUSD
+> Cameron Hughes added the benchmark to the pool as protection against Velocity going indicative; noted a roughly week-earlier indicative period delayed a client's stop loss until price was much worse. Also bounced md aggs. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789460982893339)
+
+> [resolved] 2026-09-01 — GBPNZD price spike flagged as skew arb; 10 pip ceiling cap added to global override
+> Cameron Hughes: skew arb flagged by daily checks from a spike on 2026-08-31 ~21:20 UTC; ran a pricing backtest, then added a ceiling cap of 10 pips to the global override and backtested the change. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1788274585491809) [cap](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1788281589968549)
+
+> [resolved] 2026-06-30 — XAGUSD FI/skew PnL drop; skew floor lowered 2026-07-07
 > Cameron Hughes flagged a drop in XAGUSD FI PnL, noting it is "very small relative to rest of the funded flow". Posted with screenshots; no thread discussion, no fix actioned. Potentially a recurrence of the Apr-23 XAG bleed pattern (signal was switched from neuron to synapse at that time). Worth monitoring whether it develops. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782821826950699)
 > 2026-07-07 update — Shyam Hari: XAG skew PnL continuing to drop; min skew floor was oversized (2 pips = $0.02), lowered to [1 pip](https://alphacapital-ln-admin-1.s5e9.prod.mahimarkets.com:8400/configuration/edit/pricing.adjustmentSignalParameters/012dq42gld8avib). Flagged may need to move off the neuron signal if flow keeps picking it off. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1783393617807039)
 > 2026-08-13 update — Will Carter posted FI Losses: Alpha Capital Qualifying XAGUSD -$15,564.52. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1786606990243659) Isaac Dann found a 10-min burst of $500.41M volume heavily hit by channel LR — all one counterparty (Q1 account), unsure how they traded to lose $293K, suspects mid diff was still negative despite paying $293K in spread. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1786608862275309) [yields](https://alphacapital-ln-admin-1.s5e9.prod.mahimarkets.com:8400/trading/yield-profiles?s=2niK0ab) [price](https://alphacapital-ln-admin-1.s5e9.prod.mahimarkets.com:8400/trading/price-forensics?mdSections=%7B%22XAGUSD%22%3A%5B%22prices%22%2C%22orders%22%5D%7D&ordersEnabled=1&s=eaRSOJY) [blotter](https://alphacapital-ln-admin-1.s5e9.prod.mahimarkets.com:8400/trading/orders?from=2026-08-13T04%3A00%3A00Z&instruments=%5B%27XAGUSD%27%5D_&maxRows=500&parties=%5B%27Q1_CLIENTS%27%5D_&to=2026-08-13T04%3A10%3A00Z) Same day, Cameron Hughes switched XAG off neuron to price + IFMS signals — "neuron's not performing well this week." [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1786614782656119)
+> 2026-08-19 update — Cameron Hughes whitelisted CP 5103699 to the arbitrageurs lists after lots of arb. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787137836841339) 2026-08-25: Cameron — XAG FI turned around on all books, looks much better with no arb. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787672825872419)
 
 > [watching] 2026-06-26 — False FI PnL drop on EURGBP (2026-06-25): news last-look delay interaction; FI PnL calculation methodology flagged for review
 > Shyam Hari: false FI PnL drop on EURGBP at ~12:29–12:31 UTC 2026-06-25. Price was skewed up at execution *time* when House bought, but execution *price* was fine because `newsAdditionalLastLookDelay` kicked in over a news event. Root cause explained/benign, but Shyam then flagged a follow-up: "Potentially need to review which prices we use for FI PnL calculations" — open question, no action taken yet. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782445628932189) [TOB](https://echo.mahimarkets.com/topOfBook#clientId=alphacapital.LDN;from=2026-06-25T12:28:59.859Z;instrumentId=EURGBP;to=2026-06-25T12:31:01.859Z) [config](https://alphacapital-ln-admin-1.s5e9.prod.mahimarkets.com:8400/configuration/edit/distribution.liquidityThrottle.newsAdditionalLastLookDelay/012dq4frml1nmv)
@@ -64,6 +89,8 @@ last_catchup: 2026-08-17T08:25:52Z
 
 
 ## Notable topics
+
+- 2026-08-26 — David Rapp asked about an MT5 plugin that auto-stops out a customer at a per-account equity threshold then sets the account read-only. Not available; in-progress project, a few months out. David is also sourcing from T4B and FastMT and wants ongoing feature updates and regular flow catch-up calls. [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787760873528779)
 
 - 2026-08-02 — clientDistributionGateway3 removed. Daria Horton removed `clientDistributionGateway3`, confirming it wasn't in use — closes out the 2026-05-10 removal query (was awaiting a decision from Cameron Hughes). [permalink](https://mahifx.slack.com/archives/C06UHTDQ8JF/p1785707635094409)
 
