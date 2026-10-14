@@ -5,7 +5,7 @@ refs:
   vibepulse: [../VibePulse/.claude/clients/pepperstone.yaml, ../VibePulse/.claude/clients/pepperstone-crypto.yaml]
   billing: ../MahiProduct/data/billing/clients.json     # entry: pepperstone
   hosts: ../MahiProduct/data/client-hosts.json          # entries: pepperstone, pepperstone-cfd, pepperstone-crypto
-  wiki: null                                             # ../MahiProduct/wiki/clients/pepperstone.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/pepperstone.md
 channels_override: null
 key_people_overrides:
   - {name: "Stephen Hendrie", role: "exchange/product"}

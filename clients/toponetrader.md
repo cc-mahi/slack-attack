@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/toponetrader.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: toponetrader
   hosts: ../MahiProduct/data/client-hosts.json          # entry: toponetrader
-  wiki: null                                             # ../MahiProduct/wiki/clients/toponetrader.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/toponetrader.md
 channels_override: null
 key_people_overrides:
   - {name: "Matt Morris", role: "CEO, Top One Trader"}
@@ -15,12 +15,6 @@ key_people_overrides:
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
 last_catchup: 2026-08-17T08:48:00Z
 ---
-
-## Status
-
-- **Stage:** live, post-pilot; billing renegotiated Oct 2025 to $10,000/mo base + $1.00/account (Challenge + Funded)
-- **Integration:** CTrader live Jul 1 2025; MT5 live ~Aug 2025; MatchTrader live Sep 15 2025; TradeLocker pending (contact lost, no ETA as of Oct 2025)
-- **Relationship:** strong; weekly calls; Matt engaged and expanding; brokerage expansion discussion opened Mar 2026 (retail FX under Comoros licence, same playbook as ACG)
 
 ## Recent issues
 

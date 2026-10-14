@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/rostro.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: rostro
   hosts: ../MahiProduct/data/client-hosts.json          # entry: rostro (also: easton for contracting entity)
-  wiki: null                                             # ../MahiProduct/wiki/clients/rostro.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/rostro.md
 channels_override: null
 key_people_overrides:
   - {name: "Alexandre Goudergues", role: "trading ops (alexandre.goudergues@scopemarkets.com)"}

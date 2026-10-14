@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/gomarkets.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: gomarkets
   hosts: ../MahiProduct/data/client-hosts.json          # entry: gomarkets
-  wiki: null                                             # ../MahiProduct/wiki/clients/gomarkets.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/gomarkets.md
 channels_override: null
 key_people_overrides:
   - {name: "Erik Ogkanesian", role: "client ops — reconciliation / position discrepancies / hedging checks; email erik.o@gomarkets.com confirmed 2026-08-05", confidence: low}

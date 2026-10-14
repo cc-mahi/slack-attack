@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/infinox.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: infinox
   hosts: ../MahiProduct/data/client-hosts.json          # entry: infinox
-  wiki: null                                             # ../MahiProduct/wiki/clients/infinox.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/infinox.md
 channels_override: null
 key_people_overrides:
   - {name: "Clio Constantinou", role: "Infinox sales / risk liaison (FSC EU/CY)", confidence: low}

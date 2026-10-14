@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/velocity.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: velocity
   hosts: ../MahiProduct/data/client-hosts.json          # entry: velocity
-  wiki: null                                             # ../MahiProduct/wiki/clients/velocity.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/velocity.md
 channels_override: null
 key_people_overrides:
   - {name: "Dan Beale", role: "client ops — yield profile / Echo lookups, requests new price/product features"}

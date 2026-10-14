@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/5ers.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: 5ers
   hosts: ../MahiProduct/data/client-hosts.json          # entry: 5ers
-  wiki: null
+  wiki: ../MahiProduct/wiki/clients/5ers.md
 channels_override: null
 key_people_overrides:
   - {name: "Yaniv", role: "client stakeholder — weekend/failover escalations", confidence: low}

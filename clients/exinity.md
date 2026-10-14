@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/exinity.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: exinity
   hosts: ../MahiProduct/data/client-hosts.json          # entry: exinity
-  wiki: null                                             # ../MahiProduct/wiki/clients/exinity.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/exinity.md
 channels_override: null
 key_people_overrides:
   - {name: "Marianna Konstantinidi", role: "head of trading / primary technical counterpart (MK)"}

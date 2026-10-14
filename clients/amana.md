@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/amana.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: amana
   hosts: ../MahiProduct/data/client-hosts.json          # entry: amana
-  wiki: null                                             # ../MahiProduct/wiki/clients/amana.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/amana.md
 channels_override: null
 key_people_overrides:
   - {name: "Karen Montero", role: "ops / test trading liaison"}
@@ -21,12 +21,6 @@ key_people_overrides:
   - {name: "Jake Denley Alvaro", role: "PH NOC — spread/config confirmations, contract size specs", confidence: low}
 last_catchup: 2026-08-17T08:25:53Z
 ---
-
-## Status
-
-- **Stage**: live — full production; A-book (spot+futures+CFD indices+FX), fat feed, B-book expansion in progress
-- **Integration**: FIX live on multiple sessions (A-book light/fat, BBOOK_CLIENTS_FAT, swapfree); B-book XAGUSD ALL clients enabled 2026-06-24; hybridHedgerB1 live from 2026-06-29 11:26 BST (3.5M USD notional limit on silver); arbHedgerB1 deliberately kept off pending correct tuning; hybridHedgerBClose1 (unorthodox B-Book-LP-position unwind-on-no-offset hedger, previously off) proposed 2026-08-12 by Isaac for XAGUSD B-book, agreed on a call with Nikos — plan is SI for XAGUSD pending backtests on data Amana/Hadeel are producing, Inventory-with-unhedging for XAUUSD in the meantime with an eventual move to SI there too; Mahi side needs to run sims, write the report, and stand up the SI books/hedgers; XAUUSD B-book: off-book split set up 2026-06-30, first trade 2026-07-01, mobile rollout 2026-07-03, full go-live all clients 2026-07-07 (no auto-hedger on XAU yet — dealers covering manually; price reference for XAUUSD/XAGUSD moved to Mahi A same day, Mahi B is trading-only); riskreportingmetrics WTD/MTD PnL wrong due to pre-go-live data — deletion won't fix (PnL derives from open positions + realised PnL); correct fix = USD PnL adjustment at go-live timestamp; XAUUSD B_OFF_BOOK_CLIENTS will use USD PnL offset at import to prevent recurrence; silver futures (SI FUT) Mahi B light execution enabled for 10 clients 2026-07-22 (pricing only, no hedging yet), moved into the main B-book alongside silver spot 2026-07-29; gold futures Bbook light+fat live in full for all clients from 2026-07-28 (sits in the off/non-hedger book, no auto-hedger); XAGUSD Bbook fat still in active test-trading; WTI/Brent/NG futures onboarding advancing — CFD/futures min-increment specs being finalised with Trading Ops (crude/NG corrected 2026-07-29, WTI still open), hedging venue for CMC-subscribed Brent/WTI spot and Nikkei index CFD (CMC vs Jump spread variance under review) still to be confirmed; Russell futures CMC subscription requested, pickup not yet confirmed; crypto pricing setup kicked off 2026-08-04 — top-15 instrument list + per-asset precision/quantity/FIX creds requested, leveraged crypto prices via GCEX (already connected); progressed 2026-08-12 with Binance Futures FIX credentials shared, subscription symbols confirmed (plain no-suffix, e.g. BTCUSD on both GCEX and Binance; XBT=BTCUSD, XET=ETHUSD) and market mappings set (Mahi_GCEX_TEM, Mahi_BinanceFutures_TEM) — GCEX instruments (largest volume) to test first, spreads to be finalised once Hadeel's backtest data is ready
-- **Relationship**: active and fast-moving; Nikos drives desk-level decisions; management-level Steerco engagement on B-book expansion; Will Denny is AM; Isaac internal champion for BETA feed initiative
 
 ## Recent issues
 

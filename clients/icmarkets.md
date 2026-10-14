@@ -5,7 +5,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/icmarkets.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: icmarkets-crypto
   hosts: ../MahiProduct/data/client-hosts.json          # entry: icmarkets
-  wiki: null                                             # ../MahiProduct/wiki/clients/icmarkets.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/icmarkets-crypto.md
 channels_override: null
 key_people_overrides:
   - {name: "Pavlos Elpidorou", role: "IC Markets Head of Market Risk (Compass/Echo user)"}

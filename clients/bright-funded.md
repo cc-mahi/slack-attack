@@ -5,7 +5,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/brightfunded.yaml
   billing: ../MahiProduct/data/billing/clients.json
   hosts: ../MahiProduct/data/client-hosts.json
-  wiki: null
+  wiki: ../MahiProduct/wiki/clients/bright-funded.md
 channels_override: null
 key_people_overrides:
   - {name: "Benjamin Galindo", role: "BrightFunded — primary client contact (product / new programs)", confidence: low}
@@ -17,12 +17,6 @@ status: active
 retired_at: null
 retired_reason: null
 ---
-
-## Status
-
-- **Stage:** live
-- **Integration:** prop firm running 2-Step (Bright + Classic) and 1-Step challenge programs on AWS eu-west-2; Mahi providing prop sims, skew + LR pricing, distribution via LDN.
-- **Relationship:** healthy, bi-weekly call cadence with Cameron Hughes; client (Benjamin Galindo) actively engaging on prop sim outputs and a futures expansion ask.
 
 ## Recent issues
 

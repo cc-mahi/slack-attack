@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/argamon.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: argamon
   hosts: ../MahiProduct/data/client-hosts.json          # entry: argamon
-  wiki: null                                             # ../MahiProduct/wiki/clients/argamon.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/argamon.md
 channels_override: null
 key_people_overrides:
   - {name: "Elan (Argamon CEO/principal)", role: "Principal contact / decision-maker", confidence: low}
@@ -16,12 +16,6 @@ key_people_overrides:
   - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
 last_catchup: 2026-08-17T08:31:40Z
 ---
-
-## Status
-
-- Stage: live, actively growing (new LPs, platform migration in progress)
-- Integration: retail + insti + crypto, NYC only; OneZero→Centroid migration underway (target before Aug 1)
-- Relationship: active, operationally intensive; ongoing rec disputes and infra expansion; contract being restructured (Mahi=retail, Toa=crypto/B2B/RI)
 
 ## Recent issues
 

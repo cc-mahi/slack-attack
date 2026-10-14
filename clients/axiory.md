@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/axiory.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: axiory
   hosts: ../MahiProduct/data/client-hosts.json          # entry: axiory
-  wiki: null                                             # ../MahiProduct/wiki/clients/axiory.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/axiory.md
 channels_override: null
 key_people_overrides:
   - {name: "Adam Foltyn", role: "client trading ops — LP/pricing escalations", confidence: low}

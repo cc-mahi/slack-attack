@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/valutrades.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: valutrades
   hosts: ../MahiProduct/data/client-hosts.json          # entry: valutrades
-  wiki: null                                             # ../MahiProduct/wiki/clients/valutrades.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/valutrades.md
 channels_override: ["internal-valutrades", "mahi-valutrades", "mahi-valutrades-operations"]   # -operations is a distinct operations channel not in VibePulse yaml
 key_people_overrides:
   - {name: "Andri", role: "client trading ops — algo connections, rejects", confidence: low}

@@ -1,10 +1,11 @@
 ---
 slug: gtcfx
+aliases: [gtc-global-trade-capital]                                   # MahiProduct billing slug
 refs:
   vibepulse: null                                          # no ../VibePulse/.claude/clients/gtcfx.yaml yet (pre-live)
-  billing: null                                            # not yet in ../MahiProduct/data/billing/clients.json
+  billing: ../MahiProduct/data/billing/clients.json      # entry: gtc-global-trade-capital
   hosts: ../MahiProduct/data/client-hosts.json             # entry: gtcfx (s3Slug GTCFX; LDN)
-  wiki: null                                               # ../MahiProduct/wiki/clients/gtcfx.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/gtcfx.md
   onboarding: ../MahiProduct/data/onboarding/gtcfx.json    # stage tracker
 channels_override: [internal-gtcfx, mahi-gtcfx]            # no VibePulse yaml to resolve from
 key_people_overrides:
@@ -18,13 +19,6 @@ key_people_overrides:
   - {name: "John (Jun Yang)", role: "GTC — given Compass access on Manglai's request, post go-live", confidence: low}
 last_catchup: 2026-08-17T08:22:33Z                         # ISO8601; updated by /catchup
 ---
-
-## Status
-
-- **Stage:** LIVE — AUDUSD B Book flow went live 2026-08-12 (routed via OZ-2/OZ-3; PXM connection switching 2026-08-13), after final test trades that morning. Phased FX rollout continuing before XAUUSD; EURGBP targeted next, pending PXM readiness. PXM B Book needed its own dedicated connection (set up 2026-08-13, separate from PXM A Book) and a PXM B Book test trade requested 2026-08-14 was still unconfirmed as of 2026-08-17. Signed 2026-05-14. Still listed under "Signed but not yet live" in `../MahiProduct/data/fleet.txt` as of last check — that upstream now disagrees with observed state; flagging rather than editing MahiProduct.
-- **Integration:** LDN only (`gtcfx-ln-admin-1.zlt5`), on 3 Beeks hosts repurposed from trademax (freed by the trademax LDN→NYC region swap, 2026-05-04), cluster zlt5 / cage LD5. Agreed flow: GTC MT4/5 → GTC OneZero hub → Mahi (A/B book) → GMG (FCA entity) → HRP & LPs for hedge flow. Hedged flow routes to Finalto and Swift, STP'd flow to HRP LPs; HRP stays STP-only at GTC's preference. Spreads benchmarked on FINALTO/SWIFT with `MAHI_BENCHMARK_LDN|FINALTO|HRP_XTX|HRP_MEX|HRP_ARG` mid formation and adaptive mid on signalled markets. A Book exec rules split ABOOK (standard) / ABOOK_TX (toxic); GTC agreed Mahi can risk-manage on classification. ~2,900 MT groups, so per-group trading-account mapping was abandoned in favour of A/B trading accounts with the Compass classifier setting last-look window, LR params and STP pool per counterparty.
-- **Risks / open threads:** GMG is still on PrimeXM, which Mahi flags as a system-integrity problem in the agreed path and wants moved. `marketDataProxyTx` won't start without listen config and may be an obsolete HRP_ARG proxy. Counterparty tags still missing on the B Book connections. Design questions unresolved from 2026-07-15: failover, whether HRP can be included in A Book hedging, NOP limits on Finalto/Swift/HRP, and whether LR belongs in the published price (global vs per-channel).
-- **Relationship:** warm and actively managed — David Cooney has the OneZero/Ralich relationship (Ralich cleared Mahi risk-management on joint Mahi/OZ clients, on condition it isn't broadcast); Kate Stagg runs day-to-day; message reinforced to CEO Jack Zheng on the weekly call and well received.
 
 ## Recent issues
 

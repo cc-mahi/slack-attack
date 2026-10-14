@@ -1,5 +1,6 @@
 ---
 slug: alphacapital
+aliases: [alpha-capital]                                   # MahiProduct billing slug
 refs:
   vibepulse: ../VibePulse/.claude/clients/alphacapital.yaml
   billing: null

@@ -4,18 +4,12 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/fintokei.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: fintokei
   hosts: ../MahiProduct/data/client-hosts.json          # entry: fintokei
-  wiki: null                                             # ../MahiProduct/wiki/clients/fintokei.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/fintokei.md
 channels_override: null
 key_people_overrides:
   - {name: "Jan", role: "Fintokei support/ops contact", confidence: low}
 last_catchup: 2026-08-17T08:40:00Z
 ---
-
-## Status
-
-- Stage: live — prop-firm B-book, low-spread pricing model in production.
-- Integration: live — Fintokei MT5 via Compass on `fintokei-ln-*`, YourBourse FIX connector being set up. CLIENT_PRICE_LDN distribution.
-- Relationship: active — Kate Stagg / Rory King client-facing; Adam (Fintokei) primary client-side contact.
 
 ## Recent issues
 

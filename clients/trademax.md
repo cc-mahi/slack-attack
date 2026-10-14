@@ -5,7 +5,7 @@ refs:
   vibepulse: null                                          # no ../VibePulse/.claude/clients/trademax.yaml yet (pre-live)
   billing: null                                            # not yet in ../MahiProduct/data/billing/clients.json
   hosts: ../MahiProduct/data/client-hosts.json             # entry: trademax (s3Slug TRADEMAX; LDN + NYC)
-  wiki: null                                               # ../MahiProduct/wiki/clients/trademax.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/trademax.md
   onboarding: ../MahiProduct/data/onboarding/tmgm.json     # stage tracker (slug `tmgm`)
 channels_override: [internal-tmgm, mahi-tmgm]              # no VibePulse yaml to resolve from
 key_people_overrides:
@@ -14,12 +14,6 @@ key_people_overrides:
   - {name: "Rainer", role: "TMGM — queried why account identifiers were needed on drop-copy", confidence: low}
 last_catchup: 2026-08-17T08:52:00Z                         # ISO8601; updated by /catchup
 ---
-
-## Status
-
-- **Stage:** pre-live, pricing in production trial, recovering from a client-side pause. Bailey White paused the project 2026-07-10 over RMF/MT5 integration concerns and platform-stability priorities; Andrew's "PTR is good enough, don't let perfect block useful" push reopened it, and it came back 2026-07-23 as an urgent setup request. Pricing + skew have run on metals since 2026-07-24 (gold on the A stream, all metals on the B stream, ~1 pip skew). Client has **not** yet switched to Mahi pricing — that's the live open question.
-- **Integration:** Metals-first pilot (XAU ~80% of scope), Pricing & Skew only, no volume caps. Trade reports arrive via PTR — XAU only, so skew is XAU-only even though pricing is configured for other metals and FX. `TRADEMAX_POOL_1` (top-of-book, XAUUSD only) feeds `CLIENT_PRICE_NYC` down A_CLIENTS; `TRADEMAX_POOL_2` (full depth, all metals) feeds `CLIENT_PRICE_B_NYC` down B_CLIENTS. Deliberate call to source pricing purely off TMGM's own pool feeds — no proxied reference/continuity-pool feed — so an indicative price traces straight back to their feed. FX-Majors subscriptions + pricing set up 2026-07-27 (B stream), skew still to review. Execution is a medium-term ambition, not a go-live gate; drop-copy is the fastest route per Kate Stagg.
-- **Relationship:** internal urgency is high (Andrew: "This is an urgent setup request", Bailey pushing back on delays). Nicola runs the commercial cadence; Andrew + Will + Shyam + Isaac on the technical side. Bailey flagged 2026-08-05 that Mahi's backtest-quoted value-add figure has now been wrong twice, and wants verification metrics supplied upfront rather than after connecting. Will's 2026-08-07 weekly report answered that with full metrics and a self-disclosed measurement correction, but the correction lowered the headline figure again ($2.91/M as-run vs $0.62/M capped, down from the $2.77/M quoted 2026-08-05) — the credibility question on the go-live number is not fully closed, it's now shifted to whether the reporting method itself is trusted. Weekly reports on this method are now a standing cadence through go-live.
 
 ## Recent issues
 

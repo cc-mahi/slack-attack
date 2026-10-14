@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/basemarkets.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: basemarkets
   hosts: ../MahiProduct/data/client-hosts.json          # entry: basemarkets
-  wiki: null                                             # ../MahiProduct/wiki/clients/basemarkets.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/base-markets.md
 channels_override: null
 key_people_overrides:
   - {name: "Alex", role: "Base Markets — primary client contact (algo / flow)", confidence: low}
@@ -13,12 +13,6 @@ key_people_overrides:
   - {name: "Anatoly", role: "Base Markets / Tegis — sign-off contact for TEM switch", confidence: low}
 last_catchup: 2026-08-17T08:34:20Z
 ---
-
-## Status
-
-- **Stage:** **live** — C Book with LMAX hedging went live 2026-06-29 evening BST; Tegis positions migrated from Scope MT5 to Base MT5; hedger on. Drop copies tag `BaseMarketsMT5_10101`; Centroid give-up still pending (for accurate MT5 PnL) but not blocking. Compass upgraded to latest version weekend 2026-06-07/08 (Liam Cordelle).
-- **Integration:** LDN trading + admin (LD5), Athena `basemarkets_ldn`, distribution via CLIENT_PRICE_LDN / CLIENT_PRICE_BETA_LDN / DISTRIBUTION_LDN / DISTRIBUTION_SYNAPSE_LDN. FIX API available; no margin / credit checking yet.
-- **Relationship:** healthy — Alex (client) "super happy" with recent report; Nicola Perikhanyan owns commercial, Rory King / Kate Stagg client-facing.
 
 ## Recent issues
 

@@ -4,7 +4,7 @@ refs:
   vibepulse: ../VibePulse/.claude/clients/gcc-brokers.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: gcc-brokers
   hosts: ../MahiProduct/data/client-hosts.json          # entry: gcc-brokers
-  wiki: null                                             # ../MahiProduct/wiki/clients/gcc-brokers.md (not yet)
+  wiki: ../MahiProduct/wiki/clients/gcc-brokers.md
 channels_override: null
 key_people_overrides:
   - {name: "Carl", role: "client ops / LMAX + Finalto mappings", confidence: low}
