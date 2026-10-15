@@ -1,48 +1,53 @@
 ---
 slug: instantfunding
+aliases: []
 refs:
   vibepulse: ../VibePulse/.claude/clients/instantfunding.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: instantfunding
   hosts: ../MahiProduct/data/client-hosts.json          # entry: instantfunding
   wiki: ../MahiProduct/wiki/clients/instantfunding.md
-channels_override: null
-key_people_overrides: []
-last_catchup: 2026-08-17T08:42:00Z
+channels:
+  internal-instant-funding: C07K2E5P0G2
+  mahi-instant-funding: C076RHNUP36
+contacts: []
+last_catchup: 2026-10-15T13:04:16Z
+status: active
 ---
 
-## Recent issues
+## Now
+Exited client. Served notice 2026-07-01 (out of money), stopped sending flow EOD 2026-07-10, replica disconnected and monitoring removed by 2026-08-06. No Slack activity in either channel since. Only loose end is whether the outstanding June invoice was ever paid.
 
-> [open] 2026-08-04 — DB replica down over weekend, rebuilt via fast resync method
-> Sam Hewitt (Mahi infra): Instant Funding's replica was down over the weekend (~1-2 Aug); rebuilt using the new fast resync method. Talking to Hussain about applying the same fix Infinox had to Instant Funding and GTCFX, which also went down. Notable against the dossier's offboarding status — replica infra was still live and actively maintained past the nominal 31 July Beeks-hosting termination / ~1 August effective-exit date; unclear whether this is a wind-down remnant or ongoing support through actual exit. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1785879014285709)
-> 2026-08-06 update: Sam Hewitt confirms Instant Funding removed from raindrop Nagios/Sunday Checks — monitoring decommission progressing alongside the offboarding. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1785982831416769)
+## Streams
 
-> [open] 2026-07-01 — IF served notice: running out of money, offboarding by 31 July
-> Bonnie announced to internal channel: IF have served notice, citing they're running out of money after culling key staff who could have helped. Lewis informed Bonnie on 19 June; formal termination letter received 2026-07-01. One month's notice per contract — effective date nominally 19 July (from Lewis's original email), though Mahi may hold to 1 August if being magnanimous ("depends if we want to be dicks about it"). Liam actioned Beeks hosting termination immediately (30-day notice, effective 31 July). May invoice was paid; June invoice outstanding — Susan wants it chased in the formal acknowledgment letter. Susan's stance: "Do the month but they are last on the list for any support." Andrew verified the financial narrative was accurate. Susan noted David had given discounts and helped many times — this is on IF's decisions, not Mahi's services. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1782899168223089) [Beeks termination](https://mahifx.slack.com/archives/C07K2E5P0G2/p1782908559971509) [June invoice thread](https://mahifx.slack.com/archives/C07K2E5P0G2/p1782902838604579)
-> 2026-07-15 update: Liam Cordelle noted IF appear to have stopped sending flow as of EOD 10 July; unclear whether they're still consuming Mahi pricing at all. No reply/thread yet. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1784122023160609)
+### june-invoice — Outstanding June invoice chase
+status: watching · since: 2026-07-01 · last: 2026-07-01
+State: May invoice was paid; June invoice was outstanding at notice and Susan wanted it chased in the formal acknowledgment letter. No Slack follow-up seen through 2026-10-15; payment status unknown from Slack.
+Next: confirm payment in billing data / finance; if unpaid, owner for recovery is unclear.
+Refs: https://mahifx.slack.com/archives/C07K2E5P0G2/p1782902838604579
 
-> [resolved] 2026-06-03 — FTP acquisition: migrating flow to Compass, LP contract check underway
-> IF has acquired FTP, which is roughly half IF's size and shrinking; plan is to grow FTP back up. George (client-side) is checking how long remains on FTP's current Taurex LP contract. Migration of FTP flow to Compass was discussed. Nicole confirmed FTP falls under the "Customer Group" contract definition, so FTP flow can be included in the same IF contract — billing will increase via counterparty count. David Cooney noted the irony of requesting a discount while simultaneously acquiring FTP and wanting to route that additional flow through Compass. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780479841433249)
-> 2026-06-04 update: Bonnie called Lewis directly. FTP cut staff 21→3, moved everything to MetaTrader, revenue declining all of last year. Had a $200k loss the month before last. Lewis sells ~2k accounts/month (larger accounts). Lewis said if discount removed they'd "have to look at letting Mahi go" — discount confirmed as retention lever. Lewis noted August is typically their worst month, September their best. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780566216212199)
-> 2026-07-01 update: Moot — IF have served notice and are offboarding. FTP migration never proceeded.
+### offboarding — IF served notice and exited
+status: closed · since: 2026-06-19 · last: 2026-08-06 · closed: 2026-10-15
+State: IF served notice 2026-07-01 (cash exhausted after culling staff); contract notice nominally 19 July, Mahi may have held to 1 August. Beeks hosting terminated effective 31 July. Flow stopped EOD 2026-07-10. DB replica fell over ~1-2 Aug and was rebuilt, then noted as no longer connected; removed from Nagios/Sunday Checks 2026-08-06. No activity since; assumed fully exited.
+Refs: https://mahifx.slack.com/archives/C07K2E5P0G2/p1782899168223089 https://mahifx.slack.com/archives/C07K2E5P0G2/p1785982831416769
 
-> [resolved] 2026-06-03 — Payout rule sim requested (trailing drawdown addition)
-> IF wants to change their payout criteria, including adding a trailing drawdown rule. Kate Stagg to send over the parameters so sims can be kicked off. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780479841433249)
-> 2026-06-08 update: IF provided full rule parameters for two account types. (1) Standard: daily DD 3%, max trailing drawdown 6% equity-based (trailing up to starting balance), profit target 9%, min days N/A, consistency N/A, min withdrawal 1.5% of starting balance at funded, paid every 14 calendar days — penalty mechanic: if account ever goes -1.5% equity, payout split at first payout cut in half. (2) Instant Funding: daily DD 3%, max trailing 6% balance-based, consistency 20%, min withdrawal 3% at funded, same -1.5% equity penalty on first payout split. Kate Stagg tagged Cameron Hughes to build a sim skill and run these. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780932899300319)
-> 2026-07-01 update: Moot — IF served notice and are offboarding; sim work no longer required.
+### discount-retention — 50% billing discount
+status: closed · since: 2026-06-03 · last: 2026-06-04 · closed: 2026-10-15
+State: 50% discount extended through end of August after Lewis said they would look at leaving otherwise; Bonnie owned the relationship call. Moot after notice.
+Refs: https://mahifx.slack.com/archives/C07K2E5P0G2/p1780479841433249 https://mahifx.slack.com/archives/C07K2E5P0G2/p1780570419557709
 
-> [resolved] 2026-06-08 — New Clarity MT5 account groups whitelisted
-> IF (Patrick) requested whitelisting of new MT5 Clarity account groups (demo + funded, multiple server/CT/MTCH variants). Kate Stagg clarified funded vs eval accounts (funded = groups ending IF_MT5, Micro_IF, or containing "Funded"). Config placed, pending EOD restarts to pick up the additional groups. [permalink](https://mahifx.slack.com/archives/C076RHNUP36/p1780913933693819)
+### ftp-and-payout-sims — FTP acquisition and payout rule sims
+status: closed · since: 2026-06-03 · last: 2026-06-08 · closed: 2026-10-15
+State: IF acquired FTP (shrinking, staff cut 21 to 3); FTP flow would fall under the same Customer Group contract. IF also supplied payout/trailing-drawdown rules for sims. Both cancelled by the notice; nothing proceeded.
+Refs: https://mahifx.slack.com/archives/C07K2E5P0G2/p1780479841433249 https://mahifx.slack.com/archives/C07K2E5P0G2/p1780932899300319
 
-> [resolved] 2026-06-03 — 50% billing discount extended through end of August
-> Nicole Vivian asked if the 50% discount had been extended after Lewis requested a bill revision. David Cooney initially confirmed June + July. 2026-06-04: Bonnie Cassidy called Lewis, agreed to continue discount until end of August; diarised a call with Lewis after August to discuss. Lewis's position: they'd have to look at leaving Mahi if discount removed. Bonnie diarised the August review. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780570419557709)
+### clarity-mt5-groups — MT5 Clarity group whitelisting
+status: closed · since: 2026-06-08 · last: 2026-06-08 · closed: 2026-10-15
+State: Kate Stagg whitelisted the new Clarity demo/funded groups for Patrick; done.
+Refs: https://mahifx.slack.com/archives/C076RHNUP36/p1780913933693819
 
-## Notable topics
-
-- 2026-06-03 — May value-add reviewed on call: XAUUSD skew $8.5/M, all-instrument skew $6.7/M, LR $4/M. Low slippage complaints lately; plan to increase LR settings slightly. [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780479841433249)
-- 2026-06-04 — Internal note: Susan Cooney flagged that someone other than David should manage IF commercials; Bonnie took the Lewis call and is diarising ongoing review. Lewis is the commercial contact (not George as previously thought). [permalink](https://mahifx.slack.com/archives/C07K2E5P0G2/p1780561016159079)
-
-## Status
-
-- Stage: offboarding — served notice 2026-07-01; effective date ~19 July–1 August (contract ambiguity); Beeks hosting terminated by Liam, effective 31 July
-- Integration: Compass live (LDN) running to end of notice period; no further development (FTP migration cancelled)
-- Relationship: exiting — financial distress (ran out of money, culled key staff); June invoice outstanding and being chased; Mahi supporting through notice period at lowest priority; Bonnie managing handoff
+## Arc
+- 2026-06-04 — Bonnie agrees to keep 50% discount to end of August
+- 2026-07-01 — IF serves termination notice
+- 2026-07-10 — IF stops sending flow
+- 2026-07-31 — Beeks hosting termination effective
+- 2026-08-06 — Removed from Nagios/Sunday Checks; effectively decommissioned
