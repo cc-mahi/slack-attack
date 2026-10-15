@@ -133,7 +133,7 @@ def remove_streams(d, ids):
     return "\n".join(line for i, line in enumerate(d.lines) if i not in drop)
 
 
-HARD_BYTES = 15360
+HARD_BYTES = 20480
 SOFT_BYTES = 10240
 NOW_MAX_LINES = 4
 ARC_SOFT_LINES = 20

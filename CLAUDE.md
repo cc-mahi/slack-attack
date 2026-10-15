@@ -117,6 +117,6 @@ git config core.hooksPath .githooks
 ```
 
 - **`commit-msg`** — enforces conventional commits (`feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert`), 72-char subject, no trailing period.
-- **pre-commit** — runs scripts/check-dossiers --staged: stream format, 15KB cap, stream-ID stability, and the year-off date guard. Tests: python3 -m unittest discover -s scripts/tests.
+- **pre-commit** — runs scripts/check-dossiers --staged: stream format, 20KB cap, stream-ID stability, and the year-off date guard. Tests: python3 -m unittest discover -s scripts/tests.
 
 **The remote `slack-attack-daily` routine's checkout must also have `core.hooksPath=.githooks` set**, or the pre-commit guard won't fire there — and the routine is exactly where the corruption has been landing.
