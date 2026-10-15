@@ -62,6 +62,8 @@ Known IDs:
 
    Quiet today (N): slug, slug, slug, ...
 
+   <If the brief has a "New clients:" line, include it verbatim here.>
+
    <If any failures occurred during the run (push failures, catchup sanity-check aborts, etc.): include verbatim error text as a closing paragraph above the run-stats line.>
 
    —
