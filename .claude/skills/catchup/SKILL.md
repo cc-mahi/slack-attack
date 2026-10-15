@@ -109,7 +109,7 @@ Inspect the dossier and your date conversions before retrying.
 1. `oldest` = `last_catchup`; if null, 30 days ago.
 2. For each channel in `channels:` (minus skip list): `slack_read_channel` with `oldest`, `limit: 100`. If the response has a `next_cursor`, keep paginating until you reach `oldest`.
 3. For notable threads, `slack_read_thread` with the real `message_ts` (searches need `response_format: "detailed"` to return it).
-4. **Work budget** — so one client can't stall a parallel run: at most 3 pages per channel per 30 days of window (9 pages for 90d) and at most 15 thread expansions (30 in a legacy conversion). If you hit it, stop reading, write what you have, and report `Budget hit on: <channel>`.
+4. **Work budget** — so one client can't stall a parallel run: at most 3 pages per channel per 30 days of window (9 pages for 90d) and at most 15 thread expansions (30 in a legacy conversion). If you hit it, stop reading, write what you have, and report `Budget hit on: <channel>`. **Legacy conversion exception:** the conversion sets the client's current picture, so read every channel in `channels:` across the full window (up to 40 pages per channel) — never sample. Spend thread expansions on the most recent and most active threads first.
 5. **Discard out-of-window results.** Drop any message (from search or channel read) whose `ts` falls outside `[oldest_unix, now_unix]` — decode `ts`, don't eyeball it.
 
 ## Resolving ambiguity — expand the window
