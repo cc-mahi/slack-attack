@@ -15,12 +15,14 @@ contacts:
   - {name: "Nik Teh", role: "TMGM — hub/FIX side; made the drop-copy Tag1 account-identifier change"}
   - {name: "Rainer", role: "TMGM — queried why account identifiers were needed on drop-copy", confidence: low}
 last_catchup: 2026-10-15T13:08:56Z
-status: active
+status: retired
+retired_at: 2026-10-15
+retired_reason: TMGM declined go-live 2026-08-26 and is building its own pricing/skew; PTR pilot ended, setup decommissioned, Beeks hosting cancellation effective 2026-10-25.
 ---
 
 ## Now
 TMGM declined go-live on 2026-08-26 and is building its own pricing/skew; the PTR pilot is over and the setup is being decommissioned.
-Beeks hosting cancellation takes effect 2026-10-25. Consider `status: retired` (no client-facing activity since 2026-08-26).
+Beeks hosting cancellation takes effect 2026-10-25.
 
 ## Streams
 

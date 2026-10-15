@@ -11,7 +11,9 @@ channels:
   mahi-instant-funding: C076RHNUP36
 contacts: []
 last_catchup: 2026-10-15T13:04:16Z
-status: active
+status: retired
+retired_at: 2026-10-15
+retired_reason: Served notice 2026-07-01 (out of money); flow stopped 2026-07-10, replica and monitoring removed by 2026-08-06. June invoice payment was the only loose end.
 ---
 
 ## Now
