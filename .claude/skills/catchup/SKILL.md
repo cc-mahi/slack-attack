@@ -67,7 +67,7 @@ Refs: <origin permalink> <latest permalink>   (bare URLs, 1–4)
 
 If `clients/<slug>.md` doesn't exist:
 
-1. Find the client: `../VibePulse/.claude/clients/<slug>.yaml` (try hyphen/underscore and `-crypto`/`-cfd` variants). Pre-live clients often have none — then check `../MahiProduct/data/client-hosts.json`, the "Signed but not yet live" section of `../MahiProduct/data/fleet.txt`, `../MahiProduct/data/onboarding/<slug>.json`, and `../MahiProduct/wiki/clients/`. Only if none know it, report unknown and stop.
+1. Find the client: `../VibePulse/.claude/clients/<slug>.yaml` (try hyphen/underscore and `-crypto`/`-cfd` variants). Pre-live clients often have none — then check `../MahiProduct/data/client-hosts.json`, the "Signed but not yet live" section of `../MahiProduct/data/fleet.txt`, `../MahiProduct/data/onboarding/<slug>.json`, and `../MahiProduct/wiki/clients/`. Prospects often appear in none of these — then use the channel IDs the caller passed, or find the client's `internal-*`/`mahi-*` channels with `slack_search_channels`. Only if neither the sources nor Slack know it, report unknown and stop.
 2. Copy `clients/_template.md` to `clients/<slug>.md`; set `slug`, `refs` (unknown refs `null` with a short trailing comment), `aliases` if billing/onboarding use another slug, `channels` (resolve as above), `contacts: []`, `last_catchup: null`. Delete the template's example stream and Arc line.
 3. This run populates Now / Streams / Arc. Use the 30d window (see Reading activity) and expand on ambiguity.
 4. Commit subject `chore(catchup): bootstrap <slug> dossier`.
