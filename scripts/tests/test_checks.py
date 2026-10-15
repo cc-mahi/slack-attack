@@ -90,10 +90,12 @@ class CheckTest(unittest.TestCase):
         head = dossier(stream(), stream("mt4-decom", status="closed", closed="2026-10-14"))
         self.assertEqual(errors(dossier(stream()), head=head), [])
 
-    def test_legacy_routes_to_old_check(self):
-        self.assertEqual(run(LEGACY), ([], []))
-        corrupt = LEGACY.replace("> [open] 2026-08-10", "> [open] 2025-08-10")
-        self.assertTrue(errors(corrupt))
+    def test_non_retired_legacy_rejected(self):
+        self.assertTrue(any("## Streams" in e for e in errors(LEGACY)))
+
+    def test_retired_legacy_ignored(self):
+        retired = LEGACY.replace("slug: x\n", "slug: x\nstatus: retired\n")
+        self.assertEqual(run(retired), ([], []))
 
 
 class StaleTest(unittest.TestCase):

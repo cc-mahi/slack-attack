@@ -29,7 +29,7 @@ Retired clients are excluded by the script. For `/slack-attack <slug>` on a reti
 
 Most clients are quiet most days; a subagent just to discover that is the dominant waste. For each candidate:
 
-1. Read frontmatter: `last_catchup`, `channels`. If `last_catchup` is null, the dossier lacks `## Streams` (legacy), or it has no `channels:` → **don't probe**; dispatch.
+1. Read frontmatter: `last_catchup`, `channels`. If `last_catchup` is null or it has no `channels:` → **don't probe**; dispatch.
 2. For each channel ID in `channels` (minus the skip list in `.claude/docs/slack-conventions.md`): `slack_read_channel(channel_id, oldest=<last_catchup unix>, limit=20)`. On any API error → dispatch.
 3. Count messages with neither `subtype` nor `bot_id` set.
 4. Total 0 → probe-skip; otherwise dispatch.
@@ -61,7 +61,6 @@ For each dispatched client, from the subagent's `Commit:` SHA:
 1. `git show <sha> --format=%B -s` → the `streams:` trailer: the **complete list** of what the brief may cover for that client.
 2. `git show <sha> -- clients/<slug>.md` → the diff: the new State / Next / Refs for each listed stream, and Now/Arc changes.
 3. Streams not in the trailer are **silent** in the brief, however open or recent.
-4. Legacy conversions (`refactor(dossiers): convert …`) rebuild the whole file: brief only from the streams whose `last` falls inside the reported window, plus one sentence on the conversion itself (streams created, entries dropped as stale).
 
 ## Window-anchor sanity check
 

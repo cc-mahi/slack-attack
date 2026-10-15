@@ -62,7 +62,6 @@ Refs: <origin permalink> <latest permalink>   (bare URLs, 1–4)
 - `/catchup <slug>` → `clients/<slug>.md`. Read channels from frontmatter `channels:` (name → ID); skip names matching the skip list in `.claude/docs/slack-conventions.md`.
 - If `channels:` is missing a channel the client should have: resolve names from the VibePulse `slack:` block (it's `{internal: <name>, client: <name>}` — **use both**; the internal channel carries the root-cause diagnosis), get IDs with `slack_search_channels` (`channel_types: "public_channel,private_channel"`), and write `name: ID` into `channels:`. Never skip a missing internal channel — that omission cost the axiory LD4 root cause on 2026-04-27.
 - `/catchup #<channel>` or `/catchup <channel-name>` → `channels/<name>.md`, reading `channel_id` from frontmatter.
-- Dossier has no `## Streams` section → it's legacy: follow **Legacy conversion** below.
 
 ### Bootstrap a client dossier
 
@@ -109,7 +108,7 @@ Inspect the dossier and your date conversions before retrying.
 1. `oldest` = `last_catchup`; if null, 30 days ago.
 2. For each channel in `channels:` (minus skip list): `slack_read_channel` with `oldest`, `limit: 100`. If the response has a `next_cursor`, keep paginating until you reach `oldest`.
 3. For notable threads, `slack_read_thread` with the real `message_ts` (searches need `response_format: "detailed"` to return it).
-4. **Work budget** — so one client can't stall a parallel run: at most 3 pages per channel per 30 days of window (9 pages for 90d) and at most 15 thread expansions (30 in a legacy conversion). If you hit it, stop reading, write what you have, and report `Budget hit on: <channel>`. **Legacy conversion exception:** the conversion sets the client's current picture, so read every channel in `channels:` across the full window (up to 40 pages per channel) — never sample. Channel reads return parent messages only; outcomes usually live in the replies. So in a conversion, expand every thread with replies that bears on a stream you will write as open/watching or on its resolution — most recent and most active first, up to the 30 cap. Expanding fewer than 10 threads on a channel set with >100 in-window messages needs a stated reason in the output.
+4. **Work budget** — so one client can't stall a parallel run: at most 3 pages per channel per 30 days of window (9 pages for 90d) and at most 15 thread expansions (30 in a bootstrap). If you hit it, stop reading, write what you have, and report `Budget hit on: <channel>`. Channel reads return parent messages only; outcomes usually live in the replies, so spend expansions on threads with replies that bear on a stream you are writing or on its resolution — most recent and most active first. **Bootstrap exception:** a bootstrap sets the client's whole current picture, so read every channel in `channels:` across the full window (up to 40 pages per channel) — never sample — and expanding fewer than 10 threads on a channel set with >100 in-window messages needs a stated reason in the output.
 5. **Discard out-of-window results.** Drop any message (from search or channel read) whose `ts` falls outside `[oldest_unix, now_unix]` — decode `ts`, don't eyeball it.
 
 ## Resolving ambiguity — expand the window
@@ -153,7 +152,7 @@ Never retire a dossier on cross-channel signal alone.
 
 ## Updating the dossier
 
-Use `Edit` (small diffs), except bootstrap and legacy conversion (`Write`).
+Use `Edit` (small diffs), except bootstrap (`Write`).
 
 1. **Map** each notable in-window item to a stream. Same topic, counterparty, project or recurring problem → existing stream. Prefer extending a stream over creating a sibling.
 2. **Update** a stream that moved: rewrite `State` (current truth, not a log) and `Next`; set `last` to the date of its latest in-window message; in `Refs` keep the origin permalink and replace the previous "latest" with the newest one (max 4).
@@ -166,33 +165,11 @@ Use `Edit` (small diffs), except bootstrap and legacy conversion (`Write`).
 9. **contacts**: add per notability rule 6; `confidence: low` only when unsure.
 10. Set `last_catchup` to `now_iso`.
 
-## Legacy conversion (temporary — removed once every dossier is converted)
-
-A dossier without `## Streams` was written by older, less capable models and may contain errors. Rebuild it:
-
-1. Treat the old content (`Status`, `History`, `Recent issues`, `Notable topics`, `key_people_overrides`) as **leads, not facts**.
-2. Read Slack for the normal window (`last_catchup` → now) per the sections above.
-3. For each old `[open]`/`[watching]` entry: if in-window activity covers it, it's live. Otherwise read the thread of its newest permalink (`slack_read_thread`). No sign of life for >30 days → drop it as `stale` — unless it is an explicit unanswered commitment, which becomes a `watching` stream.
-4. Group surviving items and new activity into streams (target 5–15).
-5. **Arc**: from old `History` and significant resolved entries (go-lives, decommissions, contract events, major incidents, key people changes); ≤20 lines; exact dates where the source pins them, `YYYY-MM` otherwise.
-6. **Frontmatter**: `channels:` from `channels_override` / the VibePulse `slack:` block plus IDs from the table in `.claude/docs/slack-conventions.md` (search for any missing); `contacts` from `key_people_overrides`, minus anyone in `../MahiProduct/wiki/people/` or the org chart; drop `channels_override` and `key_people_overrides`. Keep `slug`, `aliases`, `refs`, `status`/`retired_*`.
-7. Write the whole file with `Write` from the template shape; no `Status`, `History`, `Recent issues` or `Notable topics` sections remain. Aim ≤10KB.
-8. Commit with subject `refactor(dossiers): convert <slug> to streams` and body:
-
-   ```
-   Window <oldest_iso>..<now_iso>.
-   streams: <id>(new) <id>(new) ...
-   dropped: <N> old entries — <a> resolved, <b> stale, <c> merged
-   stale: <short title>; <short title>; ...
-   ```
-
-   The `stale:` line lists the titles (≤60 chars each) of every entry dropped as stale, so the user can audit the risky drops.
-
 ## Sanity-check before commit
 
 1. `scripts/prune-dossiers <file>` — note any `pruned <id>` lines for the trailer.
 2. `scripts/check-dossiers <file>` must exit 0. Warnings: fix size/Arc/Refs warnings if cheap.
-3. Every stream you created or updated has `last` within `[date(oldest_iso) - 1 day, date(now_iso)]`. Exception (legacy conversion only): a `watching` stream carried over from an old unanswered commitment (conversion step 3) keeps its real `last`, which may predate the window.
+3. Every stream you created or updated has `last` within `[date(oldest_iso) - 1 day, date(now_iso)]`.
 
 If 2 or 3 fails and you can't fix it from what you read, **abort**: leave the file dirty, don't commit, don't bump `last_catchup`:
 
@@ -216,7 +193,6 @@ The pre-commit hook re-runs the check as a backstop; a clean self-abort is the i
   | Refresh | `chore(catchup): refresh <slug> (<YYYY-MM-DD>..<YYYY-MM-DD>)` |
   | Quiet window | `chore(catchup): bump <slug> (quiet window)` |
   | Bootstrap | `chore(catchup): bootstrap <slug> dossier` |
-  | Legacy conversion | `refactor(dossiers): convert <slug> to streams` |
 
 - Body (refresh/bootstrap): `Window <oldest_iso>..<now_iso>.` then one trailer line listing every stream touched:
 

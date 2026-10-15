@@ -157,7 +157,9 @@ def _section_lines(d, name):
 def check(d, today, head=None):
     p = d.path
     if d.legacy:
-        return legacy_violations(d.text, p, today), []
+        if re.search(r"^status: retired\b", d.frontmatter, re.M):
+            return [], []
+        return [f"{p}: missing ## Streams section — not in stream format"], []
 
     errs, warns = [], []
     size = len(d.text.encode("utf-8"))
@@ -233,57 +235,6 @@ def stale(d, today):
         limit = STALE_OPEN_DAYS if s.status == "open" else STALE_WATCHING_DAYS
         if age > limit:
             out.append(f"{d.path}: {s.id} {s.status} last {s.date('last')} ({age}d)")
-    return out
-
-
-# --- legacy (pre-stream) dossiers: the old year-off guard, kept until conversion finishes ---
-
-LEGACY_SECTIONS = ("recent issues", "recent topics", "notable topics")
-LEGACY_HEADING_RE = re.compile(r"^#{1,6}\s+(.*?)\s*$")
-LEGACY_ISSUE_RE = re.compile(r"^>\s*\[[a-z]+\]\s+(\d{4}-\d{2}-\d{2})\b")
-LEGACY_BULLET_RE = re.compile(r"^-\s+(\d{4}-\d{2}-\d{2})\b")
-LEGACY_MAX_DRIFT_DAYS = 180
-
-
-def legacy_violations(text, path, today):
-    lines = text.split("\n")
-    out, in_target, i, n = [], False, 0, len(lines)
-    while i < n:
-        line = lines[i]
-        heading = LEGACY_HEADING_RE.match(line)
-        if heading:
-            in_target = heading.group(1).strip().lower() in LEGACY_SECTIONS
-            i += 1
-            continue
-        if not in_target:
-            i += 1
-            continue
-        lineno, block = i + 1, [line]
-        issue, bullet = LEGACY_ISSUE_RE.match(line), LEGACY_BULLET_RE.match(line)
-        if issue:
-            label = issue.group(1)
-            j = i + 1
-            while j < n and lines[j].lstrip().startswith(">") and not LEGACY_ISSUE_RE.match(lines[j]):
-                block.append(lines[j])
-                j += 1
-            i = j
-        elif bullet:
-            label = bullet.group(1)
-            i += 1
-        else:
-            i += 1
-            continue
-        try:
-            label_date = dt.date.fromisoformat(label)
-        except ValueError:
-            out.append(f"{path}:{lineno}: invalid date {label}")
-            continue
-        if label_date > today:
-            out.append(f"{path}:{lineno}: future-dated entry {label} (today is {today})")
-            continue
-        pdates = permalink_dates("\n".join(block))
-        if pdates and min(abs((label_date - p).days) for p in pdates) > LEGACY_MAX_DRIFT_DAYS:
-            out.append(f"{path}:{lineno}: label {label} far from its cited permalinks — likely year-off date bug")
     return out
 
 
