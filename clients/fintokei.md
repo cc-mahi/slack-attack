@@ -39,33 +39,39 @@ Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1791806622473929 https://ma
 
 ### skew-arb-defence — arbitrageurs exploiting skew flicker (GBPJPY, XBT)
 status: open · since: 2026-09-30 · last: 2026-10-02
-State: XBT FI PnL drops on 2026-09-30 came from oversized skew (LSB $5 wide pushed to $17+); Shyam cut floor 500 to 10 and ceiling 2000 to 500 pips on IFMS and harmonic. Fintokei risk (Lukas) reported accounts 6103016 and 6104366 farming GBPJPYz flicker; William Denny confirmed an arber had influenced the neuron signal, switched GBPJPY neuron to harmonics (2026-10-01) and is reducing arber influence on signals. Executing arbers on the continuity pool was proposed but needs Fintokei sign-off because it adds slippage; agreed to watch the signal change first. Arb tags do not carry across challenge accounts; Andrew Morgan says arb detection should be per instrument.
-Next: William to monitor skew PnL and verify arbing is reduced; Fintokei to confirm whether arbers go to the continuity pool.
-Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1790733359556629 https://mahifx.slack.com/archives/C08QWKFARDL/p1790856065770089 https://mahifx.slack.com/archives/C08R694QVNX/p1790952627862029?thread_ts=1790733359.556629
+State: XBT FI PnL drops on 2026-09-30 came from oversized skew (LSB $5 wide pushed to $17+); Shyam cut floor 500 to 10 and ceiling 2000 to 500 pips on IFMS and harmonic. Fintokei risk (Lukas) reported accounts 6103016 and 6104366 farming GBPJPYz flicker; William Denny confirmed an arber had influenced the neuron signal, switched GBPJPY neuron to harmonics (2026-10-01) and is reducing arber influence on signals. Arbers were auto-classified but stayed on the skewed internal price because executing them on the continuity pool adds slippage; Lukas first asked for both accounts to go to the pool, then he and Roman Komurka agreed (2026-10-02) to try the signal change plus monitoring first. The XBT arber got a fresh tag on each challenge stage (accounts 6094087, 6098579, 6099739; tags do not carry over), so Shyam whitelisted 6099739 as an arber for Funded LS Clients. Andrew Morgan says arb detection/defence should be per instrument; his follow-up fed this into /skew-health-check (adaptive switching over signals by recent skew PnL) and a research backlog item, with no live change or backtest launched.
+Next: William to monitor skew PnL and verify arbing is reduced (continuity-pool execution is the fallback if not); William asked for per-trade skew amount to be persisted to yield profiles (no answer seen).
+Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1790733359556629 https://mahifx.slack.com/archives/C08QWKFARDL/p1790856065770089 https://mahifx.slack.com/archives/C08QWKFARDL/p1790941538452089?thread_ts=1790856065.770089 https://mahifx.slack.com/archives/C08R694QVNX/p1790952627862029?thread_ts=1790733359.556629
 
 ### no-price-cancels — orders cancelled when LP feed drops; TTL and SL/TP stuck in MT5
 status: open · since: 2026-09-07 · last: 2026-10-02
-State: Triggered orders with no published price are rejected immediately (no TTL parameter exists); Fintokei asked on 2026-09-08 for a TTL and on 2026-09-21 for execution on the last available price. Daria declined last-price execution (risk of stale fills when the feed is indicative) and offered to back the feed with other firm feeds. 2026-09-25 USOILp close was cancelled because Fintokei's LP feed stopped at 20:59:30. Adam also reports SL/TP orders rejected for stale price in Compass end up stuck in MT5 (gateway not passing rejection) and wants the tech team to investigate; he has no order IDs yet.
-Next: Fintokei (Adam) to send order IDs/logs on the next stuck SL/TP; Mahi to investigate the MT5 gateway rejection handling and consider TTL.
+State: Triggered orders with no published price are rejected immediately (no TTL parameter exists); on 2026-09-07 the XAUUSD cancel happened because the Fintokei feed and all other LPs dropped together. Pau said TTL would be welcome (used in other engines) and Kate promised updates after internal discussion (none seen); Fintokei also asked on 2026-09-21 for execution on the last available price. Daria declined last-price execution (risk of stale fills when the feed is indicative) and offered to back the feed with other firm feeds. 2026-09-25 USOILp close was cancelled because Fintokei's LP feed stopped at 20:59:30. Adam also reports SL/TP orders rejected for stale price in Compass end up stuck in MT5 (gateway not passing rejection) and wants the tech team to investigate; he has no order IDs because they delete the orders, and will send logs next time. Kate (2026-10-02) will look into what she can without IDs.
+Next: Fintokei (Adam) to send order IDs/logs on the next stuck SL/TP; Mahi (Kate) to investigate the MT5 gateway rejection handling and update Pau on TTL.
 Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1788776409327359 https://mahifx.slack.com/archives/C08QWKFARDL/p1789980122311229 https://mahifx.slack.com/archives/C08QWKFARDL/p1790603545212809 https://mahifx.slack.com/archives/C08QWKFARDL/p1790930827758139?thread_ts=1790846280.783699
 
 ### cfd-normalisation — Kate proposes second-LP normalisation for CFD pricing
-status: open · since: 2026-09-28 · last: 2026-09-28
-State: CFD pricing is built from a single LP feed with no second source, so a feed drop blanks the book. Kate proposed normalisation (align a second LP onto the primary) and optional config to force the model indicative at the 20:59:30 weekly stop; offered a call or setup on the beta model first. No reply from Fintokei in Slack.
-Next: Fintokei to respond on call / beta trial.
-Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1790605312090849
+status: open · since: 2026-09-28 · last: 2026-10-01
+State: CFD pricing is built from a single LP feed with no second source, so a feed drop blanks the book. Kate proposed normalisation (align a second LP onto the primary) and optional config to force the model indicative at the 20:59:30 weekly stop; offered a call or setup on the beta model first. Adam (2026-10-01) replied they will think about it but want the stuck SL/TP issue (no-price-cancels) addressed first; no decision on call / beta trial.
+Next: Fintokei to decide on call / beta trial after SL/TP investigation.
+Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1790605312090849 https://mahifx.slack.com/archives/C08QWKFARDL/p1790846139509429?thread_ts=1790605312.090849
 
 ### compass-26-4-upgrade — Compass 26.3 to 26.4 and related deploys
 status: watching · since: 2026-10-08 · last: 2026-10-13
-State: 26.4 staged 2026-10-09, live at the weekend restart (client told 2026-10-09). Known pricing change: fintokei sets neither adjustmentSignalParametersForWidening nor ForTightening, so prices now widen/tighten one increment on PSM-W/PSM-T signals; Liam decided to let it go on. Hugepages on trading-1 raised 2026-10-11 and a Hedger Config/Channel Explorer UI deploy landed 2026-10-13. No post-upgrade issues reported in Slack.
+State: 26.4 staged 2026-10-09, live at the weekend restart (client told 2026-10-09). Known pricing change: fintokei sets neither adjustmentSignalParametersForWidening nor ForTightening, so prices now widen/tighten one increment on PSM-W/PSM-T signals; Liam decided to let it go on. RC #7224 (includes a fix for an arb hedger on adaptive reference pricing that failed to start) was approved/self-approved 2026-10-09; infra main to LDN was self-approved before staging. Hugepages on trading-1 raised 2026-10-11 and a Hedger Config/Channel Explorer UI deploy landed 2026-10-13. No post-upgrade issues reported in Slack.
 Next: ask Kate whether Zendesk 23102 (BMSL timezone overrides, needed release/26.3+) is now unblocked.
 Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1791483333881419 https://mahifx.slack.com/archives/C08QWKFARDL/p1791543779812879 https://mahifx.slack.com/archives/C08R694QVNX/p1791866232732339
 
 ### lsb-z-pricing — LSB pricing model (z-suffix symbols)
 status: watching · since: 2026-06-30 · last: 2026-08-27
-State: CLIENT_PRICE_LSB_LDN went live on z-suffix symbols at the 2026-07-12 Sunday open. 2026-08-26 Fintokei found zero spread on all z FX instead of only 15 pairs (33% reduction elsewhere); TOB benchmarking resolved identically for both subsets since go-live; fixed, client confirmed 2026-08-27. The 2026-07-13 finding that z-suffix trades fill on the older wide model is not mentioned again. Commercial question (setup fee vs monthly cost, no contract provision) from 2026-06-16 has no Slack resolution.
+State: CLIENT_PRICE_LSB_LDN went live on z-suffix symbols at the 2026-07-12 Sunday open. 2026-08-26 Fintokei found zero spread on all z FX instead of only 15 pairs (33% reduction elsewhere); TOB benchmarking resolved identically for both subsets since go-live; Kate's thread explanation: benchmarking config was unchanged since the 2026-07-12 go-live, so both subsets sat at zero spread until the fix (the _t test set streamed from 2026-06-30 showed no issues); Lukas confirmed it works as expected 2026-08-27. The 2026-07-13 finding that z-suffix trades fill on the older wide model is not mentioned again. Commercial question (setup fee vs monthly cost, no contract provision) from 2026-06-16 has no Slack resolution.
 Next: confirm the execution-routing bug is fixed; Daria to settle setup fee vs addendum.
 Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1782815433338759 https://mahifx.slack.com/archives/C08R694QVNX/p1783914394599609 https://mahifx.slack.com/archives/C08QWKFARDL/p1787754510970159 https://mahifx.slack.com/archives/C08QWKFARDL/p1787826867642199?thread_ts=1787755505.765169
+
+### account-requests — new trading accounts, September batch
+status: watching · since: 2026-09-24 · last: 2026-09-28
+State: Pau requested new accounts 2026-09-24; Cameron Hughes added 27 accounts (cTrader/MT4/MT5) plus FIX connections, multi-channel config and execution rules on LDN the same day. Nathan Burch logged on 2026-09-28 that the 27 accounts were completed but not confirmed to the client; no confirmation to Pau seen in #mahi-fintokei.
+Next: Mahi (Cameron Hughes) to confirm completion to Pau.
+Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1790244899556639 https://mahifx.slack.com/archives/C08R694QVNX/p1790579137529469?thread_ts=1790269115.866159
 
 ### liquidity-violation — "Liquidity Violation" cancels from stale JPXJPY price
 status: closed · since: 2026-07-08 · last: 2026-08-05 · closed: 2026-10-15
@@ -83,10 +89,10 @@ status: closed · since: 2026-06-16 · last: 2026-06-16 · closed: 2026-10-15
 State: Kate raised Zendesk 23102 for per-TradingTimeZone pricing.benchmarkMinimumSpread; blocked on the Fintokei pricer being on release/26.3, which the 26.4 upgrade now supersedes. No Slack update since; follow-up moved to compass-26-4-upgrade.
 Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1781610590423249 https://mahifx.zendesk.com/agent/tickets/23102
 
-### account-requests — new trading accounts, September batch
-status: closed · since: 2026-09-24 · last: 2026-09-24 · closed: 2026-10-15
-State: Pau requested new accounts 2026-09-24; Cameron Hughes added 27 accounts (cTrader/MT4/MT5) plus FIX connections, multi-channel config and execution rules on LDN the same day.
-Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1790244899556639 https://mahifx.slack.com/archives/C08R694QVNX/p1790269115866159
+### ndx-spx-limit-price — limit orders with 100,000x price on NDX/SPX
+status: closed · since: 2026-09-08 · last: 2026-09-09 · closed: 2026-10-15
+State: Shyam rejected NDX/SPX limit orders from CP 4300683 priced ~100,000x too large; Kristof Heger (2026-09-09) found it was a client's automated-system misconfiguration, already fixed.
+Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1788906654679089 https://mahifx.slack.com/archives/C08QWKFARDL/p1788945082237219?thread_ts=1788906654.679089
 
 ## Arc
 - 2025-07 — Beeks admin server NIC outages, NICs replaced; resolved mid-July
