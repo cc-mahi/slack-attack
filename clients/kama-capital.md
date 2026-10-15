@@ -103,6 +103,12 @@ State: Kama Securities MT5 A and B clients were routed to Compass on 23 Sep (Cam
 Next: Re-enable OZ session monitoring when Kama connects.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790147027559829 https://mahifx.slack.com/archives/C0B6FMU96G2/p1791200801834109
 
+### scope-price-latency — Hedge-fund client blames Scope price latency for win-rate drop
+status: watching · since: 2026-10-01 · last: 2026-10-01
+State: From Kate's 1 Oct call notes: one of Kama's clients, an aggregating hedge fund that sends weekly stats, saw Kama's win rate fall from 27% to 17% in a week and attributes it to latency in Scope's price. At the time Kama passed Scope's price straight through (Scope was the only market in price formation and the hedging pool). Kate flagged it as "one to look into at rostro"; no follow-up seen in Slack since. Price formation and the pool have since widened beyond Scope (see lp-pool-expansion), which may dilute the effect.
+Next: Kate/Will to check Scope's price latency on the Rostro side, or confirm it was dropped.
+Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1790858811618719
+
 ### limit-order-deviation — Limit order deviation (tag 10001)
 status: watching · since: 2026-09-25 · last: 2026-09-28
 State: Kama pass limit-order deviation in tag 10001, which is not in Mahi's FIX spec; Mahi expects it baked into price (tag 44). Moe explained on 25 Sep that PXM sets the limit price from Kama's TOB (not the client's limit) and sends a deviation, so Compass should respect limit plus/minus deviation and allow worse fills up to it; this also explains Scope limit rejects. William noted price improvement is off on all A_CLIENTS rules and has a cap setting. Mahi still does not accept the tag and no decision on honouring it is visible.
