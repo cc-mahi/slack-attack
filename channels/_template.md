@@ -1,19 +1,20 @@
 ---
-name: example-channel     # without leading #
-channel_id: null          # Slack ID, e.g. C0123ABCD
-purpose: ""               # one line — what this channel is for
-scope: cross-cutting      # cross-cutting | team | announcements | other
-last_catchup: null        # ISO8601
+name: example-channel             # without leading #
+channel_id: C0000000000
+purpose: ""                       # one line — what this channel is for
+scope: cross-cutting              # cross-cutting | team | announcements | other
+last_catchup: null                # ISO8601 UTC
 ---
 
-## Summary
+## Now
+Up to 4 lines: why this channel is tracked and what's live in it.
 
-Why I'm tracking this channel and what "notable" looks like here.
+## Streams
 
-## Recent topics
+### example-topic — Example stream title
+status: open · since: 2026-10-01 · last: 2026-10-01
+State: Current truth in 1–4 sentences. Client-specific issues belong in that client's dossier.
+Refs: https://mahifx.slack.com/archives/C0000000000/p1790856000000100
 
-Reverse chronological rolling log. Trim >30d for high-traffic channels. Each entry cites a Slack permalink. No status markers — channel topics are summary bullets; real tracked issues live on the relevant client dossier.
-
-```
-- YYYY-MM-DD — short description. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
-```
+## Arc
+- 2026-10-01 — One line per notable channel-level milestone
