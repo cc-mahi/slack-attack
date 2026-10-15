@@ -1,54 +1,92 @@
 ---
 slug: toponetrader
+aliases: []
 refs:
   vibepulse: ../VibePulse/.claude/clients/toponetrader.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: toponetrader
   hosts: ../MahiProduct/data/client-hosts.json          # entry: toponetrader
   wiki: ../MahiProduct/wiki/clients/toponetrader.md
-channels_override: null
-key_people_overrides:
+channels:
+  internal-toponetrader: C08TG143F4L
+  mahi-toponetraders: C08U853T684
+contacts:
   - {name: "Matt Morris", role: "CEO, Top One Trader"}
   - {name: "Lars Aerts", role: "Operations / integration lead at TOT"}
-  - {name: "Shane Kalichurn", role: "Operations; weekly payout reporting"}
+  - {name: "Shane Kalichurn", role: "TOT operations; payouts reporting, harsh-execution group requests"}
+  - {name: "Daniel", role: "TOT trading/risk contact; raises slippage and fill queries in mahi-toponetraders"}
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
-  - {name: "Todd Hodges", role: "TOT internal contact; onboarded Jan 2026 alongside Priojit for Compass product training", confidence: low}
+  - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-08-17T08:48:00Z
+last_catchup: 2026-10-15T13:08:54Z
+status: active
 ---
 
-## Recent issues
+## Now
+Prop firm; Mahi is dealing desk and risk. Focus is payout ratio: skew and LR tightened, harsher execution on 2-Step/1-Step groups, spreads restored on Prop Firm Match.
+Open client query: CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain). New: drop-copy volume exceeds expected volume (checking with Shane).
 
-> [open] 2026-07-25–29 — MatchTrader BTCUSD order arrived at Mahi 100x oversized (1.2 lots → 120 BTC)
-> Daniel (TOT) flagged account 17202's BTCUSD sell as filling well outside the candle range. Shyam Hari found the order arrived at Mahi already sized at 120 BTC and confirmed $63,900.20 was the correct VWAP for that size — no pricing or slippage issue on Mahi's side. Daniel confirmed the trader only opened 1.2 lots on the platform; MatchTrade support initially pointed back at "the bridge side," and Shyam confirmed to Broker Support that the bridge provider was MatchTrade itself. Shyam also flagged in #internal-toponetrader that no fractional crypto orders have come through this channel at all, suggesting other traders are affected the same way. On 2026-07-29 Broker Support identified the root cause: a trading-session multiplier misconfigured at 100x on BTCUSD, and asked TOT to set it to 0.01 and confirm whether other symbols show the same discrepancy. Awaiting confirmation the fix is applied. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784987610439809) [diagnosis](https://mahifx.slack.com/archives/C08U853T684/p1785122677439389) [other-traders-flagged](https://mahifx.slack.com/archives/C08TG143F4L/p1785301912854039) [root-cause](https://mahifx.slack.com/archives/C08VCTZ7ZN2/p1785304369359649)
+## Streams
 
-> [resolved] 2026-07-15–18 — Compass upgrade: maintenance window Sat 18 Jul 10:00–11:00 UK completed
-> Liam confirmed to Arjie that positions held over the weekend would stay open with no impact during the ~15min pricing gap. Release completed successfully 2026-07-18 ~10:17 UK; client acknowledged. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1784120689018969) [confirmation](https://mahifx.slack.com/archives/C08U853T684/p1784275950431989) [completion](https://mahifx.slack.com/archives/C08U853T684/p1784366260301619)
+### drop-copy-volume — Drop-copy volume exceeds expected volume
+status: open · since: 2026-10-15 · last: 2026-10-15
+State: Cameron Hughes saw drop copies carrying much more volume than expected. Shane (TOT) thinks the extra accounts are "competition" accounts not sent to Mahi, and is double-checking.
+Next: Shane to confirm whether the excess is competition accounts.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1792053381996649 https://mahifx.slack.com/archives/C08TG143F4L/p1792053398775309
 
-> [open] 2026-07-06 — USDJPY spread reported jumping 1→16 pts (client-side); Mahi feed confirmed tight
-> Lars forwarded a report from Daniel (TOT) that USDJPY spread intermittently jumps from 1 to 16 points, reported around 4am EST during the London session. Rory King and Cameron Hughes picked it up; Shyam Hari confirmed Mahi's published USDJPY spread for the full 6 Jul London session (07:00–13:00 UTC) stayed consistently tight (avg 0.6pt, max 2pt across 91,851 ticks), indicating the jump happens downstream of Mahi's pricing. Awaiting specific trade/time detail from the client to dig further. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1783353697503159)
+### cadchf-slippage — CADCHF second fill 1.3 pips above quoted ask
+status: open · since: 2026-10-14 · last: 2026-10-14
+State: Daniel forwarded TOT's analysis: two 3-lot buys at the same price, the second filled 4 ms after the first at 1.3 pips worse than Mahi's published ask. TOT wants Mahi to explain the fill. Shyam Hari acknowledged and said Mahi will check.
+Next: Mahi (Shyam Hari) to investigate and revert to Daniel.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1791943609687779 https://mahifx.slack.com/archives/C08U853T684/p1791943843239269
 
-> [resolved] 2026-07-01 — Pricing incident (Finalto/MAHI_LP_5) at ~07:43 BST; LP removed 2026-07-02
-> Cameron Hughes flagged in #internal-toponetrader that the same pricing feedback loop incident seen at Infinox also hit TOT at ~07:43 BST, caused by MAHI_LP_5 (Finalto). On 2026-07-02, Liam confirmed MAHI_LP_5 is the Finalto LP from Infinox and recommended swapping it out given the feeds are untrusted; Cameron Hughes confirmed it had been removed from price formation and bounced the pricers. No client-facing communication in #mahi-toponetraders. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1782927073351899) [resolution](https://mahifx.slack.com/archives/C08TG143F4L/p1782991925017169)
+### payout-ratio-levers — Payout ratio, skew and spread levers
+status: open · since: 2026-09-30 · last: 2026-09-30
+State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% over 6 weeks. Mahi is raising skew on 1-Step and 2-Step. EURUSD, USDJPY and GBPUSD spreads go back to 0.0 on Prop Firm Match after a ranking slide. Max loss 9% to 8% is the agreed fallback if skew and spreads are not enough. TOT's Launchpad experimental groups need the harsher execution rules, so Shane will flag each new group.
+Next: Mahi watching results of skew and spreads; Shane to notify Mahi of each new Launchpad group.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1790787041722219
 
-> [resolved] 2026-06-01 — MatchTrader account 10408: 1.7 lot (170 XBT) order rejected; TOB depth raised
-> Arjie raised that account 10408 on MatchTrader could not place a 1.7 lot position despite sufficient margin. Cameron Hughes diagnosed the order size (170 XBT) exceeded Mahi's published TOB depth; he raised the TOB tiers and imported new tiers. Arjie confirmed the large orders were being accepted by 11:03 BST; resolved same morning. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1780303004735039)
+### btcusd-100x-multiplier — MatchTrader BTCUSD order 100x oversized
+status: open · since: 2026-07-25 · last: 2026-07-29
+State: A 1.2 lot BTCUSD order reached Mahi as 120 BTC. Broker Support found a session multiplier misconfigured at 100x on BTCUSD and asked TOT to set it to 0.01 and check other symbols. No confirmation seen in channels since 2026-07-29.
+Next: TOT to confirm the multiplier fix and check other symbols.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1784987610439809 https://mahifx.slack.com/archives/C08VCTZ7ZN2/p1785304369359649
 
-> [open] 2026-05-28 — ETHUSD/XETUSD LIMIT order rejections due to 3dp pricing precision
-> Isaac Dann flagged in #mahi-toponetraders that TOT is submitting ETHUSD/XETUSD LIMIT orders with 3 decimal place precision; Mahi prices and executes ETHUSD at 2dp, causing rejections. Pattern traced to mostly one counterparty. No resolution or thread replies yet as of run time. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1779942346326859)
+### lr-harsh-execution — LR retune and harsher execution for 2-Step
+status: watching · since: 2026-08-25 · last: 2026-08-26
+State: Shane asked (2026-08-25) for harsher execution on the second phase of the 2-Step plan and harsher still when funded. Cameron Hughes sent LR options and applied LR changes on 2026-08-26 (channel refill/caps and a global cap). Shane is looking for a way to identify 2-Step accounts on TOT's side.
+Next: Shane to provide a way to distinguish 2-Step accounts.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787643570858959 https://mahifx.slack.com/archives/C08TG143F4L/p1787750805616039
 
-> [resolved] 2026-05-19 — BTCUSD slippage complaint; expected VWAP fill behaviour
-> Arjie (TOT MatchTrader ops contact) raised a concern about a trader account 19099 (demoTOTusd-B1 group) experiencing 5–10 pip slippage on BTCUSD vs the TOB price. Nathan Burch investigated and confirmed the 65 BTC sell consumed 5 liquidity layers, producing a VWAP fill of $76,944.91 vs TOB $76,992.22 — correct behaviour. Arjie acknowledged and confirmed resolved. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1779154129412389)
+### prop-perps — Prop perps request
+status: watching · since: 2026-09-30 · last: 2026-10-05
+State: Matt asked about prop perps (Vest Markets, MyFundedPerps). Cameron Hughes sees it as a growing area and a possible new offering and will look at Vest. Logged on the wiki Client requests section.
+Next: Cameron Hughes to look at Vest.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://mahifx.slack.com/archives/C08TG143F4L/p1791183636574369
 
-> [resolved] 2026-05-11 — Crypto FI skew P&L reporting bug (XBTUSD/XETUSD)
-> XAUUSD yield alert (-$4,932 on Funded FX) triggered a deeper look; Cameron Hughes identified a separate FI bug: `PRICINGBENCHMARKMIDLIFETIMEPNL` on the `_CRYPTO_CLIENTS` book dropped ~-$8.7k at 15:49:05 UTC 2026-05-10 with no fill, and FI cumsums for XBTUSD froze — broken risk-reporting pipeline for crypto books. ZD ticket #22959 raised; an older fix (ZD#20890) identified as deployable. Daria updated `signalReturnBenchmarkMarketSelectors` for XBTUSD and XETUSD on 2026-05-12 and marked ticket solved. Root cause: 3 large trades around 15:46–15:47 UTC where model mid moved faster than reference mids, causing negative skew P&L. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1778555635853379)
+### arb-pricing-tuning — Arb flagged by daily checks, pricing tweaks
+status: watching · since: 2026-08-18 · last: 2026-08-24
+State: GBPUSD arb alert on 2026-08-18 led to proportion and price-improvement reductions; on 2026-08-21 daily checks flagged more arb, so MAHI_LP5 was removed from signalReturn markets, GBPJPY added to the GBPUSD/USDJPY override and signal moved to synapse. By 2026-08-24 no more significant arb; being monitored.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787044539658809 https://mahifx.slack.com/archives/C08TG143F4L/p1787572737892749
 
-> [resolved] 2026-05-11 — XAUUSD Funded FX yield alert (-$4,932); false alarm
-> Automated ESCALATE alert on Top One Trader Funded FX · XAUUSD · -$4,932. Cameron Hughes reviewed, confirmed reporting error (one massive off-market trade distorting the yield profile). Echo showed no real P&L issue. No client impact. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1778493874264169)
+### ctrader-billing-check — cTrader shut off by TOT; billing model review
+status: watching · since: 2026-08-26 · last: 2026-09-10
+State: TOT stopped using cTrader (Shane: it was costing them heavily); config kept in case they return. On 2026-09-09/10 internal billing was queried against the revised per-user model and Will Carter noted the fixed component was missing for low totals; Cameron Hughes was asked to review accounts.
+Next: Cameron Hughes to review accounts; internal billing to reconcile.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787752907131709 https://mahifx.slack.com/archives/C08TG143F4L/p1789022593579519
 
-> [open] 2026-03-19 — Brokerage expansion discussion
-> Will Carter had introductory call with Matt Morris. TOT wants to use their Comoros FX licence to launch a retail brokerage, marketing to prop clients — full outsourced dealing desk discussed, same model as ACG. Follow-up call scheduled Monday 23 March. [permalink](https://mahifx.slack.com/archives/C08TG143F4L/p1773937053278899)
+### mt5-bridge-drop — Brief MT5 bridge disconnect 2026-10-06
+status: closed · since: 2026-10-06 · last: 2026-10-06 · closed: 2026-10-15
+State: MT5 bridge dropped for about 30 s at 03:10 UTC, with PagerDuty disconnect and cancelled-order alerts. No follow-up; no client report. Assumed resolved.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1791257735457909
 
-> [resolved] 2026-01-02–06 — Crypto expansion to MatchTrader
-> Lars requested all crypto symbols activated on MatchTrader (same list as MT5). Target launch Wednesday Jan 7. Testing on Jan 6 showed only BTC/ETH visible; Cameron Hughes worked through symbol configs and decimal place issues with Shane and Lars; all 34 crypto instruments confirmed active and testable by Jan 7. [permalink](https://mahifx.slack.com/archives/C08U853T684/p1767370386895999)
+### compass-upgrade-sep — Compass upgrade maintenance window 2026-09-19
+status: closed · since: 2026-09-18 · last: 2026-09-18 · closed: 2026-10-15
+State: Maten Rehimi requested a 10:00-11:00 UK window on 2026-09-19 (about 20 min downtime expected). No client objection or completion message seen; assumed completed.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1789735398809429
 
-## Notable topics
+## Arc
+- 2026-01 — Crypto symbols (34) enabled on MatchTrader alongside MT5
+- 2026-03 — Brokerage expansion discussion: TOT wants a retail brokerage on its Comoros licence with an outsourced dealing desk
+- 2026-07-18 — Compass upgrade completed
+- 2026-08 — TOT shut off cTrader
+- 2026-09-30 — Payout-ratio call with Matt and Shane; skew increase and spread restoration agreed
