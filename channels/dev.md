@@ -3,7 +3,7 @@ name: dev
 channel_id: C8568C6HG
 purpose: "Core engineering channel — daily huddle, cross-cutting dev discussion, regression coordination, PR triage"
 scope: cross-cutting
-last_catchup: 2026-04-27T09:35:00Z
+last_catchup: null
 ---
 
 ## Summary
