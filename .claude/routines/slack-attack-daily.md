@@ -35,11 +35,11 @@ Known IDs:
 
 2. Capture the run start. Record `RUN_START_SHA=$(git rev-parse HEAD)` and `RUN_START_TS=$(date +%s)`. You will use these in step 8 to count what landed and compute wall time.
 
-3. Catch up all active clients in batches. Invoke /slack-attack (no arg) repeatedly. Each batch processes the top 3 staleness-ranked clients; the orchestrator probe-skips any candidate showing zero non-bot activity since last_catchup (a frontmatter-only last_catchup bump rather than spinning up a full subagent). Continue batches until scripts/rank-clients shows no client with last_catchup older than today's UTC start, or you have completed 12 batches (whichever comes first). The batch cap is sized to cover the full active client set with headroom (currently ~26 actives, 12 × 3 = 36 capacity); raise it if `scripts/rank-clients | wc -l` ever approaches that ceiling.
+3. Catch up all due clients. Invoke /slack-attack (no arg) **once**. It runs `scripts/rank-clients --due`, probe-skips quiet clients, dispatches the rest in waves of up to 6 parallel catchup subagents, and returns one globally ordered brief.
 
-4. Collect, don't send. After each /slack-attack invocation, capture that batch's prose output but DO NOT send anything to Slack yet. Keep each client's section as a discrete unit (the `**<client>**` header through its references) so they can be reordered later. Drop the per-batch continuation tables. Track which clients were probe-skipped or catchup-quiet across the full run — those collapse into the `Quiet today` line in the canvas and do not get their own section.
+4. Collect, don't send. Capture the brief. Each client section (`**<client>**` header through its references) is already in significance order; the `Quiet today` line and any failures paragraph come at the end. Don't send anything to Slack yet.
 
-5. Push the commits. Run `git push origin HEAD:main` from the slack-attack clone once all batches are done. (`HEAD:main` pushes the current branch to remote `main` regardless of what auto-named branch the cloud session checked out — `git push origin main` is a no-op because the local `main` ref isn't where the new commits live.) If push fails, include the full error text verbatim in the failures paragraph of the canvas (step 6) and surface it in the short summary message (step 8) — do not swallow.
+5. Push the commits. Run `git push origin HEAD:main` from the slack-attack clone once /slack-attack has returned. (`HEAD:main` pushes the current branch to remote `main` regardless of what auto-named branch the cloud session checked out — `git push origin main` is a no-op because the local `main` ref isn't where the new commits live.) If push fails, include the full error text verbatim in the failures paragraph of the canvas (step 6) and surface it in the short summary message (step 8) — do not swallow.
 
 6. Compose the canvas content. Build a single Canvas-flavored Markdown document with this structure (omit sections that don't apply):
 
@@ -62,13 +62,11 @@ Known IDs:
 
    Quiet today (N): slug, slug, slug, ...
 
-   <If you stopped at the batch cap: "Unprocessed (N): slug, slug, ..." on its own line.>
-
    <If any failures occurred during the run (push failures, catchup sanity-check aborts, etc.): include verbatim error text as a closing paragraph above the run-stats line.>
 
    —
 
-   run stats: dispatched D, probe-skipped P, batches B, weekly Y|N|-, wall ~Mm
+   run stats: dispatched D, probe-skipped P, streams +N ~U ✓C, weekly Y|N|-, wall ~Mm
    ```
 
    **Section ordering.** Order ALL non-quiet client sections globally by significance — lead with whatever a tired reader would most want to see first (direct mentions of Cameron, escalations, real decisions). This is a single global priority order across the entire run, not per-batch.
@@ -89,10 +87,10 @@ Known IDs:
    Per-client numbering resets at each client header, same as the skill emits. The canvas lands in Slack, where embedded links render cleanly — bare URLs would clutter.
 
    **Run stats**, computed from this run's commits (commits are ground truth, not your own bookkeeping):
-   - `git log --pretty=oneline ${RUN_START_SHA}..HEAD` lists every commit this run produced.
-   - P = count of commits whose subject contains `(probe-skip` (orchestrator-owned frontmatter bumps).
-   - D = count of remaining `chore(catchup):` commits (dispatched — includes refreshes, quiet-window bumps from inside subagents, and bootstraps).
-   - B = number of /slack-attack invocations you made.
+   - `git log --format='%s%n%b' ${RUN_START_SHA}..HEAD` lists every commit and trailer this run produced.
+   - P = commits whose subject contains `(probe-skip`.
+   - D = remaining `chore(catchup):` and `refactor(dossiers): convert` commits.
+   - N / U / C = counts of `(new)`, `(updated)`, `(closed)` across all `streams:` trailer lines.
    - M = round((now_unix - RUN_START_TS) / 60).
    - weekly indicator: `-` for non-Mondays; `Y`/`N` filled in by step 9 on Mondays.
 
