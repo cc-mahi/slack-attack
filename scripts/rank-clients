@@ -17,6 +17,8 @@ Output: tab-separated rows, columns:
   - days_since:   integer with 'd' suffix, or '—' if 'never'
   - note:         'bootstrap' if no local dossier yet, else blank
 
+--due: only rows with last_catchup before today's UTC start (what the daily run must process).
+
 Sort: 'never' first (oldest of all), then by days_since descending, then slug alphabetical.
 
 Retired clients (status: retired in dossier frontmatter) are excluded by default;
@@ -120,10 +122,25 @@ def days_since(iso):
     return max(0, (datetime.now(timezone.utc) - dt).days)
 
 
+def is_due(iso, now):
+    """True if never caught up, unparseable, or last caught up before today's UTC start."""
+    if not iso or iso.lower() == "null":
+        return True
+    try:
+        last = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    if last.tzinfo is None:
+        last = last.replace(tzinfo=timezone.utc)
+    return last < now.replace(hour=0, minute=0, second=0, microsecond=0)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--include-retired", action="store_true",
                     help="Include retired clients (default: exclude)")
+    ap.add_argument("--due", action="store_true",
+                    help="Only clients whose last_catchup is before today's UTC start (or never)")
     args = ap.parse_args()
 
     slugs = collect()
@@ -131,6 +148,8 @@ def main():
     rows = []
     for slug, info in slugs.items():
         if info["status"] == "retired" and not args.include_retired:
+            continue
+        if args.due and not is_due(info["last_catchup"], datetime.now(timezone.utc)):
             continue
         d = days_since(info["last_catchup"])
         rows.append({
