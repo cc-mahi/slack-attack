@@ -1,301 +1,259 @@
 ---
 name: catchup
-description: Worker — pulls Slack activity since last_catchup for one client or channel and applies dossier updates in place. Writes the dossier; does not produce a readable digest. Use when the user says "/catchup <slug>" or "/catchup #<channel>". For the readable brief or a multi-client run, use /slack-attack instead.
+description: Worker — pulls Slack activity since last_catchup for one client or channel, updates its stream-based dossier in place, and commits. Writes the dossier; does not produce a readable digest. Use when the user says "/catchup <slug>" or "/catchup #<channel>". For the readable brief or a multi-client run, use /slack-attack instead.
 ---
 
-`/catchup` is the worker. Its product is the dossier file on disk — it reads Slack and edits `clients/<slug>.md` or `channels/<name>.md`. It does **not** synthesise a readable brief; that's `/slack-attack`'s job. When invoked directly by the user it returns a terse structured summary of what changed; when invoked from a subagent (via `/slack-attack`) the subagent forwards the same summary back.
+`/catchup` is the worker. Its product is one dossier file (`clients/<slug>.md` or `channels/<name>.md`) and one commit. Dossiers are read by **agents in this repo**, not humans: keep them small, current and structured. Git is the event log — the dossier holds current state only. It does **not** write a readable brief; that's `/slack-attack`'s job.
 
-A target is required. If invoked with no arg, stop and point at `/slack-attack`.
+A target is required. With no arg, stop and point at `/slack-attack`.
 
-If the resolved client dossier has `status: retired` in frontmatter, refuse and stop. Emit one line and exit — don't pull Slack, don't bump `last_catchup`:
+If the client dossier has `status: retired`, emit one line and stop — no Slack pull, no `last_catchup` bump:
 
 ```
 catchup: <slug> — retired (<retired_at>); skipping. Remove `status: retired` from frontmatter to re-activate.
 ```
 
-The dossier stays as a frozen record. Re-activation is a deliberate frontmatter edit by the user, not something to negotiate around.
-
 ## Who the user is
 
-The reader is **Cameron Copland** (Slack user ID `U099FA0D7CP`). Direct mentions / DMs that target this ID are notable; mentions of other Camerons (notably **Cameron Hughes**, an Analyst — see `../MahiProduct/.claude/org-chart.md`) are not. Match strictly on the Slack user ID — don't infer audience from first names alone.
+The reader is **Cameron Copland** (Slack user ID `U099FA0D7CP`). Direct mentions / DMs that target this ID are notable; mentions of other Camerons (notably **Cameron Hughes**, an Analyst — see `../MahiProduct/.claude/org-chart.md`) are not. Match strictly on the Slack user ID — never infer audience from first names.
 
-## Source-of-truth recap
+## Sources — read, never write
 
-- Hosts / Slack channels / party names / distribution markets → `../VibePulse/.claude/clients/<slug>.yaml`.
+- Hosts / Slack channel names / party names / distribution markets → `../VibePulse/.claude/clients/<slug>.yaml`.
 - Commercial terms → `../MahiProduct/data/billing/clients.json`.
-- Internal Mahi staff roster (for the "no Mahi staff in `key_people_overrides`" rule, and for distinguishing Mahi vs client speakers in dossier prose) → `../MahiProduct/.claude/org-chart.md`. If a name appears there, it's internal — don't add to `key_people_overrides`, and the org-chart row tells you their role for prose attribution.
-- External contacts worth persisting → `../MahiProduct/wiki/people/`. Never write there from here; if you find a new external contact worth keeping, add to `key_people_overrides` here with `confidence: low` and flag for promotion.
+- Internal Mahi staff → `../MahiProduct/.claude/org-chart.md`. Use it for attribution; never put staff in `contacts`.
+- External contacts → `../MahiProduct/wiki/people/`. Only people *not* there go in the dossier's `contacts`.
+
+Never write outside this repo. Never copy into a dossier anything one read of these sources returns (hosts, terms, party names, contact details). The dossier stores the synthesis — what is going on and where it stands — plus permalinks to dig further.
+
+## Dossier format (the contract)
+
+Enforced by `scripts/check-dossiers` (pre-commit runs it). Templates: `clients/_template.md`, `channels/_template.md`.
+
+```markdown
+---
+slug, aliases, refs, channels (name: ID), contacts, last_catchup, status
+---
+## Now
+≤4 lines: what matters with this client right now.
+
+## Streams
+
+### <id> — <title>
+status: open|watching|closed · since: YYYY-MM-DD · last: YYYY-MM-DD[ · closed: YYYY-MM-DD]
+State: current truth, 1–4 sentences, rewritten in place.
+Next: who owes what (omit if nothing).
+Refs: <origin permalink> <latest permalink>   (bare URLs, 1–4)
+
+## Arc
+- YYYY-MM-DD — one line per relationship-level milestone (≤~20 lines)
+```
+
+- **Stream** = one ongoing topic (an integration, a recurring pricing problem, a commercial thread), not one incident. Ten XAUUSD rejection incidents are one stream. Target 5–15 streams per client.
+- **ID**: kebab-case, ≤24 chars, unique, **never renamed or reused**. The heading line is the stable anchor git history is queried by. Edit the title if needed, never the ID.
+- **Meta line** is the first line under the heading, exact format above (separator ` · `). `since` = first Slack signal; `last` = date of the latest Slack message on the stream and **must match a permalink in Refs** (±1 day). Dates in UTC.
+- **State** is rewritten, never appended to. No "2026-10-07 update —" lines; that history is in git.
+- **Order**: open (newest `last` first), then watching, then closed.
+- **Size**: ≤10KB target, 15KB hard cap. Over target → merge or close streams, tighten State.
+- Never delete a stream by hand. Close it; `scripts/prune-dossiers` removes closed streams 14 days later.
 
 ## Resolving the target
 
-- `/catchup <slug>` → `clients/<slug>.md`. Channels resolve from (in order): `channels_override` on the dossier, then `slack:` in `../VibePulse/.claude/clients/<slug>.yaml`. The VibePulse `slack:` block is a dict `{internal: <name>, client: <name>}` — **scan both**. The internal channel typically has the actual root-cause diagnosis; skipping it loses load-bearing context. If VibePulse has multiple related yamls (e.g. `pepperstone` + `pepperstone-crypto`) and they share the same slack channels, they're one target — use either, they'll resolve to the same thing.
-- `/catchup #<channel>` or `/catchup <channel-name>` → `channels/<name>.md`. If missing, create it from `channels/_template.md` and derive the frontmatter yourself (see "Bootstrap a channel dossier" below) — don't block.
-- No-arg form is not supported. Tell the user to use `/slack-attack` for the multi-client batched flow.
+- `/catchup <slug>` → `clients/<slug>.md`. Read channels from frontmatter `channels:` (name → ID); skip names matching the skip list in `.claude/docs/slack-conventions.md`.
+- If `channels:` is missing a channel the client should have: resolve names from the VibePulse `slack:` block (it's `{internal: <name>, client: <name>}` — **use both**; the internal channel carries the root-cause diagnosis), get IDs with `slack_search_channels` (`channel_types: "public_channel,private_channel"`), and write `name: ID` into `channels:`. Never skip a missing internal channel — that omission cost the axiory LD4 root cause on 2026-04-27.
+- `/catchup #<channel>` or `/catchup <channel-name>` → `channels/<name>.md`, reading `channel_id` from frontmatter.
+- Dossier has no `## Streams` section → it's legacy: follow **Legacy conversion** below.
 
 ### Bootstrap a client dossier
 
 If `clients/<slug>.md` doesn't exist:
 
-1. Check `../VibePulse/.claude/clients/<slug>.yaml`. If absent, try common variants (hyphen/underscore, with/without `-crypto`/`-cfd` suffix). **Pre-live clients often have no VibePulse yaml and no billing entry** — before giving up, check `../MahiProduct/data/client-hosts.json`, the "Signed but not yet live" section of `../MahiProduct/data/fleet.txt`, and `../MahiProduct/data/onboarding/<slug>.json` (note the tracker sometimes uses a different slug than infra — e.g. `tmgm.json` ↔ `trademax`). Only report the slug as unknown and stop if *none* of those know it.
-2. Copy `clients/_template.md` → `clients/<slug>.md`.
-3. Fill `refs:` — point `vibepulse` at the yaml(s), `billing`/`hosts` at the MahiProduct catalogues, `wiki` at `../MahiProduct/wiki/clients/<slug>.md` if it exists else `null`. Set any the upstream doesn't cover to `null` with a short trailing comment saying why. For a pre-live client add an `onboarding:` ref pointing at its tracker JSON, and `aliases:` if the tracker slug differs from this one.
-4. `key_people_overrides: []`, `last_catchup: null`. Leave `channels_override: null` **unless** there's no VibePulse yaml to resolve channels from — then set it explicitly to the resolved `[internal-<x>, mahi-<x>]` pair, since channel resolution has nothing else to read.
-5. Leave `Recent issues` and `Notable topics` empty — the current `/catchup` run will populate them.
-6. **Status section:** if `wiki:` is set (MahiProduct has it), delete the `## Status` section entirely — the wiki is canonical. If `wiki: null`, keep the section and populate from VibePulse + the catchup window's signals (stage, integration, relationship — three bullets, one line each). Don't fabricate; if a field is unknown, write `unknown` and move on.
-7. Note the bootstrap in the run summary ("bootstrapped `clients/<slug>.md` from VibePulse").
+1. Find the client: `../VibePulse/.claude/clients/<slug>.yaml` (try hyphen/underscore and `-crypto`/`-cfd` variants). Pre-live clients often have none — then check `../MahiProduct/data/client-hosts.json`, the "Signed but not yet live" section of `../MahiProduct/data/fleet.txt`, `../MahiProduct/data/onboarding/<slug>.json`, and `../MahiProduct/wiki/clients/`. Only if none know it, report unknown and stop.
+2. Copy `clients/_template.md` to `clients/<slug>.md`; set `slug`, `refs` (unknown refs `null` with a short trailing comment), `aliases` if billing/onboarding use another slug, `channels` (resolve as above), `contacts: []`, `last_catchup: null`. Delete the template's example stream and Arc line.
+3. This run populates Now / Streams / Arc. Use the 30d window (see Reading activity) and expand on ambiguity.
+4. Commit subject `chore(catchup): bootstrap <slug> dossier`.
 
 ### Bootstrap a channel dossier
 
-If `channels/<name>.md` doesn't exist:
-
-1. `slack_search_channels` for the channel; seed `purpose` from its topic/purpose. If generic, skim ~20 recent messages to infer.
-2. `scope` is a best-guess (`cross-cutting` / `team` / `announcements` / `other`) — the user will correct on review.
-3. Record `channel_id` in `.claude/docs/slack-conventions.md`.
-
-## Reading activity
-
-For each target channel:
-
-1. `oldest` = `last_catchup` on the dossier; if null (freshly bootstrapped or just-reset dossier), 30d ago. The null-case window is so initial population picks up real history — 24h on a brand-new dossier produced empty `Recent issues` sections.
-2. Resolve channel_id: prefer `.claude/docs/slack-conventions.md` cache; else `slack_search_channels` with `channel_types: "public_channel,private_channel"`. Write any newly-resolved ID back to the cache. If a client target's internal channel is missing from the cache, **don't skip it** — search for it and cache it on first sight. Absence-by-omission is the failure mode that cost us the axiory LD4 root-cause diagnosis on 2026-04-27.
-3. `slack_read_channel` with `oldest`, `limit: 100`. If the response carries a `next_cursor`, keep paginating with it until you reach `oldest` — after a gap of days or weeks one page won't cover the window, and stopping early silently drops the oldest part of it. Report any channel that needed more than one page under "Hit channel limit on".
-4. For notable threads, `slack_read_thread` with the real `message_ts` (needs `response_format: "detailed"` when searching).
-
-Skip channels matching the skip list in `.claude/docs/slack-conventions.md`.
-
-## Resolving ambiguity — expand the window
-
-The default windows (24h since `last_catchup`, 30d when freshly bootstrapped) are starting points, not ceilings. **If what you find references events you can't see, dig deeper before writing the dossier.** The bar is: every `Recent issues` entry should stand on its own without phrases like "pre-window", "per earlier event", or "following the [unspecified] incident". If you'd have to write that, you haven't read enough yet.
-
-This matters most for clients **without an established dossier** — the user shouldn't have to manually `/seed-client` and re-run to get a coherent first pass. catchup should keep digging until the picture is clear, on its own.
-
-Triggers to expand:
-
-- A message in the window refers to an earlier event you don't have context for ("after the mid-April pause", "since the X incident", "client lost N on Y", "post-decommission", "now that we've moved off Z").
-- Cross-channel signals contradict and you can't tell which is current — e.g. one channel discusses winding infra down, another shows ongoing automation/onboarding work. (Real example: fundingpips 2026-04-30 — internal channel discussed AWS shutdown costs, while the same window had a terraform import suggesting infra still being maintained. The dossier ended up with "pre-window" leaning on a David Cooney comment about a futures-business loss the agent never read directly.)
-- The dossier has no prior `Recent issues` to anchor against (freshly bootstrapped, or first real-content run) and the immediate window leaves you guessing about lifecycle / status / what-changed-recently.
-- Status section (when `wiki: null`) can't be filled in confidently — e.g. you can't say if integration is "live", "paused", or "winding down" from the window alone.
-
-How to expand, in order:
-
-1. **Widen the channel reads** on the target's resolved channels. Bump `oldest` to 60d, then 90d if still incoherent. Re-run `slack_read_channel`.
-2. **Search the slug across all channels** with `slack_search_public_and_private` (default context on) to surface earlier mentions in #sales, #frontoffice, #internal-trading-daily-checks, etc. **Always bound the search in time**: pass `after: <oldest_unix>` and `before: <now_unix>` (the bash-anchored values from "Sanity-check the window" below), or the `after:YYYY-MM-DD`/`before:YYYY-MM-DD` query modifiers. An unbounded search is the root of the recurring year-off corruption — Slack happily returns year-old threads, which then get stamped with the current year. Never search without an `after` bound. Apply the cross-channel rule (trigger, not truth) — but use these to decide *where to read next*, not what to write directly.
-3. **Read parent threads.** If the in-window message has a `thread_ts` referencing earlier replies, fetch them with `slack_read_thread`.
-4. **Follow the breadcrumb.** Once you've located the earlier event referenced (e.g. the original "we're pausing flow" message), read its surrounding context — the decisions and follow-ups around it usually answer the ambiguity.
-
-**Discard out-of-window results.** Whatever the source (search or channel read), drop any returned message whose `ts` falls outside `[oldest_unix, now_unix]` before using it — a result older than `oldest` is out of window by definition and must not become a Recent issues entry. Decode `ts` to a date and compare; don't eyeball it. This is the in-window content rule that the time bounds (above) and the pre-commit hook (below) backstop.
-
-Stopping rule:
-
-- You can write each `Recent issues` entry self-contained, with concrete dates and permalinks for the events it references.
-- Hard cap: 90d back. Beyond that, write what you have, **flag the open question explicitly** in the entry ("earliest signal in this window — older context not searched"), and move on. Don't loop indefinitely.
-
-Cost note: this trades latency for dossier quality. A first-time fundingpips catchup pulling 90d is going to be slower than a normal 24h refresh. That's fine — the dossier is durable, so the cost is paid once.
-
-## What counts as notable
-
-In priority order:
-
-1. **Direct mentions of the user** (`<@U099FA0D7CP>`) or DMs.
-2. **Questions awaiting a reply** — unanswered `?` messages, especially in threads the user was in.
-3. **Decisions** — "we're going to", "agreed", "let's do X".
-4. **Escalations** — client dissatisfaction, outages, urgent language, specific incidents.
-5. **Recurring issues** — topic already in the dossier's `Recent issues` that's flaring again.
-6. **New external people** — client/prospect/vendor names that aren't yet in `../MahiProduct/wiki/people/` *and* aren't already in `key_people_overrides`.
-7. **Dossier-contradicting facts** — e.g. VibePulse says `SI book` but messages discuss churn/pause; flag but don't edit VibePulse. If the contradiction is about longer-term state (stage / integration / relationship) on a `wiki: null` dossier, refresh the `## Status` section in the same run.
-
-Routine bot pings, deployment notifications, and single-reaction chatter are not notable. Skip silently.
-
-## Cross-channel signals — trigger, not truth
-
-`slack_read_channel` is the authoritative read — scoped to the target's resolved channels (`channels_override` → VibePulse `slack:` block → cache). Anything from there can be written into the dossier directly.
-
-`slack_search_public_and_private` for the slug across all channels is allowed and sometimes load-bearing (e.g. an offboarded client's `internal-<slug>` is archived; the only live signal is in `#sales` or `#internal-trading-daily-checks`). But search results are **triggers to investigate, not authoritative state**.
-
-Rules for any cross-channel hit:
-
-1. **Corroborate against the target's own channels before writing it as fact.** If a #sales message claims a client is offboarded, check `internal-<slug>` and `mahi-<slug>` activity in the same window — channels still live, recent client comms, live PnL or dashboards all contradict it. Mismatches are usually typos, scope confusion, or someone speaking about a specific product/contract rather than the whole relationship. (Real example: 2026-04-29 #sales note grouped Fintokei with Errante as offboarded; Errante checked out, Fintokei did not — channels live, B-book PnL active, FIX integration in flight.)
-2. **Read the context, don't just keyword-match.** `slack_search_public_and_private` returns surrounding messages by default (`include_context: true`) — don't pass `include_context: false` for lifecycle hits, and don't collapse a hit to a one-line summary that throws the context away. The neighbouring messages often contain the correction or qualifier (real example: 2026-04-29 #sales note grouping Fintokei with Errante was a typo Nia self-corrected in a follow-up; the worker had access to it via search context but reported only the matching line). If the context didn't include enough to corroborate, `slack_read_channel` the source around the hit's `message_ts`, or `slack_read_thread` if it's threaded.
-3. **If corroboration fails, write the contradiction, not the claim.** A `[open]` Recent issues entry naming both signals ("sales says X, target channels show Y") is more useful than picking one and being wrong.
-
-This applies to lifecycle claims especially (offboarded, paused, churned, contract changes) — the kind of thing that drives `status: retired`. Don't retire a dossier on cross-channel signal alone.
-
-## Updating the dossier
-
-Apply edits with `Edit`, not `Write`, so diffs stay minimal (except when bootstrapping a new dossier).
-
-- Append new entries to `Recent issues` (or `Recent topics` for channel dossiers).
-- Promote pre-existing `[open]` entries whose threads had activity in the window to `[resolved]`, or refresh their summary line.
-- Append `Notable topics` entries where appropriate.
-- Update `key_people_overrides` for new external contacts (low confidence flag if you're unsure).
-- Bump `last_catchup` to the run timestamp in frontmatter.
-
-The dossier is the readable artefact — it can be detailed, jargon-dense, and contain everything `/slack-attack` will later need to summarise. Don't pre-summarise; write what you found.
+If `channels/<name>.md` doesn't exist: copy `channels/_template.md`; `slack_search_channels` for the ID and purpose (skim ~20 recent messages if the purpose is generic); `scope` is a best guess; delete the template example; populate from this run.
 
 ## Sanity-check the window — before reading Slack
 
-Before any `slack_read_channel` call, anchor every date to **bash output, not your own reasoning**. Three documented corruptions came from the agent silently miscalculating "today" by a year — a local run wrote 2025-05/06-dated entries into a window labelled 2026-04-28..2026-05-01, a cloud run wrote 2026-05/06/07-dated entries from 2025 source data, and a 2026-05-04 cloud run pulled five months of 2025 history into both `toa-argamon` (committed window `2026-05-01..2026-07-02`) and `rostro` (hit the 500-message channel limit at ~Oct 2025 and never reached today). The original sanity-check fired *after* the entries were written — too late if the agent's "today" is wrong, since both bounds drift in the same wrong direction and entries pass.
+Anchor every date to **bash output, not your own reasoning**. Three documented corruptions came from the agent miscalculating "today" by a year.
 
-Procedure (run this once at the top of the run, before reading any channel):
-
-1. **Get the real current time from bash, never from context.** Run, via the Bash tool:
+1. Run via Bash and use the output verbatim for the whole run:
 
    ```
    now_unix=$(date +%s)
    now_iso=$(date -u +%FT%TZ)
    ```
 
-   Use `now_unix` and `now_iso` from this output verbatim for the rest of the run. Do **not** infer "today" from the conversation, the dossier, recent commit dates, or training context.
+   Never infer "today" from the conversation, the dossier, commit dates or training context.
 
-2. **Decode `oldest_unix`** — the Unix-seconds value you intend to pass to `slack_read_channel`:
-   - For a normal refresh: `oldest_unix = ` Unix seconds of the dossier's `last_catchup` ISO timestamp (compute via `date -u -d "<iso>" +%s` or equivalent).
-   - For a freshly-bootstrapped dossier (`last_catchup: null`): `oldest_unix = now_unix - 30*86400`.
-   - For an ambiguity-expansion run: whatever wider anchor you chose (60d, 90d).
+2. `oldest_unix` = Unix seconds of the dossier's `last_catchup` (`date -u -j -f %Y-%m-%dT%H:%M:%SZ <iso> +%s` on macOS, `date -u -d <iso> +%s` on Linux); for `last_catchup: null`, `now_unix - 30*86400`; for an ambiguity expansion, the wider anchor you chose. Decode it back (`date -u -r $oldest_unix +%FT%TZ` / `date -u -d @$oldest_unix +%FT%TZ`) and confirm it matches what you expected — a year off means abort.
+3. If `now_unix - oldest_unix > 90*86400`, abort. The cap is both a cost bound and a year-off tripwire.
+4. The `last_catchup` you will write must be ≤ `now_unix + 60`.
 
-   Decode it back: `oldest_iso=$(date -u -r $oldest_unix +%FT%TZ)`. **Sanity-check that `oldest_iso` matches what you expected** — if the dossier's `last_catchup` is `2026-05-01T...` and your decoded `oldest_iso` reads `2025-05-01T...`, abort immediately. Don't pull Slack with a year-off `oldest`.
-
-3. **Cap the window width.** If `now_unix - oldest_unix > 90 * 86400` (≈ 90 days), abort. The hard cap exists for both performance and as a year-off tripwire — almost any year-off bug produces a window > 90d wide, well before any real catchup needs that much. Genuine 90d expansion runs (deliberate ambiguity-resolution, see "Resolving ambiguity") are allowed up to this exact bound but no further.
-
-4. **Sanity-check the proposed `last_catchup` you'll write.** It must satisfy `new_last_catchup_unix ≤ now_unix + 60`. Never bump `last_catchup` to a future timestamp.
-
-If any of these fail, **abort before reading Slack**:
+On any failure, abort before reading Slack:
 
 ```
 catchup: <target> — ABORT: window sanity-check failed.
 
-<one line per violation, e.g.:
-  decoded oldest 2025-05-04T00:00:00Z does not match dossier last_catchup 2026-05-01T23:59:59Z (year off)
-  window width 4,752,000s (~55d) exceeds 90d cap — likely date-math bug
-  proposed last_catchup 2026-07-02T06:22:40Z is in the future (now is 2026-05-01T15:00:00Z)>
+<one line per violation>
 
 Inspect the dossier and your date conversions before retrying.
 ```
 
+## Reading activity
+
+1. `oldest` = `last_catchup`; if null, 30 days ago.
+2. For each channel in `channels:` (minus skip list): `slack_read_channel` with `oldest`, `limit: 100`. If the response has a `next_cursor`, keep paginating until you reach `oldest`.
+3. For notable threads, `slack_read_thread` with the real `message_ts` (searches need `response_format: "detailed"` to return it).
+4. **Work budget** — so one client can't stall a parallel run: at most 3 pages per channel per 30 days of window (9 pages for 90d) and at most 15 thread expansions (30 in a legacy conversion). If you hit it, stop reading, write what you have, and report `Budget hit on: <channel>`.
+5. **Discard out-of-window results.** Drop any message (from search or channel read) whose `ts` falls outside `[oldest_unix, now_unix]` — decode `ts`, don't eyeball it.
+
+## Resolving ambiguity — expand the window
+
+The windows are starting points. If in-window messages reference events you can't see, dig before writing: every stream's State must stand on its own, without "per an earlier event" or "pre-window".
+
+Triggers: a message refers to an earlier event you lack context for; channels contradict each other on lifecycle; a new or converted dossier leaves you guessing about the client's status.
+
+How, in order (expansions count against the work budget):
+
+1. Widen channel reads to 60d, then 90d (never beyond — hard cap).
+2. Search the slug across channels with `slack_search_public_and_private` (default context on), **always time-bounded** with `after`/`before` (or the `after:YYYY-MM-DD` / `before:YYYY-MM-DD` modifiers). Unbounded searches are the root of the year-off corruption. Use hits to decide where to read next, not as facts (see next section).
+3. Read parent threads via `slack_read_thread`.
+4. Follow the breadcrumb to the original message and read around it.
+
+Stop when each stream's State is self-contained with dated permalinks, or at the 90d cap — then say so in State ("earliest signal in window; older context not searched").
+
+## What counts as notable
+
+In priority order:
+
+1. **Direct mentions of the user** (`<@U099FA0D7CP>`) or DMs.
+2. **Questions awaiting a reply** — unanswered `?`, especially in threads the user was in.
+3. **Decisions** — "we're going to", "agreed", "let's do X".
+4. **Escalations** — client dissatisfaction, outages, urgent language, incidents.
+5. **Recurring issues** — something an existing stream covers flaring again → update that stream.
+6. **New external people** with a known role and expected repeat contact, not in `../MahiProduct/wiki/people/` → `contacts`.
+7. **Facts contradicting the dossier or upstream** — fix the stream/Now; don't edit upstream.
+
+Routine bot pings, deployment notifications and single-reaction chatter are not notable.
+
+## Cross-channel signals — trigger, not truth
+
+`slack_read_channel` on the dossier's own channels is authoritative. Search hits from other channels (#sales, #frontoffice, #internal-trading-daily-checks) are **triggers to investigate**:
+
+1. Corroborate against the client's own channels in the same window before writing a claim as fact. (2026-04-29: #sales grouped Fintokei with Errante as offboarded; Fintokei's channels were live — a typo.)
+2. Read the search context, don't keyword-match; neighbouring messages often carry the correction. If context is thin, read the source channel or thread around the hit.
+3. If corroboration fails, write the contradiction ("sales says X, client channels show Y") in the stream, not the claim.
+
+Never retire a dossier on cross-channel signal alone.
+
+## Updating the dossier
+
+Use `Edit` (small diffs), except bootstrap and legacy conversion (`Write`).
+
+1. **Map** each notable in-window item to a stream. Same topic, counterparty, project or recurring problem → existing stream. Prefer extending a stream over creating a sibling.
+2. **Update** a stream that moved: rewrite `State` (current truth, not a log) and `Next`; set `last` to the date of its latest in-window message; in `Refs` keep the origin permalink and replace the previous "latest" with the newest one (max 4).
+3. **Create** a new stream for a genuinely new topic: new ID, `since` = its first message date.
+4. **Forced review**: run `scripts/check-dossiers --stale <file>` and decide every stream it lists — open >30d without activity: close it (State says how it ended, or "no activity since <date>; assumed resolved") or downgrade to `watching` with a reason; watching >60d: close it, or re-open with a `Next:` naming a concrete pending action. Never leave a listed stream untouched.
+5. **Close**: `status: closed`, append `· closed: <today>` to the meta line, State gives the outcome. Relationship-level outcomes (go-live, decommission, contract change, key person change, major incident) also get an Arc line.
+6. **Merge**: close the absorbed stream with `State: merged into <id>.`
+7. **Now**: rewrite if the client's posture changed (≤4 lines).
+8. **Order** streams: open (newest `last` first), watching, closed.
+9. **contacts**: add per notability rule 6; `confidence: low` only when unsure.
+10. Set `last_catchup` to `now_iso`.
+
+## Legacy conversion (temporary — removed once every dossier is converted)
+
+A dossier without `## Streams` was written by older, less capable models and may contain errors. Rebuild it:
+
+1. Treat the old content (`Status`, `History`, `Recent issues`, `Notable topics`, `key_people_overrides`) as **leads, not facts**.
+2. Read Slack for the normal window (`last_catchup` → now) per the sections above.
+3. For each old `[open]`/`[watching]` entry: if in-window activity covers it, it's live. Otherwise read the thread of its newest permalink (`slack_read_thread`). No sign of life for >30 days → drop it as `stale` — unless it is an explicit unanswered commitment, which becomes a `watching` stream.
+4. Group surviving items and new activity into streams (target 5–15).
+5. **Arc**: from old `History` and significant resolved entries (go-lives, decommissions, contract events, major incidents, key people changes); ≤20 lines; exact dates where the source pins them, `YYYY-MM` otherwise.
+6. **Frontmatter**: `channels:` from `channels_override` / the VibePulse `slack:` block plus IDs from the table in `.claude/docs/slack-conventions.md` (search for any missing); `contacts` from `key_people_overrides`, minus anyone in `../MahiProduct/wiki/people/` or the org chart; drop `channels_override` and `key_people_overrides`. Keep `slug`, `aliases`, `refs`, `status`/`retired_*`.
+7. Write the whole file with `Write` from the template shape; no `Status`, `History`, `Recent issues` or `Notable topics` sections remain. Aim ≤10KB.
+8. Commit with subject `refactor(dossiers): convert <slug> to streams` and body:
+
+   ```
+   Window <oldest_iso>..<now_iso>.
+   streams: <id>(new) <id>(new) ...
+   dropped: <N> old entries — <a> resolved, <b> stale, <c> merged
+   stale: <short title>; <short title>; ...
+   ```
+
+   The `stale:` line lists the titles (≤60 chars each) of every entry dropped as stale, so the user can audit the risky drops.
+
 ## Sanity-check before commit
 
-After writing dossier edits and before staging / committing, verify each newly-added entry's Slack permalink timestamp falls within the window you just sanity-checked above. This is the second line of defence: the pre-read check catches bad windows; this catches bad writes (entries dated outside the legitimate window, e.g. agent confusion fabricating a year offset on entry dates).
+1. `scripts/prune-dossiers <file>` — note any `pruned <id>` lines for the trailer.
+2. `scripts/check-dossiers <file>` must exit 0. Warnings: fix size/Arc/Refs warnings if cheap.
+3. Every stream you created or updated has `last` within `[date(oldest_iso) - 1 day, date(now_iso)]`.
 
-**This check is now enforced mechanically.** A `pre-commit` git hook (`.githooks/pre-commit` → `scripts/check-dossier-dates`) rejects any commit whose dossier entries are dated more than ~180d from the Slack permalink they cite, or dated in the future. So a year-off write will be blocked at commit regardless — but don't rely on it: run the check yourself and **ABORT cleanly** (leave the dossier dirty, don't bump `last_catchup`) rather than letting the hook fail. The hook is the backstop; a clean self-abort is the intended path. Run `scripts/check-dossier-dates <dossier>` to validate by hand. (The hook only fires where `core.hooksPath=.githooks` is configured — confirm it's set in the remote routine's checkout, not just locally.)
+If 2 or 3 fails and you can't fix it from what you read, **abort**: leave the file dirty, don't commit, don't bump `last_catchup`:
 
-Procedure:
+```
+catchup: <target> — ABORT: sanity-check failed before commit.
 
-1. For every new `Recent issues` / `Recent topics` / `Notable topics` entry just written, extract the first Slack permalink: `https://mahifx.slack.com/archives/<CID>/p<DIGITS>`. The first 10 digits of `<DIGITS>` are the Unix seconds of the source message.
-2. The permalink ts must satisfy `oldest_unix - 60 ≤ entry_ts ≤ now_unix + 60` (60s margin tolerates clock skew). Use the `oldest_unix` and `now_unix` you established at run start — do not recompute "now" here.
-3. If **any** check fails, **abort**: leave the dossier dirty (do not stage, do not commit, do not bump `last_catchup`), and emit:
+<check-dossiers output / violations>
 
-   ```
-   catchup: <target> — ABORT: sanity-check failed before commit.
+Likely date-math bug. Inspect with `git diff` before committing manually.
+```
 
-   <one line per violation, e.g.:
-     entry dated 2026-07-02 has Slack ts 2025-07-02T03:00:43Z, outside window [2026-04-30T00:00:00Z, 2026-05-01T15:00:00Z]
-     proposed last_catchup 2026-07-02T06:22:40Z is in the future (now is 2026-05-01T15:00:00Z)>
-
-   Likely date-math bug. Inspect with `git diff` and investigate before committing manually.
-   ```
-
-   Exit without further work. The caller (user or `/slack-attack`) sees the abort message and decides next steps.
-
-Why a hard abort vs. a warning: silent dossier corruption is worse than a noisy halt. A flagged abort forces investigation; a warning gets buried.
-
-The check doesn't apply to the `History` section (that's `/backfill`'s domain, deliberately wide-window) or to non-permalinked content (`Status`, `key_people_overrides`). It only checks entries that cite a Slack permalink — which by convention is every `Recent issues` / `Recent topics` / `Notable topics` entry.
+The pre-commit hook re-runs the check as a backstop; a clean self-abort is the intended path. Never `--no-verify`.
 
 ## Committing
 
-Once the dossier edit is in place **and the sanity-check has passed**, commit it as part of the same run — don't leave it staged or wait for the user to commit. The reader will see the change either by `git pull` (if a remote agent ran the catchup) or by reviewing the new commit locally.
-
-- Stage only the files this run actually touched: the target dossier (`clients/<slug>.md` or `channels/<name>.md`) and `.claude/docs/slack-conventions.md` if a newly-resolved channel ID was cached. Never `git add -A` — it'll sweep up unrelated work.
-- Commit message is conventional **and the subject must be ≤72 chars** — `.githooks/commit-msg` rejects anything longer, so use these forms and put detail in the body, not the subject. Dates in the subject are `YYYY-MM-DD` only; the full ISO window goes in the body.
+- Stage only the target dossier. Never `git add -A`. If the dossier already had unrelated uncommitted edits before this run, stop and report instead of guessing.
+- Subject ≤72 chars (`.githooks/commit-msg` enforces it); dates `YYYY-MM-DD`:
 
   | Case | Subject |
   |---|---|
   | Refresh | `chore(catchup): refresh <slug> (<YYYY-MM-DD>..<YYYY-MM-DD>)` |
   | Quiet window | `chore(catchup): bump <slug> (quiet window)` |
   | Bootstrap | `chore(catchup): bootstrap <slug> dossier` |
+  | Legacy conversion | `refactor(dossiers): convert <slug> to streams` |
 
-  Body for a refresh carries the precise window, e.g. `Window 2026-07-04T09:16:12Z..2026-08-03T09:16:12Z.` Worst case today is the longest slug (`alphacap-broker`, 15 chars) at 64 chars, leaving 8 spare — if a longer slug ever appears, shorten the parenthetical, never the `chore(catchup):` prefix (the daily routine counts commits by that prefix).
-- Don't push. Pushing is the caller's call — the local user just needs the commit on disk; the remote agent (when running this from a routine) handles its own push after all dispatched catchups have committed.
-- If `git status` shows unrelated dirty files in the working tree, leave them — only stage the catchup-owned paths. If the catchup-owned path itself has unrelated edits already staged or modified, stop and surface that in the output instead of guessing.
+- Body (refresh/bootstrap): `Window <oldest_iso>..<now_iso>.` then one trailer line listing every stream touched:
+
+  ```
+  streams: tegis-api(updated) mt4-decom(new) xau-hedging(closed) old-thing(pruned) fx-gaps(watching) ack-x(merged>xau-hedging)
+  ```
+
+  Verbs: `new | updated | closed | watching | merged>ID | pruned`. `/slack-attack` and `/weekly-overview` read this line; `git log --grep=<id>` depends on it.
+- Other catchups commit to this repo in parallel. If `git commit` fails on `.git/index.lock`, `sleep 3` and retry, up to 5 times.
+- Don't push. The caller pushes.
 
 ## Output (to caller)
 
-Catchup's output is a structured confirmation, not a prose digest. The caller (the user directly, or a `/slack-attack` subagent) uses this to know what changed. Keep it tight.
-
 ```
-catchup: <target> — <ISO window>
+catchup: <target> — <oldest_iso>..<now_iso>
 
 Commit: <short-sha>
-
-Changes to <path>:
-- bootstrapped from VibePulse  (only if applicable)
-- Recent issues: +N appended (X open / Y resolved), Z promoted [open]→[resolved]
-- Notable topics: +N appended
-- key_people_overrides: +N (M flagged low-confidence)
-- last_catchup → <new timestamp>
-
-Channels read: <count>, messages scanned: <approx>, threads expanded: <count>
-Quiet channels (no human discussion): <comma list or "none">
-Hit channel limit on: <list or "none">
+streams: <same trailer line>
+Stale review: <n> streams reviewed (<c> closed, <w> → watching, <o> re-opened)
+Channels read: <n>, messages scanned: ~<m>, threads expanded: <t>
+Budget hit on: <list or "none">
+Quiet channels: <list or "none">
 ```
 
-The `Commit:` line is the SHA of the commit this run made (`git rev-parse --short HEAD` after committing). The orchestrator uses it to diff against — it can't rely on working-tree state because catchup has already committed.
-
-If the run produced zero changes (quiet window), output one line and stop:
+Quiet window (no notable human activity, nothing reviewed or pruned): bump `last_catchup` only, commit, and output one line:
 
 ```
 catchup: <target> — quiet window (<N> bot pings, no human discussion). last_catchup bumped (commit <short-sha>).
 ```
 
-Do **not** produce paragraphs of prose. Do **not** synthesise a readable brief. The dossier is the artefact; `/slack-attack` reads it to write prose for the user.
+If anything in the window is addressed to the user (direct mention or DM awaiting reply), add a final `Action items:` line with permalinks. Match strictly on `U099FA0D7CP`.
 
-## Action items
-
-If anything in the window is addressed to the user (direct mention or DM awaiting reply), include a single `Action items:` line at the end of the output naming the items with permalinks. Otherwise omit. Match strictly on the Slack user ID `U099FA0D7CP` — don't infer from first names alone (other users may share a first name).
-
-## Dossier conventions
-
-### `Recent issues` entries
-
-Every entry starts with a status marker and cites at least one real Slack permalink. If you don't have a real `message_ts`, search again with `response_format: "detailed"` to get one before writing the entry.
-
-```
-> [open] YYYY-MM-DD — short title
-> 1–3 lines. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
-```
-
-Markers:
-- `[open]` — unresolved, awaiting action, or active investigation with a plan ("hedger latency being tuned, further digging flagged").
-- `[resolved]` — closed out (fix deployed, decision made, incident over).
-- `[watching]` — passive observation of a pattern with no active work. If anyone is actively working on it, it's `[open]`, not `[watching]`. Use sparingly.
-
-On each run, re-read existing `[open]` entries whose threads had activity in the window and promote to `[resolved]` or refresh the summary line.
-
-### `Recent topics` entries (channels only)
-
-Channel dossiers use `Recent topics` instead of `Recent issues`. Same permalink requirement, **no status markers**. If a channel thread escalates into a real tracked issue, it belongs in the relevant client's `Recent issues`, not the channel dossier.
-
-```
-- YYYY-MM-DD — short description. [permalink](https://mahifx.slack.com/archives/<CID>/p<TS>)
-```
-
-### `key_people_overrides` threshold
-
-Only external people (client-side, consultants, LP/vendor). Never Mahi staff — check `../MahiProduct/.claude/org-chart.md` first. Never add a name already on a `../MahiProduct/wiki/people/` page; if one exists there, trust it and leave this list alone.
-
-Add someone only if the role is known **and** you expect repeat interaction. One-off "new user added" events belong in `Recent issues`, not the people roster.
-
-```yaml
-- {name: "...", role: "...", confidence: low}
-```
-
-- `confidence: low` — uncertain role spelling, contradictory signals, or only seen once but plausibly recurring. Next `/catchup` flags these for verification.
-- Default is high confidence — omit the field in that case.
-
-Never inline `# comment` annotations into YAML values — parsers handle them inconsistently.
+No prose digest. The dossier and commit are the artefact.
 
 ## Constraints
 
-- Never fabricate a Slack permalink. Re-search with `response_format: "detailed"` instead of omitting it.
-- Channel zero human messages in the window → one-line note, don't expand.
-- Leave empty dossier sections blank — no placeholder text. Append cleanly when content exists.
-- Don't re-state info that's in VibePulse / MahiProduct. If something appears in Slack that's *already true* per the upstream ref (e.g. a host FQDN), skip it.
-- No prose digest in the output. The dossier change lands as a commit (see "Committing"); the readable form comes from `/slack-attack`.
+- Never fabricate a Slack permalink. Re-search with `response_format: "detailed"` for a real `message_ts`.
+- Never rename a stream ID or delete a stream by hand.
+- Never write outside this repo.
+- Leave empty sections empty — no placeholder text (an empty `## Arc` is fine).
