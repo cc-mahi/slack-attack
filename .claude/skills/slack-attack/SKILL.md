@@ -25,6 +25,16 @@ Retired clients are excluded by the script. For `/slack-attack <slug>` on a reti
 <slug> — retired since <retired_at> (<retired_reason>). Edit frontmatter to re-activate.
 ```
 
+## New clients (no-arg runs only)
+
+Clients only enter the rotation once they have a dossier, and prospects rarely reach the billing list early. So before dispatching, look for client channels nobody is tracking yet:
+
+1. List `internal-*` and `mahi-*` channels with `slack_search_channels` (`channel_types: "public_channel,private_channel"`; paginate). Drop anything already in a dossier's `channels:` (including retired ones), on the skip list, or under "Not clients" in `.claude/docs/slack-conventions.md`.
+2. For what's left, glance at recent messages and judge whether it's a client or live prospect Mahi is working with — not an internal project, vendor, adviser or dead lead. A matching `internal-<x>` + `mahi-<x>` pair with recent human discussion is a strong signal, but use judgment either way.
+3. **Clear cases** → add the slug to this run's targets; `/catchup` bootstraps the dossier. Choose a short slug and check `../VibePulse/.claude/clients/` and `rank-clients` output for an existing name first. **Unsure** → don't bootstrap; mention it in the brief so the user can decide. **Clearly not a client** → add it to "Not clients" in the same commit as the run's other changes, so it isn't reconsidered daily.
+
+In the brief, one line: `New clients: <slug> (bootstrapped), …; possible: #channel (why unsure), …`.
+
 ## Probe-skip pre-flight
 
 Most clients are quiet most days; a subagent just to discover that is the dominant waste. For each candidate:

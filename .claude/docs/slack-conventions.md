@@ -15,6 +15,15 @@ Adapted from `../pagerbuddy/.claude/docs/slack-channels.md` — trimmed to what 
 - `#frontoffice-alerts`
 - `#dev-alerts`, `#dev-commits`, `#dev-status`
 
+## Not clients
+
+Channels `/slack-attack`'s new-client check has ruled out (internal projects, advisers, dead leads). Add to this list rather than re-judging daily; remove a line if one becomes a client.
+
+- `#internal-greyspark` — advisers on Mahi's business plan
+- `#internal-funded-next` — prospect declined 2026-10-08
+- `#mahi-xrigroup` — Sammy's consultancy, not a client
+- `#mahi-client-test`, `#internal-client-updates`, `#internal-product`, `#internal-billing`, `#internal-competitors`, `#internal-cyprus-expo-2026`, `#internal-mahi-central` — internal
+
 ## Private channels
 
 Many relevant channels are private. Always pass `channel_types: "public_channel,private_channel"` to search tools.
