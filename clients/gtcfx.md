@@ -1,103 +1,110 @@
 ---
 slug: gtcfx
-aliases: [gtc-global-trade-capital]                                   # MahiProduct billing slug
+aliases: [gtc-global-trade-capital]                       # MahiProduct billing slug
 refs:
-  vibepulse: null                                          # no ../VibePulse/.claude/clients/gtcfx.yaml yet (pre-live)
-  billing: ../MahiProduct/data/billing/clients.json      # entry: gtc-global-trade-capital
+  vibepulse: null                                          # no ../VibePulse/.claude/clients/gtcfx.yaml yet
+  billing: ../MahiProduct/data/billing/clients.json        # entry: gtc-global-trade-capital
   hosts: ../MahiProduct/data/client-hosts.json             # entry: gtcfx (s3Slug GTCFX; LDN)
   wiki: ../MahiProduct/wiki/clients/gtcfx.md
   onboarding: ../MahiProduct/data/onboarding/gtcfx.json    # stage tracker
-channels_override: [internal-gtcfx, mahi-gtcfx]            # no VibePulse yaml to resolve from
-key_people_overrides:
-  - {name: "Manglai", role: "GTC — main day-to-day counterpart; owns pricing sign-off, the OZ fee negotiation, and the go-live date"}
-  - {name: "Marios Lysandrou", role: "GTC — supplies group mappings / instrument specs; sets up connections with OneZero"}
-  - {name: "Andreas", role: "GTC — joined the Compass/Echo walkthrough", confidence: low}
-  - {name: "Jack Zheng", role: "GTC — CEO; Mahi sent a personal message to reinforce the pitch 2026-07-30", confidence: low}
-  - {name: "Bruce", role: "GTC — joins Manglai on final pricing review ahead of go-live", confidence: low}
-  - {name: "Ralich", role: "OneZero — agreed to waive OZ's per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
-  - {name: "Lochlan", role: "OneZero — alternative escalation route if the fee negotiation stalls (internal only, not shared with GTC)", confidence: low}
-  - {name: "John (Jun Yang)", role: "GTC — given Compass access on Manglai's request, post go-live", confidence: low}
-last_catchup: 2026-08-17T08:22:33Z                         # ISO8601; updated by /catchup
+channels:
+  internal-gtcfx: C0AKAPLU78W
+  mahi-gtcfx: C0AKRP8C049
+contacts:
+  - {name: Manglai, role: "GTC - main day-to-day counterpart; decides which symbols/servers move to Mahi and when"}
+  - {name: Marios Lysandrou, role: "GTC - connectivity/ops; requests new OZ/Centroid/HRP sessions, reports rejects and disconnects"}
+  - {name: Antreas Florentzou, role: "GTC - ops/trading; pricing controls, tag moves between A/B book, OZ session times"}
+  - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
+  - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
+  - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
+last_catchup: 2026-10-15T13:00:35Z
+status: active
 ---
+## Now
+GTC is live and ramping: all FX majors/crosses plus XAGUSD and XAUUSD B Book flow route to Mahi over 7 OneZero hubs (A and B sessions each), with an A Book account live since 2026-10-06 (hedging to HRP LPs only).
+Main risk is load: cent accounts drive ticket rates (dist6 hit ~4k orders/s on 2026-10-15) and riskPath stalls; a riskPath fix deploys 2026-10-15 14:00Z.
+In flight: Centroid connection (creds sent 10-13), crypto (BTC/ETH, Binance blocked by Beeks IP), 24/7 session switch with a restart planned 2026-10-16 17:00 NY.
 
-## Recent issues
+## Streams
 
-> [resolved] 2026-08-17 — PagerDuty enabled for GTCFX monitoring
-> Daria enabled PD alerting on the client. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786935212042289)
+### dist-gateway-capacity — Distribution gateway load from cent/small-ticket flow
+status: open · since: 2026-09-09 · last: 2026-10-15
+State: B_CLIENTS is ~6% of XAU notional but 16-20% of tickets, and the small-ticket servers (Live 3/4/5) are ~5x the ticket count; 5% of trades are 78% of volume. Latency cancels on gateway5 (21-22 Sep) led to gateways 6-8 on trading-2, unexpected-fill-latency ceiling raised to 5000ms, dist9 added 2026-10-14. On 2026-10-15 dist6 saw 3,976 orders/s vs 235/s on the next busiest; Liam made config tweaks and CHG for an OZ-5 gateway latency fix (24G heap, 5 CEP threads) is booked Sat 17 Oct.
+Next: Isaac to ask GTC whether flow can be rebalanced across gateways; likely need 2 more servers for cent accounts and a cost conversation; dev review of latency cancels requested 2026-09-28.
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790591684124349 https://mahifx.slack.com/archives/C0AKAPLU78W/p1792068184097149
 
-> [open] 2026-08-14 — PXM B Book test trade requested; Mahi confirmation still outstanding
-> Kate asked GTC to send a PXM B Book test trade for review; GTC didn't confirm until 2026-08-17, asking Kate to check everything looks good — unconfirmed at window close. [request](https://mahifx.slack.com/archives/C0AKRP8C049/p1786698327327689) [reply](https://mahifx.slack.com/archives/C0AKRP8C049/p1786950477714529)
+### riskpath-stability — riskPath stalls, OOM crash-loops and yield-profile gaps
+status: open · since: 2026-09-02 · last: 2026-10-15
+State: riskPath OOM crash-looped on an unbounded analytics map (heap dumps filled disk and wiped logs, dumps now disabled); fix cherry-picked to release/26.3, process moved to trading-2/64GB then low-latency nodes (riskPathABook/BBook/MT split). Yield profiles were missing ~31% of XAU fills (9 Sep analysis) and classifier queries overloaded it (classification off for A and drop-copy profiles since 2026-09-11); 2026-09-24 YPs found not persisted to Pulse (Zendesk 23547). A "riskPath stall and overflow-crash fix" behind two flags deploys 2026-10-15 14:00-15:00Z.
+Next: Isaac to confirm the 10-15 deploy; re-enable classification on A/drop copy once safe.
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788309377675289 https://mahifx.slack.com/archives/C0AKAPLU78W/p1792065637260039
 
-> [open] 2026-08-13 — EURGBP go-live date pending PXM readiness
-> Kate asked when GTC would be ready to go live with EURGBP flow; Manglai said he'd do it the next day once PXM is ready — not confirmed by window close. [ask](https://mahifx.slack.com/archives/C0AKRP8C049/p1786624757240889) [reply](https://mahifx.slack.com/archives/C0AKRP8C049/p1786630153275259)
+### hedging-a-book — A Book go-live, STP rules and hedging structure
+status: open · since: 2026-10-05 · last: 2026-10-15
+State: A Book went live 2026-10-06 on one account, hedging via HRP markets only (hybridHedger markets switched from Finalto/Swift; Finalto/Swift still the two LPs in the hedger market, reason to be confirmed). 2026-10-12: flow from tag 52146947 was internalised though GTC expected STP to HRP; hedger cleared only 267oz, GTC closed 2100oz manually at HRP_MEX (avg 4177.43) and positions were adjusted in Compass. Kate told GTC to wait for Mahi to confirm STP whitelisting before routing a tag. 2026-10-14 GTC asked for percentage hedging split (A LP 30% / B LP 70%), a new client with 1000-lot limit is being onboarded via risk-split from A, and hybridHedgerSI1/arbHedgerSI1 exist. HRP_SOLID and HRP_JANESTREET_FA streams added; SWIFT XCUUSD prices arrive per 100-unit lots (asked for per-unit).
+Next: GTC to give the test-account counterparty so Mahi can test the new hedging book structure (asked 2026-10-15); answer hedge-percentage ask; Swift to fix XCUUSD unit.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791202994256859 https://mahifx.slack.com/archives/C0AKRP8C049/p1792064520530769
 
-> [resolved] 2026-08-13 — PXM B Book needed its own connection; tag1 ABOOK/BBOOK requested for billing
-> Manglai asked if one PXM connection could serve both A and B Book; Kate said no and asked for tag1 values of ABOOK/BBOOK so Mahi can route flow correctly and to help PXM bill A vs B Book separately. GTC set up a second connection, confirmed ready after restart. [ask](https://mahifx.slack.com/archives/C0AKRP8C049/p1786610016283829) [confirmed](https://mahifx.slack.com/archives/C0AKRP8C049/p1786615852457899)
+### crypto-24x7 — Crypto onboarding and 24/7 sessions
+status: open · since: 2026-09-15 · last: 2026-10-15
+State: Crypto is next after gold. GTC's core BTC/ETH LP is Binance (pricing only, not hedged), so Mahi is connecting directly; HRP Route28 connection established 2026-10-15. cryptoMarketData1 fails because Binance returns HTTP 451 for trading-1/2's Beeks public IP range (US-registered). Isaac proposed switching all A and B connections to 24/7 (Sat 10:59 to Sat 10:01 NY, 58 min server-reboot gap); B OZ-5 already runs it, GTC agreed an EOD restart 2026-10-16 17:00 NY. 24/7 XAUUSD is the upsell; a second London server cluster to stagger restarts was floated.
+Next: Beeks ticket for a non-US egress range (or take Binance from mahi-central); GTC to confirm session changes on PXM, Centroid and OZ 1-7; Mahi restart 2026-10-16 17:00 NY.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791975353055319 https://mahifx.slack.com/archives/C0AKRP8C049/p1792053281436189 https://mahifx.slack.com/archives/C0AKAPLU78W/p1791980737875259
 
-> [resolved] 2026-08-12 — Live: AUDUSD B Book flow now routed to Mahi
-> Final test trades ran through the day on OZ-2/OZ-3 (Manglai working through failover testing alongside), Kate confirming fills looked good and asking GTC to also test PXM ahead of go-live (switching over 2026-08-13). AUDUSD B Book flow went live at 16:00 BST — Kate's "We're live 🎉", celebrated internally by Liam Cordelle. Supersedes the 2026-08-11 go-live plan entry. [test-thread](https://mahifx.slack.com/archives/C0AKRP8C049/p1786532446702139) [live](https://mahifx.slack.com/archives/C0AKRP8C049/p1786546834686359) [internal](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786547564896539)
+### oz-hub-connectivity — OneZero hub sessions, disconnects and tags
+status: open · since: 2026-08-17 · last: 2026-10-09
+State: GTC keeps adding OZ hubs because OZ fears it cannot handle their trade rate (7th hub requested 2026-10-09, in progress). Recurring session problems: OZ-2/OZ-3/OZ-4 hub drop-outs and "Session time ended" logouts (fixed by aligning all OZ sessions to Sun 17:00-Fri 17:30 NYT; OZ-4 outage 22-24 Sep fixed by a hub bridge restart), missing counterparty tags on OZ-4 (2026-09-08) and OZ PTR sessions disconnecting (2026-10-06, Mahi switched PTR analytics off). New-hub sessions needed whitelisting plus a cross-connect with several delays.
+Next: finish OZ-7 session and whitelist; GTC weekly call is the forum.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786969418265589 https://mahifx.slack.com/archives/C0AKRP8C049/p1791555826631749
 
-> [open] 2026-08-12 — OZ-1 FIX connection unconfirmed post go-live
-> Kate flagged at day's end that no test trades had been seen down the OZ-1 connection despite AUDUSD going live on OZ-2/OZ-3, and asked GTC for a confirmatory test there too — not blocking, but unresolved at window close. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786547531261129)
+### centroid-connection — New Centroid LP connection
+status: open · since: 2026-09-24 · last: 2026-10-13
+State: GTC asked for a Centroid hub session (2026-09-24). Needs a Beeks X Connect plus a separate distribution process (gateway8, ports 9020/9021). Beeks missed the first weekend window; Rory sent Centroid A/B credentials on 2026-10-13 and Marios acknowledged. Not yet confirmed working.
+Next: GTC to connect and test A before B.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1790236332277899 https://mahifx.slack.com/archives/C0AKRP8C049/p1791885592937159
 
-> [open] 2026-08-11 — CBCX instrument spec still outstanding; confirmed not a go-live blocker
-> Kate's follow-up recap flagged the CBCX instrument spec (minimum/incremental quantities, pricing precision) is still not in hand, three weeks after the LP was added (2026-07-28) — now explicitly called out as not blocking go-live. Kate asked 2026-08-14 whether GTC is happy for Mahi to send CBCX test trades; no reply seen by window close. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786454325286629) [test-trade-ask](https://mahifx.slack.com/archives/C0AKRP8C049/p1786701839018699)
+### flow-rollout — Symbol and server migration to Mahi
+status: open · since: 2026-08-17 · last: 2026-10-08
+State: EURGBP moved 2026-08-17, then rolling in batches through 2026-10-05 (all FX majors/crosses, B Book). XAGUSD routed 2026-09-03 and XAUUSD 2026-09-10 with more servers added 09-16, 10-05 and 10-08 (mt4 live2). Remaining: cent accounts on small-ticket servers, indices (GTC worried about primary benchmark feed dropouts), crypto. Priorities per the 2026-09-24 Expo meeting: fix OZ hub drops, A Book with hedging, B Book via OZ, crypto, then 24/7 XAU.
+Next: GTC picks the next server/day; weekly call 2026-10-13 notes remaining checks (24/7 connection 5, FX pair spikiness, HRP Jane Street).
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786977281687209 https://mahifx.slack.com/archives/C0AKRP8C049/p1791442269445639
 
-> [open] 2026-08-10 — trading-2 MySQL disk hit 90%; ~30GB/day growth on both trading servers, `mysql_optimize_enable=false` question unanswered
-> Shyam extended `vg03-mysql` on trading-2 from 885G to 1.2T after it hit 90%. He flagged the growth rate on trading 1 and 2 as fast (~30GB/day) and asked whether `mysql_optimize_enable` being set to false is still expected — unanswered at window close, and worth resolving before B-book flow lands on the pending go-live. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1786321203578909)
+### pricing-skew-tuning — Skew, spread and last-look tuning
+status: open · since: 2026-08-19 · last: 2026-10-12
+State: Skew signal config tuned repeatedly: XAG ceilings lowered after quote "shake" complaints (09-09/10), IFMS leg removed from signal config 2026-10-07 for poor FX FI performance, arb protection and pre-triangulation spreads adjusted for wide FX crosses (09-29). Controls added: opening-window last look (800ms XAU, 400-500ms others) via CUSTOM1 timezone, indicative XAU pricing around open, 8 cent min TOB with news widening removed, XAU layers raised to 6. XAU spreads blew out into the Friday close (09-19) because BMSL/MWMS had only 3 benchmarks; MAHI_BENCHMARK_LDN added. 2026-10-12 GTC reported abnormal FX price spikes.
+Next: Rory checking the 10-12 FX spike report.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1788911767407019 https://mahifx.slack.com/archives/C0AKRP8C049/p1791799992982999
 
-> [open] 2026-08-03 — `marketDataProxyTx` won't start; needs listen config and may be obsolete
-> Daria found the process needs a `connectivity.marketData.proxy.listen` config to start up, then noted to Isaac that it looks like it was configured to proxy out HRP_ARG and asked whether the process is still needed at all given how long it's been. Unanswered. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785713908035349)
+### commercial-value — Pilot value case and billing
+status: watching · since: 2026-08-19 · last: 2026-09-29
+State: Isaac's 2026-09-09 estimate: at 2.5 $/M LR and 4 $/M FI on XAU alone, billing reaches ~200k/month by January after the pilot (4M value-add on ~650B/month XAU). Kate cited ~$10/M skew PnL on drop-copy XAU flow (09-03). 2026-09-29 call KPIs: skew PnL on XAU, handling toxic HFT on A Book, 24/7 crypto uptime; upsell is 24/7 XAUUSD. OZ's fee waiver (quiet, not to be publicised) still stands.
+Next: pilot end and billing terms to be confirmed outside Slack; downgraded to watching, no discussion since 2026-09-29.
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788950931799769 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790674407124919
 
-> [open] 2026-07-31 — GMG still on PrimeXM — system-integrity concern in the agreed flow path
-> David relayed the confirmed path (GTC MT4/5 → GTC OZ hub → Mahi A/B → GMG as FCA entity → HRP & LPs for hedge flow) and flagged that GMG remaining on PrimeXM "introduces some system integrity issues for us", asking for support in moving that business over. No plan yet. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785484125462009)
+### infra-disk-alerting — Trading-server disk, replica and alert hygiene
+status: open · since: 2026-08-10 · last: 2026-10-14
+State: vg03-mysql extended repeatedly (trading-1/2 +200G on 09-10; trading-2 +50G on 09-30 with no more room in the vg, ZD 23574); replica rebuilt manually 2026-10-01 and nightly backup switched off with bigger buffer pools (CHG 10-14) to help catch-up. The `mysql_optimize_enable=false` question from 2026-08-10 never got a reply. PD tuning: fiPnlDrop raised to alert severity, hedging-book alerts off until a hedger is live, fixOrders1 spam stopped.
+Next: someone to answer the mysql_optimize_enable question and decide longer-term DB sizing.
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790734299323199 https://mahifx.slack.com/archives/C0AKAPLU78W/p1791980456302469
 
-> [resolved] 2026-07-29 — Go-live targeted 10–11 Aug; Manglai declined to start earlier
-> Manglai confirmed a 10–11 August target and said he's happy with pricing after the spread changes. Kate asked what's driving the delay and offered to help speed it up, but he's on holiday for a week from Wednesday and wants to go live once he's back — he'd already pushed back on Kate's suggestion of getting the B Book live on 2026-07-28. Superseded by the 2026-08-11 call, which reset the plan to test trades on 08-12 then AUDUSD-first go-live. [go-live-date](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785317790537099) [pushback](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785164995327769)
+### compass-client-support — GTC's use of Compass, Echo and Pulse
+status: watching · since: 2026-08-17 · last: 2026-10-13
+State: Weekly Tuesday 10:00 UK call set up 2026-08-17. GTC asks about order CSV export in USD (fixed in the 25 Aug dashboard deploy), MT4/MT5 servers missing from yield profiles, price-forensics limits and classifier tag export. Pulse creds and spec passed to Manglai 2026-10-13 (Zendesk 23640).
+Next: none outstanding.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1787663421577319 https://mahifx.slack.com/archives/C0AKRP8C049/p1791901914330729
 
-> [open] 2026-07-28 — CBCX added as a further LP; instrument spec requested before test trades
-> GTC sent credentials for one more LP (CBCX) via onetimesecret. Kate confirmed Mahi is connected and receiving market data, and asked for CBCX's instrument spec (minimum and incremental quantities, pricing precision) before test trades can run. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1785225476074889)
+### finalto-fix-noise — Finalto execution reports for non-Compass orders
+status: closed · since: 2026-09-03 · last: 2026-09-21 · closed: 2026-10-15
+State: Finalto sent fills for orders not placed via Compass on the GTC_Global5 session, spamming PD and forcing fixOrders1 off. Finalto removed the unwanted reports 2026-09-21 and Daria restarted fixOrders1.
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788407276578049 https://mahifx.slack.com/archives/C0AKRP8C049/p1789969699635569
 
-> [open] 2026-07-27 — Counterparty tags not arriving on the B Book connections
-> Kate flagged that Mahi isn't receiving counterparty tags on the B Book connections and asked GTC to check. Same class of problem as the A Book tags, which were confirmed working 2026-07-24. Still open at window close. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1785153727058559)
-
-> [open] 2026-07-24 — Connection test matrix still incomplete
-> As of Kate's status: A-book all 4 sessions logged on (OZ 1/2/3, PXM), B-book only the 3 OZ sessions — B-book PXM not yet brought up on GTC's PrimeXM side. Tested and filling cleanly: A-book OZ 2, B-book OZ 1 and OZ 2. Still to test: A-book OZ 1, OZ 3 and PXM; B-book OZ 3 plus PXM once connected. GTC said 2026-07-27 they'd restart PXM that night and start with one feed. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1784903945431349)
-
-> [open] 2026-07-15 — Design questions still unresolved ahead of go-live
-> Isaac's list needing discussion: failover; whether Mahi can hedge with HRP via the hybrid and arb hedgers on the A Book to improve hedging yields (parkable until live, but worth confirming the reason either way); NOP limits on Finalto, Swift and HRP; and whether the A Book price needs to match the B Book price — i.e. whether LR goes in the published price, which changes whether LR is configured globally or per channel (currently published and configured differently per channel). None closed in this window. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784087993240829)
-
-> [resolved] 2026-07-28 — OneZero waiving its per-million fees on GTCFX flow to Mahi — unblocks the B Book
-> David: "OZ are going to waive the fees for GTCFX to send flow to us", per Ralich, and it applies to any joint Mahi/OZ client. Two conditions: don't tell the street, and OZ doesn't want brokers concluding they can plug in any risk-management system ("well if mahi can, why can't i use my dodgy system?"). OZ also wanted a day or two before communicating it to GTC. This resolves the headline commercial blocker from 2026-07-14. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785244660200009)
-
-> [resolved] 2026-07-28 — ~2,900 MT groups: per-group mapping dropped for classifier-driven A/B treatment
-> Kate asked for a group count after receiving the mapping spreadsheet, on the basis that Compass trading accounts want to be a small stable set. Marios came back with ~2,900 groups. Kate's call: define trading accounts as just A Book and B Book and let the Compass classifier set the treatment within each — last-look window, LR parameters, and which STP pool a counterparty routes to — driven by each counterparty's observed behaviour, so new accounts are covered from their first trades with no mapping to maintain either side. Offered direct config or a nominated FIX connection for any counterparties GTC has already identified as toxic. Explicitly not a blocker on the B Book go-live. [decision](https://mahifx.slack.com/archives/C0AKRP8C049/p1785248933790659) [internal-note](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785249094102019)
-
-> [resolved] 2026-07-27 — Spread tweaks after pricing feedback; Manglai satisfied
-> Following a call on pricing feedback and rollout plan: reduced EURUSD, USDJPY and GBPUSD top-of-book spreads and altered the benchmark markets. Kate posted the changes for review in the client channel; Manglai confirmed 2026-07-29 he's happy with how pricing looks post-call. He's keen to start with GBPUSD (having earlier favoured EURUSD). [call-notes](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785164995327769) [client-post](https://mahifx.slack.com/archives/C0AKRP8C049/p1785165048362269)
-
-> [resolved] 2026-07-21 — First successful distribution test trades
-> XAUUSD fill against counterparty 50005 on DISTRIBUTION_LDN. Remaining distribution connections scheduled for the next day; those needed a bridge restart and resumed 2026-07-23 after Kate chased Manglai in DM. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784648873374399)
-
-> [resolved] 2026-07-21 — Compass/Echo walkthrough; GTC agreed to classification-based risk management
-> Call with Manglai, Andreas and Marios to walk through the Compass and Echo pages. Outcomes: HRP stays as STP markets with Swift/Finalto for hedging rather than being added to hedger execution markets; GTC happy for Mahi to risk-manage on classification, so execution rules move to STP for signal-follow and broker-classified; go-live likely on A Book flow first. Two loose ends — they couldn't load the automation page (possibly a read-only account-type limitation), and the analytics bridge is set up for 2 MT4 + 2 MT5 servers when GTC has several more. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784642434185129)
-
-> [resolved] 2026-07-15 — LP test trades rejected across Finalto, HRP_ARG and Swift
-> Three separate rejects on the first LP test trades: Finalto `58=Invalid account id specified`, GMG_MAHI_HRP_ARG `58=REJECT: symbol not found: instrument=XAUUSD`, Swift `58=Invalid Account`. Root causes were account IDs and stream naming on GTC's side (they'd sent `GMG_MAHI_HRP_NZBank stream` where the account should have been `GMG_MAHI_HRP_NZBank`). HRP orders came good once Mahi set the `.e` suffix on the orders connection. [finalto-reject](https://mahifx.slack.com/archives/C0AKRP8C049/p1784045811733799) [hrp-fixed](https://mahifx.slack.com/archives/C0AKRP8C049/p1784076394388489)
-
-> [resolved] 2026-07-15 — Graphite disk full; process memory raised to the Pepperstone benchmark
-> Isaac bumped Graphite from 68 GB to 138 GB after it filled, and raised process memory to match Pepperstone as the benchmark given expected flow. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784089836383919)
-
-> [resolved] 2026-07-14 — OZ per-million STP fee on B Book flow: A Book first, B Book pending
-> Kate's call notes: OneZero charges a per-million fee on A Book flow, and if GTC STP'd their B Book flow to Mahi the monthly cost would be very high. Mahi's suggestion was separate A/B Book connections so OZ can differentiate and cut a deal. Mahi also offered pricing-only for B Book so GTC could still get skew, but Manglai wants execution too. Decision: go live on A Book first while the B Book fee discussion runs. Superseded by the 2026-07-28 fee waiver. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784026634191269)
-
-> [resolved] 2026-07-14 — HRP whitelisting cleared; HRP streams pricing
-> Mahi had been waiting on HRP whitelisting for prime-broker LPs since 2026-07-06 (blocking better reference-mid selection and possible inclusion in hedging); Isaac chased Marios and confirmed HRP streams pricing on 2026-07-14. [awaiting](https://mahifx.slack.com/archives/C0AKAPLU78W/p1783555252360509) [pricing](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784003984500439)
-
-## Notable topics
-
-- 2026-08-11 — Isaac shared AUDUSD price forensics from around the NFP print for GTC's review, continuing the same value-evidence approach as the 07-27 skew PnL share; Mahi offered to go deeper on pricing/spreads around market open or news events if useful. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1786447489080299)
-- 2026-07-27 — Value evidence shared with the client: running flow-predictive skew off the drop copies already set up, Mahi told GTC that in the ~12 hours since market open, had they been executing on Mahi's price, that was **$200k of skew P&L on XAUUSD alone** — and off the PXM drop copy only. Got an :eyes: reaction and no pushback. [permalink](https://mahifx.slack.com/archives/C0AKRP8C049/p1785149280652629)
-- 2026-07-14 — Volume shape explains the fee fight: A Book is 8–10 yards/month, B Book around 800 yards/month. The B Book is where essentially all the value sits, which is why the OZ per-million STP fee was the headline blocker rather than a detail. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784026634191269)
-- 2026-07-28 — The OZ fee waiver is precedent-setting and deliberately quiet: it covers any joint Mahi/OZ client, but OZ asked Mahi not to publicise it, specifically to avoid other brokers concluding that any risk-management system can be plugged in. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1785244685921069)
-- 2026-07-15 — Lochlan at OneZero is held as an internal escalation backchannel if Manglai's own OZ negotiation stalls — Will's note explicitly says not to tell GTC that route exists. [permalink](https://mahifx.slack.com/archives/C0AKAPLU78W/p1784113367405529)
+## Arc
+- 2026-07-14 - A Book first; B Book held pending OZ per-million fee
+- 2026-07-28 - OZ waives per-million fees on GTCFX flow (quiet; precedent for joint OZ clients)
+- 2026-08-12 - AUDUSD B Book live
+- 2026-08-17 - EURGBP moved; weekly Tuesday call agreed
+- 2026-08-28 - NZDUSD, USDJPY, USDCHF moved; EURUSD followed 08-31
+- 2026-09-03 - XAGUSD routed to Mahi
+- 2026-09-10 - XAUUSD routed to Mahi (more servers 09-16, 10-05, 10-08)
+- 2026-09-24 - Expo meeting with Manglai fixes the roadmap
+- 2026-10-06 - A Book live on one account, HRP-only hedging
