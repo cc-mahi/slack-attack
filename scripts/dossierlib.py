@@ -285,3 +285,18 @@ def legacy_violations(text, path, today):
         if pdates and min(abs((label_date - p).days) for p in pdates) > LEGACY_MAX_DRIFT_DAYS:
             out.append(f"{path}:{lineno}: label {label} far from its cited permalinks — likely year-off date bug")
     return out
+
+
+PRUNE_AFTER_DAYS = 14
+
+
+def prune_text(text, today, path=""):
+    d = parse(text, path)
+    if d.legacy:
+        return text, []
+    cutoff = today - dt.timedelta(days=PRUNE_AFTER_DAYS)
+    ids = [s.id for s in d.streams
+           if s.status == "closed" and s.date("closed") and s.date("closed") < cutoff]
+    if not ids:
+        return text, []
+    return remove_streams(d, set(ids)), ids

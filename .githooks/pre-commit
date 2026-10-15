@@ -1,22 +1,15 @@
 #!/bin/sh
-# Guard against the recurring year-off dossier corruption: a /catchup run
-# ingesting year-old Slack messages and stamping them with the current year.
-#
-# Validates that every staged dossier entry's label date matches the Slack
-# permalink it cites (see scripts/check-dossier-dates for the exact rule).
-# This is the enforced backstop behind the prose "Sanity-check before commit"
-# step in .claude/skills/catchup/SKILL.md — the prose check has failed in
-# practice, so the gate lives here where git runs it regardless of the agent.
-#
-# Note: validates the working-tree copy of each staged dossier (the catchup
-# flow stages exactly what it just wrote, so this matches the staged blob).
+# Validate staged dossiers: stream-format structure, size cap, stream-ID stability vs HEAD,
+# and the year-off date guard (stream last: must match a cited permalink date; legacy
+# dossiers keep the old entry-date check until conversion finishes).
+# Rules live in scripts/dossierlib.py; contract in docs/superpowers/specs/2026-10-14-stream-dossiers-design.md.
 
 root=$(git rev-parse --show-toplevel)
 
-if ! python3 "$root/scripts/check-dossier-dates" --staged; then
+if ! python3 "$root/scripts/check-dossiers" --staged; then
     echo ""
-    echo "Commit blocked: dossier entry dates are inconsistent with their Slack permalinks."
-    echo "Fix the dates (or, for the agent: ABORT this run — do not bump last_catchup)."
-    echo "To bypass for a deliberate, verified edit: git commit --no-verify"
+    echo "Commit blocked: dossier check failed (see above)."
+    echo "For the agent: ABORT this run — do not bump last_catchup, do not --no-verify."
+    echo "To bypass for a deliberate, verified human edit: git commit --no-verify"
     exit 1
 fi
