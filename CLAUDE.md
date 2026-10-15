@@ -6,12 +6,11 @@ Personal Slack catch-up tool for one reader (me). Two things live here:
 
 The reader / user is **Cameron Copland** (Slack user ID `U099FA0D7CP`, email `cameron.copland@mahimarkets.com`). Mahi staff and roles live in `../MahiProduct/.claude/org-chart.md` — consult it before naming anyone in a brief. Distinct people the brief is **not** addressed to: **Cameron Hughes** (Analyst, client-facing — appears across many client RACI rows), **Liam Cordelle** (Cameron Copland's manager). Don't confuse the brief's audience with another Cameron, and don't refer to the user by anyone else's name.
 
-1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived state per target: `last_catchup`, `History` (long-horizon relationship arc), `Recent issues`, `Notable topics`, plus pointers to canonical data elsewhere. The dossier is the durable artefact and can be detailed / jargon-dense.
+1. **Client / channel dossiers** (`clients/<slug>.md`, `channels/<name>.md`) — Slack-derived **current state** per target, read by agents in this repo (not humans): `## Now` (≤4 lines), `## Streams` (one `### <id> — <title>` per ongoing topic with status/since/last, a rewritten State, Next, 1–4 permalinks), `## Arc` (one line per relationship milestone), plus pointers to canonical data elsewhere. Git is the event log; the dossier holds only what's current.
 2. **Skills**:
-   - **`/catchup <target>`** — worker. Pulls Slack since `last_catchup` and edits one dossier in place (Recent issues + Notable topics). Output is a structured confirmation, not a readable brief.
-   - **`/slack-attack [slug]`** — reader-facing entrypoint. Dispatches `/catchup` in subagents (to keep main context clean), then synthesises a natural-language prose brief from the updated dossier(s) for me. With no slug it batches across active clients oldest-first, until the brief is substantial, then prompts to continue.
+   - **`/catchup <target>`** — worker. Pulls Slack since `last_catchup` and updates one dossier's Now / Streams / Arc in place and commits it. Output is a structured confirmation, not a readable brief.
+   - **`/slack-attack [slug]`** — reader-facing entrypoint. Dispatches `/catchup` in subagents (to keep main context clean), then synthesises a natural-language prose brief from the updated dossier(s) for me. With no slug it processes every due client (scripts/rank-clients --due) in waves of six parallel catchups and produces one brief.
    - **`/weekly-overview`** — Monday-morning higher-level digest. Reads the past week's catchup commits across all clients and synthesises a prose summary of the major stories. No fresh Slack pulls; sources strictly from in-repo commits. Runs after the daily `/slack-attack` on Monday.
-   - **`/backfill <slug>`** — one-shot lookback worker. Default 12m horizon; populates the dossier's `## History` section with the relationship arc. Suggests an extension run if older history is detected. Run once per client (or twice with `--since YYYY-MM-DD` to extend). Refuses if a wiki page exists upstream.
 
 ## Source-of-truth boundary
 
@@ -20,7 +19,7 @@ The reader / user is **Cameron Copland** (Slack user ID `U099FA0D7CP`, email `ca
 | Want... | Look in... |
 |---|---|
 | Per-client hosts, Slack channels, Athena DBs, party names, distribution markets, LP FIX, LR rules | `../VibePulse/.claude/clients/{slug}.yaml` |
-| Who's internal at Mahi (for the "Mahi staff aren't in `key_people`" rule) | `../MahiProduct/.claude/org-chart.md` |
+| Who's internal at Mahi (for the "Mahi staff aren't in `contacts`" rule) | `../MahiProduct/.claude/org-chart.md` |
 | Client commercial terms, fees, contract dates | `../MahiProduct/data/billing/clients.json` |
 | Per-env Graphite hosts, s3 slugs | `../MahiProduct/data/client-hosts.json`, `../MahiProduct/data/infra-hosts.json` |
 | External contacts (client/prospect/vendor) | `../MahiProduct/wiki/people/` |
@@ -30,9 +29,9 @@ Each dossier points at its refs via `refs:` in frontmatter. If a ref is `null`, 
 
 Rules:
 - Prefer writing to this project over `../MahiProduct/` or `../VibePulse/`.
-- `key_people_overrides` holds only external contacts not yet in `../MahiProduct/wiki/people/`, plus low-confidence discoveries waiting for promotion.
+- `contacts` (frontmatter) holds only external people not in `../MahiProduct/wiki/people/`.
 - Don't re-state hosts, commercial terms, party names, or distribution markets in the dossier body — the refs are authoritative.
-- The dossier's `## Status` section (Stage / Integration / Relationship) exists **only when `wiki: null`**. If a wiki page exists for the client, it is canonical for longer-term state and the dossier carries no Status section. When a wiki page later lands, delete the Status section and update the `wiki:` ref in the same change.
+- Never write to `../MahiProduct/` or `../VibePulse/` — read-only sources. This repo is for individual use and writes nowhere else.
 - **Retiring a client**: add `status: retired`, `retired_at: <ISO date>`, `retired_reason: <free text>` to the dossier frontmatter. `/slack-attack` and `/catchup` then skip it (no-arg flow silently; explicit-slug flow short-circuits with a one-line note). To re-activate, remove `status: retired` from frontmatter and run `/catchup <slug>` — that's the whole flow, no separate command.
 
 ## Tone
@@ -51,12 +50,20 @@ Rules:
 
 ## Dossier discipline
 
-- `/catchup` applies changes and commits them itself (one commit per run, scoped to the dossier and any newly-cached channel ID). No review-then-commit step. Locally I `git pull`/inspect history to see what landed; remotely the routine pushes the commits at the end of the batch.
-- `/slack-attack` probe-skips dispatch for any client whose resolved channels show zero non-bot human messages since `last_catchup`. On a probe-skip the orchestrator does a frontmatter-only `last_catchup` bump itself (commit message `chore(catchup): bump <slug> (probe-skip, no activity)`) and emits the standard quiet one-liner in the brief. This keeps the daily routine cheap when most clients are idle.
-- `last_catchup` in frontmatter is the source of truth for "where did we leave off". Update it as part of the same `/catchup` edit.
-- Keep dossier `Recent issues` reverse chronological, trim entries older than ~90 days. The dossier itself can be dense and detailed; readability is `/slack-attack`'s problem, not the dossier's.
-- Use `Edit`, not `Write`, for dossier updates — keeps diffs small and readable.
-- If a dossier doesn't exist for a client `/catchup` is asked about, auto-bootstrap a minimal one from the VibePulse yaml (hosts, slack channels) rather than blocking.
+Format contract: `docs/superpowers/specs/2026-10-14-stream-dossiers-design.md`; enforced by `scripts/check-dossiers` (pre-commit). The `catchup` skill holds the working rules.
+
+- `/catchup` edits one dossier and commits it itself, with a `streams:` trailer listing every stream touched (`new | updated | closed | watching | merged>ID | pruned`).
+- Streams are rewritten in place, never appended to. Stream IDs are permanent. Open streams quiet >30d (watching >60d) must be explicitly reviewed each catchup. Closed streams are pruned by `scripts/prune-dossiers` 14 days after closing.
+- `/slack-attack` probe-skips clients with zero human messages since `last_catchup`, committing `chore(catchup): bump <slug> (probe-skip, no activity)`.
+- `last_catchup` is the source of truth for where we left off. Catchup refuses windows >90 days, so a client left untouched for 90 days needs a manual reset.
+- Don't store anything one read of VibePulse / MahiProduct / Slack returns; store the synthesis plus permalinks.
+- Bootstrap: `/catchup <slug>` creates a missing dossier from the template.
+
+### Stream history
+
+- `git log --grep='<id>' -- clients/<slug>.md` — every run that touched a stream.
+- `git log -L '/^### <id> /,/^### /:clients/<slug>.md'` — how its text evolved.
+- `git log -S'### <id> ' -- clients/<slug>.md` — when it was created / pruned.
 
 ## Brief output (slack-attack)
 
@@ -89,12 +96,12 @@ Don't drop or edit other fields (cron, environment, MCP connections, etc.) unles
 ```
 clients/     per-client dossiers (_template.md is the schema)
 channels/    per-channel dossiers for non-client channels
+scripts/     dossierlib.py, check-dossiers, prune-dossiers, rank-clients; tests in scripts/tests/
 .claude/
   skills/
-    catchup/          /catchup <target>         — worker, edits Recent issues + Notable topics
-    slack-attack/     /slack-attack [slug]      — orchestrator + reader-facing daily brief
-    weekly-overview/  /weekly-overview          — Monday-morning prose digest of the past week's commits
-    backfill/         /backfill <slug>          — one-shot lookback, populates ## History
+    catchup/          /catchup <target>         — worker, updates one dossier's streams + commits
+    slack-attack/     /slack-attack [slug]      — orchestrator + reader-facing brief
+    weekly-overview/  /weekly-overview          — Monday prose digest from the week's streams: trailers
   routines/
     slack-attack-daily.md   prompt body for the daily remote routine (push to remote after editing)
   docs/
@@ -110,6 +117,6 @@ git config core.hooksPath .githooks
 ```
 
 - **`commit-msg`** — enforces conventional commits (`feat|fix|docs|chore|refactor|test|ci|build|perf|style|revert`), 72-char subject, no trailing period.
-- **`pre-commit`** — runs `scripts/check-dossier-dates --staged`, blocking any commit whose dossier entries are dated >180d from the Slack permalink they cite, or dated in the future. This is the enforced backstop against the recurring year-off catchup corruption (old Slack messages stamped with the current year). Run `scripts/check-dossier-dates clients/*.md channels/*.md` to audit by hand.
+- **pre-commit** — runs scripts/check-dossiers --staged: stream format, 15KB cap, stream-ID stability, and the year-off date guard. Tests: python3 -m unittest discover -s scripts/tests.
 
 **The remote `slack-attack-daily` routine's checkout must also have `core.hooksPath=.githooks` set**, or the pre-commit guard won't fire there — and the routine is exactly where the corruption has been landing.

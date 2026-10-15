@@ -12,9 +12,9 @@ The reader is **Cameron Copland** (Slack `U099FA0D7CP`). Same audience and tone 
 The overview sources strictly from this week's **catchup commits** on `main`. No fresh Slack pulls. The daily `/slack-attack` runs have already done the reading and the editorial first pass into the dossiers; this skill's job is to read across them and pick out what mattered.
 
 1. Anchor the window from bash (see "Window-anchor sanity check" below). Default: the previous seven full days ending at today 00:00 UTC.
-2. `git log --since="<window-start>" --until="<window-end>" --pretty=format:'%H %s' -- clients/ channels/` to enumerate the commits in scope.
-3. For each commit, `git show <sha> -- clients/<slug>.md` (or the channel path) and extract what was added: new `Recent issues` entries, `Notable topics` entries, `[open]`→`[resolved]` promotions, summary refreshes, and any `key_people_overrides` additions. Ignore frontmatter-only `last_catchup` bumps — they're noise at the weekly level.
-4. Group by slug. The result is "what each client recorded this week" — that's the editorial pool you then narrow.
+2. `git log --since="<window-start>" --until="<window-end>" --format='%H%x09%ad%x09%s%n%b' --date=short -- clients/ channels/` to enumerate commits and their bodies.
+3. Skip probe-skip/quiet bumps and `refactor(dossiers): convert …` commits (conversions rebuild whole files and would restate history). For each remaining commit, read its `streams:` trailer and `git show <sha> -- <dossier>` for the touched streams' new State / Next / Refs.
+4. Group by client, then by stream ID. A stream touched on 3+ distinct days is a multi-day arc; a stream that went `new` → `closed` inside the week is usually daily-brief material, not weekly.
 
 If the window has zero substantive commits (only `last_catchup` bumps and quiet-window notes), the overview is one line ("Quiet week. No client recorded a notable story.") and you stop.
 
@@ -25,7 +25,7 @@ Use editorial judgment — no rigid scoring rubric. Trust the daily catchups: th
 Cues that something is major:
 
 - **Relationship-shifting status changes** — go-live moved, contract movement, offboarding signal, integration milestone, churn risk.
-- **Multi-day arcs** — the same issue or topic shows up across several commits in the week. One spike is a daily-brief paragraph; the same spike across three days is a weekly story.
+- **Multi-day arcs** — the same stream ID appears in `streams:` trailers on several days. One spike is a daily-brief paragraph; the same stream moving across three days is a weekly story.
 - **Cross-client patterns** — if multiple clients hit the same LP issue, the same pricing-config tweak, the same infra change, name the pattern once at a higher level rather than repeating it per client.
 - **Direct mentions of the user that haven't been actioned** — anything still hanging from `Action items` lines in the daily catchup outputs.
 - **First-time signals** — new external contacts, a new integration mentioned, a new product topic that the dossier hadn't seen before.

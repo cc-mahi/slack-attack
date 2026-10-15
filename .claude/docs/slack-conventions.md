@@ -19,9 +19,9 @@ Adapted from `../pagerbuddy/.claude/docs/slack-channels.md` — trimmed to what 
 
 Many relevant channels are private. Always pass `channel_types: "public_channel,private_channel"` to search tools.
 
-## Known channel IDs
+## Known channel IDs (legacy — delete after conversion)
 
-Populate here as we discover them (from search results) — avoids re-resolving.
+Channel IDs now live in each dossier's `channels:` frontmatter. Legacy conversion reads this table once; remove it when every dossier is converted (plan Task 12).
 
 | Channel | ID |
 |---------|----|
