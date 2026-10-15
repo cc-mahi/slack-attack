@@ -192,7 +192,7 @@ A dossier without `## Streams` was written by older, less capable models and may
 
 1. `scripts/prune-dossiers <file>` — note any `pruned <id>` lines for the trailer.
 2. `scripts/check-dossiers <file>` must exit 0. Warnings: fix size/Arc/Refs warnings if cheap.
-3. Every stream you created or updated has `last` within `[date(oldest_iso) - 1 day, date(now_iso)]`.
+3. Every stream you created or updated has `last` within `[date(oldest_iso) - 1 day, date(now_iso)]`. Exception (legacy conversion only): a `watching` stream carried over from an old unanswered commitment (conversion step 3) keeps its real `last`, which may predate the window.
 
 If 2 or 3 fails and you can't fix it from what you read, **abort**: leave the file dirty, don't commit, don't bump `last_catchup`:
 
@@ -225,7 +225,7 @@ The pre-commit hook re-runs the check as a backstop; a clean self-abort is the i
   ```
 
   Verbs: `new | updated | closed | watching | merged>ID | pruned`. `/slack-attack` and `/weekly-overview` read this line; `git log --grep=<id>` depends on it.
-- Other catchups commit to this repo in parallel. If `git commit` fails on `.git/index.lock`, `sleep 3` and retry, up to 5 times.
+- Other catchups commit to this repo in parallel and share one git index, so a plain `git commit` can sweep up another agent's staged dossier. Always commit by path: `git commit -m "<subject>" -m "<body>" -- <dossier path>`. If it fails on `.git/index.lock`, `sleep 3` and retry, up to 5 times.
 - Don't push. The caller pushes.
 
 ## Output (to caller)
