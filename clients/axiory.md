@@ -1,49 +1,74 @@
 ---
 slug: axiory
+aliases: []
 refs:
   vibepulse: ../VibePulse/.claude/clients/axiory.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: axiory
   hosts: ../MahiProduct/data/client-hosts.json          # entry: axiory
   wiki: ../MahiProduct/wiki/clients/axiory.md
-channels_override: null
-key_people_overrides:
-  - {name: "Adam Foltyn", role: "client trading ops — LP/pricing escalations", confidence: low}
+channels:
+  internal-axiory: C06KQT6EU3W
+  mahi-axiory: C06KHNQQYMR
+contacts:
+  - {name: "Adam Foltyn", role: "client trading ops, LP/pricing escalations", confidence: low}
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
-  - {name: "Magda", role: "Axiory — possibly attending Cyprus event alongside Roman", confidence: low}
-  - {name: "Jan", role: "Axiory TY office — data/ops requests (surname unknown)", confidence: low}
-last_catchup: 2026-08-17T08:34:00Z
+  - {name: "Magda", role: "Axiory, possibly attending Cyprus event alongside Roman", confidence: low}
+  - {name: "Jan", role: "Axiory TY office, data/ops requests (surname unknown)", confidence: low}
+last_catchup: 2026-10-15T12:36:31Z
+status: active
 ---
 
-## Recent issues
+## Now
+Live Compass client (LDN + TKY, PXM books). Compass 26.3 to 26.4 upgrade went to the weekend restart of 10-10/11; completion not confirmed in Slack.
+Kate Stagg is actively tuning skew config from the weekly skew-health runs. CFD billing credit ($25k) was agreed internally in Aug; issuance not confirmed.
+Client channel has been quiet since July apart from the upgrade notice.
 
-> [open] 2026-07-22 — Billing dispute: June invoice billed 29.5B combined FX+metals+CFD volume against the CFD/indices tier, not isolated CFD flow
-> Roman queried why the last invoice billed 29.5B volume on indices when Axiory's actual CFD flow is far smaller. Will Carter confirmed a known gap: the CFD/FX split was computed cleanly in March (CFD FI $3,514 vs FX & metals $146k) but May and June reverted to billing the CFD tier off total combined volume, because the split was left "TBC" (open item 9) in the June billing-prep. Kate Stagg found only 5 CFD instruments should be summed (G30EUR, DOWUSD, NDXUSD, HSIHKD, CL1USD), not the 13 previously assumed, and pulled isolated per-month LDN+TKY volumes: June 3.63b+184m, May 4.47b+163m, April 3.02b+110m, March 3.11b+415m. She also flagged spread PnL looks poor on PXM_BROKERS_CLIENTS and will dig into signal performance. Daria Horton (late 07-22) asked Kate to confirm the exact parties/instruments to sum and correct `/billing-prep` in MahiProduct — the Grafana dashboard had been double-counting by summing HOUSE, CLIENTS_NET etc without party filtering — and has updated the process to publish all open items to Slack rather than just the worst ones. 2026-07-24: Kate confirmed the `/billing-prep` correction is in ("should be all sorted! Will check results when run this month") [fix-confirmed](https://mahifx.slack.com/archives/C06KQT6EU3W/p1784890103469169) and posted corrected monthly CFD-only volumes on the 5-instrument basis, showing every month Feb–Jun should have been billed at the $5k tier (Feb 3.08b, Mar 3.52b, Apr 3.12b, May 4.63b, Jun 3.81b) — asked Nicole Vivian to confirm actual charged fees. [corrected-volumes](https://mahifx.slack.com/archives/C06KQT6EU3W/p1784890594969379) 2026-07-26: Nicole Vivian replied with materially different, much larger volumes for the same months, all billed at $10k (Feb 20.68b, Mar 27.11b, Apr 21.29b, May 30.75b, Jun 29.5b), and asked whether a $25k credit is owed to account for charging $10k instead of $5k across those months — contradicts Kate's corrected figures, unresolved as of this catchup. [nicole-figures](https://mahifx.slack.com/archives/C06KQT6EU3W/p1785103566833749) Open: Kate's and Nicole's volume/fee figures disagree; awaiting reconciliation before any credit is issued. [thread](https://mahifx.slack.com/archives/C06KQT6EU3W/p1784710795537379)
+## Streams
 
-> [resolved] 2026-07-15 — XAUUSD slippage complaint (account 2045069, position 34001138); traced to PXM-side, client confirmed resolved
-> Jan (Axiory TY) reported a client-side slippage of 0.21 on XAUUSD (account 2045069, position 34001138, ~13:25:28 BST). Rory King reviewed and found the trade in line with Mahi's pricing feed (screenshot provided), pointed Jan to raise the observed slippage with PXM directly. Jan confirmed same day it's resolved. [complaint](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784117573849439) [response](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784118263061489)
+### compass-26-4-upgrade — Compass 26.3 to 26.4 upgrade (LDN + TKY)
+status: open · since: 2026-10-08 · last: 2026-10-09
+State: Change CHG-2610-6A7S staged Fri 10-09, live at the weekend restart; approved at RC #7224. Axiory sets neither PSM adjustment-widening nor tightening parameters, so from restart prices widen/tighten by one increment on PSM-W/PSM-T signals in LDN and TKY; Liam decided to let that go on. Client was told 10-09 and is being monitored over the open. Infra main moved to LDN + TKY ahead of staging (CHG-2610-WP2T, self-approved).
+Next: confirm the restart landed cleanly and watch pricing after the open (nothing posted yet).
+Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1791483332472299 https://mahifx.slack.com/archives/C06KHNQQYMR/p1791543782667709
 
-> [open] 2026-07-14 — GBPAUD spread blowout (21:12:59 UTC 07/13); traced to client's own PXM aggregation failing over to Finalto — Jan now disputing the root cause
-> Jan (Axiory TY) raised a client claim: GBPAUD spread blew out to ~146–166 pips for ~1.5s at 2026-07-13 21:12:59 UTC. Rory King acknowledged same morning. Kate Stagg's investigation (2026-07-14): the aggregated feed is built in Axiory's own PrimeXM, upstream of Mahi, at Axiory's request — AXIORY_POOL (TKY) and AXIORY_POOL_LDN (LDN) both quoted the wide spread because 26D dropped out at the same moment and PXM appears to have failed over to Finalto, which sent a bad quote (bid ~1.9242–1.9248, ask spiked ~1.9388–1.9398) then froze for 11.6s. Kate suggested Jan confirm with PXM directly; screenshots provided. [claim](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784017690112589) [ack](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784017797279159) [investigation](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784049533759789) 2026-07-15: Jan pushed back with Axiory's own raw tick data (spreadsheet attached) — their read shows 26D ticking continuously every 10–20ms through the window with no interruption, contradicting Kate's dropout theory; Finalto's bad quote + 11.6s freeze stand either way, but the cause of the failover to Finalto is now disputed, not settled. [rebuttal](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784112463940319) 2026-07-16: Jan sent a reminder to Kate — no reply yet, thread still open. [reminder](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784177182713689)
+### skew-arb-tuning — Skew tuning and GBPAUD/arb handling
+status: open · since: 2026-05-22 · last: 2026-08-28
+State: Weekly skew-health runs (Kate, 08-28) found capture healthy (about $100k/wk TKY, $21k/wk LDN, mostly XAUUSD) and made config-only changes: flow-price-thresh published for five crosses on TKY (measurement only), a very small harmonics skew on GBPAUD TKY (LDN stays off after the Jan and May arbs; FI-drop alert is the tripwire), USDJPY/GBPJPY/XAGUSD signal swaps, dedicated graph threads for XAUUSD/USDJPY. AXIORY_MT5_LDN is now excluded via book scope (it double counted PXM trades). NDXUSD/G30EUR re-wire since 22 Jul is a net win (about $880/wk).
+Next: Kate reads USDJPY/GBPJPY LDN and flow-price-thresh potential at the 4 and 11 Sep runs; no later result seen in Slack.
+Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1779469727749819 https://mahifx.slack.com/archives/C06KQT6EU3W/p1787914227833699
 
-> [open] 2026-06-29 — XAUUSD demo-server pricing discrepancy query from Jan (Axiory TY); pricing data provided, resolution pending
-> Jan (Axiory TY) raised a complaint on behalf of clients: XAUUSD positions on Axiory's MT5 demo server closed at prices differing significantly from Mahi's price feed (2026-06-26 ~15:06–15:39 UTC). Thirteen orders across accounts 20059963 and 20053970, all closing at 4086.64 or 4087.33. Rory King investigated and could not find drop copies (demo server — execution is on Axiory's side, not Mahi's). Jan clarified the trades are demo-side only. Kate Stagg confirmed no drop copies found and Rory provided a CSV of CLIENT_PRICE_TKY pricing data for the relevant window (2026-06-30). Jan thanked; no further reply yet — thread open. [complaint](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782736112200869) [pricing-data-sent](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782826684107249)
+### infra-change-notices — Infra and network change windows affecting Axiory
+status: watching · since: 2026-10-08 · last: 2026-10-14
+State: Upcoming or recent imposed windows: PrimeXM LD4 cross-connect port upgrade 10-10 (brief BGP drops), Beeks cross-site link move 10-17 05:00-09:00Z (replication blips), AWS taking down LD_SEC 10-22 21:00-23:00Z (London Beeks clients). Informational; Kate is listed as the Axiory owner.
+Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1791494708657249 https://mahifx.slack.com/archives/C06KQT6EU3W/p1791998802022569
 
-> [open] 2026-05-22 — GBPAUD arb + persistent skew / arbitrageur classification gaps; AXIORY_MT5_LDN party filter fix pending
-> Counterparty 2040811 arbing GBPAUD triggered repeated FI PnL drop alerts (~$5k each) via PXM Give Up Clients. Will Denny whitelisted 2040811 as Arbitrageur on PXM_GU_CLIENTS, turned off GBPAUD skew, and bounced pricers; fix initially only took effect on CLIENT_PRICE_TKY not LDN. Bounced signalProcessFI1 → CLIENT_PRICE_LDN stabilised ~19:49 BST. 2026-05-25: Adam Foltyn confirmed on #mahi-axiory that the fix was received ("skew arb again?" → Will: "yes, prevented now" → Adam: "Perfect, thank you"). [client-thread](https://mahifx.slack.com/archives/C06KHNQQYMR/p1779695244195939) 2026-05-26 (overnight BST): Daria deployed real-time arb detection to admin riskPath (Zendesk ticket 22989 still open for a separate fix; no hedgers/pricers on that component). [deploy](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779752194345309) LIVE1_2040811 also separately whitelisted for arbitrageur classification. [whitelist](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779762621419089) Open: skew was still responding to 2040811's trades even after whitelist — Daria investigating why; AXIORY_MT5_LDN has `market = AXIORY` (TKY market) in its config, not showing in order history — may need tenant profile fix to be included in arbitrageur checks; Daria asked Kate to confirm switching the market. [party-filter-q](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779762621419089) XAUUSD LDN switched to synapse as performance was dropping — monitoring. [xauusd-synapse](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779745658082699) Daria also proposed a "skew kill switch" (auto-disable skew if PnL loss >10k on single instrument, reset on pricer restart) — design idea, not actioned. [kill-switch-idea](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779752537203349) [alert](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779469727749819) [client-notification](https://mahifx.slack.com/archives/C06KHNQQYMR/p1779471380642269) [arb-detection-q](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779607931370729)
+### billing-cfd-tier — CFD tier billed on combined volume
+status: watching · since: 2026-07-22 · last: 2026-08-03
+State: Roman queried the June invoice (29.5B). Cause: CFD tier was billed off combined FX+metals+CFD volume from Feb onward at $10k, when true CFD-only volume (5 instruments, parties PXM_BROKERS/GU) is 3-4.6b and belongs on the $5k tier. Nicole Vivian confirmed 08-03 that earlier months were only ever $5k, so a $25k credit covers Feb-Jun. `/billing-prep` was corrected to filter parties and instruments.
+Next: Nicole/Kate to apply the $25k credit and tell Roman; no confirmation seen in Slack.
+Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1784710795537379 https://mahifx.slack.com/archives/C06KQT6EU3W/p1785715856791519
 
-> [resolved] 2026-04-27 — LD4 pricing broken at market open — US Oil + multiple CFDs + all FX wider than TY3
-> Adam Foltyn pulled MAHI pricing on US Oil → GER40/HKD50/US30/US100 → all FX to backup at LD4 open. Restored 04-27 after Sam Hewitt restarted the publishing process; Adam confirmed pricing recovered and switched back. Root cause (Daria, 04-28): a hazelcast WAN replication `Update overrides[distribution.distributionChannels]` at 2026-04-20 00:48:48 UTC set the LDN dist channel's internalisation market to `CLIENT_PRICE_TKY` (override last edited 2024) — surprise it didn't trigger sooner; Kate to watch LDN for similar oddities. Adam pinged 04-29 asking for RCA update — no reply yet, RCA write-up still owed. 2026-05-02: Adam confirmed `_z` suffix symbols switched back to MAHI pricing and included in give-ups as agreed — full pricing restoration complete. [permalink](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777254243398619) [internal-rca](https://mahifx.slack.com/archives/C06KQT6EU3W/p1777276704165709) [resolution](https://mahifx.slack.com/archives/C06KHNQQYMR/p1777738779200109)
+### commercial-compass-psm — Compass routing, PSM interest, low-spreads campaign
+status: watching · since: 2026-05-22 · last: 2026-05-22
+State: From the 05-22 client call: Axiory's low-spreads campaign had no volume effect and will not repeat. Roman is interested in a PSM setup and still sees Compass routing as pipeline, blocked by the double-bubble cost (PXM plus Compass fees via XCore). Roman may attend the Cyprus event, possibly with Magda.
+Next: Kate to check whether the PXM fee-reduction agreement resolves the double bubble, then follow up with Roman (no follow-up seen).
+Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1779449151258899
 
-## Notable topics
+### gbpaud-spread-dispute — GBPAUD spread blowout root-cause dispute
+status: closed · since: 2026-07-13 · last: 2026-07-16 · closed: 2026-10-15
+State: No activity since 2026-07-16; assumed resolved. Kate traced the 07-13 spike to Axiory's own PXM aggregation failing over to a bad Finalto quote; Jan disputed the 26D dropout theory with raw ticks and sent a reminder 07-16 that went unanswered in the channel.
+Refs: https://mahifx.slack.com/archives/C06KHNQQYMR/p1784017690112589 https://mahifx.slack.com/archives/C06KHNQQYMR/p1784177182713689
 
-> 2026-07-14 — GBPAUD spread blowout traced upstream to Axiory's own PrimeXM aggregation, not Mahi — now disputed by client
-> Client claim on a 1.5s GBPAUD spread spike was traced by Kate Stagg to a root cause outside Mahi's pricing: Axiory's PXM aggregation (built at their request) failing over to a bad Finalto quote when 26D allegedly dropped out. Jan came back 2026-07-15 with Axiory's own raw tick data showing 26D ticking continuously with no dropout — disputing that part of the diagnosis — and chased again 07-16 with no reply yet. [claim](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784017690112589) [investigation](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784049533759789) [rebuttal](https://mahifx.slack.com/archives/C06KHNQQYMR/p1784112463940319)
+### fix-session-alerts — Expected FIX session alerts silenced
+status: closed · since: 2026-09-04 · last: 2026-09-04 · closed: 2026-10-15
+State: AXIORY_BROKER_CLIENTS-ORDER and AXIORY_A_BOOK-ORDER PagerDuty alerts were expected (placeholder credentials, A_BOOK channel idle 90 days; all flow via MT5 bridge, cTrader and PXM books). Sam Hewitt turned the alerts off.
+Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1788489379120969
 
-> 2026-06-29 — Jan (Axiory TY) raised XAUUSD demo execution price discrepancy; Mahi provided pricing data
-> Jan flagged that two demo-account positions (accounts 20059963 and 20053970) closed on 2026-06-26 at prices differing from the Mahi price feed. Rory and Kate investigated: no matching drop copies found (expected — demo server, execution is on Axiory's side, not Mahi's). Jan acknowledged the demo-execution clarification. Rory delivered a XAUUSD pricing CSV for the relevant window (2026-06-26 ~15:00–16:00 UTC) — no Mahi pricing issue identified. [request](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782736112200869) [resolution](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782826684107249)
-
-> 2026-06-24 — Jan (Axiory TY) requested AUDCAD spread data for 2026-06-23 21:00–21:15 UTC; Rory King provided CSV same day
-> Routine data pull; no issue flagged. [request](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782297771004419) [response](https://mahifx.slack.com/archives/C06KHNQQYMR/p1782304953826109)
-
-> 2026-05-22 — Client call: low-spreads campaign had no volume impact; PSM interest; Compass routing still blocked by double-bubble cost
-> Kate's call notes: the low-spreads/commissions campaign Axiory ran produced no increase in volumes or account numbers — no plans to repeat. Roman interested in PSM setup. Compass routing conversation re-visited: Roman views it as still in the pipeline but "double bubble" (paying both PXM and Compass fees via XCore) remains the blocker; Kate to check whether the PXM fee-reduction agreement for clients sending flow could resolve this, and follow up with Roman. Roman planning to attend Cyprus (possibly with Magda). [permalink](https://mahifx.slack.com/archives/C06KQT6EU3W/p1779449151258899)
+## Arc
+- 2026-04-27 — LD4 pricing broke at open (LDN dist channel internalisation market overridden to CLIENT_PRICE_TKY via WAN replication, 04-20); restored, `_z` symbols back on MAHI pricing by 05-02
+- 2026-05-22 — GBPAUD arb (acct 2040811) on LDN; skew turned off on GBPAUD everywhere, arb detection deployed to riskPath 05-26
+- 2026-06-26 — Jan's XAUUSD demo-server price query; Mahi found no drop copies (demo execution is Axiory-side), supplied pricing CSV
+- 2026-07-15 — XAUUSD slippage complaint (acct 2045069) traced to PXM side; client confirmed resolved
+- 2026-07-22 — CFD billing over-charge found; corrected volumes and $25k credit agreed by 08-03
+- 2026-08-28 — Kate's skew-health changes on TKY and LDN
+- 2026-10-09 — Compass 26.4 approved for the weekend restart
