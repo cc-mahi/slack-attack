@@ -54,7 +54,7 @@ Refs: <origin permalink> <latest permalink>   (bare URLs, 1–4)
 - **Meta line** is the first line under the heading, exact format above (separator ` · `). `since` = first Slack signal; `last` = date of the latest Slack message on the stream and **must match a permalink in Refs** (±1 day). Dates in UTC.
 - **State** is rewritten, never appended to. No "2026-10-07 update —" lines; that history is in git.
 - **Order**: open (newest `last` first), then watching, then closed.
-- **Size**: ≤10KB target, 20KB hard cap. Over target → merge or close streams, tighten State — but never drop a live fact, open question or commitment to hit the target; busy clients may sit above it.
+- **Size**: ≤10KB target, 30KB hard cap. Over target → merge or close streams, tighten State — but never drop a live fact, open question or commitment to hit the target; busy clients may sit above it.
 - Never delete a stream by hand. Close it; `scripts/prune-dossiers` removes closed streams 14 days later.
 
 ## Resolving the target

@@ -65,7 +65,7 @@ Rules:
 - **Refs**: 1–4 bare permalinks — origin and latest at minimum. Bare URLs (no markdown labels) to keep them greppable and cheap.
 - **Ordering**: open streams first (most recent `last` first), then watching, then closed.
 - **Arc**: one line per relationship-level milestone (go-live, decommission, contract change, key person change). Written when a significant stream closes or a milestone lands. Soft cap ~20 lines; when over, the catchup agent merges the oldest lines.
-- **Size**: target ≤10KB; hard cap 20KB enforced at commit.
+- **Size**: target ≤10KB; hard cap 30KB enforced at commit.
 - No `Status`, `History`, `Recent issues`, `Notable topics`, or `key_people_overrides` sections. `channels_override` folds into `channels`.
 - Channel dossiers (`channels/<name>.md`) use the same Now / Streams / Arc body; frontmatter keeps `channel_id`, `purpose`, `scope`.
 
@@ -101,7 +101,7 @@ streams: tegis-api(updated) mt4-decom(new) xau-hedging(closed) xbt-cancels(prune
   - Structure: required frontmatter keys; `## Now`, `## Streams`, `## Arc` present; each stream has a valid heading, meta line, `State:`, `Refs:` with ≥1 permalink.
   - Dates: `last` equals a cited permalink's UTC date (±1 day for timezone edges); `since` ≤ `last`; no date in the future. Keeps the year-off guard, now on two dates per stream instead of every entry.
   - IDs: unique; no stream that was `open`/`watching` in `HEAD` may disappear from the staged file (only `closed` streams can be removed).
-  - Size: fail >20KB; warn >10KB.
+  - Size: fail >30KB; warn >10KB.
   - `--stale` mode: list open streams with `last` >30d and watching >60d (non-blocking; for the catchup agent).
   - Legacy files (no `## Streams`) during migration: run only the old date check against them.
 - **`scripts/prune-dossiers <files>`**: remove closed streams with `closed` >14d. Prints removed IDs for the commit trailer.
@@ -152,7 +152,7 @@ streams: tegis-api(updated) mt4-decom(new) xau-hedging(closed) xbt-cancels(prune
 
 ## Success criteria
 
-- Every active dossier passes `check-dossiers`, ≤20KB (most ≤10KB).
+- Every active dossier passes `check-dossiers`, ≤30KB (most ≤10KB).
 - No `open` stream with `last` >30d survives a catchup without an explicit decision.
 - `git log --grep=<id>` reconstructs any stream's history.
 - Full daily routine wall time well under the August 35–47 min (target ≤15 min on a typical day).

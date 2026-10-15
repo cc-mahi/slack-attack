@@ -70,7 +70,7 @@ class CheckTest(unittest.TestCase):
         self.assertTrue(errors(dossier(stream(status="open", closed="2026-10-14"))))
 
     def test_size_caps(self):
-        big = dossier(stream(state="x" * 21000))
+        big = dossier(stream(state="x" * 31000))
         self.assertTrue(any("hard cap" in e for e in errors(big)))
         mid_errs, mid_warns = run(dossier(stream(state="x" * 11000)))
         self.assertEqual(mid_errs, [])
