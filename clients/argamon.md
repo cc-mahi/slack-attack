@@ -1,105 +1,95 @@
 ---
 slug: argamon
+aliases: []
 refs:
   vibepulse: ../VibePulse/.claude/clients/argamon.yaml
   billing: ../MahiProduct/data/billing/clients.json     # entry: argamon
   hosts: ../MahiProduct/data/client-hosts.json          # entry: argamon
   wiki: ../MahiProduct/wiki/clients/argamon.md
-channels_override: null
-key_people_overrides:
-  - {name: "Elan (Argamon CEO/principal)", role: "Principal contact / decision-maker", confidence: low}
-  - {name: "Levi Ulman", role: "Argamon ops / connectivity", confidence: low}
-  - {name: "Tom (Argamon)", role: "Argamon ops / daily trading", confidence: low}
-  - {name: "Jonah Ink", role: "Argamon reconciliation / back-office", confidence: low}
-  - {name: "Alex (Karnadi)", role: "Argamon back-office / rec", confidence: low}
-  - {name: "Joanna Theofanous", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-  - {name: "William (Argamon)", role: "Argamon ops (client-side contact in mahi-argamon-operations)", confidence: low}
-last_catchup: 2026-08-17T08:31:40Z
+channels:
+  internal-argamon: C06U76A7ZJR
+  mahi-argamon-operations: C06TW3D8NMV
+contacts:
+  - {name: "Elan Bension", role: "Argamon principal / decision-maker", confidence: low}
+  - {name: "Jem (Jeremy)", role: "Argamon exec on calls with Elan; drives leverage / B-book strategy, surname unknown", confidence: low}
+  - {name: "Levi Ulman", role: "Argamon ops / connectivity (PXM, Jump, Centroid)", confidence: low}
+  - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
+  - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
+  - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
+last_catchup: 2026-10-15T12:57:40Z
+status: active
 ---
 
-## Recent issues
+## Now
+Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost.
 
-> [open] 2026-08-14 — XAUUSD CPI loss: hedger held short as spread cap (40c) trailed hedging pool ($4.50+); news-based MWMS added; PSM-style widening shelved after Monday catch-up
-> Daria: retail NY volumes down and getting more toxic (client's business model); plans to catch up with Elan Monday to discuss charging more spread — suggesting PSM-style widening on XAUUSD (currently fixed at 8c) while still targeting tight on average. Separately, a loss this week came from XAUUSD trading over CPI: published spreads capped out at 40c while the hedging pool widened to at least $4.50, so the hedger wouldn't fire and the book was held short through the drop. News-based MWMS already added for 100-weight events in response. 2026-08-17 (Monday catch-up outcome): spread changes ruled out; plan instead is to strip out the fast-hedge and don't-B-book rules and let VaR-triggered rules manage the risk, accepting more variable weekly PnL (shared a chart of fast-hedge-classified flow since 4 Jul as the reference case — "not nice like this every week"). Review again next week; if hedging cost proves too high to fix profitability this way, fallback is to route more to Toa for passive hedging. Separately, TOA_CHI re-added to the XAUUSD hedging market set — Elan raised its base spread to 30c to match the ~30c hedging-pool cost (was 9c). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786937814080389) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786939378841759)
+## Streams
 
-> [open] 2026-08-05 — TOA GBPUSD last-look config gap: NatWest/Lucera escalation over cancelled orders, scoped by Trading Account not channel
-> Client escalated hard ("client going nuts") over a cancelled GBPUSD order (group 042dr11a1pg, held 46ms, cancelled on last look / TOB a tick from request price) routed via TOA. Elan's prior fix for this client (10ms last look, 0.4bps movement allowance) had only been added to the SWI profile on INSTI channels, but the flow was arriving on a RETAIL channel — James Furness copied the edit into the RETAIL execution-rule editor and the client thanked him. Recurred same night (~00:01 BST 2026-08-06): James found the config is actually keyed by Trading Account, not channel — the flow is arriving under `CLIENTS_HRP_CENTROID`, not `CLIENTS_NATWEST_LUCERA` as ops had assumed. Ops (Tom) noted to check that section going forward; no confirmation yet that `CLIENTS_HRP_CENTROID` has the matching last-look config applied. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940058925549) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785940818905689) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785971278909679)
+### cfd-indices-rollout — CFD / indices via Jump into Compass
+status: open · since: 2026-08-24 · last: 2026-10-08
+State: Indices (G30EUR, then NDX/DOW/SPX) went live 2026-09-10/11 brokered to Jump after the Jump OZ connection was re-established and MT5 drop copy went live (2026-08-28); internalisation on from 2026-09-23, and Argamon analytics tables now include the A_CFD books. Shyam raised CFD skew sizing in prod to 0.35x of benchmark spread on 2026-10-08 (beta at 0.45x, review next week), added a Broker CFDs - Large rule for >$500k notional (2026-09-30) and added INST-1 to the Retail Book fast-hedge whitelist (2026-10-05).
+Next: Shyam reviews 0.45x beta skew next week; Argamon wanted internal reconciliations to account for Mahi internalisation (status not seen).
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1787541873458239 https://mahifx.slack.com/archives/C06TW3D8NMV/p1787702895306119 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791422519718139
 
-> [resolved] 2026-08-03 — LMAX FIX session breach: 200-message threshold hit on order 012dseuuwa, LMAX removed from liquidity pool
-> Tom flagged hundreds of LMAX rejections ("unknown order") alongside Firewall breach messages in order events. LMAX's session was breached (>200 messages, on order 012dseuuwa) and LMAX asked Argamon to check for missed trades since 14:00 UTC. Cameron Hughes removed LMAX from the liquidity pool and bounced the SOR pool config in internal-argamon to pick it up (Daria noted removing a market + restarting the Aggs excludes it from the SOR's pool without a full SOR restart, though re-adding it later does need one). Spamming stopped by ~16:13 BST; only internalised trades were affected during the disruption, no brokered exposure. 2026-08-07: Cameron Hughes added the message-rate-limit guard — a brokering market throttle on LMAX at 150/s plus a matching hedging execution market throttle — then queued LMAX to be added back to the liquidity pool over the weekend. Root cause of why so many orders were sent in the first place wasn't confirmed in this window. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785767168919819) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1785769495761459) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785769758242259) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786110724833399) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1786110735982799)
+### pxm-ldn-toa — Toa LDN and PXM connectivity
+status: open · since: 2026-07-21 · last: 2026-10-08
+State: Toa LDN sessions to Argamon's PXM: ClientID via tag 448/452=3 was configured 2026-07-21; the Toa crypto session to PXM LD lost sequence numbers on 2026-09-20 (reset requested; running over internet pending xconnect). On 2026-10-08 two simultaneous XAUUSD orders showed different fills; Levi found PXM keeps price improvement by default and will configure it to pass all slippage through to the client, then re-enable on 2026-10-09; James agreed PXM should pass orders through unmodified.
+Next: Levi to confirm the PXM config change worked; xconnect for the crypto session.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789872139334399 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859
 
-> [open] 2026-08-03 — pricerContinuity indicative in XAUUSD for ~1hr; scope-check against IC Markets CPN issue
-> Daria flagged that Argamon's pricerContinuity was indicative in XAUUSD for about an hour on the morning of 2026-08-03, and asked Isaac Dann whether this config is only in use at Go Markets besides Argamon — referencing a parallel issue she'd just raised in #internal-ic-markets, where CLIENT_PRICE_NYC went indicative in XAUUSD due to MAHI_CONTINUITY (a continuity model believed configured onto XAUUSD before CLIENT_PRICE_FX_NYC existed for riskPath; she plans to remove XAUUSD from CPN pending LDN sign-off). No reply yet in either thread. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785713138617559)
+### retail-toxic-flow — Retail NY book PnL and toxic flow
+status: open · since: 2026-07-24 · last: 2026-10-05
+State: Retail NY volume is down roughly 50% month on month (2026-07) and the book has been weak; INST-1 started trading with large, highly toxic volumes and the Internalise <500k - INST rule means Mahi took the hit. Shyam added INST-1 to the Retail Book fast-hedge whitelist on 2026-10-05; weekly PnL was $18k in the week to 2026-08-20 but noted as lucky on XAUUSD moves.
+Next: Watch whether the whitelist reduces the PnL drops.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791171597533909
 
-> [resolved] 2026-07-23 — Order group 012dr82wyoe: client filled worse than brokered-out price, AUDNZD widening factor tightened
-> Tom asked about order group ID 012dr82wyoe: what configuration caused the price to drop below the stack in a screenshot movement, and why the client was filled at 1.19775 while the trade was brokered out to Jane St at 1.20232. Isaac explained 2026-07-23 22:54: brokered fills use model price, not published WSS/LP price (else Mahi absorbs slippage when WSS favours the client); the stack drop was AUDUSD-driven; AUDNZD's model spread carries a 2.00 widening factor in ROLL/SNGMON that pushes the broker-only override wide unnecessarily since execution is already protected. Tom agreed 2026-07-24 04:19 to reduce the widening factor to 1 and leave WSS as-is; Isaac actioned it 04:22, Elan reacted. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784789549855939) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784843672378519) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784863374723599)
+### leverage-risk-sims — 500:1 leverage / more risk-holding sims
+status: open · since: 2026-08-31 · last: 2026-09-22
+State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1) and are exploring options up to B-booking, plus a separate in-house prop-style challenge product. Daria's sims (Compass, SI, inventory, B book) do not clearly support changing risk management; 2026-09-22 call showed FX-only internalisation as the best option so far, Argamon to review and say how much risk they will open up, and they want Mahi advice on leverage levels and instruments. Logged in the MahiProduct wiki client requests.
+Next: Argamon to come back on risk appetite; Mahi to run further instrument-group and smaller-account sims.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788499126033959 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790047491374069
 
-> [open] 2026-07-21 — PrimeXM LDN onboarding: ClientID via tag 448/452 instead of Tag109, config change pending restart
-> Levi (Argamon) raised that PrimeXM can't configure Tag109 for ClientID on the new LDN onboarding; PrimeXM's suggested workaround is tag 448 with tag 452=3 (ClientID), which most other clients already use. Lee Butts confirmed Mahi can map counterparty via party role fields, configurable on the distribution FIX connection config — scoped to the Argamon PrimeXM sessions only (not all PXM sessions). Config change applied 2026-07-21; needs a restart, active from EOD 2026-07-21. Levi to place a test trade after restart to confirm. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939)
+### toa-crypto-stability — Crypto pricing outages and sizing on Toa
+status: open · since: 2026-08-19 · last: 2026-09-21
+State: Crypto min-quantity rejects (XBTUSD 0.03, BCHJPY, ETHJPY/XETUSD defaults of 1.0) were fixed via overrides and EOD restarts on 2026-08-19 (Rakuten micro sizes). Major crypto pricing stopped from Toa on 2026-09-13 after a server reboot left processes down, and again on 2026-09-21 ("similar to last Sunday"); William Denny said it was being resolved but no root cause was posted for the second occurrence.
+Next: Root cause and prevention for the Sunday crypto pauses owed to Argamon.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1787099040590799 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789287085078259 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789997451357139
 
-> [open] 2026-07-06 — Toa LDN position rec break: 101k AUDCAD out, suspected over-hedge on INST-34 trades
-> Levi investigating a Toa LDN rec break (101k AUDCAD out, doesn't look like real risk). Flagged INST-34 trades that went via `MARKETMAKING_HRP_RETAIL` channel instead of the usual `MARKETMAKING_HRP_RETAIL_GMG` as a possible cause. Lee Butts confirmed party/market are identical across the four channels so nothing obvious explains the missing 101k; Levi troubleshooting further on Argamon's side. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783309851586399)
+### xauusd-hedging-risk — XAUUSD hedging, news events, VaR
+status: open · since: 2026-05-18 · last: 2026-09-17
+State: Hybrid hedger plus arb (arb doing >70% of XAUUSD hedge volume as of 2026-08-20), max VaR raised to 8k on 2026-08-19 with Argamon fine up to $20k; a VaRClearance-EOD rule at 10% of max VaR was added 2026-08-17. The NFP drop on 2026-09-04 (30k VaR, small loss) was RCA'd as client volume decaying faster than hedging; after calls with Jem the post-news widening on 100-weighted events was extended 90s -> 180s, news-based MWMS widens toward hedging cost, and fill-at-WSS was turned off on 2026-09-17, with Jem having suggested brokering over news instead. Toa CHI was pulled from the hedger (2026-08-19) over ~10ms latency to CHI.
+Next: Daria owes Argamon a write-up of the NFP loss (as of 2026-09-07; not seen sent).
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788530007371599 https://mahifx.slack.com/archives/C06U76A7ZJR/p1789609500783629
 
-> [resolved] 2026-06-22 — CP 90000580 switched back to internalised; going offside → all brokered XAUUSD reverted to LPs
-> Daria switched CP 90000580 back to internalised at Elan's request (it had been forcibly brokered to Toa). Up $6k from 90000580's trading on 2026-06-22 but internalised flow was going offside within 2 minutes (vs. onside as brokered). 2026-06-25: Daria reverted ALL brokered XAUUSD flow back to going to LPs from the NY4 (retail) environment, at Elan's request. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782092790487579) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782352799253379)
+### compass-26-4-upgrade — Compass 26.4 upgrade and deploys
+status: watching · since: 2026-08-17 · last: 2026-10-13
+State: Argamon moved 26.3 to 26.4 at the 2026-10-10/11 weekend restart (approved by James at RC #7224); known pricing change: with no adjustmentSignalParametersForWidening/Tightening set, prices move by one increment on PSM-W/PSM-T signals, Liam decided to let it go on. Infra main to NYC and a dashboard component deploy (2026-10-13) followed. No post-upgrade issues seen in the window.
+Next: Watch PSM widening/tightening effect on pricing.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1786964189701069 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791483328149119 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791866233863029
 
-> [resolved] 2026-06-21 — XAUUSD twilight base spread losses: TOB config fix approved
-> Another $1.5k retail loss in the XAUUSD twilight window. NY4 retail model TOB was 100oz at 8c (had been matched to the Toa retail model, now 25oz at 25c). Daria reached out to Elan; approved fix: drop TOB quantity to 25oz or 50oz, increase TOB spread to 15c, then mirror NYC beyond. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1782081899504989)
+### client-exec-queries — Execution and pricing questions from ops
+status: watching · since: 2026-08-17 · last: 2026-10-09
+State: Recurring one-off ops questions. Tom's slippage query (2026-08-17) was last look and AUDUSD signals were smoothed; Sep 3 liquidity reduction on order 042dr11e8ch was picked up by Rory (outcome not seen); the 624ms order book age (2026-09-10) was a timestamp artefact, not stale price. 2026-09-01 pricerInstiLight2 went down after Elan removed skew delegates (Nathan restored it); 2026-10-09 Shyam asked Argamon to raise B2PRIME 3dp XAU invalid-increment rejects with the LP (Argamon said they would).
+Next: Argamon to raise B2PRIME increments; Rory outcome on the 2026-09-03 liquidity reduction.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1786964549641859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789022941524499 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791507691705119
 
-> [watching] 2026-06-11 — USDCHF ~$1k PnL loss at NY roll: MAHI_BENCHMARK_LDN added as LP
-> CP 90002035 (unclassified) bought USDCHF at favourable prices during a ~15-min window over NY roll where most LPs were unstable and distribution price dipped slightly below market. Buys hedged ~4 mins later; by then YP was negative. Shyam added MAHI_BENCHMARK_LDN to USDCHF LP set and CP received fast-hedge tag to prevent recurrence. Before/after backtest (Jenkins #655/#656) confirms distribution price would have stayed more aligned with market. No further action expected. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781148840004809)
+### centroid-ny-to-pxm — NY bridge migration Centroid to PXM
+status: watching · since: 2026-06-09 · last: 2026-09-29
+State: Argamon NY moved its bridge from Centroid to PXM (Centroid UAT FIX work since 2026-06 was the lead-in); IP whitelisting via Beeks sorted 2026-09-24 and Daria confirmed retail dist sessions connected on 2026-09-27 after the weekend migration (ZD 23532). Internally James says Centroid has been poor for them and Elan negotiated PXM terms for months; Mahi's own bridge was pitched but lacks margin/reporting. Wintermute queried on 2026-09-09 whether altcrypto connectivity via Mahi was down; Kate confirmed the decommission was agreed earlier.
+Next: nothing outstanding seen; downgraded to watching, no post-migration issues in the window.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790353314143069 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790673025680519
 
-> [watching] 2026-06-09 — Centroid FIX UAT: credentials resolved, incremental MD refresh testing underway
-> Argamon ops (Levi) flagged Centroid unable to connect to the FIX integration sessions (PROD vs UAT credential mix-up). Inald provided correct UAT creds 2026-06-10; Levi confirmed passing to Centroid at 14:17 BST. 2026-06-23: Centroid now doing UAT incremental MD refresh testing — Levi requested IP whitelist for 185.125.204.156; Isaac created pricing-only FIX credentials (SenderCompId Argamon-Centroid-UAT-Prices, host 192.81.110.53:9010) and confirmed IP whitelisted via Beeks. Levi confirmed all good. 2026-06-30: Argamon requested new IP 192.109.23.20 whitelisted for Centroid UAT session (replacing 185.125.204.156); Isaac acknowledged (✓ reaction). [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781003145893419) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782182611235909) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
+### fx-pricing-tuning — LP sets, signals and direct pricing
+status: watching · since: 2026-05-04 · last: 2026-09-01
+State: AUDCAD priced directly from 2026-08-25 (5th most traded in Compass); XAUUSD arb min inception raised to -$5/M (2026-08-31); NZDUSD reference, signal, BMSL and MWMS markets got UBS and COMZ added after an AUDNZD FI loss (2026-09-01), to cut erratic mids over roll. Earlier LP-set and mid work (EURUSD mid, XAU/EUR/GBP reference selectors) is background.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529 https://mahifx.slack.com/archives/C06U76A7ZJR/p1787623926715189 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788229484766809
 
-> [resolved] 2026-05-27 — YP reval errors fixed: CLIENT_PRICE_NYC → CLIENT_PRICE_RETAIL_NYC
-> Daria switched the default client price market from CLIENT_PRICE_NYC to CLIENT_PRICE_RETAIL_NYC after YP (yield profile) reval jobs were throwing `IllegalArgumentException: CLIENT_PRICE_NYC/GBPJPY unavailable`. CLIENT_PRICE_NYC is the legacy insti model — wrong reference for retail. Fix applied ~02:00 BST 2026-05-27. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779843264602109)
-
-> [open] 2026-05-25 — XAUUSD toxic-flow rehab-cycle risk: FX/metals classification split planned
-> Daria flagged a structural rehab-cycle problem: toxic XAUUSD CPs brokered to Toa receive wider spreads + passive hedging, which improves their yield and causes them to lose their toxic classification, after which they get internalised on tight spreads and become toxic again until reclassified. Fix options: static blacklist or tighter rehab criteria for metals. Daria plans to split FX and metal classifications on 2026-05-26 (moving metals positions from CLIENTS to CLIENTS_NYC) so changes can be made independently for metals. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779681392035259)
-
-> [resolved] 2026-05-21 — CP 104719 dual-channel classification: internalised under A_CLIENTS, brokered under A_CLIENTS_TOA
-> Tom querying why CP 104719 is sometimes internalised, sometimes brokered within 12 minutes of each other. Rory explained: A_CLIENTS_TOA falls under CATCHALL//Dynamic-Broker execution profile; A_CLIENTS falls under CATCHALL//Dynamic-Dont B Book. Isaac confirmed 2026-05-22: the classification flipped for one order because CP 104719's 28-day yield was hovering near the rehab threshold — a single agent cycle (~few hours) can flip it, and trade B landed in a 2.5-hour window where rehab had succeeded before reclassifying back to broker. Tom satisfied. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779357670831129)
-
-> [resolved] 2026-05-19 — Toa insti_light XAUUSD spread config GUI error
-> Elan unable to open XAUUSD spread config for CLIENT_PRICE_INSTI_LIGHT stream in Toa GUI. James fixed — misconfigured JSON name (copy-paste error) on the Toa config. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779186517949549)
-
-> [open] 2026-05-19 — TOA_CHI 100% CPU / Aeron meltdown: ~10 min pricing dropout + toxic-flow LP reject spike
-> ~10 min dropout from TOA_CHI at ~14:30 BST. Separately, during a period where toxic-flow CPs were being auto-brokered, the designated LP had no price — causing high cancel/retry volume (Tom flagged "things going crazy"). Kate: LP pricing dropped out, retries drove reject spike; LP pricing recovered same session. James Furness also flagged 100% CPU causing an Aeron meltdown in CHI around the same time; root cause not yet published. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779199627807509) [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1779200915226979) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779211745957959)
-
-> [open] 2026-05-18 — New CP 90001948 XAUUSD scalp + all XAUUSD brokered flow migrated to Toa
-> New CP 90001948 (first day on platform) sold 600oz in 10 × 300oz clips, left Mahi long through a drop — $4k retail PnL hit 2026-05-18. Picked up as SIGNAL_FOLLOW+BROKER; will auto-broker from here. Daria also consolidated: all XAUUSD brokered flow now routing to Toa (wider spreads, tougher LR, CME hedging). Planned follow-on: split metals and FX into separate tenant profiles early next week (moving positions from CLIENTS to CLIENTS_NYC) to prevent XAUUSD flow contaminating FX signal/broker classification. Several other CPs showing similar yield profiles flagged; RI flagged as option. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779141857043039) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1779151965234289)
-
-> [resolved] 2026-05-15 — HRP booking config missing on Toa (trades not sent to HRP)
-> Tom flagged trades not being sent to HRP from Toa. James confirmed missing `connectivity.booking.bookingSystemRouting` config on Toa; HRP asked to book manually while fixed. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778840217972969)
-
-> [resolved] 2026-05-13 — XAUAUD scalping: $5.9k retail loss from arb-protection misconfiguration
-> CPs 105988 and 105990 (both ~6 days on platform) executed 106 small XAUAUD round-trips over ~16 mins during FX twilight. Root cause: `pricing.arbProtectionParameters` had UBS (sole XAUAUD LP) in reference markets but not `referencePriceMarketSelectors`, causing published quote to be clamped into UBS's wide twilight spread rather than using clean triangulated price (XAUUSD × AUDUSD). Shyam removed XAUAUD from arbProtectionParameters; pricing now uses pure triangulated price. Both CPs under monitoring. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778648027949039)
-
-> [watching] 2026-05-08 — XAUUSD signal switched to synapse
-> Shyam changed XAUUSD signal from current to synapse, motivated by simple skew analysis. Will monitor pricing impact next week; watching for CPs picking off the model post-change. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778211684932129)
-
-> [watching] 2026-05-08 — Weekly P&L: $7.5k from 402m (week to date)
-> Daria's mid-week update: 222m internalised, 180m brokered. Brokered flow decays quickly but stays onside (3x spread of internalised: $14/M brokered vs $47/M internalised). Two counterparties (928986, 928994) blacklisted from broker for now — bad couple of weeks but aggregate yield acceptable for internalisation. Net brokered spread $3.4k; internalisation P&L $4.1k (RoS 130%); LR P&L $1.4k mostly on brokered. Skew P&L had initial EURUSD open loss from arb but has fully recovered. Focus on skew and mid improvements (Shyam reviewing). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1778199139811789)
-
-> [open] 2026-05-04 — TOA_CHI/A_EXTERNAL_WASH XAUUSD reject spike (quantity too large) — analytics support question unanswered
-> Alert at 11:59–12:00Z: 98% reject ratio (93/95 orders) on TOA_CHI/A_EXTERNAL_WASH for XAUUSD from 1 counterparty (90000580), error `FIELD_VALIDATION_ERROR: quantity=TOO_LARGE, maximumShowQuantity=TOO_LARGE`. Justin Young forwarded the ZD ticket to internal-argamon asking who's on analytics support today; two +1 reactions but no reply in thread. As of 2026-05-08 still no thread reply — unresolved. Zendesk ticket: https://mahifx.zendesk.com/agent/tickets/22907. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777898434100499)
-
-> [open] 2026-04-28 — XAUUSD brokerage to Toa expansion
-> Daria added party 104881 to brokered-to-Toa for XAUUSD on argamon.NYC; plan is to migrate the softest of 104881/105048/105153/105681/105773 progressively to see if hedging to CME helps yield. Starting with softest first. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777335260425589)
-
-> [open] 2026-07-24 — Retail NY volume down ~50% month-on-month, P&L soft again; max VaR cut to $1k in response
-> Daria flagged retail NY environment P&L down again this month, tracking the volume drop: ~$800-900m/week last month vs ~$400m/week this month. 2026-07-31: Daria dropped max VaR down to $1k in the same thread — a risk-reduction step given the lighter, presumably lower-quality volume (VaR has moved between $1k-$6k here before depending on conditions). [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1785466064628219)
-
-## Notable topics
-
-- 2026-05-03 — XAUUSD retail NY4→CHI hedging disabled: retail achieving positive spreads; CHI giving negative spreads so hedging there turned off. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777845150173619)
-- 2026-05-04 — EURUSD mid formation: Elan approved adding all LPs back into mid (NY now retail-only). Shyam added DB_RCTV_NWPB_1, EDGW_RCTV_NWPB_1, GTSX_RCTV_HRP_2 as supplementary LPs; backtests show reduced spiky pricing and arb opportunities. Adaptive mid logic also added to betaRetailPricer1 for EURUSD; FI/skew PnL review ongoing. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529) [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1777869938380839)
-- 2026-05-13 — Toa LD4 TOB signal data missing: Elan flagged signal data not showing in Echo TOB for toa_argamon.LDN XAUUSD. Daria found signals not persisted since last system reboot; fixed after restart. Backfill not possible. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1778634120272459)
-- 2026-06-05 — Compass upgrade planned for weekend (06-07/08): Liam notified client in mahi-argamon-operations. Client acknowledged. Monitoring planned over market open. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1780673110439059)
-- 2026-06-10 — Reference price market selector (LP set) changes for XAU/EUR/GBP: Shyam updated referencePriceMarketSelectors after lead-lag and TOB analysis over large price moves and opens. XAU: removed NWM_RCTV_HRP_1 + MAHI_BENCHMARK_LDN, added COMZ_RCTV_NWPB_1. EUR: removed GTSX_RCTV_HRP_2, added COMZ_RCTV_NWPB_1. GBP: added UBS_RCTV_HRP_1. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1781062155159539)
-- 2026-06-12 — XAUUSD over-hedge investigation (26 May): Argamon ops (Levi) asked in mahi-argamon-operations how to narrow a search for a potential 1-lot XAUUSD over-hedge on 26 May. Shyam confirmed no over-hedge from Mahi's side; Levi noted they believe it's retail but lack data beyond EOD position rec to confirm. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1781234757662239)
-- 2026-06-23 — Centroid UAT incremental MD refresh testing: IP 185.125.204.156 whitelisted, new pricing-only FIX credentials created (Argamon-Centroid-UAT-Prices / MahiFX-Centroid-UAT-Prices on 192.81.110.53:9010). Centroid advancing UAT work ahead of OneZero→Centroid migration. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782182611235909)
-- 2026-07-03 — Toa Chicago deploy blocked pending release branch + regression: David Cooney requested pushing latest build to Toa Chicago to support options connectivity Lee Butts is writing. Lee replied it needs a new release branch cut and regression testing first — not ready to go. [permalink](https://mahifx.slack.com/archives/C06U76A7ZJR/p1783049787092519)
-- 2026-06-30 — Centroid UAT IP update: Argamon ops requested whitelist of new IP 192.109.23.20 for existing UAT session, replacing previously whitelisted IP. Isaac ✅. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1782799990703719)
-- 2026-07-06 — NOMU_RCTV_NWPB_1 test-trade FIELD_VALIDATION_ERROR: needed UI enablement; Isaac fixed within the same exchange, client confirmed working. [permalink](https://mahifx.slack.com/archives/C06TW3D8NMV/p1783315711421619)
+## Arc
+- 2026-06-26 — TraderEvolution discontinued; Argamon retail clients moved to MT5
+- 2026-08-24 — Argamon asks for weekly calls again; plan to bring indices into Compass
+- 2026-08-28 — MT5 drop copy live for Argamon
+- 2026-08-31 — Argamon exploring 500:1 leverage and B-booking; Mahi starts risk sims
+- 2026-09-10 — G30EUR live, brokered to Jump; other indices follow 2026-09-11
+- 2026-09-23 — CFD internalisation switched on
+- 2026-09-27 — NY bridge moved from Centroid to PXM
+- 2026-10-11 — Compass 26.4 live at weekend restart
