@@ -2,61 +2,52 @@
 slug: trademax
 aliases: [tmgm]                                            # MahiProduct onboarding tracker uses `tmgm`; infra/hosts use `trademax`
 refs:
-  vibepulse: null                                          # no ../VibePulse/.claude/clients/trademax.yaml yet (pre-live)
-  billing: null                                            # not yet in ../MahiProduct/data/billing/clients.json
+  vibepulse: null                                          # no ../VibePulse/.claude/clients/trademax.yaml yet
+  billing: null                                            # not in ../MahiProduct/data/billing/clients.json
   hosts: ../MahiProduct/data/client-hosts.json             # entry: trademax (s3Slug TRADEMAX; LDN + NYC)
   wiki: ../MahiProduct/wiki/clients/trademax.md
   onboarding: ../MahiProduct/data/onboarding/tmgm.json     # stage tracker (slug `tmgm`)
-channels_override: [internal-tmgm, mahi-tmgm]              # no VibePulse yaml to resolve from
-key_people_overrides:
-  - {name: "Bailey White", role: "TMGM — owns the integration decision; paused the project 2026-07-10 and set the XAU-only starting scope"}
+channels:
+  internal-tmgm: C03AP1L0Z7B
+  mahi-tmgm: C03AP4AVCCR
+contacts:
+  - {name: "Bailey White", role: "TMGM — owned the integration decision; paused 2026-07-10, declined go-live 2026-08-26"}
   - {name: "Nik Teh", role: "TMGM — hub/FIX side; made the drop-copy Tag1 account-identifier change"}
   - {name: "Rainer", role: "TMGM — queried why account identifiers were needed on drop-copy", confidence: low}
-last_catchup: 2026-08-17T08:52:00Z                         # ISO8601; updated by /catchup
+last_catchup: 2026-10-15T13:08:56Z
+status: active
 ---
 
-## Recent issues
+## Now
+TMGM declined go-live on 2026-08-26 and is building its own pricing/skew; the PTR pilot is over and the setup is being decommissioned.
+Beeks hosting cancellation takes effect 2026-10-25. Consider `status: retired` (no client-facing activity since 2026-08-26).
 
-> [open] 2026-08-07 — Will's weekly report walks back the quoted value-add figure again and proposes stepping the cap to 3c
-> The report promised on 2026-08-06 landed in #mahi-tmgm. Will disclosed a second measurement correction unprompted: skew is now measured against the pool mid at Bailey's own trade-execution timestamp rather than at trade-report receipt (their post-trade feed lands ~0.4s late), which lowers every prior figure. Re-measured week of 26–31 Jul on $37.5bn XAU / 25.2M trades: value-add as pricing actually ran $109k / $2.91/M; the same week with skew clamped to the contracted 1c cap $23k / $0.62/M (matches live production since the cap went in — $0.62/M on $18bn). Directional accuracy holds at 67% of notional whether skew is capped or not, i.e. accuracy doesn't decay as skew sizes up. Confirmed the cap-breach bug Daria diagnosed on 2026-08-05: last week skew ran above 1c on 63% of notional (median 1.3c, p95 11.3c) before the hard cap took effect at 03:00 UTC 5 Aug, verified since at sub-second resolution (longest excursion 0.7s, residual ~2% breaches attributed to feed-interleaving noise). Will proposed stepping the cap to 3c for a defined, reversible window — $48k vs $23k on last week's flow at the same 67% accuracy — but held it as an offer, not a push: cap stays at 1c until Bailey says otherwise. Report will now recur weekly on this method. Next step unchanged: Bailey to confirm the source IP for whitelisting. Bailey acknowledged briefly on 2026-08-11 ("thanks, will get back to you soon") but hasn't yet answered on the IP or the 3c proposal. [report](https://mahifx.slack.com/archives/C03AP4AVCCR/p1786099157627389) [bailey-ack](https://mahifx.slack.com/archives/C03AP4AVCCR/p1786434287534459)
+## Streams
 
-> [open] 2026-08-11 — signalProcess1 crashed twice on trademax-ny-trading-1 from a 27x gold-volume burst; fix proposed, not yet confirmed deployed
-> PagerDuty CRITICAL on `javaprocess-signalProcess1`. Sam Hewitt's diagnosis: a genuine flow spike (not the engine falling behind) drove a signal to 27x its normal range during a burst of gold trading; the same thing happened at almost exactly the same minute the day before. The process is written to shut down rather than recover from this. Proposed two-part fix: (1) `SignalProcess.java:597` — change `gl.runAndBlock(false)` to `runAndBlock(true)` so a graph failure self-heals instead of requiring a manual restart; (2) bump `-DQueueStream.DEFAULT_OVERFLOW_SIZE=500000` on `signalProcess1` on `trademax-ny-trading-1` as an immediate buffer. No confirmation in this window that either change has been deployed. Relevant given Bailey's original 2026-07-10 pause was over platform-stability concerns — this is exactly the kind of operational fragility during the live XAU trial that would resurface that worry if it reached him. [pagerduty-diagnosis](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1786415279255019)
+### decommission — Tear down TMGM pilot infrastructure
+status: watching · since: 2026-08-26 · last: 2026-08-28
+State: Liam took a config backup, stopped the app and put in the Beeks cancellation on 2026-08-26 (30 days notice, end date 2026-10-25). The servers may be reused for OS upgrades (Pepperstone and Argamon "need doing in that region"). On 2026-08-28 Liam brought the app back up as a PROD-like pentest target, with PROD connectivity config removed and external logins disabled. No Slack signal since 2026-08-28.
+Next: Liam to confirm Beeks end 2026-10-25 and the pentest-system teardown; no owner named for server reuse.
+Refs: https://mahifx.slack.com/archives/C03AP1L0Z7B/p1787732439446689 https://mahifx.slack.com/archives/C03AP1L0Z7B/p1787904798950809
 
-> [resolved] 2026-08-05 — Daria traces the skew-widening-beyond-1c to the default PSM config; Will delivered the promised management snapshot
-> Will Carter shared the internal snapshot artifact in #internal-tmgm, closing the loop on Nicola's 2026-08-04 ask for something to shut down the "pause" narrative with TMGM management. In the same thread, Daria Horton flagged that the additional widening beyond the intended 1c — the behaviour Bailey escalated on the same day (below) — looked to be caused by the `pricing.adjustmentSignalParametersForWidening` default PSM config on the trademax-ny-admin box. Confirmed fixed in the 2026-08-07 report above: hard cap in force since 03:00 UTC 5 Aug, verified at sub-second resolution. [snapshot](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785940268689659) [daria-diagnosis](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785962312370109)
+### capital-blind-feed — Reuse pilot data for Capital.com blind-feed pitch
+status: watching · since: 2026-08-26 · last: 2026-08-26
+State: Nicola asked whether data captured during the TMGM pilot could support another conversation with Capital.com, who were interested in a blind feed. Unanswered in-channel.
+Next: Mahi analytics (Will Carter / Shyam) to say what was captured; Nicola to decide on a Capital.com follow-up.
+Refs: https://mahifx.slack.com/archives/C03AP1L0Z7B/p1787748832874629
 
-> [resolved] 2026-08-05 — Bailey escalates on backtest-quoted value-add accuracy — "second time" it's been wrong; wants metrics upfront, not verified after connecting
-> Shyam sent Bailey the promised go-live update: XAU pricing/skew is running smoothly, generating ~$102k / $2.77/M on ~$36.8bn notional over the past week (skew fixed at 1c), ready to go live pending the client connecting to the Taker A/B sessions and confirming a source IP for whitelisting. Bailey immediately queried how $2.77/M was reached on a 1c fixed skew. Shyam admitted the applied skew had occasionally run wider than the intended 1c (median still 1c), said it's now hard-capped at 1c, and asked to get the distribution sessions connected so Bailey can verify output himself. Bailey pushed back hard: wants max/mean/median skew + skew-accuracy metrics supplied upfront rather than having to back-calculate them post-connection, and flagged this is **the second time** the quoted DPM value-add from Mahi's backtests has been wrong — calling the figure essential to the go/no-go decision. Addressed in the 2026-08-07 report above, which supplied the requested metrics upfront and disclosed a second measurement correction unprompted — though the figure moved again in the process, so the credibility question isn't fully closed. [update](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785893559913079) [bailey-query](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785894364316109) [shyam-admits](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785903510781339) [bailey-escalates](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785905261981809)
+### pilot-ptr-xau — PTR skew pilot for TMGM (XAU)
+status: closed · since: 2026-07-07 · last: 2026-08-26 · closed: 2026-10-15
+State: Bailey told Nicola on 2026-08-26 that TMGM will not go live and will build its own pricing/skew; the door was left open if that does not work out. Before that Bailey was slow to respond (paused 2026-07-10 over RMF/MT5 stability concerns, restarted 2026-07-23, XAU-only scope, pricing off TMGM's own pool feeds only). Open technical items at the time were never confirmed done: signalProcess1 27x gold-burst crash fix (2026-08-11), FX majors skew review, Tag1 account identifiers delivered 2026-07-26.
+Refs: https://mahifx.slack.com/archives/C03AP4AVCCR/p1783677581133339 https://mahifx.slack.com/archives/C03AP1L0Z7B/p1787730439079069
 
-> [resolved] 2026-08-04 — Nicola pushed for an internal snapshot to shut down the "pause" narrative with management and asked about billing month 1 starting in August
-> Nicola: getting a snapshot together, particularly one to share with management to shut down the "pause" conversation, and asked if billing month 1 from August was realistic. Will Carter: "Yes, think so. With data looking good we just need to share potential with him," and committed to pulling something together the same day. [nicola-ask](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785835024365429) [will-commits](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785835501153909)
+### skew-value-add — Value-add metrics and 1c cap credibility
+status: closed · since: 2026-08-05 · last: 2026-08-17 · closed: 2026-10-15
+State: After Bailey flagged twice-wrong backtest figures, Will's final report (week of 9-14 Aug, hard 1c cap) put value-add at $26.6k / $0.75/M on $35.7bn XAU, 68.5% accuracy; sent to Bailey 2026-08-17 asking for a source IP to whitelist. Bailey never supplied it; superseded by the 2026-08-26 decline.
+Refs: https://mahifx.slack.com/archives/C03AP4AVCCR/p1786099157627389 https://mahifx.slack.com/archives/C03AP4AVCCR/p1787002200375379
 
-> [resolved] 2026-08-04 — XAU judged ready to go live pending Zendesk sanity checks; Will asked Shyam to message Bailey directly, which produced the 2026-08-05 update above
-> Follow-on from the 2026-07-28 open question ("when would they switch to our pricing for XAU?"). Shyam's update: XAU is ready for go-live pending some non-critical system sanity checks tracked in [Zendesk #23273](https://mahifx.zendesk.com/agent/tickets/23273), and skewing looks profitable under the new measurement system. He flagged the ball is in Mahi's court and asked whether LDN or NZ should be pushing it forward. Will Carter confirmed ("yes, think so") and said the data looks good enough to go share the potential with Bailey; separately in-thread he asked Shyam to put it in words for Bailey that it's working as intended and he just needs to turn it on — which Shyam did the next day. [xau-ready](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785808720153749) [will-confirms](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785823818044729) [will-asks-shyam](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785858054818819)
->
-> Original 2026-07-28 context: Shyam asked in the client channel whether TMGM could start sending trade reports for the other metals and FX (pricing is configured, but skew needs the flow to verify against). Bailey: "we wanted to start just with XAUUSD for now. It's the majority of flow anyway." So XAU-only is a client choice, not a gap. [client-ask](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785203695028909) [internal-question](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785210700737189)
-
-> [open] 2026-07-27 — FX majors pricing set up on B stream; skew review outstanding, maxAgeOfTradeMs may need raising
-> Shyam completed FX-Majors subscriptions + pricing, all on the B stream, with skew still to review. Separately flagged raising `analytics.maxAgeOfTradeMs` from 30s because of the latency being seen on the PTR feed. Arun infra-deployed and started `fiReportingProcess1` the same day. Neither item closed in this window. [fx-setup](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1785128295723979) [todo-list](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784869049607509)
-
-> [resolved] 2026-07-24 — Per-account counterparty IDs added to the PTR drop-copy (Tag1)
-> Shyam flagged that PTR trade capture reports carried only a generic platform identifier, no per-account/counterparty ID. Rainer (TMGM) asked why it was needed; Shyam explained it sharpens signal quality and lets skew be tuned more granularly, but isn't critical. TMGM made the change internally, effective after the weekend hub restart; Nik Teh asked for confirmation and Shyam confirmed 2026-07-26 that account identifiers are visible on Tag1. CPs now get automated classifications off the back of it. [request](https://mahifx.slack.com/archives/C03AP4AVCCR/p1784861692782589) [confirmed](https://mahifx.slack.com/archives/C03AP4AVCCR/p1785101039073179)
-
-> [open] 2026-07-24 — Pricing sourced purely off TMGM's own pool feeds — deliberate, but a single point of failure
-> Shyam's call: no extra reference-market or continuity-pool feed proxied in, so if Mahi's price goes indicative it traces straight back to TMGM's feed — judged preferable early on to a price that jumps around or drifts off their mids basis, revisitable once proven. Will Carter flagged the flip side the day before: a single source of failure in the reference markets that should be supplemented with something network-based. Not yet reconciled. [rationale](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784869049607509) [risk-flag](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784801305949339)
-
-> [resolved] 2026-07-23 — Project un-paused as an urgent setup request; metals pricing + skew live within a day
-> Andrew: "This is an urgent setup request" / "Need to get PTR stood back up asap here. Servers currently not available." Noted Bailey was blaming Mahi a little for delays — despite the delays coming from Mahi pursuing the better long-term solution — and wanted to know the value-add of a delayed PTR skew. Scope set as gold #1, FX secondary. Will Carter got metals base spreads in and calibrated against the relative pool; Isaac confirmed setup essentially complete 2026-07-24; Daria checked whether the original 1-cent skew was still the plan (it landed at ~1 pip). [urgent-request](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784794556225699) [setup-complete](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784860298128599)
-
-> [resolved] 2026-07-10 — Bailey paused the project over RMF/MT5 integration concerns; reopened 2026-07-23
-> Bailey's message (relayed by Nicola): integrating the RMF feed needs dev work both sides; RMF is performant enough for MT4-originating trades but not MT5, whose order-finalization process gives mean latencies >500ms. Turning finalization off isn't an option because TMGM's internal data pipelines need finalized order IDs, and each hub supports only one RMF — so either they break their pipelines or OZ changes the finalization logic (OZ willing, but slow). Combined with an in-flight redundancy project, they weren't willing to add a point of failure in the execution path: "platform stability is much more important than pricing logic... I think we need to hit pause on the project at this stage." Andrew replied in the client channel that Mahi can skew without seeing the flow at all and PTR would pay for itself several times over. Bailey stayed "inclined to pause" on 2026-07-14; the 2026-07-23 restart superseded it. [pause](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1783669977028689) [andrew-reply](https://mahifx.slack.com/archives/C03AP4AVCCR/p1783677581133339)
-
-> [resolved] 2026-07-07 — Blocked on TMGM creds for integration setup and testing
-> Liam had been waiting on credentials since the prior Tuesday with two follow-ups and no reply. Overtaken by the 2026-07-10 pause and then by the PTR restart. [blocked](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1783430135583379)
-
-## Notable topics
-
-- 2026-07-24 — A_CLIENTS / B_CLIENTS here split *which price Mahi returns*, not booking — a non-obvious deviation from the usual meaning. `TRADEMAX_POOL_1` is a small top-of-book stream (100/200/300) feeding `CLIENT_PRICE_NYC` with VWAP tiers 100/300/600, streamed down A_CLIENTS, XAUUSD only. `TRADEMAX_POOL_2` is full depth and the only price for XAGUSD/XCUUSD/XPTUSD/XPDUSD as well as XAUUSD, benchmarking `CLIENT_PRICE_B_NYC` down B_CLIENTS. Isaac noted Mahi offered to form the top-of-book stream itself and was turned down at the time. [permalink](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784860298128599)
-- 2026-07-23 — Commercial bar for this pilot: gold is #1 and FX secondary; what has to be demonstrated is zero operational risk plus skew PnL that stacks up. Andrew was dusting off a prototype graph-re-indexing skew-PnL build to get prod-ready numbers. [permalink](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784795100232579)
-- 2026-07-14 — Engagement with Bailey is slow and scheduling-bound (holiday, Singapore trip, "pretty busy"), and Andrew's read is that he "loves making decisions without the full set of information" — hence the push to get him on a call with the full picture before he settles on pausing. [permalink](https://mahifx.slack.com/archives/C03AP1L0Z7B/p1784015500397489)
+## Arc
+- 2026-07-10 — Bailey pauses the project over RMF/MT5 platform-stability concerns
+- 2026-07-23 — Project restarted as an urgent XAU-first setup
+- 2026-08-05 — Hard 1c skew cap in force after Daria traces the over-widening to PSM config
+- 2026-08-26 — TMGM declines go-live, will build its own pricing; decommission begins, Beeks cancelled (ends 2026-10-25)
