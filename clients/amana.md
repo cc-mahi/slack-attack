@@ -20,7 +20,7 @@ contacts:
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config requests, rejection reports", confidence: low}
   - {name: "Ali Wehbe", role: "ops: energy futures / oils product specs", confidence: low}
   - {name: "Ahmad Hashem", role: "ops: rejection reports on Mahi_B sessions", confidence: low}
-last_catchup: 2026-10-15T12:36:31Z
+last_catchup: 2026-10-16T07:05:35Z
 status: active
 ---
 ## Now
@@ -77,9 +77,9 @@ Next: Mahi to say whether tag 109 can be consumed and returned.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790602136754039 https://mahifx.slack.com/archives/C08SYSMP0EB/p1791212038784569
 
 ### futures-expiry-recs — Futures rolls, expiries and position adjustments
-status: open · since: 2026-08-17 · last: 2026-10-04
-State: Amana posts expiry and start notices (latest 10-04: SM7F, LCC7H, NG6Z live 10-05) and Mahi zeroes positions at EOD; SI IDX futures were rolled U to Z on 09-24 by CSV import, UKO futures rolled 09-28, and manual position adjustments continue (indices B-book 09-22/23, A-book trades sent to B-book reversed 09-28). The 09-17 DOWFUT-U expiry spammed IG rejections because Amana had not set it close-only.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1791141410173409
+status: open · since: 2026-08-17 · last: 2026-10-15
+State: Amana posts expiry and start notices and Mahi zeroes positions at EOD. On 10-15 Amana announced CrudeOilX6 (Nov) settlement (zero all positions) and CrudeOilF7 (Jan) start 10-16; picking up F7 needed a re-subscribe on Mahi_CMC_FIX, done by Shyam that night with a brief CMC_CENTROID pricing gap and the feed confirmed. Earlier: SI IDX futures rolled U to Z on 09-24 by CSV import, UKO futures rolled 09-28, manual position adjustments continue, and the 09-17 DOWFUT-U expiry spammed IG rejections because Amana had not set it close-only.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792103701318669
 
 ### crypto-rollout — Crypto go-live and hedging
 status: open · since: 2026-08-17 · last: 2026-10-01
