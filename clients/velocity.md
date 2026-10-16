@@ -15,7 +15,7 @@ contacts:
   - {name: "Richard Holman", role: "Velocity principal: pricing/hedging policy, commercial terms, prospect flow"}
   - {name: "Russell Hewson", role: "Velocity: sim data requests, Echo login"}
   - {name: "Liv Mottershead", role: "Velocity, joined Richard's team 2026-07", confidence: low}
-last_catchup: 2026-10-15T13:11:52Z
+last_catchup: 2026-10-16T07:07:15Z
 status: active
 ---
 ## Now
@@ -25,9 +25,9 @@ PnL under pressure since late Aug (hedge costs up, Kama/Argamon widened); hedgin
 
 ### hedging-pnl-turnaround — PnL bleed, hedge speed and spreads
 status: open · since: 2026-08-24 · last: 2026-10-15
-State: Bleed began late Aug (Kama widened, mid-quality problems); ref LPs swapped 08-26 and PnL recovered, then CLIENTS_NET fell through Sep-Oct as hedging took the spread (Kama rule share, 1034 flow). 10-08 Mahi told the client prem-feed economics no longer add up (prem 12.2 pips TOB vs LP 19-22) and asked for ~17 pips average. dynamicOrderSpeedScaling went 1.0 to 0.1 on 10-12 (CHG-2610-T6H5) and PnL stabilised; a $3.5k overnight loss 10-14 (slow hedging, 54% LP fill) led to overnight rules scoped back to speed 1 and OR-IMI-IMS cut to 500ms. 10-15 call: client happy PnL is stabilising, agreed to review counterparty classification and drop toxic tags from prem.
-Next: Mahi: NZ watch overnight book, re-read the slowdown after a full week, size a higher-risk backstop (~300oz). Client: remove toxic tags from prem. Will D: PnL-by-price analysis for the interest feed.
-Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1787575981397189 https://mahifx.slack.com/archives/CPDS0M2KF/p1791799057996989 https://mahifx.slack.com/archives/CPDS0M2KF/p1792060203147839
+State: Bleed began late Aug (Kama widened, mid-quality problems); ref LPs swapped 08-26 and PnL recovered, then CLIENTS_NET fell through Sep-Oct as hedging took the spread (Kama rule share, 1034 flow). 10-08 Mahi told the client prem-feed economics no longer add up (prem 12.2 pips TOB vs LP 19-22) and asked for ~17 pips average. dynamicOrderSpeedScaling went 1.0 to 0.1 on 10-12 (CHG-2610-T6H5) and PnL stabilised; a $3.5k overnight loss 10-14 (slow hedging, 54% LP fill) led to overnight rules scoped back to speed 1 and OR-IMI-IMS cut to 500ms. 10-15 call: client happy PnL is stabilising, agreed to review counterparty classification and drop toxic tags from prem. 10-15 pm client asked for tag-by-tag controls on a toxic tag (1034Z58AF42E6, small share of its flow seen, 60d aggregate poor): harsher last look per tag is possible; hedging a tag after X seconds is not a function, but the hybrid hedger can react with a delay to the last client tag into the same book (no separate book needed). Will D to try slower rules for it and sim first.
+Next: Client: define the tag setup (e.g. 60s hedge delay). Mahi: sim tag-delay setup, NZ watch overnight book, re-read the slowdown after a full week, size a higher-risk backstop (~300oz). Client: remove toxic tags from prem. Will D: PnL-by-price analysis for the interest feed.
+Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1787575981397189 https://mahifx.slack.com/archives/CPDS0M2KF/p1791799057996989 https://mahifx.slack.com/archives/C05NB72AGR2/p1792072610702039
 
 ### cfd-expansion — CFD / index instruments (J40, Z40, new CFD list)
 status: open · since: 2026-08-19 · last: 2026-10-15
@@ -41,17 +41,17 @@ State: Live 08-18 with riskAdjustedFirmQty. Fill rate climbed from ~15% to ~92% 
 Next: Will D: data-backed PnL effect at different price levels; fix hedger-vs-interest race.
 Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1787071381197089 https://mahifx.slack.com/archives/CPDS0M2KF/p1790693863681659 https://mahifx.slack.com/archives/CPDS0M2KF/p1792060203147839
 
+### hedge-lps — Hedging LP set (Argamon, Virtu, ZZ, Kama, others)
+status: open · since: 2026-08-26 · last: 2026-10-15
+State: Argamon in hedging from 08-27 (whitelist gap fixed 09-01), ZZ added with tag-1034 blacklist (09-02), SGX/Edgewater added. Argamon fill rate ~15% (off-market, last look, throttle, Lucera drops) so removed 09-18 at client request, restored 09-22. Virtu (bilateral, to replace Kama) still being configured by the client; NWM Morgan Stanley test 09-29 then client asked to hold off. Kama routes to its institutional channel since 10-02 (fills at limit, 5 pip markup 10-07); Argamon and Kama widened to 20-24c TOB 10-06. Ref-mid LP set re-chosen 10-07 by 1s yield and lead-lag. 10-15 client asked to cut the ~16 price layers on hedge LP sessions; Will D agreed to cut to 5.
+Next: Mahi: apply 5-layer cut on hedge sessions. Client: Virtu ready-to-test notice; decision on VELBINT099HS (left live). Mahi: move hedge weight off Kama where possible.
+Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787725457576859 https://mahifx.slack.com/archives/C05NB72AGR2/p1789653498837279 https://mahifx.slack.com/archives/C05NB72AGR2/p1792079679596159
+
 ### prem-a-feed — Prem and A feed spreads, fills, LR
 status: open · since: 2026-08-26 · last: 2026-10-14
 State: Asia 20c TOB live (Hantec complained 08-26 of 20-35c swings). 09-24 models swapped (CLIENT_PRICE_LDN = prem, B_LDN = A) and client now supplies spread-config CSVs; Compass timezone boundaries shared. A-feed fill rate MTD 57% vs 75% target (12% LiquidityThrottled cancels, refresh raised); 4x SNG LR multiplier cut to 2x with a second tier (09-28); A_CLIENTS_PREMIUM fill price back to passthrough 10-06. Prem price instability and roll widening (10-02) explained as LP-spread protection.
 Next: Mahi: confirm 3dp XAUUSD quotes from Kama/Jump/ZZ do not cause 3dp limit rejects (client says 3dp is accepted), then change config.
 Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787744856529959 https://mahifx.slack.com/archives/C05NB72AGR2/p1790247752525379 https://mahifx.slack.com/archives/C05NB72AGR2/p1791964853372499
-
-### hedge-lps — Hedging LP set (Argamon, Virtu, ZZ, Kama, others)
-status: open · since: 2026-08-26 · last: 2026-10-14
-State: Argamon in hedging from 08-27 (whitelist gap fixed 09-01), ZZ added with tag-1034 blacklist (09-02), SGX/Edgewater added. Argamon fill rate ~15% (off-market, last look, throttle, Lucera drops) so removed 09-18 at client request, restored 09-22. Virtu (bilateral, to replace Kama) still being configured by the client; NWM Morgan Stanley test 09-29 then client asked to hold off. Kama routes to its institutional channel since 10-02 (fills at limit, 5 pip markup 10-07); Argamon and Kama widened to 20-24c TOB 10-06. Ref-mid LP set re-chosen 10-07 by 1s yield and lead-lag.
-Next: Client: Virtu ready-to-test notice; decision on VELBINT099HS (left live). Mahi: move hedge weight off Kama where possible.
-Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787725457576859 https://mahifx.slack.com/archives/C05NB72AGR2/p1789653498837279 https://mahifx.slack.com/archives/C05NB72AGR2/p1791994933111259
 
 ### db-pro — Deutsche Bank Limit Pro passive hedging via Reactive
 status: open · since: 2026-08-18 · last: 2026-10-01
