@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-10-15T13:12:17Z
+last_catchup: 2026-10-16T07:05:37Z
 status: active
 ---
 
@@ -60,9 +60,9 @@ Next: Watch overnight XAU unwinds after the 2026-10-08 retune; decide whether to
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1786349367512409 https://mahifx.slack.com/archives/C09D05EPCTV/p1790644032875939 https://mahifx.slack.com/archives/C09D05EPCTV/p1791454047171069
 
 ### a-book-hedger-netting — Base switches A book hedger off while netting LP positions
-status: watching · since: 2026-09-04 · last: 2026-10-09
-State: Kate (Base) repeatedly turns the A book hedger off to net LP positions manually (2026-09-14, 09-22, 10-09). Manual hedge trades through LP GUIs bypass Compass, so positions then need correcting in Compass (SCOPE_B buy 510 / LMAX_2 sell 407 XAU on 09-22). On 2026-09-22 Base asked to route all A book hedging to LMAX_2.
-Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790055333398639 https://mahifx.slack.com/archives/C09D8V41JAG/p1791554938091599
+status: watching · since: 2026-09-04 · last: 2026-10-15
+State: Kate (Base) repeatedly turns the A book hedger off to net LP positions manually (2026-09-14, 09-22, 10-09, 10-15; back on within ~20 minutes on 10-15). Manual hedge trades through LP GUIs bypass Compass, so positions then need correcting in Compass (SCOPE_B buy 510 / LMAX_2 sell 407 XAU on 09-22). On 2026-09-22 Base asked to route all A book hedging to LMAX_2.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790055333398639 https://mahifx.slack.com/archives/C09D8V41JAG/p1792073335429129
 
 ### admin-server-reboots — Admin server failing to return after weekend restarts
 status: watching · since: 2026-06-07 · last: 2026-09-07
