@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-15T13:00:35Z
+last_catchup: 2026-10-16T07:05:40Z
 status: active
 ---
 
@@ -29,10 +29,15 @@ Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and
 ## Streams
 
 ### channel-refactor — Regional channel/book refactor and gateway latency
-status: open · since: 2026-08-27 · last: 2026-10-14
-State: Isaac created B_FX_20_METAL_50 and mirror A20_FX_20_METAL_50 markup channels (20 $/M FX, 50 $/M metals, 20% risk split to A) and recommended rolling regional books (e.g. B_CLIENTS_AU_NYC) back into B_CLIENTS_NYC before adding more; Erik is testing and will plan at scale, client sign-off on the cleanup plan was not seen. On 2026-10-14 Isaac and Nathan found Go's gateway saturated: ~20 channels make the single CEP thread on clientDistributionGateway1 recompute each tick per channel (~18k updates/s, ~52% from the 10 regional channels), pushing last-look releases past their window. Decision: raise distribution.node.advanced.numberOfCEPThreads first (Isaac checking with Liam) and hold off asking Go to decommission channels; longer plan is remapping by new trading accounts to markup channels, but riskSplitting cannot split by trading account.
-Next: Isaac to confirm CEP thread change with Liam; Nathan to chase Go on the markup/risk-splitting refactor afterwards.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787846033418999 https://mahifx.slack.com/archives/CNF3WPNSK/p1791989720825309
+status: open · since: 2026-08-27 · last: 2026-10-15
+State: Isaac created B_FX_20_METAL_50 and mirror A20_FX_20_METAL_50 markup channels (20 $/M FX, 50 $/M metals, 20% risk split to A) and recommended rolling regional books (e.g. B_CLIENTS_AU_NYC) back into B_CLIENTS_NYC before adding more; Erik is testing and will plan at scale, client sign-off on the cleanup plan was not seen. On 2026-10-14 Isaac and Nathan found Go's gateway saturated: ~20 channels make the single CEP thread on clientDistributionGateway1 recompute each tick per channel (~18k updates/s, ~52% from the 10 regional channels), pushing last-look releases past their window. Decision: raise distribution.node.advanced.numberOfCEPThreads first and hold off asking Go to decommission channels. On 2026-10-15 Isaac set numberOfCEPThreads to 2 (pending EOD restart) and, on Liam's suggestion, switched the sharding strategy to counterparty mode; longer plan is remapping by new trading accounts to markup channels, but riskSplitting cannot split by trading account.
+Next: confirm effect on last-look release timing after the EOD restart; Nathan to chase Go on the markup/risk-splitting refactor afterwards.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787846033418999 https://mahifx.slack.com/archives/CNF3WPNSK/p1792075782283879
+
+### brokered-xau-markup — GO XAU brokering: internalisation trial and execution-rule markup
+status: open · since: 2026-10-15 · last: 2026-10-15
+State: Isaac corrected an earlier internalisation-trial uplift, which had kept the client's slipped brokered fill price. Re-priced at book VWAP with a 200ms last look, internalising Large XAU, Fast Hedge and Don't B Book shows no significant gain at 30s or 1m; Signal Follow clearly belongs brokered. No trial for now. Use case for the roadmapped execution-rule markup: brokered market orders slip at every venue while limit-order hedging is cheap, so markup would allow internalising toxic profiles and hedging via H1/arb.
+Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1792069620138069
 
 ### radex-risk-split — Radex A/B risk splitting, residual hedges, MeanFin
 status: open · since: 2026-07-21 · last: 2026-10-14
@@ -71,8 +76,8 @@ Next: Nathan to follow up on throttle/flicker root cause and the no-failover pri
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1787014679025069 https://mahifx.slack.com/archives/CNF3WPNSK/p1789447371722669 https://mahifx.slack.com/archives/C09J1DP2QQH/p1789626541976419
 
 ### lr-attribution — LR not attributed on liquidity-reduced fill
-status: open · since: 2026-09-15 · last: 2026-09-15
-State: Isaac saw an A-book PnL bump from brokered trades where published price differed one-sidedly from client model price (confirmed LR via binlogs) yet Compass and yield profiles show no LR attribution; question logged on the wiki, no answer seen.
+status: watching · since: 2026-09-15 · last: 2026-09-15
+State: Isaac saw an A-book PnL bump from brokered trades where published price differed one-sidedly from client model price (confirmed LR via binlogs) yet Compass and yield profiles show no LR attribution; question logged on the wiki, no answer seen in 31d, downgraded to watching.
 Next: Mahi dev answer on whether LR attribution is expected to be missing.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1789461866412159
 
