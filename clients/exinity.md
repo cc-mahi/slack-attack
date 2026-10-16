@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-15T13:00:34Z
+last_catchup: 2026-10-16T07:05:37Z
 status: active
 ---
 
@@ -32,11 +32,23 @@ Weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
 
+### insti-exotics-pricing — Exotic pairs unpriced on Distribution_Insti_LDN
+status: open · since: 2026-10-15 · last: 2026-10-16
+State: Mukhammad asked why exotics (AUDNOK, AUDSEK etc.) are not priced on the Insti streams. Shyam traced it to the Hidden Road to Wedbush LPs SW switch (live 21 Aug): AUDNOK/CHFNOK only have Jane Street, blank 21:00-00:00 UTC daily; AUDSEK and CHFSGD have no Wedbush LP and are unpriced since 21 Aug; TRYJPY, AUDSGD, ZARJPY go blank after the 21:00 rollover for up to an hour or more. Mahi offered adding UBS (and LMAX for EURMXN); Mukhammad will confirm with his team. Shyam also reported the hedger back up and is looking into pricing (overnight 2026-10-15/16, cause not stated).
+Next: Exinity to confirm whether to add UBS/LMAX for the exotics.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792107598604319 https://mahifx.slack.com/archives/C0456LSHQQK/p1792111952713259
+
 ### pnl-drop-alerts — Per-book PnL-drop alerts and alert email restoration
 status: open · since: 2026-09-18 · last: 2026-10-15
 State: Matt asked for book-level loss alerts; thresholds given 2026-10-06 (A-Book, SI FX, SI FX Insti below $1K/day, Big Boys $2.5K, DK Inventory $5K) plus an alert when LIQUIDITY_POOL_LDN exposure is above zero (top-up used) and restoration of the old email alerts (hedger throttle, VaR, FIX connection, A/B-book rejections). Alerts went live 2026-10-08 but froze systemStateMonitor for ~2 min per firing, so they were reverted (heap 2G to 4G, 24h PnL tracking removed, Zendesk 23617). The fix was deployed overnight 2026-10-14 and Rory is re-setting the alerts; he also flagged A-Book CLIENTS_NET averaging ~10 alerts a day.
 Next: Mahi (Rory) to re-set PnL alerts and the LP-exposure alert; Matt to supply parameters for the email alerts.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1789753758017939 https://mahifx.slack.com/archives/C0456LSHQQK/p1791471698265769 https://mahifx.slack.com/archives/C0456LSHQQK/p1792052573269699
+
+### order-reject-queries — Reject and fill investigations
+status: open · since: 2026-09-21 · last: 2026-10-15
+State: On 2026-10-01 Louie reported an urgent quote disconnect; Kate showed all Mahi sessions stayed up 00:06:52 to 00:35:33 UTC and the logged TARGET_QUOTE_Mahi_ECN session (FXTM) is not Mahi's, so it is downstream in Exinity's bridge. On 2026-10-06 Christian asked why a CL1USD take-profit rejected three times NO_PRICE/EXPIRED after a WTI spike; Rory explained pricing stayed indicative until 13:01:43 UTC after the LP stopped quoting and that Mahi does not hold pending TP/SL orders (immediate market orders), so the bridge must retry. On 2026-10-09 Christian asked for help reading FIX logs and Rory asked what he needs. Mukhammad's 2026-10-02 XAU rejects on API_111000023 had a Shyam acknowledgement but no outcome seen. On 2026-10-15 Matt asked about slippage on a 3oz XAUUSD market buy; Nathan showed the offer ticked up $0.04 during the 20ms last-look hold on the Top Four execution profile (price improvement off, so fill at the worse-for-client end-of-window price), $0.12 total.
+Next: Christian to say what he needs from the FIX logs; Exinity to check its bridge retry behaviour.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790857668546679 https://mahifx.slack.com/archives/C0456LSHQQK/p1791304956108509 https://mahifx.slack.com/archives/C0456LSHQQK/p1791563954367589 https://mahifx.slack.com/archives/C0456LSHQQK/p1792095434905469
 
 ### xau-book-realignment — XAU position breaks across A House, Big House and Clients Net
 status: open · since: 2026-09-25 · last: 2026-10-14
@@ -67,12 +79,6 @@ status: open · since: 2026-09-01 · last: 2026-10-09
 State: Sep 1 Wagyu spikes at the open traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS (Kate to check the sims ran). US30 widening on 2026-09-23 was MWMS tracking Velocity (Cameron Hughes set it to 100, Corey confirmed better). NZD/CHF/NOK cross spikes were treated with order-book rounding and lower skew ceilings (0.3 to 0.05 pips, 2026-09-25). EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut (ceiling 0.6 to 0.4, SNG 1.3 to 0.5, SNGMON 2.7 to 0.5) and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. A 2026-09-29 LP feed stoppage (ticks stopped at Wedbush and Invast ~14:52) resumed after about three hours.
 Next: Exinity to say whether spikiness persists; Wedbush-in-MWMS backtest result unconfirmed.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788299416706969 https://mahifx.slack.com/archives/C0456LSHQQK/p1790270255985109 https://mahifx.slack.com/archives/C0456LSHQQK/p1791468162700719 https://mahifx.slack.com/archives/C0456LSHQQK/p1791555149344069
-
-### order-reject-queries — Reject and fill investigations
-status: open · since: 2026-09-21 · last: 2026-10-09
-State: On 2026-10-01 Louie reported an urgent quote disconnect; Kate showed all Mahi sessions stayed up 00:06:52 to 00:35:33 UTC and the logged TARGET_QUOTE_Mahi_ECN session (FXTM) is not Mahi's, so it is downstream in Exinity's bridge. On 2026-10-06 Christian asked why a CL1USD take-profit rejected three times NO_PRICE/EXPIRED after a WTI spike; Rory explained pricing stayed indicative until 13:01:43 UTC after the LP stopped quoting and that Mahi does not hold pending TP/SL orders (immediate market orders), so the bridge must retry. On 2026-10-09 Christian asked for help reading FIX logs and Rory asked what he needs. Mukhammad's 2026-10-02 XAU rejects on API_111000023 had a Shyam acknowledgement but no outcome seen.
-Next: Christian to say what he needs from the FIX logs; Exinity to check its bridge retry behaviour.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790857668546679 https://mahifx.slack.com/archives/C0456LSHQQK/p1790909329116969 https://mahifx.slack.com/archives/C0456LSHQQK/p1791304956108509 https://mahifx.slack.com/archives/C0456LSHQQK/p1791563954367589
 
 ### velocity-nomura-onboard — Velocity (VTI C2C) and Nomura Elysium onboarding
 status: open · since: 2026-08-21 · last: 2026-10-08
