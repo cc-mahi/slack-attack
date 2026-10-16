@@ -31,7 +31,7 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-10-15T13:04:16Z
+last_catchup: 2026-10-16T07:06:23Z
 status: active
 ---
 
@@ -61,10 +61,10 @@ Next: Andrew to sanity-check findings before client delivery; Isaac to propose S
 Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1791453279474879 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1792057523803899
 
 ### xau-247-gold — Weekend/24-7 gold and FX/Metals product
-status: open · since: 2026-07-13 · last: 2026-10-14
-State: XAU pilot expired 2026-06-30; FX/Metals B volume went to zero around 2026-08-04 as IC stopped routing XAU to Mahi. IC (Pavlos) wanted a Pyth 24/7 Gold index with PAXG as divergence guard; in Aug Isaac mapped XAU-adjacent feeds in the IC env (XAUTUSD, PAXGUSD, XAUUSD-PERP) and Binance perp basis. On Oct 8 the team agreed to repackage PAXG as "XAU 24/7", show it in Beta only, and keep the pitch crypto-only; IC is also seeing EURUSD/USDJPY/GBPUSD fills that Andrew has added to the upsell playbook and enabled in signals (Oct 14) but not yet sized.
-Next: Andrew to optimise weekend gold in Beta; no IC commitment seen.
-Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1783938383718259 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1791453279474879 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1792011135894689
+status: open · since: 2026-07-13 · last: 2026-10-15
+State: XAU pilot expired 2026-06-30; FX/Metals B volume went to zero around 2026-08-04 as IC stopped routing XAU to Mahi. IC (Pavlos) wanted a Pyth 24/7 Gold index with PAXG as divergence guard; in Aug Isaac mapped XAU-adjacent feeds in the IC env (XAUTUSD, PAXGUSD, XAUUSD-PERP) and Binance perp basis. On Oct 8 the team agreed to repackage PAXG as "XAU 24/7", show it in Beta only, and keep the pitch crypto-only; IC is also seeing EURUSD/USDJPY/GBPUSD fills that Andrew has added to the upsell playbook and enabled in signals (Oct 14) but not yet sized; on Oct 15 Andrew began tracking the G4 FX group on the simple-skew view and said adaptive sized skew looks wrong there.
+Next: Andrew to optimise weekend gold in Beta and look into the G4 adaptive sized skew; no IC commitment seen.
+Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1783938383718259 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1791453279474879 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1792072276976639
 
 ### xbtusd-pricing-psm — XBTUSD pricing model, TOA lag, PSM in Beta
 status: open · since: 2026-08-19 · last: 2026-10-09
