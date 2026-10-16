@@ -21,14 +21,20 @@ contacts:
   - {name: "Manuel de Cara", role: "Rostro: Pulse/Athena data access", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro; commercial counterpart (described internally as basically co-founder)"}
   - {name: "Michael Ayres", role: "senior Rostro contact meeting David Cooney 16 Oct; named replacement after Lochlan left", confidence: low}
-last_catchup: 2026-10-15T13:04:16Z
+last_catchup: 2026-10-16T07:06:25Z
 status: active
 ---
 
 ## Now
-Relationship under strain: on 14 Oct a CMC futures price freeze cost the SI book about 178k and Andrew Morgan called it "relationship losing level"; evidence went to Rostro and David Cooney meets Michael Ayres 16 Oct. Commercials were renegotiated at Rostro's request but Rostro did not sign the 2026-09-14 draft ("a no from the board", 15 Sep); no later outcome seen. Rostro keeps adding IC sub-account books (rev-share), PSM went live on the INV model 14 Oct, and the 26.4 Compass upgrade landed the weekend of 10-11 Oct.
+Relationship under strain: on 14 Oct a CMC futures price freeze cost the SI book about 178k and Andrew Morgan called it "relationship losing level"; evidence went to Rostro and David Cooney meets Michael Ayres 16 Oct. Commercials were renegotiated at Rostro's request but Rostro did not sign the 2026-09-14 draft ("a no from the board", 15 Sep); no later outcome seen. Rostro keeps adding IC sub-account books (rev-share), PSM went live on the INV model 14 Oct, the 26.4 Compass upgrade landed the weekend of 10-11 Oct, and Rostro is switching Jump off futures (hedgers updated 15 Oct). A value-add and volumes pack went to David 15 Oct.
 
 ## Streams
+
+### c-book-clearance — C book risk clearance speed (15 Oct gold)
+status: open · since: 2026-10-15 · last: 2026-10-15
+State: A 30M exposure on the C book (Rostro's new C House client) took about 5 min to clear on 15 Oct: IC cancelled some hedge trades and the default fill-ratio liquidity adjustment zeroed IC for 30s, then the VAR-CLEARANCE rule spent about half the remaining time paused. Kate turned the fill-ratio adjustment off on hybridHedgerCHouse1 and hybridHedgerSI1 (single LP, nowhere to steer) and set forceShortenExecutionOnSurplus on VAR-CLEARANCE, bounced the hedger, and told Alex IC left about half the orders unfilled.
+Next: Kate to watch clearance performance; Alex has not replied.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1792078136400489 https://mahifx.slack.com/archives/C08ALS66EDC/p1792081751691529
 
 ### ic-sub-books — IC sub-account rev-share books (SUB 5/9/10/11, C House, Sub SI House)
 status: open · since: 2026-08-24 · last: 2026-10-15
@@ -38,21 +44,21 @@ Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787569899244609 https://ma
 
 ### commercials-reneg — Commercial renegotiation, value-add and relationship
 status: open · since: 2026-08-19 · last: 2026-10-15
-State: Rostro asked to renegotiate; Sam Steele challenged whether STP flow should count toward fees but said he wants to send all flow (Andrew, 1 Sep). Options were $0.45/M, or $0.40/M with a 24-month term. A joint PR and party were in flight in late Aug (topic TBD). A new-commercials draft had the wrong entity (incorporation wording BVI vs Antigua & Barbuda) and a marginal fee schedule; the corrected version went to Rostro for signature 14 Sep. Rostro did not sign: asked "Did Rostro sign the new commercials?", Andrew answered 15 Sep "It's a no from the board". No later outcome seen. On 15 Oct David Cooney asked for a month-by-month value-add report for the last 3 months plus monthly volumes since they started.
-Next: Kate or analytics to produce the value-add and monthly volumes report for David; David meets Michael Ayres 16 Oct; Rostro's current position on terms is unknown.
-Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1787135711511859 https://mahifx.slack.com/archives/C08ALS66EDC/p1789402809750969 https://mahifx.slack.com/archives/C08ALS66EDC/p1789481310304399 https://mahifx.slack.com/archives/C08ALS66EDC/p1792035521266049
+State: Rostro asked to renegotiate; Sam Steele challenged whether STP flow should count toward fees but said he wants to send all flow (Andrew, 1 Sep). Options were $0.45/M, or $0.40/M with a 24-month term. A joint PR and party were in flight in late Aug (topic TBD). A new-commercials draft had the wrong entity (incorporation wording BVI vs Antigua & Barbuda) and a marginal fee schedule; the corrected version went to Rostro for signature 14 Sep. Rostro did not sign: asked "Did Rostro sign the new commercials?", Andrew answered 15 Sep "It's a no from the board". No later outcome seen. On 15 Oct David Cooney asked for a month-by-month value-add report for the last 3 months plus monthly volumes since they started; Kate delivered it the same day in thread (skew and LR $/M by month with verify links, monthly volumes since Jul 2025, book P&L, a Rostro Value Add microsite) and noted Rostro is deliberately keeping some spreads tight to win flow back, so tailored models are being built with them. On the SI book Rostro whitelists chosen tags into the off book to take risk; Kate says execution quality can stay good with the classifier routing.
+Next: David meets Michael Ayres 16 Oct; Rostro's current position on terms is unknown.
+Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1787135711511859 https://mahifx.slack.com/archives/C08ALS66EDC/p1789481310304399 https://mahifx.slack.com/archives/C08ALS66EDC/p1792035521266049 https://mahifx.slack.com/archives/C08ALS66EDC/p1792078095470549
+
+### cmc-futs-dropouts — CMC as sole futures LP: recurring dropouts and rejects
+status: open · since: 2026-08-26 · last: 2026-10-15
+State: CMC is the only LP in the pool pricing gold futures (and XAUFUT, indices), so each dropout (23 single-tick XAUFUT-Z withdrawals on 25 Aug, 11 of 233 rejects on tag 148 on 5 Oct) leaves no price or fill. On 9 Sep DAXFUT-U showed flat CMC prices with quotes re-sent every 4-10s, which PXM and Scope could not see as gaps; Kate attributed it to CMC and promised a CMC-normalisation backtest (none seen); the 14 Oct freeze is the same failure mode at scale. The 18 Sep NDXFUT-U non-fill was contract expiry, not a dropout (Kate flattened the position in Compass at Alex's request). On 5 Oct Kate said broker-first only helps if Jump joins the XAUFUT reference price, then the pool (caveat: Jump reprices ahead of CMC in fast markets); Rostro has not decided, Riz is "not optimistic on CMC". On 14 Oct CMC filled 800 of a 1,000-lot XAUFUT-Z sweep then expired 200 and all retries despite showing size; Scope will raise it with CMC. On 15 Oct Rostro moved most futures volume away from Jump and expected to switch them off, so Kate removed Jump from the futures hedgers' config and bounced them; Alex then saw NQ hedges still going to a backup LP, which was a wrong PXM mapping on the new NDXFUT-Z contract (no NDXFUT flow reached Mahi since the roll; DOW, DAX and SPX futures were fine).
+Next: Rostro decision on adding Jump to XAUFUT reference price and pool (Jump is being switched off on Rostro's side, so check this still stands); Alex to fix the NDXFUT-Z mapping in PXM; Kate's CMC-normalisation backtest.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787733565831759 https://mahifx.slack.com/archives/C08AQKRU953/p1791970984817549 https://mahifx.slack.com/archives/C08AQKRU953/p1792078098426429 https://mahifx.slack.com/archives/C08AQKRU953/p1792080246319599
 
 ### cmc-spx-freeze — 14 Oct CMC SPX/NDX freeze, RCA and evidence pack
 status: open · since: 2026-10-14 · last: 2026-10-14
 State: CMC's SPX price (futures and cash) froze 12:18:36-12:34:15 UTC while IC and Jump fell about 38 points after the 12:30 print; CMC filled no SPX futures hedges until 12:34. Loss about 178k (SPX fut -145k, SPX cash -23k, NDX cash -10k), roughly 114k client trades at the frozen price (251* sold about $31.5M into it). Root cause per Athena: from 12:22:53 each CMC SPX message came about 10ms after one of Mahi's own hedge orders with a bid-size dip, so it counted as a changed book and reset the stuck filter's 10 min clock (it would have pulled CMC at 12:28:36); Will's Echo replays reproduce it, with CMC the only SPX source. Amana had no stale fills, so Rostro is the only client that dealt at the frozen price. Kate sent Rostro the evidence 14 Oct; PXM FIX logs were not recorded (PXM says CMC prices looked normal) and Rostro will ask CMC. Mahi ignores quote-condition tags on CMC mass quotes (PXM's spec does not use them, per Liam). Candidate fixes: price-level stuck clock, divergence alert/firewall vs the normalised reference index, sanity-check benchmark other than PrimaryMarket. Rebate vs direct loss with CMC is open (Andrew).
 Next: Mahi to get PXM to explain; Andrew to probe discreetly how Rostro handles CMC; engineering to action the filter and divergence fixes; Kate DMed David a briefing and offered a call with Liam on 15 Oct.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1791981542846109 https://mahifx.slack.com/archives/C08ALS66EDC/p1791986751396079 https://mahifx.slack.com/archives/C08ALS66EDC/p1791988433848269 https://mahifx.slack.com/archives/C08AQKRU953/p1791993119452699
-
-### cmc-futs-dropouts — CMC as sole futures LP: recurring dropouts and rejects
-status: open · since: 2026-08-26 · last: 2026-10-14
-State: CMC is the only LP in the pool pricing gold futures (and XAUFUT, indices), so each dropout (23 single-tick XAUFUT-Z withdrawals on 25 Aug, 11 of 233 rejects on tag 148 on 5 Oct) leaves no price or fill. On 9 Sep DAXFUT-U showed flat CMC prices with quotes re-sent every 4-10s, which PXM and Scope could not see as gaps; Kate attributed it to CMC and promised a CMC-normalisation backtest (none seen); the 14 Oct freeze is the same failure mode at scale. The 18 Sep NDXFUT-U non-fill was contract expiry, not a dropout (Kate flattened the position in Compass at Alex's request). On 5 Oct Kate said broker-first only helps if Jump joins the XAUFUT reference price, then the pool (caveat: Jump reprices ahead of CMC in fast markets); Rostro has not decided, Riz is "not optimistic on CMC". On 14 Oct CMC filled 800 of a 1,000-lot XAUFUT-Z sweep then expired 200 and all retries despite showing size; Scope will raise it with CMC.
-Next: Rostro decision on adding Jump to XAUFUT reference price and pool; Kate's CMC-normalisation backtest.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787733565831759 https://mahifx.slack.com/archives/C08AQKRU953/p1791202740464639 https://mahifx.slack.com/archives/C08AQKRU953/p1791970984817549
 
 ### pxm-connections — PrimeXM connections, LP list and feeds
 status: open · since: 2026-09-04 · last: 2026-10-14
