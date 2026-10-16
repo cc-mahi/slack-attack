@@ -17,7 +17,7 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-10-15T13:00:35Z
+last_catchup: 2026-10-16T07:06:21Z
 status: active
 ---
 ## Now
@@ -57,6 +57,12 @@ State: GTC keeps adding OZ hubs because OZ fears it cannot handle their trade ra
 Next: GTC to connect and confirm OZ-7 (and OZ-6 working) after the EOD restart; GTC weekly call is the forum.
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786969418265589 https://mahifx.slack.com/archives/C0AKRP8C049/p1792050071553529
 
+### pricing-skew-tuning — Skew, spread and last-look tuning
+status: open · since: 2026-08-19 · last: 2026-10-15
+State: Skew signal config tuned repeatedly: XAG ceilings lowered after quote "shake" complaints (09-09/10), IFMS leg removed from signal config 2026-10-07 for poor FX FI performance, arb protection and pre-triangulation spreads adjusted for wide FX crosses (09-29). Controls added: opening-window last look (800ms XAU, 400-500ms others) via CUSTOM1 timezone, indicative XAU pricing around open, 8 cent min TOB with news widening removed, XAU layers raised to 6. XAU spreads blew out into the Friday close (09-19) because BMSL/MWMS had only 3 benchmarks; MAHI_BENCHMARK_LDN added. 2026-10-12 GTC reported abnormal FX price spikes. 2026-10-15 GTC reported NZDJPY spread 3 JPY wide at the open because of SWIFT; Isaac removed SWIFT from arb protection, then found wide-spread suppression did not cover the custom execution timezone around the roll (B-OZ session saw wide spreads ~00:05-00:10 GTC time, now fixed). A dormant global force-indicative timetable (from April, possibly left over from a repurposed tmgm setup) that made all instruments indicative during roll was also removed. GTC also saw different spreads on GTC-B-Prices-OZ vs OZ-3 (cent hub); logs rolled off so not replayed.
+Next: GTC to send tick data from both hubs for 23:55-00:15 their time so Isaac can confirm the OZ vs OZ-3 spread difference; Rory checking the 10-12 FX spike report.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1788911767407019 https://mahifx.slack.com/archives/C0AKRP8C049/p1792082071865509
+
 ### centroid-connection — New Centroid LP connection
 status: open · since: 2026-09-24 · last: 2026-10-13
 State: GTC asked for a Centroid hub session (2026-09-24). GTC wants two Maker FIX connections for its Centroid bridge (backup over internet, primary over a Beeks X Connect/BGP); needs a separate distribution process (gateway8, ports 9020/9021). Centroid as taker resets sequence numbers on market data but not trade sessions. Beeks missed the first weekend window; Rory sent Centroid A/B credentials on 2026-10-13 and Marios acknowledged. Not yet confirmed working.
@@ -68,12 +74,6 @@ status: open · since: 2026-08-17 · last: 2026-10-08
 State: EURGBP moved 2026-08-17, then rolling in batches through 2026-10-05 (all FX majors/crosses, B Book). XAGUSD routed 2026-09-03 and XAUUSD 2026-09-10 with more servers added 09-16, 10-05 and 10-08 (mt4 live2). Remaining: cent accounts on small-ticket servers, indices (GTC worried about primary benchmark feed dropouts), crypto. Priorities per the 2026-09-24 Expo meeting: fix OZ hub drops, A Book with hedging, B Book via OZ, crypto, then 24/7 XAU.
 Next: GTC picks the next server/day; weekly call 2026-10-13 notes remaining checks (24/7 connection 5, FX pair spikiness, HRP Jane Street).
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786977281687209 https://mahifx.slack.com/archives/C0AKRP8C049/p1791442269445639
-
-### pricing-skew-tuning — Skew, spread and last-look tuning
-status: open · since: 2026-08-19 · last: 2026-10-12
-State: Skew signal config tuned repeatedly: XAG ceilings lowered after quote "shake" complaints (09-09/10), IFMS leg removed from signal config 2026-10-07 for poor FX FI performance, arb protection and pre-triangulation spreads adjusted for wide FX crosses (09-29). Controls added: opening-window last look (800ms XAU, 400-500ms others) via CUSTOM1 timezone, indicative XAU pricing around open, 8 cent min TOB with news widening removed, XAU layers raised to 6. XAU spreads blew out into the Friday close (09-19) because BMSL/MWMS had only 3 benchmarks; MAHI_BENCHMARK_LDN added. 2026-10-12 GTC reported abnormal FX price spikes.
-Next: Rory checking the 10-12 FX spike report.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1788911767407019 https://mahifx.slack.com/archives/C0AKRP8C049/p1791799992982999
 
 ### commercial-value — Pilot value case and billing
 status: watching · since: 2026-08-19 · last: 2026-09-29
