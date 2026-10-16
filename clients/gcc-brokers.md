@@ -15,27 +15,27 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-10-15T13:00:34Z
+last_catchup: 2026-10-16T07:05:38Z
 status: active
 ---
 ## Now
 GCC is a happy, growing internalising client ("client for life", Will Carter 09-28); the Finalto/LMAX hedger tuning has lifted PnL materially since August.
 Live work: LMAX perps (test-traded, not yet live), Amana as a third hedging venue (waiting on client funding) and an institutional pricing stream.
-Finalto became spiky again on 2026-10-14/15; Rory is sounding out Infinox as an extra LP.
+Finalto became spiky again on 2026-10-14/15; Rory is offering GCC an Infinox LP intro (call 10-16).
 
 ## Streams
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-10-13
-State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible).
+status: open · since: 2026-04-30 · last: 2026-10-15
+State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute.
 Next: Rory/ops to confirm the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791555113608319 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791555113608319 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792075794201709
 
 ### finalto-execution — Finalto rejections, spikiness and hedger tuning
 status: open · since: 2026-07-29 · last: 2026-10-15
-State: Finalto fill ratio and rejects have swung. Rejections and throttling in Aug (hedger stands down 5s after 500oz of Finalto rejects; LMAX stand-down between waves raised 200 to 500 after LMAX's book was under 10oz during a hedge cycle, which lifted LMAX fills from 1-3oz to 10-200oz; LMAX also grumbled to Youssef about the hedge flow; VaR reduction 3.5k to 8k; adding Finalto back into the hedger helped even at poor fill rates), then Finalto removed GCC from its defensive (SOR) tag list and fill rate went from 9-22% to 85-87% with rejects 1,824/day to 12/day (Rory's 09-01 summary). XAUUSD book earns about 2.8x more per day and CLIENTS_NET went from +$14.8k/wk to +$23.7k then +$44.8k; Will Carter reported an $80k week on 09-04. On 10-12 the manual Finalto hedger stopped firing because NOP was $87.65m vs an $80m cap; raised to $120m at Nael's request (LMAX limit $80m, $26.58m used). On 10-15 Rory saw Finalto XAUUSD TOB getting spiky since ~13:05 UTC on 10-13 (previously steady ~12c) and plans to gauge interest in an Infinox LP intro.
-Next: Rory to explore Infinox intro with GCC; keep watching Finalto behaviour.
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1785352468874599 https://mahifx.slack.com/archives/C09QS1NUA80/p1788257182280109 https://mahifx.slack.com/archives/C09QS1NUA80/p1792064562853469
+State: Finalto fill ratio and rejects have swung. Rejections and throttling in Aug (hedger stands down 5s after 500oz of Finalto rejects; LMAX stand-down between waves raised 200 to 500 after LMAX's book was under 10oz during a hedge cycle, which lifted LMAX fills from 1-3oz to 10-200oz; LMAX also grumbled to Youssef about the hedge flow; VaR reduction 3.5k to 8k; adding Finalto back into the hedger helped even at poor fill rates), then Finalto removed GCC from its defensive (SOR) tag list and fill rate went from 9-22% to 85-87% with rejects 1,824/day to 12/day (Rory's 09-01 summary). XAUUSD book earns about 2.8x more per day and CLIENTS_NET went from +$14.8k/wk to +$23.7k then +$44.8k; Will Carter reported an $80k week on 09-04. On 10-12 the manual Finalto hedger stopped firing because NOP was $87.65m vs an $80m cap; raised to $120m at Nael's request (LMAX limit $80m, $26.58m used). On 10-15 Rory saw Finalto XAUUSD TOB getting spiky since ~13:05 UTC on 10-13 (previously steady ~12c) and planned a quick call with Youssef on 10-16 AM to offer an intro to Infinox (unnamed, "a client") as an additional gold LP alongside Finalto and LMAX; Infinox's own institutional gold price looked tighter and deeper than Finalto/LMAX at GCC in engine data (not a quote, fill rates unchecked). Talking points withhold the crypto deal, figures and that our engine prices the stream.
+Next: Rory to hold the Infinox intro call with Youssef (10-16) and report back; keep watching Finalto behaviour.
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1785352468874599 https://mahifx.slack.com/archives/C09QS1NUA80/p1788257182280109 https://mahifx.slack.com/archives/C09QS1NUA80/p1792074743531799
 
 ### lmax-perps — LMAX perpetual futures integration (XAUUSD-PERP, BTC)
 status: open · since: 2026-09-05 · last: 2026-10-11
@@ -90,12 +90,6 @@ State: Youssef asked on 08-20 how to get P&L via the MFXPulse API, then on 09-02
 Next: Rory/Daria to provision MFXPulse (details in the 09-02 request) and confirm to Youssef.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1788376707168249 https://mahifx.slack.com/archives/C09PNC1MFAA/p1788427041816899
 
-### xag-incident-comp — Compensation demand after 2026-05-15 XAGUSD incident
-status: watching · since: 2026-05-15 · last: 2026-05-27
-State: A stale max market position cap left ~45k oz XAGUSD unhedged for ~90 minutes on 2026-05-15 (about $70k client loss); GCC (Khalil) demanded $70k cash and Mahi held at forgoing its value-add share for the pilot. No later signal on the dispute; presumably overtaken by the 12-month terms agreed 07-22 and contract signed 08-07, but never explicitly closed in Slack.
-Next: confirm with Rory/Will that the demand was settled by the new agreement.
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1778851998984029 https://mahifx.slack.com/archives/C09QS1NUA80/p1779888805588859
-
 ### manual-hedger-nop — Finalto XAGUSD close blocked by NOP cap
 status: closed · since: 2026-10-12 · last: 2026-10-12 · closed: 2026-10-15
 State: Carl could not close XAGUSD on Finalto on 10-12; the manual hedger was blocked by Finalto NOP above the $80m cap. NOP limit raised to $120m, position closed on open and manual hedgers switched off by Carl.
@@ -105,6 +99,11 @@ Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1791836695198179 https://ma
 status: closed · since: 2026-08-14 · last: 2026-08-17 · closed: 2026-10-15
 State: Youssef's comparison showed about 2x Compass's August P&L; on 08-17 he retracted it ("some confusion and wrong thinking on our side, all is good").
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1786712998616739 https://mahifx.slack.com/archives/C09QS1NUA80/p1786976617585179
+
+### xag-incident-comp — Compensation demand after 2026-05-15 XAGUSD incident
+status: closed · since: 2026-05-15 · last: 2026-05-27 · closed: 2026-10-16
+State: A stale max market position cap left ~45k oz XAGUSD unhedged for ~90 minutes on 2026-05-15 (about $70k client loss); GCC (Khalil) demanded $70k cash and Mahi held at forgoing its value-add share for the pilot. No later signal on the dispute; presumably overtaken by the 12-month terms agreed 07-22 and contract signed 08-07, but never explicitly closed in Slack; no activity since 2026-05-27, assumed resolved.
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1778851998984029 https://mahifx.slack.com/archives/C09QS1NUA80/p1779888805588859
 
 ## Arc
 - 2026-04-23 — CFD internalisation go-live list proposed; live 2026-05-07
