@@ -25,7 +25,7 @@ contacts:
   - {name: "Saemi Kim", role: "Pepperstone; pricing config changes 2026-10", confidence: low}
   - {name: "Sam Dammers", role: "Pepperstone security/Cloudflare IP policy", confidence: low}
   - {name: "Tom Williams", role: "Pepperstone COO since 2026-08"}
-last_catchup: 2026-10-15T13:04:16Z
+last_catchup: 2026-10-16T07:06:24Z
 status: active
 ---
 
@@ -58,6 +58,11 @@ State: Crypto spread yield fell to ~USD 200/M versus 350-450 historically; Isaac
 Next: Isaac to finish engine verification (5 variants on 8 and 11 Oct flow) and send MK PnL/spread numbers for PSM fully active / defensive only / 10% widening.
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1791285982179839 https://mahifx.slack.com/archives/C033K2P0RPT/p1792068068772829
 
+### crypto-hedging — Crypto spot hedger tuning and LP de-prioritisation
+status: open · since: 2026-07-13 · last: 2026-10-15
+State: After SI-vs-inventory debate in July, spot crypto hedgers were reworked in September (per-LP backstop rules, dynamic fill ratio) so LPs that keep cancelling/rejecting (LMAX EXPOSURE_CHECK_FAILURE 2026-09-03) are de-prioritised. MK moved the SI hedgers to counterparties 1001/1002 round-robin on 2026-10-04 (timed with the tapaas change), reverted on 2026-10-05 when that misbehaved, and had it reinstated on 2026-10-08 (Rory bounced the hedgers). On 2026-10-15 MK noticed SI hedge volume to HRP falling while LMAX won most flow; Isaac found HRP was excluded from some hedger rules by legacy config (feared over-hedging on its crossed book), then added it to all the rules (to be reviewed). Kraken is now an AUDUSD weekend fallback; B2C2 maintenance left USTAUD unpriceable on 2026-09-26/27.
+Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1783981698651339 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792071994735809?thread_ts=1792071994.735809&cid=C06AR8MT8NT
+
 ### fi-skew-tuning — FI/skew/LR sizing and signals across FX, CFD and metals
 status: open · since: 2026-08-18 · last: 2026-10-14
 State: Reece flagged FI PnL slipping (2.9/M vs 4.0/M, early Aug); Isaac moved XAUUSD to flow-price-thresh and FI PnL recovered to 4.2/M. EURUSD hit USD 9.17/M at a 0.5 pip skew cap, but Reece had the cap put back to 0.1 pip on flow-price-thresh alone (2026-09-22); On 2026-10-14 Isaac swapped FX majors (EURUSD included) to IFM-based benchmark adjustments. On CFD, skew was raised from 20% of base spread after Nathan's beta shadow test; MK approved promoting HSIHKD, JPXJPY and XAUUSD-F and moving NDXUSD to the price signal on 2026-10-08, changes made, monitoring. CFD LR was also reworked in September after LR-caused limit-order cancels: MK disabled channel LR, global default LR cap cut from USD 1000/M to 300/M, signals limited to oils, NDX, DOW, SPX (CAC at 40%).
@@ -75,11 +80,6 @@ status: open · since: 2026-07-27 · last: 2026-10-13
 State: The CFD inventory hedger keeps hitting LP limits. Velocity cancelled 241/250 HSTHKD hedges (2026-09-11); price-precision rejects were fixed with hedger-only overrides (HSTHKD, softs at 1dp, 2026-09-17..22; indices pending review). NG1 clips reject on 26Degrees (2026-09-25, 09-29, 10-13): William advised smaller clips, Isaac raised VaR reduction per second (600 to ~2000-2500) on 2026-09-29, and Rory showed the LP book resets to 20k within ms of each fill while the hedger sizes off rolling fill ratios, so it cannot see what is left. IG liquidity limits hit WHEAT (limit raised temporarily, Reece wants 100k clips). Andrew's analysis (2026-09-01) found NG1 hedging stopped on 2026-08-06 when the trigger was raised USD 2M to 3M and flagged hedge exit costs and unoptimised signals as the real bleed.
 Next: Reece to ask Invast/OZ whether NG1 depth is capped and whether the book can show remaining depth; Mahi to decide NG1 trigger appetite (USD 3M vs 2M) and the hedge venue review.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1785164826669399 https://mahifx.slack.com/archives/C06AR8MT8NT/p1791898246094219
-
-### crypto-hedging — Crypto spot hedger tuning and LP de-prioritisation
-status: open · since: 2026-07-13 · last: 2026-10-08
-State: After SI-vs-inventory debate in July, spot crypto hedgers were reworked in September (per-LP backstop rules, dynamic fill ratio) so LPs that keep cancelling/rejecting (LMAX EXPOSURE_CHECK_FAILURE 2026-09-03) are de-prioritised. MK moved the SI hedgers to counterparties 1001/1002 round-robin on 2026-10-04 (timed with the tapaas change), reverted on 2026-10-05 when that misbehaved, and had it reinstated on 2026-10-08 (Rory bounced the hedgers). Kraken is now an AUDUSD weekend fallback; B2C2 maintenance left USTAUD unpriceable on 2026-09-26/27.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1783981698651339 https://mahifx.slack.com/archives/C06AR8MT8NT/p1791443987998689
 
 ### perps-pricing — Perp instruments: pricing, rollover and KRX
 status: open · since: 2026-06-26 · last: 2026-10-07
