@@ -20,7 +20,7 @@ contacts:
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config requests, rejection reports", confidence: low}
   - {name: "Ali Wehbe", role: "ops: energy futures / oils product specs", confidence: low}
   - {name: "Ahmad Hashem", role: "ops: rejection reports on Mahi_B sessions", confidence: low}
-last_catchup: 2026-10-16T07:05:35Z
+last_catchup: 2026-10-19T07:07:44Z
 status: active
 ---
 ## Now
@@ -28,11 +28,47 @@ Amana is migrating everything onto Mahi in stages and is live on A-book metals/i
 
 ## Streams
 
+### xet-price-rejects — XETUSD INVALID_INCREMENT order storm
+status: open · since: 2026-10-18 · last: 2026-10-19
+State: At the 10-18 open account 8010705 sent ~1,200 XETUSD orders in seven seconds (22:00:24-22:00:31 UTC), mostly 0.5 sells at 2372.406, all rejected FIELD_VALIDATION_ERROR price=INVALID_INCREMENT because the price has too many decimals. Shyam flagged it; Princess asked 10-19 what decimal places Mahi accepts for the symbol.
+Next: Mahi to give Amana the XETUSD price increment.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792362536599479 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792391436437729
+
+### noc-stale-alerts — NOC stale-price alerts
+status: open · since: 2026-10-19 · last: 2026-10-19
+State: PH NOC reported stale-price alerts on 10-19 (sample symbols mostly futures: CO1USD, USOFUT-Z/F, UKOFUT-Z, NG1USD, XAGFUT-Z, XPD/XPTUSD, JPXJPY) while pricing looked fine; Nathan confirmed pricing is good and is still investigating the earlier alerts.
+Next: Nathan to report the cause of the stale alerts.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792371686739019 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792372611989499
+
 ### fx-metals-rollout — FX B-book and XPT/XPD go-lives
-status: open · since: 2026-09-25 · last: 2026-10-15
-State: XPT/XPD went live 10-07 (pricing set to Jump only after CMC was ~$10 off). FX B-book flow went live 10-14 for EURUSD/GBPUSD/USDJPY into B_OFF_BOOK_CLIENTS with no hedger by Amana's choice; Amana is moving EURJPY/GBPJPY pricing and B-book 10-15, asked for FX spread aggregation like XAUUSD (10-12), and for all FX quantity config HP 0.001 / Non-HP 1000 / LP 1000. Open: unhedged USDJPY on A House (10-14) and a TOB showing 500K vs the 250K Amana defined (10-15).
+status: open · since: 2026-09-25 · last: 2026-10-16
+State: XPT/XPD went live 10-07 (pricing set to Jump only after CMC was ~$10 off). FX B-book flow went live 10-14 for EURUSD/GBPUSD/USDJPY into B_OFF_BOOK_CLIENTS with no hedger by Amana's choice; Amana is moving EURJPY/GBPJPY pricing and B-book 10-15, asked for FX spread aggregation like XAUUSD (10-12), and for all FX quantity config HP 0.001 / Non-HP 1000 / LP 1000. On 10-16 Hadeel said Amana would enable pricing and B-book flow for AUDUSD, NZDUSD, USDCHF and USDCAD. Open: unhedged USDJPY on A House (10-14) and a TOB showing 500K vs the 250K Amana defined (10-15).
 Next: Mahi to answer the USDJPY exposure and TOB questions; confirm FX qty config and spread aggregation.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790335963373189 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792050663738809
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790335963373189 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792142087440439
+
+### crypto-rollout — Crypto go-live and hedging
+status: open · since: 2026-08-17 · last: 2026-10-16
+State: First cryptos (XRP, SOL, XET) went live 09-04 and BTC 09-21. On 10-01 Amana went live with seven GCEX coins (ADA, AAVE, AVAX, DOG, DOT, LTC, TRX) after Mahi-side tests and a position import on a huddle, without telling Mahi it had enabled them (Rory asked for notice). hybridHedgerCrypto1 stopped itself three times on 09-21 on GCEX_CENTROID partial IOC residuals; Amana used FOK 09-22 to 09-28 until GCEX fixed the terminal message. On 10-16 Karen asked Mahi to enable and subscribe CMC crypto pricing from a mapping sheet, for price analysis only with no execution setup yet. Mahi's Compass 26.4 build (stops internalised fills exceeding order size) goes live at the 10-17 weekly reboots, pausing crypto pricing and fills 10-15 min at 11:25 and 11:45 UTC (CHG-2610-42GK). Crypto pricer cycle times rose after restarts (SHIUSD/PEPEUSD, ZD-23543, root cause open).
+Next: Mahi to action the CMC crypto pricing subscription; Daria's ticket ZD-23543 root cause.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786963129189029 https://mahifx.slack.com/archives/C08T42TMKU3/p1792145281048949
+
+### outage-rcas — Outages with written RCAs
+status: open · since: 2026-09-05 · last: 2026-10-16
+State: Weekend crypto outage from the Centroid logon gate (09-05, RCA 09-07); 10-14 CMC froze SPX/NDX (cash and futures) 12:18-12:34 UTC, so index futures stayed firm on stale prices (about -$85 on 6 B-book fills) and the A-book NDXUSD hedger could not route off CMC (about -$567 net).
+On 10-16 a Mahi LD networking incident (from 09:33 UTC) hit Compass GUI connectivity (Nikos asked whether pricing/hedging were affected; Liam said Amana looked less affected; resolved ~11:29 UTC). At 16:00:44-45 UTC 17 XAUUSD B-book fills were force-cancelled (CANCEL_SYSTEM_ERROR) for internal latency; Isaac traced it to two read-only dashboard users created in trading hours, which trigger an authorisation update costing CPU in every JVM while the distribution gateway CEP threads share a non-isolated cpuset, and has asked that no users be created at Amana in trading hours and for an engineering ticket on both points.
+Next: Mahi to raise the user-create/CEP-core engineering ticket; Mahi to decide whether to add non-CMC hedge routing for NDXUSD.
+Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1788769386806729 https://mahifx.slack.com/archives/C08T42TMKU3/p1792168920916789
+
+### gcex-indices-lp — GCEX as second LP for indices
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: Amana wants GCEX as backup LP and aggregation source for indices (cash indices first), policy of at least two LPs per asset class (GCEX indices; LMAX and CMC FX). Rory warned that LP index CFDs have different bases (LMAX vs GCEX NDXUSD about 35pts apart). Hadeel asked for a connection test only without changing the LMAX/CMC flow; Nikos said Isaac updated the beta indices model with GCEX and hopes to turn it on Monday 10-19.
+Next: Mahi to run the GCEX connection test; Amana to decide on basis handling before switching the indices model on.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792148151058599 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792158493601849
+
+### futures-expiry-recs — Futures rolls, expiries and position adjustments
+status: open · since: 2026-08-17 · last: 2026-10-15
+State: Amana posts expiry and start notices and Mahi zeroes positions at EOD. On 10-15 Amana announced CrudeOilX6 (Nov) settlement (zero all positions) and CrudeOilF7 (Jan) start 10-16; picking up F7 needed a re-subscribe on Mahi_CMC_FIX, done by Shyam that night with a brief CMC_CENTROID pricing gap and the feed confirmed. Earlier: SI IDX futures rolled U to Z on 09-24 by CSV import, UKO futures rolled 09-28, manual position adjustments continue, and the 09-17 DOWFUT-U expiry spammed IG rejections because Amana had not set it close-only.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792103701318669
 
 ### vip-feed — Third (VIP) pricing feed for XAU/XAG
 status: open · since: 2026-10-08 · last: 2026-10-14
@@ -76,33 +112,16 @@ State: CMC needs dynamic FIX API client logins, so Amana wants to send them on t
 Next: Mahi to say whether tag 109 can be consumed and returned.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790602136754039 https://mahifx.slack.com/archives/C08SYSMP0EB/p1791212038784569
 
-### futures-expiry-recs — Futures rolls, expiries and position adjustments
-status: open · since: 2026-08-17 · last: 2026-10-15
-State: Amana posts expiry and start notices and Mahi zeroes positions at EOD. On 10-15 Amana announced CrudeOilX6 (Nov) settlement (zero all positions) and CrudeOilF7 (Jan) start 10-16; picking up F7 needed a re-subscribe on Mahi_CMC_FIX, done by Shyam that night with a brief CMC_CENTROID pricing gap and the feed confirmed. Earlier: SI IDX futures rolled U to Z on 09-24 by CSV import, UKO futures rolled 09-28, manual position adjustments continue, and the 09-17 DOWFUT-U expiry spammed IG rejections because Amana had not set it close-only.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792103701318669
-
-### crypto-rollout — Crypto go-live and hedging
-status: open · since: 2026-08-17 · last: 2026-10-01
-State: First cryptos (XRP, SOL, XET) went live 09-04 and BTC 09-21. On 10-01 Amana went live with seven GCEX coins (ADA, AAVE, AVAX, DOG, DOT, LTC, TRX) after Mahi-side tests and a position import on a huddle, without telling Mahi it had enabled them (Rory asked for notice). hybridHedgerCrypto1 stopped itself three times on 09-21 on GCEX_CENTROID partial IOC residuals; Amana used FOK 09-22 to 09-28 until GCEX fixed the terminal message. Crypto pricer cycle times rose after restarts (SHIUSD/PEPEUSD, ZD-23543, root cause open).
-Next: Daria's ticket ZD-23543 root cause.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786963129189029 https://mahifx.slack.com/archives/C08T42TMKU3/p1790858011054809
-
 ### hsi-hedger-stalls — HSIHKD hedger stalling and size mismatches
 status: open · since: 2026-09-09 · last: 2026-09-30
 State: HSI hedging moved from CMC to Jump on 09-09; dealing wanted LMAX (09-21, pending Amana's confirmation: different price bases). The CFD hedger left exposure uncleared on 09-21 (max waves, fell to backstop), 09-28 and 09-30; on 09-30 it stopped after Jump pulled pricing at 04:59:59 and Nathan bounced it (root cause still open). Mahi allows HSIHKD fills to 0.01 against Amana's 0.1 min; Amana thinks the Jump cancellations are price digits.
 Next: Amana to confirm the HSI min and the Jump cancellation reason; Nathan to report root cause.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1789983849524539 https://mahifx.slack.com/archives/C08SYSMP0EB/p1790744638304639
 
-### outage-rcas — Outages with written RCAs
-status: watching · since: 2026-09-05 · last: 2026-10-14
-State: Weekend crypto outage from the Centroid logon gate (09-05, RCA 09-07); 10-14 CMC froze SPX/NDX (cash and futures) 12:18-12:34 UTC, so index futures stayed firm on stale prices (about -$85 on 6 B-book fills) and the A-book NDXUSD hedger could not route off CMC (about -$567 net).
-Next: Mahi to decide whether to add non-CMC hedge routing for NDXUSD.
-Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1788769386806729 https://mahifx.slack.com/archives/C08T42TMKU3/p1791993005581759
-
 ### dashboard-releases — Dashboard deploys and fixes
-status: watching · since: 2026-08-26 · last: 2026-10-08
-State: Mahi ships dashboard-only releases to Amana PROD roughly weekly. Isaac asked to avoid mid-week riskReportingCore restarts until MahiMain #1203 lands.
-Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1787731205446379 https://mahifx.slack.com/archives/C08T42TMKU3/p1791448225857199
+status: watching · since: 2026-08-26 · last: 2026-10-18
+State: Mahi ships dashboard-only releases to Amana PROD roughly weekly. Compass release (performance/stability/UI) announced 10-16 and completed 10-17; Amana NOC ran pre/post UI checks clean on 10-18. Isaac asked to avoid mid-week riskReportingCore restarts until MahiMain #1203 lands.
+Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1787731205446379 https://mahifx.slack.com/archives/C08T42TMKU3/p1792359115608559
 
 ### hedger-execution — Hedger partial-fill crashes and swapfree sizing
 status: watching · since: 2026-08-18 · last: 2026-09-28
