@@ -21,16 +21,35 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-16T07:05:37Z
+last_catchup: 2026-10-19T07:08:58Z
 status: active
 ---
 
 ## Now
+A Saturday 2026-10-17 reboot cascade (Hazelcast, MySQL connections) kept the Insti, BigBook and CFD hedgers down ~2.5h, and the Sunday open cancelled 391 orders on a cold order process; both stem from weekend restarts and have an RCA / dev ticket.
 Exinity is mid-migration of its LP stack from Hidden Road to Wedbush LPs (top-up/IOC mechanics, Velocity and Nomura going live) and is chasing a run of pricing-spike, book-break and alerting asks.
 Open on Mahi: re-setting per-book PnL-drop alerts, XAU position realignment using the CLIENTS book, the TradersHub A-book move, and an XCUUSD spread decision.
 Weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
+
+### sunday-open-cancels — Last-look latency cancels at Sunday FX open
+status: open · since: 2026-10-18 · last: 2026-10-18
+State: Samuel reported cancels on several instruments with "Forcibly cancelled order due to excessive internal latency" (last-look delay overran by ~1257ms). Nathan explained 391 orders received 21:15:00 to 21:15:03 UTC on Sunday 2026-10-18 were cancelled by the internal latency safeguard because the order-handling process, restarted over the weekend, had not warmed up and queued orders; speed was normal from 21:15:04 (about four seconds affected, no further cancels). Tied to the weekend restarts above.
+Next: Mahi dev to review process warm-up after restart (ticket raised by Nathan).
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792359440287539
+
+### ld-network-route28 — Beeks LD network incident and unconfirmed Route28 AVAX order
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: On 2026-10-16 Liam posted a networking incident in the LD environment (10:33 BST, recovery 11:47, resolved 12:30). hybridHedgerCFD1 went down on an order breach after a Route28 AVAX/USD order (99 AVAX, 012e1d2mn2, sent 10:01Z) got no confirmation; Kate asked Exinity to check with Route28 whether it filled, with the FIX log, and brought the hedger back up accepting a small risk if the fill must be booked and hedged. No Exinity answer seen.
+Next: Exinity to confirm whether Route28 filled order 012e1d2mn2.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792143223051249 https://mahifx.slack.com/archives/C0456LSHQQK/p1792148922388959
+
+### weekend-ops-reliability — Weekend restarts, FIX session windows, hedger recovery
+status: open · since: 2026-08-17 · last: 2026-10-17
+State: Weekend reboots repeatedly leave things down. After the 2026-08-22 reboot ~25 processes were missed; components failed again 2026-09-12; STRD_PARTNER crypto pricing did not publish at weekends (fixed 2026-09-23). On Sat 2026-10-17 the trading-1 reboot (07:36Z) left clientDistributionGateway1 dead (duplicate Hazelcast shard ID 1533 after trading-2's node ran out of 2 GB heap; trading-2 missed its 07:50Z slot and rebooted 08:16Z for the kernel patch, admin-1 rebooted twice) and trading-1 MySQL hit 1512/1536 connections, so the Insti, BigBook and CFD hybrid hedgers were down 08:15 to ~10:55Z. James restarted all Hazelcast nodes and raised max_connections to 2048; Justin restarted the hedgers; a rebase bug (not hedger-related) showed a -42k PnL, fixed by a MahiWebstack commit (about -3k after). RCA written (P2, status open). The Friday 21:00Z to Sunday 21:00Z FIX logout of the ECN/ECNARU/PROECNARU/STRD/TE sessions (earlier flagged by Nathan) is Exinity's normal weekly cycle, seen the same the prior weekend, and the bare TCP connects every 10s from Exinity IPs are a health probe. Exinity mirrors Mahi's nightly offline window (07:00 to 09:00 UTC). Daniel says Exinity is comfortable self-monitoring but plans weekend crypto pricing.
+Next: Mahi to raise the trading-2 hazelcastNode heap above 2 GB and break down MySQL connections on trading-1; Daniel/Kate to revisit weekend support when weekend crypto starts.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/p1791752884902819 https://mahifx.slack.com/archives/C040V9LNKT5/p1792233233302349
 
 ### insti-exotics-pricing — Exotic pairs unpriced on Distribution_Insti_LDN
 status: open · since: 2026-10-15 · last: 2026-10-16
@@ -67,12 +86,6 @@ status: open · since: 2026-08-31 · last: 2026-10-12
 State: PrimeXM tag forwarding on the CONNECT_FILLET stream (2026-08-31) was confirmed by Daria to keep landing in BIG_INSTI_CLIENTS_1 as long as new tags avoid the wildcard risk-splitting counterparties. Matt moved an 11.35k oz CL1 position into A Insti Hedging Manual in September (Rory: PnL cannot be backdated, historic trade price can be used). On 2026-10-02 William closed an LMAX XAU position in 100oz clips due to a $2M LMAX volume cap. On 2026-10-12 Christian asked to move TradersHub (111000023) to A-book and open exposure at Wedbush; Nathan promised confirmation and help with the adjustment before EOD, no outcome seen.
 Next: Nathan to confirm the steps/books and help with the TradersHub adjustment.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788203770663179 https://mahifx.slack.com/archives/C0456LSHQQK/p1789471167917609 https://mahifx.slack.com/archives/C0456LSHQQK/p1791828427289149
-
-### weekend-ops-reliability — Weekend restarts, FIX session windows, crypto publishing
-status: open · since: 2026-08-17 · last: 2026-10-11
-State: Weekend reboots repeatedly leave things down: ~25 processes missed after the 2026-08-22 reboot (reboot order reversed; internal note flags a Hazelcast shard-id collision as worth a ticket), components failed again on 2026-09-12, and STRD_PARTNER crypto pricing did not publish on weekends (fixed 2026-09-23: prices were published but market data not persisted into Compass). Kate re-offered the weekend-support proposal; Daniel says Exinity is comfortable self-monitoring but plans weekend crypto pricing. Exinity mirrors Mahi's nightly offline window (07:00 to 09:00 UTC, sequence reset 09:00) after the 2026-08-17 MsgSeqNum rejects. On 2026-10-11 all five Exinity FIX session pairs logged out at 21:00:02 UTC Friday and only logged on at 21:00 Sunday; Nathan asked Exinity to confirm their configured session times, no answer yet.
-Next: Exinity to confirm FIX session times; Daniel/Kate to revisit weekend support when weekend crypto starts.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/p1789215530822229 https://mahifx.slack.com/archives/C0456LSHQQK/p1789909690377469 https://mahifx.slack.com/archives/C0456LSHQQK/p1791752884902819
 
 ### pricing-spikes-widening — Spiky and wide pricing complaints
 status: open · since: 2026-09-01 · last: 2026-10-09
@@ -115,3 +128,4 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1787324960613979 https://ma
 - 2026-09-02 — Corey Pritchard added to the shared channel
 - 2026-09-23 — NOMURA_SW_WB live market
 - 2026-09-28 — Big book XAU Invast to LMAX realignment booked
+- 2026-10-17 — Weekend reboot cascade left hedgers down ~2.5h (P2 RCA)
