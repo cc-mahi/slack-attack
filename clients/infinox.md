@@ -18,7 +18,7 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-15T13:12:17Z
+last_catchup: 2026-10-19T07:09:22Z
 status: active
 ---
 
@@ -65,9 +65,9 @@ Next: Infinox Trading Ops to ask PrimeXM what accounts for the arrival-to-proces
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1790862218777389 https://mahifx.slack.com/archives/C022S6NL82D/p1791251845973249
 
 ### xau-x3-gearing — XAUUSDx3 / Gold3x pricing and abuse
-status: open · since: 2026-07-21 · last: 2026-09-18
+status: watching · since: 2026-07-21 · last: 2026-09-18
 State: Gold3x is built on the post-skew XAUUSD client price, amplifying skew 3x; David and Nathan concluded the fix is an unskewed source (buildGearedPricingNode), and riskPath forms its own mid so analytics.riskpath.formOwnMid would need to be per-instrument. A dedicated Gold3X toxic profile was created and CPs added (09-11..15). On 09-18 Infinox said jitter spikes were landing in clients' favour, so they reverted to a clean 3x and will re-add jitter in a controlled way with Mahi; CH asked for a call before a sales push. Gold3x multiplies LR quantity 3.5x with 100k USD per 5s replenishment. The 07-20 Monday first-tick discrepancy (01:10 vs 01:00) was never closed out.
-Next: code fix for the unskewed source and the joint jitter re-introduction are not confirmed; no activity since 09-18.
+Next: code fix for the unskewed source and the joint jitter re-introduction are not confirmed; quiet since 09-18, downgraded to watching (no concrete pending action seen).
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784673730662679 https://mahifx.slack.com/archives/C01QGUXPKEY/p1789727821608629
 
 ### index-cfd-spikes — LP-driven spikes on indices and CFDs
@@ -86,6 +86,11 @@ status: closed · since: 2026-07-06 · last: 2026-07-06 · closed: 2026-10-15
 State: No activity since 2026-07-06; assumed resolved. Andrew asked whether pricing.adjustmentSignalProcessFlowImbalanceOptimisationParty is still correct per instrument; Kate said the team would review and change where needed. No confirmation of changes was seen.
 Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1783353826108009 https://mahifx.slack.com/archives/C01QGUXPKEY/p1783354691007529
 
+### ld-network-incident — LD hosting network incident
+status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
+State: On 10-16 Liam told Infinox of a networking incident in Mahi's LD environment and advised switching to failover if available. Infinox (Sadiq) saw no pricing disruption and Liam said their environment was mostly unaffected; the hosting provider fixed it that day and Georgia confirmed no abnormality.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792143327385389 https://mahifx.slack.com/archives/C022S6NL82D/p1792150361206559
+
 ## Arc
 - 2026-05-15 — Lazaros Zografopoulos (trading desk, arb classification oversight) left Infinox
 - 2026-05-21 — Extra Heavy LR profile created at CH's request; volume multiplier doubled 05-22
@@ -99,3 +104,4 @@ Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1783353826108009 https://ma
 - 2026-09-21 — Infinox rebrand coverage in trade press
 - 2026-10-07 — Aditya, Mahi's bridge-deal advocate at Infinox, reported leaving for RCX
 - 2026-10-09 — Compass 26.4 upgrade and LDN infra move
+- 2026-10-16 — LD hosting network incident; Infinox unaffected, resolved same day
