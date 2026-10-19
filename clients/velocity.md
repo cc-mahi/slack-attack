@@ -15,7 +15,7 @@ contacts:
   - {name: "Richard Holman", role: "Velocity principal: pricing/hedging policy, commercial terms, prospect flow"}
   - {name: "Russell Hewson", role: "Velocity: sim data requests, Echo login"}
   - {name: "Liv Mottershead", role: "Velocity, joined Richard's team 2026-07", confidence: low}
-last_catchup: 2026-10-16T07:07:15Z
+last_catchup: 2026-10-19T07:10:18Z
 status: active
 ---
 ## Now
@@ -48,10 +48,10 @@ Next: Mahi: apply 5-layer cut on hedge sessions. Client: Virtu ready-to-test not
 Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787725457576859 https://mahifx.slack.com/archives/C05NB72AGR2/p1789653498837279 https://mahifx.slack.com/archives/C05NB72AGR2/p1792079679596159
 
 ### prem-a-feed — Prem and A feed spreads, fills, LR
-status: open · since: 2026-08-26 · last: 2026-10-14
-State: Asia 20c TOB live (Hantec complained 08-26 of 20-35c swings). 09-24 models swapped (CLIENT_PRICE_LDN = prem, B_LDN = A) and client now supplies spread-config CSVs; Compass timezone boundaries shared. A-feed fill rate MTD 57% vs 75% target (12% LiquidityThrottled cancels, refresh raised); 4x SNG LR multiplier cut to 2x with a second tier (09-28); A_CLIENTS_PREMIUM fill price back to passthrough 10-06. Prem price instability and roll widening (10-02) explained as LP-spread protection.
-Next: Mahi: confirm 3dp XAUUSD quotes from Kama/Jump/ZZ do not cause 3dp limit rejects (client says 3dp is accepted), then change config.
-Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787744856529959 https://mahifx.slack.com/archives/C05NB72AGR2/p1790247752525379 https://mahifx.slack.com/archives/C05NB72AGR2/p1791964853372499
+status: open · since: 2026-08-26 · last: 2026-10-16
+State: 10-16 Richard saw prem 12/14c wide against the agreed 9c base; Will D confirmed 9 is the base and said temporary volatility widening is in place that should not be increased, to be checked. Asia 20c TOB live (Hantec complained 08-26 of 20-35c swings). 09-24 models swapped (CLIENT_PRICE_LDN = prem, B_LDN = A) and client now supplies spread-config CSVs; Compass timezone boundaries shared. A-feed fill rate MTD 57% vs 75% target (12% LiquidityThrottled cancels, refresh raised); 4x SNG LR multiplier cut to 2x with a second tier (09-28); A_CLIENTS_PREMIUM fill price back to passthrough 10-06. Prem price instability and roll widening (10-02) explained as LP-spread protection.
+Next: Will D: check the temporary volatility widening and bring prem back to 9c. Mahi: confirm 3dp XAUUSD quotes from Kama/Jump/ZZ do not cause 3dp limit rejects (client says 3dp is accepted), then change config.
+Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787744856529959 https://mahifx.slack.com/archives/C05NB72AGR2/p1790247752525379 https://mahifx.slack.com/archives/C05NB72AGR2/p1792139560936329
 
 ### db-pro — Deutsche Bank Limit Pro passive hedging via Reactive
 status: open · since: 2026-08-18 · last: 2026-10-01
@@ -88,6 +88,11 @@ status: watching · since: 2026-08-25 · last: 2026-09-30
 State: Priced at fixed 32.15 x XAU (rounded from 32.15074656 at client request); 3kg TOB on A feed, depth levels added. Hedge lands 32.14 (covariance vs pricing mismatch, 0.01oz residual below min clip); Mahi changed VaR gate, client accepted small residual. Ops signed off 09-18, client rolled out 09-21. 09-30 Russell asked if hedging as 32 again; thread reply not seen.
 Next: Client: spread protections for KAU; Mahi confirm 32.15 hedge behaviour.
 Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787642723388769 https://mahifx.slack.com/archives/C05NB72AGR2/p1790778810519969
+
+### platform-ops — LD network incident and Compass 26.4 release
+status: closed · since: 2026-10-16 · last: 2026-10-17 · closed: 2026-10-19
+State: LD networking incident 10-16 (client told to fail over where possible) recovered by 11:47 and declared resolved 12:30 UTC; Richard said the NDM/IG issue was unrelated. Compass 26.4 staged 10-16 and released at weekly reboots, announced complete 10-17.
+Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1792143214303699 https://mahifx.slack.com/archives/C05NB72AGR2/p1792164118298939
 
 ### xau-crosses — XAU/CNH and XAU/SGD crosses
 status: closed · since: 2026-09-11 · last: 2026-09-24 · closed: 2026-10-15
