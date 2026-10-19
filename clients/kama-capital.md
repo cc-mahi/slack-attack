@@ -16,14 +16,26 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-10-16T07:06:23Z
+last_catchup: 2026-10-19T07:09:24Z
 status: active
 ---
 
 ## Now
-Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot has about a month left (term counts from the 5 Aug go-live; Will, 12 Oct) with post-pilot terms recorded ready to send. Open: MAS filled-after-cancel reconciliation and PXM timeout handling; Friday-close risk carry under Broker First.
+Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot has about a month left (term counts from the 5 Aug go-live; Will, 12 Oct) with post-pilot terms recorded ready to send. Compass 26.4 released 17 Oct; XAUUSD pulled from MAS on 16 Oct over market-order rejects. Open: MAS filled-after-cancel reconciliation and PXM timeout handling; Friday-close risk carry under Broker First.
 
 ## Streams
+
+### mas-xau-removal — XAUUSD pulled from MAS Markets
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: On 16 Oct Moe asked Kate to stop sending XAUUSD to MAS Markets (standard feed only, not toxic); Kate removed it from the hedging markets straight away but the liquidity-pool (STP) side cannot drop one symbol, so she offered to set everything to internalise while the SOR is bounced. Moe chose to disable gold on Kama's side (switched off the price) and said it is easier if one symbol can be disabled per LP; Kate will look at restructuring the pool setup to allow that. Reason given: MAS rejecting market orders, causing losses in the Compass book. Kate asked for more detail on why.
+Next: Moe to give detail on MAS market-order rejects; Kate to see whether pools can disable one symbol per LP.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792154269472349 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792160709717089
+
+### brokered-flow-review — Brokered vs internalised flow review (internal)
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: Kate's 9-16 Oct execution-quality review (internal) found most internalisable brokered flow is roll, twilight and Sunday/Monday open. Open brokered $145M and kept $26k ($182/M), almost all EURJPY with spreads slightly wider than Scope; roll/twilight brokered $783M XAUUSD and kept $14.2/M versus about $1.7/M if internalised, so brokering is right there. CP 100079_n/a was tagged arbitrageur then brokering 7-9 Oct and untagged before 12 Oct; it is now internalised on Catch-All at about -$71/M at 1m on $99M XAUUSD, no manual change, watching for re-tag. 40874_30033000 is the only steady internalise candidate (about $1k/week), to watch a couple more weeks. Andrew queried why Broker First internalises some flow at lower yield; Kate: internalised pays Mahi spreads, brokered pays LP spreads, and all rules use passthrough fill price. Andrew fed the lesson into the routine checks (PR 153 merged) so positive markouts need session/regime review before rehabilitation advice.
+Next: Kate to finish instrument/timezone/CP breakdown; watch 100079_n/a re-tagging and 40874_30033000.
+Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1792160321472259 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792165670366029
 
 ### lp-pool-expansion — LP pool and hedging markets, KL/KS connectors
 status: open · since: 2026-09-21 · last: 2026-10-15
