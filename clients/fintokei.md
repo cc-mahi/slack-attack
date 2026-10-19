@@ -16,12 +16,12 @@ contacts:
   - {name: "Lukas Sedlacek", role: "Fintokei/Purple Technology risk; suspicious-client reviews"}
   - {name: "Kristof Heger", role: "Fintokei/Purple Technology; order-fill queries"}
   - {name: "Roman Komurka", role: "Fintokei/Purple Technology; pricing/skew opinions", confidence: low}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:08:32Z
 status: active
 ---
 
 ## Now
-Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 server clone (feeder and bridge copy) requested 2026-10-12.
+LD-environment networking incident on 2026-10-16 (fleet-wide, hosting provider investigating) hit Fintokei connectivity; Liam reported signs of recovery at 10:46 UTC, no RCA or all-clear seen. Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 server clone (feeder and bridge copy) requested 2026-10-12.
 
 ## Streams
 
@@ -54,6 +54,12 @@ status: open · since: 2026-09-28 · last: 2026-10-01
 State: CFD pricing is built from a single LP feed with no second source, so a feed drop blanks the book. Kate proposed normalisation (align a second LP onto the primary) and optional config to force the model indicative at the 20:59:30 weekly stop; offered a call or setup on the beta model first. Adam (2026-10-01) replied they will think about it but want the stuck SL/TP issue (no-price-cancels) addressed first; no decision on call / beta trial.
 Next: Fintokei to decide on call / beta trial after SL/TP investigation.
 Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1790605312090849 https://mahifx.slack.com/archives/C08QWKFARDL/p1790846139509429?thread_ts=1790605312.090849
+
+### ld-network-incident — fleet-wide LD networking incident, 2026-10-16
+status: watching · since: 2026-10-16 · last: 2026-10-16
+State: Liam Cordelle announced a networking incident in the LD environment on 2026-10-16 (~09:31 UTC), advising clients with a failover to switch to it. Adam Foltyn asked which connections were affected and whether it was isolated to Fintokei; Liam said it is fleet-wide, all LD clients affected to some extent, with the hosting provider investigating. At ~10:46 UTC Liam reported signs of recovery. No all-clear, root cause or Fintokei-specific impact summary posted yet.
+Next: Mahi (Liam) to post all-clear, RCA and Fintokei-specific details.
+Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1792143076144139 https://mahifx.slack.com/archives/C08QWKFARDL/p1792147616452629
 
 ### compass-26-4-upgrade — Compass 26.3 to 26.4 and related deploys
 status: watching · since: 2026-10-08 · last: 2026-10-13
@@ -102,3 +108,4 @@ Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1788906654679089 https://ma
 - 2026-07-12 — New LSB pricing model live on z-suffix symbols at Sunday open
 - 2026-08-26 — Zero-spread misconfiguration on all z FX symbols found and fixed
 - 2026-10-11 — Compass 26.4 live at weekend restart
+- 2026-10-16 — Fleet-wide LD networking incident affects Fintokei connectivity; recovering by midday
