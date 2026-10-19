@@ -17,15 +17,33 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-10-16T07:06:21Z
+last_catchup: 2026-10-19T07:08:36Z
 status: active
 ---
 ## Now
 GTC is live and ramping: all FX majors/crosses plus XAGUSD and XAUUSD B Book flow route to Mahi over 7 OneZero hubs (A and B sessions each), with an A Book account live since 2026-10-06 (hedging to HRP LPs only).
 Main risk is load: cent accounts drive ticket rates (dist6 hit ~4k orders/s on 2026-10-15) and riskPath stalls; the riskPath fix is approved and was rescheduled to the 2026-10-15 12:15-14:45Z window.
-In flight: Centroid connection (creds sent 10-13), crypto (BTC/ETH, Binance blocked by Beeks IP), 24/7 session switch with a restart planned 2026-10-16 17:00 NY.
+In flight: Centroid connection (creds sent 10-13), crypto (BTC/ETH, Binance blocked by Beeks IP), XAUUSD testing from the PXM xcore sessions (counterparty tag fix pending). The 24/7 session switch is done after a 2026-10-17 weekend logout hiccup.
 
 ## Streams
+
+### crypto-24x7 — Crypto onboarding and 24/7 sessions
+status: open · since: 2026-09-15 · last: 2026-10-17
+State: Crypto is next after gold. GTC's core BTC/ETH LP is Binance (pricing only; GTC confirmed it does not hedge or trade via it), so Mahi is connecting directly; the HRP Route28 connection was whitelisted both sides and confirmed established 2026-10-15. cryptoMarketData1 fails because Binance returns HTTP 451 for trading-1/2's Beeks public IP range (US-registered); Liam and Isaac agreed the preferred fix is to subscribe to Binance from mc-apnortheast-1 and proxy it to mahi-central-ln via Fabric, rather than the Beeks egress ticket. 24/7 sessions: GTC switched its OZ session times to 24/7 on 2026-10-16 (Mahi's global change, Sat 10:59 to Sat 10:01 NY, bounced after roll); MAHI_GOLD (24/7) tXAUUSD was added the same day. Mahi's side was not actually applied until the morning of 2026-10-17, so OZ sessions and PXM were logged out ("Logon attempt not within session time") until Isaac applied it and re-synced FIX sequence numbers (resolved 10-17, GTC confirmed). GTC applies the XC/provider-level 24/7 change with its EOD restart. 24/7 XAUUSD is the upsell; a second London cluster to stagger restarts was floated.
+Next: get mc-apnortheast-1 consuming Binance and proxied to mahi-central-ln (Beeks egress ticket is the fallback); GTC to confirm session changes on PXM and Centroid.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791975353055319 https://mahifx.slack.com/archives/C0AKRP8C049/p1792053281436189 https://mahifx.slack.com/archives/C0AKRP8C049/p1792147010645739 https://mahifx.slack.com/archives/C0AKRP8C049/p1792230082764779
+
+### oz-hub-connectivity — OneZero hub sessions, disconnects and tags
+status: open · since: 2026-08-17 · last: 2026-10-17
+State: GTC keeps adding OZ hubs because OZ fears it cannot handle their trade rate (7th hub requested 2026-10-09, in progress). Recurring session problems: OZ-2/OZ-3/OZ-4 hub drop-outs and "Session time ended" logouts (fixed by aligning all OZ sessions to Sun 17:00-Fri 17:30 NYT; OZ-4 outage 22-24 Sep fixed by a hub bridge restart), missing counterparty tags on OZ-4 (2026-09-08) and OZ PTR sessions disconnecting (2026-10-06, Mahi switched PTR analytics off). New-hub sessions needed whitelisting plus a cross-connect with several delays: OZ-6 (requested 2026-09-23) needed a Beeks NAT/routing change and was last pointed at the new ports on 10-06 with no confirmation in thread; OZ-7 (requested 10-09) details were sent 2026-10-14 and GTC acknowledged 10-15; after the 24/7 session-time fix on 2026-10-17 all sessions including GTC-A-Orders-OZ-7 were reported connected.
+Next: GTC to confirm OZ-6 working; GTC weekly call is the forum.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786969418265589 https://mahifx.slack.com/archives/C0AKRP8C049/p1792228566542629
+
+### pxm-xau-counterparty — XAUUSD via PXM xcore sessions, counterparty tag
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: GTC tested XAUUSD from its PXM xcore A and B order sessions on 2026-10-16 (0.01 and 1oz test trades from tag 50001); Mahi found and closed them and confirmed a closing trade, then GTC opened from the B-Book session. Test trades arrived tagged ABOOK; Isaac found the counterparty missing on GTC-B-Orders-PXM because the bridge sends the Parties block with PartyRole 452=1 (Executing Firm) where Mahi reads PartyRole 3 (Client ID), so orders fill but cannot be attributed for risk classification and reporting. GTC also asked to route VIP Gold (XAUUSD.v) to Swift; Isaac asked whether this is the new large 100-lot client setup, no answer yet.
+Next: GTC to change the PXM bridge to send the counterparty with 452=3 and confirm; GTC to answer whether XAUUSD.v is the 100-lot client.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1792140498426039 https://mahifx.slack.com/archives/C0AKRP8C049/p1792159762972949
 
 ### dist-gateway-capacity — Distribution gateway load from cent/small-ticket flow
 status: open · since: 2026-09-09 · last: 2026-10-15
@@ -44,18 +62,6 @@ status: open · since: 2026-10-05 · last: 2026-10-15
 State: A Book went live 2026-10-06 on one account, hedging via HRP markets only (hybridHedger markets switched from Finalto/Swift; Finalto/Swift still the two LPs in the hedger market, reason to be confirmed). 2026-10-12: flow from tag 52146947 was internalised though GTC expected STP to HRP; hedger cleared only 267oz, GTC closed 2100oz manually at HRP_MEX (avg 4177.43) and positions were adjusted in Compass. Thread outcome (resolved 2026-10-12): the hedger had bought 267oz (212 Swift, 55 Finalto), Mahi closed those and booked a 2100oz position adjustment at HRP_MEX 4177.43 to match GTC's manual close; tags 82025643 and 82025639 (moved to A Book 10-07/10-09, still STP to Mahi) were also switched to STP to HRP LPs. Kate told GTC to wait for Mahi to confirm STP whitelisting before routing a tag; the reason the hedger cleared only 267oz was still being looked at. 2026-10-14 GTC asked for percentage hedging split (A LP 30% / B LP 70%); Isaac replied a portion of a book's flow can go to a hedged book, split by counterparty, instrument or other factors, a new client with 1000-lot limit is being onboarded via risk-split from A, and hybridHedgerSI1/arbHedgerSI1 exist. HRP_SOLID and HRP_JANESTREET_FA streams added; SWIFT XCUUSD prices arrive per 100-unit lots (asked for per-unit).
 Next: GTC to give the test-account counterparty so Mahi can test the new hedging book structure (asked 2026-10-15); agree the hedge-percentage setup with GTC; Swift to fix XCUUSD unit (Swift removed from reference markets 10-06, request logged on the wiki 10-12).
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791202994256859 https://mahifx.slack.com/archives/C0AKRP8C049/p1792064520530769
-
-### crypto-24x7 — Crypto onboarding and 24/7 sessions
-status: open · since: 2026-09-15 · last: 2026-10-15
-State: Crypto is next after gold. GTC's core BTC/ETH LP is Binance (pricing only; GTC confirmed it does not hedge or trade via it), so Mahi is connecting directly; the HRP Route28 connection was whitelisted both sides and confirmed established 2026-10-15 12:39Z. cryptoMarketData1 fails because Binance returns HTTP 451 for trading-1/2's Beeks public IP range (US-registered); Liam and Isaac agreed the preferred fix is to subscribe to Binance from mc-apnortheast-1 (same AWS region) and proxy it to mahi-central-ln via Fabric for London clients, rather than the Beeks egress ticket first proposed. Isaac proposed switching all A and B connections to 24/7 (Sat 10:59 to Sat 10:01 NY, 58 min server-reboot gap); B OZ-5 already runs it, GTC agreed an EOD restart 2026-10-16 17:00 NY. 24/7 XAUUSD is the upsell; a second London server cluster to stagger restarts was floated.
-Next: get mc-apnortheast-1 consuming Binance and proxied to mahi-central-ln (Beeks egress ticket is the fallback); GTC to confirm session changes on PXM, Centroid and OZ 1-7; Mahi restart 2026-10-16 17:00 NY.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791975353055319 https://mahifx.slack.com/archives/C0AKRP8C049/p1792053281436189 https://mahifx.slack.com/archives/C0AKAPLU78W/p1791980737875259 https://mahifx.slack.com/archives/C0AKRP8C049/p1792064367521549
-
-### oz-hub-connectivity — OneZero hub sessions, disconnects and tags
-status: open · since: 2026-08-17 · last: 2026-10-15
-State: GTC keeps adding OZ hubs because OZ fears it cannot handle their trade rate (7th hub requested 2026-10-09, in progress). Recurring session problems: OZ-2/OZ-3/OZ-4 hub drop-outs and "Session time ended" logouts (fixed by aligning all OZ sessions to Sun 17:00-Fri 17:30 NYT; OZ-4 outage 22-24 Sep fixed by a hub bridge restart), missing counterparty tags on OZ-4 (2026-09-08) and OZ PTR sessions disconnecting (2026-10-06, Mahi switched PTR analytics off). New-hub sessions needed whitelisting plus a cross-connect with several delays: OZ-6 (requested 2026-09-23) needed a Beeks NAT/routing change and was last pointed at the new ports on 10-06 with no confirmation in thread; OZ-7 (requested 10-09) details were sent 2026-10-14 and GTC acknowledged 10-15, needing an EOD restart; not yet confirmed connected.
-Next: GTC to connect and confirm OZ-7 (and OZ-6 working) after the EOD restart; GTC weekly call is the forum.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786969418265589 https://mahifx.slack.com/archives/C0AKRP8C049/p1792050071553529
 
 ### pricing-skew-tuning — Skew, spread and last-look tuning
 status: open · since: 2026-08-19 · last: 2026-10-15
