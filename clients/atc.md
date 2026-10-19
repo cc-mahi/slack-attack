@@ -13,7 +13,7 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:07:46Z
 status: active
 ---
 ## Now
@@ -23,6 +23,12 @@ Compass moved to 26.4 on the 10-10/11 weekend, which switched on PSM widening/ti
 Volumes are well down on early 2026; ATC is sensitive to spreads, depth and fill quality on gold.
 
 ## Streams
+
+### beeks-ld-incident — Beeks LD networking incident, ATC failover
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: On 2026-10-16 a networking incident in the Beeks-hosted LD environment hit ATC's connectivity; Dave reported connection issues on the spotex MT5 order and price sessions. Mahi asked ATC to switch to failover, saw recovery signs, and at ~12:07 BST Liam said it was safe to switch back (no official Beeks confirmation yet) and later that the issue was reported resolved. Malik asked whether failback is automatic; Liam said it depends on ATC's failover setup.
+Next: Beeks root-cause / official confirmation; confirm ATC failed back and sessions are healthy.
+Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1792143086471619 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792150199815879
 
 ### prop-launch — ATC Prop firm: servers, rules, go-live
 status: open · since: 2026-08-05 · last: 2026-10-14
