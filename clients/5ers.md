@@ -18,13 +18,19 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:07:40Z
 status: active
 ---
 ## Now
-Funded flow runs through the YourBourse X-Connect (since 2026-08-17/25). The 2026-09-25 NIC-degradation incident is fixed on the optic, but the server still runs on the backup NIC; the move back to primary was pushed to a later weekend (window TBC) and Beeks still owes an answer on the unexplained 09-28 reboot. Funded XC limit-order cancels are mostly cured (YB set SEND_ORIGINAL_REQUEST_PRICE=TRUE 2026-10-09, fills ~99%); 5ers agreed 10-13 to market orders but YB says MT5 is already market and the remaining limits come from the Trade Server flow, so it awaits confirmation. Demo flow on Compass is stalled on 5ers' reluctance to pay the extra fee.
+Funded flow runs through the YourBourse X-Connect (since 2026-08-17/25). The 2026-09-25 NIC-degradation incident is fixed on the optic, but the server still runs on the backup NIC; the move back to primary was pushed to a later weekend (window TBC) and Beeks still owes an answer on the unexplained 09-28 reboot. Funded XC limit-order cancels are mostly cured (YB set SEND_ORIGINAL_REQUEST_PRICE=TRUE 2026-10-09, fills ~99%); 5ers agreed 10-13 to market orders but YB says MT5 is already market and the remaining limits come from the Trade Server flow, so it awaits confirmation. A Beeks London network outage on 2026-10-16 dropped sessions 10:10-11:35 UK; 5ers failed over and returned to the XC that afternoon, RCA still owed. Demo flow on Compass is stalled on 5ers' reluctance to pay the extra fee.
 
 ## Streams
+
+### beeks-ld-outage-1016 — 2026-10-16 Beeks London network outage
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: Between ~10:10 and 11:35 UK on 2026-10-16 a network outage across Beeks' London campus intermittently dropped 5ers' sessions, causing rejections, 3s+ stale pricing and cTrader gaps (5ers' second such incident; Andreas objected to switching pricing/execution mid-session). Kate advised failover; cTrader has no alternate price source so she suggested adding a YourBourse failover for it. Stable from ~11:35, 5ers switched pricing and execution back to the XC at 13:50 UK and reported normal. YB flagged six stale FIX orders and two execution timeouts as possible unhedged exposure; Mahi (Kate) and YB both confirmed none reached Mahi's engine, so nothing was filled or unhedged.
+Next: Beeks to deliver the full RCA, then Kate sends 5ers an incident report; 5ers to consider a cTrader price failover.
+Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1792143475688329 https://mahifx.slack.com/archives/C07AQJS4E80/p1792152998534239 https://mahifx.slack.com/archives/C0AUF6LBZ0Q/p1792158852575859 https://mahifx.slack.com/archives/C07AQJS4E80/p1792155150067909
 
 ### xc-order-cancels — Funded XC limit-order cancels and rejects
 status: open · since: 2026-09-11 · last: 2026-10-13
