@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:10:34Z
 status: active
 ---
 
@@ -31,6 +31,12 @@ Argamon is moving connectivity from Centroid to PrimeXM. Compass 26.4 is on LDN/
 Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
+
+### lucera-fill-delay — Lucera insti fill report delayed 42ms (HARD_TIMEOUT)
+status: open · since: 2026-10-18 · last: 2026-10-19
+State: Levi (Argamon) saw an EUR/USD Lucera order filled over 120ms after placement and wants the expiry to match Lucera's 90ms. Nathan explained the hard timeout is per FIX session (hardTimeoutLength in fixClientConnection, currently 80ms on this session) and a HARD_TIMEOUT comment means it fired and the order was filled because the pool price still crossed. The fill was at 80ms in Compass (21:39:44.733) but the execution report went out at .775, a 42ms internal delay on Mahi/Toa's side; Levi needs the FIX messages for Lucera, which Nathan supplied.
+Next: Nathan to find the cause of the 42ms delay before the execution report was sent.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792362870440649 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792375513540999
 
 ### insti-ldn-pricing — LDN insti pricing indicative / reference markets
 status: open · since: 2026-08-17 · last: 2026-10-15
@@ -87,8 +93,8 @@ Next: Toa/Mahi to confirm root cause of the recurring Sunday crypto pauses.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1787099040590799 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789286838789979 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789997451357139
 
 ### xauusd-hedging — XAUUSD hedging, news widening and NFP loss
-status: open · since: 2026-08-14 · last: 2026-09-17
-State: XAUUSD risk is held with an arb plus hybrid backstop (arb did over 70% of hedge volume on 08-20; max VaR for the hybrid raised to 8k, Argamon happy with up to $20k; VaRClearance-EOD rule added 08-17). The 09-04 NFP loss (about 30k VaR) was RCA'd: heavy decay, clients closed positions before hedge (52.5m internalised, 13.59m filled vs 16.55m cancelled). After the loss and Jem's push to broker over news, post-news widening on 100-weighted events went from 90s to 180s, news-based MWMS added, and "fill at WSS" was turned off on 09-17 with Jem's approval; Argamon happy with the FOMC result.
+status: watching · since: 2026-08-14 · last: 2026-09-17
+State: No activity since 2026-09-17; downgraded to watching, Argamon was happy after FOMC. XAUUSD risk is held with an arb plus hybrid backstop (arb did over 70% of hedge volume on 08-20; max VaR for the hybrid raised to 8k, Argamon happy with up to $20k; VaRClearance-EOD rule added 08-17). The 09-04 NFP loss (about 30k VaR) was RCA'd: heavy decay, clients closed positions before hedge (52.5m internalised, 13.59m filled vs 16.55m cancelled). After the loss and Jem's push to broker over news, post-news widening on 100-weighted events went from 90s to 180s, news-based MWMS added, and "fill at WSS" was turned off on 09-17 with Jem's approval; Argamon happy with the FOMC result.
 Next: Daria owes Argamon a written review of the NFP loss; watch the next big news events.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788530007371599 https://mahifx.slack.com/archives/C06U76A7ZJR/p1789609500783629
 
