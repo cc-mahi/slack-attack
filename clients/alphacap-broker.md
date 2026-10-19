@@ -11,7 +11,7 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:07:41Z
 status: active
 ---
 
@@ -44,12 +44,6 @@ State: Rapp flagged spikes at market open and rollover. Cameron Hughes added a s
 Next: Cameron Hughes to report backtest results and tell Rapp when changes are live so they can fix MT chart issues.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790006846789019 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790671797926079 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790699284890299 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791215036925529
 
-### tick-data-feed — Tick-level CFD data for ACG risk tool
-status: open · since: 2026-07-17 · last: 2026-07-17
-State: Rapp wants historical and live tick-by-tick CFD data (including .s feeds) for a client-facing analytics tool. Liam Cordelle: backfill from S3 Parquet (about 12 months), live needs a new or siphoned FIX connection. No reply or thread since the 2026-07-17 call note; Cameron Hughes owed Rapp a call time and an answer on the connection.
-Next: Cameron Hughes to confirm with Rapp whether this is still wanted and decide Parquet vs Athena delivery.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784280180924189 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784281130919229
-
 ### alert-suppression — Monitoring noise before hedgers go on
 status: watching · since: 2026-08-17 · last: 2026-09-10
 State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
@@ -61,6 +55,11 @@ status: watching · since: 2026-08-24 · last: 2026-09-03
 State: fastMT had not replied (as of 2026-08-24) on trading accounts and counterparty tags. Rapp said (09-02) some corporate-name accounts have retail clients trading under an LPOA, coming from the prop side, and must be treated as retail; George says Mahi holds profiles per prop trader. Cameron Hughes asked Rapp to create MT5 groups for both cases and plans execution tailoring per trading account; exact classification may be hard if counterparty tags do not carry over. No outcome seen since.
 Next: Rapp and fastMT to confirm MT5 groups; Cameron Hughes to match prop profiles to live accounts.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1787584267363759 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1788421751250899
+
+### tick-data-feed — Tick-level CFD data for ACG risk tool
+status: closed · since: 2026-07-17 · last: 2026-07-17 · closed: 2026-10-19
+State: Rapp wanted historical and live tick-by-tick CFD data for a client-facing analytics tool; Liam Cordelle proposed an S3 Parquet backfill and a new FIX connection for live. No activity since 2026-07-17; assumed dropped.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784280180924189 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784281130919229
 
 ### instrument-coverage — Argamon symbol coverage and subscriptions
 status: closed · since: 2026-04-29 · last: 2026-10-12 · closed: 2026-10-15
