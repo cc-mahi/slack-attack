@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-16T07:05:40Z
+last_catchup: 2026-10-19T07:08:36Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### open-latency-cancels — Weekend release and post-restart open latency cancels
+status: open · since: 2026-10-16 · last: 2026-10-18
+State: Compass 26.4 was announced to Go on 2026-10-16 (performance, stability, UI) and completed 2026-10-17 at the Saturday reboot. At the 2026-10-18 21:01 UTC open, 57 orders in the first second were cancelled by the internal latency safeguard ("excessive internal latency") because the order-handling process was still warming up after the weekend restart; normal by 21:01:02, no further cancels. Nathan raised a dev ticket on why the post-restart warm-up did not prepare the process; Will accepted, minimal impact.
+Next: Mahi dev to review why warm-up failed to cover the open.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792164137750009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792361497379359
 
 ### channel-refactor — Regional channel/book refactor and gateway latency
 status: open · since: 2026-08-27 · last: 2026-10-15
@@ -70,8 +76,8 @@ Next: Mahi to decide whether to raise the MINT feed finding with Go; inventory b
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787628603910739 https://mahifx.slack.com/archives/CNF3WPNSK/p1789949763533859
 
 ### xau-pricing-skew — Gold/FX pricing smoothness, skew and failover
-status: open · since: 2026-06-01 · last: 2026-09-17
-State: 2026-08-18 call: Kieran happy with skew sizes and slippage complaints down but wants smoother price; Go publishes to MetaQuotes every ~80ms while fills use live Compass price, which flickers; Daria suggested throttling publishing, Nathan investigating flicker before skew goes up again. 08-19 Isaac cut benchmark spread skew weight on FX after Mac's AUDCAD jumps (flow-price-thresh). 09-15 call: client price went offline and failover to the continuity pool published huge spikes; Kieran wants no price unless the client-price LPs are online; Isaac removed MAHI_CONTINUITY_NYC from the continuity pool meanwhile. 09-17: USDJPY indicative for ~8 min at open was Wide Spread Suppression (max 0.25 vs 0.267).
+status: watching · since: 2026-06-01 · last: 2026-09-17
+State: 2026-08-18 call: Kieran happy with skew sizes and slippage complaints down but wants smoother price; Go publishes to MetaQuotes every ~80ms while fills use live Compass price, which flickers; Daria suggested throttling publishing, Nathan investigating flicker before skew goes up again. 08-19 Isaac cut benchmark spread skew weight on FX after Mac's AUDCAD jumps (flow-price-thresh). 09-15 call: client price went offline and failover to the continuity pool published huge spikes; Kieran wants no price unless the client-price LPs are online; Isaac removed MAHI_CONTINUITY_NYC from the continuity pool meanwhile. 09-17: USDJPY indicative for ~8 min at open was Wide Spread Suppression (max 0.25 vs 0.267). Downgraded to watching: no activity since 09-17.
 Next: Nathan to follow up on throttle/flicker root cause and the no-failover pricing change; no outcome seen.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1787014679025069 https://mahifx.slack.com/archives/CNF3WPNSK/p1789447371722669 https://mahifx.slack.com/archives/C09J1DP2QQH/p1789626541976419
 
