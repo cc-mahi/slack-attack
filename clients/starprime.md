@@ -17,7 +17,7 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:09:27Z
 status: active
 ---
 
@@ -25,8 +25,27 @@ status: active
 Relationship is fragile after four incidents in September (two Beeks/PXM connectivity outages, an NFP over-hedge, and old-price rejections on 18 Sep that made them route flow away for about three days); Andrew Morgan promised an improvement review and said more issues likely lose the client.
 Pricing latency is healthy since adaptive was cut on 22 Sep, but the pricer-by-asset-class split, the deeper Aeron/CEP fixes and BMSL changes are still outstanding.
 Growth: RBF (FINPRIME/Vantage) B-book white-label went live 6 Oct with first flow 9 Oct, and XAG on the SI model goes live Monday 19 Oct.
+Compass 26.4 went out over the 17-18 Oct weekend; on Monday 19 Oct blacklisted tags were still reaching ISPRIME (fill rate about 10%) until Nathan Burch reverted and fixed the tag list; an urgent XAUUSD spread widening on 16 Oct still owes Jay details.
 
 ## Streams
+
+### tag-blacklist-ux — Counterparty tag blacklist scale and wildcard matching
+status: open · since: 2026-07-31 · last: 2026-10-19
+State: The reference.marketSupport.tagList grows without bound, is slow to load and edit, and Samin asked Dev for a more efficient mechanism (Nathan Burch passed it to Dev on 14 Oct); Justin Young mocked up a Compass Tag List Editor that Samin called much cleaner, aiming for the next release. On 19 Oct Samin reported blacklisted tags still hitting ISPRIME, with fill rates about 10%. Nathan found the key allows only one block per market (whitelist or blacklist) and Compass had rejected the whole list since a 12 Oct change; live processes kept the last valid list until the weekend restarts cleared it, so no counterparty blacklists were live for the SI hedgers. Nathan reverted to the pre-12 Oct state, re-added the later tags with all whitelist blocks removed, and Samin removed the remaining whitelist blocks. Wildcards are not supported, so the `*SXR_5038*` entry has no effect and each SXR_5038 tag must be blacklisted individually per market; the earlier Kama SXR_5038 case is explained by this.
+Next: Samin to add individual SXR_5038 tags to each market's blacklist; Justin Young to ship the tag list editor; Mahi to consider validation that surfaces a rejected list instead of silently keeping the old one.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1785477517683469 https://mahifx.slack.com/archives/C096422RPKK/p1791956484365609 https://mahifx.slack.com/archives/C096422RPKK/p1792383801728039
+
+### compass-26-4-release — Compass 26.4 weekend release and hedger start-up check
+status: open · since: 2026-10-16 · last: 2026-10-18
+State: Compass 26.4 was staged on 16 Oct and went live at the weekend reboots (client told the same day). Ahead of it the pre-check said hybridHedgerSI1 would not start because a LP-reducing rule whitelisting B2PRIME_RETAIL had no market for XAGUSD; Cameron Hughes fixed it by splitting Metals into separate profile definitions and removing a leftover whitelist and the old Metals override, and Arun re-ran the pre-check. Lee Butts first said the start-up check came from Argamon position-moving work (MahiMain PR 1205), then on 18 Oct said 26.4 did not change rule skipping and asked Arun for the original exception and precheck build number; if none, the single Metals group could stay. The 26.4 tag list validation (one block per market) broke StarPrime's blacklists, see tag-blacklist-ux.
+Next: Arun to send Lee the first precheck exception and build number; Cameron Hughes to decide whether to keep the split Metals profiles.
+Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1792157236841079 https://mahifx.slack.com/archives/C096422RPKK/p1792164106932039 https://mahifx.slack.com/archives/C095MJHC68J/p1792353921178369
+
+### xau-pricing-config — XAUUSD reference pricing and config-change process
+status: open · since: 2026-08-19 · last: 2026-10-16
+State: A pricing config change on 19 Aug made pricing spike (merged liquidity tiers) and was reverted; Samin asked that future changes go to BETA first, then PROD, and agreed. On 20 Aug a $10 XAUUSD spread at market close on CLIENT_PRICE_INSTI led to a timezone-scoped sanity-check config, and Samin asked for a roll backtest, no result visible. On 16 Oct Jay raised an urgent XAUUSD spread widening while Samin was off desk; Liam Cordelle and Cameron Hughes checked, pricing was fine again within about 15 minutes, and Jay asked for a headline on what happened. Cameron promised details; no cause is visible in the channels.
+Next: Mahi (Cameron Hughes) to send Jay/Samin the cause of the 16 Oct widening; Daria Horton to report the roll backtest.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787126774501579 https://mahifx.slack.com/archives/C096422RPKK/p1787206299160379 https://mahifx.slack.com/archives/C096422RPKK/p1792144153419059 https://mahifx.slack.com/archives/C096422RPKK/p1792145021644979
 
 ### si-hedging — SI model, hedger NOP restarts and LP position reconciliation
 status: open · since: 2026-08-17 · last: 2026-10-14
@@ -39,12 +58,6 @@ status: open · since: 2026-08-19 · last: 2026-10-14
 State: Cancels and rejects on 19 Aug (pricer out of sync after restart, trading-1 memory pressure; Isaac told Jay it was specific to StarPrime's box balance) and the 18 Sep old-price rejects trace to pricer saturation: adaptive reference pricing (AMTOBPN, enabled 14 Aug) made CEP load scale with tick rate, node-1 on trading-2 was overloaded, an Aeron image-health bug and CEP hotspotting made it worse, and a pricer restart tipped it over. Rebalancing to node-0 and removing adaptive on FX (22 Sep, XAGUSD kept on at first) cut pricer CPU and worst cycles sharply, and the weekly latency sweep rates StarPrime OK from 7 Oct. Liam Cordelle, who says he flagged pricer splitting last December and since, has pricer performance work in hand and judged moving half the fixMD processes to trading-2 risky. On 13 Oct instruments were trimmed to the 14 actually filled (effective at the Saturday reboot); on 14 Oct Samin asked to defer further pricing load reduction to next week for his input, and Isaac first said load was sorted then corrected that BMSL changes are still needed. Pricer-by-asset-class split, the Aeron fix and the CEP work are still pending.
 Next: Mahi dev ships the asset-class split and controlled-release fixes; BMSL changes; Samin to give input on load reduction.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787131381126679 https://mahifx.slack.com/archives/C095MJHC68J/p1789749804489599 https://mahifx.slack.com/archives/C095MJHC68J/p1790035269255469 https://mahifx.slack.com/archives/C095MJHC68J/p1791967057451979
-
-### tag-blacklist-ux — Counterparty tag blacklist scale and wildcard matching
-status: open · since: 2026-07-31 · last: 2026-10-14
-State: The reference.marketSupport.tagList grows without bound, is slow to load and edit, and Samin asked Dev for a more efficient mechanism (Nathan Burch passed it to Dev on 14 Oct). Justin Young mocked up a Compass Tag List Editor (one market, paste a list of tags), Samin called it much cleaner, and Justin will build it on its own page and try for the next release. Separately, on 14 Oct a Kama counterparty (SXR_5038_n/a) was still receiving flow despite a blacklist attempt: Rory King found the blacklist only stops that tag being used when flow goes to the LP, doubts wildcards work and suggested blacklisting the specific tags, while Samin wants wildcards such as SXR_5038* so new account suffixes are covered; unresolved.
-Next: Justin Young to ship the tag list editor; Rory King to confirm whether wildcards work in tagList and settle the Kama case.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1785477517683469 https://mahifx.slack.com/archives/C096422RPKK/p1791956484365609 https://mahifx.slack.com/archives/C096422RPKK/p1791964255368519 https://mahifx.slack.com/archives/C096422RPKK/p1791978927043879
 
 ### access-data-requests — Access provisioning and ad-hoc data/report requests
 status: open · since: 2026-08-18 · last: 2026-10-14
@@ -105,12 +118,6 @@ status: watching · since: 2026-08-20 · last: 2026-09-02
 State: Samin's reference call credits the platform highly but names GUI polish and Mahi-internal wording in the config editor as weak, plus a learning curve for new staff. Price Forensics flat-lining was a cancel-price bug fixed 20 Aug, and a large dashboard release went to PROD on 2 Sep. Suggested follow-ups: refresh timeline, a walkthrough for new staff, KB articles.
 Next: Mahi to share the dashboard refresh timeline and offer a walkthrough session.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787207208884779 https://mahifx.slack.com/archives/C095MJHC68J/p1788275053949079 https://mahifx.slack.com/archives/C095MJHC68J/p1788337882063819
-
-### xau-pricing-config — XAUUSD reference pricing and config-change process
-status: watching · since: 2026-08-19 · last: 2026-08-20
-State: A pricing config change on 19 Aug made pricing spike (merged liquidity tiers) and was reverted; Samin asked that future changes go to BETA first, then PROD, and agreed. On 20 Aug a $10 XAUUSD spread at market close on CLIENT_PRICE_INSTI led to a timezone-scoped sanity-check config with MAHI_LP_11 still sole reference elsewhere; Samin asked for a backtest of the setting during the roll and referencing ISPRIME_VIP/KAMA_RETAIL/EDGEWATER. No result is visible in the channels.
-Next: Daria Horton to report the roll backtest; no activity since 2026-08-20.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787126774501579 https://mahifx.slack.com/archives/C096422RPKK/p1787206299160379
 
 ## Arc
 - 2026-05-13 — Internal: StarPrime is owned by Vantage (David Cooney confirmed).
