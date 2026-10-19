@@ -12,7 +12,7 @@ channels:
 contacts:
   - {name: "Gerard McConnell", role: "Alpha Capital, routing / platform / prop-product contact", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:07:42Z
 status: active
 ---
 
@@ -22,6 +22,12 @@ Open this week: confirm Mahi routing for the new MT5 demo groups before Gerard g
 Billing: July cleared, August arrears still overdue, September bill due 20 Oct; Nicole Vivian wants payments before extending product offering.
 
 ## Streams
+
+### pulse-dropcopy-stale — Pulse yield-profile stale alerts from dropped MT5 drop-copy session
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: After the Beeks outage, Alpha's MT5 bridge drop-copy session (MahiFXMT5Bridge -> LIVE1Trades) into analyticsFixServerMT1 timed out at 09:13 UTC on 2026-10-16 and had not reconnected; no Alpha trades reached Pulse after 09:12 UTC and the backgroundJobs stale-yield-profile alert keeps firing. Liam Cordelle said a fix for the alert spam ships in 26.4. Reconnection not confirmed in window.
+Next: Bridge session to be logged back on; alert fix in 26.4.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1792153713986749
 
 ### mt5-demo-routing — Routing needed for new Alpha MT5 demo groups
 status: open · since: 2026-10-13 · last: 2026-10-13
@@ -77,16 +83,15 @@ State: Restricted Compass Bridge Operator role provisioned on alphacap-broker fo
 Next: Mahi to schedule flow catch-up calls and share feature updates.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782978915962429 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787760873528779
 
-### statement-of-account — Statement of account request from Jade
-status: watching · since: 2026-05-22 · last: 2026-05-22
-State: Jade asked who to contact for a statement of account. Shyam Hari took it internally; Bonnie Cassidy said she would find out what is needed and follow up. No further update seen.
-Next: Bonnie Cassidy to confirm what Jade needs and send it.
-Refs: https://mahifx.slack.com/archives/C070016ND6X/p1779427327328109 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779442392670229
-
 ### oils-off — Oils instruments turned off
 status: closed · since: 2026-06-24 · last: 2026-08-14 · closed: 2026-10-15
 State: Cameron Hughes turned oils off due to arbed price spikes and very low volumes; CO1USD signal later switched to IFMS + price (2026-08-14), possibly ahead of re-enabling, not stated. No activity since 2026-08-14; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782303349490299 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1786707493633689
+
+### statement-of-account — Statement of account request from Jade
+status: closed · since: 2026-05-22 · last: 2026-05-22 · closed: 2026-10-19
+State: Jade asked who to contact for a statement of account. Shyam Hari took it internally; Bonnie Cassidy said she would follow up. No activity since 2026-05-22; assumed resolved.
+Refs: https://mahifx.slack.com/archives/C070016ND6X/p1779427327328109 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779442392670229
 
 ## Arc
 - 2026-06-07 — Compass upgraded to latest version over the weekend
