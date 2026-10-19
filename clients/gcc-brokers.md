@@ -15,21 +15,28 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-10-16T07:05:38Z
+last_catchup: 2026-10-19T07:08:36Z
 status: active
 ---
 ## Now
 GCC is a happy, growing internalising client ("client for life", Will Carter 09-28); the Finalto/LMAX hedger tuning has lifted PnL materially since August.
 Live work: LMAX perps (test-traded, not yet live), Amana as a third hedging venue (waiting on client funding) and an institutional pricing stream.
-Finalto became spiky again on 2026-10-14/15; Rory is offering GCC an Infinox LP intro (call 10-16).
+Finalto became spiky again on 2026-10-14/15; Rory is offering GCC an Infinox LP intro (call 10-16, outcome not visible).
+A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Nael is disappointed and awaiting the provider's incident report.
 
 ## Streams
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-10-15
-State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute.
+status: open · since: 2026-04-30 · last: 2026-10-16
+State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible.
 Next: Rory/ops to confirm the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791555113608319 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792075794201709
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792075794201709 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792162250705829
+
+### ld-network-incident — 2026-10-16 LD networking outage
+status: open · since: 2026-10-16 · last: 2026-10-16
+State: On 10-16 at 10:31 BST Liam Cordelle told GCC of a networking incident in Mahi's LD environment and advised failing over if possible. Recovery signs came 11:47, GCC confirmed stable 11:55, and Liam said resolved at 12:30; GCC had switched flow directly to its LPs and disabled Mahi as a provider meanwhile. Nael (12:39) said the connection was down about 2 hours, called it very disappointing after a long stable run, and asked for confirmation before re-enabling Mahi. Liam confirmed at 12:40 that the hosting provider had fixed it and that incident details would follow once the provider supplies them.
+Next: Liam/Mahi to send GCC the provider's incident details; confirm GCC has re-enabled Mahi.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792143095130599 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792150755188579 https://mahifx.slack.com/archives/C09QS1NUA80/p1792147398651509
 
 ### finalto-execution — Finalto rejections, spikiness and hedger tuning
 status: open · since: 2026-07-29 · last: 2026-10-15
@@ -114,3 +121,4 @@ Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1778851998984029 https://ma
 - 2026-09-01 — hedger and 700106 improvements: Finalto fill rate 85-87%, best PnL week to date
 - 2026-09-07 — Youssef: "much better shape compared to a year ago"
 - 2026-10-01 — LMAX perps test trades succeeded; perps go-live pending funding
+- 2026-10-16 — LD networking incident, GCC down ~2h, flow moved to its LPs
