@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-10-16T07:05:25Z
+last_catchup: 2026-10-19T07:07:45Z
 status: active
 ---
 
@@ -24,6 +24,12 @@ status: active
 Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost.
 
 ## Streams
+
+### lucera-hard-timeout — Lucera LD fill latency and hard timeout
+status: open · since: 2026-10-18 · last: 2026-10-19
+State: Levi questioned an EURUSD buy on the Lucera LD distribution session filled over 120ms after placement; Argamon wants to match Lucera's 90ms expiry. Nathan explained expiry is the per-FIX-session hardTimeoutLength on fixClientConnection (currently 80ms) and a HARD_TIMEOUT comment means the timeout fired: internalised orders cancel, brokered orders fill if the pool price still crosses (it did, 1.11891 vs limit 1.11892). The fill was at 80ms in Compass but the execution report went out 42ms later, so the delay looks internal to Toa; Nathan is investigating and Levi has the FIX messages to take to Lucera.
+Next: Nathan to find the cause of the 42ms gap between fill and execution report.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792362870440649 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792375513540999
 
 ### cfd-indices-rollout — CFD / indices via Jump into Compass
 status: open · since: 2026-08-24 · last: 2026-10-08
@@ -56,8 +62,8 @@ Next: Root cause and prevention for the Sunday crypto pauses owed to Argamon.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1787099040590799 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789287085078259 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789997451357139
 
 ### xauusd-hedging-risk — XAUUSD hedging, news events, VaR
-status: open · since: 2026-05-18 · last: 2026-09-17
-State: Hybrid hedger plus arb (arb doing >70% of XAUUSD hedge volume as of 2026-08-20), max VaR raised to 8k on 2026-08-19 with Argamon fine up to $20k; a VaRClearance-EOD rule at 10% of max VaR was added 2026-08-17. The NFP drop on 2026-09-04 (30k VaR, small loss) was RCA'd as client volume decaying faster than hedging; after calls with Jem the post-news widening on 100-weighted events was extended 90s -> 180s, news-based MWMS widens toward hedging cost, and fill-at-WSS was turned off on 2026-09-17, with Jem having suggested brokering over news instead. Toa CHI was pulled from the hedger (2026-08-19) over ~10ms latency to CHI.
+status: watching · since: 2026-05-18 · last: 2026-09-17
+State: Downgraded to watching, no activity since 2026-09-17. Hybrid hedger plus arb (arb doing >70% of XAUUSD hedge volume as of 2026-08-20), max VaR raised to 8k on 2026-08-19 with Argamon fine up to $20k; a VaRClearance-EOD rule at 10% of max VaR was added 2026-08-17. The NFP drop on 2026-09-04 (30k VaR, small loss) was RCA'd as client volume decaying faster than hedging; after calls with Jem the post-news widening on 100-weighted events was extended 90s -> 180s, news-based MWMS widens toward hedging cost, and fill-at-WSS was turned off on 2026-09-17, with Jem having suggested brokering over news instead. Toa CHI was pulled from the hedger (2026-08-19) over ~10ms latency to CHI.
 Next: Daria owes Argamon a write-up of the NFP loss (as of 2026-09-07; not seen sent).
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788530007371599 https://mahifx.slack.com/archives/C06U76A7ZJR/p1789609500783629
 
