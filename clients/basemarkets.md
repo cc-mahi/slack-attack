@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-10-16T07:05:37Z
+last_catchup: 2026-10-19T07:08:29Z
 status: active
 ---
 
@@ -42,10 +42,10 @@ Next: Base to confirm nothing still needs the MT4 bridge; then Mahi removes both
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791755009916399 https://mahifx.slack.com/archives/C09D8V41JAG/p1791925041012299
 
 ### xauusd-1000oz-tob — Suffixed XAUUSD symbol with 1000oz top of book for a larger client
-status: open · since: 2026-10-13 · last: 2026-10-13
-State: Kate (Base) wants a suffixed XAUUSD symbol for a larger client wanting 1000oz TOB, with LMAX giving a 1000oz price to the Sub2 account. Kate Stagg is gathering information on how to set it up; no design yet.
-Next: Kate Stagg to scope the setup.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1791886072967149
+status: open · since: 2026-10-13 · last: 2026-10-16
+State: Kate (Base) wants a suffixed XAUUSD symbol for a larger client wanting 1000oz TOB. On 2026-10-16 Kate Stagg said Rory will set up a new XAUUSD-only pricing model replicating LMAX_2 tiers (1000oz TOB; LMAX being asked to switch feeds) with markup, streamed under a suffix via MCC to one Base client.
+Next: Rory to build the pricing model; LMAX feed switch.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1791886072967149 https://mahifx.slack.com/archives/C09D05EPCTV/p1792151201548029
 
 ### brokered-xau-slippage — Slippage on brokered XAU fills; markup removed
 status: open · since: 2026-10-02 · last: 2026-10-07
@@ -70,6 +70,11 @@ State: Admin server did not come back after weekend restarts on 2026-06-07, 2026
 Next: Dev-infra to address the kernel boot failure; Beeks reboot autonomy procedure (Liam Cordelle) not confirmed.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359 https://mahifx.slack.com/archives/C09D05EPCTV/p1788787318138619
 
+### ld-network-incident — Beeks LD campus network incident, Base disconnections
+status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
+State: On 2026-10-16 Base reported disconnections and no Compass login. Liam Cordelle announced a networking incident across Beeks' whole LD campus, saw recovery by 11:46 BST and confirmed resolved at 12:29 BST.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792143013486049 https://mahifx.slack.com/archives/C09D8V41JAG/p1792150197114369
+
 ### mt5-bridge-licence — MT5 Bridge licence renewal on Base backup server
 status: closed · since: 2026-10-08 · last: 2026-10-08 · closed: 2026-10-15
 State: Arun Patel sent a new licence; Yuliya Dziurayeva (FastMT) confirmed it installed successfully the same day.
@@ -85,3 +90,4 @@ Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791450091502369 https://ma
 - 2026-08-26 — Tegis grid paid $93.6k C book gain on data print; Tegis plug-in in use
 - 2026-09-29 — ~$8.7k A book loss from 111125; overnight clearance rule added
 - 2026-10-13 — Base decommissions MT4; Tegis book paused for algo/API testing
+- 2026-10-16 — Beeks LD campus network incident disconnects Base for about 2 hours
