@@ -17,7 +17,7 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-10-19T07:08:36Z
+last_catchup: 2026-10-20T07:17:55Z
 status: active
 ---
 ## Now
@@ -26,6 +26,18 @@ Main risk is load: cent accounts drive ticket rates (dist6 hit ~4k orders/s on 2
 In flight: Centroid connection (creds sent 10-13), crypto (BTC/ETH, Binance blocked by Beeks IP), XAUUSD testing from the PXM xcore sessions (counterparty tag fix pending). The 24/7 session switch is done after a 2026-10-17 weekend logout hiccup.
 
 ## Streams
+
+### pxm-xau-counterparty — XAUUSD via PXM xcore sessions, counterparty tag
+status: open · since: 2026-10-16 · last: 2026-10-20
+State: GTC tested XAUUSD from its PXM xcore A and B order sessions on 2026-10-16; test trades arrived tagged ABOOK because the PXM bridge sends the Parties block with PartyRole 452=1 (Executing Firm) where Mahi reads PartyRole 3 (Client ID), so orders fill but cannot be attributed. On 2026-10-19 Antreas asked to route XAUUSD from GTC-A-Orders-PXM to Swift only; Isaac explained A Book routing is per distribution channel, not per connection, and suggested a separate PXM trading account tag with an execution rule to a Swift-only pool. Manglai confirmed it is the separate large-client setup (hedged on its own book, starting at 100 lots / 50m); the VIP client tag is 56020001 (sent as 16_71_56020001) and Isaac added it to config. Isaac put a workaround in for the ABOOK tag; the proper counterparty fix needs the EOD restart. A further test from 16_71_50001 on 2026-10-20 looked correct on Mahi's side.
+Next: GTC to change the PXM bridge to send the counterparty with 452=3; Mahi to confirm the EOD fix and drop the workaround; GTC to retest with the VIP tag.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1792140498426039 https://mahifx.slack.com/archives/C0AKRP8C049/p1792479999175029
+
+### hedging-a-book — A Book go-live, STP rules and hedging structure
+status: open · since: 2026-10-05 · last: 2026-10-19
+State: A Book went live 2026-10-06 on one account, hedging via HRP markets only (hybridHedger markets switched from Finalto/Swift; Finalto/Swift still the two LPs in the hedger market, reason to be confirmed). 2026-10-12: flow from tag 52146947 was internalised though GTC expected STP to HRP; hedger cleared only 267oz, GTC closed 2100oz manually at HRP_MEX (avg 4177.43) and positions were adjusted in Compass. Thread outcome (resolved 2026-10-12): the hedger had bought 267oz (212 Swift, 55 Finalto), Mahi closed those and booked a 2100oz position adjustment at HRP_MEX 4177.43 to match GTC's manual close; tags 82025643 and 82025639 (moved to A Book 10-07/10-09, still STP to Mahi) were also switched to STP to HRP LPs. Kate told GTC to wait for Mahi to confirm STP whitelisting before routing a tag; the reason the hedger cleared only 267oz was still being looked at. 2026-10-14 GTC asked for percentage hedging split (A LP 30% / B LP 70%); Isaac replied a portion of a book's flow can go to a hedged book, split by counterparty, instrument or other factors, a new client with 1000-lot limit is being onboarded via risk-split from A, and hybridHedgerSI1/arbHedgerSI1 exist. HRP_SOLID and HRP_JANESTREET_FA streams added; SWIFT XCUUSD prices arrive per 100-unit lots (asked for per-unit).
+Next: the separate hedged book for the large VIP client (tag 56020001, 100 lots to start, Swift/CBCX) is being configured via the PXM stream (see pxm-xau-counterparty); GTC to give the test-account counterparty (asked 2026-10-15); agree the hedge-percentage setup with GTC; Swift to fix XCUUSD unit (Swift removed from reference markets 10-06, request logged on the wiki 10-12).
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791202994256859 https://mahifx.slack.com/archives/C0AKRP8C049/p1792398964855889
 
 ### crypto-24x7 — Crypto onboarding and 24/7 sessions
 status: open · since: 2026-09-15 · last: 2026-10-17
@@ -39,12 +51,6 @@ State: GTC keeps adding OZ hubs because OZ fears it cannot handle their trade ra
 Next: GTC to confirm OZ-6 working; GTC weekly call is the forum.
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786969418265589 https://mahifx.slack.com/archives/C0AKRP8C049/p1792228566542629
 
-### pxm-xau-counterparty — XAUUSD via PXM xcore sessions, counterparty tag
-status: open · since: 2026-10-16 · last: 2026-10-16
-State: GTC tested XAUUSD from its PXM xcore A and B order sessions on 2026-10-16 (0.01 and 1oz test trades from tag 50001); Mahi found and closed them and confirmed a closing trade, then GTC opened from the B-Book session. Test trades arrived tagged ABOOK; Isaac found the counterparty missing on GTC-B-Orders-PXM because the bridge sends the Parties block with PartyRole 452=1 (Executing Firm) where Mahi reads PartyRole 3 (Client ID), so orders fill but cannot be attributed for risk classification and reporting. GTC also asked to route VIP Gold (XAUUSD.v) to Swift; Isaac asked whether this is the new large 100-lot client setup, no answer yet.
-Next: GTC to change the PXM bridge to send the counterparty with 452=3 and confirm; GTC to answer whether XAUUSD.v is the 100-lot client.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1792140498426039 https://mahifx.slack.com/archives/C0AKRP8C049/p1792159762972949
-
 ### dist-gateway-capacity — Distribution gateway load from cent/small-ticket flow
 status: open · since: 2026-09-09 · last: 2026-10-15
 State: B_CLIENTS is ~6% of XAU notional but 16-20% of tickets, and the small-ticket servers (Live 3/4/5) are ~5x the ticket count; 5% of trades are 78% of volume. Latency cancels on gateway5 (21-22 Sep) led to gateways 6-8 on trading-2, unexpected-fill-latency ceiling raised to 5000ms, dist9 added 2026-10-14. On 2026-10-15 dist6 saw 3,976 orders/s vs 235/s on the next busiest; Liam made config tweaks and CHG for an OZ-5 gateway latency fix (24G heap, 5 CEP threads) is booked Sat 17 Oct. Root cause of the 2026-09-21 XAU cancels (Nathan to GTC): a burst pushed internal processing past the last-look limit (overrun ceiling then 300ms, since raised), and OZ's hub rule re-routes to another maker after rejects, so no XAU orders reached Mahi for 60s (15:50:49-15:51:49Z) while GTC asked OZ about it; OZ-4/OZ-5 had shared a gateway, OZ-5 moved to its own ports 9016/9017 on 2026-09-28. On 2026-10-15 Isaac said GTC is already splitting flow more evenly inside OZ and should pass that on.
@@ -57,17 +63,17 @@ State: riskPath OOM crash-looped on an unbounded analytics map (heap dumps fille
 Next: Isaac/Liam to confirm the 10-15 deploy landed; re-enable classification on A/drop copy once safe.
 Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788309377675289 https://mahifx.slack.com/archives/C0AKAPLU78W/p1792065637260039
 
-### hedging-a-book — A Book go-live, STP rules and hedging structure
-status: open · since: 2026-10-05 · last: 2026-10-15
-State: A Book went live 2026-10-06 on one account, hedging via HRP markets only (hybridHedger markets switched from Finalto/Swift; Finalto/Swift still the two LPs in the hedger market, reason to be confirmed). 2026-10-12: flow from tag 52146947 was internalised though GTC expected STP to HRP; hedger cleared only 267oz, GTC closed 2100oz manually at HRP_MEX (avg 4177.43) and positions were adjusted in Compass. Thread outcome (resolved 2026-10-12): the hedger had bought 267oz (212 Swift, 55 Finalto), Mahi closed those and booked a 2100oz position adjustment at HRP_MEX 4177.43 to match GTC's manual close; tags 82025643 and 82025639 (moved to A Book 10-07/10-09, still STP to Mahi) were also switched to STP to HRP LPs. Kate told GTC to wait for Mahi to confirm STP whitelisting before routing a tag; the reason the hedger cleared only 267oz was still being looked at. 2026-10-14 GTC asked for percentage hedging split (A LP 30% / B LP 70%); Isaac replied a portion of a book's flow can go to a hedged book, split by counterparty, instrument or other factors, a new client with 1000-lot limit is being onboarded via risk-split from A, and hybridHedgerSI1/arbHedgerSI1 exist. HRP_SOLID and HRP_JANESTREET_FA streams added; SWIFT XCUUSD prices arrive per 100-unit lots (asked for per-unit).
-Next: GTC to give the test-account counterparty so Mahi can test the new hedging book structure (asked 2026-10-15); agree the hedge-percentage setup with GTC; Swift to fix XCUUSD unit (Swift removed from reference markets 10-06, request logged on the wiki 10-12).
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791202994256859 https://mahifx.slack.com/archives/C0AKRP8C049/p1792064520530769
-
 ### pricing-skew-tuning — Skew, spread and last-look tuning
 status: open · since: 2026-08-19 · last: 2026-10-15
 State: Skew signal config tuned repeatedly: XAG ceilings lowered after quote "shake" complaints (09-09/10), IFMS leg removed from signal config 2026-10-07 for poor FX FI performance, arb protection and pre-triangulation spreads adjusted for wide FX crosses (09-29). Controls added: opening-window last look (800ms XAU, 400-500ms others) via CUSTOM1 timezone, indicative XAU pricing around open, 8 cent min TOB with news widening removed, XAU layers raised to 6. XAU spreads blew out into the Friday close (09-19) because BMSL/MWMS had only 3 benchmarks; MAHI_BENCHMARK_LDN added. 2026-10-12 GTC reported abnormal FX price spikes. 2026-10-15 GTC reported NZDJPY spread 3 JPY wide at the open because of SWIFT; Isaac removed SWIFT from arb protection, then found wide-spread suppression did not cover the custom execution timezone around the roll (B-OZ session saw wide spreads ~00:05-00:10 GTC time, now fixed). A dormant global force-indicative timetable (from April, possibly left over from a repurposed tmgm setup) that made all instruments indicative during roll was also removed. GTC also saw different spreads on GTC-B-Prices-OZ vs OZ-3 (cent hub); logs rolled off so not replayed.
 Next: GTC to send tick data from both hubs for 23:55-00:15 their time so Isaac can confirm the OZ vs OZ-3 spread difference; Rory checking the 10-12 FX spike report.
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1788911767407019 https://mahifx.slack.com/archives/C0AKRP8C049/p1792082071865509
+
+### infra-disk-alerting — Trading-server disk, replica and alert hygiene
+status: open · since: 2026-08-10 · last: 2026-10-14
+State: vg03-mysql extended repeatedly (trading-1/2 +200G on 09-10; trading-2 +50G on 09-30 with no more room in the vg, ZD 23574); a manual replica restore started 2026-10-01 was slow (two backups clashing, only reached 17 Sep after 3h) and was killed 10-02, the slave was reported back by 10-05, and nightly backup was switched off with bigger buffer pools (CHG 10-14) to help catch-up. The OneZero analytics drop copy (analyticsFixServerOZ1) was removed and stopped on trading-1 on 2026-10-05 for load reduction (revert commit to restore). The `mysql_optimize_enable=false` question from 2026-08-10 never got a reply. PD tuning: fiPnlDrop raised to alert severity, hedging-book alerts off until a hedger is live, fixOrders1 spam stopped.
+Next: someone to answer the mysql_optimize_enable question and decide longer-term DB sizing.
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790734299323199 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790870773608959 https://mahifx.slack.com/archives/C0AKAPLU78W/p1791980456302469
 
 ### centroid-connection — New Centroid LP connection
 status: open · since: 2026-09-24 · last: 2026-10-13
@@ -81,23 +87,17 @@ State: EURGBP moved 2026-08-17, then rolling in batches through 2026-10-05 (all 
 Next: GTC picks the next server/day; weekly call 2026-10-13 notes remaining checks (24/7 connection 5, FX pair spikiness, HRP Jane Street).
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786977281687209 https://mahifx.slack.com/archives/C0AKRP8C049/p1791442269445639
 
-### commercial-value — Pilot value case and billing
-status: watching · since: 2026-08-19 · last: 2026-09-29
-State: Isaac's 2026-09-09 estimate: at 2.5 $/M LR and 4 $/M FI on XAU alone, billing reaches ~200k/month by January after the pilot (4M value-add on ~650B/month XAU). Kate cited ~$10/M skew PnL on drop-copy XAU flow (09-03). 2026-09-29 call KPIs: skew PnL on XAU, handling toxic HFT on A Book, 24/7 crypto uptime; upsell is 24/7 XAUUSD. OZ's fee waiver (quiet, not to be publicised) still stands.
-Next: pilot end and billing terms to be confirmed outside Slack; downgraded to watching, no discussion since 2026-09-29.
-Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788950931799769 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790674407124919
-
-### infra-disk-alerting — Trading-server disk, replica and alert hygiene
-status: open · since: 2026-08-10 · last: 2026-10-14
-State: vg03-mysql extended repeatedly (trading-1/2 +200G on 09-10; trading-2 +50G on 09-30 with no more room in the vg, ZD 23574); a manual replica restore started 2026-10-01 was slow (two backups clashing, only reached 17 Sep after 3h) and was killed 10-02, the slave was reported back by 10-05, and nightly backup was switched off with bigger buffer pools (CHG 10-14) to help catch-up. The OneZero analytics drop copy (analyticsFixServerOZ1) was removed and stopped on trading-1 on 2026-10-05 for load reduction (revert commit to restore). The `mysql_optimize_enable=false` question from 2026-08-10 never got a reply. PD tuning: fiPnlDrop raised to alert severity, hedging-book alerts off until a hedger is live, fixOrders1 spam stopped.
-Next: someone to answer the mysql_optimize_enable question and decide longer-term DB sizing.
-Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790734299323199 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790870773608959 https://mahifx.slack.com/archives/C0AKAPLU78W/p1791980456302469
-
 ### compass-client-support — GTC's use of Compass, Echo and Pulse
 status: watching · since: 2026-08-17 · last: 2026-10-13
 State: Weekly Tuesday 10:00 UK call set up 2026-08-17. GTC asks about order CSV export in USD (fixed in the 25 Aug dashboard deploy), MT4/MT5 servers missing from yield profiles, price-forensics limits and classifier tag export. Pulse creds and spec passed to Manglai 2026-10-13 (Zendesk 23640).
 Next: none outstanding.
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1787663421577319 https://mahifx.slack.com/archives/C0AKRP8C049/p1791901914330729
+
+### commercial-value — Pilot value case and billing
+status: watching · since: 2026-08-19 · last: 2026-09-29
+State: Isaac's 2026-09-09 estimate: at 2.5 $/M LR and 4 $/M FI on XAU alone, billing reaches ~200k/month by January after the pilot (4M value-add on ~650B/month XAU). Kate cited ~$10/M skew PnL on drop-copy XAU flow (09-03). 2026-09-29 call KPIs: skew PnL on XAU, handling toxic HFT on A Book, 24/7 crypto uptime; upsell is 24/7 XAUUSD. OZ's fee waiver (quiet, not to be publicised) still stands.
+Next: pilot end and billing terms to be confirmed outside Slack; downgraded to watching, no discussion since 2026-09-29.
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788950931799769 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790674407124919
 
 ### finalto-fix-noise — Finalto execution reports for non-Compass orders
 status: closed · since: 2026-09-03 · last: 2026-09-21 · closed: 2026-10-15
