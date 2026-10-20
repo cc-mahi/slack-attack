@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-10-19T07:08:29Z
+last_catchup: 2026-10-20T07:17:54Z
 status: active
 ---
 
@@ -79,6 +79,11 @@ Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792143013486049 https://ma
 status: closed · since: 2026-10-08 · last: 2026-10-08 · closed: 2026-10-15
 State: Arun Patel sent a new licence; Yuliya Dziurayeva (FastMT) confirmed it installed successfully the same day.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791450091502369 https://mahifx.slack.com/archives/C09D8V41JAG/p1791465228493509
+
+### group-additions-1019 — New A/B book MT groups added to Compass config
+status: closed · since: 2026-10-19 · last: 2026-10-19 · closed: 2026-10-20
+State: Kate (Base) asked for three A book and four B book USD MT groups to be added; Kate Stagg updated config the same day and Base confirmed.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792404682249699 https://mahifx.slack.com/archives/C09D8V41JAG/p1792407067504919
 
 ## Arc
 - 2026-04 — Base Markets onboarding Tegis flow; Tegis/Centroid FIX integration begins
