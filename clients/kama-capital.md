@@ -16,14 +16,38 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-10-19T07:09:24Z
+last_catchup: 2026-10-20T07:16:51Z
 status: active
 ---
 
 ## Now
-Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot has about a month left (term counts from the 5 Aug go-live; Will, 12 Oct) with post-pilot terms recorded ready to send. Compass 26.4 released 17 Oct; XAUUSD pulled from MAS on 16 Oct over market-order rejects. Open: MAS filled-after-cancel reconciliation and PXM timeout handling; Friday-close risk carry under Broker First.
+Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot has about a month left (term counts from the 5 Aug go-live; Will, 12 Oct) with post-pilot terms recorded ready to send. Compass 26.4 released 17 Oct; XAUUSD pulled from MAS on 16 Oct over market-order rejects. On 19 Oct the hedger stopped clearing XAUUSD (NOP limits vs unreconciled positions; about 26,000oz unhedged) and a null-check bug crashed the SOR when a NOP key was deleted; NOP limits are off pending a fix deploy. Open: MAS filled-after-cancel reconciliation and PXM timeout handling; Friday-close risk carry under Broker First.
 
 ## Streams
+
+### nop-hedger-outage — 19 Oct unhedged XAUUSD, SOR crash, VaR alerting
+status: open · since: 2026-10-19 · last: 2026-10-19
+State: From about 06:58 UTC on 19 Oct the hedger stopped clearing XAUUSD, most likely blocked by per-LP NOP limits running against unreconciled positions (Kama had posted positions in a thread, so they were missed); VaR passed 10k at 05:33 and hit about 146k (Ali: 26,000oz unhedged), and Kama raised it at 07:31. At 07:35 Isaac deleted risk.nop.perPB to unblock the hedger; a missing null check crashed liquidityPoolSOR and the hybrid and arb hedgers, ten XAUUSD orders sat open 6-9 min and Kama's 180s timeout disabled Mahi as provider until about 07:51. Processes were back by 07:37. Fix (null guard in MarketGroupTradePositionNOPTracker) is committed to release/26.4 and 26.3 but not yet deployed; until then do not delete NOP keys on Kama (set marketListNOPConfigs to [] or raise watermarks). All NOP limits were removed on Ali's request. Kate set a sustained critical-VaR alert (sustainMs 120,000, clearHoldMs 60,000) after Ali asked for an alert and a noisy 10k threshold; Kate offered to post VaR alerts to Kama's Slack notifications channel too. Liam asked how we know we hedge the right thing with unreconciled positions; Kate: Kama was STP before, so all A Book risk is covered by hedging or STP.
+Next: Kama to send positions at EOD roll; Isaac to get the null-check fix deployed and raise whether bad non-trading config should keep the old config instead of killing processes; Kate to tune the VaR alert if noisy.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792395096025849 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792397763936839 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792417025779529
+
+### tag-lp-exclusion — Block a counterparty tag from a specific LP
+status: open · since: 2026-10-19 · last: 2026-10-19
+State: Moe asked on 19 Oct whether a specific counterparty tag can be kept from going to a specific LP on Mahi hedging trades; rory.king confirmed it is doable and offered to set it up from an example tag and LP. Moe is confirming with the LP first.
+Next: Moe to supply the tag and LP; rory to configure and share the config.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792407866139499 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792411908923309
+
+### lp-timeouts-pxm-unsub — LP latency and timeouts triggering PXM unsubscribes
+status: open · since: 2026-09-15 · last: 2026-10-19
+State: Recurring pattern: an order sitting unanswered trips PXM's firewall timeout and PXM unsubscribes XAUUSD on Kama's price sessions with no automatic resubscribe (15 Sep SOR restart; 2 Oct misconfigured MCC restart; 19 Oct, see nop-hedger-outage). On 19 Oct Kate recommended keeping the 180,000ms timeout (Rostro uses the same) and instead having PXM cancel the leg and reject the client order on a pending-leg timeout while keeping the provider enabled; Moe says PXM disables the provider (or the symbol) completely on timeout, Kate noted other PXM clients just reject the order so it looks configurable, and Moe will ask PXM. Moe also wants restarts coordinated better; Kate will give notice of planned ones. Latency incidents: Arts held limit orders 1.4-3.3s and filled 9 of them worse than limit (about $110/M; Arts later said it would fill in 1000ms and was left out of pools 8 Oct), and MAS held IOCs about 360ms against the 300ms latency guard (5 Oct). Mahi's stance (Kate, 12 Oct): never resend an order that is still open (double-fill risk), re-hedge via other LPs only once it is dead; hardTimeoutLength exists but guesses the outcome and can strand risk (Liam). Ali objects that PXM disables the whole Mahi provider on one timeout (rory to check, 9 Oct) and that brokered orders wait for the LP fill so clients with a 500ms TTL time out (William doubts Compass supports client TTL, 5 Oct).
+Next: Moe to ask PXM whether disable-on-timeout can be switched off for Kama; Mahi (rory) to confirm the PXM provider-disable behaviour; decide on hardTimeoutLength or asking LPs to reject after about 100ms.
+Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1791257314493849 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792409733558559
+
+### position-rec-nop — LP/client position reconciliation and NOP limits
+status: open · since: 2026-10-02 · last: 2026-10-19
+State: On 19 Oct unreconciled LP positions against per-LP NOP limits blocked the hedger (see nop-hedger-outage); the limits were removed that day and Kate will ask Kama to send positions at EOD roll, XAUUSD being most of their flow. Only apply NOP limits on reconciled positions. LP positions are visible in Compass under Risk Management Positions (Markets tab per LP); NOP limit changes need hedger and pool restarts (pool at EOD) and LP position adjustments can be made intraday with the hedger off, normally by the NZ team before open. Kate asked on 9 Oct for LP and client positions over the weekend for a rec; Kama replied inside the thread (file 10 Oct; Moe 11 Oct: keep NOP limits, reflect LP positions, sell 280oz) so the NZ team never saw it and nothing was updated. Kate says the 280oz was already cleared at Sunday open and asked for positions to be re-posted at roll in the main channel.
+Next: Kama to post LP positions at roll in the main channel; agree when NOP limits are re-applied.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791557796452229 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792404397201249
 
 ### mas-xau-removal — XAUUSD pulled from MAS Markets
 status: open · since: 2026-10-16 · last: 2026-10-16
@@ -55,12 +79,6 @@ State: A 21 Sep cancel burst came from FOK/IOC MinQty handling (fixed with refer
 Next: Mahi to confirm whether news criteria can be added to execution rules.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792064464469069
 
-### lp-timeouts-pxm-unsub — LP latency and timeouts triggering PXM unsubscribes
-status: open · since: 2026-09-15 · last: 2026-10-15
-State: Recurring pattern: an order sitting unanswered trips PXM's firewall timeout and PXM unsubscribes XAUUSD on Kama's price sessions with no automatic resubscribe (15 Sep SOR restart; 2 Oct misconfigured MCC restart). Latency incidents: Arts held limit orders 1.4-3.3s and filled 9 of them worse than limit (about $110/M; Arts later said it would fill in 1000ms and was left out of pools 8 Oct), and MAS held IOCs about 360ms against the 300ms latency guard (5 Oct). Mahi's stance (Kate, 12 Oct): never resend an order that is still open (double-fill risk), re-hedge via other LPs only once it is dead; hardTimeoutLength exists but guesses the outcome and can strand risk (Liam). Ali objects that PXM disables the whole Mahi provider on one timeout (rory to check, 9 Oct) and that brokered orders wait for the LP fill so clients with a 500ms TTL time out (William doubts Compass supports client TTL, 5 Oct).
-Next: Kate to give Ali a recommended timeout (session timeout currently 180000ms, 15 Oct; call planned 16 Oct); Kama to confirm PXM auto-resubscribe behaviour; Mahi (rory) to confirm the PXM provider-disable behaviour; decide on hardTimeoutLength or asking LPs to reject after about 100ms.
-Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1791257314493849 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792082500850159
-
 ### xauusd-skew-signals — B Book XAUUSD skew tuning
 status: open · since: 2026-10-08 · last: 2026-10-14
 State: B Book XAUUSD skew was about -$0.35/M for 1-8 Oct because FI optimisation parties included CLIENTS_LDN (INSTI-priced, never skewed). Kate switched the skew signal to IFM, then limited optimisation parties to B_CLIENTS_LDN (8 Oct). Skew since was +$1.61/M over 9, 12 and 13 Oct (+$528 on $329M; early). On 14 Oct she moved the signal from IFM to flow-price-thresh (57.7% volume correct, $675 potential vs IFM 51.0%, $424).
@@ -78,12 +96,6 @@ status: open · since: 2026-10-09 · last: 2026-10-12
 State: On 9 Oct a 75oz XAUUSD buy sent to MAS Markets got no response for about 2 minutes and crashed the hedger; MAS then sent a cancel and PXM disabled MAS (hedger restarted, Moe took it to MAS). Kate worked out on 12 Oct that two 75oz buys went to MAS at 16:59:57 UTC, one on KS (filled) and one on KL (order 4570942, cancelled after 3 minutes), and that MAS actually filled the cancelled one, leaving Compass over-hedged 75oz until Kama closed it manually in the MAS account. Ali had not yet confirmed whether he saw one fill or two; Kate says it is not sorted and wants a call.
 Next: Ali to confirm one fill vs two; Kate to get Kama and MAS on a call.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791566302175459 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791800955956099
-
-### position-rec-nop — LP/client position reconciliation and NOP limits
-status: open · since: 2026-10-02 · last: 2026-10-12
-State: LP positions are visible in Compass under Risk Management Positions (Markets tab per LP); NOP limit changes need hedger and pool restarts (pool at EOD) and LP position adjustments can be made intraday with the hedger off, normally by the NZ team before open. Kate asked on 9 Oct for LP and client positions over the weekend for a rec; Kama replied inside the thread (file 10 Oct; Moe 11 Oct: keep NOP limits, reflect LP positions, sell 280oz) so the NZ team never saw it and nothing was updated. Kate says the 280oz was already cleared at Sunday open and asked for positions to be re-posted at roll in the main channel.
-Next: Kama to re-post LP positions at roll in the main channel; Moe to confirm final NOP limits.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791557796452229 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791801356370129
 
 ### fx-hedge-swaps — Hedging crosses in drivers vs swap cost
 status: open · since: 2026-10-09 · last: 2026-10-09
