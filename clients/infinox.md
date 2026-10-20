@@ -18,16 +18,22 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-19T07:09:22Z
+last_catchup: 2026-10-20T07:17:56Z
 status: active
 ---
 
 ## Now
-Day-to-day is routine LR / classification support from Georgia and Trading Ops via #mahi-infinox; today they asked to exclude four accounts from automated classifications and asked how overlapping Medium/Heavy LR rules prioritise.
-Commercially live: CH's crypto-intro deal (Mahi to intro 2-3 brokers, Infinox helps toward a crypto licence), plus unpaid invoices since August.
-Compass 26.4 and the LDN infra move landed the 10-09 weekend; Sadiq's follow-up EURUSD tick request has Will wanting to know why they asked.
+Clio and CH want a custom layered XAUUSD symbol (`XAUUSD.l`) urgently; Shyam built the pricer and channel overnight and handed go-live (gateway restart, Infinox mapping, decisions) to Rory, while Clio chased again this morning.
+Day-to-day is routine LR / classification support via #mahi-infinox; open items are the four-account classification exclusion and overlapping Medium/Heavy LR rule order.
+Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq's EURUSD tick request after the 26.4 upgrade is still unexplained.
 
 ## Streams
+
+### custom-xau-layers — Custom layered XAUUSD symbol (XAUUSD.l)
+status: open · since: 2026-10-19 · last: 2026-10-20
+State: Clio asked for a new XAUUSD symbol with client-specific volume and spread layers; CH stressed it is important and Rory promised it for 10-20, with Clio chasing again 08:10 BST. Shyam deployed pricers and a CLIENT_PRICE_L_LDN model (100-4000 oz ladder, no skew or signals) plus a B_CLIENTS_L channel and a `.l` suffix rule (change CHG-2610-EGQJ). Not live: the client distribution gateway needs a restart in a window agreed with Infinox, and Infinox must not enable XAUUSD.l before then.
+Next: Rory to reply to Clio, agree the restart window, and get answers on per-layer vs average spreads and lot size; Rory to decide arb protection, skew and LR/WSS settings; change record and approval needed before gateway restart.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792416827862309 https://mahifx.slack.com/archives/C022S6NL82D/p1792480216320949 https://mahifx.slack.com/archives/C01QGUXPKEY/p1792468132574129
 
 ### auto-classification — Automated classification exclusions and LR-by-classification
 status: open · since: 2026-07-15 · last: 2026-10-15
@@ -105,3 +111,4 @@ Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792143327385389 https://ma
 - 2026-10-07 — Aditya, Mahi's bridge-deal advocate at Infinox, reported leaving for RCX
 - 2026-10-09 — Compass 26.4 upgrade and LDN infra move
 - 2026-10-16 — LD hosting network incident; Infinox unaffected, resolved same day
+- 2026-10-19 — Infinox requested a custom layered XAUUSD symbol; pricer and channel built 10-20, go-live pending
