@@ -21,7 +21,7 @@ contacts:
   - {name: "Manuel de Cara", role: "Rostro: Pulse/Athena data access", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro; commercial counterpart (described internally as basically co-founder)"}
   - {name: "Michael Ayres", role: "senior Rostro contact meeting David Cooney 16 Oct; named replacement after Lochlan left", confidence: low}
-last_catchup: 2026-10-19T07:09:26Z
+last_catchup: 2026-10-20T07:16:51Z
 status: active
 ---
 
@@ -29,6 +29,12 @@ status: active
 Relationship under strain: on 14 Oct a CMC futures price freeze cost the SI book about 178k and Andrew Morgan called it "relationship losing level"; evidence went to Rostro, David Cooney was to meet Michael Ayres 16 Oct (outcome not seen), and on 16 Oct Andrew accepted five pricing-integrity outcomes onto the roadmap (incident still open, no owners or dates yet). The C book client also complained of slippage on 16 Oct, traced to an LR mismatch. Commercials were renegotiated at Rostro's request but Rostro did not sign the 2026-09-14 draft ("a no from the board", 15 Sep); no later outcome seen. Rostro keeps adding IC sub-account books (rev-share), PSM went live on the INV model 14 Oct, the 26.4 Compass upgrade landed the weekend of 10-11 Oct, and Rostro is switching Jump off futures (hedgers updated 15 Oct). A value-add and volumes pack went to David 15 Oct.
 
 ## Streams
+
+### ic-sub-books — IC sub-account rev-share books (SUB 5/9/10/11, C House, Sub SI House)
+status: open · since: 2026-08-24 · last: 2026-10-19
+State: Rostro flow from specific counterparty tags is split into separate Compass books, each with its own hybridHedgerSub* hedging to a dedicated IC_SUBS_* market (SUB1/2 live 7 Oct on tags 76_0*/117_70* and 84_0*/117_75*, C House live 30 Sep, SUB 11 test trades 14-15 Oct; routing via MultiChannelConfig or risk splitting for multi-model tags). Scope's CK settled the PXM wiring on 5 Oct: Mahi_3 carries one shared MAHI_IC_SUBS price stream and Mahi sends tag 1 = MAHI_IC_SUBS_9 or _10 per book when hedging. The IC price in PXM carried a markup (min 7 vs 5 cents); Oliver will change the profile. Tag 251_* (large Cyprus retail broker, soft flow) gets separate FX, CFD and futures books and a "Sub SI House" book; on 9 Oct Rostro said 50% would be warehoused in PXM and 50% sent to Compass; Kate's sim says transfer every 15 min ($328k vs $280k at 5m). Oliver said 8 Oct warehousing 50% is hard because of drop copy on their side, and by 13 Oct all 251* flow was to be risk-split into the new books (FX, futures, indices to IC_SUBS_11), so the 50/50 plan may be dropped (8 Oct reply thread not read). Rostro's end client (251*) signed its rev share 13 Oct; SUB 11 tests showed ~500ms on half of trades on 14 Oct, ~70ms on 15 Oct, and Oliver said "looks good". Rostro is considering a NY4 server. On 19 Oct ScopeMarkets created a new execution account MAHI_IC_SUBS_12 (tags 114_0, 117_153) on the third connection (Mahi_3) and asked Mahi for a matching account and a new book routed by client identifier; Oliver said the client will trade on FA.
+Next: Mahi to create the MAHI_IC_SUBS_12 account and book (Kate asked, Rakan confirmed Mahi_3); Kate to confirm SUB 11 go-live; internal question on how multi-region (NY4) is charged; send the Sub SI House holding-period page to Rostro.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787569899244609 https://mahifx.slack.com/archives/C08ALS66EDC/p1791540027260459 https://mahifx.slack.com/archives/C08AQKRU953/p1792054971300949 https://mahifx.slack.com/archives/C08AQKRU953/p1792415070077209
 
 ### c-book-lr-price — C book slippage: LR applied at fill but not in quoted price
 status: open · since: 2026-10-16 · last: 2026-10-16
@@ -41,12 +47,6 @@ status: open · since: 2026-10-15 · last: 2026-10-15
 State: A 30M exposure on the C book (Rostro's new C House client) took about 5 min to clear on 15 Oct: IC cancelled some hedge trades and the default fill-ratio liquidity adjustment zeroed IC for 30s, then the VAR-CLEARANCE rule spent about half the remaining time paused. Kate turned the fill-ratio adjustment off on hybridHedgerCHouse1 and hybridHedgerSI1 (single LP, nowhere to steer) and set forceShortenExecutionOnSurplus on VAR-CLEARANCE, bounced the hedger, and told Alex IC left about half the orders unfilled.
 Next: Kate to watch clearance performance; Alex has not replied.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1792078136400489 https://mahifx.slack.com/archives/C08ALS66EDC/p1792081751691529
-
-### ic-sub-books — IC sub-account rev-share books (SUB 5/9/10/11, C House, Sub SI House)
-status: open · since: 2026-08-24 · last: 2026-10-15
-State: Rostro flow from specific counterparty tags is split into separate Compass books, each with its own hybridHedgerSub* hedging to a dedicated IC_SUBS_* market (SUB1/2 live 7 Oct on tags 76_0*/117_70* and 84_0*/117_75*, C House live 30 Sep, SUB 11 test trades 14-15 Oct; routing via MultiChannelConfig or risk splitting for multi-model tags). Scope's CK settled the PXM wiring on 5 Oct: Mahi_3 carries one shared MAHI_IC_SUBS price stream and Mahi sends tag 1 = MAHI_IC_SUBS_9 or _10 per book when hedging. The IC price in PXM carried a markup (min 7 vs 5 cents); Oliver will change the profile. Tag 251_* (large Cyprus retail broker, soft flow) gets separate FX, CFD and futures books and a "Sub SI House" book; on 9 Oct Rostro said 50% would be warehoused in PXM and 50% sent to Compass; Kate's sim says transfer every 15 min ($328k vs $280k at 5m). Oliver said 8 Oct warehousing 50% is hard because of drop copy on their side, and by 13 Oct all 251* flow was to be risk-split into the new books (FX, futures, indices to IC_SUBS_11), so the 50/50 plan may be dropped (8 Oct reply thread not read). Rostro's end client (251*) signed its rev share 13 Oct; SUB 11 tests showed ~500ms on half of trades on 14 Oct, ~70ms on 15 Oct, and Oliver said "looks good". Rostro is considering a NY4 server.
-Next: Kate to confirm SUB 11 go-live; internal question on how multi-region (NY4) is charged; send the Sub SI House holding-period page to Rostro.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787569899244609 https://mahifx.slack.com/archives/C08ALS66EDC/p1791540027260459 https://mahifx.slack.com/archives/C08AQKRU953/p1792054971300949
 
 ### commercials-reneg — Commercial renegotiation, value-add and relationship
 status: open · since: 2026-08-19 · last: 2026-10-15
