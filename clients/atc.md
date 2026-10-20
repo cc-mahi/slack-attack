@@ -13,7 +13,7 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-19T07:07:46Z
+last_catchup: 2026-10-20T07:17:55Z
 status: active
 ---
 ## Now
@@ -78,10 +78,10 @@ State: ATC staged 26.4 on 10-09 and went live at the weekend restart (client not
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1791483329972859 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791543785439449 https://mahifx.slack.com/archives/C046RNF64VD/p1791866234975939
 
 ### seychelles-uat — Seychelles entity, dev connections and UAT feed
-status: watching · since: 2026-05-19 · last: 2026-10-12
-State: Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections.
+status: watching · since: 2026-05-19 · last: 2026-10-19
+State: Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12, 10-19; Dave's 10-19 request was turned on by Liam within ~15 minutes); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections.
 Next: Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C046RNF64VD/p1789563271953519 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791817123057349
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C046RNF64VD/p1789563271953519 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792427565099679
 
 ### xau-hedging — gold hedging and P&L bleed
 status: watching · since: 2026-05-27 · last: 2026-10-08
