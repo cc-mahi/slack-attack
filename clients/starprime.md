@@ -17,7 +17,7 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-10-19T07:09:27Z
+last_catchup: 2026-10-20T07:16:51Z
 status: active
 ---
 
@@ -60,10 +60,10 @@ Next: Mahi dev ships the asset-class split and controlled-release fixes; BMSL ch
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787131381126679 https://mahifx.slack.com/archives/C095MJHC68J/p1789749804489599 https://mahifx.slack.com/archives/C095MJHC68J/p1790035269255469 https://mahifx.slack.com/archives/C095MJHC68J/p1791967057451979
 
 ### access-data-requests — Access provisioning and ad-hoc data/report requests
-status: open · since: 2026-08-18 · last: 2026-10-14
-State: Recurring asks for orders VWAP proofs for client queries (18 and 20 Aug), hedger fills/rejects reports, FIX logs, and last month's SI breakdown and three months of SI trade data for revenue shares (forwarded 1 Oct, delivery not seen). Samin said Pulse access is needed and wants to chat with Shahid; Edwin Jarilla's access was added then removed (18 Sep), Alison Koay was added to Slack (6 Oct), and on 14 Oct Samin asked for Umar to be allowed to edit the execution-rule-editor, which Nathan Burch is investigating.
-Next: Mahi to confirm Umar's execution-rule-editor access; confirm whether the SI data and rev-share file went out.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787033520203829 https://mahifx.slack.com/archives/C096422RPKK/p1787233885680149 https://mahifx.slack.com/archives/C096422RPKK/p1791955277857929
+status: open · since: 2026-08-18 · last: 2026-10-19
+State: Recurring asks for orders VWAP proofs for client queries (18 and 20 Aug), hedger fills/rejects reports, FIX logs, and last month's SI breakdown and three months of SI trade data for revenue shares (forwarded 1 Oct, delivery not seen). Samin said Pulse access is needed and wants to chat with Shahid; Edwin Jarilla's access was added then removed (18 Sep), Alison Koay was added to Slack (6 Oct) but on 19 Oct could not join the shared channel; Liam Cordelle re-invited her as a guest of Mahi's Slack that day, and on 14 Oct Samin asked for Umar to be allowed to edit the execution-rule-editor, which Nathan Burch is investigating.
+Next: Mahi to confirm Umar's execution-rule-editor access; confirm Alison's guest invite worked; confirm whether the SI data and rev-share file went out.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787033520203829 https://mahifx.slack.com/archives/C096422RPKK/p1787233885680149 https://mahifx.slack.com/archives/C096422RPKK/p1791955277857929 https://mahifx.slack.com/archives/C096422RPKK/p1792402460468399
 
 ### rbf-finprime — RBF (FINPRIME/Vantage) B-book white-label via PrimeXM
 status: open · since: 2026-08-25 · last: 2026-10-13
