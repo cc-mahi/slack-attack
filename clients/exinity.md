@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-19T07:08:58Z
+last_catchup: 2026-10-20T07:17:55Z
 status: active
 ---
 
@@ -32,6 +32,18 @@ Open on Mahi: re-setting per-book PnL-drop alerts, XAU position realignment usin
 Weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
+
+### weekend-ops-reliability — Weekend restarts, FIX session windows, hedger recovery
+status: open · since: 2026-08-17 · last: 2026-10-19
+State: Mon 2026-10-19 Liam raised the DB connection limit to 2048 and restarted replica DBs (change CHG-2610-VP5A, 15:40-16:30Z, self-approved), and moved NSCA to daemon mode to stop Nagios alert storms. Weekend reboots repeatedly leave things down. After the 2026-08-22 reboot ~25 processes were missed; components failed again 2026-09-12; STRD_PARTNER crypto pricing did not publish at weekends (fixed 2026-09-23). On Sat 2026-10-17 the trading-1 reboot (07:36Z) left clientDistributionGateway1 dead (duplicate Hazelcast shard ID 1533 after trading-2's node ran out of 2 GB heap; trading-2 missed its 07:50Z slot and rebooted 08:16Z for the kernel patch, admin-1 rebooted twice) and trading-1 MySQL hit 1512/1536 connections, so the Insti, BigBook and CFD hybrid hedgers were down 08:15 to ~10:55Z. James restarted all Hazelcast nodes and raised max_connections to 2048; Justin restarted the hedgers; a rebase bug (not hedger-related) showed a -42k PnL, fixed by a MahiWebstack commit (about -3k after). RCA written (P2, status open). The Friday 21:00Z to Sunday 21:00Z FIX logout of the ECN/ECNARU/PROECNARU/STRD/TE sessions (earlier flagged by Nathan) is Exinity's normal weekly cycle, seen the same the prior weekend, and the bare TCP connects every 10s from Exinity IPs are a health probe. Exinity mirrors Mahi's nightly offline window (07:00 to 09:00 UTC). Daniel says Exinity is comfortable self-monitoring but plans weekend crypto pricing.
+Next: Mahi to raise the trading-2 hazelcastNode heap above 2 GB and break down MySQL connections on trading-1 (limit raise done 2026-10-19); Daniel/Kate to revisit weekend support when weekend crypto starts.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/p1791752884902819 https://mahifx.slack.com/archives/C040V9LNKT5/p1792233233302349 https://mahifx.slack.com/archives/C040V9LNKT5/p1792424073139469
+
+### yield-sims-giraffe — Yield simulations on Exinity trade datasets
+status: open · since: 2026-10-05 · last: 2026-10-19
+State: On 2026-10-19 Matt sent a new October test-data workbook for a quick-turnaround yield sim, asking for a UTC+3 run as well because of a 'DST correction' in its UTC+2 timestamps; Rory confirmed the data aligned and posted the sim Echo link the same afternoon (done unless Matt has questions). Earlier, Keshav asked for simulations on three GMT+3 datasets. Rory found about half the trades are 20 to 40 pips or $19-30 off the Mahi retail mid, in blocks; Louie says they traded on a different LP, and George confirmed TradePrice is fill price and TransactTime is GMT+3 execution time. George suggested excluding outliers; Rory shows a non-trivial share is off market, so the sims have not run.
+Next: Matt to review the 2026-10-19 sim; Exinity (George/Keshav) to decide on excluding or correcting off-market trades in the earlier datasets.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1791216865711639 https://mahifx.slack.com/archives/C0456LSHQQK/p1791893099757919 https://mahifx.slack.com/archives/C0456LSHQQK/p1792421634028869
 
 ### sunday-open-cancels — Last-look latency cancels at Sunday FX open
 status: open · since: 2026-10-18 · last: 2026-10-18
@@ -44,12 +56,6 @@ status: open · since: 2026-10-16 · last: 2026-10-16
 State: On 2026-10-16 Liam posted a networking incident in the LD environment (10:33 BST, recovery 11:47, resolved 12:30). hybridHedgerCFD1 went down on an order breach after a Route28 AVAX/USD order (99 AVAX, 012e1d2mn2, sent 10:01Z) got no confirmation; Kate asked Exinity to check with Route28 whether it filled, with the FIX log, and brought the hedger back up accepting a small risk if the fill must be booked and hedged. No Exinity answer seen.
 Next: Exinity to confirm whether Route28 filled order 012e1d2mn2.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792143223051249 https://mahifx.slack.com/archives/C0456LSHQQK/p1792148922388959
-
-### weekend-ops-reliability — Weekend restarts, FIX session windows, hedger recovery
-status: open · since: 2026-08-17 · last: 2026-10-17
-State: Weekend reboots repeatedly leave things down. After the 2026-08-22 reboot ~25 processes were missed; components failed again 2026-09-12; STRD_PARTNER crypto pricing did not publish at weekends (fixed 2026-09-23). On Sat 2026-10-17 the trading-1 reboot (07:36Z) left clientDistributionGateway1 dead (duplicate Hazelcast shard ID 1533 after trading-2's node ran out of 2 GB heap; trading-2 missed its 07:50Z slot and rebooted 08:16Z for the kernel patch, admin-1 rebooted twice) and trading-1 MySQL hit 1512/1536 connections, so the Insti, BigBook and CFD hybrid hedgers were down 08:15 to ~10:55Z. James restarted all Hazelcast nodes and raised max_connections to 2048; Justin restarted the hedgers; a rebase bug (not hedger-related) showed a -42k PnL, fixed by a MahiWebstack commit (about -3k after). RCA written (P2, status open). The Friday 21:00Z to Sunday 21:00Z FIX logout of the ECN/ECNARU/PROECNARU/STRD/TE sessions (earlier flagged by Nathan) is Exinity's normal weekly cycle, seen the same the prior weekend, and the bare TCP connects every 10s from Exinity IPs are a health probe. Exinity mirrors Mahi's nightly offline window (07:00 to 09:00 UTC). Daniel says Exinity is comfortable self-monitoring but plans weekend crypto pricing.
-Next: Mahi to raise the trading-2 hazelcastNode heap above 2 GB and break down MySQL connections on trading-1; Daniel/Kate to revisit weekend support when weekend crypto starts.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/p1791752884902819 https://mahifx.slack.com/archives/C040V9LNKT5/p1792233233302349
 
 ### insti-exotics-pricing — Exotic pairs unpriced on Distribution_Insti_LDN
 status: open · since: 2026-10-15 · last: 2026-10-16
@@ -74,12 +80,6 @@ status: open · since: 2026-09-25 · last: 2026-10-14
 State: The Big House vs Big Clients Net XAU break (an Invast to LMAX move on 2026-05-07 booked to the wrong book) was fixed on 2026-09-28 by Rory with a six-row import into BIG_HEDGING_WASHBOOK_LDN and BIG_HOUSE, with the Big hedger off, plus a 14oz follow-up; Daniel confirmed it looked right. Separately, Mukhammad raised a 1.13k oz visual break between A House and Clients Net (not real risk, per Nathan, who supplied a realignment CSV based on A_HOUSE). On 2026-10-01 Daniel asked for the adjustment to use the CLIENTS book as source of truth instead; Rory said Mahi would look, and Daniel chased on 2026-10-14 with no reply seen.
 Next: Mahi (Rory/Nathan) to produce adjustments using CLIENTS as the reference and reply to Daniel's 2026-10-14 chase.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790329597165279 https://mahifx.slack.com/archives/C0456LSHQQK/p1790613838734949 https://mahifx.slack.com/archives/C0456LSHQQK/p1790555345540849 https://mahifx.slack.com/archives/C0456LSHQQK/p1791976466451139
-
-### yield-sims-giraffe — Yield simulations on Giraffe datasets
-status: open · since: 2026-10-05 · last: 2026-10-13
-State: Keshav asked for simulations on three GMT+3 datasets. Rory found about half the trades are 20 to 40 pips or $19-30 off the Mahi retail mid, in blocks; Louie says they traded on a different LP, and George confirmed TradePrice is fill price and TransactTime is GMT+3 execution time. George suggested excluding outliers; Rory shows a non-trivial share is off market, so the sims have not run.
-Next: Exinity (George/Keshav) to decide on excluding or correcting off-market trades.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1791216865711639 https://mahifx.slack.com/archives/C0456LSHQQK/p1791893099757919
 
 ### insti-book-moves — Insti routing, tag forwarding and position moves
 status: open · since: 2026-08-31 · last: 2026-10-12
