@@ -16,14 +16,20 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-10-20T07:16:32Z
+last_catchup: 2026-10-21T07:14:17Z
 status: active
 ---
 
 ## Now
-Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost.
+Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored.
 
 ## Streams
+
+### leverage-risk-sims — 500:1 leverage / more risk-holding sims
+status: open · since: 2026-08-31 · last: 2026-10-21
+State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1); Mahi sims (Compass, SI, inventory, B book) earlier did not clearly support changing risk management, and a separate in-house prop-style challenge product was floated. On 2026-10-21 Shyam, agreed with Jem, switched the retail FX book to a G8-Cap hedging profile: up to a 500k inventory cap on internalised G8 flow with a Friday close flatten, so Argamon can offer higher leverage. Replay vs old rules (2026-09-25 to mid-Oct) showed +$62k (about $1/M), average G8 risk up from $0.91m to $1.26m with much smaller peaks and near flat into weekends. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. Will Carter asked William Denny to monitor.
+Next: William Denny to monitor the G8-Cap book; swap back if PnL tanks.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790047491374069 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929
 
 ### lucera-hard-timeout — Lucera LD fill latency and hard timeout
 status: open · since: 2026-10-18 · last: 2026-10-19
@@ -48,12 +54,6 @@ status: open · since: 2026-07-24 · last: 2026-10-05
 State: Retail NY volume is down roughly 50% month on month (2026-07) and the book has been weak; INST-1 started trading with large, highly toxic volumes and the Internalise <500k - INST rule means Mahi took the hit. Shyam added INST-1 to the Retail Book fast-hedge whitelist on 2026-10-05; weekly PnL was $18k in the week to 2026-08-20 but noted as lucky on XAUUSD moves.
 Next: Watch whether the whitelist reduces the PnL drops.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791171597533909
-
-### leverage-risk-sims — 500:1 leverage / more risk-holding sims
-status: open · since: 2026-08-31 · last: 2026-09-22
-State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1) and are exploring options up to B-booking, plus a separate in-house prop-style challenge product. Daria's sims (Compass, SI, inventory, B book) do not clearly support changing risk management; 2026-09-22 call showed FX-only internalisation as the best option so far, Argamon to review and say how much risk they will open up, and they want Mahi advice on leverage levels and instruments. Logged in the MahiProduct wiki client requests.
-Next: Argamon to come back on risk appetite; Mahi to run further instrument-group and smaller-account sims.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788499126033959 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790047491374069
 
 ### toa-crypto-stability — Crypto pricing outages and sizing on Toa
 status: open · since: 2026-08-19 · last: 2026-09-21
@@ -99,3 +99,4 @@ Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529 https://ma
 - 2026-09-23 — CFD internalisation switched on
 - 2026-09-27 — NY bridge moved from Centroid to PXM
 - 2026-10-11 — Compass 26.4 live at weekend restart
+- 2026-10-21 — Retail FX book moved to G8-Cap (500k internalised inventory cap) to support higher leverage
