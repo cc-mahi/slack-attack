@@ -16,26 +16,44 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-10-20T07:16:51Z
+last_catchup: 2026-10-21T07:15:10Z
 status: active
 ---
 
 ## Now
-Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot has about a month left (term counts from the 5 Aug go-live; Will, 12 Oct) with post-pilot terms recorded ready to send. Compass 26.4 released 17 Oct; XAUUSD pulled from MAS on 16 Oct over market-order rejects. On 19 Oct the hedger stopped clearing XAUUSD (NOP limits vs unreconciled positions; about 26,000oz unhedged) and a null-check bug crashed the SOR when a NOP key was deleted; NOP limits are off pending a fix deploy. Open: MAS filled-after-cancel reconciliation and PXM timeout handling; Friday-close risk carry under Broker First.
+Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot has about a month left (term counts from the 5 Aug go-live; Will, 12 Oct) with post-pilot terms recorded ready to send. Compass 26.4 released 17 Oct; XAUUSD pulled from MAS on 16 Oct over market-order rejects. On 19 Oct the hedger stopped clearing XAUUSD (NOP limits vs unreconciled positions; about 26,000oz unhedged) and a null-check bug crashed the SOR when a NOP key was deleted; NOP limits are off pending a fix deploy. On 20-21 Oct HFT FX spreads were fixed then went to zero (HFT pool only carries XAUUSD until EOD restart), and Kama's SI sim results are due 21 Oct. Open: MAS filled-after-cancel reconciliation and PXM timeout handling; Friday-close risk carry under Broker First.
 
 ## Streams
+
+### hft-fx-pricing — HFT channel FX spreads and pool coverage
+status: open · since: 2026-10-20 · last: 2026-10-21
+State: On 20 Oct Ali saw FX spreads on the .HFT symbols far wider than the LP feeds (about 12 cents on EURUSD). Cause: LIQUIDITY_POOL_HFT carries only XAUUSD, so every other instrument fell back to the continuity pool, which was published with $50/M markup. Isaac and Kate cut continuity markup to $10/M, then to $0 at Moe's request; the full instrument list goes into the HFT pool at the EOD restart. On 21 Oct Ali reported FX HFT spreads now at zero while the normal feed has spread, and asked to construct the HFT price the same way as the normal ones; Isaac asked whether he wants the same price on both feeds. Markup lives per channel in the channel explorer (Internal, Brokering, Continuity, per instrument and zone), not on the pool. Ali's question on how channel markup differs from the price model's spread config is unanswered.
+Next: Ali to answer Isaac on same price for HFT and non-HFT; Kate/Isaac to answer Ali's markup vs spread-config question and add the remaining instruments to the HFT pool.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792484649892479 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792566224511629
+
+### eurgbp-rejects — Market rejections on EURGBP
+status: open · since: 2026-10-21 · last: 2026-10-21
+State: On 21 Oct Ali asked the team to look at market rejections on EURGBP (screenshot only; no reply yet).
+Next: Mahi to diagnose and reply.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792566675726999
+
+### lp-pool-expansion — LP pool and hedging markets, KL/KS connectors
+status: open · since: 2026-09-21 · last: 2026-10-20
+State: Pool started as Scope only. Moe asked 2026-10-01 for Scope, MAS, Edgewater, MatchPrime-FXedge and Arts with NOP limits. FXEdge and Arts went in after test trades (5-6 Oct), then Arts was pulled from the pool and hedging for latency (6 Oct) and left out at the 8 Oct call (NOP limits per LP: Scope 150M, MAS/Edgewater 20M, FXEdge 10M, Arts 5M). MatchPrime was restricted to gold on 7 Oct and restored on all symbols the same day after they fixed swap rates. On 14-15 Oct Star and Velocity were added and Ali sent a clean-up list, ending with Moe's final list: LIQUIDITY_POOL_HFT_LDN = Edgewater_2_KS, MAS_Toxic_KS, Scope_Toxic_KL; LIQUIDITY_POOL_LDN = Edgewater_2_KS, Scope_KL, MAS_KS, FX_EDGE_KL. Kate suggested spreading load across LLC (KL) and Securities (KS) connectors rather than all on KL. Moe's 15 Oct connector subscription list also carries Fusion, Arts, Star and Velocity, which are not in the pools yet. Pool changes need EOD restarts; hedger changes can be bounced intraday. Kate (15 Oct): removing a market from a pool is dynamic, adding one needs a restart; intraday options exist if Kama wants a change before EOD. LIQUIDITY_POOL_HFT still carries XAUUSD only; the other instruments join at the 20 Oct EOD restart (see hft-fx-pricing).
+Next: Kate to make the 15 Oct pool changes and remove listed LPs ahead of weekend restarts; Ali to flag when Star and Velocity are ready for test trades before they join the pool.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1789990153651149 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792486613793579
+
+### si-and-risk-golive — Risk-management go-live and SI
+status: open · since: 2026-09-15 · last: 2026-10-20
+State: Risk go-live began 2026-09-14 but the first A Book client switched off after a position-rec scare and an SOR restart that tripped PXM's firewall; flow came back 17-23 Sep. Kate pushed Kama to run the Compass book for a few weeks before SI, and ran SI sims on Moe's tag cohort (results weak; Sammy argued SI may not suit Kama). Mahi view (Andrew, Will): flow with Kama in aggregation (e.g. Star, tag 42060) is not SI material. On the 8 Oct call Kama wanted SI soon and supplied a list of tags; Kate is running sims on those tags and the full portfolio; Moe chased for the results on 20 Oct and Kate said a final internal review is under way and results come to him on 21 Oct. Kama also wants to add 26degrees and ISAM and asked for anonymised reject-rate data from other clients; Kate's 8 Oct Pulse analysis (6 clients, 30d) found gold reject rates of about 5-89% depending on setup and clip size, so she recommends giving no figure and offering to measure on Kama's own flow (no sign it was sent).
+Next: Kate to send the SI sim results to Moe (due 21 Oct) and walk Kama through them; reply to Kama on reject rates (recommended: no number).
+Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789482321712589 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792519237327159
 
 ### nop-hedger-outage — 19 Oct unhedged XAUUSD, SOR crash, VaR alerting
 status: open · since: 2026-10-19 · last: 2026-10-19
 State: From about 06:58 UTC on 19 Oct the hedger stopped clearing XAUUSD, most likely blocked by per-LP NOP limits running against unreconciled positions (Kama had posted positions in a thread, so they were missed); VaR passed 10k at 05:33 and hit about 146k (Ali: 26,000oz unhedged), and Kama raised it at 07:31. At 07:35 Isaac deleted risk.nop.perPB to unblock the hedger; a missing null check crashed liquidityPoolSOR and the hybrid and arb hedgers, ten XAUUSD orders sat open 6-9 min and Kama's 180s timeout disabled Mahi as provider until about 07:51. Processes were back by 07:37. Fix (null guard in MarketGroupTradePositionNOPTracker) is committed to release/26.4 and 26.3 but not yet deployed; until then do not delete NOP keys on Kama (set marketListNOPConfigs to [] or raise watermarks). All NOP limits were removed on Ali's request. Kate set a sustained critical-VaR alert (sustainMs 120,000, clearHoldMs 60,000) after Ali asked for an alert and a noisy 10k threshold; Kate offered to post VaR alerts to Kama's Slack notifications channel too. Liam asked how we know we hedge the right thing with unreconciled positions; Kate: Kama was STP before, so all A Book risk is covered by hedging or STP.
 Next: Kama to send positions at EOD roll; Isaac to get the null-check fix deployed and raise whether bad non-trading config should keep the old config instead of killing processes; Kate to tune the VaR alert if noisy.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792395096025849 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792397763936839 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792417025779529
-
-### tag-lp-exclusion — Block a counterparty tag from a specific LP
-status: open · since: 2026-10-19 · last: 2026-10-19
-State: Moe asked on 19 Oct whether a specific counterparty tag can be kept from going to a specific LP on Mahi hedging trades; rory.king confirmed it is doable and offered to set it up from an example tag and LP. Moe is confirming with the LP first.
-Next: Moe to supply the tag and LP; rory to configure and share the config.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792407866139499 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792411908923309
 
 ### lp-timeouts-pxm-unsub — LP latency and timeouts triggering PXM unsubscribes
 status: open · since: 2026-09-15 · last: 2026-10-19
@@ -60,18 +78,6 @@ status: open · since: 2026-10-16 · last: 2026-10-16
 State: Kate's 9-16 Oct execution-quality review (internal) found most internalisable brokered flow is roll, twilight and Sunday/Monday open. Open brokered $145M and kept $26k ($182/M), almost all EURJPY with spreads slightly wider than Scope; roll/twilight brokered $783M XAUUSD and kept $14.2/M versus about $1.7/M if internalised, so brokering is right there. CP 100079_n/a was tagged arbitrageur then brokering 7-9 Oct and untagged before 12 Oct; it is now internalised on Catch-All at about -$71/M at 1m on $99M XAUUSD, no manual change, watching for re-tag. 40874_30033000 is the only steady internalise candidate (about $1k/week), to watch a couple more weeks. Andrew queried why Broker First internalises some flow at lower yield; Kate: internalised pays Mahi spreads, brokered pays LP spreads, and all rules use passthrough fill price. Andrew fed the lesson into the routine checks (PR 153 merged) so positive markouts need session/regime review before rehabilitation advice.
 Next: Kate to finish instrument/timezone/CP breakdown; watch 100079_n/a re-tagging and 40874_30033000.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1792160321472259 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792165670366029
-
-### lp-pool-expansion — LP pool and hedging markets, KL/KS connectors
-status: open · since: 2026-09-21 · last: 2026-10-15
-State: Pool started as Scope only. Moe asked 2026-10-01 for Scope, MAS, Edgewater, MatchPrime-FXedge and Arts with NOP limits. FXEdge and Arts went in after test trades (5-6 Oct), then Arts was pulled from the pool and hedging for latency (6 Oct) and left out at the 8 Oct call (NOP limits per LP: Scope 150M, MAS/Edgewater 20M, FXEdge 10M, Arts 5M). MatchPrime was restricted to gold on 7 Oct and restored on all symbols the same day after they fixed swap rates. On 14-15 Oct Star and Velocity were added and Ali sent a clean-up list, ending with Moe's final list: LIQUIDITY_POOL_HFT_LDN = Edgewater_2_KS, MAS_Toxic_KS, Scope_Toxic_KL; LIQUIDITY_POOL_LDN = Edgewater_2_KS, Scope_KL, MAS_KS, FX_EDGE_KL. Kate suggested spreading load across LLC (KL) and Securities (KS) connectors rather than all on KL. Moe's 15 Oct connector subscription list also carries Fusion, Arts, Star and Velocity, which are not in the pools yet. Pool changes need EOD restarts; hedger changes can be bounced intraday. Kate (15 Oct): removing a market from a pool is dynamic, adding one needs a restart; intraday options exist if Kama wants a change before EOD.
-Next: Kate to make the 15 Oct pool changes and remove listed LPs ahead of weekend restarts; Ali to flag when Star and Velocity are ready for test trades before they join the pool.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1789990153651149 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792062491797469
-
-### si-and-risk-golive — Risk-management go-live and SI
-status: open · since: 2026-09-15 · last: 2026-10-15
-State: Risk go-live began 2026-09-14 but the first A Book client switched off after a position-rec scare and an SOR restart that tripped PXM's firewall; flow came back 17-23 Sep. Kate pushed Kama to run the Compass book for a few weeks before SI, and ran SI sims on Moe's tag cohort (results weak; Sammy argued SI may not suit Kama). Mahi view (Andrew, Will): flow with Kama in aggregation (e.g. Star, tag 42060) is not SI material. On the 8 Oct call Kama wanted SI soon and supplied a list of tags; Kate is running sims on those tags and the full portfolio and will review with them. Kama also wants to add 26degrees and ISAM and asked for anonymised reject-rate data from other clients; Kate's 8 Oct Pulse analysis (6 clients, 30d) found gold reject rates of about 5-89% depending on setup and clip size, so she recommends giving no figure and offering to measure on Kama's own flow (no sign it was sent).
-Next: Kate to finish the SI sims and walk Kama through them; reply to Kama on reject rates (recommended: no number).
-Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789482321712589 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792064464469069
 
 ### xau-execution-style — Broker vs Broker First, HFT book and markup
 status: open · since: 2026-09-21 · last: 2026-10-15
@@ -138,6 +144,11 @@ status: watching · since: 2026-09-25 · last: 2026-09-28
 State: Kama pass limit-order deviation in tag 10001, which is not in Mahi's FIX spec; Mahi expects it baked into price (tag 44). Moe explained on 25 Sep that PXM sets the limit price from Kama's TOB (not the client's limit) and sends a deviation, so Compass should respect limit plus/minus deviation and allow worse fills up to it; this also explains Scope limit rejects. William noted price improvement is off on all A_CLIENTS rules and has a cap setting. Mahi still does not accept the tag and no decision on honouring it is visible.
 Next: Kate to decide whether Compass can honour limit plus/minus deviation (tag 10001).
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790332508870719 https://mahifx.slack.com/archives/C0B6FMU96G2/p1790598299904109
+
+### tag-lp-exclusion — Block a counterparty tag from a specific LP
+status: closed · since: 2026-10-19 · last: 2026-10-20 · closed: 2026-10-21
+State: Done 20 Oct: Kate set a blacklist entry in the reference.marketSupport.tagList config on the FXEDGE_KL market (trading account A_INST_CLIENTS plus the counterparty tag Moe named, all instruments, which Moe confirmed was what he wanted); the tag can still go to other LPs.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792407866139499 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792489839786759
 
 ### settldate-tag64 — Bad SettlDate (tag 64) from LPs
 status: closed · since: 2026-10-02 · last: 2026-10-06 · closed: 2026-10-15
