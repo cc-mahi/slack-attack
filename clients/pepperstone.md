@@ -25,7 +25,7 @@ contacts:
   - {name: "Saemi Kim", role: "Pepperstone; pricing config changes 2026-10", confidence: low}
   - {name: "Sam Dammers", role: "Pepperstone security/Cloudflare IP policy", confidence: low}
   - {name: "Tom Williams", role: "Pepperstone COO since 2026-08"}
-last_catchup: 2026-10-20T07:16:52Z
+last_catchup: 2026-10-21T07:15:11Z
 status: active
 ---
 
@@ -33,6 +33,12 @@ status: active
 Live on FX, Crypto exchange (Modulus) and CFD (desk live since July), on a 3-year MSA to 2028-07. Three fronts: roll-time arbitrage across majors (Mahi raised roll LR 2026-10-15), FX B-book SI/inventory sims (credit limit USD 200M the constraint) and crypto PSM scoping. A CPI-print gateway incident on 2026-10-14 is awaiting a full written response to Diego. A London estate connectivity incident on 2026-10-16 resolved the same day; XBTUSD skew arbers (2026-10-18) and missing HRP data in London since 2026-10-18 are live. Pepperstone is also moving spot crypto off Modulus (to "Polaris"); Polaris sessions staged in London 2026-10-19, SOW to come. CFD licence fee steps up to USD 45k/month from month 4.
 
 ## Streams
+
+### compass-263-release — Compass 26.3 release to all Pepperstone systems
+status: open · since: 2026-10-20 · last: 2026-10-20
+State: Pricers jumped from the 7 Jul build to 26.3 (secondary-book fallback fix, combined-ceiling change, adaptive-mid firm-only; PSM overlay held off by config) under a change approved 2026-10-20. Liam also asked to release 26.3 to all Pepperstone systems; MK wants the FX, CFD and crypto release over an APAC weekend and asked what changes to expect. Liam listed performance work, extra monitoring, a new market data metadata system (off, slow rollout) and new UI screens (channel explorer, connections, spread analysis, price forensics redesign).
+Next: Liam to agree the weekend release window.
+Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792489817664909 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792490192346659 https://mahifx.slack.com/archives/C033K2P0RPT/p1792500860562609
 
 ### crypto-btc-arb — XBTUSD skew arbers hitting crypto pricing
 status: open · since: 2026-10-18 · last: 2026-10-20
@@ -65,10 +71,10 @@ Next: Diego to get HRP's answer; Shyam to update the mapping to HRP-2 if confirm
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792362092980019?thread_ts=1792362092.980019&cid=C06AR8MT8NT
 
 ### polaris-migration — Spot crypto moving from Modulus to Polaris (SOW)
-status: open · since: 2026-08-21 · last: 2026-10-19
-State: Stephen told Daria on 2026-08-21 that Pepperstone is dropping Modulus for spot crypto (new venue possibly Polaris); Liam argued for an SOW with an added-days clause or monthly exchange-MM fee and, after a call with the exchange team (2026-08-26), said the timeline is conservative and Stephen expects costs. Daria thinks Pepperstone are already committed to Polaris, so alternatives (Toa, Adaptive accelerator) look moot. On 2026-10-19 Liam staged self-approved changes in London for new Polaris FIX order/market data sessions and a 26.3 build with the Polaris adaptor; no SOW seen yet.
+status: open · since: 2026-08-21 · last: 2026-10-20
+State: Stephen told Daria on 2026-08-21 that Pepperstone is dropping Modulus for spot crypto (new venue possibly Polaris); Liam argued for an SOW with an added-days clause or monthly exchange-MM fee and, after a call with the exchange team (2026-08-26), said the timeline is conservative and Stephen expects costs. Daria thinks Pepperstone are already committed to Polaris, so alternatives (Toa, Adaptive accelerator) look moot. On 2026-10-19 Liam staged self-approved changes in London for new Polaris FIX order/market data sessions and a 26.3 build with the Polaris adaptor; on 2026-10-20 he added a UAT prop trader for Polaris in London and switched it on. No SOW seen yet.
 Next: Pepperstone to send integration info; Liam to scope the SOW.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1787289556446609 https://mahifx.slack.com/archives/C033K2P0RPT/p1792405231807419
+Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1787289556446609 https://mahifx.slack.com/archives/C033K2P0RPT/p1792492842169379
 
 ### cfd-licence-fee — CFD licence fee step-up at month 4
 status: open · since: 2026-10-19 · last: 2026-10-19
@@ -113,16 +119,16 @@ Next: Reece to ask Invast/OZ whether NG1 depth is capped and whether the book ca
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1785164826669399 https://mahifx.slack.com/archives/C06AR8MT8NT/p1791898246094219
 
 ### perps-pricing — Perp instruments: pricing, rollover and KRX
-status: open · since: 2026-06-26 · last: 2026-10-07
-State: WTI (CL1USD-PERP) mispricing on 2026-09-20 was Goldi dropouts leaving a stale basis against Binance (price ~0.45 high until Goldi returned); Binance was removed from non-XAUUSD perp reference markets on 2026-09-25 (kept on XAUUSD). Ruby found the Brent perp daily price adjustment not mirrored at rollover (clients capturing swaps); Isaac added a 16-minute force-indicative (1 min before, 15 after) failing over to marked-up HRP_GOLDI, and the basis-jump fix (MahiMain PR 1168) deployed 2026-09-30, with force indicative off on the beta pricer only to compare at the next funding basis adjustment (MK wants prod left on). KRXKRW-PERP rejects were fixed by a 2026-09-29 release, then the perp was swapped to KRXUSD-PERP on 2026-10-07 and priced in NY and LD. XAGUSD-PERP is still unlaunched: Daria found no Mahi-side blocker on 2026-09-02, so Pepperstone had to finish config and test.
+status: open · since: 2026-06-26 · last: 2026-10-20
+State: WTI (CL1USD-PERP) mispricing on 2026-09-20 was Goldi dropouts leaving a stale basis against Binance (price ~0.45 high until Goldi returned); Binance was removed from non-XAUUSD perp reference markets on 2026-09-25 (kept on XAUUSD). Ruby found the Brent perp daily price adjustment not mirrored at rollover (clients capturing swaps); Isaac added a 16-minute force-indicative (1 min before, 15 after) failing over to marked-up HRP_GOLDI, and the basis-jump fix (MahiMain PR 1168) deployed 2026-09-30, with force indicative off on the beta pricer only to compare at the next funding basis adjustment (MK wants prod left on). KRXKRW-PERP rejects were fixed by a 2026-09-29 release, then the perp was swapped to KRXUSD-PERP on 2026-10-07 and priced in NY and LD; on 2026-10-20 Reece reported KRXUSD-PERP rejects because Mahi sent 2dp prices against a 1dp symbol, and Isaac fixed it the same day. XAGUSD-PERP is still unlaunched: Daria found no Mahi-side blocker on 2026-09-02, so Pepperstone had to finish config and test.
 Next: Isaac to compare beta vs prod at the next funding basis adjustment; Pepperstone to launch XAGUSD-PERP.
-Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1782431997282909 https://mahifx.slack.com/archives/C06AR8MT8NT/p1789944667574059 https://mahifx.slack.com/archives/C033K2P0RPT/p1791389389028919
+Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1782431997282909 https://mahifx.slack.com/archives/C06AR8MT8NT/p1789944667574059 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792481789618939
 
 ### infra-resilience — Crypto server reboots, failover sessions and patching
-status: open · since: 2026-08-09 · last: 2026-10-05
-State: Weekend crypto server restarts (LDN reboot Aug 29, Beeks denied) led Mahi to move infra patches to weekday Monday windows (LDN 22:00 UTC, NYC 23:00 UTC, with advance notice). On 2026-10-05 Arun found the three NYC OZ failover MD/order sessions flapping every 7-8 minutes from TCP retransmits (packet loss; primary sessions healthy). Beeks cross-site link work is scheduled 17 Oct and 22 Oct.
-Next: Arun to raise the packet loss with Beeks if it persists.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1786319051125299 https://mahifx.slack.com/archives/C033K2P0RPT/p1791213140868539
+status: open · since: 2026-08-09 · last: 2026-10-20
+State: Weekend crypto server restarts (LDN reboot Aug 29, Beeks denied) led Mahi to move infra patches to weekday Monday windows (LDN 22:00 UTC, NYC 23:00 UTC, with advance notice). On 2026-10-05 Arun found the three NYC OZ failover MD/order sessions flapping every 7-8 minutes from TCP retransmits (packet loss; primary sessions healthy). Beeks cross-site link work is scheduled 17 Oct and 22 Oct. On 2026-10-20 Liam said Beeks must power down the London crypto trading server for maintenance; MK agreed intra-week is better since crypto fails over to NY, and a time is still to be agreed.
+Next: Arun to raise the packet loss with Beeks if it persists; Liam to agree the Beeks maintenance time with Pepperstone.
+Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1786319051125299 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792489392693439
 
 ### fx-a-book-hedging — FX A-book metals hedging and prime-broker limits
 status: open · since: 2026-09-14 · last: 2026-09-28
