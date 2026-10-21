@@ -17,13 +17,13 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-10-20T07:17:55Z
+last_catchup: 2026-10-21T07:15:10Z
 status: active
 ---
 ## Now
 GTC is live and ramping: all FX majors/crosses plus XAGUSD and XAUUSD B Book flow route to Mahi over 7 OneZero hubs (A and B sessions each), with an A Book account live since 2026-10-06 (hedging to HRP LPs only).
 Main risk is load: cent accounts drive ticket rates (dist6 hit ~4k orders/s on 2026-10-15) and riskPath stalls; the riskPath fix is approved and was rescheduled to the 2026-10-15 12:15-14:45Z window.
-In flight: Centroid connection (creds sent 10-13), crypto (BTC/ETH, Binance blocked by Beeks IP), XAUUSD testing from the PXM xcore sessions (counterparty tag fix pending). The 24/7 session switch is done after a 2026-10-17 weekend logout hiccup.
+In flight: 24/7 XAU is now the priority (demo stream on OZ-4, crypto back-seat), Centroid connection (both makers failing on network, 10-20), XAUUSD from the PXM xcore sessions (counterparty tag fix pending), XAG price spikes from FINALTO/SWIFT basis (GTC to choose markets).
 
 ## Streams
 
@@ -33,17 +33,29 @@ State: GTC tested XAUUSD from its PXM xcore A and B order sessions on 2026-10-16
 Next: GTC to change the PXM bridge to send the counterparty with 452=3; Mahi to confirm the EOD fix and drop the workaround; GTC to retest with the VIP tag.
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1792140498426039 https://mahifx.slack.com/archives/C0AKRP8C049/p1792479999175029
 
+### centroid-connection — New Centroid LP connection
+status: open · since: 2026-09-24 · last: 2026-10-20
+State: GTC asked for a Centroid hub session (2026-09-24). GTC wants two Maker FIX connections for its Centroid bridge (backup over internet, primary over a Beeks X Connect/BGP); needs a separate distribution process (gateway8, ports 9020/9021). Centroid as taker resets sequence numbers on market data but not trade sessions. Beeks missed the first weekend window; Rory sent Centroid A/B credentials on 2026-10-13 and Marios acknowledged. On 2026-10-20 Centroid configured the MAHI_A and MAHI_B makers but both connections fail (telnet also fails); Antreas asked whether Centroid bridge IP 192.109.17.144 is whitelisted. Isaac passed it to the server provider and asked for a traceroute, which Antreas posted (only two hops, 192.109.17.2/.3, before the 172.20.201.141 target). Still not working.
+Next: server provider (Beeks) to confirm whitelist/routing for the Centroid bridge IP; GTC to retest A before B.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1790236332277899 https://mahifx.slack.com/archives/C0AKRP8C049/p1792496368150449
+
+### crypto-24x7 — Crypto onboarding and 24/7 sessions
+status: open · since: 2026-09-15 · last: 2026-10-20
+State: Crypto is next after gold. GTC's core BTC/ETH LP is Binance (pricing only; GTC confirmed it does not hedge or trade via it), so Mahi is connecting directly; the HRP Route28 connection was whitelisted both sides and confirmed established 2026-10-15. cryptoMarketData1 fails because Binance returns HTTP 451 for trading-1/2's Beeks public IP range (US-registered); Liam and Isaac agreed the preferred fix is to subscribe to Binance from mc-apnortheast-1 and proxy it to mahi-central-ln via Fabric, rather than the Beeks egress ticket. 24/7 sessions: GTC switched its OZ session times to 24/7 on 2026-10-16 (Mahi's global change, Sat 10:59 to Sat 10:01 NY, bounced after roll); MAHI_GOLD (24/7) tXAUUSD was added the same day. Mahi's side was not actually applied until the morning of 2026-10-17, so OZ sessions and PXM were logged out ("Logon attempt not within session time") until Isaac applied it and re-synced FIX sequence numbers (resolved 10-17, GTC confirmed). GTC applies the XC/provider-level 24/7 change with its EOD restart. 24/7 XAUUSD is the upsell; a second London cluster to stagger restarts was floated. Call with Manglai 2026-10-20 (internal note): 24/7 XAU is now the priority and crypto takes a back seat; Mahi subscribes to GTC's 24_7 XAU feed and trades (GTC to restart its PXM to expose it) to measure FI/skew potential, XAUUSD MT5 goes on for OZ1/OZ2, and full 24/7 feeds need to align with the MC work in TKY. Isaac scheduled an EOD restart of the process housing GTC-A/B-Prices-OZ-4 to add a demonstration 24/7 tXAUUSD stream (rest of the streams by end of week or on request); GTC asked to subscribe.
+Next: GTC to subscribe to tXAUUSD on the OZ-4 stream and restart PXM; Mahi to roll 24/7 tXAUUSD to the other streams; crypto (deprioritised): get mc-apnortheast-1 consuming Binance and proxied to mahi-central-ln (Beeks egress ticket is the fallback); GTC to confirm session changes on PXM and Centroid.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791975353055319 https://mahifx.slack.com/archives/C0AKRP8C049/p1792053281436189 https://mahifx.slack.com/archives/C0AKRP8C049/p1792147010645739 https://mahifx.slack.com/archives/C0AKRP8C049/p1792507561982119
+
+### pricing-skew-tuning — Skew, spread and last-look tuning
+status: open · since: 2026-08-19 · last: 2026-10-20
+State: Skew signal config tuned repeatedly: XAG ceilings lowered after quote "shake" complaints (09-09/10), IFMS leg removed from signal config 2026-10-07 for poor FX FI performance, arb protection and pre-triangulation spreads adjusted for wide FX crosses (09-29). Controls added: opening-window last look (800ms XAU, 400-500ms others) via CUSTOM1 timezone, indicative XAU pricing around open, 8 cent min TOB with news widening removed, XAU layers raised to 6. XAU spreads blew out into the Friday close (09-19) because BMSL/MWMS had only 3 benchmarks; MAHI_BENCHMARK_LDN added. 2026-10-12 GTC reported abnormal FX price spikes. 2026-10-15 GTC reported NZDJPY spread 3 JPY wide at the open because of SWIFT; Isaac removed SWIFT from arb protection, then found wide-spread suppression did not cover the custom execution timezone around the roll (B-OZ session saw wide spreads ~00:05-00:10 GTC time, now fixed). A dormant global force-indicative timetable (from April, possibly left over from a repurposed tmgm setup) that made all instruments indicative during roll was also removed. GTC also saw different spreads on GTC-B-Prices-OZ vs OZ-3 (cent hub); logs rolled off so not replayed. 2026-10-20 evening UTC John reported repeated XAGUSD spikes; Shyam found XAG pricing was swapping between FINALTO and SWIFT, which sit on slightly different bases. Shyam pointed him to the XAGUSD referencePriceMarketSelectors rule (a change needs non-trading-impacting restarts); John said to hold and not restart, and will check with his team which markets to price XAG from.
+Next: GTC to send tick data from both hubs for 23:55-00:15 their time so Isaac can confirm the OZ vs OZ-3 spread difference; Rory checking the 10-12 FX spike report; GTC to pick the XAG reference markets (Shyam will change and restart on request).
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1788911767407019 https://mahifx.slack.com/archives/C0AKRP8C049/p1792537356852869
+
 ### hedging-a-book — A Book go-live, STP rules and hedging structure
 status: open · since: 2026-10-05 · last: 2026-10-19
 State: A Book went live 2026-10-06 on one account, hedging via HRP markets only (hybridHedger markets switched from Finalto/Swift; Finalto/Swift still the two LPs in the hedger market, reason to be confirmed). 2026-10-12: flow from tag 52146947 was internalised though GTC expected STP to HRP; hedger cleared only 267oz, GTC closed 2100oz manually at HRP_MEX (avg 4177.43) and positions were adjusted in Compass. Thread outcome (resolved 2026-10-12): the hedger had bought 267oz (212 Swift, 55 Finalto), Mahi closed those and booked a 2100oz position adjustment at HRP_MEX 4177.43 to match GTC's manual close; tags 82025643 and 82025639 (moved to A Book 10-07/10-09, still STP to Mahi) were also switched to STP to HRP LPs. Kate told GTC to wait for Mahi to confirm STP whitelisting before routing a tag; the reason the hedger cleared only 267oz was still being looked at. 2026-10-14 GTC asked for percentage hedging split (A LP 30% / B LP 70%); Isaac replied a portion of a book's flow can go to a hedged book, split by counterparty, instrument or other factors, a new client with 1000-lot limit is being onboarded via risk-split from A, and hybridHedgerSI1/arbHedgerSI1 exist. HRP_SOLID and HRP_JANESTREET_FA streams added; SWIFT XCUUSD prices arrive per 100-unit lots (asked for per-unit).
 Next: the separate hedged book for the large VIP client (tag 56020001, 100 lots to start, Swift/CBCX) is being configured via the PXM stream (see pxm-xau-counterparty); GTC to give the test-account counterparty (asked 2026-10-15); agree the hedge-percentage setup with GTC; Swift to fix XCUUSD unit (Swift removed from reference markets 10-06, request logged on the wiki 10-12).
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791202994256859 https://mahifx.slack.com/archives/C0AKRP8C049/p1792398964855889
-
-### crypto-24x7 — Crypto onboarding and 24/7 sessions
-status: open · since: 2026-09-15 · last: 2026-10-17
-State: Crypto is next after gold. GTC's core BTC/ETH LP is Binance (pricing only; GTC confirmed it does not hedge or trade via it), so Mahi is connecting directly; the HRP Route28 connection was whitelisted both sides and confirmed established 2026-10-15. cryptoMarketData1 fails because Binance returns HTTP 451 for trading-1/2's Beeks public IP range (US-registered); Liam and Isaac agreed the preferred fix is to subscribe to Binance from mc-apnortheast-1 and proxy it to mahi-central-ln via Fabric, rather than the Beeks egress ticket. 24/7 sessions: GTC switched its OZ session times to 24/7 on 2026-10-16 (Mahi's global change, Sat 10:59 to Sat 10:01 NY, bounced after roll); MAHI_GOLD (24/7) tXAUUSD was added the same day. Mahi's side was not actually applied until the morning of 2026-10-17, so OZ sessions and PXM were logged out ("Logon attempt not within session time") until Isaac applied it and re-synced FIX sequence numbers (resolved 10-17, GTC confirmed). GTC applies the XC/provider-level 24/7 change with its EOD restart. 24/7 XAUUSD is the upsell; a second London cluster to stagger restarts was floated.
-Next: get mc-apnortheast-1 consuming Binance and proxied to mahi-central-ln (Beeks egress ticket is the fallback); GTC to confirm session changes on PXM and Centroid.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791975353055319 https://mahifx.slack.com/archives/C0AKRP8C049/p1792053281436189 https://mahifx.slack.com/archives/C0AKRP8C049/p1792147010645739 https://mahifx.slack.com/archives/C0AKRP8C049/p1792230082764779
 
 ### oz-hub-connectivity — OneZero hub sessions, disconnects and tags
 status: open · since: 2026-08-17 · last: 2026-10-17
@@ -63,23 +75,11 @@ State: riskPath OOM crash-looped on an unbounded analytics map (heap dumps fille
 Next: Isaac/Liam to confirm the 10-15 deploy landed; re-enable classification on A/drop copy once safe.
 Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788309377675289 https://mahifx.slack.com/archives/C0AKAPLU78W/p1792065637260039
 
-### pricing-skew-tuning — Skew, spread and last-look tuning
-status: open · since: 2026-08-19 · last: 2026-10-15
-State: Skew signal config tuned repeatedly: XAG ceilings lowered after quote "shake" complaints (09-09/10), IFMS leg removed from signal config 2026-10-07 for poor FX FI performance, arb protection and pre-triangulation spreads adjusted for wide FX crosses (09-29). Controls added: opening-window last look (800ms XAU, 400-500ms others) via CUSTOM1 timezone, indicative XAU pricing around open, 8 cent min TOB with news widening removed, XAU layers raised to 6. XAU spreads blew out into the Friday close (09-19) because BMSL/MWMS had only 3 benchmarks; MAHI_BENCHMARK_LDN added. 2026-10-12 GTC reported abnormal FX price spikes. 2026-10-15 GTC reported NZDJPY spread 3 JPY wide at the open because of SWIFT; Isaac removed SWIFT from arb protection, then found wide-spread suppression did not cover the custom execution timezone around the roll (B-OZ session saw wide spreads ~00:05-00:10 GTC time, now fixed). A dormant global force-indicative timetable (from April, possibly left over from a repurposed tmgm setup) that made all instruments indicative during roll was also removed. GTC also saw different spreads on GTC-B-Prices-OZ vs OZ-3 (cent hub); logs rolled off so not replayed.
-Next: GTC to send tick data from both hubs for 23:55-00:15 their time so Isaac can confirm the OZ vs OZ-3 spread difference; Rory checking the 10-12 FX spike report.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1788911767407019 https://mahifx.slack.com/archives/C0AKRP8C049/p1792082071865509
-
 ### infra-disk-alerting — Trading-server disk, replica and alert hygiene
 status: open · since: 2026-08-10 · last: 2026-10-14
 State: vg03-mysql extended repeatedly (trading-1/2 +200G on 09-10; trading-2 +50G on 09-30 with no more room in the vg, ZD 23574); a manual replica restore started 2026-10-01 was slow (two backups clashing, only reached 17 Sep after 3h) and was killed 10-02, the slave was reported back by 10-05, and nightly backup was switched off with bigger buffer pools (CHG 10-14) to help catch-up. The OneZero analytics drop copy (analyticsFixServerOZ1) was removed and stopped on trading-1 on 2026-10-05 for load reduction (revert commit to restore). The `mysql_optimize_enable=false` question from 2026-08-10 never got a reply. PD tuning: fiPnlDrop raised to alert severity, hedging-book alerts off until a hedger is live, fixOrders1 spam stopped.
 Next: someone to answer the mysql_optimize_enable question and decide longer-term DB sizing.
 Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790734299323199 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790870773608959 https://mahifx.slack.com/archives/C0AKAPLU78W/p1791980456302469
-
-### centroid-connection — New Centroid LP connection
-status: open · since: 2026-09-24 · last: 2026-10-13
-State: GTC asked for a Centroid hub session (2026-09-24). GTC wants two Maker FIX connections for its Centroid bridge (backup over internet, primary over a Beeks X Connect/BGP); needs a separate distribution process (gateway8, ports 9020/9021). Centroid as taker resets sequence numbers on market data but not trade sessions. Beeks missed the first weekend window; Rory sent Centroid A/B credentials on 2026-10-13 and Marios acknowledged. Not yet confirmed working.
-Next: GTC to connect and test A before B.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1790236332277899 https://mahifx.slack.com/archives/C0AKRP8C049/p1791885592937159
 
 ### flow-rollout — Symbol and server migration to Mahi
 status: open · since: 2026-08-17 · last: 2026-10-08
