@@ -18,13 +18,13 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-20T07:17:56Z
+last_catchup: 2026-10-21T07:15:10Z
 status: active
 ---
 
 ## Now
 Clio and CH want a custom layered XAUUSD symbol (`XAUUSD.l`) urgently; Shyam built the pricer and channel overnight and handed go-live (gateway restart, Infinox mapping, decisions) to Rory, while Clio chased again this morning.
-Day-to-day is routine LR / classification support via #mahi-infinox; open items are the four-account classification exclusion and overlapping Medium/Heavy LR rule order.
+Day-to-day is routine LR / classification support via #mahi-infinox; open items are the four-account classification exclusion and Isaac's LR recommendations after Infinox questioned low Toxic Harsher LR P&L (10-20).
 Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq's EURUSD tick request after the 26.4 upgrade is still unexplained.
 
 ## Streams
@@ -35,17 +35,17 @@ State: Clio asked for a new XAUUSD symbol with client-specific volume and spread
 Next: Rory to reply to Clio, agree the restart window, and get answers on per-layer vs average spreads and lot size; Rory to decide arb protection, skew and LR/WSS settings; change record and approval needed before gateway restart.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792416827862309 https://mahifx.slack.com/archives/C022S6NL82D/p1792480216320949 https://mahifx.slack.com/archives/C01QGUXPKEY/p1792468132574129
 
+### lr-profile-ops — Routine LR / execution-profile moves
+status: open · since: 2026-05-12 · last: 2026-10-20
+State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD Harsher profiles, normally actioned within an hour by Kate, Rory, William, Shyam, Nathan, Daria or Isaac. On 10-20 Trading Ops questioned why 16 traded accounts in Toxic XAUUSD Harsher earned only $76 LR P&L (6.6 $/M on $11.6M XAUUSD) against a 250 $/M cap; Isaac said 250 is a ceiling, not a rate, and Heavy would have made about $160 (13.5 $/M). Trading Ops asked for the 16 MT5_87952662_* accounts to move to Heavy; Isaac actioned it at 18:18 BST. Isaac is analysing an LR setup that charges toxic accounts most and good flow least across bursty periods. Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
+Next: Isaac to send Infinox LR setup recommendations with expected PnL; Georgia to review rule order and come back to Kate.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792057099943739 https://mahifx.slack.com/archives/C022S6NL82D/p1792511703824849 https://mahifx.slack.com/archives/C022S6NL82D/p1792516716650559
+
 ### auto-classification — Automated classification exclusions and LR-by-classification
 status: open · since: 2026-07-15 · last: 2026-10-15
 State: Infinox repeatedly asks to pull accounts out of automated classifications. Today Georgia asked to remove four accounts (MT5_plain_b_87031851, MT5_CN_.a_b_87946548, MT5_CN_Standard_b_88000123, MT5_CN_.a_b_87953449) from Arbitrageur and "Unclassified Big XAUUSD"; William blacklisted them from Arbitrageur per Tenant profile, then said the Big XAUUSD rule should not hit them since they already carry a classification, and offered to whitelist a fixed classification. Georgia says some trades still executed under Unclassified Big XAUUSD and wants them excluded. Earlier: Centroid_* accounts excluded from Automated Classification (07-15); classifier auto-rehabilitates CPs that are profitable for the book over 24h (10-06); LR rules can use classification criteria (07-23).
 Next: William/Mahi to reconcile why Big XAUUSD fired for classified accounts and reply to Georgia.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784122243791649 https://mahifx.slack.com/archives/C022S6NL82D/p1791239276076609 https://mahifx.slack.com/archives/C022S6NL82D/p1792065605339689
-
-### lr-profile-ops — Routine LR / execution-profile moves
-status: open · since: 2026-05-12 · last: 2026-10-15
-State: Near-daily requests from Trading Ops to add or move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD Harsher profiles, normally actioned within an hour or so by Kate, Rory, William, Shyam, Nathan or Daria. Today Georgia moved MT5_87986241_Cov from Medium to Heavy LR (Kate done 10:38 BST) and asked how an account in both Medium and Heavy resolves. Kate: rules apply top-down in the config editor, so Medium above Heavy wins; she recommends exclusion/reduced rules first, then harshest to least harsh, and offered to reorder. Extra Heavy LR (created 05-21 at CH's request, volume multiplier doubled 05-22) and Gold3X profile exist.
-Next: Georgia to review rule order and come back to Kate.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792056769953769 https://mahifx.slack.com/archives/C022S6NL82D/p1792057099943739
 
 ### fill-tick-queries — Execution, slippage and raw-tick requests
 status: open · since: 2026-07-08 · last: 2026-10-15
