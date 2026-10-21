@@ -18,13 +18,19 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-10-20T07:16:32Z
+last_catchup: 2026-10-21T07:14:17Z
 status: active
 ---
 ## Now
-Funded flow runs through the YourBourse X-Connect (since 2026-08-17/25). The 2026-09-25 NIC-degradation incident is fixed on the optic, but the server still runs on the backup NIC; the move back to primary was pushed to a later weekend (window TBC) and Beeks still owes an answer on the unexplained 09-28 reboot. Funded XC limit-order cancels are mostly cured (YB set SEND_ORIGINAL_REQUEST_PRICE=TRUE 2026-10-09, fills ~99%); 5ers agreed 10-13 to market orders but YB says MT5 is already market and the remaining limits come from the Trade Server flow, so it awaits confirmation. A Beeks London network outage on 2026-10-16 dropped sessions 10:10-11:35 UK; 5ers failed over and returned to the XC that afternoon, RCA still owed. Demo flow on Compass is stalled on 5ers' reluctance to pay the extra fee.
+CHURN RISK: on the 2026-10-20 weekly call Yaniv said he wants to give 3 months' notice, citing the Beeks incidents ("two issues too many") and an unnamed rival offering skew/LR at under 50% of our fees with seamless failover; a C-level follow-up call with Yaniv is set for 2026-10-21 13:45 UK (he is away from 10-22 for ~a week) and Andrew has asked for a performance/comms review since Nov 2025. Funded flow runs through the YourBourse X-Connect; the NIC fix is done on the optic but the server is still on the backup NIC (move back to primary pending), and Beeks owes RCAs for the 09-28 reboot and the 10-16 London outage. Funded XC limit-order cancels are mostly cured; demo flow on Compass is stalled on the fee.
 
 ## Streams
+
+### churn-risk-1020 — Yaniv's notice threat and retention response
+status: open · since: 2026-10-20 · last: 2026-10-20
+State: Kate reported a bad 2026-10-20 call: Yaniv is unhappy with Beeks (two issues too many, thousands of tickets and client refunds on 5ers' side; he had thought Beeks only touched the XC, Kate explained they host the trading servers) and wants to give 3 months' notice now so 5ers can trial a competitor inside the notice window and can still reverse. The rival (unnamed) offers skew and LR with "better architecture" at under 50% of our fees; Yaniv will share its test feedback. Kate told him Mahi is disappointed in Beeks and looking at other hosts, and wants a C-level follow-up, which Yaniv accepted for 10-21 13:45 (the weekly-call slot). Internally Andrew asked for an assessment of performance, reports/comms and added functionality since Nov 2025; noted Mahi earns about $6.3/M on gold (43% of XC volume) with room to improve; there is no adaptive sized skew or PSM on 5ers and classification is not used for client experience (Kate: no B-book classified flow, toxic gets harsher execution, catch-all takes the rest), and Kate will update the skew config. Andrew thinks the competitor may be Boltzmann (skew rev-share, no fixed fee) and wants new products and hero moments, though adaptive sized skew is "no point unless we coordinate around messaging". 5ers are still on release 26.3; 26.4 needs a weekend release (Justin), and Andrew asked Justin/Leonardo to deploy the latest dashboard.
+Next: Andrew/Kate to run the 10-21 13:45 call; Kate to produce the performance review and update the skew config; Justin to schedule the 26.4 weekend release; consider alternative hosting to Beeks.
+Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1792502905672309 https://mahifx.slack.com/archives/C079M09MGGP/p1792509790689269 https://mahifx.slack.com/archives/C079M09MGGP/p1792507480634799 https://mahifx.slack.com/archives/C079M09MGGP/p1792509602289269
 
 ### beeks-ld-outage-1016 — 2026-10-16 Beeks London network outage
 status: open · since: 2026-10-16 · last: 2026-10-16
@@ -82,3 +88,4 @@ Refs: https://mahifx.slack.com/archives/C0AUF6LBZ0Q/p1788516970494359 https://ma
 - 2026-08-17 — funded flow switched to the XC; fully routed via XC by 08-25
 - 2026-08-20 — Yaniv: 5ers have not bought a new broker (only TSG); new senior manager joining
 - 2026-09-25 — Beeks NIC degradation incident; 5ers off Mahi pricing/execution until 09-29
+- 2026-10-20 — Yaniv signals intent to give 3 months' notice over Beeks incidents and a cheaper rival; C-level call set for 10-21
