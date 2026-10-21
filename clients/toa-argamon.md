@@ -21,16 +21,23 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-20T07:16:32Z
+last_catchup: 2026-10-21T07:16:04Z
 status: active
 ---
 
 ## Now
 Argamon is the NY retail tenant (Mahi) plus Toa-hosted LDN/CHI/APN1 boxes (insti, hedging, crypto). Weekly calls with Jem/Elan/Daria/Shyam drive the agenda: wanting 500:1 leverage and to hold more risk, so Mahi is running sims and rolling CFDs/indices into Compass with internalisation and skew.
 Argamon is moving connectivity from Centroid to PrimeXM. Compass 26.4 is on LDN/CHI/APN1; NY was staged for the 10-10/11 weekend restart (outcome unconfirmed).
+On 10-21 the NY retail FX book moved to a 500k G8 inventory cap with Friday flatten (William Denny monitoring).
 Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
+
+### retail-leverage-risk — Argamon wants 500:1 leverage and to hold more risk
+status: open · since: 2026-08-31 · last: 2026-10-21
+State: Argamon wants to offer higher leverage (500:1 vs 100:1 now) and hold more risk. On 2026-10-21 Shyam, agreed with Jem, switched the NY retail FX book to a "G8-Cap" profile: up to a 500k inventory cap on internalised G8 flow with a Friday-close flatten, chosen from earlier sims. Replay Sep 25 to mid Oct showed +$62k (about $1/M) vs the old rules, average G8 risk up from $0.91m to $1.26m with much smaller peaks and near-flat weekends. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. Will Carter asked William Denny to monitor. Earlier: sims did not clearly support loosening risk; 09-22 call agreed CFD internalisation and asked for leverage recommendations; Argamon also runs a prop-style challenge business outside Compass.
+Next: William Denny to monitor retail PnL on the new G8 cap; Argamon to say how much risk they will open up and get leverage recommendations.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929
 
 ### lucera-fill-delay — Lucera insti fill report delayed 42ms (HARD_TIMEOUT)
 status: open · since: 2026-10-18 · last: 2026-10-19
@@ -80,12 +87,6 @@ State: INST-1 began trading the NY retail book with large, highly toxic volumes 
 Next: Shyam to review the effect on retail PnL.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1791171597533909
 
-### retail-leverage-risk — Argamon wants 500:1 leverage and to hold more risk
-status: open · since: 2026-08-31 · last: 2026-09-22
-State: Jem is exploring options up to B-booking retail because tight spreads and good execution are not winning clients; Argamon wants to offer 500:1 (currently capped at 100:1) and believes it needs to hold more risk. Mahi sims (Compass, SI, inventory, B-book; including equity caps of 10k/25k/100k) do not clearly support changing risk management, and XAU concentration in small accounts hurts. On the 09-22 call Argamon agreed to Mahi turning on CFD internalisation, said they will review the FX-only internalisation sim and tell Shyam what risk they will open up, and asked Mahi for leverage recommendations. Argamon also runs an early prop-style challenge business outside Compass.
-Next: Argamon to say how much risk they will open up; Mahi to run further instrument-group sims.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1789446003273769 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790047491374069
-
 ### crypto-pricing — Toa crypto pricing outages and sizes
 status: open · since: 2026-08-19 · last: 2026-09-21
 State: Crypto pricing dropped on Sunday 09-13 from about 02:00 UTC (APN1 pricers failed to start after a server reboot; Daria's JsonMapping exception about DefaultIndex OMX not in the name factory) and again on 2026-09-21 ("similar to last Sunday"; William Denny investigating, resolution not posted). Earlier, XBTUSD/ETHJPY/BCHJPY rejects on small quantities (Rakuten micro sizes) were fixed by adding overrides and EOD dist restarts (08-19). Centroid_NY4 MD sessions flapped for about 2 minutes on 09-16.
@@ -115,3 +116,4 @@ Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1790435088325269 https://ma
 - 2026-09-04 — NFP XAUUSD loss on retail; RCA completed.
 - 2026-09-26 — Compass 26.4 live on LDN/CHI/APN1.
 - 2026-09-29 — Argamon confirmed to be moving from Centroid to PrimeXM.
+- 2026-10-21 — NY retail FX book moved to G8 500k inventory cap with Friday flatten.
