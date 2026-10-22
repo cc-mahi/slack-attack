@@ -10,33 +10,33 @@ channels:
   internal-finprime: C0C8M89J2JY
   mahi-finprime: C0C8HCFKE9G
 contacts: []
-last_catchup: 2026-10-21T07:15:10Z
+last_catchup: 2026-10-22T07:22:58Z
 status: active
 ---
 
 ## Now
-Pre-contract A-book broker prospect (XAUUSD-heavy retail flow, ~$21bn/month). Channels created 2026-10-12; initial value-add sims on their Jul-Sep flow are recorded internally (reruns with daily classification pending); Will frames it as an A-book optimisation story, weekend gold de-emphasised. They want a decision in ~2 weeks. Presentation to FinPrime imminent (as of 2026-10-20) on reworked microsites, with some numbers not yet aligned; NDA status unconfirmed. Fresh dataset with A/T identifier requested from FinPrime.
+Pre-contract A-book broker prospect (XAUUSD-heavy retail flow, ~$21bn/month). Channels created 2026-10-12. Fresh Jul-Sep dataset with A/T (A-book/T-book) split arrived 2026-10-21; William Denny is running M2M, skew value-add and classification sims on it (overnight batch started 2026-10-22 ~00:00 BST). Andrew wants a narrative-first pitch: retaining spread revenue FinPrime passes to providers, with a possible low-entry risk-only install; SI and hedging are how Mahi manages risk, not the value-add. They want a decision in ~2 weeks; NDA status unconfirmed.
 
 ## Streams
 
 ### valueadd-sims — XAUUSD value-add sims on FinPrime flow
-status: open · since: 2026-10-14 · last: 2026-10-15
-State: Rory's internal initial results (NAGA as basis) on Jul-Sep XAUUSD fills: pricing layer is skew ~$5m/yr plus size control (LR) ~$11m/yr (84% from tickets of 500 oz+, a third from two logins; LR to be sized with FinPrime, PSM not yet read); classification plus selective internalisation adds ~$0.9m/quarter holding only B-book flow, up to ~$2.1m routing by class with a bigger worst day (provisional, classes from console lists; 37% of flow unclassified due to 28-day classifier lookback; 38% netted in busiest week). Classification stays out of client material until the rerun shows value. Will reframes this as an A-book optimisation story (think GCC and Velocity): show how the classifier picks flow to run in a Compass risk model across SI holding periods, with Jenkins Compass sims for PnL and risk plots and SVA on good cohorts; must answer whether paying Mahi beats A-booking and what aggregation does to their book; PnL in $/M. Sim limits: no LP fills, 29-30 Sep missing to the known sim shutdown defect.
-Next: Rory: M2M rerun with daily classification then SI on per-trade tags (~5h) and PSM read from SVA #807 (~15 min). Will/Rory: fill-rate cost alongside size control before any client page.
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791968009205219 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792072798832239 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792073078399249
+status: open · since: 2026-10-14 · last: 2026-10-21
+State: Rory's earlier internal results on Jul-Sep fills were provisional (skew ~$5m/yr, LR ~$11m/yr, classification adding ~$0.9-2.1m/quarter). William Denny has since rerun on the fresh A/T data (A 445,764 trades, T 235,344; UTC timestamps verified). M2M canaries and July runs done with continuous per-day classification (212 of 744 A-book logins change class within a week); full 1 Jul-1 Oct M2M runs in progress. SVA canaries (1 Jul, 09:00-13:00 UTC) show signal ranking IFMS > SKEW_1 > SKEW_0 on both books; at benchmark skew (median $0.15) PnL scales ~7-8x versus fixed 2c. Known drops: SVA hardcodes a 1% yield outlier filter, and replay end truncates late trades. Overnight batch: SVA on A/T x Jul/Aug/Sep at fixed $0.05 skew, M2M with classifier, and soft-flow variants (brokers, signal followers, arbitrageurs removed) to show uplift without toxic accounts. Backtest-2026-4 agents were killed ~19:50 UTC by a user-initiated EC2 shutdown; asked not to stop them until ~10:00 UTC 2026-10-22. Andrew also wants internalisation rates and holding-period analysis; Will Carter asked about adaptive skew (Andrew: realistic skews first, adaptive is its own research track).
+Next: William Denny: overnight runs, then per-classification yields on full Jul-Sep, plus Python SI sims on each portion and an internal summary with links. Everyone: leave backtest instances running until ~10:00 UTC 2026-10-22.
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791968009205219 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792590134007479 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792623681651539
 
 ### data-asks — Data gaps to raise with FinPrime (Derick)
-status: open · since: 2026-10-14 · last: 2026-10-20
-State: Asks that change sim results: their LP hedge fills, A/B or LP-routed flag per fill, whether logins 7610696 (12.2% of notional) and 7125182 are omnibus/API accounts. Will owns taking these to Derick. Weekend gold is dropped as a lead ask: Rory traced it to Mahi's own prep (the 30 Sep expo email and pitch), not the 9 Oct call; the export only has `XAUUSD`, so a separate `XAUUSD247` symbol is possible but Will says not to get hooked on it. Also open internally: StarPrime both-sides decision (no StarPrime flow is in the export).
-On 2026-10-20 Will sent FinPrime a link for fresh data and asked for the dataset with an A/T (A-book/B-book) identifier; Remus said he would upload the file on 2026-10-21.
-Next: FinPrime (Remus): upload fresh dataset 2026-10-21. Will to raise remaining asks with Derick; Mahi to decide StarPrime both-sides position.
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791969668222939 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792494576229239 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792495003035739
+status: open · since: 2026-10-14 · last: 2026-10-21
+State: Fresh Jul-Sep XAUUSD dataset with the A/T identifier arrived via Zendesk #23665 and was prepped on 2026-10-21 (589 logins trade both books; only 70 T-only). Still open: their LP hedge fills, per-fill LP-routed flag, and whether logins 7610696 (12.2% of notional) and 7125182 are omnibus/API accounts. Will owns taking these to Derick. Weekend gold is dropped as a lead ask (traced to Mahi's own prep, not the 9 Oct call); a separate `XAUUSD247` symbol is possible but not a priority. Also open internally: StarPrime both-sides decision (no StarPrime flow in the export).
+Next: Will to raise remaining asks with Derick; Mahi to decide StarPrime both-sides position.
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791969668222939 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792495003035739 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792571655168959
 
 ### commercial-timeline — NDA, presentation and decision timing
-status: open · since: 2026-10-15 · last: 2026-10-20
+status: open · since: 2026-10-15 · last: 2026-10-21
 State: FinPrime want to decide in ~2 weeks. Bonnie asked when the report is ready to present; Will said early next week, plans to book them Monday morning (a Q&A the following afternoon floated, likely Tuesday). No NDA confirmed in channel; Bonnie was to send one. On 2026-10-20 Will, with Isaac, reworked the microsites to do what the earlier Gamma reports did (numbers don't all align, value is there) and planned to wing the meeting, presenting by speaking rather than slides, then fix the numbers and send afterwards. Andrew's line if FinPrime are A-book: Mahi moved GCC and ATC from STP brokers (RoS at most 40% of the book) to far higher; Will agrees A-book optimisation will come through in comms.
+Andrew (2026-10-21): start with the narrative and use the analysis to support it; SI and intelligent hedging are not value-adds, the value-add is what changes in FinPrime's economics. For the A-book, the story is retaining more of the spread revenue passed to providers; he is tempted to go in low with a risk-only install (feature-led as much as P&L-led) and close on the wider pricing opportunity later.
 Next: Will: fix microsite numbers post-meeting and send. Bonnie: NDA (unconfirmed).
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1792067299721989 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792485966084739 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792486382539219
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1792067299721989 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792485966084739 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792567913393749
 
 ## Arc
 - 2026-10-12 — #mahi-finprime and #internal-finprime created by Bonnie Cassidy; FinPrime liquidity app added to the shared channel
