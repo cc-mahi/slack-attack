@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-21T07:13:59Z
+last_catchup: 2026-10-22T07:22:59Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### ig-demo-stream — New IG DEMO price stream for latency comparison
+status: open · since: 2026-10-22 · last: 2026-10-22
+State: Mac said Go will receive a new IG DEMO price stream with improved Spot Gold and Silver latency and asked for analysis over a couple of news events against Go's other LPs and the current IG stream; it must NOT be included in any models. Nathan will set up the market in Compass today, needs the FIX session details from Go, and data flows after the EOD restart. No historic data exists, so analysis waits for a few news events; Mac agreed. Nathan asked Go to say once the price stream is received.
+Next: Go to send FIX session details and confirm the stream is received; Mahi to run the news-event latency comparison once data has accumulated.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792629269396489 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792636384267029
 
 ### open-latency-cancels — Weekend release and post-restart open latency cancels
 status: open · since: 2026-10-16 · last: 2026-10-18
@@ -69,17 +75,17 @@ State: Finalto hedging stopped from 2026-09-01 because its per-LP NOP limit (10m
 Next: Nathan to report back on why LMAX_LDN is rejecting ~70%.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788419249269449 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790556017984519 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791253970054589
 
-### mint-inventory-book — Gold inventory hedging and the MINT LP
-status: open · since: 2026-08-25 · last: 2026-09-21
-State: Go wants Compass to automate hedging excess gold risk above internal limits (inventory book and hedger, possibly an SI-book, plus an unwind hedger); Nathan confirmed a B-book gold hedger to a specific LP is possible. Go onboarded LP MINT CFD (FIX sessions set 2026-09-16). On 09-21 Nathan found MINT's XAUUSD feed looks like a copy of Go's own client price (0.969 mid correlation vs 0.33-0.57 for real LPs, +$0.04 spread, ~6ms lag) and Kieran had described a special relationship where Go can broker at a price they decide; concerns are MINT benefiting from Go's skew and Mahi hedgers picking MINT off. Logged on the wiki; not seen raised with Go in channel.
-Next: Mahi to decide whether to raise the MINT feed finding with Go; inventory book build status unknown.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787628603910739 https://mahifx.slack.com/archives/CNF3WPNSK/p1789949763533859
-
 ### xau-pricing-skew — Gold/FX pricing smoothness, skew and failover
 status: watching · since: 2026-06-01 · last: 2026-09-17
 State: 2026-08-18 call: Kieran happy with skew sizes and slippage complaints down but wants smoother price; Go publishes to MetaQuotes every ~80ms while fills use live Compass price, which flickers; Daria suggested throttling publishing, Nathan investigating flicker before skew goes up again. 08-19 Isaac cut benchmark spread skew weight on FX after Mac's AUDCAD jumps (flow-price-thresh). 09-15 call: client price went offline and failover to the continuity pool published huge spikes; Kieran wants no price unless the client-price LPs are online; Isaac removed MAHI_CONTINUITY_NYC from the continuity pool meanwhile. 09-17: USDJPY indicative for ~8 min at open was Wide Spread Suppression (max 0.25 vs 0.267). Downgraded to watching: no activity since 09-17.
 Next: Nathan to follow up on throttle/flicker root cause and the no-failover pricing change; no outcome seen.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1787014679025069 https://mahifx.slack.com/archives/CNF3WPNSK/p1789447371722669 https://mahifx.slack.com/archives/C09J1DP2QQH/p1789626541976419
+
+### mint-inventory-book — Gold inventory hedging and the MINT LP
+status: watching · since: 2026-08-25 · last: 2026-09-21
+State: Go wants Compass to automate hedging excess gold risk above internal limits (inventory book and hedger, possibly an SI-book, plus an unwind hedger); Nathan confirmed a B-book gold hedger to a specific LP is possible. Go onboarded LP MINT CFD (FIX sessions set 2026-09-16). On 09-21 Nathan found MINT's XAUUSD feed looks like a copy of Go's own client price (0.969 mid correlation vs 0.33-0.57 for real LPs, +$0.04 spread, ~6ms lag) and Kieran had described a special relationship where Go can broker at a price they decide; concerns are MINT benefiting from Go's skew and Mahi hedgers picking MINT off. Logged on the wiki; not seen raised with Go in channel. Downgraded to watching: no activity since 09-21.
+Next: Mahi to decide whether to raise the MINT feed finding with Go; inventory book build status unknown.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787628603910739 https://mahifx.slack.com/archives/CNF3WPNSK/p1789949763533859
 
 ### lr-attribution — LR not attributed on liquidity-reduced fill
 status: watching · since: 2026-09-15 · last: 2026-09-15
