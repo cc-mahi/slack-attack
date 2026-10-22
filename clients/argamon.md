@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-10-21T07:14:17Z
+last_catchup: 2026-10-22T07:21:50Z
 status: active
 ---
 
@@ -24,6 +24,18 @@ status: active
 Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored.
 
 ## Streams
+
+### toa-chi-ioc-timeouts — LP no-ack timeouts on Toa CHI
+status: open · since: 2026-10-22 · last: 2026-10-22
+State: Between 03:39:48 and 03:40:05 UTC on 2026-10-22, 8 XAUUSD orders from the AXI-OZOrders session, brokered to UBS, JPM and DB, got no ack or execution report and timed out on Mahi's side (clients sent cancels). Nathan asked Argamon to check with the LPs whether any were received or filled; Maitrya replied they cannot see the trades at reactive or Mahi NYC. Cause of the missing acks is not yet identified.
+Next: Nathan to find why the LPs sent no acks (not seen posted).
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792644401138689 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792646373306319
+
+### centroid-ny-to-pxm — Centroid bridge IP change and NY PXM migration
+status: open · since: 2026-06-09 · last: 2026-10-22
+State: Argamon NY moved its bridge from Centroid to PXM on the 2026-09-26/27 weekend (ZD 23532; retail dist sessions connected 2026-09-27). The Centroid bridge IP has changed again, to 192.229.22.160 (Tom McLean, 2026-10-21): it sits outside the 192.229.23.x range the Beeks cross-connect route covers, so Centroid must advertise it over the cross-connect. Shyam raised NOCINT-856420 with Beeks and ZD 23672. Tom has no firm date for the move to the new IP (it was due last month). Earlier: Wintermute queried 2026-09-09 whether altcrypto connectivity via Mahi was down; Kate confirmed the decommission was agreed.
+Next: Argamon (Tom) to give the Centroid move date; Shyam/Beeks to confirm the route change for 192.229.22.160.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719
 
 ### leverage-risk-sims — 500:1 leverage / more risk-holding sims
 status: open · since: 2026-08-31 · last: 2026-10-21
@@ -56,8 +68,8 @@ Next: Watch whether the whitelist reduces the PnL drops.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1784863388281539 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791171597533909
 
 ### toa-crypto-stability — Crypto pricing outages and sizing on Toa
-status: open · since: 2026-08-19 · last: 2026-09-21
-State: Crypto min-quantity rejects (XBTUSD 0.03, BCHJPY, ETHJPY/XETUSD defaults of 1.0) were fixed via overrides and EOD restarts on 2026-08-19 (Rakuten micro sizes). Major crypto pricing stopped from Toa on 2026-09-13 after a server reboot left processes down, and again on 2026-09-21 ("similar to last Sunday"); William Denny said it was being resolved but no root cause was posted for the second occurrence.
+status: watching · since: 2026-08-19 · last: 2026-09-21
+State: Downgraded to watching, no activity since 2026-09-21. Crypto min-quantity rejects (XBTUSD 0.03, BCHJPY, ETHJPY/XETUSD defaults of 1.0) were fixed via overrides and EOD restarts on 2026-08-19 (Rakuten micro sizes). Major crypto pricing stopped from Toa on 2026-09-13 after a server reboot left processes down, and again on 2026-09-21 ("similar to last Sunday"); William Denny said it was being resolved but no root cause was posted for the second occurrence.
 Next: Root cause and prevention for the Sunday crypto pauses owed to Argamon.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1787099040590799 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789287085078259 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789997451357139
 
@@ -78,12 +90,6 @@ status: watching · since: 2026-08-17 · last: 2026-10-09
 State: Recurring one-off ops questions. Tom's slippage query (2026-08-17) was last look and AUDUSD signals were smoothed; Sep 3 liquidity reduction on order 042dr11e8ch was picked up by Rory (outcome not seen); the 624ms order book age (2026-09-10) was a timestamp artefact, not stale price. 2026-09-01 pricerInstiLight2 went down after Elan removed skew delegates (Nathan restored it); 2026-10-09 Shyam asked Argamon to raise B2PRIME 3dp XAU invalid-increment rejects with the LP (Argamon said they would).
 Next: Argamon to raise B2PRIME increments; Rory outcome on the 2026-09-03 liquidity reduction.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1786964549641859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789022941524499 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791507691705119
-
-### centroid-ny-to-pxm — NY bridge migration Centroid to PXM
-status: watching · since: 2026-06-09 · last: 2026-09-29
-State: Argamon NY moved its bridge from Centroid to PXM (Centroid UAT FIX work since 2026-06 was the lead-in); IP whitelisting via Beeks sorted 2026-09-24 and Daria confirmed retail dist sessions connected on 2026-09-27 after the weekend migration (ZD 23532). Internally James says Centroid has been poor for them and Elan negotiated PXM terms for months; Mahi's own bridge was pitched but lacks margin/reporting. Wintermute queried on 2026-09-09 whether altcrypto connectivity via Mahi was down; Kate confirmed the decommission was agreed earlier.
-Next: nothing outstanding seen; downgraded to watching, no post-migration issues in the window.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790353314143069 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790673025680519
 
 ### fx-pricing-tuning — LP sets, signals and direct pricing
 status: watching · since: 2026-05-04 · last: 2026-09-01
