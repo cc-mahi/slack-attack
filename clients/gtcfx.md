@@ -17,7 +17,7 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-10-21T07:15:10Z
+last_catchup: 2026-10-22T07:22:59Z
 status: active
 ---
 ## Now
@@ -64,10 +64,10 @@ Next: GTC to confirm OZ-6 working; GTC weekly call is the forum.
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786969418265589 https://mahifx.slack.com/archives/C0AKRP8C049/p1792228566542629
 
 ### dist-gateway-capacity — Distribution gateway load from cent/small-ticket flow
-status: open · since: 2026-09-09 · last: 2026-10-15
-State: B_CLIENTS is ~6% of XAU notional but 16-20% of tickets, and the small-ticket servers (Live 3/4/5) are ~5x the ticket count; 5% of trades are 78% of volume. Latency cancels on gateway5 (21-22 Sep) led to gateways 6-8 on trading-2, unexpected-fill-latency ceiling raised to 5000ms, dist9 added 2026-10-14. On 2026-10-15 dist6 saw 3,976 orders/s vs 235/s on the next busiest; Liam made config tweaks and CHG for an OZ-5 gateway latency fix (24G heap, 5 CEP threads) is booked Sat 17 Oct. Root cause of the 2026-09-21 XAU cancels (Nathan to GTC): a burst pushed internal processing past the last-look limit (overrun ceiling then 300ms, since raised), and OZ's hub rule re-routes to another maker after rejects, so no XAU orders reached Mahi for 60s (15:50:49-15:51:49Z) while GTC asked OZ about it; OZ-4/OZ-5 had shared a gateway, OZ-5 moved to its own ports 9016/9017 on 2026-09-28. On 2026-10-15 Isaac said GTC is already splitting flow more evenly inside OZ and should pass that on.
+status: open · since: 2026-09-09 · last: 2026-10-21
+State: B_CLIENTS is ~6% of XAU notional but 16-20% of tickets, and the small-ticket servers (Live 3/4/5) are ~5x the ticket count; 5% of trades are 78% of volume. Latency cancels on gateway5 (21-22 Sep) led to gateways 6-8 on trading-2, unexpected-fill-latency ceiling raised to 5000ms, dist9 added 2026-10-14. On 2026-10-15 dist6 saw 3,976 orders/s vs 235/s on the next busiest; Liam made config tweaks and the OZ-5 gateway latency fix (24G heap, 5 CEP threads) was rebooked as CHG-2610-4FG5, self-approved by Liam on 2026-10-21 for GC tuning plus pending infra catch-up in Sat 24 Oct 13:00-14:55Z; Liam also approved a slave restart deployed now on 10-21. Root cause of the 2026-09-21 XAU cancels (Nathan to GTC): a burst pushed internal processing past the last-look limit (overrun ceiling then 300ms, since raised), and OZ's hub rule re-routes to another maker after rejects, so no XAU orders reached Mahi for 60s (15:50:49-15:51:49Z) while GTC asked OZ about it; OZ-4/OZ-5 had shared a gateway, OZ-5 moved to its own ports 9016/9017 on 2026-09-28. On 2026-10-15 Isaac said GTC is already splitting flow more evenly inside OZ and should pass that on.
 Next: GTC to confirm the rebalance across gateways (Isaac to chase); likely need 2 more servers for cent accounts and a cost conversation; dev review of latency cancels requested 2026-09-28.
-Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790591684124349 https://mahifx.slack.com/archives/C0AKRP8C049/p1790567720885579 https://mahifx.slack.com/archives/C0AKAPLU78W/p1792068184097149
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790591684124349 https://mahifx.slack.com/archives/C0AKRP8C049/p1790567720885579 https://mahifx.slack.com/archives/C0AKAPLU78W/p1792577860720509
 
 ### riskpath-stability — riskPath stalls, OOM crash-loops and yield-profile gaps
 status: open · since: 2026-09-02 · last: 2026-10-15
