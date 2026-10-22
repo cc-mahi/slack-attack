@@ -31,7 +31,7 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-10-21T07:13:59Z
+last_catchup: 2026-10-22T07:23:00Z
 status: active
 ---
 
@@ -39,8 +39,15 @@ status: active
 IC's crypto (XBTUSD-centred) B-book is Mahi's live product there, and the commercial relationship is in a renegotiation phase, so Mahi is deliberately front-footing value-add ("hero moments", price forensics) in client replies.
 Open: IC's CPI-news latency complaint (Oct 14) and its last-look request (actioned Oct 15, applies at the next restart), where the cause was an internal fallback rule that dropped LP1 as primary pricing source, plus PSM spread logic running in Beta ahead of a Price Forensics demo.
 Isaac Dann is primary quant lead on the account since 2026-10-08.
+Karam asked on Oct 21 about tag 8093117 (sharp short-duration markouts); Rory's reply offers IC a choice of keeping it B-booked or moving it to a risk-managed book, awaiting IC.
 
 ## Streams
+
+### tag-8093117-review — Review of IC tag 8093117 and B-book vs risk-managed option
+status: open · since: 2026-10-21 · last: 2026-10-21
+State: Karam asked Mahi to check tag 8093117 for anything unusual, citing sharp markouts on short-duration trades. Rory found it on the standard catch-all execution profile, up ~$63k on $151M of XBTUSD since Oct 9 and 30 BTC short; Mahi's value add (LR $6.8k, last look $6.7k, FI $1.7k) took ~$15.2k (~19%) off its PnL. It builds positions in ~5 BTC steps against the move and closes on reversion (~9 in 10 round trips win), so harsher last look would not help much. Volume rose from ~50 BTC/day to 700+ BTC on Oct 20. Rory put two options to IC: keep it B-booked and review if it keeps scaling, or move it to a risk-managed book with Passive Hedging with or without SI, keeping the spread. Rory also said the crypto B-book's return on spread was 127% in Sep and 96% in Oct so far. Karam said he will get back.
+Next: Karam to respond on the options; Mahi offered a call.
+Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1792591256487489 https://mahifx.slack.com/archives/C07UBJNUWG1/p1792600008676349
 
 ### cpi-news-latency — CPI news-event latency complaint and last-look change
 status: open · since: 2026-10-15 · last: 2026-10-15
