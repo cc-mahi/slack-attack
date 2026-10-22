@@ -20,7 +20,7 @@ contacts:
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config requests, rejection reports", confidence: low}
   - {name: "Ali Wehbe", role: "ops: energy futures / oils product specs", confidence: low}
   - {name: "Ahmad Hashem", role: "ops: rejection reports on Mahi_B sessions", confidence: low}
-last_catchup: 2026-10-21T07:14:17Z
+last_catchup: 2026-10-22T07:21:50Z
 status: active
 ---
 ## Now
@@ -29,10 +29,16 @@ Amana is migrating everything onto Mahi in stages and is live on A-book metals/i
 ## Streams
 
 ### hp-indices-energies — Indices and energies onto Mahi_A_HP
-status: open · since: 2026-10-20 · last: 2026-10-20
-State: On 10-20 Princess asked to go live on indices and energies on the Mahi_A_HP connection; Amana listed the symbols and Rory confirmed the HP precision (energy futures 5dp, indices/energies spot 8dp) is set correctly. Isaac and Nikos then found NDX futures orders rejected INVALID_INCREMENT (qty 3.35 on the regular feed, configured 0.1 increment): Isaac asked whether to move to 0.01 and Nikos said clients should trade against the HP feed. Later Maynard saw D30 orders from account 555 rejected out of session; Shyam traced them to hybridHedgerIndicesSI1 still hedging after CMC's D30 close and asked to disable it 17:00-18:00 NY.
-Next: Amana to answer Shyam on disabling hybridHedgerIndicesSI1 17:00-18:00 NY; Amana to say whether NDX futures need 0.01 on the regular feed.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792497820771659 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792532282081209
+status: open · since: 2026-10-20 · last: 2026-10-21
+State: On 10-20 Princess asked to go live on indices and energies on the Mahi_A_HP connection; Amana listed the symbols and Rory confirmed the HP precision (energy futures 5dp, indices/energies spot 8dp) is set correctly. Isaac and Nikos then found NDX futures orders rejected INVALID_INCREMENT (qty 3.35 on the regular feed, configured 0.1 increment): Isaac asked whether to move to 0.01 and Nikos said clients should trade against the HP feed. Later Maynard saw D30 orders from account 555 rejected out of session; Shyam traced them to hybridHedgerIndicesSI1 still hedging after CMC's D30 close and asked to disable it 17:00-18:00 NY. On 10-21 Nikos asked Mahi to disable trading when the market is closed for all indices and energies (Will checking) and Hadeel asked for the current min/step for indices spot and futures on HP, non-HP and LP. That evening SPXUSD orders from account 555 hit the Amana bridge below minimum (min should be 0.1, not 0.04); Nathan set the SPXUSD hedger min and increment to 0.1 and the spam stopped.
+Next: Mahi to answer Hadeel on min/step and Nikos on market-closed trading; Amana to answer Shyam on disabling hybridHedgerIndicesSI1 17:00-18:00 NY; Amana to say whether NDX futures need 0.01 on the regular feed.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792497820771659 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792608674527399
+
+### analytics-data-asks — Yield profiles, party IDs and data access
+status: open · since: 2026-08-17 · last: 2026-10-21
+State: Nikos and ops keep asking how to read yield profiles (client vs external markouts, NULL timeframes 10-07, B_OFF_BOOK_CLIENTS vs OFF_BOOK_CLIENTS party IDs 10-13) and for per-client skew data. Yield profile "external" is LP markouts against a reference mid (CMC_CENTROID for XAU). Nathan (10-02) pointed to the Compass positions tab and watchRiskBook for party-to-hedger mapping, which Nikos cannot open. On 10-19 Nikos asked how allocated yield is calculated in the yield-profiles view and why two accounts show it negative; Rory explained it is the P&L on the position a trade opens until opposite trades offset it (spread at fill plus the move before offset) and offered to look at the two counterparties. Hadeel also asked why an XAUUSD order (77026274_1, 10-14 12:30 UTC) filled at a different price from the one shown; Rory was checking. On 10-21 Nikos reported one XAUUSD trade (10-08 ~02:34 UTC) missing only its 100ms markout; Rory said analyticsProcess is not always receiving trade prices even while live pricing ticks, not an isolated issue, and is raising it with dev. Account-summary P&L was disputed 09-29/30 (WTD -426K; SI Indices -31K vs -8K by query).
+Next: Mahi dev to fix analyticsProcess missing trade prices (Rory raising); Rory to explain the 77026274_1 fill price and, if Nikos wants, review the two negative-allocated-yield accounts; Mahi to answer the party ID, yield profile NULL and account-summary P&L questions.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786982712342769 https://mahifx.slack.com/archives/C08SYSMP0EB/p1791890549480249 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792416966903439 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792579798750539
 
 ### xet-price-rejects — XETUSD INVALID_INCREMENT order storm
 status: open · since: 2026-10-18 · last: 2026-10-20
@@ -64,12 +70,6 @@ status: open · since: 2026-09-25 · last: 2026-10-19
 State: XPT/XPD went live 10-07 (pricing set to Jump only after CMC was ~$10 off). FX B-book flow went live 10-14 for EURUSD/GBPUSD/USDJPY into B_OFF_BOOK_CLIENTS with no hedger by Amana's choice; Amana is moving EURJPY/GBPJPY pricing and B-book 10-15, asked for FX spread aggregation like XAUUSD (10-12), and for all FX quantity config HP 0.001 / Non-HP 1000 / LP 1000. On 10-16 Hadeel said Amana would enable pricing and B-book flow for AUDUSD, NZDUSD, USDCHF and USDCAD. On 10-19 Nikos asked to enable FX execution aggregation; Rory restarted hybridHedger1 (10:12 BST) with EURUSD/GBPUSD/USDJPY executing to both LMAX and CMC (only USD pairs have Mahi hedgers). Nikos wants a longer-term book-level setting for all FX without defining each instrument; Rory said it can be set for all FX instruments scoped to specific hedgers and was asking what Nikos meant when the thread ended. Nikos also asked whether PnL explains a EUR position in the FUTURES_W_CLIENTS_NET book and to zero it (no reply seen). Open: unhedged USDJPY on A House (10-14) and a TOB showing 500K vs the 250K Amana defined (10-15).
 Next: Rory to clarify the all-FX hedger execution config with Nikos; Mahi to answer the FUTURES_W EUR position question, and to answer the USDJPY exposure and TOB questions; confirm FX qty config and spread aggregation.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790335963373189 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792142087440439 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792396763006619 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792402221776169
-
-### analytics-data-asks — Yield profiles, party IDs and data access
-status: open · since: 2026-08-17 · last: 2026-10-19
-State: Nikos and ops keep asking how to read yield profiles (client vs external markouts, NULL timeframes 10-07, B_OFF_BOOK_CLIENTS vs OFF_BOOK_CLIENTS party IDs 10-13) and for per-client skew data. Yield profile "external" is LP markouts against a reference mid (CMC_CENTROID for XAU). Nathan (10-02) pointed to the Compass positions tab and watchRiskBook for party-to-hedger mapping, which Nikos cannot open. On 10-19 Nikos asked how allocated yield is calculated in the yield-profiles view and why two accounts show it negative; Rory explained it is the P&L on the position a trade opens until opposite trades offset it (spread at fill plus the move before offset) and offered to look at the two counterparties. Hadeel also asked why an XAUUSD order (77026274_1, 10-14 12:30 UTC) filled at a different price from the one shown; Rory was checking. Account-summary P&L was disputed 09-29/30 (WTD -426K; SI Indices -31K vs -8K by query).
-Next: Rory to explain the 77026274_1 fill price and, if Nikos wants, review the two negative-allocated-yield accounts; Mahi to answer the party ID, yield profile NULL and account-summary P&L questions.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786982712342769 https://mahifx.slack.com/archives/C08SYSMP0EB/p1791890549480249 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792416966903439 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792421892304869
 
 ### crypto-rollout — Crypto go-live and hedging
 status: open · since: 2026-08-17 · last: 2026-10-16
