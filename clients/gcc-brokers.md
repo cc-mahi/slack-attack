@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-10-21T07:15:10Z
+last_catchup: 2026-10-22T07:22:59Z
 status: active
 ---
 ## Now
@@ -27,10 +27,10 @@ A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef i
 ## Streams
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-10-20
-State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz, 15:09 BST) was acknowledged by Rory in 10s and confirmed done at 16:01 BST.
-Next: Rory/ops to confirm the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792505393629159
+status: open · since: 2026-04-30 · last: 2026-10-21
+State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible yet.
+Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792593039452749
 
 ### ld-network-incident — 2026-10-16 LD networking outage
 status: open · since: 2026-10-16 · last: 2026-10-20
@@ -51,10 +51,10 @@ Next: Rory to finish config/pricing review, hedger config, BTC-PERP pricing/test
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1788610242999719 https://mahifx.slack.com/archives/C09PNC1MFAA/p1790845208134599 https://mahifx.slack.com/archives/C09QS1NUA80/p1791723831791499 https://mahifx.slack.com/archives/C09QS1NUA80/p1792498517091019
 
 ### insto-pricing — Institutional pricing stream
-status: open · since: 2026-10-06 · last: 2026-10-20
-State: On a 10-06 call Youssef and Nael said GCC is now targeting institutional client flow (none of the current counterparties are STP brokers), so Mahi must match or beat the insto clients' current offering. Plan is a new channel and pricer for insto pricing aimed at capturing flow even if initial PnL per account is lower. GCC will send the parameters they see today. On 10-20 Rory confirmed the institutional feed is still to be set up, with a deeper TOB aimed at volume rather than PnL, and aims to finish it before end of week.
+status: open · since: 2026-10-06 · last: 2026-10-21
+State: On a 10-06 call Youssef and Nael said GCC is now targeting institutional client flow (none of the current counterparties are STP brokers), so Mahi must match or beat the insto clients' current offering. Plan is a new channel and pricer for insto pricing aimed at capturing flow even if initial PnL per account is lower. GCC will send the parameters they see today. On 10-20 Rory confirmed the institutional feed is still to be set up, with a deeper TOB aimed at volume rather than PnL, and aims to finish it before end of week. On 10-21 Rory posted change record CHG-2610-VR2K (two pricers for an institutional stream plus infra backlog, 15:15-16:00Z), approved by Liam Cordelle.
 Next: Rory to finish the insto feed by EOW; GCC to send pricing parameters if not yet sent.
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1791287464442599 https://mahifx.slack.com/archives/C09QS1NUA80/p1792498517091019
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1791287464442599 https://mahifx.slack.com/archives/C09QS1NUA80/p1792594740438909
 
 ### amana-lp — Amana as hedging venue and taker
 status: open · since: 2026-09-14 · last: 2026-10-05
