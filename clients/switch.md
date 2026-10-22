@@ -14,7 +14,7 @@ contacts:
   - {name: Dom Gilbert, role: "Think Huge (Switch parent) - COO/shareholder; drives hosting cost questions"}
   - {name: Paul Pintiliescu, role: "Think Huge - infrastructure/CTO-side; asks hardware questions"}
   - {name: Brandon, role: "Think Huge - infrastructure lead (US west coast)"}
-last_catchup: 2026-10-21T07:13:59Z
+last_catchup: 2026-10-22T07:23:44Z
 status: active
 ---
 
@@ -30,10 +30,10 @@ Next: Think Huge to respond on hosting option and DC; Mahi awaiting their choice
 Refs: https://mahifx.slack.com/archives/C0C7N7CGC7Q/p1791459538072239 https://mahifx.slack.com/archives/C0C7N7CGC7Q/p1791535547310089
 
 ### contract-proposal — Proposal and contract pending
-status: open · since: 2026-10-08 · last: 2026-10-15
-State: Proposal is with Sammy; contract unsigned. Sammy was off this week (family bereavement) but on 2026-10-15 said Switch will 100% be a Mahi customer (relayed by Will). Switch is evaluating Mahi as risk/bridge provider. Sammy asked Kate for an autoclassifier screenshot to present to Switch on Tuesday (Compass vs OneZero); Kate was wary given recent issues, Will agreed to use an anonymised demo screen and Andrew is preparing an IB-safe login.
-Next: Mahi to supply anonymised demo screen/login before Switch's presentation.
-Refs: https://mahifx.slack.com/archives/C0C7QB281J6/p1791454134051789 https://mahifx.slack.com/archives/C0C7QB281J6/p1791465957208229 https://mahifx.slack.com/archives/C0C7QB281J6/p1792078628175019
+status: open · since: 2026-10-08 · last: 2026-10-21
+State: Proposal is with Sammy; contract unsigned. Sammy was off this week (family bereavement) but on 2026-10-15 said Switch will 100% be a Mahi customer (relayed by Will). Switch is evaluating Mahi as risk/bridge provider. Sammy asked Kate for an autoclassifier screenshot to present to Switch on Tuesday (Compass vs OneZero); Kate was wary given recent issues, Will agreed to use an anonymised demo screen and Andrew is preparing an IB-safe login. On 2026-10-21 Will said Sammy has re-engaged and he is reviewing the latest commercials.
+Next: Will to review latest commercials and respond to Sammy.
+Refs: https://mahifx.slack.com/archives/C0C7QB281J6/p1791454134051789 https://mahifx.slack.com/archives/C0C7QB281J6/p1791465957208229 https://mahifx.slack.com/archives/C0C7QB281J6/p1792078628175019 https://mahifx.slack.com/archives/C0C7QB281J6/p1792584843864439
 
 ## Arc
 - 2026-10-08 — Switch channels created; Mahi/Think Huge hosting call opened
