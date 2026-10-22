@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-10-21T07:16:06Z
+last_catchup: 2026-10-22T07:23:45Z
 status: active
 ---
 
@@ -26,10 +26,16 @@ Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UA
 
 ## Streams
 
+### lr-setting-location — Client cannot find Liquidity Reduction setting in new screen
+status: open · since: 2026-10-22 · last: 2026-10-22
+State: Andri Zamroni asked where a setting (screenshot) now lives; Isaac Dann replied that in the new screen, selecting ICDX_MINI shows a configure channel button on the right with a Liquidity Reduction menu. No client confirmation yet.
+Next: Andri confirms he found it.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792651734422169
+
 ### ab-book-queries — A/B book classification requests from overnight team
 status: open · since: 2026-07-08 · last: 2026-10-21
-State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-10-21 (95503831: B book from Isaac Dann; 68565319 still awaiting a reply at the time of the pull). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792564719113459
+State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792571194326479
 
 ### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
 status: open · since: 2026-08-19 · last: 2026-10-15
