@@ -17,7 +17,7 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-10-21T07:13:59Z
+last_catchup: 2026-10-22T07:23:44Z
 status: active
 ---
 
@@ -26,6 +26,12 @@ Prop firm; Mahi is dealing desk and risk. Focus is payout ratio: skew and LR tig
 Open client query: CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain). New: drop-copy volume exceeds expected volume (checking with Shane).
 
 ## Streams
+
+### prop-network-showcase — Mahi to show TOT its prop-network work
+status: open · since: 2026-10-21 · last: 2026-10-21
+State: The 2026-10-21 check-in call was cancelled by Shane (kept in the calendar if needed); Cameron Copland was on leave. Will Carter said Mahi will pull together what it is working on for its prop network and show TOT over the next week.
+Next: Will Carter / Mahi to send the prop-network material to Shane within about a week.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1792585285879989 https://mahifx.slack.com/archives/C08U853T684/p1792585333046689
 
 ### drop-copy-volume — Drop-copy volume exceeds expected volume
 status: open · since: 2026-10-15 · last: 2026-10-15
@@ -44,12 +50,6 @@ status: open · since: 2026-09-30 · last: 2026-09-30
 State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% over 6 weeks. Mahi is raising skew on 1-Step and 2-Step. EURUSD, USDJPY and GBPUSD spreads go back to 0.0 on Prop Firm Match after a ranking slide. Max loss 9% to 8% is the agreed fallback if skew and spreads are not enough. TOT's Launchpad experimental groups need the harsher execution rules, so Shane will flag each new group.
 Next: Mahi watching results of skew and spreads; Shane to notify Mahi of each new Launchpad group.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1790787041722219
-
-### btcusd-100x-multiplier — MatchTrader BTCUSD order 100x oversized
-status: open · since: 2026-07-25 · last: 2026-07-29
-State: A 1.2 lot BTCUSD order reached Mahi as 120 BTC. Broker Support found a session multiplier misconfigured at 100x on BTCUSD and asked TOT to set it to 0.01 and check other symbols. No confirmation seen in channels since 2026-07-29.
-Next: TOT to confirm the multiplier fix and check other symbols.
-Refs: https://mahifx.slack.com/archives/C08U853T684/p1784987610439809 https://mahifx.slack.com/archives/C08VCTZ7ZN2/p1785304369359649
 
 ### lr-harsh-execution — LR retune and harsher execution for 2-Step
 status: watching · since: 2026-08-25 · last: 2026-08-26
@@ -73,6 +73,11 @@ status: watching · since: 2026-08-26 · last: 2026-09-10
 State: TOT stopped using cTrader (Shane: it was costing them heavily); config kept in case they return. On 2026-09-09/10 internal billing was queried against the revised per-user model and Will Carter noted the fixed component was missing for low totals; Cameron Hughes was asked to review accounts.
 Next: Cameron Hughes to review accounts; internal billing to reconcile.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787752907131709 https://mahifx.slack.com/archives/C08TG143F4L/p1789022593579519
+
+### btcusd-100x-multiplier — MatchTrader BTCUSD order 100x oversized
+status: closed · since: 2026-07-25 · last: 2026-07-29 · closed: 2026-10-22
+State: A 1.2 lot BTCUSD order reached Mahi as 120 BTC. Broker Support found a session multiplier misconfigured at 100x on BTCUSD and asked TOT to set it to 0.01 and check other symbols. No confirmation seen, but no activity since 2026-07-29; assumed resolved.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1784987610439809 https://mahifx.slack.com/archives/C08VCTZ7ZN2/p1785304369359649
 
 ### mt5-bridge-drop — Brief MT5 bridge disconnect 2026-10-06
 status: closed · since: 2026-10-06 · last: 2026-10-06 · closed: 2026-10-15
