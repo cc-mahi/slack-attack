@@ -18,28 +18,34 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-21T07:15:10Z
+last_catchup: 2026-10-22T07:23:00Z
 status: active
 ---
 
 ## Now
 Clio and CH want a custom layered XAUUSD symbol (`XAUUSD.l`) urgently; Shyam built the pricer and channel overnight and handed go-live (gateway restart, Infinox mapping, decisions) to Rory, while Clio chased again this morning.
-Day-to-day is routine LR / classification support via #mahi-infinox; open items are the four-account classification exclusion and Isaac's LR recommendations after Infinox questioned low Toxic Harsher LR P&L (10-20).
+Day-to-day is routine LR / classification support via #mahi-infinox; open items are the four-account classification exclusion and Isaac's gold LR redesign (+$406k/month modelled), sent 10-21 and awaiting Infinox's review.
 Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq's EURUSD tick request after the 26.4 upgrade is still unexplained.
 
 ## Streams
+
+### lr-profile-ops — Routine LR / execution-profile moves
+status: open · since: 2026-05-12 · last: 2026-10-22
+State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
+Next: Georgia to review rule order and come back to Kate.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792057099943739 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889
+
+### lr-redesign — B_CLIENTS XAUUSD LR redesign proposal
+status: open · since: 2026-10-20 · last: 2026-10-21
+State: After Trading Ops asked why Toxic XAUUSD Harsher earned little LR, Isaac proposed (10-21) a gold-only channel Burst cut from $8.5M to $2M, a $5/M cap on Default, and Volume Multiplier 5 on Signal Follow, Dynamic Broker, Dynamic Fast Hedge and Centroid, leaving manual profiles untouched. Backtest on 21 Sep-20 Oct says directional flow rises from 2.9 to 10.7 $/M, benign flow falls from 2.5 to 0.15 $/M and total LR goes from $705k to $1,056k a month (+$406k, CI $215k-$566k), matching production on 97-99% of fills; caveats are no client behaviour change and FX/XAG not modelled. Root cause of weak Harsher: the MT5_87952662 flow fans out over ~48 suffixed IDs with per-ID buckets, and small tickets rarely pass the first 100 oz tier. Infinox asked for the full settings, got them in-thread, and said on 10-21 they will review and revert.
+Next: Infinox Trading Ops to review and revert; Mahi applies the rebased, schema-validated config only after their go-ahead.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C01QGUXPKEY/p1792583411666839
 
 ### custom-xau-layers — Custom layered XAUUSD symbol (XAUUSD.l)
 status: open · since: 2026-10-19 · last: 2026-10-20
 State: Clio asked for a new XAUUSD symbol with client-specific volume and spread layers; CH stressed it is important and Rory promised it for 10-20, with Clio chasing again 08:10 BST. Shyam deployed pricers and a CLIENT_PRICE_L_LDN model (100-4000 oz ladder, no skew or signals) plus a B_CLIENTS_L channel and a `.l` suffix rule (change CHG-2610-EGQJ). Not live: the client distribution gateway needs a restart in a window agreed with Infinox, and Infinox must not enable XAUUSD.l before then.
 Next: Rory to reply to Clio, agree the restart window, and get answers on per-layer vs average spreads and lot size; Rory to decide arb protection, skew and LR/WSS settings; change record and approval needed before gateway restart.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792416827862309 https://mahifx.slack.com/archives/C022S6NL82D/p1792480216320949 https://mahifx.slack.com/archives/C01QGUXPKEY/p1792468132574129
-
-### lr-profile-ops — Routine LR / execution-profile moves
-status: open · since: 2026-05-12 · last: 2026-10-20
-State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD Harsher profiles, normally actioned within an hour by Kate, Rory, William, Shyam, Nathan, Daria or Isaac. On 10-20 Trading Ops questioned why 16 traded accounts in Toxic XAUUSD Harsher earned only $76 LR P&L (6.6 $/M on $11.6M XAUUSD) against a 250 $/M cap; Isaac said 250 is a ceiling, not a rate, and Heavy would have made about $160 (13.5 $/M). Trading Ops asked for the 16 MT5_87952662_* accounts to move to Heavy; Isaac actioned it at 18:18 BST. Isaac is analysing an LR setup that charges toxic accounts most and good flow least across bursty periods. Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
-Next: Isaac to send Infinox LR setup recommendations with expected PnL; Georgia to review rule order and come back to Kate.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792057099943739 https://mahifx.slack.com/archives/C022S6NL82D/p1792511703824849 https://mahifx.slack.com/archives/C022S6NL82D/p1792516716650559
 
 ### auto-classification — Automated classification exclusions and LR-by-classification
 status: open · since: 2026-07-15 · last: 2026-10-15
@@ -112,3 +118,4 @@ Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792143327385389 https://ma
 - 2026-10-09 — Compass 26.4 upgrade and LDN infra move
 - 2026-10-16 — LD hosting network incident; Infinox unaffected, resolved same day
 - 2026-10-19 — Infinox requested a custom layered XAUUSD symbol; pricer and channel built 10-20, go-live pending
+- 2026-10-21 — Mahi proposed a gold LR redesign (+$406k/month modelled); Infinox reviewing
