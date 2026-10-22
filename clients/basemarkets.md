@@ -14,20 +14,38 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-10-21T07:14:17Z
+last_catchup: 2026-10-22T07:21:51Z
 status: active
 ---
 
 ## Now
-Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi to send pricing credentials). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
+Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, awaiting Base's IP for whitelisting). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
 
 ## Streams
 
+### lmax2-offsystem-fills — LMAX_2 fills placed outside Compass, positions out of sync
+status: open · since: 2026-10-21 · last: 2026-10-22
+State: Nathan Burch told Base on 2026-10-21 that two LMAX_2 fills (AUDUSD sell 7,000 on 10-21, XAGUSD buy 500oz on 10-15) did not come from Compass orders, while Compass shows both instruments flat at A_HOUSE with offsetting SCOPE_B positions. Kate (Base) replied 2026-10-22 that the trades were placed outside Compass and that LMAX_2 and SCOPE_B both hold zero in both instruments. Compass has not yet been adjusted to match.
+Next: Mahi (Nathan Burch / Kate Stagg) to correct Compass positions for AUDUSD and XAGUSD at LMAX_2 and SCOPE_B.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792620629451529 https://mahifx.slack.com/archives/C09D8V41JAG/p1792653037394839
+
 ### tegis-mt5-api — Tegis moving to MT5 API trading with Mahi price feed only
-status: open · since: 2026-04-29 · last: 2026-10-20
-State: Direct-API ask began 2026-04-29 (Alex asked about piping trades off MT4/MT5; Mahi has FIX but no margin or credit checks). Call held 2026-09-04: Tegis wanted off the MT5 EA/copy-trading setup, Mahi gave no timelines. On 2026-10-14 Alex said Tegis will trade via MT5's API (MT5 handles balances, rejections, no coverage account) and need only pricing from Mahi. Kate Stagg replied Mahi can give a FIX 4.4 price connection plus a conformance environment to build against; internally she asked whether Tegis could take prices from MT5's API since Mahi has no API clients today. Tegis's proposed workflow (FIX 4.4 pricing to its algo, orders via MT5 API into a Base MT5 account, hedging via Mahi into LMAX as today) was posted in the client channel and Kate Stagg accepted it 2026-10-20: the only change on Mahi's side is the new pricing connection.
-Next: Kate Stagg to set up pricing credentials and send them to Tegis/Base.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619 https://mahifx.slack.com/archives/C09D8V41JAG/p1788345375042849 https://mahifx.slack.com/archives/C09D05EPCTV/p1792507656568309
+status: open · since: 2026-04-29 · last: 2026-10-21
+State: Direct-API ask began 2026-04-29 (Alex asked about piping trades off MT4/MT5; Mahi has FIX but no margin or credit checks). Call held 2026-09-04: Tegis wanted off the MT5 EA/copy-trading setup, Mahi gave no timelines. On 2026-10-14 Alex said Tegis will trade via MT5's API (MT5 handles balances, rejections, no coverage account) and need only pricing from Mahi. Kate Stagg replied Mahi can give a FIX 4.4 price connection plus a conformance environment to build against; internally she asked whether Tegis could take prices from MT5's API since Mahi has no API clients today. Tegis's proposed workflow (FIX 4.4 pricing to its algo, orders via MT5 API into a Base MT5 account, hedging via Mahi into LMAX as today) was posted in the client channel and Kate Stagg accepted it 2026-10-20: the only change on Mahi's side is the new pricing connection. Kate Stagg posted the FIX pricing connection details in the client channel on 2026-10-21 (credentials are in that message; not copied here). FastMT (Aytugan) also asked whether the Mahi gateway executes orders initiated from MT5 Manager (Dealer); Kate Stagg confirmed it is supported.
+Next: Base/Tegis to give the IP for whitelisting and connect to the price feed.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619 https://mahifx.slack.com/archives/C09D8V41JAG/p1788345375042849 https://mahifx.slack.com/archives/C09D8V41JAG/p1792572631430259
+
+### group-additions-1019 — Base requests for new A/B book MT groups in Compass config
+status: open · since: 2026-10-19 · last: 2026-10-21
+State: Recurring request type. On 2026-10-19 Kate (Base) asked for three A book and four B book USD MT groups, done the same day. On 2026-10-21 she asked for two more A book groups and one B book group; no Mahi reply seen yet.
+Next: Kate Stagg to add the three groups to config and confirm.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792404682249699 https://mahifx.slack.com/archives/C09D8V41JAG/p1792597504276599
+
+### xauusd-1000oz-tob — Suffixed XAUUSD symbol with 1000oz top of book for a larger client
+status: open · since: 2026-10-13 · last: 2026-10-21
+State: Kate (Base) wants a suffixed XAUUSD symbol for a larger client wanting 1000oz TOB. On 2026-10-16 Kate Stagg said Rory will set up a new XAUUSD-only pricing model replicating LMAX_2 tiers (1000oz TOB; LMAX being asked to switch feeds) with markup, streamed under a suffix via MCC to one Base client. Change CHG-2610-DYQM (two pricers for a new full pricing model) was approved 2026-10-21 and Rory bounced restAdminServer1 and dashboardGateway to pick it up; likely this model, not confirmed in-channel.
+Next: Rory to finish the pricing model; LMAX feed switch.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1791886072967149 https://mahifx.slack.com/archives/C09D05EPCTV/p1792573543784969
 
 ### tegis-book-pause — Tegis C book warehoused while Tegis tests algo/API
 status: open · since: 2026-05-18 · last: 2026-10-13
@@ -40,12 +58,6 @@ status: open · since: 2026-10-11 · last: 2026-10-13
 State: Shyam Hari saw SYNAPSE_MT4 disconnected on 2026-10-11; Kate (Base) confirmed 2026-10-13 that MT4 is decommissioned. Shyam asked whether Mahi may remove the primary and backup MT4 bridge connections; no reply yet.
 Next: Base to confirm nothing still needs the MT4 bridge; then Mahi removes both connections.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791755009916399 https://mahifx.slack.com/archives/C09D8V41JAG/p1791925041012299
-
-### xauusd-1000oz-tob — Suffixed XAUUSD symbol with 1000oz top of book for a larger client
-status: open · since: 2026-10-13 · last: 2026-10-16
-State: Kate (Base) wants a suffixed XAUUSD symbol for a larger client wanting 1000oz TOB. On 2026-10-16 Kate Stagg said Rory will set up a new XAUUSD-only pricing model replicating LMAX_2 tiers (1000oz TOB; LMAX being asked to switch feeds) with markup, streamed under a suffix via MCC to one Base client.
-Next: Rory to build the pricing model; LMAX feed switch.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1791886072967149 https://mahifx.slack.com/archives/C09D05EPCTV/p1792151201548029
 
 ### brokered-xau-slippage — Slippage on brokered XAU fills; markup removed
 status: open · since: 2026-10-02 · last: 2026-10-07
@@ -79,11 +91,6 @@ Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792143013486049 https://ma
 status: closed · since: 2026-10-08 · last: 2026-10-08 · closed: 2026-10-15
 State: Arun Patel sent a new licence; Yuliya Dziurayeva (FastMT) confirmed it installed successfully the same day.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791450091502369 https://mahifx.slack.com/archives/C09D8V41JAG/p1791465228493509
-
-### group-additions-1019 — New A/B book MT groups added to Compass config
-status: closed · since: 2026-10-19 · last: 2026-10-19 · closed: 2026-10-20
-State: Kate (Base) asked for three A book and four B book USD MT groups to be added; Kate Stagg updated config the same day and Base confirmed.
-Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792404682249699 https://mahifx.slack.com/archives/C09D8V41JAG/p1792407067504919
 
 ## Arc
 - 2026-04 — Base Markets onboarding Tegis flow; Tegis/Centroid FIX integration begins
