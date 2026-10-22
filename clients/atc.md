@@ -13,7 +13,7 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-21T07:14:17Z
+last_catchup: 2026-10-22T07:21:49Z
 status: active
 ---
 ## Now
@@ -43,10 +43,11 @@ Next: Mahi owes root-cause for the NDX aggregation stall and the 09-17 publishin
 Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1786480031117319 https://mahifx.slack.com/archives/C046RNF64VD/p1787568429179159 https://mahifx.slack.com/archives/C04AZM0LPMH/p1789749067038009 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791915479144599
 
 ### xau-depth-ladder — gold depth question for a prospective large client
-status: open · since: 2026-10-13 · last: 2026-10-13
+status: open · since: 2026-10-13 · last: 2026-10-21
 State: Dave noticed XAUUSD levels 3-5 showing identical bid/ask while preparing for a large prospect. Cameron Hughes explained the ladder is floored at the average Finalto+Velocity spread (about 70c at 1.6k oz) so deeper levels repeat the price until the 80c base spread at 12.6k; clients see the repeated tiers merged into one ~7k band. Mahi publishes 12.6k oz per side but only about 3k oz is backed by firm LP depth, so a 5k order is chipped away rather than cleared at once. Dave confirmed he will rely on those numbers. Separately Dave asked about a client's trading style (trade logs from Malik) and Cameron said that analysis is still in progress.
+On 2026-10-21 Dave again needed to show XAUUSD depth to a client and reported it invisible for days; Rory King saw normal depth on Mahi's side and suggested a hard refresh, which did not help, but removing and re-adding the symbol fixed it (client-side display issue, resolved).
 Next: Cameron Hughes owes the trading-style analysis; Dave to decide whether to widen the 1.6k/3.6k/7.6k base spreads above the LP floor or drop the floor.
-Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1791902732632709 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791907572332459
+Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1791902732632709 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791907572332459 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792590024121469
 
 ### pnl-currency-rec — non-USD P&L legs and LP position reconciliation
 status: open · since: 2026-07-09 · last: 2026-10-08
