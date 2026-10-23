@@ -19,12 +19,12 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-22T07:22:59Z
+last_catchup: 2026-10-23T07:19:44Z
 status: active
 ---
 
 ## Now
-Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
+Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets (cutover set for 2026-11-02), Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
 
@@ -64,10 +64,10 @@ Next: Mahi to answer whether an auto-blacklist on maker rejection counts is feas
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1791819586672009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791821865555749
 
 ### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
-status: open · since: 2026-09-08 · last: 2026-10-08
-State: Will announced LPs (ISPRIME, 26DEGREES, FINALTO, LMAX_LDN; LMAX and IG just re-pointed at Go's end) will move to Go's AU entity. Agreed plan after a long thread: Mahi keeps existing market names, Go builds new AU connections mapped to *_HOLDING markets for testing, then Go switches the sources on its side at EOD and Mahi books the matching position adjustment between books; hedgers then trade the NY exposure out of the holding markets. Nathan built the holding FIX sessions on temporary processes fixMarketDataHolding1/fixOrdersHolding1 (2026-09-16); 26DEGREES_HOLDING pricing enabled 09-18, LMAX_LDN_HOLDING pricing confirmed streaming 10-08; on 09-28 Will said FINALTO_HOLDING and LMAX_LDN_HOLDING were not yet pricing and Daria made the holding markets tradeable externally for test trades. Cutover date not set.
-Next: Go to finish LP-side setup and coordinate the EOD cutover time with Mahi.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791418097993379
+status: open · since: 2026-09-08 · last: 2026-10-22
+State: Will announced LPs (ISPRIME, 26DEGREES, FINALTO, LMAX_LDN; LMAX and IG re-pointed at Go's end) move to Go's AU entity. Plan: Mahi keeps existing market names, Go builds AU connections mapped to *_HOLDING markets, Go switches pricing and execution routing on the existing channels on its side (no Mahi config change), Mahi then moves positions from the current LP books into the _HOLDING books and hedgers trade them out into the AU LPs. Nathan built the holding FIX sessions (2026-09-16); 26DEGREES_HOLDING test trade worked; ISAM_HOLDING and LMAX_HOLDING tests due next week. On 2026-10-22 Will set the cutover for Monday 2026-11-02 before the trading day (22:00 UTC, NY exits DST 11-01) for 26DEGREES, ISAM and LMAX; Finalto is delayed and not in that switch. IG becomes available as an LP afterwards. Nathan confirmed Mahi is ready, to go over the plan again on Tuesday's call.
+Next: Go to confirm ISAM_HOLDING and LMAX_HOLDING tests and message Mahi when the switch is done; Mahi to move positions into the HOLDING books on 11-02; review on Tuesday's call (2026-10-27).
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792703988337029 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792704413183769
 
 ### lp-hedging-limits — LP hedging behaviour, NOP limits, clearing positions
 status: open · since: 2026-06-09 · last: 2026-10-06
