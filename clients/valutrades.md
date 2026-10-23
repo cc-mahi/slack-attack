@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-10-22T07:23:45Z
+last_catchup: 2026-10-23T07:18:41Z
 status: active
 ---
 
@@ -26,11 +26,23 @@ Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UA
 
 ## Streams
 
+### oz-backup-whitelist — Whitelist OneZero hub backup IPs
+status: open · since: 2026-10-22 · last: 2026-10-23
+State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi to whitelist NY Surya hub backup 147.160.249.36 and NY Hub-Valutrades backup 147.160.249.37 towards 10.72.100.38 (MFX and MAHI_OZNY4 maker adapters, ports 9010/9011/9034/9035/9037). Maten Rehimi asked for traceroutes and whether a cross-connect is used; Brandon says it goes over the internet and posted traceroute screenshots from both IPs on 2026-10-23. Not yet whitelisted.
+Next: Mahi (Maten) reviews traceroutes and whitelists.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792659558042959 https://mahifx.slack.com/archives/C09HN93T0G2/p1792736621899949
+
+### profile-recs-creds — Programmatic access to Mahi profile recommendations
+status: open · since: 2026-10-23 · last: 2026-10-23
+State: Brandon asked for new credentials so the client IT team can pull the Mahi profile recommendations; he clarified they need programmatic access, i.e. DB access. Shyam Hari raised it with the dev team.
+Next: Mahi dev team decides on and provides access.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1792729903877109
+
 ### lr-setting-location — Client cannot find Liquidity Reduction setting in new screen
 status: open · since: 2026-10-22 · last: 2026-10-22
-State: Andri Zamroni asked where a setting (screenshot) now lives; Isaac Dann replied that in the new screen, selecting ICDX_MINI shows a configure channel button on the right with a Liquidity Reduction menu. No client confirmation yet.
+State: Garry also asked whether old-UI Position maps to the new Rate Limit Amount; Isaac Dann confirmed the old refresh quantity and rate are the new rate limit amount and period. Andri Zamroni asked where a setting (screenshot) now lives; Isaac Dann replied that in the new screen, selecting ICDX_MINI shows a configure channel button on the right with a Liquidity Reduction menu. No client confirmation yet.
 Next: Andri confirms he found it.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792651734422169
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792658285372589
 
 ### ab-book-queries — A/B book classification requests from overnight team
 status: open · since: 2026-07-08 · last: 2026-10-21
@@ -38,10 +50,10 @@ State: Recurring: the client overnight desk posts "please advise Ac <id>" and a 
 Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792571194326479
 
 ### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
-status: open · since: 2026-08-19 · last: 2026-10-15
-State: Client sends algo params in tag 58 from OneZero, which Mahi maps to tag 448 and parses (TWAP+, POV, ScalePOV to TT; BOLT to QB). Production release done around 2026-09-18/21; QB BOLT format fixed (7 positional fields) and tests passed; no params means Mahi config is used, malformed params reject. Open UAT issues: TT ScalePOV orders show no fills and TT sees no child orders (client to raise with TT); UAT orders cancelled after 30 min by a Mahi-side UAT timeout (Liam confirmed 30 min in UAT, 35 min on the UBS Algo prod connection, none for TT/QB) and offered to disable it; QB UAT order unfilled for 30 min with nothing from QB, client raising to QB.
-Next: client answers Liam on disabling the UAT timeout; client chases TT and QB; Mahi supplies FIX logs on request.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787128423896719 https://mahifx.slack.com/archives/C09HN93T0G2/p1792069544056769
+status: open · since: 2026-08-19 · last: 2026-10-22
+State: On 2026-10-22 a UAT GoldDec algo order was left running; Liam cancelled it on request. Client has no UAT GUI access (Graeme asked if one exists), and asked if Mahi can reject rather than cancel (Liam: not possible); client can cancel prod orders via Compass open-orders X. Client sends algo params in tag 58 from OneZero, which Mahi maps to tag 448 and parses (TWAP+, POV, ScalePOV to TT; BOLT to QB). Production release done around 2026-09-18/21; QB BOLT format fixed (7 positional fields) and tests passed; no params means Mahi config is used, malformed params reject. Open UAT issues: TT ScalePOV orders show no fills and TT sees no child orders (client to raise with TT); UAT orders cancelled after 30 min by a Mahi-side UAT timeout (Liam confirmed 30 min in UAT, 35 min on the UBS Algo prod connection, none for TT/QB) and offered to disable it; QB UAT order unfilled for 30 min with nothing from QB, client raising to QB.
+Next: Liam answers Graeme on a UAT GUI; client answers Liam on disabling the UAT timeout; client chases TT and QB; Mahi supplies FIX logs on request.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787128423896719 https://mahifx.slack.com/archives/C09HN93T0G2/p1792673915629229
 
 ### stonex-surya-tt — New StoneX/Surya TT connection via OneZero
 status: open · since: 2026-09-15 · last: 2026-10-13
