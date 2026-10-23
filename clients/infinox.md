@@ -18,7 +18,7 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-22T07:23:00Z
+last_catchup: 2026-10-23T07:19:29Z
 status: active
 ---
 
@@ -31,9 +31,9 @@ Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sa
 
 ### lr-profile-ops — Routine LR / execution-profile moves
 status: open · since: 2026-05-12 · last: 2026-10-22
-State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
+State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action), and MT5_3001867_VidaMarkets_80001857 went to No LL on 10-22 (William confirmed within 9 minutes). Shyam notified that NZ support is on bank holiday Mon 10-26 (emergency cover; email support@ or phone). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
 Next: Georgia to review rule order and come back to Kate.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792057099943739 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889 https://mahifx.slack.com/archives/C022S6NL82D/p1792676511148879
 
 ### lr-redesign — B_CLIENTS XAUUSD LR redesign proposal
 status: open · since: 2026-10-20 · last: 2026-10-21
