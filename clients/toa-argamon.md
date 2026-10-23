@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-22T07:21:50Z
+last_catchup: 2026-10-23T07:20:13Z
 status: active
 ---
 
@@ -61,10 +61,10 @@ Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://ma
 
 
 ### chi-hedgers — Toa CHI hedger breaches and CBOE state mismatches
-status: open · since: 2026-08-03 · last: 2026-10-14
-State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL). ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
+status: open · since: 2026-08-03 · last: 2026-10-22
+State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
 Next: Lee to confirm the CBOE state-mismatch code fix shipped and ordersCOMEXMarex1 fixed.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309
 
 
 ### platform-ops — Toa box housekeeping, config landmines, capacity
@@ -119,6 +119,11 @@ State: No activity since 2026-09-17; downgraded to watching, Argamon was happy a
 Next: Daria owes Argamon a written review of the NFP loss; watch the next big news events.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1786681733979849 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788530007371599 https://mahifx.slack.com/archives/C06U76A7ZJR/p1789609500783629
 
+
+### roll-internalise-query — Roll-period trades under internalise rule (DST check)
+status: closed · since: 2026-10-23 · last: 2026-10-23 · closed: 2026-10-23
+State: Elan asked whether DST changed the ROLL-timezone broker rule after USDCHF trades at roll ran under internalise. Nathan showed they hit the INSTI//Broker Rollover execution profile and were all cancelled, none filled; Elan accepted.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792715308732409 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792717939925079
 
 ## Arc
 - 2026-06 — Centroid migration from OneZero completed; Centroid test trades through July.
