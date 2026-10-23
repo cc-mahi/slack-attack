@@ -15,13 +15,19 @@ contacts:
   - {name: "Richard Holman", role: "Velocity principal: pricing/hedging policy, commercial terms, prospect flow"}
   - {name: "Russell Hewson", role: "Velocity: sim data requests, Echo login"}
   - {name: "Liv Mottershead", role: "Velocity, joined Richard's team 2026-07", confidence: low}
-last_catchup: 2026-10-22T07:24:47Z
+last_catchup: 2026-10-23T07:18:42Z
 status: active
 ---
 ## Now
-PnL under pressure since late Aug (hedge costs up, Kama/Argamon widened); hedging slowed 2026-10-12 and PnL stabilised, but losses on 10-14 and 10-19 pushed hedging to classification-based rules (no blanket delay); still losing 10-21 on hedge spread. Commercials moving from PnL share to a volume-banded fixed fee, awaiting client CFO sign-off. Interest-only feed is toxic (counterparty 1100) and being priced out; client still wants it. 10-21 1034 tags moved off prem to the wider session and the toxic list is being rejected; premium EXEC channel not yet live.
+PnL under pressure since late Aug (hedge costs up, Kama/Argamon widened); hedging slowed 2026-10-12 and PnL stabilised, but losses on 10-14 and 10-19 pushed hedging to classification-based rules (no blanket delay); still losing 10-21 on hedge spread. Commercials moving from PnL share to a volume-banded fixed fee, awaiting client CFO sign-off. Interest-only feed is toxic (counterparty 1100) and being priced out; client still wants it. 10-22 Will C is researching a premium big-ticket skew (streaky slicer flow, FM-BIG sim pending). 10-21 1034 tags moved off prem to the wider session and the toxic list is being rejected; premium EXEC channel not yet live.
 
 ## Streams
+
+### premium-skew-lean — Skew on big premium tickets (slicers)
+status: open · since: 2026-10-22 · last: 2026-10-22
+State: Will C found premium flow comes in streaks: after a $200k+ ticket the same client's next ticket goes the same way 73-83% of the time (2,119 tickets, 8-21 Oct, both weeks, placebo 50%), mostly one client slicing an order; 1034 tags named 'slicers'. LR cannot capture it as 97% of premium orders are limit IoC at our quote with zero slack (fill-time worsening just cancels; 77% re-send after an LR cancel but only 35% fill), and the client base rejects channel LR and a 9c spread. Proposed lean: after a premium fill over $100k, lean 6c for 1-2 min, screened at about $2/M vs about $1.4/M live (recorded-fill screen, not an engine result). Engine tests: IFMS-B swap +$0.7/M vs live with range including zero; FM-BIG (existing FM flow signal, 0.24 qty threshold, 120s, A_CLIENTS_PREMIUM) earned +$8/M on the triggering client's follow-ups (one Asia session, 26 fills, thin); lean came out about 3c, not 6c. Four-arm sim (live / live+FM-BIG / FM-BIG only / no skew) over three Asia sessions due 14:00-14:30 BST 10-22; result not seen. Richard (12:16) said premium should not carry sever tags and they should be switched off.
+Next: Will C: score the four-arm run, size test if live+FM-BIG holds, London window before any change-set; live trial needed to see client reaction.
+Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1792656425258739 https://mahifx.slack.com/archives/CPDS0M2KF/p1792671488308169
 
 ### tag-exec-routing — Turn off worst 1034 tags, EXEC channel for toxic flow
 status: open · since: 2026-10-15 · last: 2026-10-21
@@ -48,10 +54,10 @@ Next: Will D: check the temporary volatility widening and bring prem back to 9c.
 Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787744856529959 https://mahifx.slack.com/archives/C05NB72AGR2/p1790247752525379 https://mahifx.slack.com/archives/C05NB72AGR2/p1792139560936329 https://mahifx.slack.com/archives/C05NB72AGR2/p1792598039459839
 
 ### db-pro — Deutsche Bank Limit Pro passive hedging via Reactive
-status: open · since: 2026-08-18 · last: 2026-10-20
-State: 10-20 passive hedging retried: first rejects were 'Exceeded maximum price precision' (3dp sent, DB takes 2dp); after Denny changed to 2dp, rejects became 'LimitPro not permissioned for account VELOCITY_ALGO'. Richard says permission was disabled after the dp issues and Reactive are switching it back on; Denny turned DB_PRO off until resolved and sees no passive trades. In/out test trades succeeded 08-24 and 6dp price fixed 08-25; drop copy via Xenfin is live. Session window 17:05 Fri NY queried 09-22 (client says ask Reactive/DB). 10-01 adding DB_PRO as an XAUUSD execution market crashed hybridHedger1; reverted and restarted, setup not finished. Shared Reactive cross-connect in LD4 costs GBP 100/month; on-charge/addendum question went to Nicole 08-18 with no answer seen in channel.
+status: open · since: 2026-08-18 · last: 2026-10-22
+State: 10-22 DB cancels for subceeding minimum notional forced the hedge minimum order up to $100k (Richard: DB Pro minimum is 10oz); the cancels tripped the Reactive switch again and LimitPro not-permissioned rejects returned; Denny re-enabled DB_PRO and awaits Reactive. 10-20 passive hedging retried: first rejects were 'Exceeded maximum price precision' (3dp sent, DB takes 2dp); after Denny changed to 2dp, rejects became 'LimitPro not permissioned for account VELOCITY_ALGO'. Richard says permission was disabled after the dp issues and Reactive are switching it back on; Denny turned DB_PRO off until resolved and sees no passive trades. In/out test trades succeeded 08-24 and 6dp price fixed 08-25; drop copy via Xenfin is live. Session window 17:05 Fri NY queried 09-22 (client says ask Reactive/DB). 10-01 adding DB_PRO as an XAUUSD execution market crashed hybridHedger1; reverted and restarted, setup not finished. Shared Reactive cross-connect in LD4 costs GBP 100/month; on-charge/addendum question went to Nicole 08-18 with no answer seen in channel.
 Next: Reactive: re-enable LimitPro permission; Mahi: re-enable DB_PRO and confirm passive trades; Nicole: on-charge/addendum answer.
-Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787049402059669 https://mahifx.slack.com/archives/C05NB72AGR2/p1790081928596799 https://mahifx.slack.com/archives/CPDS0M2KF/p1790869762252159 https://mahifx.slack.com/archives/C05NB72AGR2/p1792494641397569
+Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787049402059669 https://mahifx.slack.com/archives/C05NB72AGR2/p1790081928596799 https://mahifx.slack.com/archives/C05NB72AGR2/p1792494641397569 https://mahifx.slack.com/archives/C05NB72AGR2/p1792668512445189
 
 ### cfd-expansion — CFD / index instruments (J40, Z40, new CFD list)
 status: open · since: 2026-08-19 · last: 2026-10-21
