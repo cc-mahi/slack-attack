@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-10-22T07:21:50Z
+last_catchup: 2026-10-23T07:20:07Z
 status: active
 ---
 
@@ -95,6 +95,11 @@ Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1786964549641859 https://ma
 status: watching · since: 2026-05-04 · last: 2026-09-01
 State: AUDCAD priced directly from 2026-08-25 (5th most traded in Compass); XAUUSD arb min inception raised to -$5/M (2026-08-31); NZDUSD reference, signal, BMSL and MWMS markets got UBS and COMZ added after an AUDNZD FI loss (2026-09-01), to cut erratic mids over roll. Earlier LP-set and mid work (EURUSD mid, XAU/EUR/GBP reference selectors) is background.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1777855717442529 https://mahifx.slack.com/archives/C06U76A7ZJR/p1787623926715189 https://mahifx.slack.com/archives/C06U76A7ZJR/p1788229484766809
+
+### roll-broker-profile — Roll-period trades under internalise query
+status: closed · since: 2026-10-23 · last: 2026-10-23 · closed: 2026-10-23
+State: Elan asked whether daylight saving had flipped ROLL-timezone FX from broker to internalise, having seen clock times rather than session names in the execution rule. Nathan found the USDCHF roll trades hit the INSTI/Broker Rollover profile, and none were filled (all cancelled), so no rule change; Elan acknowledged.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792715308732409 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792717939925079
 
 ## Arc
 - 2026-06-26 — TraderEvolution discontinued; Argamon retail clients moved to MT5
