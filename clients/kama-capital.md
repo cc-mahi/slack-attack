@@ -16,14 +16,32 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-10-22T07:23:43Z
+last_catchup: 2026-10-23T07:18:42Z
 status: active
 ---
 
 ## Now
-Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot has about a month left (counts from the 5 Aug go-live; Will, 12 Oct) with post-pilot terms recorded ready to send. On 21 Oct Moe closed Kama's MAS Markets account and had it removed from all pools and hedging, and Kate said the SI sim results are ready for the 22 Oct weekly call along with a proposal. Still open: 19 Oct NOP/hedger outage fix deploy (NOP limits off), HFT FX pool coverage, EURGBP rejects, PXM timeout handling, Friday-close risk carry under Broker First.
+Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot ends 5 Nov; Will (22 Oct) asked Kate to seed the agreed 12-month volume-banded post-pilot terms with Moe now so it is signed before then. On 21 Oct Moe closed Kama's MAS Markets account and had it removed from all pools and hedging, and Kate said the SI sim results are ready for the 22 Oct weekly call along with a proposal. On 23 Oct Ali flagged XAUUSD market-open rejects on the B book. Still open: 19 Oct NOP/hedger outage fix deploy (NOP limits off), HFT FX pool coverage, EURGBP rejects, PXM timeout handling, Friday-close risk carry under Broker First.
 
 ## Streams
+
+### xau-open-rejects — XAUUSD market-open rejects on B book
+status: open · since: 2026-10-23 · last: 2026-10-23
+State: On 23 Oct Ali posted a screenshot of rejected XAUUSD orders at the market open on Kama's B book account and asked the team to check; Isaac replied he will look. No diagnosis yet.
+Next: Isaac to diagnose and reply.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792735564284869 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792738860840049
+
+### pilot-commercials — Pilot end and post-pilot terms
+status: open · since: 2026-09-10 · last: 2026-10-22
+State: Pilot ends 5 Nov (Will, 22 Oct; the wiki table still says it expired 9 Sep). Post-pilot terms are already agreed: the 12-month volume-banded ladder in the revised proposal Moe accepted on 2 Jun ($15k floor under $10B, $30k for $10-20B, marginal bands above). Aim is to have the agreement signed before 5 Nov so November bills on the ladder, with Bonnie on paperwork. Open point to settle with Kama: which flow counts toward the bands, since billing today counts CLIENTS and B_CLIENTS only, not Kama Securities MT5 flow or the new A/HFT books.
+Next: Kate to start seeding the terms with Moe now; settle which flow counts toward bands; Bonnie to prepare paperwork.
+Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789029069493129 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792659106795139
+
+### xau-execution-style — Broker vs Broker First, HFT book and markup
+status: open · since: 2026-09-21 · last: 2026-10-22
+State: A 21 Sep cancel burst came from FOK/IOC MinQty handling (fixed with reference.marketSupport.FOK) and led to Kama moving all A_CLIENTS to Broker First (29 Sep). HFT flow got its own book and hedgers (30 Sep) with internalisation on the toxic HFT pool; $20/M markup on HFT and $10/M on A Book internalised flow was agreed on the 1 Oct call and set up via MultiChannelConfig on 2 Oct (a type=list vs ArrayList misconfig caused stuck orders that day). On 30 Sep Kate asked Kama to turn off PXM sweep/boost so each A-book order arrives whole and Ali asked to switch to single IOC (Kate: IOC or FOK is fine); Ali was confirming with PXM and no outcome is visible. The automated classifier moves clients between broker/signal-follow and catch-all, so catch-all history on a tag is expected (William, 21 Sep). On 15 Oct Kama asked for Broker (not Broker First) over high-impact news and said they are happy to switch manually; Moe set twilight and roll flow to Broker. Kate flagged that execution rules cannot be day-specific. Kate answered that a bare '*' in counterparty criteria matches none (rule will not fire); to apply to every counterparty, remove the criteria altogether. On 21 Oct Kate explained FOK orders arriving 21:00-23:00 UTC expired because the HFT channel brokers everything to the HFT pool and none of its LPs were configured to accept FOK; Moe said all LPs accept FOK except Fusion (a crypto LP), so Kate set reference.marketSupport.FOK across the board. Kama staff edited distribution.executionRules three times on 22 Oct (13:13, 14:54, 15:14 BST; config-updates bot), content not visible.
+Next: Mahi to confirm whether news criteria can be added to execution rules.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0C1L6G37HN/p1792678441637159
 
 ### hft-fx-pricing — HFT channel FX spreads and pool coverage
 status: open · since: 2026-10-20 · last: 2026-10-21
@@ -60,12 +78,6 @@ status: open · since: 2026-10-16 · last: 2026-10-21
 State: On 16 Oct Moe asked Kate to stop sending XAUUSD to MAS Markets (standard feed only, not toxic); Kate removed it from the hedging markets straight away but the liquidity-pool (STP) side cannot drop one symbol, so she offered to set everything to internalise while the SOR is bounced. Moe chose to disable gold on Kama's side (switched off the price) and said it is easier if one symbol can be disabled per LP; Kate will look at restructuring the pool setup to allow that. Reason given: MAS rejecting market orders, causing losses in the Compass book. Kate asked for more detail on why. On 21 Oct Moe escalated: Kama is closing the MAS account, so Kate was asked to disable MAS Markets from all pools, with no pricing and no execution, from everywhere (including pricing models); only the connectors stay in case MAS fix things. Isaac made the config changes and restarted processes about 12:48 UTC (hedging markets, pool markets, HFT and LDN pool restarts); Moe worried about a reconnect as before, Isaac saw trades flowing and no disconnects.
 Next: Kate to see whether pools can disable one symbol per LP (less pressing now); confirm MAS is fully out of pricing models.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792154269472349 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792586254793539
-
-### xau-execution-style — Broker vs Broker First, HFT book and markup
-status: open · since: 2026-09-21 · last: 2026-10-21
-State: A 21 Sep cancel burst came from FOK/IOC MinQty handling (fixed with reference.marketSupport.FOK) and led to Kama moving all A_CLIENTS to Broker First (29 Sep). HFT flow got its own book and hedgers (30 Sep) with internalisation on the toxic HFT pool; $20/M markup on HFT and $10/M on A Book internalised flow was agreed on the 1 Oct call and set up via MultiChannelConfig on 2 Oct (a type=list vs ArrayList misconfig caused stuck orders that day). On 30 Sep Kate asked Kama to turn off PXM sweep/boost so each A-book order arrives whole and Ali asked to switch to single IOC (Kate: IOC or FOK is fine); Ali was confirming with PXM and no outcome is visible. The automated classifier moves clients between broker/signal-follow and catch-all, so catch-all history on a tag is expected (William, 21 Sep). On 15 Oct Kama asked for Broker (not Broker First) over high-impact news and said they are happy to switch manually; Moe set twilight and roll flow to Broker. Kate flagged that execution rules cannot be day-specific. Kate answered that a bare '*' in counterparty criteria matches none (rule will not fire); to apply to every counterparty, remove the criteria altogether. On 21 Oct Kate explained FOK orders arriving 21:00-23:00 UTC expired because the HFT channel brokers everything to the HFT pool and none of its LPs were configured to accept FOK; Moe said all LPs accept FOK except Fusion (a crypto LP), so Kate set reference.marketSupport.FOK across the board.
-Next: Mahi to confirm whether news criteria can be added to execution rules.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792569055503229
 
 ### lp-timeouts-pxm-unsub — LP latency and timeouts triggering PXM unsubscribes
 status: open · since: 2026-09-15 · last: 2026-10-19
@@ -108,12 +120,6 @@ status: open · since: 2026-09-28 · last: 2026-10-07
 State: Outdated reference mid prices caused false PnL-drop pager alerts on Kama; tied to a Beeks multicast issue (Zendesk 23343, Beeks NOCINT-839427). On 30 Sep Beeks said enabling IGMP snooping mitigated storm control, that it is still investigating blackholing on an LD5 distribution switch (servers cannot see the querier), and that Mahi should take no action and leave its test scripts in place. Liam sent a chaser on 7 Oct asking for an ETA; no Beeks answer is visible since.
 Next: Liam/Inald to chase Beeks for a fix ETA.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1790597791892939 https://mahifx.slack.com/archives/C0B6FMU96G2/p1791364219575089
-
-### pilot-commercials — Pilot term and post-pilot terms
-status: watching · since: 2026-09-10 · last: 2026-10-12
-State: Pilot term runs from the 5 Aug go-live with a free integration period, not from signing; Bonnie's "expired" figures count from 9 Sep. On 12 Oct Bonnie (from Nic's handover doc) said the pilot was 33 days expired; Will answered "same story" (linking the 10 Sep note) and "month left on the pilot", and Bonnie accepted ("Ah sorry"). So the pilot has about a month left (ends around early Nov, inferred as 3 months from 5 Aug) and the post-pilot terms are recorded ready to send. The wiki table still says the pilot expired 9 Sep.
-Next: Will to send the post-pilot terms before the pilot period ends; no evidence in Slack they have gone to Kama.
-Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789029069493129 https://mahifx.slack.com/archives/C0B6FMU96G2/p1791824613643489
 
 ### xpd-pricing — XPDUSD price jumps between LP levels
 status: watching · since: 2026-10-09 · last: 2026-10-09
