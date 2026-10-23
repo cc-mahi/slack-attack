@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-10-22T07:21:33Z
+last_catchup: 2026-10-23T07:20:03Z
 status: active
 ---
 
@@ -28,10 +28,10 @@ Next: Toa/Argamon to confirm whether those futures are meant to be priced; Elan 
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787002323906439 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619
 
 ### cboe-hedger-chi — hedgerCBOE1 on CHI: firewall/PnL trips and state mismatches
-status: open · since: 2026-08-03 · last: 2026-10-14
-State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, and down at the US CPI release 10-14. Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
+status: open · since: 2026-08-03 · last: 2026-10-22
+State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, and restarted again 10-22 by James ("looks fine"). Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
 Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309
 
 ### infra-releases — releases, new gateways and box changes on Argamon/Toa
 status: open · since: 2026-08-17 · last: 2026-10-14
