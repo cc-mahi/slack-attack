@@ -10,20 +10,20 @@ channels:
   internal-finprime: C0C8M89J2JY
   mahi-finprime: C0C8HCFKE9G
 contacts: []
-last_catchup: 2026-10-22T07:22:58Z
+last_catchup: 2026-10-23T07:19:52Z
 status: active
 ---
 
 ## Now
-Pre-contract A-book broker prospect (XAUUSD-heavy retail flow, ~$21bn/month). Channels created 2026-10-12. Fresh Jul-Sep dataset with A/T (A-book/T-book) split arrived 2026-10-21; William Denny is running M2M, skew value-add and classification sims on it (overnight batch started 2026-10-22 ~00:00 BST). Andrew wants a narrative-first pitch: retaining spread revenue FinPrime passes to providers, with a possible low-entry risk-only install; SI and hedging are how Mahi manages risk, not the value-add. They want a decision in ~2 weeks; NDA status unconfirmed.
+Pre-contract A-book broker prospect (XAUUSD-heavy retail flow, ~$21bn/month). Channels created 2026-10-12. Fresh Jul-Sep dataset with A/T (A-book/T-book) split arrived 2026-10-21; William Denny is running M2M, skew value-add and classification sims on it (overnight batch started 2026-10-22 ~00:00 BST). Andrew wants a narrative-first pitch: retaining spread revenue FinPrime passes to providers, going in cheap with a risk-only install and bundled free bridge/direct connectivity; SI and hedging are not the value-add. Sims are slowed by pool contention (runs due 23-28 Oct); Will is prepping FinPrime for a presentation early next week and has asked for rough commercials. They want a decision in ~2 weeks; NDA status unconfirmed.
 
 ## Streams
 
 ### valueadd-sims — XAUUSD value-add sims on FinPrime flow
-status: open · since: 2026-10-14 · last: 2026-10-21
-State: Rory's earlier internal results on Jul-Sep fills were provisional (skew ~$5m/yr, LR ~$11m/yr, classification adding ~$0.9-2.1m/quarter). William Denny has since rerun on the fresh A/T data (A 445,764 trades, T 235,344; UTC timestamps verified). M2M canaries and July runs done with continuous per-day classification (212 of 744 A-book logins change class within a week); full 1 Jul-1 Oct M2M runs in progress. SVA canaries (1 Jul, 09:00-13:00 UTC) show signal ranking IFMS > SKEW_1 > SKEW_0 on both books; at benchmark skew (median $0.15) PnL scales ~7-8x versus fixed 2c. Known drops: SVA hardcodes a 1% yield outlier filter, and replay end truncates late trades. Overnight batch: SVA on A/T x Jul/Aug/Sep at fixed $0.05 skew, M2M with classifier, and soft-flow variants (brokers, signal followers, arbitrageurs removed) to show uplift without toxic accounts. Backtest-2026-4 agents were killed ~19:50 UTC by a user-initiated EC2 shutdown; asked not to stop them until ~10:00 UTC 2026-10-22. Andrew also wants internalisation rates and holding-period analysis; Will Carter asked about adaptive skew (Andrew: realistic skews first, adaptive is its own research track).
-Next: William Denny: overnight runs, then per-classification yields on full Jul-Sep, plus Python SI sims on each portion and an internal summary with links. Everyone: leave backtest instances running until ~10:00 UTC 2026-10-22.
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791968009205219 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792590134007479 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792623681651539
+status: open · since: 2026-10-14 · last: 2026-10-22
+State: Rory's earlier internal results on Jul-Sep fills were provisional (skew ~$5m/yr, LR ~$11m/yr, classification adding ~$0.9-2.1m/quarter). William Denny has since rerun on the fresh A/T data (A 445,764 trades, T 235,344; UTC timestamps verified). M2M canaries and July runs done with continuous per-day classification (212 of 744 A-book logins change class within a week); full 1 Jul-1 Oct M2M runs in progress. SVA canaries (1 Jul, 09:00-13:00 UTC) show signal ranking IFMS > SKEW_1 > SKEW_0 on both books; at benchmark skew (median $0.15) PnL scales ~7-8x versus fixed 2c. Known drops: SVA hardcodes a 1% yield outlier filter, and replay end truncates late trades. Overnight batch: SVA on A/T x Jul/Aug/Sep at fixed $0.05 skew, M2M with classifier, and soft-flow variants (brokers, signal followers, arbitrageurs removed) to show uplift without toxic accounts. Andrew also wants internalisation rates and holding-period analysis; Will Carter asked about adaptive skew (Andrew: realistic skews first, adaptive is its own research track). As of 2026-10-22 evening: all-CP SVA done for A Sep and T Jul/Aug/Sep; continuously classified soft SVA done for T Jul, T Aug, A Sep; A Jul all-CP, A Aug all-CP, the other soft runs and A-book verification M2M still running (due 23-28 Oct). Runs are slow (5-30x warp vs 250-300x standalone) because 12+ share one pool, a shared-resource contention. Andrew is moving yield profiles in-memory alongside holding period and skew stats, adding rules to record sim failure reasons, and floated a swap-inventory skew idea (clients sit on losing positions; skew at rollover) as a possible prototype and GTM study.
+Next: William Denny: finish remaining runs, then per-classification yields on full Jul-Sep, Python SI sims and an internal summary with links; progress tracked in his Claude artifact tracker.
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791968009205219 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792590134007479 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792707683247519
 
 ### data-asks — Data gaps to raise with FinPrime (Derick)
 status: open · since: 2026-10-14 · last: 2026-10-21
@@ -32,11 +32,11 @@ Next: Will to raise remaining asks with Derick; Mahi to decide StarPrime both-si
 Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791969668222939 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792495003035739 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792571655168959
 
 ### commercial-timeline — NDA, presentation and decision timing
-status: open · since: 2026-10-15 · last: 2026-10-21
+status: open · since: 2026-10-15 · last: 2026-10-23
 State: FinPrime want to decide in ~2 weeks. Bonnie asked when the report is ready to present; Will said early next week, plans to book them Monday morning (a Q&A the following afternoon floated, likely Tuesday). No NDA confirmed in channel; Bonnie was to send one. On 2026-10-20 Will, with Isaac, reworked the microsites to do what the earlier Gamma reports did (numbers don't all align, value is there) and planned to wing the meeting, presenting by speaking rather than slides, then fix the numbers and send afterwards. Andrew's line if FinPrime are A-book: Mahi moved GCC and ATC from STP brokers (RoS at most 40% of the book) to far higher; Will agrees A-book optimisation will come through in comms.
-Andrew (2026-10-21): start with the narrative and use the analysis to support it; SI and intelligent hedging are not value-adds, the value-add is what changes in FinPrime's economics. For the A-book, the story is retaining more of the spread revenue passed to providers; he is tempted to go in low with a risk-only install (feature-led as much as P&L-led) and close on the wider pricing opportunity later.
-Next: Will: fix microsite numbers post-meeting and send. Bonnie: NDA (unconfirmed).
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1792067299721989 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792485966084739 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792567913393749
+Andrew (2026-10-21): start with the narrative and use the analysis to support it; SI and intelligent hedging are not value-adds, the value-add is what changes in FinPrime's economics. For the A-book, the story is retaining more of the spread revenue passed to providers; he is tempted to go in low with a risk-only install (feature-led as much as P&L-led) and close on the wider pricing opportunity later. Andrew (2026-10-22): go in cheap enough to win and respect feature breadth; they may not participate in execution or pricing at all (in-house bridge); bundle free bridge and direct connectivity to undermine in-house tech. On 2026-10-23 Will told FinPrime they are being prepped for early next week and asked William and Bonnie for rough commercials on current data.
+Next: William/Bonnie: rough commercials. Will: fix microsite numbers post-meeting and send. Bonnie: NDA (unconfirmed).
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1792067299721989 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792567913393749 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792739183473799
 
 ## Arc
 - 2026-10-12 — #mahi-finprime and #internal-finprime created by Bonnie Cassidy; FinPrime liquidity app added to the shared channel
