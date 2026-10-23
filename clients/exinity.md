@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-22T07:21:32Z
+last_catchup: 2026-10-23T07:19:29Z
 status: active
 ---
 
@@ -34,10 +34,10 @@ Weekend reliability matters more as Exinity plans weekend crypto pricing.
 ## Streams
 
 ### pnl-drop-alerts — Per-book PnL-drop alerts and alert email restoration
-status: open · since: 2026-09-18 · last: 2026-10-20
-State: Matt asked for book-level loss alerts; thresholds given 2026-10-06 (A-Book, SI FX, SI FX Insti below $1K/day, Big Boys $2.5K, DK Inventory $5K) plus an alert when LIQUIDITY_POOL_LDN exposure is above zero (top-up used) and restoration of the old email alerts (hedger throttle, VaR, FIX connection, A/B-book rejections). Alerts went live 2026-10-08 but froze systemStateMonitor for ~2 min per firing, so they were reverted (Zendesk 23617); the fix was deployed 2026-10-14. On 2026-10-20 Rory and Matt called and covered all email alerts Exinity wants back; Rory restarted systemStateMonitor (Matt approved, no trading impact) to pick up the new PnL alerting, and the 24h A-Book alerts fired and Matt confirmed receipt. Rory flagged A-Book CLIENTS_NET averaging ~10 alerts a day earlier.
-Next: Mahi (Rory) to confirm the other books' PnL alerts and the LP-exposure alert are live; email-alert restoration still to be put in place.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1789753758017939 https://mahifx.slack.com/archives/C0456LSHQQK/p1792052573269699 https://mahifx.slack.com/archives/C0456LSHQQK/p1792511678868259
+status: open · since: 2026-09-18 · last: 2026-10-22
+State: Matt asked for book-level loss alerts; thresholds given 2026-10-06 (A-Book, SI FX, SI FX Insti below $1K/day, Big Boys $2.5K, DK Inventory $5K) plus an alert when LIQUIDITY_POOL_LDN exposure is above zero (top-up used) and restoration of the old email alerts (hedger throttle, VaR, FIX connection, A/B-book rejections). Alerts went live 2026-10-08 but froze systemStateMonitor for ~2 min per firing, so they were reverted (Zendesk 23617); the fix was deployed 2026-10-14. On 2026-10-20 Rory and Matt called and covered all email alerts Exinity wants back; Rory restarted systemStateMonitor (Matt approved, no trading impact) to pick up the new PnL alerting, and the 24h A-Book alerts fired and Matt confirmed receipt. Rory flagged A-Book CLIENTS_NET averaging ~10 alerts a day earlier. On 2026-10-22 Rory asked again to restart systemStateMonitor to pick up new alerting; Mukhammad (overnight) asked whether the restart affects order execution, no answer seen.
+Next: Mahi (Rory) to answer Mukhammad's execution-impact question before restarting, and confirm the other books' PnL alerts and the LP-exposure alert are live; email-alert restoration still to be put in place.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1789753758017939 https://mahifx.slack.com/archives/C0456LSHQQK/p1792052573269699 https://mahifx.slack.com/archives/C0456LSHQQK/p1792511678868259 https://mahifx.slack.com/archives/C0456LSHQQK/p1792683656578339
 
 
 ### yield-sims-giraffe — Yield simulations on Exinity trade datasets
