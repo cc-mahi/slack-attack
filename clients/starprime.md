@@ -17,17 +17,29 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-10-22T07:21:32Z
+last_catchup: 2026-10-23T07:20:03Z
 status: active
 ---
 
 ## Now
 Relationship is fragile after four incidents in September (two Beeks/PXM connectivity outages, an NFP over-hedge, and old-price rejections on 18 Sep that made them route flow away for about three days); Andrew Morgan promised an improvement review and said more issues likely lose the client.
 Pricing latency is healthy since adaptive was cut on 22 Sep, but the pricer-by-asset-class split, the deeper Aeron/CEP fixes and BMSL changes are still outstanding.
-Growth: RBF (FINPRIME/Vantage) B-book white-label went live 6 Oct with first flow 9 Oct, and XAG on the SI model goes live Monday 19 Oct.
+Samin wants a redundant Compass instance for failover (pricing owed, 22 Oct call). Growth: RBF (FINPRIME/Vantage) B-book white-label went live 6 Oct with first flow 9 Oct, and XAG on the SI model goes live Monday 19 Oct.
 Compass 26.4 went out over the 17-18 Oct weekend; on Monday 19 Oct blacklisted tags were still reaching ISPRIME (fill rate about 10%) until Nathan Burch reverted and fixed the tag list; an urgent XAUUSD spread widening on 16 Oct still owes Jay details.
 
 ## Streams
+
+### compass-redundancy — Redundant Compass instance for failover
+status: open · since: 2026-10-22 · last: 2026-10-22
+State: On a 22 Oct call Samin said the main thing StarPrime wants is a redundant Compass instance for failover; he wants Compass as StarPrime's trading engine long term and is keen to expand to NYC clients, so a NYC system may fit. Mahi also suggested same-region failover across two server providers. Follows the September outages and the request to auto-route around Mahi failures (see stability-reviews).
+Next: Mahi to get back to Samin on pricing for a redundant instance.
+Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1792667868134029
+
+### weekend-gold-247 — 24/7 gold launch and weekend support scope
+status: open · since: 2026-08-21 · last: 2026-10-22
+State: StarTrader launched 24/7 XAUUSD in August; Mahi learned from the news. Samin said on 16 Sep he could launch it with Mahi and asked for a price, spreads and margin, but by 18 Sep it was PR'd and not live. After the incident Jay questioned Mahi's ability to support it, and Andrew told Jay on 20 Sep that the current agreement is market-hours support only, to be scoped alongside weekend trading. On the 22 Oct call Samin and Liam Cordelle covered 24/7 XAU: StarPrime currently offers only an indicative feed, is interested in future but lacks the support on its side to offer it firm.
+Next: scope weekend support coverage with StarPrime if 24/7 gold goes ahead (no near-term plan).
+Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1787313823826079 https://mahifx.slack.com/archives/C095MJHC68J/p1789548218691959 https://mahifx.slack.com/archives/C096422RPKK/p1789906497829189 https://mahifx.slack.com/archives/C095MJHC68J/p1792667868134029
 
 ### tag-blacklist-ux — Counterparty tag blacklist scale and wildcard matching
 status: open · since: 2026-07-31 · last: 2026-10-19
@@ -94,12 +106,6 @@ status: open · since: 2026-08-20 · last: 2026-09-28
 State: An LR health check on 20 Aug found StarPrime's LR healthy ($5.62/M, rank 5 of 17) but the B_CLIENTS profile mis-tuned (burst 5,000,000, cap 25) and B_CLIENTS_TIER2 a stub; recommendation was burst 500,000 and cap 60, and it is not visible whether it was applied. Classification-based brokering is working well. Dave Cooney wants slippage applied to every classifier-matched counterparty, with StarPrime as pilot (Zendesk 23424); first-trade coverage needs a small MahiMain change. BIGG LR went live for the first time on 20 Sep after a reorder fix. David Cooney's 27 Sep question about the parties in the Echo yield profile was answered by Nathan (INSTI_CLIENTS_LDN and B_CLIENTS_LDN are A and B book flow, SI_CLIENT_RISK_TRANSFER is the 100% risk split of A flow into the SI book, PXM_GU_CLIENTS and STARPRIME_MT5_LN1 are drop copies from StarPrime's PXM and MT5) and Andrew added it to the wiki.
 Next: confirm whether the B_CLIENTS LR change was applied; MahiMain first-trade slippage change.
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1787222052913939 https://mahifx.slack.com/archives/C095MJHC68J/p1788454059838229 https://mahifx.slack.com/archives/C095MJHC68J/p1790478344455159 https://mahifx.slack.com/archives/C095MJHC68J/p1790590263659839
-
-### weekend-gold-247 — 24/7 gold launch and weekend support scope
-status: open · since: 2026-08-21 · last: 2026-09-20
-State: StarTrader launched 24/7 XAUUSD in August; Mahi learned from the news. Samin said on 16 Sep he could launch it with Mahi and asked for a price, spreads and margin, but by 18 Sep it was PR'd and not live. After the incident Jay questioned Mahi's ability to support it, and Andrew told Jay on 20 Sep that the current agreement is market-hours support only, to be scoped alongside weekend trading.
-Next: scope weekend support coverage with StarPrime if 24/7 gold goes ahead.
-Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1787313823826079 https://mahifx.slack.com/archives/C095MJHC68J/p1789548218691959 https://mahifx.slack.com/archives/C096422RPKK/p1789906497829189
 
 ### news-brokering — Client switching to broker mode around news
 status: watching · since: 2026-09-04 · last: 2026-10-02
