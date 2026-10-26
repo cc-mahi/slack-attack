@@ -15,13 +15,19 @@ contacts:
   - {name: "Richard Holman", role: "Velocity principal: pricing/hedging policy, commercial terms, prospect flow"}
   - {name: "Russell Hewson", role: "Velocity: sim data requests, Echo login"}
   - {name: "Liv Mottershead", role: "Velocity, joined Richard's team 2026-07", confidence: low}
-last_catchup: 2026-10-23T07:18:42Z
+last_catchup: 2026-10-26T08:07:46Z
 status: active
 ---
 ## Now
-PnL under pressure since late Aug (hedge costs up, Kama/Argamon widened); hedging slowed 2026-10-12 and PnL stabilised, but losses on 10-14 and 10-19 pushed hedging to classification-based rules (no blanket delay); still losing 10-21 on hedge spread. Commercials moving from PnL share to a volume-banded fixed fee, awaiting client CFO sign-off. Interest-only feed is toxic (counterparty 1100) and being priced out; client still wants it. 10-22 Will C is researching a premium big-ticket skew (streaky slicer flow, FM-BIG sim pending). 10-21 1034 tags moved off prem to the wider session and the toxic list is being rejected; premium EXEC channel not yet live.
+PnL under pressure since late Aug (hedge costs up, Kama/Argamon widened); hedging slowed 2026-10-12 and PnL stabilised, but losses on 10-14 and 10-19 pushed hedging to classification-based rules (no blanket delay); still losing 10-21 on hedge spread. Commercials moving from PnL share to a volume-banded fixed fee, awaiting client CFO sign-off. Interest-only feed is toxic (counterparty 1100) and being priced out; client still wants it. 10-22 Will C is researching a premium big-ticket skew (streaky slicer flow, FM-BIG sim pending). 10-21 1034 tags moved off prem to the wider session and the toxic list is being rejected; premium EXEC channel not yet live. 10-23 Andrew M proposes a depth ladder (tight first clip, charge for size) on gold plus per-session skew.
 
 ## Streams
+
+### gold-depth-ladder — Tight gold TOB, charge for size, per-session skew
+status: open · since: 2026-10-23 · last: 2026-10-23
+State: Andrew M proposes (internal only) keeping the tight XAUUSD TOB for the first clip and laddering depth so bigger tickets fill wider on VWAP, instead of widening the Prem TOB; Will C's 20 Oct analysis has the 9c Prem channel below hedge cost, with losses in identifiable tags. Jul-Sep half-spread paid: Velocity 20-100oz 35.3 $/M (79% of volume) equals the network median, >100oz 95.7 vs median 56.2; about $330k a quarter per +10 $/M on the 20-100oz band if flow stays. FinPrime prospect figures stay internal; any Velocity-facing version uses network bands only. Second lever is a per-counterparty/FIX-session flow-momentum skew variant being built in the SkewValueAdd sim, with Velocity a live candidate. Figures are Athena-based, not yet Compass-linked.
+Next: Mahi: size a depth ladder on Velocity's own flow in sim; score per-session skew once built.
+Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1792771031124009
 
 ### premium-skew-lean — Skew on big premium tickets (slicers)
 status: open · since: 2026-10-22 · last: 2026-10-22
