@@ -16,20 +16,26 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-10-23T07:18:42Z
+last_catchup: 2026-10-26T08:06:11Z
 status: active
 ---
 
 ## Now
-Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot ends 5 Nov; Will (22 Oct) asked Kate to seed the agreed 12-month volume-banded post-pilot terms with Moe now so it is signed before then. On 21 Oct Moe closed Kama's MAS Markets account and had it removed from all pools and hedging, and Kate said the SI sim results are ready for the 22 Oct weekly call along with a proposal. On 23 Oct Ali flagged XAUUSD market-open rejects on the B book. Still open: 19 Oct NOP/hedger outage fix deploy (NOP limits off), HFT FX pool coverage, EURGBP rejects, PXM timeout handling, Friday-close risk carry under Broker First.
+Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow) with most connectors routed since 2026-09-29; Kama keeps tuning execution style and the LP pool. Kate Stagg is the day-to-day owner; Moe Ibrahim drives changes on the client side. Pilot ends 5 Nov; Will (22 Oct) asked Kate to seed the agreed 12-month volume-banded post-pilot terms with Moe now so it is signed before then. On 21 Oct Moe closed Kama's MAS Markets account and had it removed from all pools and hedging, and Kate said the SI sim results are ready for the 22 Oct weekly call along with a proposal. On 23 Oct Ali flagged XAUUSD market-open rejects on the B book (awaiting his logs); on 26 Oct Jad hit a login error, Shyam checking. Still open: 19 Oct NOP/hedger outage fix deploy (NOP limits off), HFT FX pool coverage, EURGBP rejects, PXM timeout handling, Friday-close risk carry under Broker First.
 
 ## Streams
 
+### compass-login-error — Jad hit a Compass login error
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: At 00:57 UTC on 26 Oct Jad posted a screenshot of an error when logging in (page not visible); Shyam replied at 00:59 that he is checking, and the thread has further replies not visible to us. No cause or outcome seen.
+Next: Shyam to diagnose; confirm Jad can log in.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792976237806039 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792976366185539
+
 ### xau-open-rejects — XAUUSD market-open rejects on B book
 status: open · since: 2026-10-23 · last: 2026-10-23
-State: On 23 Oct Ali posted a screenshot of rejected XAUUSD orders at the market open on Kama's B book account and asked the team to check; Isaac replied he will look. No diagnosis yet.
-Next: Isaac to diagnose and reply.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792735564284869 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792738860840049
+State: On 23 Oct Ali posted a screenshot of rejected XAUUSD orders at the market open on Kama's B book. Isaac first read it as an A-book order (Scope cancelled, client price off the limit so cancelled rather than internalised); Ali corrected that the B book is not routed to the LP, and Isaac saw no B-book cancels in Compass at that time and asked for the 012* order ID. Ali said he will share logs; none seen yet.
+Next: Ali to send logs / order IDs; Isaac to diagnose.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792735564284869 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792743155724969
 
 ### pilot-commercials — Pilot end and post-pilot terms
 status: open · since: 2026-09-10 · last: 2026-10-22
