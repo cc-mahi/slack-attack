@@ -18,22 +18,40 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-23T07:19:29Z
+last_catchup: 2026-10-26T08:06:11Z
 status: active
 ---
 
 ## Now
-Clio and CH want a custom layered XAUUSD symbol (`XAUUSD.l`) urgently; Shyam built the pricer and channel overnight and handed go-live (gateway restart, Infinox mapping, decisions) to Rory, while Clio chased again this morning.
-Day-to-day is routine LR / classification support via #mahi-infinox; open items are the four-account classification exclusion and Isaac's gold LR redesign (+$406k/month modelled), sent 10-21 and awaiting Infinox's review.
-Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq's EURUSD tick request after the 26.4 upgrade is still unexplained.
+Gold3X had no price from Sunday's open to ~04:40 UTC 10-26 (engine bug in geared session start tied to next week's US clock change; pricers restarted, ZD 23699), and Infinox then reported XAUUSD spikes Shyam could not see in Mahi's pricing; Infinox wants ticks to escalate to its bridge team.
+Custom layered XAUUSD symbol (`XAUUSD.l`) go-live and Isaac's gold LR redesign (+$406k/month modelled, sent 10-21) both await Infinox/Rory next steps; routine LR / classification support continues in #mahi-infinox.
+Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq asked for Echo access for two more users; Kate says Echo is now in Compass and they need Compass logins.
 
 ## Streams
 
+### echo-compass-access — Echo / Compass logins for new Infinox users
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: Sadiq asked for Echo access for Dmitrii Ponomarev and Alain Saad; Kate replied Echo pages are now integrated into Compass, linked the yield profiles and price forensics screens, and noted neither user has a Compass login yet.
+Next: Mahi to create Compass logins for the two users; Sadiq to say what they want to look into.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792999339513029 https://mahifx.slack.com/archives/C022S6NL82D/p1792999695579759
+
+### fill-tick-queries — Execution, slippage and raw-tick requests
+status: open · since: 2026-07-08 · last: 2026-10-26
+State: Infinox periodically queries fills and asks for raw ticks (XAUUSD 09-04, 07-15; EURUSD 10-09 on 10-13). On 10-23 Andreas reported an MT5 pricing issue 13:10:12-13:10:28 GMT+3 and Isaac supplied the XAUUSD Price Forensics tick CSV. On 10-26 Andreas reported many XAUUSD spikes (06:23-06:24 GMT+3 and 04:10-04:11 GMT) and asked for ticks; Shyam said Mahi's XAUUSD pricing looked clean at both times and no spikes were visible, ticks were being pulled, and Andreas replied he needs them to escalate to Infinox's bridge team. Rory delivered the EURUSD ticks (full day, then re-cut to 21:00 UTC 10-08..20:59 UTC 10-09) and confirmed bid_price_0/offer_price_0 is TOB. Will Carter noted internally on 10-15 that the reason behind the request is unknown and the team should not be blindsided on pricing; he has discussed it with Rory. Recent explainers: last-look start-vs-end fill rule (09-08), default LR profile burst mechanics for MT5_plain_b_87997401 (10-08).
+Next: Mahi to deliver the 10-26 XAUUSD ticks to Andreas; still unknown why Infinox wanted 10-09 EURUSD ticks (26.4 upgrade impact?).
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1791886436475979 https://mahifx.slack.com/archives/C022S6NL82D/p1792995135978029
+
+### xau-x3-gearing — XAUUSDx3 / Gold3x pricing and abuse
+status: open · since: 2026-07-21 · last: 2026-10-26
+State: Gold3x is built on the post-skew XAUUSD client price, amplifying skew 3x; David and Nathan concluded the fix is an unskewed source (buildGearedPricingNode), and riskPath forms its own mid so analytics.riskpath.formOwnMid would need to be per-instrument. A dedicated Gold3X toxic profile exists. On 09-18 Infinox reverted to a clean 3x and will re-add jitter jointly with Mahi. On 10-26 Andreas reported no Gold3X pricing; Shyam (internal) found none from Sunday's open until ~04:40 UTC, caused by an engine bug in the geared session start triggered by next week's US clock change (Sunday open check thought the session had not started, so no start price loaded); restarting pricers fixed it and Andreas asked for the reason (answered internally, ZD 23699). The permanent engine fix is not confirmed. The 07-20 Monday first-tick discrepancy was never closed out.
+Next: Mahi to ship the engine fix before the US clock change and tell Infinox the cause; unskewed source fix and jitter re-introduction still unconfirmed.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784673730662679 https://mahifx.slack.com/archives/C01QGUXPKEY/p1792991160720049
+
 ### lr-profile-ops — Routine LR / execution-profile moves
-status: open · since: 2026-05-12 · last: 2026-10-22
-State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action), and MT5_3001867_VidaMarkets_80001857 went to No LL on 10-22 (William confirmed within 9 minutes). Shyam notified that NZ support is on bank holiday Mon 10-26 (emergency cover; email support@ or phone). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
+status: open · since: 2026-05-12 · last: 2026-10-23
+State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action), and MT5_3001867_VidaMarkets_80001857 went to No LL on 10-22 (William confirmed within 9 minutes). On 10-23 Trading Ops asked whether tags INF_MT5__87964749 / MT5_+_b_87964749 sit under a profile and to keep that client on No LR until further notice, and Andreas asked for MT5_87018814_Centroid_3623025 to go to Heavy LR (Kate: will do). Shyam notified that NZ support is on bank holiday Mon 10-26 (emergency cover; email support@ or phone). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
 Next: Georgia to review rule order and come back to Kate.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889 https://mahifx.slack.com/archives/C022S6NL82D/p1792676511148879
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889 https://mahifx.slack.com/archives/C022S6NL82D/p1792785419569409
 
 ### lr-redesign — B_CLIENTS XAUUSD LR redesign proposal
 status: open · since: 2026-10-20 · last: 2026-10-21
@@ -53,22 +71,11 @@ State: Infinox repeatedly asks to pull accounts out of automated classifications
 Next: William/Mahi to reconcile why Big XAUUSD fired for classified accounts and reply to Georgia.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784122243791649 https://mahifx.slack.com/archives/C022S6NL82D/p1791239276076609 https://mahifx.slack.com/archives/C022S6NL82D/p1792065605339689
 
-### fill-tick-queries — Execution, slippage and raw-tick requests
-status: open · since: 2026-07-08 · last: 2026-10-15
-State: Infinox periodically queries fills and asks for raw ticks (XAUUSD 09-04, 07-15; EURUSD 10-09 on 10-13). Rory delivered the EURUSD ticks (full day, then re-cut to 21:00 UTC 10-08..20:59 UTC 10-09) and confirmed bid_price_0/offer_price_0 is TOB. Will Carter noted internally on 10-15 that the reason behind the request is unknown and the team should not be blindsided on pricing; he has discussed it with Rory. Recent explainers: last-look start-vs-end fill rule (09-08), default LR profile burst mechanics for MT5_plain_b_87997401 (10-08).
-Next: Mahi to work out why Infinox wanted 10-09 EURUSD ticks, i.e. whether the 26.4 weekend upgrade had pricing impact.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1791886436475979 https://mahifx.slack.com/archives/C01QGUXPKEY/p1792057675397809
-
 ### crypto-intro-deal — CH crypto business for broker intros
 status: open · since: 2026-10-06 · last: 2026-10-14
 State: CH offered Mahi Infinox's crypto business, with help towards an Infinox crypto licence, if Mahi introduces 2-3 brokers to take the liquidity. Isaac's view: start with XBT and XET, crypto skew PnL maybe 20k-100k p/m, 24/7 XAU raised but not pursued. On 10-14 Isaac said the plan is to introduce CH to Youssef at GCC; Will thinks the candidates are Amana GCC plus one more, preferring brokers without horrendous flow who are flexible and not too big. Velocity was floated earlier.
 Next: Isaac and Will to settle 1-2 more broker candidates and make the intros.
 Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1791283923202179 https://mahifx.slack.com/archives/C01QGUXPKEY/p1791994970744929
-
-### compass-26-4-upgrade — 26.3 to 26.4 upgrade and LDN infra move
-status: watching · since: 2026-10-08 · last: 2026-10-09
-State: Infinox was upgraded from Compass 26.3 to 26.4 over the weekend of 10-09 (approved at RC #7223/#7224, restart at the weekend, monitored over the open); Infinox opted out of the PSM overlays, so no pricing change was intended. A separate infra change moved "infra main" to LDN on 10-09. No post-upgrade fallout reported in channel; the Sadiq EURUSD tick request on 10-13 may be related (see fill-tick-queries).
-Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1791483335954819 https://mahifx.slack.com/archives/C01QGUXPKEY/p1791558221851879
 
 ### pxm-latency — XAUUSD fill latency dispute with PrimeXM
 status: open · since: 2026-10-01 · last: 2026-10-06
@@ -76,11 +83,10 @@ State: Infinox says the 2026-09-28 12:04 UTC XAUUSD fill reflects a price about 
 Next: Infinox Trading Ops to ask PrimeXM what accounts for the arrival-to-processing delay; they said on 10-06 they would revert. Nothing since.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1790862218777389 https://mahifx.slack.com/archives/C022S6NL82D/p1791251845973249
 
-### xau-x3-gearing — XAUUSDx3 / Gold3x pricing and abuse
-status: watching · since: 2026-07-21 · last: 2026-09-18
-State: Gold3x is built on the post-skew XAUUSD client price, amplifying skew 3x; David and Nathan concluded the fix is an unskewed source (buildGearedPricingNode), and riskPath forms its own mid so analytics.riskpath.formOwnMid would need to be per-instrument. A dedicated Gold3X toxic profile was created and CPs added (09-11..15). On 09-18 Infinox said jitter spikes were landing in clients' favour, so they reverted to a clean 3x and will re-add jitter in a controlled way with Mahi; CH asked for a call before a sales push. Gold3x multiplies LR quantity 3.5x with 100k USD per 5s replenishment. The 07-20 Monday first-tick discrepancy (01:10 vs 01:00) was never closed out.
-Next: code fix for the unskewed source and the joint jitter re-introduction are not confirmed; quiet since 09-18, downgraded to watching (no concrete pending action seen).
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784673730662679 https://mahifx.slack.com/archives/C01QGUXPKEY/p1789727821608629
+### compass-26-4-upgrade — 26.3 to 26.4 upgrade and LDN infra move
+status: watching · since: 2026-10-08 · last: 2026-10-09
+State: Infinox was upgraded from Compass 26.3 to 26.4 over the weekend of 10-09 (approved at RC #7223/#7224, restart at the weekend, monitored over the open); Infinox opted out of the PSM overlays, so no pricing change was intended. A separate infra change moved "infra main" to LDN on 10-09. No post-upgrade fallout reported in channel; the Sadiq EURUSD tick request on 10-13 may be related (see fill-tick-queries).
+Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1791483335954819 https://mahifx.slack.com/archives/C01QGUXPKEY/p1791558221851879
 
 ### index-cfd-spikes — LP-driven spikes on indices and CFDs
 status: watching · since: 2026-05-20 · last: 2026-09-18
@@ -93,15 +99,15 @@ State: After the 07-01 SPX500 feedback-loop incident CH asked for a ~$350k three
 Next: confirm payment received and the bridge-discount answer; nothing seen since 09-11.
 Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1782992001195759 https://mahifx.slack.com/archives/C01QGUXPKEY/p1789118720343269
 
-### fi-party-review — FI signal party correctness by instrument
-status: closed · since: 2026-07-06 · last: 2026-07-06 · closed: 2026-10-15
-State: No activity since 2026-07-06; assumed resolved. Andrew asked whether pricing.adjustmentSignalProcessFlowImbalanceOptimisationParty is still correct per instrument; Kate said the team would review and change where needed. No confirmation of changes was seen.
-Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1783353826108009 https://mahifx.slack.com/archives/C01QGUXPKEY/p1783354691007529
-
 ### ld-network-incident — LD hosting network incident
 status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
 State: On 10-16 Liam told Infinox of a networking incident in Mahi's LD environment and advised switching to failover if available. Infinox (Sadiq) saw no pricing disruption and Liam said their environment was mostly unaffected; the hosting provider fixed it that day and Georgia confirmed no abnormality.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792143327385389 https://mahifx.slack.com/archives/C022S6NL82D/p1792150361206559
+
+### fi-party-review — FI signal party correctness by instrument
+status: closed · since: 2026-07-06 · last: 2026-07-06 · closed: 2026-10-15
+State: No activity since 2026-07-06; assumed resolved. Andrew asked whether pricing.adjustmentSignalProcessFlowImbalanceOptimisationParty is still correct per instrument; Kate said the team would review and change where needed. No confirmation of changes was seen.
+Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1783353826108009 https://mahifx.slack.com/archives/C01QGUXPKEY/p1783354691007529
 
 ## Arc
 - 2026-05-15 — Lazaros Zografopoulos (trading desk, arb classification oversight) left Infinox
