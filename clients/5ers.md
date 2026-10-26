@@ -18,11 +18,11 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-10-23T07:18:25Z
+last_catchup: 2026-10-26T08:05:21Z
 status: active
 ---
 ## Now
-CHURN RISK: on the 2026-10-20 weekly call Yaniv said he wants to give 3 months' notice, citing the Beeks incidents ("two issues too many") and an unnamed rival offering skew/LR at under 50% of our fees with seamless failover; a C-level follow-up call with Yaniv is set for 2026-10-21 13:45 UK (he is away from 10-22 for ~a week) and Andrew has asked for a performance/comms review since Nov 2025. Funded flow runs through the YourBourse X-Connect; the NIC fix is done on the optic but the server is still on the backup NIC (move back to primary pending), and Beeks owes RCAs for the 09-28 reboot and the 10-16 London outage. Funded XC limit-order cancels are mostly cured; demo flow on Compass is stalled on the fee.
+CHURN RISK: on the 2026-10-20 weekly call Yaniv said he wants to give 3 months' notice, citing the Beeks incidents ("two issues too many") and an unnamed rival offering skew/LR at under 50% of our fees with seamless failover; a C-level follow-up call with Yaniv is set for 2026-10-21 13:45 UK (he is away from 10-22 for ~a week) and Andrew has asked for a performance/comms review since Nov 2025. Funded flow runs through the YourBourse X-Connect; the NIC fix is done on the optic but the server is still on the backup NIC (move back to primary pending), and Beeks owes RCAs for the 09-28 reboot and the 10-16 London outage. Compass 26.4 release went out in the 10-23 to 10-25 weekend window (CHG-2610-VSHM); 57 single stocks are loaded but unpriced (needs a B2Broker feed). Funded XC limit-order cancels are mostly cured; demo flow on Compass is stalled on the fee.
 
 ## Streams
 
@@ -32,11 +32,11 @@ State: Internal retrospective 10-21 (Andrew, Kate, Will; huddle notes in #intern
 Next: Kate to send the client-facing review and update the skew config; Andrew to feed in the funded/graduate point and scope the demo-flow value-add; plan single-region, all-asset-class and weekend-gold evaluation work; Justin to schedule the 26.4 weekend release; consider alternative hosting to Beeks. Outcome of the 10-21 13:45 call not seen in Slack.
 Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1792502905672309 https://mahifx.slack.com/archives/C079M09MGGP/p1792509790689269 https://mahifx.slack.com/archives/C079M09MGGP/p1792589201530159 https://mahifx.slack.com/archives/C079M09MGGP/p1792581592949149
 
-### stock-cfd-request — New stock CFD instruments (~55 tickers)
-status: open · since: 2026-09-29 · last: 2026-10-21
-State: Andreas asked whether Mahi can price a list of ~55 US/EU single stocks (AAPL, TSLA, NVDA, etc). Kate said Mahi does not price all of them; Andreas noted 5ers gets these from B2B and Mahi may source from there, and Kate agreed but said some backend work is needed to add the instruments and she is checking feasibility. On 2026-10-21 Andrew said single stocks can be added and Kate confirmed 5ers already had a list; they are now part of the retention offer. No reply to 5ers seen yet.
-Next: Kate to revert to Andreas on feasibility and timing.
-Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1790672163941279 https://mahifx.slack.com/archives/C07AQJS4E80/p1790691730847859 https://mahifx.slack.com/archives/C079M09MGGP/p1792584193214239
+### stock-cfd-request — New stock CFD instruments (~57 tickers)
+status: open · since: 2026-09-29 · last: 2026-10-23
+State: Andreas asked for ~55 US/EU single stocks; they are now part of the retention offer. On 2026-10-23 Isaac loaded all 57 from his list into 5ers Compass as reference data (names-only import, one equity asset + one USD CFD per stock, e.g. AAPL/AAPLUSD; Mattel is MATTEL as MAT clashes with a crypto asset); he skipped a change record (Liam flagged it, bounce of systemNotificationProcessor2 was clean). Naming convention is under debate (Liam's Finotive pattern: asset AAPLx, instrument AAPL; Andrew wants ticker consistency checked against top retail sites). The blocker is price: B2Broker's 5ers session carries no stocks, so 5ers must confirm B2Broker can stream these names and their symbols. Isaac asked Andreas this 10-23; Andreas replied he must first discuss internally. Support is limited: no dividend, corporate-action or equity-news feed (a split means manual handling; only AAPL, AMZN, GOOGL, META, MSFT, NVDA, TSLA have econ-news drivers). Andrew wants a KB/upsell article and PDFs on stock capacity.
+Next: Andreas to come back after internal discussion and ask B2Broker about the feed; Isaac to settle naming and map subscriptions/pricing once symbols are known.
+Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1790672163941279 https://mahifx.slack.com/archives/C079M09MGGP/p1792584193214239 https://mahifx.slack.com/archives/C079M09MGGP/p1792757497794269 https://mahifx.slack.com/archives/C07AQJS4E80/p1792759023540679
 
 ### xc-demo-flow — Moving demo/grad flow onto the XC
 status: open · since: 2026-07-29 · last: 2026-10-21
