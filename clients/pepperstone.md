@@ -25,18 +25,30 @@ contacts:
   - {name: "Saemi Kim", role: "Pepperstone; pricing config changes 2026-10", confidence: low}
   - {name: "Sam Dammers", role: "Pepperstone security/Cloudflare IP policy", confidence: low}
   - {name: "Tom Williams", role: "Pepperstone COO since 2026-08"}
-last_catchup: 2026-10-23T07:18:42Z
+last_catchup: 2026-10-26T08:06:11Z
 status: active
 ---
 
 ## Now
-Live on FX, Crypto exchange (Modulus) and CFD (desk live since July), on a 3-year MSA to 2028-07. Three fronts: roll-time arbitrage across majors (Mahi raised roll LR 2026-10-15), FX B-book SI/inventory sims (credit limit USD 200M the constraint) and crypto PSM scoping. A CPI-print gateway incident on 2026-10-14 is awaiting a full written response to Diego. A London estate connectivity incident on 2026-10-16 resolved the same day; XBTUSD skew arbers (2026-10-18) and missing HRP data in London since 2026-10-18 are live. Pepperstone is also moving spot crypto off Modulus (to "Polaris"); Polaris sessions staged in London 2026-10-19, SOW to come. CFD licence fee steps up to USD 45k/month from month 4. Pepperstone procurement is contesting the USD 1,500 dev day rate (Mahi counter: 1,250 for 12 months).
+PPolaris (spot crypto) cut over 2026-10-23, but the London crypto server rebooted twice on 2026-10-25 and Stephen wants a backup prop trader and alerting urgently; he also wants a hard 26D-Toxic whitelist after an internalised failover (2026-10-26). Other live fronts: roll-time arb (roll LR raised), XBTUSD skew arbers, CPI-print gateway incident response still owed to Diego, FX/CFD on 26.4 and Velocity primary on ten CFD indices since the weekend. CFD licence steps to USD 45k/month; procurement contests the USD 1,500 dev day rate (Mahi counter 1,250 for 12 months).
 
 ## Streams
 
+### toxic-pool-failover — Toxic client internalised after failover to LD, request for hard 26D whitelist
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: On 2026-10-26 Stephen reported a client on the A-China>Broker 26D Toxic Pool execution rules traded EURCAD and, apparently after a brief failover to LD, was internalised, leaving Pepperstone with 26D positions to trade out of. He asked whether such clients can be whitelisted as 26D-Toxic 100% of the time so open and close are both captured. Shyam replied that Mahi will check and revert.
+Next: Mahi (Shyam) to answer Stephen on a no-exceptions 26D-Toxic whitelist and why the failover internalised.
+Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792988548313129?thread_ts=1792988548.313129&cid=C06AR8MT8NT
+
+### compass-264-release — Compass 26.4 upgrade of FX and CFD over the weekend
+status: open · since: 2026-10-23 · last: 2026-10-23
+State: Leonardo told Pepperstone on 2026-10-23 that the FX and CFD Compass environments (not crypto) get 26.4 over the 24-25 Oct weekend, live at each host's weekly reboot, with monitoring over the open. Outcome not yet seen in channel.
+Next: Mahi to monitor the Sunday open; confirm any 26.4 issues.
+Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792772169235949
+
 ### dev-day-rate — Pepperstone procurement challenges the USD 1,500 SOW day rate
 status: open · since: 2026-10-22 · last: 2026-10-22
-State: Pepperstone procurement (Lisa) objected to the SOW day rate moving from USD 1,000 to 1,500 and proposed a written rate card (fixed 12 months, 90 days' notice), volume tiers, and a lower base rate. Liam's background: rate held at 1,000 since Nov 2021 (about 8.8%/yr), SOW #4 was agreed at 1,250 with Stephen, quotes are lean, and Modulus was built free; he thinks 1,500 was a bit sharp and suggested 6-12 months at 1,250. Bonnie drafted a reply (agree to hold 1,250 for 12 months then 1,500, rate card in writing, no volume tiers) for review; not yet sent as far as seen. SOW 4 is still in progress and likely billed this month.
+State: Pepperstone procurement (Lisa) objected to the SOW day rate moving from USD 1,000 to 1,500 and proposed a written rate card (fixed 12 months, 90 days' notice), volume tiers, and a lower base rate. Liam's background: rate held at 1,000 since Nov 2021 (about 8.8%/yr), SOW #4 was agreed at 1,250 with Stephen, quotes are lean, and Modulus was built free; he thinks 1,500 was a bit sharp and suggested 6-12 months at 1,250. Bonnie drafted a reply (hold 1,250 for 12 months then 1,500, written rate card, no volume tiers); not yet sent as far as seen.
 Next: Bonnie to send/revise the reply to Lisa; Liam to review the draft.
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1792657103153339 https://mahifx.slack.com/archives/C033K2P0RPT/p1792688981792389
 
@@ -53,16 +65,16 @@ Next: Isaac to answer on internalising at the continuity price when indicative; 
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792665503647569 https://mahifx.slack.com/archives/C033K2P0RPT/p1792721043650659
 
 ### polaris-migration — Spot crypto moving from Modulus to Polaris (SOW)
-status: open · since: 2026-08-21 · last: 2026-10-22
-State: Stephen told Daria on 2026-08-21 that Pepperstone is dropping Modulus for spot crypto (new venue possibly Polaris); Liam argued for an SOW with an added-days clause or monthly exchange-MM fee and, after a call with the exchange team (2026-08-26), said the timeline is conservative and Stephen expects costs. Daria thinks Pepperstone are already committed to Polaris, so alternatives (Toa, Adaptive accelerator) look moot. On 2026-10-19 Liam staged self-approved changes in London for new Polaris FIX order/market data sessions and a 26.3 build with the Polaris adaptor; on 2026-10-20 he added a UAT prop trader for Polaris in London and switched it on. No SOW seen yet. On 2026-10-22 Nathan flagged propTraderPolarisUAT1 OOM'd and crashed; it is back up but its book is turned off (PagerDuty incident grouped).
-Next: Pepperstone to send integration info; Liam to scope the SOW; Mahi to look at the Polaris UAT OOM before turning the book back on.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1787289556446609 https://mahifx.slack.com/archives/C033K2P0RPT/p1792492842169379 https://mahifx.slack.com/archives/C033K2P0RPT/p1792638948097249
+status: open · since: 2026-08-21 · last: 2026-10-25
+State: Stephen told Daria on 2026-08-21 that Pepperstone is dropping Modulus for spot crypto (new venue possibly Polaris); Liam argued for an SOW with an added-days clause or monthly exchange-MM fee, and Daria thinks Pepperstone are already committed to Polaris. Polaris FIX sessions and a 26.3 build were staged in London 2026-10-19 and a UAT prop trader added 2026-10-20 (it OOM'd 2026-10-22). On 2026-10-23 Liam self-approved the cutover (CHG-2610-T16F): a new process propTraderPolaris1 on London trades Polaris and all three old prop traders are decommissioned. That evening Arun asked for propTraderPolaris1 and its book to be turned back on once the Polaris team fixed their issue. Over the weekend the London crypto server was rebooted twice on 2026-10-25 night (after the Saturday RAM upgrade), taking propTraderPolaris1 down twice; Stephen complained the prop trader was off again and asked for a NY/LD backup so maintenance has no downtime, plus alerting urgently. Shyam asked internally whether a backup like the old setup can be built. No SOW seen yet.
+Next: Mahi to set up a backup/failover for propTraderPolaris1 and alerting; Liam to scope the SOW.
+Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1787289556446609 https://mahifx.slack.com/archives/C033K2P0RPT/p1792638948097249 https://mahifx.slack.com/archives/C033K2P0RPT/p1792964887567969 https://mahifx.slack.com/archives/C033K2P0RPT/p1792968665134069
 
 ### cfd-pricing-feeds — CFD feed gaps, reference-market changes and indicative alerts
-status: open · since: 2026-09-22 · last: 2026-10-22
-State: Recurring CFD price-feed questions. USDCLP root cause (Nathan, 2026-09-22): priced from QRT_NYC and FINALTO_LDN; Finalto starts ~12:30 UTC and QRT_NYC has sent no USDCLP since 17 Sep (also a gap 17-21 Aug) while its FIX session is healthy, so it is a QRT-side issue and Pepperstone were to raise it with OneZero; MK disabled NAPN and USDCLP on 2026-09-24 meanwhile. Also indicative-pricing alerts and the ~20s LD delay above. On 2026-10-15 MK asked for the primary reference on ten indices (AUS200, UK100, EUSTX50, FRA40, CHINAH, NETH25, HK50, SWI20, CN50, SCI25) to move to Velocity in beta ahead of extended hours at the DST change. On 2026-10-16 MK flagged clients exploiting latency on the IG feed (known, IG fixing; no other LP prices UKOUSD/USOUSD, so no backup); Isaac proposed a proxied mid of each forward pair's cash partner as primary mid with IG as secondary fallback and spreads kept in line with IG, MK agreed to put it in beta, pending a proxy restart so likely next week. Isaac also needs to deploy the latest 26.3 to the CFD pricers for a primary/secondary fix (26.3 is now on CFD). On 2026-10-21 MK confirmed the Velocity reference moves to prod this weekend in line with UK DST end, and the out-of-hours timezone update follows on 1 Nov with US DST end; Isaac said the Velocity change must be done pre-open next week and Timetables the week after, and will write instructions (Shyam picking up). On 2026-10-22 Reece saw the Nikkei normalising against Jump as backup when Invast drops out, where a Velocity backup is expected; Isaac found the LDN rule scoped but not the NYC one, corrected it and started an audit, and noted VELOCITY_LDN does not price JPXJPY (only NYC).
-Next: Reece to check whether VELOCITY_LDN should stream JPXJPY; Isaac to write the Velocity-to-prod and OOH timetable instructions, Shyam/team to execute (Velocity before next week's open, timetables on 1 Nov); Isaac to prepare the proxied-mid IG fallback for beta and deploy 26.3 to the CFD pricers; Pepperstone to chase OneZero/QRT on USDCLP.
-Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1790096194336949 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792155095799099?thread_ts=1792155095.799099&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C033K2P0RPT/p1792581335519849?thread_ts=1792581335.519849&cid=C033K2P0RPT https://mahifx.slack.com/archives/C06AR8MT8NT/p1792662223585509?thread_ts=1792662223.585509&cid=C06AR8MT8NT
+status: open · since: 2026-09-22 · last: 2026-10-25
+State: Recurring CFD price-feed questions. USDCLP gap (2026-09-22) is QRT-side (no USDCLP since 17 Sep, FIX healthy); Pepperstone to raise with OneZero, MK disabled NAPN and USDCLP meanwhile. On 2026-10-15 MK asked for the primary reference on ten indices (AUS200, UK100, EUSTX50, FRA40, CHINAH, NETH25, HK50, SWI20, CN50, SCI25) to move to Velocity in beta ahead of extended hours at the DST change. On 2026-10-16 MK flagged clients exploiting latency on the IG feed (known, IG fixing; no other LP prices UKOUSD/USOUSD, so no backup); Isaac proposed a proxied mid of each forward pair's cash partner as primary mid with IG as secondary fallback and spreads kept in line with IG, MK agreed to put it in beta, pending a proxy restart so likely next week. The out-of-hours timezone update follows on 1 Nov with US DST end. On 2026-10-22 Isaac corrected a Nikkei backup rule scoped for LDN but not NYC and started an audit; VELOCITY_LDN does not price JPXJPY (only NYC). On 2026-10-23 Isaac confirmed the ten indices go to Velocity as primary for pricing and hedging in LDN and NYC before Sunday's open; Shyam executed it Saturday (CHG-2610-GF87). Diego then asked if GDAX was switched (already on Velocity), and Stephen asked whether Mahi "jumped the gun", Shyam pointing to Pepperstone's own request. On 2026-10-25 Stephen asked where Custom2 timezone times are defined: Shyam pointed to tradingTimeTable.timezoneOverrides, Stephen and Tom Williams said Pepperstone cannot see those keys, and Shyam will ask dev whether they can be made visible. On 2026-10-23 MK also asked for an @here tag on alerts in the channel because they were missed; William agreed.
+Next: Shyam to raise visibility of timezone overrides with dev; Reece to check whether VELOCITY_LDN should stream JPXJPY; Isaac/Shyam to do the OOH timetable update on 1 Nov; Isaac to prepare the proxied-mid IG fallback for beta; Pepperstone to chase OneZero/QRT on USDCLP.
+Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1790096194336949 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792155095799099?thread_ts=1792155095.799099&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C033K2P0RPT/p1792581335519849?thread_ts=1792581335.519849&cid=C033K2P0RPT https://mahifx.slack.com/archives/C06AR8MT8NT/p1792969809909669?thread_ts=1792969809.909669&cid=C06AR8MT8NT
 
 ### cfd-licence-fee — CFD licence fee step-up at month 4 and quarterly review prep
 status: open · since: 2026-10-19 · last: 2026-10-21
@@ -71,10 +83,10 @@ Next: Mahi team to prep the system health review and value-add summary for the q
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1792425618470259 https://mahifx.slack.com/archives/C033K2P0RPT/p1792573119829529
 
 ### infra-resilience — Crypto server reboots, failover sessions and patching
-status: open · since: 2026-08-09 · last: 2026-10-21
-State: Weekend crypto server restarts (LDN reboot Aug 29, Beeks denied) led Mahi to move infra patches to weekday Monday windows (LDN 22:00 UTC, NYC 23:00 UTC, with advance notice). On 2026-10-05 Arun found the three NYC OZ failover MD/order sessions flapping every 7-8 minutes from TCP retransmits (packet loss; primary sessions healthy). Beeks cross-site link work is scheduled 17 Oct and 22 Oct. On 2026-10-20 Liam said Beeks must power down the London crypto trading server for maintenance; MK agreed intra-week is better since crypto fails over to NY, and on 2026-10-21 Liam confirmed Beeks must do it over the weekend, aiming for Saturday 2026-10-24 11:00 UTC for about an hour; Diego acknowledged.
-Next: Arun to raise the packet loss with Beeks if it persists; Liam to watch the London crypto server when it returns after the Saturday window.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1786319051125299 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792489392693439 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792571444931719
+status: open · since: 2026-08-09 · last: 2026-10-23
+State: Crypto server reboots (LDN Aug 29) moved infra patches to Monday windows with notice. On 2026-10-05 Arun found the NYC OZ failover MD/order sessions flapping every 7-8 minutes from TCP retransmits (primary healthy). Beeks had to power down the London crypto server, done over the weekend. It was scheduled as a RAM upgrade (NOCINT-854295, orders failing over to NY); the London server then rebooted twice on the night of 2026-10-25, taking propTraderPolaris1 down (see polaris-migration).
+Next: Arun to raise the packet loss with Beeks if it persists; Mahi to find why the London server rebooted twice on 2026-10-25.
+Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1786319051125299 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792489392693439 https://mahifx.slack.com/archives/C033K2P0RPT/p1792767468812089
 
 ### crypto-btc-arb — XBTUSD skew arbers hitting crypto pricing
 status: open · since: 2026-10-18 · last: 2026-10-20
@@ -84,7 +96,7 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792355023754729?thread_ts=
 
 ### crypto-hedging — Crypto spot hedger tuning and LP de-prioritisation
 status: open · since: 2026-07-13 · last: 2026-10-20
-State: Spot crypto hedgers were reworked in September (per-LP backstop rules, dynamic fill ratio) so LPs that keep cancelling/rejecting are de-prioritised. MK's SI-hedger round-robin to counterparties 1001/1002 was reverted 2026-10-05 and reinstated 2026-10-08. On 2026-10-15 Isaac found HRP excluded from some hedger rules by legacy config and added it everywhere (to be reviewed). On 2026-10-19 XAUT/SOL opposite positions came from a June merge of per-LP LPR rules judging spread across all four LPs; Isaac restored per-market LPR rules for non-XBT/XET pairs and cut LPR delays. On 2026-10-20 Stephen said XAUT and PAXG hedging has no cost benefit; Nathan offered to remove them via instrumentToProfileMappings (also hybridHedgerSITotalNYC1), Stephen will discuss internally. Kraken is now an AUDUSD weekend fallback.
+State: Spot crypto hedgers were reworked in September (per-LP backstop rules, dynamic fill ratio) to de-prioritise LPs that cancel/reject. On 2026-10-15 Isaac found HRP excluded from some hedger rules by legacy config and added it everywhere (to be reviewed). On 2026-10-19 XAUT/SOL opposite positions came from a June merge of per-LP LPR rules judging spread across all four LPs; Isaac restored per-market LPR rules for non-XBT/XET pairs and cut LPR delays. On 2026-10-20 Stephen said XAUT and PAXG hedging has no cost benefit; Nathan offered to remove them via instrumentToProfileMappings (also hybridHedgerSITotalNYC1), Stephen will discuss internally. Kraken is now an AUDUSD weekend fallback.
 Next: Stephen to decide whether to drop XAUT/PAXG from SI hedging.
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1783981698651339 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792414394365519?thread_ts=1792414394.365519&cid=C06AR8MT8NT
 
@@ -96,13 +108,13 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1782731133990719 https://ma
 
 ### perps-pricing — Perp instruments: pricing, rollover and KRX
 status: open · since: 2026-06-26 · last: 2026-10-20
-State: WTI perp mispricing (2026-09-20) was Goldi dropouts leaving a stale Binance basis; Binance removed from non-XAUUSD perp references 2026-09-25. Brent perp rollover adjustment: Isaac added a 16-minute force-indicative window failing over to marked-up HRP_GOLDI, basis-jump fix (MahiMain PR 1168) deployed 2026-09-30, off on the beta pricer only to compare at the next funding adjustment. KRXUSD-PERP replaced KRXKRW-PERP on 2026-10-07; 2dp-vs-1dp price rejects fixed 2026-10-20. XAGUSD-PERP still unlaunched (Pepperstone to finish config and test).
+State: WTI perp mispricing (2026-09-20) led to Binance being removed from non-XAUUSD perp references. Brent perp rollover adjustment: Isaac added a 16-minute force-indicative window failing over to marked-up HRP_GOLDI, basis-jump fix (MahiMain PR 1168) deployed 2026-09-30, off on the beta pricer only to compare at the next funding adjustment. KRXUSD-PERP replaced KRXKRW-PERP on 2026-10-07; 2dp-vs-1dp price rejects fixed 2026-10-20. XAGUSD-PERP still unlaunched (Pepperstone to finish config and test).
 Next: Isaac to compare beta vs prod at the next funding basis adjustment; Pepperstone to launch XAGUSD-PERP.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1782431997282909 https://mahifx.slack.com/archives/C06AR8MT8NT/p1789944667574059 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792481789618939
 
 ### roll-arb — Roll-time arbitrage on FX majors and Mahi's defensive LR/widening
 status: open · since: 2026-07-17 · last: 2026-10-19
-State: NZDUSD roll arb spread to EURCHF, AUDNZD, EURUSD, USDCAD (USD 264M on 2026-10-05) and EURNZD (USD 90M, 2026-10-14). Roll-window LR plus defensive widening cut NZDUSD roll volume 87% by 2026-09-23. After a 2026-10-15 call Mahi switched to an across-the-board roll LR on all majors (channel cap 25/M to 200/M, NZD/USD 600/M) and reduced some widening; Pepperstone want a walkthrough. On 2026-10-19 Shyam tightened the global roll LR further (burst 250k to 0, refill 500k/s to 250k/s on EUR, GBP, USD, AUD, JPY, CHF, CAD), agreed with Stephen, who is considering A-booking some of this flow. Stephen also repointed the toxic NYC pool (PB instruments to Invast_Defensive), needing a SOR restart that Nathan scheduled before 5pm NYT.
+State: NZDUSD roll arb spread to EURCHF, AUDNZD, EURUSD, USDCAD and EURNZD (USD 90M, 2026-10-14); roll LR plus defensive widening cut NZDUSD roll volume 87% by 2026-09-23. After a 2026-10-15 call Mahi switched to an across-the-board roll LR on all majors (channel cap 25/M to 200/M, NZD/USD 600/M) and reduced some widening; Pepperstone want a walkthrough. On 2026-10-19 Shyam tightened the global roll LR further (burst 250k to 0, refill 500k/s to 250k/s on EUR, GBP, USD, AUD, JPY, CHF, CAD), agreed with Stephen, who is considering A-booking some of this flow. Stephen also repointed the toxic NYC pool (PB instruments to Invast_Defensive), needing a SOR restart that Nathan scheduled before 5pm NYT.
 Next: Shyam to show Stephen's team the roll LR set-up; Nathan to do the NYC SOR restart just before 5pm NYT on 2026-10-19.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1784250309662259 https://mahifx.slack.com/archives/C033K2P0RPT/p1792377289163719 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792384520826769?thread_ts=1792384520.826769&cid=C06AR8MT8NT
 
@@ -126,7 +138,7 @@ Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1791285982179839 https://ma
 
 ### fi-skew-tuning — FI/skew/LR sizing and signals across FX, CFD and metals
 status: open · since: 2026-08-18 · last: 2026-10-14
-State: FI PnL slipped early Aug (2.9/M vs 4.0/M); Isaac moved XAUUSD to flow-price-thresh and it recovered to 4.2/M. Reece had the EURUSD skew cap put back to 0.1 pip (2026-09-22); on 2026-10-14 Isaac moved FX majors to IFM-based benchmark adjustments. On CFD, skew was raised after Nathan's beta shadow test and MK approved promoting HSIHKD, JPXJPY, XAUUSD-F and NDXUSD to the price signal (2026-10-08, monitoring). CFD LR was reworked in September after LR-caused cancels: channel LR off, global cap USD 1000/M to 300/M, signals limited to oils, NDX, DOW, SPX (CAC 40%).
+State: Isaac moved XAUUSD to flow-price-thresh after an early-Aug FI dip and it recovered (4.2/M). Reece had the EURUSD skew cap put back to 0.1 pip (2026-09-22); on 2026-10-14 Isaac moved FX majors to IFM-based benchmark adjustments. On CFD, skew was raised after Nathan's beta shadow test and MK approved promoting HSIHKD, JPXJPY, XAUUSD-F and NDXUSD to the price signal (2026-10-08, monitoring). CFD LR was reworked in September after LR-caused cancels: channel LR off, global cap USD 1000/M to 300/M, signals limited to oils, NDX, DOW, SPX (CAC 40%).
 Next: Nathan to report on promoted CFD skew performance.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1787060801310749 https://mahifx.slack.com/archives/C06AR8MT8NT/p1791453538861039?thread_ts=1788929145.526369&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C033K2P0RPT/p1791992133214739
 
@@ -138,7 +150,7 @@ Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1779146841798919 https://ma
 
 ### cfd-hedging — CFD inventory hedger rejections, LP liquidity and risk controls
 status: open · since: 2026-07-27 · last: 2026-10-13
-State: The CFD inventory hedger keeps hitting LP limits: Velocity cancelled 241/250 HSTHKD hedges (2026-09-11); price-precision rejects fixed with hedger-only overrides (2026-09-17..22; indices pending). NG1 clips reject on 26Degrees (09-25, 09-29, 10-13): Isaac raised VaR reduction per second on 2026-09-29, and Rory showed the LP book resets within ms of each fill while the hedger sizes off rolling fill ratios. IG limits hit WHEAT (Reece wants 100k clips). Andrew's 2026-09-01 analysis found NG1 hedging stopped 2026-08-06 when the trigger rose USD 2M to 3M.
+State: The CFD inventory hedger keeps hitting LP limits: Velocity cancelled 241/250 HSTHKD hedges (2026-09-11); price-precision rejects fixed with hedger-only overrides (indices pending). NG1 clips reject on 26Degrees (09-25, 09-29, 10-13); Isaac raised VaR reduction per second on 2026-09-29. IG limits hit WHEAT (Reece wants 100k clips). Andrew's 2026-09-01 analysis found NG1 hedging stopped 2026-08-06 when the trigger rose USD 2M to 3M.
 Next: Reece to ask Invast/OZ whether NG1 depth is capped and whether the book can show remaining depth; Mahi to decide NG1 trigger appetite (USD 3M vs 2M) and the hedge venue review.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1785164826669399 https://mahifx.slack.com/archives/C06AR8MT8NT/p1791898246094219
 
@@ -155,7 +167,7 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1787786333971199 https://ma
 
 ### margin-exploit-throttle — New-account margin exploits and order throttling
 status: watching · since: 2026-07-30 · last: 2026-09-14
-State: Pepperstone clients exploited margin validation (CPI-print bursts, small-deposit martingale). Diego asked for symbol-level throttling (2026-08-31); Daria proposed a realtime burst-trade classification (e.g. 100+ trades/min). Stephen promised more exploiting accounts (2026-09-14); Pepperstone would reject orders so false positives matter. Daria: the existing 150 orders/1000ms per-counterparty throttle cannot be scoped to new accounts or symbols without a dev change; MK then asked for a per-timezone / NZDUSD override, which looks unanswered.
+State: Pepperstone clients exploited margin validation (CPI-print bursts, small-deposit martingale). Diego asked for symbol-level throttling (2026-08-31); Stephen promised more exploiting accounts (2026-09-14). Daria: the existing 150 orders/1000ms per-counterparty throttle cannot be scoped to new accounts or symbols without a dev change; MK then asked for a per-timezone / NZDUSD override, which looks unanswered.
 Next: Mahi to answer MK on a timezone/NZDUSD-scoped throttle override (and raise the dev change); Stephen to send accounts.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1788172536055649 https://mahifx.slack.com/archives/C033K2P0RPT/p1789365103971619
 
@@ -181,17 +193,17 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792489817664909 https://ma
 
 ### xau-fill-vs-price — XAUUSD fill vs displayed price gap (two pricers)
 status: closed · since: 2026-10-21 · last: 2026-10-21 · closed: 2026-10-22
-State: Reece's 2026-10-16 XAUUSD fill (4194.67 vs 4194.65 on price-forensics) hit the second NYC pricer while the screen showed the first; pricers sample skew on separate timers so fills differ by cents in fast markets (~0.1 $/M net). Logs had rolled off; Reece accepted.
+State: Fill differed by cents from the screen because the second NYC pricer filled it (separate skew timers). Reece accepted.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792587213386379?thread_ts=1792587213.386379&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C06AR8MT8NT/p1792593460283749?thread_ts=1792587213.386379&cid=C06AR8MT8NT
 
 ### ld-estate-incident — London estate inter-region connectivity incident
 status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
-State: On 2026-10-16 about 09:30 UTC LD/NY cross-region adapters saw latency and disconnects from a Mahi London estate issue; Pepperstone relied on NY-NY and LD-LD until Mahi reported resolution at 12:29 BST and re-enabled links. No root cause given in channel.
+State: LD/NY cross-region latency and disconnects from a Mahi London estate issue (2026-10-16); resolved 12:29 BST, no root cause given.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792142815121549 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792142873267079?thread_ts=1792142873.267079&cid=C06AR8MT8NT
 
 ### echo-price-queries — Echo/Compass price and slippage discrepancy questions
 status: closed · since: 2026-10-07 · last: 2026-10-07 · closed: 2026-10-15
-State: Answered. NDXUSD ticket-vs-chart gap is price at request (~50ms before fill), same as the blotter; Reece's 2026-09-08 XAUUSD fills were a 50ms last-look move plus global LR. Tick logs had rolled off.
+State: Answered: price shown is price at request (~50ms before fill); XAUUSD fills were a last-look move plus global LR.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1791377823659449
 
 ## Arc
