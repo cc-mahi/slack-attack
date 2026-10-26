@@ -16,14 +16,20 @@ contacts:
   - {name: "Lukas Sedlacek", role: "Fintokei/Purple Technology risk; suspicious-client reviews"}
   - {name: "Kristof Heger", role: "Fintokei/Purple Technology; order-fill queries"}
   - {name: "Roman Komurka", role: "Fintokei/Purple Technology; pricing/skew opinions", confidence: low}
-last_catchup: 2026-10-23T07:18:25Z
+last_catchup: 2026-10-26T08:05:16Z
 status: active
 ---
 
 ## Now
-LD-environment networking incident on 2026-10-16 (fleet-wide, hosting provider investigating) hit Fintokei connectivity; Liam reported signs of recovery at 10:46 UTC, no RCA or all-clear seen. Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 server clone (feeder and bridge copy) requested 2026-10-12.
+MT5 gateway on the main server stopped 2026-10-23 08:33 UTC (no logs, auto-restart now on; fixed MT4/MT5 build sent, deploy pending). LD-environment networking incident on 2026-10-16 (fleet-wide, hosting provider investigating) hit Fintokei connectivity; Liam reported signs of recovery at 10:46 UTC, no RCA or all-clear seen. Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 server clone (feeder and bridge copy) requested 2026-10-12.
 
 ## Streams
+
+### mt5-gateway-outage — MT5 execution bridge stopped on Fintokei main server
+status: open · since: 2026-10-23 · last: 2026-10-23
+State: The Mahi MT5 gateway service on Fintokei's main MT5 server stopped at 08:33 UTC on 2026-10-23 with no logging before or after (last line 08:33:31, next 08:52:56 on restart); Kristof Heger asked for enhanced logging. Maten Rehimi confirmed the service was down, no MT5 EB deploy had gone to Fintokei recently, and no enhanced logging exists (INFO/DEBUG already on). Bridge had been consolidated from primary+backup services into one service, so both went down together. Fintokei switched the service to auto-restart on failure; Maten sent a fixed build for both MT4/MT5 for deployment as soon as this weekend. Isaac wants a fuller picture before going back to the client.
+Next: Fintokei to deploy fixed MT4/MT5 build; Mahi (Maten/Isaac) to report root cause back to Fintokei.
+Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1792746330157459 https://mahifx.slack.com/archives/C08R694QVNX/p1792771293748419?thread_ts=1792746534.345579
 
 ### xau-fi-skew-perf — XAU FI performance drop, skew rule changes
 status: open · since: 2026-10-15 · last: 2026-10-15
