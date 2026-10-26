@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-10-23T07:18:41Z
+last_catchup: 2026-10-26T08:07:44Z
 status: active
 ---
 
@@ -26,17 +26,34 @@ Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UA
 
 ## Streams
 
+### echo-compass-users — Echo/Compass user admin
+status: open · since: 2026-09-01 · last: 2026-10-26
+State: Re-opened. Liam Cordelle noted on 2026-10-23 that the client has logins in the system (one named, one overnight) and offered to arrange access. On 2026-10-26 Garry asked Liam to add his own email and reset the overnight password. Andri asked whether a screenshotted control is where to cancel an order in Compass; Shyam Hari confirmed. Earlier: Echo user audit and removal of 14 users (2026-09-01); new Compass and Echo account for a client analyst created 2026-09-29.
+Next: Liam adds Garry's email and resets the overnight password.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1788234307503689 https://mahifx.slack.com/archives/C09HN93T0G2/p1792995720779479
+
 ### oz-backup-whitelist — Whitelist OneZero hub backup IPs
 status: open · since: 2026-10-22 · last: 2026-10-23
-State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi to whitelist NY Surya hub backup 147.160.249.36 and NY Hub-Valutrades backup 147.160.249.37 towards 10.72.100.38 (MFX and MAHI_OZNY4 maker adapters, ports 9010/9011/9034/9035/9037). Maten Rehimi asked for traceroutes and whether a cross-connect is used; Brandon says it goes over the internet and posted traceroute screenshots from both IPs on 2026-10-23. Not yet whitelisted.
-Next: Mahi (Maten) reviews traceroutes and whitelists.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792659558042959 https://mahifx.slack.com/archives/C09HN93T0G2/p1792736621899949
-
+State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi to whitelist NY Surya hub backup 147.160.249.36 and NY Hub-Valutrades backup 147.160.249.37 towards 10.72.100.38 (MFX and MAHI_OZNY4 maker adapters, ports 9010/9011/9034/9035/9037). The connection goes over the internet, and Maten Rehimi pointed out 10.72.100.38 is private, so Brandon traced to public 192.81.111.24 from both IPs on 2026-10-23 and asked if that can be the backup. Maten asked whether the backup only connects when the primary is down and for telnet confirmation on all the flagged ports. Not yet whitelisted.
+Next: Brandon answers Maten (backup behaviour, telnet to 192.81.111.24 on all ports); Mahi then whitelists.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792659558042959 https://mahifx.slack.com/archives/C09HN93T0G2/p1792746206556109
 ### profile-recs-creds — Programmatic access to Mahi profile recommendations
 status: open · since: 2026-10-23 · last: 2026-10-23
-State: Brandon asked for new credentials so the client IT team can pull the Mahi profile recommendations; he clarified they need programmatic access, i.e. DB access. Shyam Hari raised it with the dev team.
+State: Brandon asked for new credentials so the client IT team can pull the Mahi profile recommendations; he clarified they need programmatic access, i.e. DB access. Shyam Hari raised it with the dev team (2026-10-23); Brandon acknowledged.
 Next: Mahi dev team decides on and provides access.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1792729903877109
+
+
+### phillip-tt-removal — Remove deactivated Phillip TT connection
+status: open · since: 2026-10-23 · last: 2026-10-23
+State: Graeme said the client stopped using the Phillip TT connection, which Phillip appears to have deactivated, leaving an error on Compass. Liam Cordelle removed it from Mahi's side on 2026-10-23. Andri then flagged another error screenshot and Liam asked if it was that connection; Graeme asked Brandon to remove the same connection on the OneZero side too.
+Next: Brandon removes it on the OneZero side.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792758756367069 https://mahifx.slack.com/archives/C09HN93T0G2/p1792776666037109
+
+### ab-book-queries — A/B book classification requests from overnight team
+status: open · since: 2026-07-08 · last: 2026-10-23
+State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792758596615249
 
 ### lr-setting-location — Client cannot find Liquidity Reduction setting in new screen
 status: open · since: 2026-10-22 · last: 2026-10-22
@@ -44,10 +61,6 @@ State: Garry also asked whether old-UI Position maps to the new Rate Limit Amoun
 Next: Andri confirms he found it.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792658285372589
 
-### ab-book-queries — A/B book classification requests from overnight team
-status: open · since: 2026-07-08 · last: 2026-10-21
-State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792571194326479
 
 ### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
 status: open · since: 2026-08-19 · last: 2026-10-22
@@ -90,9 +103,9 @@ State: Compass errors on 2026-09-20 (fix deployed by Sam Hewitt, trading unaffec
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1789937493122649 https://mahifx.slack.com/archives/C09HN93T0G2/p1791193345574799
 
 ### overnight-reconnects — Overnight connection fixes
-status: watching · since: 2026-08-18 · last: 2026-09-21
-State: Overnight desk posts a screenshot ("please can you fix this for us") out of hours; Sam Hewitt or Daria Horton fix it within about 2 minutes and the client confirms (2026-08-18, 2026-08-27, 2026-09-21).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1787088431402609 https://mahifx.slack.com/archives/CSLM3Q8AD/p1790025740559209
+status: watching · since: 2026-08-18 · last: 2026-10-25
+State: Overnight desk posts a screenshot ("please can you fix this for us") out of hours; Sam Hewitt or Daria Horton fix it within about 2 minutes and the client confirms (2026-08-18, 2026-08-27, 2026-09-21). On 2026-10-25 Brandon asked Mahi to confirm whether a screenshotted item was an issue; Shyam Hari checked and found everything fine.
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1787088431402609 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792962970307259
 
 ### ip-whitelist-beeks — Brandon cannot reach Compass/Echo from new IP
 status: watching · since: 2026-09-08 · last: 2026-09-16
@@ -125,10 +138,6 @@ status: closed · since: 2026-08-12 · last: 2026-10-05 · closed: 2026-10-15
 State: New LPs (JT, GCEX, B2_OZNY4_RETAIL_MARGIN_VT) caused FEED4 disconnections; B2 duplicated on FEED1 and FEED4. On 2026-10-05 client confirmed B2 comes via FEED1 and Shyam Hari moved the market selector from FEED4 to FEED1.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787633651014009 https://mahifx.slack.com/archives/CP7A1F8BT/p1791230817547969
 
-### echo-compass-users — Echo/Compass user admin
-status: closed · since: 2026-09-01 · last: 2026-09-29 · closed: 2026-10-15
-State: Echo user audit list and removal of 14 users (2026-09-01); new Compass and Echo account for a client analyst created 2026-09-29, credentials emailed.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1788234307503689 https://mahifx.slack.com/archives/C09HN93T0G2/p1790654563743499
 
 ### tt-stunnel-pinning — TT certificate pinning removal
 status: closed · since: 2026-09-23 · last: 2026-09-23 · closed: 2026-10-15
