@@ -17,7 +17,7 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-10-23T07:20:03Z
+last_catchup: 2026-10-26T08:07:45Z
 status: active
 ---
 
@@ -28,6 +28,12 @@ Samin wants a redundant Compass instance for failover (pricing owed, 22 Oct call
 Compass 26.4 went out over the 17-18 Oct weekend; on Monday 19 Oct blacklisted tags were still reaching ISPRIME (fill rate about 10%) until Nathan Burch reverted and fixed the tag list; an urgent XAUUSD spread widening on 16 Oct still owes Jay details.
 
 ## Streams
+
+### si-hedging — SI model, hedger NOP restarts and LP position reconciliation
+status: open · since: 2026-08-17 · last: 2026-10-23
+State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and arb hedgers, which Mahi does by hand. On 28 Sep the hedger paced itself around a protective timing check and then went quiet because the backstop rule hit its 100-wave cap; Samin agreed to raise the cap a bit rather than switch it off, and asked that hedger settings not be changed without telling him. The arb hedger honours NOP limits but not per-instrument LP limits, so Kama's position kept growing on 4 Sep; Kama was taken out of arb and Samin expects dev work letting arb reduce LP positions. LP positions are periodically realigned through paired maker/client adjustments after StarPrime sends LP snapshots, and risk-reducing LPR rules were added in the SI hedger Metals profile for Edgewater, Argamon, Invast and B2Prime on 28 Sep (ISPRIME_2_1/2_2 excluded). XAG on SI is configured and goes live Monday 19 Oct on KAMA_RETAIL, ARGAMON_INSTI_PXM, ISPRIME_VIP and EDGEWATER_RETAIL; EURUSD with tighter spreads is next, and Samin also floated revenue shares on the SI model. On 23 Oct Samin updated NOP limits and had the SI and arb hedgers restarted, then saw BUY orders still hitting ISPRIME_VIP above the new limit; Isaac Dann concluded the arb hedger does not respect maximumMarketPosition, switched it off for now and Samin confirmed the position was reducing.
+Next: Samin sets XAG maximumMarketPosition per LP before Monday; Will Carter owes Samin an answer on SI revenue-share mechanics; Isaac Dann to scope arb-hedger LP position reduction and a new setting (or making arb respect the existing one) before the arb hedger is switched back on.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1790583093084979 https://mahifx.slack.com/archives/C096422RPKK/p1791872874279109 https://mahifx.slack.com/archives/C096422RPKK/p1792767626842559
 
 ### compass-redundancy — Redundant Compass instance for failover
 status: open · since: 2026-10-22 · last: 2026-10-22
@@ -58,12 +64,6 @@ status: open · since: 2026-08-19 · last: 2026-10-16
 State: A pricing config change on 19 Aug made pricing spike (merged liquidity tiers) and was reverted; Samin asked that future changes go to BETA first, then PROD, and agreed. On 20 Aug a $10 XAUUSD spread at market close on CLIENT_PRICE_INSTI led to a timezone-scoped sanity-check config, and Samin asked for a roll backtest, no result visible. On 16 Oct Jay raised an urgent XAUUSD spread widening while Samin was off desk; Liam Cordelle and Cameron Hughes checked, pricing was fine again within about 15 minutes, and Jay asked for a headline on what happened. Cameron promised details; no cause is visible in the channels.
 Next: Mahi (Cameron Hughes) to send Jay/Samin the cause of the 16 Oct widening; Daria Horton to report the roll backtest.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787126774501579 https://mahifx.slack.com/archives/C096422RPKK/p1787206299160379 https://mahifx.slack.com/archives/C096422RPKK/p1792144153419059 https://mahifx.slack.com/archives/C096422RPKK/p1792145021644979
-
-### si-hedging — SI model, hedger NOP restarts and LP position reconciliation
-status: open · since: 2026-08-17 · last: 2026-10-14
-State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and arb hedgers, which Mahi does by hand. On 28 Sep the hedger paced itself around a protective timing check and then went quiet because the backstop rule hit its 100-wave cap; Samin agreed to raise the cap a bit rather than switch it off, and asked that hedger settings not be changed without telling him. The arb hedger honours NOP limits but not per-instrument LP limits, so Kama's position kept growing on 4 Sep; Kama was taken out of arb and Samin expects dev work letting arb reduce LP positions. LP positions are periodically realigned through paired maker/client adjustments after StarPrime sends LP snapshots, and risk-reducing LPR rules were added in the SI hedger Metals profile for Edgewater, Argamon, Invast and B2Prime on 28 Sep (ISPRIME_2_1/2_2 excluded). XAG on SI is configured and goes live Monday 19 Oct on KAMA_RETAIL, ARGAMON_INSTI_PXM, ISPRIME_VIP and EDGEWATER_RETAIL; EURUSD with tighter spreads is next, and Samin also floated revenue shares on the SI model.
-Next: Samin sets XAG maximumMarketPosition per LP before Monday; Will Carter owes Samin an answer on SI revenue-share mechanics; Isaac Dann to scope arb-hedger LP position reduction.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1790583093084979 https://mahifx.slack.com/archives/C096422RPKK/p1791872874279109 https://mahifx.slack.com/archives/C095MJHC68J/p1791971454187659
 
 ### pricer-load — Pricer CPU/latency, trading-host balance and rejections
 status: open · since: 2026-08-19 · last: 2026-10-14
