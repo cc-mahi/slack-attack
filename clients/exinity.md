@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-23T07:19:29Z
+last_catchup: 2026-10-26T08:05:16Z
 status: active
 ---
 
@@ -29,9 +29,16 @@ status: active
 A Saturday 2026-10-17 reboot cascade (Hazelcast, MySQL connections) kept the Insti, BigBook and CFD hedgers down ~2.5h, and the Sunday open cancelled 391 orders on a cold order process; both stem from weekend restarts and have an RCA / dev ticket.
 Exinity is mid-migration of its LP stack from Hidden Road to Wedbush LPs (top-up/IOC mechanics, Velocity and Nomura going live) and is chasing a run of pricing-spike, book-break and alerting asks.
 Open on Mahi: re-setting per-book PnL-drop alerts, XAU position realignment using the CLIENTS book, the TradersHub A-book move, and an XCUUSD spread decision.
-Weekend reliability matters more as Exinity plans weekend crypto pricing.
+Compass 26.4 went on over the 2026-10-24/25 weekend; signalProcessFI1 on trading-1 overflowed and was restarted Monday 2026-10-26; weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
+
+### compass-26-4-upgrade — Compass 26.4 upgrade and post-upgrade signal overflow
+status: open · since: 2026-10-23 · last: 2026-10-26
+State: Leonardo told Exinity on 2026-10-23 that Compass would be upgraded to 26.4 over the weekend, applied at each host's weekly reboot (change CHG-2610-VSHM, Fri 17:00Z to Sun 05:20Z), with monitoring over the open; no Exinity reply seen. On Mon 2026-10-26 07:39 Cameron posted in #internal-exinity that signalProcessFI1 on trading-1 went down on an IFMSslidWndwCbackStream overflow (PagerDuty incident); it stayed up after a manual restart and is being looked into.
+Next: Cameron to find the cause of the signalProcessFI1 overflow and whether it relates to the 26.4 upgrade.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792760362955399 https://mahifx.slack.com/archives/C040V9LNKT5/p1793000364921949
+
 
 ### pnl-drop-alerts — Per-book PnL-drop alerts and alert email restoration
 status: open · since: 2026-09-18 · last: 2026-10-22
