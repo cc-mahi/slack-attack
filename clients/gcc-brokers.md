@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-10-23T07:19:29Z
+last_catchup: 2026-10-26T08:06:11Z
 status: active
 ---
 ## Now
@@ -25,6 +25,18 @@ Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads
 A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef is unhappy and now wants GCC to provision its own main plus standby servers (reply from Rory pending), and GCC awaits the provider's incident report.
 
 ## Streams
+
+### lmax-xau-limit — LMAX XAUUSD max-position rejects
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: On 10-26 around 03:38 UTC Shyam Hari flagged XAU hedging rejects at LMAX with MAXIMUM_POSITION_EXCEEDED and Carl Tannous asked if the limit was still being exceeded (Shyam: yes). Nael replied GCC had already moved some volume from LMAX to Finalto and temporarily raised its XAUUSD limit on LMAX, so it should be fine until GCC fixes the limit issue later that day.
+Next: GCC to fix the LMAX XAUUSD limit today; Mahi to watch for further rejects.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792985886827929 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792990642060759
+
+### futures-contract-roll — UKOFUT-F price gap and futures month mappings
+status: open · since: 2026-10-23 · last: 2026-10-23
+State: On 10-23 Nael reported no UKOFUT-F price from Mahi while Finalto LCOF7 priced. Isaac Dann found Mahi subscribed to expired LCOF6 and is switching UKOFUT-F to LCOF7; he proposed rolling all futures mappings (Brent, WTI, gas, metals, indices; still on 2026 contracts) to the next live contract so every month is available and two nearest contracts always price together (LCOZ6 and LCOF7 now; LCOF7 and LCOG7 from November). Nael agreed. It needs a short Finalto gateway restart, targeted for next week, and LCOZ6 rolls to LCOZ7 after 30 Oct.
+Next: Isaac to apply the mapping roll, restart the Finalto gateways and tell Nael when live.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792744200127579 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792756609902269
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
 status: open · since: 2026-04-30 · last: 2026-10-22
