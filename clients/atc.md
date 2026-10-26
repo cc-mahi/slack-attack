@@ -13,16 +13,22 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-23T07:18:25Z
+last_catchup: 2026-10-26T08:05:16Z
 status: active
 ---
 ## Now
 ATC is a matched-principal broker in a build phase: prop firm launch (own MT5/bridge), a Britannia prime arrangement for triangulation-arb flow, and a Seychelles entity migration.
 Biggest live risk is the FCA/compliance finding that non-USD P&L legs in Compass leave real unhedged LP exposure; the fix is a weekend flatten and reimport to USD.
-Compass moved to 26.4 on the 10-10/11 weekend, which switched on PSM widening/tightening overlays for ATC pricing.
-Volumes are well down on early 2026; ATC is sensitive to spreads, depth and fill quality on gold.
+Compass moved to 26.4 on the 10-10/11 weekend, which switched on PSM widening/tightening overlays for ATC pricing. Volumes are well down on early 2026; ATC is sensitive to spreads, depth and fill quality on gold.
+Malik asked for a call (hedge-fund futures option idea); Andrew pushed it to Monday 2026-10-26, with a Mahi relationship catch-up beforehand and a session with Dave at 4pm.
 
 ## Streams
+
+### xbt-phantom-position — XBTUSD position ATC says it does not hold
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: On 2026-10-26 Dave saw an XBTUSD position in his view and said ATC has no such contract and Finalto shows no open position, so it should be scratched. Shyam Hari offered to zero the positions out on Compass; no reply yet.
+Next: Dave to confirm Shyam should zero it; Mahi to find where the XBTUSD position came from.
+Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1792981057677909 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792981279472429
 
 ### beeks-ld-incident — Beeks LD networking incident, ATC failover
 status: open · since: 2026-10-16 · last: 2026-10-16
@@ -68,8 +74,8 @@ Next: Malik to relay Velocity's response and any symbols to drop; Cameron Hughes
 Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1791190471362809 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791215001177869
 
 ### fxcm-connection — FXCM logon rejects and failed auto-restarts
-status: open · since: 2026-06-04 · last: 2026-09-23
-State: FXCM session is up but auto-restarts after weekend restarts keep failing and need a manual restart (still true 2026-09-23). Logon rejects began Sunday 2026-08-16 (Daria's question on 08-17 about `user not recognised or password incorrect` got no reply), likely a credential change; FXCM also wanted to publish only TOB to ATC. ATC said they would raise it with FXCM and had not as of 08-19; Malik reportedly tired of the issue and may leave Britannia to handle it.
+status: watching · since: 2026-06-04 · last: 2026-09-23
+State: No activity since 2026-09-23; downgraded to watching. FXCM session is up but auto-restarts after weekend restarts keep failing and need a manual restart (still true 2026-09-23). Logon rejects began Sunday 2026-08-16 (Daria's question on 08-17 about `user not recognised or password incorrect` got no reply), likely a credential change; FXCM also wanted to publish only TOB to ATC. ATC said they would raise it with FXCM and had not as of 08-19; Malik reportedly tired of the issue and may leave Britannia to handle it.
 Next: Malik owes the FXCM follow-up; Cameron Hughes sent a chaser 08-19.
 Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1786947960799679 https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1787127331818279 https://mahifx.slack.com/archives/C046RNF64VD/p1790183042306349
 
@@ -107,8 +113,8 @@ Next: Mahi to decide and implement the preventive actions.
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1787907463800669 https://mahifx.slack.com/archives/C046RNF64VD/p1788127946167719
 
 ### lr-martingale — liquidity refresh policy for martingale masters
-status: watching · since: 2026-05-27 · last: 2026-08-25
-State: Martingale masters (27072402, 27072435, 27072473) sit on a No-LR profile as a deliberate temporary measure while a "timer-LR" / 50ms speed-hump design is worked out (never defined in Slack). The 2026-08-25 LR health check found LR earning $4.01/M inside ATC's band; the one gap (SHIUSD taking zero LR) was fixed by adding SHI alongside XAU in the counterparty and global profiles. David flagged the clients may scale to $30-50M.
+status: closed · since: 2026-05-27 · last: 2026-08-25 · closed: 2026-10-26
+State: No activity since 2026-08-25; assumed resolved. Martingale masters (27072402, 27072435, 27072473) sit on a No-LR profile as a deliberate temporary measure while a "timer-LR" / 50ms speed-hump design is worked out (never defined in Slack). The 2026-08-25 LR health check found LR earning $4.01/M inside ATC's band; the one gap (SHIUSD taking zero LR) was fixed by adding SHI alongside XAU in the counterparty and global profiles. David flagged the clients may scale to $30-50M.
 Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1779895485904019 https://mahifx.slack.com/archives/C046RNF64VD/p1782819193766359 https://mahifx.slack.com/archives/C046RNF64VD/p1787677959034359
 
 ## Arc
