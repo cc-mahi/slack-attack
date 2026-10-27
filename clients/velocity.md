@@ -15,13 +15,19 @@ contacts:
   - {name: "Richard Holman", role: "Velocity principal: pricing/hedging policy, commercial terms, prospect flow"}
   - {name: "Russell Hewson", role: "Velocity: sim data requests, Echo login"}
   - {name: "Liv Mottershead", role: "Velocity, joined Richard's team 2026-07", confidence: low}
-last_catchup: 2026-10-26T08:07:46Z
+last_catchup: 2026-10-27T07:23:30Z
 status: active
 ---
 ## Now
 PnL under pressure since late Aug (hedge costs up, Kama/Argamon widened); hedging slowed 2026-10-12 and PnL stabilised, but losses on 10-14 and 10-19 pushed hedging to classification-based rules (no blanket delay); still losing 10-21 on hedge spread. Commercials moving from PnL share to a volume-banded fixed fee, awaiting client CFO sign-off. Interest-only feed is toxic (counterparty 1100) and being priced out; client still wants it. 10-22 Will C is researching a premium big-ticket skew (streaky slicer flow, FM-BIG sim pending). 10-21 1034 tags moved off prem to the wider session and the toxic list is being rejected; premium EXEC channel not yet live. 10-23 Andrew M proposes a depth ladder (tight first clip, charge for size) on gold plus per-session skew.
 
 ## Streams
+
+### last-look-slack — Last-look retry and passing client slack back
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: 10-26 Richard queried a trade rejected then instantly refilled; Denny: the first order was cancelled by last look, the retry was repriced to our TOB and passed. Richard then said Velocity had stopped passing slack (client-side limit) to Mahi because it was not improving them, asked whether that is resolved and whether to resume; Denny will check execution settings and revert.
+Next: Mahi (Denny): answer on whether slack can be passed again.
+Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1793032599037739 https://mahifx.slack.com/archives/C05NB72AGR2/p1793033048353429
 
 ### gold-depth-ladder — Tight gold TOB, charge for size, per-session skew
 status: open · since: 2026-10-23 · last: 2026-10-23
@@ -30,10 +36,10 @@ Next: Mahi: size a depth ladder on Velocity's own flow in sim; score per-session
 Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1792771031124009
 
 ### premium-skew-lean — Skew on big premium tickets (slicers)
-status: open · since: 2026-10-22 · last: 2026-10-22
-State: Will C found premium flow comes in streaks: after a $200k+ ticket the same client's next ticket goes the same way 73-83% of the time (2,119 tickets, 8-21 Oct, both weeks, placebo 50%), mostly one client slicing an order; 1034 tags named 'slicers'. LR cannot capture it as 97% of premium orders are limit IoC at our quote with zero slack (fill-time worsening just cancels; 77% re-send after an LR cancel but only 35% fill), and the client base rejects channel LR and a 9c spread. Proposed lean: after a premium fill over $100k, lean 6c for 1-2 min, screened at about $2/M vs about $1.4/M live (recorded-fill screen, not an engine result). Engine tests: IFMS-B swap +$0.7/M vs live with range including zero; FM-BIG (existing FM flow signal, 0.24 qty threshold, 120s, A_CLIENTS_PREMIUM) earned +$8/M on the triggering client's follow-ups (one Asia session, 26 fills, thin); lean came out about 3c, not 6c. Four-arm sim (live / live+FM-BIG / FM-BIG only / no skew) over three Asia sessions due 14:00-14:30 BST 10-22; result not seen. Richard (12:16) said premium should not carry sever tags and they should be switched off.
+status: open · since: 2026-10-22 · last: 2026-10-26
+State: 10-26 Will C registered additional FM signals with a qty threshold for the prem channel and restarted the signal process; signals were only configured for Prem so he bounced again, and Denny bounced starfishFilePersisterExternalMarketData1 to pick up new signals in metadata_signal_xauusd and riskPath for signalprofiles. Will C's evening screenshots read 'not bad' and 'synapse still better', with jumps when the >24oz trigger fires. Earlier: Will C found premium flow comes in streaks: after a $200k+ ticket the same client's next ticket goes the same way 73-83% of the time (2,119 tickets, 8-21 Oct, both weeks, placebo 50%), mostly one client slicing an order; 1034 tags named 'slicers'. LR cannot capture it as 97% of premium orders are limit IoC at our quote with zero slack (fill-time worsening just cancels; 77% re-send after an LR cancel but only 35% fill), and the client base rejects channel LR and a 9c spread. Proposed lean: after a premium fill over $100k, lean 6c for 1-2 min, screened at about $2/M vs about $1.4/M live (recorded-fill screen, not an engine result). Engine tests: IFMS-B swap +$0.7/M vs live with range including zero; FM-BIG (existing FM flow signal, 0.24 qty threshold, 120s, A_CLIENTS_PREMIUM) earned +$8/M on the triggering client's follow-ups (one Asia session, 26 fills, thin); lean came out about 3c, not 6c. Four-arm sim (live / live+FM-BIG / FM-BIG only / no skew) over three Asia sessions due 14:00-14:30 BST 10-22; result not seen. Richard (12:16) said premium should not carry sever tags and they should be switched off.
 Next: Will C: score the four-arm run, size test if live+FM-BIG holds, London window before any change-set; live trial needed to see client reaction.
-Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1792656425258739 https://mahifx.slack.com/archives/CPDS0M2KF/p1792671488308169
+Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1792656425258739 https://mahifx.slack.com/archives/CPDS0M2KF/p1792671488308169 https://mahifx.slack.com/archives/CPDS0M2KF/p1793022086770639
 
 ### tag-exec-routing — Turn off worst 1034 tags, EXEC channel for toxic flow
 status: open · since: 2026-10-15 · last: 2026-10-21
@@ -78,10 +84,10 @@ Next: Mahi: apply 5-layer cut on hedge sessions. Client: Virtu ready-to-test not
 Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787725457576859 https://mahifx.slack.com/archives/C05NB72AGR2/p1789653498837279 https://mahifx.slack.com/archives/C05NB72AGR2/p1792079679596159
 
 ### flow-onboarding — Prospect datasets, new tags and tob size requests
-status: open · since: 2026-08-21 · last: 2026-10-15
-State: Client runs prospect datasets through MarkToMarket sims (Dan, Russell; latest SB1 data GMT+3 10-15, FX data pending) and moves tags to A/prem feeds (911, 460 to A; 1034 upgrade; new FX cpty 122). Hantec asked for 500oz TOB (09-16): Will C advised stepping it up weekly with a dedicated session; decision not yet communicated. Exinity/VTI C2C (Elysium) contra mapping queried 08-21.
-Next: Mahi: reply on the 500oz TOB request; run SB1 FX sim.
-Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787309743078989 https://mahifx.slack.com/archives/CPDS0M2KF/p1789548932088989 https://mahifx.slack.com/archives/C05NB72AGR2/p1792062011672689
+status: open · since: 2026-08-21 · last: 2026-10-26
+State: 10-26 Richard asked about a TF Global dataset; Will C found it in email (Zendesk 23703) but trade_time came through as minutes and seconds only, so it cannot be marked to market; asked for a raw source export with full UTC timestamps and trade ID. Client runs prospect datasets through MarkToMarket sims (Dan, Russell; latest SB1 data GMT+3 10-15, FX data pending) and moves tags to A/prem feeds (911, 460 to A; 1034 upgrade; new FX cpty 122). Hantec asked for 500oz TOB (09-16): Will C advised stepping it up weekly with a dedicated session; decision not yet communicated. Exinity/VTI C2C (Elysium) contra mapping queried 08-21.
+Next: Client: re-send TF Global export with UTC timestamps. Mahi: reply on the 500oz TOB request; run SB1 FX sim.
+Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787309743078989 https://mahifx.slack.com/archives/CPDS0M2KF/p1789548932088989 https://mahifx.slack.com/archives/C05NB72AGR2/p1792062011672689 https://mahifx.slack.com/archives/C05NB72AGR2/p1793021118443629
 
 ### client-tooling — Access, reports and self-serve requests
 status: open · since: 2026-08-19 · last: 2026-10-15
