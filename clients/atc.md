@@ -13,22 +13,34 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-26T08:05:16Z
+last_catchup: 2026-10-27T07:20:02Z
 status: active
 ---
 ## Now
 ATC is a matched-principal broker in a build phase: prop firm launch (own MT5/bridge), a Britannia prime arrangement for triangulation-arb flow, and a Seychelles entity migration.
 Biggest live risk is the FCA/compliance finding that non-USD P&L legs in Compass leave real unhedged LP exposure; the fix is a weekend flatten and reimport to USD.
 Compass moved to 26.4 on the 10-10/11 weekend, which switched on PSM widening/tightening overlays for ATC pricing. Volumes are well down on early 2026; ATC is sensitive to spreads, depth and fill quality on gold.
-Malik asked for a call (hedge-fund futures option idea); Andrew pushed it to Monday 2026-10-26, with a Mahi relationship catch-up beforehand and a session with Dave at 4pm.
+On 2026-10-26 the Malik call was joined by an ATC compliance contact working with auditors, who is pressing on why Mahi-held LP cross positions (NZD etc.) dwarf client trades; Andrew treats it as an escalation. Malik also wants futures, XAU futures and crypto setups.
 
 ## Streams
 
-### xbt-phantom-position — XBTUSD position ATC says it does not hold
+### lp-cross-positions — legacy cross positions at Finalto and auditor questions
 status: open · since: 2026-10-26 · last: 2026-10-26
-State: On 2026-10-26 Dave saw an XBTUSD position in his view and said ATC has no such contract and Finalto shows no open position, so it should be scratched. Shyam Hari offered to zero the positions out on Compass; no reply yet.
-Next: Dave to confirm Shyam should zero it; Mahi to find where the XBTUSD position came from.
-Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1792981057677909 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792981279472429
+State: ATC's compliance contact, working with auditors, is not satisfied that Mahi-held positions (NZD crosses etc.) are far larger than client trades while ATC is a matched principal at FCA level; Malik escalated on 10-26 and Andrew raised it as higher priority, with regulators following up the position rec. Will's investigation found the Finalto crosses are legacy brokered inventory built Sep 2023 to Sep 2024 by brokering rules (whale rule, Dynamic Broker Toxic FX and Metals) plus LP switching and manual moves, never unwound because hedgers only trade USD pairs; NZDJPY is about 36M, the NZD crosses are 8-13x recent client volume, and gross $304.5M nets to about $96M with the same open risk. Five broker setups in the LDN config still send crosses to Finalto. Dave's claims of out-of-loop adjustments may cause divergence.
+Next: Stop brokering crosses; net the dead pairs into USD pairs at Finalto (Will: close the longs/shorts at minimum); pull the Oct 2023 and 2026-06-25 import files for auditors; Mahi to answer the auditors' original questions (Andrew asked Malik for them).
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793025346402589 https://mahifx.slack.com/archives/C046RNF64VD/p1793038694725539
+
+### xbt-phantom-position — XBTUSD and DOW CFD positions differ from ATC's own rec
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: ATC's own rec flagged CFD differences on 2026-10-26: XBTUSD is flat on ATC's side and at Finalto while Compass shows 64 client and LP side, and DOW is about 0.5 on the client side versus 1.77 in Compass (not netted to Velocity correctly). Dave asked why Compass shows a position that does not exist at Finalto; Cameron Hughes said it is likely trading outside Compass (manual close-outs or failover routing) and Compass needs position updates, being worked with Malik. CFDs hedge 1-1 with the inbound instrument.
+Next: Malik to confirm exact client positions to book; Mahi to adjust Compass positions.
+Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1793023106101569 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793023353198839 https://mahifx.slack.com/archives/C046RNF64VD/p1793027080083249
+
+### futures-crypto-ask — futures, XAU futures symbol and crypto setup
+status: open · since: 2026-10-26 · last: 2026-10-26
+State: After a pre-call with Malik, Andrew noted ATC is courting basis traders in futures, wants a crypto setup (with its own LP), and G7 futures quoted as CFDs; Andrew wants an XAU futures symbol added. Mahi also needs ATC client and LP positions ingested into Compass for reconciliation and swap calcs; a swap inventory skew CSV is owed to ATC. Mahi is looking for other firms quoting G7 futures as CFDs (Amana was named as having CMC, Jump, IG, GCEX).
+Next: Mahi to send swap inventory skew CSV and ingest ATC positions; scope the XAU futures symbol and crypto setup.
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793009406477699 https://mahifx.slack.com/archives/C046RNF64VD/p1793033858681609
 
 ### beeks-ld-incident — Beeks LD networking incident, ATC failover
 status: open · since: 2026-10-16 · last: 2026-10-16
@@ -56,10 +68,10 @@ Next: Cameron Hughes owes the trading-style analysis; Dave to decide whether to 
 Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1791902732632709 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791907572332459 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792590024121469
 
 ### pnl-currency-rec — non-USD P&L legs and LP position reconciliation
-status: open · since: 2026-07-09 · last: 2026-10-08
-State: Compass books realised P&L in the counter currency, so cross flow (AUDNZD, GBPNZD etc.) leaves non-USD P&L balances (about 21.7m NZD) that the hedger treats as risk and hedges at the LPs. Finalto and ATC cash are USD-only, so those LP positions (about $12m short NZD, $4.5m long JPY) are real exposure with no client trade behind them; ATC's compliance officer flagged this to auditors and the FCA on 2026-10-01 and has accepted the mechanism. Agreed fix is converting P&L legs to USD in Compass as a weekend flatten and reimport (duplicate trade-position rows from the NY-to-LDN move, Zendesk 23171, still need cleaning), then a currency-level rec with ATC. On 10-08 Malik asked for a systematic conversion to limit spread cost; Liam laid out the three P&L models (Compass, Finalto, MetaQuotes) that disagree. On 09-22 Cameron Hughes confirmed no net per-asset risk between ATC and LPs.
+status: open · since: 2026-07-09 · last: 2026-10-26
+State: Compass books realised P&L in the counter currency, so cross flow (AUDNZD, GBPNZD etc.) leaves non-USD P&L balances (about 21.7m NZD) that the hedger treats as risk and hedges at the LPs. Finalto and ATC cash are USD-only, so those LP positions (about $12m short NZD, $4.5m long JPY) are real exposure with no client trade behind them; ATC's compliance officer flagged this to auditors and the FCA on 2026-10-01 and has accepted the mechanism. Agreed fix is converting P&L legs to USD in Compass as a weekend flatten and reimport (duplicate trade-position rows from the NY-to-LDN move, Zendesk 23171, still need cleaning), then a currency-level rec with ATC. On 10-08 Malik asked for a systematic conversion to limit spread cost; Liam laid out the three P&L models (Compass, Finalto, MetaQuotes) that disagree. On 09-22 Cameron Hughes confirmed no net per-asset risk between ATC and LPs. On 2026-10-26 Andrew said the technical gap is known and CPS is fixing it but a HPS fix may be brought forward; the July USD adjustment was never done (NZD residual about 30.9m on 09-29, JPY 637m) and a counter-currency to USD or deposit currency conversion is needed. Andrew also called the swap risk on a book meant to be zero "crazy".
 Next: Cameron Hughes to revert to Malik with a full-rec plan and schedule the weekend flatten/reimport (Daria, Liam); build the ongoing currency-level rec.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1783567793838579 https://mahifx.slack.com/archives/C046RNF64VD/p1790850531938759 https://mahifx.slack.com/archives/C046RNF64VD/p1791463861287519
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1783567793838579 https://mahifx.slack.com/archives/C046RNF64VD/p1790850531938759 https://mahifx.slack.com/archives/C046RNF64VD/p1791463861287519 https://mahifx.slack.com/archives/C046RNF64VD/p1793028994527199
 
 ### britannia-triangle-arb — Britannia prime connectivity and triangulation arb flow
 status: open · since: 2026-09-15 · last: 2026-10-08
@@ -85,10 +97,10 @@ State: ATC staged 26.4 on 10-09 and went live at the weekend restart (client not
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1791483329972859 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791543785439449 https://mahifx.slack.com/archives/C046RNF64VD/p1791866234975939
 
 ### seychelles-uat — Seychelles entity, dev connections and UAT feed
-status: watching · since: 2026-05-19 · last: 2026-10-19
-State: Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12, 10-19; Dave's 10-19 request was turned on by Liam within ~15 minutes); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections.
+status: watching · since: 2026-05-19 · last: 2026-10-26
+State: Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12, 10-19, 10-26; Liam turned it on 10-26 but Dave said at 17:42 it was still not live, and Cameron Copland confirmed it working at 18:24, Dave acked); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections.
 Next: Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C046RNF64VD/p1789563271953519 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792427565099679
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C046RNF64VD/p1789563271953519 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792427565099679 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793036534440469
 
 ### xau-hedging — gold hedging and P&L bleed
 status: watching · since: 2026-05-27 · last: 2026-10-08
@@ -126,4 +138,5 @@ Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1779895485904019 https://ma
 - 2026-08-19 — prop go-live plan agreed with Jack and Malik
 - 2026-09-15 — Britannia PB and triangulation-arb discussions begin
 - 2026-10-01 — ATC compliance flags non-USD LP positions to auditors/FCA
+- 2026-10-26 — auditors/compliance press ATC on LP cross positions; Mahi traces them to legacy brokered inventory from 2023-24
 - 2026-10-09 — Compass upgraded 26.3 to 26.4 at weekend restart
