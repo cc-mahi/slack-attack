@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-26T08:05:16Z
+last_catchup: 2026-10-27T07:19:23Z
 status: active
 ---
 
@@ -29,15 +29,15 @@ status: active
 A Saturday 2026-10-17 reboot cascade (Hazelcast, MySQL connections) kept the Insti, BigBook and CFD hedgers down ~2.5h, and the Sunday open cancelled 391 orders on a cold order process; both stem from weekend restarts and have an RCA / dev ticket.
 Exinity is mid-migration of its LP stack from Hidden Road to Wedbush LPs (top-up/IOC mechanics, Velocity and Nomura going live) and is chasing a run of pricing-spike, book-break and alerting asks.
 Open on Mahi: re-setting per-book PnL-drop alerts, XAU position realignment using the CLIENTS book, the TradersHub A-book move, and an XCUUSD spread decision.
-Compass 26.4 went on over the 2026-10-24/25 weekend; signalProcessFI1 on trading-1 overflowed and was restarted Monday 2026-10-26; weekend reliability matters more as Exinity plans weekend crypto pricing.
+Compass 26.4 went on over the 2026-10-24/25 weekend; signalProcessFI1 on trading-1 overflowed twice on 2026-10-26 (fix rolled out that evening); weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
 
 ### compass-26-4-upgrade — Compass 26.4 upgrade and post-upgrade signal overflow
 status: open · since: 2026-10-23 · last: 2026-10-26
-State: Leonardo told Exinity on 2026-10-23 that Compass would be upgraded to 26.4 over the weekend, applied at each host's weekly reboot (change CHG-2610-VSHM, Fri 17:00Z to Sun 05:20Z), with monitoring over the open; no Exinity reply seen. On Mon 2026-10-26 07:39 Cameron posted in #internal-exinity that signalProcessFI1 on trading-1 went down on an IFMSslidWndwCbackStream overflow (PagerDuty incident); it stayed up after a manual restart and is being looked into.
-Next: Cameron to find the cause of the signalProcessFI1 overflow and whether it relates to the 26.4 upgrade.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792760362955399 https://mahifx.slack.com/archives/C040V9LNKT5/p1793000364921949
+State: Leonardo told Exinity on 2026-10-23 that Compass would be upgraded to 26.4 over the weekend (change CHG-2610-VSHM, Fri 17:00Z to Sun 05:20Z); no Exinity reply seen. On Mon 2026-10-26 signalProcessFI1 on trading-1 went down on an IFMSslidWndwCbackStream overflow at 07:18Z (PagerDuty incident). Matt asked urgently whether skew on XAUUSD was switched off; Kate replied that skew stayed live apart from the brief restart and a fix was in hand. Andrew Morgan had seen the same in TKY CoE and pushed a fix; the overflow recurred (Christian's alert 16:18Z, Kate: process restarted and back up, Mahi gets all alerts too), and Cameron bounced signalProcessFI1 and rolled the fix out to Exinity at ~17:23Z.
+Next: Confirm the signalProcessFI1 fix holds (no further overflow alerts) and whether it was caused by the 26.4 upgrade.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792760362955399 https://mahifx.slack.com/archives/C040V9LNKT5/p1793035385218119
 
 
 ### pnl-drop-alerts — Per-book PnL-drop alerts and alert email restoration
