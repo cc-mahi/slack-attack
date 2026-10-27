@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-26T08:04:59Z
+last_catchup: 2026-10-27T07:22:48Z
 status: active
 ---
 
@@ -29,21 +29,34 @@ status: active
 Argamon is the NY retail tenant (Mahi) plus Toa-hosted LDN/CHI/APN1 boxes (insti, hedging, crypto). Weekly calls with Jem/Elan/Daria/Shyam drive the agenda: wanting 500:1 leverage and to hold more risk, so Mahi is running sims and rolling CFDs/indices into Compass with internalisation and skew.
 Argamon is moving connectivity from Centroid to PrimeXM. Compass 26.4 is on LDN/CHI/APN1; NY was staged for the 10-10/11 weekend restart (outcome unconfirmed).
 On 10-21 the NY retail FX book moved to a 500k G8 inventory cap with Friday flatten (William Denny monitoring).
-Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
+GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
 
+### gts-hrp-nwm — GTS HRP sessions retired; GTS via NWM not in Compass
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: On 10-27 Levi found NY Compass was sending orders to GTS_HRP (GTSX_RCTV_HRP_1/2), no longer active in HRP; 13 trades (118 oz XAUUSD exposure if busted) executed at GTS via NWM, with PB drop copies split between HRP and NWM. Argamon chose to honour them and book manually at NWM. Compass keeps them under GTSX_RCTV_HRP_1 (risk and PnL unaffected), so per-LP reconciliation against NWM needs a mapping. Shyam removed GTS HRP from the NY pools and hedgers; there is no GTS via NWM market in Compass. Separately, Levi's GTS_NW_LDN pricing in LD Compass was fixed by Daria on the back end.
+Next: Argamon to say whether they want a GTS via NWM market set up in Compass.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793075092211549
+
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
-status: open · since: 2026-07-21 · last: 2026-10-22
-State: James says Centroid has been poor for Argamon and Elan has spent months negotiating a PrimeXM deal; James pitched the Mahi bridge but Argamon needs margin and reporting, which Mahi lacks (Andrew Morgan asked about the business case). The Argamon NY Centroid bridge was migrated to a new IP over the weekend of 09-26/27 (Zendesk 23532; Beeks confirmed the route covers the range; retail dist sessions reconnected 09-27). Toa's crypto session to PXM LD needed a sequence reset on 09-20. On 10-08 a PXM price-improvement mismatch (client filled at 4107.19, Toa at 4107.18) was traced to PXM's default of keeping price improvement; Levi will configure PXM to pass through all slippage and observe. On 10-21 Tom McLean said the relevant Centroid IP has changed again to 192.229.22.160, outside the 192.229.23.x range the Beeks cross-connect route covers; Shyam raised NOCINT-856420 with Beeks and ZD 23672, and Centroid must advertise the new IP over the cross-connect. Argamon has no date for the Centroid move yet (it was due last month). The Wintermute/Centroid-direct question on 09-09 was an expected decommissioned connection.
+status: open · since: 2026-07-21 · last: 2026-10-27
+State: On the 10-27 call Argamon said they have Centroid failover for LP aggregation and will confirm it is still in place. James says Centroid has been poor for Argamon and Elan has spent months negotiating a PrimeXM deal; James pitched the Mahi bridge but Argamon needs margin and reporting, which Mahi lacks (Andrew Morgan asked about the business case). The Argamon NY Centroid bridge was migrated to a new IP over the weekend of 09-26/27 (Zendesk 23532; Beeks confirmed the route covers the range; retail dist sessions reconnected 09-27). Toa's crypto session to PXM LD needed a sequence reset on 09-20. On 10-08 a PXM price-improvement mismatch (client filled at 4107.19, Toa at 4107.18) was traced to PXM's default of keeping price improvement; Levi will configure PXM to pass through all slippage and observe. On 10-21 Tom McLean said the relevant Centroid IP has changed again to 192.229.22.160, outside the 192.229.23.x range the Beeks cross-connect route covers; Shyam raised NOCINT-856420 with Beeks and ZD 23672, and Centroid must advertise the new IP over the cross-connect. Argamon has no date for the Centroid move yet (it was due last month). The Wintermute/Centroid-direct question on 09-09 was an expected decommissioned connection.
 Next: Levi to apply the PXM passthrough setting and report; Beeks to confirm cross-connect changes for the new Centroid IP; Tom to supply a Centroid move date.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339
 
 ### retail-leverage-risk — Argamon wants 500:1 leverage and to hold more risk
-status: open · since: 2026-08-31 · last: 2026-10-21
-State: Argamon wants to offer higher leverage (500:1 vs 100:1 now) and hold more risk. On 2026-10-21 Shyam, agreed with Jem, switched the NY retail FX book to a "G8-Cap" profile: up to a 500k inventory cap on internalised G8 flow with a Friday-close flatten, chosen from earlier sims. Replay Sep 25 to mid Oct showed +$62k (about $1/M) vs the old rules, average G8 risk up from $0.91m to $1.26m with much smaller peaks and near-flat weekends. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. Will Carter asked William Denny to monitor. Earlier: sims did not clearly support loosening risk; 09-22 call agreed CFD internalisation and asked for leverage recommendations; Argamon also runs a prop-style challenge business outside Compass.
-Next: William Denny to monitor retail PnL on the new G8 cap; Argamon to say how much risk they will open up and get leverage recommendations.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929
+status: open · since: 2026-08-31 · last: 2026-10-27
+State: On the 10-27 call with Jem and Elan there was no timeline for higher leverage; Argamon wants Mahi to lead on internalising more flow profitably, eventually across all their clients. They want all FX, not just G8, on the new risk model (Shyam to sim). Elan also suggested dark pool hedging (XTX, ~5 min time to fill per Elan) for NY4; Daria noted Toa dropped XTX in recent months because it cost spread, and it might work with less aggressive VaR clearance/backstop rules. Argamon wants to offer higher leverage (500:1 vs 100:1 now) and hold more risk. On 2026-10-21 Shyam, agreed with Jem, switched the NY retail FX book to a "G8-Cap" profile: up to a 500k inventory cap on internalised G8 flow with a Friday-close flatten, chosen from earlier sims. Replay Sep 25 to mid Oct showed +$62k (about $1/M) vs the old rules, average G8 risk up from $0.91m to $1.26m with much smaller peaks and near-flat weekends. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. Will Carter asked William Denny to monitor. Earlier: sims did not clearly support loosening risk; 09-22 call agreed CFD internalisation and asked for leverage recommendations; Argamon also runs a prop-style challenge business outside Compass.
+Next: William Denny to monitor retail PnL on the new G8 cap; Shyam to sim all-FX on the new risk model and look into dark pool hedging for NY4 (Daria to look at fill rate and time to fill); Argamon to say how much risk they will open up.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339
+
+
+### inst-toxic-flow — INST-1 large toxic flow in retail book
+status: open · since: 2026-10-05 · last: 2026-10-27
+State: INST-1 began trading the NY retail book with large, highly toxic volumes that are internalised under the "Internalise <500k - INST" rule, causing most of the recent PnL drops. Shyam added INST-1 to the Retail Book fast-hedge whitelist on 10-05; no follow-up on whether it worked. On the 10-27 call Elan agreed that INST-tagged retail flow can be sent to Chi if it gets too toxic.
+Next: Shyam to review the effect on retail PnL and decide whether to route INST flow to Chi.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1791171597533909 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339
 
 
 ### lucera-fill-delay — Lucera insti fill report delayed 42ms (HARD_TIMEOUT)
@@ -86,13 +99,6 @@ status: open · since: 2026-08-24 · last: 2026-10-08
 State: Indices (NDX, SPX, DOW, G30) were moved from Jump STP to Compass: G30EUR live 09-10 brokering to Jump, other indices 09-11, A_CFD books added to analytics tables at Argamon's request (done 09-24), CFD internalisation on 09-23 with hybridHedgerCfd1, and skew sizing raised from 0.25x to 0.35x of the Jump benchmark spread on 10-08 (beta now 0.45x, review the following week). Larger flow looks toxic, so a "Broker CFDs - Large" rule brokers trades above $500k (09-30). NAS100 rejections on 09-13 were because Jump published about 70 NDX, too little for the second tier; BMSL pass-through enabled. MT5 drop copy live 08-28; MT4 showed about 131m index volume for August.
 Next: Shyam to review 0.45x beta skew; Daria to see whether PSM suits indices.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1787541873458239 https://mahifx.slack.com/archives/C06U76A7ZJR/p1789003323456489 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791422519718139
-
-
-### inst-toxic-flow — INST-1 large toxic flow in retail book
-status: open · since: 2026-10-05 · last: 2026-10-05
-State: INST-1 began trading the NY retail book with large, highly toxic volumes that are internalised under the "Internalise <500k - INST" rule, causing most of the recent PnL drops. Shyam added INST-1 to the Retail Book fast-hedge whitelist on 10-05; no follow-up on whether it worked.
-Next: Shyam to review the effect on retail PnL.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1791171597533909
 
 
 ### ioc-timeouts-chi — XAUUSD IoC orders timed out with no LP response (CHI)
