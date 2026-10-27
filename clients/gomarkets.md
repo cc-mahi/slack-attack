@@ -19,14 +19,20 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-26T08:04:59Z
+last_catchup: 2026-10-27T07:20:34Z
 status: active
 ---
 
 ## Now
-Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets (cutover set for 2026-11-02), Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
+Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets (cutover set for 2026-11-02; Finalto dropped, no automatic failover), Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
+status: open · since: 2026-09-08 · last: 2026-10-27
+State: Will announced LPs (ISPRIME, 26DEGREES, FINALTO, LMAX_LDN; LMAX and IG re-pointed at Go's end) move to Go's AU entity. Plan: Mahi keeps existing market names, Go builds AU connections mapped to *_HOLDING markets, Go switches pricing and execution routing on the existing channels on its side (no Mahi config change), Mahi then moves positions from the current LP books into the _HOLDING books and hedgers trade them out into the AU LPs. Nathan built the holding FIX sessions (2026-09-16); 26DEGREES_HOLDING test trade worked; ISAM_HOLDING and LMAX_HOLDING tests due next week. On 2026-10-22 Will set the cutover for Monday 2026-11-02 before the trading day (22:00 UTC, NY exits DST 11-01) for 26DEGREES, ISAM and LMAX; Finalto is delayed and not in that switch. IG becomes available as an LP afterwards. Nathan confirmed Mahi is ready. Go call 2026-10-27: Go will close out all Finalto positions and not re-open (trouble setting up its Finalto AU entity); no automatic OZ routing, Go switches manually with ISAM as failover LP; Kieran declined an automatic in-OZ failover and any extra Mahi failover unless free; if Mahi's servers went down Go's 24/7 support would switch flow manually (AU team knows how, Cyprus being trained), so some downtime is likely in that case. Follow-up call NZ Friday to confirm time and finalise the plan.
+Next: Go to confirm ISAM_HOLDING and LMAX_HOLDING tests and message Mahi when the switch is done; Mahi to move positions into the HOLDING books on 11-02; Nathan to post a specific plan to Compass config this week and confirm time on the NZ Friday call.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792703988337029 https://mahifx.slack.com/archives/CNF3WPNSK/p1793072238317139
 
 ### ig-demo-stream — New IG DEMO price stream for latency comparison
 status: open · since: 2026-10-22 · last: 2026-10-22
@@ -62,12 +68,6 @@ status: open · since: 2026-10-12 · last: 2026-10-12
 State: Erik asked for account 81259604 to be excluded when orders go to iSAM; Kate added it to the blacklist of counterparty tags sent to iSAM when hedging (done). He then asked whether a background script could auto-blacklist counterparties reaching X rejections with makers; Kate raised it internally with no substantive answer yet.
 Next: Mahi to answer whether an auto-blacklist on maker rejection counts is feasible.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1791819586672009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791821865555749
-
-### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
-status: open · since: 2026-09-08 · last: 2026-10-22
-State: Will announced LPs (ISPRIME, 26DEGREES, FINALTO, LMAX_LDN; LMAX and IG re-pointed at Go's end) move to Go's AU entity. Plan: Mahi keeps existing market names, Go builds AU connections mapped to *_HOLDING markets, Go switches pricing and execution routing on the existing channels on its side (no Mahi config change), Mahi then moves positions from the current LP books into the _HOLDING books and hedgers trade them out into the AU LPs. Nathan built the holding FIX sessions (2026-09-16); 26DEGREES_HOLDING test trade worked; ISAM_HOLDING and LMAX_HOLDING tests due next week. On 2026-10-22 Will set the cutover for Monday 2026-11-02 before the trading day (22:00 UTC, NY exits DST 11-01) for 26DEGREES, ISAM and LMAX; Finalto is delayed and not in that switch. IG becomes available as an LP afterwards. Nathan confirmed Mahi is ready, to go over the plan again on Tuesday's call.
-Next: Go to confirm ISAM_HOLDING and LMAX_HOLDING tests and message Mahi when the switch is done; Mahi to move positions into the HOLDING books on 11-02; review on Tuesday's call (2026-10-27).
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792703988337029 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792704413183769
 
 ### lp-hedging-limits — LP hedging behaviour, NOP limits, clearing positions
 status: open · since: 2026-06-09 · last: 2026-10-06
