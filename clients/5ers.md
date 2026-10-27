@@ -18,7 +18,7 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-10-26T08:05:21Z
+last_catchup: 2026-10-27T07:19:05Z
 status: active
 ---
 ## Now
