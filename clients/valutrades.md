@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-10-26T08:07:44Z
+last_catchup: 2026-10-27T07:25:00Z
 status: active
 ---
 
@@ -25,6 +25,12 @@ status: active
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### support-channel-teams — Client asks about Microsoft Teams support channel
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: Brandon asked whether Mahi supports Microsoft Teams for support because of a client compliance requirement to possibly switch platforms. Shyam Hari replied Mahi does not support Teams and prefers Slack or email, and asked for more detail on the requirement to take back to the team. No client reply yet.
+Next: Brandon shares the compliance detail; Mahi decides whether to accommodate.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793071670570599 https://mahifx.slack.com/archives/C09HN93T0G2/p1793072932042059
 
 ### echo-compass-users — Echo/Compass user admin
 status: open · since: 2026-09-01 · last: 2026-10-26
