@@ -12,7 +12,7 @@ channels:
 contacts:
   - {name: "Gerard McConnell", role: "Alpha Capital, routing / platform / prop-product contact", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-10-26T08:04:59Z
+last_catchup: 2026-10-27T07:19:22Z
 status: active
 ---
 
@@ -53,6 +53,12 @@ State: Gerard says Alpha Trader (own platform) is being built, temporarily 3-6 m
 Next: Mahi to answer what the Compass document covers (DX/cTrader direct, own-platform integration); Cameron Hughes started with DXtrade and cTrader bridge docs.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787749386714689 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790264746444999 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790579145063059
 
+### fastmt-requests — FastMT (David Rapp) feature and access requests
+status: open · since: 2026-07-02 · last: 2026-08-26
+State: Restricted Compass Bridge Operator role provisioned on alphacap-broker for FastMT 2026-07-02, with a standard Compass account to follow. On 2026-08-26 David asked for an MT5 plugin to auto-stop out at an equity threshold then set accounts read-only; not available, a few months out. He also sources from T4B and wants ongoing feature updates and regular flow catch-up calls.
+Next: Mahi to schedule flow catch-up calls and share feature updates.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782978915962429 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787760873528779
+
 ### arb-classification — Arbitrageur detection lag and classifier changes
 status: watching · since: 2026-05-05 · last: 2026-09-17
 State: 2026-05 skew health check found arbitrageur detection lag costing ~35K/week on XAGUSD; continuity-pool fills on arb-classified flow do not apply last look, and Q1-Arbitrageurs profile uses forced internalisation. Arbs are whitelisted manually when auto-detection misses (riskPath reference market changed BLACKWELL to VELOCITY 2026-06-22; CP 5103699 whitelisted 2026-08-19). Liam Cordelle switched the classifier to run against Pulse 2026-09-16, reverted by Daria Horton after PagerDuty alerts, then re-enabled after a Netty fix. Full report in docs/skew-health/alphacapital/2026-05-05-skew-health.md.
@@ -65,11 +71,6 @@ State: Recurring spikes traced to bad Velocity ticks (BMSL blowouts 2026-05-04; 
 Next: confirm whether the max skew reduction was applied.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1777994333748779 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779945147921969 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789460982893339
 
-### xag-fi-pnl — XAGUSD and FI PnL leakage; FI PnL methodology question
-status: watching · since: 2026-04-23 · last: 2026-08-25
-State: XAG FI PnL bled repeatedly (April, June, August), with signal moved neuron to synapse (2026-04-23), skew floor lowered to 1 pip (2026-07-07), and XAG switched to price + IFMS signals (2026-08-13); by 2026-08-25 FI turned around on all books. Shyam Hari also flagged (2026-06-25, EURGBP false FI drop from news last-look delay) that prices used for FI PnL calculations may need review; no action seen.
-Next: none; FI PnL price-source review unowned.
-Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1776939603625359 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782445628932189 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787672825872419
 
 ### weekend-trading — Alpha prop asks about 24/7 weekend trading
 status: watching · since: 2026-09-14 · last: 2026-09-14
@@ -77,11 +78,6 @@ State: Gerard asked about weekend trading on XAU, XAG, WTI, SPX, NDX with reduce
 Next: Cameron Hughes to send the bespoke draft after review.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789378377294579 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789396646430429
 
-### fastmt-requests — FastMT (David Rapp) feature and access requests
-status: watching · since: 2026-07-02 · last: 2026-08-26
-State: Restricted Compass Bridge Operator role provisioned on alphacap-broker for FastMT 2026-07-02, with a standard Compass account to follow. On 2026-08-26 David asked for an MT5 plugin to auto-stop out at an equity threshold then set accounts read-only; not available, a few months out. He also sources from T4B and wants ongoing feature updates and regular flow catch-up calls.
-Next: Mahi to schedule flow catch-up calls and share feature updates.
-Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782978915962429 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787760873528779
 
 ### oils-off — Oils instruments turned off
 status: closed · since: 2026-06-24 · last: 2026-08-14 · closed: 2026-10-15
@@ -92,6 +88,11 @@ Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782303349490299 https://ma
 status: closed · since: 2026-05-22 · last: 2026-05-22 · closed: 2026-10-19
 State: Jade asked who to contact for a statement of account. Shyam Hari took it internally; Bonnie Cassidy said she would follow up. No activity since 2026-05-22; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C070016ND6X/p1779427327328109 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1779442392670229
+
+### xag-fi-pnl — XAGUSD and FI PnL leakage; FI PnL methodology question
+status: closed · since: 2026-04-23 · last: 2026-08-25 · closed: 2026-10-27
+State: XAG FI PnL bled repeatedly (April, June, August), with signal moved neuron to synapse (2026-04-23), skew floor lowered to 1 pip (2026-07-07), and XAG switched to price + IFMS signals (2026-08-13); by 2026-08-25 FI turned around on all books; no activity since, assumed resolved. Shyam Hari also flagged (2026-06-25, EURGBP false FI drop from news last-look delay) that prices used for FI PnL calculations may need review; no action seen.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1776939603625359 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782445628932189 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787672825872419
 
 ## Arc
 - 2026-06-07 — Compass upgraded to latest version over the weekend
