@@ -16,14 +16,26 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-10-26T08:04:59Z
+last_catchup: 2026-10-27T07:19:22Z
 status: active
 ---
 
 ## Now
-Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored.
+Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored. On 2026-10-27 Argamon asked for all FX on the new risk model; GTS HRP was pulled from NY pools and hedgers.
 
 ## Streams
+
+### gts-hrp-nwm-mapping — GTS HRP removal and NWM mapping
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: NY Compass was sending orders to GTS_HRP, which is no longer active in HRP (Levi, 2026-10-27). Shyam took GTSX_RCTV_HRP_1/2 out of the NY pools and HRP hedgers. 13 trades (118 oz XAUUSD) were actually executed at GTS via NWM, with drop copies split between HRP and NWM; Argamon will honour and manually book them at NWM, so Compass needed no change (only the LP label differs; per-LP reconciliation vs NWM needs mapping). There is no GTS-via-NWM market in Compass; Mahi offered to set one up if Argamon wants to keep trading GTS through NWM. Separately Levi asked for the NW market data gateway restart to stream GTS_NW_LDN in LD Compass; Daria fixed it and pricing is now visible.
+Next: Argamon to say whether it wants a GTS via NWM market in Compass.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793075092211549
+
+### leverage-risk-sims — 500:1 leverage / more risk-holding sims
+status: open · since: 2026-08-31 · last: 2026-10-27
+State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1); a separate in-house prop-style challenge product was floated earlier. On 2026-10-21 Shyam, agreed with Jem, switched the retail FX book to a G8-Cap hedging profile (up to 500k inventory cap on internalised G8 flow, Friday close flatten); replay vs old rules showed +$62k (about $1/M), average G8 risk $0.91m to $1.26m with much smaller peaks. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. On the 2026-10-27 call Jem and Elan gave no timeline for higher leverage, want Mahi to lead on internalising more flow profitably (eventually all their clients), and want all FX, not just G8, on the new risk model; Elan suggested dark pool hedging (XTX) for NY4, but Daria noted Mahi dropped it in recent months for paying spread there, suggesting looser VaR clearance/backstop rules and checking fill rate and time to fill (Elan says Toa fills are good, ~5 min to fill). INST-tagged retail flow can go to Chi if too toxic.
+Next: Shyam to sim all-FX on the new risk model and look into dark pool hedging for NY4; William Denny to monitor the G8-Cap book; Argamon to confirm Centroid LP failover is still in place.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339
 
 ### toa-chi-ioc-timeouts — LP no-ack timeouts on Toa CHI
 status: open · since: 2026-10-22 · last: 2026-10-22
@@ -36,12 +48,6 @@ status: open · since: 2026-06-09 · last: 2026-10-22
 State: Argamon NY moved its bridge from Centroid to PXM on the 2026-09-26/27 weekend (ZD 23532; retail dist sessions connected 2026-09-27). The Centroid bridge IP has changed again, to 192.229.22.160 (Tom McLean, 2026-10-21): it sits outside the 192.229.23.x range the Beeks cross-connect route covers, so Centroid must advertise it over the cross-connect. Shyam raised NOCINT-856420 with Beeks and ZD 23672. Tom has no firm date for the move to the new IP (it was due last month). Earlier: Wintermute queried 2026-09-09 whether altcrypto connectivity via Mahi was down; Kate confirmed the decommission was agreed.
 Next: Argamon (Tom) to give the Centroid move date; Shyam/Beeks to confirm the route change for 192.229.22.160.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719
-
-### leverage-risk-sims — 500:1 leverage / more risk-holding sims
-status: open · since: 2026-08-31 · last: 2026-10-21
-State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1); Mahi sims (Compass, SI, inventory, B book) earlier did not clearly support changing risk management, and a separate in-house prop-style challenge product was floated. On 2026-10-21 Shyam, agreed with Jem, switched the retail FX book to a G8-Cap hedging profile: up to a 500k inventory cap on internalised G8 flow with a Friday close flatten, so Argamon can offer higher leverage. Replay vs old rules (2026-09-25 to mid-Oct) showed +$62k (about $1/M), average G8 risk up from $0.91m to $1.26m with much smaller peaks and near flat into weekends. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. Will Carter asked William Denny to monitor.
-Next: William Denny to monitor the G8-Cap book; swap back if PnL tanks.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1790047491374069 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929
 
 ### lucera-hard-timeout — Lucera LD fill latency and hard timeout
 status: open · since: 2026-10-18 · last: 2026-10-19
