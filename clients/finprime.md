@@ -10,7 +10,7 @@ channels:
   internal-finprime: C0C8M89J2JY
   mahi-finprime: C0C8HCFKE9G
 contacts: []
-last_catchup: 2026-10-27T07:19:22Z
+last_catchup: 2026-10-28T07:17:01Z
 status: active
 ---
 
@@ -38,11 +38,12 @@ Next: Will to raise remaining asks with Derick; Mahi to decide StarPrime both-si
 Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1791969668222939 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792495003035739 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792571655168959
 
 ### commercial-timeline — NDA, presentation and decision timing
-status: open · since: 2026-10-15 · last: 2026-10-26
+status: open · since: 2026-10-15 · last: 2026-10-27
 State: FinPrime want to decide in ~2 weeks. Bonnie asked when the report is ready to present; Will said early next week, plans to book them Monday morning (a Q&A the following afternoon floated, likely Tuesday). No NDA confirmed in channel; Bonnie was to send one. On 2026-10-20 Will, with Isaac, reworked the microsites to do what the earlier Gamma reports did (numbers don't all align, value is there) and planned to wing the meeting, presenting by speaking rather than slides, then fix the numbers and send afterwards. Andrew's line if FinPrime are A-book: Mahi moved GCC and ATC from STP brokers (RoS at most 40% of the book) to far higher; Will agrees A-book optimisation will come through in comms.
 Andrew (2026-10-21): start with the narrative and use the analysis to support it; SI and intelligent hedging are not value-adds, the value-add is what changes in FinPrime's economics. For the A-book, the story is retaining more of the spread revenue passed to providers; he is tempted to go in low with a risk-only install (feature-led as much as P&L-led) and close on the wider pricing opportunity later. Andrew (2026-10-22): go in cheap enough to win and respect feature breadth; they may not participate in execution or pricing at all (in-house bridge); bundle free bridge and direct connectivity to undermine in-house tech. On 2026-10-23 Will told FinPrime they are being prepped for early next week and asked William and Bonnie for rough commercials on current data. On 2026-10-26 Derrick asked for Wednesday 9am (2026-10-28); Will provisionally said yes. Andrew then found it unclear whether an MNDA is in place: Will requested one but Will Carter found nothing on record in email or repos.
+Andrew (2026-10-27): happy with the FinPrime write-up; Will Carter's feedback was to state clearly that the A-book result (lost to -$18.3M by 19 Aug, made it back in six weeks) is what Mahi's model actually did if B-booked, to avoid dispute, and to add internalisation rate per strategy (they asked) plus a weekend-gold mention; Andrew agreed weekend gold is hard to offer as it is not a price deal, so it goes in as phase 2.
 Next: William/Bonnie: rough commercials. Will: fix microsite numbers post-meeting and send. Confirm MNDA status (nothing on record as of 2026-10-26); confirm Wed 9am slot with Derrick.
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1792067299721989 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792567913393749 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792739183473799 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793043237875419
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1792067299721989 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792567913393749 https://mahifx.slack.com/archives/C0C8M89J2JY/p1792739183473799 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793100633628809
 
 ## Arc
 - 2026-10-12 — #mahi-finprime and #internal-finprime created by Bonnie Cassidy; FinPrime liquidity app added to the shared channel
