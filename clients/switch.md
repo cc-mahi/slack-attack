@@ -14,7 +14,7 @@ contacts:
   - {name: Dom Gilbert, role: "Think Huge (Switch parent) - COO/shareholder; drives hosting cost questions"}
   - {name: Paul Pintiliescu, role: "Think Huge - infrastructure/CTO-side; asks hardware questions"}
   - {name: Brandon, role: "Think Huge - infrastructure lead (US west coast)"}
-last_catchup: 2026-10-27T07:22:10Z
+last_catchup: 2026-10-28T07:17:57Z
 status: active
 ---
 
@@ -24,10 +24,10 @@ Prospect, contract unsigned. On 2026-10-26 Sammy relayed that Switch has cold fe
 ## Streams
 
 ### sva-credibility — Switch doubts FI numbers; fresh XAUUSD SVA rerun
-status: open · since: 2026-10-26 · last: 2026-10-26
-State: Sammy said Switch don't believe the skew numbers and backtested it themselves with AI, getting about $2/M and a 52% hit rate on gold, which Sammy says cannot be true. Old echo links may have expired. Will launched 13 monthly XAUUSD SVA runs (Jun 2025 to Jun 2026, UTC-corrected timestamps) on Switch's own file; all running, 10 of 13 done by about 06:30 UTC and the full set by about 11:00 UTC on 2026-10-27. Cameron Hughes saved the raw SVA and SI sim data to Google Drive and wants to see what Sammy showed Switch commercially, since his charts may not match the sim results. Will thinks Mahi should run comms with Switch directly from here.
-Next: Will to read out the SVA results to Sammy once the runs land; Will to retrieve what Sammy showed commercially.
-Refs: https://mahifx.slack.com/archives/C0C7QB281J6/p1793039397274569 https://mahifx.slack.com/archives/C0C7QB281J6/p1793044380906489
+status: open · since: 2026-10-26 · last: 2026-10-27
+State: Sammy said Switch don't believe the skew numbers and backtested it themselves with AI, getting about $2/M and a 52% hit rate on gold, which Sammy says cannot be true. Old echo links may have expired. Will launched 13 monthly XAUUSD SVA runs (Jun 2025 to Jun 2026, UTC-corrected timestamps) on Switch's own file; at 08:00 UTC on 2026-10-27 eight of 13 were done with none failed, four more due that morning and Jun 26 about 35% with ETA 2026-10-28 ~07:00 UTC. Andrew also has preliminary Switch results. Cameron Hughes saved the raw SVA and SI sim data to Google Drive and wants to see what Sammy showed Switch commercially, since his charts may not match the sim results. Will thinks Mahi should run comms with Switch directly from here.
+Next: Will to read out the 12-month results (Jun 26 follows) and prep an internal summary once Luke is sorted; Will to read out to Sammy; Will to retrieve what Sammy showed commercially.
+Refs: https://mahifx.slack.com/archives/C0C7QB281J6/p1793039397274569 https://mahifx.slack.com/archives/C0C7QB281J6/p1793091926112869
 
 ### mnda-ip-coverage — No NDA with Switch covering sims and mechanism
 status: open · since: 2026-10-26 · last: 2026-10-26
