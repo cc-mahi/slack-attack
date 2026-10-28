@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-27T07:22:48Z
+last_catchup: 2026-10-28T07:19:50Z
 status: active
 ---
 
@@ -33,11 +33,18 @@ GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). O
 
 ## Streams
 
-### gts-hrp-nwm — GTS HRP sessions retired; GTS via NWM not in Compass
-status: open · since: 2026-10-27 · last: 2026-10-27
-State: On 10-27 Levi found NY Compass was sending orders to GTS_HRP (GTSX_RCTV_HRP_1/2), no longer active in HRP; 13 trades (118 oz XAUUSD exposure if busted) executed at GTS via NWM, with PB drop copies split between HRP and NWM. Argamon chose to honour them and book manually at NWM. Compass keeps them under GTSX_RCTV_HRP_1 (risk and PnL unaffected), so per-LP reconciliation against NWM needs a mapping. Shyam removed GTS HRP from the NY pools and hedgers; there is no GTS via NWM market in Compass. Separately, Levi's GTS_NW_LDN pricing in LD Compass was fixed by Daria on the back end.
-Next: Argamon to say whether they want a GTS via NWM market set up in Compass.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793075092211549
+### gts-hrp-nwm — HRP LP sessions wound down in favour of NWM/NWPB
+status: open · since: 2026-10-27 · last: 2026-10-28
+State: On 10-27 Levi found NY Compass was sending orders to GTS_HRP (GTSX_RCTV_HRP_1/2), no longer active in HRP; 13 trades (118 oz XAUUSD exposure if busted) executed at GTS via NWM, with PB drop copies split between HRP and NWM. Argamon chose to honour them and book manually at NWM. Compass keeps them under GTSX_RCTV_HRP_1 (risk and PnL unaffected), so per-LP reconciliation against NWM needs a mapping. Shyam removed GTS HRP from the NY pools and hedgers; there is no GTS via NWM market in Compass. Separately, Levi's GTS_NW_LDN pricing in LD Compass was fixed by Daria on the back end. The wind-down is wider than GTS: on 10-28 Shyam replaced JPM_RCTV_HRP_1 with JPM_RCTV_NWPB_1 in all hedger pools, then removed it from brokering pools and moved pricing over (continuity pool for EURHUF was still listed as holding it). For HSBC, only the _1 feeds are in pools (HRP_1 in all HRP hedger, brokering, continuity pools and pricing; NWPB_1 in the NatWest brokering pool only); Levi will decomm the unused _2 feeds and turn off the HRP feed, so HSBC pricing moves to NWPB too. Separately, on 10-27 Tom could not see HSBC prices in Compass during an HRP-requested HSBC test; Cameron Hughes said the market data session will not resume until reconnect, so HSBC market data processes are to be restarted at EOD (Tom confirmed ARGAMON_SW_HRP/_2 serve both MD and orders).
+Next: Argamon to say whether they want a GTS via NWM market set up in Compass; Mahi to restart HSBC market data processes at EOD and confirm HSBC prices stream.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793113766371149 https://mahifx.slack.com/archives/C083GP5F1CL/p1793166381823569
+
+### platform-ops — Toa box housekeeping, config landmines, capacity
+status: open · since: 2026-08-17 · last: 2026-10-28
+State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17. marketDataNado1 hit an OOM on 10-28 and was restarted by Shyam (PagerDuty raised).
+Next: confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787462723096659 https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029
+
 
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
 status: open · since: 2026-07-21 · last: 2026-10-27
@@ -78,13 +85,6 @@ status: open · since: 2026-08-03 · last: 2026-10-22
 State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
 Next: Lee to confirm the CBOE state-mismatch code fix shipped and ordersCOMEXMarex1 fixed.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309
-
-
-### platform-ops — Toa box housekeeping, config landmines, capacity
-status: open · since: 2026-08-17 · last: 2026-10-11
-State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17.
-Next: confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787462723096659 https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1791711442423979
 
 
 ### xau-invalid-increment — XAU price increment rejects (TOA_CHI, B2PRIME)
