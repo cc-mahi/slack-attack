@@ -15,16 +15,22 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-10-27T07:20:36Z
+last_catchup: 2026-10-28T07:17:02Z
 status: active
 ---
 ## Now
 GCC is a happy, growing internalising client ("client for life", Will Carter 09-28); the Finalto/LMAX hedger tuning has lifted PnL materially since August.
 Live work: LMAX perps (test-traded, not yet live), Amana as a third hedging venue (waiting on client funding) and an institutional pricing stream.
-Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads; GCC agreed on the 10-20 call to an Infinox LP intro, but Youssef reacted badly on 10-22 once he learned who it was, so Mahi is walking it back to no pressure. Perps are close to ready.
+Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads; GCC agreed on the 10-20 call to an Infinox LP intro, but Youssef reacted badly on 10-22 once he learned who it was, so Mahi is walking it back to no pressure. Perps are close to ready. On 10-27 a Mahi tag-blacklist change blocked a client at Finalto on all instruments (reverted in ~15 min); Youssef is jumpy ("no room to trial and error") and Will Carter has told the team to be very careful with anything touching client experience.
 A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef is unhappy and now wants GCC to provision its own main plus standby servers (reply from Rory pending), and GCC awaits the provider's incident report.
 
 ## Streams
+
+### finalto-tag-blacklist — 2026-10-27 tag 4004532 blacklist rejects
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: On 10-27 Finalto moved tag 4004532 to its defensive feed; Youssef asked Mahi to mirror it while disputing the decision with Finalto (markouts healthy, just a sharp day or two). Isaac Dann agreed markouts are generally fine (~$50/M decay over 10s, dampened by high spread paid) but found the hedger trading client risk under the client's tag gives Finalto a more toxic view (house +72.39 $/M, broker -42.78, hybrid -23, arb -13), so he added 4004532 to the Finalto tag blacklist for the hedgers. That change blacklisted the client from Finalto for all instruments: from ~12:34 UTC tag 4004402 and USOIL were rejected ("reason expired"), GCC routed the client to Finalto directly, and Isaac scoped the blacklist to hedgers only and reverted both tags by 12:50 (dynamic config, broker process confirmed). Youssef: 4004532 would have been critical had it traded; 4004402 saw many rejects before a fill; he wants no inconsistencies on non-gold instruments. Will Carter internally asked for no more silly mistakes.
+Next: Isaac to watch closely; Mahi to confirm to GCC it is safe to route back via Compass (GCC will match open exposure) and whether Finalto reverts 4004532.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793100261800059 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793105234041459 https://mahifx.slack.com/archives/C09QS1NUA80/p1793105896213549
 
 ### lmax-xau-limit — LMAX XAUUSD max-position rejects
 status: open · since: 2026-10-26 · last: 2026-10-26
@@ -39,15 +45,16 @@ Next: Isaac to apply the mapping roll, restart the Finalto gateways and tell Nae
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792744200127579 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792756609902269
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-10-26
-State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible. The 10-22 report (3,708 oz gold long, 15:30 BST) was acknowledged in 13s and confirmed actioned by Rory at 15:34 BST. The 10-26 report (3,423 oz gold long, 15:08 GMT) was acknowledged by William in 4 minutes and confirmed done at 15:19 GMT.
+status: open · since: 2026-04-30 · last: 2026-10-27
+State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible. The 10-22 report (3,708 oz gold long, 15:30 BST) was acknowledged in 13s and confirmed actioned by Rory at 15:34 BST. The 10-26 report (3,423 oz gold long, 15:08 GMT) was acknowledged by William in 4 minutes and confirmed done at 15:19 GMT. The 10-27 report (1,746 oz gold long, 16:16 UTC) was acknowledged by Isaac Dann ("will book this now") with no done-confirmation visible. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
 Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027291641789
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791910856126109 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027291641789 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009
 
 ### defensive-feeds — LMAX and Finalto defensive feeds and news hedging
-status: open · since: 2026-08-19 · last: 2026-10-26
+status: open · since: 2026-08-19 · last: 2026-10-27
 State: Daria moved LMAX_DEFENSIVE positions back to LMAX on 08-19 so LPR rules see the right position. Will added a news hedging rule on 09-04 after a 26s window with no hedge at NFP; the hedger's News config went from 40s to 60s and added both defensive feeds on 09-11 (about +$17k on CPI). Nael approved Finalto defensive test trades 09-15; the first was rejected ("Account not enabled on the gateway", defensive session GCC_Brokers5) until Youssef supplied the right Finalto account id, and buy/sell succeeded 09-17, confirmed by both sides. On 09-21 Nael said two tags had been moved again to Finalto SOR, so William set up Finalto defensive in the pool, blacklisted tags 334380 and 700154 from core Finalto and added 334380 to the defensive-feed execution rules (Finalto defensive in executionMarkets 09-22). Finalto's core feed dropped for ~1 min on 09-04 NFP according to Finalto. On 10-26 Nael said Finalto had moved tag 700154 from its defensive feed back to its main feed again and asked Mahi to mirror it; William made the change on the Finalto side and, per Nael, left the LMAX leg of 700154 on the LMAX main feed.
-Next: none outstanding; watch for Finalto moving tags between feeds again.
+On 10-27 Finalto moved tag 4004532 to defensive and the mirror went wrong (see finalto-tag-blacklist).
+Next: watch for Finalto moving tags between feeds again.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1788519496962869 https://mahifx.slack.com/archives/C09PNC1MFAA/p1789470718891469 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793024358924139 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027894157539
 
 ### ld-network-incident — 2026-10-16 LD networking outage
