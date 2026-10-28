@@ -11,14 +11,32 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-10-27T07:19:05Z
+last_catchup: 2026-10-28T07:16:21Z
 status: active
 ---
 
 ## Now
-Pre-live but close: Argamon enabled all instruments on 2026-10-06 and Cameron Hughes finished test trading on every asset class by 2026-10-13. Waiting on David Rapp to say when they go live for real and the hedgers get turned on. Outstanding Aug/Sep invoices (24+ days overdue) are the commercial overhang; Andrew wants it handled softly, not as a go-live gate. Pricing spikiness at open/rollover is being tuned, not closed.
+Going live: Alpha Broker's first live client was due 2026-10-28, so hedgers and expectedBookStatusOnTimezones come into play. Rollover and open spikes are being tuned hard (new WSS caps and widening factors on 2026-10-27; the 21:00 roll on 2026-10-28 is the first full test). Rapp wants redundancy against outages and a reliable swaps source for crosses, and Andrew said he can have redundancy. Outstanding Aug/Sep invoices remain a soft overhang.
 
 ## Streams
+
+### redundancy-swaps — Redundancy, cross swaps and cross connect
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: After the Beeks issue, Rapp wants redundancy against outages (asked again on the 2026-10-27 call about XC). Andrew Morgan replied "Rapp can have redundancy". Open questions from Cameron Hughes: multi-region servers and cost, whether redundancy belongs on Alpha's side, the best swaps source for crosses Argamon will not price (Rapp was swap-arbed for hundreds of thousands before), and whether a cross connect is needed (Beeks says no).
+Next: Mahi to decide redundancy design and cost, swaps source and cross-connect answer for Rapp.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793094782250149 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793098215512009
+
+### pricing-spikes — Open and rollover price spikiness
+status: open · since: 2026-09-21 · last: 2026-10-27
+State: Rapp reported on the 2026-10-27 call that many spiky candles had gone but some remained. Cameron Hughes cut cross widening factors on CLIENT_PRICE_LDN (AUDCAD 10.6 bps vs 276.7 the night before), added ARGAMON back as MWMS benchmark for Metals and AlphaCFDs, switched off XAGUSD benchmark minimum spread, re-firmed metals at 18:00:05 NY, and added WSS caps for 26 uncapped instruments (reset to about 3x LP average spread). Pricers and Beta restarted cleanly; CHFSGD added to AlphaFx. Earlier work (sanity checks, yardsticks, rollover backtests) stands.
+Next: Cameron Hughes to check the 21:00 roll on 2026-10-28 with Rapp, the first full test of the new caps.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790006846789019 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793141646580879
+
+### go-live-testing — Live test trading and go-live readiness
+status: open · since: 2026-04-29 · last: 2026-10-27
+State: Alpha's first live client was due 2026-10-28 (per the 2026-10-27 call). Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
+Next: Cameron Hughes to turn hedgers on and re-check monitoring once the first live client trades.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791900870280529 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793094782250149
 
 ### invoices-fees — Overdue invoices and additional fees
 status: open · since: 2026-10-14 · last: 2026-10-14
@@ -26,23 +44,11 @@ State: Bonnie Cassidy chased again on 2026-10-14: prop and broker August invoice
 Next: Cameron Hughes to keep raising arrears with several contacts without gating go-live.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791966476920889 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791972502451699
 
-### go-live-testing — Live test trading and go-live readiness
-status: open · since: 2026-04-29 · last: 2026-10-13
-State: Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
-Next: David Rapp to tell Cameron Hughes when they are live for real and the hedgers need turning on.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791298835824709 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791890559871449 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791900870280529
-
 ### argamon-shared-chan — Shared Slack channel with Argamon
 status: open · since: 2026-10-08 · last: 2026-10-08
 State: Rapp wants a Slack group including Argamon so the LP and Mahi can resolve issues directly when he is offline. Will Carter found a broker plus LP channel unusual and asked for risks; Cameron Hughes listed risks both ways (LP detail exposed to client, Argamon hearing pricing gripes first-hand, blame triangles, versus Alpha emailing Argamon anyway) and proposed a Mahi-admined, ops-only channel. Argamon already knows Mahi talks to Alpha on Slack.
 Next: Will Carter to review and reply.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791455602185639 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791456535845149
-
-### pricing-spikes — Open and rollover price spikiness
-status: open · since: 2026-09-21 · last: 2026-10-05
-State: Rapp flagged spikes at market open and rollover. Cameron Hughes added a sanity check (09-21), extra benchmarkMarkets and referencePriceMarketSelectors (09-23), then on 09-29 found the fixes covered only AlphaFx, a trailing space broke the central mid yardstick, and CFDs/softs often have only Argamon live at rollover. He fixed the yardstick, added a CFD yardstick and reference feed and a sanity rule for metal crosses and XCUUSD, and started before/after backtests on the 09-25 and 09-28 rollovers. Rapp was calmer once told these are teething issues of tailored pricing. A spikiness comparison doc vs Argamon was published 2026-10-05; backtest results not yet seen in channel.
-Next: Cameron Hughes to report backtest results and tell Rapp when changes are live so they can fix MT chart issues.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790006846789019 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790671797926079 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790699284890299 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791215036925529
 
 ### alert-suppression — Monitoring noise before hedgers go on
 status: watching · since: 2026-08-17 · last: 2026-09-10
@@ -72,3 +78,4 @@ Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777538204659809 https://ma
 - 2026-04-27 — Account manager handoff from Maten back to Cameron Hughes for setup work.
 - 2026-10-06 — Argamon enabled all instruments and volumes; live test trading began.
 - 2026-10-13 — Test trading finished across all asset classes; awaiting client go-live.
+- 2026-10-28 — First live client expected (per 2026-10-27 call).
