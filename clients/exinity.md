@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-27T07:19:23Z
+last_catchup: 2026-10-28T07:17:01Z
 status: active
 ---
 
@@ -32,6 +32,12 @@ Open on Mahi: re-setting per-book PnL-drop alerts, XAU position realignment usin
 Compass 26.4 went on over the 2026-10-24/25 weekend; signalProcessFI1 on trading-1 overflowed twice on 2026-10-26 (fix rolled out that evening); weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
+
+### pricing-spikes-widening — Spiky and wide pricing complaints
+status: open · since: 2026-09-01 · last: 2026-10-27
+State: Sep 1 Wagyu spikes at the open traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS (Kate to check the sims ran). US30 widening on 2026-09-23 was MWMS tracking Velocity (Cameron Hughes set it to 100, Corey confirmed better). NZD/CHF/NOK cross spikes were treated with order-book rounding and lower skew ceilings (0.3 to 0.05 pips, 2026-09-25). EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut (ceiling 0.6 to 0.4, SNG 1.3 to 0.5, SNGMON 2.7 to 0.5) and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. A 2026-09-29 LP feed stoppage (ticks stopped at Wedbush and Invast ~14:52) resumed after about three hours. On 2026-10-27 Christian reported poor LP pricing 2026-10-26 20:45-22:00; Kate found the market itself was wide over the NY rollover (GBPCHF LPs 25-30 pips 21:00-22:00 UTC, Jane Street, Jump, Barclays, DB, HSBC and Velocity not quoting, normal by ~22:05), Mahi stayed firm, not indicative, and the mid held steady.
+Next: Exinity to say whether spikiness persists and to check rollover width with Wedbush/LPs (and why Barclays, DB, HSBC, Velocity don't stream GBPCHF) or send a timestamp; Wedbush-in-MWMS backtest result unconfirmed.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788299416706969 https://mahifx.slack.com/archives/C0456LSHQQK/p1793100609912989 https://mahifx.slack.com/archives/C0456LSHQQK/p1793127985564209
 
 ### compass-26-4-upgrade — Compass 26.4 upgrade and post-upgrade signal overflow
 status: open · since: 2026-10-23 · last: 2026-10-26
@@ -102,12 +108,6 @@ State: PrimeXM tag forwarding on the CONNECT_FILLET stream (2026-08-31) was conf
 Next: Nathan to confirm the steps/books and help with the TradersHub adjustment.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788203770663179 https://mahifx.slack.com/archives/C0456LSHQQK/p1789471167917609 https://mahifx.slack.com/archives/C0456LSHQQK/p1791828427289149
 
-
-### pricing-spikes-widening — Spiky and wide pricing complaints
-status: open · since: 2026-09-01 · last: 2026-10-09
-State: Sep 1 Wagyu spikes at the open traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS (Kate to check the sims ran). US30 widening on 2026-09-23 was MWMS tracking Velocity (Cameron Hughes set it to 100, Corey confirmed better). NZD/CHF/NOK cross spikes were treated with order-book rounding and lower skew ceilings (0.3 to 0.05 pips, 2026-09-25). EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut (ceiling 0.6 to 0.4, SNG 1.3 to 0.5, SNGMON 2.7 to 0.5) and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. A 2026-09-29 LP feed stoppage (ticks stopped at Wedbush and Invast ~14:52) resumed after about three hours.
-Next: Exinity to say whether spikiness persists; Wedbush-in-MWMS backtest result unconfirmed.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788299416706969 https://mahifx.slack.com/archives/C0456LSHQQK/p1790270255985109 https://mahifx.slack.com/archives/C0456LSHQQK/p1791468162700719 https://mahifx.slack.com/archives/C0456LSHQQK/p1791555149344069
 
 
 ### velocity-nomura-onboard — Velocity (VTI C2C) and Nomura Elysium onboarding
