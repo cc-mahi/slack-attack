@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-27T07:20:34Z
+last_catchup: 2026-10-28T07:17:02Z
 status: active
 ---
 
@@ -33,6 +33,12 @@ status: open · since: 2026-09-08 · last: 2026-10-27
 State: Will announced LPs (ISPRIME, 26DEGREES, FINALTO, LMAX_LDN; LMAX and IG re-pointed at Go's end) move to Go's AU entity. Plan: Mahi keeps existing market names, Go builds AU connections mapped to *_HOLDING markets, Go switches pricing and execution routing on the existing channels on its side (no Mahi config change), Mahi then moves positions from the current LP books into the _HOLDING books and hedgers trade them out into the AU LPs. Nathan built the holding FIX sessions (2026-09-16); 26DEGREES_HOLDING test trade worked; ISAM_HOLDING and LMAX_HOLDING tests due next week. On 2026-10-22 Will set the cutover for Monday 2026-11-02 before the trading day (22:00 UTC, NY exits DST 11-01) for 26DEGREES, ISAM and LMAX; Finalto is delayed and not in that switch. IG becomes available as an LP afterwards. Nathan confirmed Mahi is ready. Go call 2026-10-27: Go will close out all Finalto positions and not re-open (trouble setting up its Finalto AU entity); no automatic OZ routing, Go switches manually with ISAM as failover LP; Kieran declined an automatic in-OZ failover and any extra Mahi failover unless free; if Mahi's servers went down Go's 24/7 support would switch flow manually (AU team knows how, Cyprus being trained), so some downtime is likely in that case. Follow-up call NZ Friday to confirm time and finalise the plan.
 Next: Go to confirm ISAM_HOLDING and LMAX_HOLDING tests and message Mahi when the switch is done; Mahi to move positions into the HOLDING books on 11-02; Nathan to post a specific plan to Compass config this week and confirm time on the NZ Friday call.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792703988337029 https://mahifx.slack.com/archives/CNF3WPNSK/p1793072238317139
+
+### lr-benign-flow — Published LR also charged on benign counterparties
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: Isaac noted that because Go runs published LR, LR also lands on benign flow: the lr-health check on 2026-10-02 flagged 57 benign counterparties charged about $4.6k in total (mostly a few hundred dollars each, largest ~$1.6k). He dismissed the cards as the expected cost of published LR. If Go asks about fills for good clients, a more targeted setup (Infinox approach: penalise toxic flow harder, benign less) could be offered, but it shows up mostly as slippage so needs client sign-off and probably ties into Go's colour-routing work; unclear Go would be interested.
+Next: Nathan to decide whether to raise it with Go; no client action.
+Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1793119374681369
 
 ### ig-demo-stream — New IG DEMO price stream for latency comparison
 status: open · since: 2026-10-22 · last: 2026-10-22
