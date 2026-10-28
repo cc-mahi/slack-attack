@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-10-27T07:25:00Z
+last_catchup: 2026-10-28T07:19:50Z
 status: active
 ---
 
@@ -25,6 +25,12 @@ status: active
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### feed-lp-routing — LP feed routing (B2Broker, JT)
+status: open · since: 2026-08-12 · last: 2026-10-28
+State: Re-opened. New LPs (JT, GCEX, B2_OZNY4_RETAIL_MARGIN_VT) caused FEED4 disconnections; B2 duplicated on FEED1 and FEED4, resolved 2026-10-05 when Shyam Hari moved the market selector from FEED4 to FEED1. On 2026-10-28 Garry asked Rory what to do to add JT_OZNY4_RETAIL_MARGIN_VT given another LP shares FEED4 with JT; Shyam Hari said Mahi will check.
+Next: Mahi (Shyam Hari/Rory) answers Garry on how to add the JT market.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787633651014009 https://mahifx.slack.com/archives/C09HN93T0G2/p1793168593978109
 
 ### support-channel-teams — Client asks about Microsoft Teams support channel
 status: open · since: 2026-10-27 · last: 2026-10-27
@@ -138,12 +144,6 @@ Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792497831920379 https://ma
 status: closed · since: 2026-10-05 · last: 2026-10-06 · closed: 2026-10-15
 State: Client confirmed QB hours 5pm Chicago to 4pm next day (18:00-17:00 NYT). Mahi changed fixOrdersQB1 session times on 2026-10-07 (low-risk change CHG-2610-P1WP).
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1791169713201199 https://mahifx.slack.com/archives/C09HN93T0G2/p1791325982612159
-
-### feed-lp-routing — B2Broker LP feed routing
-status: closed · since: 2026-08-12 · last: 2026-10-05 · closed: 2026-10-15
-State: New LPs (JT, GCEX, B2_OZNY4_RETAIL_MARGIN_VT) caused FEED4 disconnections; B2 duplicated on FEED1 and FEED4. On 2026-10-05 client confirmed B2 comes via FEED1 and Shyam Hari moved the market selector from FEED4 to FEED1.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787633651014009 https://mahifx.slack.com/archives/CP7A1F8BT/p1791230817547969
-
 
 ### tt-stunnel-pinning — TT certificate pinning removal
 status: closed · since: 2026-09-23 · last: 2026-09-23 · closed: 2026-10-15
