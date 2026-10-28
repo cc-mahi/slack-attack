@@ -20,7 +20,7 @@ contacts:
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config requests, rejection reports", confidence: low}
   - {name: "Ali Wehbe", role: "ops: energy futures / oils product specs", confidence: low}
   - {name: "Ahmad Hashem", role: "ops: rejection reports on Mahi_B sessions", confidence: low}
-last_catchup: 2026-10-27T07:19:22Z
+last_catchup: 2026-10-28T07:16:20Z
 status: active
 ---
 ## Now
@@ -35,11 +35,11 @@ Next: Amana to connect, test and move Crypto/Indices/Energies symbols to the new
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792765304547529 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793030884166429 https://mahifx.slack.com/archives/C08T42TMKU3/p1793020492386999
 
 ### si-books — SI energies and SI indices books
-status: open · since: 2026-08-17 · last: 2026-10-26
+status: open · since: 2026-08-17 · last: 2026-10-27
 State: Energies SI went live 09-11 (time-based, 4h, 500K VaR); indices SI went live 09-25 (1h then 4h transfer, 100K VaR total) after a position flatten and rebuild. SI PnL keeps going missing (Energies 09-28; Indices 09-25, 09-28, 09-30, 10-05, again 10-12): root cause so far is a VIX position with no pricing (VIX pricing put live 10-05, VIXUSD tested 10-06), partly patched by adding VIX to base spreads and CPL. On 10-19 Nikos reported the same again: indices showed no PnL until 06:00 UTC (no reply seen). Nikos called the SI PnL drop alerts inaccurate (10-01, 10-06); Cameron cut them to the TOTAL book with a shorter window and Isaac made them alert-only 10-07.
-On 10-20 Isaac posted since-go-live stats (internal): Energies SI $341M client volume, 75.4% internalised, cash PnL +$115.7k; Indices SI $2,823M, 89.9% internalised, +$83.8k, open positions -$1.2M and -$0.4M. Isaac forwarded Nikos on 10-22 saying the SI books are doing really well. On 10-26 Nikos reported no indices PnL again; Shyam (03:44 UTC) said the same issue: after the weekend restart the book has no valid price for the European indices until they reopen, so the total shows blank until the ~07:00 UTC European open. Positions and hedging unaffected.
-Next: Mahi dev to deliver the permanent fix for the blank SI Indices PnL after restarts (recurred 10-19, 10-26).
-Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1786981181951769 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792984534176299
+On 10-20 Isaac posted since-go-live stats (internal): Energies SI $341M client volume, 75.4% internalised, cash PnL +$115.7k; Indices SI $2,823M, 89.9% internalised, +$83.8k, open positions -$1.2M and -$0.4M. Isaac forwarded Nikos on 10-22 saying the SI books are doing really well. On 10-26 Nikos reported no indices PnL again; Shyam (03:44 UTC) said the same issue: after the weekend restart the book has no valid price for the European indices until they reopen, so the total shows blank until the ~07:00 UTC European open. Positions and hedging unaffected. On 10-27 Isaac announced the permanent fix merged (MahiMain#1203 on release/26.4): after a riskReportingCore restart with markets closed, trade-position books start from each instrument's last client mid in Graphite instead of NaN PnL.
+Next: Isaac to schedule an analytics release to Amana this week and raise the change record; after deploy riskReportingCore log should show the Graphite last-mids load line.
+Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1786981181951769 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792984534176299 https://mahifx.slack.com/archives/C08T42TMKU3/p1793118153654929
 
 ### analytics-data-asks — Yield profiles, party IDs and data access
 status: open · since: 2026-08-17 · last: 2026-10-26
@@ -54,15 +54,15 @@ Next: Mahi to action the CMC crypto pricing subscription, wind GCEX crypto down 
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786963129189029 https://mahifx.slack.com/archives/C08T42TMKU3/p1792664415225229 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793013778807299
 
 ### hp-indices-energies — Indices and energies onto Mahi_A_HP
-status: open · since: 2026-10-20 · last: 2026-10-26
-State: On 10-26 Hadeel asked Mahi to adjust the Min/Step for indices to an attached sheet of proposed Mahi settings (no reply yet). On 10-20 Princess asked to go live on indices and energies on the Mahi_A_HP connection; Amana listed the symbols and Rory confirmed the HP precision (energy futures 5dp, indices/energies spot 8dp) is set correctly. Isaac and Nikos then found NDX futures orders rejected INVALID_INCREMENT (qty 3.35 on the regular feed, configured 0.1 increment): Isaac asked whether to move to 0.01 and Nikos said clients should trade against the HP feed. Later Maynard saw D30 orders from account 555 rejected out of session; Shyam traced them to hybridHedgerIndicesSI1 still hedging after CMC's D30 close and asked to disable it 17:00-18:00 NY. On 10-21 Nikos asked Mahi to disable trading when the market is closed for all indices and energies (Will checking) and Hadeel asked for the current min/step for indices spot and futures on HP, non-HP and LP. That evening SPXUSD orders from account 555 hit the Amana bridge below minimum (min should be 0.1, not 0.04); Nathan set the SPXUSD hedger min and increment to 0.1 and the spam stopped.
+status: open · since: 2026-10-20 · last: 2026-10-27
+State: On 10-27 Hadeel asked Nathan/team to confirm all definitions are reflected on Mahi's end (no reply seen). On 10-26 Hadeel asked Mahi to adjust the Min/Step for indices to an attached sheet of proposed Mahi settings (no reply yet). On 10-20 Princess asked to go live on indices and energies on the Mahi_A_HP connection; Amana listed the symbols and Rory confirmed the HP precision (energy futures 5dp, indices/energies spot 8dp) is set correctly. Isaac and Nikos then found NDX futures orders rejected INVALID_INCREMENT (qty 3.35 on the regular feed, configured 0.1 increment): Isaac asked whether to move to 0.01 and Nikos said clients should trade against the HP feed. Later Maynard saw D30 orders from account 555 rejected out of session; Shyam traced them to hybridHedgerIndicesSI1 still hedging after CMC's D30 close and asked to disable it 17:00-18:00 NY. On 10-21 Nikos asked Mahi to disable trading when the market is closed for all indices and energies (Will checking) and Hadeel asked for the current min/step for indices spot and futures on HP, non-HP and LP. That evening SPXUSD orders from account 555 hit the Amana bridge below minimum (min should be 0.1, not 0.04); Nathan set the SPXUSD hedger min and increment to 0.1 and the spam stopped.
 Next: Mahi to apply Hadeel's 10-26 indices Min/Step sheet and answer Nikos on market-closed trading; Amana to answer Shyam on disabling hybridHedgerIndicesSI1 17:00-18:00 NY; Amana to say whether NDX futures need 0.01 on the regular feed.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792497820771659 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793027547819219
 
 ### futures-expiry-recs — Futures rolls, expiries and position adjustments
-status: open · since: 2026-08-17 · last: 2026-10-25
-State: Amana posts expiry and start notices and Mahi zeroes positions at EOD. On 10-15 Amana announced CrudeOilX6 (Nov) settlement (zero all positions) and CrudeOilF7 (Jan) start 10-16; picking up F7 needed a re-subscribe on Mahi_CMC_FIX, done by Shyam that night with a brief CMC_CENTROID pricing gap and the feed confirmed. On 10-23 Amana announced NG6X settlement; Shyam zeroed those positions on 10-25. Earlier: SI IDX futures rolled U to Z on 09-24 by CSV import, UKO futures rolled 09-28, manual position adjustments continue, and the 09-17 DOWFUT-U expiry spammed IG rejections because Amana had not set it close-only.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792920575038069
+status: open · since: 2026-08-17 · last: 2026-10-28
+State: Amana posts expiry and start notices and Mahi zeroes positions at EOD. On 10-27 Amana announced BrentOil6Z settlement (Shyam flattened the positions 10-28 00:29 UTC) and that BrentOil7G, NG7F and GC7G start 10-28, activated after EOD; Mohamad Malkani asked 20:56 UTC whether Mahi subscribed those contracts, Shyam resubscribed at EOD and confirmed the symbol subscription looked accepted at 21:13. On 10-15 Amana announced CrudeOilX6 (Nov) settlement (zero all positions) and CrudeOilF7 (Jan) start 10-16; picking up F7 needed a re-subscribe on Mahi_CMC_FIX, done by Shyam that night with a brief CMC_CENTROID pricing gap and the feed confirmed. On 10-23 Amana announced NG6X settlement; Shyam zeroed those positions on 10-25. Earlier: SI IDX futures rolled U to Z on 09-24 by CSV import, UKO futures rolled 09-28, manual position adjustments continue, and the 09-17 DOWFUT-U expiry spammed IG rejections because Amana had not set it close-only.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793131215829399
 
 ### pricing-load-latency — Pricing model load and latency
 status: open · since: 2026-08-20 · last: 2026-10-23
