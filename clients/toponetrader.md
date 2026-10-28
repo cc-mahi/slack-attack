@@ -17,15 +17,21 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-10-27T07:19:06Z
+last_catchup: 2026-10-28T07:19:50Z
 status: active
 ---
 
 ## Now
 Prop firm; Mahi is dealing desk and risk. Focus is payout ratio: skew and LR tightened, harsher execution on 2-Step/1-Step groups, spreads restored on Prop Firm Match.
-Open client query: CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain). New: drop-copy volume exceeds expected volume (checking with Shane).
+Open: MatchTrader IP whitelist request (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain). New: drop-copy volume exceeds expected volume (checking with Shane).
 
 ## Streams
+
+### matchtrader-ip-allow — MatchTrader asks Mahi to whitelist an IP
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: Lars forwarded a MatchTrader IT Support request for Mahi to whitelist 18.132.0.59. Cameron Hughes replied that Mahi will action it on 2026-10-27; no completion message seen yet.
+Next: Mahi (Cameron Hughes) to whitelist the IP and confirm to Lars.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1793098034378779 https://mahifx.slack.com/archives/C08U853T684/p1793098073453029
 
 ### prop-network-showcase — Mahi to show TOT its prop-network work
 status: open · since: 2026-10-21 · last: 2026-10-21
@@ -51,28 +57,27 @@ State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% o
 Next: Mahi watching results of skew and spreads; Shane to notify Mahi of each new Launchpad group.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1790787041722219
 
-### lr-harsh-execution — LR retune and harsher execution for 2-Step
-status: watching · since: 2026-08-25 · last: 2026-08-26
-State: Shane asked (2026-08-25) for harsher execution on the second phase of the 2-Step plan and harsher still when funded. Cameron Hughes sent LR options and applied LR changes on 2026-08-26 (channel refill/caps and a global cap). Shane is looking for a way to identify 2-Step accounts on TOT's side.
-Next: Shane to provide a way to distinguish 2-Step accounts.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787643570858959 https://mahifx.slack.com/archives/C08TG143F4L/p1787750805616039
-
 ### prop-perps — Prop perps request
 status: watching · since: 2026-09-30 · last: 2026-10-05
 State: Matt asked about prop perps (Vest Markets, MyFundedPerps). Cameron Hughes sees it as a growing area and a possible new offering and will look at Vest. Logged on the wiki Client requests section.
 Next: Cameron Hughes to look at Vest.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://mahifx.slack.com/archives/C08TG143F4L/p1791183636574369
 
-### arb-pricing-tuning — Arb flagged by daily checks, pricing tweaks
-status: watching · since: 2026-08-18 · last: 2026-08-24
-State: GBPUSD arb alert on 2026-08-18 led to proportion and price-improvement reductions; on 2026-08-21 daily checks flagged more arb, so MAHI_LP5 was removed from signalReturn markets, GBPJPY added to the GBPUSD/USDJPY override and signal moved to synapse. By 2026-08-24 no more significant arb; being monitored.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787044539658809 https://mahifx.slack.com/archives/C08TG143F4L/p1787572737892749
-
 ### ctrader-billing-check — cTrader shut off by TOT; billing model review
 status: watching · since: 2026-08-26 · last: 2026-09-10
 State: TOT stopped using cTrader (Shane: it was costing them heavily); config kept in case they return. On 2026-09-09/10 internal billing was queried against the revised per-user model and Will Carter noted the fixed component was missing for low totals; Cameron Hughes was asked to review accounts.
 Next: Cameron Hughes to review accounts; internal billing to reconcile.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787752907131709 https://mahifx.slack.com/archives/C08TG143F4L/p1789022593579519
+
+### lr-harsh-execution — LR retune and harsher execution for 2-Step
+status: closed · since: 2026-08-25 · last: 2026-08-26 · closed: 2026-10-28
+State: Shane asked (2026-08-25) for harsher execution on the second phase of the 2-Step plan and harsher still when funded. Cameron Hughes sent LR options and applied LR changes on 2026-08-26 (channel refill/caps and a global cap). Shane was to find a way to identify 2-Step accounts; no activity since 2026-08-26, assumed resolved (superseded by payout-ratio-levers).
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787643570858959 https://mahifx.slack.com/archives/C08TG143F4L/p1787750805616039
+
+### arb-pricing-tuning — Arb flagged by daily checks, pricing tweaks
+status: closed · since: 2026-08-18 · last: 2026-08-24 · closed: 2026-10-28
+State: GBPUSD arb alert on 2026-08-18 led to proportion and price-improvement reductions; on 2026-08-21 daily checks flagged more arb, so MAHI_LP5 was removed from signalReturn markets, GBPJPY added to the GBPUSD/USDJPY override and signal moved to synapse. By 2026-08-24 no more significant arb; no activity since 2026-08-24; assumed resolved.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787044539658809 https://mahifx.slack.com/archives/C08TG143F4L/p1787572737892749
 
 ### btcusd-100x-multiplier — MatchTrader BTCUSD order 100x oversized
 status: closed · since: 2026-07-25 · last: 2026-07-29 · closed: 2026-10-22
