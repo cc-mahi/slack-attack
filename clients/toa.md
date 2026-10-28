@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-10-27T07:19:06Z
+last_catchup: 2026-10-28T07:17:57Z
 status: active
 ---
 
@@ -21,11 +21,11 @@ Several Argamon-raised issues arrive as forwards from `mahi-argamon-operations`,
 
 ## Streams
 
-### insti-indicative-pricing — LDN insti pricing indicative after EBS decommission and around rolls
-status: open · since: 2026-08-17 · last: 2026-10-15
-State: EBS decommission removed `EBS_IMP_CHI`, which LDN insti pricing relied on, so insti FX went indicative; the EBS feed is now killed. During rolls CBOE_HR_LDN is the main reference and CBOE liquidity can be too thin for a stable price (Elan was to ask CBOE). Ops muted alerts via `monitoring.pricing.suppressAlertsDuring` and Lee removed SINGAPORE_MONDAY. James: CLIENT_PRICE_INSTI_LDN may be indicative because it is the only model without index reference-price fallback ("rather no price than a degraded price"). 2026-10-15 Nathan Burch asked whether 6A/6B/6E/6J/6M/6N/6S/6Z, GC, MGC, SI and SIL Dec-26 futures should be priced: LDN pricerInsti reference markets changed, and no base spreads exist on CHI or LDN insti. Lee replied that they are not published to clients but are available via CME/COMEX.
-Next: Toa/Argamon to confirm whether those futures are meant to be priced; Elan to follow up with CBOE on liquidity.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787002323906439 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619
+### infra-releases — releases, new gateways and box changes on Argamon/Toa
+status: open · since: 2026-08-17 · last: 2026-10-28
+State: Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
+Next: Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1790435088325269 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029
 
 ### cboe-hedger-chi — hedgerCBOE1 on CHI: firewall/PnL trips and state mismatches
 status: open · since: 2026-08-03 · last: 2026-10-22
@@ -33,11 +33,11 @@ State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was lef
 Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309
 
-### infra-releases — releases, new gateways and box changes on Argamon/Toa
-status: open · since: 2026-08-17 · last: 2026-10-14
-State: Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
-Next: Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1790435088325269 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429
+### insti-indicative-pricing — LDN insti pricing indicative after EBS decommission and around rolls
+status: open · since: 2026-08-17 · last: 2026-10-15
+State: EBS decommission removed `EBS_IMP_CHI`, which LDN insti pricing relied on, so insti FX went indicative; the EBS feed is now killed. During rolls CBOE_HR_LDN is the main reference and CBOE liquidity can be too thin for a stable price (Elan was to ask CBOE). Ops muted alerts via `monitoring.pricing.suppressAlertsDuring` and Lee removed SINGAPORE_MONDAY. James: CLIENT_PRICE_INSTI_LDN may be indicative because it is the only model without index reference-price fallback ("rather no price than a degraded price"). 2026-10-15 Nathan Burch asked whether 6A/6B/6E/6J/6M/6N/6S/6Z, GC, MGC, SI and SIL Dec-26 futures should be priced: LDN pricerInsti reference markets changed, and no base spreads exist on CHI or LDN insti. Lee replied that they are not published to clients but are available via CME/COMEX.
+Next: Toa/Argamon to confirm whether those futures are meant to be priced; Elan to follow up with CBOE on liquidity.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787002323906439 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619
 
 ### argamon-relays — Argamon-raised issues relayed from mahi-argamon-operations
 status: open · since: 2026-08-19 · last: 2026-10-09
@@ -45,17 +45,17 @@ State: Argamon issues reach this channel as forwards from Daria, William Denny a
 Next: Lee to raise the B2PRIME increment rejects with Argamon.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787118229196849 https://mahifx.slack.com/archives/C035H1VNCAD/p1789997987559629 https://mahifx.slack.com/archives/C035H1VNCAD/p1791507126707139
 
-### cme-hedger-chi — hedgerHrpCME1 and COMEX/CME gateway outages on CHI
-status: open · since: 2026-07-21 · last: 2026-09-27
-State: hedgerHrpCME1 keeps going down on CHI. On 09-07 a `hedging.rules.profiles.profileDefinitions` edit caused "No rule for converting: XAU to: ZAR", and Leonardo reverted it via the LDN audit log (audit does not replicate between regions). On 08-30 propTrader1HrpChi1 was down after the weekend restart because a profile mapping pointed at expired MGCQ6; Nathan repointed it to MGCZ6. On 09-27 the hedger tripped on order breaches and ordersCME1/ordersCOMEX1 were stuck in starting; Lee left the hedger off, turned it back on, and said he would fix ordersCOMEXMarex1 later.
-Next: Lee to fix ordersCOMEXMarex1.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1784613134154519 https://mahifx.slack.com/archives/C035H1VNCAD/p1788800584804799 https://mahifx.slack.com/archives/C035H1VNCAD/p1790548332936469
-
 ### arg-chi-disk — Argamon CHI /app/fx/apps/mahifx at 90%
 status: watching · since: 2026-10-05 · last: 2026-10-11
 State: Disk alert on 2026-10-05. Most space is model weights under `common/var`, plus EBS data that James said can be deleted. On 10-11 Nathan extended the volume by 50GB (422GB of 470GB, about 90%, down to about 80%) rather than the 200GB first proposed. Watching because EBS data deletion and model-weight growth are not confirmed.
 Next: someone to delete the EBS data.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1791220309661789 https://mahifx.slack.com/archives/C035H1VNCAD/p1791711442423979
+
+### cme-hedger-chi — hedgerHrpCME1 and COMEX/CME gateway outages on CHI
+status: watching · since: 2026-07-21 · last: 2026-09-27
+State: hedgerHrpCME1 keeps going down on CHI. On 09-07 a `hedging.rules.profiles.profileDefinitions` edit caused "No rule for converting: XAU to: ZAR", and Leonardo reverted it via the LDN audit log (audit does not replicate between regions). On 08-30 propTrader1HrpChi1 was down after the weekend restart because a profile mapping pointed at expired MGCQ6; Nathan repointed it to MGCZ6. On 09-27 the hedger tripped on order breaches and ordersCME1/ordersCOMEX1 were stuck in starting; Lee left the hedger off, turned it back on, and said he would fix ordersCOMEXMarex1 later.
+Next: Lee to fix ordersCOMEXMarex1. Downgraded to watching: no activity for 31 days, outcome unseen.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1784613134154519 https://mahifx.slack.com/archives/C035H1VNCAD/p1788800584804799 https://mahifx.slack.com/archives/C035H1VNCAD/p1790548332936469
 
 ### config-breakage — bad config writes stopping processes
 status: watching · since: 2026-08-23 · last: 2026-09-13
