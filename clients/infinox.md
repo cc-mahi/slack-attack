@@ -18,16 +18,22 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-27T07:20:34Z
+last_catchup: 2026-10-28T07:17:02Z
 status: active
 ---
 
 ## Now
 Gold3X had no price from Sunday's open to ~04:40 UTC 10-26 (engine bug in geared session start tied to next week's US clock change; pricers restarted, ZD 23699), and Infinox then reported XAUUSD spikes Shyam could not see in Mahi's pricing; Infinox wants ticks to escalate to its bridge team.
-Custom layered XAUUSD symbol (`XAUUSD.l`) go-live and Isaac's gold LR redesign (+$406k/month modelled, sent 10-21) both await Infinox/Rory next steps; routine LR / classification support continues in #mahi-infinox.
+Custom layered XAUUSD symbol (`XAUUSD.l`) go-live awaits Rory next steps; Isaac's gold LR redesign (+$406k/month modelled, sent 10-21) awaits Infinox, and Isaac chased for an answer on 10-27; routine LR / classification support continues in #mahi-infinox.
 Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq asked for Echo access for two more users; Kate says Echo is now in Compass and they need Compass logins.
 
 ## Streams
+
+### lr-redesign — B_CLIENTS XAUUSD LR redesign proposal
+status: open · since: 2026-10-20 · last: 2026-10-27
+State: After Trading Ops asked why Toxic XAUUSD Harsher earned little LR, Isaac proposed (10-21) a gold-only channel Burst cut from $8.5M to $2M, a $5/M cap on Default, and Volume Multiplier 5 on Signal Follow, Dynamic Broker, Dynamic Fast Hedge and Centroid, leaving manual profiles untouched. Backtest on 21 Sep-20 Oct says directional flow rises from 2.9 to 10.7 $/M, benign flow falls from 2.5 to 0.15 $/M and total LR goes from $705k to $1,056k a month (+$406k, CI $215k-$566k), matching production on 97-99% of fills; caveats are no client behaviour change and FX/XAG not modelled. Root cause of weak Harsher: the MT5_87952662 flow fans out over ~48 suffixed IDs with per-ID buckets, and small tickets rarely pass the first 100 oz tier. Infinox asked for the full settings, got them in-thread, and said on 10-21 they will review and revert; no reply seen, and Isaac chased in-channel on 10-27 (14:19 UTC) asking for updates on implementing the LR changes.
+Next: Infinox Trading Ops to answer Isaac's 10-27 chase and revert; Mahi applies the rebased, schema-validated config only after their go-ahead.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1793110786085069
 
 ### echo-compass-access — Echo / Compass logins for new Infinox users
 status: open · since: 2026-10-26 · last: 2026-10-26
@@ -52,12 +58,6 @@ status: open · since: 2026-05-12 · last: 2026-10-26
 State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action), and MT5_3001867_VidaMarkets_80001857 went to No LL on 10-22 (William confirmed within 9 minutes). On 10-23 Trading Ops asked whether tags INF_MT5__87964749 / MT5_+_b_87964749 sit under a profile and to keep that client on No LR until further notice, and Andreas asked for MT5_87018814_Centroid_3623025 to go to Heavy LR (Kate: will do). On 10-26 Georgia asked whether MT5_87036249_ServiceCom is under any LR profile; Kate found it in none and unclassified, no action needed. Shyam notified that NZ support is on bank holiday Mon 10-26 (emergency cover; email support@ or phone). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
 Next: Georgia to review rule order and come back to Kate.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889 https://mahifx.slack.com/archives/C022S6NL82D/p1793035943021469
-
-### lr-redesign — B_CLIENTS XAUUSD LR redesign proposal
-status: open · since: 2026-10-20 · last: 2026-10-21
-State: After Trading Ops asked why Toxic XAUUSD Harsher earned little LR, Isaac proposed (10-21) a gold-only channel Burst cut from $8.5M to $2M, a $5/M cap on Default, and Volume Multiplier 5 on Signal Follow, Dynamic Broker, Dynamic Fast Hedge and Centroid, leaving manual profiles untouched. Backtest on 21 Sep-20 Oct says directional flow rises from 2.9 to 10.7 $/M, benign flow falls from 2.5 to 0.15 $/M and total LR goes from $705k to $1,056k a month (+$406k, CI $215k-$566k), matching production on 97-99% of fills; caveats are no client behaviour change and FX/XAG not modelled. Root cause of weak Harsher: the MT5_87952662 flow fans out over ~48 suffixed IDs with per-ID buckets, and small tickets rarely pass the first 100 oz tier. Infinox asked for the full settings, got them in-thread, and said on 10-21 they will review and revert.
-Next: Infinox Trading Ops to review and revert; Mahi applies the rebased, schema-validated config only after their go-ahead.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C01QGUXPKEY/p1792583411666839
 
 ### custom-xau-layers — Custom layered XAUUSD symbol (XAUUSD.l)
 status: open · since: 2026-10-19 · last: 2026-10-20
