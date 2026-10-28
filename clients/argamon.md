@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-10-27T07:19:22Z
+last_catchup: 2026-10-28T07:16:20Z
 status: active
 ---
 
@@ -24,6 +24,12 @@ status: active
 Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored. On 2026-10-27 Argamon asked for all FX on the new risk model; GTS HRP was pulled from NY pools and hedgers.
 
 ## Streams
+
+### hsbc-hrp-pricing — HSBC market data via Reactive not streaming
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: After HRP asked for an HSBC test trade, Tom enabled pricing through Reactive but Compass showed no HSBC prices (EURUSD included). Tom's settings are now reverted and he sees HSBC EURUSD in Reactive on ARGAMON_SW_HRP and ARGAMON_SW_HRP_2, confirmed as the accounts behind both market data and order sessions. Both HSBC sessions are still logged on in Compass, but the market data stream does not resume until reconnect, so the market data processes need an EOD restart.
+Next: Mahi (Cameron Hughes) to restart market data processes at EOD 2026-10-27 and confirm HSBC streams in Compass.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793105972763279 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793114025899389
 
 ### gts-hrp-nwm-mapping — GTS HRP removal and NWM mapping
 status: open · since: 2026-10-27 · last: 2026-10-27
