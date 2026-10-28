@@ -13,22 +13,22 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-27T07:20:02Z
+last_catchup: 2026-10-28T07:16:21Z
 status: active
 ---
 ## Now
 ATC is a matched-principal broker in a build phase: prop firm launch (own MT5/bridge), a Britannia prime arrangement for triangulation-arb flow, and a Seychelles entity migration.
 Biggest live risk is the FCA/compliance finding that non-USD P&L legs in Compass leave real unhedged LP exposure; the fix is a weekend flatten and reimport to USD.
 Compass moved to 26.4 on the 10-10/11 weekend, which switched on PSM widening/tightening overlays for ATC pricing. Volumes are well down on early 2026; ATC is sensitive to spreads, depth and fill quality on gold.
-On 2026-10-26 the Malik call was joined by an ATC compliance contact working with auditors, who is pressing on why Mahi-held LP cross positions (NZD etc.) dwarf client trades; Andrew treats it as an escalation. Malik also wants futures, XAU futures and crypto setups.
+On 2026-10-26 the Malik call was joined by an ATC compliance contact working with auditors, who is pressing on why Mahi-held LP cross positions (NZD etc.) dwarf client trades; Andrew treats it as an escalation. Malik also wants futures, XAU futures and crypto setups. As of 10-27 Mahi is reconciling LP positions with Malik before trading anything down.
 
 ## Streams
 
 ### lp-cross-positions — legacy cross positions at Finalto and auditor questions
-status: open · since: 2026-10-26 · last: 2026-10-26
-State: ATC's compliance contact, working with auditors, is not satisfied that Mahi-held positions (NZD crosses etc.) are far larger than client trades while ATC is a matched principal at FCA level; Malik escalated on 10-26 and Andrew raised it as higher priority, with regulators following up the position rec. Will's investigation found the Finalto crosses are legacy brokered inventory built Sep 2023 to Sep 2024 by brokering rules (whale rule, Dynamic Broker Toxic FX and Metals) plus LP switching and manual moves, never unwound because hedgers only trade USD pairs; NZDJPY is about 36M, the NZD crosses are 8-13x recent client volume, and gross $304.5M nets to about $96M with the same open risk. Five broker setups in the LDN config still send crosses to Finalto. Dave's claims of out-of-loop adjustments may cause divergence.
-Next: Stop brokering crosses; net the dead pairs into USD pairs at Finalto (Will: close the longs/shorts at minimum); pull the Oct 2023 and 2026-06-25 import files for auditors; Mahi to answer the auditors' original questions (Andrew asked Malik for them).
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793025346402589 https://mahifx.slack.com/archives/C046RNF64VD/p1793038694725539
+status: open · since: 2026-10-26 · last: 2026-10-27
+State: ATC's compliance contact, working with auditors, is not satisfied that Mahi-held positions (NZD crosses etc.) are far larger than client trades while ATC is a matched principal at FCA level; Andrew treats it as an escalation. Will's investigation found the Finalto crosses are legacy brokered inventory built Sep 2023 to Sep 2024 by brokering rules plus LP switching and manual moves, never unwound because hedgers only trade USD pairs (NZDJPY was 36M in Oct 2025 and is 36.24M now; Finalto netted crosses for ATC in Sep and Oct 2025). Mahi's swap brief (internal artifact, client PDF held back) prices holding at about $1.1k-$3.9k a night in swaps versus a one-off ~$1.5k-$3.9k spread to net to USD majors, but Compass fills leave ~276M base of unexplained residual, so nothing is traded until Finalto's own position statement reconciles pair by pair; any trade-down is at Finalto only (block price for the seven large crosses). On 10-27 Cameron Hughes asked Malik for position statements from every LP, client positions per MT server, Finalto's 25 Jun positions and swap sheets, and whether Finalto charges swap per pair or per net balance; Malik asked to action it on 10-28. ATC sent a dry-run (no rec) positions file for the 10pm run.
+Next: Malik to supply the LP statements and swap sheets (due ~10-28); Mahi to reconcile HOUSE@Finalto to Finalto pair by pair, then ask Finalto to repeat the netting; finish call content and sign off the report before it goes to ATC; pull the Oct 2023 and 2026-06-25 import files for auditors.
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793025346402589 https://mahifx.slack.com/archives/C046RNF64VD/p1793038694725539 https://mahifx.slack.com/archives/C046RNF64VD/p1793119687726319
 
 ### xbt-phantom-position — XBTUSD and DOW CFD positions differ from ATC's own rec
 status: open · since: 2026-10-26 · last: 2026-10-26
