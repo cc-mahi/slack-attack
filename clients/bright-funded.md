@@ -16,7 +16,7 @@ contacts:
   - {name: "Mio Knights", role: "BrightFunded — trading-surveillance and pricing requests", confidence: low}
   - {name: "Alfredo", role: "BrightFunded — joined channel 2026-10-07, raised GBPUSD Sunday-open abuse review", confidence: low}
   - {name: "Marcelo", role: "BrightFunded — picks up counterparty / free-account (F1KC) data pulls; surname unconfirmed", confidence: low}
-last_catchup: 2026-10-28T07:16:04Z
+last_catchup: 2026-10-29T07:19:02Z
 status: active
 retired_at: null
 retired_reason: null
