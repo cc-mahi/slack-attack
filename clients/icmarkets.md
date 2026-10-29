@@ -31,17 +31,23 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-10-28T07:16:04Z
+last_catchup: 2026-10-29T07:20:30Z
 status: active
 ---
 
 ## Now
 IC's crypto (XBTUSD-centred) B-book is Mahi's live product there, and the commercial relationship is in a renegotiation phase, so Mahi is deliberately front-footing value-add ("hero moments", price forensics) in client replies.
 Open: IC's CPI-news latency complaint (Oct 14) and its last-look request (actioned Oct 15, applies at the next restart), where the cause was an internal fallback rule that dropped LP1 as primary pricing source, plus PSM spread logic running in Beta ahead of a Price Forensics demo.
-Isaac Dann is primary quant lead on the account since 2026-10-08.
+Isaac Dann is primary quant lead on the account since 2026-10-08. The Toa pricer route is being retired: Tokyo feed moves to Mahi Central Thu/Fri, ahead of the Sat 31 Oct 10:00-11:00Z WAN cutover.
 Karam asked on Oct 21 about tag 8093117 (sharp short-duration markouts); Rory's reply offers IC a choice of keeping it B-booked or moving it to a risk-managed book, awaiting IC.
 
 ## Streams
+
+### toa-to-mahi-central — Move IC pricer feed from Toa to Mahi Central Tokyo
+status: open · since: 2026-10-28 · last: 2026-10-28
+State: Isaac is repointing TOA_PRICE_APN1 from the Toa box to the Mahi Central (MC) Tokyo box, same config, names and pricing model; XBTUSD and XETUSD are in the model, XBTUST, XETUST and USTUSD still being added (pricers finalised 28 Oct pending those three, Fabric finalised). Once switched, MC TKY counts as live production, with change-management messages to follow. Andrew and Liam preferred hot-hot first since Liam had called the env not prod-ready. James planned to kill the Toa route in the Sat 31 Oct 10:00-11:00Z window (single- to dual-redundant WAN cutover, change CHG-2610-HSJB); after discussion with Liam and Isaac the plan is to cut to the MC Tokyo-NYC feed Thu/Fri so Toa is out of use by Saturday. Wintermute is already primary, so this feed is for normalisation basis only. James can re-add a Toa backup route after the cutover (up to ~60 min downtime if moved) but plans to stop the Toa box once IC is off it.
+Next: Isaac to finish the last three instruments and cut over Thu/Fri; James to run the Sat window; change-management messages pending.
+Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793201975033619 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793206126488939
 
 ### tag-8093117-review — Review of IC tag 8093117 and B-book vs risk-managed option
 status: open · since: 2026-10-21 · last: 2026-10-21
@@ -91,17 +97,16 @@ State: IC regularly asks Mahi to review specific accounts or add tags to the def
 Next: Harry to say whether 6165669 should get a custom counterparty LR profile (offered 2026-09-10, no reply seen).
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1789037279787749 https://mahifx.slack.com/archives/C07UBJNUWG1/p1789002814143249 https://mahifx.slack.com/archives/C07UBJNUWG1/p1788788753748429 https://mahifx.slack.com/archives/C07UBJNUWG1/p1790932086942509
 
-### lr-last-look-tuning — Liquidity reduction, WSS caps and last-look policy
-status: watching · since: 2026-08-13 · last: 2026-08-26
-State: Mid-August the WSS cap was raised to 125 and a notional ladder for LR proposed (Isaac, Aug 18-20); after IC's challenge on tiers Pavlos set the channel LR cap on Aug 21 to 500 $/M for tickets up to ~$50k and 1000 above (Isaac had proposed 300), agreed a small global surplus cut (250k to 200k, to monitor) and actioned the same day; Pavlos also asked for TOB spread 5 on Aug 21 (actioned). Rare-event spread protection (cap $11.50/side) was pushed to Beta on Aug 25, Pavlos said to implement it on Aug 26 and Isaac confirmed it live in production. Xenofon's Aug 24 $50 spread blip was liquidity depletion capped by the $500/M channel limit. This stream's current driver is the news-event last look in cpi-news-latency.
-Next: none pending beyond cpi-news-latency.
-Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1787222735783359 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787313985372619 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787734375576109
 
 ### si-hedging-clusters — Cluster LR groups and XBTUSD SI hedging
-status: watching · since: 2026-08-20 · last: 2026-08-26
+status: open · since: 2026-08-20 · last: 2026-08-26
 State: Pavlos grouped the BTCUSD cluster list into 3 clusters with shared liquidity pools and Signal Follow settings (2026-08-24) and Cameron Hughes actioned it the same day, after Cooney's 6 new BO groups on Aug 21 (cluster LR cut from 100k/1000 to 25k/3000, as 100k/1000 was more generous than the 75k/3000 default); cluster flow is sharp (about 10-20 $/M captured). Cooney set up SI hedging for XBTUSD: hold 5m for 2h, hard limit 20m, working out of excess via passive OKX orders (OKX moved HK to Tokyo). OKX test orders worked on Aug 21 after a gateway fix and Isaac declared it ready; it remained on B Book because IC had not confirmed the switch (Isaac, Aug 24; "throw the switch").
-Next: IC (Pavlos) to approve switching SI on.
+Next: IC (Pavlos) to approve switching SI on; no reply since 2026-08-26, and Rory's Oct 21 risk-managed option for tag 8093117 may overlap.
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1787327600173079 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787573389998509 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787731325918319
+### lr-last-look-tuning — Liquidity reduction, WSS caps and last-look policy
+status: closed · since: 2026-08-13 · last: 2026-08-26 · closed: 2026-10-29
+State: Mid-August the WSS cap was raised to 125 and a notional ladder for LR proposed (Isaac, Aug 18-20); after IC's challenge on tiers Pavlos set the channel LR cap on Aug 21 to 500 $/M for tickets up to ~$50k and 1000 above (Isaac had proposed 300), agreed a small global surplus cut (250k to 200k, to monitor) and actioned the same day; Pavlos also asked for TOB spread 5 on Aug 21 (actioned). Rare-event spread protection (cap $11.50/side) was pushed to Beta on Aug 25, Pavlos said to implement it on Aug 26 and Isaac confirmed it live in production. Xenofon's Aug 24 $50 spread blip was liquidity depletion capped by the $500/M channel limit. No activity since 2026-08-26; assumed settled, with the current driver now the news-event last look in cpi-news-latency.
+Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1787222735783359 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787313985372619 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787734375576109
 
 ### cnh-connection-audit — IC connection cleanup and China crypto sessions
 status: closed · since: 2026-09-14 · last: 2026-09-14 · closed: 2026-10-15
