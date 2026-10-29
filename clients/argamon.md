@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-10-28T07:16:20Z
+last_catchup: 2026-10-29T07:19:16Z
 status: active
 ---
 
@@ -50,10 +50,10 @@ Next: Nathan to find why the LPs sent no acks (not seen posted).
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792644401138689 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792646373306319
 
 ### centroid-ny-to-pxm — Centroid bridge IP change and NY PXM migration
-status: open · since: 2026-06-09 · last: 2026-10-22
-State: Argamon NY moved its bridge from Centroid to PXM on the 2026-09-26/27 weekend (ZD 23532; retail dist sessions connected 2026-09-27). The Centroid bridge IP has changed again, to 192.229.22.160 (Tom McLean, 2026-10-21): it sits outside the 192.229.23.x range the Beeks cross-connect route covers, so Centroid must advertise it over the cross-connect. Shyam raised NOCINT-856420 with Beeks and ZD 23672. Tom has no firm date for the move to the new IP (it was due last month). Earlier: Wintermute queried 2026-09-09 whether altcrypto connectivity via Mahi was down; Kate confirmed the decommission was agreed.
-Next: Argamon (Tom) to give the Centroid move date; Shyam/Beeks to confirm the route change for 192.229.22.160.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719
+status: open · since: 2026-06-09 · last: 2026-10-28
+State: Argamon NY moved its bridge from Centroid to PXM on the 2026-09-26/27 weekend (ZD 23532; retail dist sessions connected 2026-09-27). The Centroid bridge IP has changed again, to 192.229.22.160 (Tom McLean, 2026-10-21): it sits outside the 192.229.23.x range the Beeks cross-connect route covers, so Centroid must advertise it over the cross-connect. Shyam raised NOCINT-856420 with Beeks and ZD 23672. Tom has no firm date for the move to the new IP (it was due last month). Mahi infra change CHG-2610-HSJB (approved 2026-10-28): Tokyo link cutover on Sat 2026-10-31 10:00-11:00Z will drop Centroid FIX sessions for up to 60 min. Earlier: Wintermute queried 2026-09-09 whether altcrypto connectivity via Mahi was down; Kate confirmed the decommission was agreed.
+Next: Argamon (Tom) to give the Centroid move date; Shyam/Beeks to confirm the route change for 192.229.22.160; Argamon to be aware of the 2026-10-31 Centroid session drop.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1781000635571119 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793206534345309
 
 ### lucera-hard-timeout — Lucera LD fill latency and hard timeout
 status: open · since: 2026-10-18 · last: 2026-10-19
