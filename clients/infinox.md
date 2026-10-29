@@ -18,7 +18,7 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-28T07:17:02Z
+last_catchup: 2026-10-29T07:19:59Z
 status: active
 ---
 
@@ -36,16 +36,16 @@ Next: Infinox Trading Ops to answer Isaac's 10-27 chase and revert; Mahi applies
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1793110786085069
 
 ### echo-compass-access — Echo / Compass logins for new Infinox users
-status: open · since: 2026-10-26 · last: 2026-10-26
-State: Sadiq asked for Echo access for Dmitrii Ponomarev and Alain Saad; Kate replied Echo pages are now integrated into Compass, linked the yield profiles and price forensics screens, and noted neither user has a Compass login yet.
-Next: Mahi to create Compass logins for the two users; Sadiq to say what they want to look into.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792999339513029 https://mahifx.slack.com/archives/C022S6NL82D/p1792999695579759
+status: open · since: 2026-10-26 · last: 2026-10-28
+State: On 10-28 Trading Ops asked for Compass access for a further user (Andreas Sofocleous); Isaac found a user already exists and Trading Ops asked for a password-reset link by email. Earlier, Sadiq asked for Echo access for Dmitrii Ponomarev and Alain Saad; Kate replied Echo pages are now integrated into Compass, linked the yield profiles and price forensics screens, and noted neither user has a Compass login yet.
+Next: Mahi to send the password-reset link and create Compass logins for the two 10-26 users; Sadiq to say what they want to look into.
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792999339513029 https://mahifx.slack.com/archives/C022S6NL82D/p1793197137096099
 
 ### fill-tick-queries — Execution, slippage and raw-tick requests
-status: open · since: 2026-07-08 · last: 2026-10-26
-State: Infinox periodically queries fills and asks for raw ticks (XAUUSD 09-04, 07-15; EURUSD 10-09 on 10-13). On 10-23 Andreas reported an MT5 pricing issue 13:10:12-13:10:28 GMT+3 and Isaac supplied the XAUUSD Price Forensics tick CSV. On 10-26 Andreas reported many XAUUSD spikes (06:23-06:24 GMT+3 and 04:10-04:11 GMT) and asked for ticks; Shyam said Mahi's XAUUSD pricing looked clean at both times and no spikes were visible, ticks were being pulled, and Andreas replied he needs them to escalate to Infinox's bridge team. Rory delivered the EURUSD ticks (full day, then re-cut to 21:00 UTC 10-08..20:59 UTC 10-09) and confirmed bid_price_0/offer_price_0 is TOB. Will Carter noted internally on 10-15 that the reason behind the request is unknown and the team should not be blindsided on pricing; he has discussed it with Rory. Recent explainers: last-look start-vs-end fill rule (09-08), default LR profile burst mechanics for MT5_plain_b_87997401 (10-08).
+status: open · since: 2026-07-08 · last: 2026-10-28
+State: On 10-28 Trading Ops asked which execution profile suits XAUUSDmini at 0.1-0.2 lots and what the Small Size Fast 10,000 Base Notional means; Isaac explained the rule applies only to orders of USD 10k or less, so 0.1-0.2 lots (~40-80k) hit mid size fast if under 50k, else the catch-all rule, and Trading Ops accepted. William also confirmed Mahi does not execute tag VIDA_MT5__21246122 (no delay). Infinox periodically queries fills and asks for raw ticks (XAUUSD 09-04, 07-15; EURUSD 10-09 on 10-13). On 10-23 Andreas reported an MT5 pricing issue 13:10:12-13:10:28 GMT+3 and Isaac supplied the XAUUSD Price Forensics tick CSV. On 10-26 Andreas reported many XAUUSD spikes (06:23-06:24 GMT+3 and 04:10-04:11 GMT) and asked for ticks; Shyam said Mahi's XAUUSD pricing looked clean at both times and no spikes were visible, ticks were being pulled, and Andreas replied he needs them to escalate to Infinox's bridge team. Rory delivered the EURUSD ticks (full day, then re-cut to 21:00 UTC 10-08..20:59 UTC 10-09) and confirmed bid_price_0/offer_price_0 is TOB. Will Carter noted internally on 10-15 that the reason behind the request is unknown and the team should not be blindsided on pricing; he has discussed it with Rory. Recent explainers: last-look start-vs-end fill rule (09-08), default LR profile burst mechanics for MT5_plain_b_87997401 (10-08).
 Next: Mahi to deliver the 10-26 XAUUSD ticks to Andreas; still unknown why Infinox wanted 10-09 EURUSD ticks (26.4 upgrade impact?).
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1791886436475979 https://mahifx.slack.com/archives/C022S6NL82D/p1792995135978029
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1791886436475979 https://mahifx.slack.com/archives/C022S6NL82D/p1793195881447619
 
 ### xau-x3-gearing — XAUUSDx3 / Gold3x pricing and abuse
 status: open · since: 2026-07-21 · last: 2026-10-26
@@ -54,10 +54,10 @@ Next: CH to confirm whether Gold3x is unfrozen in PXM; Mahi to ship the engine f
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784673730662679 https://mahifx.slack.com/archives/C022S6NL82D/p1793003403134579
 
 ### lr-profile-ops — Routine LR / execution-profile moves
-status: open · since: 2026-05-12 · last: 2026-10-26
-State: Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action), and MT5_3001867_VidaMarkets_80001857 went to No LL on 10-22 (William confirmed within 9 minutes). On 10-23 Trading Ops asked whether tags INF_MT5__87964749 / MT5_+_b_87964749 sit under a profile and to keep that client on No LR until further notice, and Andreas asked for MT5_87018814_Centroid_3623025 to go to Heavy LR (Kate: will do). On 10-26 Georgia asked whether MT5_87036249_ServiceCom is under any LR profile; Kate found it in none and unclassified, no action needed. Shyam notified that NZ support is on bank holiday Mon 10-26 (emergency cover; email support@ or phone). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
+status: open · since: 2026-05-12 · last: 2026-10-28
+State: On 10-28 Andreas Kazelas asked for three MT5_87018814_Centroid accounts to go on Heavy LR and Kate said she would do it. Near-daily requests from Trading Ops to move counterparties between Heavy, Extra Heavy, Medium, Short LL, No LL and Toxic XAUUSD profiles, normally actioned within an hour or so by Isaac, Kate, Rory, William, Shyam, Nathan or Daria. On 10-21 two Centroid accounts went to Heavy LR and the 16 MT5_87952662_* accounts moved from Heavy to Extra Heavy LR (Isaac confirmed 19:38 BST) after Isaac modelled Harsher at 26 $/M, Heavy at 59 and Extra Heavy at 141 on their 30-day flow; one more Centroid account was added to Toxic XAUUSD on 10-22 (Isaac: will action), and MT5_3001867_VidaMarkets_80001857 went to No LL on 10-22 (William confirmed within 9 minutes). On 10-23 Trading Ops asked whether tags INF_MT5__87964749 / MT5_+_b_87964749 sit under a profile and to keep that client on No LR until further notice, and Andreas asked for MT5_87018814_Centroid_3623025 to go to Heavy LR (Kate: will do). On 10-26 Georgia asked whether MT5_87036249_ServiceCom is under any LR profile; Kate found it in none and unclassified, no action needed. Shyam notified that NZ support is on bank holiday Mon 10-26 (emergency cover; email support@ or phone). Medium-vs-Heavy rule order (10-15): rules apply top-down, Kate recommends exclusions first, then harshest to least harsh. Extra Heavy LR (05-21, CH request) and Gold3X profile exist.
 Next: Georgia to review rule order and come back to Kate.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889 https://mahifx.slack.com/archives/C022S6NL82D/p1793035943021469
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779345609246989 https://mahifx.slack.com/archives/C022S6NL82D/p1792578729447559 https://mahifx.slack.com/archives/C022S6NL82D/p1792649005718889 https://mahifx.slack.com/archives/C022S6NL82D/p1793173780315089
 
 ### custom-xau-layers — Custom layered XAUUSD symbol (XAUUSD.l)
 status: open · since: 2026-10-19 · last: 2026-10-20
