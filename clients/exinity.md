@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-28T07:17:01Z
+last_catchup: 2026-10-29T07:19:17Z
 status: active
 ---
 
@@ -32,6 +32,12 @@ Open on Mahi: re-setting per-book PnL-drop alerts, XAU position realignment usin
 Compass 26.4 went on over the 2026-10-24/25 weekend; signalProcessFI1 on trading-1 overflowed twice on 2026-10-26 (fix rolled out that evening); weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
+
+### strd-feed-drops — STRD connector and pricing drop-outs
+status: open · since: 2026-10-28 · last: 2026-10-29
+State: On 2026-10-28 ~21:19Z Matt reported no USDJPY pricing on the Mahi STRD connector; Shyam checked and Matt withdrew it within a minute (symbol ticking). At 02:05Z on 2026-10-29 Samuel reported errors (screenshot, not readable); Nathan said all was good and Mahi's team was already bringing processes up, but the cause is still under investigation.
+Next: Mahi (Nathan) to report the cause of the 2026-10-29 errors to Samuel.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793222374723979 https://mahifx.slack.com/archives/C0456LSHQQK/p1793239541468319
 
 ### pricing-spikes-widening — Spiky and wide pricing complaints
 status: open · since: 2026-09-01 · last: 2026-10-27
