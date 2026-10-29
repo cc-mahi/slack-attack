@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-28T07:19:50Z
+last_catchup: 2026-10-29T07:21:39Z
 status: active
 ---
 
@@ -47,10 +47,10 @@ Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787462723096659 https://ma
 
 
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
-status: open · since: 2026-07-21 · last: 2026-10-27
-State: On the 10-27 call Argamon said they have Centroid failover for LP aggregation and will confirm it is still in place. James says Centroid has been poor for Argamon and Elan has spent months negotiating a PrimeXM deal; James pitched the Mahi bridge but Argamon needs margin and reporting, which Mahi lacks (Andrew Morgan asked about the business case). The Argamon NY Centroid bridge was migrated to a new IP over the weekend of 09-26/27 (Zendesk 23532; Beeks confirmed the route covers the range; retail dist sessions reconnected 09-27). Toa's crypto session to PXM LD needed a sequence reset on 09-20. On 10-08 a PXM price-improvement mismatch (client filled at 4107.19, Toa at 4107.18) was traced to PXM's default of keeping price improvement; Levi will configure PXM to pass through all slippage and observe. On 10-21 Tom McLean said the relevant Centroid IP has changed again to 192.229.22.160, outside the 192.229.23.x range the Beeks cross-connect route covers; Shyam raised NOCINT-856420 with Beeks and ZD 23672, and Centroid must advertise the new IP over the cross-connect. Argamon has no date for the Centroid move yet (it was due last month). The Wintermute/Centroid-direct question on 09-09 was an expected decommissioned connection.
-Next: Levi to apply the PXM passthrough setting and report; Beeks to confirm cross-connect changes for the new Centroid IP; Tom to supply a Centroid move date.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339
+status: open · since: 2026-07-21 · last: 2026-10-28
+State: On the 10-27 call Argamon said they have Centroid failover for LP aggregation and will confirm it is still in place. James says Centroid has been poor for Argamon and Elan has spent months negotiating a PrimeXM deal; James pitched the Mahi bridge but Argamon needs margin and reporting, which Mahi lacks (Andrew Morgan asked about the business case). The Argamon NY Centroid bridge was migrated to a new IP over the weekend of 09-26/27 (Zendesk 23532; Beeks confirmed the route covers the range; retail dist sessions reconnected 09-27). Toa's crypto session to PXM LD needed a sequence reset on 09-20. On 10-08 a PXM price-improvement mismatch (client filled at 4107.19, Toa at 4107.18) was traced to PXM's default of keeping price improvement; Levi will configure PXM to pass through all slippage and observe. On 10-21 Tom McLean said the relevant Centroid IP has changed again to 192.229.22.160, outside the 192.229.23.x range the Beeks cross-connect route covers; Shyam raised NOCINT-856420 with Beeks and ZD 23672, and Centroid must advertise the new IP over the cross-connect. Argamon has no date for the Centroid move yet (it was due last month). A change record (CHG-2610-HSJB, approved 10-28) covers a Tokyo link cutover on Sat 31 Oct 10:00-11:00Z that will drop Centroid FIX sessions for up to 60 minutes. The Wintermute/Centroid-direct question on 09-09 was an expected decommissioned connection.
+Next: expect Centroid FIX drops on 10-31 10:00-11:00Z; Levi to apply the PXM passthrough setting and report; Beeks to confirm cross-connect changes for the new Centroid IP; Tom to supply a Centroid move date.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793206534345309
 
 ### retail-leverage-risk — Argamon wants 500:1 leverage and to hold more risk
 status: open · since: 2026-08-31 · last: 2026-10-27
