@@ -16,7 +16,7 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-10-28T07:17:57Z
+last_catchup: 2026-10-29T07:19:59Z
 status: active
 ---
 
@@ -30,6 +30,12 @@ status: open · since: 2026-10-26 · last: 2026-10-28
 State: At 00:57 UTC on 26 Oct Jad posted a screenshot of an error when logging in (page not visible); Shyam replied at 00:59 that he is checking. On 28 Oct 06:30 UTC Justin told Jad he is pushing a fix soon, with the dashboard down for a couple of minutes and no client or trading impact (presumably this issue; not stated). No confirmation from Jad yet.
 Next: Confirm Jad can log in after Justin's fix.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792976237806039 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793169011218019
+
+### hft-fx-pricing — HFT channel FX spreads and pool coverage
+status: open · since: 2026-10-20 · last: 2026-10-28
+State: On 20 Oct Ali saw FX spreads on the .HFT symbols far wider than the LP feeds (about 12 cents on EURUSD) because LIQUIDITY_POOL_HFT carried only XAUUSD, so other instruments fell back to the continuity pool at $50/M markup; markup was cut to $10/M then $0 at Moe's request. On 21 Oct Ali reported FX HFT spreads at zero versus a spread on the normal feed and asked to construct the HFT price like the normal ones. Resolved by design on 28 Oct: Kate set up a dedicated pricing model CLIENT_PRICE_HFT_LDN (same as the standard non-skewed insti model, but benchmarking spreads on SCOPE_TOXIC_KL instead of SCOPE_KL) with base spreads editable in Compass spread-config; Ali confirmed they can now construct the price from it. After the 28 Oct EOD restarts the HFT connections publish this pricing model instead of the liquidity pool (distribution channels edited 14:17-14:20 and 21:02-21:04 UTC; the restart detector flagged CorePrice LIQUIDITY_POOL_HFT_LDN != CLIENT_PRICE_HFT_LDN as expected). Ali edited pricing.spreadprofile seven times on 29 Oct about 07:14-07:16 UTC (content not visible). Ali's markup versus price-model spread-config question was not explicitly answered but the new model covers spread control.
+Next: Watch HFT FX spreads after the switch to CLIENT_PRICE_HFT_LDN; add remaining instruments to the HFT pool if still needed.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792484649892479 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793196612192619
 
 ### xau-open-rejects — XAUUSD market-open rejects on B book
 status: open · since: 2026-10-23 · last: 2026-10-23
@@ -48,12 +54,6 @@ status: open · since: 2026-09-21 · last: 2026-10-27
 State: A 21 Sep cancel burst came from FOK/IOC MinQty handling (fixed with reference.marketSupport.FOK) and led to Kama moving all A_CLIENTS to Broker First (29 Sep). HFT flow got its own book and hedgers (30 Sep) with internalisation on the toxic HFT pool; $20/M markup on HFT and $10/M on A Book internalised flow was agreed on the 1 Oct call and set up via MultiChannelConfig on 2 Oct (a type=list vs ArrayList misconfig caused stuck orders that day). On 30 Sep Kate asked Kama to turn off PXM sweep/boost so each A-book order arrives whole and Ali asked to switch to single IOC (Kate: IOC or FOK is fine); Ali was confirming with PXM and no outcome is visible. The automated classifier moves clients between broker/signal-follow and catch-all, so catch-all history on a tag is expected (William, 21 Sep). On 15 Oct Kama asked for Broker (not Broker First) over high-impact news and said they are happy to switch manually; Moe set twilight and roll flow to Broker. Kate flagged that execution rules cannot be day-specific. Kate answered that a bare '*' in counterparty criteria matches none (rule will not fire); to apply to every counterparty, remove the criteria altogether. On 21 Oct Kate explained FOK orders arriving 21:00-23:00 UTC expired because the HFT channel brokers everything to the HFT pool and none of its LPs were configured to accept FOK; Moe said all LPs accept FOK except Fusion (a crypto LP), so Kate set reference.marketSupport.FOK across the board. Kama staff edited distribution.executionRules three times on 22 Oct (13:13, 14:54, 15:14 BST; config-updates bot), content not visible. Moe edited distribution.executionRules nine more times on 26 Oct (about 10:04-10:08 UTC) and five more on 27 Oct (about 10:59-11:00 UTC), content not visible.
 Next: Mahi to confirm whether news criteria can be added to execution rules.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0C1L6G37HN/p1793098819391439
-
-### hft-fx-pricing — HFT channel FX spreads and pool coverage
-status: open · since: 2026-10-20 · last: 2026-10-26
-State: On 26 Oct Kate noted infra was deploying pricerHFT1/2. On 20 Oct Ali saw FX spreads on the .HFT symbols far wider than the LP feeds (about 12 cents on EURUSD). Cause: LIQUIDITY_POOL_HFT carries only XAUUSD, so every other instrument fell back to the continuity pool, which was published with $50/M markup. Isaac and Kate cut continuity markup to $10/M, then to $0 at Moe's request; the full instrument list goes into the HFT pool at the EOD restart. On 21 Oct Ali reported FX HFT spreads now at zero while the normal feed has spread, and asked to construct the HFT price the same way as the normal ones; Isaac asked whether he wants the same price on both feeds. Markup lives per channel in the channel explorer (Internal, Brokering, Continuity, per instrument and zone), not on the pool. Ali's question on how channel markup differs from the price model's spread config is unanswered.
-Next: Ali to answer Isaac on same price for HFT and non-HFT; Kate/Isaac to answer Ali's markup vs spread-config question and add the remaining instruments to the HFT pool.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792484649892479 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792566224511629 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793038745379979
 
 ### eurgbp-rejects — Market rejections on EURGBP
 status: open · since: 2026-10-21 · last: 2026-10-21
