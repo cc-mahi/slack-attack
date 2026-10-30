@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-10-29T07:19:02Z
+last_catchup: 2026-10-30T07:20:58Z
 status: active
 ---
 
@@ -22,6 +22,12 @@ status: active
 Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, awaiting Base's IP for whitelisting). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
 
 ## Streams
+
+### partial-ab-book-split — Partial A / partial B book risk split by counterparty tag
+status: open · since: 2026-10-29 · last: 2026-10-29
+State: Kate Stagg noted on 2026-10-29 that Base wants a partly-B-book, partly-A-book setup: Base would supply the counterparty tags and Mahi would risk-split a percentage to the Compass book. Only a one-line internal note so far; no client-channel request, percentages or timing seen.
+Next: Base to supply counterparty tags and the split percentage; Mahi to configure the risk split.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1793286795594799
 
 ### lmax2-offsystem-fills — LMAX_2 fills placed outside Compass, positions out of sync
 status: open · since: 2026-10-21 · last: 2026-10-22
@@ -86,11 +92,6 @@ Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359 https://ma
 status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
 State: On 2026-10-16 Base reported disconnections and no Compass login. Liam Cordelle announced a networking incident across Beeks' whole LD campus, saw recovery by 11:46 BST and confirmed resolved at 12:29 BST.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792143013486049 https://mahifx.slack.com/archives/C09D8V41JAG/p1792150197114369
-
-### mt5-bridge-licence — MT5 Bridge licence renewal on Base backup server
-status: closed · since: 2026-10-08 · last: 2026-10-08 · closed: 2026-10-15
-State: Arun Patel sent a new licence; Yuliya Dziurayeva (FastMT) confirmed it installed successfully the same day.
-Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791450091502369 https://mahifx.slack.com/archives/C09D8V41JAG/p1791465228493509
 
 ## Arc
 - 2026-04 — Base Markets onboarding Tegis flow; Tegis/Centroid FIX integration begins
