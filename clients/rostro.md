@@ -21,7 +21,7 @@ contacts:
   - {name: "Manuel de Cara", role: "Rostro: Pulse/Athena data access", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro; commercial counterpart (described internally as basically co-founder)"}
   - {name: "Michael Ayres", role: "senior Rostro contact meeting David Cooney 16 Oct; named replacement after Lochlan left", confidence: low}
-last_catchup: 2026-10-29T07:21:39Z
+last_catchup: 2026-10-30T07:21:41Z
 status: active
 ---
 
@@ -37,10 +37,10 @@ Next: send settlement details to Nicole Vivian for the contract draft; prepare f
 Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1787135711511859 https://mahifx.slack.com/archives/C08ALS66EDC/p1789481310304399 https://mahifx.slack.com/archives/C08ALS66EDC/p1792485246173679 https://mahifx.slack.com/archives/C08ALS66EDC/p1793204791395779
 
 ### cmc-futs-dropouts — CMC as sole futures LP: recurring dropouts and rejects
-status: open · since: 2026-08-26 · last: 2026-10-28
-State: CMC is the only LP in the pool pricing gold futures (and XAUFUT, indices), so each dropout (23 single-tick XAUFUT-Z withdrawals on 25 Aug, 11 of 233 rejects on tag 148 on 5 Oct) leaves no price or fill. On 9 Sep DAXFUT-U showed flat CMC prices with quotes re-sent every 4-10s, which PXM and Scope could not see as gaps; Kate attributed it to CMC and promised a CMC-normalisation backtest (none seen); the 14 Oct freeze is the same failure mode at scale. The 18 Sep NDXFUT-U non-fill was contract expiry, not a dropout (Kate flattened the position in Compass at Alex's request). On 5 Oct Kate said broker-first only helps if Jump joins the XAUFUT reference price, then the pool (caveat: Jump reprices ahead of CMC in fast markets); Rostro has not decided, Riz is "not optimistic on CMC". On 14 Oct CMC filled 800 of a 1,000-lot XAUFUT-Z sweep then expired 200 and all retries despite showing size; Scope will raise it with CMC. On 15 Oct Rostro moved most futures volume away from Jump and expected to switch them off, so Kate removed Jump from the futures hedgers' config and bounced them; Alex then saw NQ hedges still going to a backup LP, which was a wrong PXM mapping on the new NDXFUT-Z contract (no NDXFUT flow reached Mahi since the roll; DOW, DAX and SPX futures were fine). On 28 Oct Rahul asked for NDXFUT-Z's minimum size and volume step; Shyam Hari answered 0.2 min with 0.2 step on Mahi's side.
+status: open · since: 2026-08-26 · last: 2026-10-30
+State: CMC is the only LP in the pool pricing gold futures (and XAUFUT, indices), so each dropout (23 single-tick XAUFUT-Z withdrawals on 25 Aug, 11 of 233 rejects on tag 148 on 5 Oct) leaves no price or fill. On 9 Sep DAXFUT-U showed flat CMC prices with quotes re-sent every 4-10s, which PXM and Scope could not see as gaps; Kate attributed it to CMC and promised a CMC-normalisation backtest (none seen); the 14 Oct freeze is the same failure mode at scale. The 18 Sep NDXFUT-U non-fill was contract expiry, not a dropout (Kate flattened the position in Compass at Alex's request). On 5 Oct Kate said broker-first only helps if Jump joins the XAUFUT reference price, then the pool (caveat: Jump reprices ahead of CMC in fast markets); Rostro has not decided, Riz is "not optimistic on CMC". On 14 Oct CMC filled 800 of a 1,000-lot XAUFUT-Z sweep then expired 200 and all retries despite showing size; Scope will raise it with CMC. On 15 Oct Rostro moved most futures volume away from Jump and expected to switch them off, so Kate removed Jump from the futures hedgers' config and bounced them; Alex then saw NQ hedges still going to a backup LP, which was a wrong PXM mapping on the new NDXFUT-Z contract (no NDXFUT flow reached Mahi since the roll; DOW, DAX and SPX futures were fine). On 28 Oct Rahul asked for NDXFUT-Z's minimum size and volume step; Shyam Hari answered 0.2 min with 0.2 step on Mahi's side. On 29 Oct CMC stopped quoting NDXUSD for 15s (20:01:00-20:01:15 UTC), so CLIENT_PRICE_INV_LDN and CONTINUITY_POOL_LDN went indicative and an A_CLIENTS NDX/USD sell was rejected LIQUIDITY_VIOLATION; Nathan Burch explained it to Rahul in thread (price forensics link provided).
 Next: Rostro decision on adding Jump to XAUFUT reference price and pool (Jump is being switched off on Rostro's side, so check this still stands); Alex to fix the NDXFUT-Z mapping in PXM; Kate's CMC-normalisation backtest.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787733565831759 https://mahifx.slack.com/archives/C08AQKRU953/p1791970984817549 https://mahifx.slack.com/archives/C08AQKRU953/p1792078098426429 https://mahifx.slack.com/archives/C08AQKRU953/p1793214834840619
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787733565831759 https://mahifx.slack.com/archives/C08AQKRU953/p1791970984817549 https://mahifx.slack.com/archives/C08AQKRU953/p1792078098426429 https://mahifx.slack.com/archives/C08AQKRU953/p1793319660284079
 
 ### pxm-connections — PrimeXM connections, LP list and feeds
 status: open · since: 2026-09-04 · last: 2026-10-27
@@ -141,16 +141,6 @@ Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1787649194353099 https://ma
 status: watching · since: 2026-08-17 · last: 2026-09-01
 State: ~$350k client-side loss from an oil reference source change applied beyond intended scope; Mahi's stated position is no goodwill. RCA was prepared 17-24 Aug as a separate email from commercials; Sam Steele "wasn't super happy with our accountability" on it but did not press (1 Sep). Delivery confirmation not seen in channel. The 14 Oct CMC freeze is being treated against this precedent.
 Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1786988498348909 https://mahifx.slack.com/archives/C08ALS66EDC/p1788273338625779
-
-### news-hedging — News-event hedging, single-LP risk (NFP 4 Sep)
-status: closed · since: 2026-09-04 · last: 2026-09-17 · closed: 2026-10-15
-State: 4 Sep NFP wiped about $90k of SI P&L because both hedgers hedge only to IC Markets (rev-share) and hit cancels/rejects. News rules were set on both hedgers after calls on 8 and 16 Sep; on 17 Sep, at Rostro's request, execution markets reverted to IC-only with reduced slippage. MWMS news widening for XAUUSD approved 9 Sep. No open items seen.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1788526116336149 https://mahifx.slack.com/archives/C08AQKRU953/p1788946405404699 https://mahifx.slack.com/archives/C08ALS66EDC/p1789657801727309
-
-### vip-book-shape — VIP order-book tier merging (EURUSD/USDJPY/XAGUSD)
-status: closed · since: 2026-08-17 · last: 2026-08-21 · closed: 2026-10-15
-State: Tiers merged around the roll when BMSL and wide-spread suppression caps collapsed layers; Mahi changed BMSL multipliers and VWAP spreads (19-20 Aug). Alex reported it still happening 21 Aug; no activity since; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787136862033619 https://mahifx.slack.com/archives/C08AQKRU953/p1787309561700819
 
 ## Arc
 - 2025 — Rostro live on Compass (per Kate, 2026-09-14, sanity check disabled before go-live)
