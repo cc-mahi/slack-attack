@@ -12,16 +12,34 @@ channels:
 contacts:
   - {name: "Gerard McConnell", role: "Alpha Capital, routing / platform / prop-product contact", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-10-29T07:19:02Z
+last_catchup: 2026-10-30T07:19:46Z
 status: active
 ---
 
 ## Now
 Prop client mid-build: Alpha is moving to its own broker and Alpha Trader on a DX Trade backend, so routing and platform-scope asks are arriving via Gerard McConnell.
 Open this week: confirm Mahi routing for the new MT5 demo groups before Gerard goes live, and the TempDXPrices FIX bad-credential spam.
-Billing: July cleared, August arrears still overdue, September bill due 20 Oct; Nicole Vivian wants payments before extending product offering.
+Billing: Alpha still 4 invoices behind (2026-10-29); Mahi is holding the DX direct connection until bills are settled, and Andrew Morgan is preparing a business review plus a tighter-spread proposal alongside the collections chase.
 
 ## Streams
+
+### spread-proposal — Business review and tighter-spread proposal for Alpha
+status: open · since: 2026-10-30 · last: 2026-10-30
+State: Andrew Morgan is pairing the collections chase with a business review (earned $/M from LR, skew, classifier, PSM; competitiveness; cost-out) and Alpha is the first candidate. First-cut proposal: PSM tightening in quiet periods (PSM not running at Alpha today) with skew and classifier keeping flow priced, plus the DX direct connection replacing T4B. Alpha's gold published spread is flat and sits at the top of the network band while paid spread is typical. Must be proven first with a prop challenge sim on Alpha's real trades; internal brief to come before anything goes to Alpha.
+Next: Prop challenge sim; internal brief from Andrew.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1793319742085789 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1793320150310079
+
+### invoices-arrears — ACG Markets and ACG Broker invoices overdue
+status: open · since: 2026-09-08 · last: 2026-10-29
+State: As of 2026-10-29 Alpha is still 4 invoices behind; Bonnie Cassidy asked David Cooney to ask George when they will be paid and David said he will message George. Earlier: Alpha futures business hit by Ninja Trader cancelling on a day's notice; challenge sales fell sharply and Alpha goes live with its own broker 21 Sept. George (Alpha) promised arrears cleared by end of September; as of 2026-10-06 Nicole Vivian confirmed 83k and 6k received clearing July, August still overdue, September bill not due until 20 Oct. Outstanding on 2026-10-05 was ACG Markets 249,815 and ACG Broker 19,632 before those payments. Nicole wants to see payments before extending product offering.
+Next: David Cooney to chase George on payment timing.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1788856330954559 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790720761202929 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1793285424733629
+
+### dx-platform-scope — Alpha Trader / DX Trade platform scope; direct bridge routing off T4B
+status: open · since: 2026-08-26 · last: 2026-10-29
+State: Gerard says Alpha Trader (own platform) is being built, temporarily 3-6 months on a DX Trade backend; Mahi has no direct DX Trade connection yet. Long-term goal is MT5 native, cTrader, Alpha Trader, probably DX Trade. Gerard (2026-09-16) said routing and stop-out rules for new plans need access via the Mahi bridge, not T4B; flow is currently via T4B while Alpha builds its draw-down engine and Mahi's build-out estimate is long. Nathan Burch logged the DX Trade platform-scope question as open on the MahiProduct wiki. On 2026-10-29 George was pushing Gerard to get the DX direct connection (dropping T4B) sorted; Cameron Hughes proposed telling him Mahi cannot pick it up until outstanding bills are settled, and Bonnie deferred to David and Susan Cooney (no decision visible).
+Next: Mahi to answer what the Compass document covers (DX/cTrader direct, own-platform integration); Cameron Hughes started with DXtrade and cTrader bridge docs.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787749386714689 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790264746444999 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1793286376766659
 
 ### pulse-dropcopy-stale — Pulse yield-profile stale alerts from dropped MT5 drop-copy session
 status: open · since: 2026-10-16 · last: 2026-10-16
@@ -41,22 +59,10 @@ State: Session Prices->TempDXPrices is repeatedly rejected on clientDistribution
 Next: Alpha to fix or remove the session credentials.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791277536831499 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791278615268349
 
-### invoices-arrears — ACG Markets and ACG Broker invoices overdue
-status: open · since: 2026-09-08 · last: 2026-10-06
-State: Alpha futures business hit by Ninja Trader cancelling on a day's notice; challenge sales fell sharply and Alpha goes live with its own broker 21 Sept. George (Alpha) promised arrears cleared by end of September; as of 2026-10-06 Nicole Vivian confirmed 83k and 6k received clearing July, August still overdue, September bill not due until 20 Oct. Outstanding on 2026-10-05 was ACG Markets 249,815 and ACG Broker 19,632 before those payments. Nicole wants to see payments before extending product offering.
-Next: Alpha to pay August; September invoice due 2026-10-20.
-Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1788856330954559 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790720761202929 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791318273980089
-
-### dx-platform-scope — Alpha Trader / DX Trade platform scope; direct bridge routing off T4B
-status: open · since: 2026-08-26 · last: 2026-09-28
-State: Gerard says Alpha Trader (own platform) is being built, temporarily 3-6 months on a DX Trade backend; Mahi has no direct DX Trade connection yet. Long-term goal is MT5 native, cTrader, Alpha Trader, probably DX Trade. Gerard (2026-09-16) said routing and stop-out rules for new plans need access via the Mahi bridge, not T4B; flow is currently via T4B while Alpha builds its draw-down engine and Mahi's build-out estimate is long. Nathan Burch logged the DX Trade platform-scope question as open on the MahiProduct wiki.
-Next: Mahi to answer what the Compass document covers (DX/cTrader direct, own-platform integration); Cameron Hughes started with DXtrade and cTrader bridge docs.
-Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787749386714689 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790264746444999 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1790579145063059
-
 ### fastmt-requests — FastMT (David Rapp) feature and access requests
-status: open · since: 2026-07-02 · last: 2026-08-26
+status: watching · since: 2026-07-02 · last: 2026-08-26
 State: Restricted Compass Bridge Operator role provisioned on alphacap-broker for FastMT 2026-07-02, with a standard Compass account to follow. On 2026-08-26 David asked for an MT5 plugin to auto-stop out at an equity threshold then set accounts read-only; not available, a few months out. He also sources from T4B and wants ongoing feature updates and regular flow catch-up calls.
-Next: Mahi to schedule flow catch-up calls and share feature updates.
+Next: Mahi to schedule flow catch-up calls and share feature updates. Downgraded to watching: no activity since 2026-08-26.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782978915962429 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787760873528779
 
 ### arb-classification — Arbitrageur detection lag and classifier changes
@@ -78,11 +84,6 @@ State: Gerard asked about weekend trading on XAU, XAG, WTI, SPX, NDX with reduce
 Next: Cameron Hughes to send the bespoke draft after review.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789378377294579 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789396646430429
 
-
-### oils-off — Oils instruments turned off
-status: closed · since: 2026-06-24 · last: 2026-08-14 · closed: 2026-10-15
-State: Cameron Hughes turned oils off due to arbed price spikes and very low volumes; CO1USD signal later switched to IFMS + price (2026-08-14), possibly ahead of re-enabling, not stated. No activity since 2026-08-14; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782303349490299 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1786707493633689
 
 ### statement-of-account — Statement of account request from Jade
 status: closed · since: 2026-05-22 · last: 2026-05-22 · closed: 2026-10-19
