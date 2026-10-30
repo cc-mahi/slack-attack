@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-29T07:19:02Z
+last_catchup: 2026-10-30T07:21:17Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets (cutover set for 2026-11-02; Finalto dropped, no automatic failover), Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### counterparty-blacklist — Blacklist / exclude counterparties on hedge cancels and rejections
+status: open · since: 2026-10-12 · last: 2026-10-30
+State: Erik asked on 2026-10-12 for account 81259604 to be excluded from iSAM hedging (Kate added it to the blacklist) and whether a background script could auto-blacklist counterparties reaching X rejections; no substantive answer seen. Since 2026-10-21 ISPRIME has cancelled hedges of a single counterparty within ~13ms nearly daily (HEDGING_MODEL_H1_NYC alerts); the H1 hedger retries ISPRIME every ~200ms with no fallback LP until the account is blacklisted. On 2026-10-29 Isaac blacklisted tag 95000689 from ISPRIME and told Go (Orpheas will investigate on Go's side; hedging cancels only, client execution unaffected). Isaac asked internally whether to make this a routine (flag the CP early) or product automation (auto-blacklist a CP on an LP after N zero-fill cancels and route elsewhere); Shyam replied it would be great automated in the product.
+Next: Mahi to decide routine vs product automation (and answer Erik's auto-blacklist ask); Go to investigate the ISPRIME cancels.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1791819586672009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793266711610419 https://mahifx.slack.com/archives/CNF3WPNSK/p1793267765705429
 
 ### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
 status: open · since: 2026-09-08 · last: 2026-10-27
@@ -68,12 +74,6 @@ status: open · since: 2026-07-21 · last: 2026-10-14
 State: Radex flow (A_CLIENTS_RA) is soft-classified and risk-split A to B automatically, which ignores clients closing their own trades, so lumpy flow leaves residual LP hedges: XAU on 2026-09-04 (Isaac netted everything into B for now; he floated turning splitting off or fully A- or B-booking Radex; Erik floated re-splitting open exposure when classification changes), and NZDCAD 12m opened in A and closed in B (2026-09-25), resolved by Daria's options (A-to-B move triggers the hedger to unwind, or close via the trading hedger). Mac adjusted into B_CLIENTS_RA_NYC_SPLIT on 09-28; Daria said adjusting directly into B_CLIENTS_RA_NYC is the correct exception to the child-book rule. Go will onboard a new institutional client MeanFin on the Radex session (tag 1 = MEANFIN, same pricing and risk-splitting config); set up, no start ETA, not enabled without notice. On 2026-10-14 Mac asked why Radex skews more than regular clients; Nathan explained the signal config is identical and Radex's wider XAUUSD base spread (0.11 vs 0.07) scales skew, Mac accepted.
 Next: Nathan to update the team when Go gives a MeanFin start date. The underlying split-versus-closes design problem is not formally decided.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788528415870089 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790301122048699 https://mahifx.slack.com/archives/CNF3WPNSK/p1791775388999269 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791952706615519
-
-### counterparty-blacklist — Blacklist / exclude counterparties on rejections
-status: open · since: 2026-10-12 · last: 2026-10-12
-State: Erik asked for account 81259604 to be excluded when orders go to iSAM; Kate added it to the blacklist of counterparty tags sent to iSAM when hedging (done). He then asked whether a background script could auto-blacklist counterparties reaching X rejections with makers; Kate raised it internally with no substantive answer yet.
-Next: Mahi to answer whether an auto-blacklist on maker rejection counts is feasible.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1791819586672009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791821865555749
 
 ### lp-hedging-limits — LP hedging behaviour, NOP limits, clearing positions
 status: open · since: 2026-06-09 · last: 2026-10-06
