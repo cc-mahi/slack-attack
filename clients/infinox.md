@@ -18,7 +18,7 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-10-29T07:19:59Z
+last_catchup: 2026-10-30T07:21:41Z
 status: active
 ---
 
@@ -42,10 +42,10 @@ Next: Mahi to send the password-reset link and create Compass logins for the two
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792999339513029 https://mahifx.slack.com/archives/C022S6NL82D/p1793197137096099
 
 ### fill-tick-queries — Execution, slippage and raw-tick requests
-status: open · since: 2026-07-08 · last: 2026-10-28
-State: On 10-28 Trading Ops asked which execution profile suits XAUUSDmini at 0.1-0.2 lots and what the Small Size Fast 10,000 Base Notional means; Isaac explained the rule applies only to orders of USD 10k or less, so 0.1-0.2 lots (~40-80k) hit mid size fast if under 50k, else the catch-all rule, and Trading Ops accepted. William also confirmed Mahi does not execute tag VIDA_MT5__21246122 (no delay). Infinox periodically queries fills and asks for raw ticks (XAUUSD 09-04, 07-15; EURUSD 10-09 on 10-13). On 10-23 Andreas reported an MT5 pricing issue 13:10:12-13:10:28 GMT+3 and Isaac supplied the XAUUSD Price Forensics tick CSV. On 10-26 Andreas reported many XAUUSD spikes (06:23-06:24 GMT+3 and 04:10-04:11 GMT) and asked for ticks; Shyam said Mahi's XAUUSD pricing looked clean at both times and no spikes were visible, ticks were being pulled, and Andreas replied he needs them to escalate to Infinox's bridge team. Rory delivered the EURUSD ticks (full day, then re-cut to 21:00 UTC 10-08..20:59 UTC 10-09) and confirmed bid_price_0/offer_price_0 is TOB. Will Carter noted internally on 10-15 that the reason behind the request is unknown and the team should not be blindsided on pricing; he has discussed it with Rory. Recent explainers: last-look start-vs-end fill rule (09-08), default LR profile burst mechanics for MT5_plain_b_87997401 (10-08).
-Next: Mahi to deliver the 10-26 XAUUSD ticks to Andreas; still unknown why Infinox wanted 10-09 EURUSD ticks (26.4 upgrade impact?).
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1791886436475979 https://mahifx.slack.com/archives/C022S6NL82D/p1793195881447619
+status: open · since: 2026-07-08 · last: 2026-10-30
+State: On 10-28 Trading Ops asked which execution profile suits XAUUSDmini at 0.1-0.2 lots and what the Small Size Fast 10,000 Base Notional means; Isaac explained the rule applies only to orders of USD 10k or less, so 0.1-0.2 lots (~40-80k) hit mid size fast if under 50k, else the catch-all rule, and Trading Ops accepted. William also confirmed Mahi does not execute tag VIDA_MT5__21246122 (no delay). On 10-29 Clio queried a 0.12-lot XAUUSD stop-loss filled out of market (SL 4037, fill 4036.19 vs low 4036.81); Kate found Mahi's bid was 4036.79 and a client sell influx from 14:36:39 UTC depleted B clients liquidity so channel LR applied within its cap, and offered to review channel LR settings; on 10-30 Clio countered that a 0.12-lot order should fill at TOB. Also on 10-30 Trading Ops asked Mahi to verify an EURUSD tick (1.11871, then back to 1.1182) that stopped out a client and which they cannot find in their vantage feed; Nathan is looking. Infinox periodically queries fills and asks for raw ticks (XAUUSD 09-04, 07-15; EURUSD 10-09 on 10-13). On 10-23 Andreas reported an MT5 pricing issue 13:10:12-13:10:28 GMT+3 and Isaac supplied the XAUUSD Price Forensics tick CSV. On 10-26 Andreas reported many XAUUSD spikes (06:23-06:24 GMT+3 and 04:10-04:11 GMT) and asked for ticks; Shyam said Mahi's XAUUSD pricing looked clean at both times and no spikes were visible, ticks were being pulled, and Andreas replied he needs them to escalate to Infinox's bridge team. Rory delivered the EURUSD ticks (full day, then re-cut to 21:00 UTC 10-08..20:59 UTC 10-09) and confirmed bid_price_0/offer_price_0 is TOB. Will Carter noted internally on 10-15 that the reason behind the request is unknown and the team should not be blindsided on pricing; he has discussed it with Rory. Recent explainers: last-look start-vs-end fill rule (09-08), default LR profile burst mechanics for MT5_plain_b_87997401 (10-08).
+Next: Kate to answer Clio on why 0.12 lots took channel LR rather than TOB and whether to review channel LR; Nathan to validate the 10-30 EURUSD tick; Mahi to deliver the 10-26 XAUUSD ticks to Andreas; still unknown why Infinox wanted 10-09 EURUSD ticks (26.4 upgrade impact?).
+Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1791886436475979 https://mahifx.slack.com/archives/C022S6NL82D/p1793340015832869
 
 ### xau-x3-gearing — XAUUSDx3 / Gold3x pricing and abuse
 status: open · since: 2026-07-21 · last: 2026-10-26
@@ -103,11 +103,6 @@ Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1782992001195759 https://ma
 status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
 State: On 10-16 Liam told Infinox of a networking incident in Mahi's LD environment and advised switching to failover if available. Infinox (Sadiq) saw no pricing disruption and Liam said their environment was mostly unaffected; the hosting provider fixed it that day and Georgia confirmed no abnormality.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792143327385389 https://mahifx.slack.com/archives/C022S6NL82D/p1792150361206559
-
-### fi-party-review — FI signal party correctness by instrument
-status: closed · since: 2026-07-06 · last: 2026-07-06 · closed: 2026-10-15
-State: No activity since 2026-07-06; assumed resolved. Andrew asked whether pricing.adjustmentSignalProcessFlowImbalanceOptimisationParty is still correct per instrument; Kate said the team would review and change where needed. No confirmation of changes was seen.
-Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1783353826108009 https://mahifx.slack.com/archives/C01QGUXPKEY/p1783354691007529
 
 ## Arc
 - 2026-05-15 — Lazaros Zografopoulos (trading desk, arb classification oversight) left Infinox
