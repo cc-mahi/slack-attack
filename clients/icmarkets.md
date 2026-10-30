@@ -31,23 +31,23 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-10-29T07:20:30Z
+last_catchup: 2026-10-30T07:23:00Z
 status: active
 ---
 
 ## Now
 IC's crypto (XBTUSD-centred) B-book is Mahi's live product there, and the commercial relationship is in a renegotiation phase, so Mahi is deliberately front-footing value-add ("hero moments", price forensics) in client replies.
 Open: IC's CPI-news latency complaint (Oct 14) and its last-look request (actioned Oct 15, applies at the next restart), where the cause was an internal fallback rule that dropped LP1 as primary pricing source, plus PSM spread logic running in Beta ahead of a Price Forensics demo.
-Isaac Dann is primary quant lead on the account since 2026-10-08. The Toa pricer route is being retired: Tokyo feed moves to Mahi Central Thu/Fri, ahead of the Sat 31 Oct 10:00-11:00Z WAN cutover.
+Isaac Dann is primary quant lead on the account since 2026-10-08. The Toa pricer route is being retired: Tokyo feed moved to Mahi Central on 29 Oct, with the Sat 31 Oct 10:00-11:00Z WAN cutover still to run.
 Karam asked on Oct 21 about tag 8093117 (sharp short-duration markouts); Rory's reply offers IC a choice of keeping it B-booked or moving it to a risk-managed book, awaiting IC.
 
 ## Streams
 
 ### toa-to-mahi-central — Move IC pricer feed from Toa to Mahi Central Tokyo
-status: open · since: 2026-10-28 · last: 2026-10-28
-State: Isaac is repointing TOA_PRICE_APN1 from the Toa box to the Mahi Central (MC) Tokyo box, same config, names and pricing model; XBTUSD and XETUSD are in the model, XBTUST, XETUST and USTUSD still being added (pricers finalised 28 Oct pending those three, Fabric finalised). Once switched, MC TKY counts as live production, with change-management messages to follow. Andrew and Liam preferred hot-hot first since Liam had called the env not prod-ready. James planned to kill the Toa route in the Sat 31 Oct 10:00-11:00Z window (single- to dual-redundant WAN cutover, change CHG-2610-HSJB); after discussion with Liam and Isaac the plan is to cut to the MC Tokyo-NYC feed Thu/Fri so Toa is out of use by Saturday. Wintermute is already primary, so this feed is for normalisation basis only. James can re-add a Toa backup route after the cutover (up to ~60 min downtime if moved) but plans to stop the Toa box once IC is off it.
-Next: Isaac to finish the last three instruments and cut over Thu/Fri; James to run the Sat window; change-management messages pending.
-Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793201975033619 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793206126488939
+status: open · since: 2026-10-28 · last: 2026-10-29
+State: The Tokyo reference feed moved from Toa to Mahi Central (MC) Tokyo in the Thu 29 Oct 16:00-16:30Z window (CHG-2610-NGD1, approved by Liam 16:10Z; scope grew and it completed, band red, recorded after the fact). MC Tokyo now prices all 16 instruments IC used from Toa, and IC's NYC and HK receivers read it (HK over MC's public IP, firewall opened for IC HK only). MC TKY now counts as live production. Wintermute is already primary, so the feed is for normalisation basis only. James still plans the Sat 31 Oct 10:00-11:00Z WAN cutover (CHG-2610-HSJB) and to stop the Toa box once IC is off it; a Toa backup route can be re-added after (up to ~60 min downtime). Follow-ups raised 29 Oct: IC's APE box reaches MC TKY over the internet, and OKX now sits in APNE1, so MC needs a local OKX feed or it is a TK-HK-TK round trip (James). Liam thinks IC's Asia box may need rebuilding or be unnecessary if Mahi does no risk management for IC again, and failover needs discussing with IC, though the commercial position is unclear.
+Next: James to run the Sat window and stop Toa; local OKX feed for MC TKY; decision on IC's Asia box and failover (Liam, Isaac, no owner or date seen).
+Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793201975033619 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793305561451639
 
 ### tag-8093117-review — Review of IC tag 8093117 and B-book vs risk-managed option
 status: open · since: 2026-10-21 · last: 2026-10-21
@@ -99,19 +99,15 @@ Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1789037279787749 https://ma
 
 
 ### si-hedging-clusters — Cluster LR groups and XBTUSD SI hedging
-status: open · since: 2026-08-20 · last: 2026-08-26
+status: watching · since: 2026-08-20 · last: 2026-08-26
 State: Pavlos grouped the BTCUSD cluster list into 3 clusters with shared liquidity pools and Signal Follow settings (2026-08-24) and Cameron Hughes actioned it the same day, after Cooney's 6 new BO groups on Aug 21 (cluster LR cut from 100k/1000 to 25k/3000, as 100k/1000 was more generous than the 75k/3000 default); cluster flow is sharp (about 10-20 $/M captured). Cooney set up SI hedging for XBTUSD: hold 5m for 2h, hard limit 20m, working out of excess via passive OKX orders (OKX moved HK to Tokyo). OKX test orders worked on Aug 21 after a gateway fix and Isaac declared it ready; it remained on B Book because IC had not confirmed the switch (Isaac, Aug 24; "throw the switch").
-Next: IC (Pavlos) to approve switching SI on; no reply since 2026-08-26, and Rory's Oct 21 risk-managed option for tag 8093117 may overlap.
+Next: IC (Pavlos) to approve switching SI on; no reply since 2026-08-26 (watching, no open Mahi action); Rory's Oct 21 risk-managed option for tag 8093117 may overlap, and Liam's 29 Oct remark questions whether risk management happens for IC at all.
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1787327600173079 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787573389998509 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787731325918319
+
 ### lr-last-look-tuning — Liquidity reduction, WSS caps and last-look policy
 status: closed · since: 2026-08-13 · last: 2026-08-26 · closed: 2026-10-29
 State: Mid-August the WSS cap was raised to 125 and a notional ladder for LR proposed (Isaac, Aug 18-20); after IC's challenge on tiers Pavlos set the channel LR cap on Aug 21 to 500 $/M for tickets up to ~$50k and 1000 above (Isaac had proposed 300), agreed a small global surplus cut (250k to 200k, to monitor) and actioned the same day; Pavlos also asked for TOB spread 5 on Aug 21 (actioned). Rare-event spread protection (cap $11.50/side) was pushed to Beta on Aug 25, Pavlos said to implement it on Aug 26 and Isaac confirmed it live in production. Xenofon's Aug 24 $50 spread blip was liquidity depletion capped by the $500/M channel limit. No activity since 2026-08-26; assumed settled, with the current driver now the news-event last look in cpi-news-latency.
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1787222735783359 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787313985372619 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787734375576109
-
-### cnh-connection-audit — IC connection cleanup and China crypto sessions
-status: closed · since: 2026-09-14 · last: 2026-09-14 · closed: 2026-10-15
-State: Chi-Loong audited maker/taker ports and asked to remove old FX/CNH-NYC and extra orders sessions while keeping core crypto and `icmarkets_crypto_cnh` (China). Isaac confirmed every REMOVE item is correct (orders_2/3/4 are used for crypto on Mahi's side but removable if IC does not load-balance on them) and that the HK sessions stay as backup to NY distribution. No further reply; actual removal is on IC's side.
-Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1789387784721829 https://mahifx.slack.com/archives/C07UBJNUWG1/p1789389536080269
 
 ## Arc
 - 2026-05-11 — Crypto full licence contract confirmed signed, 12-month term
@@ -125,3 +121,4 @@ Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1789387784721829 https://ma
 - 2026-10-08 — Isaac Dann named primary quant lead for IC
 - 2026-10-09 — Compass 26.3 to 26.4 release; PSM live on Beta XBTUSD
 - 2026-10-15 — Renegotiation phase flagged; CPI latency complaint answered with value-add framing
+- 2026-10-29 — Tokyo reference feed moved from Toa to Mahi Central
