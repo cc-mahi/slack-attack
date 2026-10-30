@@ -17,13 +17,13 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-10-29T07:20:30Z
+last_catchup: 2026-10-30T07:21:41Z
 status: active
 ---
 ## Now
 GTC is live and ramping: all FX majors/crosses plus XAGUSD and XAUUSD B Book flow route to Mahi over 7 OneZero hubs (A and B sessions each), with an A Book account live since 2026-10-06 (hedging to HRP LPs only).
 Main risk is load: cent accounts drive ticket rates (dist6 hit ~4k orders/s on 2026-10-15) and riskPath stalls; the riskPath fix is approved and was rescheduled to the 2026-10-15 12:15-14:45Z window.
-In flight: 24/7 XAU is now the priority (GTC enabled XAUUSD_24_7 on its PXM connection 10-25; XAUUSD mt5 live1 execution moved to Mahi 10-23) (demo stream on OZ-4, crypto back-seat), Centroid connection (both makers failing on network, 10-20), XAUUSD from the PXM xcore sessions (counterparty tag fix pending), XAG price spikes from FINALTO/SWIFT basis (GTC to choose markets).
+In flight: 24/7 XAU is now the priority (GTC enabled XAUUSD_24_7 on its PXM connection 10-25; XAUUSD mt5 live1 execution moved to Mahi 10-23) (demo stream on OZ-4, crypto back-seat), Centroid connection (both makers logged on since 10-29), XAUUSD from the PXM xcore sessions (counterparty tag fix pending), XAG price spikes from FINALTO/SWIFT basis (GTC to choose markets).
 
 ## Streams
 
@@ -34,10 +34,10 @@ Next: Mahi to subscribe to the PXM XAUUSD_24_7 feed and the OZ-4 tXAUUSD stream;
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1791975353055319 https://mahifx.slack.com/archives/C0AKRP8C049/p1792053281436189 https://mahifx.slack.com/archives/C0AKRP8C049/p1792147010645739 https://mahifx.slack.com/archives/C0AKRP8C049/p1793175939965819
 
 ### flow-rollout — Symbol and server migration to Mahi
-status: open · since: 2026-08-17 · last: 2026-10-27
-State: EURGBP moved 2026-08-17, then rolling in batches through 2026-10-05 (all FX majors/crosses, B Book). XAGUSD routed 2026-09-03 and XAUUSD 2026-09-10 with more servers added 09-16, 10-05 and 10-08 (mt4 live2); on 2026-10-23 Manglai moved XAUUSD mt5 live1 execution to Mahi and Isaac is monitoring. On 2026-10-27 Isaac asked GTC to confirm when MT5 Live 2 can be switched to Mahi: October FI PnL is $897,145 at 7.76 $/M on executed flow so far, and MT5 Live 2 would have added about $2.22M this month on 285.69B volume. The internal call that day (Manglai absent) hoped for MT5 Live 2 this week. Remaining: cent accounts on small-ticket servers, indices (GTC worried about primary benchmark feed dropouts), crypto. Priorities per the 2026-09-24 Expo meeting: fix OZ hub drops, A Book with hedging, B Book via OZ, crypto, then 24/7 XAU.
-Next: GTC to confirm MT5 Live 2 switch (hoped this week); GTC picks the next server/day; weekly call 2026-10-13 notes remaining checks (24/7 connection 5, FX pair spikiness, HRP Jane Street).
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786977281687209 https://mahifx.slack.com/archives/C0AKRP8C049/p1793096649591279
+status: open · since: 2026-08-17 · last: 2026-10-29
+State: EURGBP moved 2026-08-17, then rolling in batches through 2026-10-05 (all FX majors/crosses, B Book). XAGUSD routed 2026-09-03 and XAUUSD 2026-09-10 with more servers added 09-16, 10-05 and 10-08 (mt4 live2); on 2026-10-23 Manglai moved XAUUSD mt5 live1 execution to Mahi and Isaac is monitoring. On 2026-10-27 Isaac asked GTC to confirm when MT5 Live 2 can be switched to Mahi: October FI PnL is $897,145 at 7.76 $/M on executed flow so far, and MT5 Live 2 would have added about $2.22M this month on 285.69B volume. The internal call that day (Manglai absent) hoped for MT5 Live 2 this week. On 2026-10-29 Isaac told GTC the MT5 Live 2 drop copy to Mahi stopped at 16:10 UTC on 10-28 across all symbols and asked whether the session was changed or dropped on GTC's side; no reply yet. Remaining: cent accounts on small-ticket servers, indices (GTC worried about primary benchmark feed dropouts), crypto. Priorities per the 2026-09-24 Expo meeting: fix OZ hub drops, A Book with hedging, B Book via OZ, crypto, then 24/7 XAU.
+Next: GTC to explain the MT5 Live 2 drop copy stopping and confirm the Live 2 switch (hoped this week); GTC picks the next server/day; weekly call 2026-10-13 notes remaining checks (24/7 connection 5, FX pair spikiness, HRP Jane Street).
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786977281687209 https://mahifx.slack.com/archives/C0AKRP8C049/p1793286194434769
 
 ### hedging-a-book — A Book go-live, STP rules and hedging structure
 status: open · since: 2026-10-05 · last: 2026-10-27
@@ -63,12 +63,6 @@ State: GTC tested XAUUSD from its PXM xcore A and B order sessions on 2026-10-16
 Next: GTC to change the PXM bridge to send the counterparty with 452=3; Mahi to confirm the EOD fix and drop the workaround; GTC to retest with the VIP tag.
 Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1792140498426039 https://mahifx.slack.com/archives/C0AKRP8C049/p1792479999175029
 
-### centroid-connection — New Centroid LP connection
-status: open · since: 2026-09-24 · last: 2026-10-20
-State: GTC asked for a Centroid hub session (2026-09-24). GTC wants two Maker FIX connections for its Centroid bridge (backup over internet, primary over a Beeks X Connect/BGP); needs a separate distribution process (gateway8, ports 9020/9021). Centroid as taker resets sequence numbers on market data but not trade sessions. Beeks missed the first weekend window; Rory sent Centroid A/B credentials on 2026-10-13 and Marios acknowledged. On 2026-10-20 Centroid configured the MAHI_A and MAHI_B makers but both connections fail (telnet also fails); Antreas asked whether Centroid bridge IP 192.109.17.144 is whitelisted. Isaac passed it to the server provider and asked for a traceroute, which Antreas posted (only two hops, 192.109.17.2/.3, before the 172.20.201.141 target). Still not working.
-Next: server provider (Beeks) to confirm whitelist/routing for the Centroid bridge IP; GTC to retest A before B.
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1790236332277899 https://mahifx.slack.com/archives/C0AKRP8C049/p1792496368150449
-
 ### oz-hub-connectivity — OneZero hub sessions, disconnects and tags
 status: open · since: 2026-08-17 · last: 2026-10-17
 State: GTC keeps adding OZ hubs because OZ fears it cannot handle their trade rate (7th hub requested 2026-10-09, in progress). Recurring session problems: OZ-2/OZ-3/OZ-4 hub drop-outs and "Session time ended" logouts (fixed by aligning all OZ sessions to Sun 17:00-Fri 17:30 NYT; OZ-4 outage 22-24 Sep fixed by a hub bridge restart), missing counterparty tags on OZ-4 (2026-09-08) and OZ PTR sessions disconnecting (2026-10-06, Mahi switched PTR analytics off). New-hub sessions needed whitelisting plus a cross-connect with several delays: OZ-6 (requested 2026-09-23) needed a Beeks NAT/routing change and was last pointed at the new ports on 10-06 with no confirmation in thread; OZ-7 (requested 10-09) details were sent 2026-10-14 and GTC acknowledged 10-15; after the 24/7 session-time fix on 2026-10-17 all sessions including GTC-A-Orders-OZ-7 were reported connected.
@@ -82,10 +76,10 @@ Next: Isaac/Liam to confirm the 10-15 deploy landed; re-enable classification on
 Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788309377675289 https://mahifx.slack.com/archives/C0AKAPLU78W/p1792065637260039
 
 ### infra-disk-alerting — Trading-server disk, replica and alert hygiene
-status: open · since: 2026-08-10 · last: 2026-10-14
-State: vg03-mysql extended repeatedly (trading-1/2 +200G on 09-10; trading-2 +50G on 09-30 with no more room in the vg, ZD 23574); a manual replica restore started 2026-10-01 was slow (two backups clashing, only reached 17 Sep after 3h) and was killed 10-02, the slave was reported back by 10-05, and nightly backup was switched off with bigger buffer pools (CHG 10-14) to help catch-up. The OneZero analytics drop copy (analyticsFixServerOZ1) was removed and stopped on trading-1 on 2026-10-05 for load reduction (revert commit to restore). The `mysql_optimize_enable=false` question from 2026-08-10 never got a reply. PD tuning: fiPnlDrop raised to alert severity, hedging-book alerts off until a hedger is live, fixOrders1 spam stopped.
+status: open · since: 2026-08-10 · last: 2026-10-29
+State: vg03-mysql extended repeatedly (trading-1/2 +200G on 09-10; trading-2 +50G on 09-30 with no more room in the vg, ZD 23574); a manual replica restore started 2026-10-01 was slow (two backups clashing, only reached 17 Sep after 3h) and was killed 10-02, the slave was reported back by 10-05, and nightly backup was switched off with bigger buffer pools (CHG 10-14) to help catch-up. The OneZero analytics drop copy (analyticsFixServerOZ1) was removed and stopped on trading-1 on 2026-10-05 for load reduction (revert commit to restore). The `mysql_optimize_enable=false` question from 2026-08-10 never got a reply. On 2026-10-29 CHG-2610-XJSN (Cameron Copland responsible) freed 550G on the DB master by emptying an unused table, window 11:00-11:30Z, approved by Liam. PD tuning: fiPnlDrop raised to alert severity, hedging-book alerts off until a hedger is live, fixOrders1 spam stopped.
 Next: someone to answer the mysql_optimize_enable question and decide longer-term DB sizing.
-Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790734299323199 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790870773608959 https://mahifx.slack.com/archives/C0AKAPLU78W/p1791980456302469
+Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1790734299323199 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790870773608959 https://mahifx.slack.com/archives/C0AKAPLU78W/p1793270835364739
 
 ### compass-client-support — GTC's use of Compass, Echo and Pulse
 status: watching · since: 2026-08-17 · last: 2026-10-13
@@ -99,10 +93,10 @@ State: Isaac's 2026-09-09 estimate: at 2.5 $/M LR and 4 $/M FI on XAU alone, bil
 Next: pilot end and billing terms to be confirmed outside Slack; downgraded to watching, no discussion since 2026-09-29.
 Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788950931799769 https://mahifx.slack.com/archives/C0AKAPLU78W/p1790674407124919
 
-### finalto-fix-noise — Finalto execution reports for non-Compass orders
-status: closed · since: 2026-09-03 · last: 2026-09-21 · closed: 2026-10-15
-State: Finalto sent fills for orders not placed via Compass on the GTC_Global5 session, spamming PD and forcing fixOrders1 off. Finalto removed the unwanted reports 2026-09-21 and Daria restarted fixOrders1.
-Refs: https://mahifx.slack.com/archives/C0AKAPLU78W/p1788407276578049 https://mahifx.slack.com/archives/C0AKRP8C049/p1789969699635569
+### centroid-connection — New Centroid LP connection
+status: closed · since: 2026-09-24 · last: 2026-10-29 · closed: 2026-10-30
+State: GTC asked for a Centroid hub session (2026-09-24). GTC wants two Maker FIX connections for its Centroid bridge (backup over internet, primary over a Beeks X Connect/BGP); needs a separate distribution process (gateway8, ports 9020/9021). Centroid as taker resets sequence numbers on market data but not trade sessions. Beeks missed the first weekend window; Rory sent Centroid A/B credentials on 2026-10-13 and Marios acknowledged. On 2026-10-20 Centroid configured the MAHI_A and MAHI_B makers but both connections fail (telnet also fails); Antreas asked whether Centroid bridge IP 192.109.17.144 is whitelisted. Isaac passed it to the server provider and asked for a traceroute, which Antreas posted (only two hops, 192.109.17.2/.3, before the 172.20.201.141 target). Resolved: Isaac confirmed on 2026-10-29 that both MAHI_A and MAHI_B are logged on with prices and orders on each since 08:54 UTC.
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1790236332277899 https://mahifx.slack.com/archives/C0AKRP8C049/p1793286274663379
 
 ## Arc
 - 2026-07-14 - A Book first; B Book held pending OZ per-million fee
