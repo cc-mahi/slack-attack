@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-10-29T07:19:02Z
+last_catchup: 2026-10-30T07:23:17Z
 status: active
 ---
 
@@ -139,16 +139,6 @@ Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792487283744139 https://ma
 status: closed · since: 2026-10-20 · last: 2026-10-20 · closed: 2026-10-21
 State: Client questioned an oil order (CLZ6, 5 lots, 2026-10-18) reported unfilled in OneZero but filled at Mahi. Liam Cordelle showed it was partially filled for 1 unit at 22:26:48, then cancelled at the client's request at 22:27:51.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792497831920379 https://mahifx.slack.com/archives/C09HN93T0G2/p1792499760182229
-
-### qb-session-hours — fixOrdersQB1 session schedule
-status: closed · since: 2026-10-05 · last: 2026-10-06 · closed: 2026-10-15
-State: Client confirmed QB hours 5pm Chicago to 4pm next day (18:00-17:00 NYT). Mahi changed fixOrdersQB1 session times on 2026-10-07 (low-risk change CHG-2610-P1WP).
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1791169713201199 https://mahifx.slack.com/archives/C09HN93T0G2/p1791325982612159
-
-### tt-stunnel-pinning — TT certificate pinning removal
-status: closed · since: 2026-09-23 · last: 2026-09-23 · closed: 2026-10-15
-State: Liam confirmed no Mahi impact (no stunnel/cert loading); UAT bounced and reconnected cleanly.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1790154246462319 https://mahifx.slack.com/archives/C09HN93T0G2/p1790154788215129
 
 ### beeks-hosting — Client exit from Beeks, Compass hosting move
 status: closed · since: 2026-07-30 · last: 2026-07-31 · closed: 2026-10-21
