@@ -13,34 +13,40 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-29T07:19:17Z
+last_catchup: 2026-10-30T07:21:00Z
 status: active
 ---
 ## Now
 ATC is a matched-principal broker in a build phase: prop firm launch (own MT5/bridge), a Britannia prime arrangement for triangulation-arb flow, and a Seychelles entity migration.
 Biggest live risk is the FCA/compliance finding that non-USD P&L legs in Compass leave real unhedged LP exposure; the fix is a weekend flatten and reimport to USD.
 Compass moved to 26.4 on the 10-10/11 weekend, which switched on PSM widening/tightening overlays for ATC pricing. Volumes are well down on early 2026; ATC is sensitive to spreads, depth and fill quality on gold.
-On 2026-10-26 the Malik call was joined by an ATC compliance contact working with auditors, who is pressing on why Mahi-held LP cross positions (NZD etc.) dwarf client trades; Andrew treats it as an escalation. Malik also wants futures, XAU futures and crypto setups. By 10-28 Mahi has a plan for Finalto to net the crosses at one mark (fallback: own trade-down), pending ATC written sign-off.
+On 2026-10-26 the Malik call was joined by an ATC compliance contact working with auditors, who is pressing on why Mahi-held LP cross positions (NZD etc.) dwarf client trades; Andrew treats it as an escalation. Malik also wants futures, XAU futures and crypto setups. On 10-29 Dave reported gold positions not matching Compass (FAU zero at ATC/Finalto), under investigation. By 10-28 Mahi has a plan for Finalto to net the crosses at one mark (fallback: own trade-down), pending ATC written sign-off.
 
 ## Streams
 
+### gold-position-mismatch — Compass vs ATC gold positions disagree
+status: open · since: 2026-10-29 · last: 2026-10-29
+State: On 10-29 Dave said ATC's gold positions do not match Compass, and that FAU shows zero open positions at ATC, Spotex and Finalto (no SHI at Finalto either). Compass shows net client positions XAU -280.9 and SHI 309.4; Cameron Hughes suspected client and LP positions diverged during a failover and said he is looking into it. Likely related to the xbt-phantom-position pattern of Compass holding positions that do not exist at the LP.
+Next: Cameron Hughes to reconcile Compass XAU/FAU/SHI positions against ATC and Finalto and adjust Compass.
+Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1793286377179559 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793293226695989
+
 ### lp-cross-positions — legacy cross positions at Finalto and auditor questions
-status: open · since: 2026-10-26 · last: 2026-10-28
-State: ATC's compliance contact, working with auditors, is not satisfied that Mahi-held positions (NZD crosses etc.) are far larger than client trades while ATC is a matched principal at FCA level; Andrew treats it as an escalation. Finalto crosses are legacy brokered inventory built Sep 2023 to Sep 2024 (brokering rules, LP switching, manual moves), never unwound because hedgers only trade USD pairs; Finalto netted crosses for ATC in Sep and Oct 2025. By 10-28 Cameron Hughes had an internal and a client-facing artifact on one live snapshot (10-28 15:11 UTC) after Will's review. Plan A: ATC asks Finalto to rebook to a target book at one agreed mark (Finalto gross $300.9m to $99.5m, no spread), mirrored in Compass with position adjustments plus Finalto's confirmation for the auditors; the NZD +$13.0m / JPY -$5.2m P&L-to-USD unwind and Velocity alignment are real trades ($22.5m, ~$0.3k-$1.8k spread). Our own triangle trade-down is the fallback ($3.5k-$21.3k); it is hard to do manually (USDJPY TOB 100k), HEDGING_MANUAL sits under CLIENTS_NET so a part-done trade would be hedged at Velocity, and a mitigation must be picked before any clip. Step 2 is sized on house net across all LPs (Finalto is 98.6% of LP gross); USDCHF excess ~3.1M is the existing CHF residual moved. Swap saving about $1.2k a night. Order of play: present to ATC, written sign-off (target book, netting route, fallback cost range, P&L conversion), then act; no execution timing and no "How we got here" history on the client page until Andrew signs it off. Malik did not send the 10-27 positions file; Mahi chased on 10-28.
+status: open · since: 2026-10-26 · last: 2026-10-29
+State: ATC's compliance contact, working with auditors, is not satisfied that Mahi-held positions (NZD crosses etc.) are far larger than client trades while ATC is a matched principal at FCA level; Andrew treats it as an escalation. Finalto crosses are legacy brokered inventory built Sep 2023 to Sep 2024 (brokering rules, LP switching, manual moves), never unwound because hedgers only trade USD pairs; Finalto netted crosses for ATC in Sep and Oct 2025. By 10-28 Cameron Hughes had an internal and a client-facing artifact on one live snapshot (10-28 15:11 UTC) after Will's review. Plan A: ATC asks Finalto to rebook to a target book at one agreed mark (Finalto gross $300.9m to $99.5m, no spread), mirrored in Compass with position adjustments plus Finalto's confirmation for the auditors; the NZD +$13.0m / JPY -$5.2m P&L-to-USD unwind and Velocity alignment are real trades ($22.5m, ~$0.3k-$1.8k spread). Our own triangle trade-down is the fallback ($3.5k-$21.3k); it is hard to do manually (USDJPY TOB 100k), HEDGING_MANUAL sits under CLIENTS_NET so a part-done trade would be hedged at Velocity, and a mitigation must be picked before any clip. Step 2 is sized on house net across all LPs (Finalto is 98.6% of LP gross); USDCHF excess ~3.1M is the existing CHF residual moved. Swap saving about $1.2k a night. Order of play: present to ATC, written sign-off (target book, netting route, fallback cost range, P&L conversion), then act; no execution timing and no "How we got here" history on the client page until Andrew signs it off. Malik did not send the 10-27 positions file; Mahi chased on 10-28. On 10-29 Cameron Hughes refreshed the artifact's triangulation trades for price moves and new positions and messaged Malik to arrange a call, hoping Finalto can close the crosses out again to avoid paying spread.
 Next: Malik to supply LP statements and swap sheets; Mahi to present the plan to ATC and obtain written sign-off, agree Finalto's mark and fee, then ask Finalto to rebook; Andrew to sign off the history section; pull the Oct 2023 and 2026-06-25 import files for auditors.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793025346402589 https://mahifx.slack.com/archives/C046RNF64VD/p1793119687726319 https://mahifx.slack.com/archives/C046RNF64VD/p1793203469542639 https://mahifx.slack.com/archives/C046RNF64VD/p1793204736482909
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793025346402589 https://mahifx.slack.com/archives/C046RNF64VD/p1793203469542639 https://mahifx.slack.com/archives/C046RNF64VD/p1793204736482909 https://mahifx.slack.com/archives/C046RNF64VD/p1793266149373089
+
+### futures-crypto-ask — futures, XAU futures symbol and crypto setup
+status: open · since: 2026-10-26 · last: 2026-10-29
+State: On 10-29 Malik asked Andrew for a 15-20 min call because Dave wants to understand how Mahi works with futures instruments; Andrew was on holiday so Will took it with Dave (Andrew suggested demoing some contracts and asking for data). Will reported ATC is happy with the P/W framework used elsewhere, will talk again early next week if issues, and that the futures feeds would come through Britannia, with about a day to get the system ready after that. After a pre-call with Malik, Andrew noted ATC is courting basis traders in futures, wants a crypto setup (with its own LP), and G7 futures quoted as CFDs; Andrew wants an XAU futures symbol added. Mahi also needs ATC client and LP positions ingested into Compass for reconciliation and swap calcs; a swap inventory skew CSV is owed to ATC. Mahi is looking for other firms quoting G7 futures as CFDs (Amana was named as having CMC, Jump, IG, GCEX).
+Next: Mahi to send swap inventory skew CSV and ingest ATC positions; scope the XAU futures symbol and crypto setup.
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793009406477699 https://mahifx.slack.com/archives/C046RNF64VD/p1793033858681609 https://mahifx.slack.com/archives/C046RNF64VD/p1793290830652219
 
 ### xbt-phantom-position — XBTUSD and DOW CFD positions differ from ATC's own rec
 status: open · since: 2026-10-26 · last: 2026-10-26
 State: ATC's own rec flagged CFD differences on 2026-10-26: XBTUSD is flat on ATC's side and at Finalto while Compass shows 64 client and LP side, and DOW is about 0.5 on the client side versus 1.77 in Compass (not netted to Velocity correctly). Dave asked why Compass shows a position that does not exist at Finalto; Cameron Hughes said it is likely trading outside Compass (manual close-outs or failover routing) and Compass needs position updates, being worked with Malik. CFDs hedge 1-1 with the inbound instrument.
 Next: Malik to confirm exact client positions to book; Mahi to adjust Compass positions.
 Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1793023106101569 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793023353198839 https://mahifx.slack.com/archives/C046RNF64VD/p1793027080083249
-
-### futures-crypto-ask — futures, XAU futures symbol and crypto setup
-status: open · since: 2026-10-26 · last: 2026-10-26
-State: After a pre-call with Malik, Andrew noted ATC is courting basis traders in futures, wants a crypto setup (with its own LP), and G7 futures quoted as CFDs; Andrew wants an XAU futures symbol added. Mahi also needs ATC client and LP positions ingested into Compass for reconciliation and swap calcs; a swap inventory skew CSV is owed to ATC. Mahi is looking for other firms quoting G7 futures as CFDs (Amana was named as having CMC, Jump, IG, GCEX).
-Next: Mahi to send swap inventory skew CSV and ingest ATC positions; scope the XAU futures symbol and crypto setup.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793009406477699 https://mahifx.slack.com/archives/C046RNF64VD/p1793033858681609
 
 ### beeks-ld-incident — Beeks LD networking incident, ATC failover
 status: open · since: 2026-10-16 · last: 2026-10-16
@@ -119,9 +125,8 @@ State: CFD arbitrageur execution was turned off 2026-09-21 after two of Dave's c
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1790005631153139 https://mahifx.slack.com/archives/C046RNF64VD/p1790088439159019 https://mahifx.slack.com/archives/C046RNF64VD/p1790154076347849
 
 ### cfd-hedger-off-rca — CFD hedger book left OFF for 5h
-status: watching · since: 2026-08-28 · last: 2026-08-30
-State: CFD_PRAXIS_HEDGING_HYBRID was switched OFF in the GUI at 03:57 UTC on 08-28 during config work and not re-enabled; G30EUR risk built (about -$2k) and PD alerts were resolved twice with the book still off. RCA filed (P2); proposed actions are alerts that only resolve when state matches expected, mandatory comments on GUI book-state changes, and Daria's push to bump MXC-66 Sustained VaR Alerting. No recorded implementation.
-Next: Mahi to decide and implement the preventive actions.
+status: closed · since: 2026-08-28 · last: 2026-08-30 · closed: 2026-10-30
+State: No activity since 2026-08-30; assumed resolved. CFD_PRAXIS_HEDGING_HYBRID was switched OFF in the GUI at 03:57 UTC on 08-28 during config work and not re-enabled; G30EUR risk built (about -$2k) and PD alerts were resolved twice with the book still off. RCA filed (P2); proposed actions are alerts that only resolve when state matches expected, mandatory comments on GUI book-state changes, and Daria's push to bump MXC-66 Sustained VaR Alerting. No recorded implementation.
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1787907463800669 https://mahifx.slack.com/archives/C046RNF64VD/p1788127946167719
 
 ### lr-martingale — liquidity refresh policy for martingale masters
