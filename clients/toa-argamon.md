@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-29T07:21:39Z
+last_catchup: 2026-10-30T07:23:17Z
 status: active
 ---
 
@@ -40,10 +40,10 @@ Next: Argamon to say whether they want a GTS via NWM market set up in Compass; M
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793113766371149 https://mahifx.slack.com/archives/C083GP5F1CL/p1793166381823569
 
 ### platform-ops — Toa box housekeeping, config landmines, capacity
-status: open · since: 2026-08-17 · last: 2026-10-28
-State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17. marketDataNado1 hit an OOM on 10-28 and was restarted by Shyam (PagerDuty raised).
-Next: confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787462723096659 https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029
+status: open · since: 2026-08-17 · last: 2026-10-30
+State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17. marketDataNado1 hit an OOM on 10-28 and was restarted by Shyam (PagerDuty raised). On 10-30 Kraken Futures market data on APN1 went down from about 02:20 UTC; Shyam says it is Kraken's side (their spot connectivity incident, still under investigation; PagerDuty raised).
+Next: watch for Kraken Futures MD recovery on APN1; confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787462723096659 https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379
 
 
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
