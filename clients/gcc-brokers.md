@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-10-29T07:19:59Z
+last_catchup: 2026-10-30T07:22:00Z
 status: active
 ---
 ## Now
@@ -25,6 +25,18 @@ Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads
 A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef is unhappy and now wants GCC to provision its own main plus standby servers (reply from Rory pending), and GCC awaits the provider's incident report.
 
 ## Streams
+
+### lmax-price-outage — 2026-10-29 LMAX pricing gap
+status: open · since: 2026-10-29 · last: 2026-10-29
+State: On 10-29 at ~14:53 UTC Youssef told Mahi GCC saw no LMAX pricing for about 12 minutes; GCC was chasing LMAX, and Isaac Dann said Mahi would watch hedging meanwhile. At 14:58 Youssef reported it back after 16 minutes with no price. Cause not stated in channel.
+Next: Mahi to confirm hedging was unaffected during the gap; watch for recurrence.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285629414699 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285935629259
+
+### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
+status: open · since: 2026-04-30 · last: 2026-10-29
+State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible. The 10-22 report (3,708 oz gold long, 15:30 BST) was acknowledged in 13s and confirmed actioned by Rory at 15:34 BST. The 10-26 report (3,423 oz gold long, 15:08 GMT) was acknowledged by William in 4 minutes and confirmed done at 15:19 GMT. The 10-27 report (1,746 oz gold long, 16:16 UTC) was acknowledged by Isaac Dann ("will book this now") with no done-confirmation visible. The 10-28 report (1,212 oz gold long, 15:26 UTC) was acknowledged by William ("Hi Layan, sure") with one more reply in thread at 15:34. The 10-29 report (3,510 oz gold long, 15:06 UTC) was acknowledged by Isaac Dann ("booking this now") with no done-confirmation visible. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
+Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027291641789 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793286416958399
 
 ### finalto-tag-blacklist — 2026-10-27 tag 4004532 blacklist rejects
 status: open · since: 2026-10-27 · last: 2026-10-28
@@ -43,12 +55,6 @@ status: open · since: 2026-10-23 · last: 2026-10-23
 State: On 10-23 Nael reported no UKOFUT-F price from Mahi while Finalto LCOF7 priced. Isaac Dann found Mahi subscribed to expired LCOF6 and is switching UKOFUT-F to LCOF7; he proposed rolling all futures mappings (Brent, WTI, gas, metals, indices; still on 2026 contracts) to the next live contract so every month is available and two nearest contracts always price together (LCOZ6 and LCOF7 now; LCOF7 and LCOG7 from November). Nael agreed. It needs a short Finalto gateway restart, targeted for next week, and LCOZ6 rolls to LCOZ7 after 30 Oct.
 Next: Isaac to apply the mapping roll, restart the Finalto gateways and tell Nael when live.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792744200127579 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792756609902269
-
-### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-10-28
-State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible. The 10-22 report (3,708 oz gold long, 15:30 BST) was acknowledged in 13s and confirmed actioned by Rory at 15:34 BST. The 10-26 report (3,423 oz gold long, 15:08 GMT) was acknowledged by William in 4 minutes and confirmed done at 15:19 GMT. The 10-27 report (1,746 oz gold long, 16:16 UTC) was acknowledged by Isaac Dann ("will book this now") with no done-confirmation visible. The 10-28 report (1,212 oz gold long, 15:26 UTC) was acknowledged by William ("Hi Layan, sure") with one more reply in thread at 15:34. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
-Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027291641789 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793201175713199
 
 ### defensive-feeds — LMAX and Finalto defensive feeds and news hedging
 status: open · since: 2026-08-19 · last: 2026-10-27
@@ -117,16 +123,6 @@ status: watching · since: 2026-08-20 · last: 2026-09-03
 State: Youssef asked on 08-20 how to get P&L via the MFXPulse API, then on 09-02 asked for both S3/Parquet and Athena access with a list of credentials, workgroup, yieldprofiles_latest view and book IDs. Daria said she would set it up with the dev team and Rory said he would check status when Youssef asked on 09-03; no provisioning or confirmation is visible after that.
 Next: Rory/Daria to provision MFXPulse (details in the 09-02 request) and confirm to Youssef.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1788376707168249 https://mahifx.slack.com/archives/C09PNC1MFAA/p1788427041816899
-
-### manual-hedger-nop — Finalto XAGUSD close blocked by NOP cap
-status: closed · since: 2026-10-12 · last: 2026-10-12 · closed: 2026-10-15
-State: Carl could not close XAGUSD on Finalto on 10-12; the manual hedger was blocked by Finalto NOP above the $80m cap. NOP limit raised to $120m, position closed on open and manual hedgers switched off by Carl.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1791836695198179 https://mahifx.slack.com/archives/C09QS1NUA80/p1791843024196049
-
-### pnl-report-gap — Youssef's STP report vs Compass P&L
-status: closed · since: 2026-08-14 · last: 2026-08-17 · closed: 2026-10-15
-State: Youssef's comparison showed about 2x Compass's August P&L; on 08-17 he retracted it ("some confusion and wrong thinking on our side, all is good").
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1786712998616739 https://mahifx.slack.com/archives/C09QS1NUA80/p1786976617585179
 
 ### xag-incident-comp — Compensation demand after 2026-05-15 XAGUSD incident
 status: closed · since: 2026-05-15 · last: 2026-05-27 · closed: 2026-10-16
