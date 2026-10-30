@@ -17,7 +17,7 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-10-29T07:19:02Z
+last_catchup: 2026-10-30T07:23:17Z
 status: active
 ---
 
@@ -83,16 +83,6 @@ Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787044539658809 https://ma
 status: closed · since: 2026-07-25 · last: 2026-07-29 · closed: 2026-10-22
 State: A 1.2 lot BTCUSD order reached Mahi as 120 BTC. Broker Support found a session multiplier misconfigured at 100x on BTCUSD and asked TOT to set it to 0.01 and check other symbols. No confirmation seen, but no activity since 2026-07-29; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1784987610439809 https://mahifx.slack.com/archives/C08VCTZ7ZN2/p1785304369359649
-
-### mt5-bridge-drop — Brief MT5 bridge disconnect 2026-10-06
-status: closed · since: 2026-10-06 · last: 2026-10-06 · closed: 2026-10-15
-State: MT5 bridge dropped for about 30 s at 03:10 UTC, with PagerDuty disconnect and cancelled-order alerts. No follow-up; no client report. Assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1791257735457909
-
-### compass-upgrade-sep — Compass upgrade maintenance window 2026-09-19
-status: closed · since: 2026-09-18 · last: 2026-09-18 · closed: 2026-10-15
-State: Maten Rehimi requested a 10:00-11:00 UK window on 2026-09-19 (about 20 min downtime expected). No client objection or completion message seen; assumed completed.
-Refs: https://mahifx.slack.com/archives/C08U853T684/p1789735398809429
 
 ## Arc
 - 2026-01 — Crypto symbols (34) enabled on MatchTrader alongside MT5
