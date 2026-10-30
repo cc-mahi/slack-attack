@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-10-29T07:19:17Z
+last_catchup: 2026-10-30T07:20:58Z
 status: active
 ---
 
@@ -39,6 +39,12 @@ State: On 2026-10-28 ~21:19Z Matt reported no USDJPY pricing on the Mahi STRD co
 Next: Mahi (Nathan) to report the cause of the 2026-10-29 errors to Samuel.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793222374723979 https://mahifx.slack.com/archives/C0456LSHQQK/p1793239541468319
 
+### centroid-fok-conformance — Centroid conformance: FOK brokered orders expire
+status: open · since: 2026-10-29 · last: 2026-10-29
+State: During Centroid/Mahi conformance testing on 2026-10-28 Matt saw an A-Book XAU/USD FOK market order cancelled (EXPIRED) on the Centroid connection while a PrimeXM FOK filled. Kate explained the Centroid order was set to broker by the channel/execution rule but the liquidity pool has no FOK-capable market for gold, so it expired before reaching an LP; the PXM order was internalised (EXINITY_CONNECT_WAGYU channel, B_CLIENTS_LDN, Top Four rule), so it never needed an LP. Matt confirmed Wedbush LPs cannot accept FOK, so any FOK STP'd to the liquidity pool will never reach market.
+Next: Exinity (Matt) to change Centroid-side config so FOK is not brokered to WB; Mahi (Kate) asked whether another FOK-capable market can be added to the pool.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793264343496069
+
 ### pricing-spikes-widening — Spiky and wide pricing complaints
 status: open · since: 2026-09-01 · last: 2026-10-27
 State: Sep 1 Wagyu spikes at the open traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS (Kate to check the sims ran). US30 widening on 2026-09-23 was MWMS tracking Velocity (Cameron Hughes set it to 100, Corey confirmed better). NZD/CHF/NOK cross spikes were treated with order-book rounding and lower skew ceilings (0.3 to 0.05 pips, 2026-09-25). EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut (ceiling 0.6 to 0.4, SNG 1.3 to 0.5, SNGMON 2.7 to 0.5) and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. A 2026-09-29 LP feed stoppage (ticks stopped at Wedbush and Invast ~14:52) resumed after about three hours. On 2026-10-27 Christian reported poor LP pricing 2026-10-26 20:45-22:00; Kate found the market itself was wide over the NY rollover (GBPCHF LPs 25-30 pips 21:00-22:00 UTC, Jane Street, Jump, Barclays, DB, HSBC and Velocity not quoting, normal by ~22:05), Mahi stayed firm, not indicative, and the mid held steady.
@@ -53,10 +59,10 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792760362955399 https://ma
 
 
 ### pnl-drop-alerts — Per-book PnL-drop alerts and alert email restoration
-status: open · since: 2026-09-18 · last: 2026-10-22
-State: Matt asked for book-level loss alerts; thresholds given 2026-10-06 (A-Book, SI FX, SI FX Insti below $1K/day, Big Boys $2.5K, DK Inventory $5K) plus an alert when LIQUIDITY_POOL_LDN exposure is above zero (top-up used) and restoration of the old email alerts (hedger throttle, VaR, FIX connection, A/B-book rejections). Alerts went live 2026-10-08 but froze systemStateMonitor for ~2 min per firing, so they were reverted (Zendesk 23617); the fix was deployed 2026-10-14. On 2026-10-20 Rory and Matt called and covered all email alerts Exinity wants back; Rory restarted systemStateMonitor (Matt approved, no trading impact) to pick up the new PnL alerting, and the 24h A-Book alerts fired and Matt confirmed receipt. Rory flagged A-Book CLIENTS_NET averaging ~10 alerts a day earlier. On 2026-10-22 Rory asked again to restart systemStateMonitor to pick up new alerting; Mukhammad (overnight) asked whether the restart affects order execution, no answer seen.
-Next: Mahi (Rory) to answer Mukhammad's execution-impact question before restarting, and confirm the other books' PnL alerts and the LP-exposure alert are live; email-alert restoration still to be put in place.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1789753758017939 https://mahifx.slack.com/archives/C0456LSHQQK/p1792052573269699 https://mahifx.slack.com/archives/C0456LSHQQK/p1792511678868259 https://mahifx.slack.com/archives/C0456LSHQQK/p1792683656578339
+status: open · since: 2026-09-18 · last: 2026-10-29
+State: On 2026-10-29 Matt chased for an update on the "emergency alerts" (no reply seen). Matt asked for book-level loss alerts; thresholds given 2026-10-06 (A-Book, SI FX, SI FX Insti below $1K/day, Big Boys $2.5K, DK Inventory $5K) plus an alert when LIQUIDITY_POOL_LDN exposure is above zero (top-up used) and restoration of the old email alerts (hedger throttle, VaR, FIX connection, A/B-book rejections). Alerts went live 2026-10-08 but froze systemStateMonitor for ~2 min per firing, so they were reverted (Zendesk 23617); the fix was deployed 2026-10-14. On 2026-10-20 Rory and Matt called and covered all email alerts Exinity wants back; Rory restarted systemStateMonitor (Matt approved, no trading impact) to pick up the new PnL alerting, and the 24h A-Book alerts fired and Matt confirmed receipt. Rory flagged A-Book CLIENTS_NET averaging ~10 alerts a day earlier. On 2026-10-22 Rory asked again to restart systemStateMonitor to pick up new alerting; Mukhammad (overnight) asked whether the restart affects order execution, no answer seen.
+Next: Mahi to reply to Matt's 2026-10-29 chase on the emergency alerts; Rory to answer Mukhammad's execution-impact question before restarting, and confirm the other books' PnL alerts and the LP-exposure alert are live; email-alert restoration still to be put in place.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1789753758017939 https://mahifx.slack.com/archives/C0456LSHQQK/p1792511678868259 https://mahifx.slack.com/archives/C0456LSHQQK/p1792683656578339 https://mahifx.slack.com/archives/C0456LSHQQK/p1793265485080539
 
 
 ### yield-sims-giraffe — Yield simulations on Exinity trade datasets
