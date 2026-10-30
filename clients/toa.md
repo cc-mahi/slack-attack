@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-10-29T07:19:02Z
+last_catchup: 2026-10-30T07:23:17Z
 status: active
 ---
 
@@ -22,10 +22,10 @@ Several Argamon-raised issues arrive as forwards from `mahi-argamon-operations`,
 ## Streams
 
 ### infra-releases — releases, new gateways and box changes on Argamon/Toa
-status: open · since: 2026-08-17 · last: 2026-10-28
-State: Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
+status: open · since: 2026-08-17 · last: 2026-10-30
+State: Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
 Next: Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1790435088325269 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379
 
 ### cboe-hedger-chi — hedgerCBOE1 on CHI: firewall/PnL trips and state mismatches
 status: open · since: 2026-08-03 · last: 2026-10-22
