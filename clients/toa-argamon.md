@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-10-30T07:23:17Z
+last_catchup: 2026-11-02T07:19:10Z
 status: active
 ---
 
@@ -29,9 +29,15 @@ status: active
 Argamon is the NY retail tenant (Mahi) plus Toa-hosted LDN/CHI/APN1 boxes (insti, hedging, crypto). Weekly calls with Jem/Elan/Daria/Shyam drive the agenda: wanting 500:1 leverage and to hold more risk, so Mahi is running sims and rolling CFDs/indices into Compass with internalisation and skew.
 Argamon is moving connectivity from Centroid to PrimeXM. Compass 26.4 is on LDN/CHI/APN1; NY was staged for the 10-10/11 weekend restart (outcome unconfirmed).
 On 10-21 the NY retail FX book moved to a 500k G8 inventory cap with Friday flatten (William Denny monitoring).
-GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
+GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). From 11-02 gold hedging no longer uses TOA_CHI (Toa last-look tolerance 0). Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
+
+### toa-last-look-hedge — Toa last-look tolerance 0 rejecting Mahi gold hedges
+status: open · since: 2026-11-02 · last: 2026-11-02
+State: Since 10-28 Toa has set last-look tolerance to 0 on Mahi's account, so hybrid hedger gold orders mostly get rejected: fill rate at Toa fell from about 40% to 7% and gold hedging volume dropped by about two thirds. On 11-02 Shyam removed TOA_CHI from the hybrid hedger's gold venues; gold hedges now go to JANE, HSBC and DB. Brokered gold via Toa is unchanged. No Toa response seen yet.
+Next: Toa to say whether the 0 tolerance is intended; Mahi to watch gold hedge fill rates and PnL on the new venues.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1793588984698429
 
 ### gts-hrp-nwm — HRP LP sessions wound down in favour of NWM/NWPB
 status: open · since: 2026-10-27 · last: 2026-10-28
@@ -67,24 +73,24 @@ Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1791171597533909 https://ma
 
 
 ### lucera-fill-delay — Lucera insti fill report delayed 42ms (HARD_TIMEOUT)
-status: open · since: 2026-10-18 · last: 2026-10-19
-State: Levi (Argamon) saw an EUR/USD Lucera order filled over 120ms after placement and wants the expiry to match Lucera's 90ms. Nathan explained the hard timeout is per FIX session (hardTimeoutLength in fixClientConnection, currently 80ms on this session) and a HARD_TIMEOUT comment means it fired and the order was filled because the pool price still crossed. The fill was at 80ms in Compass (21:39:44.733) but the execution report went out at .775, a 42ms internal delay on Mahi/Toa's side; Levi needs the FIX messages for Lucera, which Nathan supplied.
+status: open · since: 2026-10-18 · last: 2026-11-02
+State: Levi (Argamon) saw an EUR/USD Lucera order filled over 120ms after placement and wants the expiry to match Lucera's 90ms. Nathan explained the hard timeout is per FIX session (hardTimeoutLength in fixClientConnection, currently 80ms on this session) and a HARD_TIMEOUT comment means it fired and the order was filled because the pool price still crossed. The fill was at 80ms in Compass (21:39:44.733) but the execution report went out at .775, a 42ms internal delay on Mahi/Toa's side; Levi needs the FIX messages for Lucera, which Nathan supplied. On 11-02 Levi asked which FIX tag sets the counterparty ID on LD Compass account CLIENTS_HRP_LUCERA; Daria says it uses tag 109 if present, else falls back to 1+448, and Levi will clean up the tags with Lucera.
 Next: Nathan to find the cause of the 42ms delay before the execution report was sent.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792362870440649 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792375513540999
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792362870440649 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792375513540999 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793602642195049
 
 
 ### insti-ldn-pricing — LDN insti pricing indicative / reference markets
-status: open · since: 2026-08-17 · last: 2026-10-15
-State: CLIENT_PRICE_INSTI_LDN has repeatedly gone indicative (EBS_IMP_CHI removal in the EBS decommission on 2026-08-17; index pricing during roll). James says it is acceptable for this model to be indicative (it alone has no reference-price fallback, deliberately); CBOE liquidity may be too thin for stable index pricing and Elan was to ask CBOE. On 2026-10-15 a pricer restart alert showed a recent change to LDN pricerInsti reference markets left CME FX/metals futures (6AZ6, GCZ6, MGCZ6, SIZ6 etc.) with no reference markets, though no base spreads exist for them on LDN/CHI insti anyway; Lee says they are not published to clients.
-Next: Toa/Nathan to decide whether the alert for unpriced futures needs suppressing or configuring.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619
+status: open · since: 2026-08-17 · last: 2026-11-01
+State: CLIENT_PRICE_INSTI_LDN has repeatedly gone indicative (EBS_IMP_CHI removal in the EBS decommission on 2026-08-17; index pricing during roll). James says it is acceptable for this model to be indicative (it alone has no reference-price fallback, deliberately); CBOE liquidity may be too thin for stable index pricing and Elan was to ask CBOE. On 2026-10-15 a pricer restart alert showed a recent change to LDN pricerInsti reference markets left CME FX/metals futures (6AZ6, GCZ6, MGCZ6, SIZ6 etc.) with no reference markets, though no base spreads exist for them on LDN/CHI insti anyway; Lee says they are not published to clients. On 11-01 Daria restarted the Argamon LDN prices and pricerInsti1 again alarmed (unable to create 12 of 35 pricing models, all no-reference-price markets); she asked whether those instruments should be removed.
+Next: Toa/Nathan to decide whether to remove the unpriced instruments or suppress the alert.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793571986506049
 
 
 ### chi-hedgers — Toa CHI hedger breaches and CBOE state mismatches
-status: open · since: 2026-08-03 · last: 2026-10-22
-State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
+status: open · since: 2026-08-03 · last: 2026-10-30
+State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). On 10-30 hedgerCBOE1 tripped UnrealisedPnlFirewall (pnlProfitLimitPerDay, 2M) six times in about 3 hours; Lee bumped the unrealised limits and restarted it. ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
 Next: Lee to confirm the CBOE state-mismatch code fix shipped and ordersCOMEXMarex1 fixed.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589
 
 
 ### xau-invalid-increment — XAU price increment rejects (TOA_CHI, B2PRIME)
