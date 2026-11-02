@@ -17,14 +17,21 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-10-30T07:23:17Z
+last_catchup: 2026-11-02T07:20:49Z
 status: active
 ---
 
 ## Now
+Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), with new contact addresses.
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### surya-entity-move — Client moved to Indonesian entity PT Surya Anugrah Mulya
+status: open · since: 2026-11-01 · last: 2026-11-01
+State: Nicole Vivian posted on 2026-11-01 that Valutrades has moved to its Indonesia entity, PT Surya Anugrah Mulya, with new commercial and Mahi-system-support contacts on the client side (addresses in the thread). Implications for contract party, billing and the Surya TT connection are not discussed yet.
+Next: Mahi to check whether the contracting/billing party and client-channel contacts need updating.
+Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1793566129040399
 
 ### feed-lp-routing — LP feed routing (B2Broker, JT)
 status: open · since: 2026-08-12 · last: 2026-10-28
@@ -152,3 +159,4 @@ Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1785399649401229 https://mahi
 - 2026-08-26 — GreySpark reference call (Project Redwood): NPS 9/10, very happy to promote
 - 2026-09-09 — Press report: Valutrades stops CFD client onboarding globally
 - 2026-10-12 — Bridge-to-production quote (~$5k/month) relayed to Graeme; targets 1 Jan launch
+- 2026-11-01 — Valutrades moves to Indonesian entity PT Surya Anugrah Mulya; new contact details
