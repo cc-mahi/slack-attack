@@ -19,26 +19,26 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-10-30T07:21:17Z
+last_catchup: 2026-11-02T07:17:51Z
 status: active
 ---
 
 ## Now
-Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues via *_HOLDING markets (cutover set for 2026-11-02; Finalto dropped, no automatic failover), Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
+Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
+status: open · since: 2026-09-08 · last: 2026-11-02
+State: Cutover happened at the 2026-11-02 open: Go switched ISPRIME, 26DEGREES, LMAX_LDN (and IG available) to its AU entity and re-pointed FIX sessions; Nathan reports it went smoothly. In Compass the plain market names are now the AU entity and *_HOLDING are the old MU entity. Go has not set up an AU Finalto entity, so all Finalto trading is disabled in config (FINALTO_HOLDING cleared and reopened with other LPs). Unwinding MU positions uses hybridHedgerSubTrading1 (close at _HOLDING) and hybridHedgerTrading1 (reopen at AU LPs), with small residuals closed manually. Will finds this manual (manual adjustments plus hedger restart per symbol/market), asked for a more automated risk upload, and asked how residual currency amounts in the trading book work and whether they need clearing; Go wants ISPRIME_HOLDING, 26DEGREES_HOLDING and LMAX_LDN_HOLDING closed by EOD 11-02. Daria offered the LDN team and Isaac to run instruments in parallel and sweep residual P&L positions into another book so they do not net with hedger risk; Will accepted and asked Erik and Orpheas to coordinate.
+Next: Isaac/LDN team to unwind the three _HOLDING books by EOD 11-02 and sweep residuals into a separate book; answer Will's question on residual currency amounts; Go to set up AU Finalto (no date).
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793598060430539 https://mahifx.slack.com/archives/CNF3WPNSK/p1793594318447929
 
 ### counterparty-blacklist — Blacklist / exclude counterparties on hedge cancels and rejections
 status: open · since: 2026-10-12 · last: 2026-10-30
 State: Erik asked on 2026-10-12 for account 81259604 to be excluded from iSAM hedging (Kate added it to the blacklist) and whether a background script could auto-blacklist counterparties reaching X rejections; no substantive answer seen. Since 2026-10-21 ISPRIME has cancelled hedges of a single counterparty within ~13ms nearly daily (HEDGING_MODEL_H1_NYC alerts); the H1 hedger retries ISPRIME every ~200ms with no fallback LP until the account is blacklisted. On 2026-10-29 Isaac blacklisted tag 95000689 from ISPRIME and told Go (Orpheas will investigate on Go's side; hedging cancels only, client execution unaffected). Isaac asked internally whether to make this a routine (flag the CP early) or product automation (auto-blacklist a CP on an LP after N zero-fill cancels and route elsewhere); Shyam replied it would be great automated in the product.
 Next: Mahi to decide routine vs product automation (and answer Erik's auto-blacklist ask); Go to investigate the ISPRIME cancels.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1791819586672009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793266711610419 https://mahifx.slack.com/archives/CNF3WPNSK/p1793267765705429
-
-### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
-status: open · since: 2026-09-08 · last: 2026-10-27
-State: Will announced LPs (ISPRIME, 26DEGREES, FINALTO, LMAX_LDN; LMAX and IG re-pointed at Go's end) move to Go's AU entity. Plan: Mahi keeps existing market names, Go builds AU connections mapped to *_HOLDING markets, Go switches pricing and execution routing on the existing channels on its side (no Mahi config change), Mahi then moves positions from the current LP books into the _HOLDING books and hedgers trade them out into the AU LPs. Nathan built the holding FIX sessions (2026-09-16); 26DEGREES_HOLDING test trade worked; ISAM_HOLDING and LMAX_HOLDING tests due next week. On 2026-10-22 Will set the cutover for Monday 2026-11-02 before the trading day (22:00 UTC, NY exits DST 11-01) for 26DEGREES, ISAM and LMAX; Finalto is delayed and not in that switch. IG becomes available as an LP afterwards. Nathan confirmed Mahi is ready. Go call 2026-10-27: Go will close out all Finalto positions and not re-open (trouble setting up its Finalto AU entity); no automatic OZ routing, Go switches manually with ISAM as failover LP; Kieran declined an automatic in-OZ failover and any extra Mahi failover unless free; if Mahi's servers went down Go's 24/7 support would switch flow manually (AU team knows how, Cyprus being trained), so some downtime is likely in that case. Follow-up call NZ Friday to confirm time and finalise the plan.
-Next: Go to confirm ISAM_HOLDING and LMAX_HOLDING tests and message Mahi when the switch is done; Mahi to move positions into the HOLDING books on 11-02; Nathan to post a specific plan to Compass config this week and confirm time on the NZ Friday call.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792703988337029 https://mahifx.slack.com/archives/CNF3WPNSK/p1793072238317139
 
 ### lr-benign-flow — Published LR also charged on benign counterparties
 status: open · since: 2026-10-27 · last: 2026-10-27
@@ -100,8 +100,8 @@ Next: Mahi dev answer on whether LR attribution is expected to be missing.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1789461866412159
 
 ### cyprus-onboarding — Cyprus staff onboarding and training
-status: watching · since: 2026-08-03 · last: 2026-09-02
-State: Andreas H and Alexandros (Cyprus) asked for educational calls on Mahi components (2026-08-25); Isaac runs weekly training calls (yields, price forensics, automation, execution rules). Alexandros asked what half-life measures (09-02, William Denny checking, no outcome seen). Mac's price-forensics rendering problem 09-10 resolved after Nathan's relink.
+status: closed · since: 2026-08-03 · last: 2026-09-02 · closed: 2026-11-02
+State: Andreas H and Alexandros (Cyprus) asked for educational calls on Mahi components (2026-08-25); Isaac runs weekly training calls (yields, price forensics, automation, execution rules). Alexandros asked what half-life measures (09-02, William Denny checking, no outcome seen). Mac's price-forensics rendering problem 09-10 resolved after Nathan's relink. No activity since 2026-09-02; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787646846925519 https://mahifx.slack.com/archives/C09J1DP2QQH/p1788337952132509
 
 ## Arc
@@ -110,3 +110,4 @@ Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787646846925519 https://ma
 - 2026-07-21 — B-book risk splitting added for Radex
 - 2026-08-27 — A20/B_FX_20_METAL_50 markup channels created
 - 2026-09-16 — LP *_HOLDING connections and MINT CFD LP onboarded
+- 2026-11-02 — LPs cut over to Go's AU entity; Finalto disabled
