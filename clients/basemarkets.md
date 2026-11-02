@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-10-30T07:20:58Z
+last_catchup: 2026-11-02T07:16:36Z
 status: active
 ---
 
@@ -22,6 +22,12 @@ status: active
 Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, awaiting Base's IP for whitelisting). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
 
 ## Streams
+
+### xbtusd-cancels-1030 — XBTUSD orders cancelled: continuity pool missing for crypto
+status: open · since: 2026-10-30 · last: 2026-10-30
+State: Kate (Base) asked 2026-10-30 why an XBTUSD order was cancelled. Kate Stagg found the trades were being force-internalised, i.e. filled on the continuity pool, which had not been set up for crypto; she has now set it up so these cancels should stop. Kate (Base) then asked whether the order was also classified as a dynamic arbitrageur; no answer seen yet. Related to the earlier XBTUSD cancels in brokered-xau-slippage.
+Next: Kate Stagg to answer whether dynamic-arb classification contributed.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1793349196856979 https://mahifx.slack.com/archives/C09D8V41JAG/p1793376640811379
 
 ### partial-ab-book-split — Partial A / partial B book risk split by counterparty tag
 status: open · since: 2026-10-29 · last: 2026-10-29
