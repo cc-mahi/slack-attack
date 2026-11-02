@@ -11,12 +11,12 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-10-30T07:19:47Z
+last_catchup: 2026-11-02T07:16:36Z
 status: active
 ---
 
 ## Now
-Going live: Alpha Broker's first live client was due 2026-10-28, so hedgers and expectedBookStatusOnTimezones come into play. Rollover and open spikes are being tuned hard (new WSS caps and widening factors on 2026-10-27; the 21:00 roll on 2026-10-28 is the first full test). Rapp wants redundancy against outages and a reliable swaps source for crosses, and Andrew said he can have redundancy. Outstanding Aug/Sep invoices remain a soft overhang.
+Going live is slipping: Alpha's first live client was due 2026-10-29 but no flow seen by 2026-10-30; Rapp now says next week after teething issues (charts). Hedgers and expectedBookStatusOnTimezones come into play. Rollover and open spikes are being tuned hard (new WSS caps and widening factors on 2026-10-27; the 21:00 roll on 2026-10-28 is the first full test). Rapp wants redundancy against outages and a reliable swaps source for crosses, and Andrew said he can have redundancy. Outstanding Aug/Sep invoices remain a soft overhang.
 
 ## Streams
 
@@ -26,17 +26,23 @@ State: After the Beeks issue, Rapp wants redundancy against outages (asked again
 Next: Mahi to decide redundancy design and cost, swaps source and cross-connect answer for Rapp.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793094782250149 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793098215512009
 
+### acg-mt5-sessions — Saturday gateway session hours
+status: open · since: 2026-10-31 · last: 2026-10-31
+State: The AlphacapBroker* MT5 bridge sessions on clientDistributionGateway* run Sat 17:00 to Sat 08:00 UTC, so they are closed 08:00-17:00 every Saturday. FastMT reported the gateway offline when it closed at 08:00 on 2026-10-31. Justin Young asked Maten Rehimi what hours they should run and told FastMT Mahi is checking whether Saturday sessions should run longer. No reply seen yet.
+Next: Maten Rehimi to confirm intended session hours; reply to FastMT.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793438994201189
+
 ### pricing-spikes — Open and rollover price spikiness
-status: open · since: 2026-09-21 · last: 2026-10-29
-State: Rapp reported on the 2026-10-27 call that many spiky candles had gone but some remained. Cameron Hughes cut cross widening factors on CLIENT_PRICE_LDN (AUDCAD 10.6 bps vs 276.7 the night before), added ARGAMON back as MWMS benchmark for Metals and AlphaCFDs, switched off XAGUSD benchmark minimum spread, re-firmed metals at 18:00:05 NY, and added WSS caps for 26 uncapped instruments (reset to about 3x LP average spread). Pricers and Beta restarted cleanly; CHFSGD added to AlphaFx. On 2026-10-29 pricers were bounced again to pick up an XAGUSD benchmark minimum spread change and fix indicative pricing. Earlier work (sanity checks, yardsticks, rollover backtests) stands.
-Next: Cameron Hughes to check the 21:00 roll on 2026-10-28 with Rapp, the first full test of the new caps.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790006846789019 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793285270001749
+status: open · since: 2026-09-21 · last: 2026-10-30
+State: By 2026-10-30 Cameron Hughes reported most open-spike issues resolved via MWMS, BMSL and WSS changes; Alpha still flags Softs, XNG and XAGEUR, being looked into. Rapp reported on the 2026-10-27 call that many spiky candles had gone but some remained. Cameron Hughes cut cross widening factors on CLIENT_PRICE_LDN (AUDCAD 10.6 bps vs 276.7 the night before), added ARGAMON back as MWMS benchmark for Metals and AlphaCFDs, switched off XAGUSD benchmark minimum spread, re-firmed metals at 18:00:05 NY, and added WSS caps for 26 uncapped instruments (reset to about 3x LP average spread). Pricers and Beta restarted cleanly; CHFSGD added to AlphaFx. On 2026-10-29 pricers were bounced again to pick up an XAGUSD benchmark minimum spread change and fix indicative pricing. Earlier work (sanity checks, yardsticks, rollover backtests) stands.
+Next: Cameron Hughes to fix Softs, XNG and XAGEUR spikiness and confirm with Rapp.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790006846789019 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793285270001749 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793366099309859
 
 ### go-live-testing — Live test trading and go-live readiness
-status: open · since: 2026-04-29 · last: 2026-10-29
-State: Cameron Hughes was setting up analytics alerting on 2026-10-29 ahead of go-live. Alpha's first live client was due 2026-10-28 (per the 2026-10-27 call). Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
+status: open · since: 2026-04-29 · last: 2026-10-30
+State: Alpha's first live client was meant to activate 2026-10-29 but no flow had been seen by 2026-10-30; Cameron Hughes asked Rapp why, and Rapp now says next week after a few teething issues including charts. Cameron Hughes was setting up analytics alerting on 2026-10-29 ahead of go-live. Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
 Next: Cameron Hughes to turn hedgers on and re-check monitoring once the first live client trades.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791900870280529 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793285281994589
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791900870280529 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793366167563989 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793367049578149
 
 ### invoices-fees — Overdue invoices and additional fees
 status: open · since: 2026-10-14 · last: 2026-10-14
@@ -73,4 +79,4 @@ Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784280180924189 https://ma
 - 2026-04-27 — Account manager handoff from Maten back to Cameron Hughes for setup work.
 - 2026-10-06 — Argamon enabled all instruments and volumes; live test trading began.
 - 2026-10-13 — Test trading finished across all asset classes; awaiting client go-live.
-- 2026-10-28 — First live client expected (per 2026-10-27 call).
+- 2026-10-30 — First live client missed 2026-10-29 target; Rapp now says next week.
