@@ -13,7 +13,7 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-10-30T07:21:00Z
+last_catchup: 2026-11-02T07:16:36Z
 status: active
 ---
 ## Now
@@ -103,10 +103,10 @@ State: ATC staged 26.4 on 10-09 and went live at the weekend restart (client not
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1791483329972859 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791543785439449 https://mahifx.slack.com/archives/C046RNF64VD/p1791866234975939
 
 ### seychelles-uat — Seychelles entity, dev connections and UAT feed
-status: watching · since: 2026-05-19 · last: 2026-10-26
-State: Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12, 10-19, 10-26; Liam turned it on 10-26 but Dave said at 17:42 it was still not live, and Cameron Copland confirmed it working at 18:24, Dave acked); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections.
-Next: Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C046RNF64VD/p1789563271953519 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792427565099679 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793036534440469
+status: watching · since: 2026-05-19 · last: 2026-11-02
+State: Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12, 10-19, 10-26, 11-02; on 11-02 Dave asked at 04:57 UTC and Daria started it by 05:05, Dave acked); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections. On 2026-11-02 Daria reported the MT5 SC orders session (orders_mt5_sc) could not log on from 00:00 UTC: MT5 reset FIX sequence numbers at 00:00 while Mahi's session runs Sunday 20:00 to Friday 21:00 UTC; ATC asked to align the MT5 side to the weekly schedule, no reply yet.
+Next: ATC to align orders_mt5_sc MT5 reset schedule with Sun 20:00-Fri 21:00 UTC; Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C046RNF64VD/p1789563271953519 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792427565099679 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793582879361799
 
 ### xau-hedging — gold hedging and P&L bleed
 status: watching · since: 2026-05-27 · last: 2026-10-08
