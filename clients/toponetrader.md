@@ -17,15 +17,22 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-10-30T07:23:17Z
+last_catchup: 2026-11-02T07:20:53Z
 status: active
 ---
 
 ## Now
+New: TOT has no second price source if Mahi Central eu-west-2 drops; Liam Cordelle weighing options.
 Prop firm; Mahi is dealing desk and risk. Focus is payout ratio: skew and LR tightened, harsher execution on 2-Step/1-Step groups, spreads restored on Prop Firm Match.
-Open: MatchTrader IP whitelist request (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain). New: drop-copy volume exceeds expected volume (checking with Shane).
+Open: MatchTrader IP whitelist request (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain). Also: drop-copy volume exceeds expected volume (checking with Shane).
 
 ## Streams
+
+### single-price-source — No second price source if Mahi Central eu-west-2 drops
+status: open · since: 2026-10-30 · last: 2026-10-30
+State: Cameron Hughes flagged TOT as the one client with no fallback price source: all FX, CFD and metal reference prices come via the Mahi Central eu-west-2 proxy (XAUUSD and RTYUSD each on a single LP); only a small crypto set would survive. This is by design (TOT was told in 2025 it needed no LP alongside MT5; Match feed dropped Dec 2025; BTC/ETH failover FIX sessions sent Sep 2025 never configured). Options: TOT re-enables a platform-side LP, or Mahi adds a second Mahi Central region to TOT's reference panel. Liam Cordelle said it is on his list to think about.
+Next: Liam Cordelle to decide between the two options.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1793359672712069 https://mahifx.slack.com/archives/C08TG143F4L/p1793359694612209
 
 ### matchtrader-ip-allow — MatchTrader asks Mahi to whitelist an IP
 status: open · since: 2026-10-27 · last: 2026-10-27
@@ -52,9 +59,9 @@ Next: Mahi (Shyam Hari) to investigate and revert to Daniel.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1791943609687779 https://mahifx.slack.com/archives/C08U853T684/p1791943843239269
 
 ### payout-ratio-levers — Payout ratio, skew and spread levers
-status: open · since: 2026-09-30 · last: 2026-09-30
+status: watching · since: 2026-09-30 · last: 2026-09-30
 State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% over 6 weeks. Mahi is raising skew on 1-Step and 2-Step. EURUSD, USDJPY and GBPUSD spreads go back to 0.0 on Prop Firm Match after a ranking slide. Max loss 9% to 8% is the agreed fallback if skew and spreads are not enough. TOT's Launchpad experimental groups need the harsher execution rules, so Shane will flag each new group.
-Next: Mahi watching results of skew and spreads; Shane to notify Mahi of each new Launchpad group.
+Next: Quiet since 2026-09-30, downgraded to watching. Mahi watching results of skew and spreads; Shane to notify Mahi of each new Launchpad group.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1790787041722219
 
 ### prop-perps — Prop perps request
