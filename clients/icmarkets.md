@@ -31,22 +31,28 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-10-30T07:23:00Z
+last_catchup: 2026-11-02T07:17:51Z
 status: active
 ---
 
 ## Now
 IC's crypto (XBTUSD-centred) B-book is Mahi's live product there, and the commercial relationship is in a renegotiation phase, so Mahi is deliberately front-footing value-add ("hero moments", price forensics) in client replies.
-Open: IC's CPI-news latency complaint (Oct 14) and its last-look request (actioned Oct 15, applies at the next restart), where the cause was an internal fallback rule that dropped LP1 as primary pricing source, plus PSM spread logic running in Beta ahead of a Price Forensics demo.
+Open: weekend BTCUSD cancels RCA (skew PnL hit of -$110.9K amends its no-P&L line); IC's CPI-news latency complaint (Oct 14) and its last-look request (actioned Oct 15, applies at the next restart), where the cause was an internal fallback rule that dropped LP1 as primary pricing source, plus PSM spread logic running in Beta ahead of a Price Forensics demo.
 Isaac Dann is primary quant lead on the account since 2026-10-08. The Toa pricer route is being retired: Tokyo feed moved to Mahi Central on 29 Oct, with the Sat 31 Oct 10:00-11:00Z WAN cutover still to run.
 Karam asked on Oct 21 about tag 8093117 (sharp short-duration markouts); Rory's reply offers IC a choice of keeping it B-booked or moving it to a risk-managed book, awaiting IC.
 
 ## Streams
 
+### weekend-btcusd-cancels — BTCUSD arb-profile cancels and rejects over the 31 Oct weekend
+status: open · since: 2026-10-31 · last: 2026-11-02
+State: After the 29 Oct Tokyo feed move, the XBTUSD continuity pool's only source sat on mahi-central Tokyo pricers on the default WEEKEND schedule. They went indicative at Fri 30 Oct 21:00Z, so every Dynamic Arbitrageurs BTCUSD order cancelled (155 accounts) until the fix at Sun 1 Nov 09:28Z (global empty `reference.tradingDisabledTimezones`, pricer restarts). IC reported rejections from Sat 31 Oct (Elbekjon, Andrew Chan, Joanna on 1 Nov); Cooney first read one as too much size at the level, then James adjusted config for the toxic/arbitrageur tags and Andreas confirmed fills were fine at 10:39Z 1 Nov. James's RCA (P2, Will agreed the actions) said no P&L impact, but on 2 Nov Shyam showed the freeze also hit skew PnL: TOA_BENCHMARK_APN is XBTUSD's skew PnL reference, so FI was measured against a frozen price, netting -$110.9K over the window. Skew PnL also accepted the indicative price the pool refused, which a second pool source would not cover. The wiki has the correction flagged.
+Next: James: second XBTUSD pool source, page on cancel-ratio EMERGENCYs (fired from Fri 22:09Z unseen), check ADAUSD and other Tokyo-sourced coins before next weekend; amend the "no P&L impact" line in the RCA; client post-mortem draft awaits AM sign-off.
+Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1793462410747149 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793527085905049 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793603002074319
+
 ### toa-to-mahi-central — Move IC pricer feed from Toa to Mahi Central Tokyo
 status: open · since: 2026-10-28 · last: 2026-10-29
 State: The Tokyo reference feed moved from Toa to Mahi Central (MC) Tokyo in the Thu 29 Oct 16:00-16:30Z window (CHG-2610-NGD1, approved by Liam 16:10Z; scope grew and it completed, band red, recorded after the fact). MC Tokyo now prices all 16 instruments IC used from Toa, and IC's NYC and HK receivers read it (HK over MC's public IP, firewall opened for IC HK only). MC TKY now counts as live production. Wintermute is already primary, so the feed is for normalisation basis only. James still plans the Sat 31 Oct 10:00-11:00Z WAN cutover (CHG-2610-HSJB) and to stop the Toa box once IC is off it; a Toa backup route can be re-added after (up to ~60 min downtime). Follow-ups raised 29 Oct: IC's APE box reaches MC TKY over the internet, and OKX now sits in APNE1, so MC needs a local OKX feed or it is a TK-HK-TK round trip (James). Liam thinks IC's Asia box may need rebuilding or be unnecessary if Mahi does no risk management for IC again, and failover needs discussing with IC, though the commercial position is unclear.
-Next: James to run the Sat window and stop Toa; local OKX feed for MC TKY; decision on IC's Asia box and failover (Liam, Isaac, no owner or date seen).
+Next: James to run the Sat window and stop Toa (no Slack signal seen on whether it ran); local OKX feed for MC TKY; decision on IC's Asia box and failover (Liam, Isaac, no owner or date seen).
 Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793201975033619 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793305561451639
 
 ### tag-8093117-review — Review of IC tag 8093117 and B-book vs risk-managed option
@@ -92,16 +98,14 @@ Next: IC (Andreas) to supply MT5 S3 journal and OneZero hub logs (no reply seen)
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1789999684236149 https://mahifx.slack.com/archives/C07UBJNUWG1/p1790179197920489 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1790579141187729 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1791581333178099
 
 ### account-reviews — Per-account execution/LR reviews and defensive tags
-status: open · since: 2026-08-19 · last: 2026-10-02
+status: watching · since: 2026-08-19 · last: 2026-10-02
 State: IC regularly asks Mahi to review specific accounts or add tags to the defensive profile (Aug 19, 21, 27 batches actioned, 5299799 moved to defensive with ~$4k protected). Harry's 2026-10-02 request on 8120817 was answered the same morning (Rory: LR stepped up with volume, markouts steady for 30s) and Harry will keep monitoring. For cTrader account 6165669 (2026-09-09) Nathan found clean fills ($21.67m over 159 orders, ~$1.41k extra LR, $65/M), a pattern that looks like VWAP avoidance, and offered a custom counterparty LR profile. Other threads: Savvas's 2026-09-07 BTCUSD rejections were an account auto-flagged as an arbitrageur (-49 $/M at inception) and filled on a separate unskewed feed, so its limit orders were breached; Isaac manually rehabilitated it. Elbekjon's 2026-08-31 slippage was a Dynamic Arbitrageurs fill at continuity pool plus $200/M B_BOOK markup. A Sep 10 oddity: trades for MT4S27_270073080 appeared on drop copy (clips over $1m, filled better than VWAP) without Mahi executing them; Nouri said it is an in-house group with no live trading. An account Cooney found exploiting the over-skew was not auto-classified as an arber (logged on the wiki 2026-09-14).
-Next: Harry to say whether 6165669 should get a custom counterparty LR profile (offered 2026-09-10, no reply seen).
+Next: Downgraded to watching 2026-11-02 (quiet since Oct 2; the live rejection thread is weekend-btcusd-cancels). Harry to say whether 6165669 should get a custom counterparty LR profile (offered 2026-09-10, no reply seen).
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1789037279787749 https://mahifx.slack.com/archives/C07UBJNUWG1/p1789002814143249 https://mahifx.slack.com/archives/C07UBJNUWG1/p1788788753748429 https://mahifx.slack.com/archives/C07UBJNUWG1/p1790932086942509
 
-
 ### si-hedging-clusters — Cluster LR groups and XBTUSD SI hedging
-status: watching · since: 2026-08-20 · last: 2026-08-26
-State: Pavlos grouped the BTCUSD cluster list into 3 clusters with shared liquidity pools and Signal Follow settings (2026-08-24) and Cameron Hughes actioned it the same day, after Cooney's 6 new BO groups on Aug 21 (cluster LR cut from 100k/1000 to 25k/3000, as 100k/1000 was more generous than the 75k/3000 default); cluster flow is sharp (about 10-20 $/M captured). Cooney set up SI hedging for XBTUSD: hold 5m for 2h, hard limit 20m, working out of excess via passive OKX orders (OKX moved HK to Tokyo). OKX test orders worked on Aug 21 after a gateway fix and Isaac declared it ready; it remained on B Book because IC had not confirmed the switch (Isaac, Aug 24; "throw the switch").
-Next: IC (Pavlos) to approve switching SI on; no reply since 2026-08-26 (watching, no open Mahi action); Rory's Oct 21 risk-managed option for tag 8093117 may overlap, and Liam's 29 Oct remark questions whether risk management happens for IC at all.
+status: closed · since: 2026-08-20 · last: 2026-08-26 · closed: 2026-11-02
+State: Pavlos grouped the BTCUSD cluster list into 3 clusters with shared liquidity pools and Signal Follow settings (2026-08-24) and Cameron Hughes actioned it the same day, after Cooney's 6 new BO groups on Aug 21 (cluster LR cut from 100k/1000 to 25k/3000, as 100k/1000 was more generous than the 75k/3000 default); cluster flow is sharp (about 10-20 $/M captured). Cooney set up SI hedging for XBTUSD: hold 5m for 2h, hard limit 20m, working out of excess via passive OKX orders (OKX moved HK to Tokyo). OKX test orders worked on Aug 21 after a gateway fix and Isaac declared it ready; it remained on B Book because IC had not confirmed the switch (Isaac, Aug 24; "throw the switch"). No activity since 2026-08-26; closed as superseded by the 21 Oct risk-managed option in tag-8093117-review.
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1787327600173079 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787573389998509 https://mahifx.slack.com/archives/C07UBJNUWG1/p1787731325918319
 
 ### lr-last-look-tuning — Liquidity reduction, WSS caps and last-look policy
@@ -122,3 +126,4 @@ Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1787222735783359 https://ma
 - 2026-10-09 — Compass 26.3 to 26.4 release; PSM live on Beta XBTUSD
 - 2026-10-15 — Renegotiation phase flagged; CPI latency complaint answered with value-add framing
 - 2026-10-29 — Tokyo reference feed moved from Toa to Mahi Central
+- 2026-11-01 — Weekend BTCUSD arb-profile cancels (from Fri 21:00Z) traced to the new Tokyo pool source; fixed 09:28Z
