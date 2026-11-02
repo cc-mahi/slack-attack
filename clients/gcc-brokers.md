@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-10-30T07:22:00Z
+last_catchup: 2026-11-02T07:17:51Z
 status: active
 ---
 ## Now
@@ -26,17 +26,23 @@ A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef i
 
 ## Streams
 
+### inst-hedger-deploy — Inst hedger Puppet deploy left broken
+status: open · since: 2026-10-30 · last: 2026-11-02
+State: The Inst hedger deploy (CHG-2610-2Q0F, Infra-Deploy #640) failed at Puppet on admin-1 on 10-30 from a corrupt Puppet backup entry, so the arbHedgerInst1 Nagios check and nagios/nsca/collectd refreshes did not apply and the Puppet cron is off on both boxes. William Denny brought up hybridHedgerInst1 and arbHedgerInst1 anyway; after a PagerDuty alert Daria left them off on 11-01 as no trades showed under Inst house for the last week (the institutional stream, see insto-pricing, is not trading yet). Nathan logged it on the GCC wiki 11-02.
+Next: Fix the Puppet backup entry and re-run the deploy; Daria to turn the Inst hedgers on when Inst flow starts.
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1793380821002989 https://mahifx.slack.com/archives/C09QS1NUA80/p1793602997317929
+
+### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
+status: open · since: 2026-04-30 · last: 2026-10-30
+State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible. The 10-22 report (3,708 oz gold long, 15:30 BST) was acknowledged in 13s and confirmed actioned by Rory at 15:34 BST. The 10-26 report (3,423 oz gold long, 15:08 GMT) was acknowledged by William in 4 minutes and confirmed done at 15:19 GMT. The 10-27 report (1,746 oz gold long, 16:16 UTC) was acknowledged by Isaac Dann ("will book this now") with no done-confirmation visible. The 10-28 report (1,212 oz gold long, 15:26 UTC) was acknowledged by William ("Hi Layan, sure") with one more reply in thread at 15:34. The 10-29 report (3,510 oz gold long, 15:06 UTC) was acknowledged by Isaac Dann ("booking this now") with no done-confirmation visible. The 10-30 report (1,012 oz gold long, 15:12 UTC) was acknowledged by Isaac Dann in 3 minutes and confirmed actioned at 15:17. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
+Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027291641789 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793373433506539
+
 ### lmax-price-outage — 2026-10-29 LMAX pricing gap
 status: open · since: 2026-10-29 · last: 2026-10-29
 State: On 10-29 at ~14:53 UTC Youssef told Mahi GCC saw no LMAX pricing for about 12 minutes; GCC was chasing LMAX, and Isaac Dann said Mahi would watch hedging meanwhile. At 14:58 Youssef reported it back after 16 minutes with no price. Cause not stated in channel.
 Next: Mahi to confirm hedging was unaffected during the gap; watch for recurrence.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285629414699 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285935629259
-
-### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-10-29
-State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible. The 10-22 report (3,708 oz gold long, 15:30 BST) was acknowledged in 13s and confirmed actioned by Rory at 15:34 BST. The 10-26 report (3,423 oz gold long, 15:08 GMT) was acknowledged by William in 4 minutes and confirmed done at 15:19 GMT. The 10-27 report (1,746 oz gold long, 16:16 UTC) was acknowledged by Isaac Dann ("will book this now") with no done-confirmation visible. The 10-28 report (1,212 oz gold long, 15:26 UTC) was acknowledged by William ("Hi Layan, sure") with one more reply in thread at 15:34. The 10-29 report (3,510 oz gold long, 15:06 UTC) was acknowledged by Isaac Dann ("booking this now") with no done-confirmation visible. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
-Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027291641789 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793286416958399
 
 ### finalto-tag-blacklist — 2026-10-27 tag 4004532 blacklist rejects
 status: open · since: 2026-10-27 · last: 2026-10-28
@@ -123,11 +129,6 @@ status: watching · since: 2026-08-20 · last: 2026-09-03
 State: Youssef asked on 08-20 how to get P&L via the MFXPulse API, then on 09-02 asked for both S3/Parquet and Athena access with a list of credentials, workgroup, yieldprofiles_latest view and book IDs. Daria said she would set it up with the dev team and Rory said he would check status when Youssef asked on 09-03; no provisioning or confirmation is visible after that.
 Next: Rory/Daria to provision MFXPulse (details in the 09-02 request) and confirm to Youssef.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1788376707168249 https://mahifx.slack.com/archives/C09PNC1MFAA/p1788427041816899
-
-### xag-incident-comp — Compensation demand after 2026-05-15 XAGUSD incident
-status: closed · since: 2026-05-15 · last: 2026-05-27 · closed: 2026-10-16
-State: A stale max market position cap left ~45k oz XAGUSD unhedged for ~90 minutes on 2026-05-15 (about $70k client loss); GCC (Khalil) demanded $70k cash and Mahi held at forgoing its value-add share for the pilot. No later signal on the dispute; presumably overtaken by the 12-month terms agreed 07-22 and contract signed 08-07, but never explicitly closed in Slack; no activity since 2026-05-27, assumed resolved.
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1778851998984029 https://mahifx.slack.com/archives/C09QS1NUA80/p1779888805588859
 
 ## Arc
 - 2026-04-23 — CFD internalisation go-live list proposed; live 2026-05-07
