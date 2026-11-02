@@ -10,13 +10,13 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-10-30T07:23:17Z
+last_catchup: 2026-11-02T07:19:11Z
 status: active
 ---
 
 ## Now
 Toa is a sister company (same CTO, James Furness; also posts as James@toalabs.xyz). Nado is wound down; the live workload is Argamon FX/metals market making on LDN, CHI and APN1, with ops watching PagerDuty in `internal-toa-ops`. `toa-nado-shared` has been silent since the wind-down.
-Main threads: the CBOE hedger on CHI keeps tripping its PnL firewall, the CBOE state-mismatch code fix is due, and LDN insti pricing goes indicative around rolls since the EBS feed was killed.
+Main threads: the CBOE hedger on CHI keeps tripping its PnL firewall (six trips on 10-30), the CBOE state-mismatch code fix is due, and LDN insti pricing goes indicative around rolls since the EBS feed was killed.
 Several Argamon-raised issues arrive as forwards from `mahi-argamon-operations`, which is not in this dossier's channels.
 
 ## Streams
@@ -28,16 +28,16 @@ Next: Lee to finish the TKY LP; unwind the multi-region infra left from the sec-
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379
 
 ### cboe-hedger-chi — hedgerCBOE1 on CHI: firewall/PnL trips and state mismatches
-status: open · since: 2026-08-03 · last: 2026-10-22
-State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, and restarted again 10-22 by James ("looks fine"). Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
-Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1790649346754469 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309
+status: open · since: 2026-08-03 · last: 2026-10-30
+State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, restarted again 10-22 by James ("looks fine"), and on 10-30 tripped `UnrealisedPnlFirewall` (`pnlProfitLimitPerDay`, 2M) six times in about three hours from 13:04 UTC, re-tripping after each restart until Lee bumped the unrealised limits and restarted it. Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
+Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile; limit tuning or root cause of the repeated unrealised-PnL trips is open.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589
 
 ### insti-indicative-pricing — LDN insti pricing indicative after EBS decommission and around rolls
-status: open · since: 2026-08-17 · last: 2026-10-15
-State: EBS decommission removed `EBS_IMP_CHI`, which LDN insti pricing relied on, so insti FX went indicative; the EBS feed is now killed. During rolls CBOE_HR_LDN is the main reference and CBOE liquidity can be too thin for a stable price (Elan was to ask CBOE). Ops muted alerts via `monitoring.pricing.suppressAlertsDuring` and Lee removed SINGAPORE_MONDAY. James: CLIENT_PRICE_INSTI_LDN may be indicative because it is the only model without index reference-price fallback ("rather no price than a degraded price"). 2026-10-15 Nathan Burch asked whether 6A/6B/6E/6J/6M/6N/6S/6Z, GC, MGC, SI and SIL Dec-26 futures should be priced: LDN pricerInsti reference markets changed, and no base spreads exist on CHI or LDN insti. Lee replied that they are not published to clients but are available via CME/COMEX.
-Next: Toa/Argamon to confirm whether those futures are meant to be priced; Elan to follow up with CBOE on liquidity.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787002323906439 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619
+status: open · since: 2026-08-17 · last: 2026-11-01
+State: EBS decommission removed `EBS_IMP_CHI`, which LDN insti pricing relied on, so insti FX went indicative; the EBS feed is now killed. During rolls CBOE_HR_LDN is the main reference and CBOE liquidity can be too thin for a stable price (Elan was to ask CBOE). Ops muted alerts via `monitoring.pricing.suppressAlertsDuring` and Lee removed SINGAPORE_MONDAY. James: CLIENT_PRICE_INSTI_LDN may be indicative because it is the only model without index reference-price fallback ("rather no price than a degraded price"). 2026-10-15 Nathan Burch asked whether 6A/6B/6E/6J/6M/6N/6S/6Z, GC, MGC, SI and SIL Dec-26 futures should be priced: LDN pricerInsti reference markets changed, and no base spreads exist on CHI or LDN insti. Lee replied that they are not published to clients but are available via CME/COMEX. On 2026-11-01 Daria restarted the Argamon LDN prices and pricerInsti1 raised `marketData.pricing.modelError` (unable to create 12 of 35 pricing models, all no-reference-price markets, same as the 10-15 case); she asked whether those instruments should be removed.
+Next: Toa/Argamon to answer whether those futures (and the 12 failing models) should be priced or removed; Elan to follow up with CBOE on liquidity.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787002323906439 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793571986506049
 
 ### argamon-relays — Argamon-raised issues relayed from mahi-argamon-operations
 status: open · since: 2026-08-19 · last: 2026-10-09
