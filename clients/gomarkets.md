@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-02T07:17:51Z
+last_catchup: 2026-11-03T07:16:26Z
 status: active
 ---
 
@@ -30,9 +30,9 @@ Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and
 
 ### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
 status: open · since: 2026-09-08 · last: 2026-11-02
-State: Cutover happened at the 2026-11-02 open: Go switched ISPRIME, 26DEGREES, LMAX_LDN (and IG available) to its AU entity and re-pointed FIX sessions; Nathan reports it went smoothly. In Compass the plain market names are now the AU entity and *_HOLDING are the old MU entity. Go has not set up an AU Finalto entity, so all Finalto trading is disabled in config (FINALTO_HOLDING cleared and reopened with other LPs). Unwinding MU positions uses hybridHedgerSubTrading1 (close at _HOLDING) and hybridHedgerTrading1 (reopen at AU LPs), with small residuals closed manually. Will finds this manual (manual adjustments plus hedger restart per symbol/market), asked for a more automated risk upload, and asked how residual currency amounts in the trading book work and whether they need clearing; Go wants ISPRIME_HOLDING, 26DEGREES_HOLDING and LMAX_LDN_HOLDING closed by EOD 11-02. Daria offered the LDN team and Isaac to run instruments in parallel and sweep residual P&L positions into another book so they do not net with hedger risk; Will accepted and asked Erik and Orpheas to coordinate.
-Next: Isaac/LDN team to unwind the three _HOLDING books by EOD 11-02 and sweep residuals into a separate book; answer Will's question on residual currency amounts; Go to set up AU Finalto (no date).
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793598060430539 https://mahifx.slack.com/archives/CNF3WPNSK/p1793594318447929
+State: Cutover happened at the 2026-11-02 open: Go switched ISPRIME, 26DEGREES, LMAX_LDN (and IG available) to its AU entity and re-pointed FIX sessions; Nathan reports it went smoothly. In Compass the plain market names are now the AU entity and *_HOLDING are the old MU entity. Go has not set up an AU Finalto entity, so all Finalto trading is disabled in config (FINALTO_HOLDING cleared and reopened with other LPs). Unwinding MU positions uses hybridHedgerSubTrading1 (close at _HOLDING) and hybridHedgerTrading1 (reopen at AU LPs), with small residuals closed manually. Will finds this manual (manual adjustments plus hedger restart per symbol/market), asked for a more automated risk upload, and asked how residual currency amounts in the trading book work and whether they need clearing; Go wants ISPRIME_HOLDING, 26DEGREES_HOLDING and LMAX_LDN_HOLDING closed by EOD 11-02. Daria offered the LDN team and Isaac to run instruments in parallel and sweep residual P&L positions into another book so they do not net with hedger risk; Will accepted and asked Erik and Orpheas to coordinate. Isaac confirmed at 12:00 UTC that all positions were moved MU to AU; by 17:20 Erik reported MU LP accounts and HOLDING connections flat and exposure matching Tapaas, with only the AU LP account cross-check left; Will thanked Isaac.
+Next: Go (Erik) to finish cross-checking AU LP accounts and flag any issue; answer Will's question on residual currency amounts if still open; Go to set up AU Finalto (no date).
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793598060430539 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793640007212149
 
 ### counterparty-blacklist — Blacklist / exclude counterparties on hedge cancels and rejections
 status: open · since: 2026-10-12 · last: 2026-10-30
