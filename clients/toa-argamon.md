@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-11-02T07:19:10Z
+last_catchup: 2026-11-03T07:17:13Z
 status: active
 ---
 
@@ -29,15 +29,15 @@ status: active
 Argamon is the NY retail tenant (Mahi) plus Toa-hosted LDN/CHI/APN1 boxes (insti, hedging, crypto). Weekly calls with Jem/Elan/Daria/Shyam drive the agenda: wanting 500:1 leverage and to hold more risk, so Mahi is running sims and rolling CFDs/indices into Compass with internalisation and skew.
 Argamon is moving connectivity from Centroid to PrimeXM. Compass 26.4 is on LDN/CHI/APN1; NY was staged for the 10-10/11 weekend restart (outcome unconfirmed).
 On 10-21 the NY retail FX book moved to a 500k G8 inventory cap with Friday flatten (William Denny monitoring).
-GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). From 11-02 gold hedging no longer uses TOA_CHI (Toa last-look tolerance 0). Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
+GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). Toa reset Mahi's last-look/tolerance, so TOA_CHI went back into XAU hedging on 11-03. Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
 
 ### toa-last-look-hedge — Toa last-look tolerance 0 rejecting Mahi gold hedges
-status: open · since: 2026-11-02 · last: 2026-11-02
-State: Since 10-28 Toa has set last-look tolerance to 0 on Mahi's account, so hybrid hedger gold orders mostly get rejected: fill rate at Toa fell from about 40% to 7% and gold hedging volume dropped by about two thirds. On 11-02 Shyam removed TOA_CHI from the hybrid hedger's gold venues; gold hedges now go to JANE, HSBC and DB. Brokered gold via Toa is unchanged. No Toa response seen yet.
-Next: Toa to say whether the 0 tolerance is intended; Mahi to watch gold hedge fill rates and PnL on the new venues.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1793588984698429
+status: open · since: 2026-11-02 · last: 2026-11-03
+State: Since 10-28 Toa has set last-look tolerance to 0 on Mahi's account, so hybrid hedger gold orders mostly get rejected: fill rate at Toa fell from about 40% to 7% and gold hedging volume dropped by about two thirds. On 11-02 Shyam removed TOA_CHI from the hybrid hedger's gold venues; gold hedges now go to JANE, HSBC and DB. Brokered gold via Toa is unchanged. By 11-03 Toa had reset last-look and tolerance, and Shyam added TOA_CHI back into XAU hedging markets; Elan will also revert the NY4 execution rule tightening at Toa, so fill rates should normalise. Shyam also extended Gold LowSlow into twilight (16:00-16:45 NY) to get cheaper hedges before 16:45 EOD clearance, blocked 17:00-18:10 NY.
+Next: Mahi to confirm Toa gold fill rates recover and watch PnL on the twilight LowSlow change.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1793588984698429 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793678514931149
 
 ### gts-hrp-nwm — HRP LP sessions wound down in favour of NWM/NWPB
 status: open · since: 2026-10-27 · last: 2026-10-28
@@ -46,11 +46,10 @@ Next: Argamon to say whether they want a GTS via NWM market set up in Compass; M
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793113766371149 https://mahifx.slack.com/archives/C083GP5F1CL/p1793166381823569
 
 ### platform-ops — Toa box housekeeping, config landmines, capacity
-status: open · since: 2026-08-17 · last: 2026-10-30
-State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17. marketDataNado1 hit an OOM on 10-28 and was restarted by Shyam (PagerDuty raised). On 10-30 Kraken Futures market data on APN1 went down from about 02:20 UTC; Shyam says it is Kraken's side (their spot connectivity incident, still under investigation; PagerDuty raised).
-Next: watch for Kraken Futures MD recovery on APN1; confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787462723096659 https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379
-
+status: open · since: 2026-08-17 · last: 2026-11-02
+State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17. marketDataNado1 hit an OOM on 10-28 and was restarted by Shyam (PagerDuty raised). On 10-30 Kraken Futures market data on APN1 went down from about 02:20 UTC; Shyam says it is Kraken's side (their spot connectivity incident, still under investigation; PagerDuty raised). On 11-02 Daria asked Toa whether to extend the alert threshold or disable not-ticking monitoring for ISAM_NW_LDN (down about 16:20-18:00 NY) and KGI_RCTV_NYC (about 16:50-18:15 NY) around roll; no answer yet.
+Next: Toa to answer on the roll-time not-ticking alerts; watch for Kraken Futures MD recovery on APN1; confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379 https://mahifx.slack.com/archives/C035H1VNCAD/p1793662534164719
 
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
 status: open · since: 2026-07-21 · last: 2026-10-28
@@ -59,10 +58,10 @@ Next: expect Centroid FIX drops on 10-31 10:00-11:00Z; Levi to apply the PXM pas
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793206534345309
 
 ### retail-leverage-risk — Argamon wants 500:1 leverage and to hold more risk
-status: open · since: 2026-08-31 · last: 2026-10-27
-State: On the 10-27 call with Jem and Elan there was no timeline for higher leverage; Argamon wants Mahi to lead on internalising more flow profitably, eventually across all their clients. They want all FX, not just G8, on the new risk model (Shyam to sim). Elan also suggested dark pool hedging (XTX, ~5 min time to fill per Elan) for NY4; Daria noted Toa dropped XTX in recent months because it cost spread, and it might work with less aggressive VaR clearance/backstop rules. Argamon wants to offer higher leverage (500:1 vs 100:1 now) and hold more risk. On 2026-10-21 Shyam, agreed with Jem, switched the NY retail FX book to a "G8-Cap" profile: up to a 500k inventory cap on internalised G8 flow with a Friday-close flatten, chosen from earlier sims. Replay Sep 25 to mid Oct showed +$62k (about $1/M) vs the old rules, average G8 risk up from $0.91m to $1.26m with much smaller peaks and near-flat weekends. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. Will Carter asked William Denny to monitor. Earlier: sims did not clearly support loosening risk; 09-22 call agreed CFD internalisation and asked for leverage recommendations; Argamon also runs a prop-style challenge business outside Compass.
-Next: William Denny to monitor retail PnL on the new G8 cap; Shyam to sim all-FX on the new risk model and look into dark pool hedging for NY4 (Daria to look at fill rate and time to fill); Argamon to say how much risk they will open up.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339
+status: open · since: 2026-08-31 · last: 2026-11-03
+State: On the 11-02/03 call Jem and Elan wanted to try full B-book for some CPs with soft flow (A-book/B-book model; Shyam says little soft flow exists) and to extend capped internalisation beyond G8 with a 250k cap on other currencies (sims roughly PnL-neutral, closer to supporting higher FX leverage); they are open to holding past the 500k limit for soft CPs. They agreed to PSM in beta provided average spreads stay the same (Elan may want it at Toa too). Elan is sending CBOE session credentials for a hidden peg hedging trial in NY4. Earlier, on the 10-27 call with Jem and Elan there was no timeline for higher leverage; Argamon wants Mahi to lead on internalising more flow profitably, eventually across all their clients. They want all FX, not just G8, on the new risk model (Shyam to sim). Elan also suggested dark pool hedging (XTX, ~5 min time to fill per Elan) for NY4; Daria noted Toa dropped XTX in recent months because it cost spread, and it might work with less aggressive VaR clearance/backstop rules. Argamon wants to offer higher leverage (500:1 vs 100:1 now) and hold more risk. On 2026-10-21 Shyam, agreed with Jem, switched the NY retail FX book to a "G8-Cap" profile: up to a 500k inventory cap on internalised G8 flow with a Friday-close flatten, chosen from earlier sims. Replay Sep 25 to mid Oct showed +$62k (about $1/M) vs the old rules, average G8 risk up from $0.91m to $1.26m with much smaller peaks and near-flat weekends. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. Will Carter asked William Denny to monitor. Earlier: sims did not clearly support loosening risk; 09-22 call agreed CFD internalisation and asked for leverage recommendations; Argamon also runs a prop-style challenge business outside Compass.
+Next: William Denny to monitor retail PnL on the new G8 cap; Shyam to check configurability of holding past 500k and B-book for soft CPs, put PSM in beta with comparative sims, trial hidden peg hedging in NY4 once Elan sends CBOE credentials, and look into dark pool hedging (Daria on fill rate/time to fill); Argamon to say how much risk they will open up.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793674916716319
 
 
 ### inst-toxic-flow — INST-1 large toxic flow in retail book
