@@ -16,20 +16,20 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-11-02T07:19:05Z
+last_catchup: 2026-11-03T07:16:26Z
 status: active
 ---
 
 ## Now
-Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow), expanding to crosses, futures and CFDs. On the 29 Oct call Kama agreed the post-pilot terms (pilot ends 5 Nov); Nicole's draft contract (3-month rolling, volume tiers, futures/CFDs at no extra cost) awaits Will and Kate. Kama want to go ahead with SI on their own 51 tags and ask Mahi to flag bad subtags (Kate re-running sims); Kate is the day-to-day owner, Moe drives client-side changes. Roll cancels on 29 Oct came from no HFT-pool liquidity (Ali declined indicative pricing). Still open: NOP/hedger null-check fix deploy, EURGBP rejects, PXM timeout handling, Friday-close risk carry.
+Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow), expanding to crosses, futures and CFDs. On the 29 Oct call Kama agreed the post-pilot terms (pilot ends 5 Nov); Nicole's draft contract (3-month rolling, volume tiers, futures/CFDs at no extra cost) awaits Will and Kate. Kama want to go ahead with SI on their own 51 tags and ask Mahi to flag bad subtags (Kate re-running sims); Kate is the day-to-day owner, Moe drives client-side changes. On 2 Nov 19 crosses went to direct pricing with per-timezone spread profiles Kama can edit. Roll cancels on 29 Oct came from no HFT-pool liquidity (Ali declined indicative pricing). Still open: NOP/hedger null-check fix deploy, EURGBP rejects, PXM timeout handling, Friday-close risk carry.
 
 ## Streams
 
-### cross-pricing-spreads — GBPNZD cross wider than provider, timezone spread config
+### cross-pricing-spreads — Direct cross pricing and spread control
 status: open · since: 2026-10-29 · last: 2026-11-02
-State: Ali saw GBPNZD about 60s versus about 30s at his provider. Kate found it was the SNGLDN timezone: drivers' base spreads there are wider and crosses are triangulated from them, while Ali was editing the LDN timezone config; once the session moved to LDN the cross returned in line at factor 1. On the 29 Oct call Kama asked to price crosses directly like the drivers, for more spread flexibility; Ali edited pricing.spreadprofile repeatedly (29 Oct, 30 Oct about 08:24-08:28 UTC). On 2 Nov 06:57 UTC Ali asked again why triangular-cross min spreads are higher in SNGLDN than LDN despite the same driver spreads and factors; Moe reminded Kate they agreed to make crosses direct with Kama setting the level, like majors. Daria (07:02) explained the difference: the 1M-tier NZDUSD spread differs and more than 500k NZDUSD is needed to triangulate 500k GBPNZD; aligning the 1M spread or cutting the triangulated quantity fixes it, but moving crosses to direct pricing is the agreed route and the LDN team will pick it up with Kama on 2 Nov. Moe acknowledged.
-Next: LDN team (Kate) to set up direct cross pricing with Kama on 2 Nov.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793258682451549 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793602978673649
+State: GBPNZD looked wider than Ali's provider (29 Oct) because crosses were triangulated from the wider SNGLDN driver spreads; on 29 Oct Kama asked to price crosses directly with Kama setting the level. On 2 Nov Kate went live with 19 directly priced crosses (JPY, AUD, NZD, CAD, CHF and EURSGD crosses; 19 total), uploaded to pricing.spreadprofile (12:11-15:24 UTC) (clients unhappy with pre-London spreads). Each cross has its own base spread per size tier and timezone, seeded from the last week of LP quotes; the widening factor now applies only to triangulated crosses. Two non-dynamic floors stop the price being tighter than the LPs, both at factor 1 on each pricing model: Benchmark Minimum Spread (per tier against the benchmark LPs' combined book) and Market Width Minimum Spread (against the tightest LP live); cutting base spreads below them shows no change. Hedging is unchanged and still goes through the drivers.
+Next: Kama to tune base spreads and report crosses or sessions still flagged by clients; Kate to review the market-widening config if Kama wants tighter than the LP floor.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793258682451549 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793640066486849
 
 ### roll-stp-rejects — Market order cancels over roll (no HFT-pool liquidity)
 status: open · since: 2026-10-29 · last: 2026-10-30
@@ -117,7 +117,7 @@ Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792154269472349 https://ma
 
 ### lp-timeouts-pxm-unsub — LP latency and timeouts triggering PXM unsubscribes
 status: open · since: 2026-09-15 · last: 2026-10-19
-State: Recurring pattern: an order sitting unanswered trips PXM's firewall timeout and PXM unsubscribes XAUUSD on Kama's price sessions with no automatic resubscribe (15 Sep SOR restart; 2 Oct misconfigured MCC restart; 19 Oct, see nop-hedger-outage). On 19 Oct Kate recommended keeping the 180,000ms timeout and having PXM cancel the leg and reject the client order on a pending-leg timeout while keeping the provider enabled; Moe says PXM disables the provider (or symbol) on timeout, Kate noted other PXM clients just reject so it looks configurable, and Moe will ask PXM. Moe wants restarts coordinated better; Kate will give notice of planned ones. Mahi's stance (Kate, 12 Oct): never resend an open order (double-fill risk), re-hedge via other LPs only once it is dead; hardTimeoutLength exists but can strand risk (Liam). Ali objects that brokered orders wait for the LP fill so clients with a 500ms TTL time out (5 Oct).
+State: Recurring pattern: an order sitting unanswered trips PXM's firewall timeout and PXM unsubscribes XAUUSD on Kama's price sessions with no automatic resubscribe (15 Sep SOR restart; 2 Oct misconfigured MCC restart; 19 Oct, see nop-hedger-outage). On 19 Oct Kate recommended keeping the 180,000ms timeout and having PXM cancel the leg and reject the client order on a pending-leg timeout while keeping the provider enabled; Moe says PXM disables the provider (or symbol) on timeout, Kate noted other PXM clients just reject so it looks configurable, and Moe will ask PXM. Moe wants restarts coordinated better; Kate will give notice of planned ones. Mahi stance (12 Oct): never resend an open order (double-fill risk), re-hedge via other LPs only once it is dead; hardTimeoutLength exists but can strand risk (Liam). Ali objects that brokered orders wait for the LP fill so clients with a 500ms TTL time out (5 Oct).
 Next: Moe to ask PXM whether disable-on-timeout can be switched off for Kama; Mahi (rory) to confirm the PXM provider-disable behaviour; decide on hardTimeoutLength or asking LPs to reject after about 100ms.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1791257314493849 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792409733558559
 
