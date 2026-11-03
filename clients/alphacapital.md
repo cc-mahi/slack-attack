@@ -12,7 +12,7 @@ channels:
 contacts:
   - {name: "Gerard McConnell", role: "Alpha Capital, routing / platform / prop-product contact", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-11-02T07:16:23Z
+last_catchup: 2026-11-03T07:15:00Z
 status: active
 ---
 
