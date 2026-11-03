@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-11-02T07:17:51Z
+last_catchup: 2026-11-03T07:15:14Z
 status: active
 ---
 
@@ -33,11 +33,25 @@ Compass 26.4 went on over the 2026-10-24/25 weekend; signalProcessFI1 on trading
 
 ## Streams
 
+### echo-tob-crash — Echo TOB errors on historical dates
+status: open · since: 2026-11-03 · last: 2026-11-03
+State: On 2026-11-03 Daniel reported Echo TOB crashing when EURUSD is selected for 2026-10-21 (recent days work). Daria asked if 2026-10-25 also failed (a weekend, may explain it) and pointed him to Compass price forensics meanwhile; no fix or root cause yet.
+Next: Mahi (Daria) to investigate the Echo TOB error; Daniel to say whether 2026-10-25 also fails.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793686208763259 https://mahifx.slack.com/archives/C0456LSHQQK/p1793686599906029
+
+
 ### order-reject-queries — Reject and fill investigations
 status: open · since: 2026-09-21 · last: 2026-11-02
 State: On 2026-10-01 Louie reported an urgent quote disconnect; Kate showed all Mahi sessions stayed up 00:06:52 to 00:35:33 UTC and the logged TARGET_QUOTE_Mahi_ECN session (FXTM) is not Mahi's, so it is downstream in Exinity's bridge. On 2026-10-06 Christian asked why a CL1USD take-profit rejected three times NO_PRICE/EXPIRED after a WTI spike; Rory explained pricing stayed indicative until 13:01:43 UTC after the LP stopped quoting and that Mahi does not hold pending TP/SL orders (immediate market orders), so the bridge must retry. On 2026-10-09 Christian asked for help reading FIX logs and Rory asked what he needs. Mukhammad's 2026-10-02 XAU rejects on API_111000023 had a Shyam acknowledgement but no outcome seen. On 2026-10-15 Matt asked about slippage on a 3oz XAUUSD market buy; Nathan showed the offer ticked up $0.04 during the 20ms last-look hold on the Top Four execution profile (price improvement off, so fill at the worse-for-client end-of-window price), $0.12 total. On 2026-11-02 Mukhammad asked why a client TP on DOWUSD (counterparty ASV_MT5_15122527, 2026-10-29 10:30 UTC) was rejected; Daria showed the cancel reason 'Internalisation Quantity greater than Published' because published quantity was 0 as all LPs had stopped pricing (price forensics), so no price was formed; Mukhammad acknowledged.
 Next: Christian to say what he needs from the FIX logs; Exinity to check its bridge retry behaviour.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790857668546679 https://mahifx.slack.com/archives/C0456LSHQQK/p1791304956108509 https://mahifx.slack.com/archives/C0456LSHQQK/p1791563954367589 https://mahifx.slack.com/archives/C0456LSHQQK/p1793594635045049
+
+
+### admin-feed-multicast — Multicast change undo to restore admin feeds
+status: open · since: 2026-11-02 · last: 2026-11-02
+State: Saturday 2026-10-31's multicast change broke the admin feeds; Liam posted change CHG-2611-0Z3D (approved) to undo it Mon 2026-11-02 22:00-23:00Z. Internal only, no Exinity thread seen.
+Next: Confirm admin feeds restored after the 22:00Z window.
+Refs: https://mahifx.slack.com/archives/C040V9LNKT5/p1793646965293749
 
 
 ### bbook-weekend-pnl — False -1.7M B-book PnL at Sunday open
