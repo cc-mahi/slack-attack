@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-11-02T07:16:36Z
+last_catchup: 2026-11-03T07:15:21Z
 status: active
 ---
 
@@ -23,17 +23,17 @@ Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and b
 
 ## Streams
 
+### partial-ab-book-split — Partial A / partial B book risk split by counterparty tag
+status: open · since: 2026-10-29 · last: 2026-11-02
+State: Kate Stagg noted 2026-10-29 that Base wants a partly-B-book, partly-A-book setup: Base supplies counterparty tags and Mahi risk-splits a percentage to the Compass book. On 2026-11-02 she posted the tag list (200493, 200356, 200505, 200414, 200494, 200469) with the split 25% B book / 75% A book. No client-channel request seen and no confirmation yet that the config is applied.
+Next: Mahi (Kate Stagg) to configure the 25/75 risk split for those tags and confirm.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1793286795594799 https://mahifx.slack.com/archives/C09D05EPCTV/p1793623127357889
+
 ### xbtusd-cancels-1030 — XBTUSD orders cancelled: continuity pool missing for crypto
 status: open · since: 2026-10-30 · last: 2026-10-30
 State: Kate (Base) asked 2026-10-30 why an XBTUSD order was cancelled. Kate Stagg found the trades were being force-internalised, i.e. filled on the continuity pool, which had not been set up for crypto; she has now set it up so these cancels should stop. Kate (Base) then asked whether the order was also classified as a dynamic arbitrageur; no answer seen yet. Related to the earlier XBTUSD cancels in brokered-xau-slippage.
 Next: Kate Stagg to answer whether dynamic-arb classification contributed.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1793349196856979 https://mahifx.slack.com/archives/C09D8V41JAG/p1793376640811379
-
-### partial-ab-book-split — Partial A / partial B book risk split by counterparty tag
-status: open · since: 2026-10-29 · last: 2026-10-29
-State: Kate Stagg noted on 2026-10-29 that Base wants a partly-B-book, partly-A-book setup: Base would supply the counterparty tags and Mahi would risk-split a percentage to the Compass book. Only a one-line internal note so far; no client-channel request, percentages or timing seen.
-Next: Base to supply counterparty tags and the split percentage; Mahi to configure the risk split.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1793286795594799
 
 ### lmax2-offsystem-fills — LMAX_2 fills placed outside Compass, positions out of sync
 status: open · since: 2026-10-21 · last: 2026-10-22
@@ -93,11 +93,6 @@ status: watching · since: 2026-06-07 · last: 2026-09-07
 State: Admin server did not come back after weekend restarts on 2026-06-07, 2026-08-16 and 2026-09-06 (Beeks tickets; the 09-06 case needed a previous-kernel boot and the new kernel may fail again). PricerVIP1/2 were also restored after the 09-06 restarts. No fresh outage since 2026-09-07.
 Next: Dev-infra to address the kernel boot failure; Beeks reboot autonomy procedure (Liam Cordelle) not confirmed.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359 https://mahifx.slack.com/archives/C09D05EPCTV/p1788787318138619
-
-### ld-network-incident — Beeks LD campus network incident, Base disconnections
-status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
-State: On 2026-10-16 Base reported disconnections and no Compass login. Liam Cordelle announced a networking incident across Beeks' whole LD campus, saw recovery by 11:46 BST and confirmed resolved at 12:29 BST.
-Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792143013486049 https://mahifx.slack.com/archives/C09D8V41JAG/p1792150197114369
 
 ## Arc
 - 2026-04 — Base Markets onboarding Tegis flow; Tegis/Centroid FIX integration begins
