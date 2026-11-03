@@ -24,7 +24,7 @@ contacts:
   - {name: "Saemi Kim", role: "Pepperstone; pricing config", confidence: low}
   - {name: "Sam Dammers", role: "Pepperstone security", confidence: low}
   - {name: "Tom Williams", role: "Pepperstone COO since 2026-08"}
-last_catchup: 2026-11-02T07:19:08Z
+last_catchup: 2026-11-03T07:16:26Z
 status: active
 ---
 
@@ -33,9 +33,21 @@ Crypto A-book dynamic arb was too harsh (633 accounts, client complaints): Light
 
 ## Streams
 
+### cfd-licence-fee — CFD licence fee step-up at month 4 and quarterly review prep
+status: open · since: 2026-10-19 · last: 2026-11-03
+State: Daria posted the quarterly-call microsite on 2026-11-03 (David Cooney liked it and wants an anonymised version as a prospect example). The CFD licence enters month 4, when the addendum fee uplift moves from USD 30k to USD 45k a month; Nicole will annotate the invoice. Andrew wants the quarterly review to remind Pepperstone of it and show value-add and plans (Bonnie to raise it). On 2026-10-29 Daria shared a first-pass QBR artifact and Andrew updated it; he still needs hero-moment links opened and FX/CFD cross-region failover confirmed. The quarterly moved from Monday 8am to Tuesday 2026-11-03 (Stephen fine, awaiting MK; Andrew joins).
+Next: Isaac/Nathan to finish the QBR checks; Daria to confirm Tuesday with MK; Mahi to raise the CFD fee step-up there or before the next invoice.
+Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1792425618470259 https://mahifx.slack.com/archives/C033K2P0RPT/p1792573119829529 https://mahifx.slack.com/archives/C06AR8MT8NT/p1793308448617129?thread_ts=1793305398.074479&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C033K2P0RPT/p1793676457572049
+
+### cfd-ld-admin-traffic — Traffic problem on Pepperstone's LD admin server
+status: open · since: 2026-11-02 · last: 2026-11-02
+State: MK reported alerts on CFD prices on 2026-11-02 (no reply seen); Liam told her traffic to the LD admin server has issues, no trading impact, possibly spurious alerting. CHG-2611-0Z3D (2026-11-02 22:00-23:00Z) undoes Saturday's multicast change to restore admin feeds.
+Next: Mahi to confirm to MK the admin feeds are restored after CHG-2611-0Z3D.
+Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1793615743428549 https://mahifx.slack.com/archives/C06AR8MT8NT/p1793615787469419 https://mahifx.slack.com/archives/C0C1UHPLZPF/p1793646949124589
+
 ### fx-xag-nop-limit — Inventory hedger blocked on XAGUSD per-market NOP limits
 status: open · since: 2026-10-23 · last: 2026-11-02
-State: On 2026-11-02 (00:00Z) Stephen asked for current NOP on ISP, Finalto and Invast, thinking all were maxed and blocking XAG hedging. Nathan replied the XAGUSD inventory-hedger risk level is USD 1.6M and current risk -1.41M, so the hedger was inside limits; Stephen sees USD 1.8M on his side and will reconcile. Nathan made per-market NOP visible on the trading overview page (Finalto 20M, Invast 17M, ISPrime 43M). Earlier, on 2026-10-23 the hedger sat short ~89k oz XAGUSD (~USD 4.8M) because those markets were over the USD 20M NOP watermark, so only NOP-reducing trades were allowed. Stephen says opposing XAU/XAG positions across markets are the problem; he will loosen Finalto limits for now.
+State: On 2026-11-02 (00:00Z) Stephen asked for current NOP on ISP, Finalto and Invast, thinking all were maxed and blocking XAG hedging. Nathan replied the XAGUSD inventory-hedger risk level is USD 1.6M and current risk -1.41M, so the hedger was inside limits; Stephen sees USD 1.8M on his side and will reconcile. Nathan made per-market NOP visible on the trading overview page (Finalto 20M, Invast 17M, ISPrime 43M). On 2026-10-23 the hedger sat short ~89k oz XAGUSD (~USD 4.8M) because those markets were over the USD 20M NOP watermark. Stephen says opposing XAU/XAG positions across markets are the problem; he will loosen Finalto limits for now.
 Next: Stephen to reconcile positions and adjust limits; Mahi to keep NOP view available.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792722843067479 https://mahifx.slack.com/archives/C06AR8MT8NT/p1793577548415299 https://mahifx.slack.com/archives/C06AR8MT8NT/p1793579076774179
 
@@ -53,15 +65,9 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1793250276577629 https://ma
 
 ### crypto-a-book-arb — Crypto A-book dynamic arb classifying too harshly; realtime detection
 status: open · since: 2026-10-29 · last: 2026-10-30
-State: Reece (2026-10-29) said the crypto A-book dynamic arb classifies far too harshly; Stephen (10-30) reported more client complaints and asked for a quick fix or whitelists. Shyam's 60-day sims showed the cycle flagged anything worse than $0/M on small gates, so 633 accounts sat on the list. Stephen chose the Light profile: Shyam set the 7-day and 30-minute bad checks to -$5/M and reset the list to 193 problem accounts (the 29 realtime-flagged accounts all kept; a before/after CSV was shared). Stephen also agreed to realtime arb detection ($1M, 50 fills, worse than -$50/M over a rolling hour) and Shyam said it will be implemented. Absorbs the 2026-10-18..20 XBTUSD skew-arber thread (ten accounts near -$55/M, whitelisted against rehab; a wrongly rehabilitated Arbitrageur to be blacklisted; MK asked to tone down weekend skew).
+State: Reece (2026-10-29) said the crypto A-book dynamic arb classifies far too harshly; Stephen (10-30) reported more client complaints and asked for a quick fix or whitelists. Shyam's 60-day sims showed the cycle flagged anything worse than $0/M on small gates, so 633 accounts sat on the list. Stephen chose the Light profile: Shyam set the 7-day and 30-minute bad checks to -$5/M and reset the list to 193 problem accounts (the 29 realtime-flagged accounts all kept; a before/after CSV was shared). Stephen also agreed to realtime arb detection ($1M, 50 fills, worse than -$50/M over a rolling hour) and Shyam said it will be implemented. Absorbs the 2026-10-18..20 XBTUSD skew-arber thread (ten accounts near -$55/M; a wrongly rehabilitated Arbitrageur to be blacklisted; MK asked to tone down weekend skew).
 Next: Shyam to enable realtime arb detection; Stephen to blacklist the misclassified counterparty; Isaac to review crypto skew sizing and weekend setting.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792355023754729?thread_ts=1792355023.754729&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C06AR8MT8NT/p1793329376387089?thread_ts=1793262497.615879&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C06AR8MT8NT/p1793330613302529?thread_ts=1793262497.615879&cid=C06AR8MT8NT
-
-### cfd-licence-fee — CFD licence fee step-up at month 4 and quarterly review prep
-status: open · since: 2026-10-19 · last: 2026-10-30
-State: The CFD licence enters month 4, when the addendum fee uplift moves from USD 30k to USD 45k a month; Nicole will annotate the invoice. Andrew wants the quarterly review to remind Pepperstone of it and show value-add and plans (Bonnie to raise it). On 2026-10-29 Daria shared a first-pass QBR artifact and Andrew updated it; he still needs hero-moment links opened and FX/CFD cross-region failover confirmed. The quarterly moved from Monday 8am to Tuesday 2026-11-03 (Stephen fine, awaiting MK; Andrew joins).
-Next: Isaac/Nathan to finish the QBR draft and checks; Daria to confirm Tuesday with MK; Mahi to raise the CFD fee step-up there or before the next invoice.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1792425618470259 https://mahifx.slack.com/archives/C033K2P0RPT/p1792573119829529 https://mahifx.slack.com/archives/C06AR8MT8NT/p1793308448617129?thread_ts=1793305398.074479&cid=C06AR8MT8NT
 
 ### cfd-depth-cap — CATTLEUSD 96k trade break: spread layers and distributed quantity cap
 status: open · since: 2026-10-29 · last: 2026-10-29
@@ -77,7 +83,7 @@ Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1789365103971619 https://ma
 
 ### cfd-pricing-feeds — CFD feed gaps, reference-market changes and indicative alerts
 status: open · since: 2026-09-22 · last: 2026-10-29
-State: USDCLP gap (2026-09-22) is QRT-side; Pepperstone to raise with OneZero. IG-feed latency exploitation (2026-10-16): CHG-2610-4GVE republished cash/front-month feeds as proxy markets under the 13 forward symbols, IG fallback, live on all four prod pricers 2026-10-27; remaining check is a clean fallback to IG at the next cash close. Ten indices went to Velocity as primary for pricing and hedging in LDN and NYC (CHG-2610-GF87, 2026-10-24); VELOCITY_LDN does not price JPXJPY; Isaac fixed an LDN-only Nikkei backup rule and is auditing. Out-of-hours timezone update follows 1 Nov with US DST end; on 2026-10-25 Pepperstone said they cannot see the Custom2 timezone times (tradingTimeTable.timezoneOverrides). MK asked for @here on channel alerts; William agreed.
+State: USDCLP gap (2026-09-22) is QRT-side; Pepperstone to raise with OneZero. IG-feed latency exploitation (2026-10-16): CHG-2610-4GVE republished cash/front-month feeds as proxy markets under the 13 forward symbols, IG fallback, live on all four prod pricers 2026-10-27; remaining check is a clean fallback to IG at the next cash close. Ten indices went to Velocity as primary for pricing and hedging in LDN and NYC (CHG-2610-GF87, 2026-10-24); VELOCITY_LDN does not price JPXJPY. Isaac fixed an LDN-only Nikkei backup rule. Out-of-hours timezone update follows 1 Nov with US DST end; on 2026-10-25 Pepperstone said they cannot see the Custom2 timezone times (tradingTimeTable.timezoneOverrides). MK asked for @here on channel alerts; William agreed.
 Next: Shyam to raise visibility of timezone overrides with dev; Reece to check whether VELOCITY_LDN should stream JPXJPY; Isaac/Shyam to do the OOH timetable update on 1 Nov; Isaac to confirm IG fallback at next cash close; Pepperstone to chase OneZero/QRT on USDCLP.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1790096194336949 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792155095799099?thread_ts=1792155095.799099&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C033K2P0RPT/p1792581335519849?thread_ts=1792581335.519849&cid=C033K2P0RPT https://mahifx.slack.com/archives/C033K2P0RPT/p1793274530228519
 
@@ -112,7 +118,7 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792665503647569 https://ma
 
 ### infra-resilience — Crypto server reboots, failover sessions and patching
 status: open · since: 2026-08-09 · last: 2026-10-23
-State: Infra patches moved to Monday windows with notice after Aug 29 reboots. On 2026-10-05 Arun found the NYC OZ failover MD/order sessions flapping every 7-8 minutes from TCP retransmits (primary healthy). Beeks powered down the London crypto server for a RAM upgrade (NOCINT-854295, orders failing over to NY); the server then rebooted twice on the night of 2026-10-25 (see polaris-migration).
+State: On 2026-10-05 Arun found the NYC OZ failover MD/order sessions flapping every 7-8 minutes from TCP retransmits (primary healthy). Beeks powered down the London crypto server for a RAM upgrade (NOCINT-854295, orders failing over to NY); the server then rebooted twice on the night of 2026-10-25 (see polaris-migration).
 Next: Arun to raise the packet loss with Beeks if it persists; Mahi to find why the London server rebooted twice on 2026-10-25.
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1786319051125299 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792489392693439 https://mahifx.slack.com/archives/C033K2P0RPT/p1792767468812089
 
@@ -124,7 +130,7 @@ Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1792657103153339 https://ma
 
 ### crypto-hedging — Crypto spot hedger tuning and LP de-prioritisation
 status: open · since: 2026-07-13 · last: 2026-10-20
-State: Spot crypto hedgers de-prioritise LPs that cancel/reject; HRP added to hedger rules 2026-10-15. On 2026-10-19 XAUT/SOL opposite positions traced to merged per-LP LPR rules; Isaac restored per-market LPR rules for non-XBT/XET pairs and cut LPR delays. On 2026-10-20 Stephen said XAUT/PAXG hedging has no cost benefit; Nathan offered to remove them via instrumentToProfileMappings.
+State: HRP added to hedger rules 2026-10-15. On 2026-10-19 XAUT/SOL opposite positions traced to merged per-LP LPR rules; Isaac restored per-market LPR rules for non-XBT/XET pairs and cut LPR delays. On 2026-10-20 Stephen said XAUT/PAXG hedging has no cost benefit; Nathan offered to remove them via instrumentToProfileMappings.
 Next: Stephen to decide whether to drop XAUT/PAXG from SI hedging.
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1783981698651339 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792414394365519?thread_ts=1792414394.365519&cid=C06AR8MT8NT
 
@@ -148,7 +154,7 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792362092980019?thread_ts=
 
 ### crypto-yield-psm — Crypto yields down; PSM scoping for XBTUSD/XETUSD
 status: open · since: 2026-10-06 · last: 2026-10-15
-State: Crypto spread yield fell to ~USD 200/M versus 350-450 historically (about half BTC's rally against a flat spread). Isaac proposed PSM to MK (agreed 2026-10-08) and on 2026-10-15, after a call with MK and Andrew, screened configs: a "middle ground" widen/tighten gives about +9.2/M on XBTUSD and +48.5/M on XETUSD; full backtest and Compass sim verification is under way.
+State: Crypto spread yield fell to ~USD 200/M versus 350-450 historically (about half BTC's rally against a flat spread). Isaac proposed PSM (MK agreed 2026-10-08); on 2026-10-15 screened configs: a "middle ground" widen/tighten gives about +9.2/M on XBTUSD and +48.5/M on XETUSD; full backtest and Compass sim verification is under way.
 Next: Isaac to finish engine verification (5 variants on 8 and 11 Oct flow) and send MK PnL/spread numbers for PSM fully active / defensive only / 10% widening.
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1791285982179839 https://mahifx.slack.com/archives/C033K2P0RPT/p1792068068772829
 
@@ -178,7 +184,7 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1787786333971199 https://ma
 
 ### margin-exploit-throttle — New-account margin exploits and order throttling
 status: watching · since: 2026-07-30 · last: 2026-09-14
-State: Pepperstone clients exploited margin validation (CPI-print bursts, small-deposit martingale). Diego asked for symbol-level throttling (2026-08-31); Stephen promised more exploiting accounts (2026-09-14). Daria: the existing 150 orders/1000ms per-counterparty throttle cannot be scoped to new accounts or symbols without a dev change; MK then asked for a per-timezone / NZDUSD override, which looks unanswered.
+State: Clients exploited margin validation. Diego asked for symbol-level throttling (2026-08-31); Stephen promised more exploiting accounts (2026-09-14). Daria: the existing 150 orders/1000ms per-counterparty throttle cannot be scoped to new accounts or symbols without a dev change; MK then asked for a per-timezone / NZDUSD override, which looks unanswered.
 Next: Mahi to answer MK on a timezone/NZDUSD-scoped throttle override (and raise the dev change); Stephen to send accounts.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1788172536055649 https://mahifx.slack.com/archives/C033K2P0RPT/p1789365103971619
 
@@ -189,38 +195,33 @@ Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1789365103971619
 
 ### crypto-limit-nofill — XBTUSD client limit not filled despite pool price through it
 status: closed · since: 2026-10-29 · last: 2026-10-29 · closed: 2026-10-30
-State: Reece's SELL limit sat inside the continuity price once the $100/M (about $8/XBT) markup applied to dynamic-arb executions; William explained, Reece accepted.
+State: Limit sat inside the continuity price once the $100/M markup applied to dynamic-arb executions; Reece accepted.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1793263578250659 https://mahifx.slack.com/archives/C06AR8MT8NT/p1793288055752659?thread_ts=1793263578.250659&cid=C06AR8MT8NT
 
 ### positions-mismatch-alert — TradePositions vs Positions mismatch alert after weekend upgrade
 status: closed · since: 2026-10-26 · last: 2026-10-27 · closed: 2026-10-27
-State: Small HKD TradePositions/Positions mismatch alert since 2026-10-24 (weekend upgrade, no trading impact); Shyam booked an adjustment on 2026-10-27 so it should stop.
+State: Small HKD mismatch alert after the weekend upgrade; Shyam booked an adjustment 2026-10-27.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1793004200709869?thread_ts=1793004200.709869&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C06AR8MT8NT/p1793059314284639?thread_ts=1793004200.709869&cid=C06AR8MT8NT
 
 ### compass-264-release — Compass 26.4 upgrade of FX and CFD over the weekend
 status: closed · since: 2026-10-23 · last: 2026-10-23 · closed: 2026-10-29
-State: 26.4 applied to FX and CFD over 24-25 Oct (the TradePositions mismatch alert followed, see positions-mismatch-alert); no further issues seen.
+State: Applied to FX and CFD 24-25 Oct; no further issues.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792772169235949
 
 ### compass-263-release — Compass 26.3 release to all Pepperstone systems
 status: closed · since: 2026-10-20 · last: 2026-10-21 · closed: 2026-10-22
-State: Done: all pricers on 26.3 by 2026-10-21.
+State: Done by 2026-10-21.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792489817664909 https://mahifx.slack.com/archives/C033K2P0RPT/p1792608882275709
 
 ### xau-fill-vs-price — XAUUSD fill vs displayed price gap (two pricers)
 status: closed · since: 2026-10-21 · last: 2026-10-21 · closed: 2026-10-22
-State: Second NYC pricer filled it (separate skew timers); Reece accepted.
+State: Second NYC pricer filled it; Reece accepted.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792587213386379?thread_ts=1792587213.386379&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C06AR8MT8NT/p1792593460283749?thread_ts=1792587213.386379&cid=C06AR8MT8NT
 
 ### crypto-btc-arb — XBTUSD skew arbers hitting crypto pricing
 status: closed · since: 2026-10-18 · last: 2026-10-20 · closed: 2026-10-30
 State: merged into crypto-a-book-arb.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792355023754729?thread_ts=1792355023.754729&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C06AR8MT8NT/p1792467208123369?thread_ts=1792464616.833879&cid=C06AR8MT8NT
-
-### ld-estate-incident — London estate inter-region connectivity incident
-status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-10-19
-State: Cross-region disconnects 2026-10-16; resolved..
-Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1792142815121549 https://mahifx.slack.com/archives/C06AR8MT8NT/p1792142873267079?thread_ts=1792142873.267079&cid=C06AR8MT8NT
 
 ### arb-classification — Dynamic arb classification false positives and realtime detection
 status: closed · since: 2026-07-27 · last: 2026-09-02 · closed: 2026-11-02
