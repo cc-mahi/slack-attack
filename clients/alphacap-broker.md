@@ -11,20 +11,20 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-02T07:16:36Z
+last_catchup: 2026-11-03T07:15:14Z
 status: active
 ---
 
 ## Now
-Going live is slipping: Alpha's first live client was due 2026-10-29 but no flow seen by 2026-10-30; Rapp now says next week after teething issues (charts). Hedgers and expectedBookStatusOnTimezones come into play. Rollover and open spikes are being tuned hard (new WSS caps and widening factors on 2026-10-27; the 21:00 roll on 2026-10-28 is the first full test). Rapp wants redundancy against outages and a reliable swaps source for crosses, and Andrew said he can have redundancy. Outstanding Aug/Sep invoices remain a soft overhang.
+Going live is slipping: Alpha's first live client was due 2026-10-29; by 2026-11-02 only internal "live testing" flow is real and Rapp has asked for hedgers to be activated. Hedgers and expectedBookStatusOnTimezones come into play. Rollover and open spikes are being tuned hard (new WSS caps and widening factors on 2026-10-27; the 21:00 roll on 2026-10-28 is the first full test). Rapp wants redundancy against outages and a reliable swaps source for crosses, and Andrew said he can have redundancy. Outstanding Aug/Sep invoices remain a soft overhang.
 
 ## Streams
 
-### redundancy-swaps — Redundancy, cross swaps and cross connect
-status: open · since: 2026-10-27 · last: 2026-10-27
-State: After the Beeks issue, Rapp wants redundancy against outages (asked again on the 2026-10-27 call about XC). Andrew Morgan replied "Rapp can have redundancy". Open questions from Cameron Hughes: multi-region servers and cost, whether redundancy belongs on Alpha's side, the best swaps source for crosses Argamon will not price (Rapp was swap-arbed for hundreds of thousands before), and whether a cross connect is needed (Beeks says no).
-Next: Mahi to decide redundancy design and cost, swaps source and cross-connect answer for Rapp.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793094782250149 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793098215512009
+### go-live-testing — Live test trading and go-live readiness
+status: open · since: 2026-04-29 · last: 2026-11-02
+State: Alpha's first live client was meant to activate 2026-10-29; on 2026-11-02 Rapp asked for the hedgers to be activated, then said the flow now seen is real but internal people doing live testing, not yet the first client (Cameron Hughes had asked which). Earlier Rapp said next week after teething issues including charts. Cameron Hughes was setting up analytics alerting on 2026-10-29 ahead of go-live. Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
+Next: Cameron Hughes to act on Rapp's request to activate hedgers and re-check monitoring once the first live client trades.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791900870280529 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793628933742509 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793632224508649
 
 ### acg-mt5-sessions — Saturday gateway session hours
 status: open · since: 2026-10-31 · last: 2026-10-31
@@ -38,11 +38,11 @@ State: By 2026-10-30 Cameron Hughes reported most open-spike issues resolved via
 Next: Cameron Hughes to fix Softs, XNG and XAGEUR spikiness and confirm with Rapp.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790006846789019 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793285270001749 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793366099309859
 
-### go-live-testing — Live test trading and go-live readiness
-status: open · since: 2026-04-29 · last: 2026-10-30
-State: Alpha's first live client was meant to activate 2026-10-29 but no flow had been seen by 2026-10-30; Cameron Hughes asked Rapp why, and Rapp now says next week after a few teething issues including charts. Cameron Hughes was setting up analytics alerting on 2026-10-29 ahead of go-live. Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
-Next: Cameron Hughes to turn hedgers on and re-check monitoring once the first live client trades.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791900870280529 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793366167563989 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793367049578149
+### redundancy-swaps — Redundancy, cross swaps and cross connect
+status: open · since: 2026-10-27 · last: 2026-10-27
+State: After the Beeks issue, Rapp wants redundancy against outages (asked again on the 2026-10-27 call about XC). Andrew Morgan replied "Rapp can have redundancy". Open questions from Cameron Hughes: multi-region servers and cost, whether redundancy belongs on Alpha's side, the best swaps source for crosses Argamon will not price (Rapp was swap-arbed for hundreds of thousands before), and whether a cross connect is needed (Beeks says no).
+Next: Mahi to decide redundancy design and cost, swaps source and cross-connect answer for Rapp.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793094782250149 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793098215512009
 
 ### invoices-fees — Overdue invoices and additional fees
 status: open · since: 2026-10-14 · last: 2026-10-14
@@ -63,15 +63,9 @@ Next: Cameron Hughes to re-enable expectedBookStatusOnTimezones when hedgers go 
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
 
 ### retail-lpoa-groups — MT5 groups for retail-under-corporate accounts
-status: watching · since: 2026-08-24 · last: 2026-09-03
-State: fastMT had not replied (as of 2026-08-24) on trading accounts and counterparty tags. Rapp said (09-02) some corporate-name accounts have retail clients trading under an LPOA, coming from the prop side, and must be treated as retail; George says Mahi holds profiles per prop trader. Cameron Hughes asked Rapp to create MT5 groups for both cases and plans execution tailoring per trading account; exact classification may be hard if counterparty tags do not carry over. No outcome seen since.
-Next: Rapp and fastMT to confirm MT5 groups; Cameron Hughes to match prop profiles to live accounts.
+status: closed · since: 2026-08-24 · last: 2026-09-03 · closed: 2026-11-03
+State: fastMT had not replied (as of 2026-08-24) on trading accounts and counterparty tags. Rapp said (09-02) some corporate-name accounts have retail clients trading under an LPOA, coming from the prop side, and must be treated as retail; George says Mahi holds profiles per prop trader. Cameron Hughes asked Rapp to create MT5 groups for both cases and plans execution tailoring per trading account; exact classification may be hard if counterparty tags do not carry over. No activity since 2026-09-03; assumed resolved or folded into go-live.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1787584267363759 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1788421751250899
-
-### tick-data-feed — Tick-level CFD data for ACG risk tool
-status: closed · since: 2026-07-17 · last: 2026-07-17 · closed: 2026-10-19
-State: Rapp wanted historical and live tick-by-tick CFD data for a client-facing analytics tool; Liam Cordelle proposed an S3 Parquet backfill and a new FIX connection for live. No activity since 2026-07-17; assumed dropped.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784280180924189 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1784281130919229
 
 ## Arc
 - 2026-04-16 — MT5 group/symbol plan signed off by Rapp and Gerard McConnell; test trades succeeded 2026-04-17.
