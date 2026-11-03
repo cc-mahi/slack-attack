@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-02T07:20:49Z
+last_catchup: 2026-11-03T07:17:13Z
 status: active
 ---
 
@@ -26,6 +26,12 @@ Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), wi
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### xau-mini-micro-source — Client queries source of XAUUSD mini/micro pricing
+status: open · since: 2026-11-03 · last: 2026-11-03
+State: On 2026-11-03 Andri Zamroni urgently asked where mini and micro (XAUUSD, XAUUSD3) pricing comes from, saying around 06:17 UTC it was higher than ISPrime (bid 3923 / ask 3922 vs 3921.9 / 3922.2 on the direct ISPrime symbol). Daria Horton found both configured to the same reference markets with only ISP_OZNY4_RETAIL_MARGIN_VT pricing, and Compass max TOB offer 06:14-06:19 was 3922.61, in line with ISPrime. Andri said the client has no other feed and will check further on their side; no Mahi fault identified.
+Next: client checks their side; Mahi on request.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793686895184259 https://mahifx.slack.com/archives/C09HN93T0G2/p1793689672004209
 
 ### surya-entity-move — Client moved to Indonesian entity PT Surya Anugrah Mulya
 status: open · since: 2026-11-01 · last: 2026-11-01
