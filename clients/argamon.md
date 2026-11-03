@@ -16,20 +16,20 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-11-02T07:16:36Z
+last_catchup: 2026-11-03T07:15:14Z
 status: active
 ---
 
 ## Now
-Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored. On 2026-10-27 Argamon asked for all FX on the new risk model; GTS HRP was pulled from NY pools and hedgers. Toa set last-look tolerance 0 from 2026-10-28, so TOA_CHI was removed from gold hedging on 2026-11-02.
+Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored. On 2026-10-27 Argamon asked for all FX on the new risk model; GTS HRP was pulled from NY pools and hedgers. Toa last-look tolerance 0 (from 2026-10-28) was reset on 2026-11-03 and TOA_CHI is back in gold hedging; on the 2026-11-02 call Argamon asked to extend cap internalisation beyond G8 (250k), explore B-booking soft CPs, and try PSM in beta.
 
 ## Streams
 
-### toa-last-look-hedging — Toa last-look tolerance 0 hits gold hedge fills
-status: open · since: 2026-11-02 · last: 2026-11-02
-State: Since 2026-10-28 Toa set last-look tolerance to 0 on Argamon's account, so hybrid hedger orders mostly get rejected: Toa fill rate fell from about 40% to 7% and gold hedging volume dropped about two thirds. Shyam removed TOA_CHI from the hybrid hedger's gold venues on 2026-11-02; gold hedges now go to JANE, HSBC and DB. Brokered gold via Toa is unchanged.
-Next: Watch gold hedge fill quality on the new venue set; whether Toa tolerance is restored is not seen.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1793588984698429
+### leverage-risk-sims — 500:1 leverage / more risk-holding sims
+status: open · since: 2026-08-31 · last: 2026-11-03
+State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1). Retail FX book has been on a G8-Cap profile (500k inventory cap on internalised G8 flow, Friday close flatten) since 2026-10-21; rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. After the 2026-10-27 call Argamon wants all FX on the new risk model and dark pool hedging explored. On the 2026-11-02 call Jem and Elan asked to extend cap internalisation beyond G8 with a 250k cap on other currencies (Shyam's sims show roughly PnL-neutral, closer to supporting higher leverage), to hold past 500k for soft-looking CPs, and to try full B-book for some soft-flow CPs (Shyam says little such flow exists; Argamon sounded interested in an A-book/B-book model). They are very open to PSM: Shyam to run it in beta with comparative sims, go-ahead if average spread and related metrics hold; Elan may want it at Toa too. Elan is sending CBOE session credentials for hidden peg hedging, to be trialled in NY4.
+Next: Shyam to check configurability of holding past 500k, put PSM in beta with sims, and trial hidden peg hedging in NY4 once credentials arrive; Argamon to confirm Centroid LP failover is in place.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793674916716319
 
 ### lucera-hard-timeout — Lucera LD fill latency and hard timeout
 status: open · since: 2026-10-18 · last: 2026-11-02
@@ -49,12 +49,6 @@ status: open · since: 2026-10-27 · last: 2026-10-27
 State: NY Compass was sending orders to GTS_HRP, which is no longer active in HRP (Levi, 2026-10-27). Shyam took GTSX_RCTV_HRP_1/2 out of the NY pools and HRP hedgers. 13 trades (118 oz XAUUSD) were actually executed at GTS via NWM, with drop copies split between HRP and NWM; Argamon will honour and manually book them at NWM, so Compass needed no change (only the LP label differs; per-LP reconciliation vs NWM needs mapping). There is no GTS-via-NWM market in Compass; Mahi offered to set one up if Argamon wants to keep trading GTS through NWM. Separately Levi asked for the NW market data gateway restart to stream GTS_NW_LDN in LD Compass; Daria fixed it and pricing is now visible.
 Next: Argamon to say whether it wants a GTS via NWM market in Compass.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793075092211549
-
-### leverage-risk-sims — 500:1 leverage / more risk-holding sims
-status: open · since: 2026-08-31 · last: 2026-10-27
-State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1); a separate in-house prop-style challenge product was floated earlier. On 2026-10-21 Shyam, agreed with Jem, switched the retail FX book to a G8-Cap hedging profile (up to 500k inventory cap on internalised G8 flow, Friday close flatten); replay vs old rules showed +$62k (about $1/M), average G8 risk $0.91m to $1.26m with much smaller peaks. Rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. On the 2026-10-27 call Jem and Elan gave no timeline for higher leverage, want Mahi to lead on internalising more flow profitably (eventually all their clients), and want all FX, not just G8, on the new risk model; Elan suggested dark pool hedging (XTX) for NY4, but Daria noted Mahi dropped it in recent months for paying spread there, suggesting looser VaR clearance/backstop rules and checking fill rate and time to fill (Elan says Toa fills are good, ~5 min to fill). INST-tagged retail flow can go to Chi if too toxic.
-Next: Shyam to sim all-FX on the new risk model and look into dark pool hedging for NY4; William Denny to monitor the G8-Cap book; Argamon to confirm Centroid LP failover is still in place.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1792552125427929 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793068905149339
 
 ### toa-chi-ioc-timeouts — LP no-ack timeouts on Toa CHI
 status: open · since: 2026-10-22 · last: 2026-10-22
@@ -109,6 +103,11 @@ status: watching · since: 2026-08-17 · last: 2026-10-09
 State: Recurring one-off ops questions. Tom's slippage query (2026-08-17) was last look and AUDUSD signals were smoothed; Sep 3 liquidity reduction on order 042dr11e8ch was picked up by Rory (outcome not seen); the 624ms order book age (2026-09-10) was a timestamp artefact, not stale price. 2026-09-01 pricerInstiLight2 went down after Elan removed skew delegates (Nathan restored it); 2026-10-09 Shyam asked Argamon to raise B2PRIME 3dp XAU invalid-increment rejects with the LP (Argamon said they would).
 Next: Argamon to raise B2PRIME increments; Rory outcome on the 2026-09-03 liquidity reduction.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1786964549641859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789022941524499 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791507691705119
+
+### toa-last-look-hedging — Toa last-look tolerance 0 hits gold hedge fills
+status: closed · since: 2026-11-02 · last: 2026-11-03 · closed: 2026-11-03
+State: Toa set last-look tolerance to 0 on Argamon's account from 2026-10-28, cutting Toa hedge fill rate from about 40% to 7%; TOA_CHI was pulled from gold hedging on 2026-11-02. Elan had tightened the NY4 execution rule at Toa; on 2026-11-03 Toa reset last-look and tolerance and Shyam added TOA_CHI back into XAU hedging markets.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1793588984698429 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793678514931149
 
 ### fx-pricing-tuning — LP sets, signals and direct pricing
 status: closed · since: 2026-05-04 · last: 2026-09-01 · closed: 2026-11-02
