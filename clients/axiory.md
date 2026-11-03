@@ -14,7 +14,7 @@ contacts:
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory, possibly attending Cyprus event alongside Roman", confidence: low}
   - {name: "Jan", role: "Axiory TY office, data/ops requests (surname unknown)", confidence: low}
-last_catchup: 2026-11-02T07:16:23Z
+last_catchup: 2026-11-03T07:15:00Z
 status: active
 ---
 
