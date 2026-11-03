@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-11-02T07:19:11Z
+last_catchup: 2026-11-03T07:17:13Z
 status: active
 ---
 
@@ -32,6 +32,12 @@ status: open · since: 2026-08-03 · last: 2026-10-30
 State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, restarted again 10-22 by James ("looks fine"), and on 10-30 tripped `UnrealisedPnlFirewall` (`pnlProfitLimitPerDay`, 2M) six times in about three hours from 13:04 UTC, re-tripping after each restart until Lee bumped the unrealised limits and restarted it. Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
 Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile; limit tuning or root cause of the repeated unrealised-PnL trips is open.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589
+
+### pnl-var-alerting — PnL-drop, VaR and not-ticking alert noise
+status: open · since: 2026-06-25 · last: 2026-11-02
+State: HRP_CLIENTS_NET PnL-drop alerts recur on LDN. James raised `monitoring.pnlDrop` limits on 2026-08-11 because Toa is running more risk. Leonardo flagged a -16,953 in 8 minutes drop on 09-11 with no follow-up. The 08-27 high-VaR alert was CHI and had cleared. On 08-31 Justin asked for auto-resolve on cleared-risk alerts, and James pointed at MXC-66. No tuning change after the 08-11 limit rise. On 2026-11-02 Daria said not-ticking alerts fire regularly around roll for ISAM_NW_LDN (down about 16:20-18:00 NY) and KGI_RCTV_NYC (about 16:50-18:15 NY) and asked whether to extend the alert threshold or disable monitoring for them; one thumbs-up, no decision seen.
+Next: Toa/Mahi to answer Daria on extending or disabling the ISAM/KGI not-ticking alerts; MXC-66 for auto-resolve.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1782371422081669 https://mahifx.slack.com/archives/C035H1VNCAD/p1788162803181199 https://mahifx.slack.com/archives/C035H1VNCAD/p1789134750585619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793662534164719
 
 ### insti-indicative-pricing — LDN insti pricing indicative after EBS decommission and around rolls
 status: open · since: 2026-08-17 · last: 2026-11-01
@@ -62,12 +68,6 @@ status: watching · since: 2026-08-23 · last: 2026-09-13
 State: A recurring failure mode is a config write that live processes tolerate but that breaks them at the next restart. On 2026-08-20 a "B2Prime FX" profile with GBPUSD as a Currency asset sat in the store, then took down four distribution/state-monitor processes on LDN and CHI until Sam Hewitt removed it on 08-23. 2026-09-01 pricerInstiLight2 on LDN went down while Elan was changing config. 2026-09-13 Argamon APN1 pricers would not start ("DefaultIndex OMX is not in the name factory"); Daria could not find OMX in config, Lee said he was looking, and Argamon flagged it too. No resolution is visible in-channel.
 Next: confirm the APN1 OMX pricer problem was fixed. Downgraded to watching: no activity for 32 days, outcome unseen.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787462723096659 https://mahifx.slack.com/archives/C035H1VNCAD/p1788223120406549 https://mahifx.slack.com/archives/C035H1VNCAD/p1789286572338989
-
-### pnl-var-alerting — HRP_CLIENTS_NET PnL-drop and VaR alert noise
-status: watching · since: 2026-06-25 · last: 2026-09-11
-State: HRP_CLIENTS_NET PnL-drop alerts recur on LDN. James raised `monitoring.pnlDrop` limits on 2026-08-11 because Toa is running more risk. Leonardo flagged a -16,953 in 8 minutes drop on 09-11 with no follow-up. The 08-27 high-VaR alert was CHI and had cleared. On 08-31 Justin asked for auto-resolve on cleared-risk alerts, and James pointed at MXC-66. No tuning change after the 08-11 limit rise.
-Next: MXC-66 for auto-resolve.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1782371422081669 https://mahifx.slack.com/archives/C035H1VNCAD/p1788162803181199 https://mahifx.slack.com/archives/C035H1VNCAD/p1789134750585619
 
 ## Arc
 - 2025-09 — CVEX wound down (rebranded Pascal/Jetstream).
