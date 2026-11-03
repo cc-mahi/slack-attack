@@ -15,7 +15,7 @@ contacts:
   - {name: "Richard Holman", role: "Velocity principal: pricing/hedging policy, commercial terms, prospect flow"}
   - {name: "Russell Hewson", role: "Velocity: sim data requests, Echo login"}
   - {name: "Liv Mottershead", role: "Velocity, joined Richard's team 2026-07", confidence: low}
-last_catchup: 2026-11-02T07:21:00Z
+last_catchup: 2026-11-03T07:17:13Z
 status: active
 ---
 ## Now
@@ -101,10 +101,10 @@ Next: Mahi: average LP spreads by timezone for Dan.
 Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787118553763069 https://mahifx.slack.com/archives/C05NB72AGR2/p1792064490877339
 
 ### commercial-terms — Move from PnL share to volume-banded fee
-status: open · since: 2026-09-09 · last: 2026-10-06
-State: INV-1039 ($28.4k, 51 days late) was held over negative-month netting; Will C held to Schedule 1 (monthly, no carry-forward) and it was paid 09-14. 10-01 meeting: agreed to drop PnL share for a volume-banded long-term deal; 10-06 Richard accepted terms: 12-month $15k + $2.00/$1.50/$1.25 per M tiers, $20k minimum (3-month rolling $17.5k + higher tiers). Velocity CEO backs the long-term commitment.
-Next: Client CFO (Tim) sign-off, then new 12-month contracts; client wants consultation before Asia widening (SLAs).
-Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1788953874786009 https://mahifx.slack.com/archives/CPDS0M2KF/p1790847451087629 https://mahifx.slack.com/archives/CPDS0M2KF/p1791298648881549
+status: open · since: 2026-09-09 · last: 2026-11-03
+State: 11-02 Will C said Tim (client CFO) is finally back and asked Nicole to draft the contract for the new terms; 11-03 Nicole posted a draft Compass Services Agreement, noting the options make it a little complicated. INV-1039 ($28.4k, 51 days late) was held over negative-month netting; Will C held to Schedule 1 (monthly, no carry-forward) and it was paid 09-14. 10-01 meeting: agreed to drop PnL share for a volume-banded long-term deal; 10-06 Richard accepted terms: 12-month $15k + $2.00/$1.50/$1.25 per M tiers, $20k minimum (3-month rolling $17.5k + higher tiers). Velocity CEO backs the long-term commitment.
+Next: Will C to review Nicole's draft, then send to client CFO (Tim) for sign-off and new 12-month contracts; client wants consultation before Asia widening (SLAs).
+Refs: https://mahifx.slack.com/archives/CPDS0M2KF/p1788953874786009 https://mahifx.slack.com/archives/CPDS0M2KF/p1790847451087629 https://mahifx.slack.com/archives/CPDS0M2KF/p1791298648881549 https://mahifx.slack.com/archives/CPDS0M2KF/p1793614039432379
 
 ### hedger-reliability — Hedger switched off or crashing
 status: watching · since: 2026-09-04 · last: 2026-10-01
@@ -117,11 +117,6 @@ status: watching · since: 2026-08-25 · last: 2026-09-30
 State: Priced at fixed 32.15 x XAU (rounded from 32.15074656 at client request); 3kg TOB on A feed, depth levels added. Hedge lands 32.14 (covariance vs pricing mismatch, 0.01oz residual below min clip); Mahi changed VaR gate, client accepted small residual. Ops signed off 09-18, client rolled out 09-21. 09-30 Russell asked if hedging as 32 again; thread reply not seen.
 Next: Client: spread protections for KAU; Mahi confirm 32.15 hedge behaviour.
 Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1787642723388769 https://mahifx.slack.com/archives/C05NB72AGR2/p1790778810519969
-
-### platform-ops — LD network incident and Compass 26.4 release
-status: closed · since: 2026-10-16 · last: 2026-10-17 · closed: 2026-10-19
-State: LD networking incident 10-16 (client told to fail over where possible) recovered by 11:47 and declared resolved 12:30 UTC; Richard said the NDM/IG issue was unrelated. Compass 26.4 staged 10-16 and released at weekly reboots, announced complete 10-17.
-Refs: https://mahifx.slack.com/archives/C05NB72AGR2/p1792143214303699 https://mahifx.slack.com/archives/C05NB72AGR2/p1792164118298939
 
 ## Arc
 - 2026-01-06 — Contract signed (re-papered 12 Jan), Compass + Echo pilot, $20k minimum plus 50% PnL share
