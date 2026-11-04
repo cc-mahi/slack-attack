@@ -16,7 +16,7 @@ contacts:
   - {name: "Lukas Sedlacek", role: "Fintokei/Purple Technology risk; suspicious-client reviews"}
   - {name: "Kristof Heger", role: "Fintokei/Purple Technology; order-fill queries"}
   - {name: "Roman Komurka", role: "Fintokei/Purple Technology; pricing/skew opinions", confidence: low}
-last_catchup: 2026-11-03T07:15:00Z
+last_catchup: 2026-11-04T08:04:40Z
 status: active
 ---
 
