@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-11-03T07:17:13Z
+last_catchup: 2026-11-04T08:08:16Z
 status: active
 ---
 
@@ -86,10 +86,10 @@ Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://ma
 
 
 ### chi-hedgers — Toa CHI hedger breaches and CBOE state mismatches
-status: open · since: 2026-08-03 · last: 2026-10-30
-State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). On 10-30 hedgerCBOE1 tripped UnrealisedPnlFirewall (pnlProfitLimitPerDay, 2M) six times in about 3 hours; Lee bumped the unrealised limits and restarted it. ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
-Next: Lee to confirm the CBOE state-mismatch code fix shipped and ordersCOMEXMarex1 fixed.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589
+status: open · since: 2026-08-03 · last: 2026-11-04
+State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). On 10-30 hedgerCBOE1 tripped UnrealisedPnlFirewall (pnlProfitLimitPerDay, 2M) six times in about 3 hours; Lee bumped the unrealised limits and restarted it. On 11-04 the CBOE realised-PnL firewall and the unrealised 1-hour firewall tripped as XAUUSD gained about $60 in an hour; Daria restarted, raised PnL Limit Per Hour from 1.6m to 2m, then 2.2m after it tripped again, and Inald restarted hedgerCBOE after another PagerDuty alert; she suggests reviewing the sweep config. ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
+Next: Mahi to review the CBOE sweep config and firewall limits; Lee to confirm the CBOE state-mismatch code fix shipped and ordersCOMEXMarex1 fixed.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793771918651539
 
 
 ### xau-invalid-increment — XAU price increment rejects (TOA_CHI, B2PRIME)
