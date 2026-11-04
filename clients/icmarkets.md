@@ -31,7 +31,7 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-11-03T07:15:00Z
+last_catchup: 2026-11-04T08:04:40Z
 status: active
 ---
 
