@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-11-03T07:17:13Z
+last_catchup: 2026-11-04T08:08:18Z
 status: active
 ---
 
@@ -21,17 +21,11 @@ Several Argamon-raised issues arrive as forwards from `mahi-argamon-operations`,
 
 ## Streams
 
-### infra-releases — releases, new gateways and box changes on Argamon/Toa
-status: open · since: 2026-08-17 · last: 2026-10-30
-State: Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
-Next: Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379
-
 ### cboe-hedger-chi — hedgerCBOE1 on CHI: firewall/PnL trips and state mismatches
-status: open · since: 2026-08-03 · last: 2026-10-30
-State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, restarted again 10-22 by James ("looks fine"), and on 10-30 tripped `UnrealisedPnlFirewall` (`pnlProfitLimitPerDay`, 2M) six times in about three hours from 13:04 UTC, re-tripping after each restart until Lee bumped the unrealised limits and restarted it. Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
-Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile; limit tuning or root cause of the repeated unrealised-PnL trips is open.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589
+status: open · since: 2026-08-03 · last: 2026-11-04
+State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, restarted again 10-22 by James ("looks fine"), and on 10-30 tripped `UnrealisedPnlFirewall` (`pnlProfitLimitPerDay`, 2M) six times in about three hours from 13:04 UTC, re-tripping after each restart until Lee bumped the unrealised limits and restarted it. On 11-04 it tripped again: realised P&L firewall at about 05:58 UTC (Daria restarted it, suggested reviewing the sweep config), then the unrealised 1-hour firewall as XAUUSD gained about $60 in an hour; Daria raised PnL Limit Per Hour from 1.6m to 2m, then to 2.2m after another trip at 06:57, and Inald restarted it after another hedgerCBOE down alert at 07:50. Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
+Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile; limit tuning or root cause of the repeated PnL trips (sweep config review suggested 11-04) is open.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589 https://mahifx.slack.com/archives/C035H1VNCAD/p1793778654668379
 
 ### pnl-var-alerting — PnL-drop, VaR and not-ticking alert noise
 status: open · since: 2026-06-25 · last: 2026-11-02
@@ -44,6 +38,12 @@ status: open · since: 2026-08-17 · last: 2026-11-01
 State: EBS decommission removed `EBS_IMP_CHI`, which LDN insti pricing relied on, so insti FX went indicative; the EBS feed is now killed. During rolls CBOE_HR_LDN is the main reference and CBOE liquidity can be too thin for a stable price (Elan was to ask CBOE). Ops muted alerts via `monitoring.pricing.suppressAlertsDuring` and Lee removed SINGAPORE_MONDAY. James: CLIENT_PRICE_INSTI_LDN may be indicative because it is the only model without index reference-price fallback ("rather no price than a degraded price"). 2026-10-15 Nathan Burch asked whether 6A/6B/6E/6J/6M/6N/6S/6Z, GC, MGC, SI and SIL Dec-26 futures should be priced: LDN pricerInsti reference markets changed, and no base spreads exist on CHI or LDN insti. Lee replied that they are not published to clients but are available via CME/COMEX. On 2026-11-01 Daria restarted the Argamon LDN prices and pricerInsti1 raised `marketData.pricing.modelError` (unable to create 12 of 35 pricing models, all no-reference-price markets, same as the 10-15 case); she asked whether those instruments should be removed.
 Next: Toa/Argamon to answer whether those futures (and the 12 failing models) should be priced or removed; Elan to follow up with CBOE on liquidity.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787002323906439 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793571986506049
+
+### infra-releases — releases, new gateways and box changes on Argamon/Toa
+status: open · since: 2026-08-17 · last: 2026-10-30
+State: Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
+Next: Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379
 
 ### argamon-relays — Argamon-raised issues relayed from mahi-argamon-operations
 status: open · since: 2026-08-19 · last: 2026-10-09
