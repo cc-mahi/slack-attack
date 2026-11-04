@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-03T07:17:13Z
+last_catchup: 2026-11-04T08:08:21Z
 status: active
 ---
 
@@ -27,11 +27,23 @@ Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UA
 
 ## Streams
 
+### echo-compass-users — Echo/Compass user admin
+status: open · since: 2026-09-01 · last: 2026-11-04
+State: Re-opened. On 2026-11-04 Brandon asked for Echo and Compass credentials for a new user at the Surya entity (Slava); Daria Horton said Mahi will send them directly once created. Liam Cordelle noted on 2026-10-23 that the client has logins in the system (one named, one overnight) and offered to arrange access. On 2026-10-26 Garry asked Liam to add his own email and reset the overnight password. Andri asked whether a screenshotted control is where to cancel an order in Compass; Shyam Hari confirmed. Earlier: Echo user audit and removal of 14 users (2026-09-01); new Compass and Echo account for a client analyst created 2026-09-29.
+Next: Liam adds Garry's email and resets the overnight password; Mahi (Daria Horton) creates and sends Slava's Echo/Compass credentials.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1788234307503689 https://mahifx.slack.com/archives/C09HN93T0G2/p1793767610138899
+
 ### xau-mini-micro-source — Client queries source of XAUUSD mini/micro pricing
 status: open · since: 2026-11-03 · last: 2026-11-03
 State: On 2026-11-03 Andri Zamroni urgently asked where mini and micro (XAUUSD, XAUUSD3) pricing comes from, saying around 06:17 UTC it was higher than ISPrime (bid 3923 / ask 3922 vs 3921.9 / 3922.2 on the direct ISPrime symbol). Daria Horton found both configured to the same reference markets with only ISP_OZNY4_RETAIL_MARGIN_VT pricing, and Compass max TOB offer 06:14-06:19 was 3922.61, in line with ISPrime. Andri said the client has no other feed and will check further on their side; no Mahi fault identified.
 Next: client checks their side; Mahi on request.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793686895184259 https://mahifx.slack.com/archives/C09HN93T0G2/p1793689672004209
+
+### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
+status: open · since: 2026-08-19 · last: 2026-11-03
+State: On 2026-11-03 Andri asked why a UAT order was cancelled; Rory King found TT's algo engine stopped it ("RCM-X: excessive child rejects") and asked the client to raise it with TT with the order ID. On 2026-10-22 a UAT GoldDec algo order was left running; Liam cancelled it on request. Client has no UAT GUI access (Graeme asked if one exists), and asked if Mahi can reject rather than cancel (Liam: not possible); client can cancel prod orders via Compass open-orders X. Client sends algo params in tag 58 from OneZero, which Mahi maps to tag 448 and parses (TWAP+, POV, ScalePOV to TT; BOLT to QB). Production release done around 2026-09-18/21; QB BOLT format fixed (7 positional fields) and tests passed; no params means Mahi config is used, malformed params reject. Open UAT issues: TT ScalePOV orders show no fills and TT sees no child orders (client to raise with TT); UAT orders cancelled after 30 min by a Mahi-side UAT timeout (Liam confirmed 30 min in UAT, 35 min on the UBS Algo prod connection, none for TT/QB) and offered to disable it; QB UAT order unfilled for 30 min with nothing from QB, client raising to QB.
+Next: client raises the TT cancel with TT; Liam answers Graeme on a UAT GUI; client answers Liam on disabling the UAT timeout; client chases TT and QB; Mahi supplies FIX logs on request.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787128423896719 https://mahifx.slack.com/archives/C09HN93T0G2/p1793710313225739
 
 ### surya-entity-move — Client moved to Indonesian entity PT Surya Anugrah Mulya
 status: open · since: 2026-11-01 · last: 2026-11-01
@@ -51,12 +63,6 @@ State: Brandon asked whether Mahi supports Microsoft Teams for support because o
 Next: Brandon shares the compliance detail; Mahi decides whether to accommodate.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793071670570599 https://mahifx.slack.com/archives/C09HN93T0G2/p1793072932042059
 
-### echo-compass-users — Echo/Compass user admin
-status: open · since: 2026-09-01 · last: 2026-10-26
-State: Re-opened. Liam Cordelle noted on 2026-10-23 that the client has logins in the system (one named, one overnight) and offered to arrange access. On 2026-10-26 Garry asked Liam to add his own email and reset the overnight password. Andri asked whether a screenshotted control is where to cancel an order in Compass; Shyam Hari confirmed. Earlier: Echo user audit and removal of 14 users (2026-09-01); new Compass and Echo account for a client analyst created 2026-09-29.
-Next: Liam adds Garry's email and resets the overnight password.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1788234307503689 https://mahifx.slack.com/archives/C09HN93T0G2/p1792995720779479
-
 ### oz-backup-whitelist — Whitelist OneZero hub backup IPs
 status: open · since: 2026-10-22 · last: 2026-10-23
 State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi to whitelist NY Surya hub backup 147.160.249.36 and NY Hub-Valutrades backup 147.160.249.37 towards 10.72.100.38 (MFX and MAHI_OZNY4 maker adapters, ports 9010/9011/9034/9035/9037). The connection goes over the internet, and Maten Rehimi pointed out 10.72.100.38 is private, so Brandon traced to public 192.81.111.24 from both IPs on 2026-10-23 and asked if that can be the backup. Maten asked whether the backup only connects when the primary is down and for telnet confirmation on all the flagged ports. Not yet whitelisted.
@@ -67,7 +73,6 @@ status: open · since: 2026-10-23 · last: 2026-10-23
 State: Brandon asked for new credentials so the client IT team can pull the Mahi profile recommendations; he clarified they need programmatic access, i.e. DB access. Shyam Hari raised it with the dev team (2026-10-23); Brandon acknowledged.
 Next: Mahi dev team decides on and provides access.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1792729903877109
-
 
 ### phillip-tt-removal — Remove deactivated Phillip TT connection
 status: open · since: 2026-10-23 · last: 2026-10-23
@@ -85,13 +90,6 @@ status: open · since: 2026-10-22 · last: 2026-10-22
 State: Garry also asked whether old-UI Position maps to the new Rate Limit Amount; Isaac Dann confirmed the old refresh quantity and rate are the new rate limit amount and period. Andri Zamroni asked where a setting (screenshot) now lives; Isaac Dann replied that in the new screen, selecting ICDX_MINI shows a configure channel button on the right with a Liquidity Reduction menu. No client confirmation yet.
 Next: Andri confirms he found it.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792658285372589
-
-
-### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
-status: open · since: 2026-08-19 · last: 2026-10-22
-State: On 2026-10-22 a UAT GoldDec algo order was left running; Liam cancelled it on request. Client has no UAT GUI access (Graeme asked if one exists), and asked if Mahi can reject rather than cancel (Liam: not possible); client can cancel prod orders via Compass open-orders X. Client sends algo params in tag 58 from OneZero, which Mahi maps to tag 448 and parses (TWAP+, POV, ScalePOV to TT; BOLT to QB). Production release done around 2026-09-18/21; QB BOLT format fixed (7 positional fields) and tests passed; no params means Mahi config is used, malformed params reject. Open UAT issues: TT ScalePOV orders show no fills and TT sees no child orders (client to raise with TT); UAT orders cancelled after 30 min by a Mahi-side UAT timeout (Liam confirmed 30 min in UAT, 35 min on the UBS Algo prod connection, none for TT/QB) and offered to disable it; QB UAT order unfilled for 30 min with nothing from QB, client raising to QB.
-Next: Liam answers Graeme on a UAT GUI; client answers Liam on disabling the UAT timeout; client chases TT and QB; Mahi supplies FIX logs on request.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787128423896719 https://mahifx.slack.com/archives/C09HN93T0G2/p1792673915629229
 
 ### stonex-surya-tt — New StoneX/Surya TT connection via OneZero
 status: open · since: 2026-09-15 · last: 2026-10-13
