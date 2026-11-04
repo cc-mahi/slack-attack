@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-11-03T07:15:14Z
+last_catchup: 2026-11-04T08:07:14Z
 status: active
 ---
 
@@ -41,10 +41,10 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793686208763259 https://ma
 
 
 ### order-reject-queries — Reject and fill investigations
-status: open · since: 2026-09-21 · last: 2026-11-02
-State: On 2026-10-01 Louie reported an urgent quote disconnect; Kate showed all Mahi sessions stayed up 00:06:52 to 00:35:33 UTC and the logged TARGET_QUOTE_Mahi_ECN session (FXTM) is not Mahi's, so it is downstream in Exinity's bridge. On 2026-10-06 Christian asked why a CL1USD take-profit rejected three times NO_PRICE/EXPIRED after a WTI spike; Rory explained pricing stayed indicative until 13:01:43 UTC after the LP stopped quoting and that Mahi does not hold pending TP/SL orders (immediate market orders), so the bridge must retry. On 2026-10-09 Christian asked for help reading FIX logs and Rory asked what he needs. Mukhammad's 2026-10-02 XAU rejects on API_111000023 had a Shyam acknowledgement but no outcome seen. On 2026-10-15 Matt asked about slippage on a 3oz XAUUSD market buy; Nathan showed the offer ticked up $0.04 during the 20ms last-look hold on the Top Four execution profile (price improvement off, so fill at the worse-for-client end-of-window price), $0.12 total. On 2026-11-02 Mukhammad asked why a client TP on DOWUSD (counterparty ASV_MT5_15122527, 2026-10-29 10:30 UTC) was rejected; Daria showed the cancel reason 'Internalisation Quantity greater than Published' because published quantity was 0 as all LPs had stopped pricing (price forensics), so no price was formed; Mukhammad acknowledged.
+status: open · since: 2026-09-21 · last: 2026-11-04
+State: On 2026-10-01 Louie reported an urgent quote disconnect; Kate showed all Mahi sessions stayed up 00:06:52 to 00:35:33 UTC and the logged TARGET_QUOTE_Mahi_ECN session (FXTM) is not Mahi's, so it is downstream in Exinity's bridge. On 2026-10-06 Christian asked why a CL1USD take-profit rejected three times NO_PRICE/EXPIRED after a WTI spike; Rory explained pricing stayed indicative until 13:01:43 UTC after the LP stopped quoting and that Mahi does not hold pending TP/SL orders (immediate market orders), so the bridge must retry. On 2026-10-09 Christian asked for help reading FIX logs and Rory asked what he needs. Mukhammad's 2026-10-02 XAU rejects on API_111000023 had a Shyam acknowledgement but no outcome seen. On 2026-10-15 Matt asked about slippage on a 3oz XAUUSD market buy; Nathan showed the offer ticked up $0.04 during the 20ms last-look hold on the Top Four execution profile (price improvement off, so fill at the worse-for-client end-of-window price), $0.12 total. On 2026-11-02 Mukhammad asked why a client TP on DOWUSD (counterparty ASV_MT5_15122527, 2026-10-29 10:30 UTC) was rejected; Daria showed the cancel reason 'Internalisation Quantity greater than Published' because published quantity was 0 as all LPs had stopped pricing (price forensics), so no price was formed; Mukhammad acknowledged. On 2026-11-04 Samuel asked whether CP API_111000021's cancels on EXINITY_CONNECT_WAGYU (2026-11-03 23:39-23:45 UTC) were still due to limit-order volume; Shyam confirmed the same cause: 800 oz buy limits at top of book, which only had 100 oz.
 Next: Christian to say what he needs from the FIX logs; Exinity to check its bridge retry behaviour.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790857668546679 https://mahifx.slack.com/archives/C0456LSHQQK/p1791304956108509 https://mahifx.slack.com/archives/C0456LSHQQK/p1791563954367589 https://mahifx.slack.com/archives/C0456LSHQQK/p1793594635045049
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790857668546679 https://mahifx.slack.com/archives/C0456LSHQQK/p1791304956108509 https://mahifx.slack.com/archives/C0456LSHQQK/p1791563954367589 https://mahifx.slack.com/archives/C0456LSHQQK/p1793756635298589
 
 
 ### admin-feed-multicast — Multicast change undo to restore admin feeds
