@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-03T07:16:26Z
+last_catchup: 2026-11-04T08:07:10Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### ig-demo-stream — New IG DEMO price stream for latency comparison
+status: open · since: 2026-10-22 · last: 2026-11-04
+State: Mac said Go will receive a new IG DEMO price stream with improved Spot Gold and Silver latency and asked for analysis over a couple of news events against Go's other LPs and the current IG stream; it must NOT be included in any models. Go reused the dormant HRP bridge connection (no market data from HRP since April) for the demo feed. Nathan set up IG_DEMO in Compass on the HRP FIX session details on 2026-11-04: session logged on with heartbeats but no quotes, as Go's hub is rejecting the subscription. Test stream only, no orders will be sent. No historic data exists, so the news-event analysis waits for data to accumulate.
+Next: Go to fix the hub subscription rejection so market data streams; Mahi to run the news-event latency comparison once data has accumulated.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792629269396489 https://mahifx.slack.com/archives/CNF3WPNSK/p1793764431608789
 
 ### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
 status: open · since: 2026-09-08 · last: 2026-11-02
@@ -45,12 +51,6 @@ status: open · since: 2026-10-27 · last: 2026-10-27
 State: Isaac noted that because Go runs published LR, LR also lands on benign flow: the lr-health check on 2026-10-02 flagged 57 benign counterparties charged about $4.6k in total (mostly a few hundred dollars each, largest ~$1.6k). He dismissed the cards as the expected cost of published LR. If Go asks about fills for good clients, a more targeted setup (Infinox approach: penalise toxic flow harder, benign less) could be offered, but it shows up mostly as slippage so needs client sign-off and probably ties into Go's colour-routing work; unclear Go would be interested.
 Next: Nathan to decide whether to raise it with Go; no client action.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1793119374681369
-
-### ig-demo-stream — New IG DEMO price stream for latency comparison
-status: open · since: 2026-10-22 · last: 2026-10-22
-State: Mac said Go will receive a new IG DEMO price stream with improved Spot Gold and Silver latency and asked for analysis over a couple of news events against Go's other LPs and the current IG stream; it must NOT be included in any models. Nathan will set up the market in Compass today, needs the FIX session details from Go, and data flows after the EOD restart. No historic data exists, so analysis waits for a few news events; Mac agreed. Nathan asked Go to say once the price stream is received.
-Next: Go to send FIX session details and confirm the stream is received; Mahi to run the news-event latency comparison once data has accumulated.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792629269396489 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792636384267029
 
 ### open-latency-cancels — Weekend release and post-restart open latency cancels
 status: open · since: 2026-10-16 · last: 2026-10-18
