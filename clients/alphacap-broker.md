@@ -11,7 +11,7 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-03T07:15:14Z
+last_catchup: 2026-11-04T08:08:24Z
 status: active
 ---
 
@@ -19,6 +19,18 @@ status: active
 Going live is slipping: Alpha's first live client was due 2026-10-29; by 2026-11-02 only internal "live testing" flow is real and Rapp has asked for hedgers to be activated. Hedgers and expectedBookStatusOnTimezones come into play. Rollover and open spikes are being tuned hard (new WSS caps and widening factors on 2026-10-27; the 21:00 roll on 2026-10-28 is the first full test). Rapp wants redundancy against outages and a reliable swaps source for crosses, and Andrew said he can have redundancy. Outstanding Aug/Sep invoices remain a soft overhang.
 
 ## Streams
+
+### argamon-shared-chan — Shared Slack channel with Argamon
+status: open · since: 2026-10-08 · last: 2026-11-03
+State: Rapp wants a Slack group including Argamon so the LP and Mahi can resolve issues directly when he is offline. Mahi had hoped to avoid one (Will Carter asked for risks on 2026-10-08; Cameron Hughes listed them and proposed a Mahi-admined, ops-only channel). On 2026-11-03 Rapp asked Bonnie Cassidy to move it along and she agreed; Cameron Hughes accepted it as Rapp really wants it. Argamon's Tom McLean supplied seven Argamon addresses to add.
+Next: Bonnie Cassidy to create the channel; Cameron Hughes to confirm membership.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791455602185639 https://mahifx.slack.com/archives/C09F15FRTAB/p1793693990087839 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793700342470859
+
+### prop-deposit-accounts — Risk managing deposit-funded prop accounts
+status: open · since: 2026-11-03 · last: 2026-11-03
+State: Rapp asked how Mahi will risk manage prop-based accounts that are given the deposit and can only withdraw PnL. Cameron Hughes replied the best approach is to B-book and optimise the rest, as props usually do, and Rapp is setting up an MT5 group so they can be identified in Compass. Related to the earlier LPOA retail-account grouping.
+Next: Rapp to create the group; Cameron Hughes to tailor execution for it.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793708733600729 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793708760060049
 
 ### go-live-testing — Live test trading and go-live readiness
 status: open · since: 2026-04-29 · last: 2026-11-02
@@ -49,12 +61,6 @@ status: open · since: 2026-10-14 · last: 2026-10-14
 State: Bonnie Cassidy chased again on 2026-10-14: prop and broker August invoices 24 days overdue, September due next week. Andrew asked whether go-live unlocks additional fees and asked Cameron Hughes to raise arrears with multiple ACG contacts. Cameron Hughes told Rapp he wanted the final outstanding bill paid before go-live; Andrew judged that too harsh ("I don't want to disrupt their ability to make more money") and Cameron Hughes retracted it and sent a softer nudge. Rapp replied he would sort it. Broker-side work was unfunded until fees start.
 Next: Cameron Hughes to keep raising arrears with several contacts without gating go-live.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791966476920889 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791972502451699
-
-### argamon-shared-chan — Shared Slack channel with Argamon
-status: open · since: 2026-10-08 · last: 2026-10-08
-State: Rapp wants a Slack group including Argamon so the LP and Mahi can resolve issues directly when he is offline. Will Carter found a broker plus LP channel unusual and asked for risks; Cameron Hughes listed risks both ways (LP detail exposed to client, Argamon hearing pricing gripes first-hand, blame triangles, versus Alpha emailing Argamon anyway) and proposed a Mahi-admined, ops-only channel. Argamon already knows Mahi talks to Alpha on Slack.
-Next: Will Carter to review and reply.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791455602185639 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791456535845149
 
 ### alert-suppression — Monitoring noise before hedgers go on
 status: watching · since: 2026-08-17 · last: 2026-09-10
