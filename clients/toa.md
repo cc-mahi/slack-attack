@@ -10,22 +10,22 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-11-04T08:08:18Z
+last_catchup: 2026-11-05T08:16:13Z
 status: active
 ---
 
 ## Now
 Toa is a sister company (same CTO, James Furness; also posts as James@toalabs.xyz). Nado is wound down; the live workload is Argamon FX/metals market making on LDN, CHI and APN1, with ops watching PagerDuty in `internal-toa-ops`. `toa-nado-shared` has been silent since the wind-down.
-Main threads: the CBOE hedger on CHI keeps tripping its PnL firewall (six trips on 10-30), the CBOE state-mismatch code fix is due, and LDN insti pricing goes indicative around rolls since the EBS feed was killed.
+Main threads: the CBOE hedger on CHI keeps tripping its PnL firewall (six trips on 10-30, more on 11-04 and 11-05; daily limit now -3M), the CBOE state-mismatch code fix is due, and LDN insti pricing goes indicative around rolls since the EBS feed was killed.
 Several Argamon-raised issues arrive as forwards from `mahi-argamon-operations`, which is not in this dossier's channels.
 
 ## Streams
 
 ### cboe-hedger-chi — hedgerCBOE1 on CHI: firewall/PnL trips and state mismatches
-status: open · since: 2026-08-03 · last: 2026-11-04
-State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, restarted again 10-22 by James ("looks fine"), and on 10-30 tripped `UnrealisedPnlFirewall` (`pnlProfitLimitPerDay`, 2M) six times in about three hours from 13:04 UTC, re-tripping after each restart until Lee bumped the unrealised limits and restarted it. On 11-04 it tripped again: realised P&L firewall at about 05:58 UTC (Daria restarted it, suggested reviewing the sweep config), then the unrealised 1-hour firewall as XAUUSD gained about $60 in an hour; Daria raised PnL Limit Per Hour from 1.6m to 2m, then to 2.2m after another trip at 06:57, and Inald restarted it after another hedgerCBOE down alert at 07:50. Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
+status: open · since: 2026-08-03 · last: 2026-11-05
+State: hedgerCBOE1 (moved to Chicago 2026-07-22/23 after the London book was left off) trips repeatedly: firewall on 08-03, 08-05, 08-06 (Lee raised limits per a Zendesk ticket), PnL breach 09-17, firewall 09-28, down at the US CPI release 10-14, restarted again 10-22 by James ("looks fine"), and on 10-30 tripped `UnrealisedPnlFirewall` (`pnlProfitLimitPerDay`, 2M) six times in about three hours from 13:04 UTC, re-tripping after each restart until Lee bumped the unrealised limits and restarted it. On 11-04 it tripped again: realised P&L firewall at about 05:58 UTC (Daria restarted it, suggested reviewing the sweep config), then the unrealised 1-hour firewall as XAUUSD gained about $60 in an hour; Daria raised PnL Limit Per Hour from 1.6m to 2m, then to 2.2m after another trip at 06:57, and Inald restarted it after another hedgerCBOE down alert at 07:50. At 00:30 UTC on 11-05 it crashed again, this time on the daily realised-PnL firewall (the hourly limit had been raised, not the daily); Shyam restarted it and, with James's go-ahead ("we want a bigger limit"), raised realisedPnlLimitPerDay from -2M to -3M. Cameron restarted it on 09-17 and 10-14 after checking net PnL. James's guidance (09-17): hedger PnL firewalls see only the hedger side, so restart is fine if net PnL is healthy. Separately, ordersCboe1 state-mismatch alerts (price 1.32503 vs 1.325, and a 100 EURUSD mismatch) are on the Argamon-to-CBOE side. On 2026-09-30 Lee said a code fix is ready and "should be sorted this week"; no confirmation of release seen.
 Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatches meanwhile; limit tuning or root cause of the repeated PnL trips (sweep config review suggested 11-04) is open.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589 https://mahifx.slack.com/archives/C035H1VNCAD/p1793778654668379
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589 https://mahifx.slack.com/archives/C035H1VNCAD/p1793838638143019
 
 ### pnl-var-alerting — PnL-drop, VaR and not-ticking alert noise
 status: open · since: 2026-06-25 · last: 2026-11-02
@@ -40,10 +40,10 @@ Next: Toa/Argamon to answer whether those futures (and the 12 failing models) sh
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787002323906439 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793571986506049
 
 ### infra-releases — releases, new gateways and box changes on Argamon/Toa
-status: open · since: 2026-08-17 · last: 2026-10-30
-State: Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
-Next: Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1791945601312429 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379
+status: open · since: 2026-08-17 · last: 2026-11-04
+State: On 11-04 marketDataNado1 on Toa APN1 OOMed again (Inald); James (Toa Labs) disabled PagerDuty for Toa APN1 and Isaac Dann agreed it is fine to stop the box, so the leftover Nado process is being retired. Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
+Next: stop the Toa APN1 box (approved 11-04); Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379 https://mahifx.slack.com/archives/C035H1VNCAD/p1793805125223629
 
 ### argamon-relays — Argamon-raised issues relayed from mahi-argamon-operations
 status: open · since: 2026-08-19 · last: 2026-10-09
