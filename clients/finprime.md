@@ -10,7 +10,7 @@ channels:
   internal-finprime: C0C8M89J2JY
   mahi-finprime: C0C8HCFKE9G
 contacts: []
-last_catchup: 2026-11-04T08:04:59Z
+last_catchup: 2026-11-05T08:14:49Z
 status: active
 ---
 
@@ -21,15 +21,16 @@ Pre-contract A-book broker prospect (XAUUSD-heavy retail flow, ~$21bn/month). Ch
 
 ### pilot-agreement — Pilot agreement drafting and intake
 status: open · since: 2026-11-03 · last: 2026-11-04
-State: FinPrime are chasing the contract daily on WhatsApp and pushing urgency. Terms agreed per Andrew (2026-11-03): 3-month pilot, execution and risk modules only, Option A ($25k/month fixed up to $30bn, then 5 $/M; Option B not needed), hosting at cost on top, pricing modules on application, price match on like-for-like offers, free bridge/connectivity items, and a post-pilot choice between a banded fixed fee or a lower banded fee plus 12-25% of measured value-add. Nicole Vivian posted a redline of the pilot agreement (new clauses: post-pilot terms, price match, network data, StarPrime information barrier) with decisions needed from Andrew on invoicing start, price-match strength, post-pilot notice, network data wording and limiting the pilot to FinPrime's own flow. Andrew flagged network-data use (participation mode, currently assumed full) and the StarPrime sister-company barrier and possible commercial arbitrage as areas beyond the template. Will Carter collected the legal entity, signatory and witness details from FinPrime on 2026-11-04 (entity name differs from the Mauritius entity found in public PR, i.e. rebrand); draft review goes to their liquidity mailbox. NDA still not received. Liam Cordelle is getting the Beeks hosting quote for a dedicated environment, not needed in the agreement. Andrew introduced /contract-draft-check (intake/check/sweep) with FinPrime as first use.
-Next: Andrew: decide the redline points; Nicole Vivian: update draft with entity/signatory details and send for review; Will/Bonnie: confirm NDA status and AML/KYC docs from FinPrime; Mahi: success criteria and hosting location.
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1793727529621529 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793741157654589 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793776189514959
+State: FinPrime are chasing the contract daily on WhatsApp and pushing urgency. Terms agreed per Andrew (2026-11-03): 3-month pilot, execution and risk modules only, Option A ($25k/month fixed up to $30bn, then 5 $/M; Option B not needed), hosting at cost on top, pricing modules on application, price match on like-for-like offers, free bridge/connectivity items, and a post-pilot choice between a banded fixed fee or a lower banded fee plus 12-25% of measured value-add. Nicole Vivian posted a redline of the pilot agreement (new clauses: post-pilot terms, price match, network data, StarPrime information barrier) with decisions needed from Andrew on invoicing start, price-match strength, post-pilot notice, network data wording and limiting the pilot to FinPrime's own flow. Andrew flagged network-data use (participation mode, currently assumed full) and the StarPrime sister-company barrier and possible commercial arbitrage as areas beyond the template. Will Carter collected the legal entity, signatory and witness details from FinPrime on 2026-11-04 (entity name differs from the Mauritius entity found in public PR, i.e. rebrand); draft review goes to their liquidity mailbox. NDA still not received. Liam Cordelle is getting the Beeks hosting quote for a dedicated environment, not needed in the agreement. Nicole posted an updated agreement (docx and pdf) on 2026-11-04 evening, ready to circulate to FinPrime; Will Carter approved it. Andrew introduced /contract-draft-check (intake/check/sweep) with FinPrime as first use.
+Next: Will/Bonnie: send the updated agreement to FinPrime (liquidity mailbox); Andrew: confirm any redline points still open; Will/Bonnie: confirm NDA status and AML/KYC docs from FinPrime; Mahi: success criteria and hosting location.
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1793727529621529 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793741157654589 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793822944885119
 
 ### martingale-data — FinPrime B-book martingale datasets
-status: open · since: 2026-11-02 · last: 2026-11-02
+status: open · since: 2026-11-02 · last: 2026-11-05
 State: FinPrime uploaded two B-book trade files from martingale-style clients on 2026-11-02. William Denny cleaned and combined them (2.77m trades; EURUSD 93.5% of USD volume, GBPUSD 3.8%, XAUUSD 2.5%; 400 non-FX/metals trades dropped). Timestamps are MT server time following US DST (UTC+2 to 8 Mar, UTC+3 to 20 Oct), not a fixed GMT+3. M2M is running on the full set with and without classification. Early read: most accounts add to losing positions at roughly 1.5-1.6x per step, and in the second file many accounts run the same ladder simultaneously, suggesting one EA copied across accounts. Will Carter treats this as upsell territory (B-book flow) and asked William to follow the initial process.
-Next: William Denny: M2M and behaviour results; Will Carter: decide scope given the no-more-free-analysis stance.
-Refs: https://mahifx.slack.com/archives/C0C8HCFKE9G/p1793598288171109 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793638116335499
+Will Carter (2026-11-05) told the team to let FinPrime (Remus) know on WhatsApp that martingale analysis will be ready by end of day, so the analysis is going ahead.
+Next: William Denny: M2M and behaviour results by EOD 2026-11-05; Will Carter: tell Remus on WhatsApp.
+Refs: https://mahifx.slack.com/archives/C0C8HCFKE9G/p1793598288171109 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793864420439919
 
 ### valueadd-sims — XAUUSD value-add sims on FinPrime flow
 status: open · since: 2026-10-14 · last: 2026-10-28
