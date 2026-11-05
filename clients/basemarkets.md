@@ -14,12 +14,12 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-11-04T08:04:40Z
+last_catchup: 2026-11-05T08:14:49Z
 status: active
 ---
 
 ## Now
-Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, awaiting Base's IP for whitelisting). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
+Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, whitelisted Base's IPs 2026-10-28; swapping one IP at Base's 2026-11-02 request, pending). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
 
 ## Streams
 
@@ -42,10 +42,11 @@ Next: Mahi (Nathan Burch / Kate Stagg) to correct Compass positions for AUDUSD a
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792620629451529 https://mahifx.slack.com/archives/C09D8V41JAG/p1792653037394839
 
 ### tegis-mt5-api — Tegis moving to MT5 API trading with Mahi price feed only
-status: open · since: 2026-04-29 · last: 2026-10-21
+status: open · since: 2026-04-29 · last: 2026-11-04
 State: Direct-API ask began 2026-04-29 (Alex asked about piping trades off MT4/MT5; Mahi has FIX but no margin or credit checks). Call held 2026-09-04: Tegis wanted off the MT5 EA/copy-trading setup, Mahi gave no timelines. On 2026-10-14 Alex said Tegis will trade via MT5's API (MT5 handles balances, rejections, no coverage account) and need only pricing from Mahi. Kate Stagg replied Mahi can give a FIX 4.4 price connection plus a conformance environment to build against; internally she asked whether Tegis could take prices from MT5's API since Mahi has no API clients today. Tegis's proposed workflow (FIX 4.4 pricing to its algo, orders via MT5 API into a Base MT5 account, hedging via Mahi into LMAX as today) was posted in the client channel and Kate Stagg accepted it 2026-10-20: the only change on Mahi's side is the new pricing connection. Kate Stagg posted the FIX pricing connection details in the client channel on 2026-10-21 (credentials are in that message; not copied here). FastMT (Aytugan) also asked whether the Mahi gateway executes orders initiated from MT5 Manager (Dealer); Kate Stagg confirmed it is supported.
-Next: Base/Tegis to give the IP for whitelisting and connect to the price feed.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619 https://mahifx.slack.com/archives/C09D8V41JAG/p1788345375042849 https://mahifx.slack.com/archives/C09D8V41JAG/p1792572631430259
+Whitelisting: Tegis first had connection timeouts 2026-10-27; Alex gave two static IPs, Kate Stagg confirmed them dedicated and Mahi whitelisted on port 9022 on 2026-10-28. On 2026-11-02 Alex asked to drop one IP (no longer in use) and add a new one, and chased on 2026-11-04 ("this should be final"); Kate Stagg acknowledged 2026-11-04 and will request it and confirm. No confirmation yet that Tegis is connected and receiving prices.
+Next: Mahi (Kate Stagg) to swap the whitelisted IP and confirm; Tegis to connect to the price feed.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619 https://mahifx.slack.com/archives/C09D8V41JAG/p1788345375042849 https://mahifx.slack.com/archives/C09D8V41JAG/p1792572631430259 https://mahifx.slack.com/archives/C09D8V41JAG/p1793801518977649
 
 ### group-additions-1019 — Base requests for new A/B book MT groups in Compass config
 status: open · since: 2026-10-19 · last: 2026-10-21
