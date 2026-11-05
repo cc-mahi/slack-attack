@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-11-04T08:07:11Z
+last_catchup: 2026-11-05T08:14:49Z
 status: active
 ---
 ## Now
@@ -39,10 +39,10 @@ Next: Fix the Puppet backup entry and re-run the deploy; Daria to turn the Inst 
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1793380821002989 https://mahifx.slack.com/archives/C09QS1NUA80/p1793602997317929
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-11-03
-State: Almost every weekday ~15:00 BST Layan posts a gold long (occasionally short) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes or William answers "will do" and confirms. Volumes ran 160oz to 9.8k oz in the window. Confirmation is not always prompt: GCC had to chase on 09-22 (done next day), 10-07 ("is this done?", confirmed 10-08) and 10-09 (2,572 oz; Layan asked again 10-13 18:00 BST and no confirmation is visible). 10-15 report (1,694 oz) was acknowledged by Rory within a minute. The 10-16 report (1,583 oz, 15:50 BST) was confirmed done by William at 18:10 BST, over two hours later; the 10-09 2,572 oz confirmation is still not visible. The 10-19 report (5,661 oz, the largest in the window) was acknowledged by Rory in 52s and confirmed done 11 minutes later. The 10-20 report (1,525 oz) was confirmed done at 16:01 BST. The 10-21 report (5,508 oz gold long plus 69,767 oz silver long, first silver in the window, 15:30 BST) was acknowledged by Rory in 19s; no done-confirmation visible. The 10-22 report (3,708 oz gold long, 15:30 BST) was acknowledged in 13s and confirmed actioned by Rory at 15:34 BST. The 10-26 report (3,423 oz gold long, 15:08 GMT) was acknowledged by William in 4 minutes and confirmed done at 15:19 GMT. The 10-27 report (1,746 oz gold long, 16:16 UTC) was acknowledged by Isaac Dann ("will book this now") with no done-confirmation visible. The 10-28 report (1,212 oz gold long, 15:26 UTC) was acknowledged by William ("Hi Layan, sure") with one more reply in thread at 15:34. The 10-29 report (3,510 oz gold long, 15:06 UTC) was acknowledged by Isaac Dann ("booking this now") with no done-confirmation visible. The 10-30 report (1,012 oz gold long, 15:12 UTC) was acknowledged by Isaac Dann in 3 minutes and confirmed actioned at 15:17. The 11-02 report (1,895 oz gold long, 15:19 UTC) was acknowledged by Rory in 12s and confirmed actioned at 15:24. The 11-03 report (1,662 oz gold long plus 10,600 oz silver short, 15:44 UTC) was acknowledged by Rory in 14s and confirmed done at 15:48. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
+status: open · since: 2026-04-30 · last: 2026-11-04
+State: Almost every weekday ~15:00 UTC/BST Layan posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms, usually within seconds to minutes (volumes 160oz to 9.8k oz). Confirmation is not always visible: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz; Layan asked again 10-13 and no confirmation is visible), the 10-16 report was confirmed over two hours late, and the 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 reports have no done-confirmation visible. The 10-22 to 11-03 reports were acknowledged and mostly confirmed actioned within minutes. On 11-04 (200 oz gold long, 15:32 UTC) Rory replied "will do" within a minute and there is one more reply in thread at 15:38. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
 Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793027291641789 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793720697785109
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793806330909269
 
 ### defensive-feeds — LMAX and Finalto defensive feeds and news hedging
 status: open · since: 2026-08-19 · last: 2026-11-02
@@ -100,9 +100,9 @@ Next: Rory to finish the insto feed by EOW; GCC to send pricing parameters if no
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1791287464442599 https://mahifx.slack.com/archives/C09QS1NUA80/p1792594740438909
 
 ### amana-lp — Amana as hedging venue and taker
-status: open · since: 2026-09-14 · last: 2026-10-05
+status: watching · since: 2026-09-14 · last: 2026-10-05
 State: Amana was set up (fixOrders3/fixMD3, XAUUSD and EURUSD mapped, in the beta pricer since late Sep) after Will Carter flagged an "interesting request to setup Amana as a taker" on 09-14. Connection worked 09-15 and Youssef confirmed quantity definitions that day (gold contract 100oz, step 0.01 = 1oz; FX 100k contract, min 1,000). Nael approved test trades 09-23 and XAUUSD and EURUSD buy/sell looked good, on a small test-only funding; Rory still to map the remaining instruments and asked whether to set an NOP limit like Finalto's. As of 10-05 GCC was to fully fund the Amana account that week, after which NOPs are configured and Amana added as a third hedging venue; full funding not yet confirmed in the channels. On 10-20 Rory noted some hesitation on GCC's side about Amana, though they would push ahead if needed.
-Next: GCC to fully fund Amana and answer on NOP limit; Rory to map remaining instruments, set NOPs and add it to the hedger.
+Next: (watching; no Slack activity since 10-05, GCC funding unconfirmed) GCC to fully fund Amana and answer on NOP limit; Rory to map remaining instruments, set NOPs and add it to the hedger.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1789388024317479 https://mahifx.slack.com/archives/C09PNC1MFAA/p1790170512445709 https://mahifx.slack.com/archives/C09QS1NUA80/p1791204525364089
 
 ### platform-ops — Stability, maintenance windows, access
