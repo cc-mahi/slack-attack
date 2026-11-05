@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-11-04T08:07:14Z
+last_catchup: 2026-11-05T08:16:00Z
 status: active
 ---
 
@@ -32,6 +32,13 @@ Open on Mahi: re-setting per-book PnL-drop alerts, XAU position realignment usin
 Compass 26.4 went on over the 2026-10-24/25 weekend; signalProcessFI1 on trading-1 overflowed twice on 2026-10-26 (fix rolled out that evening); weekend reliability matters more as Exinity plans weekend crypto pricing.
 
 ## Streams
+
+### signal-process-alerts — Alerts on signal processes, no execution impact
+status: open · since: 2026-11-05 · last: 2026-11-05
+State: On 2026-11-05 ~04:49Z Mukhammad asked Mahi to check a set of alerts (screenshot, not readable). Daria said they should be fixed shortly and, asked about execution impact, said there was no noticeable trading impact because these processes produce signals and are not in the execution pipeline. Which processes alerted is not stated; may relate to the 2026-10-26 signalProcessFI1 overflow.
+Next: Mahi (Daria) to confirm the alerts are cleared.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1793855501147249
+
 
 ### echo-tob-crash — Echo TOB errors on historical dates
 status: open · since: 2026-11-03 · last: 2026-11-03
