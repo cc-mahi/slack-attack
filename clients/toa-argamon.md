@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-11-04T08:08:16Z
+last_catchup: 2026-11-05T08:16:13Z
 status: active
 ---
 
@@ -32,6 +32,18 @@ On 10-21 the NY retail FX book moved to a 500k G8 inventory cap with Friday flat
 GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). Toa reset Mahi's last-look/tolerance, so TOA_CHI went back into XAU hedging on 11-03. Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
+
+### roll-fok-topup — FOK market orders cancelled over roll; Allow Top Up enabled
+status: open · since: 2026-11-05 · last: 2026-11-05
+State: Over roll, INST-33 FOK market orders ran on the rollover execution profile and were brokered to the LDN pool, whose LPs do not accept FOK, so each was cancelled. On 11-05 Argamon (Levi, then Elan applying it) asked for Allow Top Up on the rollover profile; Nathan explained it sends IoC to the pool and lets the house top up partial fills, which adds book risk versus pure brokering, and agreed min top-up PnL of 0 is sensible (top up only when the house part is at or better than client mid). Related: on 11-04 Tom asked where the net volume limit is configured after a XAUUSD trade group triggered it at about 600oz; James pointed to the Execution Rule and the DEFAULT netVolumeLimitingProfile and advised setting profiles (incl. Catch-All) to Don't Cancel, which extends last-look to reprice on imbalance; Elan agreed.
+Next: Argamon to set Catch-All and other profiles to Don't Cancel as agreed; Mahi to watch book risk from top-ups after the next roll.
+Refs: https://mahifx.slack.com/archives/C083GP5F1CL/p1793839256914529 https://mahifx.slack.com/archives/C083GP5F1CL/p1793851283672419 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793795725289139
+
+### cboe-maker-session — Argamon requesting Cboe ECN Maker session
+status: open · since: 2026-11-05 · last: 2026-11-05
+State: Levi emailed support on 11-05 for a Maker session connection to Cboe ECN. Shyam is handling it and asked whether the trading account is the same as with Toa; Levi confirmed both are hedged on Argamon's HRP PB account. Likely linked to the CBOE hidden-peg hedging trial in NY4.
+Next: Shyam/Daria to set up the Cboe Maker session.
+Refs: https://mahifx.slack.com/archives/C083GP5F1CL/p1793840550520559 https://mahifx.slack.com/archives/C083GP5F1CL/p1793851680323869
 
 ### toa-last-look-hedge — Toa last-look tolerance 0 rejecting Mahi gold hedges
 status: open · since: 2026-11-02 · last: 2026-11-03
@@ -46,10 +58,10 @@ Next: Argamon to say whether they want a GTS via NWM market set up in Compass; M
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793113766371149 https://mahifx.slack.com/archives/C083GP5F1CL/p1793166381823569
 
 ### platform-ops — Toa box housekeeping, config landmines, capacity
-status: open · since: 2026-08-17 · last: 2026-11-02
-State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17. marketDataNado1 hit an OOM on 10-28 and was restarted by Shyam (PagerDuty raised). On 10-30 Kraken Futures market data on APN1 went down from about 02:20 UTC; Shyam says it is Kraken's side (their spot connectivity incident, still under investigation; PagerDuty raised). On 11-02 Daria asked Toa whether to extend the alert threshold or disable not-ticking monitoring for ISAM_NW_LDN (down about 16:20-18:00 NY) and KGI_RCTV_NYC (about 16:50-18:15 NY) around roll; no answer yet.
-Next: Toa to answer on the roll-time not-ticking alerts; watch for Kraken Futures MD recovery on APN1; confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379 https://mahifx.slack.com/archives/C035H1VNCAD/p1793662534164719
+status: open · since: 2026-08-17 · last: 2026-11-04
+State: Recurrent config-driven outages: bad liquidityRefreshProfiles entry (GBPUSD typed as Currency) took down distribution gateways and systemStateMonitor on LDN/CHI from 08-20 until removed 08-23; Elan's skew edit removed delegates and pricerInstiLight2 would not start (09-01); an expired MGCQ6 contract in instrumentToProfileMappings blocked propTrader1HrpChi1 (08-30). CHI /app/fx/apps/mahifx hit 90% (mostly model weights incl. dead EBS series); James said delete the EBS data and Nathan added 50GB on 10-11 (about 80%). hazelcastNode OOM on APN1 primary (09-07) tied to the secondary box being decommissioned without unwinding multi-region infra. New LP being set up in TKY (10-14) and new gateways on CHI (09-22). PD licence renewed 08-17. marketDataNado1 hit an OOM on 10-28 and was restarted by Shyam (PagerDuty raised). On 10-30 Kraken Futures market data on APN1 went down from about 02:20 UTC; Shyam says it is Kraken's side (their spot connectivity incident, still under investigation; PagerDuty raised). On 11-02 Daria asked Toa whether to extend the alert threshold or disable not-ticking monitoring for ISAM_NW_LDN (down about 16:20-18:00 NY) and KGI_RCTV_NYC (about 16:50-18:15 NY) around roll; no answer yet. On 11-04 marketDataNado1 on APN1 OOMed again; Toa disabled PagerDuty for the Toa APN1 service and Isaac agreed the APN1 box can be stopped.
+Next: Toa to answer on the roll-time not-ticking alerts; stop the APN1 box; watch for Kraken Futures MD recovery on APN1; confirm the leftover EBS model data is actually deleted; unwind multi-region infra from the decommissioned secondary box.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1791220342201259 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379 https://mahifx.slack.com/archives/C035H1VNCAD/p1793805125223629
 
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
 status: open · since: 2026-07-21 · last: 2026-10-28
@@ -86,10 +98,10 @@ Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://ma
 
 
 ### chi-hedgers — Toa CHI hedger breaches and CBOE state mismatches
-status: open · since: 2026-08-03 · last: 2026-11-04
-State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). On 10-30 hedgerCBOE1 tripped UnrealisedPnlFirewall (pnlProfitLimitPerDay, 2M) six times in about 3 hours; Lee bumped the unrealised limits and restarted it. On 11-04 the CBOE realised-PnL firewall and the unrealised 1-hour firewall tripped as XAUUSD gained about $60 in an hour; Daria restarted, raised PnL Limit Per Hour from 1.6m to 2m, then 2.2m after it tripped again, and Inald restarted hedgerCBOE after another PagerDuty alert; she suggests reviewing the sweep config. ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
+status: open · since: 2026-08-03 · last: 2026-11-05
+State: hedgerCBOE1 and hedgerHrpCME1 at Toa CHI keep tripping PnL/firewall/order-breach limits (09-17, 09-27/28, 10-14) and are restarted by whoever is on call; Toa says the PnL firewalls see only the hedger side, so restart is fine when net PnL is healthy (Cameron Copland restarted on 09-17 and 10-14 after checking net PnL; James restarted hedgerCBOE1 again on 10-22). On 10-30 hedgerCBOE1 tripped UnrealisedPnlFirewall (pnlProfitLimitPerDay, 2M) six times in about 3 hours; Lee bumped the unrealised limits and restarted it. On 11-04 the CBOE realised-PnL firewall and the unrealised 1-hour firewall tripped as XAUUSD gained about $60 in an hour; Daria restarted, raised PnL Limit Per Hour from 1.6m to 2m, then 2.2m after it tripped again, and Inald restarted hedgerCBOE after another PagerDuty alert; she suggests reviewing the sweep config. On 11-05 hedgerCBOE1 crashed again, this time on the daily realised PnL limit; Shyam restarted it and, with James's approval, raised realisedPnlLimitPerDay to -3M. ordersCboe1 state mismatches (price 1.32503 vs 1.325) were referred to CBOE via Argamon; Lee had a code fix ready in the week of 09-29. 09-07 hedgerHrpCME1 crashed on "No rule for converting XAU to ZAR" from a profileDefinitions edit and was fixed by reverting (the audit log is only visible on LDN). 09-27 ordersCME1/ordersCOMEX1 stuck in starting and ordersCOMEXMarex1 awaiting a fix.
 Next: Mahi to review the CBOE sweep config and firewall limits; Lee to confirm the CBOE state-mismatch code fix shipped and ordersCOMEXMarex1 fixed.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793771918651539
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1791982032259119 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793838638143019
 
 
 ### xau-invalid-increment — XAU price increment rejects (TOA_CHI, B2PRIME)
