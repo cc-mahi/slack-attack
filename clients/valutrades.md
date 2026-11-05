@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-04T08:08:21Z
+last_catchup: 2026-11-05T08:17:53Z
 status: active
 ---
 
@@ -68,6 +68,7 @@ status: open · since: 2026-10-22 · last: 2026-10-23
 State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi to whitelist NY Surya hub backup 147.160.249.36 and NY Hub-Valutrades backup 147.160.249.37 towards 10.72.100.38 (MFX and MAHI_OZNY4 maker adapters, ports 9010/9011/9034/9035/9037). The connection goes over the internet, and Maten Rehimi pointed out 10.72.100.38 is private, so Brandon traced to public 192.81.111.24 from both IPs on 2026-10-23 and asked if that can be the backup. Maten asked whether the backup only connects when the primary is down and for telnet confirmation on all the flagged ports. Not yet whitelisted.
 Next: Brandon answers Maten (backup behaviour, telnet to 192.81.111.24 on all ports); Mahi then whitelists.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792659558042959 https://mahifx.slack.com/archives/C09HN93T0G2/p1792746206556109
+
 ### profile-recs-creds — Programmatic access to Mahi profile recommendations
 status: open · since: 2026-10-23 · last: 2026-10-23
 State: Brandon asked for new credentials so the client IT team can pull the Mahi profile recommendations; he clarified they need programmatic access, i.e. DB access. Shyam Hari raised it with the dev team (2026-10-23); Brandon acknowledged.
@@ -109,52 +110,32 @@ State: Graeme asked whether bridge deployment to production is still free; inter
 Next: client sign-off mid-Nov; Mahi to hold quote and follow up on the named update cadence for build requests.
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1785744760869439 https://mahifx.slack.com/archives/CP7A1F8BT/p1791798007442899
 
-### hotspot-pegged — CBOE Hotspot pegged-order integration
-status: open · since: 2026-09-03 · last: 2026-10-05
-State: Graeme asked whether Mahi still has a CBOE Hotspot integration (ITCH MD plus FIX orders, in active use per James Furness) and the cost to map text strings to pegged order types. Mahi uses Auto Peg set up on the venue side today; mapping on Mahi's side estimated 1-3 days. Andrew Morgan is happy to SOW; Graeme said he will come back on Hotspot.
-Next: client comes back on Hotspot.
-Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1788444927995509 https://mahifx.slack.com/archives/CP7A1F8BT/p1791206090832099
-
-### contract-rolls — Futures and CFD rolls announced by client
-status: watching · since: 2026-08-18 · last: 2026-10-15
-State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec for AMB, US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787042749088329 https://mahifx.slack.com/archives/C09HN93T0G2/p1792043232458789
-
 ### dashboard-stability — Compass dashboard and admin outages
-status: watching · since: 2026-08-17 · last: 2026-10-05
-State: Compass errors on 2026-09-20 (fix deployed by Sam Hewitt, trading unaffected), LDN dashboard login bounce fixed by a dashboard-only deploy on 2026-09-28 (NY already fixed), and a transient all-tab error on 2026-10-05 that cleared after refresh. Sam raised LDN backgroundJobs memory 2048 to 3072MB on 2026-09-01.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1789937493122649 https://mahifx.slack.com/archives/C09HN93T0G2/p1791193345574799
+status: watching · since: 2026-08-17 · last: 2026-11-05
+State: On 2026-11-05 the overnight desk reported the NY admin trading/orders page slow to load (a filtered NQZ6 view); Shyam Hari and Daria Horton could load it fine, a refresh fixed it and the client confirmed. Earlier: Compass errors on 2026-09-20 (fix deployed by Sam Hewitt, trading unaffected), LDN dashboard login bounce fixed by a dashboard-only deploy on 2026-09-28 (NY already fixed), and a transient all-tab error on 2026-10-05 that cleared after refresh. Sam raised LDN backgroundJobs memory 2048 to 3072MB on 2026-09-01.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1789937493122649 https://mahifx.slack.com/archives/CSLM3Q8AD/p1793838767664399 https://mahifx.slack.com/archives/CSLM3Q8AD/p1793858285175349
 
 ### overnight-reconnects — Overnight connection fixes
 status: watching · since: 2026-08-18 · last: 2026-10-25
 State: Overnight desk posts a screenshot ("please can you fix this for us") out of hours; Sam Hewitt or Daria Horton fix it within about 2 minutes and the client confirms (2026-08-18, 2026-08-27, 2026-09-21). On 2026-10-25 Brandon asked Mahi to confirm whether a screenshotted item was an issue; Shyam Hari checked and found everything fine.
 Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1787088431402609 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792962970307259
 
+### contract-rolls — Futures and CFD rolls announced by client
+status: watching · since: 2026-08-18 · last: 2026-10-15
+State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec for AMB, US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787042749088329 https://mahifx.slack.com/archives/C09HN93T0G2/p1792043232458789
+
+### hotspot-pegged — CBOE Hotspot pegged-order integration
+status: watching · since: 2026-09-03 · last: 2026-10-05
+State: Graeme asked whether Mahi still has a CBOE Hotspot integration (ITCH MD plus FIX orders, in active use per James Furness) and the cost to map text strings to pegged order types. Mahi uses Auto Peg set up on the venue side today; mapping on Mahi's side estimated 1-3 days. Andrew Morgan is happy to SOW; Graeme said he will come back on Hotspot. Downgraded to watching: no activity for 31d, client has not returned.
+Next: client comes back on Hotspot.
+Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1788444927995509 https://mahifx.slack.com/archives/CP7A1F8BT/p1791206090832099
+
 ### ip-whitelist-beeks — Brandon cannot reach Compass/Echo from new IP
 status: watching · since: 2026-09-08 · last: 2026-09-16
 State: Client asked to whitelist 108.136.145.119 for Echo and Compass; Brandon still could not connect as of 2026-09-16, Beeks running a TCP dump. Downgraded to watching: no activity for 35d, no resolution visible.
 Next: confirm with client whether access works.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1788860536902869 https://mahifx.slack.com/archives/C09HN93T0G2/p1789557438771399
-
-### vt-lp-removal — Edge, Jump, Commerz removed from VT feed
-status: closed · since: 2026-10-20 · last: 2026-10-21 · closed: 2026-10-21
-State: Rory noticed no prices since Friday's close from three NWPB VT streams (Edge, Jump, Commerz) while the session stayed up; Garry confirmed on 2026-10-21 the client is removing them. Expected, no fault.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792504266802319 https://mahifx.slack.com/archives/C09HN93T0G2/p1792553324672229
-
-### surya-hedger-blocked — Surya RM gold hedger stopped hedging
-status: closed · since: 2026-10-20 · last: 2026-10-20 · closed: 2026-10-21
-State: Garry reported no orders on MFX_Echo hedging since 2026-10-19. Rory King found the Surya RM hedger blocked with a small XAUUSD position (short 59.4oz) not clearing; it trades via the INSTI LP and always has. Client briefly expected the RETAIL LP; after restarting hybridHedgerRM1 with unchanged config the position cleared and Garry confirmed no LP change needed. Root cause of the block not stated.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792487283744139 https://mahifx.slack.com/archives/C09HN93T0G2/p1792494285470129
-
-### oil-order-status — OneZero shows unfilled, Mahi shows filled
-status: closed · since: 2026-10-20 · last: 2026-10-20 · closed: 2026-10-21
-State: Client questioned an oil order (CLZ6, 5 lots, 2026-10-18) reported unfilled in OneZero but filled at Mahi. Liam Cordelle showed it was partially filled for 1 unit at 22:26:48, then cancelled at the client's request at 22:27:51.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792497831920379 https://mahifx.slack.com/archives/C09HN93T0G2/p1792499760182229
-
-### beeks-hosting — Client exit from Beeks, Compass hosting move
-status: closed · since: 2026-07-30 · last: 2026-07-31 · closed: 2026-10-21
-State: No activity since 2026-07-31; assumed dormant (hosts still Beeks-based in October, no transfer decision seen). Graeme said the client is done with Beeks and asked whether Mahi prefers the servers transferred to Mahi's account (rebilled) or moved to a new provider. Beeks (Martyna) offered no price rise for Mahi and a monthly capacity call. No later activity seen in window; hosts still Beeks-based in October.
-Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1785399649401229 https://mahifx.slack.com/archives/CP7A1F8BT/p1785496853098919
 
 ## Arc
 - 2026-05-21 — Both SOWs signed: Scale POV and Quantitative Brokers (QB)
