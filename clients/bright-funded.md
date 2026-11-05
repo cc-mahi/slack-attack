@@ -16,7 +16,7 @@ contacts:
   - {name: "Mio Knights", role: "BrightFunded — trading-surveillance and pricing requests", confidence: low}
   - {name: "Alfredo", role: "BrightFunded — joined channel 2026-10-07, raised GBPUSD Sunday-open abuse review", confidence: low}
   - {name: "Marcelo", role: "BrightFunded — picks up counterparty / free-account (F1KC) data pulls; surname unconfirmed", confidence: low}
-last_catchup: 2026-11-04T08:07:10Z
+last_catchup: 2026-11-05T08:14:49Z
 status: active
 retired_at: null
 retired_reason: null
@@ -48,13 +48,6 @@ Next: none beyond monitoring.
 Refs: https://mahifx.slack.com/archives/C08473TFD7Z/p1779793894044729 https://mahifx.slack.com/archives/C084G40JXEE/p1790867729276549 https://mahifx.slack.com/archives/C084G40JXEE/p1791300507287019
 
 
-### free-account-billing — Excluding free F1KC accounts from billing
-status: open · since: 2026-06-01 · last: 2026-10-05
-State: Free $1k Challenge (F1KC) accounts inflate the active-user count, so each month BF supplies a list of counterparties that only traded free accounts and Mahi excludes them. July came out 3,845 billable (of 32,887 raw), BF agreed on 2026-08-28; August 3,996 (of 51,695; BF's list arrived a week past period end after chasing, via Mio, Syb then Marcelo, and the bill went out at 3,996 on 2026-09-08); September 4,196 (of 35,985), BF confirmed 2026-10-05 and Cameron Hughes forwarded to finance. The count depends on BF's monthly list each time; the fixed-fee proposal is meant to remove that dependency.
-Next: Syb to send October users data (promised on the 2026-11-03 call); closes if the fixed fee lands.
-Refs: https://mahifx.slack.com/archives/C08473TFD7Z/p1780330801690039 https://mahifx.slack.com/archives/C08473TFD7Z/p1787911173849309 https://mahifx.slack.com/archives/C08473TFD7Z/p1788341931661869 https://mahifx.slack.com/archives/C08473TFD7Z/p1791214982915359
-
-
 ### sunday-open-gbpusd — GBPUSD Sunday-open arbing and spread fixes
 status: watching · since: 2026-09-21 · last: 2026-10-09
 State: On 2026-09-20 counterparty 1008081 (small volumes before, then ~$300M arb volume) hit GBPUSD two-way with IoC limits for ~35 min after the open and ended flat in profit (-$21k FI loss); the classifier missed it (positive inception yield) so it was whitelisted as an arber. Reference feeds were 15+ pips wide and disagreeing while Mahi quoted 0.1 pip. Fixes: SINGAPORE_MONDAY ladder widened (GBPUSD 4 pips, EURUSD 1, USDJPY 2; Mio approved 2026-09-23), then MWMS prioritised over ROLL/TWILIGHT/SNGMON and relaxed in liquid hours (backtested). BF (Mio, Alfredo) raised it again on 2026-10-07; Cameron Hughes showed prices were not stale, but the same trader also hit after 22:00 on 27 Sep and 4 Oct when the front reverts to 0.1 pip (2M clips swept the book at 1-1.6 pips). BF agreed to discount the PnL, approved a floor of half the tightest LP on GBPUSD (Sunday open 0.5-1 pip at the top), live 2026-10-09, Alfredo thanked. Isaac Dann also said Mahi will review spread benchmarking.
@@ -67,6 +60,13 @@ status: watching · since: 2026-10-07 · last: 2026-10-07
 State: SOLUSD went indicative on CLIENT_PRICE_LDN 2026-10-03 until a pricer bounce 6 Oct: Binance is pulled by the latency filter after each websocket reconnect (~48h) and never returns, and OKX (the other source) dropped out 30 Sep. Change switched referencePriceMarketSelectors from BINANCE|OKX to BINANCE|MATCH_TRADE; Cameron Hughes approved and reported "change done" on 2026-10-07 (pricer restarts, ZD #23601). The underlying Binance triggerTime/latency-filter bug is not fixed: after a reconnect SOL prices off Match alone until the next restart.
 Next: Confirm SOLUSD stays firm through Binance reconnects; revert selector and bounce pricers if SOL is indicative or the mid is off Binance/Match; ZD #23601 tracks the filter bug.
 Refs: https://mahifx.slack.com/archives/C084G40JXEE/p1791338442138609 https://mahifx.slack.com/archives/C084G40JXEE/p1791386487483589
+
+
+### free-account-billing — Excluding free F1KC accounts from billing
+status: watching · since: 2026-06-01 · last: 2026-10-05
+State: Downgraded to watching: quiet since 2026-10-05, awaiting the monthly list. Free $1k Challenge (F1KC) accounts inflate the active-user count, so each month BF supplies a list of counterparties that only traded free accounts and Mahi excludes them. July came out 3,845 billable (of 32,887 raw), BF agreed on 2026-08-28; August 3,996 (of 51,695; BF's list arrived a week past period end after chasing, via Mio, Syb then Marcelo, and the bill went out at 3,996 on 2026-09-08); September 4,196 (of 35,985), BF confirmed 2026-10-05 and Cameron Hughes forwarded to finance. The count depends on BF's monthly list each time; the fixed-fee proposal is meant to remove that dependency.
+Next: Syb to send October users data (promised on the 2026-11-03 call); closes if the fixed fee lands.
+Refs: https://mahifx.slack.com/archives/C08473TFD7Z/p1780330801690039 https://mahifx.slack.com/archives/C08473TFD7Z/p1787911173849309 https://mahifx.slack.com/archives/C08473TFD7Z/p1788341931661869 https://mahifx.slack.com/archives/C08473TFD7Z/p1791214982915359
 
 
 ### perps-interest — BF interest in perpetuals
