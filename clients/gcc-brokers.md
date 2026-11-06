@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-11-05T08:14:49Z
+last_catchup: 2026-11-06T08:14:22Z
 status: active
 ---
 ## Now
@@ -39,17 +39,17 @@ Next: Fix the Puppet backup entry and re-run the deploy; Daria to turn the Inst 
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1793380821002989 https://mahifx.slack.com/archives/C09QS1NUA80/p1793602997317929
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-11-04
-State: Almost every weekday ~15:00 UTC/BST Layan posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms, usually within seconds to minutes (volumes 160oz to 9.8k oz). Confirmation is not always visible: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz; Layan asked again 10-13 and no confirmation is visible), the 10-16 report was confirmed over two hours late, and the 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 reports have no done-confirmation visible. The 10-22 to 11-03 reports were acknowledged and mostly confirmed actioned within minutes. On 11-04 (200 oz gold long, 15:32 UTC) Rory replied "will do" within a minute and there is one more reply in thread at 15:38. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
+status: open · since: 2026-04-30 · last: 2026-11-05
+State: Almost every weekday ~15:00 UTC/BST Layan posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms, usually within seconds to minutes (volumes 160oz to 9.8k oz). Confirmation is not always visible: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz; Layan asked again 10-13 and no confirmation is visible), the 10-16 report was confirmed over two hours late, and the 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 reports have no done-confirmation visible. The 10-22 to 11-03 reports were acknowledged and mostly confirmed actioned within minutes. On 11-04 (200 oz gold long, 15:32 UTC) Rory replied "will do" within a minute and there is one more reply in thread at 15:38. On 11-05 (7,037 oz gold long, 15:25 UTC) Rory said "will do" and confirmed done at 15:50. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
 Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793806330909269
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793892324271049
 
 ### defensive-feeds — LMAX and Finalto defensive feeds and news hedging
-status: open · since: 2026-08-19 · last: 2026-11-02
+status: open · since: 2026-08-19 · last: 2026-11-05
 State: Daria moved LMAX_DEFENSIVE positions back to LMAX on 08-19 so LPR rules see the right position. Will added a news hedging rule on 09-04 after a 26s window with no hedge at NFP; the hedger's News config went from 40s to 60s and added both defensive feeds on 09-11 (about +$17k on CPI). Nael approved Finalto defensive test trades 09-15; the first was rejected ("Account not enabled on the gateway", defensive session GCC_Brokers5) until Youssef supplied the right Finalto account id, and buy/sell succeeded 09-17, confirmed by both sides. On 09-21 Nael said two tags had been moved again to Finalto SOR, so William set up Finalto defensive in the pool, blacklisted tags 334380 and 700154 from core Finalto and added 334380 to the defensive-feed execution rules (Finalto defensive in executionMarkets 09-22). Finalto's core feed dropped for ~1 min on 09-04 NFP according to Finalto. On 10-26 Nael said Finalto had moved tag 700154 from its defensive feed back to its main feed again and asked Mahi to mirror it; William made the change on the Finalto side and, per Nael, left the LMAX leg of 700154 on the LMAX main feed.
-On 11-02 Nael asked to add tags 8000031, 4004152, 4002083, 4004357 and 4004482 to the defensive feed and move 4004072 and 700106 back to the main feed; Youssef said only Finalto (not LMAX) had changed them, Rory first asked if it applied to both venues, then corrected himself and adjusted. On 10-27 Finalto moved tag 4004532 to defensive and the mirror went wrong (see finalto-tag-blacklist).
+On 11-02 Nael asked to add tags 8000031, 4004152, 4002083, 4004357 and 4004482 to the defensive feed and move 4004072 and 700106 back to the main feed; Youssef said only Finalto (not LMAX) had changed them, Rory first asked if it applied to both venues, then corrected himself and adjusted. On 11-05 Nael asked to move tag 4004530 from the main feed to defensive; Rory actioned it. On 10-27 Finalto moved tag 4004532 to defensive and the mirror went wrong (see finalto-tag-blacklist).
 Next: Rory to confirm the 11-02 tag moves are applied; watch for Finalto moving tags between feeds again.
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1788519496962869 https://mahifx.slack.com/archives/C09PNC1MFAA/p1789470718891469 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793024358924139 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793639695799929
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1788519496962869 https://mahifx.slack.com/archives/C09PNC1MFAA/p1789470718891469 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793024358924139 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793872842787499
 
 ### lmax-perps — LMAX perpetual futures integration (XAUUSD-PERP, BTC)
 status: open · since: 2026-09-05 · last: 2026-11-02
