@@ -17,7 +17,7 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-11-05T08:15:31Z
+last_catchup: 2026-11-06T08:12:39Z
 status: active
 ---
 ## Now
