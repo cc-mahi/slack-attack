@@ -17,7 +17,7 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-11-05T08:17:00Z
+last_catchup: 2026-11-06T08:12:39Z
 status: active
 ---
 
