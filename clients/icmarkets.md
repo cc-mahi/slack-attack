@@ -31,23 +31,29 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-11-05T08:15:30Z
+last_catchup: 2026-11-06T08:12:56Z
 status: active
 ---
 
 ## Now
 IC's crypto (XBTUSD-centred) B-book is Mahi's live product there, and the commercial relationship is in a renegotiation phase, so Mahi is deliberately front-footing value-add ("hero moments", price forensics) in client replies.
-Open: weekend BTCUSD cancels RCA (skew PnL hit of -$110.9K amends its no-P&L line); IC's CPI-news latency complaint (Oct 14) and its last-look request (actioned Oct 15, applies at the next restart), where the cause was an internal fallback rule that dropped LP1 as primary pricing source, plus PSM spread logic running in Beta ahead of a Price Forensics demo.
+Renegotiation is live: Will sent Angus a value-add email on 5 Nov ($7.07M Aug-Oct) and Cooney awaits his reply. Open: weekend BTCUSD cancels RCA (skew PnL hit of -$110.9K amends its no-P&L line); IC's CPI-news latency complaint (Oct 14) and its last-look request (actioned Oct 15, applies at the next restart), where the cause was an internal fallback rule that dropped LP1 as primary pricing source, plus PSM spread logic running in Beta ahead of a Price Forensics demo.
 Isaac Dann is primary quant lead on the account since 2026-10-08. The Toa pricer route is being retired: Tokyo feed moved to Mahi Central on 29 Oct, with the Sat 31 Oct 10:00-11:00Z WAN cutover still to run.
 Karam asked on Oct 21 about tag 8093117 (sharp short-duration markouts); Rory's reply offers IC a choice of keeping it B-booked or moving it to a risk-managed book, awaiting IC.
 
 ## Streams
 
+### commercial-renegotiation — Renegotiation phase and decision-maker mapping
+status: open · since: 2026-08-17 · last: 2026-11-05
+State: Will Carter says IC is under renegotiation (Oct 15) and every communication should show value-add. In August Cooney spoke to Angus, who stays "at 30,000 feet" and said Pavlos is the person to walk through XAU details; Nicola's read was that Pavlos is influencer not decision-maker and still needs convincing. Crypto full licence (12 months from May) is live; XAU 24/7 and weekend pricing are the open commercial levers. On 5 Nov Will posted an email for Angus ("before anything gets switched off") claiming Aug-Oct crypto value-add of $7.07M on $166.91bn ($42.37/M, rising monthly; $4.97M LR, $2.10M skew; no last look or price improvement), with per-month Compass links, plus three asks: PSM replay on IC flow, passive hedge or internalise the scaled counterparty, weekend gold and agent/EA flow cut. The "switched off" wording suggests IC is weighing termination. Cooney had already gone back to Angus and is waiting on his response.
+Next: Angus to respond (Cooney waiting); Mahi to offer a 30-minute walkthrough of the numbers; no date seen.
+Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1786983558369939 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1792057523803899 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793886649398919 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793888116105279
+
 ### arb-limit-rejects — Account 6137863 sell-limit rejections explained as arb classification
 status: open · since: 2026-11-05 · last: 2026-11-05
-State: Andreas (IC) asked why a client's sell limit was not filled and drew many rejections. Will Carter traced order 229896377 (account 6137863, sell 0.08 BTCUSD limit 77,700, 3 Nov 20:27:30Z): the account is classified arbitrage flow, so it fills against a protected price that sat below the limit; the oneZero "failed to find matching volume" text is generic. The rejection volume is the client's own resend of the same limit every 150-200ms (330 times on 3 Nov, over 1,000 on 2 Nov). Will's reply to IC argues the classification pays for itself: fills ran -$135/M at 5s and -$359/M at 1m against IC's book on 6-31 Oct, versus +$99/M at 5s since 1 Nov on over ten times the volume. Mahi recommends keeping it classified; moving it would restore October markouts on larger size. Will also offered a call and noted internally that buying down there looks good, so he is checking the ER logic.
+State: Andreas (IC) asked why a client's sell limit was not filled and drew many rejections. Will Carter traced order 229896377 (account 6137863, sell 0.08 BTCUSD limit 77,700, 3 Nov 20:27:30Z): the account is classified arbitrage flow, so it fills against a protected price that sat below the limit; the oneZero "failed to find matching volume" text is generic. The rejection volume is the client's own resend of the same limit every 150-200ms (330 times on 3 Nov, over 1,000 on 2 Nov). Will's reply to IC argues the classification pays for itself: fills ran -$135/M at 5s and -$359/M at 1m against IC's book on 6-31 Oct, versus +$99/M at 5s since 1 Nov on over ten times the volume. Mahi recommends keeping it classified; moving it would restore October markouts on larger size. Will also offered a call and noted internally that buying down there looks good, so he is checking the ER logic; he adds the 77,700 limit looks like a stop and execution rules on open/close would have let the house fill there.
 Next: Andreas to answer whether the account should stay classified; Will checking ER logic.
-Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1793865136368359 https://mahifx.slack.com/archives/C07UBJNUWG1/p1793866407775849
+Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1793865136368359 https://mahifx.slack.com/archives/C07UBJNUWG1/p1793866407775849 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793866685849379
 
 ### weekend-btcusd-cancels — BTCUSD arb-profile cancels and rejects over the 31 Oct weekend
 status: open · since: 2026-10-31 · last: 2026-11-02
@@ -72,12 +78,6 @@ status: open · since: 2026-10-15 · last: 2026-10-15
 State: Karam says accounts (240069580 plus 250040598, 330025738, 330029906 per his 10:51 BST follow-up) traded ~1s after the Oct 14 12:30 UTC CPI print and suspects price latency. Mahi replied the published price reacted within 65ms (inside the default 100ms last look) and LR plus FI added ~316 $/M over the 4-minute window. Internally Isaac found the real cause: FallbackToSecondaryPricingNode dropped MAHI_CRYPTO_LP_1 (Wintermute) as primary for 60s because LP1's 1 BTC spread (~$700) exceeded 20x base (`fallbackSpreadTooWideRatioOfBase`=20), and the fallback markets were slower. Karam then asked for 150-200ms last look on high-impact news; Isaac actioned `newsAdditionalLastLookDelay` (+50ms for >50 weighted news, +100ms for >100), applying at the next scheduled restart. The team argued about messaging (Andrew: optics, avoid framing the best skew/LR moment as an ops failure; Will: every reply is an upsell during renegotiation).
 Next: Isaac to raise `fallbackSpreadTooWideRatioOfBase` and decide whether to disclose the fallback cause to IC; Mahi to send the full reply on the 5 accounts.
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1792056629435349 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1792059917658369 https://mahifx.slack.com/archives/C07UBJNUWG1/p1792068166287969
-
-### commercial-renegotiation — Renegotiation phase and decision-maker mapping
-status: open · since: 2026-08-17 · last: 2026-10-15
-State: Will Carter says IC is under renegotiation (Oct 15) and every communication should show value-add. In August Cooney spoke to Angus, who stays "at 30,000 feet" and said Pavlos is the person to walk through XAU details; Nicola's read was that Pavlos is influencer not decision-maker and still needs convincing. Crypto full licence (12 months from May) is live; XAU 24/7 and weekend pricing are the open commercial levers.
-Next: Mahi to build a value-add narrative (hero moments, PSM demo) before the next commercial call; no date seen.
-Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1786983558369939 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1792057523803899
 
 ### hero-moments-value-add — Value-add evidence for IC (hero moments, Price Forensics)
 status: open · since: 2026-10-08 · last: 2026-10-15
