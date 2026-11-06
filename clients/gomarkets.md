@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-05T08:15:30Z
+last_catchup: 2026-11-06T08:14:22Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### compass-ui-asks — Go ops asks on Compass/Echo UI (audit search, multi-value filters)
+status: open · since: 2026-11-05 · last: 2026-11-05
+State: On 2026-11-05 Erik reported the Compass configuration audit search returned nothing for Oct/Nov config edits even after a cache clear (Daria could see edits on the same link; Erik sent a screenshot and Daria said she would look again). Erik also asked for comma-delimited multi-value input in Echo's counterparty filter (28 CP ids); Nathan pointed him to the new Compass yield profiles tab, which supports it.
+Next: Daria to investigate the empty audit search for Erik.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1793908880645829 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793911054407749
 
 ### ig-demo-stream — New IG DEMO price stream for latency comparison
 status: open · since: 2026-10-22 · last: 2026-11-04
@@ -76,8 +82,8 @@ Next: Nathan to update the team when Go gives a MeanFin start date. The underlyi
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788528415870089 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790301122048699 https://mahifx.slack.com/archives/CNF3WPNSK/p1791775388999269 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791952706615519
 
 ### lp-hedging-limits — LP hedging behaviour, NOP limits, clearing positions
-status: open · since: 2026-06-09 · last: 2026-10-06
-State: Finalto hedging stopped from 2026-09-01 because its per-LP NOP limit (10m high / 8m low watermark) tripped and stayed tripped (not a config change); Will cut the position. On 2026-10-01 Go put Finalto reducing-only and Shyam adjusted NOP settings; Kate reverted them 10-02 at Mac's request. On 09-28 Mahi cleared a 14.49m over-hedged ISPRIME AUDUSD via arbHedgerSubTrading1 plus an adjustment from B_HEDGING_MANUAL (worked, hedger switched off). USDMXN residual LP positions (09-18): no auto reduce-exposure model, Daria suggested small internalise rules before brokering. On 2026-10-06 Will reported ~70% LMAX_LDN rejection and very little flow; Nathan said hedgers do not rank LPs (best aggregated quote wins; LMAX_LDN gold spread ~8x ISPRIME so rarely competitive) and is investigating the reject rate.
+status: watching · since: 2026-06-09 · last: 2026-10-06
+State: Finalto hedging stopped from 2026-09-01 because its per-LP NOP limit (10m high / 8m low watermark) tripped and stayed tripped (not a config change); Will cut the position. On 2026-10-01 Go put Finalto reducing-only and Shyam adjusted NOP settings; Kate reverted them 10-02 at Mac's request. On 09-28 Mahi cleared a 14.49m over-hedged ISPRIME AUDUSD via arbHedgerSubTrading1 plus an adjustment from B_HEDGING_MANUAL (worked, hedger switched off). USDMXN residual LP positions (09-18): no auto reduce-exposure model, Daria suggested small internalise rules before brokering. On 2026-10-06 Will reported ~70% LMAX_LDN rejection and very little flow; Nathan said hedgers do not rank LPs (best aggregated quote wins; LMAX_LDN gold spread ~8x ISPRIME so rarely competitive) and is investigating the reject rate. Downgraded to watching: no activity since 10-06.
 Next: Nathan to report back on why LMAX_LDN is rejecting ~70%.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788419249269449 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790556017984519 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791253970054589
 
