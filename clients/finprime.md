@@ -10,7 +10,7 @@ channels:
   internal-finprime: C0C8M89J2JY
   mahi-finprime: C0C8HCFKE9G
 contacts: []
-last_catchup: 2026-11-05T08:14:49Z
+last_catchup: 2026-11-06T08:14:22Z
 status: active
 ---
 
@@ -28,9 +28,9 @@ Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1793727529621529 https://ma
 ### martingale-data — FinPrime B-book martingale datasets
 status: open · since: 2026-11-02 · last: 2026-11-05
 State: FinPrime uploaded two B-book trade files from martingale-style clients on 2026-11-02. William Denny cleaned and combined them (2.77m trades; EURUSD 93.5% of USD volume, GBPUSD 3.8%, XAUUSD 2.5%; 400 non-FX/metals trades dropped). Timestamps are MT server time following US DST (UTC+2 to 8 Mar, UTC+3 to 20 Oct), not a fixed GMT+3. M2M is running on the full set with and without classification. Early read: most accounts add to losing positions at roughly 1.5-1.6x per step, and in the second file many accounts run the same ladder simultaneously, suggesting one EA copied across accounts. Will Carter treats this as upsell territory (B-book flow) and asked William to follow the initial process.
-Will Carter (2026-11-05) told the team to let FinPrime (Remus) know on WhatsApp that martingale analysis will be ready by end of day, so the analysis is going ahead.
-Next: William Denny: M2M and behaviour results by EOD 2026-11-05; Will Carter: tell Remus on WhatsApp.
-Refs: https://mahifx.slack.com/archives/C0C8HCFKE9G/p1793598288171109 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793864420439919
+Will Carter (2026-11-05) told the team to let FinPrime (Remus) know on WhatsApp that martingale analysis will be ready by end of day, so the analysis is going ahead. Results landed 2026-11-05: William Denny posted SVA SI PnL and skew PnL, then a draft report on the combined dataset, then a second report treating the two datasets separately (FinPrime presented them as two, so treatment may differ). Will Carter's read: regardless of martingale behaviour, FI and SI make money, and "SI PnL vs B Book" is all that is needed for the pitch. Presentation to FinPrime likely next week given the time difference.
+Next: Will Carter: present martingale/B-book result to FinPrime next week; William Denny: support as needed.
+Refs: https://mahifx.slack.com/archives/C0C8HCFKE9G/p1793598288171109 https://mahifx.slack.com/archives/C0C8M89J2JY/p1793891016177219
 
 ### valueadd-sims — XAUUSD value-add sims on FinPrime flow
 status: open · since: 2026-10-14 · last: 2026-10-28
