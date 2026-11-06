@@ -16,20 +16,38 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-11-05T08:15:30Z
+last_catchup: 2026-11-06T08:12:56Z
 status: active
 ---
 
 ## Now
-Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow), expanding to crosses, futures and CFDs. On the 29 Oct call Kama agreed the post-pilot terms (pilot ends 5 Nov); Nicole's draft contract (3-month rolling, volume tiers, futures/CFDs at no extra cost) awaits Will and Kate. Kama want to go ahead with SI on their own 51 tags and ask Mahi to flag bad subtags (Kate re-running sims); Kate is the day-to-day owner, Moe drives client-side changes. On 2 Nov 19 crosses went to direct pricing with per-timezone spread profiles Kama can edit. Roll cancels on 29 Oct came from no HFT-pool liquidity (Ali declined indicative pricing). On 5 Nov FX Edge fill delays and cancels held up client orders (FX Edge removal from the pool offered). Still open: NOP/hedger null-check fix deploy, EURGBP rejects, PXM timeout handling, Friday-close risk carry.
+Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow); pilot ended 5 Nov and Nicole's draft contract (3-month rolling, volume tiers, futures/CFDs at no extra cost) awaits Will and Kate. On 5 Nov Kama parked SI to get CFDs and futures live first (Kate setting up books and hedgers); 19 crosses went to direct pricing on 2 Nov. Kate is day-to-day owner, Moe drives client-side changes. Open: FX Edge fill delays, GBPCAD/EURGBP rejects, NOP null-check fix deploy, PXM timeout handling, Friday-close risk carry.
 
 ## Streams
+
+### gbpcad-quote-block — GBPCAD rejects at market open (quote blocked)
+status: open · since: 2026-11-06 · last: 2026-11-06
+State: On 6 Nov Ali asked Mahi to check the reject reasons on GBPCAD at the market open the night before: Kama's logs show quote blocked and he thinks Scope was not quoting then (screenshot only). No reply yet.
+Next: Mahi to diagnose and reply.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793948581789389
 
 ### fxedge-delays — FX Edge fill delays and cancels via PXM
 status: open · since: 2026-11-05 · last: 2026-11-05
 State: On 5 Nov Daria asked Kama to check with PXM why order 012drb34aa (GBPNZD, bound for FXEDGE_KL) was acked at once but took 12s to fill, and offered to pull FX Edge from the pool meanwhile; Ali said Kama has issues with orders going to FX Edge and saw high execution times on the Non skewed A provider (quote blocked and max exposure reached on FX Edge). Daria's read of order 4964712: the SOR split it across FX Edge, Scope and Edgewater; Scope and Edgewater filled quickly while FX Edge delayed and cancelled, the SOR kept retrying FX Edge and held the order until it was cancelled and refilled elsewhere; she sees no Compass-side speed issue. Ali asked how long the SOR keeps retrying one provider and how that process works; Cameron Hughes said he will gather details. No decision yet on removing FX Edge from the pool.
 Next: Cameron Hughes to answer Ali on SOR retry behaviour; Kama to check FX Edge/PXM side; decide whether to pull FX Edge from the pool.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793859648388519 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793864803371289
+
+### si-and-risk-golive — Risk-management go-live and SI
+status: open · since: 2026-09-15 · last: 2026-11-05
+State: Risk go-live began 2026-09-14 but the first A Book client switched off after a position-rec scare and an SOR restart that tripped PXM's firewall; flow came back 17-23 Sep. Mahi view (Andrew, Will): flow with Kama in aggregation (e.g. Star, tag 42060) is not SI material. Kate's SI sims (shared 22 Oct, written proposal 26 Oct) on Kama's XAUUSD drop copy 15 Jul-14 Oct (A and HFT flow): Compass-good flow (17 logins, $2.7B) with a 2-3h window and no cap beat A-booking by about $400k, while short-horizon and long/toxic flow did not beat it reliably. Of Kama's own 51-login list, 34 ($23.0B) were in scope and the gain leaned on four HFT-routed logins and tag 42060, so Mahi proposed letting Compass's classification pick logins. Proposal: (1) SI book on the Compass-good flow, rest stays A-book/STP; (2) later, a separate execution channel with a markup. Moe asked about a 1h window; Kate added it. On the 29 Oct call Kama were disappointed the sims differed from expectations (they wanted subtags to exclude); Kate explained hardly any of their accounts are round-trip, so they likely have Mahi in aggregation. Kama want to go ahead with their own tags and have Mahi pick out bad subtags, plus exclude a few physical gold hedgers (Moe to send list); Kate will re-run sims on the 51 tags. Kama also wants to add 26degrees and ISAM and asked for anonymised reject-rate data from other clients; Kate recommends giving no figure and offering to measure on Kama's own flow (no sign it was sent). On 5 Nov Kate posted follow-up SI analysis on the 51 logins using sub tags (proposal: standard routing, 2h time box, no cap; brokering/signalFollow/arbitrageurs to STP, fastHedge to an SI book, Compass-good and dontBBook-only to the off book; about +$476k vs A-book, $16M peak; letting the classifier choose accounts would add about $1.9B of good flow). On the 5 Nov call Kama chose to park SI and get CFDs and futures live first, since new clients are arriving and they want to see that flow; they can go live later and review new tags in real time. Call notes: Moe's decisions look relationship-based (brokering all Star subtags to keep LPs happy); Kama want FX and XAG flow sent to Velocity, whose contact told Moe Velocity does not use Mahi.
+Next: SI parked by Kama; revisit once CFDs/futures are live; Moe to send the physical-hedger exclusion list if SI resumes; Kate to reply on reject rates (recommended: no number).
+Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789482321712589 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793275423756799 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793877406602359 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793883514943189
+
+### futures-cfd-onboarding — Futures and CFDs added to Kama's Compass
+status: open · since: 2026-10-29 · last: 2026-11-05
+State: Kama want futures and CFDs live. Kate set up a handful of indices on the pricing model and will set up books and hedgers; on 29 Oct she asked for instrument mappings and Ali listed the Z26/F27 contracts (DAX30, US100, US30, SI, USOIL, UKOIL) and said he will enable them on Mahi's connection so LP market data can be subscribed. On 5 Nov Kate asked for LP oil symbol mappings; Ali gave the index/oil list and the futures list (DAX30.Z26, GC.Z26, SI.Z26, US100.Z26, US30.Z26, US500.Z26, USOIL.Z26, UKOIL.F27), and Kate updated subscription mappings, custom instruments and the instrument list mapping that afternoon. Scope is the main LP for CFDs except oil (Velocity). Added to the contract at no extra cost (see pilot-commercials).
+Next: Kate to finish LP market data subscriptions, then set up risk books and hedgers.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793283834284999 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793886797058639
 
 ### cross-pricing-spreads — Direct cross pricing and spread control
 status: open · since: 2026-10-29 · last: 2026-11-02
@@ -49,23 +67,11 @@ State: On 30 Oct Ali showed a client's market orders rejected with REJECT_SYSTEM
 Next: Kama to say whether they want a higher per-counterparty throttle; Kate/Isaac to decide on brokered LR.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793354921588429 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793355181129629
 
-### futures-cfd-onboarding — Futures and CFDs added to Kama's Compass
-status: open · since: 2026-10-29 · last: 2026-10-29
-State: Kama want futures and CFDs live. Kate set up a handful of indices on the pricing model and will set up books and hedgers; on 29 Oct she asked for instrument mappings and Ali listed the Z26/F27 contracts (DAX30, US100, US30, SI, USOIL, UKOIL) and said he will enable them on Mahi's connection so LP market data can be subscribed. Added to the contract at no extra cost (see pilot-commercials).
-Next: Kate to subscribe LP market data and set up books and hedgers.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793283834284999 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793284336627129
-
 ### pilot-commercials — Pilot end and post-pilot terms
 status: open · since: 2026-09-10 · last: 2026-10-29
 State: Pilot ends 5 Nov (Will, 22 Oct). On the 29 Oct call Kama said they are happy to move ahead with the proposed terms (12-month volume-banded ladder from Moe's 2 Jun acceptance), either as an addendum or a new contract, and Mahi agreed to add futures and CFDs at no extra cost (billing is on volume, so this should raise volume). Nicole circulated a draft Compass Services Agreement at 22:22 UTC on 29 Oct: 3-month rolling term, CFDs and futures added to the pilot offerings, volume tiers in the fees section; she asked Will and Kate to check it matches their discussions (the 3-month term differs from the 12-month ladder discussed earlier). Open point: which flow counts toward the bands, since billing today counts CLIENTS and B_CLIENTS only, not Kama Securities MT5 flow or the new A/HFT books.
 Next: Will and Kate to review Nicole's draft (term length, volume tiers) and then send to Moe; settle which flow counts toward bands; sign before 5 Nov.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789029069493129 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793312572894189
-
-### si-and-risk-golive — Risk-management go-live and SI
-status: open · since: 2026-09-15 · last: 2026-10-29
-State: Risk go-live began 2026-09-14 but the first A Book client switched off after a position-rec scare and an SOR restart that tripped PXM's firewall; flow came back 17-23 Sep. Mahi view (Andrew, Will): flow with Kama in aggregation (e.g. Star, tag 42060) is not SI material. Kate's SI sims (shared 22 Oct, written proposal 26 Oct) on Kama's XAUUSD drop copy 15 Jul-14 Oct (A and HFT flow): Compass-good flow (17 logins, $2.7B) with a 2-3h window and no cap beat A-booking by about $400k, while short-horizon and long/toxic flow did not beat it reliably. Of Kama's own 51-login list, 34 ($23.0B) were in scope and the gain leaned on four HFT-routed logins and tag 42060, so Mahi proposed letting Compass's classification pick logins. Proposal: (1) SI book on the Compass-good flow, rest stays A-book/STP; (2) later, a separate execution channel with a markup. Moe asked about a 1h window; Kate added it. On the 29 Oct call Kama were disappointed the sims differed from expectations (they wanted subtags to exclude); Kate explained hardly any of their accounts are round-trip, so they likely have Mahi in aggregation. Kama want to go ahead with their own tags and have Mahi pick out bad subtags, plus exclude a few physical gold hedgers (Moe to send list); Kate will re-run sims on the 51 tags. Kama also wants to add 26degrees and ISAM and asked for anonymised reject-rate data from other clients; Kate recommends giving no figure and offering to measure on Kama's own flow (no sign it was sent).
-Next: Kate to re-run sims on the 51 tags to flag bad subtags; Moe to send the physical-hedger exclusion list; Kate to reply on reject rates (recommended: no number).
-Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789482321712589 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793275423756799
 
 ### compass-login-error — Jad hit a Compass login error
 status: open · since: 2026-10-26 · last: 2026-10-28
@@ -114,12 +120,6 @@ status: open · since: 2026-10-19 · last: 2026-10-21
 State: From about 06:58 UTC on 19 Oct the hedger stopped clearing XAUUSD, most likely blocked by per-LP NOP limits running against unreconciled positions (Kama had posted positions in a thread, so they were missed); VaR passed 10k at 05:33 and hit about 146k (Ali: 26,000oz unhedged), and Kama raised it at 07:31. At 07:35 Isaac deleted risk.nop.perPB to unblock the hedger; a missing null check crashed liquidityPoolSOR and the hybrid and arb hedgers, ten XAUUSD orders sat open 6-9 min and Kama's 180s timeout disabled Mahi as provider until about 07:51. Processes were back by 07:37. Fix (null guard in MarketGroupTradePositionNOPTracker) is committed to release/26.4 and 26.3 but not yet deployed; until then do not delete NOP keys on Kama (set marketListNOPConfigs to [] or raise watermarks). All NOP limits were removed on Ali's request. Kate set a sustained critical-VaR alert after Ali asked for one, and on 21 Oct a Kama notifications channel (high VaR, PnL drops, rejects, indicative pricing).
 Next: Kama to send positions at EOD roll; Isaac to get the null-check fix deployed and raise whether bad non-trading config should keep the old config instead of killing processes; Kate to tune the VaR alert if noisy.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792395096025849 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792397763936839 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792572412812379
-
-### mas-xau-removal — MAS Markets pulled (XAUUSD 16 Oct, whole LP 21 Oct)
-status: open · since: 2026-10-16 · last: 2026-10-21
-State: On 16 Oct Moe asked Kate to stop sending XAUUSD to MAS Markets (standard feed only, not toxic); Kate removed it from the hedging markets straight away but the liquidity-pool (STP) side cannot drop one symbol, so she offered to set everything to internalise while the SOR is bounced. Moe chose to disable gold on Kama's side (switched off the price) and said it is easier if one symbol can be disabled per LP; Kate will look at restructuring the pool setup to allow that. Reason given: MAS rejecting market orders, causing losses in the Compass book. Kate asked for more detail on why. On 21 Oct Moe escalated: Kama is closing the MAS account, so Kate was asked to disable MAS Markets from all pools, with no pricing and no execution, from everywhere (including pricing models); only the connectors stay in case MAS fix things. Isaac made the config changes and restarted processes about 12:48 UTC (hedging markets, pool markets, HFT and LDN pool restarts); Moe worried about a reconnect as before, Isaac saw trades flowing and no disconnects.
-Next: Kate to see whether pools can disable one symbol per LP (less pressing now); confirm MAS is fully out of pricing models.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792154269472349 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792586254793539
 
 ### lp-timeouts-pxm-unsub — LP latency and timeouts triggering PXM unsubscribes
 status: open · since: 2026-09-15 · last: 2026-10-19
@@ -181,10 +181,10 @@ State: Kama pass limit-order deviation in tag 10001, which is not in Mahi's FIX 
 Next: Kate to decide whether Compass can honour limit plus/minus deviation (tag 10001).
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790332508870719 https://mahifx.slack.com/archives/C0B6FMU96G2/p1790598299904109
 
-### mas-fill-after-cancel — MAS 2-minute timeout, 75oz filled after cancel
-status: closed · since: 2026-10-09 · last: 2026-10-12 · closed: 2026-10-22
-State: Moot: Kama closed its MAS account (21 Oct, see mas-xau-removal).
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791566302175459 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791800955956099
+### mas-xau-removal — MAS Markets pulled (XAUUSD 16 Oct, whole LP 21 Oct)
+status: closed · since: 2026-10-16 · last: 2026-10-21 · closed: 2026-11-06
+State: Moe had MAS removed from XAUUSD hedging on 16 Oct (MAS rejecting market orders), then on 21 Oct Kama closed the MAS account and Isaac disabled MAS from all pools and hedging (restarts about 12:48 UTC, trades flowing, no disconnects). Only the connectors remain. No activity since 21 Oct; per-symbol pool disabling no longer pressing.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792154269472349 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792586254793539
 
 ## Arc
 - 2026-06-02 — Deal accepted; pilot agreement signed 2026-06-08
