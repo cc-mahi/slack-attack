@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-11-06T08:12:39Z
+last_catchup: 2026-11-09T08:16:58Z
 status: active
 ---
 
@@ -25,17 +25,24 @@ Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via 
 
 ## Streams
 
+### leverage-risk-sims — 500:1 leverage / more risk-holding sims
+status: open · since: 2026-08-31 · last: 2026-11-09
+State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1). Retail FX book has been on a G8-Cap profile (500k inventory cap on internalised G8 flow, Friday close flatten) since 2026-10-21; rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. After the 2026-10-27 call Argamon wants all FX on the new risk model and dark pool hedging explored. On the 2026-11-02 call Jem and Elan asked to extend cap internalisation beyond G8 with a 250k cap on other currencies (Shyam's sims show roughly PnL-neutral, closer to supporting higher leverage), to hold past 500k for soft-looking CPs, and to try full B-book for some soft-flow CPs (Shyam says little such flow exists; Argamon sounded interested in an A-book/B-book model). They are very open to PSM: Shyam to run it in beta with comparative sims, go-ahead if average spread and related metrics hold; Elan may want it at Toa too. Elan is sending CBOE session credentials for hidden peg hedging, to be trialled in NY4; on 2026-11-09 Shyam flagged that ordersCboe1 and marketDataCboe1 were being set up, so expect related alerts.
+Next: Shyam to check configurability of holding past 500k, put PSM in beta with sims, and trial hidden peg hedging in NY4 once credentials arrive; Argamon to confirm Centroid LP failover is in place.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793674916716319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794193748388459
+
+### cfd-indices-rollout — CFD / indices via Jump into Compass
+status: open · since: 2026-08-24 · last: 2026-11-09
+State: Indices (G30EUR, then NDX/DOW/SPX) went live 2026-09-10/11 brokered to Jump after the Jump OZ connection was re-established and MT5 drop copy went live (2026-08-28); internalisation on from 2026-09-23, and Argamon analytics tables now include the A_CFD books. Shyam raised CFD skew sizing in prod to 0.35x of benchmark spread on 2026-10-08 (beta at 0.45x, review next week), added a Broker CFDs - Large rule for >$500k notional (2026-09-30) and added INST-1 to the Retail Book fast-hedge whitelist (2026-10-05).
+On 2026-11-09 Jump (via OZ) asked, through Levi, how Mahi would connect if the cross-connect fails and the Jump sessions must fail over via the internet. Shyam said the internet path would come from a different source IP than the cross-connect, asked for an internet endpoint for the Jump hub (host, ports, whether plain TCP is possible) to add as a backup host on both sessions, and suggested a short failover test with OZ; Levi will pass Mahi's public IP to Jump for whitelist confirmation.
+Next: Levi to get Jump to confirm the whitelist and supply the internet failover endpoint, then Shyam to add the backup host and test; Shyam reviews 0.45x beta skew (review date has passed, outcome not seen); Argamon wanted internal reconciliations to account for Mahi internalisation (status not seen).
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1787541873458239 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791422519718139 https://mahifx.slack.com/archives/C06TW3D8NMV/p1794189940988869 https://mahifx.slack.com/archives/C06TW3D8NMV/p1794192974322969
+
 ### client-exec-queries — Execution and pricing questions from ops
 status: open · since: 2026-08-17 · last: 2026-11-04
 State: Recurring one-off ops questions. Tom's slippage query (2026-08-17) was last look and AUDUSD signals were smoothed; Sep 3 liquidity reduction on order 042dr11e8ch was picked up by Rory (outcome not seen); the 624ms order book age (2026-09-10) was a timestamp artefact, not stale price. 2026-09-01 pricerInstiLight2 went down after Elan removed skew delegates (Nathan restored it); 2026-10-09 Shyam asked Argamon to raise B2PRIME 3dp XAU invalid-increment rejects with the LP (Argamon said they would). 2026-11-04 Tom asked where the net volume limit config lives after a 600oz XAUUSD trade group was throttled well below the 100,000 base units/ms setting; James pointed to the Execution Rule and distribution.liquidityThrottle.netVolumeLimitingProfile, explaining it is a small amount and most rules use Don't Cancel, which only extends to the max last-look delay on a buy/sell imbalance so trades can be repriced. The Catch-All profile (not Scope) triggered; James advised setting all profiles to Don't Cancel unless flow is very toxic, and Elan agreed.
 Next: Tom to set Catch-All to Don't Cancel; Argamon to raise B2PRIME increments; Rory outcome on the 2026-09-03 liquidity reduction.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1786964549641859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789022941524499 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793795725289139
-
-### leverage-risk-sims — 500:1 leverage / more risk-holding sims
-status: open · since: 2026-08-31 · last: 2026-11-03
-State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1). Retail FX book has been on a G8-Cap profile (500k inventory cap on internalised G8 flow, Friday close flatten) since 2026-10-21; rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. After the 2026-10-27 call Argamon wants all FX on the new risk model and dark pool hedging explored. On the 2026-11-02 call Jem and Elan asked to extend cap internalisation beyond G8 with a 250k cap on other currencies (Shyam's sims show roughly PnL-neutral, closer to supporting higher leverage), to hold past 500k for soft-looking CPs, and to try full B-book for some soft-flow CPs (Shyam says little such flow exists; Argamon sounded interested in an A-book/B-book model). They are very open to PSM: Shyam to run it in beta with comparative sims, go-ahead if average spread and related metrics hold; Elan may want it at Toa too. Elan is sending CBOE session credentials for hidden peg hedging, to be trialled in NY4.
-Next: Shyam to check configurability of holding past 500k, put PSM in beta with sims, and trial hidden peg hedging in NY4 once credentials arrive; Argamon to confirm Centroid LP failover is in place.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793674916716319
 
 ### lucera-hard-timeout — Lucera LD fill latency and hard timeout
 status: open · since: 2026-10-18 · last: 2026-11-02
@@ -68,23 +75,17 @@ State: Between 03:39:48 and 03:40:05 UTC on 2026-10-22, 8 XAUUSD orders from the
 Next: Nathan to find why the LPs sent no acks (not seen posted).
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792644401138689 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792646373306319
 
-### cfd-indices-rollout — CFD / indices via Jump into Compass
-status: open · since: 2026-08-24 · last: 2026-10-08
-State: Indices (G30EUR, then NDX/DOW/SPX) went live 2026-09-10/11 brokered to Jump after the Jump OZ connection was re-established and MT5 drop copy went live (2026-08-28); internalisation on from 2026-09-23, and Argamon analytics tables now include the A_CFD books. Shyam raised CFD skew sizing in prod to 0.35x of benchmark spread on 2026-10-08 (beta at 0.45x, review next week), added a Broker CFDs - Large rule for >$500k notional (2026-09-30) and added INST-1 to the Retail Book fast-hedge whitelist (2026-10-05).
-Next: Shyam reviews 0.45x beta skew next week; Argamon wanted internal reconciliations to account for Mahi internalisation (status not seen).
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1787541873458239 https://mahifx.slack.com/archives/C06TW3D8NMV/p1787702895306119 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791422519718139
-
-### pxm-ldn-toa — Toa LDN and PXM connectivity
-status: open · since: 2026-07-21 · last: 2026-10-08
-State: Toa LDN sessions to Argamon's PXM: ClientID via tag 448/452=3 was configured 2026-07-21; the Toa crypto session to PXM LD lost sequence numbers on 2026-09-20 (reset requested; running over internet pending xconnect). On 2026-10-08 two simultaneous XAUUSD orders showed different fills; Levi found PXM keeps price improvement by default and will configure it to pass all slippage through to the client, then re-enable on 2026-10-09; James agreed PXM should pass orders through unmodified.
-Next: Levi to confirm the PXM config change worked; xconnect for the crypto session.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789872139334399 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859
-
 ### compass-26-4-upgrade — Compass 26.4 upgrade and deploys
 status: watching · since: 2026-08-17 · last: 2026-10-13
 State: Argamon moved 26.3 to 26.4 at the 2026-10-10/11 weekend restart (approved by James at RC #7224); known pricing change: with no adjustmentSignalParametersForWidening/Tightening set, prices move by one increment on PSM-W/PSM-T signals, Liam decided to let it go on. Infra main to NYC and a dashboard component deploy (2026-10-13) followed. No post-upgrade issues seen in the window.
 Next: Watch PSM widening/tightening effect on pricing.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1786964189701069 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791483328149119 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791866233863029
+
+### pxm-ldn-toa — Toa LDN and PXM connectivity
+status: watching · since: 2026-07-21 · last: 2026-10-08
+State: Downgraded to watching, no activity since 2026-10-08. Toa LDN sessions to Argamon's PXM: ClientID via tag 448/452=3 was configured 2026-07-21; the Toa crypto session to PXM LD lost sequence numbers on 2026-09-20 (reset requested; running over internet pending xconnect). On 2026-10-08 two simultaneous XAUUSD orders showed different fills; Levi found PXM keeps price improvement by default and will configure it to pass all slippage through to the client, then re-enable on 2026-10-09; James agreed PXM should pass orders through unmodified.
+Next: Levi to confirm the PXM config change worked (not seen); xconnect for the crypto session.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789872139334399 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859
 
 ### retail-toxic-flow — Retail NY book PnL and toxic flow
 status: watching · since: 2026-07-24 · last: 2026-10-05
@@ -108,11 +109,6 @@ Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1779116545067019 https://ma
 status: closed · since: 2026-11-02 · last: 2026-11-03 · closed: 2026-11-03
 State: Toa set last-look tolerance to 0 on Argamon's account from 2026-10-28, cutting Toa hedge fill rate from about 40% to 7%; TOA_CHI was pulled from gold hedging on 2026-11-02. Elan had tightened the NY4 execution rule at Toa; on 2026-11-03 Toa reset last-look and tolerance and Shyam added TOA_CHI back into XAU hedging markets.
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1793588984698429 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793678514931149
-
-### roll-broker-profile — Roll-period trades under internalise query
-status: closed · since: 2026-10-23 · last: 2026-10-23 · closed: 2026-10-23
-State: Elan asked whether daylight saving had flipped ROLL-timezone FX from broker to internalise, having seen clock times rather than session names in the execution rule. Nathan found the USDCHF roll trades hit the INSTI/Broker Rollover profile, and none were filled (all cancelled), so no rule change; Elan acknowledged.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1792715308732409 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792717939925079
 
 ### fx-pricing-tuning — LP sets, signals and direct pricing
 status: closed · since: 2026-05-04 · last: 2026-09-01 · closed: 2026-11-02
