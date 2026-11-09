@@ -15,16 +15,34 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-11-06T08:14:22Z
+last_catchup: 2026-11-09T08:21:00Z
 status: active
 ---
 ## Now
-GCC is a happy, growing internalising client ("client for life", Will Carter 09-28); the Finalto/LMAX hedger tuning has lifted PnL materially since August.
-Live work: LMAX perps (test-traded, not yet live), Amana as a third hedging venue (waiting on client funding) and an institutional pricing stream.
+GCC is a happy, growing internalising client (record 2bn+ volume week to 11-06, heading for the >6bn/mo billing tier) ("client for life", Will Carter 09-28); the Finalto/LMAX hedger tuning has lifted PnL materially since August.
+Live work: LMAX perps (test-traded, not yet live), Amana as a third hedging venue (going in the week of 11-09) and an institutional pricing stream.
 Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads; GCC agreed on the 10-20 call to an Infinox LP intro, but Youssef reacted badly on 10-22 once he learned who it was, so Mahi is walking it back to no pressure. Perps are close to ready. On 10-27 a Mahi tag-blacklist change blocked a client at Finalto on all instruments (reverted in ~15 min); Youssef is jumpy ("no room to trial and error") and Will Carter has told the team to be very careful with anything touching client experience.
 On 11-02 a perps demo test by Will Carter hit live LMAX (about $5.5k equity, flattened, no open risk) and exposed incomplete perps execution rules and yield profile setup. A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef is unhappy and now wants GCC to provision its own main plus standby servers (reply from Rory pending), and GCC awaits the provider's incident report.
 
 ## Streams
+
+### amana-lp — Amana as hedging venue and taker
+status: open · since: 2026-09-14 · last: 2026-11-06
+State: Amana was set up (fixOrders3/fixMD3, XAUUSD and EURUSD mapped, in the beta pricer since late Sep) after Will Carter flagged an "interesting request to setup Amana as a taker" on 09-14. Connection worked 09-15 and Youssef confirmed quantity definitions that day (gold contract 100oz, step 0.01 = 1oz; FX 100k contract, min 1,000). Nael approved test trades 09-23 and XAUUSD and EURUSD buy/sell looked good, on a small test-only funding; Rory still to map the remaining instruments and asked whether to set an NOP limit like Finalto's. GCC hesitated on Amana on 10-20, but on 11-06 Rory said he had confirmed with Youssef that Amana comes into the mix the week of 11-09 to help hedging costs overall.
+Next: Rory to bring Amana live as a third hedging venue next week (GCC funding, NOP limits and remaining instrument mappings still to confirm).
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1789388024317479 https://mahifx.slack.com/archives/C09QS1NUA80/p1793976030377669
+
+### volume-tier — Record volume week, NFP positioning and billing tier
+status: open · since: 2026-11-06 · last: 2026-11-06
+State: On 11-06 Will Carter called it a storming week; Rory said GCC trades over 2bn so far this week, which if repeated across the month reaches the next billing tier (above 6bn a month). Into NFP he saw nothing needing change ("pure dependence on the whales"); Will floated brokering to go low risk and Rory said he would raise it with GCC. Post-NFP the book took a ~5k PnL drop, with tag 4004532 flow a bit sharper than usual.
+Next: Rory to raise the low-risk/brokering option with GCC; watch 4004532 flow.
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1793969013807299 https://mahifx.slack.com/archives/C09QS1NUA80/p1793976030377669
+
+### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
+status: open · since: 2026-04-30 · last: 2026-11-06
+State: Almost every weekday ~15:00 UTC/BST Layan posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms, usually within seconds to minutes (volumes 160oz to 9.8k oz). Confirmation is not always visible: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz; Layan asked again 10-13 and no confirmation is visible), the 10-16 report was confirmed over two hours late, and the 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 reports have no done-confirmation visible. The 10-22 to 11-03 reports were acknowledged and mostly confirmed actioned within minutes. On 11-04 (200 oz gold long, 15:32 UTC) Rory replied "will do" within a minute and there is one more reply in thread at 15:38. On 11-05 (7,037 oz gold long, 15:25 UTC) Rory said "will do" and confirmed done at 15:50. On 11-06 (1,529 oz gold long, 15:21 UTC) Rory said "will do" and confirmed done at 16:45. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
+Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793978509135199
 
 ### perps-test-misroute — 2026-11-02 XAU-PERP demo test hit live LMAX
 status: open · since: 2026-11-02 · last: 2026-11-02
@@ -37,12 +55,6 @@ status: open · since: 2026-10-30 · last: 2026-11-02
 State: The Inst hedger deploy (CHG-2610-2Q0F, Infra-Deploy #640) failed at Puppet on admin-1 on 10-30 from a corrupt Puppet backup entry, so the arbHedgerInst1 Nagios check and nagios/nsca/collectd refreshes did not apply and the Puppet cron is off on both boxes. William Denny brought up hybridHedgerInst1 and arbHedgerInst1 anyway; after a PagerDuty alert Daria left them off on 11-01 as no trades showed under Inst house for the last week (the institutional stream, see insto-pricing, is not trading yet). Nathan logged it on the GCC wiki 11-02.
 Next: Fix the Puppet backup entry and re-run the deploy; Daria to turn the Inst hedgers on when Inst flow starts.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1793380821002989 https://mahifx.slack.com/archives/C09QS1NUA80/p1793602997317929
-
-### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-11-05
-State: Almost every weekday ~15:00 UTC/BST Layan posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms, usually within seconds to minutes (volumes 160oz to 9.8k oz). Confirmation is not always visible: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz; Layan asked again 10-13 and no confirmation is visible), the 10-16 report was confirmed over two hours late, and the 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 reports have no done-confirmation visible. The 10-22 to 11-03 reports were acknowledged and mostly confirmed actioned within minutes. On 11-04 (200 oz gold long, 15:32 UTC) Rory replied "will do" within a minute and there is one more reply in thread at 15:38. On 11-05 (7,037 oz gold long, 15:25 UTC) Rory said "will do" and confirmed done at 15:50. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
-Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793892324271049
 
 ### defensive-feeds — LMAX and Finalto defensive feeds and news hedging
 status: open · since: 2026-08-19 · last: 2026-11-05
@@ -98,12 +110,6 @@ status: open · since: 2026-10-06 · last: 2026-10-21
 State: On a 10-06 call Youssef and Nael said GCC is now targeting institutional client flow (none of the current counterparties are STP brokers), so Mahi must match or beat the insto clients' current offering. Plan is a new channel and pricer for insto pricing aimed at capturing flow even if initial PnL per account is lower. GCC will send the parameters they see today. On 10-20 Rory confirmed the institutional feed is still to be set up, with a deeper TOB aimed at volume rather than PnL, and aims to finish it before end of week. On 10-21 Rory posted change record CHG-2610-VR2K (two pricers for an institutional stream plus infra backlog, 15:15-16:00Z), approved by Liam Cordelle.
 Next: Rory to finish the insto feed by EOW; GCC to send pricing parameters if not yet sent.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1791287464442599 https://mahifx.slack.com/archives/C09QS1NUA80/p1792594740438909
-
-### amana-lp — Amana as hedging venue and taker
-status: watching · since: 2026-09-14 · last: 2026-10-05
-State: Amana was set up (fixOrders3/fixMD3, XAUUSD and EURUSD mapped, in the beta pricer since late Sep) after Will Carter flagged an "interesting request to setup Amana as a taker" on 09-14. Connection worked 09-15 and Youssef confirmed quantity definitions that day (gold contract 100oz, step 0.01 = 1oz; FX 100k contract, min 1,000). Nael approved test trades 09-23 and XAUUSD and EURUSD buy/sell looked good, on a small test-only funding; Rory still to map the remaining instruments and asked whether to set an NOP limit like Finalto's. As of 10-05 GCC was to fully fund the Amana account that week, after which NOPs are configured and Amana added as a third hedging venue; full funding not yet confirmed in the channels. On 10-20 Rory noted some hesitation on GCC's side about Amana, though they would push ahead if needed.
-Next: (watching; no Slack activity since 10-05, GCC funding unconfirmed) GCC to fully fund Amana and answer on NOP limit; Rory to map remaining instruments, set NOPs and add it to the hedger.
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1789388024317479 https://mahifx.slack.com/archives/C09PNC1MFAA/p1790170512445709 https://mahifx.slack.com/archives/C09QS1NUA80/p1791204525364089
 
 ### platform-ops — Stability, maintenance windows, access
 status: watching · since: 2026-08-23 · last: 2026-10-11
