@@ -18,7 +18,7 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-11-06T08:12:39Z
+last_catchup: 2026-11-09T08:19:45Z
 status: active
 ---
 
@@ -28,6 +28,12 @@ Custom layered XAUUSD symbol (`XAUUSD.l`) was shelved on 11-02 (Clio: settled wi
 Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq asked for Echo access for two more users; Kate says Echo is now in Compass and they need Compass logins.
 
 ## Streams
+
+### nfp-hero-moment — NFP value-add post to Infinox
+status: open · since: 2026-11-06 · last: 2026-11-06
+State: Will drafted a client-ready post on the 11-06 US payrolls release on Infinox's gold book (13:30-13:33 UTC) and posted it in #mahi-infinox at 14:51 UTC with Compass Price Forensics and Yield Profiles links, pitching predictive spread modulation with a replay of their own flow. Will's internal 15:48 correction says the first draft overstated volume and LR dollars about 3x (raw yieldprofiles double counted); the corrected figures are $157M of gold, LR ~$20k at $129/M against ~$2/M the hour before, skew ~$13k, ~$34k total. The client post as sent carries $157M, $129/M LR and $28/M skew, so it matches the corrected volume and rates. Open: confirm PXM_GU_CLIENTS is Infinox's own book ($8.6k of the skew), and who owns the predictive spread modulation replay the post promises. Justin confirmed the latest Compass UI was shipped 11-06.
+Next: Mahi to name an owner for the spread modulation replay on Infinox flow; confirm the PXM_GU_CLIENTS attribution.
+Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1793976608090879 https://mahifx.slack.com/archives/C01QGUXPKEY/p1793980095852719 https://mahifx.slack.com/archives/C022S6NL82D/p1793976677123399
 
 ### fill-tick-queries — Execution, slippage and raw-tick requests
 status: open · since: 2026-07-08 · last: 2026-11-02
@@ -72,9 +78,9 @@ Next: Isaac and Will to settle 1-2 more broker candidates and make the intros.
 Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1791283923202179 https://mahifx.slack.com/archives/C01QGUXPKEY/p1791994970744929
 
 ### pxm-latency — XAUUSD fill latency dispute with PrimeXM
-status: open · since: 2026-10-01 · last: 2026-10-06
+status: watching · since: 2026-10-01 · last: 2026-10-06
 State: Infinox says the 2026-09-28 12:04 UTC XAUUSD fill reflects a price about 400ms stale. Mahi (Isaac, Rory): order arrived 12:04:08.138, filled .220 (82ms, within 75-100ms last-look), publishing was normal, Tag 52 is 1-4ms after TransactTime and PXM-to-Mahi sessions average 0.25ms. PrimeXM replied its "received" time is bridge processing time, with delays of up to 381ms across 12:04:07.9-14.5, so the gap sits after Mahi hands off.
-Next: Infinox Trading Ops to ask PrimeXM what accounts for the arrival-to-processing delay; they said on 10-06 they would revert. Nothing since.
+Next: Infinox Trading Ops to ask PrimeXM what accounts for the arrival-to-processing delay; they said on 10-06 they would revert. Nothing since; downgraded to watching (quiet >30d).
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1790862218777389 https://mahifx.slack.com/archives/C022S6NL82D/p1791251845973249
 
 ### compass-26-4-upgrade — 26.3 to 26.4 upgrade and LDN infra move
