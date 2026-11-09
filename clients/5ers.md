@@ -18,13 +18,19 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-11-06T08:12:39Z
+last_catchup: 2026-11-09T08:17:07Z
 status: active
 ---
 ## Now
-CHURN RISK: on the 2026-10-20 weekly call Yaniv said he wants to give 3 months' notice, citing the Beeks incidents ("two issues too many") and an unnamed rival offering skew/LR at under 50% of our fees with seamless failover; a C-level follow-up call with Yaniv is set for 2026-10-21 13:45 UK (he is away from 10-22 for ~a week) and Andrew has asked for a performance/comms review since Nov 2025. Funded flow runs through the YourBourse X-Connect; the NIC fix is done on the optic but the server is still on the backup NIC (move back to primary pending), and Beeks owes RCAs for the 09-28 reboot and the 10-16 London outage. Compass 26.4 release went out in the 10-23 to 10-25 weekend window (CHG-2610-VSHM); 57 single stocks are loaded but unpriced (needs a B2Broker feed). Funded XC limit-order cancels are mostly cured; demo flow on Compass is stalled on the fee.
+CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival); outcome of the 10-21 C-level call not seen in Slack. Retention work continues: adaptive sized skew is live, and on 2026-11-06 Kate posted an NFP performance update to the client (gold LR + skew $38/M vs $16.63/M average) as a hero moment. Beeks still owes RCAs (09-28 reboot, 10-16 outage); backup-link rebuild change CHG-2611-SR0F was set for 2026-11-07 21:00Z (result not seen). 57 single stocks are loaded but unpriced pending B2Broker symbols; funded XC cancels mostly cured, demo flow still stalled on the fee.
 
 ## Streams
+
+### nfp-value-add-1106 — NFP 2026-11-06 value-add moment
+status: open · since: 2026-11-06 · last: 2026-11-06
+State: Will's automated NFP sweep first read 5ers LR as ~$21k and skew as zero, then corrected for a 4x volume overcount (13:30-13:33 UTC: LR $5.2k on $126M, $41/M; gold $49/M vs ~$4.8/M the hour before; fleet rank 4th of 13 behind Infinox, IC and Alpha Capital). Kate found the skew-zero reading was an artefact: the skew counter updates only every 5-8 minutes, so the window fell between updates; skew is on (+$2,040 at 13:37:58), and Will fixed the skill. Kate challenged the LR dollar figure and published to 5ers (16:20 GMT) the funded-book gold result over the half hour around the number: ~$6k on $157M, $38/M vs a $16.63/M Aug-Oct average (LR $21.50/M, skew $16.80/M vs $7.03/M), with Compass Yield Profiles and Price Forensics links, offering a call. Kate also noted drop copies may not be coming through.
+Next: Kate to follow up if 5ers ask for the call; check the drop-copy gap; Will's proposed skew-on replay sim is moot given skew is live (no owner named).
+Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1793978272170219 https://mahifx.slack.com/archives/C079M09MGGP/p1793980160428339 https://mahifx.slack.com/archives/C07AQJS4E80/p1793982051354099
 
 ### ctrader-rejects-1104 — cTrader rejections, Mid Distance Check
 status: open · since: 2026-11-04 · last: 2026-11-04
@@ -54,10 +60,10 @@ Next: Kate to send the client-facing review and publish hero moments to the main
 Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1792502905672309 https://mahifx.slack.com/archives/C079M09MGGP/p1792589201530159 https://mahifx.slack.com/archives/C079M09MGGP/p1793099110414249 https://mahifx.slack.com/archives/C079M09MGGP/p1793111560735969
 
 ### adaptive-skew-rollout — Adaptive sized skew rolled out
-status: open · since: 2026-10-27 · last: 2026-10-27
-State: Kate rolled out adaptive sized skew in 5ers' environment on 2026-10-27 and told the client: skew now scales with market speed (larger in fast markets, unchanged in quiet). Part of the retention plan; impact on the book to be reviewed over the coming weeks.
-Next: Kate to review impact on the book and feed it into value-add.
-Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793124677300249 https://mahifx.slack.com/archives/C079M09MGGP/p1793099110414249
+status: open · since: 2026-10-27 · last: 2026-11-06
+State: Kate rolled out adaptive sized skew in 5ers' environment on 2026-10-27 (skew scales with market speed). First big test was NFP on 2026-11-06: gold skew $16.80/M vs $7.03/M Aug-Oct average, reported to the client.
+Next: Kate to keep feeding the impact into value-add.
+Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793124677300249 https://mahifx.slack.com/archives/C07AQJS4E80/p1793982051354099
 
 ### xc-demo-flow — Moving demo/grad flow onto the XC
 status: open · since: 2026-07-29 · last: 2026-10-21
@@ -83,16 +89,16 @@ status: watching · since: 2026-08-20 · last: 2026-09-15
 State: Fast-markets multiplier raised to 1.3 for CFDs and metals (2026-08-20). Andreas questioned ~130-170 point FX spikes around the 20:59-22:00Z daily rollover (2026-09-10); Rory explained it is LP feed widening with a cap in place and offered a lower multiplier. On 2026-09-14 5ers asked for EURUSD/GBPUSD/USDJPY at 0; Kate set base spread 0, cTrader briefly showed negative spreads (5ers-side markdown, fixed), and Yaron confirmed it looked good 2026-09-15. YB later noted 72-93% zero-spread ticks on those pairs.
 Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1787221538992459 https://mahifx.slack.com/archives/C07AQJS4E80/p1789466160780809
 
-### xc-funded-migration — XC cleanup after funded flow cutover
-status: watching · since: 2026-07-07 · last: 2026-09-08
-State: XC delivered 2026-07-28 after YB delays; funded flow moved 2026-08-17 and all funded (incl. TradingView after the counterparty-tag fix, YB now sends account id in tag 448) routed via XC by 2026-08-25. On 2026-08-28 Kate found the XC flow had run on the catch-all ruleset for two weeks (no classification) with no measured cost; fixed (v35) and classification added to CATCHALL. On 08-25 YB found cTrader/UAT/MT5 DEV sessions still on the Mahi LP; MT5 DEV and UAT were repointed to the XC (cTrader on YB unused per Andreas), and on 09-08 YB confirmed MT5 Main and MT5 Exp use the XC prices while MT5 TSG uses match prime. Old MT5 gateways were set up as 5ers' failovers; Kate leaned to decommission them and asked YB (08-25) to retire the 5ers-Funded-YB-MT5 Orders/Prices connections, but YB never confirmed retirement and Kate flagged a billing risk if removing the gateways reduces fees (billing structure never agreed). 2026-08-26 cTrader flow, missing for weeks, was routed back to Compass after Andreas found a fault on their side.
-Next: confirm YB retired the old MT5 connections and decide on decommissioning the MT5 gateways after the billing check.
-Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1783426138434659 https://mahifx.slack.com/archives/C079M09MGGP/p1786959572664399 https://mahifx.slack.com/archives/C079M09MGGP/p1787565915372879 https://mahifx.slack.com/archives/C0AUF6LBZ0Q/p1788879639154749
-
 ### usdchf-spike-1027 — USDCHF bad-price report
 status: closed · since: 2026-10-27 · last: 2026-10-27 · closed: 2026-10-28
 State: Andreas reported bad USDCHF pricing and a spike at 20:42 UTC+3 on 2026-10-27; Kate found Mahi distributing normal pricing, USDCHF untouched by that day's skew change, and the quote not originating from Mahi. Andreas concluded it was not Mahi's side and 5ers would handle it.
 Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793125044157899 https://mahifx.slack.com/archives/C07AQJS4E80/p1793127218839519
+
+### xc-funded-migration — XC cleanup after funded flow cutover
+status: closed · since: 2026-07-07 · last: 2026-09-08 · closed: 2026-11-09
+State: XC delivered 2026-07-28 after YB delays; funded flow moved 2026-08-17 and all funded (incl. TradingView after the counterparty-tag fix, YB now sends account id in tag 448) routed via XC by 2026-08-25. On 2026-08-28 Kate found the XC flow had run on the catch-all ruleset for two weeks (no classification) with no measured cost; fixed (v35) and classification added to CATCHALL. On 08-25 YB found cTrader/UAT/MT5 DEV sessions still on the Mahi LP; MT5 DEV and UAT were repointed to the XC (cTrader on YB unused per Andreas), and on 09-08 YB confirmed MT5 Main and MT5 Exp use the XC prices while MT5 TSG uses match prime. Old MT5 gateways were set up as 5ers' failovers; Kate leaned to decommission them and asked YB (08-25) to retire the 5ers-Funded-YB-MT5 Orders/Prices connections, but YB never confirmed retirement and Kate flagged a billing risk if removing the gateways reduces fees (billing structure never agreed). 2026-08-26 cTrader flow, missing for weeks, was routed back to Compass after Andreas found a fault on their side.
+Closed: no activity since 2026-09-08; assumed resolved. Open leftover (YB retiring old MT5 connections, MT5 gateway decommission vs billing) not seen again.
+Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1783426138434659 https://mahifx.slack.com/archives/C079M09MGGP/p1786959572664399 https://mahifx.slack.com/archives/C079M09MGGP/p1787565915372879 https://mahifx.slack.com/archives/C0AUF6LBZ0Q/p1788879639154749
 
 ## Arc
 - 2026-04 — B2Broker weekend session breaks caused crypto/CFD indicative pricing; crypto and CFD feed enrichment deployed (04-30/05-01)
@@ -106,3 +112,4 @@ Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793125044157899 https://ma
 - 2026-09-25 — Beeks NIC degradation incident; 5ers off Mahi pricing/execution until 09-29
 - 2026-10-20 — Yaniv signals intent to give 3 months' notice over Beeks incidents and a cheaper rival; C-level call set for 10-21
 - 2026-10-27 — adaptive sized skew rolled out at 5ers as part of the retention plan
+- 2026-11-06 — NFP: client told gold LR + skew earned $38/M vs $16.63/M average
