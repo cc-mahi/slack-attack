@@ -16,22 +16,29 @@ contacts:
   - {name: "Mio Knights", role: "BrightFunded — trading-surveillance and pricing requests", confidence: low}
   - {name: "Alfredo", role: "BrightFunded — joined channel 2026-10-07, raised GBPUSD Sunday-open abuse review", confidence: low}
   - {name: "Marcelo", role: "BrightFunded — picks up counterparty / free-account (F1KC) data pulls; surname unconfirmed", confidence: low}
-last_catchup: 2026-11-06T08:12:39Z
+last_catchup: 2026-11-09T08:16:56Z
 status: active
 retired_at: null
 retired_reason: null
 ---
 
 ## Now
-Healthy relationship; the live issue is commercial. Mahi proposed a $25k/mo fixed fee (Sep 2026), BF pushed back on 2026-10-06 that Mahi's measured payout reduction is below the proposed bill, and no agreement is visible; at the 2026-11-03 call Mahi showed $70k minimum October payout reduction (3x September) and a billing call with Syb is being arranged. Sunday-open GBPUSD pricing was patched three times after a -$21k FI loss on 2026-09-20 (ladder, MWMS, half-tightest-LP floor live 2026-10-09); BF approved each and agreed to discount the PnL. BF is taking perps to a third-party provider. Monthly call cadence; Cameron Hughes is the day-to-day Mahi owner.
+Healthy relationship; the live issue is commercial. Mahi proposed a $25k/mo fixed fee (Sep 2026), BF pushed back on 2026-10-06 that Mahi's measured payout reduction is below the proposed bill, and no agreement is visible; at the 2026-11-03 call Mahi showed $70k minimum October payout reduction (3x September) and the 2026-11-06 billing call went badly: Syb will not accept a higher bill, cites cheaper rival skew providers, and comes back Monday 2026-11-09 with a figure. An NFP review (2026-11-06) found weak LR and skew capture; BF has also turned off LR on their side. Sunday-open GBPUSD pricing was patched three times after a -$21k FI loss on 2026-09-20 (ladder, MWMS, half-tightest-LP floor live 2026-10-09); BF approved each and agreed to discount the PnL. BF is taking perps to a third-party provider. Monthly call cadence; Cameron Hughes is the day-to-day Mahi owner.
 
 ## Streams
 
 ### fixed-fee-proposal — Move to a fixed monthly fee
-status: open · since: 2026-09-07 · last: 2026-11-03
-State: BF currently pays $12k + $1/user (~$15.5-16.2k/mo, trending down; users vs accounts was fought and lost in Dec 2025, billed on distinct counterparty since, with Syb open to renegotiating). After the 2026-09-01 call BF said they were happy to move to a fixed fee and Syb chased on 2026-09-08. Cameron Hughes proposed $25k/mo replacing it, 12-month term, banded on funded volume ($25k up to 10bn then 32/40/48/56/65k); sizing is ~$3,250 per funded bn at $25k vs Fintokei ~$3,700 ($50k) and FundingPips ~$560 ($60k), so $25-30k is "same rate as the network". Andrew Morgan called the first draft too generous: wants a reset toward network fair value (staged if needed), growth triggers (tier steps on active challenges, extra for new asset classes/sims), user definition left settled, and a pre-agreed mandate, floor and walk-away; he accepts ~$25k only with a growth ladder (free accounts counted 10:1) and a client-facing redraft. Cameron Hughes' worry is BF drops the fixed bill if the figure is well above expectation. Call with Syb planned for 2026-09-29 (Dubai week); its outcome is not in Slack. At the 2026-10-06 monthly call BF said the minimum measurable payout reduction is less than the proposed bill; Mahi replied it is only the easy-to-measure part and that the current price is far too cheap. At the 2026-11-03 monthly call Mahi showed October minimum payout reduction of $70k (3x September), which Cameron Hughes notes cuts against BF's earlier argument against bill changes; Syb dropped off before billing was covered.
-Next: Cameron Hughes to arrange a billing-talks call with Syb this week (offered 2026-11-03, no reply yet); Mahi to settle the growth metric and bands; BF decision outstanding.
-Refs: https://mahifx.slack.com/archives/C084G40JXEE/p1788788372257979 https://mahifx.slack.com/archives/C084G40JXEE/p1788944104228899 https://mahifx.slack.com/archives/C084G40JXEE/p1791282278979729 https://mahifx.slack.com/archives/C084G40JXEE/p1793707880336229
+status: open · since: 2026-09-07 · last: 2026-11-06
+State: BF currently pays $12k + $1/user (~$15.5-16.2k/mo, trending down; users vs accounts was fought and lost in Dec 2025, billed on distinct counterparty since, with Syb open to renegotiating). After the 2026-09-01 call BF said they were happy to move to a fixed fee and Syb chased on 2026-09-08. Cameron Hughes proposed $25k/mo replacing it, 12-month term, banded on funded volume ($25k up to 10bn then 32/40/48/56/65k); sizing is ~$3,250 per funded bn at $25k vs Fintokei ~$3,700 ($50k) and FundingPips ~$560 ($60k), so $25-30k is "same rate as the network". Andrew Morgan called the first draft too generous: wants a reset toward network fair value (staged if needed), growth triggers (tier steps on active challenges, extra for new asset classes/sims), user definition left settled, and a pre-agreed mandate, floor and walk-away; he accepts ~$25k only with a growth ladder (free accounts counted 10:1) and a client-facing redraft. Cameron Hughes' worry is BF drops the fixed bill if the figure is well above expectation. Call with Syb planned for 2026-09-29 (Dubai week); its outcome is not in Slack. At the 2026-10-06 monthly call BF said the minimum measurable payout reduction is less than the proposed bill; Mahi replied it is only the easy-to-measure part and that the current price is far too cheap. At the 2026-11-03 monthly call Mahi showed October minimum payout reduction of $70k (3x September), which Cameron Hughes notes cuts against BF's earlier argument against bill changes; Syb dropped off before billing was covered. The billing call with Syb happened 2026-11-06: he is not happy to increase the bill and will come back on Monday 2026-11-09 with what BF thinks is fair. His reasons: the bill looks high next to their other costs, they have been looking at other skew providers for a while, and he sees the value add as "undeniable" but says other providers will charge less for the same thing (Cameron Hughes presented custom pricing for marketing campaigns, the $70k skew payout cut and sims, which BF says it runs fairly accurately in-house). He values the relationship and wants to make it work. Cameron Hughes is assembling a consolidated doc (including AI growth and what separates Mahi from a competitor, Boltzmann) and expects BF to risk a switch only if an apples-for-apples comparison shows much lower cost.
+Next: BF (Syb) to come back Monday 2026-11-09 with its fair figure; Cameron Hughes to finish the consolidated pitch doc; Mahi to settle the growth metric and bands.
+Refs: https://mahifx.slack.com/archives/C084G40JXEE/p1788788372257979 https://mahifx.slack.com/archives/C084G40JXEE/p1791282278979729 https://mahifx.slack.com/archives/C084G40JXEE/p1793707880336229 https://mahifx.slack.com/archives/C084G40JXEE/p1793974544607349
+
+
+### nfp-optimisation — Weak LR and skew capture on NFP
+status: open · since: 2026-11-06 · last: 2026-11-06
+State: Will Carter's review of the 2026-11-06 NFP release (13:30-13:33 UTC vs the hour before) found BF barely moved while other clients made real money on the same engine. Corrected figures: LR $667 on $74M (~$9/M), and gold LR went backwards (Q1 ~$0.6/M vs ~$3/M the hour before); skew net -$237 (-$3/M), with Q1_FX negative and F_FX slightly positive. He reads skew sizing on the Q and F books as too timid for event flow, and the tight spreads (see pfm-ranking) as a cause. His initial PSM alarm was retracted: the USDJPY counter accrues in yen, so PSM was small but real (~$0.6k). Cameron Hughes added that BF has turned off LR on their side to optimise client experience.
+Next: owner needed (unassigned): find why gold LR did not respond (bucket sizing / caps) via /lr-health-check, and sim stronger or adaptive skew on the release before changing config; LR being off BF-side may change the first.
+Refs: https://mahifx.slack.com/archives/C084G40JXEE/p1793977310998809 https://mahifx.slack.com/archives/C084G40JXEE/p1793980106246579 https://mahifx.slack.com/archives/C084G40JXEE/p1793981197713629
 
 
 ### payout-reduction — Monthly payout data and value-add report
@@ -39,13 +46,6 @@ status: open · since: 2026-07-07 · last: 2026-11-03
 State: Each month BF sends the funded-payout spreadsheet and Cameron Hughes returns payout-reduction estimates inside the monthly report or microsite. August data came 2026-09-01 (estimates added the same day); September data came 2026-10-06 ahead of the monthly call and the report went out after it. October data came 2026-11-03 from Benjamin ahead of the monthly call (Mahi asked that morning); the report was sent after the call with October minimum payout reduction at $70k, 3x last month, and Mahi discussed pricing tailored to funded flow. BF's reaction to the size of the reduction is tracked under fixed-fee-proposal.
 Next: BF sends November payouts around the first week of December; Cameron Hughes asks ahead of the call.
 Refs: https://mahifx.slack.com/archives/C08473TFD7Z/p1783419861147459 https://mahifx.slack.com/archives/C08473TFD7Z/p1788260805308349 https://mahifx.slack.com/archives/C08473TFD7Z/p1791277130717089 https://mahifx.slack.com/archives/C08473TFD7Z/p1793704499567789
-
-
-### pfm-ranking — Prop Firm Match spread ranking
-status: open · since: 2026-05-26 · last: 2026-10-06
-State: BF's position in the Prop Firm Match spread table drives how tight Mahi quotes (the reason GBPUSD sits at 0.1 pip most hours). On 2026-10-01 Cameron Hughes noted BF was less often at the top, reduced MWMS and changed widening signal parameters, then reported "back to the top". Will Carter asked about payout impact; Cameron Hughes said skew and LR counter it well and BF checks the table often and wants to be at the top. On 2026-10-06 he flagged that the PFM spreads table looked broken. Tight quoting is a standing trade-off against Sunday-open and other arb exposure.
-Next: none beyond monitoring.
-Refs: https://mahifx.slack.com/archives/C08473TFD7Z/p1779793894044729 https://mahifx.slack.com/archives/C084G40JXEE/p1790867729276549 https://mahifx.slack.com/archives/C084G40JXEE/p1791300507287019
 
 
 ### sunday-open-gbpusd — GBPUSD Sunday-open arbing and spread fixes
@@ -60,6 +60,13 @@ status: watching · since: 2026-10-07 · last: 2026-10-07
 State: SOLUSD went indicative on CLIENT_PRICE_LDN 2026-10-03 until a pricer bounce 6 Oct: Binance is pulled by the latency filter after each websocket reconnect (~48h) and never returns, and OKX (the other source) dropped out 30 Sep. Change switched referencePriceMarketSelectors from BINANCE|OKX to BINANCE|MATCH_TRADE; Cameron Hughes approved and reported "change done" on 2026-10-07 (pricer restarts, ZD #23601). The underlying Binance triggerTime/latency-filter bug is not fixed: after a reconnect SOL prices off Match alone until the next restart.
 Next: Confirm SOLUSD stays firm through Binance reconnects; revert selector and bounce pricers if SOL is indicative or the mid is off Binance/Match; ZD #23601 tracks the filter bug.
 Refs: https://mahifx.slack.com/archives/C084G40JXEE/p1791338442138609 https://mahifx.slack.com/archives/C084G40JXEE/p1791386487483589
+
+
+### pfm-ranking — Prop Firm Match spread ranking
+status: watching · since: 2026-05-26 · last: 2026-10-06
+State: Downgraded to watching: quiet since 2026-10-06 (34d). BF's position in the Prop Firm Match spread table drives how tight Mahi quotes (the reason GBPUSD sits at 0.1 pip most hours). On 2026-10-01 Cameron Hughes noted BF was less often at the top, reduced MWMS and changed widening signal parameters, then reported "back to the top". Will Carter asked about payout impact; Cameron Hughes said skew and LR counter it well and BF checks the table often and wants to be at the top. On 2026-10-06 he flagged that the PFM spreads table looked broken. Tight quoting is a standing trade-off against Sunday-open and other arb exposure.
+Next: none beyond monitoring; tight quoting is now also implicated in weak NFP capture (nfp-optimisation).
+Refs: https://mahifx.slack.com/archives/C08473TFD7Z/p1779793894044729 https://mahifx.slack.com/archives/C084G40JXEE/p1790867729276549 https://mahifx.slack.com/archives/C084G40JXEE/p1791300507287019
 
 
 ### free-account-billing — Excluding free F1KC accounts from billing
