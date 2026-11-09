@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-06T08:12:39Z
+last_catchup: 2026-11-09T08:21:56Z
 status: active
 ---
 
@@ -26,6 +26,12 @@ Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), wi
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
+status: open · since: 2026-08-19 · last: 2026-11-08
+State: On 2026-11-08 Garry told Mahi the client will send algo parameters from its side on 2026-11-09 and asked whether the algo parameter service is ready in Production; Graeme added that parameters already flow from OneZero to Mahi, the OneZero side needs amending, and the client will keep the current OneZero default for market open and change it on Monday. No Mahi reply yet. On 2026-11-03 Andri asked why a UAT order was cancelled; Rory King found TT's algo engine stopped it ("RCM-X: excessive child rejects") and asked the client to raise it with TT with the order ID. On 2026-10-22 a UAT GoldDec algo order was left running; Liam cancelled it on request. Client has no UAT GUI access (Graeme asked if one exists), and asked if Mahi can reject rather than cancel (Liam: not possible); client can cancel prod orders via Compass open-orders X. Client sends algo params in tag 58 from OneZero, which Mahi maps to tag 448 and parses (TWAP+, POV, ScalePOV to TT; BOLT to QB). Production release done around 2026-09-18/21; QB BOLT format fixed (7 positional fields) and tests passed; no params means Mahi config is used, malformed params reject. Open UAT issues: TT ScalePOV orders show no fills and TT sees no child orders (client to raise with TT); UAT orders cancelled after 30 min by a Mahi-side UAT timeout (Liam confirmed 30 min in UAT, 35 min on the UBS Algo prod connection, none for TT/QB) and offered to disable it; QB UAT order unfilled for 30 min with nothing from QB, client raising to QB.
+Next: Mahi confirms to Garry whether the algo parameter service is ready in Production (client sends params 2026-11-09); client raises the TT cancel with TT; Liam answers Graeme on a UAT GUI; client answers Liam on disabling the UAT timeout; client chases TT and QB; Mahi supplies FIX logs on request.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787128423896719 https://mahifx.slack.com/archives/C09HN93T0G2/p1794135431610409
 
 ### echo-compass-users — Echo/Compass user admin
 status: open · since: 2026-09-01 · last: 2026-11-04
@@ -38,12 +44,6 @@ status: open · since: 2026-11-03 · last: 2026-11-03
 State: On 2026-11-03 Andri Zamroni urgently asked where mini and micro (XAUUSD, XAUUSD3) pricing comes from, saying around 06:17 UTC it was higher than ISPrime (bid 3923 / ask 3922 vs 3921.9 / 3922.2 on the direct ISPrime symbol). Daria Horton found both configured to the same reference markets with only ISP_OZNY4_RETAIL_MARGIN_VT pricing, and Compass max TOB offer 06:14-06:19 was 3922.61, in line with ISPrime. Andri said the client has no other feed and will check further on their side; no Mahi fault identified.
 Next: client checks their side; Mahi on request.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793686895184259 https://mahifx.slack.com/archives/C09HN93T0G2/p1793689672004209
-
-### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
-status: open · since: 2026-08-19 · last: 2026-11-03
-State: On 2026-11-03 Andri asked why a UAT order was cancelled; Rory King found TT's algo engine stopped it ("RCM-X: excessive child rejects") and asked the client to raise it with TT with the order ID. On 2026-10-22 a UAT GoldDec algo order was left running; Liam cancelled it on request. Client has no UAT GUI access (Graeme asked if one exists), and asked if Mahi can reject rather than cancel (Liam: not possible); client can cancel prod orders via Compass open-orders X. Client sends algo params in tag 58 from OneZero, which Mahi maps to tag 448 and parses (TWAP+, POV, ScalePOV to TT; BOLT to QB). Production release done around 2026-09-18/21; QB BOLT format fixed (7 positional fields) and tests passed; no params means Mahi config is used, malformed params reject. Open UAT issues: TT ScalePOV orders show no fills and TT sees no child orders (client to raise with TT); UAT orders cancelled after 30 min by a Mahi-side UAT timeout (Liam confirmed 30 min in UAT, 35 min on the UBS Algo prod connection, none for TT/QB) and offered to disable it; QB UAT order unfilled for 30 min with nothing from QB, client raising to QB.
-Next: client raises the TT cancel with TT; Liam answers Graeme on a UAT GUI; client answers Liam on disabling the UAT timeout; client chases TT and QB; Mahi supplies FIX logs on request.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787128423896719 https://mahifx.slack.com/archives/C09HN93T0G2/p1793710313225739
 
 ### surya-entity-move — Client moved to Indonesian entity PT Surya Anugrah Mulya
 status: open · since: 2026-11-01 · last: 2026-11-01
