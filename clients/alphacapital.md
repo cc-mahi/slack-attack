@@ -12,16 +12,22 @@ channels:
 contacts:
   - {name: "Gerard McConnell", role: "Alpha Capital, routing / platform / prop-product contact", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-11-06T08:12:39Z
+last_catchup: 2026-11-09T08:16:59Z
 status: active
 ---
 
 ## Now
 Prop client mid-build: Alpha is moving to its own broker and Alpha Trader on a DX Trade backend, so routing and platform-scope asks are arriving via Gerard McConnell.
-Open this week: confirm Mahi routing for the new MT5 demo groups before Gerard goes live, and the TempDXPrices FIX bad-credential spam.
+Open: confirm Mahi routing for the new MT5 demo groups before Gerard goes live; NFP value-add message sent to Alpha (2026-11-06) cites ~$10k skew while internal analysis says skew is off, so it needs a rerun.
 Billing: Alpha still 4 invoices behind (2026-10-29); Mahi is holding the DX direct connection until bills are settled, and Andrew Morgan is preparing a business review plus a tighter-spread proposal alongside the collections chase.
 
 ## Streams
+
+### nfp-value-add — NFP release value-add figures and client message
+status: open · since: 2026-11-06 · last: 2026-11-06
+State: Will Carter's NFP analysis (13:30-13:33 UTC 2026-11-06) was first posted at ~$71k, then corrected for a ~4x volume overcount to LR ~$16.3k on $553M ($29.5/M, gold on Q1 $33/M) plus PSM ~$5.4k, total ~$22k; it claimed skew was zero everywhere, which Cameron Hughes disputed and Will said needs a rerun. Cameron Hughes nonetheless sent Alpha a client message the same day citing LR ~$16.3k, PSM ~$5.3k and skew ~$10k (~$13/M), total ~$32k, so the skew figure sent to the client contradicts the internal finding that skew is off. Skew state is unresolved and also bears on the spread-proposal stream.
+Next: Rerun the analysis and settle whether skew is on at Alpha; correct the client message if the ~$10k skew figure is wrong. Sim proposal (skew on, adaptive sizing) still needs an owner.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1793978158037899 https://mahifx.slack.com/archives/C070016ND6X/p1793985300039609
 
 ### spread-proposal — Business review and tighter-spread proposal for Alpha
 status: open · since: 2026-10-30 · last: 2026-10-30
@@ -53,12 +59,6 @@ State: Gerard McConnell updated feeds for new ACGd demo MT5 groups (Direct, Qual
 Next: Cameron Hughes to apply config and confirm to Gerard.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791894322304399
 
-### tempdx-fix-logons — Prices->TempDXPrices FIX session spamming bad-credential logons
-status: open · since: 2026-10-06 · last: 2026-10-06
-State: Session Prices->TempDXPrices is repeatedly rejected on clientDistributionGateway2 (Invalid username and/or password), generating many alerts on Mahi's side. Cameron Hughes flagged it to Gerard; Arun said not urgent. No fix confirmed.
-Next: Alpha to fix or remove the session credentials.
-Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791277536831499 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791278615268349
-
 ### arb-classification — Arbitrageur detection lag and classifier changes
 status: watching · since: 2026-05-05 · last: 2026-09-17
 State: 2026-05 skew health check found arbitrageur detection lag costing ~35K/week on XAGUSD; continuity-pool fills on arb-classified flow do not apply last look, and Q1-Arbitrageurs profile uses forced internalisation. Arbs are whitelisted manually when auto-detection misses (riskPath reference market changed BLACKWELL to VELOCITY 2026-06-22; CP 5103699 whitelisted 2026-08-19). Liam Cordelle switched the classifier to run against Pulse 2026-09-16, reverted by Daria Horton after PagerDuty alerts, then re-enabled after a Netty fix. Full report in docs/skew-health/alphacapital/2026-05-05-skew-health.md.
@@ -89,6 +89,11 @@ status: closed · since: 2026-07-02 · last: 2026-08-26 · closed: 2026-11-05
 State: Restricted Compass Bridge Operator role provisioned on alphacap-broker for FastMT 2026-07-02, with a standard Compass account to follow. On 2026-08-26 David asked for an MT5 plugin to auto-stop out at an equity threshold then set accounts read-only; not available, a few months out. He also sources from T4B and wants ongoing feature updates and regular flow catch-up calls.
 Next: Mahi to schedule flow catch-up calls and share feature updates. Closed: no activity since 2026-08-26; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782978915962429 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787760873528779
+
+### tempdx-fix-logons — Prices->TempDXPrices FIX session spamming bad-credential logons
+status: closed · since: 2026-10-06 · last: 2026-10-06 · closed: 2026-11-09
+State: Session Prices->TempDXPrices is repeatedly rejected on clientDistributionGateway2 (Invalid username and/or password), generating many alerts on Mahi's side. Cameron Hughes flagged it to Gerard; Arun said not urgent. No activity since 2026-10-06; assumed resolved.
+Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791277536831499 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1791278615268349
 
 ## Arc
 - 2026-06-07 — Compass upgraded to latest version over the weekend
