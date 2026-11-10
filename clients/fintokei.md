@@ -16,20 +16,20 @@ contacts:
   - {name: "Lukas Sedlacek", role: "Fintokei/Purple Technology risk; suspicious-client reviews"}
   - {name: "Kristof Heger", role: "Fintokei/Purple Technology; order-fill queries"}
   - {name: "Roman Komurka", role: "Fintokei/Purple Technology; pricing/skew opinions", confidence: low}
-last_catchup: 2026-11-09T08:18:34Z
+last_catchup: 2026-11-10T08:16:59Z
 status: active
 ---
 
 ## Now
-Reduced-spread set-up on the LS model is streaming on _t symbols for Fintokei review (2026-11-06); z symbols move to it on sign-off. MT5 gateway on the main server stopped 2026-10-23 08:33 UTC (no logs, auto-restart now on; fixed MT4/MT5 build sent, deploy pending). LD-environment networking incident on 2026-10-16 (fleet-wide, hosting provider investigating) hit Fintokei connectivity; Liam reported signs of recovery at 10:46 UTC, no RCA or all-clear seen. Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 server clone (feeder and bridge copy) requested 2026-10-12. New batch of 63 MT4R/MT5 accounts requested 2026-11-04, change CHG-2611-6248 pending approval.
+Reduced-spread LS model signed off; z symbols still showed old pricing 2026-11-10 after the first EOD switch (missed config step), second restart promised at 2026-11-10 EOD as Fintokei clients expect it from midnight. MT5 gateway on the main server stopped 2026-10-23 08:33 UTC (no logs, auto-restart now on; fixed MT4/MT5 build sent, deploy pending). LD-environment networking incident on 2026-10-16 (fleet-wide, hosting provider investigating) hit Fintokei connectivity; Liam reported signs of recovery at 10:46 UTC, no RCA or all-clear seen. Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 server clone (feeder and bridge copy) requested 2026-10-12. New batch of 63 MT4R/MT5 accounts requested 2026-11-04, change CHG-2611-6248 pending approval.
 
 ## Streams
 
 ### ls-reduced-spread — reduced-spread set-up on the LS model (_t symbols)
-status: open · since: 2026-11-06 · last: 2026-11-06
-State: Kate built Fintokei's requested reduced-spread set-up on the LS model (pricerLS1/2), streaming on the _t symbols for review while z symbols stay on LSB. Spec: reduced spreads all day except 17:00-18:00 New York, weekend unchanged, double depth on zero-spread pairs (100k top of book), XAUUSD depth x2.5 (50 oz top of book), JP225 and BTCUSD as on LSB. Kate is reviewing with Adam; on sign-off the LS model starts publishing on z symbols.
-Next: Fintokei (Adam) to sign off; Mahi (Kate) to switch z symbols to the LS model.
-Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1793960803618309
+status: open · since: 2026-11-06 · last: 2026-11-10
+State: Kate built Fintokei's requested reduced-spread set-up on the LS model (pricerLS1/2), streaming on _t symbols for review. Spec: reduced spreads all day except 17:00-18:00 New York, weekend unchanged, double depth on zero-spread pairs (100k top of book), XAUUSD depth x2.5 (50 oz top of book), JP225 and BTCUSD as on LSB. Fintokei signed off; change CHG-2611-SMV9 (z symbols from LSB to LS model, 2026-11-09 22:00Z, approved, taken by Nathan Burch) was applied at EOD, but on 2026-11-10 Adam still saw old pricing on z symbols. Nathan found a forgotten config step, now corrected, needing another process restart (3-5 min downtime). Adam asked for it at 2026-11-10 EOD since Fintokei told its clients the change takes effect from that midnight; Rory confirmed. Cause of the persisting old pricing is still being checked.
+Next: Mahi (Rory/Nathan) to restart at 2026-11-10 EOD and confirm z symbols on the LS model to Adam.
+Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1793960803618309 https://mahifx.slack.com/archives/C08R694QVNX/p1794241704682899 https://mahifx.slack.com/archives/C08QWKFARDL/p1794291652048219
 
 ### account-requests — new trading account batches (Sep, Nov)
 status: open · since: 2026-09-24 · last: 2026-11-04
