@@ -17,16 +17,26 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-11-09T08:16:42Z
+last_catchup: 2026-11-10T08:18:26Z
 status: active
 ---
 
 ## Now
-New: TOT has no second price source if Mahi Central eu-west-2 drops; Liam Cordelle weighing options.
-Prop firm; Mahi is dealing desk and risk. Focus is payout ratio: skew and LR tightened, harsher execution on 2-Step/1-Step groups, spreads restored on Prop Firm Match.
-Open: MatchTrader IP whitelist request (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain). Also: drop-copy volume exceeds expected volume (checking with Shane).
+Prop firm; Mahi is dealing desk and risk. Payouts were high last week; Cameron Hughes widened spread-table spreads (TOT no longer on Prop Firm Match) as a first step. Cameron Hughes also sent TOT an NFP value-add note (about $4.3k over the release).
+Open: no second price source if Mahi Central eu-west-2 drops (Liam Cordelle weighing options); MatchTrader IP whitelist (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain); drop-copy volume check with Shane.
 
 ## Streams
+
+### nfp-valueadd-post — Cameron Hughes' NFP value-add note to TOT
+status: open · since: 2026-11-09 · last: 2026-11-09
+State: Cameron Hughes posted to TOT on 2026-11-09 about Friday's US payrolls: $32M client volume in the 3 minutes from 13:30 UTC, LR about $3.6k ($113/M vs about $5/M the hour before; gold $2.7k on $19M), PSM about $0.7k, about $4.3k total over the release, plus skew about $8.2k ($5/M) across the day. Includes a Compass yield-profile link. No client reply yet.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1794239357111729
+
+### payout-ratio-levers — Payout ratio, skew and spread levers
+status: open · since: 2026-09-30 · last: 2026-11-09
+State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% over 6 weeks; Mahi raised skew on 1-Step and 2-Step, spreads on majors restored on Prop Firm Match, max loss 9% to 8% the agreed fallback, Shane to flag each new Launchpad group for harsher execution. Re-opened 2026-11-09: Shane told Cameron Hughes TOT payouts were high last week and they want changes in place. TOT no longer uses Prop Firm Match (same as other props), so Cameron Hughes added wider spreads on the spread-table instruments as a first step.
+Next: Watch payouts after the wider spreads; further levers (skew, max loss) if still high.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1794238452068779
 
 ### single-price-source — No second price source if Mahi Central eu-west-2 drops
 status: open · since: 2026-10-30 · last: 2026-10-30
@@ -58,12 +68,6 @@ State: Daniel forwarded TOT's analysis: two 3-lot buys at the same price, the se
 Next: Mahi (Shyam Hari) to investigate and revert to Daniel.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1791943609687779 https://mahifx.slack.com/archives/C08U853T684/p1791943843239269
 
-### payout-ratio-levers — Payout ratio, skew and spread levers
-status: watching · since: 2026-09-30 · last: 2026-09-30
-State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% over 6 weeks. Mahi is raising skew on 1-Step and 2-Step. EURUSD, USDJPY and GBPUSD spreads go back to 0.0 on Prop Firm Match after a ranking slide. Max loss 9% to 8% is the agreed fallback if skew and spreads are not enough. TOT's Launchpad experimental groups need the harsher execution rules, so Shane will flag each new group.
-Next: Quiet since 2026-09-30, downgraded to watching. Mahi watching results of skew and spreads; Shane to notify Mahi of each new Launchpad group.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1790787041722219
-
 ### prop-perps — Prop perps request
 status: watching · since: 2026-09-30 · last: 2026-10-05
 State: Matt asked about prop perps (Vest Markets, MyFundedPerps). Cameron Hughes sees it as a growing area and a possible new offering and will look at Vest. Logged on the wiki Client requests section.
@@ -71,9 +75,8 @@ Next: Cameron Hughes to look at Vest.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://mahifx.slack.com/archives/C08TG143F4L/p1791183636574369
 
 ### ctrader-billing-check — cTrader shut off by TOT; billing model review
-status: watching · since: 2026-08-26 · last: 2026-09-10
-State: TOT stopped using cTrader (Shane: it was costing them heavily); config kept in case they return. On 2026-09-09/10 internal billing was queried against the revised per-user model and Will Carter noted the fixed component was missing for low totals; Cameron Hughes was asked to review accounts.
-Next: Cameron Hughes to review accounts; internal billing to reconcile.
+status: closed · since: 2026-08-26 · last: 2026-09-10 · closed: 2026-11-10
+State: TOT stopped using cTrader (Shane: it was costing them heavily); config kept in case they return. On 2026-09-09/10 internal billing was queried against the revised per-user model and Will Carter noted the fixed component was missing for low totals; Cameron Hughes was asked to review accounts; no activity since 2026-09-10, assumed resolved.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787752907131709 https://mahifx.slack.com/archives/C08TG143F4L/p1789022593579519
 
 ### lr-harsh-execution — LR retune and harsher execution for 2-Step
@@ -85,11 +88,6 @@ Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787643570858959 https://ma
 status: closed · since: 2026-08-18 · last: 2026-08-24 · closed: 2026-10-28
 State: GBPUSD arb alert on 2026-08-18 led to proportion and price-improvement reductions; on 2026-08-21 daily checks flagged more arb, so MAHI_LP5 was removed from signalReturn markets, GBPJPY added to the GBPUSD/USDJPY override and signal moved to synapse. By 2026-08-24 no more significant arb; no activity since 2026-08-24; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787044539658809 https://mahifx.slack.com/archives/C08TG143F4L/p1787572737892749
-
-### btcusd-100x-multiplier — MatchTrader BTCUSD order 100x oversized
-status: closed · since: 2026-07-25 · last: 2026-07-29 · closed: 2026-10-22
-State: A 1.2 lot BTCUSD order reached Mahi as 120 BTC. Broker Support found a session multiplier misconfigured at 100x on BTCUSD and asked TOT to set it to 0.01 and check other symbols. No confirmation seen, but no activity since 2026-07-29; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08U853T684/p1784987610439809 https://mahifx.slack.com/archives/C08VCTZ7ZN2/p1785304369359649
 
 ## Arc
 - 2026-01 — Crypto symbols (34) enabled on MatchTrader alongside MT5
