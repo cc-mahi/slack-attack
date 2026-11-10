@@ -10,7 +10,7 @@ channels:
   internal-finprime: C0C8M89J2JY
   mahi-finprime: C0C8HCFKE9G
 contacts: []
-last_catchup: 2026-11-09T08:18:34Z
+last_catchup: 2026-11-10T08:15:15Z
 status: active
 ---
 
