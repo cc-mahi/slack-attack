@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-09T08:21:56Z
+last_catchup: 2026-11-10T08:18:26Z
 status: active
 ---
 
@@ -26,6 +26,11 @@ Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), wi
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### ab-book-queries — A/B book classification requests from overnight team
+status: open · since: 2026-07-08 · last: 2026-11-10
+State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1794297052376269
 
 ### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
 status: open · since: 2026-08-19 · last: 2026-11-08
@@ -80,11 +85,6 @@ status: open · since: 2026-10-23 · last: 2026-10-23
 State: Graeme said the client stopped using the Phillip TT connection, which Phillip appears to have deactivated, leaving an error on Compass. Liam Cordelle removed it from Mahi's side on 2026-10-23. Andri then flagged another error screenshot and Liam asked if it was that connection; Graeme asked Brandon to remove the same connection on the OneZero side too.
 Next: Brandon removes it on the OneZero side.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792758756367069 https://mahifx.slack.com/archives/C09HN93T0G2/p1792776666037109
-
-### ab-book-queries — A/B book classification requests from overnight team
-status: open · since: 2026-07-08 · last: 2026-10-23
-State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792758596615249
 
 ### lr-setting-location — Client cannot find Liquidity Reduction setting in new screen
 status: open · since: 2026-10-22 · last: 2026-10-22
