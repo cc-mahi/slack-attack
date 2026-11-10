@@ -17,7 +17,7 @@ contacts:
   - {name: John (Jun Yang), role: "GTC - raises pricing-quality issues (XAG quote jumps); has Compass access", confidence: low}
   - {name: Ralich, role: "OneZero - waived OZ per-million fees on GTCFX flow to Mahi; David Cooney's contact", confidence: low}
   - {name: Lochlan, role: "OneZero - internal-only escalation route if OZ fee/support talks stall; not to be shared with GTC", confidence: low}
-last_catchup: 2026-11-09T08:18:34Z
+last_catchup: 2026-11-10T08:17:00Z
 status: active
 ---
 ## Now
@@ -30,9 +30,9 @@ New since 11-06: GTC is switching XAUUSD from MT5 Live2 to Mahi (11-09); Will fl
 
 ### flow-rollout — Symbol and server migration to Mahi
 status: open · since: 2026-08-17 · last: 2026-11-09
-State: EURGBP moved 2026-08-17, then rolling in batches through 2026-10-05 (all FX majors/crosses, B Book). XAGUSD routed 2026-09-03 and XAUUSD 2026-09-10 with more servers added 09-16, 10-05 and 10-08 (mt4 live2); on 2026-10-23 Manglai moved XAUUSD mt5 live1 execution to Mahi and Isaac is monitoring. On 2026-10-27 Isaac asked GTC to confirm when MT5 Live 2 can be switched to Mahi: October FI PnL is $897,145 at 7.76 $/M on executed flow so far, and MT5 Live 2 would have added about $2.22M this month on 285.69B volume. The internal call that day (Manglai absent) hoped for MT5 Live 2 this week. On 2026-10-29 Isaac told GTC the MT5 Live 2 drop copy to Mahi stopped at 16:10 UTC on 10-28 across all symbols and asked whether the session was changed or dropped on GTC's side; no reply recorded. On 2026-11-09 Antreas said GTC will switch XAUUSD from MT5 Live2 to Mahi and asked for confirmation; Isaac confirmed and Mahi is monitoring. Remaining: cent accounts on small-ticket servers, indices (GTC worried about primary benchmark feed dropouts), crypto. Priorities per the 2026-09-24 Expo meeting: fix OZ hub drops, A Book with hedging, B Book via OZ, crypto, then 24/7 XAU.
-Next: Mahi to monitor the XAUUSD MT5 Live2 switch; GTC to explain the earlier Live 2 drop copy stop; GTC picks the next server/day; weekly call 2026-10-13 notes remaining checks (24/7 connection 5, FX pair spikiness, HRP Jane Street).
-Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786977281687209 https://mahifx.slack.com/archives/C0AKRP8C049/p1793286194434769 https://mahifx.slack.com/archives/C0AKRP8C049/p1794212198087419
+State: EURGBP moved 2026-08-17, then rolling in batches through 2026-10-05 (all FX majors/crosses, B Book). XAGUSD routed 2026-09-03 and XAUUSD 2026-09-10 with more servers added 09-16, 10-05 and 10-08 (mt4 live2); on 2026-10-23 Manglai moved XAUUSD mt5 live1 execution to Mahi and Isaac is monitoring. On 2026-10-27 Isaac asked GTC to confirm when MT5 Live 2 can be switched to Mahi: October FI PnL is $897,145 at 7.76 $/M on executed flow so far, and MT5 Live 2 would have added about $2.22M this month on 285.69B volume. The internal call that day (Manglai absent) hoped for MT5 Live 2 this week. On 2026-10-29 Isaac told GTC the MT5 Live 2 drop copy to Mahi stopped at 16:10 UTC on 10-28 across all symbols and asked whether the session was changed or dropped on GTC's side; no reply recorded. On 2026-11-09 Antreas said GTC will switch XAUUSD from MT5 Live2 to Mahi and asked for confirmation; Isaac confirmed; Antreas then posted "Done pls monitor" (08:19 UTC), so the XAUUSD switch from MT5 Live2 is done and Mahi is monitoring. Remaining: cent accounts on small-ticket servers, indices (GTC worried about primary benchmark feed dropouts), crypto. Priorities per the 2026-09-24 Expo meeting: fix OZ hub drops, A Book with hedging, B Book via OZ, crypto, then 24/7 XAU.
+Next: Mahi to monitor the now-live XAUUSD MT5 Live2 flow; GTC to explain the earlier Live 2 drop copy stop; GTC picks the next server/day; weekly call 2026-10-13 notes remaining checks (24/7 connection 5, FX pair spikiness, HRP Jane Street).
+Refs: https://mahifx.slack.com/archives/C0AKRP8C049/p1786977281687209 https://mahifx.slack.com/archives/C0AKRP8C049/p1793286194434769 https://mahifx.slack.com/archives/C0AKRP8C049/p1794212384937039
 
 ### nfp-gold-review — NFP result: LR, skew and PSM flat on gold
 status: open · since: 2026-11-06 · last: 2026-11-06
