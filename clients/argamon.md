@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-11-09T08:16:58Z
+last_catchup: 2026-11-10T08:15:28Z
 status: active
 ---
 
@@ -26,10 +26,10 @@ Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via 
 ## Streams
 
 ### leverage-risk-sims — 500:1 leverage / more risk-holding sims
-status: open · since: 2026-08-31 · last: 2026-11-09
-State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1). Retail FX book has been on a G8-Cap profile (500k inventory cap on internalised G8 flow, Friday close flatten) since 2026-10-21; rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. After the 2026-10-27 call Argamon wants all FX on the new risk model and dark pool hedging explored. On the 2026-11-02 call Jem and Elan asked to extend cap internalisation beyond G8 with a 250k cap on other currencies (Shyam's sims show roughly PnL-neutral, closer to supporting higher leverage), to hold past 500k for soft-looking CPs, and to try full B-book for some soft-flow CPs (Shyam says little such flow exists; Argamon sounded interested in an A-book/B-book model). They are very open to PSM: Shyam to run it in beta with comparative sims, go-ahead if average spread and related metrics hold; Elan may want it at Toa too. Elan is sending CBOE session credentials for hidden peg hedging, to be trialled in NY4; on 2026-11-09 Shyam flagged that ordersCboe1 and marketDataCboe1 were being set up, so expect related alerts.
-Next: Shyam to check configurability of holding past 500k, put PSM in beta with sims, and trial hidden peg hedging in NY4 once credentials arrive; Argamon to confirm Centroid LP failover is in place.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793674916716319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794193748388459
+status: open · since: 2026-08-31 · last: 2026-11-10
+State: Jem/Elan say retail growth is blocked without 500:1 leverage (most capped at 100:1). Retail FX book has been on a G8-Cap profile (500k inventory cap on internalised G8 flow, Friday close flatten) since 2026-10-21; rollback is swapping instrumentToProfileMappings G8-Cap to G8 and restarting hybridHedgerHrp1. After the 2026-10-27 call Argamon wants all FX on the new risk model and dark pool hedging explored. On the 2026-11-02 call Jem and Elan asked to extend cap internalisation beyond G8 with a 250k cap on other currencies (Shyam's sims show roughly PnL-neutral, closer to supporting higher leverage), to hold past 500k for soft-looking CPs, and to try full B-book for some soft-flow CPs (Shyam says little such flow exists; Argamon sounded interested in an A-book/B-book model). They are very open to PSM: Shyam to run it in beta with comparative sims, go-ahead if average spread and related metrics hold; Elan may want it at Toa too. Elan is sending CBOE session credentials for hidden peg hedging, to be trialled in NY4; on 2026-11-09 Shyam flagged that ordersCboe1 and marketDataCboe1 were being set up, so expect related alerts. On 2026-11-09 Shyam extended cap internalisation to the liquid EMs (CNH, ZAR, SGD, MXN) with a 250k cap and 500k hard backstop, same setup as G8; a 6-month replay is slightly positive to neutral on PnL, and the remaining FX was left out as it gets under $0.1M combined. On the 2026-11-10 call Jem and Elan were happy with last week's performance and the direction of more internalisation, want more internalisation opportunities explored (including fully B-bookable flow), and want the gold internalisation strategy reviewed as it is losing on reval.
+Next: Shyam to look for further internalisation and full B-book flow, review the gold internalisation strategy, check configurability of holding past 500k, put PSM in beta with sims, and trial hidden peg hedging in NY4 once credentials arrive; Argamon to confirm Centroid LP failover is in place.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1788152543060319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793674916716319 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794193748388459 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794280220794099
 
 ### cfd-indices-rollout — CFD / indices via Jump into Compass
 status: open · since: 2026-08-24 · last: 2026-11-09
