@@ -11,14 +11,26 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-09T08:16:41Z
+last_catchup: 2026-11-10T08:15:28Z
 status: active
 ---
 
 ## Now
-Going live is slipping: Alpha's first live client was due 2026-10-29; by 2026-11-02 only internal "live testing" flow is real and Rapp has asked for hedgers to be activated. Hedgers and expectedBookStatusOnTimezones come into play. Rollover and open spikes are being tuned hard (new WSS caps and widening factors on 2026-10-27; the 21:00 roll on 2026-10-28 is the first full test). Rapp wants redundancy against outages and a reliable swaps source for crosses, and Andrew said he can have redundancy. Outstanding Aug/Sep invoices remain a soft overhang.
+Alpha is officially live: the first trades arrived 2026-11-09 (Cameron Hughes). David Rapp wants an in-person session this Thursday on Mahi's risk management and a simplified Compass walkthrough for value-add checks. Hedger activation and re-enabling expectedBookStatusOnTimezones now follow. Rollover and open spikes are still being tuned (Softs, XNG, XAGEUR). Rapp wants redundancy and a swaps source for crosses; Aug/Sep invoices remain a soft overhang.
 
 ## Streams
+
+### inperson-risk-session — In-person risk management session
+status: open · since: 2026-11-09 · last: 2026-11-09
+State: On a 2026-11-09 call Rapp asked for an in-person meeting this Thursday where Mahi explains its risk management and simplifies Compass so Alpha knows where to check value adds. He liked the US Payroll value-add report sent last week; it helps his higher-ups appreciate what Mahi does.
+Next: Cameron Hughes to arrange the Thursday session and prepare the material.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409
+
+### go-live-testing — Live test trading and go-live readiness
+status: open · since: 2026-04-29 · last: 2026-11-09
+State: Alpha is now live: Cameron Hughes reported the first couple of real trades on 2026-11-09. Before that, Alpha's first live client was meant to activate 2026-10-29; on 2026-11-02 Rapp asked for the hedgers to be activated, then said the flow now seen is real but internal people doing live testing, not yet the first client (Cameron Hughes had asked which). Earlier Rapp said next week after teething issues including charts. Cameron Hughes was setting up analytics alerting on 2026-10-29 ahead of go-live. Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
+Next: Cameron Hughes to act on Rapp's request to activate hedgers and re-check monitoring now live flow has started.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793628933742509 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409
 
 ### argamon-shared-chan — Shared Slack channel with Argamon
 status: open · since: 2026-10-08 · last: 2026-11-03
@@ -31,12 +43,6 @@ status: open · since: 2026-11-03 · last: 2026-11-03
 State: Rapp asked how Mahi will risk manage prop-based accounts that are given the deposit and can only withdraw PnL. Cameron Hughes replied the best approach is to B-book and optimise the rest, as props usually do, and Rapp is setting up an MT5 group so they can be identified in Compass. Related to the earlier LPOA retail-account grouping.
 Next: Rapp to create the group; Cameron Hughes to tailor execution for it.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793708733600729 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793708760060049
-
-### go-live-testing — Live test trading and go-live readiness
-status: open · since: 2026-04-29 · last: 2026-11-02
-State: Alpha's first live client was meant to activate 2026-10-29; on 2026-11-02 Rapp asked for the hedgers to be activated, then said the flow now seen is real but internal people doing live testing, not yet the first client (Cameron Hughes had asked which). Earlier Rapp said next week after teething issues including charts. Cameron Hughes was setting up analytics alerting on 2026-10-29 ahead of go-live. Argamon told Rapp on 2026-10-06 "I've enabled all instruments and volumes we can consider this live". Cameron Hughes ran manual, hybrid and GUI test trades (FX, metals, indices, CFDs, softs, XCUUSD, metal crosses) with hedger config tweaks (riskQuantisation, quantityDefinition, covariance matrix); all finished 2026-10-13, "systems working as expected". Hedgers are held off (startInOffState) so test trades do not reach Argamon; Argamon moved from Centroid to PXM, order and market-data connections were swapped on 2026-09-29 and PXM creds for position visibility obtained 2026-10-09. Earlier tests were slowed by the client's $1k deposit hitting NOP.
-Next: Cameron Hughes to act on Rapp's request to activate hedgers and re-check monitoring once the first live client trades.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1777462009649679 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791900870280529 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793628933742509 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793632224508649
 
 ### acg-mt5-sessions — Saturday gateway session hours
 status: open · since: 2026-10-31 · last: 2026-10-31
@@ -63,9 +69,9 @@ Next: Cameron Hughes to keep raising arrears with several contacts without gatin
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791966476920889 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791972502451699
 
 ### alert-suppression — Monitoring noise before hedgers go on
-status: watching · since: 2026-08-17 · last: 2026-09-10
+status: open · since: 2026-08-17 · last: 2026-09-10
 State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
-Next: Cameron Hughes to re-enable expectedBookStatusOnTimezones when hedgers go on.
+Next: Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
 
 ### retail-lpoa-groups — MT5 groups for retail-under-corporate accounts
@@ -78,5 +84,6 @@ Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1787584267363759 https://ma
 - 2026-04-24 — Spread/commission/markup file V5.4 signed off by Rapp.
 - 2026-04-27 — Account manager handoff from Maten back to Cameron Hughes for setup work.
 - 2026-10-06 — Argamon enabled all instruments and volumes; live test trading began.
+- 2026-11-09 — First real client trades arrived; Alpha officially live.
 - 2026-10-13 — Test trading finished across all asset classes; awaiting client go-live.
 - 2026-10-30 — First live client missed 2026-10-29 target; Rapp now says next week.
