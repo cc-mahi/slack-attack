@@ -18,13 +18,19 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-11-09T08:17:07Z
+last_catchup: 2026-11-10T08:15:28Z
 status: active
 ---
 ## Now
 CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival); outcome of the 10-21 C-level call not seen in Slack. Retention work continues: adaptive sized skew is live, and on 2026-11-06 Kate posted an NFP performance update to the client (gold LR + skew $38/M vs $16.63/M average) as a hero moment. Beeks still owes RCAs (09-28 reboot, 10-16 outage); backup-link rebuild change CHG-2611-SR0F was set for 2026-11-07 21:00Z (result not seen). 57 single stocks are loaded but unpriced pending B2Broker symbols; funded XC cancels mostly cured, demo flow still stalled on the fee.
 
 ## Streams
+
+### crypto-sat-break-1107 — Crypto pricing gap during Saturday reboot
+status: open · since: 2026-11-09 · last: 2026-11-09
+State: Andreas asked why crypto pricing stopped 22:45-00:00 Cyprus time on Saturday 2026-11-07. Rory: it is Mahi's weekly Saturday reboot (FIX sessions closed 20:50-22:00 UTC, fixed in UTC, same every week); the apparent shift is the clock change. 5ers' server break (23:50-01:00 on GMT+2) is an hour late now, so prices stopped before their break and trading only resumed at 01:00 although Mahi priced from 00:00. Rory asked 5ers to move the Saturday crypto break to 22:50-00:00 GMT+2 for winter and revert in March; daily 23:55-00:05 break is fine. Rory also offered a Mahi backup-server connection if crypto should price through the window.
+Next: Andreas to change the break (and remind in March) or take up the backup-server option.
+Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1794231664793559 https://mahifx.slack.com/archives/C07AQJS4E80/p1794248083595669
 
 ### nfp-value-add-1106 — NFP 2026-11-06 value-add moment
 status: open · since: 2026-11-06 · last: 2026-11-06
