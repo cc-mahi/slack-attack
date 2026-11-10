@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-11-09T08:21:00Z
+last_catchup: 2026-11-10T08:17:00Z
 status: active
 ---
 ## Now
@@ -25,6 +25,12 @@ Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads
 On 11-02 a perps demo test by Will Carter hit live LMAX (about $5.5k equity, flattened, no open risk) and exposed incomplete perps execution rules and yield profile setup. A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef is unhappy and now wants GCC to provision its own main plus standby servers (reply from Rory pending), and GCC awaits the provider's incident report.
 
 ## Streams
+
+### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
+status: open · since: 2026-04-30 · last: 2026-11-09
+State: Almost every weekday ~15:00 UTC/BST Layan posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms, usually within seconds to minutes (volumes 160oz to 9.8k oz). Confirmation is not always visible: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz; Layan asked again 10-13 and no confirmation is visible), the 10-16 report was confirmed over two hours late, and the 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 reports have no done-confirmation visible. The 10-22 to 11-03 reports were acknowledged and mostly confirmed actioned within minutes. On 11-04 (200 oz gold long, 15:32 UTC) Rory replied "will do" within a minute and there is one more reply in thread at 15:38. On 11-05 (7,037 oz gold long, 15:25 UTC) Rory said "will do" and confirmed done at 15:50. On 11-06 (1,529 oz gold long, 15:21 UTC) Rory said "will do" and confirmed done at 16:45. On 11-09 (5,295 oz gold long, 15:21 UTC) Rory said "will do" and confirmed done at 18:12. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
+Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794237659203029
 
 ### amana-lp — Amana as hedging venue and taker
 status: open · since: 2026-09-14 · last: 2026-11-06
@@ -37,12 +43,6 @@ status: open · since: 2026-11-06 · last: 2026-11-06
 State: On 11-06 Will Carter called it a storming week; Rory said GCC trades over 2bn so far this week, which if repeated across the month reaches the next billing tier (above 6bn a month). Into NFP he saw nothing needing change ("pure dependence on the whales"); Will floated brokering to go low risk and Rory said he would raise it with GCC. Post-NFP the book took a ~5k PnL drop, with tag 4004532 flow a bit sharper than usual.
 Next: Rory to raise the low-risk/brokering option with GCC; watch 4004532 flow.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1793969013807299 https://mahifx.slack.com/archives/C09QS1NUA80/p1793976030377669
-
-### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-11-06
-State: Almost every weekday ~15:00 UTC/BST Layan posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms, usually within seconds to minutes (volumes 160oz to 9.8k oz). Confirmation is not always visible: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz; Layan asked again 10-13 and no confirmation is visible), the 10-16 report was confirmed over two hours late, and the 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 reports have no done-confirmation visible. The 10-22 to 11-03 reports were acknowledged and mostly confirmed actioned within minutes. On 11-04 (200 oz gold long, 15:32 UTC) Rory replied "will do" within a minute and there is one more reply in thread at 15:38. On 11-05 (7,037 oz gold long, 15:25 UTC) Rory said "will do" and confirmed done at 15:50. On 11-06 (1,529 oz gold long, 15:21 UTC) Rory said "will do" and confirmed done at 16:45. Late on 10-27 Carl posted GCC's LP exposure (XAU LMAX 6,404, Finalto 0; XAG Finalto 63,506, LMAX 39,250); Daria found Compass showed 4,081 XAU vs the client's 6,404, aligned positions and Carl confirmed all good.
-Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793978509135199
 
 ### perps-test-misroute — 2026-11-02 XAU-PERP demo test hit live LMAX
 status: open · since: 2026-11-02 · last: 2026-11-02
