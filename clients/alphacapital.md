@@ -12,16 +12,22 @@ channels:
 contacts:
   - {name: "Gerard McConnell", role: "Alpha Capital, routing / platform / prop-product contact", confidence: low}
   - {name: "Jade", role: "Alpha Capital (last name and role unknown; raised statement of account request 2026-05-22)", confidence: low}
-last_catchup: 2026-11-10T08:15:14Z
+last_catchup: 2026-11-11T08:16:35Z
 status: active
 ---
 
 ## Now
 Prop client mid-build: Alpha is moving to its own broker and Alpha Trader on a DX Trade backend, so routing and platform-scope asks are arriving via Gerard McConnell.
-Open: confirm Mahi routing for the new MT5 demo groups before Gerard goes live; NFP value-add message sent to Alpha (2026-11-06) cites ~$10k skew while internal analysis says skew is off, so it needs a rerun.
+Open: CPI slippage query from Gerard traced to a 50-pip TOB price-improvement cap (sims run, 2026-11-11); confirm Mahi routing for the new MT5 demo groups before Gerard goes live; NFP value-add message sent to Alpha (2026-11-06) cites ~$10k skew while internal analysis says skew is off, so it needs a rerun.
 Billing: Alpha still 4 invoices behind (2026-10-29); Mahi is holding the DX direct connection until bills are settled, and Andrew Morgan is preparing a business review plus a tighter-spread proposal alongside the collections chase.
 
 ## Streams
+
+### cpi-slippage — CPI slippage query and model widening from TOB price-improvement cap
+status: open · since: 2026-11-10 · last: 2026-11-11
+State: Gerard McConnell forwarded CPI slippage queries (account 3019837, trade 112829227), saying slippage was well below tick data. Daria Horton traced the model widening to `Maximal Price Improvement Pips On Tob` configured at 50 pips in the signal config; if Alpha wants tighter pricing the tolerance should rise significantly, using MWMS/BMSL for intentional widening, and XAUUSD skew could move to composite rather than base-spread relative. She ran two sims (baseline vs no TOB cap) and a Price Forensics view; results not read in this window.
+Next: Cameron Hughes to review the sims and reply to Gerard; decide on the cap change.
+Refs: https://mahifx.slack.com/archives/C08A4RJMQMP/p1794321119855439 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1794365254125719
 
 ### nfp-value-add — NFP release value-add figures and client message
 status: open · since: 2026-11-06 · last: 2026-11-06
@@ -78,11 +84,6 @@ State: Gerard asked about weekend trading on XAU, XAG, WTI, SPX, NDX with reduce
 Next: Cameron Hughes to send the bespoke draft after review.
 Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789378377294579 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1789396646430429
 
-
-### xag-fi-pnl — XAGUSD and FI PnL leakage; FI PnL methodology question
-status: closed · since: 2026-04-23 · last: 2026-08-25 · closed: 2026-10-27
-State: XAG FI PnL bled repeatedly (April, June, August), with signal moved neuron to synapse (2026-04-23), skew floor lowered to 1 pip (2026-07-07), and XAG switched to price + IFMS signals (2026-08-13); by 2026-08-25 FI turned around on all books; no activity since, assumed resolved. Shyam Hari also flagged (2026-06-25, EURGBP false FI drop from news last-look delay) that prices used for FI PnL calculations may need review; no action seen.
-Refs: https://mahifx.slack.com/archives/C06UHTDQ8JF/p1776939603625359 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1782445628932189 https://mahifx.slack.com/archives/C06UHTDQ8JF/p1787672825872419
 
 ### fastmt-requests — FastMT (David Rapp) feature and access requests
 status: closed · since: 2026-07-02 · last: 2026-08-26 · closed: 2026-11-05
