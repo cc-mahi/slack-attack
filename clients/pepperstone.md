@@ -23,7 +23,7 @@ contacts:
   - {name: "Saemi Kim", role: "pricing config", confidence: low}
   - {name: "Sam Dammers", role: "security", confidence: low}
   - {name: "Tom Williams", role: "COO since 2026-08"}
-last_catchup: 2026-11-10T08:17:00Z
+last_catchup: 2026-11-11T08:13:38Z
 status: active
 ---
 
