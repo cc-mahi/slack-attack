@@ -16,7 +16,7 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-11-10T08:16:59Z
+last_catchup: 2026-11-11T08:15:26Z
 status: active
 ---
 
@@ -26,10 +26,16 @@ Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow); pilot
 ## Streams
 
 ### futures-cfd-onboarding — Futures and CFDs added to Kama's Compass
-status: open · since: 2026-10-29 · last: 2026-11-09
-State: Kama want futures and CFDs live. Kate set up a handful of indices on the pricing model and will set up books and hedgers; on 29 Oct she asked for instrument mappings and Ali listed the Z26/F27 contracts (DAX30, US100, US30, SI, USOIL, UKOIL) and said he will enable them on Mahi's connection so LP market data can be subscribed. On 5 Nov Kate asked for LP oil symbol mappings; Ali gave the index/oil list and the futures list (DAX30.Z26, GC.Z26, SI.Z26, US100.Z26, US30.Z26, US500.Z26, USOIL.Z26, UKOIL.F27), and Kate updated subscription mappings, custom instruments and the instrument list mapping that afternoon. Scope is the main LP for CFDs except oil (Velocity). Added to the contract at no extra cost (see pilot-commercials). On 6 Nov Inald put the new futures (DAX, NDX, DOW, SPX, XAG, XAU, USO, UKO: 8 families, 52 contracts) into the client DB under CHG-2611-X9VR (ZD #23780, approved by Liam); they go live only when kama-ln-trading-1 restarts (patch run Fri 22:00Z or the Sat 08:40Z reboot) and the change was marked implemented on 7 Nov, verification due by 10 Nov. Post-restart checks: all processes up, no pricer or hedger failing to start, no FUT-002 ERROR_NoPriceConversion; rollback SQL is on the ticket if needed before the Sun 22:00Z open. On 9 Nov William staged a further change, CHG-2611-G9MP (CFD book, hedger and channel base setup, no client routing; window 10:28-22:15Z, live at restart): that day he and Kate edited riskControlProfiles, markupProfiles, wideSpreadSuppression, hedging rules/executionMarkets, pool markets (pool restart pending), instrumentListMapping and FIX subscriptionMappings. Kama said they will not use new instruments for XAUUSD until indices, oil and futures are live.
-Next: Inald to finish verification by 10 Nov (3 of 4 checks pending; no result seen in Slack); Kate/William to finish CFD books and hedgers (staged 9 Nov, live at restart), then enable client routing.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793283834284999 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793964687617569 https://mahifx.slack.com/archives/C0B6FMU96G2/p1794226387016589
+status: open · since: 2026-10-29 · last: 2026-11-10
+State: Kama want futures and CFDs live. Kate set up a handful of indices on the pricing model and will set up books and hedgers; on 29 Oct she asked for instrument mappings and Ali listed the Z26/F27 contracts (DAX30, US100, US30, SI, USOIL, UKOIL) and said he will enable them on Mahi's connection so LP market data can be subscribed. On 5 Nov Kate asked for LP oil symbol mappings; Ali gave the index/oil list and the futures list (DAX30.Z26, GC.Z26, SI.Z26, US100.Z26, US30.Z26, US500.Z26, USOIL.Z26, UKOIL.F27), and Kate updated subscription mappings, custom instruments and the instrument list mapping that afternoon. Scope is the main LP for CFDs except oil (Velocity). Added to the contract at no extra cost (see pilot-commercials). On 6 Nov Inald put the new futures (DAX, NDX, DOW, SPX, XAG, XAU, USO, UKO: 8 families, 52 contracts) into the client DB under CHG-2611-X9VR (ZD #23780, approved by Liam); they go live only when kama-ln-trading-1 restarts (patch run Fri 22:00Z or the Sat 08:40Z reboot) and the change was marked implemented on 7 Nov, verification due by 10 Nov. Post-restart checks: all processes up, no pricer or hedger failing to start, no FUT-002 ERROR_NoPriceConversion; rollback SQL is on the ticket if needed before the Sun 22:00Z open. On 9 Nov William staged a further change, CHG-2611-G9MP (CFD book, hedger and channel base setup, no client routing; window 10:28-22:15Z, live at restart): that day he and Kate edited riskControlProfiles, markupProfiles, wideSpreadSuppression, hedging rules/executionMarkets, pool markets (pool restart pending), instrumentListMapping and FIX subscriptionMappings. Kama said they will not use new instruments for XAUUSD until indices, oil and futures are live. On 10 Nov Kate and William continued the CFD base setup (pool marketInstrumentOverrides, instrumentListMapping, FIX subscriptionMappings; pool restarts pending; pricers bounced to pick up benchmark norm on CFDs), and William staged CHG-2611-0KWV (futures P/W books, hedgers and channels, no client routing; window 11:49-14:00Z), approved 15:06Z.
+Next: Inald to finish verification by 10 Nov (3 of 4 checks pending; no result seen in Slack); Kate/William to finish CFD and futures books and hedgers (CHG-2611-G9MP, CHG-2611-0KWV), then enable client routing.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793283834284999 https://mahifx.slack.com/archives/C0B6FMU96G2/p1794226387016589 https://mahifx.slack.com/archives/C0B6FMU96G2/p1794323264577929
+
+### xau-execution-style — Broker vs Broker First, HFT book and markup
+status: open · since: 2026-09-21 · last: 2026-11-10
+State: A 21 Sep cancel burst (FOK/IOC MinQty handling) led to Kama moving all A_CLIENTS to Broker First (29 Sep). HFT flow got its own book and hedgers (30 Sep) with internalisation on the toxic HFT pool; $20/M markup on HFT and $10/M on A Book internalised flow was agreed on 1 Oct and set up via MultiChannelConfig on 2 Oct. On 30 Sep Kate asked Kama to turn off PXM sweep/boost so each A-book order arrives whole; Ali was confirming with PXM and no outcome is visible. On 15 Oct Kama asked for Broker (not Broker First) over high-impact news; Moe set twilight and roll flow to Broker. Execution rules cannot be day-specific; a bare '*' in counterparty criteria matches none. On 21 Oct FOK orders (21:00-23:00 UTC) expired as no HFT-channel LP accepted FOK; Kate set reference.marketSupport.FOK across the board. Kama staff edited distribution.executionRules repeatedly (22, 26, 27 Oct, 4 and 6 Nov, and four times on 10 Nov by Ali and a colleague; content not visible). The agreed $20/M and $10/M markups were removed on 6 Nov (see markup-removal).
+Next: Mahi to confirm whether news criteria can be added to execution rules.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0C1L6G37HN/p1793098819391439 https://mahifx.slack.com/archives/C0C1L6G37HN/p1794321220997669
 
 ### lp-pool-expansion — LP pool and hedging markets, KL/KS connectors
 status: open · since: 2026-09-21 · last: 2026-11-09
@@ -48,12 +54,6 @@ status: open · since: 2026-11-06 · last: 2026-11-06
 State: On 6 Nov Ali asked Mahi to check the reject reasons on GBPCAD at the market open the night before: Kama's logs show quote blocked and he thinks Scope was not quoting then (screenshot only). No reply yet.
 Next: Mahi to diagnose and reply.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793948581789389
-
-### xau-execution-style — Broker vs Broker First, HFT book and markup
-status: open · since: 2026-09-21 · last: 2026-11-06
-State: A 21 Sep cancel burst (FOK/IOC MinQty handling) led to Kama moving all A_CLIENTS to Broker First (29 Sep). HFT flow got its own book and hedgers (30 Sep) with internalisation on the toxic HFT pool; $20/M markup on HFT and $10/M on A Book internalised flow was agreed on 1 Oct and set up via MultiChannelConfig on 2 Oct. On 30 Sep Kate asked Kama to turn off PXM sweep/boost so each A-book order arrives whole; Ali was confirming with PXM and no outcome is visible. On 15 Oct Kama asked for Broker (not Broker First) over high-impact news; Moe set twilight and roll flow to Broker. Execution rules cannot be day-specific; a bare '*' in counterparty criteria matches none. On 21 Oct FOK orders (21:00-23:00 UTC) expired as no HFT-channel LP accepted FOK; Kate set reference.marketSupport.FOK across the board. Kama staff edited distribution.executionRules repeatedly (22, 26, 27 Oct, 4 and 6 Nov; content not visible). The agreed $20/M and $10/M markups were removed on 6 Nov (see markup-removal).
-Next: Mahi to confirm whether news criteria can be added to execution rules.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0C1L6G37HN/p1793098819391439 https://mahifx.slack.com/archives/C0C1L6G37HN/p1793973471096749
 
 ### fxedge-delays — FX Edge fill delays and cancels via PXM
 status: open · since: 2026-11-05 · last: 2026-11-05
@@ -91,35 +91,11 @@ State: Pilot ends 5 Nov (Will, 22 Oct). On the 29 Oct call Kama said they are ha
 Next: Will and Kate to review Nicole's draft (term length, volume tiers) and then send to Moe; settle which flow counts toward bands; sign before 5 Nov.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1789029069493129 https://mahifx.slack.com/archives/C0B6FMU96G2/p1793312572894189
 
-### compass-login-error — Jad hit a Compass login error
-status: open · since: 2026-10-26 · last: 2026-10-28
-State: At 00:57 UTC on 26 Oct Jad posted a screenshot of an error when logging in (page not visible); Shyam replied at 00:59 that he is checking. On 28 Oct 06:30 UTC Justin told Jad he is pushing a fix soon, with the dashboard down for a couple of minutes and no client or trading impact (presumably this issue; not stated). No confirmation from Jad yet.
-Next: Confirm Jad can log in after Justin's fix.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792976237806039 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793169011218019
-
-### hft-fx-pricing — HFT channel FX spreads and pool coverage
-status: open · since: 2026-10-20 · last: 2026-10-28
-State: On 20-21 Oct Ali saw .HFT FX spreads far too wide, then zero, because LIQUIDITY_POOL_HFT carried only XAUUSD. Resolved by design on 28 Oct: Kate set up a dedicated pricing model CLIENT_PRICE_HFT_LDN (same as the standard non-skewed insti model, but benchmarking spreads on SCOPE_TOXIC_KL instead of SCOPE_KL) with base spreads editable in Compass spread-config; Ali confirmed they can now construct the price from it. After the 28 Oct EOD restarts the HFT connections publish this pricing model instead of the liquidity pool.
-Next: Watch HFT FX spreads after the switch to CLIENT_PRICE_HFT_LDN; add remaining instruments to the HFT pool if still needed.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792484649892479 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793196612192619
-
 ### position-rec-nop — LP/client position reconciliation and NOP limits
 status: open · since: 2026-10-02 · last: 2026-10-27
 State: On 26-27 Oct Kate asked Kama for LP position snapshots over roll and at EOD; Jad said Kama's set-up cannot split positions into the Compass format, Kate said per-LP is enough since markets are grouped for NOP limits, and Jad sent the 27 Oct EOD file. Nathan compared it with Compass' roll snapshot: instruments missing from the file are flat at that LP (Jad confirmed; e.g. a -29k EURGBP adjustment), plus XPTUSD 86 at Scope; Nathan is applying the adjustments in Compass. Earlier unreconciled positions blocked the hedger (see nop-hedger-outage), so NOP limits were removed. Only apply NOP limits on reconciled positions.
 Next: Nathan to finish the Compass position adjustments; Kama to keep sending per-LP snapshots at EOD; agree when NOP limits are re-applied.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1791557796452229 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793145150334519
-
-### xau-open-rejects — XAUUSD market-open rejects on B book
-status: open · since: 2026-10-23 · last: 2026-10-23
-State: On 23 Oct Ali posted a screenshot of rejected XAUUSD orders at the market open on Kama's B book. Isaac first read it as an A-book order (Scope cancelled, client price off the limit so cancelled rather than internalised); Ali corrected that the B book is not routed to the LP, and Isaac saw no B-book cancels in Compass at that time and asked for the 012* order ID. Ali said he will share logs; none seen yet.
-Next: Ali to send logs / order IDs; Isaac to diagnose.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792735564284869 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792743155724969
-
-### eurgbp-rejects — Market rejections on EURGBP
-status: open · since: 2026-10-21 · last: 2026-10-21
-State: On 21 Oct Ali asked the team to look at market rejections on EURGBP (screenshot only; no reply yet).
-Next: Mahi to diagnose and reply.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792566675726999
 
 ### nop-hedger-outage — 19 Oct unhedged XAUUSD, SOR crash, VaR alerting
 status: open · since: 2026-10-19 · last: 2026-10-21
@@ -187,11 +163,34 @@ State: Kama pass limit-order deviation in tag 10001, which is not in Mahi's FIX 
 Next: Kate to decide whether Compass can honour limit plus/minus deviation (tag 10001).
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790332508870719 https://mahifx.slack.com/archives/C0B6FMU96G2/p1790598299904109
 
+### compass-login-error — Jad hit a Compass login error
+status: closed · since: 2026-10-26 · last: 2026-10-28 · closed: 2026-11-11
+State: Jad's 26 Oct login error; Justin pushed a fix on 28 Oct. No further reports; assumed resolved.
+Next: Confirm Jad can log in after Justin's fix.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792976237806039 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793169011218019
+
+### hft-fx-pricing — HFT channel FX spreads and pool coverage
+status: closed · since: 2026-10-20 · last: 2026-10-28 · closed: 2026-11-11
+State: Wide HFT FX spreads (20-21 Oct) fixed by design: dedicated pricing model CLIENT_PRICE_HFT_LDN with editable base spreads, published by the HFT connections after the 28 Oct EOD restarts; Ali confirmed. No complaints since.
+Next: Watch HFT FX spreads after the switch to CLIENT_PRICE_HFT_LDN; add remaining instruments to the HFT pool if still needed.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792484649892479 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793196612192619
+
+### xau-open-rejects — XAUUSD market-open rejects on B book
+status: closed · since: 2026-10-23 · last: 2026-10-23 · closed: 2026-11-11
+State: Ali's 23 Oct screenshot of rejected XAUUSD orders at the open on the B book; Isaac saw no B-book cancels and asked for the 012* order ID. No logs since; no activity since 23 Oct, assumed resolved.
+Next: Ali to send logs / order IDs; Isaac to diagnose.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792735564284869 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792743155724969
+
+### eurgbp-rejects — Market rejections on EURGBP
+status: closed · since: 2026-10-21 · last: 2026-10-21 · closed: 2026-11-11
+State: Ali's 21 Oct screenshot of EURGBP market rejections; no reply or follow-up since; assumed resolved.
+Next: Mahi to diagnose and reply.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792566675726999
+
 ### mas-xau-removal — MAS Markets pulled (XAUUSD 16 Oct, whole LP 21 Oct)
 status: closed · since: 2026-10-16 · last: 2026-10-21 · closed: 2026-11-06
 State: MAS removed from XAUUSD hedging 16 Oct (rejecting market orders); Kama closed the account 21 Oct and Isaac disabled MAS from all pools and hedging. No activity since.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792154269472349 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792586254793539
-
 ## Arc
 - 2026-06-02 — Deal accepted; pilot agreement signed 2026-06-08
 - 2026-08-05 — B Book flow live on Compass (pricing and execution)
