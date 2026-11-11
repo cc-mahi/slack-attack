@@ -16,7 +16,7 @@ contacts:
   - {name: "Lukas Sedlacek", role: "Fintokei/Purple Technology risk; suspicious-client reviews"}
   - {name: "Kristof Heger", role: "Fintokei/Purple Technology; order-fill queries"}
   - {name: "Roman Komurka", role: "Fintokei/Purple Technology; pricing/skew opinions", confidence: low}
-last_catchup: 2026-11-10T08:16:59Z
+last_catchup: 2026-11-11T08:15:27Z
 status: active
 ---
 
@@ -68,10 +68,10 @@ Next: ask Kate whether Zendesk 23102 (BMSL timezone overrides, needed release/26
 Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1791483333881419 https://mahifx.slack.com/archives/C08QWKFARDL/p1791543779812879 https://mahifx.slack.com/archives/C08R694QVNX/p1791866232732339
 
 ### skew-arb-defence — arbitrageurs exploiting skew flicker (GBPJPY, XBT)
-status: watching · since: 2026-09-30 · last: 2026-10-02
-State: XBT FI PnL drops on 2026-09-30 came from oversized skew (LSB $5 wide pushed to $17+); Shyam cut floor 500 to 10 and ceiling 2000 to 500 pips on IFMS and harmonic. Fintokei risk (Lukas) reported accounts 6103016 and 6104366 farming GBPJPYz flicker; William Denny confirmed an arber had influenced the neuron signal, switched GBPJPY neuron to harmonics (2026-10-01) and is reducing arber influence on signals. Arbers were auto-classified but stayed on the skewed internal price because executing them on the continuity pool adds slippage; Lukas first asked for both accounts to go to the pool, then he and Roman Komurka agreed (2026-10-02) to try the signal change plus monitoring first. The XBT arber got a fresh tag on each challenge stage (accounts 6094087, 6098579, 6099739; tags do not carry over), so Shyam whitelisted 6099739 as an arber for Funded LS Clients. Andrew Morgan says arb detection/defence should be per instrument; his follow-up fed this into /skew-health-check (adaptive switching over signals by recent skew PnL) and a research backlog item, with no live change or backtest launched.
+status: watching · since: 2026-09-30 · last: 2026-11-10
+State: XBT FI PnL drops on 2026-09-30 came from oversized skew (LSB $5 wide pushed to $17+); Shyam cut floor 500 to 10 and ceiling 2000 to 500 pips on IFMS and harmonic. Fintokei risk (Lukas) reported accounts 6103016 and 6104366 farming GBPJPYz flicker; William Denny confirmed an arber had influenced the neuron signal, switched GBPJPY neuron to harmonics (2026-10-01) and is reducing arber influence on signals. Arbers were auto-classified but stayed on the skewed internal price because executing them on the continuity pool adds slippage; Lukas first asked for both accounts to go to the pool, then he and Roman Komurka agreed (2026-10-02) to try the signal change plus monitoring first. The XBT arber got a fresh tag on each challenge stage (accounts 6094087, 6098579, 6099739; tags do not carry over), so Shyam whitelisted 6099739 as an arber for Funded LS Clients. Andrew Morgan says arb detection/defence should be per instrument; his follow-up fed this into /skew-health-check (adaptive switching over signals by recent skew PnL) and a research backlog item, with no live change or backtest launched. On 2026-11-10 William bounced the signal process and pricer1/2, pricerLS1/2 and pricerLSB1/2 to pick up arbClassificationMultiplier:0 on the FM signals, so arb-classified counterparties no longer influence skew.
 Next: William to monitor skew PnL and verify arbing is reduced (continuity-pool execution is the fallback if not); William asked for per-trade skew amount to be persisted to yield profiles (no answer seen).
-Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1790733359556629 https://mahifx.slack.com/archives/C08QWKFARDL/p1790856065770089 https://mahifx.slack.com/archives/C08QWKFARDL/p1790941538452089?thread_ts=1790856065.770089 https://mahifx.slack.com/archives/C08R694QVNX/p1790952627862029?thread_ts=1790733359.556629
+Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1790733359556629 https://mahifx.slack.com/archives/C08QWKFARDL/p1790856065770089 https://mahifx.slack.com/archives/C08QWKFARDL/p1790941538452089?thread_ts=1790856065.770089 https://mahifx.slack.com/archives/C08R694QVNX/p1794321059393199
 
 ### no-price-cancels — orders cancelled when LP feed drops; TTL and SL/TP stuck in MT5
 status: watching · since: 2026-09-07 · last: 2026-10-02
