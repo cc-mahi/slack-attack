@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-11-10T08:18:25Z
+last_catchup: 2026-11-11T08:16:35Z
 status: active
 ---
 
@@ -32,6 +32,12 @@ On 10-21 the NY retail FX book moved to a 500k G8 inventory cap with Friday flat
 GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). Toa reset Mahi's last-look/tolerance, so TOA_CHI went back into XAU hedging on 11-03. Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
+
+### gts-hrp-nwm — HRP LP sessions wound down in favour of NWM/NWPB
+status: open · since: 2026-10-27 · last: 2026-11-11
+State: On 11-11 Levi asked how to see the NY hedging pools to shift venues from HRP to NWM; Daria listed them (broker pool plus Arb, Crypto hybrid, FX hybrid, CFD hybrid) and Levi sent a change list: replace HRP PB markets with NWPB for HSBC, UBS, NWM (and JLQD on crypto/FX hybrid), excluding Jane St (awaiting NWM sessions), keeping HSBC on HRP for metals and HSBC+UBS only on HRP for XPT/XPD (not supported on NWM), and dropping the NWPB minimums (FX 250k to 1k, XAUUSD 50 to 1, XAGUSD 15k to 50; Levi confirmed, costs were reduced). Daria will apply them with a few EOD restarts and confirm. Earlier: on 10-27 Levi found NY Compass was sending orders to GTS_HRP (GTSX_RCTV_HRP_1/2), no longer active in HRP; 13 trades (118 oz XAUUSD exposure if busted) executed at GTS via NWM, with PB drop copies split between HRP and NWM. Argamon chose to honour them and book manually at NWM. Compass keeps them under GTSX_RCTV_HRP_1 (risk and PnL unaffected), so per-LP reconciliation against NWM needs a mapping. Shyam removed GTS HRP from the NY pools and hedgers; there is no GTS via NWM market in Compass. Separately, Levi's GTS_NW_LDN pricing in LD Compass was fixed by Daria on the back end. The wind-down is wider than GTS: on 10-28 Shyam replaced JPM_RCTV_HRP_1 with JPM_RCTV_NWPB_1 in all hedger pools, then removed it from brokering pools and moved pricing over (continuity pool for EURHUF was still listed as holding it). For HSBC, only the _1 feeds are in pools (HRP_1 in all HRP hedger, brokering, continuity pools and pricing; NWPB_1 in the NatWest brokering pool only); Levi will decomm the unused _2 feeds and turn off the HRP feed, so HSBC pricing moves to NWPB too. Separately, on 10-27 Tom could not see HSBC prices in Compass during an HRP-requested HSBC test; Cameron Hughes said the market data session will not resume until reconnect, so HSBC market data processes are to be restarted at EOD (Tom confirmed ARGAMON_SW_HRP/_2 serve both MD and orders).
+Next: Daria to apply the NY pool changes and confirm after EOD restarts; Argamon to say whether they want a GTS via NWM market set up in Compass; Mahi to restart HSBC market data processes at EOD and confirm HSBC prices stream.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793113766371149 https://mahifx.slack.com/archives/C083GP5F1CL/p1793166381823569 https://mahifx.slack.com/archives/C083GP5F1CL/p1794365783062669
 
 ### retail-leverage-risk — Argamon wants 500:1 leverage and to hold more risk
 status: open · since: 2026-08-31 · last: 2026-11-10
@@ -86,12 +92,6 @@ status: open · since: 2026-08-17 · last: 2026-11-01
 State: CLIENT_PRICE_INSTI_LDN has repeatedly gone indicative (EBS_IMP_CHI removal in the EBS decommission on 2026-08-17; index pricing during roll). James says it is acceptable for this model to be indicative (it alone has no reference-price fallback, deliberately); CBOE liquidity may be too thin for stable index pricing and Elan was to ask CBOE. On 2026-10-15 a pricer restart alert showed a recent change to LDN pricerInsti reference markets left CME FX/metals futures (6AZ6, GCZ6, MGCZ6, SIZ6 etc.) with no reference markets, though no base spreads exist for them on LDN/CHI insti anyway; Lee says they are not published to clients. On 11-01 Daria restarted the Argamon LDN prices and pricerInsti1 again alarmed (unable to create 12 of 35 pricing models, all no-reference-price markets); she asked whether those instruments should be removed.
 Next: Toa/Nathan to decide whether to remove the unpriced instruments or suppress the alert.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793571986506049
-
-### gts-hrp-nwm — HRP LP sessions wound down in favour of NWM/NWPB
-status: open · since: 2026-10-27 · last: 2026-10-28
-State: On 10-27 Levi found NY Compass was sending orders to GTS_HRP (GTSX_RCTV_HRP_1/2), no longer active in HRP; 13 trades (118 oz XAUUSD exposure if busted) executed at GTS via NWM, with PB drop copies split between HRP and NWM. Argamon chose to honour them and book manually at NWM. Compass keeps them under GTSX_RCTV_HRP_1 (risk and PnL unaffected), so per-LP reconciliation against NWM needs a mapping. Shyam removed GTS HRP from the NY pools and hedgers; there is no GTS via NWM market in Compass. Separately, Levi's GTS_NW_LDN pricing in LD Compass was fixed by Daria on the back end. The wind-down is wider than GTS: on 10-28 Shyam replaced JPM_RCTV_HRP_1 with JPM_RCTV_NWPB_1 in all hedger pools, then removed it from brokering pools and moved pricing over (continuity pool for EURHUF was still listed as holding it). For HSBC, only the _1 feeds are in pools (HRP_1 in all HRP hedger, brokering, continuity pools and pricing; NWPB_1 in the NatWest brokering pool only); Levi will decomm the unused _2 feeds and turn off the HRP feed, so HSBC pricing moves to NWPB too. Separately, on 10-27 Tom could not see HSBC prices in Compass during an HRP-requested HSBC test; Cameron Hughes said the market data session will not resume until reconnect, so HSBC market data processes are to be restarted at EOD (Tom confirmed ARGAMON_SW_HRP/_2 serve both MD and orders).
-Next: Argamon to say whether they want a GTS via NWM market set up in Compass; Mahi to restart HSBC market data processes at EOD and confirm HSBC prices stream.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793113766371149 https://mahifx.slack.com/archives/C083GP5F1CL/p1793166381823569
 
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
 status: open · since: 2026-07-21 · last: 2026-10-28
