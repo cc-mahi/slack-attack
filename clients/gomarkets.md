@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-10T08:15:15Z
+last_catchup: 2026-11-11T08:15:27Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### compass-ui-asks — Go ops asks on Compass/Echo UI (audit search, multi-value filters)
+status: open · since: 2026-11-05 · last: 2026-11-10
+State: On 2026-11-10 Erik posted again that he still cannot see history (screenshot, likely the same audit search problem; not stated) and Isaac replied Mahi will look into it. On 2026-11-05 Erik reported the Compass configuration audit search returned nothing for Oct/Nov config edits even after a cache clear (Daria could see edits on the same link; Erik sent a screenshot and Daria said she would look again). Erik also asked for comma-delimited multi-value input in Echo's counterparty filter (28 CP ids); Nathan pointed him to the new Compass yield profiles tab, which supports it.
+Next: Mahi (Isaac, Daria) to investigate why Erik still sees no config history.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1793908880645829 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794315419688219
 
 ### nzdusd-open-spread — NZDUSD too tight at the Monday open after Finalto
 status: open · since: 2026-11-09 · last: 2026-11-09
@@ -39,12 +45,6 @@ status: open · since: 2026-11-06 · last: 2026-11-06
 State: Will Carter's corrected NFP read (13:30-13:33 UTC, 2026-11-06): LR $2.3k on $48M ($48/M) across Go B_CLIENTS books, skew flat, but PSM only ~$245 and almost all on XAUUSD ($239); zero on majors, so either PSM is not wired there or did not fire into the release. The first post showed inflated figures (duplicate yieldprofiles rows, yen counted as dollars), corrected in-thread. Internal concern is the pitch that event minutes are where PSM earns for other clients.
 Next: Run /psm-health-check on Go (not seen done).
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1793977091543839 https://mahifx.slack.com/archives/CNF3WPNSK/p1793980102512179
-
-### compass-ui-asks — Go ops asks on Compass/Echo UI (audit search, multi-value filters)
-status: open · since: 2026-11-05 · last: 2026-11-05
-State: On 2026-11-05 Erik reported the Compass configuration audit search returned nothing for Oct/Nov config edits even after a cache clear (Daria could see edits on the same link; Erik sent a screenshot and Daria said she would look again). Erik also asked for comma-delimited multi-value input in Echo's counterparty filter (28 CP ids); Nathan pointed him to the new Compass yield profiles tab, which supports it.
-Next: Daria to investigate the empty audit search for Erik.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1793908880645829 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793911054407749
 
 ### ig-demo-stream — New IG DEMO price stream for latency comparison
 status: open · since: 2026-10-22 · last: 2026-11-04
