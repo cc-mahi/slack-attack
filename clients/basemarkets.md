@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-11-10T08:15:15Z
+last_catchup: 2026-11-11T08:16:36Z
 status: active
 ---
 
@@ -22,6 +22,13 @@ status: active
 Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, whitelisted Base's IPs 2026-10-28; swapping one IP at Base's 2026-11-02 request, still pending after Alex chased 2026-11-06). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
 
 ## Streams
+
+### tegis-mt5-api — Tegis moving to MT5 API trading with Mahi price feed only
+status: open · since: 2026-04-29 · last: 2026-11-10
+State: Direct-API ask began 2026-04-29 (Alex asked about piping trades off MT4/MT5; Mahi has FIX but no margin or credit checks). Call held 2026-09-04: Tegis wanted off the MT5 EA/copy-trading setup, Mahi gave no timelines. On 2026-10-14 Alex said Tegis will trade via MT5's API (MT5 handles balances, rejections, no coverage account) and need only pricing from Mahi. Kate Stagg replied Mahi can give a FIX 4.4 price connection plus a conformance environment to build against; internally she asked whether Tegis could take prices from MT5's API since Mahi has no API clients today. Tegis's proposed workflow (FIX 4.4 pricing to its algo, orders via MT5 API into a Base MT5 account, hedging via Mahi into LMAX as today) was posted in the client channel and Kate Stagg accepted it 2026-10-20: the only change on Mahi's side is the new pricing connection. Kate Stagg posted the FIX pricing connection details in the client channel on 2026-10-21 (credentials are in that message; not copied here). FastMT (Aytugan) also asked whether the Mahi gateway executes orders initiated from MT5 Manager (Dealer); Kate Stagg confirmed it is supported.
+Whitelisting: Tegis first had connection timeouts 2026-10-27; Alex gave two static IPs, Kate Stagg confirmed them dedicated and Mahi whitelisted on port 9022 on 2026-10-28. On 2026-11-02 Alex asked to drop one IP (no longer in use) and add a new one, and chased on 2026-11-04 ("this should be final"); Kate Stagg acknowledged 2026-11-04 and will request it and confirm; Alex chased again 2026-11-06 asking to be told when the whitelisting is done. On 2026-11-10 Kate Stagg asked Alex to get a traceroute from Tegis (109.161.57.211) to Mahi's pricing endpoint, suggesting connectivity is still failing; no confirmation yet that Tegis is connected and receiving prices.
+Next: Alex/Tegis to supply the traceroute; Mahi (Kate Stagg) to swap the whitelisted IP and confirm; Tegis to connect to the price feed.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619 https://mahifx.slack.com/archives/C09D8V41JAG/p1788345375042849 https://mahifx.slack.com/archives/C09D8V41JAG/p1792572631430259 https://mahifx.slack.com/archives/C09D8V41JAG/p1794318831741919
 
 ### partial-ab-book-split — Partial A / partial B book risk split by counterparty tag
 status: open · since: 2026-10-29 · last: 2026-11-02
@@ -40,13 +47,6 @@ status: open · since: 2026-10-21 · last: 2026-10-22
 State: Nathan Burch told Base on 2026-10-21 that two LMAX_2 fills (AUDUSD sell 7,000 on 10-21, XAGUSD buy 500oz on 10-15) did not come from Compass orders, while Compass shows both instruments flat at A_HOUSE with offsetting SCOPE_B positions. Kate (Base) replied 2026-10-22 that the trades were placed outside Compass and that LMAX_2 and SCOPE_B both hold zero in both instruments. Compass has not yet been adjusted to match.
 Next: Mahi (Nathan Burch / Kate Stagg) to correct Compass positions for AUDUSD and XAGUSD at LMAX_2 and SCOPE_B.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792620629451529 https://mahifx.slack.com/archives/C09D8V41JAG/p1792653037394839
-
-### tegis-mt5-api — Tegis moving to MT5 API trading with Mahi price feed only
-status: open · since: 2026-04-29 · last: 2026-11-06
-State: Direct-API ask began 2026-04-29 (Alex asked about piping trades off MT4/MT5; Mahi has FIX but no margin or credit checks). Call held 2026-09-04: Tegis wanted off the MT5 EA/copy-trading setup, Mahi gave no timelines. On 2026-10-14 Alex said Tegis will trade via MT5's API (MT5 handles balances, rejections, no coverage account) and need only pricing from Mahi. Kate Stagg replied Mahi can give a FIX 4.4 price connection plus a conformance environment to build against; internally she asked whether Tegis could take prices from MT5's API since Mahi has no API clients today. Tegis's proposed workflow (FIX 4.4 pricing to its algo, orders via MT5 API into a Base MT5 account, hedging via Mahi into LMAX as today) was posted in the client channel and Kate Stagg accepted it 2026-10-20: the only change on Mahi's side is the new pricing connection. Kate Stagg posted the FIX pricing connection details in the client channel on 2026-10-21 (credentials are in that message; not copied here). FastMT (Aytugan) also asked whether the Mahi gateway executes orders initiated from MT5 Manager (Dealer); Kate Stagg confirmed it is supported.
-Whitelisting: Tegis first had connection timeouts 2026-10-27; Alex gave two static IPs, Kate Stagg confirmed them dedicated and Mahi whitelisted on port 9022 on 2026-10-28. On 2026-11-02 Alex asked to drop one IP (no longer in use) and add a new one, and chased on 2026-11-04 ("this should be final"); Kate Stagg acknowledged 2026-11-04 and will request it and confirm; Alex chased again 2026-11-06 asking to be told when the whitelisting is done. No confirmation yet that Tegis is connected and receiving prices.
-Next: Mahi (Kate Stagg) to swap the whitelisted IP and confirm; Tegis to connect to the price feed.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619 https://mahifx.slack.com/archives/C09D8V41JAG/p1788345375042849 https://mahifx.slack.com/archives/C09D8V41JAG/p1792572631430259 https://mahifx.slack.com/archives/C09D8V41JAG/p1793946486202199
 
 ### group-additions-1019 — Base requests for new A/B book MT groups in Compass config
 status: open · since: 2026-10-19 · last: 2026-10-21
@@ -72,26 +72,26 @@ State: Shyam Hari saw SYNAPSE_MT4 disconnected on 2026-10-11; Kate (Base) confir
 Next: Base to confirm nothing still needs the MT4 bridge; then Mahi removes both connections.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791755009916399 https://mahifx.slack.com/archives/C09D8V41JAG/p1791925041012299
 
-### brokered-xau-slippage — Slippage on brokered XAU fills; markup removed
-status: open · since: 2026-10-02 · last: 2026-10-07
-State: XBTUSD orders were cancelled 2026-10-02 because brokered flow priced outside the limit; fixed with local crypto in LIQUIDITY_POOL_LDN and a temporary A BOOK rule. On 2026-10-06 Kate (Base) complained of slippage on small XAU trades (200479). Kate Stagg's analysis of 2,096 brokered fills found median $29/M worse than published, mostly the $20/M brokering fee; LMAX_2 was added to LIQUIDITY_POOL_LDN, liquidityPoolSOR1 bounced, and Base removed the $20/M markup (replay: median $0/M, ~$7.8k/week back to clients). Price improvement still off on A BOOK profiles.
-Next: Kate Stagg to check real fills after Athena catches up and again after a week (about 2026-10-14); no result posted yet.
-Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790957952350349 https://mahifx.slack.com/archives/C09D8V41JAG/p1791281610611709 https://mahifx.slack.com/archives/C09D05EPCTV/p1791385257726699
-
-### xau-hedging-tuning — A book XAU hedging losses and hedger retuning
-status: open · since: 2026-08-10 · last: 2026-10-08
-State: Recurring A book PnL drops from large internalised XAU tickets (111319 $6k 2026-09-18; 111125 ~$8.7k 2026-09-29 with 1,960oz in one second; ~$3k and ~$4k 2026-10-08), driven by slow hedging. Fixes so far: LMAX_2 brought in as primary venue beside SCOPE_B (Scope kept as backstop after Scope blacklisting/cancel problems in August), dynamic execution rules enabled for Broker-classified tag, VAR-CLEARANCE-OVERNIGHT-LARGE rule (50oz floor), and on 2026-10-08 the SCOPE_B static adjustment removed, a 30s dynamic fill-ratio adjustment added and 10 pip tolerance on the overnight rule. 111125 whitelisted to A BOOK Broker list as a stopgap. Monitoring.
-Next: Watch overnight XAU unwinds after the 2026-10-08 retune; decide whether to un-whitelist 111125.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1786349367512409 https://mahifx.slack.com/archives/C09D05EPCTV/p1790644032875939 https://mahifx.slack.com/archives/C09D05EPCTV/p1791454047171069
-
 ### a-book-hedger-netting — Base switches A book hedger off while netting LP positions
 status: watching · since: 2026-09-04 · last: 2026-10-15
 State: Kate (Base) repeatedly turns the A book hedger off to net LP positions manually (2026-09-14, 09-22, 10-09, 10-15; back on within ~20 minutes on 10-15). Manual hedge trades through LP GUIs bypass Compass, so positions then need correcting in Compass (SCOPE_B buy 510 / LMAX_2 sell 407 XAU on 09-22). On 2026-09-22 Base asked to route all A book hedging to LMAX_2.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790055333398639 https://mahifx.slack.com/archives/C09D8V41JAG/p1792073335429129
 
+### xau-hedging-tuning — A book XAU hedging losses and hedger retuning
+status: watching · since: 2026-08-10 · last: 2026-10-08
+State: Downgraded to watching (no activity since 2026-10-08). Recurring A book PnL drops from large internalised XAU tickets (111319 $6k 2026-09-18; 111125 ~$8.7k 2026-09-29 with 1,960oz in one second; ~$3k and ~$4k 2026-10-08), driven by slow hedging. Fixes so far: LMAX_2 brought in as primary venue beside SCOPE_B (Scope kept as backstop after Scope blacklisting/cancel problems in August), dynamic execution rules enabled for Broker-classified tag, VAR-CLEARANCE-OVERNIGHT-LARGE rule (50oz floor), and on 2026-10-08 the SCOPE_B static adjustment removed, a 30s dynamic fill-ratio adjustment added and 10 pip tolerance on the overnight rule. 111125 whitelisted to A BOOK Broker list as a stopgap. Monitoring.
+Next: Watch overnight XAU unwinds after the 2026-10-08 retune; decide whether to un-whitelist 111125.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1786349367512409 https://mahifx.slack.com/archives/C09D05EPCTV/p1790644032875939 https://mahifx.slack.com/archives/C09D05EPCTV/p1791454047171069
+
+### brokered-xau-slippage — Slippage on brokered XAU fills; markup removed
+status: watching · since: 2026-10-02 · last: 2026-10-07
+State: Downgraded to watching (no activity since 2026-10-07). XBTUSD orders were cancelled 2026-10-02 because brokered flow priced outside the limit; fixed with local crypto in LIQUIDITY_POOL_LDN and a temporary A BOOK rule. On 2026-10-06 Kate (Base) complained of slippage on small XAU trades (200479). Kate Stagg's analysis of 2,096 brokered fills found median $29/M worse than published, mostly the $20/M brokering fee; LMAX_2 was added to LIQUIDITY_POOL_LDN, liquidityPoolSOR1 bounced, and Base removed the $20/M markup (replay: median $0/M, ~$7.8k/week back to clients). Price improvement still off on A BOOK profiles.
+Next: Kate Stagg to check real fills after Athena catches up and again after a week (about 2026-10-14); no result posted yet.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790957952350349 https://mahifx.slack.com/archives/C09D8V41JAG/p1791281610611709 https://mahifx.slack.com/archives/C09D05EPCTV/p1791385257726699
+
 ### admin-server-reboots — Admin server failing to return after weekend restarts
-status: watching · since: 2026-06-07 · last: 2026-09-07
-State: Admin server did not come back after weekend restarts on 2026-06-07, 2026-08-16 and 2026-09-06 (Beeks tickets; the 09-06 case needed a previous-kernel boot and the new kernel may fail again). PricerVIP1/2 were also restored after the 09-06 restarts. No fresh outage since 2026-09-07.
+status: closed · since: 2026-06-07 · last: 2026-09-07 · closed: 2026-11-11
+State: Closed: no activity since 2026-09-07; assumed resolved. Admin server did not come back after weekend restarts on 2026-06-07, 2026-08-16 and 2026-09-06 (Beeks tickets; the 09-06 case needed a previous-kernel boot and the new kernel may fail again). PricerVIP1/2 were also restored after the 09-06 restarts. No fresh outage since 2026-09-07.
 Next: Dev-infra to address the kernel boot failure; Beeks reboot autonomy procedure (Liam Cordelle) not confirmed.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359 https://mahifx.slack.com/archives/C09D05EPCTV/p1788787318138619
 
