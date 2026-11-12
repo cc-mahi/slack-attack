@@ -21,17 +21,31 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-11-11T08:15:26Z
+last_catchup: 2026-11-12T08:14:50Z
 status: active
 ---
 
 ## Now
-Reactive price feeds (BAML, DB, Jane Street, Jump, Nomura) went silent 2026-11-09 15:53-17:05Z with sessions still logged on; Mahi added stale-price alerts for several LPs 2026-11-10. Newest: the STRDPARTNER order session sat disabled from the Saturday 2026-11-07 open until Nathan re-enabled it Monday 2026-11-09 (sequence-reset logon race, no alert fired); RCA follow-up owed. Internally, NFP showed no LR and weak skew on B_CLIENTS, and an adaptive-skew sim needs an owner.
+Newest: signal-process errors recurred 2026-11-12 (processes restored, dev fix pending), and an institutional client's 500ms order-expiry complaint found no Mahi-side cause. Reactive price feeds (BAML, DB, Jane Street, Jump, Nomura) went silent 2026-11-09 15:53-17:05Z with sessions still logged on; Mahi added stale-price alerts for several LPs 2026-11-10. Newest: the STRDPARTNER order session sat disabled from the Saturday 2026-11-07 open until Nathan re-enabled it Monday 2026-11-09 (sequence-reset logon race, no alert fired); RCA follow-up owed. Internally, NFP showed no LR and weak skew on B_CLIENTS, and an adaptive-skew sim needs an owner.
 Weekend restarts caused the 2026-10-17 hedger outage (~2.5h) and 391 cancelled orders at the Sunday open; RCA / dev ticket exist.
 Exinity is mid-migration of its LP stack from Hidden Road to Wedbush LPs (top-up/IOC mechanics, Velocity and Nomura going live) and is chasing a run of pricing-spike, book-break and alerting asks.
 Open on Mahi: per-book PnL-drop alerts, XAU position realignment using the CLIENTS book, the TradersHub A-book move and an XCUUSD spread decision; Compass 26.4 (2026-10-24/25) caused signalProcessFI1 overflows, and weekend reliability matters as Exinity plans weekend crypto pricing.
 
 ## Streams
+
+### signal-process-alerts — Alerts on signal processes, no execution impact
+status: open · since: 2026-11-05 · last: 2026-11-12
+State: On 2026-11-12 ~04:34Z Samuel reported signal errors again (screenshot); Nathan brought both processes back up by 04:45Z and said at 04:51Z that Mahi knows the cause and dev is working on a fix. On 2026-11-05 ~04:49Z Mukhammad asked Mahi to check a set of alerts (screenshot, not readable). Daria said they should be fixed shortly and, asked about execution impact, said there was no noticeable trading impact because these processes produce signals and are not in the execution pipeline. Which processes alerted is not stated; may relate to the 2026-10-26 signalProcessFI1 overflow. On 2026-11-06 ~01:30Z Mukhammad reported another error (screenshot, not readable); Nathan restored the process within minutes.
+Next: Mahi dev to deliver the fix for the recurring signal-process errors and tell Samuel the cause.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1793928885999739 https://mahifx.slack.com/archives/C0456LSHQQK/p1794458029345139 https://mahifx.slack.com/archives/C0456LSHQQK/p1794459060239709
+
+
+### insti-500ms-expiry — Institutional client sees ~500ms before orders expire
+status: open · since: 2026-11-11 · last: 2026-11-11
+State: Louie relayed an institutional client's complaint of a 500ms delay on almost all orders (XAUUSD limit orders via FIX, three examples 2026-11-11 14:37-15:08Z). Rory found nothing on Mahi's side adding 500ms: the first order arrived 14:37:26.633 and was cancelled at .635 (limit through price, 20ms last look), so the 'expired' the client saw came ~500ms later; the other two never appear in Mahi logs. Louie will check them on Exinity's side.
+Next: Louie to check the 14:40 and 15:08 orders on Exinity's side.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1794419081666329 https://mahifx.slack.com/archives/C0456LSHQQK/p1794422570877219
+
 
 ### reactive-feed-gap — Reactive LP price feeds stopped, no alerting
 status: open · since: 2026-11-10 · last: 2026-11-10
@@ -67,13 +81,6 @@ Next: Mahi to confirm the 5dp pool rounding is live after the weekend reboot.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793934874890119 https://mahifx.slack.com/archives/C0456LSHQQK/p1793937644348509
 
 
-### signal-process-alerts — Alerts on signal processes, no execution impact
-status: open · since: 2026-11-05 · last: 2026-11-06
-State: On 2026-11-05 ~04:49Z Mukhammad asked Mahi to check a set of alerts (screenshot, not readable). Daria said they should be fixed shortly and, asked about execution impact, said there was no noticeable trading impact because these processes produce signals and are not in the execution pipeline. Which processes alerted is not stated; may relate to the 2026-10-26 signalProcessFI1 overflow. On 2026-11-06 ~01:30Z Mukhammad reported another error (screenshot, not readable); Nathan restored the process within minutes.
-Next: Mahi (Daria) to confirm the alerts are cleared.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1793928885999739
-
-
 ### strd-feed-drops — STRD connector and pricing drop-outs
 status: open · since: 2026-10-28 · last: 2026-11-06
 State: On 2026-11-06 Louie reported offline XAUUSD orders at 14:09Z on ExinitySTRD-Orders; Rory found they reached Mahi's gateway 3.2-4.0s after their SendingTime, then acked and filled within ~40ms with other sessions normal, so the delay arose before the gateway and Mahi is still looking into the cause (Louie accepted). On 2026-11-06 Mahi added USDTHB to the reference-price override after it stopped ticking for ~10 min (see pricing-spikes-widening). Matt's 2026-10-28 USDJPY no-pricing report was withdrawn within a minute. At 02:05Z on 2026-10-29 Samuel reported errors (screenshot, not readable); Nathan said all was good and Mahi's team was already bringing processes up, but the cause is still under investigation.
@@ -83,14 +90,14 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793222374723979 https://ma
 
 ### pricing-spikes-widening — Spiky and wide pricing complaints
 status: open · since: 2026-09-01 · last: 2026-11-06
-State: On 2026-11-06 ~20:35Z Christian reported USDTHB not ticking for almost 10 min with poor pricing; Cameron Hughes added USDTHB to the referencePriceMarketSelectors override (internal note 20:51Z) and asked Christian to recheck, no reply seen. Sep 1 Wagyu spikes traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS. US30 widening (2026-09-23) was MWMS tracking Velocity, fixed. Cross spikes got order-book rounding and lower skew ceilings (2026-09-25). EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. A 2026-09-29 Wedbush/Invast feed stoppage resumed after ~3 hours. On 2026-10-27 Christian reported poor LP pricing 2026-10-26 20:45-22:00; Kate found the market itself was wide over the NY rollover (GBPCHF LPs 25-30 pips 21:00-22:00 UTC, Jane Street, Jump, Barclays, DB, HSBC and Velocity not quoting, normal by ~22:05), Mahi stayed firm, not indicative, and the mid held steady.
+State: On 2026-11-06 ~20:35Z Christian reported USDTHB not ticking for almost 10 min with poor pricing; Cameron Hughes added USDTHB to the referencePriceMarketSelectors override (internal note 20:51Z) and asked Christian to recheck, no reply seen. Sep 1 Wagyu spikes traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS. EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. On 2026-10-27 Christian reported poor LP pricing 2026-10-26 20:45-22:00; Kate found the market itself was wide over the NY rollover (GBPCHF LPs 25-30 pips 21:00-22:00 UTC, several LPs not quoting, normal by ~22:05); Mahi stayed firm and the mid held.
 Next: Christian to confirm USDTHB now ticks; Exinity to say whether spikiness persists and to check rollover width with Wedbush/LPs (and why Barclays, DB, HSBC, Velocity don't stream GBPCHF) or send a timestamp; Wedbush-in-MWMS backtest result unconfirmed.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788299416706969 https://mahifx.slack.com/archives/C0456LSHQQK/p1793100609912989 https://mahifx.slack.com/archives/C0456LSHQQK/p1793127985564209 https://mahifx.slack.com/archives/C0456LSHQQK/p1793997336044029
 
 
 ### order-reject-queries — Reject and fill investigations
 status: open · since: 2026-09-21 · last: 2026-11-04
-State: Earlier items: the 2026-10-01 quote disconnect was downstream in Exinity's bridge; the 2026-10-06 CL1USD take-profit rejects were indicative pricing after the LP stopped quoting (Mahi holds no pending TP/SL, so the bridge must retry); Christian's 2026-10-09 FIX-log help request awaits his reply; Mukhammad's 2026-10-02 XAU rejects had no outcome seen. On 2026-10-15 Matt asked about slippage on a 3oz XAUUSD market buy; Nathan showed the offer ticked up $0.04 during the 20ms last-look hold (price improvement off), $0.12 total. On 2026-11-02 Mukhammad asked why a client TP on DOWUSD (counterparty ASV_MT5_15122527, 2026-10-29 10:30 UTC) was rejected; Daria showed the cancel reason 'Internalisation Quantity greater than Published' because published quantity was 0 as all LPs had stopped pricing (price forensics), so no price was formed; Mukhammad acknowledged. On 2026-11-04 Samuel asked whether CP API_111000021's cancels on EXINITY_CONNECT_WAGYU (2026-11-03 23:39-23:45 UTC) were still due to limit-order volume; Shyam confirmed the same cause: 800 oz buy limits at top of book, which only had 100 oz.
+State: Open: Christian's 2026-10-09 FIX-log help request awaits his reply; Mukhammad's 2026-10-02 XAU rejects had no outcome seen. Resolved: 2026-10-01 quote disconnect was Exinity's bridge; 2026-10-06 CL1USD TP rejects were indicative pricing after the LP stopped quoting (Mahi holds no pending TP/SL, so the bridge must retry); 2026-10-15 3oz XAUUSD slippage was a $0.04 offer tick in the 20ms last-look hold. On 2026-11-02 a client TP on DOWUSD was rejected ('Internalisation Quantity greater than Published', published quantity 0 as all LPs had stopped pricing); on 2026-11-04 API_111000021's cancels on EXINITY_CONNECT_WAGYU were 800oz limit buys against 100oz at top of book.
 Next: Christian to say what he needs from the FIX logs; Exinity to check its bridge retry behaviour.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790857668546679 https://mahifx.slack.com/archives/C0456LSHQQK/p1791304956108509 https://mahifx.slack.com/archives/C0456LSHQQK/p1791563954367589 https://mahifx.slack.com/archives/C0456LSHQQK/p1793756635298589
 
@@ -118,21 +125,21 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793571776435089 https://ma
 
 ### centroid-fok-conformance — Centroid conformance: FOK brokered orders expire
 status: open · since: 2026-10-29 · last: 2026-10-30
-State: During Centroid/Mahi conformance testing on 2026-10-28 Matt saw an A-Book XAU/USD FOK market order cancelled (EXPIRED) on the Centroid connection while a PrimeXM FOK filled. Kate explained the Centroid order was set to broker by the channel/execution rule but the liquidity pool has no FOK-capable market for gold, so it expired before reaching an LP; the PXM order was internalised (EXINITY_CONNECT_WAGYU channel, B_CLIENTS_LDN, Top Four rule), so it never needed an LP. Matt confirmed Wedbush LPs cannot accept FOK, so any FOK STP'd to the liquidity pool will never reach market. On 2026-10-30 Kate explained routing: execution rules are picked by trading account, and the Centroid connection (account 001) lands on the Exinity Connect rule and Chuck profile, which has top-up off, whereas the MT4/MT5 A-book STP FOKs that fill (account 65280, A-BOOK rule) have Allow Top Up on. Non-FOK brokering works (~700 fills this month); the only FOK cancels were the 112 Centroid test orders on 2026-10-28. Daniel asked whether Centroid can be set up like STP.
+State: During Centroid/Mahi conformance testing on 2026-10-28 Matt saw an A-Book XAU/USD FOK market order cancelled (EXPIRED) on the Centroid connection while a PrimeXM FOK filled. Kate explained the Centroid order was set to broker by the channel/execution rule but the liquidity pool has no FOK-capable market for gold, so it expired before reaching an LP; the PXM order was internalised. On 2026-10-30 Kate explained routing: execution rules are picked by trading account, and the Centroid connection (account 001) lands on the Exinity Connect rule and Chuck profile, which has top-up off, whereas the MT4/MT5 A-book STP FOKs that fill (account 65280, A-BOOK rule) have Allow Top Up on. Non-FOK brokering works; the only FOK cancels were the 112 Centroid test orders. Daniel asked whether Centroid can be set up like STP.
 Next: Mahi (Kate) offered on 2026-10-30 to configure Allow Top Up on the Chuck profile; Exinity (Daniel/Matt) to say yes or change Centroid-side config so FOK is not brokered to WB.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793264343496069 https://mahifx.slack.com/archives/C0456LSHQQK/p1793365009754819
 
 
 ### wedbush-lp-migration — Hidden Road to Wedbush LPs, IOC/top-up mechanics
 status: open · since: 2026-08-05 · last: 2026-10-30
-State: Wedbush LPs do not take FOK/market orders, so on 2026-08-19 Daniel chose top-up enabled with IOC Limits at very high slippage for STP clients on the 'Wedbush LPs SW' list; Nathan applied it at EOD 2026-08-20 and the first FoK AUDUSD order brokered cleanly. Reference Price Market Selectors moved to Wedbush 2026-09-15; CLIENT_PRICE_LDN pricers restarted EOD 2026-10-01 for the switch. On 2026-09-17 a top-up left 200oz residual (Jane Street cancelled three 200oz attempts, Compass topped up at 4287.45, booked on LIQUIDITY_POOL_LDN); Louie said Exinity cannot carry that risk for 111000021/22/26, so Rory set Allow Top-Up to No on the EXINITY_CONNECT_CHUCK rule. How to book the residual 200oz was still being worked out in thread.
+State: Wedbush LPs do not take FOK/market orders, so top-up with IOC Limits at very high slippage was applied for STP clients on 'Wedbush LPs SW' (EOD 2026-08-20). Reference Price Market Selectors moved to Wedbush 2026-09-15; pricers restarted EOD 2026-10-01. On 2026-09-17 a top-up left a 200oz residual (booked on LIQUIDITY_POOL_LDN); Louie said Exinity cannot carry that risk for 111000021/22/26, so Rory set Allow Top-Up to No on the EXINITY_CONNECT_CHUCK rule. How to book the residual was still being worked out.
 Next: Exinity to book/move the 200oz residual; confirm where top-up should be on versus off (Kate offered 2026-10-30 to enable it on Chuck, see centroid-fok-conformance).
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1787146976800389 https://mahifx.slack.com/archives/C0456LSHQQK/p1789637820930659 https://mahifx.slack.com/archives/C0456LSHQQK/p1793365009754819
 
 
 ### pnl-drop-alerts — Per-book PnL-drop alerts and alert email restoration
 status: open · since: 2026-09-18 · last: 2026-10-29
-State: On 2026-10-29 Matt chased for an update on the "emergency alerts" (no reply seen). Matt asked for book-level loss alerts; thresholds given 2026-10-06 ($1K-$5K/day per book), an alert when LIQUIDITY_POOL_LDN exposure is above zero (top-up used), and restoration of the old email alerts (hedger throttle, VaR, FIX connection, A/B-book rejections). Alerts went live 2026-10-08 but froze systemStateMonitor ~2 min per firing, so were reverted (Zendesk 23617); fix deployed 2026-10-14. On 2026-10-20 the 24h A-Book alerts fired after a restart Matt approved. On 2026-10-22 Rory asked again to restart systemStateMonitor to pick up new alerting; Mukhammad (overnight) asked whether the restart affects order execution, no answer seen.
+State: Matt chased on 2026-10-29 for an update on the "emergency alerts" (no reply seen). He asked for per-book loss alerts (thresholds $1K-$5K/day given 2026-10-06), an alert when LIQUIDITY_POOL_LDN exposure is above zero, and restoration of old email alerts (hedger throttle, VaR, FIX connection, A/B-book rejections). Alerts went live 2026-10-08 but froze systemStateMonitor ~2 min per firing and were reverted (Zendesk 23617); fix deployed 2026-10-14; 24h A-Book alerts fired 2026-10-20. On 2026-10-22 Rory asked to restart systemStateMonitor for new alerting; Mukhammad asked if that affects execution, no answer seen.
 Next: Mahi to reply to Matt's 2026-10-29 chase on the emergency alerts; Rory to answer Mukhammad's execution-impact question before restarting, and confirm the other books' PnL alerts and the LP-exposure alert are live; email-alert restoration still to be put in place.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1789753758017939 https://mahifx.slack.com/archives/C0456LSHQQK/p1792511678868259 https://mahifx.slack.com/archives/C0456LSHQQK/p1792683656578339 https://mahifx.slack.com/archives/C0456LSHQQK/p1793265485080539
 
@@ -146,30 +153,16 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792760362955399 https://ma
 
 ### yield-sims-giraffe — Yield simulations on Exinity trade datasets
 status: open · since: 2026-10-05 · last: 2026-10-20
-State: On 2026-10-20 Matt sent another UTC+3 sim request (TRAD-2510 attachments); Rory will confirm when run and said the benchmark is the aggregate of the LP feeds in referencePriceMarketSelectors. On 2026-10-19 Matt sent a new October test-data workbook for a quick-turnaround yield sim, asking for a UTC+3 run as well because of a 'DST correction' in its UTC+2 timestamps; Rory confirmed the data aligned and posted the sim Echo link the same afternoon (done unless Matt has questions).Keshav's three GMT+3 datasets had about half the trades 20 to 40 pips ($19-30) off the Mahi retail mid, in blocks (Louie: different LP; George: TradePrice is fill price, TransactTime GMT+3); George suggested excluding outliers, so those sims have not run.
+State: On 2026-10-20 Matt sent another UTC+3 sim request (TRAD-2510 attachments); Rory will confirm when run and said the benchmark is the aggregate of the LP feeds in referencePriceMarketSelectors. On 2026-10-19 Matt sent a new October test-data workbook for a quick-turnaround yield sim, asking for a UTC+3 run as well because of a 'DST correction' in its UTC+2 timestamps; Rory ran it the same afternoon. Keshav's three GMT+3 datasets had about half the trades 20 to 40 pips ($19-30) off the Mahi retail mid, in blocks (Louie: different LP; George: TradePrice is fill price, TransactTime GMT+3); George suggested excluding outliers, so those sims have not run.
 Next: Rory to run and report the 2026-10-20 sim; Matt to review the 2026-10-19 sim; Exinity (George/Keshav) to decide on excluding or correcting off-market trades in the earlier datasets.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1791216865711639 https://mahifx.slack.com/archives/C0456LSHQQK/p1791893099757919 https://mahifx.slack.com/archives/C0456LSHQQK/p1792509715236449
 
 
 ### weekend-ops-reliability — Weekend restarts, FIX session windows, hedger recovery
 status: open · since: 2026-08-17 · last: 2026-10-19
-State: Mon 2026-10-19 Liam raised the DB connection limit to 2048 and restarted replica DBs (change CHG-2610-VP5A, 15:40-16:30Z, self-approved), and moved NSCA to daemon mode to stop Nagios alert storms. Reboots also failed 2026-08-22 and 2026-09-12. On Sat 2026-10-17 the trading-1 reboot (07:36Z) left clientDistributionGateway1 dead (duplicate Hazelcast shard ID 1533 after trading-2's node ran out of 2 GB heap) and trading-1 MySQL hit 1512/1536 connections, so the Insti, BigBook and CFD hybrid hedgers were down 08:15 to ~10:55Z. James restarted all Hazelcast nodes and raised max_connections to 2048; Justin restarted the hedgers. RCA written (P2, status open). The Friday 21:00Z to Sunday 21:00Z FIX logout of the ECN/ECNARU/PROECNARU/STRD/TE sessions is Exinity's normal weekly cycle,. Exinity self-monitors but plans weekend crypto pricing.
+State: Mon 2026-10-19 Liam raised the DB connection limit to 2048 and restarted replica DBs (change CHG-2610-VP5A, 15:40-16:30Z, self-approved), and moved NSCA to daemon mode to stop Nagios alert storms. On Sat 2026-10-17 the trading-1 reboot (07:36Z) left clientDistributionGateway1 dead (duplicate Hazelcast shard ID 1533 after trading-2's node ran out of 2 GB heap) and trading-1 MySQL hit 1512/1536 connections, so the Insti, BigBook and CFD hybrid hedgers were down 08:15 to ~10:55Z. James restarted all Hazelcast nodes and raised max_connections to 2048; Justin restarted the hedgers. RCA written (P2, status open). The Friday 21:00Z to Sunday 21:00Z FIX logout of the ECN/ECNARU/PROECNARU/STRD/TE sessions is Exinity's normal weekly cycle,. Exinity self-monitors but plans weekend crypto pricing.
 Next: Mahi to raise the trading-2 hazelcastNode heap above 2 GB and break down MySQL connections on trading-1 (limit raise done 2026-10-19); Daniel/Kate to revisit weekend support when weekend crypto starts.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/p1791752884902819 https://mahifx.slack.com/archives/C040V9LNKT5/p1792233233302349 https://mahifx.slack.com/archives/C040V9LNKT5/p1792424073139469
-
-
-### sunday-open-cancels — Last-look latency cancels at Sunday FX open
-status: open · since: 2026-10-18 · last: 2026-10-18
-State: Samuel reported cancels on several instruments with "Forcibly cancelled order due to excessive internal latency" (last-look delay overran by ~1257ms). Nathan explained 391 orders received 21:15:00 to 21:15:03 UTC on Sunday 2026-10-18 were cancelled by the internal latency safeguard because the order-handling process, restarted over the weekend, had not warmed up and queued orders; speed was normal from 21:15:04 (about four seconds affected, no further cancels). Tied to the weekend restarts above.
-Next: Mahi dev to review process warm-up after restart (ticket raised by Nathan).
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792359440287539
-
-
-### ld-network-route28 — Beeks LD network incident and unconfirmed Route28 AVAX order
-status: open · since: 2026-10-16 · last: 2026-10-16
-State: On 2026-10-16 Liam posted a networking incident in the LD environment (10:33 BST, recovery 11:47, resolved 12:30). hybridHedgerCFD1 went down on an order breach after a Route28 AVAX/USD order (99 AVAX, 012e1d2mn2, sent 10:01Z) got no confirmation; Kate asked Exinity to check with Route28 whether it filled, and brought the hedger back up accepting a small risk. No Exinity answer seen.
-Next: Exinity to confirm whether Route28 filled order 012e1d2mn2.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792143223051249 https://mahifx.slack.com/archives/C0456LSHQQK/p1792148922388959
 
 
 ### insti-exotics-pricing — Exotic pairs unpriced on Distribution_Insti_LDN
@@ -187,17 +180,17 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790329597165279 https://ma
 
 
 ### insti-book-moves — Insti routing, tag forwarding and position moves
-status: open · since: 2026-08-31 · last: 2026-10-12
-State: PrimeXM tag forwarding on the CONNECT_FILLET stream (2026-08-31) was confirmed by Daria to keep landing in BIG_INSTI_CLIENTS_1 as long as new tags avoid the wildcard risk-splitting counterparties. Matt moved an 11.35k oz CL1 position into A Insti Hedging Manual in September (Rory: PnL cannot be backdated, historic trade price can be used). On 2026-10-02 William closed an LMAX XAU position in 100oz clips due to a $2M LMAX volume cap. On 2026-10-12 Christian asked to move TradersHub (111000023) to A-book and open exposure at Wedbush; Nathan promised confirmation and help with the adjustment before EOD, no outcome seen.
+status: watching · since: 2026-08-31 · last: 2026-10-12
+State: PrimeXM tag forwarding on CONNECT_FILLET keeps landing in BIG_INSTI_CLIENTS_1 if new tags avoid the wildcard risk-splitting counterparties (Daria, 2026-08-31). On 2026-10-12 Christian asked to move TradersHub (111000023) to A-book and open exposure at Wedbush; Nathan promised confirmation and help with the adjustment before EOD, no outcome seen.
 Next: Nathan to confirm the steps/books and help with the TradersHub adjustment.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788203770663179 https://mahifx.slack.com/archives/C0456LSHQQK/p1789471167917609 https://mahifx.slack.com/archives/C0456LSHQQK/p1791828427289149
 
 
 ### compass-config-questions — Config and UI how-it-works questions
-status: watching · since: 2026-09-09 · last: 2026-10-14
-State: Shyam explained Signal Return Benchmark (skew PnL midpoint, normalisation) versus Reference Price Mid (model mid from reference markets, yield markouts) on 2026-09-22, after Daniel found T50USD/SPMUSD/GDIUSD have no benchmark. Rory confirmed on 2026-10-13 that execution rule changes are dynamic and on 2026-10-14 Shyam explained SI Insti XAUUSD hedging (client-trade rules 5/10/30s; risk rules at 48s/60s/200s with 10oz/40oz thresholds). Dashboard glitches (2026-10-04, 2026-10-12) were UI-only and fixed; Louie's 2026-09-21 manual-order error was browser clock skew. Daniel asked on 2026-10-06 for AEXEUR/HISKHKD/S30SGD to be checked as enabled; no reply seen.
+status: watching · since: 2026-09-09 · last: 2026-11-11
+State: On 2026-11-11 Matt asked how to view order books at a timestamp for a pricing stream; Rory pointed to Compass price forensics (better than Echo TOB; full depth needs Pulse), Matt found the trade-detail widget sufficient, and Rory confirmed price-forensics spreads are per unit (e.g. $60.80 x 900oz); Matt's extra Compass IP (102.115.49.162) was whitelisted ~14:12Z. Shyam explained Signal Return Benchmark (skew PnL midpoint, normalisation) versus Reference Price Mid (model mid from reference markets, yield markouts) on 2026-09-22, after Daniel found T50USD/SPMUSD/GDIUSD have no benchmark. Shyam explained SI Insti XAUUSD hedging rules on 2026-10-14. Daniel asked on 2026-10-06 for AEXEUR/HISKHKD/S30SGD to be checked as enabled; no reply seen.
 Next: Mahi to confirm AEXEUR/HISKHKD/S30SGD enablement.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790076650019729 https://mahifx.slack.com/archives/C0456LSHQQK/p1791263973364079 https://mahifx.slack.com/archives/C0456LSHQQK/p1792005318722349
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790076650019729 https://mahifx.slack.com/archives/C0456LSHQQK/p1791263973364079 https://mahifx.slack.com/archives/C0456LSHQQK/p1792005318722349 https://mahifx.slack.com/archives/C0456LSHQQK/p1794394501162529
 
 
 ### velocity-nomura-onboard — Velocity (VTI C2C) and Nomura Elysium onboarding
@@ -212,6 +205,23 @@ status: watching · since: 2026-08-21 · last: 2026-10-05
 State: Invast copper 5dp-vs-4dp rejects (2026-08-21) got a temporary internalise rule. XCUUSD's one-layer 50-unit stack cancelled a 300-unit order (2026-09-21); Nathan deepened it to ~15k, TOB spread left at $1. On 2026-10-05 Rory copied the BACKUP rule into the multiChannelConfig and added the _CFD channel to the CFD Internalise rule; both are in place.
 Next: Exinity to decide the XCUUSD TOB spread on CLIENT_PRICE_RETAIL_LDN.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1787324960613979 https://mahifx.slack.com/archives/C0456LSHQQK/p1789964680045919 https://mahifx.slack.com/archives/C0456LSHQQK/p1791218263170469
+
+### gbpaud-roll-cancels — GBPAUD cancels at rollover (wide-spread suppression)
+status: closed · since: 2026-11-11 · last: 2026-11-11 · closed: 2026-11-12
+State: Samuel asked why ASV_MT4_STANDARD1_5618035 got GBPAUD cancels at the 2026-11-11 rollover. Shyam: spread widened past the wide-spread-suppression threshold, so the distribution price went indicative and orders cancelled; the bridge retried and filled at 22:24Z once spread normalised. Mahi offered to loosen the rollover WSS for GBPAUD; Samuel said keep as is for now.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1794435903177429 https://mahifx.slack.com/archives/C0456LSHQQK/p1794437737729939
+
+### sunday-open-cancels — Last-look latency cancels at Sunday FX open
+status: closed · since: 2026-10-18 · last: 2026-10-18 · closed: 2026-11-12
+State: 391 orders at 21:15:00-03Z on Sunday 2026-10-18 were cancelled by the internal-latency safeguard because the weekend-restarted order process had not warmed up; normal from 21:15:04. Dev ticket raised for warm-up; no activity since, assumed resolved.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792359440287539
+
+
+### ld-network-route28 — Beeks LD network incident and unconfirmed Route28 AVAX order
+status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-11-12
+State: Beeks LD network incident 2026-10-16 (10:33-12:30 BST) took hybridHedgerCFD1 down on an unconfirmed Route28 AVAX order (012e1d2mn2); Kate restarted it accepting a small risk and asked Exinity to check with Route28. No answer seen; no activity since, assumed resolved.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792143223051249 https://mahifx.slack.com/archives/C0456LSHQQK/p1792148922388959
+
 
 ## Arc
 - 2026-04-29 — Exinity / Jane Street test-trade meeting
