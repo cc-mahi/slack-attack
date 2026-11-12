@@ -16,14 +16,20 @@ contacts:
   - {name: "Lukas Sedlacek", role: "Fintokei/Purple Technology risk; suspicious-client reviews"}
   - {name: "Kristof Heger", role: "Fintokei/Purple Technology; order-fill queries"}
   - {name: "Roman Komurka", role: "Fintokei/Purple Technology; pricing/skew opinions", confidence: low}
-last_catchup: 2026-11-11T08:15:27Z
+last_catchup: 2026-11-12T08:14:49Z
 status: active
 ---
 
 ## Now
-Reduced-spread LS model signed off; z symbols still showed old pricing 2026-11-10 after the first EOD switch (missed config step), second restart promised at 2026-11-10 EOD as Fintokei clients expect it from midnight. MT5 gateway on the main server stopped 2026-10-23 08:33 UTC (no logs, auto-restart now on; fixed MT4/MT5 build sent, deploy pending). LD-environment networking incident on 2026-10-16 (fleet-wide, hosting provider investigating) hit Fintokei connectivity; Liam reported signs of recovery at 10:46 UTC, no RCA or all-clear seen. Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 server clone (feeder and bridge copy) requested 2026-10-12. New batch of 63 MT4R/MT5 accounts requested 2026-11-04, change CHG-2611-6248 pending approval.
+Reduced-spread LS model signed off; z symbols still showed old pricing 2026-11-10 after the first EOD switch (missed config step), second restart promised at 2026-11-10 EOD as Fintokei clients expect it from midnight. MT5 gateway on the main server stopped 2026-10-23 08:33 UTC (no logs, auto-restart now on; fixed MT4/MT5 build sent, deploy pending). LD-environment networking incident on 2026-10-16 (fleet-wide, hosting provider investigating) hit Fintokei connectivity; Liam reported signs of recovery at 10:46 UTC, no RCA or all-clear seen. Live on Compass 26.4 since the 2026-10-11 weekend restart. Mahi is fighting two pricing-skew problems: arbitrageurs exploiting skew flicker (GBPJPY, XBT) and XAU FI performance collapsing from 2026-10-12. Fintokei wants orders to survive LP feed gaps (TTL / last-price execution); Mahi is offering normalisation instead. New MT4 servers now live for z-symbol pricing (2026-11-11); z execution on MT4 pending Fintokei confirming groups. New batch of 63 MT4R/MT5 accounts requested 2026-11-04, change CHG-2611-6248 pending approval.
 
 ## Streams
+
+### mt4-server-clone — Fintokei new MT4 server needs copy of feeder and bridge
+status: open · since: 2026-10-12 · last: 2026-11-11
+State: Jan Becan said (2026-10-12) Fintokei was deploying a new MT4 server as a copy of the existing one and wanted exact copies of the feeder and bridge with all settings; Rory King replied "we'll review and let you know". By 2026-11-11 the new MT4 servers exist and Kate says z-symbol pricing can be subscribed on them. Execution on z symbols on the MT4 servers is not live yet; Kate asked which groups will trade. Adam said he would check the z-symbol connection on MT4 on 2026-11-12.
+Next: Fintokei (Adam) to check z pricing on MT4 and confirm which groups will trade; Mahi (Kate) to enable z execution afterwards.
+Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1791806622473929 https://mahifx.slack.com/archives/C08QWKFARDL/p1794397644835969
 
 ### ls-reduced-spread — reduced-spread set-up on the LS model (_t symbols)
 status: open · since: 2026-11-06 · last: 2026-11-10
@@ -48,12 +54,6 @@ status: open · since: 2026-10-15 · last: 2026-10-15
 State: Shyam flagged poor XAU FI this week; Kate found the price signal stopped performing from Monday 2026-10-12 (funded XAU skew ~$0.4/M vs $6.6/M the week before, both LS books negative). XAUUSD skew rule moved back to harmonics (as before 2026-10-06) and a new XAUUSD rule on the LSB model with a 5-pip ceiling (was 20). Backtests of price/harmonics/IFM/IFMS on main and LSB models are running.
 Next: Kate to post backtest results in #internal-fintokei (this week's due 2026-10-15 afternoon, last week's evening).
 Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1792040613876479 https://mahifx.slack.com/archives/C08R694QVNX/p1792061221645329?thread_ts=1792040613.876479
-
-### mt4-server-clone — Fintokei new MT4 server needs copy of feeder and bridge
-status: open · since: 2026-10-12 · last: 2026-10-12
-State: Jan Becan says Fintokei is deploying a new MT4 server as a copy of the existing one and wants exact copies of the feeder and bridge with all settings. Asked what Mahi needs from them. Rory King replied "we'll review and let you know".
-Next: Mahi (Rory) to say what is needed from Fintokei.
-Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1791806622473929 https://mahifx.slack.com/archives/C08QWKFARDL/p1791806684630299
 
 ### ld-network-incident — fleet-wide LD networking incident, 2026-10-16
 status: watching · since: 2026-10-16 · last: 2026-10-16
