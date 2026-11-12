@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-11-11T08:13:37Z
+last_catchup: 2026-11-12T08:13:33Z
 status: active
 ---
 
@@ -24,6 +24,12 @@ status: active
 Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored. On 2026-10-27 Argamon asked for all FX on the new risk model; GTS HRP was pulled from NY pools and hedgers. Toa last-look tolerance 0 (from 2026-10-28) was reset on 2026-11-03 and TOA_CHI is back in gold hedging; on the 2026-11-02 call Argamon asked to extend cap internalisation beyond G8 (250k), explore B-booking soft CPs, and try PSM in beta.
 
 ## Streams
+
+### gts-hrp-nwm-mapping — GTS HRP removal and NWM mapping
+status: open · since: 2026-10-27 · last: 2026-11-12
+State: NY Compass was sending orders to GTS_HRP, which is no longer active in HRP (Levi, 2026-10-27). Shyam took GTSX_RCTV_HRP_1/2 out of the NY pools and HRP hedgers. 13 trades (118 oz XAUUSD) were actually executed at GTS via NWM, with drop copies split between HRP and NWM; Argamon will honour and manually book them at NWM, so Compass needed no change (only the LP label differs; per-LP reconciliation vs NWM needs mapping). There is no GTS-via-NWM market in Compass; Mahi offered to set one up if Argamon wants to keep trading GTS through NWM. Separately Levi asked for the NW market data gateway restart to stream GTS_NW_LDN in LD Compass; Daria fixed it and pricing is now visible. GTS has been dark in Argamon NY pricing references and XAUUSD arb protection since 2026-10-27; change CHG-2611-PA7W (Shyam, awaiting approval, weekend window pending in ZD 23769) remaps the Reactive sessions so the GTS LP moves to NatWest PB, to be applied Sun 2026-11-15 05:00-17:00Z during Sunday checks, after which GTS returns to those references once it ticks on sessions 2 and 4.
+Next: Approvers to approve CHG-2611-PA7W and agree the weekend window; Shyam to apply it and confirm GTS ticks on sessions 2 and 4; Argamon to say whether it wants a GTS via NWM market in Compass.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793075092211549 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794446310167779
 
 ### leverage-risk-sims — 500:1 leverage / more risk-holding sims
 status: open · since: 2026-08-31 · last: 2026-11-10
@@ -62,12 +68,6 @@ status: open · since: 2026-10-27 · last: 2026-10-27
 State: After HRP asked for an HSBC test trade, Tom enabled pricing through Reactive but Compass showed no HSBC prices (EURUSD included). Tom's settings are now reverted and he sees HSBC EURUSD in Reactive on ARGAMON_SW_HRP and ARGAMON_SW_HRP_2, confirmed as the accounts behind both market data and order sessions. Both HSBC sessions are still logged on in Compass, but the market data stream does not resume until reconnect, so the market data processes need an EOD restart.
 Next: Mahi (Cameron Hughes) to restart market data processes at EOD 2026-10-27 and confirm HSBC streams in Compass.
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793105972763279 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793114025899389
-
-### gts-hrp-nwm-mapping — GTS HRP removal and NWM mapping
-status: open · since: 2026-10-27 · last: 2026-10-27
-State: NY Compass was sending orders to GTS_HRP, which is no longer active in HRP (Levi, 2026-10-27). Shyam took GTSX_RCTV_HRP_1/2 out of the NY pools and HRP hedgers. 13 trades (118 oz XAUUSD) were actually executed at GTS via NWM, with drop copies split between HRP and NWM; Argamon will honour and manually book them at NWM, so Compass needed no change (only the LP label differs; per-LP reconciliation vs NWM needs mapping). There is no GTS-via-NWM market in Compass; Mahi offered to set one up if Argamon wants to keep trading GTS through NWM. Separately Levi asked for the NW market data gateway restart to stream GTS_NW_LDN in LD Compass; Daria fixed it and pricing is now visible.
-Next: Argamon to say whether it wants a GTS via NWM market in Compass.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1793062310809789 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793075092211549
 
 ### toa-chi-ioc-timeouts — LP no-ack timeouts on Toa CHI
 status: open · since: 2026-10-22 · last: 2026-10-22
