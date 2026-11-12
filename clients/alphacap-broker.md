@@ -11,20 +11,20 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-11T08:13:37Z
+last_catchup: 2026-11-12T08:13:33Z
 status: active
 ---
 
 ## Now
-Alpha is officially live: the first trades arrived 2026-11-09 (Cameron Hughes). David Rapp wants an in-person session this Thursday on Mahi's risk management and a simplified Compass walkthrough for value-add checks. Hedger activation and re-enabling expectedBookStatusOnTimezones now follow. Rollover and open spikes are still being tuned (Softs, XNG, XAGEUR). Rapp wants redundancy and a swaps source for crosses; Aug/Sep invoices remain a soft overhang.
+Alpha is officially live: the first trades arrived 2026-11-09 (Cameron Hughes). David Rapp's in-person session is today (Thu 2026-11-12) on Mahi's risk management and a simplified Compass walkthrough for value-add checks. Hedger activation and re-enabling expectedBookStatusOnTimezones now follow. Rollover and open spikes are still being tuned (Softs, XNG, XAGEUR). Rapp wants redundancy and a swaps source for crosses; Aug/Sep invoices remain a soft overhang.
 
 ## Streams
 
 ### inperson-risk-session — In-person risk management session
-status: open · since: 2026-11-09 · last: 2026-11-09
-State: On a 2026-11-09 call Rapp asked for an in-person meeting this Thursday where Mahi explains its risk management and simplifies Compass so Alpha knows where to check value adds. He liked the US Payroll value-add report sent last week; it helps his higher-ups appreciate what Mahi does.
-Next: Cameron Hughes to arrange the Thursday session and prepare the material.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409
+status: open · since: 2026-11-09 · last: 2026-11-11
+State: Rapp asked on 2026-11-09 for an in-person meeting where Mahi explains its risk management and simplifies Compass so Alpha knows where to check value adds; he liked the US Payroll value-add report. Meeting is 2026-11-12 (10:00 prep deadline). Will Carter posted a prep artifact on 2026-11-11: why Mahi advises on risk, why the book is near-fully hedged today and how to move off that over 4-6 weeks once flow is readable, where each value-add lives in Compass (anonymised QBR, anonymised demo envs, then ACG's own Compass), and a simple line on size-tiered margin (gap/credit risk, not toxic flow). Goal: permission to propose moving off full hedging on their flow, plus a monthly value-add report to George and David. Will's "near full pass-through to Argamon" comes from the 6 Oct trace, not current config. Gerard's open items (3 Nov prices not quoting for minutes, three 15 Oct stop-loss follow-ups) may come up.
+Next: Cameron Hughes to confirm the current hedger setup on alphacap-broker before 10:00 on 2026-11-12 and have answers to Gerard's open items.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794427016536779
 
 ### go-live-testing — Live test trading and go-live readiness
 status: open · since: 2026-04-29 · last: 2026-11-09
@@ -73,6 +73,11 @@ status: open · since: 2026-08-17 · last: 2026-09-10
 State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
 Next: Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
+
+### dashboard-access — Client dashboard access restored
+status: watching · since: 2026-11-11 · last: 2026-11-11
+State: Client dashboard access was restored 2026-11-11 via a firewall rule (CHG-2611-X6GK, green change) after the host's deny-all required a rule for the outside address; David confirmed it works and will be logged in during the in-person meeting. A paired Beeks SSH request (CHG-2611-MDV9) was aborted after Beeks withdrew it (the address was likely their engineer's remote IP).
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794388590395709 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794427016536779
 
 ### retail-lpoa-groups — MT5 groups for retail-under-corporate accounts
 status: closed · since: 2026-08-24 · last: 2026-09-03 · closed: 2026-11-03
