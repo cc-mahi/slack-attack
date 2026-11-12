@@ -18,13 +18,19 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-11-11T08:13:54Z
+last_catchup: 2026-11-12T08:13:34Z
 status: active
 ---
 ## Now
-CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival). On 2026-11-10 Kate's call with him: the rival presented its test results, 5ers plan to go live with it on a group soon, and his priority is now seamless failover (the rival claims no pricing break if a feed drops). Mahi's October funded-gold skew PnL was $461k vs the rival's $240k; Mahi offered a side-by-side on an MT5 group. CPI hero moment posted 11-10 ($44/M vs $16.63/M average); adaptive sized skew is live. Beeks still owes RCAs; CHG-2611-SR0F backup-link rebuild (11-07) result not seen. 57 single stocks loaded but unpriced pending B2Broker symbols.
+CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival). On 2026-11-10 Kate's call with him: the rival presented its test results, 5ers plan to go live with it on a group soon, and his priority is now seamless failover (the rival claims no pricing break if a feed drops). Mahi's October funded-gold skew PnL was $461k vs the rival's $240k; Mahi offered a side-by-side on an MT5 group. CPI hero moment posted 11-10 ($44/M vs $16.63/M average); adaptive sized skew is live. Beeks still owes RCAs; CHG-2611-SR0F backup-link rebuild (11-07) result not seen. 57 single stocks loaded but unpriced pending B2Broker symbols. LMAX market-data feed down since 10-31 (ACCESS_DENIED).
 
 ## Streams
+
+### lmax-md-down-1031 — LMAX market data feed rejected since 2026-10-31
+status: open · since: 2026-11-11 · last: 2026-11-11
+State: Arun found while on the NIC work that the LMAX FIX market-data session (fixMarketData1 on 5ers-ln-trading-1) has been down since Sat 2026-10-31: LMAX rejects every login from 5ers' account with ACCESS_DENIED, which looks like an account change on LMAX's side. Impact on pricing not stated.
+Next: Kate to raise with Yaniv / 5ers and get the LMAX account status restored.
+Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1794390260435229
 
 ### failover-ask-1110 — Yaniv's seamless-failover priority
 status: open · since: 2026-11-10 · last: 2026-11-10
@@ -105,11 +111,6 @@ Refs: https://mahifx.slack.com/archives/C0AUF6LBZ0Q/p1789122645463079 https://ma
 status: watching · since: 2026-08-20 · last: 2026-09-15
 State: Fast-markets multiplier raised to 1.3 for CFDs and metals (2026-08-20). Andreas questioned ~130-170 point FX spikes around the 20:59-22:00Z daily rollover (2026-09-10); Rory explained it is LP feed widening with a cap in place and offered a lower multiplier. On 2026-09-14 5ers asked for EURUSD/GBPUSD/USDJPY at 0; Kate set base spread 0, cTrader briefly showed negative spreads (5ers-side markdown, fixed), and Yaron confirmed it looked good 2026-09-15. YB later noted 72-93% zero-spread ticks on those pairs.
 Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1787221538992459 https://mahifx.slack.com/archives/C07AQJS4E80/p1789466160780809
-
-### usdchf-spike-1027 — USDCHF bad-price report
-status: closed · since: 2026-10-27 · last: 2026-10-27 · closed: 2026-10-28
-State: Andreas reported bad USDCHF pricing and a spike at 20:42 UTC+3 on 2026-10-27; Kate found Mahi distributing normal pricing, USDCHF untouched by that day's skew change, and the quote not originating from Mahi. Andreas concluded it was not Mahi's side and 5ers would handle it.
-Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793125044157899 https://mahifx.slack.com/archives/C07AQJS4E80/p1793127218839519
 
 ### xc-funded-migration — XC cleanup after funded flow cutover
 status: closed · since: 2026-07-07 · last: 2026-09-08 · closed: 2026-11-09
