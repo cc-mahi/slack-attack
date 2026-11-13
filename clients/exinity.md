@@ -21,24 +21,30 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-11-12T08:14:50Z
+last_catchup: 2026-11-13T08:13:59Z
 status: active
 ---
 
 ## Now
-Newest: signal-process errors recurred 2026-11-12 (processes restored, dev fix pending), and an institutional client's 500ms order-expiry complaint found no Mahi-side cause. Reactive price feeds (BAML, DB, Jane Street, Jump, Nomura) went silent 2026-11-09 15:53-17:05Z with sessions still logged on; Mahi added stale-price alerts for several LPs 2026-11-10. Newest: the STRDPARTNER order session sat disabled from the Saturday 2026-11-07 open until Nathan re-enabled it Monday 2026-11-09 (sequence-reset logon race, no alert fired); RCA follow-up owed. Internally, NFP showed no LR and weak skew on B_CLIENTS, and an adaptive-skew sim needs an owner.
-Weekend restarts caused the 2026-10-17 hedger outage (~2.5h) and 391 cancelled orders at the Sunday open; RCA / dev ticket exist.
-Exinity is mid-migration of its LP stack from Hidden Road to Wedbush LPs (top-up/IOC mechanics, Velocity and Nomura going live) and is chasing a run of pricing-spike, book-break and alerting asks.
-Open on Mahi: per-book PnL-drop alerts, XAU position realignment using the CLIENTS book, the TradersHub A-book move and an XCUUSD spread decision; Compass 26.4 (2026-10-24/25) caused signalProcessFI1 overflows, and weekend reliability matters as Exinity plans weekend crypto pricing.
+Signal-process errors recurred 2026-11-12 and again 2026-11-13 (processes restored each time, dev fix pending); an institutional client's 500ms order-expiry complaint found no Mahi-side cause; Exinity asked about oil and silver futures (needs new book structure).
+Reactive LP feeds went silent 2026-11-09 with no alert (stale-price alerts added 2026-11-10); STRDPARTNER sat disabled 2026-11-07 to 11-09 after a sequence-reset logon race, RCA follow-up owed. NFP showed no LR and weak skew on B_CLIENTS.
+Exinity is migrating LPs from Hidden Road to Wedbush (Velocity, Nomura going live) and chasing pricing-spike, book-break and alerting asks; weekend reliability matters as weekend crypto pricing nears (2026-10-17 hedger outage RCA open).
+Open on Mahi: per-book PnL-drop alerts, XAU position realignment, TradersHub A-book move, XCUUSD spread decision, Compass 26.4 signalProcessFI1 overflows, adaptive-skew sim owner.
 
 ## Streams
 
 ### signal-process-alerts — Alerts on signal processes, no execution impact
-status: open · since: 2026-11-05 · last: 2026-11-12
-State: On 2026-11-12 ~04:34Z Samuel reported signal errors again (screenshot); Nathan brought both processes back up by 04:45Z and said at 04:51Z that Mahi knows the cause and dev is working on a fix. On 2026-11-05 ~04:49Z Mukhammad asked Mahi to check a set of alerts (screenshot, not readable). Daria said they should be fixed shortly and, asked about execution impact, said there was no noticeable trading impact because these processes produce signals and are not in the execution pipeline. Which processes alerted is not stated; may relate to the 2026-10-26 signalProcessFI1 overflow. On 2026-11-06 ~01:30Z Mukhammad reported another error (screenshot, not readable); Nathan restored the process within minutes.
+status: open · since: 2026-11-05 · last: 2026-11-13
+State: On 2026-11-13 ~01:51Z Samuel chased an emergency alert (screenshot, not readable) and Nathan confirmed the process was back up. On 2026-11-12 ~04:34Z Samuel reported signal errors again (screenshot); Nathan brought both processes back up by 04:45Z and said at 04:51Z that Mahi knows the cause and dev is working on a fix. On 2026-11-05 ~04:49Z Mukhammad asked Mahi to check a set of alerts (screenshot, not readable). Daria said they should be fixed shortly and, asked about execution impact, said there was no noticeable trading impact because these processes produce signals and are not in the execution pipeline. Which processes alerted is not stated; may relate to the 2026-10-26 signalProcessFI1 overflow. On 2026-11-06 ~01:30Z Mukhammad reported another error (screenshot, not readable); Nathan restored the process within minutes.
 Next: Mahi dev to deliver the fix for the recurring signal-process errors and tell Samuel the cause.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1793928885999739 https://mahifx.slack.com/archives/C0456LSHQQK/p1794458029345139 https://mahifx.slack.com/archives/C0456LSHQQK/p1794459060239709
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1794458029345139 https://mahifx.slack.com/archives/C0456LSHQQK/p1794534671593379 https://mahifx.slack.com/archives/C0456LSHQQK/p1794534689377529
 
+
+### futures-oil-silver — Exinity asks about adding oil and silver futures
+status: open · since: 2026-11-12 · last: 2026-11-12
+State: Corey asked on 2026-11-12 whether oil and silver futures are planned. Rory said Mahi would scope it and that futures need a new book structure, and asked what the plan is for risk management of them. Corey has not replied yet.
+Next: Corey to say how Exinity plans to risk-manage the futures; Mahi to scope the book structure.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1794492374298919 https://mahifx.slack.com/archives/C0456LSHQQK/p1794492465501279
 
 ### insti-500ms-expiry — Institutional client sees ~500ms before orders expire
 status: open · since: 2026-11-11 · last: 2026-11-11
@@ -90,7 +96,7 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793222374723979 https://ma
 
 ### pricing-spikes-widening — Spiky and wide pricing complaints
 status: open · since: 2026-09-01 · last: 2026-11-06
-State: On 2026-11-06 ~20:35Z Christian reported USDTHB not ticking for almost 10 min with poor pricing; Cameron Hughes added USDTHB to the referencePriceMarketSelectors override (internal note 20:51Z) and asked Christian to recheck, no reply seen. Sep 1 Wagyu spikes traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS. EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. On 2026-10-27 Christian reported poor LP pricing 2026-10-26 20:45-22:00; Kate found the market itself was wide over the NY rollover (GBPCHF LPs 25-30 pips 21:00-22:00 UTC, several LPs not quoting, normal by ~22:05); Mahi stayed firm and the mid held.
+State: On 2026-11-06 ~20:35Z Christian reported USDTHB not ticking for almost 10 min with poor pricing; Cameron Hughes added USDTHB to the referencePriceMarketSelectors override and asked Christian to recheck, no reply seen. Sep 1 Wagyu spikes traced to Nomura via the Market Width Minimum Spread (MWMS) references; Exinity is backtesting adding Wedbush LPs to MWMS. EURUSD spikes on 2026-10-07 were skew plus Invast's bid crossing the Wedbush offers in the mid; skew was cut and Mahi proposed dropping Invast from the EURUSD mid, which Daniel declined on 2026-10-09. On 2026-10-27 Christian reported poor LP pricing 2026-10-26 20:45-22:00; Kate found the market itself was wide over the NY rollover (GBPCHF LPs 25-30 pips, several not quoting, normal by ~22:05Z) and the mid held.
 Next: Christian to confirm USDTHB now ticks; Exinity to say whether spikiness persists and to check rollover width with Wedbush/LPs (and why Barclays, DB, HSBC, Velocity don't stream GBPCHF) or send a timestamp; Wedbush-in-MWMS backtest result unconfirmed.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788299416706969 https://mahifx.slack.com/archives/C0456LSHQQK/p1793100609912989 https://mahifx.slack.com/archives/C0456LSHQQK/p1793127985564209 https://mahifx.slack.com/archives/C0456LSHQQK/p1793997336044029
 
@@ -125,7 +131,7 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793571776435089 https://ma
 
 ### centroid-fok-conformance — Centroid conformance: FOK brokered orders expire
 status: open · since: 2026-10-29 · last: 2026-10-30
-State: During Centroid/Mahi conformance testing on 2026-10-28 Matt saw an A-Book XAU/USD FOK market order cancelled (EXPIRED) on the Centroid connection while a PrimeXM FOK filled. Kate explained the Centroid order was set to broker by the channel/execution rule but the liquidity pool has no FOK-capable market for gold, so it expired before reaching an LP; the PXM order was internalised. On 2026-10-30 Kate explained routing: execution rules are picked by trading account, and the Centroid connection (account 001) lands on the Exinity Connect rule and Chuck profile, which has top-up off, whereas the MT4/MT5 A-book STP FOKs that fill (account 65280, A-BOOK rule) have Allow Top Up on. Non-FOK brokering works; the only FOK cancels were the 112 Centroid test orders. Daniel asked whether Centroid can be set up like STP.
+State: During Centroid/Mahi conformance testing on 2026-10-28 Matt saw an A-Book XAU/USD FOK market order cancelled (EXPIRED) on the Centroid connection while a PrimeXM FOK filled. Kate explained the Centroid order was set to broker by the channel/execution rule but the liquidity pool has no FOK-capable market for gold, so it expired before reaching an LP; the PXM order was internalised. On 2026-10-30 Kate explained routing: execution rules are picked by trading account, and the Centroid connection (account 001) lands on the Exinity Connect rule and Chuck profile, which has top-up off, whereas the MT4/MT5 A-book STP FOKs that fill (account 65280, A-BOOK rule) have Allow Top Up on. Non-FOK brokering works; only the 112 Centroid test FOKs cancelled. Daniel asked whether Centroid can be set up like STP.
 Next: Mahi (Kate) offered on 2026-10-30 to configure Allow Top Up on the Chuck profile; Exinity (Daniel/Matt) to say yes or change Centroid-side config so FOK is not brokered to WB.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793264343496069 https://mahifx.slack.com/archives/C0456LSHQQK/p1793365009754819
 
@@ -160,7 +166,7 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1791216865711639 https://ma
 
 ### weekend-ops-reliability — Weekend restarts, FIX session windows, hedger recovery
 status: open · since: 2026-08-17 · last: 2026-10-19
-State: Mon 2026-10-19 Liam raised the DB connection limit to 2048 and restarted replica DBs (change CHG-2610-VP5A, 15:40-16:30Z, self-approved), and moved NSCA to daemon mode to stop Nagios alert storms. On Sat 2026-10-17 the trading-1 reboot (07:36Z) left clientDistributionGateway1 dead (duplicate Hazelcast shard ID 1533 after trading-2's node ran out of 2 GB heap) and trading-1 MySQL hit 1512/1536 connections, so the Insti, BigBook and CFD hybrid hedgers were down 08:15 to ~10:55Z. James restarted all Hazelcast nodes and raised max_connections to 2048; Justin restarted the hedgers. RCA written (P2, status open). The Friday 21:00Z to Sunday 21:00Z FIX logout of the ECN/ECNARU/PROECNARU/STRD/TE sessions is Exinity's normal weekly cycle,. Exinity self-monitors but plans weekend crypto pricing.
+State: Mon 2026-10-19 Liam raised the DB connection limit to 2048 (change CHG-2610-VP5A) and moved NSCA to daemon mode to stop Nagios alert storms. The Sat 2026-10-17 trading-1 reboot left clientDistributionGateway1 dead (duplicate Hazelcast shard ID after trading-2's node ran out of 2 GB heap) and MySQL hit its connection limit, so the Insti, BigBook and CFD hybrid hedgers were down 08:15 to ~10:55Z; James restarted Hazelcast, Justin the hedgers. RCA written (P2, open). The Friday 21:00Z to Sunday 21:00Z FIX logout of the ECN/STRD/TE sessions is Exinity's normal weekly cycle. Exinity self-monitors but plans weekend crypto pricing.
 Next: Mahi to raise the trading-2 hazelcastNode heap above 2 GB and break down MySQL connections on trading-1 (limit raise done 2026-10-19); Daniel/Kate to revisit weekend support when weekend crypto starts.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/p1791752884902819 https://mahifx.slack.com/archives/C040V9LNKT5/p1792233233302349 https://mahifx.slack.com/archives/C040V9LNKT5/p1792424073139469
 
@@ -188,7 +194,7 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1788203770663179 https://ma
 
 ### compass-config-questions — Config and UI how-it-works questions
 status: watching · since: 2026-09-09 · last: 2026-11-11
-State: On 2026-11-11 Matt asked how to view order books at a timestamp for a pricing stream; Rory pointed to Compass price forensics (better than Echo TOB; full depth needs Pulse), Matt found the trade-detail widget sufficient, and Rory confirmed price-forensics spreads are per unit (e.g. $60.80 x 900oz); Matt's extra Compass IP (102.115.49.162) was whitelisted ~14:12Z. Shyam explained Signal Return Benchmark (skew PnL midpoint, normalisation) versus Reference Price Mid (model mid from reference markets, yield markouts) on 2026-09-22, after Daniel found T50USD/SPMUSD/GDIUSD have no benchmark. Shyam explained SI Insti XAUUSD hedging rules on 2026-10-14. Daniel asked on 2026-10-06 for AEXEUR/HISKHKD/S30SGD to be checked as enabled; no reply seen.
+State: On 2026-11-11 Matt asked how to view order books at a timestamp for a pricing stream; Rory pointed to Compass price forensics (better than Echo TOB; full depth needs Pulse), Matt found the trade-detail widget sufficient, and Rory confirmed price-forensics spreads are per unit (e.g. $60.80 x 900oz); Matt's extra Compass IP was whitelisted. Shyam explained Signal Return Benchmark (skew PnL midpoint, normalisation) versus Reference Price Mid (model mid from reference markets, yield markouts) on 2026-09-22, after Daniel found T50USD/SPMUSD/GDIUSD have no benchmark. Daniel asked on 2026-10-06 for AEXEUR/HISKHKD/S30SGD to be checked as enabled; no reply seen.
 Next: Mahi to confirm AEXEUR/HISKHKD/S30SGD enablement.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790076650019729 https://mahifx.slack.com/archives/C0456LSHQQK/p1791263973364079 https://mahifx.slack.com/archives/C0456LSHQQK/p1792005318722349 https://mahifx.slack.com/archives/C0456LSHQQK/p1794394501162529
 
