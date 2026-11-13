@@ -20,13 +20,19 @@ contacts:
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config requests, rejection reports", confidence: low}
   - {name: "Ali Wehbe", role: "ops: energy futures / oils product specs", confidence: low}
   - {name: "Ahmad Hashem", role: "ops: rejection reports on Mahi_B sessions", confidence: low}
-last_catchup: 2026-11-12T08:13:34Z
+last_catchup: 2026-11-13T08:13:58Z
 status: active
 ---
 ## Now
-AAmana is migrating everything onto Mahi in stages: A-book metals/indices/energies, crypto (fully on CMC since 11-04), SI energies and indices books, FX B-book (USD majors since 10-14, MXN SI go-live 11-05), FX execution on LMAX+CMC. Nikos drives and escalates fast. 11-11: all indices and crypto moved to the new Maker sessions (dist3/HP dist4); XPT/XPD A-book exposure cleared after the Jump-only hedger limit fix; Nikos asked whether Aug spread-widening protection is still on. 11-12: NDXUSD/NDXFUT price flip-flop under investigation (Nathan). Still open: NFP LR-off/negative skew review (no owner), TRADEVOLUME reset bug, DAXFUT-Z wider than CMC, IG hedging NOP/commission, manual-intervention protocol, recurring min-size reject storms, A-book skew/yield value.
+Amana is migrating everything onto Mahi in stages: A-book metals/indices/energies, crypto (fully on CMC since 11-04), SI energies and indices books, FX B-book (USD majors since 10-14, MXN SI go-live 11-05), FX execution on LMAX+CMC. Nikos drives and escalates fast. 11-11: all indices and crypto moved to the new Maker sessions (dist3/HP dist4); XPT/XPD A-book exposure cleared after the Jump-only hedger limit fix; Nikos asked whether Aug spread-widening protection is still on. 11-12: NDXUSD/NDXFUT price flip-flop under investigation (Nathan); IG position adjusted in Compass to match the real 9,065oz. 11-13: Nikos queried FX A-book TRY/MXN residuals (50k hedge clip/minimum). Still open: NFP LR-off/negative skew review (no owner), TRADEVOLUME reset bug, DAXFUT-Z wider than CMC, IG hedging NOP/commission, manual-intervention protocol, recurring min-size reject storms, A-book skew/yield value.
 
 ## Streams
+
+### fx-hedge-pool-nop — FX exotic hedging pool, NOP and hedger stalls
+status: open · since: 2026-11-10 · last: 2026-11-13
+State: 11-10 Amana saw USDTRY exposure on the A-book that should be flat: CMC was too wide so the hedger blocked trades. Isaac found LMAX was second LP for majors but not exotics; Nikos and Omar agreed LMAX for all FX with 5M NOP on both MXN and TRY (Omar talking to LMAX), actioned 13:40 UTC and TRY cleared. Nikos also asked for a max-spread alert (Isaac looking). Same day CMC rejected many XAUUSD swapfree hedges and Isaac restarted a hedger after removing a rule that stopped it firing. 11-13 Nikos asked why FX A-book showed TRY and MXN exposure: Nathan said they are sub-50k residuals (a 35.6k residual formed 03:01 UTC) because the A-book hedger clips in 5% of the 1M normal quantity (50k USD) and has a 50k minimum position, so the VaR-based trigger fired but sent no order; LPs can take smaller.
+Next: Mahi to decide whether to lower the 50k clip/minimum on USDTRY/USDMXN and finish explaining normal quantity to Nikos; Isaac to add the max-spread alert; Mahi to confirm LMAX NOP limits for exotics once Omar hears back.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794312795036509 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794546126185519
 
 ### ndx-price-flip — NDXUSD / NDXFUT price flipping, wrong client price
 status: open · since: 2026-11-12 · last: 2026-11-12
@@ -34,9 +40,15 @@ State: 11-12 Nikos asked Mahi to look at an NDXUSD distribution-HP fill (yield-p
 Next: Nathan to report the root cause (and whether it relates to the 11-11 index session move) to Hadeel/Nikos.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794458187874679 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794468307057449
 
+### ig-xau-hedging — IG_CENTROID as a metals hedge venue
+status: open · since: 2026-11-03 · last: 2026-11-12
+State: IG_CENTROID added as a metals hedge LP (regular account only, not swapfree). Rory set an IG quantityDefinition override 11-04; Isaac enabled IG for A-book XAU hedging 11-05 08:55 UTC; Mahi can set a max market position per instrument plus an overall NOP, and Omar gave a temporary XAUUSD max position pending IG's NOP and tier margin. IG min stays 0.01oz. 11-06 Omar asked whether per-LP commission can feed the aggregation; Daria will check. 11-12 Omar asked whether Amana has NOP with IG: Rory said NOP is set at 18,000 XAU; Omar saw 11,866.96 on his side and the true IG position was 9,064.92 oz (avg 3982.81), so Rory adjusted the IG position in Compass only (hedgers off, then back on) and Omar confirmed aligned.
+Next: Mahi (Daria) to answer Omar on LP commission in aggregation.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793784345213029 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794475903371119
+
 ### spread-widening-check — Is the illiquid-hours spread widening still enabled?
 status: open · since: 2026-11-11 · last: 2026-11-11
-State: 11-11 Nikos asked Mahi to investigate spread widening during illiquid hours back in August (XAUUSD report of 08-19 attached). He knows it is an algo feature protecting against arbers on sudden moves but does not remember whether it is still enabled or whether the maximum widening was reduced. Rory acknowledged and will look.
+State: 11-11 Nikos asked Mahi to investigate spread widening during illiquid hours back in August. He knows it is an algo feature protecting against arbers on sudden moves but does not remember whether it is still enabled or whether the maximum widening was reduced. Rory acknowledged and will look.
 Next: Rory to check the current widening feature and its max-spread cap and reply to Nikos.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794384286346449 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794384343189959
 
@@ -54,15 +66,9 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792765304547529 https://ma
 
 ### dax-spread-vs-cmc — DAXFUT-Z spread wider than CMC
 status: open · since: 2026-11-10 · last: 2026-11-10
-State: On 11-10 Nikos said CMC is the main LP for DAX futures but Mahi's client spread does not follow CMC; Rory saw a different comparison on his side, then Nikos posted a 06:45-07:00 UTC Light-vs-CMC spread CSV/HTML (Mahi significantly wider, now also seeing 60). Same morning he asked Mahi to act as clients are complaining about the spread (the image he forwarded is not readable).
+State: On 11-10 Nikos said CMC is the main LP for DAX futures but Mahi's client spread does not follow CMC; Rory saw a different comparison on his side, then Nikos posted a 06:45-07:00 UTC Light-vs-CMC spread CSV/HTML (Mahi significantly wider, now also seeing 60). Same morning he asked Mahi to act as clients are complaining about the spread.
 Next: Rory to investigate the DAXFUT-Z spread config against CMC and reply.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794297408817199 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794297567238929
-
-### fx-hedge-pool-nop — FX exotic hedging pool, NOP and hedger stalls
-status: open · since: 2026-11-10 · last: 2026-11-10
-State: 11-10 Amana saw USDTRY exposure on the A-book that should be flat: CMC was too wide so the hedger blocked trades. Isaac found LMAX was second LP for majors but not exotics; Nikos and Omar agreed LMAX for all FX with 5M NOP on both MXN and TRY (Omar talking to LMAX), actioned 13:40 UTC and TRY cleared. Nikos also asked for a max-spread alert (Isaac looking). Same day CMC rejected many XAUUSD swapfree hedges, USDCHF W-book exposure was zeroed at Nikos's request, and Isaac restarted a hedger after removing a rule that stopped it firing.
-Next: Isaac to add the max-spread alert; Mahi to confirm LMAX NOP limits for exotics once Omar hears back.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794312795036509 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794328624585339
 
 ### fx-bbook-roll-pnl — FX B-book PnL differs Friday close vs Sunday roll
 status: open · since: 2026-11-09 · last: 2026-11-09
@@ -78,15 +84,9 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794228473570299 https://ma
 
 ### analytics-data-asks — Yield profiles, party IDs and data access
 status: open · since: 2026-08-17 · last: 2026-11-09
-State: On 11-09 Nikos found TRADEVOLUME in riskreportingmetrics restarting because a running total resets to zero after a quiet period plus a process restart; Nathan said no volume was lost, pointed him to the parent books and gave diff-summing and yieldprofiles_latest queries, which Nikos accepted for volume. Nikos wants it fixed as a bug and asked whether skew PnL (PRICINGBENCHMARKMIDLIFETIMEPNL) has the same issue; Nathan said it is a running total per client trade and is creating a dev ticket, skew question unanswered. Also 11-09 Nikos asked for the fixed-price (FP) fee figure YTD ($600,070.24 over $328.1B reset-aware volume = 1.83 RPM, 1 Jan-30 Oct; wants confirmation he is roughly right); Isaac said B_GOLD_CLIENTS_LDN double counts B_CLIENTS_LDN (split book) and will look. Older asks: FUTURES_W volume baseline, spread per book, NULL markouts, 77026274_1 fill price, account-summary P&L.
-Next: Isaac to confirm the FP YTD figure excluding B_GOLD double count and give a spread-per-book query; Nathan to file the TRADEVOLUME dev ticket and answer whether skew PnL resets too; Rory to explain the 77026274_1 fill price; Mahi to answer the NULL-markout, party ID and account-summary P&L questions.
+State: On 11-09 Nikos found TRADEVOLUME in riskreportingmetrics restarting because a running total resets to zero after a quiet period plus a process restart; Nathan said no volume was lost, pointed him to the parent books and gave diff-summing and yieldprofiles_latest queries, which Nikos accepted for volume. Nikos wants it fixed as a bug and asked whether skew PnL (PRICINGBENCHMARKMIDLIFETIMEPNL) has the same issue; Nathan said it is a running total per client trade and is creating a dev ticket, skew question unanswered. Also 11-09 Nikos asked for the fixed-price (FP) fee figure YTD ($600,070.24 over $328.1B reset-aware volume = 1.83 RPM, 1 Jan-30 Oct; wants confirmation he is roughly right); Isaac said B_GOLD_CLIENTS_LDN double counts B_CLIENTS_LDN (split book) and will look.
+Next: Isaac to confirm the FP YTD figure excluding B_GOLD double count and give a spread-per-book query; Nathan to file the TRADEVOLUME dev ticket and answer whether skew PnL resets too.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786982712342769 https://mahifx.slack.com/archives/C08SYSMP0EB/p1792416966903439 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794221465833699
-
-### ig-xau-hedging — IG_CENTROID as a metals hedge venue
-status: open · since: 2026-11-03 · last: 2026-11-06
-State: IG_CENTROID added as a metals hedge LP (regular account only, not swapfree). Rory set an IG quantityDefinition override 11-04; Isaac enabled IG for A-book XAU hedging 11-05 08:55 UTC (first fill 287.08oz); Mahi can set a max market position per instrument plus an overall NOP, and Omar gave a temporary XAUUSD max position pending IG's NOP and tier margin. IG min stays 0.01oz. Nikos (11-05) asked why the hedger rounds 0.01 below client volume via IG (no reply seen). 11-06 Omar asked whether per-LP commission can feed the aggregation; Daria will check.
-Next: Mahi (Daria) to answer Omar on LP commission in aggregation; Isaac/Rory to answer Nikos on the 0.01 IG hedge rounding and confirm the IG NOP/max position is set.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793784345213029 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793946769934689
 
 ### futures-expiry-recs — Futures rolls, expiries and position adjustments
 status: open · since: 2026-08-17 · last: 2026-11-06
@@ -108,7 +108,7 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793972045779729 https://ma
 
 ### si-books — SI energies and SI indices books
 status: open · since: 2026-08-17 · last: 2026-11-05
-State: Energies SI live 09-11 (4h, 500K VaR); indices SI live 09-25 (4h, 100K VaR). SI PnL went blank repeatedly (VIX with no price, then no valid European index price after weekend restarts); permanent fix MahiMain#1203 (last client mid from Graphite after a riskReportingCore restart) deployed 10-29 (CHG-2610-TXKS).  Since 10-20: Energies SI +$115.7k, Indices SI +$83.8k. On 11-04 the energies book lost about $110k in minutes (see manual-intervention). On 11-05 Rory said an IDX_OFF_BOOK_NET PnLDropAlert (-182k) was a transfer between books. MXN SI go-live was set for 11-05 (CHG-2611-749Q, hedged at 50k VaR).
+State: Energies SI live 09-11 (4h, 500K VaR); indices SI live 09-25 (4h, 100K VaR). SI PnL went blank repeatedly (VIX with no price, then no valid European index price after weekend restarts); permanent fix MahiMain#1203 (last client mid from Graphite after a riskReportingCore restart) deployed 10-29 (CHG-2610-TXKS).  On 11-04 the energies book lost about $110k in minutes (see manual-intervention). On 11-05 Rory said an IDX_OFF_BOOK_NET PnLDropAlert (-182k) was a transfer between books. MXN SI go-live was set for 11-05 (CHG-2611-749Q, hedged at 50k VaR).
 Next: confirm indices PnL shows at Monday's open and the riskReportingCore log shows the Graphite last-mids load line.
 Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1786981181951769 https://mahifx.slack.com/archives/C08T42TMKU3/p1793865062079869
 
@@ -120,13 +120,13 @@ Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1793811329971989 https://ma
 
 ### min-size-rejects — Below-minimum reject storms after quantity-rule changes
 status: open · since: 2026-11-01 · last: 2026-11-04
-State: Night of 11-03 the hedger spammed CMC crypto rejects (BTCUSD rule 0.001 vs CMC 0.005; ADAUSD and LTCUSD 0.1 vs CMC step validation); Nathan disabled the hedger, then reverted to the earlier definitions and re-enabled it. Amana will raise Step Volume Validation with CMC; CMC's true minimums are unresolved. On 11-01 the crypto hedger sent 1,498 AVAXUSD 0.01 orders to GCEX, all rejected, because a 10-30 quantityDefinition rule overrode the real 0.1; Daria switched the crypto hedge book OFF and it stayed off (about 6k VaR unhedged; startInOffState defaults true). Also 11-02 XAUUSD sub-1oz LMAX rejects and U30 rejections (cause unknown).
-Next: Amana to get CMC's real crypto minimums and increments and update the LP settings (then Mahi re-applies); Isaac to confirm GCEX's real AVAX minimum and delete or set the 10-30 rule to 0.1; confirm the crypto hedge book is back ON; Daria to resolve the U30 rejects.
+State: Night of 11-03 the hedger spammed CMC crypto rejects (BTCUSD rule 0.001 vs CMC 0.005; ADAUSD and LTCUSD 0.1 vs CMC step validation); Nathan disabled the hedger, then reverted to the earlier definitions and re-enabled it. Amana will raise Step Volume Validation with CMC; CMC's true minimums are unresolved. On 11-01 the crypto hedger sent 1,498 AVAXUSD 0.01 orders to GCEX, all rejected, because a 10-30 quantityDefinition rule overrode the real 0.1; Daria switched the crypto hedge book OFF and it stayed off (about 6k VaR unhedged; startInOffState defaults true).
+Next: Amana to get CMC's real crypto minimums and increments and update the LP settings (then Mahi re-applies); Isaac to confirm GCEX's real AVAX minimum and delete or set the 10-30 rule to 0.1; confirm the crypto hedge book is back ON.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793513045608259 https://mahifx.slack.com/archives/C08T42TMKU3/p1793545136210629 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793595854803639 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793747127837329
 
 ### crypto-rollout — Crypto go-live and hedging
 status: open · since: 2026-08-17 · last: 2026-11-04
-State: First cryptos live 09-04, BTC 09-21, seven GCEX coins 10-01. Amana's risk committee decided 10-21 to stop trading with GCEX. On 11-02 to 11-04 Cameron Hughes moved crypto hedging and pricing from GCEX to CMC_CENTROID; by 11-04 17:27 UTC crypto was fully on CMC_CENTROID (CMC quantity definitions set to Mohamad's values, GCEX positions traded out and flat, GCEX-PRIMARY removed from pools and mappings; fixOrdersCentroid and fixMarketDataCentroid restart at EOD). CMC is 24/7 with no maintenance window. B2C2 comes on later. Hybrid hedger crypto stopped 10-31 (ActiveMQ failover EOF, investigation pending); crypto pricer cycle times rose after restarts (ZD-23543).
+State: First cryptos live 09-04, BTC 09-21, seven GCEX coins 10-01. Amana's risk committee decided 10-21 to stop trading with GCEX. On 11-02 to 11-04 Cameron Hughes moved crypto hedging and pricing from GCEX to CMC_CENTROID; by 11-04 17:27 UTC crypto was fully on CMC_CENTROID (GCEX positions flat, GCEX-PRIMARY removed from pools and mappings). CMC is 24/7 with no maintenance window. B2C2 comes on later. Hybrid hedger crypto stopped 10-31 (ActiveMQ failover EOF, pending); pricer cycle times rose after restarts (ZD-23543).
 Next: Cameron Hughes to delete GCEX-PRIMARY from reference.lists.instrument.custom once the EOD restarts are clean; onboard B2C2 when Amana asks; Daria's ticket ZD-23543 root cause.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793513045608259 https://mahifx.slack.com/archives/C08T42TMKU3/p1793813241969279
 
