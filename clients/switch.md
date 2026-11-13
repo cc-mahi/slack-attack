@@ -14,7 +14,7 @@ contacts:
   - {name: Dom Gilbert, role: "Think Huge (Switch parent) - COO/shareholder; drives hosting cost questions"}
   - {name: Paul Pintiliescu, role: "Think Huge - infrastructure/CTO-side; asks hardware questions"}
   - {name: Brandon, role: "Think Huge - infrastructure lead (US west coast)"}
-last_catchup: 2026-11-12T08:13:20Z
+last_catchup: 2026-11-13T08:13:42Z
 status: active
 ---
 
