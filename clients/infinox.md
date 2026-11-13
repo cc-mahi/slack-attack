@@ -18,7 +18,7 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-11-12T08:13:20Z
+last_catchup: 2026-11-13T08:13:41Z
 status: active
 ---
 
