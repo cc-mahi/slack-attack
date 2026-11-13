@@ -14,14 +14,26 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-11-12T08:13:20Z
+last_catchup: 2026-11-13T08:13:58Z
 status: active
 ---
 
 ## Now
-Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, whitelisted Base's IPs 2026-10-28; swapping one IP at Base's 2026-11-02 request, still pending after Alex chased 2026-11-06). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
+Margin call on Base 2026-11-12: Mahi is adjusting positions to clear risk, moving some LP positions SCOPE to LMAX, and the hedger must stay off until Kate Stagg says otherwise. 26Degrees is cancelling XAUUSD hedger orders sent at 2dp (1dp suspected limit). Tegis (Base's main flow) is paused for algo testing: hybridHedgerC1 is off and being removed from hiera, and Tegis now wants only a FIX 4.4 price feed from Mahi while trading through MT5's own API (agreed 2026-10-20; Mahi sent pricing connection details 2026-10-21, whitelisted Base's IPs 2026-10-28; swapping one IP at Base's 2026-11-02 request, still pending after Alex chased 2026-11-06). Base has decommissioned MT4; Mahi has asked to remove the MT4 bridge connections. Two LMAX_2 fills Base placed outside Compass (AUDUSD, XAGUSD) need Compass positions corrected. XAU hedging on the A book was retuned 2026-10-08 after repeated overnight PnL drops from account 111125, and brokered-XAU slippage is being monitored after the $20/M markup was removed.
 
 ## Streams
+
+### margin-call-1112 — Base margin called 2026-11-12; Mahi clearing risk, LP positions to move SCOPE to LMAX
+status: open · since: 2026-11-12 · last: 2026-11-12
+State: Kate Stagg said in the internal channel on 2026-11-12 that Base was margin called and she was doing position adjustment to clear risk, asking that the hedger not be turned on; later she reported 3,200oz bought with a few oz left to close once Base's Kate confirms numbers. In the client channel she asked whether Base wanted positions moved from SCOPE to LMAX (per a message in the base-scope-mahi-fastmt channel); Base's Kate said yes and offered to send current LP positions that need updating.
+Next: Base (Kate) to send the LP positions to move; Mahi (Kate Stagg) to move them, finish closing the residual oz, and keep the hedger off until she says otherwise.
+Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1794493628126709 https://mahifx.slack.com/archives/C09D8V41JAG/p1794492530220489
+
+### 26degrees-xau-qty — 26Degrees cancelling XAUUSD hedger orders sent to 2dp
+status: open · since: 2026-11-12 · last: 2026-11-12
+State: Rory King reported 2026-11-12 that 26Degrees cancelled XAUUSD hedger trades, with risk already cleared. He suspects 26Degrees only accepts 1dp quantity (a 25.39oz request filled for 25.3) and asked Base to confirm; Base's Kate said she will check. If confirmed Mahi will switch to 1dp and restart the hedgers.
+Next: Base (Kate) to confirm the 1dp limit; Rory to change quantity precision and restart hedgers.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1794472494169219 https://mahifx.slack.com/archives/C09D8V41JAG/p1794474722274159
 
 ### tegis-mt5-api — Tegis moving to MT5 API trading with Mahi price feed only
 status: open · since: 2026-04-29 · last: 2026-11-10
@@ -61,14 +73,14 @@ Next: Rory to finish the pricing model; LMAX feed switch.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1791886072967149 https://mahifx.slack.com/archives/C09D05EPCTV/p1792573543784969
 
 ### tegis-book-pause — Tegis C book warehoused while Tegis tests algo/API
-status: open · since: 2026-05-18 · last: 2026-10-13
-State: Tegis flow runs through the Compass-managed C book hedged to LMAX (positions migrated 2026-06-29; VIP zero-spread prices via CLIENT_PRICE_VIP_LDN routed to C_CLIENTS). Tegis closed out positions around 2026-10-02 to change algos, and on 2026-10-13 asked for the book to be warehoused while they test. Kate Stagg turned off hybridHedgerC1 with startInOffState=TRUE, then said she is stopping it and removing it from hiera; it must not be turned on until testing is done and positions are flat.
+status: watching · since: 2026-05-18 · last: 2026-10-13
+State: Downgraded to watching (no activity since 2026-10-13; pause stands while Tegis tests the MT5 API route). Tegis flow runs through the Compass-managed C book hedged to LMAX (positions migrated 2026-06-29; VIP zero-spread prices via CLIENT_PRICE_VIP_LDN routed to C_CLIENTS). Tegis closed out positions around 2026-10-02 to change algos, and on 2026-10-13 asked for the book to be warehoused while they test. Kate Stagg turned off hybridHedgerC1 with startInOffState=TRUE, then said she is stopping it and removing it from hiera; it must not be turned on until testing is done and positions are flat.
 Next: Tegis to say when they go live again; re-add hybridHedgerC1 to hiera then.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969 https://mahifx.slack.com/archives/C09D05EPCTV/p1791885596379839 https://mahifx.slack.com/archives/C09D05EPCTV/p1791886158813629
 
 ### mt4-decom — Base decommissioned MT4; Mahi removing MT4 bridge connections
-status: open · since: 2026-10-11 · last: 2026-10-13
-State: Shyam Hari saw SYNAPSE_MT4 disconnected on 2026-10-11; Kate (Base) confirmed 2026-10-13 that MT4 is decommissioned. Shyam asked whether Mahi may remove the primary and backup MT4 bridge connections; no reply yet.
+status: watching · since: 2026-10-11 · last: 2026-10-13
+State: Downgraded to watching (no reply since 2026-10-13). Shyam Hari saw SYNAPSE_MT4 disconnected on 2026-10-11; Kate (Base) confirmed 2026-10-13 that MT4 is decommissioned. Shyam asked whether Mahi may remove the primary and backup MT4 bridge connections; no reply yet.
 Next: Base to confirm nothing still needs the MT4 bridge; then Mahi removes both connections.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791755009916399 https://mahifx.slack.com/archives/C09D8V41JAG/p1791925041012299
 
