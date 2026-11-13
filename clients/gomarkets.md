@@ -19,20 +19,20 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-12T08:14:49Z
+last_catchup: 2026-11-13T08:15:09Z
 status: active
 ---
 
 ## Now
-Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP position re-sync (B House holds ~$30M of manual-hedge LP positions, 2026-11-12); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
+Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP position re-sync (~$30M manual-hedge LP positions in B House; evening adjustments booked 2026-11-12, USDJPY B-to-A move still requested); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
 
 ### lp-position-resync — B House carrying LP positions; re-sync to match A Book risk
 status: open · since: 2026-11-12 · last: 2026-11-12
-State: Will reported 2026-11-12 that total LP positions do not reflect A Book risk: B House holds many LP positions (likely manual hedges from netting between LPs) and asked for a fresh re-sync, then LP position adjustment. Client positions in DISTRIBUTION_NYC match; HOUSE-level LP positions match the LPs. Nathan found about $30M USD-equivalent open in the B Manual Hedging book (largest USDJPY -16.6M) and offered to move them to the A Book and close with the LPs. Kieran asked Cyprus (Alexandros) to check Tapaas against LP positions (ticking A and B), export exposure by LP and symbol, and confirm how much USDJPY is the B-book exposure hedge; Mahi to clear anything not matching the A Book or that USDJPY hedge (e.g. USDCHF long ~$5m too much). Whether the B USDJPY hedge sits under A or B house is unresolved (Will knows).
-Next: Go (Alexandros, Will) to send the exposure export and the USDJPY B-hedge amount; Mahi (Nathan) to move or clear the excess once confirmed.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1794448433301549 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794469583659219
+State: Will reported 2026-11-12 that total LP positions do not reflect A Book risk: B House holds many LP positions (likely manual hedges from netting between LPs) and asked for a re-sync. Nathan found about $30M USD-equivalent open in B Manual Hedging (largest USDJPY -16.6M) and offered to move it to the A Book; Kieran had Cyprus (Alexandros) check Tapaas against LPs. That evening Erik confirmed Tapaas and Mahi LP positions match and asked for desk help to fix the books; Rory (Mahi) turned the hedger off and booked position adjustments from Erik's CSVs (non-XAUUSD FX, XAGUSD, then XAUUSD after his go-ahead), VaR spiking as expected, with Nathan picking up the XAGUSD balance. Late on 11-12 Will asked Mahi to move B HOUSE USDJPY (ISPRIME +5.87M, 26DEGREES -3.52M, LMAX_LDN -2.35M) to A HOUSE for the hedgers to execute; not yet seen actioned. Whether the hedger was switched back on is not stated.
+Next: Mahi (Nathan/Rory) to action Will's USDJPY B-to-A move and confirm the hedger is back on; Go to confirm the USDJPY B-hedge amount.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1794448433301549 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794525431143559
 
 ### compass-ui-asks — Go ops asks on Compass/Echo UI (audit search, multi-value filters)
 status: open · since: 2026-11-05 · last: 2026-11-10
