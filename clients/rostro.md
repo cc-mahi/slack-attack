@@ -17,30 +17,41 @@ contacts:
   - {name: "Andreas Christofi", role: "ScopeMarkets ops: FIX sessions, new books", confidence: low}
   - {name: "Abdullah Almasharfa", role: "ScopeMarkets ops: PXM connections, IC feeds", confidence: low}
   - {name: "Chrysovalantis Karageorgiou", role: "ScopeMarkets ops: PXM connector/account setup", confidence: low}
-  - {name: "Rakan Awwad", role: "ScopeMarkets ops: FIX rejection queries", confidence: low}
   - {name: "Manuel de Cara", role: "Rostro: Pulse/Athena data access", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro; commercial counterpart (described internally as basically co-founder)"}
   - {name: "Michael Ayres", role: "senior Rostro contact meeting David Cooney 16 Oct; named replacement after Lochlan left", confidence: low}
-last_catchup: 2026-11-12T08:16:18Z
+last_catchup: 2026-11-13T08:15:09Z
 status: active
 ---
 
 ## Now
-Relationship under strain: on 14 Oct a CMC futures price freeze cost the SI book about 178k and Andrew Morgan called it "relationship losing level"; evidence went to Rostro, CMC gave no rebate, and on 16 Oct Andrew accepted five pricing-integrity outcomes onto the roadmap (incident still open, no owners or dates yet). The C book client also complained of slippage on 16 Oct, traced to an LR mismatch. Commercials: Rostro accepted the new commercials with Mahi fees discounted by a $150K repayment settlement over 15 months (likely crypto licence, wants weekend gold); Bonnie reported the new terms signed on 11 Nov. Rostro keeps adding IC sub-account books (rev-share), PSM went live on the INV model 14 Oct, and Rostro is switching Jump off futures (hedgers updated 15 Oct).  Futures (DOW/SPX/NDX) were switched to IC on 10 Nov, rolled back to CMC, and on 11 Nov flipped to IC again after test trades; Rostro wants all futures on IC for now. Sub 11 went live 2 Nov (XAUUSD, XAGUSD, G7 FX and futures via Mahi; Rostro keeps indices direct to IC), and Scope's VIP end client is on a final trial week with skew switched off on USDJPY/EURUSD (30 Oct).
+Relationship under strain: on 14 Oct a CMC futures price freeze cost the SI book about 178k and Andrew Morgan called it "relationship losing level"; evidence went to Rostro, CMC gave no rebate, and on 16 Oct Andrew accepted five pricing-integrity outcomes onto the roadmap (incident still open, no owners or dates yet). The C book client also complained of slippage on 16 Oct, traced to an LR mismatch. Commercials: Rostro accepted the new commercials with Mahi fees discounted by a $150K repayment settlement over 15 months (likely crypto licence, wants weekend gold); Bonnie reported the new terms signed on 11 Nov. Rostro keeps adding IC sub-account books (rev-share); PSM live on INV since 14 Oct. 12 Nov: FX book down about 20k (GBPNZD roll fallback; gold off-book long); continuity markup rise proposed. Futures (DOW/SPX/NDX) were switched to IC on 10 Nov, rolled back to CMC, and on 11 Nov flipped to IC again after test trades; Rostro wants all futures on IC for now. Sub 11 live since 2 Nov.
 
 ## Streams
+
+### gbpnzd-roll-price — GBPNZD continuity-pool fallback at roll and continuity markup
+status: open · since: 2026-11-10 · last: 2026-11-13
+State: On 2 Nov GBPNZD fell back to the continuity pool at 22:01 UTC (one LP quoting). On the 11 Nov roll the INV model for GBPNZD dropped out under 0.5s and the continuity pool priced about 42 pips wide vs about 90 for the model; six 127_ accounts bought 1.8M within 30ms, hedged via GBPUSD/NZDUSD at roll spreads, hitting non-rev-share PnL. 127_ did the same in GBPUSD on 22 Oct at smaller size. Kate proposed raising the continuity markup (now $50/M) in roll and twilight windows: roll 21:59-23:00 UTC $1,000/M NZD/CHF crosses, $500/M other crosses, $300/M majors; twilight $150/$100/$50 per M, on A_CLIENTS, SCOPE_X_RETAIL/INSTI/VIP. Alexandre said yes; Riz (13 Nov) asked about blocking trading when there is no price instead, but said to apply the levels today and go indicative if clients complain.
+Next: Kate to apply the continuity markups (Riz asked for today, ahead of roll); Rostro to revisit indicative-instead-of-continuity if spreads cause complaints.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794306214114219 https://mahifx.slack.com/archives/C08AQKRU953/p1794507216428059 https://mahifx.slack.com/archives/C08AQKRU953/p1794545552790469
+
+### fx-pnl-drop — SI/non-rev-share FX PnL drops (10-12 Nov) and exposure query
+status: open · since: 2026-11-11 · last: 2026-11-12
+State: Alexandre reported FX down about 10k on 10 Nov, 5k on 11 Nov and about 20k on 12 Nov on small volume (about -200 per million). Kate traced 12 Nov's drop partly to the GBPNZD roll fallback (see gbpnzd-roll-price) and the gold part to xau-offbook-148; FX and metals share one book so there is no standalone FX VaR. Alexandre asked if a -43.5M summed USD exposure is expected; Kate confirmed it matches SI_BOOK plus NON_REV_SHARE_CLIENTS pair by pair but is not open exposure (crosses are hedged in the drivers, so it nets by currency). Alexandre then said it may be a reporting issue on his side (end-of-day prices the night before). The 11 Nov ~5k drop was never explained in what was read.
+Next: Alexandre to finish his own PnL/exposure reconciliation; Kate to report the cause of the 11 Nov SI FX drop if still wanted.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794393610189339 https://mahifx.slack.com/archives/C08AQKRU953/p1794507740719929
+
+### xau-offbook-148 — 12 Nov XAUUSD off-book long and risk splitting for the 148_ tag set
+status: open · since: 2026-11-12 · last: 2026-11-12
+State: About 20k was lost around 15:00 UTC on 12 Nov: the off book built a long of about 3koz between 14:55 and 14:57 as clients (mainly 152_1_300402 and a handful incl. 148_0_43886_n/a, 1,120oz over 132 fills) sold into a roughly $10 drop. Kate says the counterparty flagged earlier was hedged within seconds, so not the cause. 148_0_43886_n/a is classified signal follow and broker (about $330/M at 4 min over the month) but the 148_* risk splitting rule, set at Rostro's request, sends all 148_ flow to the off book regardless of classification. Kate proposed splitting 148_ by classification so signal follow, broker and fast hedge flow goes to the SI book (execution unaffected); no answer seen.
+Next: Alexandre/Oliver to approve or decline splitting 148_ risk by classification.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794502387640839 https://mahifx.slack.com/archives/C08AQKRU953/p1794503863384269
 
 ### hedger-cp-tag — Hybrid hedger orders to IC lost the HybridHedger counterparty tag
 status: open · since: 2026-11-11 · last: 2026-11-11
 State: Alexandre saw no HybridHedger-tagged trades since Monday 9 Nov and reads a client tag on IC hedges as brokered/fast hedge, not risk-cycle hedging. Kate: hedging is unchanged, but since the restart after the weekend server maintenance the SI-book hybrid hedger sends the counterparty of the most recent client trade in the instrument (skipping tags not allowed on the LP) instead of replacing it with HybridHedger. Mahi can add config to always send HybridHedger; reverting needs a hedger restart (intraday possible, brief downtime). Alexandre asked if it can be reverted on the fly; no decision seen.
 Next: Alexandre to decide whether he wants the fixed HybridHedger tag restored.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794393367585939 https://mahifx.slack.com/archives/C08AQKRU953/p1794415781616949
-
-### fx-pnl-drop — SI book FX PnL drop reported 10-11 Nov
-status: open · since: 2026-11-11 · last: 2026-11-11
-State: Alexandre said Scope lost about 10k on 10 Nov and 5k on 11 Nov on small volume. Kate: 10 Nov SI Book - FX was up 17.1k; the roughly 5k drop in the same book since 07:30 UTC on 11 Nov is being investigated. Not yet explained.
-Next: Kate to report the cause of the 11 Nov SI FX drop.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794393610189339 https://mahifx.slack.com/archives/C08AQKRU953/p1794396815288069
 
 ### cpi-skew-drop — 10 Nov CPI drop in FI PL on SI and retail skew
 status: open · since: 2026-11-10 · last: 2026-11-11
@@ -56,13 +67,13 @@ Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794347283583259 https://ma
 
 ### cmc-futs-dropouts — CMC as sole futures LP: recurring dropouts and rejects
 status: open · since: 2026-08-26 · last: 2026-11-11
-State: CMC was the only LP pricing gold futures (and XAUFUT, indices), so each dropout (25 Aug, 5 Oct, 29 Oct NDXUSD 15s gap that rejected an A_CLIENTS sell) leaves no price or fill; 9 Sep DAXFUT-U showed stale CMC prices and. 15 Oct Rostro moved most futures volume off Jump; Kate removed Jump from the futures hedgers; NDXFUT-Z was mapped wrongly in PXM after the roll (no NDXFUT flow reached Mahi). Broker-first only helps if Jump joins the XAUFUT reference price (Rostro undecided, Riz not optimistic on CMC). 10 Nov: Oliver approved moving DOWFUT/SPXFUT/NDXFUT hedging and pricing (all models) to IC_MARKETS, with brokered rules left on CMC; Kate switched them (~11:05-11:50 UTC). IC clears were cancelled and NQ rejects appeared; cause was IC config and a Scope pool change needing an EOD restart, so Scope switched back to CMC. 11 Nov: IC test trades accepted 0.1 for ES/NQ/YM; IC mins are ES 0.5, NQ 0.2, YM 0.1; Oliver asked to flip NAS/SPX/DOW back to IC, Kate switched after test trades and bounced the SI futures hedgers (~14:36 UTC). Oliver: for now all futures go to IC, and clients chosen for CMC get execution rules brokering to CMC. Kate will set up a CMC liquidity pool live from EOD 11 Nov and suggests waiting for the EOD restart to change the brokering rules for SPXFUT/DOWFUT/NDXFUT; Oliver replied ok. Kate also asked whether to set up futures widening (Mahi priced inside IC's spread about half the time over a week); no answer. Hedging min qty now NDX 0.2, DOW 0.05, SPX 0.5, DAX 0.25, XAU 0.01.
+State: CMC was the only LP pricing gold futures (and XAUFUT, indices), so each dropout (25 Aug, 5 Oct, 29 Oct NDXUSD 15s gap) leaves no price or fill. 15 Oct Rostro moved most futures volume off Jump; Kate removed Jump from the futures hedgers; NDXFUT-Z was mapped wrongly in PXM after the roll (no NDXFUT flow reached Mahi). Broker-first only helps if Jump joins the XAUFUT reference price (Rostro undecided, Riz not optimistic on CMC). 10 Nov: Oliver approved moving DOWFUT/SPXFUT/NDXFUT hedging and pricing (all models) to IC_MARKETS, with brokered rules left on CMC; Kate switched them (~11:05-11:50 UTC). IC clears were cancelled and NQ rejects appeared (IC config, Scope pool change needing EOD restart), so Scope switched back to CMC. 11 Nov: IC test trades accepted 0.1 for ES/NQ/YM; IC mins are ES 0.5, NQ 0.2, YM 0.1; Oliver asked to flip NAS/SPX/DOW back to IC, Kate switched after test trades and bounced the SI futures hedgers (~14:36 UTC). Oliver: for now all futures go to IC, and clients chosen for CMC get execution rules brokering to CMC. Kate will set up a CMC liquidity pool live from EOD 11 Nov and suggests waiting for the EOD restart to change the brokering rules for SPXFUT/DOWFUT/NDXFUT; Oliver replied ok. Kate also asked whether to set up futures widening (Mahi priced inside IC's spread about half the time over a week); no answer. Hedging min qty now NDX 0.2, DOW 0.05, SPX 0.5, DAX 0.25, XAU 0.01.
 Next: Kate to apply the futures brokering-rule changes after the EOD restart and watch for IC rejections (Oliver asked); Rostro to confirm hedging min quantities against IC and say whether to set up futures widening; Rostro decision on Jump in XAUFUT reference price (Jump is being switched off, check it still stands); Alex to fix NDXFUT-Z mapping in PXM; Kate's CMC-normalisation backtest.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787733565831759 https://mahifx.slack.com/archives/C08AQKRU953/p1791970984817549 https://mahifx.slack.com/archives/C08AQKRU953/p1794317966817829 https://mahifx.slack.com/archives/C08AQKRU953/p1794407794037449
 
 ### ic-sub-books — IC sub-account rev-share books (SUB 5/9/10/11, C House, Sub SI House)
 status: open · since: 2026-08-24 · last: 2026-11-09
-State: Rostro flow from specific counterparty tags is split into separate Compass books, each hedged via a dedicated hybridHedgerSub* to an IC_SUBS_* market through Scope's PXM Mahi_3 connection (shared MAHI_IC_SUBS stream; Mahi sends tag 1 = MAHI_IC_SUBS_n). Tag 251_* (large Cyprus retail broker, soft flow) has FX, CFD, futures and "Sub SI House" books; its rev share was signed 13 Oct. IC_SUBS_12 set up 19-20 Oct; sub 8 (XAU book) funded 30 Oct. Sub 11 went live 2 Nov: Rostro keeps indices direct to IC; XAUUSD, XAGUSD, G7 FX and futures (DAX, NDX, SPX, DOW, XAU) go via Mahi, with tags 251_0 and 79_30 (VIP Vol, always internalised) split to the off book or SI book and hedged to IC_SUBS_11. 3-4 Nov hedging misbehaved (XAG, USDJPY, DAX fut): Kate fixed a missing risk splitting rule, moved sub 11 back to the SI book and set an interim execution rule internalising the XAG tags caught by an SI book brokering rule (risk to normal IC feed, Rostro flat).  Kate removed HRP_Saxo (MAHI_2 "account not found") pending Scope's EOD restart. 6 Nov one futures trade hit the SI book broker rule and went to CMC; Kate added a higher-priority internalise futures rule. Sub 11 is going into the 15 min SI cycle (FX and metals done, futures being looked at). 9 Nov Oliver planned to send 50% of sub 11 trades to Mahi (Mahi accepts min 0.01oz), then reported silver futures still going to CMC; Kate said Mahi does not price silver futures for Rostro and Oliver said it was on his side.
+State: Rostro flow from specific counterparty tags is split into separate Compass books, each hedged via a dedicated hybridHedgerSub* to an IC_SUBS_* market through Scope's PXM Mahi_3 connection (shared MAHI_IC_SUBS stream; Mahi sends tag 1 = MAHI_IC_SUBS_n). Tag 251_* (large Cyprus retail broker, soft flow) has FX, CFD, futures and "Sub SI House" books; its rev share was signed 13 Oct. IC_SUBS_12 set up 19-20 Oct; sub 8 (XAU book) funded 30 Oct. Sub 11 went live 2 Nov: Rostro keeps indices direct to IC; XAUUSD, XAGUSD, G7 FX and futures (DAX, NDX, SPX, DOW, XAU) go via Mahi, with tags 251_0 and 79_30 (VIP Vol, always internalised) split to the off book or SI book and hedged to IC_SUBS_11. 3-4 Nov hedging misbehaved (XAG, USDJPY, DAX fut): Kate fixed a missing risk splitting rule, moved sub 11 back to the SI book and set an interim rule internalising the XAG tags.  Kate removed HRP_Saxo (MAHI_2 "account not found") pending Scope's EOD restart. 6 Nov Kate added a higher-priority internalise futures rule after one trade went to CMC. Sub 11 is going into the 15 min SI cycle (FX and metals done, futures being looked at). 9 Nov Oliver planned to send 50% of sub 11 trades to Mahi (Mahi accepts min 0.01oz), then reported silver futures still going to CMC; Kate said Mahi does not price silver futures for Rostro and Oliver said it was on his side.
 Next: Kate to finish the 15 min SI cycle for sub 11 futures and fix risk splitting so sub 11 XAG hedges to IC_SUBS_11 (replacing the interim rule); re-add HRP_Saxo after Scope's restart; sub 8 test trades and go-live; confirm MAHI_IC_SUBS_12 funded; internal question on how multi-region (NY4) is charged; send the Sub SI House holding-period page to Rostro.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787569899244609 https://mahifx.slack.com/archives/C08AQKRU953/p1793366254660579 https://mahifx.slack.com/archives/C08AQKRU953/p1793968140238289 https://mahifx.slack.com/archives/C08AQKRU953/p1794231007095749
 
@@ -80,7 +91,7 @@ Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1793975301078089 https://ma
 
 ### position-breaks — Position breaks and position recs
 status: open · since: 2026-09-04 · last: 2026-11-05
-State: Oliver flagged 622k of EUR SI net unhedged (4 Sep); Rostro pulls positions from Pulse to check; breaks booked manually on 8 Sep (151 XAUUSD) and 2 Oct (G30EUR, SPX, DOW, NDX), and a 200oz break on 17 Sep. On 28 Oct Kate booked positions in the rev share book (hedger off while booking, done by 15:48 UTC) to fix long-term breaks left by the earlier Centroid issue. On 5 Nov Alexandre flagged a new 2k GBPJPY break on the SI book vs Scope's coverage account, begun between 18:20 and 22:20 UTC on 4 Nov; Rory King said Mahi hedges in drivers (GBPUSD, USDJPY), and that two trades cancelled and re-sent were filled just after 22:00 UTC (72725714-2 and 72725715-2 replaced -1); he asked for the coverage account position; no answer seen.
+State: Breaks booked manually 8 Sep, 17 Sep and 2 Oct. On 28 Oct Kate booked positions in the rev share book (hedger off while booking, done by 15:48 UTC) to fix long-term breaks left by the earlier Centroid issue. On 5 Nov Alexandre flagged a new 2k GBPJPY break on the SI book vs Scope's coverage account, begun between 18:20 and 22:20 UTC on 4 Nov; Rory King said Mahi hedges in drivers (GBPUSD, USDJPY), and that two trades cancelled and re-sent were filled just after 22:00 UTC (72725714-2 and 72725715-2 replaced -1); he asked for the coverage account position; no answer seen.
 Next: Alexandre to share the coverage account position for GBPJPY; Cameron to roll out the VaR alerting now the booking is done.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1788504725919689 https://mahifx.slack.com/archives/C08ALS66EDC/p1793199991187849 https://mahifx.slack.com/archives/C08AQKRU953/p1793892499283759
 
@@ -92,44 +103,44 @@ Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787068816321309 https://ma
 
 ### commercials-reneg — Commercial renegotiation, value-add and relationship
 status: open · since: 2026-08-19 · last: 2026-11-11
-State: New Rostro terms signed (Bonnie, 11 Nov). Rostro asked to renegotiate; Sam Steele challenged whether STP flow counts toward fees but wants to send all flow (1 Sep). A draft was declined 15 Sep; after the mid-Oct talks Rostro accepted terms with fees discounted by a $150K repayment settlement over 15 months (crypto licence likely, interested in weekend gold). Sam Steele wants two sessions, on the crypto tool and the equities portfolio tool (Andrew thinks single stocks are the bulk of Rostro's business, so Mahi may need to close a gap); his meeting is booked for the 13th (month not stated, presumably Nov). Kate delivered a value-add report 15 Oct; Rostro keeps some spreads tight to win flow back, so tailored models are being built. Alex asked about kilo gold; Kate said Mahi can do it, Andrew said charge where possible. 3 Nov call (Kate): Rostro happy to set up global LR, conservative at $5/M max; considering pricing into Integral, but Kate's early read (-$60/M on inception or worse) is poor and she asked for a dataset. Rostro's group got a crypto registration in the BVI.
+State: New Rostro terms signed (Bonnie, 11 Nov). Draft declined 15 Sep; after mid-Oct talks Rostro accepted terms with fees discounted by a $150K repayment settlement over 15 months (crypto licence likely, interested in weekend gold). Sam Steele wants two sessions, on the crypto tool and the equities portfolio tool (Andrew thinks single stocks are the bulk of Rostro's business, so Mahi may need to close a gap); his meeting is booked for the 13th (month not stated, presumably Nov). Kate delivered a value-add report 15 Oct; tailored models are being built. Alex asked about kilo gold; Kate said Mahi can do it, Andrew said charge where possible. 3 Nov call (Kate): Rostro happy to set up global LR, conservative at $5/M max; considering pricing into Integral, but Kate's early read (-$60/M on inception or worse) is poor and she asked for a dataset. Rostro's group got a crypto registration in the BVI.
 Next: Rostro to send Integral flow dataset; set up global LR (max $5/M); prepare for the Sam Steele meeting on the 13th (crypto tool, then equities); consider charging for kilo gold.
 Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1787135711511859 https://mahifx.slack.com/archives/C08ALS66EDC/p1792485246173679 https://mahifx.slack.com/archives/C08ALS66EDC/p1793703042394719 https://mahifx.slack.com/archives/C08ALS66EDC/p1794388096504289
 
 ### pxm-order-handling — PXM order splitting, boost, latency and tick throttle
 status: open · since: 2026-09-30 · last: 2026-10-30
-State: PXM splits large FA/VIP orders into tier-sized clips so fills land near TOB not VWAP (30 Sep, 6 Oct). PXM (13 Oct): boost off suits limit orders but market orders then sweep too; Liam says LR is the only in-product fix and the no-slippage agreement rules it out. Kate proposes Alex ask PXM for pass-through or per-order-type boost. Client latency traced to tick throttles in Mahi's VIP distribution and PXM: Mahi moved VIP to 2 per 10ms, Rostro raised PXM to 1 per ms; Alex asked for 4 per 10ms, Kate (12 Oct) doubts it helps. On 30 Oct Alexandre said the VIP end client still sees 12ms tick latency; Scope's PXM sampling interval is 5 and he wants 3 and Mahi ticks per 10ms at 7. Kate wanted a fresh dataset first (every tick was being published after the last change); Alexandre has no dataset, so he will lower the PXM sample interval and Mahi will check next week whether every tick is published.
+State: PXM splits large FA/VIP orders into tier-sized clips so fills land near TOB not VWAP (30 Sep, 6 Oct). PXM boost off suits limit orders but market orders then sweep too; LR is the only in-product fix and the no-slippage agreement rules it out; Kate proposes asking PXM for per-order-type boost. Client latency traced to tick throttles in Mahi's VIP distribution and PXM (Mahi VIP 2 per 10ms, PXM 1 per ms). On 30 Oct Alexandre said the VIP end client still sees 12ms tick latency; Scope's PXM sampling interval is 5 and he wants 3 and Mahi ticks per 10ms at 7. Kate wanted a fresh dataset first (every tick was being published after the last change); Alexandre has no dataset, so he will lower the PXM sample interval and Mahi will check next week whether every tick is published.
 Next: PXM/Alex on pass-through or per-order-type boost; Kate to review tick publishing next week after the PXM sampling change (no dataset from the end client); Kate to check protective throttling on Mahi side before Rostro changes the PXM throttle.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1790776376391349 https://mahifx.slack.com/archives/C08ALS66EDC/p1791298744478709 https://mahifx.slack.com/archives/C08ALS66EDC/p1791883456395629 https://mahifx.slack.com/archives/C08AQKRU953/p1793361779461789
 
 ### vip-trial-skew — VIP end-client final trial: skew off on USDJPY/EURUSD
 status: open · since: 2026-10-30 · last: 2026-10-30
-State: Alexandre said the end client behind tag ending 100029 (most of VIP flow on USDJPY/EURUSD) is on its last trial week with Scope and will switch Scope off if unhappy, and asked for skew to be disabled. Skew is per price stream, not per tag, so Kate turned skew off on USDJPY and EURUSD on the VIP feed for the trial (price-based signals still apply to others), to be reviewed afterwards; the alternative is skew on with this tag's trades excluded from the signals, as its own trades drive most of the skew it sees. Alexandre called the skew PnL small. Tick latency side is in pxm-order-handling.
+State: Alexandre said the end client behind tag ending 100029 (most of VIP flow on USDJPY/EURUSD) is on its last trial week with Scope and will switch Scope off if unhappy, and asked for skew to be disabled. Skew is per price stream, not per tag, so Kate turned skew off on USDJPY and EURUSD on the VIP feed for the trial (price-based signals still apply to others), to be reviewed afterwards; the alternative is skew on with this tag's trades excluded from the signals, as its own trades drive most of the skew it sees. Tick latency side is in pxm-order-handling.
 Next: Kate to review skew after the trial and decide between skew on with the tag excluded from signals or staying off.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1793361779461789 https://mahifx.slack.com/archives/C08AQKRU953/p1793372430907599
 
 ### pxm-connections — PrimeXM connections, LP list and feeds
 status: open · since: 2026-09-04 · last: 2026-10-27
-State: PXM taker connections were cleaned up (7 Sep) and feeds added (incl. IC_SUBS_*). A third connection (MAHI_3, done 30 Sep) was added because MAHI_2 is close to MAHI in throughput; it carries the IC_SUBS stream. On 14 Oct, Mahi found the VIP price session in PXM never requests XAGUSD, so Alex sees the INV book on VIP silver. On 16 Oct Kate confirmed no DST change is needed on Scope's side (FIX connections run on NY time).
+State: PXM taker connections cleaned up (7 Sep); MAHI_3 added 30 Sep for the IC_SUBS stream. On 14 Oct, Mahi found the VIP price session in PXM never requests XAGUSD, so Alex sees the INV book on VIP silver.
 On 26 Oct Alexandre added the missing XAGUSD spread config on the FA stream; on 27 Oct Kate confirmed risk splitting for XAGUSD on FA was fine, Scope's test trade was routed to the off book and Kate said it looked good. Alexandre is still tweaking the XAGUSD spread config (no BMSL set on silver, even on the SI) and Kate offered to check the setup against his target spreads/widening.
 Next: Alexandre to add XAG/USD to the VIP price session in PXM; Alexandre to share target XAGUSD spreads/widening if he wants Kate to check the setup.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1788508022729149 https://mahifx.slack.com/archives/C08AQKRU953/p1790608061088529 https://mahifx.slack.com/archives/C08AQKRU953/p1793051109437589 https://mahifx.slack.com/archives/C08AQKRU953/p1793109730716639
 
 ### fok-partial-fill — 26 Oct SI XAUUSD position break from partial-fill FOK brokering
 status: open · since: 2026-10-26 · last: 2026-10-26
-State: Scope (Alexandre) flagged a -1.2M average SI short held since Friday; Oliver put it at -1028 and guessed the outage. Kate traced it to partial fills on FOK orders attempted to broker: 400oz orders got 350oz from the LPs, one was topped up 50oz (long 50oz) and for the other the client trade was cancelled, leaving the house short 300oz at the LPs. Oliver confirmed the SI house needed to be short and, after a call, said the position looked right at 09:38 UTC. Kate turned off the hedger-to-book position adjustment, set a high-VAR alert on the Retail A Book tenant profile and asked Oliver to rec CLIENTS_NET positions; Riz's rule had top-up allowed. Scope asked for a DB query to detect FOK partial fills and alert proactively.
+State: Scope (Alexandre) flagged a -1.2M average SI short held since Friday; Kate traced it to partial fills on FOK orders attempted to broker: 400oz orders got 350oz from the LPs, one was topped up 50oz (long 50oz) and for the other the client trade was cancelled, leaving the house short 300oz at the LPs. Oliver later said the position looked right. Kate turned off the hedger-to-book position adjustment, set a high-VAR alert on the Retail A Book tenant profile and asked Oliver to rec CLIENTS_NET positions; Riz's rule had top-up allowed.
 Next: Riz to confirm whether top-up allowed was intended on the rule; Kate to answer Scope's partial-fill detection question; Oliver to rec CLIENTS_NET positions.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1793005750513019 https://mahifx.slack.com/archives/C08AQKRU953/p1793006840087599 https://mahifx.slack.com/archives/C08ALS66EDC/p1793015998283009
 
 ### fill-queries — Client execution, slippage and rejection queries
 status: open · since: 2026-08-27 · last: 2026-10-23
-State: 23 Oct Rahul reported 57 of 86 orders with negative slippage ($106.53) on a sub-account; Kate: all were brokered to IC after automated classification briefly flagged the account (cleared 08:50 UTC), internal fills got the shown price. 22 Oct a USDJPY Limit IOC to IC sat 3 min (IC connection reset), tripping hybridHedgerOffBook1's order-breach limit; no open risk. Recurring ScopeMarkets fill queries, mostly LP-side behaviour on brokered flow or model behaviour. 
+State: 23 Oct Rahul reported 57 of 86 orders negative slippage on a sub-account; Kate: brokered to IC after classification briefly flagged the account, internal fills got the shown price. 22 Oct a USDJPY Limit IOC to IC sat 3 min (IC connection reset), tripping an order-breach limit; no open risk.
 Next: Rostro to say whether to change the LP, internalise, or relax the anti-spoof node; no reply seen.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787835257505189 https://mahifx.slack.com/archives/C08AQKRU953/p1792665379140899 https://mahifx.slack.com/archives/C08AQKRU953/p1792781435455779 https://mahifx.slack.com/archives/C08AQKRU953/p1792782045722059
 
 ### cmc-spx-freeze — 14 Oct CMC SPX/NDX freeze, RCA and evidence pack
 status: open · since: 2026-10-14 · last: 2026-10-20
-State: CMC's SPX price (futures and cash) froze 12:18:36-12:34:15 UTC while IC and Jump fell about 38 points after the 12:30 print. Loss about 178k (SPX fut -145k, SPX cash -23k, NDX cash -10k); roughly 114k client trades at the frozen price (251* sold about $31.5M into it); Cause: CMC stayed connected and its size changes reset the stuck-filter's 10 min clock (reproduced in Will's replays): upstream failure plus a Mahi protection gap. Evidence went to Rostro 14 Oct; PXM FIX logs were not recorded. Andrew told David the clients were remarked to the Jump rate (amendments and remaining loss to be confirmed) and accepted five outcomes onto roadmap 7.2-PI-1 to 5: quantity-only updates must not hide frozen prices, divergence alert vs a normalised reference (first), quote pull at a replay-validated threshold, hedge availability alongside pricing health, and reconciling the Jump repricing with any CMC recovery. 20 Oct: CMC gave no rebate; its incident report said internal config was published with errors halting pricing.
+State: CMC's SPX price (futures and cash) froze 12:18:36-12:34:15 UTC while IC and Jump fell about 38 points after the 12:30 print. Loss about 178k (SPX fut -145k, SPX cash -23k, NDX cash -10k); roughly 114k client trades at the frozen price Cause: CMC stayed connected and its size changes reset the stuck-filter's 10 min clock (reproduced in Will's replays): upstream failure plus a Mahi protection gap. Evidence went to Rostro 14 Oct. Andrew accepted five outcomes onto roadmap 7.2-PI-1 to 5: quantity-only updates must not hide frozen prices, divergence alert vs a normalised reference (first), quote pull at a replay-validated threshold, hedge availability alongside pricing health, and reconciling the Jump repricing with any CMC recovery. 20 Oct: CMC gave no rebate; its incident report said internal config was published with errors halting pricing.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1791981542846109 https://mahifx.slack.com/archives/C08ALS66EDC/p1792137303134229 https://mahifx.slack.com/archives/C08ALS66EDC/p1792139709277749 https://mahifx.slack.com/archives/C08ALS66EDC/p1792490159068509
 
 ### c-book-lr-price — C book slippage: LR applied at fill but not in quoted price
@@ -138,21 +149,15 @@ State: Alexandre said the C book client complained of slippage on 15 Oct gold (f
 Next: Rostro (Alexandre/Riz) to decide between XAUUSD.c routing and global LR; LR stays off on C_CLIENTS until then.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1792138607035239 https://mahifx.slack.com/archives/C08AQKRU953/p1792140741428669 https://mahifx.slack.com/archives/C08AQKRU953/p1792141257894219
 
-### gbpnzd-roll-price — GBPNZD price source around the 2 Nov roll
-status: watching · since: 2026-11-10 · last: 2026-11-10
-State: Riz asked what sourced the INSTI distribution price for GBPNZD before CLIENT_PRICE_LDN started pricing at 22:01:20 UTC on 2 Nov. Kate: the channel fell back to its continuity pool, where only one LP quoted GBPNZD from 22:01:00, so it published around that LP's mid at the roll max spread, then switched back. Riz suspects the triangulated legs were missing and asked whether spread is capped; Kate offered to review the pool's LPs.
-Next: Riz to say whether he wants the pool LPs reviewed; answer on the spread cap.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794306214114219 https://mahifx.slack.com/archives/C08AQKRU953/p1794309708989839
-
 ### psm-inv-rollout — Predictive spread modulation on the INV model
 status: watching · since: 2026-09-01 · last: 2026-10-14
-State: Kate proposed PSM on CLIENT_PRICE_INV_LDN on 1 Sep. A Beta model ran about a month at +$0.83/M wider than INV. Rostro agreed and PSM went live 13-14 Oct.
+State: PSM live on INV 13-14 Oct after a month-long beta (+$0.83/M).
 Next: watch volumes and spreads after go-live.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1788280838936589 https://mahifx.slack.com/archives/C08AQKRU953/p1791971029551609
 
 ### compass-26-4 — Compass 26.4 upgrade and dashboard deploys
 status: watching · since: 2026-10-08 · last: 2026-10-09
-State: 26.3 to 26.4 staged Friday 9 Oct, live at the weekend restart; Rostro opted out of the PSM overlays it restores, so no pricing change. A classifier bug on tags containing "/" is tracked as ZD-23407.
+State: 26.4 live at the 10-11 Oct restart; Rostro opted out of PSM overlays. Classifier bug on tags containing "/" is ZD-23407.
 Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1791483337578909 https://mahifx.slack.com/archives/C08AQKRU953/p1791543772435149
 
 ### xau-bad-print — 11 Sep Jane Street XAUUSD bad print (CPI) and missing price guard
@@ -163,27 +168,27 @@ Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1789131695104789 https://ma
 
 ### centroid-b2c-prices — B2C Centroid connection showed no GBPNZD prices
 status: closed · since: 2026-10-28 · last: 2026-10-28 · closed: 2026-11-02
-State: GBPNZD missing on B2C Centroid; Mahi streams were live, Abdullah traced it to an MT5 filter on Scope's side.
+State: GBPNZD missing on B2C Centroid; traced to an MT5 filter on Scope's side.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1793187010016709 https://mahifx.slack.com/archives/C08AQKRU953/p1793189507174379
 
 ### c-book-clearance — C book risk clearance speed (15 Oct gold)
 status: closed · since: 2026-10-15 · last: 2026-10-15 · closed: 2026-11-11
-State: 30M C book exposure took about 5 min to clear on 15 Oct (IC cancels, fill-ratio adjustment zeroing IC, VAR-CLEARANCE paused). Kate turned the fill-ratio adjustment off on the C House and SI hedgers and set forceShortenExecutionOnSurplus; no activity since, assumed resolved.
+State: 15 Oct 30M C book clearance took ~5 min; Kate turned off fill-ratio adjustment on the hedgers; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1792078136400489 https://mahifx.slack.com/archives/C08ALS66EDC/p1792081751691529
 
 ### pulse-athena-access — Rostro cannot read Pulse/Athena from new IP
 status: closed · since: 2026-08-27 · last: 2026-09-09 · closed: 2026-11-05
-State: no activity since 2026-09-09; Mahi has no Pulse/Athena whitelisting; assumed resolved.
+State: assumed resolved.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787822793611979 https://mahifx.slack.com/archives/C08AQKRU953/p1788950130321199
 
 ### brokered-lr-review — Brokered last-look yield decline
 status: closed · since: 2026-08-25 · last: 2026-09-01 · closed: 2026-11-02
-State: no activity since 2026-09-01; assumed resolved or superseded (PSM live on INV 13-14 Oct).
+State: assumed resolved or superseded (PSM live on INV).
 Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1787649194353099 https://mahifx.slack.com/archives/C08ALS66EDC/p1787740328562409 https://mahifx.slack.com/archives/C08ALS66EDC/p1788280858317659
 
 ### oil-incident-rca — July oil reference-feed incident RCA
 status: closed · since: 2026-08-17 · last: 2026-09-01 · closed: 2026-11-02
-State: no activity since 2026-09-01; assumed resolved (RCA sent Aug; see Arc).
+State: assumed resolved (RCA sent Aug).
 Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1786988498348909 https://mahifx.slack.com/archives/C08ALS66EDC/p1788273338625779
 
 ## Arc
