@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-13T08:15:09Z
+last_catchup: 2026-11-16T08:19:32Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP position re-sync (~$30M manual-hedge LP positions in B House; evening adjustments booked 2026-11-12, USDJPY B-to-A move still requested); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### radex-risk-split — Radex A/B risk splitting, residual hedges, MeanFin
+status: open · since: 2026-07-21 · last: 2026-11-16
+State: Radex flow (A_CLIENTS_RA) is soft-classified and risk-split A to B automatically, which ignores clients closing their own trades, so lumpy flow leaves residual LP hedges: XAU on 2026-09-04 (Isaac netted everything into B for now; he floated turning splitting off or fully A- or B-booking Radex; Erik floated re-splitting open exposure when classification changes), and NZDCAD 12m opened in A and closed in B (2026-09-25), resolved by Daria's options (A-to-B move triggers the hedger to unwind, or close via the trading hedger). Mac adjusted into B_CLIENTS_RA_NYC_SPLIT on 09-28; Daria said adjusting directly into B_CLIENTS_RA_NYC is the correct exception to the child-book rule. Go will onboard a new institutional client MeanFin on the Radex session (tag 1 = MEANFIN, same pricing and risk-splitting config); set up, no start ETA, not enabled without notice. On 2026-10-14 Mac asked why Radex skews more than regular clients; Nathan explained the signal config is identical and Radex's wider XAUUSD base spread (0.11 vs 0.07) scales skew, Mac accepted. On 2026-11-16 Kieran asked why the _RA feed (CLIENT_PRICE_RA_NYC) is tighter than the normal feed on AUDCAD (TOB 5x the size at 100k). Nathan's config history shows RA has always been tighter (500k at 0.1 pip vs 100k at 0.8 pip since 2 Jul; 0.4 pip before); Kieran countered the main feed's AUDUSD/USDCAD inputs are tighter and asked if another setting floors the main feed. Nathan then found AUDCAD is configured as a cross driver, so it takes its directly priced spread profile instead of triangulating from AUDUSD/USDCAD.
+Next: Nathan to update the team when Go gives a MeanFin start date; Kieran to say whether the AUDCAD cross-driver explanation settles the RA-vs-main gap. The underlying split-versus-closes design problem is not formally decided.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788528415870089 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790301122048699 https://mahifx.slack.com/archives/CNF3WPNSK/p1791775388999269 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794792905679019
 
 ### lp-position-resync — B House carrying LP positions; re-sync to match A Book risk
 status: open · since: 2026-11-12 · last: 2026-11-12
@@ -83,21 +89,10 @@ Next: Mahi dev to review why warm-up failed to cover the open.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792164137750009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792361497379359
 
 ### channel-refactor — Regional channel/book refactor and gateway latency
-status: open · since: 2026-08-27 · last: 2026-10-15
-State: Isaac created B_FX_20_METAL_50 and mirror A20_FX_20_METAL_50 markup channels (20 $/M FX, 50 $/M metals, 20% risk split to A) and recommended rolling regional books (e.g. B_CLIENTS_AU_NYC) back into B_CLIENTS_NYC before adding more; Erik is testing and will plan at scale, client sign-off on the cleanup plan was not seen. On 2026-10-14 Isaac and Nathan found Go's gateway saturated: ~20 channels make the single CEP thread on clientDistributionGateway1 recompute each tick per channel (~18k updates/s, ~52% from the 10 regional channels), pushing last-look releases past their window. Decision: raise distribution.node.advanced.numberOfCEPThreads first and hold off asking Go to decommission channels. On 2026-10-15 Isaac set numberOfCEPThreads to 2 (pending EOD restart) and, on Liam's suggestion, switched the sharding strategy to counterparty mode; longer plan is remapping by new trading accounts to markup channels, but riskSplitting cannot split by trading account.
+status: watching · since: 2026-08-27 · last: 2026-10-15
+State: Downgraded to watching: no activity since 10-15. Isaac created B_FX_20_METAL_50 and mirror A20_FX_20_METAL_50 markup channels (20 $/M FX, 50 $/M metals, 20% risk split to A) and recommended rolling regional books (e.g. B_CLIENTS_AU_NYC) back into B_CLIENTS_NYC before adding more; Erik is testing and will plan at scale, client sign-off on the cleanup plan was not seen. On 2026-10-14 Isaac and Nathan found Go's gateway saturated: ~20 channels make the single CEP thread on clientDistributionGateway1 recompute each tick per channel (~18k updates/s, ~52% from the 10 regional channels), pushing last-look releases past their window. Decision: raise distribution.node.advanced.numberOfCEPThreads first and hold off asking Go to decommission channels. On 2026-10-15 Isaac set numberOfCEPThreads to 2 (pending EOD restart) and, on Liam's suggestion, switched the sharding strategy to counterparty mode; longer plan is remapping by new trading accounts to markup channels, but riskSplitting cannot split by trading account.
 Next: confirm effect on last-look release timing after the EOD restart; Nathan to chase Go on the markup/risk-splitting refactor afterwards.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787846033418999 https://mahifx.slack.com/archives/CNF3WPNSK/p1792075782283879
-
-### brokered-xau-markup — GO XAU brokering: internalisation trial and execution-rule markup
-status: open · since: 2026-10-15 · last: 2026-10-15
-State: Isaac corrected an earlier internalisation-trial uplift, which had kept the client's slipped brokered fill price. Re-priced at book VWAP with a 200ms last look, internalising Large XAU, Fast Hedge and Don't B Book shows no significant gain at 30s or 1m; Signal Follow clearly belongs brokered. No trial for now. Use case for the roadmapped execution-rule markup: brokered market orders slip at every venue while limit-order hedging is cheap, so markup would allow internalising toxic profiles and hedging via H1/arb.
-Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1792069620138069
-
-### radex-risk-split — Radex A/B risk splitting, residual hedges, MeanFin
-status: open · since: 2026-07-21 · last: 2026-10-14
-State: Radex flow (A_CLIENTS_RA) is soft-classified and risk-split A to B automatically, which ignores clients closing their own trades, so lumpy flow leaves residual LP hedges: XAU on 2026-09-04 (Isaac netted everything into B for now; he floated turning splitting off or fully A- or B-booking Radex; Erik floated re-splitting open exposure when classification changes), and NZDCAD 12m opened in A and closed in B (2026-09-25), resolved by Daria's options (A-to-B move triggers the hedger to unwind, or close via the trading hedger). Mac adjusted into B_CLIENTS_RA_NYC_SPLIT on 09-28; Daria said adjusting directly into B_CLIENTS_RA_NYC is the correct exception to the child-book rule. Go will onboard a new institutional client MeanFin on the Radex session (tag 1 = MEANFIN, same pricing and risk-splitting config); set up, no start ETA, not enabled without notice. On 2026-10-14 Mac asked why Radex skews more than regular clients; Nathan explained the signal config is identical and Radex's wider XAUUSD base spread (0.11 vs 0.07) scales skew, Mac accepted.
-Next: Nathan to update the team when Go gives a MeanFin start date. The underlying split-versus-closes design problem is not formally decided.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788528415870089 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790301122048699 https://mahifx.slack.com/archives/CNF3WPNSK/p1791775388999269 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791952706615519
 
 ### lp-hedging-limits — LP hedging behaviour, NOP limits, clearing positions
 status: watching · since: 2026-06-09 · last: 2026-10-06
@@ -105,21 +100,31 @@ State: Finalto hedging stopped from 2026-09-01 because its per-LP NOP limit (10m
 Next: Nathan to report back on why LMAX_LDN is rejecting ~70%.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788419249269449 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790556017984519 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791253970054589
 
-### xau-pricing-skew — Gold/FX pricing smoothness, skew and failover
-status: watching · since: 2026-06-01 · last: 2026-09-17
-State: 2026-08-18 call: Kieran happy with skew sizes and slippage complaints down but wants smoother price; Go publishes to MetaQuotes every ~80ms while fills use live Compass price, which flickers; Daria suggested throttling publishing, Nathan investigating flicker before skew goes up again. 08-19 Isaac cut benchmark spread skew weight on FX after Mac's AUDCAD jumps (flow-price-thresh). 09-15 call: client price went offline and failover to the continuity pool published huge spikes; Kieran wants no price unless the client-price LPs are online; Isaac removed MAHI_CONTINUITY_NYC from the continuity pool meanwhile. 09-17: USDJPY indicative for ~8 min at open was Wide Spread Suppression (max 0.25 vs 0.267). Downgraded to watching: no activity since 09-17.
-Next: Nathan to follow up on throttle/flicker root cause and the no-failover pricing change; no outcome seen.
-Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1787014679025069 https://mahifx.slack.com/archives/CNF3WPNSK/p1789447371722669 https://mahifx.slack.com/archives/C09J1DP2QQH/p1789626541976419
-
 ### mint-inventory-book — Gold inventory hedging and the MINT LP
 status: watching · since: 2026-08-25 · last: 2026-09-21
 State: Go wants Compass to automate hedging excess gold risk above internal limits (inventory book and hedger, possibly an SI-book, plus an unwind hedger); Nathan confirmed a B-book gold hedger to a specific LP is possible. Go onboarded LP MINT CFD (FIX sessions set 2026-09-16). On 09-21 Nathan found MINT's XAUUSD feed looks like a copy of Go's own client price (0.969 mid correlation vs 0.33-0.57 for real LPs, +$0.04 spread, ~6ms lag) and Kieran had described a special relationship where Go can broker at a price they decide; concerns are MINT benefiting from Go's skew and Mahi hedgers picking MINT off. Logged on the wiki; not seen raised with Go in channel. Downgraded to watching: no activity since 09-21.
 Next: Mahi to decide whether to raise the MINT feed finding with Go; inventory book build status unknown.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787628603910739 https://mahifx.slack.com/archives/CNF3WPNSK/p1789949763533859
 
+### xau-pricing-skew — Gold/FX pricing smoothness, skew and failover
+status: watching · since: 2026-06-01 · last: 2026-09-17
+State: 2026-08-18 call: Kieran happy with skew sizes and slippage complaints down but wants smoother price; Go publishes to MetaQuotes every ~80ms while fills use live Compass price, which flickers; Daria suggested throttling publishing, Nathan investigating flicker before skew goes up again. 08-19 Isaac cut benchmark spread skew weight on FX after Mac's AUDCAD jumps (flow-price-thresh). 09-15 call: client price went offline and failover to the continuity pool published huge spikes; Kieran wants no price unless the client-price LPs are online; Isaac removed MAHI_CONTINUITY_NYC from the continuity pool meanwhile. 09-17: USDJPY indicative for ~8 min at open was Wide Spread Suppression (max 0.25 vs 0.267). Downgraded to watching: no activity since 09-17.
+Next: Nathan to follow up on throttle/flicker root cause and the no-failover pricing change; no outcome seen.
+Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1787014679025069 https://mahifx.slack.com/archives/CNF3WPNSK/p1789447371722669 https://mahifx.slack.com/archives/C09J1DP2QQH/p1789626541976419
+
+### warehouse-b-account — New Warehouse_B trading account for Go
+status: closed · since: 2026-11-13 · last: 2026-11-15 · closed: 2026-11-16
+State: Erik asked on 2026-11-13 for a trading account named Warehouse_B to book trades under the correct book and keep Go's other systems aligned; Rory agreed and Nathan confirmed it actioned on 2026-11-15.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1794593076005619 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794777220115129
+
+### brokered-xau-markup — GO XAU brokering: internalisation trial and execution-rule markup
+status: closed · since: 2026-10-15 · last: 2026-10-15 · closed: 2026-11-16
+State: No activity since 10-15; no trial pursued, assumed resolved. Isaac corrected an earlier internalisation-trial uplift, which had kept the client's slipped brokered fill price. Re-priced at book VWAP with a 200ms last look, internalising Large XAU, Fast Hedge and Don't B Book shows no significant gain at 30s or 1m; Signal Follow clearly belongs brokered. No trial for now. Use case for the roadmapped execution-rule markup: brokered market orders slip at every venue while limit-order hedging is cheap, so markup would allow internalising toxic profiles and hedging via H1/arb.
+Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1792069620138069
+
 ### lr-attribution — LR not attributed on liquidity-reduced fill
-status: watching · since: 2026-09-15 · last: 2026-09-15
-State: Isaac saw an A-book PnL bump from brokered trades where published price differed one-sidedly from client model price (confirmed LR via binlogs) yet Compass and yield profiles show no LR attribution; question logged on the wiki, no answer seen in 31d, downgraded to watching.
+status: closed · since: 2026-09-15 · last: 2026-09-15 · closed: 2026-11-16
+State: No answer in 62d; closed as stale (question can be re-raised if it recurs). Isaac saw an A-book PnL bump from brokered trades where published price differed one-sidedly from client model price (confirmed LR via binlogs) yet Compass and yield profiles show no LR attribution; question logged on the wiki, no answer seen in 31d, downgraded to watching.
 Next: Mahi dev answer on whether LR attribution is expected to be missing.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1789461866412159
 
