@@ -14,7 +14,7 @@ contacts:
   - {name: "Roman", role: "Axiory main commercial/relationship contact (no surname confirmed)", confidence: low}
   - {name: "Magda", role: "Axiory, possibly attending Cyprus event alongside Roman", confidence: low}
   - {name: "Jan", role: "Axiory TY office, data/ops requests (surname unknown)", confidence: low}
-last_catchup: 2026-11-13T08:13:41Z
+last_catchup: 2026-11-16T08:17:35Z
 status: active
 ---
 
@@ -26,9 +26,9 @@ Client channel has been quiet since July apart from the upgrade notice.
 ## Streams
 
 ### compass-26-4-upgrade — Compass 26.3 to 26.4 upgrade (LDN + TKY)
-status: open · since: 2026-10-08 · last: 2026-10-09
-State: Change CHG-2610-6A7S staged Fri 10-09, live at the weekend restart; approved at RC #7224. Axiory sets neither PSM adjustment-widening nor tightening parameters, so from restart prices widen/tighten by one increment on PSM-W/PSM-T signals in LDN and TKY; Liam decided to let that go on. Client was told 10-09 and is being monitored over the open. Infra main moved to LDN + TKY ahead of staging (CHG-2610-WP2T, self-approved).
-Next: confirm the restart landed cleanly and watch pricing after the open (nothing posted yet).
+status: watching · since: 2026-10-08 · last: 2026-10-09
+State: Downgraded to watching (no Slack activity for 38d; restart outcome never posted). Change CHG-2610-6A7S staged Fri 10-09, live at the weekend restart; approved at RC #7224. Axiory sets neither PSM adjustment-widening nor tightening parameters, so from restart prices widen/tighten by one increment on PSM-W/PSM-T signals in LDN and TKY; Liam decided to let that go on. Client was told 10-09 and is being monitored over the open. Infra main moved to LDN + TKY ahead of staging (CHG-2610-WP2T, self-approved).
+Next: confirm the restart landed cleanly (nothing posted yet); close if still silent at 60d.
 Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1791483332472299 https://mahifx.slack.com/archives/C06KHNQQYMR/p1791543782667709
 
 ### infra-change-notices — Infra and network change windows affecting Axiory
@@ -37,9 +37,8 @@ State: Upcoming or recent imposed windows: PrimeXM LD4 cross-connect port upgrad
 Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1791494708657249 https://mahifx.slack.com/archives/C06KQT6EU3W/p1791998802022569
 
 ### skew-arb-tuning — Skew tuning and GBPAUD/arb handling
-status: watching · since: 2026-05-22 · last: 2026-08-28
-State: Downgraded to watching (no Slack activity for 69d). Weekly skew-health runs (Kate, 08-28) found capture healthy (about $100k/wk TKY, $21k/wk LDN, mostly XAUUSD) and made config-only changes: flow-price-thresh published for five crosses on TKY (measurement only), a very small harmonics skew on GBPAUD TKY (LDN stays off after the Jan and May arbs; FI-drop alert is the tripwire), USDJPY/GBPJPY/XAGUSD signal swaps, dedicated graph threads for XAUUSD/USDJPY. AXIORY_MT5_LDN is now excluded via book scope (it double counted PXM trades). NDXUSD/G30EUR re-wire since 22 Jul is a net win (about $880/wk).
-Next: Kate reads USDJPY/GBPJPY LDN and flow-price-thresh potential at the 4 and 11 Sep runs; no later result seen in Slack.
+status: closed · since: 2026-05-22 · last: 2026-08-28 · closed: 2026-11-16
+State: No activity since 2026-08-28; assumed resolved. Weekly skew-health runs (Kate, 08-28) found capture healthy (about $100k/wk TKY, $21k/wk LDN, mostly XAUUSD) and made config-only changes: flow-price-thresh published for five crosses on TKY (measurement only), a very small harmonics skew on GBPAUD TKY (LDN stays off after the Jan and May arbs; FI-drop alert is the tripwire), USDJPY/GBPJPY/XAGUSD signal swaps, dedicated graph threads for XAUUSD/USDJPY. AXIORY_MT5_LDN is now excluded via book scope (it double counted PXM trades). NDXUSD/G30EUR re-wire since 22 Jul is a net win (about $880/wk).
 Refs: https://mahifx.slack.com/archives/C06KQT6EU3W/p1779469727749819 https://mahifx.slack.com/archives/C06KQT6EU3W/p1787914227833699
 
 ### billing-cfd-tier — CFD tier billed on combined volume
