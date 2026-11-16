@@ -14,7 +14,7 @@ contacts:
   - {name: Dom Gilbert, role: "Think Huge (Switch parent) - COO/shareholder; drives hosting cost questions"}
   - {name: Paul Pintiliescu, role: "Think Huge - infrastructure/CTO-side; asks hardware questions"}
   - {name: Brandon, role: "Think Huge - infrastructure lead (US west coast)"}
-last_catchup: 2026-11-13T08:13:42Z
+last_catchup: 2026-11-16T08:23:46Z
 status: active
 ---
 
@@ -42,8 +42,8 @@ Next: Will to review latest commercials and respond to Sammy; Will to pull FI su
 Refs: https://mahifx.slack.com/archives/C0C7QB281J6/p1791454134051789 https://mahifx.slack.com/archives/C0C7QB281J6/p1791465957208229 https://mahifx.slack.com/archives/C0C7QB281J6/p1792584843864439 https://mahifx.slack.com/archives/C0C7QB281J6/p1792663788281489
 
 ### hosting-non-beeks — Switch self-hosting Compass outside Beeks
-status: open · since: 2026-10-08 · last: 2026-10-09
-State: Switch/Think Huge want to host Compass on Think Huge infra rather than Beeks. Liam offered it as possible but costed: one-off $2,000 per hosting provider plus $500 per server per month, x-connect to Beeks still needed for central market data and signals, UDP multicast, jumbo frames and private connectivity required. Standard Beeks setup for scope (1 admin, 2 trading) is about GBP 4,242 pm, billed separately. Think Huge asked whether Intel is mandatory (Liam: not mandatory, but low-latency tuning is Intel-specific and would need rework on AMD) and which DC Mahi uses with Beeks (LD4/LD5, NY4, TY3; would co-locate near the client's bridge provider).
+status: watching · since: 2026-10-08 · last: 2026-10-09
+State: No activity since 2026-10-09; watching until Think Huge answers. Switch/Think Huge want to host Compass on Think Huge infra rather than Beeks. Liam offered it as possible but costed: one-off $2,000 per hosting provider plus $500 per server per month, x-connect to Beeks still needed for central market data and signals, UDP multicast, jumbo frames and private connectivity required. Standard Beeks setup for scope (1 admin, 2 trading) is about GBP 4,242 pm, billed separately. Think Huge asked whether Intel is mandatory (Liam: not mandatory, but low-latency tuning is Intel-specific and would need rework on AMD) and which DC Mahi uses with Beeks (LD4/LD5, NY4, TY3; would co-locate near the client's bridge provider).
 Next: Think Huge to respond on hosting option and DC; Mahi awaiting their choice.
 Refs: https://mahifx.slack.com/archives/C0C7N7CGC7Q/p1791459538072239 https://mahifx.slack.com/archives/C0C7N7CGC7Q/p1791535547310089
 
