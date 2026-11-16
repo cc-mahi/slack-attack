@@ -16,7 +16,7 @@ contacts:
   - {name: Alexandru Malanca, role: NAGA Operations}
   - {name: Paris Stephanou, role: NAGA Operations}
   - {name: Andrei Vieru, role: NAGA Operations}
-last_catchup: 2026-11-13T08:13:42Z
+last_catchup: 2026-11-16T08:21:09Z
 status: active
 ---
 
@@ -35,8 +35,8 @@ Next: NAGA to revert with feedback (Adrian Prodan), on a pilot, and on flagging 
 Refs: https://mahifx.slack.com/archives/C0C8WBNM464/p1791882666358299 https://mahifx.slack.com/archives/C0C8WBNM464/p1793714470286989 https://mahifx.slack.com/archives/C0C8WBNM464/p1793730313438089 https://mahifx.slack.com/archives/C0C8WA6FAKA/p1794330406188829
 
 ### xau-valueadd-sims — XAUUSD B-book value-add sims and report
-status: open · since: 2026-10-09 · last: 2026-10-15
-State: Quarter (Jul-Sep) of 432k NAGA B-book gold fills run through Python SI model. Headline SI 2h (12.5c hedge) is $1.45m vs $2.66m hold-everything, with much better risk (drawdown -$158k after the risk fix). Counterparty classification run daily (M2M 1212) drops SI to $1.09m with lower risk; 2026-10-15 figures compare full B-book, SI, and SI plus classifications (slightly lower PnL, better risk profile). Andrew Morgan's position: leave classification out of the client analysis until it shows a positive effect. Reconciliation of Java SI vs Python found and fixed an End-mark bug; full-quarter matched comparison still running.
+status: watching · since: 2026-10-09 · last: 2026-10-15
+State: No activity since 2026-10-15; downgraded to watching pending NAGA feedback. Quarter (Jul-Sep) of 432k NAGA B-book gold fills run through Python SI model. Headline SI 2h (12.5c hedge) is $1.45m vs $2.66m hold-everything, with much better risk (drawdown -$158k after the risk fix). Counterparty classification run daily (M2M 1212) drops SI to $1.09m with lower risk; 2026-10-15 figures compare full B-book, SI, and SI plus classifications (slightly lower PnL, better risk profile). Andrew Morgan's position: leave classification out of the client analysis until it shows a positive effect. Reconciliation of Java SI vs Python found and fixed an End-mark bug; full-quarter matched comparison still running.
 Next: Shyam/Cameron Hughes rerun SI on per-trade classifier tags (class lists differed: broker $523m vs $360m); Compass engine sim 721 (one week) still running; Java #799 vs Python $1.45m not yet a matched comparison.
 Refs: https://mahifx.slack.com/archives/C0C8WA6FAKA/p1791550292600169 https://mahifx.slack.com/archives/C0C8WA6FAKA/p1791948615791079 https://mahifx.slack.com/archives/C0C8WA6FAKA/p1792035103557469
 
