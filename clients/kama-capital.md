@@ -16,7 +16,7 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-11-13T08:15:09Z
+last_catchup: 2026-11-16T08:22:00Z
 status: active
 ---
 
@@ -26,16 +26,16 @@ Live Compass-managed A Book on XAUUSD (plus HFT and Kama Securities flow); pilot
 ## Streams
 
 ### futures-cfd-onboarding — Futures and CFDs added to Kama's Compass
-status: open · since: 2026-10-29 · last: 2026-11-12
-State: Kama want futures and CFDs live (added to the contract at no extra cost, see pilot-commercials). Kate set up indices on the pricing model; Ali listed the Z26/F27 contracts and enabled them on Mahi's connection, and on 5 Nov Kate updated subscription mappings, custom instruments and the instrument list mapping (DAX30, GC, SI, US100, US30, US500, USOIL, UKOIL). On 6 Nov Inald put the new futures (8 families, 52 contracts) into the client DB under CHG-2611-X9VR (ZD #23780, approved by Liam); live only at the kama-ln-trading-1 restart, marked implemented 7 Nov, verification due 10 Nov (3 of 4 checks pending, no result seen). William staged CHG-2611-G9MP (CFD book, hedger and channel base setup, no client routing, live at restart) on 9 Nov and CHG-2611-0KWV (futures P/W books, hedgers and channels, approved 10 Nov 15:06Z); Kate and William kept editing CFD pool, instrumentListMapping and FIX subscriptionMappings on 9-10 Nov, with pool restarts pending. Main LP for CFDs except oil is Velocity. Kama will not use new instruments for XAUUSD until indices, oil and futures are live. On 11 Nov Kate asked for LP min/step/max quantities for CFDs and futures; Ali posted the MT5 connector quantity table. On 12 Nov Kate applied the quantity limits (reference.marketInstrumentDefinitions.quantityDefinition, many edits 10:01-12:00 UTC) and, with Ali's go-ahead, sent test trades on Scope KL: all 8 futures families (SPX, XAG, DAX, XAU, NDX, DOW, UKO-F, USO-Z) and Ali confirmed all good; spot index CFD tests (SPX, NDX, DOW, G30) and then VELOCITY_KL oil CFD tests (CO1, CL1) followed and Ali said all trades fine, yes to Velocity for USO/UKO. Open: Kate asked what decimal places Kama prices futures/CFDs to (unanswered); Ali will give one day's notice of new futures listings/expiries so Mahi can subscribe at roll; the UKOFUT-F test trade from the dash errored 'Cannot convert from CO1 to USD' (instrument needs adding to a pricer process, internal).
-Next: Kate to fix the CO1 to USD pricer-process error and get the dp answer; Inald to finish verification (CHG-2611-X9VR); Kate/William to finish CFD and futures books and hedgers (CHG-2611-G9MP, CHG-2611-0KWV), apply Kama's quantity limits, then enable client routing.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793283834284999 https://mahifx.slack.com/archives/C0B6FMU96G2/p1794481959396969 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1794484184431989
+status: open · since: 2026-10-29 · last: 2026-11-13
+State: Kama want futures and CFDs live (added to the contract at no extra cost, see pilot-commercials). Kate set up indices on the pricing model; Ali listed the Z26/F27 contracts and enabled them on Mahi's connection, and on 5 Nov Kate updated subscription mappings, custom instruments and the instrument list mapping (DAX30, GC, SI, US100, US30, US500, USOIL, UKOIL). On 6 Nov Inald put the new futures (8 families, 52 contracts) into the client DB under CHG-2611-X9VR (ZD #23780, approved by Liam); live only at the kama-ln-trading-1 restart, marked implemented 7 Nov, verification due 10 Nov (3 of 4 checks pending, no result seen). William staged CHG-2611-G9MP (CFD book, hedger and channel base setup, no client routing, live at restart) on 9 Nov and CHG-2611-0KWV (futures P/W books, hedgers and channels, approved 10 Nov 15:06Z); Kate and William kept editing CFD pool, instrumentListMapping and FIX subscriptionMappings on 9-10 Nov, with pool restarts pending. Main LP for CFDs except oil is Velocity. Kama will not use new instruments for XAUUSD until indices, oil and futures are live. On 11 Nov Kate asked for LP min/step/max quantities for CFDs and futures; Ali posted the MT5 connector quantity table. On 12 Nov Kate applied the quantity limits (reference.marketInstrumentDefinitions.quantityDefinition, many edits 10:01-12:00 UTC) and, with Ali's go-ahead, sent test trades on Scope KL: all 8 futures families (SPX, XAG, DAX, XAU, NDX, DOW, UKO-F, USO-Z) and Ali confirmed all good; spot index CFD tests (SPX, NDX, DOW, G30) and then VELOCITY_KL oil CFD tests (CO1, CL1) followed and Ali said all trades fine, yes to Velocity for USO/UKO. Open: Kate asked what decimal places Kama prices futures/CFDs to (unanswered); Ali will give one day's notice of new futures listings/expiries so Mahi can subscribe at roll; the UKOFUT-F test trade from the dash errored 'Cannot convert from CO1 to USD' (instrument needs adding to a pricer process, internal). On 13 Nov William posted the list of CFDs and futures symbols to subscribe to from Kama's client pricing (kama-cfd-futures-symbols.xlsx).
+Next: Kama to subscribe the listed symbols; Kate to fix the CO1 to USD pricer-process error and get the dp answer; Inald to finish verification (CHG-2611-X9VR); Kate/William to finish CFD and futures books and hedgers (CHG-2611-G9MP, CHG-2611-0KWV), apply Kama's quantity limits, then enable client routing.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793283834284999 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1794484184431989 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1794572801034019
 
 ### xau-execution-style — Broker vs Broker First, HFT book and markup
-status: open · since: 2026-09-21 · last: 2026-11-10
-State: A 21 Sep cancel burst (FOK/IOC MinQty handling) led to Kama moving all A_CLIENTS to Broker First (29 Sep). HFT flow got its own book and hedgers (30 Sep) with internalisation on the toxic HFT pool; $20/M markup on HFT and $10/M on A Book internalised flow was agreed on 1 Oct and set up via MultiChannelConfig on 2 Oct. On 30 Sep Kate asked Kama to turn off PXM sweep/boost so each A-book order arrives whole; Ali was confirming with PXM and no outcome is visible. On 15 Oct Kama asked for Broker (not Broker First) over high-impact news; Moe set twilight and roll flow to Broker. Execution rules cannot be day-specific; a bare '*' in counterparty criteria matches none. On 21 Oct FOK orders (21:00-23:00 UTC) expired as no HFT-channel LP accepted FOK; Kate set reference.marketSupport.FOK across the board. Kama staff edited distribution.executionRules repeatedly (22, 26, 27 Oct, 4 and 6 Nov, and four times on 10 Nov by Ali and a colleague; content not visible). The agreed $20/M and $10/M markups were removed on 6 Nov (see markup-removal).
+status: open · since: 2026-09-21 · last: 2026-11-13
+State: A 21 Sep cancel burst (FOK/IOC MinQty handling) led to Kama moving all A_CLIENTS to Broker First (29 Sep). HFT flow got its own book and hedgers (30 Sep) with internalisation on the toxic HFT pool; $20/M markup on HFT and $10/M on A Book internalised flow was agreed on 1 Oct and set up via MultiChannelConfig on 2 Oct. On 30 Sep Kate asked Kama to turn off PXM sweep/boost so each A-book order arrives whole; Ali was confirming with PXM and no outcome is visible. On 15 Oct Kama asked for Broker (not Broker First) over high-impact news; Moe set twilight and roll flow to Broker. Execution rules cannot be day-specific; a bare '*' in counterparty criteria matches none. On 21 Oct FOK orders (21:00-23:00 UTC) expired as no HFT-channel LP accepted FOK; Kate set reference.marketSupport.FOK across the board. Kama staff edited distribution.executionRules repeatedly (22, 26, 27 Oct, 4 and 6 Nov, and four times on 10 Nov and twice on 13 Nov by the dealing login; content not visible). The agreed $20/M and $10/M markups were removed on 6 Nov (see markup-removal).
 Next: Mahi to confirm whether news criteria can be added to execution rules.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0C1L6G37HN/p1793098819391439 https://mahifx.slack.com/archives/C0C1L6G37HN/p1794321220997669
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790009143944299 https://mahifx.slack.com/archives/C0C1L6G37HN/p1793098819391439 https://mahifx.slack.com/archives/C0C1L6G37HN/p1794578047239229
 
 ### lp-pool-expansion — LP pool and hedging markets, KL/KS connectors
 status: open · since: 2026-09-21 · last: 2026-11-09
@@ -110,16 +110,18 @@ Next: Moe to ask PXM whether disable-on-timeout can be switched off for Kama; Ma
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1791257314493849 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792409733558559
 
 ### brokered-flow-review — Brokered vs internalised flow review (internal)
-status: open · since: 2026-10-16 · last: 2026-10-16
+status: watching · since: 2026-10-16 · last: 2026-10-16
 State: Kate's 9-16 Oct execution-quality review found most internalisable brokered flow is roll, twilight and Sunday/Monday open; roll/twilight brokered XAUUSD kept $14.2/M versus about $1.7/M if internalised, so brokering is right there. CP 100079_n/a was tagged arbitrageur then brokering 7-9 Oct, untagged before 12 Oct; now internalised on Catch-All at about -$71/M at 1m on $99M XAUUSD, watching for re-tag. 40874_30033000 is the only steady internalise candidate (about $1k/week), to watch a couple more weeks.
-Next: Kate to finish instrument/timezone/CP breakdown; watch 100079_n/a re-tagging and 40874_30033000.
+Next: Downgraded to watching (no activity since 16 Oct). Kate to finish instrument/timezone/CP breakdown; watch 100079_n/a re-tagging and 40874_30033000.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1792160321472259 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792165670366029
 
+
 ### xauusd-skew-signals — B Book XAUUSD skew tuning
-status: open · since: 2026-10-08 · last: 2026-10-14
+status: watching · since: 2026-10-08 · last: 2026-10-14
 State: B Book XAUUSD skew was about -$0.35/M for 1-8 Oct because FI optimisation parties included CLIENTS_LDN (INSTI-priced, never skewed). Kate switched the skew signal to IFM, then limited optimisation parties to B_CLIENTS_LDN (8 Oct). Skew since was +$1.61/M over 9, 12 and 13 Oct (+$528 on $329M; early). On 14 Oct she moved the signal from IFM to flow-price-thresh (57.7% volume correct, $675 potential vs IFM 51.0%, $424).
-Next: Kate to keep reviewing; a before/after backtest was planned.
+Next: Downgraded to watching (no activity since 14 Oct). Kate to keep reviewing; a before/after backtest was planned.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1791471223806789 https://mahifx.slack.com/archives/C0B6FMU96G2/p1791965822602239
+
 
 ### weekend-risk-carry — Friday close hedging did not clear risk
 status: watching · since: 2026-10-12 · last: 2026-10-13
