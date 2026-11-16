@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-11-13T08:17:23Z
+last_catchup: 2026-11-16T08:24:55Z
 status: active
 ---
 
@@ -32,6 +32,18 @@ On 10-21 the NY retail FX book moved to a 500k G8 inventory cap with Friday flat
 GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). Toa reset Mahi's last-look/tolerance, so TOA_CHI went back into XAU hedging on 11-03. Open operational threads: CHI hedger breaches/CBOE state mismatches, LDN insti pricer reference-market gap, B2PRIME XAU increment rejects.
 
 ## Streams
+
+### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
+status: open · since: 2026-07-21 · last: 2026-11-16
+State: On 11-16 Shyam told Argamon the Centroid UAT price session (Argamon-Centroid-UAT-Prices) keeps disconnecting, apparently because Centroid's UAT side falls behind on the price stream; live Centroid sessions are fine. Levi is checking with Centroid. On the 10-27 call Argamon said they have Centroid failover for LP aggregation and will confirm it is still in place. James says Centroid has been poor for Argamon and Elan has spent months negotiating a PrimeXM deal; James pitched the Mahi bridge but Argamon needs margin and reporting, which Mahi lacks (Andrew Morgan asked about the business case). The Argamon NY Centroid bridge was migrated to a new IP over the weekend of 09-26/27 (Zendesk 23532; Beeks confirmed the route covers the range; retail dist sessions reconnected 09-27). Toa's crypto session to PXM LD needed a sequence reset on 09-20. On 10-08 a PXM price-improvement mismatch (client filled at 4107.19, Toa at 4107.18) was traced to PXM's default of keeping price improvement; Levi will configure PXM to pass through all slippage and observe. On 10-21 Tom McLean said the relevant Centroid IP has changed again to 192.229.22.160, outside the 192.229.23.x range the Beeks cross-connect route covers; Shyam raised NOCINT-856420 with Beeks and ZD 23672, and Centroid must advertise the new IP over the cross-connect. Argamon has no date for the Centroid move yet (it was due last month). A change record (CHG-2610-HSJB, approved 10-28) covers a Tokyo link cutover on Sat 31 Oct 10:00-11:00Z that will drop Centroid FIX sessions for up to 60 minutes. The Wintermute/Centroid-direct question on 09-09 was an expected decommissioned connection.
+Next: expect Centroid FIX drops on 10-31 10:00-11:00Z; Levi to apply the PXM passthrough setting and report; Beeks to confirm cross-connect changes for the new Centroid IP; Tom to supply a Centroid move date.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793206534345309 https://mahifx.slack.com/archives/C06TW3D8NMV/p1794794780957499
+
+### ny-link-failover — NY link failover retest and flaky SSH
+status: open · since: 2026-11-13 · last: 2026-11-16
+State: CHG-2611-DHA8 (NY link failover retest, Tokyo crypto feeds may blip, Fri 13 Nov 22:00-22:20Z) was approved, implemented and verified/closed on 11-14. On 11-16 Daria asked whether the intermittent SSH failures (about 50% of attempts succeed) are related; she has Beeks ticket NOCINT-861819 open.
+Next: Beeks to resolve NOCINT-861819; confirm whether SSH flakiness relates to the failover retest.
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1794587467071369 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794793297361489?thread_ts=1794587467.071369
 
 ### gts-hrp-nwm — HRP LP sessions wound down in favour of NWM/NWPB
 status: open · since: 2026-10-27 · last: 2026-11-12
@@ -52,10 +64,10 @@ Next: Levi to get Jump/OZ to confirm the whitelist and supply the internet endpo
 Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1794189940988869 https://mahifx.slack.com/archives/C06TW3D8NMV/p1794192953592729
 
 ### cboe-maker-session — Argamon requesting Cboe ECN Maker session
-status: open · since: 2026-11-05 · last: 2026-11-09
-State: Levi emailed support on 11-05 for a Maker session connection to Cboe ECN. Shyam is handling it and asked whether the trading account is the same as with Toa; Levi confirmed both are hedged on Argamon's HRP PB account. On 11-09 Shyam noted ordersCboe1 and marketDataCboe1 are being set up on the Toa side (expect alerts while they come up). Likely linked to the CBOE hidden-peg hedging trial in NY4.
-Next: Shyam/Daria to set up the Cboe Maker session.
-Refs: https://mahifx.slack.com/archives/C083GP5F1CL/p1793840550520559 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794193748388459
+status: open · since: 2026-11-05 · last: 2026-11-15
+State: On 11-15 Shyam asked internally whether anyone heard from Beeks sales about an X-connect from Argamon NY4 to Cboe (NOCINT-861001 said sales would reach out the week before; nothing received). Levi emailed support on 11-05 for a Maker session connection to Cboe ECN. Shyam is handling it and asked whether the trading account is the same as with Toa; Levi confirmed both are hedged on Argamon's HRP PB account. On 11-09 Shyam noted ordersCboe1 and marketDataCboe1 are being set up on the Toa side (expect alerts while they come up). Likely linked to the CBOE hidden-peg hedging trial in NY4.
+Next: Shyam/Daria to set up the Cboe Maker session; chase Beeks sales on the NY4 X-connect to Cboe.
+Refs: https://mahifx.slack.com/archives/C083GP5F1CL/p1793840550520559 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794778517811549
 
 ### roll-fok-topup — FOK market orders cancelled over roll; Allow Top Up enabled
 status: open · since: 2026-11-05 · last: 2026-11-05
@@ -92,12 +104,6 @@ status: open · since: 2026-08-17 · last: 2026-11-01
 State: CLIENT_PRICE_INSTI_LDN has repeatedly gone indicative (EBS_IMP_CHI removal in the EBS decommission on 2026-08-17; index pricing during roll). James says it is acceptable for this model to be indicative (it alone has no reference-price fallback, deliberately); CBOE liquidity may be too thin for stable index pricing and Elan was to ask CBOE. On 2026-10-15 a pricer restart alert showed a recent change to LDN pricerInsti reference markets left CME FX/metals futures (6AZ6, GCZ6, MGCZ6, SIZ6 etc.) with no reference markets, though no base spreads exist for them on LDN/CHI insti anyway; Lee says they are not published to clients. On 11-01 Daria restarted the Argamon LDN prices and pricerInsti1 again alarmed (unable to create 12 of 35 pricing models, all no-reference-price markets); she asked whether those instruments should be removed.
 Next: Toa/Nathan to decide whether to remove the unpriced instruments or suppress the alert.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1786949906190919 https://mahifx.slack.com/archives/C035H1VNCAD/p1787003951012219 https://mahifx.slack.com/archives/C035H1VNCAD/p1792028629227619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793571986506049
-
-### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
-status: open · since: 2026-07-21 · last: 2026-10-28
-State: On the 10-27 call Argamon said they have Centroid failover for LP aggregation and will confirm it is still in place. James says Centroid has been poor for Argamon and Elan has spent months negotiating a PrimeXM deal; James pitched the Mahi bridge but Argamon needs margin and reporting, which Mahi lacks (Andrew Morgan asked about the business case). The Argamon NY Centroid bridge was migrated to a new IP over the weekend of 09-26/27 (Zendesk 23532; Beeks confirmed the route covers the range; retail dist sessions reconnected 09-27). Toa's crypto session to PXM LD needed a sequence reset on 09-20. On 10-08 a PXM price-improvement mismatch (client filled at 4107.19, Toa at 4107.18) was traced to PXM's default of keeping price improvement; Levi will configure PXM to pass through all slippage and observe. On 10-21 Tom McLean said the relevant Centroid IP has changed again to 192.229.22.160, outside the 192.229.23.x range the Beeks cross-connect route covers; Shyam raised NOCINT-856420 with Beeks and ZD 23672, and Centroid must advertise the new IP over the cross-connect. Argamon has no date for the Centroid move yet (it was due last month). A change record (CHG-2610-HSJB, approved 10-28) covers a Tokyo link cutover on Sat 31 Oct 10:00-11:00Z that will drop Centroid FIX sessions for up to 60 minutes. The Wintermute/Centroid-direct question on 09-09 was an expected decommissioned connection.
-Next: expect Centroid FIX drops on 10-31 10:00-11:00Z; Levi to apply the PXM passthrough setting and report; Beeks to confirm cross-connect changes for the new Centroid IP; Tom to supply a Centroid move date.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1784590345336939 https://mahifx.slack.com/archives/C06TW3D8NMV/p1791464526120859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1792647126311719 https://mahifx.slack.com/archives/C06U76A7ZJR/p1793206534345309
 
 ### inst-toxic-flow — INST-1 large toxic flow in retail book
 status: open · since: 2026-10-05 · last: 2026-10-27
