@@ -16,7 +16,7 @@ contacts:
   - {name: "Lukas Sedlacek", role: "Fintokei/Purple Technology risk; suspicious-client reviews"}
   - {name: "Kristof Heger", role: "Fintokei/Purple Technology; order-fill queries"}
   - {name: "Roman Komurka", role: "Fintokei/Purple Technology; pricing/skew opinions", confidence: low}
-last_catchup: 2026-11-13T08:13:41Z
+last_catchup: 2026-11-16T08:19:32Z
 status: active
 ---
 
@@ -50,9 +50,9 @@ Next: Fintokei to deploy fixed MT4/MT5 build; Mahi (Maten/Isaac) to report root 
 Refs: https://mahifx.slack.com/archives/C08QWKFARDL/p1792746330157459 https://mahifx.slack.com/archives/C08R694QVNX/p1792771293748419?thread_ts=1792746534.345579
 
 ### xau-fi-skew-perf — XAU FI performance drop, skew rule changes
-status: open · since: 2026-10-15 · last: 2026-10-15
+status: watching · since: 2026-10-15 · last: 2026-10-15
 State: Shyam flagged poor XAU FI this week; Kate found the price signal stopped performing from Monday 2026-10-12 (funded XAU skew ~$0.4/M vs $6.6/M the week before, both LS books negative). XAUUSD skew rule moved back to harmonics (as before 2026-10-06) and a new XAUUSD rule on the LSB model with a 5-pip ceiling (was 20). Backtests of price/harmonics/IFM/IFMS on main and LSB models are running.
-Next: Kate to post backtest results in #internal-fintokei (this week's due 2026-10-15 afternoon, last week's evening).
+Next: Kate to post backtest results in #internal-fintokei (none seen since 2026-10-15); downgraded to watching 2026-11-16, no activity in 32d.
 Refs: https://mahifx.slack.com/archives/C08R694QVNX/p1792040613876479 https://mahifx.slack.com/archives/C08R694QVNX/p1792061221645329?thread_ts=1792040613.876479
 
 ### ld-network-incident — fleet-wide LD networking incident, 2026-10-16
