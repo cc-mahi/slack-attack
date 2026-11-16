@@ -18,14 +18,14 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-11-13T08:13:41Z
+last_catchup: 2026-11-16T08:21:11Z
 status: active
 ---
 
 ## Now
 Gold3X had no price from Sunday's open to ~04:40 UTC 10-26 (engine bug in geared session start tied to next week's US clock change; pricers restarted, ZD 23699), and Infinox then reported XAUUSD spikes Shyam could not see in Mahi's pricing; Infinox wants ticks to escalate to its bridge team.
 Custom layered XAUUSD symbol (`XAUUSD.l`) was shelved on 11-02 (Clio: settled with the client, no need to proceed); Isaac's gold LR redesign (+$406k/month modelled, sent 10-21) awaits Infinox, and Isaac chased for an answer on 10-27; routine LR / classification support continues in #mahi-infinox.
-Commercially live: CH's crypto-intro deal, plus unpaid invoices since August. Sadiq asked for Echo access for two more users; Kate says Echo is now in Compass and they need Compass logins.
+Commercially: CH's crypto-intro deal is quiet since 10-14; no Slack activity 11-13..11-16. Sadiq asked for Echo access for two more users; Kate says Echo is now in Compass and they need Compass logins.
 
 ## Streams
 
@@ -66,16 +66,21 @@ Next: CH to confirm whether Gold3x is unfrozen in PXM; Mahi to ship the engine f
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784673730662679 https://mahifx.slack.com/archives/C022S6NL82D/p1793003403134579
 
 ### auto-classification — Automated classification exclusions and LR-by-classification
-status: open · since: 2026-07-15 · last: 2026-10-15
+status: watching · since: 2026-07-15 · last: 2026-10-15
 State: Infinox repeatedly asks to pull accounts out of automated classifications. Today Georgia asked to remove four accounts (MT5_plain_b_87031851, MT5_CN_.a_b_87946548, MT5_CN_Standard_b_88000123, MT5_CN_.a_b_87953449) from Arbitrageur and "Unclassified Big XAUUSD"; William blacklisted them from Arbitrageur per Tenant profile, then said the Big XAUUSD rule should not hit them since they already carry a classification, and offered to whitelist a fixed classification. Georgia says some trades still executed under Unclassified Big XAUUSD and wants them excluded. Earlier: Centroid_* accounts excluded from Automated Classification (07-15); classifier auto-rehabilitates CPs that are profitable for the book over 24h (10-06); LR rules can use classification criteria (07-23).
-Next: William/Mahi to reconcile why Big XAUUSD fired for classified accounts and reply to Georgia.
+Next: (watching, quiet since 10-15) William/Mahi to reconcile why Big XAUUSD fired for classified accounts and reply to Georgia.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1784122243791649 https://mahifx.slack.com/archives/C022S6NL82D/p1791239276076609 https://mahifx.slack.com/archives/C022S6NL82D/p1792065605339689
 
 ### crypto-intro-deal — CH crypto business for broker intros
-status: open · since: 2026-10-06 · last: 2026-10-14
+status: watching · since: 2026-10-06 · last: 2026-10-14
 State: CH offered Mahi Infinox's crypto business, with help towards an Infinox crypto licence, if Mahi introduces 2-3 brokers to take the liquidity. Isaac's view: start with XBT and XET, crypto skew PnL maybe 20k-100k p/m, 24/7 XAU raised but not pursued. On 10-14 Isaac said the plan is to introduce CH to Youssef at GCC; Will thinks the candidates are Amana GCC plus one more, preferring brokers without horrendous flow who are flexible and not too big. Velocity was floated earlier.
-Next: Isaac and Will to settle 1-2 more broker candidates and make the intros.
+Next: (watching, quiet since 10-14) Isaac and Will to settle 1-2 more broker candidates and make the intros.
 Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1791283923202179 https://mahifx.slack.com/archives/C01QGUXPKEY/p1791994970744929
+
+### compass-26-4-upgrade — 26.3 to 26.4 upgrade and LDN infra move
+status: watching · since: 2026-10-08 · last: 2026-10-09
+State: Infinox was upgraded from Compass 26.3 to 26.4 over the weekend of 10-09 (approved at RC #7223/#7224, restart at the weekend, monitored over the open); Infinox opted out of the PSM overlays, so no pricing change was intended. A separate infra change moved "infra main" to LDN on 10-09. No post-upgrade fallout reported in channel; the Sadiq EURUSD tick request on 10-13 may be related (see fill-tick-queries).
+Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1791483335954819 https://mahifx.slack.com/archives/C01QGUXPKEY/p1791558221851879
 
 ### pxm-latency — XAUUSD fill latency dispute with PrimeXM
 status: watching · since: 2026-10-01 · last: 2026-10-06
@@ -83,26 +88,20 @@ State: Infinox says the 2026-09-28 12:04 UTC XAUUSD fill reflects a price about 
 Next: Infinox Trading Ops to ask PrimeXM what accounts for the arrival-to-processing delay; they said on 10-06 they would revert. Nothing since; downgraded to watching (quiet >30d).
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1790862218777389 https://mahifx.slack.com/archives/C022S6NL82D/p1791251845973249
 
-### compass-26-4-upgrade — 26.3 to 26.4 upgrade and LDN infra move
-status: watching · since: 2026-10-08 · last: 2026-10-09
-State: Infinox was upgraded from Compass 26.3 to 26.4 over the weekend of 10-09 (approved at RC #7223/#7224, restart at the weekend, monitored over the open); Infinox opted out of the PSM overlays, so no pricing change was intended. A separate infra change moved "infra main" to LDN on 10-09. No post-upgrade fallout reported in channel; the Sadiq EURUSD tick request on 10-13 may be related (see fill-tick-queries).
-Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1791483335954819 https://mahifx.slack.com/archives/C01QGUXPKEY/p1791558221851879
-
 ### index-cfd-spikes — LP-driven spikes on indices and CFDs
 status: watching · since: 2026-05-20 · last: 2026-09-18
 State: Recurring client complaints about spikes and wide spreads on US30, NAS100, SPX500, JPN225 and BTCUSD, traced to Vantage and B2Broker feed quality; Mahi mitigates via benchmarking and pricing tweaks, most recently lower-quantity rungs (500/1k/2k/4k) for JPN225, implemented 09-18. Vantage's off-market opening ticks (07-13) led Shyam to offer a ~1s indicative suppression, which Infinox never decided on; the BTCUSD B2B/Vantage identical-feed question (07-02) was left unresolved.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779259961824069 https://mahifx.slack.com/archives/C022S6NL82D/p1789687354550679
 
-### billing-invoices — Unpaid invoices, discounts and volume fee
-status: watching · since: 2026-07-02 · last: 2026-09-11
-State: After the 07-01 SPX500 feedback-loop incident CH asked for a ~$350k three-bill discount, which Mahi declined (offering a walkthrough and divergence alerting). In August David gave a one-off $40k discount and waived the $25k volume-threshold fee (volume 179/194/191bn May-Jul). Infinox was two invoices behind; on 09-11 their finance asked for patience pending a payment plan, with David expecting settlement the next payment run. Whether the 10% bridge discount still applies is unanswered.
-Next: confirm payment received and the bridge-discount answer; nothing seen since 09-11.
-Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1782992001195759 https://mahifx.slack.com/archives/C01QGUXPKEY/p1789118720343269
-
 ### custom-xau-layers — Custom layered XAUUSD symbol (XAUUSD.l)
 status: closed · since: 2026-10-19 · last: 2026-11-02 · closed: 2026-11-03
 State: Clio asked for a new XAUUSD symbol with client-specific volume and spread layers; Shyam deployed pricers, a CLIENT_PRICE_L_LDN model and a B_CLIENTS_L channel with a `.l` suffix rule (CHG-2610-EGQJ), but it never went live. On 11-02 Clio told Rory there is no need to proceed for now as it was settled with the client; Rory confirmed internally that the L_LDN XAU pricing model is not needed for the moment. Infinox will say if it wants it later.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792416827862309 https://mahifx.slack.com/archives/C022S6NL82D/p1793618947000509
+
+### billing-invoices — Unpaid invoices, discounts and volume fee
+status: closed · since: 2026-07-02 · last: 2026-09-11 · closed: 2026-11-16
+State: After the 07-01 SPX500 feedback-loop incident CH asked for a ~$350k three-bill discount, which Mahi declined (offering a walkthrough and divergence alerting). In August David gave a one-off $40k discount and waived the $25k volume-threshold fee (volume 179/194/191bn May-Jul). Infinox was two invoices behind; on 09-11 their finance asked for patience pending a payment plan, with David expecting settlement the next payment run. Whether the 10% bridge discount still applies is unanswered. No activity since 09-11; assumed resolved.
+Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1782992001195759 https://mahifx.slack.com/archives/C01QGUXPKEY/p1789118720343269
 
 ## Arc
 - 2026-05-15 — Lazaros Zografopoulos (trading desk, arb classification oversight) left Infinox
