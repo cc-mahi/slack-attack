@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-13T08:17:23Z
+last_catchup: 2026-11-16T08:24:55Z
 status: active
 ---
 
@@ -28,16 +28,17 @@ Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UA
 ## Streams
 
 ### profile-recs-creds — Programmatic access to Mahi profile recommendations
-status: open · since: 2026-10-23 · last: 2026-11-13
-State: Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval.
-Next: change CHG-2611-68EZ approved and implemented; Mahi confirms to Neil.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794547118605529 https://mahifx.slack.com/archives/CP7A1F8BT/p1794554977379139
+status: open · since: 2026-10-23 · last: 2026-11-16
+State: Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval. On 2026-11-16 Neil replied to Nathan that he can telnet but MySQL still refuses the user from 13.218.4.162 (access denied), so the grant looks not yet applied; Shyam Hari said Mahi will check.
+Next: change CHG-2611-68EZ approved and implemented and MySQL grant confirmed (Mahi, Shyam Hari checking); Mahi confirms to Neil.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794547118605529 https://mahifx.slack.com/archives/C09HN93T0G2/p1794805907585309
 
 
 ### ab-book-queries — A/B book classification requests from overnight team
-status: open · since: 2026-07-08 · last: 2026-11-10
-State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1794297052376269
+status: open · since: 2026-07-08 · last: 2026-11-16
+State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-15/16: 88522460 answered A book by Nathan Burch (flow goes offside quickly on most instruments, NDFUSD less so), and 65570981 answered A book by Shyam Hari within about 5 min; Andri asked how to read the chart and where to see it, and Shyam explained it is a yield profile (house-perspective markouts by horizon) - no answer yet on where the client can view it. Before that 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
+Next: Mahi tells Andri where the yield profile can be viewed (Echo/Compass).
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1794805232476559
 
 
 ### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
@@ -150,9 +151,8 @@ Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1788444927995509 https://mahi
 
 
 ### ip-whitelist-beeks — Brandon cannot reach Compass/Echo from new IP
-status: watching · since: 2026-09-08 · last: 2026-09-16
-State: Client asked to whitelist 108.136.145.119 for Echo and Compass; Brandon still could not connect as of 2026-09-16, Beeks running a TCP dump. Downgraded to watching: no activity for 35d, no resolution visible.
-Next: confirm with client whether access works.
+status: closed · since: 2026-09-08 · last: 2026-09-16 · closed: 2026-11-16
+State: Client asked to whitelist 108.136.145.119 for Echo and Compass; Brandon still could not connect as of 2026-09-16, Beeks running a TCP dump. No activity since 2026-09-16; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1788860536902869 https://mahifx.slack.com/archives/C09HN93T0G2/p1789557438771399
 
 ## Arc
