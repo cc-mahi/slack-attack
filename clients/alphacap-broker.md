@@ -11,20 +11,20 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-13T08:13:41Z
+last_catchup: 2026-11-16T08:17:34Z
 status: active
 ---
 
 ## Now
-Alpha is officially live: the first trades arrived 2026-11-09 (Cameron Hughes). David Rapp's in-person session is today (Thu 2026-11-12) on Mahi's risk management and a simplified Compass walkthrough for value-add checks. Hedger activation and re-enabling expectedBookStatusOnTimezones now follow. Rollover and open spikes are still being tuned (Softs, XNG, XAGEUR). Rapp wants redundancy and a swaps source for crosses; Aug/Sep invoices remain a soft overhang.
+Alpha is live (first trades 2026-11-09). David Rapp's in-person risk session happened 2026-11-12 and Will Carter says it went very well; follow-ups are an updated deck to David, a Compass login reset and walkthrough for George, and a backup hedging LP scope. Hedger activation, re-enabling expectedBookStatusOnTimezones and Softs/XNG/XAGEUR spikes remain open. Aug/Sep invoices still a soft overhang.
 
 ## Streams
 
 ### inperson-risk-session — In-person risk management session
-status: open · since: 2026-11-09 · last: 2026-11-11
-State: Rapp asked on 2026-11-09 for an in-person meeting where Mahi explains its risk management and simplifies Compass so Alpha knows where to check value adds; he liked the US Payroll value-add report. Meeting is 2026-11-12 (10:00 prep deadline). Will Carter posted a prep artifact on 2026-11-11: why Mahi advises on risk, why the book is near-fully hedged today and how to move off that over 4-6 weeks once flow is readable, where each value-add lives in Compass (anonymised QBR, anonymised demo envs, then ACG's own Compass), and a simple line on size-tiered margin (gap/credit risk, not toxic flow). Goal: permission to propose moving off full hedging on their flow, plus a monthly value-add report to George and David. Will's "near full pass-through to Argamon" comes from the 6 Oct trace, not current config. Gerard's open items (3 Nov prices not quoting for minutes, three 15 Oct stop-loss follow-ups) may come up.
-Next: Cameron Hughes to confirm the current hedger setup on alphacap-broker before 10:00 on 2026-11-12 and have answers to Gerard's open items.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794427016536779
+status: open · since: 2026-11-09 · last: 2026-11-13
+State: The 2026-11-12 session with ACG went very well (Will Carter's 2026-11-13 readout). Covered markout-based classification, SI vs A/B-book (book too small for SI today, switches on as flow builds), return on spread, pricing and skew, news handling and signals. Not covered: tiered margin and prop-book payrolls value-add numbers. Concerns: George has not logged into Compass in two years, and Will did not know about the overdue invoices so should have led with prop-book value-add. ACG is near fully hedged by design; the pitch is 4-6 weeks of their own flow to show what to keep via SI.
+Next: Send updated deck and session page to David this week; reset George's Compass access and walk the team through it; backtest SI and classification on prop accounts; follow up on tiered margin and payrolls value-add; Cameron Hughes still owes Gerard's open items (3 Nov quoting gap, 15 Oct stop-loss follow-ups).
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794566948410859
 
 ### go-live-testing — Live test trading and go-live readiness
 status: open · since: 2026-04-29 · last: 2026-11-09
@@ -57,27 +57,27 @@ Next: Cameron Hughes to fix Softs, XNG and XAGEUR spikiness and confirm with Rap
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1790006846789019 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793285270001749 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793366099309859
 
 ### redundancy-swaps — Redundancy, cross swaps and cross connect
-status: open · since: 2026-10-27 · last: 2026-10-27
+status: open · since: 2026-10-27 · last: 2026-11-13
 State: After the Beeks issue, Rapp wants redundancy against outages (asked again on the 2026-10-27 call about XC). Andrew Morgan replied "Rapp can have redundancy". Open questions from Cameron Hughes: multi-region servers and cost, whether redundancy belongs on Alpha's side, the best swaps source for crosses Argamon will not price (Rapp was swap-arbed for hundreds of thousands before), and whether a cross connect is needed (Beeks says no).
-Next: Mahi to decide redundancy design and cost, swaps source and cross-connect answer for Rapp.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793094782250149 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793098215512009
-
-### invoices-fees — Overdue invoices and additional fees
-status: open · since: 2026-10-14 · last: 2026-10-14
-State: Bonnie Cassidy chased again on 2026-10-14: prop and broker August invoices 24 days overdue, September due next week. Andrew asked whether go-live unlocks additional fees and asked Cameron Hughes to raise arrears with multiple ACG contacts. Cameron Hughes told Rapp he wanted the final outstanding bill paid before go-live; Andrew judged that too harsh ("I don't want to disrupt their ability to make more money") and Cameron Hughes retracted it and sent a softer nudge. Rapp replied he would sort it. Broker-side work was unfunded until fees start.
-Next: Cameron Hughes to keep raising arrears with several contacts without gating go-live.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791966476920889 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791972502451699
-
-### alert-suppression — Monitoring noise before hedgers go on
-status: open · since: 2026-08-17 · last: 2026-09-10
-State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
-Next: Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
+Next: Mahi to decide redundancy design and cost, swaps source and cross-connect answer for Rapp; scope a backup hedging LP alongside Argamon (ACG has a Velocity account, per 2026-11-12 meeting follow-ups).
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1793094782250149 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794566948410859
 
 ### dashboard-access — Client dashboard access restored
 status: watching · since: 2026-11-11 · last: 2026-11-11
 State: Client dashboard access was restored 2026-11-11 via a firewall rule (CHG-2611-X6GK, green change) after the host's deny-all required a rule for the outside address; David confirmed it works and will be logged in during the in-person meeting. A paired Beeks SSH request (CHG-2611-MDV9) was aborted after Beeks withdrew it (the address was likely their engineer's remote IP).
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794388590395709 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794427016536779
+
+### invoices-fees — Overdue invoices and additional fees
+status: watching · since: 2026-10-14 · last: 2026-10-14
+State: Bonnie Cassidy chased again on 2026-10-14: prop and broker August invoices 24 days overdue, September due next week. Andrew asked whether go-live unlocks additional fees and asked Cameron Hughes to raise arrears with multiple ACG contacts. Cameron Hughes told Rapp he wanted the final outstanding bill paid before go-live; Andrew judged that too harsh ("I don't want to disrupt their ability to make more money") and Cameron Hughes retracted it and sent a softer nudge. Rapp replied he would sort it. Broker-side work was unfunded until fees start.
+Next: (watching: payment promised by Rapp, no new signal since 2026-10-14; raised again as a concern 2026-11-13) Cameron Hughes to keep raising arrears with several contacts without gating go-live.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791966476920889 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791972502451699
+
+### alert-suppression — Monitoring noise before hedgers go on
+status: watching · since: 2026-08-17 · last: 2026-09-10
+State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
+Next: (watching: no alerts since 2026-09-10, depends on hedger activation) Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
 
 ### retail-lpoa-groups — MT5 groups for retail-under-corporate accounts
 status: closed · since: 2026-08-24 · last: 2026-09-03 · closed: 2026-11-03
