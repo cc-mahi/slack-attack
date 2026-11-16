@@ -13,7 +13,7 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-11-13T08:13:58Z
+last_catchup: 2026-11-16T08:17:35Z
 status: active
 ---
 ## Now
@@ -22,6 +22,12 @@ Top risk: Mahi-held LP cross positions (NZD etc.) dwarf client trades; auditors/
 11-10/11: USD gap explained to Malik/Jack as accumulated hedging P&L (~USD 10m, GBP translation risk); Compass rebase planned for 11-11 17:00 NY; an SPX hedger mishap (-$80.5k) on 11-10 left CFD hedgers off. Earlier response: Finalto exposure traded out, ATC on full STP, books flattened and ATC self-reported 11-09 evening after a last-minute CHF rec (~1m CHF still unexplained); live Britannia test trades started 11-09; gold positions mismatch (10-29) and Compass 26.4 PSM overlays also live.
 
 ## Streams
+
+### seychelles-uat — Seychelles entity, dev connections and UAT feed
+status: open · since: 2026-05-19 · last: 2026-11-16
+State: On 2026-11-12 Dave reported no prices for index and energy CFDs on SC production; Nathan Burch found none of the instruments in LIQUIDITY_POOL_SC and added them with an EOD restart, but Dave still saw no prices on 11-13. Nathan explained on 11-15 he had forgotten to schedule the clientDistributionGateway restart (it controls distributed price output); all processes were restarted over the weekend and by 11-16 01:02 UTC all index and energy CFDs price except F40EUR and JPXUSD, which Britannia rejects as invalid symbols (requested as FRA40 and JPXUSD); Mahi asked ATC to check Britannia's names for France 40 and Japan 225. Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12, 10-19, 10-26, 11-02, 11-10 (Malik, Rory actioned); on 11-09 Dave asked again at 19:54 UTC; 11-02 Dave asked at 04:57 UTC and Daria started it by 05:05, Dave acked); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections. On 2026-11-02 Daria reported the MT5 SC orders session (orders_mt5_sc) could not log on from 00:00 UTC: MT5 reset FIX sequence numbers at 00:00 while Mahi's session runs Sunday 20:00 to Friday 21:00 UTC; ATC asked to align the MT5 side to the weekly schedule; Cameron Hughes forwarded it internally and Malik and Patrick were looking into it by 14:23 UTC.
+Next: ATC (Dave/Malik) to get Britannia's symbol names for France 40 and Japan 225; Nathan to confirm pricing at market open; ATC to align orders_mt5_sc MT5 reset schedule with Sun 20:00-Fri 21:00 UTC; Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793582879361799 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794599436589589 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794790970454859
 
 ### britannia-triangle-arb — Britannia prime connectivity and triangulation arb flow
 status: open · since: 2026-09-15 · last: 2026-11-12
@@ -34,12 +40,6 @@ status: open · since: 2026-10-26 · last: 2026-11-12
 State: On 11-12 Dave sent a list of extra symbols to support; Nathan Burch replied all exist in Compass, EURCZK, EURHUF, USDCZK and USDILS are available now, and eight FX (CADSGD, CHFDKK, GBPCZK, GBPDKK, EURHKD, EURILS, GBPHKD, GBPTRY) and eight CFDs (SPA35, CN50, SWI20, USDX, TWN, XAUIDX, NATGAS, SG30) need an LP to stream them. On 10-29 Malik asked Andrew for a 15-20 min call because Dave wants to understand how Mahi works with futures instruments; Andrew was on holiday so Will took it with Dave (Andrew suggested demoing some contracts and asking for data). Will reported ATC is happy with the P/W framework used elsewhere, will talk again early next week if issues, and that the futures feeds would come through Britannia, with about a day to get the system ready after that. After a pre-call with Malik, Andrew noted ATC is courting basis traders in futures, wants a crypto setup (with its own LP), and G7 futures quoted as CFDs; Andrew wants an XAU futures symbol added. Mahi also needs ATC client and LP positions ingested into Compass for reconciliation and swap calcs; a swap inventory skew CSV is owed to ATC. Mahi is looking for other firms quoting G7 futures as CFDs (Amana was named as having CMC, Jump, IG, GCEX).
 Next: Mahi to send swap inventory skew CSV and ingest ATC positions; scope the XAU futures symbol and crypto setup.
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1793009406477699 https://mahifx.slack.com/archives/C046RNF64VD/p1793033858681609 https://mahifx.slack.com/archives/C046RNF64VD/p1793290830652219 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794513373925249
-
-### seychelles-uat — Seychelles entity, dev connections and UAT feed
-status: open · since: 2026-05-19 · last: 2026-11-12
-State: On 2026-11-12 Dave reported no prices for index and energy CFDs on SC production; Nathan Burch found none of the instruments in LIQUIDITY_POOL_SC (the channel's core price selector) so nothing was published, and will add them with a pool restart scheduled for EOD. Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring ask from Malik and Dave (09-02, 09-14, 09-21, 09-28, 10-07, 10-12, 10-19, 10-26, 11-02, 11-10 (Malik, Rory actioned); on 11-09 Dave asked again at 19:54 UTC; 11-02 Dave asked at 04:57 UTC and Daria started it by 05:05, Dave acked); the realistic gateway moved to 9012/9013 on 09-14 so ATC needed re-whitelisting and port changes. SC monitoring was toggled off in August pending connections. On 2026-11-02 Daria reported the MT5 SC orders session (orders_mt5_sc) could not log on from 00:00 UTC: MT5 reset FIX sequence numbers at 00:00 while Mahi's session runs Sunday 20:00 to Friday 21:00 UTC; ATC asked to align the MT5 side to the weekly schedule; Cameron Hughes forwarded it internally and Malik and Patrick were looking into it by 14:23 UTC.
-Next: Nathan to add the CFDs to LIQUIDITY_POOL_SC at the EOD pool restart and confirm to Dave; ATC to align orders_mt5_sc MT5 reset schedule with Sun 20:00-Fri 21:00 UTC; Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793582879361799 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794316877201149 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794512686696149
 
 ### lp-cross-positions — legacy cross positions at Finalto and auditor questions
 status: open · since: 2026-10-26 · last: 2026-11-11
@@ -92,23 +92,17 @@ On 2026-10-21 Dave again needed to show XAUUSD depth to a client and reported it
 Next: Cameron Hughes owes the trading-style analysis; Dave to decide whether to widen the 1.6k/3.6k/7.6k base spreads above the LP floor or drop the floor.
 Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1791902732632709 https://mahifx.slack.com/archives/C04AZM0LPMH/p1791907572332459 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792590024121469
 
-### beeks-ld-incident — Beeks LD networking incident, ATC failover
-status: open · since: 2026-10-16 · last: 2026-10-16
-State: On 2026-10-16 a networking incident in the Beeks-hosted LD environment hit ATC's connectivity; Dave reported connection issues on the spotex MT5 order and price sessions. Mahi asked ATC to switch to failover, saw recovery signs, and at ~12:07 BST Liam said it was safe to switch back (no official Beeks confirmation yet) and later that the issue was reported resolved. Malik asked whether failback is automatic; Liam said it depends on ATC's failover setup.
-Next: Beeks root-cause / official confirmation; confirm ATC failed back and sessions are healthy.
-Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1792143086471619 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792150199815879
-
-### prop-launch — ATC Prop firm: servers, rules, go-live
-status: open · since: 2026-08-05 · last: 2026-10-14
-State: Go-live plan of record and programme rules are filed in MahiProduct (agreed at the 2026-08-19 meeting); ATC runs its own prop bridge and MT5 install, Mahi supplies the Beeks server and Compass (atc-prop-ln). Conformance passed 2026-09-11, prop FIX creds (qualifying and funded) sent, and Malik asked for prod IPs to be whitelisted on 2026-09-30 (proptrading and brokerage). Open commercial item: ATC's in-house prop CRM resale as a white-label bundled with Mahi liquidity needs written sub-licence agreement and a pricing steer (Andrew/Will, alongside the Seychelles addendum). Jack's 2026-10-08 email asking what API data Mahi wants for anti-predatory safeguards has had no reply for 6 days.
-Next: Cameron Hughes to send Jack a holding reply and then the API data list; Andrew/Will to give commercial steer on CRM sub-licensing; confirm drawdown calc mechanics with ATC.
-Refs: https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1787125125063369 https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1787210584953589 https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1791963840973209
-
 ### monthly-pnl-report — monthly P&L report for Jack
 status: watching · since: 2026-06-07 · last: 2026-11-10
 State: Jack Manoukian wants the P&L report alongside each invoice; August was requested 2026-09-12 (Bonnie asked if it could be sent proactively), September was posted unprompted by Cameron Hughes on 10-01, and October was requested by Jack and delivered by Cameron Hughes on 11-10. Jack also asked for April client and LP trade CSVs by POP (delivered 09-17); end-April Finalto-only open positions were unavailable as that data has only been persisted since late June.
 Next: October report due start of November.
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1780865571965479 https://mahifx.slack.com/archives/C04AZM0LPMH/p1789217003836759 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794322207441799
+
+### prop-launch — ATC Prop firm: servers, rules, go-live
+status: watching · since: 2026-08-05 · last: 2026-10-14
+State: Downgraded to watching 2026-11-16: no prop-channel activity since 2026-10-14, Jack's API-data email reply status unknown. Go-live plan of record and programme rules are filed in MahiProduct (agreed at the 2026-08-19 meeting); ATC runs its own prop bridge and MT5 install, Mahi supplies the Beeks server and Compass (atc-prop-ln). Conformance passed 2026-09-11, prop FIX creds (qualifying and funded) sent, and Malik asked for prod IPs to be whitelisted on 2026-09-30 (proptrading and brokerage). Open commercial item: ATC's in-house prop CRM resale as a white-label bundled with Mahi liquidity needs written sub-licence agreement and a pricing steer (Andrew/Will, alongside the Seychelles addendum). Jack's 2026-10-08 email asking what API data Mahi wants for anti-predatory safeguards has had no reply for 6 days.
+Next: Cameron Hughes to send Jack a holding reply and then the API data list; Andrew/Will to give commercial steer on CRM sub-licensing; confirm drawdown calc mechanics with ATC.
+Refs: https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1787125125063369 https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1787210584953589 https://mahifx.slack.com/archives/C0AQ3PVTX6D/p1791963840973209
 
 ### compass-26-4 — Compass 26.3 to 26.4 upgrade
 status: watching · since: 2026-10-08 · last: 2026-10-13
@@ -137,10 +131,10 @@ status: watching · since: 2026-09-21 · last: 2026-09-23
 State: CFD arbitrageur execution was turned off 2026-09-21 after two of Dave's clients complained (mostly intentional flow; he wants good relationships and whitelisting by daily check). On 09-22 rules were restored with 10 $/M additional slippage instead of 50 at Dave and Jack's request, and a riskPathCFD benchmarkNormalised override fixed negative-spread yield profiles that had fed false arb classifications; the old CFD arb bot list was cleared on 09-23 and yields improved.
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1790005631153139 https://mahifx.slack.com/archives/C046RNF64VD/p1790088439159019 https://mahifx.slack.com/archives/C046RNF64VD/p1790154076347849
 
-### cfd-hedger-off-rca — CFD hedger book left OFF for 5h
-status: closed · since: 2026-08-28 · last: 2026-08-30 · closed: 2026-10-30
-State: No activity since 2026-08-30; assumed resolved. CFD_PRAXIS_HEDGING_HYBRID was switched OFF in the GUI at 03:57 UTC on 08-28 during config work and not re-enabled; G30EUR risk built (about -$2k) and PD alerts were resolved twice with the book still off. RCA filed (P2); proposed actions are alerts that only resolve when state matches expected, mandatory comments on GUI book-state changes, and Daria's push to bump MXC-66 Sustained VaR Alerting. No recorded implementation.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1787907463800669 https://mahifx.slack.com/archives/C046RNF64VD/p1788127946167719
+### beeks-ld-incident — Beeks LD networking incident, ATC failover
+status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-11-16
+State: No activity since 2026-10-16; assumed resolved. On 2026-10-16 a networking incident in the Beeks-hosted LD environment hit ATC's connectivity; Dave reported connection issues on the spotex MT5 order and price sessions. Mahi asked ATC to switch to failover, saw recovery signs, and at ~12:07 BST Liam said it was safe to switch back (no official Beeks confirmation yet) and later that the issue was reported resolved. Malik asked whether failback is automatic; Liam said it depends on ATC's failover setup.
+Refs: https://mahifx.slack.com/archives/C04AZM0LPMH/p1792143086471619 https://mahifx.slack.com/archives/C04AZM0LPMH/p1792150199815879
 
 ## Arc
 - 2026-05-13 — SI disabled after losing every month Feb-May; volumes down sharply, ATC under financial stress
