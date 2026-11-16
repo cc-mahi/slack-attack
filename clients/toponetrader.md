@@ -17,7 +17,7 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-11-13T08:13:42Z
+last_catchup: 2026-11-16T08:23:46Z
 status: active
 ---
 
@@ -57,15 +57,15 @@ Next: Will Carter / Mahi to send the prop-network material to Shane within about
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1792585285879989 https://mahifx.slack.com/archives/C08U853T684/p1792585333046689
 
 ### drop-copy-volume — Drop-copy volume exceeds expected volume
-status: open · since: 2026-10-15 · last: 2026-10-15
+status: watching · since: 2026-10-15 · last: 2026-10-15
 State: Cameron Hughes saw drop copies carrying much more volume than expected. Shane (TOT) thinks the extra accounts are "competition" accounts not sent to Mahi, and is double-checking.
-Next: Shane to confirm whether the excess is competition accounts.
+Next: Shane to confirm whether the excess is competition accounts. Watching: no follow-up seen since 2026-10-15.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1792053381996649 https://mahifx.slack.com/archives/C08TG143F4L/p1792053398775309
 
 ### cadchf-slippage — CADCHF second fill 1.3 pips above quoted ask
-status: open · since: 2026-10-14 · last: 2026-10-14
+status: watching · since: 2026-10-14 · last: 2026-10-14
 State: Daniel forwarded TOT's analysis: two 3-lot buys at the same price, the second filled 4 ms after the first at 1.3 pips worse than Mahi's published ask. TOT wants Mahi to explain the fill. Shyam Hari acknowledged and said Mahi will check.
-Next: Mahi (Shyam Hari) to investigate and revert to Daniel.
+Next: Mahi (Shyam Hari) to investigate and revert to Daniel. Watching: no reply seen since 2026-10-14.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1791943609687779 https://mahifx.slack.com/archives/C08U853T684/p1791943843239269
 
 ### prop-perps — Prop perps request
@@ -78,16 +78,6 @@ Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://ma
 status: closed · since: 2026-08-26 · last: 2026-09-10 · closed: 2026-11-10
 State: TOT stopped using cTrader (Shane: it was costing them heavily); config kept in case they return. On 2026-09-09/10 internal billing was queried against the revised per-user model and Will Carter noted the fixed component was missing for low totals; Cameron Hughes was asked to review accounts; no activity since 2026-09-10, assumed resolved.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787752907131709 https://mahifx.slack.com/archives/C08TG143F4L/p1789022593579519
-
-### lr-harsh-execution — LR retune and harsher execution for 2-Step
-status: closed · since: 2026-08-25 · last: 2026-08-26 · closed: 2026-10-28
-State: Shane asked (2026-08-25) for harsher execution on the second phase of the 2-Step plan and harsher still when funded. Cameron Hughes sent LR options and applied LR changes on 2026-08-26 (channel refill/caps and a global cap). Shane was to find a way to identify 2-Step accounts; no activity since 2026-08-26, assumed resolved (superseded by payout-ratio-levers).
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787643570858959 https://mahifx.slack.com/archives/C08TG143F4L/p1787750805616039
-
-### arb-pricing-tuning — Arb flagged by daily checks, pricing tweaks
-status: closed · since: 2026-08-18 · last: 2026-08-24 · closed: 2026-10-28
-State: GBPUSD arb alert on 2026-08-18 led to proportion and price-improvement reductions; on 2026-08-21 daily checks flagged more arb, so MAHI_LP5 was removed from signalReturn markets, GBPJPY added to the GBPUSD/USDJPY override and signal moved to synapse. By 2026-08-24 no more significant arb; no activity since 2026-08-24; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787044539658809 https://mahifx.slack.com/archives/C08TG143F4L/p1787572737892749
 
 ## Arc
 - 2026-01 — Crypto symbols (34) enabled on MatchTrader alongside MT5
