@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-16T08:19:32Z
+last_catchup: 2026-11-17T08:15:44Z
 status: active
 ---
 
@@ -27,6 +27,17 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP position re-sync (~$30M manual-hedge LP positions in B House; evening adjustments booked 2026-11-12, USDJPY B-to-A move still requested); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### var-decomposition — Go asks why B Book VaR peaked at 3.7m
+status: open · since: 2026-11-16 · last: 2026-11-16
+State: Erik asked on 2026-11-16 how to decompose VaR or see why it hit 3.7m at ~12:30 GMT. William Denny answered that B Book positions did not change; the jump is the intraday volatility estimate, highest around the 12:30 and 13:30 GMT US data releases (about 1.5m at 10:00, 3.7m in the 12:00 hour, same pattern daily). The book is mainly long USD and CHF against short EUR, GBP, AUD and JPY, with short EUR the largest VaR contributor. Whether Erik is satisfied was not seen.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1794853780078349 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794854680815019
+
+### warehouse-b-account — Warehouse_B trading account and counterparty
+status: open · since: 2026-11-13 · last: 2026-11-16
+State: Erik asked on 2026-11-13 for a trading account named Warehouse_B; Rory agreed and Nathan actioned it on 2026-11-15. Re-opened: on 2026-11-16 Erik said that on an orders view he needs the counterparty to be Warehouse_B, not the trading account; William Denny said he will check trade positions on that book in Pulse. Outcome not seen.
+Next: William Denny to check the book's positions in Pulse and reply to Erik.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1794593076005619 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794833691585409
 
 ### radex-risk-split — Radex A/B risk splitting, residual hedges, MeanFin
 status: open · since: 2026-07-21 · last: 2026-11-16
@@ -107,15 +118,10 @@ Next: Mahi to decide whether to raise the MINT feed finding with Go; inventory b
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787628603910739 https://mahifx.slack.com/archives/CNF3WPNSK/p1789949763533859
 
 ### xau-pricing-skew — Gold/FX pricing smoothness, skew and failover
-status: watching · since: 2026-06-01 · last: 2026-09-17
-State: 2026-08-18 call: Kieran happy with skew sizes and slippage complaints down but wants smoother price; Go publishes to MetaQuotes every ~80ms while fills use live Compass price, which flickers; Daria suggested throttling publishing, Nathan investigating flicker before skew goes up again. 08-19 Isaac cut benchmark spread skew weight on FX after Mac's AUDCAD jumps (flow-price-thresh). 09-15 call: client price went offline and failover to the continuity pool published huge spikes; Kieran wants no price unless the client-price LPs are online; Isaac removed MAHI_CONTINUITY_NYC from the continuity pool meanwhile. 09-17: USDJPY indicative for ~8 min at open was Wide Spread Suppression (max 0.25 vs 0.267). Downgraded to watching: no activity since 09-17.
+status: closed · since: 2026-06-01 · last: 2026-09-17 · closed: 2026-11-17
+State: No activity since 2026-09-17; closed as stale (flicker root cause and no-failover change never confirmed, re-raise if it recurs). Earlier: 2026-08-18 call: Kieran happy with skew sizes and slippage complaints down but wants smoother price; Go publishes to MetaQuotes every ~80ms while fills use live Compass price, which flickers; Daria suggested throttling publishing, Nathan investigating flicker before skew goes up again. 08-19 Isaac cut benchmark spread skew weight on FX after Mac's AUDCAD jumps (flow-price-thresh). 09-15 call: client price went offline and failover to the continuity pool published huge spikes; Kieran wants no price unless the client-price LPs are online; Isaac removed MAHI_CONTINUITY_NYC from the continuity pool meanwhile. 09-17: USDJPY indicative for ~8 min at open was Wide Spread Suppression (max 0.25 vs 0.267). Downgraded to watching: no activity since 09-17.
 Next: Nathan to follow up on throttle/flicker root cause and the no-failover pricing change; no outcome seen.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1787014679025069 https://mahifx.slack.com/archives/CNF3WPNSK/p1789447371722669 https://mahifx.slack.com/archives/C09J1DP2QQH/p1789626541976419
-
-### warehouse-b-account — New Warehouse_B trading account for Go
-status: closed · since: 2026-11-13 · last: 2026-11-15 · closed: 2026-11-16
-State: Erik asked on 2026-11-13 for a trading account named Warehouse_B to book trades under the correct book and keep Go's other systems aligned; Rory agreed and Nathan confirmed it actioned on 2026-11-15.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1794593076005619 https://mahifx.slack.com/archives/C09J1DP2QQH/p1794777220115129
 
 ### brokered-xau-markup — GO XAU brokering: internalisation trial and execution-rule markup
 status: closed · since: 2026-10-15 · last: 2026-10-15 · closed: 2026-11-16
@@ -127,11 +133,6 @@ status: closed · since: 2026-09-15 · last: 2026-09-15 · closed: 2026-11-16
 State: No answer in 62d; closed as stale (question can be re-raised if it recurs). Isaac saw an A-book PnL bump from brokered trades where published price differed one-sidedly from client model price (confirmed LR via binlogs) yet Compass and yield profiles show no LR attribution; question logged on the wiki, no answer seen in 31d, downgraded to watching.
 Next: Mahi dev answer on whether LR attribution is expected to be missing.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1789461866412159
-
-### cyprus-onboarding — Cyprus staff onboarding and training
-status: closed · since: 2026-08-03 · last: 2026-09-02 · closed: 2026-11-02
-State: Andreas H and Alexandros (Cyprus) asked for educational calls on Mahi components (2026-08-25); Isaac runs weekly training calls (yields, price forensics, automation, execution rules). Alexandros asked what half-life measures (09-02, William Denny checking, no outcome seen). Mac's price-forensics rendering problem 09-10 resolved after Nathan's relink. No activity since 2026-09-02; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787646846925519 https://mahifx.slack.com/archives/C09J1DP2QQH/p1788337952132509
 
 ## Arc
 - 2026-04-23 — All Books tenant profile migration; execution rules use All Books
