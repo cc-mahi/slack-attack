@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-11-16T08:23:46Z
+last_catchup: 2026-11-17T08:13:17Z
 status: active
 ---
 
