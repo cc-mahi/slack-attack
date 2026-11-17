@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-16T08:24:55Z
+last_catchup: 2026-11-17T08:17:21Z
 status: active
 ---
 
@@ -27,11 +27,18 @@ Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UA
 
 ## Streams
 
+### icdx-pricing-failover — ICDX pricing rules moved off VT connections
+status: open · since: 2026-11-17 · last: 2026-11-17
+State: On 2026-11-17 Garry said the client no longer uses VT connections and asked Mahi to update the ICDX pricing rules to a new priority and failover order: ISP_OZNY4_RETAIL_MARGIN_SURYA primary, JUMP_OZNY4_RETAIL_MARGIN_SURYA first failover, VELO_OZNY4_RETAIL_MARGIN_SURYA second failover. Shyam Hari replied that Mahi will get it sorted. Related to the Surya entity move and the JT/FEED4 routing thread.
+Next: Mahi (Shyam Hari) applies the ICDX pricing-rule change and confirms to Garry.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1794894754394429 https://mahifx.slack.com/archives/C09HN93T0G2/p1794894979002469
+
+
 ### profile-recs-creds — Programmatic access to Mahi profile recommendations
 status: open · since: 2026-10-23 · last: 2026-11-16
-State: Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval. On 2026-11-16 Neil replied to Nathan that he can telnet but MySQL still refuses the user from 13.218.4.162 (access denied), so the grant looks not yet applied; Shyam Hari said Mahi will check.
-Next: change CHG-2611-68EZ approved and implemented and MySQL grant confirmed (Mahi, Shyam Hari checking); Mahi confirms to Neil.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794547118605529 https://mahifx.slack.com/archives/C09HN93T0G2/p1794805907585309
+State: On 2026-11-16 Neil also asked to whitelist two further IPs (32.202.79.37, 54.88.253.4) for network and MySQL, saying that is the last; Rory King agreed. Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval. On 2026-11-16 Neil replied to Nathan that he can telnet but MySQL still refuses the user from 13.218.4.162 (access denied), so the grant looks not yet applied; Shyam Hari said Mahi will check.
+Next: change CHG-2611-68EZ approved and implemented and MySQL grant confirmed (Mahi, Shyam Hari checking); Rory King whitelists the two new IPs; Mahi confirms to Neil.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794805907585309 https://mahifx.slack.com/archives/C09HN93T0G2/p1794827657406459
 
 
 ### ab-book-queries — A/B book classification requests from overnight team
