@@ -11,20 +11,20 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-16T08:17:34Z
+last_catchup: 2026-11-17T08:13:35Z
 status: active
 ---
 
 ## Now
-Alpha is live (first trades 2026-11-09). David Rapp's in-person risk session happened 2026-11-12 and Will Carter says it went very well; follow-ups are an updated deck to David, a Compass login reset and walkthrough for George, and a backup hedging LP scope. Hedger activation, re-enabling expectedBookStatusOnTimezones and Softs/XNG/XAGEUR spikes remain open. Aug/Sep invoices still a soft overhang.
+Alpha is live (first trades 2026-11-09). David Rapp's in-person risk session happened 2026-11-12; Will Carter posted the written summary 2026-11-16 and awaits David's reply (prop-to-broker account list, logins, training call). Cameron Hughes is out this week. Other follow-ups: Compass reset and walkthrough for George, and a backup hedging LP scope. Hedger activation, re-enabling expectedBookStatusOnTimezones and Softs/XNG/XAGEUR spikes remain open. Aug/Sep invoices still a soft overhang.
 
 ## Streams
 
 ### inperson-risk-session — In-person risk management session
-status: open · since: 2026-11-09 · last: 2026-11-13
-State: The 2026-11-12 session with ACG went very well (Will Carter's 2026-11-13 readout). Covered markout-based classification, SI vs A/B-book (book too small for SI today, switches on as flow builds), return on spread, pricing and skew, news handling and signals. Not covered: tiered margin and prop-book payrolls value-add numbers. Concerns: George has not logged into Compass in two years, and Will did not know about the overdue invoices so should have led with prop-book value-add. ACG is near fully hedged by design; the pitch is 4-6 weeks of their own flow to show what to keep via SI.
-Next: Send updated deck and session page to David this week; reset George's Compass access and walk the team through it; backtest SI and classification on prop accounts; follow up on tiered margin and payrolls value-add; Cameron Hughes still owes Gerard's open items (3 Nov quoting gap, 15 Oct stop-loss follow-ups).
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794566948410859
+status: open · since: 2026-11-09 · last: 2026-11-16
+State: The 2026-11-12 session with ACG went very well (Will Carter's 2026-11-13 readout). On 2026-11-16 Will posted the written summary in the client channel: ACG is close to fully hedged to Argamon by design, LR/skew/PSM/news widening already run on every price, and over 4-6 weeks Mahi reads each account then proposes what to keep via SI, replayed on ACG's own trades first. He also offered prop Compass logins/resets and a walkthrough (George has not logged in for a while), quoted October prop-book skew and LR value-add, and asked for a list of prop accounts likely to move to the broker so their trades can be simulated through the broker setup. David Rapp said he will revert ASAP and joked he would like a figure to stay at 153.4$/m; Will said the yield profiles now look fixed and flagged "George the sniper?". Will offered another product training call. Not covered in session: tiered margin and prop-book payrolls value-add numbers. Cameron Hughes is out this week; Will is covering the channel.
+Next: David to revert with prop-to-broker account list, logins needing reset and a time for more training; Mahi to reset George's Compass access and walk the team through it; backtest SI and classification on prop accounts; follow up on tiered margin and payrolls value-add; Cameron Hughes still owes Gerard's open items (3 Nov quoting gap, 15 Oct stop-loss follow-ups) on return.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1794236304666409 https://mahifx.slack.com/archives/C09F15FRTAB/p1794826877947969 https://mahifx.slack.com/archives/C09F15FRTAB/p1794829419514859
 
 ### go-live-testing — Live test trading and go-live readiness
 status: open · since: 2026-04-29 · last: 2026-11-09
@@ -74,9 +74,9 @@ Next: (watching: payment promised by Rapp, no new signal since 2026-10-14; raise
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791966476920889 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791972502451699
 
 ### alert-suppression — Monitoring noise before hedgers go on
-status: watching · since: 2026-08-17 · last: 2026-09-10
+status: open · since: 2026-08-17 · last: 2026-09-10
 State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
-Next: (watching: no alerts since 2026-09-10, depends on hedger activation) Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
+Next: (re-opened: stale 68d; Alpha is live so action is due) Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
 
 ### retail-lpoa-groups — MT5 groups for retail-under-corporate accounts
