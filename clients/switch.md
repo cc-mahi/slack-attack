@@ -14,7 +14,7 @@ contacts:
   - {name: Dom Gilbert, role: "Think Huge (Switch parent) - COO/shareholder; drives hosting cost questions"}
   - {name: Paul Pintiliescu, role: "Think Huge - infrastructure/CTO-side; asks hardware questions"}
   - {name: Brandon, role: "Think Huge - infrastructure lead (US west coast)"}
-last_catchup: 2026-11-16T08:23:46Z
+last_catchup: 2026-11-17T08:17:25Z
 status: active
 ---
 
@@ -24,10 +24,10 @@ Prospect, contract unsigned. Switch had cold feet on 2026-10-26 over skew/FI num
 ## Streams
 
 ### mnda-ip-coverage — No NDA with Switch covering sims and mechanism
-status: open · since: 2026-10-26 · last: 2026-10-29
-State: Andrew found the Introducer Agreement binds the introducer, not the prospect, and "confidential information" is undefined, so nothing stops Switch rebuilding its own skew. Bonnie confirmed on 2026-10-28 there is no MNDA in place and offered to send one (customer is Mahi's, not the IB's), and is getting legal opinion too. On 2026-10-29 she sent Sammy an MNDA for Switch to review, with details guessed from Switch's website as Sammy did not reply. Will thinks an NDA is needed directly with Switch even via the IB, and is waiting on Andrew's counter work before going back to Switch. Mahi has no NDA with FinPrime either.
-Next: Switch/Sammy to review and return the MNDA (party details unconfirmed); Andrew's counter work; Protected IP to be named as a class in future agreements.
-Refs: https://mahifx.slack.com/archives/C0C7QB281J6/p1793042795810709 https://mahifx.slack.com/archives/C0C7QB281J6/p1793203037567439 https://mahifx.slack.com/archives/C0C7QB281J6/p1793284717969209
+status: open · since: 2026-10-26 · last: 2026-11-16
+State: Andrew found the Introducer Agreement binds the introducer, not the prospect, and "confidential information" is undefined, so nothing stops Switch rebuilding its own skew. Bonnie confirmed on 2026-10-28 there is no MNDA in place and offered to send one (customer is Mahi's, not the IB's), and is getting legal opinion too. On 2026-10-29 she sent Sammy an MNDA for Switch to review, with details guessed from Switch's website as Sammy did not reply. Will thinks an NDA is needed directly with Switch even via the IB, and is waiting on Andrew's counter work before going back to Switch. Mahi has no NDA with FinPrime either. On 2026-11-16 Bonnie asked for any update from Sammy; Will said radio silence on his side and Bonnie will see if Sammy replies to her. No MNDA reply from Switch in the 18 days since it was sent.
+Next: Switch/Sammy to review and return the MNDA (party details unconfirmed; chase via Bonnie); Andrew's counter work; Protected IP to be named as a class in future agreements.
+Refs: https://mahifx.slack.com/archives/C0C7QB281J6/p1793042795810709 https://mahifx.slack.com/archives/C0C7QB281J6/p1793203037567439 https://mahifx.slack.com/archives/C0C7QB281J6/p1793284717969209 https://mahifx.slack.com/archives/C0C7QB281J6/p1794823857777629
 
 ### sva-credibility — Switch doubts FI numbers; UTC-corrected XAUUSD SVA rerun
 status: open · since: 2026-10-26 · last: 2026-10-28
