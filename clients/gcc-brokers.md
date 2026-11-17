@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-11-16T08:19:32Z
+last_catchup: 2026-11-17T08:15:23Z
 status: active
 ---
 ## Now
@@ -57,10 +57,10 @@ Next: Rory to send Amana vs LMAX/Finalto performance numbers (11-13) and hand ma
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1789388024317479 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794504876996289 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794567664965689
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-11-12
-State: Almost every weekday ~15:00 UTC GCC ops (Layan, lately Nael) posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms. Since 11-04 Rory has answered "will do" within minutes and confirmed done same day (11-12: 1,936 oz at 11:23 UTC confirmed 11:25 and 1,376 oz at 15:35 confirmed 16:52), though confirmation sometimes lags 1-3 hours. Earlier confirmation gaps: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz, asked again 10-13), the 10-16 report was confirmed 2h late, and 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 have no done-confirmation visible. Late on 10-27 Carl posted GCC's LP exposure and Daria found Compass showed 4,081 XAU vs the client's 6,404; positions aligned and Carl confirmed.
+status: open · since: 2026-04-30 · last: 2026-11-16
+State: Almost every weekday ~15:00 UTC GCC ops (Layan, lately Nael) posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms. Since 11-04 Rory has answered "will do" within minutes and confirmed done same day (11-12: 1,936 oz at 11:23 UTC confirmed 11:25 and 1,376 oz at 15:35 confirmed 16:52; 11-16: 5,849 oz at 15:56 confirmed 15:59), though confirmation sometimes lags 1-3 hours. Earlier confirmation gaps: GCC had to chase on 09-22, 10-07 and 10-09 (2,572 oz, asked again 10-13), the 10-16 report was confirmed 2h late, and 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 have no done-confirmation visible. Late on 10-27 Carl posted GCC's LP exposure and Daria found Compass showed 4,081 XAU vs the client's 6,404; positions aligned and Carl confirmed.
 Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794497739078619
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794844584826039
 
 ### volume-tier — Record volume week, NFP positioning and billing tier
 status: open · since: 2026-11-06 · last: 2026-11-06
