@@ -17,26 +17,32 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-11-17T08:13:17Z
+last_catchup: 2026-11-18T08:17:01Z
 status: active
 ---
 
 ## Now
 Prop firm; Mahi is dealing desk and risk. Payouts were high last week; Cameron Hughes widened spread-table spreads (TOT no longer on Prop Firm Match) as a first step. Cameron Hughes also sent TOT an NFP value-add note (about $4.3k over the release).
-Open: no second price source if Mahi Central eu-west-2 drops (Liam Cordelle weighing options); MatchTrader IP whitelist (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain); drop-copy volume check with Shane.
+Open: EURUSD PSM widening was stuck on 13-17 Nov (round-numbers override applied, $/M anomaly under investigation); Matt says TOT is back to #13 on Prop Firm Match spreads; no second price source if Mahi Central eu-west-2 drops (Liam Cordelle weighing options); MatchTrader IP whitelist (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain); drop-copy volume check with Shane.
 
 ## Streams
+
+### psm-eurusd-widening — EURUSD PSM widening stuck on
+status: open · since: 2026-11-13 · last: 2026-11-17
+State: Daria Horton found PSM widened EURUSD on almost every sample from 2026-11-13 ~15:00 UTC to 2026-11-17 21:20 UTC (~54 trading hours vs a normal 20-30%), caused by the `round-numbers` input to PSM-W giving 1.1000 a 50-pip approach zone while price sat inside it. A client-wide registry override (`maxTiers: 3`, 5-pip zone) went live 2026-11-17 21:20 with the signalProcessFI1 restart (XAUUSD loses its $5 zone around $100 levels); two stale 2025 rules blocking imports were fixed first. Widening stays on until EURUSD moves >5 pips from 1.1000. Widened-period yield averaged 45-53 $/M from 16 Nov vs ~20 before, more than the cap explains, so still under investigation. Daria asked Andrew Morgan to review.
+Next: Daria Horton to check widened share over 2026-11-18 session and explain the $/M excess; Andrew Morgan to review.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1794951032551019
+
+### payout-ratio-levers — Payout ratio, skew and spread levers
+status: open · since: 2026-09-30 · last: 2026-11-17
+State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% over 6 weeks; Mahi raised skew on 1-Step and 2-Step, spreads on majors restored on Prop Firm Match, max loss 9% to 8% the agreed fallback, Shane to flag each new Launchpad group for harsher execution. Re-opened 2026-11-09: Shane told Cameron Hughes TOT payouts were high last week and they want changes in place. TOT no longer uses Prop Firm Match (same as other props), so Cameron Hughes added wider spreads on the spread-table instruments as a first step. On 2026-11-17 Matt told Cameron Hughes TOT is #13 on the Prop Firm Match spreads list and "somehow it reverted back"; William Denny said Mahi will look into it.
+Next: Mahi (Cameron Hughes / William Denny) to look into the Prop Firm Match ranking; watch payouts after the wider spreads; further levers (skew, max loss) if still high.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1794238452068779 https://mahifx.slack.com/archives/C08U853T684/p1794931416547649 https://mahifx.slack.com/archives/C08U853T684/p1794931621065459
 
 ### nfp-valueadd-post — Cameron Hughes' NFP value-add note to TOT
 status: open · since: 2026-11-09 · last: 2026-11-09
 State: Cameron Hughes posted to TOT on 2026-11-09 about Friday's US payrolls: $32M client volume in the 3 minutes from 13:30 UTC, LR about $3.6k ($113/M vs about $5/M the hour before; gold $2.7k on $19M), PSM about $0.7k, about $4.3k total over the release, plus skew about $8.2k ($5/M) across the day. Includes a Compass yield-profile link. No client reply yet.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1794239357111729
-
-### payout-ratio-levers — Payout ratio, skew and spread levers
-status: open · since: 2026-09-30 · last: 2026-11-09
-State: Call with Matt and Shane on 2026-09-30: 2-Step Pro payout ratio was 47% over 6 weeks; Mahi raised skew on 1-Step and 2-Step, spreads on majors restored on Prop Firm Match, max loss 9% to 8% the agreed fallback, Shane to flag each new Launchpad group for harsher execution. Re-opened 2026-11-09: Shane told Cameron Hughes TOT payouts were high last week and they want changes in place. TOT no longer uses Prop Firm Match (same as other props), so Cameron Hughes added wider spreads on the spread-table instruments as a first step.
-Next: Watch payouts after the wider spreads; further levers (skew, max loss) if still high.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1789027773632959 https://mahifx.slack.com/archives/C08TG143F4L/p1794238452068779
 
 ### single-price-source — No second price source if Mahi Central eu-west-2 drops
 status: open · since: 2026-10-30 · last: 2026-10-30
