@@ -21,7 +21,7 @@ contacts:
   - {name: "Jem", role: "Argamon exec (also 'Jeremy'); on weekly strategy calls with Elan, Daria and Shyam; surname unknown", confidence: low}
   - {name: "Joanna Theofanous", role: "Argamon ops; no activity seen in window", confidence: low}
   - {name: "Alexander Karnadi", role: "Argamon analytics/reconciliation; no activity seen in window", confidence: low}
-last_catchup: 2026-11-17T08:17:22Z
+last_catchup: 2026-11-18T08:17:00Z
 status: active
 ---
 
@@ -35,9 +35,9 @@ GTS HRP sessions were retired on 10-27 (no GTS via NWM market in Compass yet). T
 
 ### xau-spread-lr-psm — Wider gold spreads via higher LR and PSM beta
 status: open · since: 2026-11-17 · last: 2026-11-17
-State: On the 11-17 call Jem and Elan agreed they need wider gold spreads to be profitable on gold. They will go harder on LR for bursty flow (no big-client complaints since Toa LR went to $15/M; retail is $4/M), ramped incrementally. They are happy with the 6-12c spread range on beta XAU with PSM; on 11-16 beta published 7.71c vs 8.05c in prod and charged 8.43c vs 8.18c at client trades. Shyam wants to smooth the spread fluctuations before moving it to prod, probably next week; there is room to widen more or tighten less at the same averages. Aim is LR plus PSM keeping average published spread near current. Absorbs the old xauusd-hedging thread.
+State: On the 11-17 call Jem and Elan agreed they need wider gold spreads to be profitable on gold. LR on XAU was tightened that evening (Daria, 22:06Z) from 500k surplus / 250k per 500ms to 150k surplus / 75k per 500ms, as Shyam proposed and Jem tightened further. They will go harder on LR for bursty flow (no big-client complaints since Toa LR went to $15/M; retail is $4/M), ramped incrementally. They are happy with the 6-12c spread range on beta XAU with PSM; on 11-16 beta published 7.71c vs 8.05c in prod and charged 8.43c vs 8.18c at client trades. Shyam wants to smooth the spread fluctuations before moving it to prod, probably next week; there is room to widen more or tighten less at the same averages. Aim is LR plus PSM keeping average published spread near current. Absorbs the old xauusd-hedging thread.
 Next: Shyam to ramp LR incrementally, smooth the beta PSM spread and likely move it to prod next week.
-Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1794887022544449
+Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1794887022544449 https://mahifx.slack.com/archives/C06U76A7ZJR/p1794953192574289
 
 ### pxm-centroid-migration — Argamon moving connectivity from Centroid to PrimeXM
 status: open · since: 2026-07-21 · last: 2026-11-16
