@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-17T08:17:21Z
+last_catchup: 2026-11-18T08:17:00Z
 status: active
 ---
 
@@ -35,10 +35,10 @@ Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1794894754394429 https://ma
 
 
 ### profile-recs-creds — Programmatic access to Mahi profile recommendations
-status: open · since: 2026-10-23 · last: 2026-11-16
-State: On 2026-11-16 Neil also asked to whitelist two further IPs (32.202.79.37, 54.88.253.4) for network and MySQL, saying that is the last; Rory King agreed. Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval. On 2026-11-16 Neil replied to Nathan that he can telnet but MySQL still refuses the user from 13.218.4.162 (access denied), so the grant looks not yet applied; Shyam Hari said Mahi will check.
-Next: change CHG-2611-68EZ approved and implemented and MySQL grant confirmed (Mahi, Shyam Hari checking); Rory King whitelists the two new IPs; Mahi confirms to Neil.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794805907585309 https://mahifx.slack.com/archives/C09HN93T0G2/p1794827657406459
+status: open · since: 2026-10-23 · last: 2026-11-17
+State: On 2026-11-17 Leonardo Borsi opened change CHG-2611-E19T (read-only DB access for the two further IPs, window 2026-11-17..2026-11-24, same login/SSL/read-only grants as CHG-2611-68EZ); Liam Cordelle approved it, noting the GRANTS must be copied over too. Neil Whitehead later acknowledged in the operations channel ("will let you know if any issues"). On 2026-11-16 Neil also asked to whitelist two further IPs (32.202.79.37, 54.88.253.4) for network and MySQL, saying that is the last; Rory King agreed. Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval. On 2026-11-16 Neil replied to Nathan that he can telnet but MySQL still refuses the user from 13.218.4.162 (access denied), so the grant looks not yet applied; Shyam Hari said Mahi will check.
+Next: CHG-2611-68EZ and CHG-2611-E19T implemented with GRANTS copied and MySQL access confirmed for all four IPs (Mahi, Shyam Hari / Leonardo Borsi); Mahi confirms to Neil.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794827657406459 https://mahifx.slack.com/archives/CP7A1F8BT/p1794909021865319 https://mahifx.slack.com/archives/C09HN93T0G2/p1794928110365059
 
 
 ### ab-book-queries — A/B book classification requests from overnight team
