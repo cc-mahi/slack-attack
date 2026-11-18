@@ -18,7 +18,7 @@ contacts:
   - {name: "Andreas Lykotrafitis", role: "Infinox trading desk (night shift) — Echo training attendee", confidence: low}
   - {name: "Andreas Kazelas", role: "Infinox trading ops — Heavy/No LR and Toxic XAUUSD requests", confidence: low}
   - {name: "Aditya", role: "Infinox product/strategy head — Mahi bridge-deal advocate; reported leaving for RCX 2026-10", confidence: low}
-last_catchup: 2026-11-17T08:15:24Z
+last_catchup: 2026-11-18T08:15:49Z
 status: active
 ---
 
@@ -28,6 +28,12 @@ Custom layered XAUUSD symbol (`XAUUSD.l`) was shelved on 11-02 (Clio: settled wi
 Commercially: CH's crypto-intro deal is quiet since 10-14; no Slack activity 11-13..11-16. Sadiq asked for Echo access for two more users; Kate says Echo is now in Compass and they need Compass logins.
 
 ## Streams
+
+### oct-value-add-report — October 2026 value-add report and email
+status: open · since: 2026-11-17 · last: 2026-11-17
+State: On 11-17 Will posted the October value-add report (PDF) and a client email draft in #internal-infinox, asking Kate to reply "signed off" or "hold" with a reason in-thread; no reply yet. Once signed off Kate sends the email herself to the senior contacts on the wiki page in the first week of the month, after the page-2 reviewer notes are removed.
+Next: Kate to review and sign off or hold; send the email in the first week of December.
+Refs: https://mahifx.slack.com/archives/C01QGUXPKEY/p1794917703589099
 
 ### fill-tick-queries — Execution, slippage and raw-tick requests
 status: open · since: 2026-07-08 · last: 2026-11-16
@@ -89,14 +95,9 @@ Next: Infinox Trading Ops to ask PrimeXM what accounts for the arrival-to-proces
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1790862218777389 https://mahifx.slack.com/archives/C022S6NL82D/p1791251845973249
 
 ### index-cfd-spikes — LP-driven spikes on indices and CFDs
-status: watching · since: 2026-05-20 · last: 2026-09-18
-State: Recurring client complaints about spikes and wide spreads on US30, NAS100, SPX500, JPN225 and BTCUSD, traced to Vantage and B2Broker feed quality; Mahi mitigates via benchmarking and pricing tweaks, most recently lower-quantity rungs (500/1k/2k/4k) for JPN225, implemented 09-18. Vantage's off-market opening ticks (07-13) led Shyam to offer a ~1s indicative suppression, which Infinox never decided on; the BTCUSD B2B/Vantage identical-feed question (07-02) was left unresolved.
+status: closed · since: 2026-05-20 · last: 2026-09-18 · closed: 2026-11-18
+State: No activity since 09-18; assumed resolved. Recurring client complaints about spikes and wide spreads on US30, NAS100, SPX500, JPN225 and BTCUSD, traced to Vantage and B2Broker feed quality; Mahi mitigates via benchmarking and pricing tweaks, most recently lower-quantity rungs (500/1k/2k/4k) for JPN225, implemented 09-18. Vantage's off-market opening ticks (07-13) led Shyam to offer a ~1s indicative suppression, which Infinox never decided on; the BTCUSD B2B/Vantage identical-feed question (07-02) was left unresolved.
 Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1779259961824069 https://mahifx.slack.com/archives/C022S6NL82D/p1789687354550679
-
-### custom-xau-layers — Custom layered XAUUSD symbol (XAUUSD.l)
-status: closed · since: 2026-10-19 · last: 2026-11-02 · closed: 2026-11-03
-State: Clio asked for a new XAUUSD symbol with client-specific volume and spread layers; Shyam deployed pricers, a CLIENT_PRICE_L_LDN model and a B_CLIENTS_L channel with a `.l` suffix rule (CHG-2610-EGQJ), but it never went live. On 11-02 Clio told Rory there is no need to proceed for now as it was settled with the client; Rory confirmed internally that the L_LDN XAU pricing model is not needed for the moment. Infinox will say if it wants it later.
-Refs: https://mahifx.slack.com/archives/C022S6NL82D/p1792416827862309 https://mahifx.slack.com/archives/C022S6NL82D/p1793618947000509
 
 ### billing-invoices — Unpaid invoices, discounts and volume fee
 status: closed · since: 2026-07-02 · last: 2026-09-11 · closed: 2026-11-16
