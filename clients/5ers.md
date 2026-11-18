@@ -18,11 +18,11 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-11-17T08:13:35Z
+last_catchup: 2026-11-18T08:14:00Z
 status: active
 ---
 ## Now
-CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival). On 2026-11-10 Kate's call with him: the rival presented its test results, 5ers plan to go live with it on a group soon, and his priority is now seamless failover (the rival claims no pricing break if a feed drops). Mahi's October funded-gold skew PnL was $461k vs the rival's $240k; Mahi offered a side-by-side on an MT5 group. CPI hero moment posted 11-10 ($44/M vs $16.63/M average); adaptive sized skew is live. Beeks still owes RCAs; CHG-2611-SR0F backup-link rebuild (11-07) result not seen. 57 single stocks loaded but unpriced pending B2Broker symbols. LMAX market-data feed down since 10-31 (ACCESS_DENIED).
+CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival). On 2026-11-10 Kate's call with him: the rival presented its test results, 5ers plan to go live with it on a group soon, and his priority is now seamless failover (the rival claims no pricing break if a feed drops); 11-17 YourBourse confirmed it can do automatic pricing/execution failover and Kate plans an AWS backup server. Mahi's October funded-gold skew PnL was $461k vs the rival's $240k; Mahi offered a side-by-side on an MT5 group. CPI hero moment posted 11-10 ($44/M vs $16.63/M average); adaptive sized skew is live. Beeks still owes RCAs; CHG-2611-SR0F backup-link rebuild (11-07) result not seen. 57 single stocks loaded but unpriced pending B2Broker symbols. LMAX market-data feed down since 10-31 (ACCESS_DENIED).
 
 ## Streams
 
@@ -39,10 +39,10 @@ Next: Kate to raise with Yaniv / 5ers and get the LMAX account status restored.
 Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1794390260435229
 
 ### failover-ask-1110 — Yaniv's seamless-failover priority
-status: open · since: 2026-11-10 · last: 2026-11-10
-State: Yaniv says failover is now what matters most: the rival (pricing only) claims no break in pricing if a feed cuts out, and he values no drop-outs over a perfect solution given reputation, compensation and staff-time risk. Kate is unsure execution failover can be seamless through the YB bridge, since 5ers must change execution location manually; if the issue is A-book to B-book switching, she floated Mahi central in eu-west-2 as a failover A-book location, removing the reliance on Beeks. Kate told Yaniv she would check internally.
-Next: Kate/Andrew/Liam to decide on a failover proposal (eu-west-2 A-book location, cTrader price failover) and reply to Yaniv.
-Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1794330870581919
+status: open · since: 2026-11-10 · last: 2026-11-17
+State: Yaniv says failover is now what matters most: the rival (pricing only) claims no break in pricing if a feed cuts out, and he values no drop-outs over a perfect solution given reputation, compensation and staff-time risk. Kate is unsure execution failover can be seamless through the YB bridge, since 5ers must change execution location manually; if the issue is A-book to B-book switching, she floated Mahi central in eu-west-2 as a failover A-book location, removing the reliance on Beeks. Kate told Yaniv she would check internally. On 2026-11-17 Kate asked YourBourse about automatic failover; YB confirmed both pricing and A-book execution failover are possible: per symbol a primary LP plus up to three ranked backups, triggered when all primaries stop quoting for a configured timeout (default 15s), with automatic failback after a configured stable delay (default 60s). Caveat: failover is driven by loss of pricing only, so a venue that keeps quoting but rejects fills is not auto-switched. Kate's plan is a backup server in AWS; she is tracking progress in a thread in #internal-5ers.
+Next: Kate/Andrew/Liam to finalise the failover proposal (AWS backup server, YB auto failover config, cTrader price failover) and reply to Yaniv.
+Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1794330870581919 https://mahifx.slack.com/archives/C0AUF6LBZ0Q/p1794912506679589
 
 ### cpi-value-add-1110 — CPI 2026-11-10 value-add moment
 status: open · since: 2026-11-10 · last: 2026-11-10
