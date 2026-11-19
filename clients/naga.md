@@ -16,7 +16,7 @@ contacts:
   - {name: Alexandru Malanca, role: NAGA Operations}
   - {name: Paris Stephanou, role: NAGA Operations}
   - {name: Andrei Vieru, role: NAGA Operations}
-last_catchup: 2026-11-18T08:13:42Z
+last_catchup: 2026-11-19T08:15:20Z
 status: active
 ---
 
@@ -26,13 +26,13 @@ Prospect (wiki says parked to Q3 2026, but channels opened 2026-10-09 and work i
 ## Streams
 
 ### naga-client-report — Client report and read-out calls
-status: open · since: 2026-10-12 · last: 2026-11-10
+status: open · since: 2026-10-12 · last: 2026-11-18
 State: Adrian Prodan asked when the next call on the analysis of submitted data would be. Mahi had a first-pass report with issues to correct, so moved the call from Thursday to Wednesday 2026-10-14 (6.30pm EEST) and presented. Andrew Morgan: call seemed ok; NAGA spreads cushion them against bad flow. Core message: NAGA realised half-spread is 34c (about 68c full), above the market p75 and about 2x Mahi's widest client; skew subsidises tightening. Report was iterated on internally (PSM section +$95k, +$8.92/M extra spread revenue; pricing layer adds $17.30/M).
 Proposal/presentation sent about a week before 2026-10-22 with no response; Bonnie Cassidy nudged Adrian Prodan in #mahi-naga on 2026-10-22 and he replied that NAGA has no feedback yet and will revert.
 On 2026-10-23 Andrew Morgan posted in #mahi-naga listing the week's product work (new risk measures, open-risk yield profiles, holding-period analysis against network benchmarks, single-counterparty vs book-skew suitability) and said Mahi is keen to start a pilot, offering to work on scope, integration and commercial terms. Internally he added chasers tied to the new product digest to the upsell playbook.
-On 2026-11-03 Bonnie Cassidy chased Adrian Prodan again (no word for a couple of weeks, offered another call) and Andrew Morgan posted in #mahi-naga about a Liquidity Reduction for Copy Trading feature, citing NAGA gold fills 11 Aug-30 Sep (same-side bursts from 5+ accounts 6.1% of volume; ~$560/M best-to-worst in 10+ account bursts) and asking NAGA to flag copy followers in October gold data. No NAGA reply yet. On 2026-11-10 Bonnie Cassidy noted internally that there is still no response from NAGA.
-Next: NAGA to revert with feedback (Adrian Prodan), on a pilot, and on flagging copy followers in October data; Bonnie Cassidy to follow up. Andrew wanted to push rather than rush the next deliverable.
-Refs: https://mahifx.slack.com/archives/C0C8WBNM464/p1791882666358299 https://mahifx.slack.com/archives/C0C8WBNM464/p1793714470286989 https://mahifx.slack.com/archives/C0C8WBNM464/p1793730313438089 https://mahifx.slack.com/archives/C0C8WA6FAKA/p1794330406188829
+On 2026-11-03 Bonnie Cassidy chased Adrian Prodan again (no word for a couple of weeks, offered another call) and Andrew Morgan posted in #mahi-naga about a Liquidity Reduction for Copy Trading feature, citing NAGA gold fills 11 Aug-30 Sep (same-side bursts from 5+ accounts 6.1% of volume; ~$560/M best-to-worst in 10+ account bursts) and asking NAGA to flag copy followers in October gold data. No NAGA reply yet. On 2026-11-10 Bonnie Cassidy noted internally that there is still no response from NAGA. On 2026-11-18 Bonnie Cassidy asked Adrian Prodan in #mahi-naga whether he will be in London next week for FMLS (in-person meeting opportunity); no reply yet.
+Next: NAGA to revert with feedback (Adrian Prodan), on a pilot, and on flagging copy followers in October data; Bonnie Cassidy to follow up (FMLS meet-up next week). Andrew wanted to push rather than rush the next deliverable.
+Refs: https://mahifx.slack.com/archives/C0C8WBNM464/p1791882666358299 https://mahifx.slack.com/archives/C0C8WBNM464/p1793730313438089 https://mahifx.slack.com/archives/C0C8WA6FAKA/p1794330406188829 https://mahifx.slack.com/archives/C0C8WBNM464/p1795010371102289
 
 ### xau-valueadd-sims — XAUUSD B-book value-add sims and report
 status: watching · since: 2026-10-09 · last: 2026-10-15
