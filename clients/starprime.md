@@ -17,22 +17,16 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-11-18T08:16:59Z
+last_catchup: 2026-11-19T08:17:30Z
 status: active
 ---
 
 ## Now
 Relationship still fragile after four September incidents (Andrew Morgan promised an improvement review); pricing latency healthy since adaptive was cut 22 Sep, but pricer split, Aeron/CEP fixes and BMSL changes are outstanding. RBF (FINPRIME) white-label is switched off by StarPrime (parent-group politics, no restart date) while Mahi's Stream2 logon attempts still raise false alerts.
-Day-to-day: Samin's NOP/market edits and hedger restarts, XAG on SI, tag-blacklist problems, and position adjustments; 12 Nov SPXUSD orders rejected under the 0.1 minimum size; 16 Nov UK100 retail quotes filtered at StarPrime hub (kept on Velocity); new B_CLIENTS_TIER3 channel 17 Nov.
+Day-to-day: Samin's NOP/market edits and hedger restarts, XAG on SI, tag-blacklist problems, and position adjustments; 12 Nov SPXUSD orders rejected under the 0.1 minimum size; 16 Nov UK100 retail quotes filtered at StarPrime hub (kept on Velocity); B_CLIENTS_TIER3 channel set up and test-traded 19 Nov.
 Samin wants a redundant Compass instance (pricing owed) and is pitching Compass to the parent group; arb hedger now honours position limits (29 Oct).
 
 ## Streams
-
-### b-clients-tier3 — New B_CLIENTS_TIER3 distribution channel
-status: open · since: 2026-11-17 · last: 2026-11-17
-State: On 17 Nov Samin asked for a new distribution channel B_CLIENTS_TIER3 as a copy of B_CLIENTS_TIER2 with new FIX credentials. Shyam Hari set it up and posted the FIX details in the client thread (credentials are in Slack only); it becomes subscribable after the EOD restarts and Samin acknowledged.
-Next: confirm Samin can connect after the EOD restarts.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794889229907999 https://mahifx.slack.com/archives/C096422RPKK/p1794898448877749
 
 ### uk100-retail-filter — UK100 quotes on MFX-RETAIL filtered by StarPrime hub
 status: open · since: 2026-11-16 · last: 2026-11-16
@@ -48,9 +42,9 @@ Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794459260350249 https://ma
 
 ### si-hedging — SI model, hedger NOP restarts and LP position reconciliation
 status: open · since: 2026-08-17 · last: 2026-11-18
-State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and arb hedgers, which Mahi does by hand. The arb hedger honours NOP limits but not per-instrument LP limits, so Kama's position kept growing on 4 Sep; Kama was taken out of arb and Samin expects dev work letting arb reduce LP positions. LP positions are periodically realigned through paired maker/client adjustments after StarPrime sends LP snapshots; risk-reducing LPR rules were added to the SI hedger Metals profile on 28 Sep. XAG on SI went live 19 Oct (EURUSD with tighter spreads is next). On 23 Oct the arb hedger ignored maximumMarketPosition (switched off); on 27 Oct hybridHedgerSI1 crashed on an "Over-allocated" backstop buy at a venue already at its position cap (restarted). On 29 Oct Isaac Dann deployed the fix so the arb hedger enforces hedging.rules.execution.maximumMarketPosition; Samin added FINIOR_CAPITAL to the SI and ARB markets. On 30 Oct Isaac loosened the XAU arb gates as an A/B test (rollback if edge below -3 $/M). On 4 Nov Alison Koay asked for maker/distribution position adjustments (XAUUSD ARGAMON_INSTI_PXM +673, XAGUSD EDGEWATER +9950); Daria Horton said shortly. On 10 Nov Samin removed ISPRIME from the XAGUSD SI and ARB hedgers' execution markets; to let hybridHedgerSI come back up Nathan Burch removed the DYNAMIC-FASTHEDGE-LP-REDUCING-ISPRIME-VIP and VAR-CLEARANCE-LP-REDUCING-ISPRIME-VIP rules and emptied the market whitelist on the EOW and EOD Cannon rules, then restarted both hedgers. On 12 Nov Alison Koay asked for a maker and matching distribution adjustment of XAUUSD ISPRIME_VIP +602 and Nathan Burch actioned it at 07:18 UTC. Later on 12 Nov Samin added FINALTO to the SI and ARB hedgers with an updated NOP limit and Kate Stagg restarted both (done 12:44 UTC). On 18 Nov Samin raised the XAUUSD NOP limit on ISPRIME to 45,000 (hedging.rules.execution.maximumMarketPosition) and asked for an ARB and SI hedger restart; Nathan Burch first said NOP values were dynamic, then corrected that risk.nop limits are dynamic but unused on this system, whereas that key is not dynamic, restarted both hedgers and cleared Samin's pending-restart warnings.
+State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and arb hedgers, which Mahi does by hand. The arb hedger honours NOP limits but not per-instrument LP limits, so Kama's position kept growing on 4 Sep; Kama was taken out of arb and Samin expects dev work letting arb reduce LP positions. LP positions are periodically realigned through paired maker/client adjustments after StarPrime sends LP snapshots; risk-reducing LPR rules were added to the SI hedger Metals profile on 28 Sep. XAG on SI went live 19 Oct (EURUSD with tighter spreads is next). On 23 Oct the arb hedger ignored maximumMarketPosition (switched off); on 27 Oct hybridHedgerSI1 crashed on an "Over-allocated" backstop buy at a venue already at its position cap (restarted). On 29 Oct Isaac Dann deployed the fix so the arb hedger enforces hedging.rules.execution.maximumMarketPosition; Samin added FINIOR_CAPITAL to the SI and ARB markets. On 30 Oct Isaac loosened the XAU arb gates as an A/B test (rollback if edge below -3 $/M). On 4 Nov Alison Koay asked for maker/distribution position adjustments (XAUUSD ARGAMON_INSTI_PXM +673, XAGUSD EDGEWATER +9950); Daria Horton said shortly. On 10 Nov Samin removed ISPRIME from the XAGUSD SI and ARB hedgers' execution markets; to let hybridHedgerSI come back up Nathan Burch removed the DYNAMIC-FASTHEDGE-LP-REDUCING-ISPRIME-VIP and VAR-CLEARANCE-LP-REDUCING-ISPRIME-VIP rules and emptied the market whitelist on the EOW and EOD Cannon rules, then restarted both hedgers. On 12 Nov Alison Koay asked for a maker and matching distribution adjustment of XAUUSD ISPRIME_VIP +602 and Nathan Burch actioned it at 07:18 UTC. Later on 12 Nov Samin added FINALTO to the SI and ARB hedgers with an updated NOP limit and Kate Stagg restarted both (done 12:44 UTC). On 18 Nov Samin raised the XAUUSD NOP limit on ISPRIME to 45,000 (hedging.rules.execution.maximumMarketPosition) and asked for an ARB and SI hedger restart; Nathan Burch first said NOP values were dynamic, then corrected that risk.nop limits are dynamic but unused on this system, whereas that key is not dynamic, restarted both hedgers and cleared Samin's pending-restart warnings. Later on 18 Nov (19:42 UTC) Samin updated FINALTO NOP values and Daria Horton restarted the ARB and SI hedgers (done 19:45 UTC).
 Next: Daria Horton to confirm Alison's 4 Nov position adjustments were completed; Isaac Dann to keep monitoring the arb A/B test and roll back if edge drops below -3 $/M; Samin to decide whether to switch the arb hedger back on now it respects position limits; Will Carter owes Samin an answer on SI revenue-share mechanics; dev fix so the backstop skips a venue at its position cap; arb LP position reduction still wanted.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1794463691867519 https://mahifx.slack.com/archives/C096422RPKK/p1794979046402059 https://mahifx.slack.com/archives/C096422RPKK/p1794980132234459
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1794463691867519 https://mahifx.slack.com/archives/C096422RPKK/p1794980132234459 https://mahifx.slack.com/archives/C096422RPKK/p1795030930597559
 
 ### rbf-finprime — RBF (FINPRIME/Vantage) B-book white-label via PrimeXM
 status: open · since: 2026-08-25 · last: 2026-11-08
@@ -152,6 +146,11 @@ Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787149002785969 https://ma
 status: closed · since: 2026-10-16 · last: 2026-10-18 · closed: 2026-11-18
 State: 26.4 went live at the 17-18 Oct weekend reboots; the hybridHedgerSI1 pre-check failure (LP-reducing rule with no XAGUSD market) was fixed by splitting Metals profiles. Its tag-list validation broke StarPrime's blacklists, see tag-blacklist-ux. No activity since 18 Oct; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1792157236841079 https://mahifx.slack.com/archives/C095MJHC68J/p1792353921178369
+
+### b-clients-tier3 — New B_CLIENTS_TIER3 distribution channel
+status: closed · since: 2026-11-17 · last: 2026-11-19 · closed: 2026-11-19
+State: On 17 Nov Samin asked for a new distribution channel B_CLIENTS_TIER3 as a copy of B_CLIENTS_TIER2 with new FIX credentials; Shyam Hari set it up. On 19 Nov Shahid sent a 2oz XAUUSD test trade on Starprime-B-Tier3-Orders and Nathan Burch confirmed it was received and filled; Shahid will pass on to Samin. Connection verified.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794889229907999 https://mahifx.slack.com/archives/C096422RPKK/p1795073366476739
 
 ## Arc
 - 2026-05-13 — Internal: StarPrime is owned by Vantage (David Cooney confirmed).
