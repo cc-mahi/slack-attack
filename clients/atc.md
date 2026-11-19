@@ -13,7 +13,7 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-11-18T08:14:00Z
+last_catchup: 2026-11-19T08:15:20Z
 status: active
 ---
 ## Now
