@@ -21,7 +21,7 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-11-18T08:14:00Z
+last_catchup: 2026-11-19T08:15:21Z
 status: active
 ---
 
@@ -32,6 +32,12 @@ Reactive LP feeds went silent 2026-11-09 with no alert (stale-price alerts added
 Exinity is migrating LPs from Hidden Road to Wedbush and chasing pricing-spike, book-break and alerting asks; weekend reliability matters as weekend crypto nears. Open on Mahi: per-book PnL-drop alerts, XAU position realignment, TradersHub A-book move, XCUUSD spread decision, Compass 26.4 signalProcessFI1 overflows, adaptive-skew sim owner.
 
 ## Streams
+
+### signal-process-alerts — Alerts on signal processes, no execution impact
+status: open · since: 2026-11-05 · last: 2026-11-19
+State: On 2026-11-19 ~03:39Z Samuel again asked Mahi to check errors (screenshot, not readable; likely the same signal processes, not stated); Nathan restarted the processes and confirmed both back online by 04:03Z. On 2026-11-13 Samuel chased an emergency alert and Nathan confirmed the process was back up. On 2026-11-12 Samuel reported signal errors; Nathan restored both processes by 04:45Z and said Mahi knows the cause and dev is working on a fix. Alerts on 2026-11-05/06 were also screenshots; Daria said no trading impact (signal processes are outside execution), restored within minutes. May relate to the 2026-10-26 signalProcessFI1 overflow.
+Next: Mahi dev to deliver the fix for the recurring signal-process errors and tell Samuel the cause.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1794534671593379 https://mahifx.slack.com/archives/C0456LSHQQK/p1795059543591619 https://mahifx.slack.com/archives/C0456LSHQQK/p1795060994231009
 
 ### order-reject-queries — Reject and fill investigations
 status: open · since: 2026-09-21 · last: 2026-11-18
@@ -56,12 +62,6 @@ status: open · since: 2026-08-17 · last: 2026-11-15
 State: Sat 2026-11-14 clientDistributionGateway1 on trading-1 failed to start after the weekly reboot (duplicate consumer registration on CLIENT_PRICE_VIP_LDN, no auto-restart); James restarted it by hand, which is what Siddig saw missing at 10:55Z. An OS patch on trading-2 (CHG-2611-DA9T) left two riskPathSI down until 09:59Z, and Beeks pulled a faulty LD4 link (NOCINT-860378). The gateway error may recur at the next reboot. Earlier: the Sat 2026-10-17 reboot left the gateway dead (duplicate Hazelcast shard ID, trading-2 node out of 2 GB heap) and MySQL at its connection limit, so hybrid hedgers were down 08:15 to ~10:55Z (RCA written, P2 open); DB limit raised to 2048 on 2026-10-19. Exinity plans weekend crypto pricing.
 Next: Mahi to find why the gateway fails to start after reboot; Mahi to raise the trading-2 hazelcastNode heap above 2 GB and break down MySQL connections on trading-1 (limit raise done 2026-10-19); Daniel/Kate to revisit weekend support when weekend crypto starts.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/https://mahifx.slack.com/archives/C040V9LNKT5/p1792424073139469 https://mahifx.slack.com/archives/C040V9LNKT5/p1794777515302229 https://mahifx.slack.com/archives/C040V9LNKT5/p1794780190721359
-
-### signal-process-alerts — Alerts on signal processes, no execution impact
-status: open · since: 2026-11-05 · last: 2026-11-13
-State: On 2026-11-13 ~01:51Z Samuel chased an emergency alert (screenshot, not readable) and Nathan confirmed the process was back up. On 2026-11-12 ~04:34Z Samuel reported signal errors again (screenshot); Nathan brought both processes back up by 04:45Z and said at 04:51Z that Mahi knows the cause and dev is working on a fix. Alerts on 2026-11-05 and 2026-11-06 were also screenshots; Daria said no trading impact as these processes produce signals and are not in the execution pipeline, and Nathan restored the process within minutes on 11-06. Which processes alerted is not stated; may relate to the 2026-10-26 signalProcessFI1 overflow.
-Next: Mahi dev to deliver the fix for the recurring signal-process errors and tell Samuel the cause.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1794458029345139 https://mahifx.slack.com/archives/C0456LSHQQK/p1794534671593379 https://mahifx.slack.com/archives/C0456LSHQQK/p1794534689377529
 
 ### centroid-fok-conformance — Centroid conformance: FOK brokered orders expire
 status: open · since: 2026-10-29 · last: 2026-11-13
