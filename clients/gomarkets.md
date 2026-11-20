@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-19T08:15:04Z
+last_catchup: 2026-11-20T08:17:57Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP position re-sync (~$30M manual-hedge LP positions in B House; evening adjustments booked 2026-11-12, USDJPY B-to-A move still requested); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### huf-pnl-hedge — Hedger trades EURHUF to close residual HUF P&L balance
+status: open · since: 2026-11-20 · last: 2026-11-20
+State: Will asked on 2026-11-20 why 2k EURHUF was sold at ISPRIME on 11-19 with no A HOUSE client HUF flow. Daria explained the A book carries a small realised HUF P&L balance (about -1.05M HUF, roughly -$3.1k) since old HUF hedges closed on 11-12; hedgers watch combined currency positions including P&L currency, so it was treated as open risk and hedged. Will found the residual in Compass and will confirm the logic next week; Daria offered to transfer or convert P&L positions if that is not how Go handles P&L. Same mechanism as residual-currency question in au-lp-migration.
+Next: Will to confirm next week whether Go wants P&L currency positions excluded or swept; Daria to look at options if so.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1795151980508259 https://mahifx.slack.com/archives/C09J1DP2QQH/p1795154226865329
 
 ### var-decomposition — Go asks why B Book VaR peaked at 3.7m
 status: open · since: 2026-11-16 · last: 2026-11-16
@@ -93,12 +99,6 @@ State: Isaac noted that because Go runs published LR, LR also lands on benign fl
 Next: Nathan to decide whether to raise it with Go; no client action.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1793119374681369
 
-### open-latency-cancels — Weekend release and post-restart open latency cancels
-status: open · since: 2026-10-16 · last: 2026-10-18
-State: Compass 26.4 was announced to Go on 2026-10-16 (performance, stability, UI) and completed 2026-10-17 at the Saturday reboot. At the 2026-10-18 21:01 UTC open, 57 orders in the first second were cancelled by the internal latency safeguard ("excessive internal latency") because the order-handling process was still warming up after the weekend restart; normal by 21:01:02, no further cancels. Nathan raised a dev ticket on why the post-restart warm-up did not prepare the process; Will accepted, minimal impact.
-Next: Mahi dev to review why warm-up failed to cover the open.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792164137750009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792361497379359
-
 ### channel-refactor — Regional channel/book refactor and gateway latency
 status: watching · since: 2026-08-27 · last: 2026-10-15
 State: Downgraded to watching: no activity since 10-15. Isaac created B_FX_20_METAL_50 and mirror A20_FX_20_METAL_50 markup channels (20 $/M FX, 50 $/M metals, 20% risk split to A) and recommended rolling regional books (e.g. B_CLIENTS_AU_NYC) back into B_CLIENTS_NYC before adding more; Erik is testing and will plan at scale, client sign-off on the cleanup plan was not seen. On 2026-10-14 Isaac and Nathan found Go's gateway saturated: ~20 channels make the single CEP thread on clientDistributionGateway1 recompute each tick per channel (~18k updates/s, ~52% from the 10 regional channels), pushing last-look releases past their window. Decision: raise distribution.node.advanced.numberOfCEPThreads first and hold off asking Go to decommission channels. On 2026-10-15 Isaac set numberOfCEPThreads to 2 (pending EOD restart) and, on Liam's suggestion, switched the sharding strategy to counterparty mode; longer plan is remapping by new trading accounts to markup channels, but riskSplitting cannot split by trading account.
@@ -116,6 +116,11 @@ status: watching · since: 2026-08-25 · last: 2026-09-21
 State: Go wants Compass to automate hedging excess gold risk above internal limits (inventory book and hedger, possibly an SI-book, plus an unwind hedger); Nathan confirmed a B-book gold hedger to a specific LP is possible. Go onboarded LP MINT CFD (FIX sessions set 2026-09-16). On 09-21 Nathan found MINT's XAUUSD feed looks like a copy of Go's own client price (0.969 mid correlation vs 0.33-0.57 for real LPs, +$0.04 spread, ~6ms lag) and Kieran had described a special relationship where Go can broker at a price they decide; concerns are MINT benefiting from Go's skew and Mahi hedgers picking MINT off. Logged on the wiki; not seen raised with Go in channel. Downgraded to watching: no activity since 09-21.
 Next: Mahi to decide whether to raise the MINT feed finding with Go; inventory book build status unknown.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787628603910739 https://mahifx.slack.com/archives/CNF3WPNSK/p1789949763533859
+
+### open-latency-cancels — Weekend release and post-restart open latency cancels
+status: closed · since: 2026-10-16 · last: 2026-10-18 · closed: 2026-11-20
+State: No activity since 2026-10-18; assumed resolved (dev ticket outcome not seen). Compass 26.4 was announced to Go on 2026-10-16 (performance, stability, UI) and completed 2026-10-17 at the Saturday reboot. At the 2026-10-18 21:01 UTC open, 57 orders in the first second were cancelled by the internal latency safeguard ("excessive internal latency") because the order-handling process was still warming up after the weekend restart; normal by 21:01:02, no further cancels. Nathan raised a dev ticket on why the post-restart warm-up did not prepare the process; Will accepted, minimal impact.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792164137750009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1792361497379359
 
 ### xau-pricing-skew — Gold/FX pricing smoothness, skew and failover
 status: closed · since: 2026-06-01 · last: 2026-09-17 · closed: 2026-11-17
