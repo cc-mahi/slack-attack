@@ -18,11 +18,11 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-11-19T08:15:04Z
+last_catchup: 2026-11-20T08:16:06Z
 status: active
 ---
 ## Now
-CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival). On 2026-11-10 Kate's call with him: the rival presented its test results, 5ers plan to go live with it on a group soon, and his priority is now seamless failover (the rival claims no pricing break if a feed drops); 11-17 YourBourse confirmed it can do automatic pricing/execution failover and Kate plans an AWS backup server. Mahi's October funded-gold skew PnL was $461k vs the rival's $240k; Mahi offered a side-by-side on an MT5 group. CPI hero moment posted 11-10 ($44/M vs $16.63/M average); adaptive sized skew is live. Beeks still owes RCAs; CHG-2611-SR0F backup-link rebuild (11-07) result not seen. 57 single stocks loaded but unpriced pending B2Broker symbols. LMAX market-data feed down since 10-31 (ACCESS_DENIED).
+CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival). On 2026-11-10 Kate's call with him: the rival presented its test results, 5ers plan to go live with it on a group soon, and his priority is now seamless failover (the rival claims no pricing break if a feed drops); 11-17 YourBourse confirmed it can do automatic pricing/execution failover and Kate plans an AWS backup server. Mahi's October funded-gold skew PnL was $461k vs the rival's $240k; Mahi offered a side-by-side on an MT5 group. CPI hero moment posted 11-10 ($44/M vs $16.63/M average); adaptive sized skew is live. Beeks still owes RCAs; CHG-2611-SR0F backup-link rebuild (11-07) result not seen. 57 single stocks loaded but paused (11-19: Yaniv will use B2Broker pricing, volumes tiny). LMAX market-data feed down since 10-31 (ACCESS_DENIED).
 
 ## Streams
 
@@ -73,14 +73,6 @@ State: Kate rolled out adaptive sized skew in 5ers' environment on 2026-10-27 (s
 Next: Kate to keep feeding the impact into value-add.
 Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793124677300249 https://mahifx.slack.com/archives/C07AQJS4E80/p1793982051354099
 
-### stock-cfd-request — New stock CFD instruments (~57 tickers)
-status: open · since: 2026-09-29 · last: 2026-11-04
-State: Andreas asked for ~55 US/EU single stocks; they are now part of the retention offer. On 2026-10-23 Isaac loaded all 57 from his list into 5ers Compass as reference data (names-only import, one equity asset + one USD CFD per stock, e.g. AAPL/AAPLUSD; Mattel is MATTEL as MAT clashes with a crypto asset); he skipped a change record (Liam flagged it, bounce of systemNotificationProcessor2 was clean). Naming convention is under debate (Liam's Finotive pattern: asset AAPLx, instrument AAPL; Andrew wants ticker consistency checked against top retail sites). The blocker is price: B2Broker's 5ers session carries no stocks, so 5ers must confirm B2Broker can stream these names and their symbols. Isaac asked Andreas this 10-23; Andreas replied he must first discuss internally. Support is limited: no dividend, corporate-action or equity-news feed (a split means manual handling; only AAPL, AMZN, GOOGL, META, MSFT, NVDA, TSLA have econ-news drivers). Andrew wants a KB/upsell article and PDFs on stock capacity.
-Update 2026-10-27: Kate said the stocks are in the system and she will look for symbol mappings herself to subscribe overnight, with a further update to 5ers due 10-28.
-Update 2026-11-04: Kate asked Andreas in the shared channel for the B2Broker symbol mappings and for B2Broker to allow the symbols on 5ers' connection; no reply yet.
-Next: Andreas to come back after internal discussion and ask B2Broker about the feed; Isaac to settle naming and map subscriptions/pricing once symbols are known.
-Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1790672163941279 https://mahifx.slack.com/archives/C079M09MGGP/p1792757497794269 https://mahifx.slack.com/archives/C07AQJS4E80/p1792759023540679 https://mahifx.slack.com/archives/C07AQJS4E80/p1793808948669859
-
 ### nic-degradation-0925 — 2026-09-25 stale pricing + cTrader drop, Beeks NIC
 status: open · since: 2026-09-25 · last: 2026-11-04
 State: 2026-09-25 5ers saw delayed prices / extreme slippage on MT5 via the XC and cTrader dropped; cause was a degraded optic on 5ers-ln-trading-1's primary NIC (Beeks). Beeks' manual failover to the backup NIC left the box unreachable ~38 min (backup switchport never had VLANs; cTrader has no failover at 5ers). On 2026-09-28 the server rebooted mid-flow while Beeks were on the console: Mahi's logs show a SIGINT (Ctrl-Alt-Del) from a Beeks console session (beeksadmin, tty1) and no Mahi user action, but Beeks deny it and have not yet answered the reboot / why-degradation-wasn't-flagged questions (NOCINT-848378; Gavin's 10-02 reply on NOCINT-847123 was unhelpful and Inald re-asked). That day Mahi briefly sat idle believing it was blocked on Beeks' logical change for the primary; Beeks said the backup is fine to use, so flow resumed on it. 5ers moved funded flow to B-book from 09-25 and returned to Mahi 2026-09-29; incident report sent 09-29, committing only to better latency monitoring and earlier provider detection. Optic replaced 09-26 and clean since; server still on the backup NIC. The switch to primary (Sat 10 Oct, agreed by Andreas 10-05) was rescheduled on 10-09 to "next weekend" (~17 Oct), window TBC (CHG-2610-B5YC). Arun's post-change check script is on the server (links, errors/drops, pings, named sessions up); Beeks to fail back to the backup if it fails; Yaniv wants post-change monitoring.
@@ -94,6 +86,12 @@ State: Main reason for the XC push was demo flow, but Yaniv (2026-08-25 call) is
 Update 2026-10-21: the ROI sim is still owed (Andrew asked what the 'demo-flow payout sim' is) and is now part of the retention case; demo flow already runs on Mahi pricing and shows $4.86/M skew capture.
 Next: Kate to run the ROI sim and send Yaniv fill ratio / rejections.
 Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1785317110665399 https://mahifx.slack.com/archives/C079M09MGGP/p1787663051652619 https://mahifx.slack.com/archives/C079M09MGGP/p1787926196028439 https://mahifx.slack.com/archives/C079M09MGGP/p1792581592949149
+
+### stock-cfd-request — New stock CFD instruments (~57 tickers)
+status: watching · since: 2026-09-29 · last: 2026-11-19
+State: Andreas asked for ~55 US/EU single stocks and they were part of the retention offer. Isaac loaded all 57 into 5ers Compass as reference data on 2026-10-23 (names-only import; he skipped a change record, Liam flagged it, bounce was clean). Naming convention is still undecided (Liam's Finotive pattern vs Andrew's ticker consistency). Support is limited: no dividend, corporate-action or equity-news feed. B2Broker's 5ers session carries no stocks; Kate chased Andreas for symbol mappings (10-27, 11-04). On 2026-11-19 Kate said Yaniv will just use B2Broker's price for now as volumes are very small, so single stocks are paused on our side. Andrew asked whether an Anthropic stock is set up and noted that skipping stocks misses an attraction for some retail traders.
+Next: nothing pending unless 5ers revive the request; Andrew may want a KB/upsell article on stock capacity.
+Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1790672163941279 https://mahifx.slack.com/archives/C07AQJS4E80/p1793808948669859 https://mahifx.slack.com/archives/C079M09MGGP/p1795087873745739
 
 ### xc-order-cancels — Funded XC limit-order cancels and rejects
 status: watching · since: 2026-09-11 · last: 2026-10-13
