@@ -17,15 +17,30 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-19T08:15:04Z
+last_catchup: 2026-11-20T08:19:12Z
 status: active
 ---
 
 ## Now
 Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), with new contact addresses.
+Active incident 2026-11-20: client DB report starved NYC /tmp, 37 fills unreported (reconciliation under way).
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### nyc-tmp-fill-incident — Client DB report filled NYC /tmp, fills not delivered
+status: open · since: 2026-11-20 · last: 2026-11-20
+State: From ~07:21Z on 2026-11-20 a markout report run by the client's read-only DB login (valu.user, one of the IPs whitelisted under profile-recs-creds) filled the NYC trading master's /tmp with MariaDB temp tables, which also holds the QuickFIX stores. 37 XAU/USD BUY orders (qty 45) on the SURYA_EX_CLIENTS session were filled in Compass between 07:28 and 07:36Z but never reported to the client; its OneZero hub cancelled each after 5s, so the client shows them cancelled while Mahi shows them filled. Hedge side: 9.0 hedged at the LP via the SURYA_RM split, 36.0 sits in VALUTRADES_HOUSE. HOUSE1PositionHistory is missing rows for 43 trades (07:28-07:36Z); EnrichedTradeOutputSummary is complete. Query killed ~07:35Z and trading normal since; Neil Whitehead said it was probably his query on EnrichedTradeOutputSummary, larger than he expected. William Denny is leading reconciliation and asked for the unreported-order list and the hedges to reverse (Leonardo Borsi posted both lists). The report looks like a scheduled daily job and would refill /tmp on its next run.
+Next: Mahi (William Denny) reconciles the 37 fills with the client and reverses the hedged portion; Leonardo checks the other parties' persistence gaps; agree scheduling or replica use and a max_statement_time limit for valu.user; longer term move FIX stores / MariaDB tmpdir off the 4.8G /tmp.
+Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795160898098069 https://mahifx.slack.com/archives/C09HN93T0G2/p1795162263143939
+
+
+### ab-book-queries — A/B book classification requests from overnight team
+status: open · since: 2026-07-08 · last: 2026-11-20
+State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-20: 68533315 asked by the overnight desk, Daria Horton replied A with a chart within 4 min. Before that 2026-11-15/16: 88522460 answered A book by Nathan Burch (flow goes offside quickly on most instruments, NDFUSD less so), and 65570981 answered A book by Shyam Hari within about 5 min; Andri asked how to read the chart and where to see it, and Shyam explained it is a yield profile (house-perspective markouts by horizon) - no answer yet on where the client can view it. Before that 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
+Next: Mahi tells Andri where the yield profile can be viewed (Echo/Compass).
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1795156261188289
+
 
 ### icdx-pricing-failover — ICDX pricing rules moved off VT connections
 status: open · since: 2026-11-17 · last: 2026-11-17
@@ -39,13 +54,6 @@ status: open · since: 2026-10-23 · last: 2026-11-17
 State: On 2026-11-17 Leonardo Borsi opened change CHG-2611-E19T (read-only DB access for the two further IPs, window 2026-11-17..2026-11-24, same login/SSL/read-only grants as CHG-2611-68EZ); Liam Cordelle approved it, noting the GRANTS must be copied over too. Neil Whitehead later acknowledged in the operations channel ("will let you know if any issues"). On 2026-11-16 Neil also asked to whitelist two further IPs (32.202.79.37, 54.88.253.4) for network and MySQL, saying that is the last; Rory King agreed. Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval. On 2026-11-16 Neil replied to Nathan that he can telnet but MySQL still refuses the user from 13.218.4.162 (access denied), so the grant looks not yet applied; Shyam Hari said Mahi will check.
 Next: CHG-2611-68EZ and CHG-2611-E19T implemented with GRANTS copied and MySQL access confirmed for all four IPs (Mahi, Shyam Hari / Leonardo Borsi); Mahi confirms to Neil.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794827657406459 https://mahifx.slack.com/archives/CP7A1F8BT/p1794909021865319 https://mahifx.slack.com/archives/C09HN93T0G2/p1794928110365059
-
-
-### ab-book-queries — A/B book classification requests from overnight team
-status: open · since: 2026-07-08 · last: 2026-11-16
-State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-15/16: 88522460 answered A book by Nathan Burch (flow goes offside quickly on most instruments, NDFUSD less so), and 65570981 answered A book by Shyam Hari within about 5 min; Andri asked how to read the chart and where to see it, and Shyam explained it is a yield profile (house-perspective markouts by horizon) - no answer yet on where the client can view it. Before that 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
-Next: Mahi tells Andri where the yield profile can be viewed (Echo/Compass).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1794805232476559
 
 
 ### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
