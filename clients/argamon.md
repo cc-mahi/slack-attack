@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-11-19T08:15:04Z
+last_catchup: 2026-11-20T08:16:07Z
 status: active
 ---
 
@@ -24,6 +24,12 @@ status: active
 Argamon (Afterprime workspace) is growing beyond FX/XAUUSD into CFD indices via Jump (brokered, internalisation and skew now on) and is pushing for 500:1 leverage, which Mahi sims do not clearly support. NY Centroid bridge moved to PXM on the weekend of 2026-09-26; Compass 26.4 went on the weekend of 2026-10-10. Retail NY book is weak: toxic INST-1 flow, XAUUSD news-event hedging cost. On 2026-10-21 the retail FX book moved to a 500k G8 inventory cap (G8-Cap) to support higher leverage; being monitored. On 2026-10-27 Argamon asked for all FX on the new risk model; GTS HRP was pulled from NY pools and hedgers. Toa last-look tolerance 0 (from 2026-10-28) was reset on 2026-11-03 and TOA_CHI is back in gold hedging; on the 2026-11-02 call Argamon asked to extend cap internalisation beyond G8 (250k), explore B-booking soft CPs, and try PSM in beta.
 
 ## Streams
+
+### client-exec-queries — Execution and pricing questions from ops
+status: open · since: 2026-08-17 · last: 2026-11-20
+State: Recurring one-off ops questions. Tom's slippage query (2026-08-17) was last look and AUDUSD signals were smoothed; Sep 3 liquidity reduction on order 042dr11e8ch was picked up by Rory (outcome not seen); the 624ms order book age (2026-09-10) was a timestamp artefact, not stale price. 2026-09-01 pricerInstiLight2 went down after Elan removed skew delegates (Nathan restored it); 2026-10-09 Shyam asked Argamon to raise B2PRIME 3dp XAU invalid-increment rejects with the LP (Argamon said they would). 2026-11-04 Tom asked where the net volume limit config lives after a 600oz XAUUSD trade group was throttled well below the 100,000 base units/ms setting; James pointed to the Execution Rule and distribution.liquidityThrottle.netVolumeLimitingProfile, explaining it is a small amount and most rules use Don't Cancel, which only extends to the max last-look delay on a buy/sell imbalance so trades can be repriced. The Catch-All profile (not Scope) triggered; James advised setting all profiles to Don't Cancel unless flow is very toxic, and Elan agreed. On 2026-11-20 Tom asked why a Toa LDN client buy (order group 042dr11mg3n) was rejected "Internalisation Disabled IoC expired" when external liquidity looked available; Daria found the client order was FOK and no LP in the pool accepts FOKs, and suggested the client send IOCs or enabling top-up on the execution rule so partial fills can be topped up to a full FOK fill. Elan enabled top-up.
+Next: Tom to monitor FOK handling after top-up; Tom to set Catch-All to Don't Cancel; Argamon to raise B2PRIME increments; Rory outcome on the 2026-09-03 liquidity reduction.
+Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1786964549641859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789022941524499 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793795725289139 https://mahifx.slack.com/archives/C06TW3D8NMV/p1795159478772559
 
 ### centroid-ny-to-pxm — Centroid bridge IP change and NY PXM migration
 status: open · since: 2026-06-09 · last: 2026-11-16
@@ -49,12 +55,6 @@ State: Indices (G30EUR, then NDX/DOW/SPX) went live 2026-09-10/11 brokered to Ju
 On 2026-11-09 Jump (via OZ) asked, through Levi, how Mahi would connect if the cross-connect fails and the Jump sessions must fail over via the internet. Shyam said the internet path would come from a different source IP than the cross-connect, asked for an internet endpoint for the Jump hub (host, ports, whether plain TCP is possible) to add as a backup host on both sessions, and suggested a short failover test with OZ; Levi will pass Mahi's public IP to Jump for whitelist confirmation.
 Next: Levi to get Jump to confirm the whitelist and supply the internet failover endpoint, then Shyam to add the backup host and test; Shyam reviews 0.45x beta skew (review date has passed, outcome not seen); Argamon wanted internal reconciliations to account for Mahi internalisation (status not seen).
 Refs: https://mahifx.slack.com/archives/C06U76A7ZJR/p1787541873458239 https://mahifx.slack.com/archives/C06U76A7ZJR/p1791422519718139 https://mahifx.slack.com/archives/C06TW3D8NMV/p1794189940988869 https://mahifx.slack.com/archives/C06TW3D8NMV/p1794192974322969
-
-### client-exec-queries — Execution and pricing questions from ops
-status: open · since: 2026-08-17 · last: 2026-11-04
-State: Recurring one-off ops questions. Tom's slippage query (2026-08-17) was last look and AUDUSD signals were smoothed; Sep 3 liquidity reduction on order 042dr11e8ch was picked up by Rory (outcome not seen); the 624ms order book age (2026-09-10) was a timestamp artefact, not stale price. 2026-09-01 pricerInstiLight2 went down after Elan removed skew delegates (Nathan restored it); 2026-10-09 Shyam asked Argamon to raise B2PRIME 3dp XAU invalid-increment rejects with the LP (Argamon said they would). 2026-11-04 Tom asked where the net volume limit config lives after a 600oz XAUUSD trade group was throttled well below the 100,000 base units/ms setting; James pointed to the Execution Rule and distribution.liquidityThrottle.netVolumeLimitingProfile, explaining it is a small amount and most rules use Don't Cancel, which only extends to the max last-look delay on a buy/sell imbalance so trades can be repriced. The Catch-All profile (not Scope) triggered; James advised setting all profiles to Don't Cancel unless flow is very toxic, and Elan agreed.
-Next: Tom to set Catch-All to Don't Cancel; Argamon to raise B2PRIME increments; Rory outcome on the 2026-09-03 liquidity reduction.
-Refs: https://mahifx.slack.com/archives/C06TW3D8NMV/p1786964549641859 https://mahifx.slack.com/archives/C06TW3D8NMV/p1789022941524499 https://mahifx.slack.com/archives/C06TW3D8NMV/p1793795725289139
 
 ### lucera-hard-timeout — Lucera LD fill latency and hard timeout
 status: open · since: 2026-10-18 · last: 2026-11-02
