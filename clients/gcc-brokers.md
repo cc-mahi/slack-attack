@@ -15,28 +15,34 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-11-19T08:15:21Z
+last_catchup: 2026-11-20T08:18:00Z
 status: active
 ---
 ## Now
 GCC is a happy, growing internalising client (record 2bn+ volume week to 11-06, heading for the >6bn/mo billing tier) ("client for life", Will Carter 09-28); the Finalto/LMAX hedger tuning has lifted PnL materially since August.
 Live work: LMAX perps (test-traded, not yet live), Amana as a third hedging venue (funded and first hedge trade sent 11-10) and an institutional pricing stream.
-Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads; GCC agreed on the 10-20 call to an Infinox LP intro, but Youssef reacted badly on 10-22 once he learned who it was, so Mahi is walking it back to no pressure. Perps are close to ready. On 10-27 a Mahi tag-blacklist change blocked a client at Finalto on all instruments (reverted in ~15 min); Youssef is jumpy ("no room to trial and error") and Will Carter has told the team to be very careful with anything touching client experience.
+On 11-19 Youssef said GCC's flow looks sharp to its LPs since 11-13 and wants to discuss the hedger's order slicing. Finalto became spiky again on 2026-10-14/15 and is being pushed on wider spreads; GCC agreed on the 10-20 call to an Infinox LP intro, but Youssef reacted badly on 10-22 once he learned who it was, so Mahi is walking it back to no pressure. Perps are close to ready. On 10-27 a Mahi tag-blacklist change blocked a client at Finalto on all instruments (reverted in ~15 min); Youssef is jumpy ("no room to trial and error") and Will Carter has told the team to be very careful with anything touching client experience.
 On 11-02 a perps demo test by Will Carter hit live LMAX (about $5.5k equity, flattened, no open risk) and exposed incomplete perps execution rules and yield profile setup. A Mahi LD networking incident on 10-16 left GCC's connection down ~2h; Youssef is unhappy and now wants GCC to provision its own main plus standby servers (reply from Rory pending), and GCC awaits the provider's incident report.
 
 ## Streams
+
+### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
+status: open · since: 2026-04-30 · last: 2026-11-19
+State: Almost every weekday ~15:00 UTC GCC ops (Layan, lately Nael) posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms. Since 11-04 Rory has answered "will do" within minutes and confirmed done same day (11-19: 1,968 oz at 13:58 and 3,284 oz at 15:09 acked 'will do' by Rory, the latter confirmed done 15:56; 11-18: 2,783 oz at 15:32 acked 'will do' by Rory within a minute; 11-12: 1,936 oz at 11:23 UTC confirmed 11:25 and 1,376 oz at 15:35 confirmed 16:52; 11-16: 5,849 oz at 15:56 confirmed 15:59; 11-17: 2,333 oz at 15:16 confirmed 15:36), though confirmation sometimes lags 1-3 hours. Earlier confirmation gaps: GCC chased on 09-22, 10-07 and 10-09 (2,572 oz, asked again 10-13); 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 have no done-confirmation visible. Late on 10-27 Carl posted GCC's LP exposure and Daria found Compass showed 4,081 XAU vs the client's 6,404; positions aligned and Carl confirmed.
+Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1795100962210009
+
+### sharp-flow-hedging — Youssef: GCC flow "sharp" at LPs, order slicing
+status: open · since: 2026-11-19 · last: 2026-11-19
+State: Rory forwarded Youssef's overnight message (11-19): after talking to Amana's contact, Youssef says GCC's flow has looked sharp to its LPs since Friday 11-13 (LMAX occasionally, Finalto and its feeds, especially defensive), and wants a discussion with Mahi about how the hedger breaks volume into small pieces to use top of book and "machine guns" orders to the LP; he says fast hedge and short-term intervals are fine. Will Carter's reaction: this is fine because execution can now be tuned from GCC's side, but comms about Amana's view should run between Amana and Youssef.
+Next: Mahi to respond to Youssef on the order-slicing question; Rory/Will to decide whether to tune hedger slicing.
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1795076441863229
 
 ### futures-contract-roll — UKOFUT-F price gap and futures month mappings
 status: open · since: 2026-10-23 · last: 2026-11-18
 State: On 11-17 at 23:09 UTC Carl Tannous reported USOIL rejected: Finalto mapping USOILG7 is CLG7 (Compass USOFUT-G), which Finalto answered 'unknown symbol' because the subscription went out before Finalto enabled CLG7 (opened 11-17 23:00 UTC); Nathan Burch scheduled a resubscribe for the EOD restart at Carl's choice, and agreed GCC will give advance notice of any intra-week contract opening so a daily-break restart can be scheduled (subscriptions are only sent when the Finalto session logs on, normally the weekend restart). On 11-18 Carl flagged a new silver contract on 11-19 (Finalto SIH7); Nathan confirmed SIH7 is mapped to XAGFUT-H and tomorrow's restart will resubscribe it with CLG7. Earlier: on 10-23 Nael reported no UKOFUT-F price from Mahi while Finalto LCOF7 priced. Isaac Dann found Mahi subscribed to expired LCOF6 and is switching UKOFUT-F to LCOF7; he proposed rolling all futures mappings (Brent, WTI, gas, metals, indices; still on 2026 contracts) to the next live contract so every month is available and two nearest contracts always price together (LCOZ6 and LCOF7 now; LCOF7 and LCOG7 from November). Nael agreed. It needs a short Finalto gateway restart, targeted for next week, and LCOZ6 rolls to LCOZ7 after 30 Oct.
 Next: Nathan to restart at the 11-19 EOD and confirm CLG7 and SIH7 are pricing; Isaac to confirm the broader futures mapping roll is applied.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792744200127579 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794957744613579 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794974329616059
-
-### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-11-18
-State: Almost every weekday ~15:00 UTC GCC ops (Layan, lately Nael) posts a gold long (occasionally short, sometimes silver) filled on Finalto and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms. Since 11-04 Rory has answered "will do" within minutes and confirmed done same day (11-18: 2,783 oz at 15:32 acked 'will do' by Rory within a minute; 11-12: 1,936 oz at 11:23 UTC confirmed 11:25 and 1,376 oz at 15:35 confirmed 16:52; 11-16: 5,849 oz at 15:56 confirmed 15:59; 11-17: 2,333 oz at 15:16 confirmed 15:36), though confirmation sometimes lags 1-3 hours. Earlier confirmation gaps: GCC chased on 09-22, 10-07 and 10-09 (2,572 oz, asked again 10-13); 10-21 (5,508 oz gold plus 69,767 oz silver), 10-27 and 10-29 have no done-confirmation visible. Late on 10-27 Carl posted GCC's LP exposure and Daria found Compass showed 4,081 XAU vs the client's 6,404; positions aligned and Carl confirmed.
-Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1795015977022159
 
 ### finalto-execution — Finalto rejections, spikiness and hedger tuning
 status: open · since: 2026-07-29 · last: 2026-11-18
@@ -81,12 +87,6 @@ State: Youssef asked on 09-05 to bring LMAX Perps (separate platform/FIX account
 Next: Rory to finish config/pricing review, hedger config, BTC-PERP pricing/test and set a go-live date; GCC to fund the perps account.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1788610242999719 https://mahifx.slack.com/archives/C09PNC1MFAA/p1790845208134599 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793637180588499 https://mahifx.slack.com/archives/C09QS1NUA80/p1794782597326859
 
-### compass-26-4-upgrade — Compass 26.4 upgrade (CHG-2611-542H)
-status: open · since: 2026-11-13 · last: 2026-11-14
-State: Arun told GCC on 11-13 the Compass environment would be upgraded to the latest version that weekend; Youssef confirmed the Amana tag solution is included. Change window Fri 11-13 12:00Z to Sat 11-14 09:30Z; marked implemented and verifying on 11-14 11:06 UTC (8 of 8 checks pending), and Arun told Youssef at 18:04 UTC the upgrade completed successfully.
-Next: Arun to complete the verification checks by Tue 11-17.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1794567605273569 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794679489112679 https://mahifx.slack.com/archives/C0C1UHPLZPF/p1794568155214949
-
 ### volume-tier — Record volume week, NFP positioning and billing tier
 status: open · since: 2026-11-06 · last: 2026-11-06
 State: On 11-06 Will Carter called it a storming week; Rory said GCC trades over 2bn so far this week, which if repeated across the month reaches the next billing tier (above 6bn a month). Into NFP he saw nothing needing change ("pure dependence on the whales"); Will floated brokering to go low risk and Rory said he would raise it with GCC. Post-NFP the book took a ~5k PnL drop, with tag 4004532 flow a bit sharper than usual.
@@ -106,23 +106,11 @@ State: From ~16:33 UTC on 11-02 Isaac Dann saw NOT_ENOUGH_FUNDS rejects on LMAX 
 Next: finish yield profile setup for XAUUSD-PERP; Will to review sign-off and change-management procedures.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793637180588499 https://mahifx.slack.com/archives/C09QS1NUA80/p1793639896746729
 
-### lmax-price-outage — 2026-10-29 LMAX pricing gap
-status: open · since: 2026-10-29 · last: 2026-10-29
-State: On 10-29 at ~14:53 UTC Youssef told Mahi GCC saw no LMAX pricing for about 12 minutes; GCC was chasing LMAX, and Isaac Dann said Mahi would watch hedging meanwhile. At 14:58 Youssef reported it back after 16 minutes with no price. Cause not stated in channel.
-Next: Mahi to confirm hedging was unaffected during the gap; watch for recurrence.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285629414699 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285935629259
-
 ### finalto-tag-blacklist — 2026-10-27 tag 4004532 blacklist rejects
 status: open · since: 2026-10-27 · last: 2026-10-28
 State: On 10-27 Finalto moved tag 4004532 to its defensive feed; Youssef asked Mahi to mirror it while disputing the decision with Finalto (markouts healthy, just a sharp day or two). Isaac Dann agreed markouts are generally fine (~$50/M decay over 10s, dampened by high spread paid) but found the hedger trading client risk under the client's tag gives Finalto a more toxic view (house +72.39 $/M, broker -42.78, hybrid -23, arb -13), so he added 4004532 to the Finalto tag blacklist for the hedgers. That change blacklisted the client from Finalto for all instruments: from ~12:34 UTC tag 4004402 and USOIL were rejected ("reason expired"), GCC routed the client to Finalto directly, and Isaac scoped the blacklist to hedgers only and reverted both tags by 12:50 (dynamic config, broker process confirmed). Youssef: 4004532 would have been critical had it traded; 4004402 saw many rejects before a fill; he wants no inconsistencies on non-gold instruments. Will Carter internally asked for no more silly mistakes. On 10-28 evening Nael asked whether 4004532 was filling on the LMAX main feed rather than defensive; Shyam Hari explained the tag is in the defensive execution rules but those also require Signal Follow or Broker classification, which it lacks, so it is internalised on the G8/XAU/XAG/indices/oil rule and fast-hedged out; removing the classification condition would always broker it to the defensive pools. Youssef (Finalto matters, LMAX did not complain) said "keep as is".
 Next: Isaac to watch closely; Mahi to confirm to GCC it is safe to route back via Compass (GCC will match open exposure) and whether Finalto reverts 4004532.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793100261800059 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793105234041459 https://mahifx.slack.com/archives/C09QS1NUA80/p1793105896213549 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793223520570629
-
-### lmax-xau-limit — LMAX XAUUSD max-position rejects
-status: open · since: 2026-10-26 · last: 2026-10-26
-State: On 10-26 around 03:38 UTC Shyam Hari flagged XAU hedging rejects at LMAX with MAXIMUM_POSITION_EXCEEDED and Carl Tannous asked if the limit was still being exceeded (Shyam: yes). Nael replied GCC had already moved some volume from LMAX to Finalto and temporarily raised its XAUUSD limit on LMAX, so it should be fine until GCC fixes the limit issue later that day.
-Next: GCC to fix the LMAX XAUUSD limit today; Mahi to watch for further rejects.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792985886827929 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792990642060759
 
 ### insto-pricing — Institutional pricing stream
 status: open · since: 2026-10-06 · last: 2026-10-21
@@ -131,8 +119,8 @@ Next: Rory to finish the insto feed by EOW; GCC to send pricing parameters if no
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1791287464442599 https://mahifx.slack.com/archives/C09QS1NUA80/p1792594740438909
 
 ### ld-network-incident — 2026-10-16 LD networking outage
-status: open · since: 2026-10-16 · last: 2026-10-20
-State: On 10-16 at 10:31 BST Liam Cordelle told GCC of a networking incident in Mahi's LD environment and advised failing over if possible. Liam said resolved at 12:30 (GCC confirmed stable 11:55); GCC had switched flow directly to its LPs and disabled Mahi as a provider meanwhile. Nael (12:39) said the connection was down about 2 hours, called it very disappointing after a long stable run, and asked for confirmation before re-enabling Mahi. Liam confirmed at 12:40 that the hosting provider had fixed it and that incident details would follow once the provider supplies them. Youssef's follow-ups (Fri 10-16, forwarded by Rory 10-19) say he is unhappy: GCC had fallbacks so was fine, but as the broker it would bear any consequences. He recalls wanting to provision servers himself at ThinkHuge, being steered to Mahi/Beeks, and his backup-server-in-another-region idea going unprioritised. He now prefers to provision a main and a standby server on GCC's side, with Mahi access unchanged, and asks whether a standby would have let Mahi fail over. Rory confirmed on Friday it was Beeks-related. On the 10-20 call Rory assured Youssef and Nael a full operational review is under way and a fuller picture will follow; Youssef said he chose ThinkHuge over Beeks for his own servers and that service has been excellent.
+status: watching · since: 2026-10-16 · last: 2026-10-20
+State: No Slack activity since 10-20; downgraded to watching with the standby/server-provisioning reply and provider incident report still not visible. On 10-16 at 10:31 BST Liam Cordelle told GCC of a networking incident in Mahi's LD environment and advised failing over if possible. Liam said resolved at 12:30 (GCC confirmed stable 11:55); GCC had switched flow directly to its LPs and disabled Mahi as a provider meanwhile. Nael (12:39) said the connection was down about 2 hours, called it very disappointing after a long stable run, and asked for confirmation before re-enabling Mahi. Liam confirmed at 12:40 that the hosting provider had fixed it and that incident details would follow once the provider supplies them. Youssef's follow-ups (Fri 10-16, forwarded by Rory 10-19) say he is unhappy: GCC had fallbacks so was fine, but as the broker it would bear any consequences. He recalls wanting to provision servers himself at ThinkHuge, being steered to Mahi/Beeks, and his backup-server-in-another-region idea going unprioritised. He now prefers to provision a main and a standby server on GCC's side, with Mahi access unchanged, and asks whether a standby would have let Mahi fail over. Rory confirmed on Friday it was Beeks-related. On the 10-20 call Rory assured Youssef and Nael a full operational review is under way and a fuller picture will follow; Youssef said he chose ThinkHuge over Beeks for his own servers and that service has been excellent.
 Next: Rory/Liam to answer Youssef on the standby/failover and server-provisioning proposal; send the provider's incident report; confirm GCC has re-enabled Mahi.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792143095130599 https://mahifx.slack.com/archives/C09QS1NUA80/p1792147398651509 https://mahifx.slack.com/archives/C09QS1NUA80/p1792417622069019 https://mahifx.slack.com/archives/C09QS1NUA80/p1792498517091019
 
@@ -142,14 +130,29 @@ State: Sunday checks on 08-23 found clientDistributionGateway1 and systemStateMo
 Next: revisit weekend support if perps go live.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1787462534322929 https://mahifx.slack.com/archives/C09PNC1MFAA/p1789932675132249 https://mahifx.slack.com/archives/C09PNC1MFAA/p1791751897689189
 
+### compass-26-4-upgrade — Compass 26.4 upgrade (CHG-2611-542H)
+status: closed · since: 2026-11-13 · last: 2026-11-14 · closed: 2026-11-20
+State: Upgrade completed successfully 11-14 (Amana tag solution included); verification checks were due 11-17, no issue raised.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1794567605273569 https://mahifx.slack.com/archives/C09PNC1MFAA/p1794679489112679
+
+### lmax-price-outage — 2026-10-29 LMAX pricing gap
+status: closed · since: 2026-10-29 · last: 2026-10-29 · closed: 2026-11-20
+State: LMAX pricing gap of ~16 min on 10-29 recovered; cause not stated; no recurrence seen.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285629414699 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285935629259
+
+### lmax-xau-limit — LMAX XAUUSD max-position rejects
+status: closed · since: 2026-10-26 · last: 2026-10-26 · closed: 2026-11-20
+State: GCC raised its LMAX XAUUSD limit and shifted volume to Finalto on 10-26; no further rejects reported; assumed resolved.
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792985886827929 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792990642060759
+
 ### si-book — Systematic internaliser book
 status: closed · since: 2026-07-03 · last: 2026-09-15 · closed: 2026-11-16
-State: No activity since 09-15; assumed resolved. SI was live from 07-24 with a 200oz XAUUSD cap, but flow into it stayed thin (an $800 drop from tag 334514 on 08-24). On 09-15 Rory moved SI from exclusion-tagged to inclusion-tagged: 50% of specified counterparties and 100% of "Should B Book" flow go to the SI book, everything else skips it. A review doc lives in MahiProduct (2026-09-15-si-review-default-in-vs-out.md); larger counterparties are still under review.
+State: No activity since 09-15; assumed resolved. SI live from 07-24 (200oz XAUUSD cap, thin flow); 09-15 moved to inclusion-tagged. Review doc in MahiProduct (2026-09-15-si-review-default-in-vs-out.md).
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1784780445088809 https://mahifx.slack.com/archives/C09QS1NUA80/p1789491725123129
 
 ### flow-toxicity — Large-order tags 700106 / 700154
 status: closed · since: 2026-08-06 · last: 2026-09-14 · closed: 2026-11-16
-State: No activity since 09-14; assumed resolved. Tag 700106 (informed, large clips of 2k+ oz) cost $6k on $37m on 08-18 and was answered with DYNAMIC-LARGEORDER hedger rule (max time-to-flat 138s vs up to 6,067s), a 700106-specific LR profile ($100/M) and channel LR 50 to 100. Youssef declined routing 700106 to LMAX only (08-25) and chose to keep internalising. 700106's client leg moved from -$15k to +$76k at 30s. On 09-14 Daria reported a $4k A-book loss from a 3k oz 700154 trade and asked whether flow has got more toxic; Rory said markouts two weeks earlier were still onside out to 30s, volumes were light (~20m the prior week), and relabelled it brokered, fine to leave for now.
+State: No activity since 09-14; assumed resolved. Tag 700106 cost $6k on 08-18 and was answered with a DYNAMIC-LARGEORDER hedger rule and a 700106 LR profile; Youssef chose to keep internalising. 09-14 a 3k oz 700154 trade lost $4k; Rory relabelled it brokered, fine for now.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1786023089729289 https://mahifx.slack.com/archives/C09QS1NUA80/p1787674237025029 https://mahifx.slack.com/archives/C09QS1NUA80/p1789347578163429
 
 ## Arc
