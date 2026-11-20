@@ -10,20 +10,20 @@ channels:
   internal-finprime: C0C8M89J2JY
   mahi-finprime: C0C8HCFKE9G
 contacts: []
-last_catchup: 2026-11-19T08:15:04Z
+last_catchup: 2026-11-20T08:16:06Z
 status: active
 ---
 
 ## Now
-Pilot agreement signed by FinPrime (2026-11-17); now a contracted pilot client moving to onboarding (server requirements, then integration call). Likely single server on their own infrastructure; Will asked Andrew/Liam whether to follow the Epic route. Martingale/account-level analysis follow-up was proposed for 2026-11-17/18 (outcome not in channel). Susan Cooney warns of internal politics and rivalry in FinPrime's wider group. Post-pilot commercials (option 1/2 bands) and AML/KYC/NDA status unconfirmed.
+Pilot agreement signed by FinPrime (2026-11-17); onboarding under way: server-requirement questions sent 11-19, FinPrime says oneZero hub is at LD4 and is gathering peak order rate; integration call not yet booked. Likely single server on their own infrastructure; Will asked Andrew/Liam whether to follow the Epic route. Martingale/account-level analysis follow-up was proposed for 2026-11-17/18 (outcome not in channel). Susan Cooney warns of internal politics and rivalry in FinPrime's wider group. Post-pilot commercials (option 1/2 bands) and AML/KYC/NDA status unconfirmed.
 
 ## Streams
 
 ### onboarding — Pilot onboarding and integration
-status: open · since: 2026-11-17 · last: 2026-11-17
-State: After signature, FinPrime (Remus) asked for next steps. Will Carter said Mahi will request server requirements and then arrange an integration call; deployment is probably a single server on FinPrime's own infrastructure, and Will asked Andrew and Liam whether to go the same route as Epic and whether the server-requirement questions are the same (no reply in channel yet). Remus said their admin team will handle it; Will asked FinPrime to appoint a champion for their quant to work with. Susan Cooney: there is odd politics in the wider group (Samin was surprised and uneasy that FinPrime contacted Mahi; another stakeholder, possibly Kevin, may need a direct approach; internal bickering and competition).
-Next: Andrew/Liam: confirm deployment route and server questions; Will: send server requirements and book integration call; FinPrime: name a champion.
-Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1794904487553199 https://mahifx.slack.com/archives/C0C8M89J2JY/p1794904895216029 https://mahifx.slack.com/archives/C0C8M89J2JY/p1794906213255219
+status: open · since: 2026-11-17 · last: 2026-11-20
+State: After signature, FinPrime (Remus) asked for next steps. Will Carter said Mahi will request server requirements and then arrange an integration call; deployment is probably a single server on FinPrime's own infrastructure, and Will asked Andrew and Liam whether to go the same route as Epic and whether the server-requirement questions are the same (no reply in channel yet). Remus said their admin team will handle it; Will asked FinPrime to appoint a champion for their quant to work with. Susan Cooney: there is odd politics in the wider group (Samin was surprised and uneasy that FinPrime contacted Mahi; another stakeholder, possibly Kevin, may need a direct approach; internal bickering and competition). 2026-11-19: Remus joined #mahi-finprime and brought in Goh Wei Jie and (by 11-20) Marble Ma and a systemadmin account; Will emailed the server-requirement questions, and William Denny introduced himself as dedicated quant and asked in-channel for peak orders per second, oneZero hub location and a technical integration contact. 2026-11-20: FinPrime's sysadmin replied that the oneZero hub (vantage-wholesale-demo) is hosted at Equinix LD4 and that they need to retrieve the peak-rate data and supply it; no technical contact named yet.
+Next: FinPrime: supply peak orders/sec and name a technical integration contact and champion; Mahi: order servers, then book integration call; Andrew/Liam: confirm deployment route (Epic-style).
+Refs: https://mahifx.slack.com/archives/C0C8M89J2JY/p1794904487553199 https://mahifx.slack.com/archives/C0C8HCFKE9G/p1795096832973789 https://mahifx.slack.com/archives/C0C8HCFKE9G/p1795142882342609
 
 ### pilot-agreement — Pilot agreement drafting and intake
 status: open · since: 2026-11-03 · last: 2026-11-17
