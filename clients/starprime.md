@@ -17,7 +17,7 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-11-19T08:17:30Z
+last_catchup: 2026-11-20T08:19:11Z
 status: active
 ---
 
@@ -90,10 +90,10 @@ Next: Samin to say whether the client accepts it or supplies symbol and session 
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1793121509152879 https://mahifx.slack.com/archives/C096422RPKK/p1793169436410739
 
 ### access-data-requests — Access provisioning and ad-hoc data/report requests
-status: open · since: 2026-08-18 · last: 2026-11-06
-State: Recurring asks for orders VWAP proofs for client queries (18 and 20 Aug), hedger fills/rejects reports, FIX logs, and last month's SI breakdown and three months of SI trade data for revenue shares (forwarded 1 Oct, delivery not seen). Samin said Pulse access is needed; Alison Koay was added to Slack (6 Oct) but on 19 Oct could not join the shared channel; Liam Cordelle re-invited her as a guest of Mahi's Slack that day, and on 14 Oct Samin asked for Umar to be allowed to edit the execution-rule-editor, which Nathan Burch is investigating. On 27 Oct Samin asked where to see how his signals perform and was pointed to the Flow predictiveness page. On 6 Nov Shahid asked for database access; Cameron Hughes raised a dev ticket and will report back (Shahid chased once).
+status: open · since: 2026-08-18 · last: 2026-11-20
+State: Recurring asks for orders VWAP proofs for client queries (18 and 20 Aug), hedger fills/rejects reports, FIX logs, and last month's SI breakdown and three months of SI trade data for revenue shares (forwarded 1 Oct, delivery not seen). Samin said Pulse access is needed; Alison Koay was added to Slack (6 Oct) but on 19 Oct could not join the shared channel; Liam Cordelle re-invited her as a guest of Mahi's Slack that day, and on 14 Oct Samin asked for Umar to be allowed to edit the execution-rule-editor, which Nathan Burch is investigating. On 27 Oct Samin asked where to see how his signals perform and was pointed to the Flow predictiveness page. On 6 Nov Shahid asked for database access; Cameron Hughes raised a dev ticket and will report back (Shahid chased once). On 20 Nov Samin lost admin edit rights on the reference-data markets page; Daria Horton fixed it within 30 min by removing a distribution.liquidityThrottle.notionalCap.perchannel role-key permission rule (Isaac Dann suspects his key whitelist on it; Zendesk 23879 raised).
 Next: Cameron Hughes to report on the database access dev ticket; Mahi to confirm Umar's execution-rule-editor access; confirm Alison's guest invite worked; confirm whether the SI data and rev-share file went out.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787033520203829 https://mahifx.slack.com/archives/C096422RPKK/p1793083960149769 https://mahifx.slack.com/archives/C096422RPKK/p1793972465733609
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787033520203829 https://mahifx.slack.com/archives/C096422RPKK/p1793083960149769 https://mahifx.slack.com/archives/C096422RPKK/p1793972465733609 https://mahifx.slack.com/archives/C096422RPKK/p1795148003012379
 
 ### xau-pricing-config — XAUUSD reference pricing and config-change process
 status: open · since: 2026-08-19 · last: 2026-10-26
@@ -140,7 +140,7 @@ Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1789882511519159 https://ma
 ### lp-connections-ttl — LP connectors, TTLs and order linking
 status: closed · since: 2026-08-19 · last: 2026-09-15 · closed: 2026-11-16
 State: no activity since 15 Sep; assumed resolved. Hedger TTLs for B2PRIME_RETAIL and ARGAMON_* set to 30 ms (reference.marketSupport.marketThrottle); the FIX tag 527 request to link PXM orders to final LP fills never got an outcome.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787149002785969 https://mahifx.slack.com/archives/C096422RPKK/p1787744436191109 https://mahifx.slack.com/archives/C096422RPKK/p1788161355501189 https://mahifx.slack.com/archives/C096422RPKK/p1789468762100799
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787149002785969 https://mahifx.slack.com/archives/C096422RPKK/p1789468762100799
 
 ### compass-26-4-release — Compass 26.4 weekend release and hedger start-up check
 status: closed · since: 2026-10-16 · last: 2026-10-18 · closed: 2026-11-18
@@ -149,7 +149,7 @@ Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1792157236841079 https://ma
 
 ### b-clients-tier3 — New B_CLIENTS_TIER3 distribution channel
 status: closed · since: 2026-11-17 · last: 2026-11-19 · closed: 2026-11-19
-State: On 17 Nov Samin asked for a new distribution channel B_CLIENTS_TIER3 as a copy of B_CLIENTS_TIER2 with new FIX credentials; Shyam Hari set it up. On 19 Nov Shahid sent a 2oz XAUUSD test trade on Starprime-B-Tier3-Orders and Nathan Burch confirmed it was received and filled; Shahid will pass on to Samin. Connection verified.
+State: B_CLIENTS_TIER3 (copy of TIER2, new FIX credentials) set up by Shyam Hari after Samin's 17 Nov ask; Shahid's 19 Nov 2oz XAUUSD test trade was received and filled. Connection verified.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794889229907999 https://mahifx.slack.com/archives/C096422RPKK/p1795073366476739
 
 ## Arc
