@@ -17,22 +17,29 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-20T08:19:12Z
+last_catchup: 2026-11-23T08:17:00Z
 status: active
 ---
 
 ## Now
 Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), with new contact addresses.
-Active incident 2026-11-20: client DB report starved NYC /tmp, 37 fills unreported (reconciliation under way).
+2026-11-20 NYC /tmp incident (client DB report, 39 fills unreported) reconciled by Mahi position adjustments; client queries to move to a replica DB. Client unexpectedly has an LP labelled "Valutrades" on its FEED1 quote session; awaiting their decision.
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
 
+### feed1-valutrades-lp — Unknown "Valutrades" LP on client FEED1 quote session
+status: open · since: 2026-11-22 · last: 2026-11-23
+State: After the 2026-11-22 market open Shyam Hari noticed an LP labelled "Valutrades" on the client's FEED1 quote session (ValuCY_Live_Q) that Mahi has not set up, so its prices are unused; he asked what it is and whether the client wants it used. Garry Bersnov replied 2026-11-23 that the client is still discussing internally.
+Next: client (Garry) decides and tells Mahi whether to use the LP.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795388473669799 https://mahifx.slack.com/archives/C09HN93T0G2/p1795413133774249
+
+
 ### nyc-tmp-fill-incident — Client DB report filled NYC /tmp, fills not delivered
 status: open · since: 2026-11-20 · last: 2026-11-20
-State: From ~07:21Z on 2026-11-20 a markout report run by the client's read-only DB login (valu.user, one of the IPs whitelisted under profile-recs-creds) filled the NYC trading master's /tmp with MariaDB temp tables, which also holds the QuickFIX stores. 37 XAU/USD BUY orders (qty 45) on the SURYA_EX_CLIENTS session were filled in Compass between 07:28 and 07:36Z but never reported to the client; its OneZero hub cancelled each after 5s, so the client shows them cancelled while Mahi shows them filled. Hedge side: 9.0 hedged at the LP via the SURYA_RM split, 36.0 sits in VALUTRADES_HOUSE. HOUSE1PositionHistory is missing rows for 43 trades (07:28-07:36Z); EnrichedTradeOutputSummary is complete. Query killed ~07:35Z and trading normal since; Neil Whitehead said it was probably his query on EnrichedTradeOutputSummary, larger than he expected. William Denny is leading reconciliation and asked for the unreported-order list and the hedges to reverse (Leonardo Borsi posted both lists). The report looks like a scheduled daily job and would refill /tmp on its next run.
-Next: Mahi (William Denny) reconciles the 37 fills with the client and reverses the hedged portion; Leonardo checks the other parties' persistence gaps; agree scheduling or replica use and a max_statement_time limit for valu.user; longer term move FIX stores / MariaDB tmpdir off the 4.8G /tmp.
-Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795160898098069 https://mahifx.slack.com/archives/C09HN93T0G2/p1795162263143939
+State: From ~07:21Z on 2026-11-20 a markout report run by the client's read-only DB login (valu.user, one of the IPs whitelisted under profile-recs-creds) filled the NYC trading master's /tmp with MariaDB temp tables, which also holds the QuickFIX stores. 37 XAU/USD BUY orders (qty 45) on the SURYA_EX_CLIENTS session were filled in Compass between 07:28 and 07:36Z but never reported to the client; its OneZero hub cancelled each after 5s, so the client shows them cancelled while Mahi shows them filled. Hedge side: 9.0 hedged at the LP via the SURYA_RM split, 36.0 sits in VALUTRADES_HOUSE. HOUSE1PositionHistory is missing rows for 43 trades (07:28-07:36Z); EnrichedTradeOutputSummary is complete. Query killed ~07:35Z and trading normal since; Neil Whitehead said it was probably his query on EnrichedTradeOutputSummary, larger than he expected. Leonardo Borsi's root cause: a 3-month all-instrument markout with a window function wrote 4.6G of temp tables in 6 min; the final count was 39 unreported fills (37 ICDX_MICRO buys, 2 ICDX_MINI sells) and 502 missing HOUSE1PositionHistory rows. Resolved 2026-11-20: William Denny booked position adjustments reversing the unreported fills and closed the +5oz open risk at the LP; client (Andri) agreed to the hedge reversal, Neil said the query will not be run again, and Liam Cordelle said client queries will move to a replica DB (details to follow) and Neil should use yieldprofiles_latest in Pulse.
+Next: Mahi (Liam) delivers the replica DB details; Leonardo checks other parties' persistence gaps; longer term move FIX stores / MariaDB tmpdir off the 4.8G /tmp and consider a max_statement_time limit for valu.user.
+Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795160898098069 https://mahifx.slack.com/archives/C09HN93T0G2/p1795166591925259
 
 
 ### ab-book-queries — A/B book classification requests from overnight team
@@ -98,27 +105,6 @@ Next: Brandon shares the compliance detail; Mahi decides whether to accommodate.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793071670570599 https://mahifx.slack.com/archives/C09HN93T0G2/p1793072932042059
 
 
-### oz-backup-whitelist — Whitelist OneZero hub backup IPs
-status: open · since: 2026-10-22 · last: 2026-10-23
-State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi to whitelist NY Surya hub backup 147.160.249.36 and NY Hub-Valutrades backup 147.160.249.37 towards 10.72.100.38 (MFX and MAHI_OZNY4 maker adapters, ports 9010/9011/9034/9035/9037). The connection goes over the internet, and Maten Rehimi pointed out 10.72.100.38 is private, so Brandon traced to public 192.81.111.24 from both IPs on 2026-10-23 and asked if that can be the backup. Maten asked whether the backup only connects when the primary is down and for telnet confirmation on all the flagged ports. Not yet whitelisted.
-Next: Brandon answers Maten (backup behaviour, telnet to 192.81.111.24 on all ports); Mahi then whitelists.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792659558042959 https://mahifx.slack.com/archives/C09HN93T0G2/p1792746206556109
-
-
-### phillip-tt-removal — Remove deactivated Phillip TT connection
-status: open · since: 2026-10-23 · last: 2026-10-23
-State: Graeme said the client stopped using the Phillip TT connection, which Phillip appears to have deactivated, leaving an error on Compass. Liam Cordelle removed it from Mahi's side on 2026-10-23. Andri then flagged another error screenshot and Liam asked if it was that connection; Graeme asked Brandon to remove the same connection on the OneZero side too.
-Next: Brandon removes it on the OneZero side.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792758756367069 https://mahifx.slack.com/archives/C09HN93T0G2/p1792776666037109
-
-
-### lr-setting-location — Client cannot find Liquidity Reduction setting in new screen
-status: open · since: 2026-10-22 · last: 2026-10-22
-State: Garry also asked whether old-UI Position maps to the new Rate Limit Amount; Isaac Dann confirmed the old refresh quantity and rate are the new rate limit amount and period. Andri Zamroni asked where a setting (screenshot) now lives; Isaac Dann replied that in the new screen, selecting ICDX_MINI shows a configure channel button on the right with a Liquidity Reduction menu. No client confirmation yet.
-Next: Andri confirms he found it.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792658285372589
-
-
 ### contract-rolls — Futures and CFD rolls announced by client
 status: watching · since: 2026-08-18 · last: 2026-11-13
 State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec to Jan 2027 for AMB, latest 2026-11-13, US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
@@ -135,6 +121,27 @@ Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1789937493122649 https://ma
 status: watching · since: 2026-08-18 · last: 2026-10-25
 State: Overnight desk posts a screenshot ("please can you fix this for us") out of hours; Sam Hewitt or Daria Horton fix it within about 2 minutes and the client confirms (2026-08-18, 2026-08-27, 2026-09-21). On 2026-10-25 Brandon asked Mahi to confirm whether a screenshotted item was an issue; Shyam Hari checked and found everything fine.
 Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1787088431402609 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792962970307259
+
+
+### oz-backup-whitelist — Whitelist OneZero hub backup IPs
+status: watching · since: 2026-10-22 · last: 2026-10-23
+State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi to whitelist NY Surya hub backup 147.160.249.36 and NY Hub-Valutrades backup 147.160.249.37 towards 10.72.100.38 (MFX and MAHI_OZNY4 maker adapters, ports 9010/9011/9034/9035/9037). The connection goes over the internet, and Maten Rehimi pointed out 10.72.100.38 is private, so Brandon traced to public 192.81.111.24 from both IPs on 2026-10-23 and asked if that can be the backup. Maten asked whether the backup only connects when the primary is down and for telnet confirmation on all the flagged ports. Not yet whitelisted. Downgraded to watching: no activity for 31d; Brandon to answer Maten.
+Next: Brandon answers Maten (backup behaviour, telnet to 192.81.111.24 on all ports); Mahi then whitelists.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792659558042959 https://mahifx.slack.com/archives/C09HN93T0G2/p1792746206556109
+
+
+### phillip-tt-removal — Remove deactivated Phillip TT connection
+status: watching · since: 2026-10-23 · last: 2026-10-23
+State: Graeme said the client stopped using the Phillip TT connection, which Phillip appears to have deactivated, leaving an error on Compass. Liam Cordelle removed it from Mahi's side on 2026-10-23. Andri then flagged another error screenshot and Liam asked if it was that connection; Graeme asked Brandon to remove the same connection on the OneZero side too. Downgraded to watching: no activity for 31d; Brandon to remove on OneZero side.
+Next: Brandon removes it on the OneZero side.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792758756367069 https://mahifx.slack.com/archives/C09HN93T0G2/p1792776666037109
+
+
+### lr-setting-location — Client cannot find Liquidity Reduction setting in new screen
+status: watching · since: 2026-10-22 · last: 2026-10-22
+State: Garry also asked whether old-UI Position maps to the new Rate Limit Amount; Isaac Dann confirmed the old refresh quantity and rate are the new rate limit amount and period. Andri Zamroni asked where a setting (screenshot) now lives; Isaac Dann replied that in the new screen, selecting ICDX_MINI shows a configure channel button on the right with a Liquidity Reduction menu. No client confirmation yet. Downgraded to watching: no activity for 32d; client to confirm.
+Next: Andri confirms he found it.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792658285372589
 
 
 ### stonex-surya-tt — New StoneX/Surya TT connection via OneZero
