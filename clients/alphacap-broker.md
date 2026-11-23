@@ -11,7 +11,7 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-20T08:15:46Z
+last_catchup: 2026-11-23T08:13:40Z
 status: active
 ---
 
