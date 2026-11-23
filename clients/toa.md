@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-11-20T08:15:46Z
+last_catchup: 2026-11-23T08:15:36Z
 status: active
 ---
 
@@ -28,10 +28,10 @@ Next: Lee/James to ship the state-mismatch fix and confirm; ops ignore mismatche
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1785757251842839 https://mahifx.slack.com/archives/C035H1VNCAD/p1792683541640309 https://mahifx.slack.com/archives/C035H1VNCAD/p1793376250627589 https://mahifx.slack.com/archives/C035H1VNCAD/p1794495489920819
 
 ### infra-releases — releases, new gateways and box changes on Argamon/Toa
-status: open · since: 2026-08-17 · last: 2026-11-12
-State: On 11-12 traderBinance on Argamon APN1 came down on a BINANCE_FUTURES_UM cancel timeout (order breaches limit 0); Arun was starting it back up. On 11-04 marketDataNado1 on Toa APN1 OOMed again (Inald); James (Toa Labs) disabled PagerDuty for Toa APN1 and Isaac Dann agreed it is fine to stop the box, so the leftover Nado process is being retired. Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
-Next: stop the Toa APN1 box (approved 11-04); Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1793329652756379 https://mahifx.slack.com/archives/C035H1VNCAD/p1794474981996009
+status: open · since: 2026-08-17 · last: 2026-11-20
+State: James self-approved change CHG-2611-Z81H on 11-20 for Sat 11-21 08:00-09:00Z: Compass 26.4 with in-band Aeron metadata on every market (extends the APN KRAKEN-only test from 09-26). On 11-12 traderBinance on Argamon APN1 came down on a BINANCE_FUTURES_UM cancel timeout (order breaches limit 0); Arun was starting it back up. On 11-04 marketDataNado1 on Toa APN1 OOMed again (Inald); James (Toa Labs) disabled PagerDuty for Toa APN1 and Isaac Dann agreed it is fine to stop the box, so the leftover Nado process is being retired. Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
+Next: confirm the 11-21 in-band Aeron change went through; stop the Toa APN1 box (approved 11-04); Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1794474981996009 https://mahifx.slack.com/archives/C035H1VNCAD/p1795193614817319
 
 ### pnl-var-alerting — PnL-drop, VaR and not-ticking alert noise
 status: open · since: 2026-06-25 · last: 2026-11-02
