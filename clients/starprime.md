@@ -17,7 +17,7 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-11-20T08:19:11Z
+last_catchup: 2026-11-23T08:15:36Z
 status: active
 ---
 
@@ -28,11 +28,29 @@ Samin wants a redundant Compass instance (pricing owed) and is pitching Compass 
 
 ## Streams
 
+### si-hedging — SI model, hedger NOP restarts and LP position reconciliation
+status: open · since: 2026-08-17 · last: 2026-11-23
+State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and ARB hedgers by hand (latest: FINIOR NOP 20 Nov, restarted by Isaac Dann; FINALTO and XAUUSD ISPRIME NOP limits 12 and 18 Nov; the XAUUSD limit is hedging.rules.execution.maximumMarketPosition, which is not dynamic, whereas risk.nop limits are dynamic but unused here). The arb hedger honours NOP limits but not per-instrument LP limits (Kama's position grew on 4 Sep, so Kama was taken out of arb); since 29 Oct Isaac's fix makes it enforce maximumMarketPosition, and on 30 Oct he loosened the XAU arb gates as an A/B test (rollback if edge below -3 $/M). A 27 Oct hybridHedgerSI1 crash came from a backstop buy at a venue at its position cap. XAG went live on SI 19 Oct (EURUSD next); on 10 Nov ISPRIME was removed from the XAGUSD SI/ARB markets and Nathan Burch removed two ISPRIME_VIP LP-reducing rules and emptied the EOW/EOD Cannon whitelists to bring hybridHedgerSI back up. LP positions are realigned through paired maker/distribution adjustments after StarPrime sends snapshots; Alison Koay's requests of 4 Nov (XAUUSD ARGAMON_INSTI_PXM +673, XAGUSD EDGEWATER +9950) and 12 Nov (ISPRIME_VIP +602, done) followed this route. On 20 Nov William Denny did EDGEWATER +2,000 / FINIOR_CAPITAL -2,000 (no distribution adjustment as they net to zero). On 23 Nov 07:18 UTC Alison asked for XAUUSD ISPRIME_VIP +712 (no reply yet), and Daria Horton asked internally at 01:12 UTC whether arbHedgerSI1 still being off is expected (unanswered).
+Next: Mahi to action Alison's 23 Nov ISPRIME_VIP +712 adjustment; Isaac Dann to answer whether arbHedgerSI1 being off is expected; Daria Horton to confirm Alison's 4 Nov position adjustments were completed; Isaac Dann to keep monitoring the arb A/B test and roll back if edge drops below -3 $/M; Samin to decide whether to switch the arb hedger back on now it respects position limits; Will Carter owes Samin an answer on SI revenue-share mechanics; dev fix so the backstop skips a venue at its position cap; arb LP position reduction still wanted.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1794463691867519 https://mahifx.slack.com/archives/C096422RPKK/p1794980132234459 https://mahifx.slack.com/archives/C096422RPKK/p1795418300690369
+
+### access-data-requests — Access provisioning and ad-hoc data/report requests
+status: open · since: 2026-08-18 · last: 2026-11-20
+State: Recurring asks for orders VWAP proofs for client queries (18 and 20 Aug), hedger fills/rejects reports, FIX logs, and last month's SI breakdown and three months of SI trade data for revenue shares (forwarded 1 Oct, delivery not seen). Samin said Pulse access is needed; Alison Koay was added to Slack (6 Oct) but on 19 Oct could not join the shared channel; Liam Cordelle re-invited her as a guest of Mahi's Slack that day, and on 14 Oct Samin asked for Umar to be allowed to edit the execution-rule-editor, which Nathan Burch is investigating. On 27 Oct Samin asked where to see how his signals perform and was pointed to the Flow predictiveness page. On 6 Nov Shahid asked for database access; Cameron Hughes raised a dev ticket and will report back (Shahid chased once). On 20 Nov Samin lost admin edit rights on the reference-data markets page; Daria Horton fixed it within 30 min by removing a distribution.liquidityThrottle.notionalCap.perchannel role-key permission rule (Isaac Dann suspects his key whitelist on it; Zendesk 23879 raised).
+Next: Cameron Hughes to report on the database access dev ticket; Mahi to confirm Umar's execution-rule-editor access; confirm Alison's guest invite worked; confirm whether the SI data and rev-share file went out.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787033520203829 https://mahifx.slack.com/archives/C096422RPKK/p1793083960149769 https://mahifx.slack.com/archives/C096422RPKK/p1793972465733609 https://mahifx.slack.com/archives/C096422RPKK/p1795148003012379
+
 ### uk100-retail-filter — UK100 quotes on MFX-RETAIL filtered by StarPrime hub
 status: open · since: 2026-11-16 · last: 2026-11-16
 State: On 16 Nov Shahid reported UK100 quotes on the MFX RETAIL distribution channel being filtered out at StarPrime's hub (ask about 10896 against other makers near 10883). William Denny found the channel publishes the continuity pool for UK100, which is Velocity's rate plus a $20/M markup (max spread 1.9), with Velocity pricing higher than ISPRIME/B2PRIME and possibly slow between updates. He offered to re-point pricing to ISPRIME_RETAIL/B2PRIME_RETAIL; after a call Samin said to keep Velocity as it is a differently derived price (indices are derived differently across makers). Shahid removed the filter on their hub; only UKXGBP/UK100 affected.
 Next: none unless Shahid sees filtering recur.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794848501096789 https://mahifx.slack.com/archives/C096422RPKK/p1794856950292639
+
+### tag-blacklist-ux — Counterparty tag blacklist scale and wildcard matching
+status: open · since: 2026-07-31 · last: 2026-11-16
+State: The reference.marketSupport.tagList grows without bound, is slow to load and edit, and Samin asked Dev for a more efficient mechanism (Nathan Burch passed it to Dev on 14 Oct); Justin Young mocked up a Compass Tag List Editor that Samin called much cleaner, aiming for the next release. On 19 Oct Samin reported blacklisted tags still hitting ISPRIME, with fill rates about 10%. Nathan found the key allows only one block per market (whitelist or blacklist) and Compass had rejected the whole list since a 12 Oct change; live processes kept the last valid list until the weekend restarts cleared it, so no counterparty blacklists were live for the SI hedgers. Nathan reverted to the pre-12 Oct state, re-added the later tags with all whitelist blocks removed, and Samin removed the remaining whitelist blocks. Wildcards are not supported, so the `*SXR_5038*` entry has no effect and each SXR_5038 tag must be blacklisted individually per market; the earlier Kama SXR_5038 case is explained by this. On 27 Oct Samin again saw blacklisted tags hitting ISPRIME_VIP; Shyam Hari found the accounts were listed under prefix SXR_5164 but belong under SXR_5255 and advised adding SXR_5255_200831, _201135 and _201875 to the ISPRIME_VIP block; no confirmation yet. On 29 Oct Samin chased an unanswered query: tag SXR_5183_5183-1000430 was added the day before yet Mahi's hedger still attempted his ISPRIME with it. On 4 Nov Samin asked for automatic blacklisting of a tag after 10 consecutive rejects at a maker (also counting rejects across interleaved fills elsewhere); Isaac Dann said it is not a current feature but worthwhile, and as a stopgap added alerts flagging an LP rejecting most hedger orders on an instrument within five minutes. Samin asked to receive that alert by email. On 16 Nov Shyam Hari saw many hedging cancels on ISPRIME_VIP for tag SXR_5255_200291 and asked to add it to the blacklist; Samin replied he will handle it.
+Next: Isaac Dann to look into auto-blacklisting and whether the alert can reach Samin by email; Mahi to answer Samin's 29 Oct SXR_5183_5183-1000430 query; Samin to blacklist SXR_5255_200291 and add the three SXR_5255 tags and individual SXR_5038 tags to each market's blacklist; Justin Young to ship the tag list editor; Mahi to consider validation that surfaces a rejected list instead of silently keeping the old one.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1785477517683469 https://mahifx.slack.com/archives/C096422RPKK/p1792383801728039 https://mahifx.slack.com/archives/C096422RPKK/p1793795613983459 https://mahifx.slack.com/archives/C096422RPKK/p1794789938683589
 
 ### spxusd-min-size — SPXUSD order rejects below minimum trade size
 status: open · since: 2026-11-12 · last: 2026-11-12
@@ -40,11 +58,11 @@ State: On 12 Nov Shahid reported multiple rejected orders; the sample was a 0.01
 Next: Shahid to confirm whether to lower the SPXUSD minimum to 0.01 (and align PXM config); Nathan Burch to apply if so.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794459260350249 https://mahifx.slack.com/archives/C096422RPKK/p1794461125617399
 
-### si-hedging — SI model, hedger NOP restarts and LP position reconciliation
-status: open · since: 2026-08-17 · last: 2026-11-18
-State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and arb hedgers, which Mahi does by hand. The arb hedger honours NOP limits but not per-instrument LP limits, so Kama's position kept growing on 4 Sep; Kama was taken out of arb and Samin expects dev work letting arb reduce LP positions. LP positions are periodically realigned through paired maker/client adjustments after StarPrime sends LP snapshots; risk-reducing LPR rules were added to the SI hedger Metals profile on 28 Sep. XAG on SI went live 19 Oct (EURUSD with tighter spreads is next). On 23 Oct the arb hedger ignored maximumMarketPosition (switched off); on 27 Oct hybridHedgerSI1 crashed on an "Over-allocated" backstop buy at a venue already at its position cap (restarted). On 29 Oct Isaac Dann deployed the fix so the arb hedger enforces hedging.rules.execution.maximumMarketPosition; Samin added FINIOR_CAPITAL to the SI and ARB markets. On 30 Oct Isaac loosened the XAU arb gates as an A/B test (rollback if edge below -3 $/M). On 4 Nov Alison Koay asked for maker/distribution position adjustments (XAUUSD ARGAMON_INSTI_PXM +673, XAGUSD EDGEWATER +9950); Daria Horton said shortly. On 10 Nov Samin removed ISPRIME from the XAGUSD SI and ARB hedgers' execution markets; to let hybridHedgerSI come back up Nathan Burch removed the DYNAMIC-FASTHEDGE-LP-REDUCING-ISPRIME-VIP and VAR-CLEARANCE-LP-REDUCING-ISPRIME-VIP rules and emptied the market whitelist on the EOW and EOD Cannon rules, then restarted both hedgers. On 12 Nov Alison Koay asked for a maker and matching distribution adjustment of XAUUSD ISPRIME_VIP +602 and Nathan Burch actioned it at 07:18 UTC. Later on 12 Nov Samin added FINALTO to the SI and ARB hedgers with an updated NOP limit and Kate Stagg restarted both (done 12:44 UTC). On 18 Nov Samin raised the XAUUSD NOP limit on ISPRIME to 45,000 (hedging.rules.execution.maximumMarketPosition) and asked for an ARB and SI hedger restart; Nathan Burch first said NOP values were dynamic, then corrected that risk.nop limits are dynamic but unused on this system, whereas that key is not dynamic, restarted both hedgers and cleared Samin's pending-restart warnings. Later on 18 Nov (19:42 UTC) Samin updated FINALTO NOP values and Daria Horton restarted the ARB and SI hedgers (done 19:45 UTC).
-Next: Daria Horton to confirm Alison's 4 Nov position adjustments were completed; Isaac Dann to keep monitoring the arb A/B test and roll back if edge drops below -3 $/M; Samin to decide whether to switch the arb hedger back on now it respects position limits; Will Carter owes Samin an answer on SI revenue-share mechanics; dev fix so the backstop skips a venue at its position cap; arb LP position reduction still wanted.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1794463691867519 https://mahifx.slack.com/archives/C096422RPKK/p1794980132234459 https://mahifx.slack.com/archives/C096422RPKK/p1795030930597559
+### parent-group-pitch — Samin pitching Compass to the parent group
+status: open · since: 2026-10-29 · last: 2026-11-12
+State: On a 29 Oct call Samin said he is pitching Mahi to the parent group and meets its head in a few weeks. Will Carter notes Samin is winning business from other brokers, has a few things needing explanation, and is asking how optimal pricing is now. Isaac Dann is looking at Insti-optimised FI options. On 12 Nov Bonnie Cassidy shared a trade-press article on StarPrime collaborating with HedgX on institutional risk and dealing capabilities (no discussion).
+Next: Isaac Dann to report on Insti-optimised FI options; support Samin ahead of the group meeting.
+Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1793280003814629 https://mahifx.slack.com/archives/C095MJHC68J/p1793280096631609 https://mahifx.slack.com/archives/C095MJHC68J/p1794477948268379
 
 ### rbf-finprime — RBF (FINPRIME/Vantage) B-book white-label via PrimeXM
 status: open · since: 2026-08-25 · last: 2026-11-08
@@ -64,36 +82,17 @@ State: Jay posted a message with a screenshot in the client channel late on 29 O
 Next: Samin to supply the time and timezone if the issue stands.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1793311777815649 https://mahifx.slack.com/archives/C096422RPKK/p1793340297398099
 
-### parent-group-pitch — Samin pitching Compass to the parent group
-status: open · since: 2026-10-29 · last: 2026-11-12
-State: On a 29 Oct call Samin said he is pitching Mahi to the parent group and meets its head in a few weeks. Will Carter notes Samin is winning business from other brokers, has a few things needing explanation, and is asking how optimal pricing is now. Isaac Dann is looking at Insti-optimised FI options. On 12 Nov Bonnie Cassidy shared a trade-press article on StarPrime collaborating with HedgX on institutional risk and dealing capabilities (no discussion).
-Next: Isaac Dann to report on Insti-optimised FI options; support Samin ahead of the group meeting.
-Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1793280003814629 https://mahifx.slack.com/archives/C095MJHC68J/p1793280096631609 https://mahifx.slack.com/archives/C095MJHC68J/p1794477948268379
-
-### tag-blacklist-ux — Counterparty tag blacklist scale and wildcard matching
-status: open · since: 2026-07-31 · last: 2026-11-16
-State: The reference.marketSupport.tagList grows without bound, is slow to load and edit, and Samin asked Dev for a more efficient mechanism (Nathan Burch passed it to Dev on 14 Oct); Justin Young mocked up a Compass Tag List Editor that Samin called much cleaner, aiming for the next release. On 19 Oct Samin reported blacklisted tags still hitting ISPRIME, with fill rates about 10%. Nathan found the key allows only one block per market (whitelist or blacklist) and Compass had rejected the whole list since a 12 Oct change; live processes kept the last valid list until the weekend restarts cleared it, so no counterparty blacklists were live for the SI hedgers. Nathan reverted to the pre-12 Oct state, re-added the later tags with all whitelist blocks removed, and Samin removed the remaining whitelist blocks. Wildcards are not supported, so the `*SXR_5038*` entry has no effect and each SXR_5038 tag must be blacklisted individually per market; the earlier Kama SXR_5038 case is explained by this. On 27 Oct Samin again saw blacklisted tags hitting ISPRIME_VIP; Shyam Hari found the accounts were listed under prefix SXR_5164 but belong under SXR_5255 and advised adding SXR_5255_200831, _201135 and _201875 to the ISPRIME_VIP block; no confirmation yet. On 29 Oct Samin chased an unanswered query: tag SXR_5183_5183-1000430 was added the day before yet Mahi's hedger still attempted his ISPRIME with it. On 4 Nov Samin asked for automatic blacklisting of a tag after 10 consecutive rejects at a maker (also counting rejects across interleaved fills elsewhere); Isaac Dann said it is not a current feature but worthwhile, and as a stopgap added alerts flagging an LP rejecting most hedger orders on an instrument within five minutes. Samin asked to receive that alert by email. On 16 Nov Shyam Hari saw many hedging cancels on ISPRIME_VIP for tag SXR_5255_200291 and asked to add it to the blacklist; Samin replied he will handle it.
-Next: Isaac Dann to look into auto-blacklisting and whether the alert can reach Samin by email; Mahi to answer Samin's 29 Oct SXR_5183_5183-1000430 query; Samin to blacklist SXR_5255_200291 and add the three SXR_5255 tags and individual SXR_5038 tags to each market's blacklist; Justin Young to ship the tag list editor; Mahi to consider validation that surfaces a rejected list instead of silently keeping the old one.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1785477517683469 https://mahifx.slack.com/archives/C096422RPKK/p1792383801728039 https://mahifx.slack.com/archives/C096422RPKK/p1793795613983459 https://mahifx.slack.com/archives/C096422RPKK/p1794789938683589
-
 ### lr-slippage-yield — LR tuning, slippage automation and yield classification
 status: open · since: 2026-08-20 · last: 2026-10-28
 State: An LR health check on 20 Aug found StarPrime's LR healthy ($5.62/M, rank 5 of 17) but the B_CLIENTS profile mis-tuned (burst 5,000,000, cap 25) and B_CLIENTS_TIER2 a stub; recommendation was burst 500,000 and cap 60, and it is not visible whether it was applied. Classification-based brokering is working well. Dave Cooney wants slippage applied to every classifier-matched counterparty, with StarPrime as pilot (Zendesk 23424); first-trade coverage needs a small MahiMain change. BIGG LR went live for the first time on 20 Sep after a reorder fix. David Cooney's 27 Sep Echo yield-profile party question was answered by Nathan and added to the wiki. On 28 Oct Shyam Hari found a 'Bespoke LR' profile added below the Default profile, which matches every counterparty, so Compass rejected the whole LR update and that profile plus later LR edits had not taken effect; Samin approved and Shyam moved it above Default. On 27 Oct Samin asked for a session with one of the team on reading signal impacts, how execution rules place a counterparty, what rates LR executes at once a stack is depleted, and getting $/M slippage control over LR.
 Next: Mahi to schedule Samin's training session (signals, execution rules, LR) the week of 27 Oct; confirm whether the B_CLIENTS LR change was applied; MahiMain first-trade slippage change.
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1787222052913939 https://mahifx.slack.com/archives/C095MJHC68J/p1790478344455159 https://mahifx.slack.com/archives/C095MJHC68J/p1793097688317799 https://mahifx.slack.com/archives/C096422RPKK/p1793160150478929
 
-
 ### box-health-freezes — Client price-freeze complaint and box health sign-off
 status: open · since: 2026-10-27 · last: 2026-10-28
 State: On 27 Oct Samin said a top client complained of price freezes and asked Mahi to confirm the box had no spikes and was green on health and load so he could sign Mahi off proactively. Isaac Dann confirmed all green that day (no pricing engine lag, restarts or FIX price session gaps). On 28 Oct Samin gave two times on 15 Oct (14:18:27 and 14:43:32 UTC) and Shyam Hari said the records still exist and the same checks looked well at both.
 Next: Samin to say whether the client accepts it or supplies symbol and session for an end-to-end price trace.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1793121509152879 https://mahifx.slack.com/archives/C096422RPKK/p1793169436410739
-
-### access-data-requests — Access provisioning and ad-hoc data/report requests
-status: open · since: 2026-08-18 · last: 2026-11-20
-State: Recurring asks for orders VWAP proofs for client queries (18 and 20 Aug), hedger fills/rejects reports, FIX logs, and last month's SI breakdown and three months of SI trade data for revenue shares (forwarded 1 Oct, delivery not seen). Samin said Pulse access is needed; Alison Koay was added to Slack (6 Oct) but on 19 Oct could not join the shared channel; Liam Cordelle re-invited her as a guest of Mahi's Slack that day, and on 14 Oct Samin asked for Umar to be allowed to edit the execution-rule-editor, which Nathan Burch is investigating. On 27 Oct Samin asked where to see how his signals perform and was pointed to the Flow predictiveness page. On 6 Nov Shahid asked for database access; Cameron Hughes raised a dev ticket and will report back (Shahid chased once). On 20 Nov Samin lost admin edit rights on the reference-data markets page; Daria Horton fixed it within 30 min by removing a distribution.liquidityThrottle.notionalCap.perchannel role-key permission rule (Isaac Dann suspects his key whitelist on it; Zendesk 23879 raised).
-Next: Cameron Hughes to report on the database access dev ticket; Mahi to confirm Umar's execution-rule-editor access; confirm Alison's guest invite worked; confirm whether the SI data and rev-share file went out.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787033520203829 https://mahifx.slack.com/archives/C096422RPKK/p1793083960149769 https://mahifx.slack.com/archives/C096422RPKK/p1793972465733609 https://mahifx.slack.com/archives/C096422RPKK/p1795148003012379
 
 ### xau-pricing-config — XAUUSD reference pricing and config-change process
 status: open · since: 2026-08-19 · last: 2026-10-26
@@ -102,14 +101,14 @@ Next: Mahi (Cameron Hughes) to send Jay/Samin the cause of the 16 Oct widening; 
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787126774501579 https://mahifx.slack.com/archives/C096422RPKK/p1792144153419059 https://mahifx.slack.com/archives/C096422RPKK/p1792145021644979 https://mahifx.slack.com/archives/C096422RPKK/p1793008562378559
 
 ### compass-redundancy — Redundant Compass instance for failover
-status: open · since: 2026-10-22 · last: 2026-10-22
-State: On a 22 Oct call Samin said the main thing StarPrime wants is a redundant Compass instance for failover; he wants Compass as StarPrime's trading engine long term and is keen to expand to NYC clients, so a NYC system may fit. Mahi also suggested same-region failover across two server providers. Follows the September outages and the request to auto-route around Mahi failures (see stability-reviews).
+status: watching · since: 2026-10-22 · last: 2026-10-22
+State: No activity since 22 Oct; watching for Mahi's pricing reply. On a 22 Oct call Samin said the main thing StarPrime wants is a redundant Compass instance for failover; he wants Compass as StarPrime's trading engine long term and is keen to expand to NYC clients, so a NYC system may fit. Mahi also suggested same-region failover across two server providers. Follows the September outages and the request to auto-route around Mahi failures (see stability-reviews).
 Next: Mahi to get back to Samin on pricing for a redundant instance.
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1792667868134029
 
 ### weekend-gold-247 — 24/7 gold launch and weekend support scope
-status: open · since: 2026-08-21 · last: 2026-10-22
-State: StarTrader launched 24/7 XAUUSD in August; Mahi learned from the news. Samin said on 16 Sep he could launch it with Mahi and asked for a price, spreads and margin, but by 18 Sep it was PR'd and not live. After the incident Jay questioned Mahi's ability to support it, and Andrew told Jay on 20 Sep that the current agreement is market-hours support only, to be scoped alongside weekend trading. On the 22 Oct call Samin and Liam Cordelle covered 24/7 XAU: StarPrime currently offers only an indicative feed, is interested in future but lacks the support on its side to offer it firm.
+status: watching · since: 2026-08-21 · last: 2026-10-22
+State: No activity since 22 Oct; watching, no near-term plan. StarTrader launched 24/7 XAUUSD in August; Mahi learned from the news. Samin said on 16 Sep he could launch it with Mahi and asked for a price, spreads and margin, but by 18 Sep it was PR'd and not live. After the incident Jay questioned Mahi's ability to support it, and Andrew told Jay on 20 Sep that the current agreement is market-hours support only, to be scoped alongside weekend trading. On the 22 Oct call Samin and Liam Cordelle covered 24/7 XAU: StarPrime currently offers only an indicative feed, is interested in future but lacks the support on its side to offer it firm.
 Next: scope weekend support coverage with StarPrime if 24/7 gold goes ahead (no near-term plan).
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1787313823826079 https://mahifx.slack.com/archives/C095MJHC68J/p1789548218691959 https://mahifx.slack.com/archives/C096422RPKK/p1789906497829189 https://mahifx.slack.com/archives/C095MJHC68J/p1792667868134029
 
@@ -137,20 +136,20 @@ State: No activity since 2026-10-02; downgraded to watching. After the Saturday 
 Next: Mahi to add the start-up retry and Saturday check; decide whether USDPLN should be added to CLIENT_PRICE_LDN and the profile workaround reverted.
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1789882511519159 https://mahifx.slack.com/archives/C095MJHC68J/p1790945628947149 https://mahifx.slack.com/archives/C095MJHC68J/p1790950414093199
 
-### lp-connections-ttl — LP connectors, TTLs and order linking
-status: closed · since: 2026-08-19 · last: 2026-09-15 · closed: 2026-11-16
-State: no activity since 15 Sep; assumed resolved. Hedger TTLs for B2PRIME_RETAIL and ARGAMON_* set to 30 ms (reference.marketSupport.marketThrottle); the FIX tag 527 request to link PXM orders to final LP fills never got an outcome.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787149002785969 https://mahifx.slack.com/archives/C096422RPKK/p1789468762100799
+### b-clients-tier3 — New B_CLIENTS_TIER3 distribution channel
+status: closed · since: 2026-11-17 · last: 2026-11-19 · closed: 2026-11-19
+State: B_CLIENTS_TIER3 (copy of TIER2, new FIX credentials) set up by Shyam Hari after Samin's 17 Nov ask; Shahid's 19 Nov 2oz XAUUSD test trade was received and filled. Connection verified.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794889229907999 https://mahifx.slack.com/archives/C096422RPKK/p1795073366476739
 
 ### compass-26-4-release — Compass 26.4 weekend release and hedger start-up check
 status: closed · since: 2026-10-16 · last: 2026-10-18 · closed: 2026-11-18
 State: 26.4 went live at the 17-18 Oct weekend reboots; the hybridHedgerSI1 pre-check failure (LP-reducing rule with no XAGUSD market) was fixed by splitting Metals profiles. Its tag-list validation broke StarPrime's blacklists, see tag-blacklist-ux. No activity since 18 Oct; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1792157236841079 https://mahifx.slack.com/archives/C095MJHC68J/p1792353921178369
 
-### b-clients-tier3 — New B_CLIENTS_TIER3 distribution channel
-status: closed · since: 2026-11-17 · last: 2026-11-19 · closed: 2026-11-19
-State: B_CLIENTS_TIER3 (copy of TIER2, new FIX credentials) set up by Shyam Hari after Samin's 17 Nov ask; Shahid's 19 Nov 2oz XAUUSD test trade was received and filled. Connection verified.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794889229907999 https://mahifx.slack.com/archives/C096422RPKK/p1795073366476739
+### lp-connections-ttl — LP connectors, TTLs and order linking
+status: closed · since: 2026-08-19 · last: 2026-09-15 · closed: 2026-11-16
+State: no activity since 15 Sep; assumed resolved. Hedger TTLs for B2PRIME_RETAIL and ARGAMON_* set to 30 ms (reference.marketSupport.marketThrottle); the FIX tag 527 request to link PXM orders to final LP fills never got an outcome.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787149002785969 https://mahifx.slack.com/archives/C096422RPKK/p1789468762100799
 
 ## Arc
 - 2026-05-13 — Internal: StarPrime is owned by Vantage (David Cooney confirmed).
