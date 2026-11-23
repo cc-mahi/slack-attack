@@ -16,7 +16,7 @@ contacts:
   - {name: "Tom McLean", role: "Argamon ops / daily trading monitoring", confidence: low}
   - {name: "Hafiz Mehmood", role: "Argamon back-office / analytics tables", confidence: low}
   - {name: "Maitrya Anupam", role: "Argamon ops (copied on bridge migration)", confidence: low}
-last_catchup: 2026-11-20T08:16:07Z
+last_catchup: 2026-11-23T08:13:40Z
 status: active
 ---
 
