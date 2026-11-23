@@ -31,7 +31,7 @@ contacts:
   - {name: "Marios Christofidis", role: "IC; joined 2026-09-14, role unknown", confidence: low}
   - {name: "Harries Hingco", role: "IC; joined 2026-09-01, role unknown", confidence: low}
   - {name: "Joshua Yiap", role: "IC; joined 2026-08-24, role unknown", confidence: low}
-last_catchup: 2026-11-20T08:17:57Z
+last_catchup: 2026-11-23T08:14:00Z
 status: active
 ---
 
@@ -42,6 +42,12 @@ Isaac Dann is primary quant lead on the account since 2026-10-08. The Toa pricer
 IC's 7 Nov secondary-hub CNH problem was on IC's side; Mahi issued dedicated secondary sessions on 9 Nov and IC asked to whitelist two IPs on 10 Nov; on 11 Nov Isaac said no whitelisting is needed and IC agreed to a weekend restart. IC's 9 Nov XBTUSD price complaint was answered by moving the account off arb pricing and rehabilitating 39 CPs. Karam asked on Oct 21 about tag 8093117 (sharp short-duration markouts); Rory's reply offers IC a choice of keeping it B-booked or moving it to a risk-managed book, awaiting IC.
 
 ## Streams
+
+### hero-moments-value-add — Value-add evidence for IC (hero moments, Price Forensics)
+status: open · since: 2026-10-08 · last: 2026-11-20
+State: Andrew Morgan's value-add-moments scan found 10 positive moments (nine LR, one skew) and six learning windows (report 2026-10-08); Price Forensics was reworked 13-14 Oct to show contribution alongside price action, but client sharing is gated on attribution and IP-filtered evidence. On Oct 15 Andrew argued the views should celebrate Mahi's work and that IC channel interactions skew towards ops fix-ups; he is adding per-channel sentiment scoring and a daily hero-moments routine. The first findings are intended to go to IC with the weekly briefing. On 6 Nov the first live example went out in #mahi-ic-markets: Will's NFP note with Price Forensics and Yield Profiles links (skew $400/M and LR $185/M over the print), after he cross-checked it against earlier NFPs (skew $25/M on 7 Aug, $89/M on 4 Sep, $23/M on 2 Oct; today the outlier, skew up ~13x within a ~9x jump in total edge) and flagged that the skew counter posted in one step at 13:31:12. On 20 Nov Isaac posted a weekly value-add summary to IC ($935k on $12.8B, 73 $/M: LR $528k, FI $389k, PSM $18k; BTC $893k), crediting the weekend BTC sell-off for IC's two biggest days of November, and pitched full PSM to quote a tighter headline spread.
+Next: Andrew to sanity-check findings before client delivery; Isaac to propose Slack-plus-dashboard delivery; Isaac to send a call time next week on the full-PSM backtest of this week's flow.
+Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1791453279474879 https://mahifx.slack.com/archives/C07UBJNUWG1/p1793974562043839 https://mahifx.slack.com/archives/C07UBJNUWG1/p1795194037190189
 
 ### commercial-renegotiation — Renegotiation phase and decision-maker mapping
 status: open · since: 2026-08-17 · last: 2026-11-19
@@ -79,12 +85,6 @@ State: After the 29 Oct Tokyo feed move, the XBTUSD continuity pool's only sourc
 Next: James: second XBTUSD pool source, page on cancel-ratio EMERGENCYs (fired from Fri 22:09Z unseen), check ADAUSD and other Tokyo-sourced coins before next weekend; amend the "no P&L impact" line in the RCA; client post-mortem draft awaits AM sign-off.
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1793462410747149 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793527085905049 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793603002074319 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793979896327999
 
-### hero-moments-value-add — Value-add evidence for IC (hero moments, Price Forensics)
-status: open · since: 2026-10-08 · last: 2026-11-06
-State: Andrew Morgan's value-add-moments scan found 10 positive moments (nine LR, one skew) and six learning windows (report 2026-10-08); Price Forensics was reworked 13-14 Oct to show contribution alongside price action, but client sharing is gated on attribution and IP-filtered evidence. On Oct 15 Andrew argued the views should celebrate Mahi's work and that IC channel interactions skew towards ops fix-ups; he is adding per-channel sentiment scoring and a daily hero-moments routine. The first findings are intended to go to IC with the weekly briefing. On 6 Nov the first live example went out in #mahi-ic-markets: Will's NFP note with Price Forensics and Yield Profiles links (skew $400/M and LR $185/M over the print), after he cross-checked it against earlier NFPs (skew $25/M on 7 Aug, $89/M on 4 Sep, $23/M on 2 Oct; today the outlier, skew up ~13x within a ~9x jump in total edge) and flagged that the skew counter posted in one step at 13:31:12.
-Next: Andrew to sanity-check findings before client delivery; Isaac to propose Slack-plus-dashboard delivery.
-Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1791453279474879 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1792057523803899 https://mahifx.slack.com/archives/C07UBJNUWG1/p1793974562043839
-
 ### account-reviews — Per-account execution/LR reviews and defensive tags
 status: open · since: 2026-08-19 · last: 2026-11-06
 State: IC regularly asks (latest: Karam asked on 6 Nov to switch tag 8009966 to a sharper defensive feed with LR last look; Cameron Hughes agreed and reported done) Mahi to review specific accounts or add tags to the defensive profile (Aug 19, 21, 27 batches actioned, 5299799 moved to defensive with ~$4k protected). Harry's 2026-10-02 request on 8120817 was answered the same morning (Rory: LR stepped up with volume, markouts steady for 30s) and Harry will keep monitoring. For cTrader account 6165669 (2026-09-09) Nathan found clean fills ($21.67m over 159 orders, ~$1.41k extra LR, $65/M), a pattern that looks like VWAP avoidance, and offered a custom counterparty LR profile. Other threads: Savvas's 2026-09-07 BTCUSD rejections were an account auto-flagged as an arbitrageur (-49 $/M at inception) and filled on a separate unskewed feed, so its limit orders were breached; Isaac manually rehabilitated it. Elbekjon's 2026-08-31 slippage was a Dynamic Arbitrageurs fill at continuity pool plus $200/M B_BOOK markup. A Sep 10 oddity: trades for MT4S27_270073080 appeared on drop copy (clips over $1m, filled better than VWAP) without Mahi executing them; Nouri said it is an in-house group with no live trading. An account Cooney found exploiting the over-skew was not auto-classified as an arber (logged on the wiki 2026-09-14).
@@ -98,9 +98,9 @@ Next: James to run the Sat window and stop Toa (no Slack signal seen on whether 
 Refs: https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793201975033619 https://mahifx.slack.com/archives/C07TZ00FK1Q/p1793305561451639
 
 ### tag-8093117-review — Review of IC tag 8093117 and B-book vs risk-managed option
-status: open · since: 2026-10-21 · last: 2026-10-21
+status: watching · since: 2026-10-21 · last: 2026-10-21
 State: Karam asked Mahi to check tag 8093117 for anything unusual, citing sharp markouts on short-duration trades. Rory found it on the standard catch-all execution profile, up ~$63k on $151M of XBTUSD since Oct 9 and 30 BTC short; Mahi's value add (LR $6.8k, last look $6.7k, FI $1.7k) took ~$15.2k (~19%) off its PnL. It builds positions in ~5 BTC steps against the move and closes on reversion (~9 in 10 round trips win), so harsher last look would not help much. Volume rose from ~50 BTC/day to 700+ BTC on Oct 20. Rory put two options to IC: keep it B-booked and review if it keeps scaling, or move it to a risk-managed book with Passive Hedging with or without SI, keeping the spread. Rory also said the crypto B-book's return on spread was 127% in Sep and 96% in Oct so far. Karam said he will get back.
-Next: Karam to respond on the options; Mahi offered a call.
+Next: Karam to respond on the options; Mahi offered a call. Downgraded to watching 2026-11-23: no reply seen in 33 days.
 Refs: https://mahifx.slack.com/archives/C07UBJNUWG1/p1792591256487489 https://mahifx.slack.com/archives/C07UBJNUWG1/p1792600008676349
 
 ### cpi-news-latency — CPI news-event latency complaint and last-look change
