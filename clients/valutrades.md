@@ -17,7 +17,7 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-23T08:17:00Z
+last_catchup: 2026-11-24T08:17:00Z
 status: active
 ---
 
@@ -27,6 +27,20 @@ Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), wi
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### efp-gold-quote — Client asks for a derived gold EFP (futures minus spot) quote
+status: open · since: 2026-11-23 · last: 2026-11-23
+State: Brandon Soo emailed Bonnie Cassidy and support on 2026-11-23 with ten questions on whether Mahi can publish an EFP instrument (futures minus spot, bid/ask from crossed legs, negative values, per-leg staleness, multiplier normalisation, roll, same depth/spread/skew controls as .mic/.mn, maker stream back to OneZero, hedge on both legs, timestamp alignment); OneZero synthetics cannot subtract symbols. Internally Andrew Morgan said nothing exists today but it could be built and asked if the client will pay; Liam Cordelle said the reference-index feature cannot do it so it is new work, and suggested a quant team support ticket (Isaac Dann best placed). Bonnie created a ticket (Liam merged duplicates) and is asking Graeme Watkins, who said to quote; Bonnie expects he will want it free.
+Next: Bonnie gets Graeme's appetite to pay; quant team scopes via the ticket and answers Brandon's questions; Mahi quotes.
+Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795426648207919 https://mahifx.slack.com/archives/CP7A1F8BT/p1795446991718259
+
+
+### algo-close-cutoff — Algo orders to TT expire 2 minutes before NY close
+status: open · since: 2026-11-23 · last: 2026-11-23
+State: Garry Bersnov reported that a ScalePOV order (13 lots GCZ6, sent 16:56:47 NY on 2026-11-20) expired at 16:57:47 after filling 2 of 13, and asked for the cutoff to be 1 minute before close rather than about 2 minutes. Rory King found Mahi cuts algo order duration sent to TT so they finish 2 minutes before the 17:00 NY close; TT takes duration in whole minutes, so the order got 1 minute. Mahi is looking at making the cutoff configurable to 1 minute.
+Next: Mahi (Rory King) confirms whether and when the cutoff can be set to 1 minute.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795423437925179 https://mahifx.slack.com/archives/C09HN93T0G2/p1795440087808359
+
 
 ### feed1-valutrades-lp — Unknown "Valutrades" LP on client FEED1 quote session
 status: open · since: 2026-11-22 · last: 2026-11-23
@@ -106,9 +120,9 @@ Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793071670570599 https://ma
 
 
 ### contract-rolls — Futures and CFD rolls announced by client
-status: watching · since: 2026-08-18 · last: 2026-11-13
-State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec to Jan 2027 for AMB, latest 2026-11-13, US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787042749088329 https://mahifx.slack.com/archives/C09HN93T0G2/p1794548794139719
+status: watching · since: 2026-08-18 · last: 2026-11-24
+State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec to Jan 2027 for AMB, latest gold Dec2026 to Feb2027 for AMB on 2026-11-24 acknowledged by Nathan Burch, US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787042749088329 https://mahifx.slack.com/archives/C09HN93T0G2/p1795485755123069
 
 
 ### dashboard-stability — Compass dashboard and admin outages
