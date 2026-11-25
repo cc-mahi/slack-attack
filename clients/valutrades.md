@@ -17,16 +17,24 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-24T08:17:00Z
+last_catchup: 2026-11-25T08:15:39Z
 status: active
 ---
 
 ## Now
 Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), with new contact addresses.
 2026-11-20 NYC /tmp incident (client DB report, 39 fills unreported) reconciled by Mahi position adjustments; client queries to move to a replica DB. Client unexpectedly has an LP labelled "Valutrades" on its FEED1 quote session; awaiting their decision.
+Gold Feb27 roll on Surya rejected overnight 2026-11-24 for a missing security definition; fixed manually, root cause with Dev.
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### gold-feb-secdef — GCG7-FEB27 rejects on Surya TT; security definitions stale
+status: open · since: 2026-11-24 · last: 2026-11-25
+State: After the client rolled gold Dec2026 to Feb2027 for Surya on 2026-11-24, orders (incl. ScalePOV, 5 lots) were rejected overnight with "Unable to find security definition for instrument: GCG7-FEB27"; Nathan Burch got trades flowing about 19:52Z and told Garry Bersnov the new contract had not been set up on the Surya retail margin account (normally automatic), was added manually, no rejects since, and the cause was raised with Dev. At Garry's request Nathan added GCH7, GCJ7, CLH7, CLJ7 and NQH7 (matching the AMB account, which updates automatically). Daria Horton (internal) ticketed TT security definitions as a regression on 26.4: not updated since mid-Sep for the additional markets (Zendesk 23909).
+Next: Dev fixes automatic security-definition updates for the Surya account (ticket 23909).
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795540318668029 https://mahifx.slack.com/archives/C09HN93T0G2/p1795564582113569 https://mahifx.slack.com/archives/CP7A1F8BT/p1795550940476299
+
 
 ### efp-gold-quote — Client asks for a derived gold EFP (futures minus spot) quote
 status: open · since: 2026-11-23 · last: 2026-11-23
@@ -121,8 +129,8 @@ Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793071670570599 https://ma
 
 ### contract-rolls — Futures and CFD rolls announced by client
 status: watching · since: 2026-08-18 · last: 2026-11-24
-State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec to Jan 2027 for AMB, latest gold Dec2026 to Feb2027 for AMB on 2026-11-24 acknowledged by Nathan Burch, US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787042749088329 https://mahifx.slack.com/archives/C09HN93T0G2/p1795485755123069
+State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec to Jan 2027 for AMB, gold Dec2026 to Feb2027 for AMB (acknowledged by Nathan Burch) and for Surya on 2026-11-24 (see gold-feb-secdef), US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787042749088329 https://mahifx.slack.com/archives/C09HN93T0G2/p1795540286212189
 
 
 ### dashboard-stability — Compass dashboard and admin outages
