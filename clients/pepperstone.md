@@ -18,7 +18,7 @@ contacts:
   - {name: "Gabriel Bignon", role: "YP/arb, failover breaks", confidence: low}
   - {name: "Tom Smith", role: "tech/ops: DB/IP (not Tom Williams)", confidence: low}
   - {name: "Tom Williams", role: "COO since 2026-08"}
-last_catchup: 2026-11-24T08:15:23Z
+last_catchup: 2026-11-25T08:14:18Z
 status: active
 ---
 
@@ -27,6 +27,13 @@ Gateway kill switches keep tripping (slow consumer on NYC failover sessions plus
 Owed: FX SI report to MK, 1003 tag on crypto hedgers, GBPUSD FI loss look, 78 missing arbers, CPI kill-switch note, 26D-Toxic whitelist answer, spot backup trader. CFD licence steps to USD 45k/month; procurement contests the USD 1,500 day rate.
 
 ## Streams
+### crypto-yield-psm — Crypto yields down; PSM scoping for XBTUSD/XETUSD
+status: open · since: 2026-10-06 · last: 2026-11-24
+State: Crypto spread yield fell to ~USD 200/M (350-450 before). Isaac proposed PSM (MK agreed 10-08). 2026-11-23 16:04Z the beta stream was retuned to MK's chosen $9 shape ($5 floor after 5s without flow, base $8, PSM-W-T90 widening, four states up to $15.29). First 16h averaged $8.64 vs $15.01 live; first 17h repriced fills score -15 $/M vs live 244 $/M (about 7% more flow needed to hold revenue; one night too short to conclude, month emulation gives +3 $/M).
+Next: Isaac to keep monitoring the beta against live and report to MK; Isaac to finish engine verification and send MK PnL/spread numbers for PSM variants.
+Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1791285982179839 https://mahifx.slack.com/archives/C033K2P0RPT/p1795513662439569
+
+
 ### cfd-session-spreads — CFD custom sessions, BMSL timezone overrides and thin layers
 status: open · since: 2026-11-09 · last: 2026-11-23
 State: MK (2026-11-09) saw ASXAUD spreads wider than 2 at the 22:50Z open: the custom session started late; Isaac moved its start to 09:30 Sydney after the 22:00Z restart. MK also reports a deeper G30EUR layer missing from the model and broken Compass audit history. 11-17: G30EUR 0.01 orders cancel in CFD NYC (G30 min quantity 0.1 on the LIQUIDITY_POOL_NYC/LDN pools). 11-20: at MK's request Kate reverted the ASX timezone table (Custom 2 back to 05:30-06:10 and 21:00-22:00 UK), undoing the 09:30 Sydney start. 11-23 MK asked again to remove the leftover 22:30-23:00 Sydney entry from Custom 2 so ROLL and SNGMON apply, leaving only 05:30-06:10 and 21:00-22:00; no reply yet.
@@ -167,13 +174,6 @@ Next: Will/Daria to review the corrected figures (was due 2026-11-09) and send t
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1793976769629449 https://mahifx.slack.com/archives/C033K2P0RPT/p1794397891032079
 
 
-### crypto-yield-psm — Crypto yields down; PSM scoping for XBTUSD/XETUSD
-status: open · since: 2026-10-06 · last: 2026-11-11
-State: Crypto spread yield fell to ~USD 200/M (350-450 before). Isaac proposed PSM (MK agreed 10-08); verification under way. On 2026-11-11 MK (forwarded by Isaac) asked for expected numbers on a bitcoin spread with a 5 minimum headline, averaging about 7, widening sized for maximum revenue.
-Next: Isaac to produce MK's BTC 5/7 expected numbers; Isaac to finish engine verification (5 variants on 8 and 11 Oct flow) and send MK PnL/spread numbers for PSM fully active / defensive only / 10% widening.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1791285982179839 https://mahifx.slack.com/archives/C033K2P0RPT/p1794414193198939
-
-
 ### arb-list-gap — 78 of 116 latency arbers missing from the B-book dynamic arb list
 status: open · since: 2026-11-05 · last: 2026-11-06
 State: Reece listed 116 latency arbers (YTD) but only 38 are in the NY B Book arbitrageurs list, leaving 78 uncaught. Daria said London capacity permitting today, otherwise Monday (2026-11-09); no reply seen in channel yet.
@@ -305,12 +305,6 @@ Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1793920459251039
 status: closed · since: 2026-10-27 · last: 2026-10-27 · closed: 2026-11-13
 State: IG first tick beat Mahi by 1ms at the open; assumed resolved.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1793118304272449?thread_ts=1793118304.272449&cid=C06AR8MT8NT
-
-
-### infra-resilience — Crypto server reboots, failover sessions and patching
-status: closed · since: 2026-08-09 · last: 2026-10-23 · closed: 2026-11-10
-State: merged into polaris-migration.
-Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1792767468812089
 
 
 ## Arc
