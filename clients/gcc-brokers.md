@@ -15,7 +15,7 @@ contacts:
   - {name: Layan, role: "GCC ops; posts daily Finalto gold fills asking Compass adjustment", confidence: low}
   - {name: Carl Tannous, role: "GCC ops; closes positions, escalates Finalto unresponsiveness", confidence: low}
   - {name: Khalil, role: "senior GCC contact above Youssef; pushed $70k compensation demand after 2026-05-15 XAGUSD incident", confidence: low}
-last_catchup: 2026-11-24T08:14:11Z
+last_catchup: 2026-11-25T08:12:30Z
 status: active
 ---
 ## Now
@@ -27,16 +27,16 @@ On 11-02 a perps demo test by Will Carter hit live LMAX (about $5.5k equity, fla
 ## Streams
 
 ### lp-position-split — GCC LP positions split across Finalto/LMAX
-status: open · since: 2026-11-20 · last: 2026-11-23
-State: On 11-20 Will Carter saw GCC's LP positions split Finalto +85k oz XAUUSD, LMAX -80.24k, clients (Dist) -9.96k, called it inefficient and worth getting ahead of; Rory said the only positions GCC trades outside Compass are Finalto fix requests (the daily adjustments) plus a manual trading book used to move positions between LPs; Will then confirmed the HOUSE book is in good shape (he had been looking at the parent book). On 11-23 Daria set expected book status to match actual for the Futs hybrids and asked Rory to check.
-Next: Rory to check the Futs hybrid expected book status change.
-Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1795173233350249 https://mahifx.slack.com/archives/C09QS1NUA80/p1795401445168369
+status: open · since: 2026-11-20 · last: 2026-11-24
+State: On 11-24 Rory bounced the futs hedgers, left them off intentionally while aligning expiries, then set futs to broker temporarily while he reviews the existing config. On 11-20 Will Carter saw GCC's LP positions split Finalto +85k oz XAUUSD, LMAX -80.24k, clients (Dist) -9.96k, called it inefficient and worth getting ahead of; Rory said the only positions GCC trades outside Compass are Finalto fix requests (the daily adjustments) plus a manual trading book used to move positions between LPs; Will then confirmed the HOUSE book is in good shape (he had been looking at the parent book). On 11-23 Daria set expected book status to match actual for the Futs hybrids and asked Rory to check.
+Next: Rory to finish the futs config review and restore hedging; check the Futs hybrid expected book status change.
+Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1795173233350249 https://mahifx.slack.com/archives/C09QS1NUA80/p1795523722700339
 
 ### layan-adjustments — Daily Finalto gold fill reports, Compass adjustment
-status: open · since: 2026-04-30 · last: 2026-11-23
-State: Almost every weekday ~15:00 UTC GCC ops (Layan, lately Nael) posts a gold long (occasionally short, sometimes silver) filled on Finalto (from 11-20 also Amana) and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms. Since 11-04 Rory answers "will do" within minutes and confirms done same day, though confirmation sometimes lags 1-3 hours (11-20: 2,000 oz at 10:50 and 2,209 oz Finalto plus 2,500 oz Amana at 15:40, both confirmed done within 2h; 11-23: 3,320 oz gold short at 11:11 confirmed by Rory in 11 min, 5,694 oz gold long at 15:55 actioned by Isaac Dann in ~20 min). Earlier confirmation gaps: GCC chased on 09-22, 10-07, 10-09 and 10-13; 10-21 (gold plus silver), 10-27 and 10-29 show no done-confirmation. Late on 10-27 Carl posted GCC's LP exposure and Daria found Compass showed 4,081 XAU vs the client's 6,404; positions aligned and Carl confirmed.
+status: open · since: 2026-04-30 · last: 2026-11-24
+State: Almost every weekday ~15:00 UTC GCC ops (Layan, lately Nael) posts a gold long (occasionally short, sometimes silver) filled on Finalto (from 11-20 also Amana) and asks Mahi to adjust Compass; Rory, Cameron Hughes, William or Isaac Dann acknowledges and confirms. Since 11-04 Rory answers "will do" within minutes and confirms done same day, though confirmation sometimes lags 1-3 hours (11-20: 2,000 oz and 2,209 oz Finalto plus 2,500 oz Amana, confirmed within 2h; 11-23: 3,320 oz gold short at 11:11 confirmed by Rory in 11 min, 5,694 oz gold long at 15:55 actioned by Isaac Dann in ~20 min; 11-24: 3,097 oz gold long at 17:08 actioned by Nathan Burch, confirmed 19:25). Earlier gaps: GCC chased on 09-22, 10-07, 10-09, 10-13; 10-21, 10-27, 10-29 show no done-confirmation. Late on 10-27 Carl posted GCC's LP exposure and Daria found Compass showed 4,081 XAU vs the client's 6,404; positions aligned and Carl confirmed.
 Next: Rory/ops to confirm the 10-21 gold and silver adjustment and the 10-09 2,572 oz Finalto gold adjustment to Layan; confirm each adjustment in thread same day.
-Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1795450459190119
+Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1786976522444999 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793117803222009 https://mahifx.slack.com/archives/C09PNC1MFAA/p1795540097146539
 
 ### sharp-flow-hedging — Youssef: GCC flow "sharp" at LPs, order slicing
 status: open · since: 2026-11-19 · last: 2026-11-19
@@ -143,22 +143,22 @@ Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1794567605273569 https://ma
 
 ### lmax-price-outage — 2026-10-29 LMAX pricing gap
 status: closed · since: 2026-10-29 · last: 2026-10-29 · closed: 2026-11-20
-State: LMAX pricing gap of ~16 min on 10-29 recovered; cause not stated; no recurrence seen.
+State: LMAX pricing gap of ~16 min on 10-29 recovered; no recurrence.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285629414699 https://mahifx.slack.com/archives/C09PNC1MFAA/p1793285935629259
 
 ### lmax-xau-limit — LMAX XAUUSD max-position rejects
 status: closed · since: 2026-10-26 · last: 2026-10-26 · closed: 2026-11-20
-State: GCC raised its LMAX XAUUSD limit and shifted volume to Finalto on 10-26; no further rejects reported; assumed resolved.
+State: GCC raised its LMAX XAUUSD limit and shifted volume to Finalto on 10-26; no further rejects.
 Refs: https://mahifx.slack.com/archives/C09PNC1MFAA/p1792985886827929 https://mahifx.slack.com/archives/C09PNC1MFAA/p1792990642060759
 
 ### si-book — Systematic internaliser book
 status: closed · since: 2026-07-03 · last: 2026-09-15 · closed: 2026-11-16
-State: No activity since 09-15; assumed resolved. SI live from 07-24 (200oz XAUUSD cap, thin flow); 09-15 moved to inclusion-tagged. Review doc in MahiProduct (2026-09-15-si-review-default-in-vs-out.md).
+State: No activity since 09-15; assumed resolved. SI live from 07-24 (200oz XAUUSD cap, thin flow); 09-15 moved to inclusion-tagged.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1784780445088809 https://mahifx.slack.com/archives/C09QS1NUA80/p1789491725123129
 
 ### flow-toxicity — Large-order tags 700106 / 700154
 status: closed · since: 2026-08-06 · last: 2026-09-14 · closed: 2026-11-16
-State: No activity since 09-14; assumed resolved. Tag 700106 cost $6k on 08-18 and was answered with a DYNAMIC-LARGEORDER hedger rule and a 700106 LR profile; Youssef chose to keep internalising. 09-14 a 3k oz 700154 trade lost $4k; Rory relabelled it brokered, fine for now.
+State: No activity since 09-14; assumed resolved. 700106 ($6k, 08-18) got a large-order hedger rule and LR profile; 700154 ($4k, 09-14) relabelled brokered.
 Refs: https://mahifx.slack.com/archives/C09QS1NUA80/p1786023089729289 https://mahifx.slack.com/archives/C09QS1NUA80/p1787674237025029 https://mahifx.slack.com/archives/C09QS1NUA80/p1789347578163429
 
 ## Arc
