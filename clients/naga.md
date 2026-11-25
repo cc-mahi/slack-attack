@@ -16,7 +16,7 @@ contacts:
   - {name: Alexandru Malanca, role: NAGA Operations}
   - {name: Paris Stephanou, role: NAGA Operations}
   - {name: Andrei Vieru, role: NAGA Operations}
-last_catchup: 2026-11-24T08:13:57Z
+last_catchup: 2026-11-25T08:12:16Z
 status: active
 ---
 
