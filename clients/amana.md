@@ -19,7 +19,7 @@ contacts:
   - {name: "Andreas Kleanthous / Mohamad Malkani / Rafik Mansour", role: "ops: futures expiry/start notices", confidence: low}
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config, LP NOP", confidence: low}
   - {name: "Ali Wehbe / Ahmad Hashem", role: "ops: energy futures specs; Mahi_B rejection reports", confidence: low}
-last_catchup: 2026-11-24T08:14:11Z
+last_catchup: 2026-11-25T08:12:30Z
 status: active
 ---
 ## Now
@@ -53,10 +53,10 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1795277723540489 https://ma
 
 
 ### ig-xau-hedging — IG_CENTROID as a metals hedge venue
-status: open · since: 2026-11-03 · last: 2026-11-20
-State: 11-20 Omar had IG client-net XAUUSD corrected again (110.13 vs 50.13 lots at the LP): -60 lots booked internally, nothing sent to IG. 11-17 Masri had IG_CENTROID -5,500 oz and CMC_CENTROID +5,500 oz adjusted likewise. 11-16 Nikos asked to enable IG for XAGUSD aggregation on the non-swapfree account; Kate asked whether for hedging or price formation (unanswered). IG_CENTROID is a metals hedge LP (regular account only); Isaac enabled it for A-book XAU hedging 11-05 with a temporary max position pending IG NOP/margin. Omar asked whether per-LP commission can feed aggregation (Daria checking).
+status: open · since: 2026-11-03 · last: 2026-11-25
+State: 11-25 06:30 UTC Masri asked for another internal XAUUSD position adjustment; Isaac picked it up 08:02 (outcome not yet seen). 11-20 Omar had IG client-net XAUUSD corrected again (110.13 vs 50.13 lots at the LP): -60 lots booked internally, nothing sent to IG. 11-17 Masri had IG_CENTROID -5,500 oz and CMC_CENTROID +5,500 oz adjusted likewise. 11-16 Nikos asked to enable IG for XAGUSD aggregation on the non-swapfree account; Kate asked whether for hedging or price formation (unanswered). IG_CENTROID is a metals hedge LP (regular account only); Isaac enabled it for A-book XAU hedging 11-05 with a temporary max position pending IG NOP/margin. Omar asked whether per-LP commission can feed aggregation (Daria checking).
 Next: Nikos to answer Kate (XAGUSD hedging vs pricing); Mahi (Daria) to answer Omar on LP commission in aggregation.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793784345213029 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795159834536379
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793784345213029 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795588225642219
 
 
 ### vip-feed — Third (VIP) pricing feed for XAU/XAG, now A_CLIENTS_VIP channel
@@ -284,17 +284,6 @@ status: closed · since: 2026-11-17 · last: 2026-11-17 · closed: 2026-11-18
 State: Answered 11-17 (William): XAUUSD base spread 8c for TOB 250oz, no skew shading on the CMC mid.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794902050001049 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794908679108229
 
-
-### xaufut-booking — XAUFUT G/Z hedger and book routing
-status: closed · since: 2026-10-29 · last: 2026-10-29 · closed: 2026-11-10
-State: XAUFUT-G moved to FUTURES-W and fixed manually; no activity since 10-29, assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793267301772479 https://mahifx.slack.com/archives/C08SYSMP0EB/p1793288312690919
-
-
-### skew-yield-value — XAU skew, A-book yield and account value
-status: closed · since: 2026-08-19 · last: 2026-09-10 · closed: 2026-11-10
-State: No activity since 09-10; closed (live concerns now under nfp-lr-review and analytics-data-asks).
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1787167725330769 https://mahifx.slack.com/archives/C08SYSMP0EB/p1789022349377719
 
 ## Arc
 - 2026-04-30 — Amana management happy with Mahi; goal is all flow through Mahi
