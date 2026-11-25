@@ -20,7 +20,7 @@ contacts:
   - {name: "Manuel de Cara", role: "Rostro: Pulse/Athena data access", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro; commercial counterpart"}
   - {name: "Michael Ayres", role: "senior Rostro contact; named replacement after Lochlan left", confidence: low}
-last_catchup: 2026-11-24T08:15:23Z
+last_catchup: 2026-11-25T08:14:18Z
 status: active
 ---
 
@@ -29,6 +29,20 @@ Relationship under strain: the 14 Oct CMC futures freeze cost ~178k; Five pricin
 Recent: 23 Nov NDX widening-with-CMC rules on INV and tag 150_0_1102181_100076 gold-futures latency arb; 19-20 Nov tickstore disk scare, Invast tag blacklists, 254_* slippage; 17-18 Nov NDXFUT-Z withdrawals and XAGUSD.v stale IC prices.
 
 ## Streams
+
+### cmc-futs-dropouts — CMC as sole futures LP: recurring dropouts and rejects
+status: open · since: 2026-08-26 · last: 2026-11-25
+State: CMC was the only LP pricing gold futures (and XAUFUT, indices), so each dropout (25 Aug, 5 Oct, 29 Oct) leaves no price or fill. NDXFUT-Z was mapped wrongly in PXM after the roll. 10-11 Nov: Oliver approved moving DOWFUT/SPXFUT/NDXFUT hedging and pricing to IC_MARKETS (brokered rules stay on CMC); after IC clear cancels and NQ rejects Scope briefly reverted, then Kate switched again on 11 Nov after IC test trades and bounced the SI futures hedgers. Oliver: all futures go to IC for now, clients chosen for CMC get brokering execution rules.
+13 Nov Riz reported hedging with an incorrect step size (screenshot, instrument unstated); Kate said she would fix it, no confirmation seen.
+23 Nov: XAUFUT-G now maps to GC.G27 (pricing after EOD restarts, Scope aligned); Abdullah raised the CMC market hedger max size to 200 after SP500 rejections and Kate aligned Mahi's side.
+25 Nov 07:33 UTC the step-size problem recurred: Abdullah posted a PXM reject of a GC.Z26 limit sell on MAHI_CMC (size 213.35, step=1.0, rejectCount=3); Isaac Dann said he is checking.
+Next: Isaac/Kate to fix the GC.Z26 hedge size rounding to step 1.0 (13 Nov step-size report never confirmed fixed); Kate to apply the futures brokering-rule changes after the EOD restart and watch for IC rejections (Oliver asked); Rostro to confirm hedging min quantities against IC and say whether to set up futures widening; Rostro decision on Jump in XAUFUT reference price (Jump is being switched off, check it still stands); Alex to fix NDXFUT-Z mapping in PXM.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787733565831759 https://mahifx.slack.com/archives/C08AQKRU953/p1794317966817829 https://mahifx.slack.com/archives/C08AQKRU953/p1795442353264769 https://mahifx.slack.com/archives/C08AQKRU953/p1795592107310689
+
+### mfp-xau-reject — HRP_MFP_Trading rejected an XAU order (24 Nov)
+status: open · since: 2026-11-24 · last: 2026-11-24
+State: Abdullah flagged a 13:33 UTC reject from HRP_MFP_Trading on an XAU/USD order ("Order Rejected"). Kate: Mahi cleared the risk to other venues after the cancel and a fill has since come from MFP.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1795527839720459 https://mahifx.slack.com/archives/C08AQKRU953/p1795528641864379
 
 ### index-widen-cmc — INV model widens indices when CMC widens (NDX, DOW, SPX, G30)
 status: open · since: 2026-11-23 · last: 2026-11-23
@@ -125,14 +139,6 @@ State: Alexandre saw no HybridHedger-tagged trades since 9 Nov and reads a clien
 Next: Alexandre to decide whether he wants the fixed HybridHedger tag restored.
 Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794393367585939 https://mahifx.slack.com/archives/C08AQKRU953/p1794415781616949
 
-### cmc-futs-dropouts — CMC as sole futures LP: recurring dropouts and rejects
-status: open · since: 2026-08-26 · last: 2026-11-23
-State: CMC was the only LP pricing gold futures (and XAUFUT, indices), so each dropout (25 Aug, 5 Oct, 29 Oct) leaves no price or fill. NDXFUT-Z was mapped wrongly in PXM after the roll. 10-11 Nov: Oliver approved moving DOWFUT/SPXFUT/NDXFUT hedging and pricing to IC_MARKETS (brokered rules stay on CMC); after IC clear cancels and NQ rejects Scope briefly reverted, then Kate switched again on 11 Nov after IC test trades and bounced the SI futures hedgers. Oliver: all futures go to IC for now, clients chosen for CMC get brokering execution rules.
-13 Nov Riz reported hedging with an incorrect step size (screenshot, instrument unstated); Kate said she would fix it, no confirmation seen.
-23 Nov: XAUFUT-G now maps to GC.G27 (pricing after EOD restarts, Scope aligned); Abdullah raised the CMC market hedger max size to 200 after SP500 rejections and Kate aligned Mahi's side.
-Next: Kate to confirm the hedge step size fix; Kate to apply the futures brokering-rule changes after the EOD restart and watch for IC rejections (Oliver asked); Rostro to confirm hedging min quantities against IC and say whether to set up futures widening; Rostro decision on Jump in XAUFUT reference price (Jump is being switched off, check it still stands); Alex to fix NDXFUT-Z mapping in PXM.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1787733565831759 https://mahifx.slack.com/archives/C08AQKRU953/p1794317966817829 https://mahifx.slack.com/archives/C08AQKRU953/p1794407794037449 https://mahifx.slack.com/archives/C08AQKRU953/p1795442353264769
-
 ### adaptive-skew-pitch — Move Rostro onto adaptive skew after NFP
 status: open · since: 2026-11-06 · last: 2026-11-06
 State: Will Carter said Rostro's B_INSTI_VIP book barely moved on the 6 Nov NFP release (13:30-13:33 UTC): skew about $3/M, LR $4/M, versus IC Crypto skew about $430/M and Infinox gold LR $125/M after his 15:48 correction (volume $56M, not the $170M first posted). He proposes replaying the release on a sim with an adaptive skew config, showing the client before/after skew PnL and switching on the measured result. Kate is looking at the skew setup. Skew is currently off on USDJPY/EURUSD for the VIP trial (see vip-trial-skew).
@@ -180,58 +186,58 @@ Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1792138607035239 https://ma
 
 ### hedger-ew-ic-split — Temporary hedger bias: sell at EW, buy at IC (20 Nov)
 status: closed · since: 2026-11-20 · last: 2026-11-20 · closed: 2026-11-23
-State: Alexandre asked about biasing the hedger to sell at EW and buy at IC briefly; Kate said it needs fake opposite positions plus position-reducing hedging rules (manual LP trades the alternative). Alexandre dropped it.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1795169499670819 https://mahifx.slack.com/archives/C08AQKRU953/p1795170989628879
+State: Alexandre asked about biasing the hedger to sell at EW and buy at IC briefly; Kate: needs fake positions plus hedging rules. Dropped.
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1795170989628879
 
 ### xau-offbook-148 — 12 Nov XAUUSD off-book long and risk splitting for the 148_ tag set
 status: closed · since: 2026-11-12 · last: 2026-11-16 · closed: 2026-11-17
 State: Oliver approved splitting 148_ risk by classification; done 16 Nov.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794502387640839 https://mahifx.slack.com/archives/C08AQKRU953/p1794824898300319
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794824898300319
 
 ### c-book-slippage-file — C book (122_*) client slippage file, tick throttle suspected
 status: closed · since: 2026-11-10 · last: 2026-11-16 · closed: 2026-11-17
 State: No throttling; accepted by Alexandre 16 Nov.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794347283583259 https://mahifx.slack.com/archives/C08AQKRU953/p1794847070992339
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794847070992339
 
 ### hedge-step-size — Hedging with an incorrect step size (13 Nov)
 status: closed · since: 2026-11-13 · last: 2026-11-13 · closed: 2026-11-20
 State: merged into cmc-futs-dropouts.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794577645417579 https://mahifx.slack.com/archives/C08AQKRU953/p1794577665079449
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794577665079449
 
 ### cpi-skew-drop — 10 Nov CPI drop in FI PL on SI and retail skew
 status: closed · since: 2026-11-10 · last: 2026-11-11 · closed: 2026-11-20
 State: merged into fx-pnl-drop.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794329146184069 https://mahifx.slack.com/archives/C08AQKRU953/p1794393541339619
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794393541339619
 
 ### ndx-min-qty-reject — NDXUSD 0.01 order rejected by CMC min quantity
 status: closed · since: 2026-11-09 · last: 2026-11-09 · closed: 2026-11-20
 State: merged into exec-rule-requests.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794238189537329 https://mahifx.slack.com/archives/C08AQKRU953/p1794239314132049
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1794239314132049
 
 ### fok-partial-fill — 26 Oct SI XAUUSD position break from partial-fill FOK brokering
 status: closed · since: 2026-10-26 · last: 2026-10-26 · closed: 2026-11-20
 State: merged into position-breaks.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1793005750513019 https://mahifx.slack.com/archives/C08ALS66EDC/p1793015998283009
+Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1793015998283009
 
 ### c-book-clearance — C book risk clearance speed (15 Oct gold)
 status: closed · since: 2026-10-15 · last: 2026-10-15 · closed: 2026-11-11
 State: Fill-ratio adjustment turned off; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1792078136400489 https://mahifx.slack.com/archives/C08ALS66EDC/p1792081751691529
+Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1792081751691529
 
 ### psm-inv-rollout — Predictive spread modulation on the INV model
 status: closed · since: 2026-09-01 · last: 2026-10-14 · closed: 2026-11-23
 State: PSM live on INV 13-14 Oct (+$0.83/M in beta); no activity since; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1788280838936589 https://mahifx.slack.com/archives/C08AQKRU953/p1791971029551609
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1791971029551609
 
 ### compass-26-4 — Compass 26.4 upgrade and dashboard deploys
 status: closed · since: 2026-10-08 · last: 2026-10-09 · closed: 2026-11-23
 State: 26.4 live at the 10-11 Oct restart; no activity since 9 Oct; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1791483337578909 https://mahifx.slack.com/archives/C08AQKRU953/p1791543772435149
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1791543772435149
 
 ### xau-bad-print — 11 Sep Jane Street XAUUSD bad print (CPI) and missing price guard
 status: closed · since: 2026-09-11 · last: 2026-09-15 · closed: 2026-11-16
 State: Jane Street bad print at CPI; sanity check enabled 15 Sep. Assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08ALS66EDC/p1789131695104789 https://mahifx.slack.com/archives/C08AQKRU953/p1789463134083049
+Refs: https://mahifx.slack.com/archives/C08AQKRU953/p1789463134083049
 
 ## Arc
 - 2025 — Rostro live on Compass (per Kate, 2026-09-14, sanity check disabled before go-live)
