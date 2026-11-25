@@ -13,7 +13,7 @@ channels:
 contacts:
   - {name: David Manoukian, role: "ATC trading/sales lead (Dave M); raises execution and depth issues in #mahi-atc"}
   - {name: Malik Khan, role: "ATC ops/back office; LP and connectivity contact, owns UAT and whitelisting requests"}
-last_catchup: 2026-11-24T08:13:57Z
+last_catchup: 2026-11-25T08:12:30Z
 status: active
 ---
 ## Now
@@ -23,6 +23,12 @@ ATC is a matched-principal broker in a build phase (prop launch, Britannia prime
 Top risk: Mahi-held LP cross positions dwarfed client trades; auditors escalated 11-02, ATC self-reported to the FCA (~11-09/10), the ~USD 10m gap was explained as accumulated hedging P&L, and ~1m CHF stays unexplained. CFD hedgers stay off after the 11-10 SPX mishap (-$80.5k) pending the Compass rebase; 11-17 a DOW hedger was bounced and reconfigured to clear risk (made P&L, FCA concern).
 
 ## Streams
+
+### seychelles-uat — Seychelles entity, dev connections and UAT feed
+status: open · since: 2026-05-19 · last: 2026-11-24
+State: On 2026-11-12 Dave reported no prices for index and energy CFDs on SC production; Nathan Burch found none of the instruments in LIQUIDITY_POOL_SC and added them with an EOD restart, but Dave still saw no prices on 11-13. Nathan had missed scheduling the clientDistributionGateway restart; after a weekend restart by 11-16 all index and energy CFDs price except F40EUR and JPXUSD, which Britannia rejects as invalid symbols (requested as FRA40 and JPXUSD); Mahi asked ATC to check Britannia's names for France 40 and Japan 225. Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring weekly ask from Malik and Dave (since 09-02, latest 11-24 evening when Malik asked for UAT prices to be started and Nathan brought the UAT server and Compass UAT online by 21:11 UTC; earlier 11-09/11-10, actioned by Rory/Daria); the UAT gateway moved to 9012/9013 on 09-14, needing re-whitelisting. On 11-02 the MT5 SC orders session (orders_mt5_sc) could not log on: MT5 resets FIX sequence numbers at 00:00 while Mahi's session runs Sun 20:00 to Fri 21:00 UTC; ATC asked to align.
+Next: ATC (Dave/Malik) to get Britannia's symbol names for France 40 and Japan 225; Nathan to confirm pricing at market open; ATC to align orders_mt5_sc MT5 reset schedule with Sun 20:00-Fri 21:00 UTC; Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
+Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794790970454859 https://mahifx.slack.com/archives/C04AZM0LPMH/p1795552449593369
 
 ### velocity-ny-position-id — hybrid hedger built EURUSD/AUDUSD positions after NY-ID miss
 status: open · since: 2026-11-20 · last: 2026-11-20
@@ -53,12 +59,6 @@ status: open · since: 2026-07-09 · last: 2026-11-17
 State: Compass books realised P&L in the counter currency, so cross flow (AUDNZD, GBPNZD etc.) leaves non-USD P&L balances (about 21.7m NZD) that the hedger treats as risk and hedges at the LPs. Finalto and ATC cash are USD-only, so those LP positions (about $12m short NZD, $4.5m long JPY) are real exposure with no client trade behind them; ATC's compliance officer flagged this to auditors and the FCA on 2026-10-01 and has accepted the mechanism. Agreed fix is converting P&L legs to USD in Compass as a weekend flatten and reimport (duplicate trade-position rows from the NY-to-LDN move, Zendesk 23171, still need cleaning), then a currency-level rec with ATC. On 10-08 Malik asked for a systematic conversion to limit spread cost; the three P&L models (Compass, Finalto, MetaQuotes) disagree. On 2026-10-26 Andrew said the technical gap is known and CPS is fixing it but a HPS fix may be brought forward; the July USD adjustment was never done (NZD residual about 30.9m on 09-29, JPY 637m) and a counter-currency to USD or deposit currency conversion is needed. On 2026-11-17 Will estimated ATC rec work at roughly 250-330 hours since Nov 2023 (120-180h of it on the currency/position issue since July) and said the aim is a currency rec that ends manual breaks rather than more one-off fixes.
 Next: Cameron Hughes to revert to Malik with a full-rec plan and schedule the weekend flatten/reimport (Daria, Liam); build the ongoing currency-level rec.
 Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1783567793838579 https://mahifx.slack.com/archives/C046RNF64VD/p1790850531938759 https://mahifx.slack.com/archives/C046RNF64VD/p1791463861287519 https://mahifx.slack.com/archives/C046RNF64VD/p1794907226788829
-
-### seychelles-uat — Seychelles entity, dev connections and UAT feed
-status: open · since: 2026-05-19 · last: 2026-11-16
-State: On 2026-11-12 Dave reported no prices for index and energy CFDs on SC production; Nathan Burch found none of the instruments in LIQUIDITY_POOL_SC and added them with an EOD restart, but Dave still saw no prices on 11-13. Nathan had missed scheduling the clientDistributionGateway restart; after a weekend restart by 11-16 all index and energy CFDs price except F40EUR and JPXUSD, which Britannia rejects as invalid symbols (requested as FRA40 and JPXUSD); Mahi asked ATC to check Britannia's names for France 40 and Japan 225. Seychelles (SC) infrastructure is live (SC channel, books, hedgers) with BVI-only LP routing; on the 2026-09-16 call Malik said ATC wants to move from UK plus SC connections to SC only, and ATC's dev team needs connections to both servers (two new sessions for ATC Broker). UAT feed/server restarts are a recurring weekly ask from Malik and Dave (since 09-02, latest 11-09/11-10, actioned by Rory/Daria); the UAT gateway moved to 9012/9013 on 09-14, needing re-whitelisting. On 11-02 the MT5 SC orders session (orders_mt5_sc) could not log on: MT5 resets FIX sequence numbers at 00:00 while Mahi's session runs Sun 20:00 to Fri 21:00 UTC; ATC asked to align.
-Next: ATC (Dave/Malik) to get Britannia's symbol names for France 40 and Japan 225; Nathan to confirm pricing at market open; ATC to align orders_mt5_sc MT5 reset schedule with Sun 20:00-Fri 21:00 UTC; Mahi to create the two dev connections; re-enable SC monitoring when connections are expected.
-Refs: https://mahifx.slack.com/archives/C046RNF64VD/p1782992990487589 https://mahifx.slack.com/archives/C04AZM0LPMH/p1793582879361799 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794599436589589 https://mahifx.slack.com/archives/C04AZM0LPMH/p1794790970454859
 
 ### client-exec-incidents — pricing and fill incidents reported by Dave M
 status: open · since: 2026-08-11 · last: 2026-11-16
