@@ -17,15 +17,21 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-11-24T08:13:57Z
+last_catchup: 2026-11-25T08:15:39Z
 status: active
 ---
 
 ## Now
 Prop firm; Mahi is dealing desk and risk. Payouts were high last week; Cameron Hughes widened spread-table spreads (TOT no longer on Prop Firm Match) as a first step. Cameron Hughes also sent TOT an NFP value-add note (about $4.3k over the release).
-Open: EURUSD PSM widening was stuck on 13-17 Nov (round-numbers override applied, $/M anomaly under investigation); Matt says TOT is back to #13 on Prop Firm Match spreads; no second price source if Mahi Central eu-west-2 drops (Liam Cordelle weighing options); MatchTrader IP whitelist (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain); drop-copy volume check with Shane.
+Open: TOT plans a perps offering in January (Mahi to ask instruments and funding); EURUSD PSM widening was stuck on 13-17 Nov (round-numbers override applied, $/M anomaly under investigation); Matt says TOT is back to #13 on Prop Firm Match spreads; no second price source if Mahi Central eu-west-2 drops (Liam Cordelle weighing options); MatchTrader IP whitelist (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain); drop-copy volume check with Shane.
 
 ## Streams
+
+### prop-perps — Prop perps request
+status: open · since: 2026-09-30 · last: 2026-11-24
+State: Matt first asked about prop perps (Vest Markets, MyFundedPerps) in Oct; Cameron Hughes sees a growing area. On 2026-11-24 Matt forwarded that TOT plans to roll out a perps offering in January and asked if Mahi has put energy into perpetuals. Isaac Dann said Mahi should have enough pricing around and asked which instruments; Andrew Morgan asked whether TOT plans to do funding on it. Logged on the wiki Client requests section.
+Next: Cameron Hughes to ask Matt for the instrument list and whether TOT will run funding, then reply.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://mahifx.slack.com/archives/C08TG143F4L/p1795509913481269
 
 ### psm-eurusd-widening — EURUSD PSM widening stuck on
 status: open · since: 2026-11-13 · last: 2026-11-17
@@ -57,9 +63,9 @@ Next: Mahi (Cameron Hughes) to whitelist the IP and confirm to Lars.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1793098034378779 https://mahifx.slack.com/archives/C08U853T684/p1793098073453029
 
 ### prop-network-showcase — Mahi to show TOT its prop-network work
-status: open · since: 2026-10-21 · last: 2026-10-21
+status: watching · since: 2026-10-21 · last: 2026-10-21
 State: The 2026-10-21 check-in call was cancelled by Shane (kept in the calendar if needed); Cameron Copland was on leave. Will Carter said Mahi will pull together what it is working on for its prop network and show TOT over the next week.
-Next: Will Carter / Mahi to send the prop-network material to Shane within about a week.
+Next: Will Carter / Mahi to send the prop-network material to Shane. Watching: no follow-up seen since 2026-10-21.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1792585285879989 https://mahifx.slack.com/archives/C08U853T684/p1792585333046689
 
 ### drop-copy-volume — Drop-copy volume exceeds expected volume
@@ -73,17 +79,6 @@ status: watching · since: 2026-10-14 · last: 2026-10-14
 State: Daniel forwarded TOT's analysis: two 3-lot buys at the same price, the second filled 4 ms after the first at 1.3 pips worse than Mahi's published ask. TOT wants Mahi to explain the fill. Shyam Hari acknowledged and said Mahi will check.
 Next: Mahi (Shyam Hari) to investigate and revert to Daniel. Watching: no reply seen since 2026-10-14.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1791943609687779 https://mahifx.slack.com/archives/C08U853T684/p1791943843239269
-
-### prop-perps — Prop perps request
-status: watching · since: 2026-09-30 · last: 2026-10-05
-State: Matt asked about prop perps (Vest Markets, MyFundedPerps). Cameron Hughes sees it as a growing area and a possible new offering and will look at Vest. Logged on the wiki Client requests section.
-Next: Cameron Hughes to look at Vest.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://mahifx.slack.com/archives/C08TG143F4L/p1791183636574369
-
-### ctrader-billing-check — cTrader shut off by TOT; billing model review
-status: closed · since: 2026-08-26 · last: 2026-09-10 · closed: 2026-11-10
-State: TOT stopped using cTrader (Shane: it was costing them heavily); config kept in case they return. On 2026-09-09/10 internal billing was queried against the revised per-user model and Will Carter noted the fixed component was missing for low totals; Cameron Hughes was asked to review accounts; no activity since 2026-09-10, assumed resolved.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1787752907131709 https://mahifx.slack.com/archives/C08TG143F4L/p1789022593579519
 
 ## Arc
 - 2026-01 — Crypto symbols (34) enabled on MatchTrader alongside MT5
