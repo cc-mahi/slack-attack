@@ -19,7 +19,7 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-25T08:12:16Z
+last_catchup: 2026-11-26T08:13:54Z
 status: active
 ---
 
@@ -27,6 +27,12 @@ status: active
 Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP position re-sync (~$30M manual-hedge LP positions in B House; evening adjustments booked 2026-11-12, USDJPY B-to-A move still requested); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### counterparty-blacklist — Blacklist / exclude counterparties on hedge cancels and rejections
+status: open · since: 2026-10-12 · last: 2026-11-26
+State: Erik asked on 2026-10-12 for account 81259604 to be excluded from iSAM hedging (Kate added it to the blacklist) and whether a background script could auto-blacklist counterparties reaching X rejections; no substantive answer seen. Since 2026-10-21 ISPRIME has cancelled hedges of a single counterparty within ~13ms nearly daily (HEDGING_MODEL_H1_NYC alerts); the H1 hedger retries ISPRIME every ~200ms with no fallback LP until the account is blacklisted. On 2026-10-29 Isaac blacklisted tag 95000689 from ISPRIME and told Go (Orpheas will investigate on Go's side; hedging cancels only, client execution unaffected). Isaac asked internally whether to make this a routine (flag the CP early) or product automation (auto-blacklist a CP on an LP after N zero-fill cancels and route elsewhere); Shyam replied it would be great automated in the product. On 2026-11-24 Will added account 90800487 to the ISPRIME hedging blacklist; on 2026-11-26 Mac asked if the taglist limit was hit as Go still saw hedge attempts, and Shyam showed the cancels were on IG and 26DEGREES (last ISPRIME attempt 11-24 04:37 UTC) since the blacklist is per-LP; Mac accepted.
+Next: Mahi to decide routine vs product automation (and answer Erik's auto-blacklist ask); Go to investigate the ISPRIME cancels.
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1791819586672009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793266711610419 https://mahifx.slack.com/archives/CNF3WPNSK/p1793267765705429 https://mahifx.slack.com/archives/C09J1DP2QQH/p1795673251845719
 
 ### huf-pnl-hedge — Hedger trades EURHUF to close residual HUF P&L balance
 status: open · since: 2026-11-20 · last: 2026-11-20
@@ -87,12 +93,6 @@ State: Cutover happened at the 2026-11-02 open: Go switched ISPRIME, 26DEGREES, 
 Next: Go (Erik) to finish cross-checking AU LP accounts and flag any issue; answer Will's question on residual currency amounts if still open; Go to set up AU Finalto (no date).
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793598060430539 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793640007212149
 
-### counterparty-blacklist — Blacklist / exclude counterparties on hedge cancels and rejections
-status: open · since: 2026-10-12 · last: 2026-10-30
-State: Erik asked on 2026-10-12 for account 81259604 to be excluded from iSAM hedging (Kate added it to the blacklist) and whether a background script could auto-blacklist counterparties reaching X rejections; no substantive answer seen. Since 2026-10-21 ISPRIME has cancelled hedges of a single counterparty within ~13ms nearly daily (HEDGING_MODEL_H1_NYC alerts); the H1 hedger retries ISPRIME every ~200ms with no fallback LP until the account is blacklisted. On 2026-10-29 Isaac blacklisted tag 95000689 from ISPRIME and told Go (Orpheas will investigate on Go's side; hedging cancels only, client execution unaffected). Isaac asked internally whether to make this a routine (flag the CP early) or product automation (auto-blacklist a CP on an LP after N zero-fill cancels and route elsewhere); Shyam replied it would be great automated in the product.
-Next: Mahi to decide routine vs product automation (and answer Erik's auto-blacklist ask); Go to investigate the ISPRIME cancels.
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1791819586672009 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793266711610419 https://mahifx.slack.com/archives/CNF3WPNSK/p1793267765705429
-
 ### lr-benign-flow — Published LR also charged on benign counterparties
 status: open · since: 2026-10-27 · last: 2026-10-27
 State: Isaac noted that because Go runs published LR, LR also lands on benign flow: the lr-health check on 2026-10-02 flagged 57 benign counterparties charged about $4.6k in total (mostly a few hundred dollars each, largest ~$1.6k). He dismissed the cards as the expected cost of published LR. If Go asks about fills for good clients, a more targeted setup (Infinox approach: penalise toxic flow harder, benign less) could be offered, but it shows up mostly as slippage so needs client sign-off and probably ties into Go's colour-routing work; unclear Go would be interested.
@@ -112,9 +112,8 @@ Next: Nathan to report back on why LMAX_LDN is rejecting ~70%.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788419249269449 https://mahifx.slack.com/archives/C09J1DP2QQH/p1790556017984519 https://mahifx.slack.com/archives/C09J1DP2QQH/p1791253970054589
 
 ### mint-inventory-book — Gold inventory hedging and the MINT LP
-status: watching · since: 2026-08-25 · last: 2026-09-21
-State: Go wants Compass to automate hedging excess gold risk above internal limits (inventory book and hedger, possibly an SI-book, plus an unwind hedger); Nathan confirmed a B-book gold hedger to a specific LP is possible. Go onboarded LP MINT CFD (FIX sessions set 2026-09-16). On 09-21 Nathan found MINT's XAUUSD feed looks like a copy of Go's own client price (0.969 mid correlation vs 0.33-0.57 for real LPs, +$0.04 spread, ~6ms lag) and Kieran had described a special relationship where Go can broker at a price they decide; concerns are MINT benefiting from Go's skew and Mahi hedgers picking MINT off. Logged on the wiki; not seen raised with Go in channel. Downgraded to watching: no activity since 09-21.
-Next: Mahi to decide whether to raise the MINT feed finding with Go; inventory book build status unknown.
+status: closed · since: 2026-08-25 · last: 2026-09-21 · closed: 2026-11-26
+State: Go wants Compass to automate hedging excess gold risk above internal limits (inventory book and hedger, possibly an SI-book, plus an unwind hedger); Nathan confirmed a B-book gold hedger to a specific LP is possible. Go onboarded LP MINT CFD (FIX sessions set 2026-09-16). On 09-21 Nathan found MINT's XAUUSD feed looks like a copy of Go's own client price (0.969 mid correlation vs 0.33-0.57 for real LPs, +$0.04 spread, ~6ms lag) and Kieran had described a special relationship where Go can broker at a price they decide; concerns are MINT benefiting from Go's skew and Mahi hedgers picking MINT off. Logged on the wiki; not seen raised with Go in channel. No activity since 09-21; closed as stale (re-raise if MINT feed concern or inventory book resurfaces).
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1787628603910739 https://mahifx.slack.com/archives/CNF3WPNSK/p1789949763533859
 
 ### open-latency-cancels — Weekend release and post-restart open latency cancels
