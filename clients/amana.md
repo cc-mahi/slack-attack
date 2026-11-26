@@ -19,7 +19,7 @@ contacts:
   - {name: "Andreas Kleanthous / Mohamad Malkani / Rafik Mansour", role: "ops: futures expiry/start notices", confidence: low}
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config, LP NOP", confidence: low}
   - {name: "Ali Wehbe / Ahmad Hashem", role: "ops: energy futures specs; Mahi_B rejection reports", confidence: low}
-last_catchup: 2026-11-25T08:12:30Z
+last_catchup: 2026-11-26T08:12:52Z
 status: active
 ---
 ## Now
@@ -30,18 +30,17 @@ Open: NFP LR-off review (no owner), TRADEVOLUME reset bug, NDXUSD price flip, DA
 
 ## Streams
 
+### hedger-offhours-rejects — Hedger sending orders outside session hours
+status: open · since: 2026-11-13 · last: 2026-11-26
+State: 11-26 PH NOC saw D30 "out of session" rejects: Mahi hedge orders on G30 hit CMC's 02:00-02:15 UTC break; no CMC session times are configured and CMC published a stale price until a filter dropped it after 10 minutes. A per-instrument session override is possible (offered for G30EUR, Nikos undecided); per-market override raised with Dev. 11-23 CL1USD orders rejected during the energies roll: a valid IG_CENTROID quote was not cancelled; Daria to make the hedger hold back during the roll. 11-13 USDCHF rejects; William filed CHG-2611-Y8P9 (11-16) to stop G8 weekend orders.
+Next: Nikos to decide on the G30EUR override; Dev on per-market sessions; William to apply the weekend change; Daria to implement the roll hold-back.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794607758054459 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795668853553909
+
 ### delay-rule-client — Removing a lone client from the 500 ms delay rule
 status: open · since: 2026-11-24 · last: 2026-11-24
 State: 11-24 Masri could not remove a client from the 500 ms delay because he is the only client on that rule; Nikos then put the client on another profile (08:06 UTC). No Mahi reply yet.
 Next: Mahi to advise how to empty/remove the rule.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1795506928637669 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795507614464439
-
-
-### hedger-offhours-rejects — Hedger sending orders outside session hours
-status: open · since: 2026-11-13 · last: 2026-11-23
-State: 11-23 22:06 UTC PH NOC saw CL1USD (WTI) orders rejected out of session during the energies roll (reopens 23:00 UTC); Daria: a still-valid IG_CENTROID quote was not cancelled and the hedger kept hitting it; she will make the hedger hold back orders during energies roll, orders stopped by 22:16. 11-13 PH NOC saw USDCHF orders rejected "symbol out of session": hedger orders to CMC_CENTROID, William filed CHG-2611-Y8P9 (11-16) so the B FX hedger stops sending G8 orders over the weekend.
-Next: William to apply the change and report back to Nikos; Daria to implement the energies-roll hold-back.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794607758054459 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795471778559689
 
 
 ### weekend-reboot-outage — Gateways not relaunching after the weekly reboot (CFD/crypto down 11-21)
@@ -67,11 +66,11 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1791457134754879 https://ma
 
 
 ### futures-expiry-recs — Futures rolls, expiries and position adjustments
-status: open · since: 2026-08-17 · last: 2026-11-20
-State: 11-20 Andreas gave notice of CM6Z settlement; Masri confirmed it is the December corn contract, not live on Mahi, so no action. Amana posts expiry and start notices and Mahi zeroes positions at EOD, re-subscribing new contracts on Mahi_CMC_FIX. 11-17 Andreas announced CrudeOilZ6 settlement (Daria: no open position) and Mohamad Malkani said CrudeOilG7 and SI7H start 11-18; Daria switched the subscriptions and scheduled EOD restarts to pick them up.
+status: open · since: 2026-08-17 · last: 2026-11-25
+State: 11-25 Rafik gave notice of GC6Z and SI6Z (Dec) settlement; Nathan flattened both in Compass by 21:08 UTC. 11-20 Andreas gave notice of CM6Z settlement; Masri confirmed it is the December corn contract, not live on Mahi, so no action. Amana posts expiry and start notices and Mahi zeroes positions at EOD, re-subscribing new contracts on Mahi_CMC_FIX. 11-17 Andreas announced CrudeOilZ6 settlement (Daria: no open position) and Mohamad Malkani said CrudeOilG7 and SI7H start 11-18; Daria switched the subscriptions and scheduled EOD restarts to pick them up.
 11-19 Masri reported hedging on the wrong symbol after SI7H was enabled: XAGFUT-H was not remapped from the P to the W futures hedger profile at EOD. Rory remapped it, restarted the hedgers and netted the mismatch at CMC (10,250oz) by 16:09 UTC.
 Next: Mahi to check futures contract rolls are fully remapped at EOD; Daria to confirm CrudeOilG7 is live.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795194429084469
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795637173171259
 
 
 ### si-books — SI energies and SI indices books
@@ -82,10 +81,10 @@ Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1786981181951769 https://ma
 
 
 ### client-tag-passthru — Client login tag for CMC dynamic logins
-status: open · since: 2026-09-28 · last: 2026-11-18
-State: CMC needs dynamic FIX API client logins, so Amana wants to send them on tag 109 and have Mahi consume and echo them. Execution reports do not return 109 today (Rory 09-28); 11-02 Karen asked about a "tag 90017 plan", none visible. 11-03 Amana tested tag 58 (sub-login), live for one client; Rory: stored per order in Compass comments, not passed to CMC. 11-18 Karen enabled tag 58 sublogin for Mahi analytics and asked whether the new return tags are available; Rory to test 109=222.
+status: open · since: 2026-09-28 · last: 2026-11-25
+State: 11-25 Nikos could not find markouts per tag in Yield Profiles; Isaac: the tag 58 value is stored in Pulse as Comment on yieldprofiles, but only on B_CLIENTS_LDN (the pre-risk-split order), not carried to B_FX_CLIENTS_LDN, though present in SWAPFREE_CLIENTS_LDN. CMC needs dynamic FIX API client logins, so Amana wants to send them on tag 109 and have Mahi consume and echo them. Execution reports do not return 109 today (Rory 09-28); 11-02 Karen asked about a "tag 90017 plan", none visible. 11-03 Amana tested tag 58 (sub-login), live for one client; Rory: stored per order in Compass comments, not passed to CMC. 11-18 Karen enabled tag 58 sublogin for Mahi analytics and asked whether the new return tags are available; Rory to test 109=222.
 Next: Mahi to say whether tag 109 (or 90017) can be consumed and returned; Amana to extend tag 58 to more clients/instruments.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790602136754039 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795007759259589
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790602136754039 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795602679174819
 
 
 ### gold-hedger-params — Gold B-book hedge/unhedge parameters
@@ -137,10 +136,10 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794385645413669 https://ma
 
 
 ### gateway-split — Distribution gateway split (dist3 / HP dist4)
-status: open · since: 2026-10-23 · last: 2026-11-11
-State: Plan (CHG-2610-TRFK): FX and Metals stay on dist1/HP dist2; Crypto, Indices, Energies and futures move to dist3 and HP dist4. CFDs and cryptos switched 11-05, oils and gas 11-06, all indices and crypto 11-11 (only metals and FX still on the originals). Karen asked about removing a Mahi-side pricing throttle and disabling CFD/crypto on old sessions (no answer seen). Hadeel suspects ndx-price-flip relates to the index move.
-Next: Rory to answer Karen; Isaac to remove migrated symbols from dist1/HP dist2 at an EOD restart.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792765304547529 https://mahifx.slack.com/archives/C08SYSMP0EB/p1794416099251529
+status: open · since: 2026-10-23 · last: 2026-11-25
+State: 11-25 Isaac called the instrument split complete and began dropping the gateway throttle from 1/10ms to 1/8ms, aiming for 1/5ms or 2/10ms. Plan (CHG-2610-TRFK): FX and Metals stay on dist1/HP dist2; Crypto, Indices, Energies and futures move to dist3 and HP dist4. CFDs and cryptos switched 11-05, oils and gas 11-06, all indices and crypto 11-11 (only metals and FX still on the originals). Karen asked about removing a Mahi-side pricing throttle and disabling CFD/crypto on old sessions (no answer seen). Hadeel suspects ndx-price-flip relates to the index move.
+Next: Rory to answer Karen; Isaac to remove migrated symbols from dist1/HP dist2 at an EOD restart and keep stepping the throttle down.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792765304547529 https://mahifx.slack.com/archives/C08T42TMKU3/p1795598397306789
 
 
 ### dax-spread-vs-cmc — DAXFUT-Z spread wider than CMC
@@ -243,7 +242,7 @@ Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1786632001568829 https://ma
 
 ### gcex-indices-lp — GCEX as second LP for indices
 status: closed · since: 2026-10-16 · last: 2026-10-22 · closed: 2026-11-23
-State: No activity since 10-22; superseded. GCEX as backup indices LP passed 10-20 tests, but the 10-21 risk committee decision to stop trading with GCEX leaves second-LP and cash-indices aggregation unclear.
+State: Superseded by the 10-21 decision to stop trading with GCEX; no activity since 10-22.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792148151058599 https://mahifx.slack.com/archives/C08T42TMKU3/p1792664415225229
 
 
@@ -275,7 +274,7 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1787084603512219 https://ma
 
 ### gold-24-7 — 24/7 XAU pricing
 status: closed · since: 2026-08-24 · last: 2026-09-21 · closed: 2026-11-23
-State: No activity since 09-21. Amana wants 24h gold. Isaac was happy to pipe weekend pricing to clients on 09-21 and advised longer last looks at XAU opens; Nikos chased for another call.
+State: No activity since 09-21; Isaac was happy to pipe weekend gold pricing to clients.
 Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1787559144038639 https://mahifx.slack.com/archives/C08T42TMKU3/p1789983776166919
 
 
