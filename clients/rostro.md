@@ -20,7 +20,7 @@ contacts:
   - {name: "Manuel de Cara", role: "Rostro: Pulse/Athena data access", confidence: low}
   - {name: "Sam Steele", role: "Group Chief Strategy Officer at Rostro; commercial counterpart"}
   - {name: "Michael Ayres", role: "senior Rostro contact; named replacement after Lochlan left", confidence: low}
-last_catchup: 2026-11-25T08:14:18Z
+last_catchup: 2026-11-26T08:15:52Z
 status: active
 ---
 
