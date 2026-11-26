@@ -17,17 +17,45 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-25T08:15:39Z
+last_catchup: 2026-11-26T08:17:17Z
 status: active
 ---
 
 ## Now
 Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), with new contact addresses.
 2026-11-20 NYC /tmp incident (client DB report, 39 fills unreported) reconciled by Mahi position adjustments; client queries to move to a replica DB. Client unexpectedly has an LP labelled "Valutrades" on its FEED1 quote session; awaiting their decision.
-Gold Feb27 roll on Surya rejected overnight 2026-11-24 for a missing security definition; fixed manually, root cause with Dev.
+Gold Feb27 roll on Surya rejected overnight 2026-11-24 for a missing security definition; fixed manually, root cause with Dev. Algo cutoff change (CHG-2611-WYCS) went live 2026-11-25, verification due 2026-11-27; Mahi UAT is moving to new servers.
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
+
+### stonex-child-execs — Child-order exec reports on StoneX TT connection trigger alerts
+status: open · since: 2026-11-25 · last: 2026-11-26
+State: Maten Rehimi told the client on 2026-11-25 that execution reports for child orders of TT algo orders on the StoneX/Surya TT connection (comp IDs PTSAMORD1 // TT_PTSAMORD1) trigger Mahi alerting, the same issue as on the SURYA_RETAIL TT connection, and asked them to check whether the first two options are enabled and disable them. Graeme Watkins asked Brandon to request this from StoneX and record it in the client knowledge base for new Mahi TT connections. On 2026-11-26 Brandon asked Mahi to screenshot or point to where the setting is in TT so they can ask StoneX to change it.
+Next: Mahi (Maten Rehimi) shows Brandon where the setting is in TT; client asks StoneX to disable it.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795621196455869 https://mahifx.slack.com/archives/C09HN93T0G2/p1795668338524089
+
+
+### uat-migration — Mahi migrating client UAT environment (us-east-1) to new servers
+status: open · since: 2026-11-25 · last: 2026-11-26
+State: On 2026-11-25 Maten Rehimi asked the client to have OneZero UAT and Quantitative Brokers whitelist Mahi's new UAT IP (18.232.240.154), to confirm OneZero UAT can reach it on ports 9010/9011/9013/9014, and to say which IPs Mahi should whitelist for Compass dashboard access. On 2026-11-26 Brandon said OneZero whitelisting is done for port 23483, port connectivity will be confirmed once OneZero finishes, and asked Mahi to whitelist 108.136.145.119 for dashboard access first. QB whitelisting is not mentioned yet.
+Next: Mahi whitelists 108.136.145.119 for the new UAT Compass; Brandon confirms OneZero connectivity and QB whitelisting.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795617474509929 https://mahifx.slack.com/archives/C09HN93T0G2/p1795667078588009
+
+
+### ab-book-queries — A/B book classification requests from overnight team
+status: open · since: 2026-07-08 · last: 2026-11-26
+State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-25: 77004329 answered B book, one to keep an eye on (Cameron Hughes). On 2026-11-26 Brandon asked whether these recommendations sit in a database he can pull programmatically; Shyam Hari said the calls are not stored, each is an analyst's read of the account's markouts and PnL at the time, and Brandon accepted (supersedes the earlier profile-recs-creds programmatic-access ask for these calls). Before that 2026-11-20: 68533315 asked by the overnight desk, Daria Horton replied A with a chart within 4 min. Before that 2026-11-15/16: 88522460 answered A book by Nathan Burch (flow goes offside quickly on most instruments, NDFUSD less so), and 65570981 answered A book by Shyam Hari within about 5 min; Andri asked how to read the chart and where to see it, and Shyam explained it is a yield profile (house-perspective markouts by horizon) - no answer yet on where the client can view it. Before that 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
+Next: Mahi tells Andri where the yield profile can be viewed (Echo/Compass).
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1795667133225439
+
+
+
+### algo-close-cutoff — Algo orders to TT expire before NY close; cutoff change deployed
+status: open · since: 2026-11-23 · last: 2026-11-25
+State: Garry Bersnov reported on 2026-11-23 that a ScalePOV order (sent 16:56:47 NY on 2026-11-20) expired after filling 2 of 13, and asked for the cutoff to be 1 minute before close. Rory King found Mahi cuts algo duration so orders finish 2 minutes before the 17:00 NY close, and TT takes whole minutes. On 2026-11-25 Garry asked again if the cutoff had been updated, after a 3-lot ScalePOV order on GCG7-FEB27 at 21:58:38Z on 2026-11-24 was rejected ("RCM-X: end time must be before market close"); no reply to him in the channel yet. Liam Cordelle raised and self-approved change CHG-2611-WYCS (TT order gateways get new contracts; algo cutoff 16:59), live at the 22:00-22:05Z restart on 2026-11-25 and implemented; 5 of 5 verification checks pending, Liam to verify by 2026-11-27.
+Next: Liam verifies CHG-2611-WYCS by 2026-11-27 and tells Garry the cutoff is now 1 minute.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795423437925179 https://mahifx.slack.com/archives/C09HN93T0G2/p1795607210353599 https://mahifx.slack.com/archives/CP7A1F8BT/p1795622404598549
 
 ### gold-feb-secdef — GCG7-FEB27 rejects on Surya TT; security definitions stale
 status: open · since: 2026-11-24 · last: 2026-11-25
@@ -43,13 +71,6 @@ Next: Bonnie gets Graeme's appetite to pay; quant team scopes via the ticket and
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795426648207919 https://mahifx.slack.com/archives/CP7A1F8BT/p1795446991718259
 
 
-### algo-close-cutoff — Algo orders to TT expire 2 minutes before NY close
-status: open · since: 2026-11-23 · last: 2026-11-23
-State: Garry Bersnov reported that a ScalePOV order (13 lots GCZ6, sent 16:56:47 NY on 2026-11-20) expired at 16:57:47 after filling 2 of 13, and asked for the cutoff to be 1 minute before close rather than about 2 minutes. Rory King found Mahi cuts algo order duration sent to TT so they finish 2 minutes before the 17:00 NY close; TT takes duration in whole minutes, so the order got 1 minute. Mahi is looking at making the cutoff configurable to 1 minute.
-Next: Mahi (Rory King) confirms whether and when the cutoff can be set to 1 minute.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795423437925179 https://mahifx.slack.com/archives/C09HN93T0G2/p1795440087808359
-
-
 ### feed1-valutrades-lp — Unknown "Valutrades" LP on client FEED1 quote session
 status: open · since: 2026-11-22 · last: 2026-11-23
 State: After the 2026-11-22 market open Shyam Hari noticed an LP labelled "Valutrades" on the client's FEED1 quote session (ValuCY_Live_Q) that Mahi has not set up, so its prices are unused; he asked what it is and whether the client wants it used. Garry Bersnov replied 2026-11-23 that the client is still discussing internally.
@@ -62,13 +83,6 @@ status: open · since: 2026-11-20 · last: 2026-11-20
 State: From ~07:21Z on 2026-11-20 a markout report run by the client's read-only DB login (valu.user, one of the IPs whitelisted under profile-recs-creds) filled the NYC trading master's /tmp with MariaDB temp tables, which also holds the QuickFIX stores. 37 XAU/USD BUY orders (qty 45) on the SURYA_EX_CLIENTS session were filled in Compass between 07:28 and 07:36Z but never reported to the client; its OneZero hub cancelled each after 5s, so the client shows them cancelled while Mahi shows them filled. Hedge side: 9.0 hedged at the LP via the SURYA_RM split, 36.0 sits in VALUTRADES_HOUSE. HOUSE1PositionHistory is missing rows for 43 trades (07:28-07:36Z); EnrichedTradeOutputSummary is complete. Query killed ~07:35Z and trading normal since; Neil Whitehead said it was probably his query on EnrichedTradeOutputSummary, larger than he expected. Leonardo Borsi's root cause: a 3-month all-instrument markout with a window function wrote 4.6G of temp tables in 6 min; the final count was 39 unreported fills (37 ICDX_MICRO buys, 2 ICDX_MINI sells) and 502 missing HOUSE1PositionHistory rows. Resolved 2026-11-20: William Denny booked position adjustments reversing the unreported fills and closed the +5oz open risk at the LP; client (Andri) agreed to the hedge reversal, Neil said the query will not be run again, and Liam Cordelle said client queries will move to a replica DB (details to follow) and Neil should use yieldprofiles_latest in Pulse.
 Next: Mahi (Liam) delivers the replica DB details; Leonardo checks other parties' persistence gaps; longer term move FIX stores / MariaDB tmpdir off the 4.8G /tmp and consider a max_statement_time limit for valu.user.
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795160898098069 https://mahifx.slack.com/archives/C09HN93T0G2/p1795166591925259
-
-
-### ab-book-queries — A/B book classification requests from overnight team
-status: open · since: 2026-07-08 · last: 2026-11-20
-State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-20: 68533315 asked by the overnight desk, Daria Horton replied A with a chart within 4 min. Before that 2026-11-15/16: 88522460 answered A book by Nathan Burch (flow goes offside quickly on most instruments, NDFUSD less so), and 65570981 answered A book by Shyam Hari within about 5 min; Andri asked how to read the chart and where to see it, and Shyam explained it is a yield profile (house-perspective markouts by horizon) - no answer yet on where the client can view it. Before that 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
-Next: Mahi tells Andri where the yield profile can be viewed (Echo/Compass).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1795156261188289
 
 
 ### icdx-pricing-failover — ICDX pricing rules moved off VT connections
