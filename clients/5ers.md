@@ -18,13 +18,19 @@ contacts:
   - {name: "Constantinos P", role: "5ers trading ops — pricing/execution checks", confidence: low}
   - {name: "Kirill Oleskevic", role: "YourBourse support — shared channel tickets", confidence: low}
   - {name: "Valter Timanov", role: "YourBourse — MT5 filtration / bridge diagnostics", confidence: low}
-last_catchup: 2026-11-25T08:12:30Z
+last_catchup: 2026-11-26T08:12:49Z
 status: active
 ---
 ## Now
 CHURN RISK: Yaniv said on 2026-10-20 he wants to give 3 months' notice (Beeks incidents, unnamed cheaper rival). On 2026-11-10 Kate's call with him: the rival presented its test results, 5ers plan to go live with it on a group soon, and his priority is now seamless failover (the rival claims no pricing break if a feed drops); 11-17 YourBourse confirmed it can do automatic pricing/execution failover and Kate plans an AWS backup server. Mahi's October funded-gold skew PnL was $461k vs the rival's $240k; Mahi offered a side-by-side on an MT5 group. CPI hero moment posted 11-10 ($44/M vs $16.63/M average); adaptive sized skew is live. Beeks still owes RCAs; CHG-2611-SR0F backup-link rebuild (11-07) result not seen. 57 single stocks loaded but paused (11-19: Yaniv will use B2Broker pricing, volumes tiny). LMAX market-data feed down since 10-31 (ACCESS_DENIED).
 
 ## Streams
+
+### adaptive-skew-rollout — Adaptive sized skew rolled out
+status: open · since: 2026-10-27 · last: 2026-11-25
+State: Kate rolled out adaptive sized skew in 5ers' environment on 2026-10-27 (skew scales with market speed). First big test was NFP on 2026-11-06: gold skew $16.80/M vs $7.03/M Aug-Oct average, reported to the client. Kate's 2026-11-25 four-week read (funded books): skew $4.26/M before vs $5.31/M since, up every week and best this week; changed instruments +$1.19/M (gold +$1.37, EURUSD +$1.78, USDJPY +$1.62; GBPUSD and NDXUSD flat), unchanged flat; XBTUSD $7.26/M to $24.68/M on small volume.
+Next: Kate to keep feeding the impact into value-add.
+Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793124677300249 https://mahifx.slack.com/archives/C079M09MGGP/p1795605633334949
 
 ### failover-ask-1110 — Yaniv's seamless-failover priority
 status: open · since: 2026-11-10 · last: 2026-11-24
@@ -66,12 +72,6 @@ status: open · since: 2026-11-06 · last: 2026-11-06
 State: Will's automated NFP sweep first read 5ers LR as ~$21k and skew as zero, then corrected for a 4x volume overcount (13:30-13:33 UTC: LR $5.2k on $126M, $41/M; gold $49/M vs ~$4.8/M the hour before; fleet rank 4th of 13 behind Infinox, IC and Alpha Capital). Kate found the skew-zero reading was an artefact: the skew counter updates only every 5-8 minutes, so the window fell between updates; skew is on (+$2,040 at 13:37:58), and Will fixed the skill. Kate challenged the LR dollar figure and published to 5ers (16:20 GMT) the funded-book gold result over the half hour around the number: ~$6k on $157M, $38/M vs a $16.63/M Aug-Oct average (LR $21.50/M, skew $16.80/M vs $7.03/M), with Compass Yield Profiles and Price Forensics links, offering a call. Kate also noted drop copies may not be coming through.
 Next: Kate to follow up if 5ers ask for the call; check the drop-copy gap; Will's proposed skew-on replay sim is moot given skew is live (no owner named).
 Refs: https://mahifx.slack.com/archives/C079M09MGGP/p1793978272170219 https://mahifx.slack.com/archives/C079M09MGGP/p1793980160428339 https://mahifx.slack.com/archives/C07AQJS4E80/p1793982051354099
-
-### adaptive-skew-rollout — Adaptive sized skew rolled out
-status: open · since: 2026-10-27 · last: 2026-11-06
-State: Kate rolled out adaptive sized skew in 5ers' environment on 2026-10-27 (skew scales with market speed). First big test was NFP on 2026-11-06: gold skew $16.80/M vs $7.03/M Aug-Oct average, reported to the client.
-Next: Kate to keep feeding the impact into value-add.
-Refs: https://mahifx.slack.com/archives/C07AQJS4E80/p1793124677300249 https://mahifx.slack.com/archives/C07AQJS4E80/p1793982051354099
 
 ### nic-degradation-0925 — 2026-09-25 stale pricing + cTrader drop, Beeks NIC
 status: open · since: 2026-09-25 · last: 2026-11-04
