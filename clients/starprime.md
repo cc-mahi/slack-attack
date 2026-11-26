@@ -17,7 +17,7 @@ contacts:
   - {name: "Umar Bin Aziz", role: "client ops; execution/pricing incident reporting, needs execution-rule-editor write access", confidence: low}
   - {name: "Clarice Frost", role: "overnight ops (startrader.com)", confidence: low}
   - {name: "Allan Maira", role: "overnight ops (startrader.com)", confidence: low}
-last_catchup: 2026-11-25T08:14:18Z
+last_catchup: 2026-11-26T08:15:51Z
 status: active
 ---
 
@@ -29,10 +29,10 @@ Samin wants a redundant Compass instance (pricing owed) and is pitching Compass 
 ## Streams
 
 ### si-hedging — SI model, hedger NOP restarts and LP position reconciliation
-status: open · since: 2026-08-17 · last: 2026-11-25
-State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and ARB hedgers by hand (latest: FINIOR NOP 20 Nov, restarted by Isaac Dann; FINALTO and XAUUSD ISPRIME NOP limits 12 and 18 Nov; the XAUUSD limit is hedging.rules.execution.maximumMarketPosition, which is not dynamic, whereas risk.nop limits are dynamic but unused here). The arb hedger honours NOP limits but not per-instrument LP limits (Kama's position grew on 4 Sep, so Kama was taken out of arb); since 29 Oct Isaac's fix makes it enforce maximumMarketPosition, and on 30 Oct he loosened the XAU arb gates as an A/B test (rollback if edge below -3 $/M). A 27 Oct hybridHedgerSI1 crash came from a backstop buy at a venue at its position cap. XAG went live on SI 19 Oct (EURUSD next); on 10 Nov ISPRIME was removed from the XAGUSD SI/ARB markets and Nathan Burch removed two ISPRIME_VIP LP-reducing rules and emptied the EOW/EOD Cannon whitelists to bring hybridHedgerSI back up. LP positions are realigned through paired maker/distribution adjustments after StarPrime sends snapshots (Alison Koay's 4 Nov requests: XAUUSD ARGAMON_INSTI_PXM +673, XAGUSD EDGEWATER +9950; 12 Nov ISPRIME_VIP +602, done). On 20 Nov William Denny did EDGEWATER +2,000 / FINIOR_CAPITAL -2,000 (no distribution adjustment as they net to zero). On 23 Nov 07:18 UTC Alison asked for XAUUSD ISPRIME_VIP +712 (no reply yet), and Daria Horton asked internally at 01:12 UTC whether arbHedgerSI1 still being off is expected; Isaac Dann answered at 08:50 that it is not and he would switch it back on. At 09:34 Samin updated FINIOR and FINALTO NOP limits and asked for an SI and ARB hedger restart; Isaac agreed. On the 23 Nov call Samin said he wants EURUSD turned on for SI, which Isaac recorded as ready to go. On 25 Nov Shyam Hari restarted the arb and hybrid SI hedgers after Samin's FINALTO NOP update (05:51 UTC) and agreed Alison's new XAUUSD ISPRIME_VIP +835 adjustment (06:10 UTC, not yet confirmed done).
-Next: Mahi to confirm Alison's 23 Nov ISPRIME_VIP +712 and 25 Nov +835 adjustments (maker and distribution) are done; Isaac Dann to confirm arbHedgerSI1 is back on and the FINIOR/FINALTO hedger restart done; enable EURUSD on SI; Daria Horton to confirm Alison's 4 Nov position adjustments were completed; Isaac Dann to keep monitoring the arb A/B test and roll back if edge drops below -3 $/M; Samin to decide whether to switch the arb hedger back on now it respects position limits; Will Carter owes Samin an answer on SI revenue-share mechanics; dev fix so the backstop skips a venue at its position cap; arb LP position reduction still wanted.
-Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1794463691867519 https://mahifx.slack.com/archives/C096422RPKK/p1794980132234459 https://mahifx.slack.com/archives/C096422RPKK/p1795586857813159
+status: open · since: 2026-08-17 · last: 2026-11-26
+State: Samin updates NOP limits and execution markets in Compass most days and asks Mahi to restart the SI and ARB hedgers by hand (the XAUUSD ISPRIME limit is hedging.rules.execution.maximumMarketPosition, which is not dynamic, whereas risk.nop limits are dynamic but unused here). The arb hedger honours NOP limits but not per-instrument LP limits (Kama's position grew on 4 Sep, so Kama was taken out of arb); since 29 Oct Isaac's fix makes it enforce maximumMarketPosition, and on 30 Oct he loosened the XAU arb gates as an A/B test (rollback if edge below -3 $/M). A 27 Oct hybridHedgerSI1 crash came from a backstop buy at a venue at its position cap. XAG went live on SI 19 Oct (EURUSD next); on 10 Nov ISPRIME was removed from the XAGUSD SI/ARB markets and Nathan Burch removed two ISPRIME_VIP LP-reducing rules and emptied the EOW/EOD Cannon whitelists to bring hybridHedgerSI back up. LP positions are realigned through paired maker/distribution adjustments after StarPrime sends snapshots (Alison Koay's 4, 12 and 20 Nov requests done; 4 Nov completion not confirmed in-channel). On 23 Nov 07:18 UTC Alison asked for XAUUSD ISPRIME_VIP +712 (no reply yet), and Daria Horton asked internally at 01:12 UTC whether arbHedgerSI1 still being off is expected; Isaac Dann answered at 08:50 that it is not and he would switch it back on. At 09:34 Samin updated FINIOR and FINALTO NOP limits and asked for an SI and ARB hedger restart; Isaac agreed. On the 23 Nov call Samin said he wants EURUSD turned on for SI, which Isaac recorded as ready to go. On 25 Nov Shyam Hari restarted the arb and hybrid SI hedgers after Samin's FINALTO NOP update (05:51 UTC) and agreed Alison's new XAUUSD ISPRIME_VIP +835 adjustment (06:10 UTC, not yet confirmed done). On 26 Nov at 05:16 UTC Alison asked for XAUUSD EDGEWATER +1,500, KAMA_RETAIL +4,492 and FINALTO -6,000 on maker and distribution; Shyam Hari actioned it by 05:25.
+Next: Mahi to confirm Alison's 23 Nov ISPRIME_VIP +712 and 25 Nov +835 adjustments (maker and distribution) are done; Isaac Dann to confirm arbHedgerSI1 is back on and the FINIOR/FINALTO hedger restart done; enable EURUSD on SI; Isaac Dann to keep monitoring the arb A/B test and roll back if edge drops below -3 $/M; Samin to decide whether to switch the arb hedger back on now it respects position limits; Will Carter owes Samin an answer on SI revenue-share mechanics; dev fix so the backstop skips a venue at its position cap; arb LP position reduction still wanted.
+Refs: https://mahifx.slack.com/archives/C096422RPKK/p1786973579898989 https://mahifx.slack.com/archives/C096422RPKK/p1794463691867519 https://mahifx.slack.com/archives/C096422RPKK/p1794980132234459 https://mahifx.slack.com/archives/C096422RPKK/p1795670173478929
 
 ### access-data-requests — Access provisioning and ad-hoc data/report requests
 status: open · since: 2026-08-18 · last: 2026-11-25
@@ -41,10 +41,10 @@ Next: Shyam Hari/dev to restore Samin's access to the notionalCap.perchannel pag
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787033520203829 https://mahifx.slack.com/archives/C096422RPKK/p1793083960149769 https://mahifx.slack.com/archives/C096422RPKK/p1793972465733609 https://mahifx.slack.com/archives/C096422RPKK/p1795579240680559
 
 ### toxic-feed-channels — New toxic-flow channels and feed requested by Samin
-status: open · since: 2026-11-23 · last: 2026-11-23
-State: On 23 Nov Samin asked for a feed for toxic (TOX) business, brokering or hedging relative to signals and risk, with fast-moving toxic risk sent to a different set of LPs. Isaac Dann's call notes list the setup: A_TOX_TIER1_CLIENTS and A_TOX_TIER2_CLIENTS channels with new LR settings, a new liquidity pool, new pricing models, new API connections and distribution, and a new hedger. Whether the boxes have headroom is unchecked.
-Next: Isaac Dann to check box headroom before agreeing to the build.
-Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1795423855319249 https://mahifx.slack.com/archives/C095MJHC68J/p1795431042887749
+status: open · since: 2026-11-23 · last: 2026-11-26
+State: On 23 Nov Samin asked for a feed for toxic (TOX) business, brokering or hedging relative to signals and risk, with fast-moving toxic risk sent to a different set of LPs. Isaac Dann's call notes list the setup: A_TOX_TIER1_CLIENTS and A_TOX_TIER2_CLIENTS channels with new LR settings, a new liquidity pool, new pricing models, new API connections and distribution, and a new hedger. By 25 Nov the build had moved ahead: Isaac posted Tier1 and Tier2 FIX session details (market data and orders) on a new gateway address separate from the existing sessions, Shahid confirmed PrimeXM connectivity to both ports from the expected source IP, and on 26 Nov Samin named the StarPrime providers MFX-TOX-1 and MFX-TOX-2. Session credentials were posted in the shared channel in plain text (not recorded here).
+Next: StarPrime to configure MFX-TOX-1/2 and test logon; Isaac Dann to bring the sessions up and confirm; consider rotating the credentials posted in-channel.
+Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1795423855319249 https://mahifx.slack.com/archives/C096422RPKK/p1795604604873919 https://mahifx.slack.com/archives/C096422RPKK/p1795670009401599
 
 ### weekend-gold-247 — 24/7 gold launch and weekend support scope
 status: open · since: 2026-08-21 · last: 2026-11-23
@@ -101,8 +101,8 @@ Next: Samin to say whether the client accepts it or supplies symbol and session 
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1793121509152879 https://mahifx.slack.com/archives/C096422RPKK/p1793169436410739
 
 ### xau-pricing-config — XAUUSD reference pricing and config-change process
-status: open · since: 2026-08-19 · last: 2026-10-26
-State: A pricing config change on 19 Aug made pricing spike (merged liquidity tiers) and was reverted; Samin asked that future changes go to BETA first, then PROD, and agreed. A $10 XAUUSD close spread on 20 Aug led to a timezone-scoped sanity-check config; Roll backtest asked, no result visible. On 16 Oct Jay raised an urgent XAUUSD spread widening while Samin was off desk; Liam Cordelle and Cameron Hughes checked, pricing was fine again within about 15 minutes, and Jay asked for a headline on what happened. Cameron promised details; no cause is visible in the channels. On 26 Oct Samin saw CLIENT_PRICE_INST_LDN XAUUSD outputting spreads tighter than base (0.03); Kate Stagg fixed it within the hour: a config setting on the Insti gold model picked up the wrong base spreads after the weekend restart, which Samin tied to a setting he and Isaac Dann had made.
+status: watching · since: 2026-08-19 · last: 2026-10-26
+State: No activity since 26 Oct; downgraded to watching, cause of the 16 Oct widening and roll backtest still unconfirmed. A pricing config change on 19 Aug made pricing spike (merged liquidity tiers) and was reverted; Samin asked that future changes go to BETA first, then PROD, and agreed. A $10 XAUUSD close spread on 20 Aug led to a timezone-scoped sanity-check config; Roll backtest asked, no result visible. On 16 Oct Jay raised an urgent XAUUSD spread widening while Samin was off desk; Liam Cordelle and Cameron Hughes checked, pricing was fine again within about 15 minutes, and Jay asked for a headline on what happened. Cameron promised details; no cause is visible in the channels. On 26 Oct Samin saw CLIENT_PRICE_INST_LDN XAUUSD outputting spreads tighter than base (0.03); Kate Stagg fixed it within the hour: a config setting on the Insti gold model picked up the wrong base spreads after the weekend restart, which Samin tied to a setting he and Isaac Dann had made.
 Next: Mahi (Cameron Hughes) to send Jay/Samin the cause of the 16 Oct widening; Daria Horton to report the roll backtest.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787126774501579 https://mahifx.slack.com/archives/C096422RPKK/p1792144153419059 https://mahifx.slack.com/archives/C096422RPKK/p1792145021644979 https://mahifx.slack.com/archives/C096422RPKK/p1793008562378559
 
@@ -138,22 +138,22 @@ Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1789882511519159 https://ma
 
 ### b-clients-tier3 — New B_CLIENTS_TIER3 distribution channel
 status: closed · since: 2026-11-17 · last: 2026-11-19 · closed: 2026-11-19
-State: B_CLIENTS_TIER3 (copy of TIER2, new FIX credentials) set up by Shyam Hari after Samin's 17 Nov ask; Shahid's 19 Nov 2oz XAUUSD test trade was received and filled. Connection verified.
+State: set up by Shyam Hari 17 Nov; Shahid's 19 Nov test trade filled.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1794889229907999 https://mahifx.slack.com/archives/C096422RPKK/p1795073366476739
 
 ### compass-26-4-release — Compass 26.4 weekend release and hedger start-up check
 status: closed · since: 2026-10-16 · last: 2026-10-18 · closed: 2026-11-18
-State: 26.4 went live at the 17-18 Oct weekend reboots; the hybridHedgerSI1 pre-check failure (LP-reducing rule with no XAGUSD market) was fixed by splitting Metals profiles. Its tag-list validation broke StarPrime's blacklists, see tag-blacklist-ux. No activity since 18 Oct; assumed resolved.
+State: 26.4 live 17-18 Oct; hedger pre-check failure fixed by splitting Metals profiles; its tag-list validation broke blacklists (see tag-blacklist-ux). Assumed resolved.
 Refs: https://mahifx.slack.com/archives/C095MJHC68J/p1792157236841079 https://mahifx.slack.com/archives/C095MJHC68J/p1792353921178369
 
 ### lp-connections-ttl — LP connectors, TTLs and order linking
 status: closed · since: 2026-08-19 · last: 2026-09-15 · closed: 2026-11-16
-State: no activity since 15 Sep; assumed resolved. Hedger TTLs for B2PRIME_RETAIL and ARGAMON_* set to 30 ms (reference.marketSupport.marketThrottle); the FIX tag 527 request to link PXM orders to final LP fills never got an outcome.
+State: assumed resolved; hedger TTLs set to 30 ms; FIX tag 527 order-linking request never got an outcome.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1787149002785969 https://mahifx.slack.com/archives/C096422RPKK/p1789468762100799
 
 ### price-tick-query — Jay's 29 Oct price tick screenshot query
 status: closed · since: 2026-10-29 · last: 2026-10-30 · closed: 2026-11-25
-State: Jay's 29 Oct screenshot query (unreadable block); Samin handled it himself (30 Oct); assumed resolved.
+State: Samin handled Jay's query himself (30 Oct); assumed resolved.
 Refs: https://mahifx.slack.com/archives/C096422RPKK/p1793311777815649 https://mahifx.slack.com/archives/C096422RPKK/p1793340297398099
 
 ## Arc
