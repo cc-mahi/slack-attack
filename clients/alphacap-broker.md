@@ -11,14 +11,20 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-25T08:12:14Z
+last_catchup: 2026-11-26T08:12:50Z
 status: active
 ---
 
 ## Now
-Alpha is live (first trades 2026-11-09). David Rapp's in-person risk session happened 2026-11-12; Will Carter posted the written summary 2026-11-16 and awaits David's reply (prop-to-broker account list, logins, training call). Cameron Hughes is out this week. Other follow-ups: Compass reset and walkthrough for George, and a backup hedging LP scope. Hedger activation, re-enabling expectedBookStatusOnTimezones and Softs/XNG/XAGEUR spikes remain open. Aug/Sep invoices still a soft overhang.
+Alpha is live (first trades 2026-11-09). David Rapp's in-person risk session happened 2026-11-12; Will Carter posted the written summary 2026-11-16 and awaits David's reply (prop-to-broker account list, logins, training call). Cameron Hughes is back (2026-11-25) and relaying a DDoS worry from Rapp. Other follow-ups: Compass reset and walkthrough for George, and a backup hedging LP scope. Hedger activation, re-enabling expectedBookStatusOnTimezones and Softs/XNG/XAGEUR spikes remain open. Aug/Sep invoices still a soft overhang.
 
 ## Streams
+
+### ddos-concern — Rapp DDoS worry (context unclear)
+status: open · since: 2026-11-25 · last: 2026-11-25
+State: On 2026-11-25 Cameron Hughes (back from leave) forwarded into the internal channel a message from David Rapp saying he does not want to be discussing it "after the DDOS attack happens and we have a million complaints", and said he is discussing it with Maten. The topic Rapp is pressing is not visible in the window (screenshot only); likely a resilience or exposure concern, possibly tied to redundancy-swaps. Older context not searched.
+Next: Cameron Hughes and Maten to settle a response for Rapp; read the thread context before assuming the subject.
+Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1795624880214399 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1795624918081259
 
 ### inperson-risk-session — In-person risk management session
 status: open · since: 2026-11-09 · last: 2026-11-16
@@ -76,13 +82,8 @@ Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://ma
 ### alert-suppression — Monitoring noise before hedgers go on
 status: open · since: 2026-08-17 · last: 2026-09-10
 State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
-Next: (re-opened: stale 68d; Alpha is live so action is due) Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
+Next: (re-opened: stale 77d, reviewed 2026-11-26; Alpha is live so action is due) Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
-
-### retail-lpoa-groups — MT5 groups for retail-under-corporate accounts
-status: closed · since: 2026-08-24 · last: 2026-09-03 · closed: 2026-11-03
-State: fastMT had not replied (as of 2026-08-24) on trading accounts and counterparty tags. Rapp said (09-02) some corporate-name accounts have retail clients trading under an LPOA, coming from the prop side, and must be treated as retail; George says Mahi holds profiles per prop trader. Cameron Hughes asked Rapp to create MT5 groups for both cases and plans execution tailoring per trading account; exact classification may be hard if counterparty tags do not carry over. No activity since 2026-09-03; assumed resolved or folded into go-live.
-Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1787584267363759 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1788421751250899
 
 ## Arc
 - 2026-04-16 — MT5 group/symbol plan signed off by Rapp and Gerard McConnell; test trades succeeded 2026-04-17.
