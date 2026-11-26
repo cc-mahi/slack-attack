@@ -17,7 +17,7 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-11-25T08:15:39Z
+last_catchup: 2026-11-26T08:17:16Z
 status: active
 ---
 
@@ -28,10 +28,10 @@ Open: TOT plans a perps offering in January (Mahi to ask instruments and funding
 ## Streams
 
 ### prop-perps — Prop perps request
-status: open · since: 2026-09-30 · last: 2026-11-24
-State: Matt first asked about prop perps (Vest Markets, MyFundedPerps) in Oct; Cameron Hughes sees a growing area. On 2026-11-24 Matt forwarded that TOT plans to roll out a perps offering in January and asked if Mahi has put energy into perpetuals. Isaac Dann said Mahi should have enough pricing around and asked which instruments; Andrew Morgan asked whether TOT plans to do funding on it. Logged on the wiki Client requests section.
-Next: Cameron Hughes to ask Matt for the instrument list and whether TOT will run funding, then reply.
-Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://mahifx.slack.com/archives/C08TG143F4L/p1795509913481269
+status: open · since: 2026-09-30 · last: 2026-11-25
+State: Matt first asked about prop perps (Vest Markets, MyFundedPerps) in Oct; Cameron Hughes sees a growing area. On 2026-11-24 Matt forwarded that TOT plans to roll out a perps offering in January and asked if Mahi has put energy into perpetuals. Isaac Dann said Mahi should have enough pricing around and asked which instruments; Andrew Morgan asked whether TOT plans to do funding on it. Logged on the wiki Client requests section. On 2026-11-25 Cameron Hughes posted the instrument list Matt hopes to offer (modelled on Tradeify perps): about 40 symbols across crypto (BTC, ETH, SOL, XRP, BNB, HYPE, ZEC), metals and energy (GOLD, SILVER, CL, COPPER, BRENTOIL, NATGAS, PLATINUM), indices (SP500, XYZ100) and US/Asia single-stock perps (NVDA, TSLA, AAPL, COIN, MSTR and others). Funding question not yet answered in channel.
+Next: Mahi to check pricing coverage for the list and confirm whether TOT will run funding, then reply to Matt.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1790787110596799 https://mahifx.slack.com/archives/C08TG143F4L/p1795509913481269 https://mahifx.slack.com/archives/C08TG143F4L/p1795615285128109
 
 ### psm-eurusd-widening — EURUSD PSM widening stuck on
 status: open · since: 2026-11-13 · last: 2026-11-17
