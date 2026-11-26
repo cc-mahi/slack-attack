@@ -14,7 +14,7 @@ contacts:
   - {name: "Kate B", role: "Base Markets - client contact (A book hedger, LMAX/Scope accounts, group codes)", confidence: low}
   - {name: "Aytugan Khafizov", role: "FastMT/Tegis - integration contact (Centroid setup, TEM config)", confidence: low}
   - {name: "Anatoly", role: "Base Markets / Tegis - sign-off contact for TEM switch", confidence: low}
-last_catchup: 2026-11-25T08:12:15Z
+last_catchup: 2026-11-26T08:12:52Z
 status: active
 ---
 
@@ -23,17 +23,25 @@ Margin call on Base 2026-11-12: Mahi is adjusting positions to clear risk, movin
 
 ## Streams
 
+### group-additions-1019 — Base requests for new A/B book MT groups in Compass config
+status: open · since: 2026-10-19 · last: 2026-11-26
+State: Recurring request type. On 2026-10-19 Kate (Base) asked for three A book and four B book USD MT groups, done the same day. On 2026-10-21 she asked for two more A book groups and one B book group; no Mahi reply seen. On 2026-11-26 she asked for two more B book groups (AUD-MU-RZ-LOW-X, USD-MU-RZ-LOW-X) and two A book groups (AUD-MU-RZ-LOW-S, USD-MU-RZ-LOW-S); Shyam Hari acknowledged ("sure thing"). Whether the 10-21 groups were ever added is unconfirmed.
+Next: Mahi (Shyam Hari / Kate Stagg) to add the 11-26 groups, and confirm the 10-21 ones exist.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792404682249699 https://mahifx.slack.com/archives/C09D8V41JAG/p1795676030859579
+
 ### margin-call-1112 — Base margin called 2026-11-12; Mahi clearing risk, LP positions to move SCOPE to LMAX
 status: open · since: 2026-11-12 · last: 2026-11-12
 State: Kate Stagg said in the internal channel on 2026-11-12 that Base was margin called and she was doing position adjustment to clear risk, asking that the hedger not be turned on; later she reported 3,200oz bought with a few oz left to close once Base's Kate confirms numbers. In the client channel she asked whether Base wanted positions moved from SCOPE to LMAX (per a message in the base-scope-mahi-fastmt channel); Base's Kate said yes and offered to send current LP positions that need updating.
 Next: Base (Kate) to send the LP positions to move; Mahi (Kate Stagg) to move them, finish closing the residual oz, and keep the hedger off until she says otherwise.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1794493628126709 https://mahifx.slack.com/archives/C09D8V41JAG/p1794492530220489
 
+
 ### 26degrees-xau-qty — 26Degrees cancelling XAUUSD hedger orders sent to 2dp
 status: open · since: 2026-11-12 · last: 2026-11-12
 State: Rory King reported 2026-11-12 that 26Degrees cancelled XAUUSD hedger trades, with risk already cleared. He suspects 26Degrees only accepts 1dp quantity (a 25.39oz request filled for 25.3) and asked Base to confirm; Base's Kate said she will check. If confirmed Mahi will switch to 1dp and restart the hedgers.
 Next: Base (Kate) to confirm the 1dp limit; Rory to change quantity precision and restart hedgers.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1794472494169219 https://mahifx.slack.com/archives/C09D8V41JAG/p1794474722274159
+
 
 ### tegis-mt5-api — Tegis moving to MT5 API trading with Mahi price feed only
 status: open · since: 2026-04-29 · last: 2026-11-10
@@ -42,11 +50,13 @@ Whitelisting: Tegis first had connection timeouts 2026-10-27; Alex gave two stat
 Next: Alex/Tegis to supply the traceroute; Mahi (Kate Stagg) to swap the whitelisted IP and confirm; Tegis to connect to the price feed.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1777470115067619 https://mahifx.slack.com/archives/C09D8V41JAG/p1788345375042849 https://mahifx.slack.com/archives/C09D8V41JAG/p1792572631430259 https://mahifx.slack.com/archives/C09D8V41JAG/p1794318831741919
 
+
 ### partial-ab-book-split — Partial A / partial B book risk split by counterparty tag
 status: open · since: 2026-10-29 · last: 2026-11-02
 State: Kate Stagg noted 2026-10-29 that Base wants a partly-B-book, partly-A-book setup: Base supplies counterparty tags and Mahi risk-splits a percentage to the Compass book. On 2026-11-02 she posted the tag list (200493, 200356, 200505, 200414, 200494, 200469) with the split 25% B book / 75% A book. No client-channel request seen and no confirmation yet that the config is applied.
 Next: Mahi (Kate Stagg) to configure the 25/75 risk split for those tags and confirm.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1793286795594799 https://mahifx.slack.com/archives/C09D05EPCTV/p1793623127357889
+
 
 ### xbtusd-cancels-1030 — XBTUSD orders cancelled: continuity pool missing for crypto
 status: open · since: 2026-10-30 · last: 2026-10-30
@@ -54,23 +64,26 @@ State: Kate (Base) asked 2026-10-30 why an XBTUSD order was cancelled. Kate Stag
 Next: Kate Stagg to answer whether dynamic-arb classification contributed.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1793349196856979 https://mahifx.slack.com/archives/C09D8V41JAG/p1793376640811379
 
+
 ### lmax2-offsystem-fills — LMAX_2 fills placed outside Compass, positions out of sync
-status: open · since: 2026-10-21 · last: 2026-10-22
-State: Nathan Burch told Base on 2026-10-21 that two LMAX_2 fills (AUDUSD sell 7,000 on 10-21, XAGUSD buy 500oz on 10-15) did not come from Compass orders, while Compass shows both instruments flat at A_HOUSE with offsetting SCOPE_B positions. Kate (Base) replied 2026-10-22 that the trades were placed outside Compass and that LMAX_2 and SCOPE_B both hold zero in both instruments. Compass has not yet been adjusted to match.
+status: watching · since: 2026-10-21 · last: 2026-10-22
+State: Downgraded to watching (no activity since 2026-10-22). Nathan Burch told Base on 2026-10-21 that two LMAX_2 fills (AUDUSD sell 7,000 on 10-21, XAGUSD buy 500oz on 10-15) did not come from Compass orders, while Compass shows both instruments flat at A_HOUSE with offsetting SCOPE_B positions. Kate (Base) replied 2026-10-22 that the trades were placed outside Compass and that LMAX_2 and SCOPE_B both hold zero in both instruments. Compass has not yet been adjusted to match.
 Next: Mahi (Nathan Burch / Kate Stagg) to correct Compass positions for AUDUSD and XAGUSD at LMAX_2 and SCOPE_B.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792620629451529 https://mahifx.slack.com/archives/C09D8V41JAG/p1792653037394839
 
-### group-additions-1019 — Base requests for new A/B book MT groups in Compass config
-status: open · since: 2026-10-19 · last: 2026-10-21
-State: Recurring request type. On 2026-10-19 Kate (Base) asked for three A book and four B book USD MT groups, done the same day. On 2026-10-21 she asked for two more A book groups and one B book group; no Mahi reply seen yet.
-Next: Kate Stagg to add the three groups to config and confirm.
-Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1792404682249699 https://mahifx.slack.com/archives/C09D8V41JAG/p1792597504276599
 
 ### xauusd-1000oz-tob — Suffixed XAUUSD symbol with 1000oz top of book for a larger client
-status: open · since: 2026-10-13 · last: 2026-10-21
-State: Kate (Base) wants a suffixed XAUUSD symbol for a larger client wanting 1000oz TOB. On 2026-10-16 Kate Stagg said Rory will set up a new XAUUSD-only pricing model replicating LMAX_2 tiers (1000oz TOB; LMAX being asked to switch feeds) with markup, streamed under a suffix via MCC to one Base client. Change CHG-2610-DYQM (two pricers for a new full pricing model) was approved 2026-10-21 and Rory bounced restAdminServer1 and dashboardGateway to pick it up; likely this model, not confirmed in-channel.
+status: watching · since: 2026-10-13 · last: 2026-10-21
+State: Downgraded to watching (no activity since 2026-10-21). Kate (Base) wants a suffixed XAUUSD symbol for a larger client wanting 1000oz TOB. On 2026-10-16 Kate Stagg said Rory will set up a new XAUUSD-only pricing model replicating LMAX_2 tiers (1000oz TOB; LMAX being asked to switch feeds) with markup, streamed under a suffix via MCC to one Base client. Change CHG-2610-DYQM (two pricers for a new full pricing model) was approved 2026-10-21 and Rory bounced restAdminServer1 and dashboardGateway to pick it up; likely this model, not confirmed in-channel.
 Next: Rory to finish the pricing model; LMAX feed switch.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1791886072967149 https://mahifx.slack.com/archives/C09D05EPCTV/p1792573543784969
+
+
+### a-book-hedger-netting — Base switches A book hedger off while netting LP positions
+status: watching · since: 2026-09-04 · last: 2026-10-15
+State: Kate (Base) repeatedly turns the A book hedger off to net LP positions manually (2026-09-14, 09-22, 10-09, 10-15; back on within ~20 minutes on 10-15). Manual hedge trades through LP GUIs bypass Compass, so positions then need correcting in Compass (SCOPE_B buy 510 / LMAX_2 sell 407 XAU on 09-22). On 2026-09-22 Base asked to route all A book hedging to LMAX_2.
+Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790055333398639 https://mahifx.slack.com/archives/C09D8V41JAG/p1792073335429129
+
 
 ### tegis-book-pause — Tegis C book warehoused while Tegis tests algo/API
 status: watching · since: 2026-05-18 · last: 2026-10-13
@@ -78,16 +91,13 @@ State: Downgraded to watching (no activity since 2026-10-13; pause stands while 
 Next: Tegis to say when they go live again; re-add hybridHedgerC1 to hiera then.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1782780254069969 https://mahifx.slack.com/archives/C09D05EPCTV/p1791885596379839 https://mahifx.slack.com/archives/C09D05EPCTV/p1791886158813629
 
+
 ### mt4-decom — Base decommissioned MT4; Mahi removing MT4 bridge connections
 status: watching · since: 2026-10-11 · last: 2026-10-13
 State: Downgraded to watching (no reply since 2026-10-13). Shyam Hari saw SYNAPSE_MT4 disconnected on 2026-10-11; Kate (Base) confirmed 2026-10-13 that MT4 is decommissioned. Shyam asked whether Mahi may remove the primary and backup MT4 bridge connections; no reply yet.
 Next: Base to confirm nothing still needs the MT4 bridge; then Mahi removes both connections.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1791755009916399 https://mahifx.slack.com/archives/C09D8V41JAG/p1791925041012299
 
-### a-book-hedger-netting — Base switches A book hedger off while netting LP positions
-status: watching · since: 2026-09-04 · last: 2026-10-15
-State: Kate (Base) repeatedly turns the A book hedger off to net LP positions manually (2026-09-14, 09-22, 10-09, 10-15; back on within ~20 minutes on 10-15). Manual hedge trades through LP GUIs bypass Compass, so positions then need correcting in Compass (SCOPE_B buy 510 / LMAX_2 sell 407 XAU on 09-22). On 2026-09-22 Base asked to route all A book hedging to LMAX_2.
-Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790055333398639 https://mahifx.slack.com/archives/C09D8V41JAG/p1792073335429129
 
 ### xau-hedging-tuning — A book XAU hedging losses and hedger retuning
 status: watching · since: 2026-08-10 · last: 2026-10-08
@@ -95,17 +105,13 @@ State: Downgraded to watching (no activity since 2026-10-08). Recurring A book P
 Next: Watch overnight XAU unwinds after the 2026-10-08 retune; decide whether to un-whitelist 111125.
 Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1786349367512409 https://mahifx.slack.com/archives/C09D05EPCTV/p1790644032875939 https://mahifx.slack.com/archives/C09D05EPCTV/p1791454047171069
 
+
 ### brokered-xau-slippage — Slippage on brokered XAU fills; markup removed
 status: watching · since: 2026-10-02 · last: 2026-10-07
 State: Downgraded to watching (no activity since 2026-10-07). XBTUSD orders were cancelled 2026-10-02 because brokered flow priced outside the limit; fixed with local crypto in LIQUIDITY_POOL_LDN and a temporary A BOOK rule. On 2026-10-06 Kate (Base) complained of slippage on small XAU trades (200479). Kate Stagg's analysis of 2,096 brokered fills found median $29/M worse than published, mostly the $20/M brokering fee; LMAX_2 was added to LIQUIDITY_POOL_LDN, liquidityPoolSOR1 bounced, and Base removed the $20/M markup (replay: median $0/M, ~$7.8k/week back to clients). Price improvement still off on A BOOK profiles.
 Next: Kate Stagg to check real fills after Athena catches up and again after a week (about 2026-10-14); no result posted yet.
 Refs: https://mahifx.slack.com/archives/C09D8V41JAG/p1790957952350349 https://mahifx.slack.com/archives/C09D8V41JAG/p1791281610611709 https://mahifx.slack.com/archives/C09D05EPCTV/p1791385257726699
 
-### admin-server-reboots — Admin server failing to return after weekend restarts
-status: closed · since: 2026-06-07 · last: 2026-09-07 · closed: 2026-11-11
-State: Closed: no activity since 2026-09-07; assumed resolved. Admin server did not come back after weekend restarts on 2026-06-07, 2026-08-16 and 2026-09-06 (Beeks tickets; the 09-06 case needed a previous-kernel boot and the new kernel may fail again). PricerVIP1/2 were also restored after the 09-06 restarts. No fresh outage since 2026-09-07.
-Next: Dev-infra to address the kernel boot failure; Beeks reboot autonomy procedure (Liam Cordelle) not confirmed.
-Refs: https://mahifx.slack.com/archives/C09D05EPCTV/p1780822809497359 https://mahifx.slack.com/archives/C09D05EPCTV/p1788787318138619
 
 ## Arc
 - 2026-04 — Base Markets onboarding Tegis flow; Tegis/Centroid FIX integration begins
