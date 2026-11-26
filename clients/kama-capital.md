@@ -16,7 +16,7 @@ contacts:
   - {name: "Jad Hayek", role: "ops / access, whitelisting, Compass users"}
   - {name: "Mahmoud Kleit", role: "built Kama's swap sync tool; on holiday as of 2026-10-09", confidence: low}
   - {name: "Sammy (xrigroup)", role: "third-party consultant helping Kama on SI and tags; pushes SI", confidence: low}
-last_catchup: 2026-11-25T08:14:17Z
+last_catchup: 2026-11-26T08:15:49Z
 status: active
 ---
 
@@ -30,6 +30,25 @@ status: open · since: 2026-10-29 · last: 2026-11-25
 State: Kama want futures and CFDs live (added to the contract at no extra cost, see pilot-commercials). Kate set up indices on the pricing model and subscription mappings (5 Nov). On 6 Nov Inald put the new futures (8 families, 52 contracts) into the client DB under CHG-2611-X9VR (approved by Liam), implemented 7 Nov, verification due 10 Nov (no result seen). William staged CHG-2611-G9MP (CFD book, hedger, channel setup, no client routing) on 9 Nov and CHG-2611-0KWV (futures books, hedgers, channels; approved 10 Nov). Main LP for CFDs except oil is Velocity. Kama will not use new instruments for XAUUSD until indices, oil and futures are live. On 12 Nov Kate applied Kama's quantity limits and sent test trades (8 futures families on Scope KL, spot index CFDs, VELOCITY_KL oil CFDs); Ali said all fine. Open: Kate asked what decimal places Kama prices futures/CFDs to (unanswered); Ali will give a day's notice of new futures expiries; the UKOFUT-F dash test trade errored 'Cannot convert from CO1 to USD' (needs adding to a pricer process, internal). On 16 Nov Kate asked whether HFT CFD flow should hedge to SCOPE or SCOPE_TOXIC: Ali said US/UK oil hedges with Velocity, futures and spot indices to Scope, and HFT FX used to go to Scope too (small volume). On 17 Nov Ali asked whether to start pricing CFDs; Kate asked him not to switch to Mahi pricing yet (final items on Mahi's side), then said one more distribution process restart is needed before tests. Contract sizes: Mahi's unit is 1 barrel (UKOIL/USOIL), 1 oz (GC/SI), 1 index unit (US30/US500/UT100/DAX30); Ali confirmed Kama's oil lot is 1,000 barrels and index CFDs are 1, min 10 barrels = 0.01 lots, so quantities reach Mahi in barrels/index units and Kate's min/step config matches; Kate will check fill sizes on the test trades. Ali was getting CFD quotes and will confirm the full symbol list on 18 Nov. On 17 Nov Kate removed the MCC rules routing toxic A-book flow to a default channel and added an MCC for CFDs/futures. On 18 Nov Ali confirmed Kama were receiving CFD prices; Kate asked for CFD and futures test trades, changed execution rules for testing (12:08 UTC) and asked for more on the skewed, non-skewed and HFT feeds; Ali sent them (12:06 and 12:44 UTC, one batch to the non-skewed provider like normal FX/gold) and Kate confirmed at 13:43 UTC that the CFD trades on all three feeds came through on the correct channels. She asked Ali for feedback on CFD spreads/instruments and for futures test trades on each feed; Ali will check the futures and revert. Kate made many CFD hedger profile edits 15:13-16:45 UTC; hybridHedgerCFD1 alerted on a duplicate hedging rule (CL1USD, Friday close time guard) at 16:10 UTC (no resolution visible). Internally (18 Nov) Will asked whether the HFT flow hedges to Edgewater; Kate said yes, and that Moe wants no back-and-forth of flow with Velocity (Kama send Velocity FX and XAG and receive its XAU), Will noting IB relationships often set up maker plus taker directions; Kate will check. On 19 Nov 11:26 UTC Kate asked whether Kama are happy to start routing CFD flow to Mahi that day; Ali said he will get back soon (no answer yet). On 23 Nov 01:17 UTC Daria updated hedging.expectedBookStatusOnTimeZones on Kama so the expected status matches actual for hybridHedgerCFD1 and asked Kate to check it. On 23 Nov 09:11 UTC Kate asked Kama to say when they are ready to route CFD flow to Mahi; Moe replied at 10:10 UTC that Kama are discussing internally. Kama's execution rules (distribution.executionRules) were edited via the admin server at 16:23 UTC (config-updates bot). On 24 Nov 11:37 UTC Ali edited pricing.spreadprofile via the admin server (content not visible). On 25 Nov 06:56 UTC Ali said Kama might add FX Edge for the spot indices alongside Scope and asked whether test trades were done on that connection; Shyam said Kate would be online shortly (no answer yet).
 Next: Kate to answer Ali on FX Edge test trades for spot indices; Moe/Ali to say when CFD flow routing starts (Kama discussing internally), send futures test trades on each feed and give CFD spread feedback; Kate to check the Velocity two-way flow question, resolve the CL1USD duplicate-rule alert, fix the CO1 to USD pricer-process error and get the dp answer; Inald to finish verification (CHG-2611-X9VR); Kate/William to finish CFD and futures books and hedgers (CHG-2611-G9MP, CHG-2611-0KWV), apply Kama's quantity limits, then enable client routing.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793283834284999 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1794484184431989 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1795087595740039 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1795589782952099
+
+### slippage-gold-drop — Kama query on gold sell slippage in a sharp drop
+status: open · since: 2026-11-25 · last: 2026-11-25
+State: On 25 Nov Ali asked Mahi to check slippage on a set of XAUUSD sells (screenshot only). Kate found all were during a ~$23 drop in 30s at 11:58:47-11:59:16 UTC. MT5 market orders fill at the better of start or end of a short last-look window; most filled at or near arrival bid, the two at 11:58:48 filled $1.30-1.50 lower. The requested prices were Mahi's bid 120-180ms before arrival while the Kama-bridge round trip is a few ms, so she suspects a delay between Mahi price reaching MT5 and the order reaching the bridge and is checking Mahi's side too. A-book orders went straight to FX Edge, held 670-800ms and filled $1.40-1.90 below arrival; a further $0.50-0.90 was liquidity reduction, applied to orders passed to the market since 19 Nov.
+Next: Ali to send MT5 order times and bridge quote-receipt times; Ali to say whether LR should be on for A-book flow; Kama to raise the FX Edge hold; Kate to check Mahi's side.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1795611790972399 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1795627379373449
+
+### fxedge-delays — FX Edge fill delays and cancels via PXM
+status: open · since: 2026-11-05 · last: 2026-11-25
+State: On 5 Nov Daria asked Kama to check with PXM why order 012drb34aa (GBPNZD, bound for FXEDGE_KL) was acked at once but took 12s to fill, and offered to pull FX Edge from the pool meanwhile; Ali said Kama has issues with orders going to FX Edge and saw high execution times on the Non skewed A provider (quote blocked and max exposure reached on FX Edge). Daria's read of order 4964712: the SOR split it across FX Edge, Scope and Edgewater; FX Edge delayed and cancelled while the SOR kept retrying it until the order was refilled elsewhere; no Compass-side speed issue seen. Ali asked how long the SOR keeps retrying one provider and how that process works; Cameron Hughes said he will gather details. On 25 Nov Kate found A-book orders passed straight to FX Edge were held 670-800ms (usually about 10ms) before filling, and said to raise it with FX Edge (see slippage-gold-drop). No decision yet on removing FX Edge from the pool.
+Next: Kama to raise the 670-800ms hold with FX Edge; Cameron Hughes to answer Ali on SOR retry behaviour; Kama to check FX Edge/PXM side; decide whether to pull FX Edge from the pool.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793859648388519 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1795627379373449
+
+### rate-limit-rejects — RATE_LIMIT_EXCEEDED rejects on a rapid-fire A-book client
+status: open · since: 2026-10-30 · last: 2026-11-25
+State: On 30 Oct Ali showed a client's market orders rejected with REJECT_SYSTEM_ERROR RATE_LIMIT_EXCEEDED (counterparty sending consecutive trades, XAUUSD, via the Mahi_Nonskewed_A provider). Isaac explained these come from a per-counterparty throttle of 150 trades per second, set Compass-side and adjustable per counterparty on request. Internally Isaac noted the same counterparty is machine-gunning market orders that are brokered with no LR collected, and suggested turning on brokered liquidity reduction (distribution.liquidityThrottle.brokeredLiquidityReduction). No Kama reply on raising the threshold, and On 19 Nov 09:50 UTC Kate edited distribution.liquidityThrottle.brokeredLiquidityReduction on Kama (content not visible; possibly acting on Isaac's suggestion), and edited liquidityRefreshProfiles.perchannel at 10:30 and 11:35 UTC.
+On 25 Nov 17:12 UTC Kate edited distribution.liquidityThrottle.brokeredLiquidityReduction again (content not visible).
+Next: Kama to say whether they want a higher per-counterparty throttle; Kate/Isaac to decide on brokered LR.
+Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793354921588429 https://mahifx.slack.com/archives/C0C1L6G37HN/p1795626757877579
 
 ### xau-execution-style — Broker vs Broker First, HFT book and markup
 status: open · since: 2026-09-21 · last: 2026-11-13
@@ -55,12 +74,6 @@ State: On 6 Nov Ali asked Mahi to check the reject reasons on GBPCAD at the mark
 Next: Mahi to diagnose and reply.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793948581789389
 
-### fxedge-delays — FX Edge fill delays and cancels via PXM
-status: open · since: 2026-11-05 · last: 2026-11-05
-State: On 5 Nov Daria asked Kama to check with PXM why order 012drb34aa (GBPNZD, bound for FXEDGE_KL) was acked at once but took 12s to fill, and offered to pull FX Edge from the pool meanwhile; Ali said Kama has issues with orders going to FX Edge and saw high execution times on the Non skewed A provider (quote blocked and max exposure reached on FX Edge). Daria's read of order 4964712: the SOR split it across FX Edge, Scope and Edgewater; FX Edge delayed and cancelled while the SOR kept retrying it until the order was refilled elsewhere; no Compass-side speed issue seen. Ali asked how long the SOR keeps retrying one provider and how that process works; Cameron Hughes said he will gather details. No decision yet on removing FX Edge from the pool.
-Next: Cameron Hughes to answer Ali on SOR retry behaviour; Kama to check FX Edge/PXM side; decide whether to pull FX Edge from the pool.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793859648388519 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793864803371289
-
 ### si-and-risk-golive — Risk-management go-live and SI
 status: open · since: 2026-09-15 · last: 2026-11-05
 State: Risk go-live began 2026-09-14 but the first A Book client switched off after a position-rec scare and an SOR restart that tripped PXM's firewall; flow came back 17-23 Sep. Mahi view (Andrew, Will): flow with Kama in aggregation (e.g. Star, tag 42060) is not SI material. Kate's SI sims (22-26 Oct) on Kama's XAUUSD drop copy: Compass-good flow beat A-booking by about $400k but other flow did not reliably, and the gain leaned on four HFT-routed logins and tag 42060. On the 29 Oct call Kama were disappointed; Kate said hardly any accounts are round-trip, so Mahi is likely in aggregation. Kama wanted their own tags and to exclude a few physical gold hedgers (Moe to send list). Kama also wants to add 26degrees and ISAM and asked for anonymised reject-rate data from other clients; Kate recommends giving no figure and offering to measure on Kama's own flow (no sign it was sent). On 5 Nov Kate posted follow-up SI analysis on the 51 logins using sub tags (proposal: 2h time box, no cap; about +$476k vs A-book, $16M peak). On the 5 Nov call Kama chose to park SI and get CFDs and futures live first, since new clients are arriving and they want to see that flow; they can go live later and review new tags in real time. Kama want FX and XAG flow sent to Velocity (tested 9 Nov, see lp-pool-expansion).
@@ -78,12 +91,6 @@ status: open · since: 2026-10-29 · last: 2026-10-30
 State: On 29 Oct 21:33 UTC Ali reported market order rejections. Shyam explained they were cancels over the roll: all flow goes STP under the 'STP: Twighlight and Roll' execution rule and can only fill from the HFT pool (EDGEWATER_2_KS and SCOPE_TOXIC_KL), and neither LP had a price, so orders came back not marketable and expired. Shyam offered to make pricing go indicative when there is no LP liquidity; Ali declined on 30 Oct (not worth the risk) and asked whether twilight/roll STP is also set on the HFT channel (screenshot only, unanswered).
 Next: Mahi to answer Ali's HFT twilight/roll STP question.
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793309589660289 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793341714371219
-
-### rate-limit-rejects — RATE_LIMIT_EXCEEDED rejects on a rapid-fire A-book client
-status: open · since: 2026-10-30 · last: 2026-11-19
-State: On 30 Oct Ali showed a client's market orders rejected with REJECT_SYSTEM_ERROR RATE_LIMIT_EXCEEDED (counterparty sending consecutive trades, XAUUSD, via the Mahi_Nonskewed_A provider). Isaac explained these come from a per-counterparty throttle of 150 trades per second, set Compass-side and adjustable per counterparty on request. Internally Isaac noted the same counterparty is machine-gunning market orders that are brokered with no LR collected, and suggested turning on brokered liquidity reduction (distribution.liquidityThrottle.brokeredLiquidityReduction). No Kama reply on raising the threshold, and On 19 Nov 09:50 UTC Kate edited distribution.liquidityThrottle.brokeredLiquidityReduction on Kama (content not visible; possibly acting on Isaac's suggestion), and edited liquidityRefreshProfiles.perchannel at 10:30 and 11:35 UTC.
-Next: Kama to say whether they want a higher per-counterparty throttle; Kate/Isaac to decide on brokered LR.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793354921588429 https://mahifx.slack.com/archives/C0C1L6G37HN/p1795081819206649
 
 ### position-rec-nop — LP/client position reconciliation and NOP limits
 status: open · since: 2026-10-02 · last: 2026-10-27
@@ -109,13 +116,11 @@ State: Kate's 9-16 Oct review found internalisable brokered flow is mostly roll,
 Next: Downgraded to watching (no activity since 16 Oct). Kate to finish instrument/timezone/CP breakdown; watch 100079_n/a re-tagging and 40874_30033000.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1792160321472259 https://mahifx.slack.com/archives/C0B6FMU96G2/p1792165670366029
 
-
 ### xauusd-skew-signals — B Book XAUUSD skew tuning
 status: watching · since: 2026-10-08 · last: 2026-10-14
 State: B Book XAUUSD skew was about -$0.35/M for 1-8 Oct because FI optimisation parties included CLIENTS_LDN (INSTI-priced, never skewed). Kate switched the skew signal to IFM, then limited optimisation parties to B_CLIENTS_LDN (8 Oct). Skew since was +$1.61/M over 9, 12 and 13 Oct (+$528 on $329M; early). On 14 Oct she moved the signal from IFM to flow-price-thresh (57.7% volume correct, $675 potential vs IFM 51.0%, $424).
 Next: Downgraded to watching (no activity since 14 Oct). Kate to keep reviewing; a before/after backtest was planned.
 Refs: https://mahifx.slack.com/archives/C0B6FMU96G2/p1791471223806789 https://mahifx.slack.com/archives/C0B6FMU96G2/p1791965822602239
-
 
 ### weekend-risk-carry — Friday close hedging did not clear risk
 status: watching · since: 2026-10-12 · last: 2026-10-13
@@ -158,26 +163,6 @@ status: watching · since: 2026-09-25 · last: 2026-09-28
 State: Kama pass limit-order deviation in tag 10001, which is not in Mahi's FIX spec; Mahi expects it baked into price (tag 44). Moe explained on 25 Sep that PXM sets the limit price from Kama's TOB (not the client's limit) and sends a deviation, so Compass should respect limit plus/minus deviation and allow worse fills up to it; this also explains Scope limit rejects. William noted price improvement is off on all A_CLIENTS rules and has a cap setting. Mahi still does not accept the tag and no decision on honouring it is visible.
 Next: Kate to decide whether Compass can honour limit plus/minus deviation (tag 10001).
 Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1790332508870719 https://mahifx.slack.com/archives/C0B6FMU96G2/p1790598299904109
-
-### compass-login-error — Jad hit a Compass login error
-status: closed · since: 2026-10-26 · last: 2026-10-28 · closed: 2026-11-11
-State: Jad's 26 Oct login error; Justin pushed a fix on 28 Oct. No further reports; assumed resolved.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792976237806039 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793169011218019
-
-### hft-fx-pricing — HFT channel FX spreads and pool coverage
-status: closed · since: 2026-10-20 · last: 2026-10-28 · closed: 2026-11-11
-State: Wide HFT FX spreads (20-21 Oct) fixed by dedicated pricing model CLIENT_PRICE_HFT_LDN from 28 Oct; Ali confirmed. No complaints since.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792484649892479 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1793196612192619
-
-### xau-open-rejects — XAUUSD market-open rejects on B book
-status: closed · since: 2026-10-23 · last: 2026-10-23 · closed: 2026-11-11
-State: Ali's 23 Oct screenshot of XAUUSD open rejects on the B book; Isaac saw no B-book cancels. No activity since, assumed resolved.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792735564284869 https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792743155724969
-
-### eurgbp-rejects — Market rejections on EURGBP
-status: closed · since: 2026-10-21 · last: 2026-10-21 · closed: 2026-11-11
-State: Ali's 21 Oct EURGBP rejects screenshot; no follow-up, assumed resolved.
-Refs: https://mahifx.slack.com/archives/C0B7T6S6D0C/p1792566675726999
 
 ### pilot-commercials — Pilot end and post-pilot terms
 status: closed · since: 2026-09-10 · last: 2026-11-20 · closed: 2026-11-23
