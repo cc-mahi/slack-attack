@@ -18,12 +18,12 @@ contacts:
   - {name: "Gabriel Bignon", role: "YP/arb, failover breaks", confidence: low}
   - {name: "Tom Smith", role: "tech/ops: DB/IP (not Tom Williams)", confidence: low}
   - {name: "Tom Williams", role: "COO since 2026-08"}
-last_catchup: 2026-11-26T08:15:51Z
+last_catchup: 2026-11-27T08:14:57Z
 status: active
 ---
 
 ## Now
-Gateway kill switches keep tripping (slow consumer on NYC failover sessions plus a 26.4 regression); fix goes out on FX and CFD in the 11-21 reboots, crypto next week. Crypto SI hedger outage (11-14) fix still open. CFD: ASX timezone table reverted at MK's request, HSIHKD depth tier added after cancels (11-20), LDN on Java 25.
+Gateway kill switches keep tripping (slow consumer on NYC failover sessions plus a 26.4 regression); fix goes out on FX and CFD in the 11-21 reboots, crypto next week. Crypto SI hedger outage (11-14) fix still open. HRP_PROXY crypto NOP is over its watermark: perps hedger blocked and arb hedger off (11-27). CFD: ASX timezone table reverted at MK's request, HSIHKD depth tier added after cancels (11-20), LDN on Java 25.
 Owed: FX SI report to MK, 1003 tag on crypto hedgers, GBPUSD FI loss look, 78 missing arbers, CPI kill-switch note, 26D-Toxic whitelist answer, spot backup trader. CFD licence steps to USD 45k/month; procurement contests the USD 1,500 day rate.
 
 ## Streams
@@ -32,6 +32,12 @@ status: open · since: 2026-06-26 · last: 2026-11-26
 State: Isaac finds perp hedging costly (+$37.3k client spread vs -$32.0k hedging, about $8k a month) and proposes taking all perps except XAUUSD-PERP out of the hedger. JPXUSD-PERP, I50USD-PERP and XCUUSD-PERP copper requested 11-12; copper (CHG-2611-CPW7, Goldi feed) staged for the 11-17 22:00Z restart. XAGUSD-PERP unlaunched. 11-20 MK asked to add NDXUSD-PERP and XAUUSD-PERP from the HRP_PROXY feed to the price (benchmark only, no normalising) and to the perps hedger; Isaac actioned it. 11-26 MK asked to add CL1USDPERP pricing from HRP now that it is visible.
 Next: Mahi to add CL1USDPERP from HRP; Isaac to raise hedger removal with Stephen/MK; Shyam to confirm copper live after the 11-17 restart; Pepperstone to launch XAGUSD-PERP.
 Refs: https://mahifx.slack.com/archives/C033K2P0RPT/p1793788289609159 https://mahifx.slack.com/archives/C06AR8MT8NT/p1795182632653789?thread_ts=1795182632.653789&cid=C06AR8MT8NT https://mahifx.slack.com/archives/C06AR8MT8NT/p1795679108014849
+
+### compass-26-4-upgrade — FX and CFD environments upgraded to Compass 26.4
+status: open · since: 2026-11-13 · last: 2026-11-26
+State: FX and CFD upgraded 11-14 (CHG-2611-542H), 8 checks pending. Follow-on 11-20 to fix a 26.4 kill-switch regression: FX update (CHG-2611-P53V, notice 11-20 from Liam) and CFD update (CHG-2611-CRJQ) staged Fri, live at Sat 21 Nov reboots; CRJQ implemented 11-21 with 6 of 8 checks pending. LDN moved to Java 25 (CHG-2611-ZVKQ), implemented, 3 of 6 checks pending. 11-26 Liam self-approved Java 25 on the London servers, wave 1 (CHG-2611-1JQG, to 11-29 05:30Z) and the wider set (CHG-2611-4TSX, to 11-29 23:00Z), staged for the weekend restart.
+Next: Arun to verify 542H (was due 2026-11-17); Liam to verify CRJQ by 11-24 and ZVKQ by 11-25; crypto 26.4 fix to be arranged next week.
+Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1794567662931909 https://mahifx.slack.com/archives/C033K2P0RPT/p1795699319720219
 
 ### data-access — Pepperstone DB, S3/Athena access and IP whitelists
 status: open · since: 2026-06-29 · last: 2026-11-25
@@ -50,12 +56,6 @@ status: open · since: 2026-11-09 · last: 2026-11-23
 State: MK (2026-11-09) saw ASXAUD spreads wider than 2 at the 22:50Z open: the custom session started late; Isaac moved its start to 09:30 Sydney after the 22:00Z restart. MK also reports a deeper G30EUR layer missing from the model and broken Compass audit history. 11-17: G30EUR 0.01 orders cancel in CFD NYC (G30 min quantity 0.1 on the LIQUIDITY_POOL_NYC/LDN pools). 11-20: at MK's request Kate reverted the ASX timezone table (Custom 2 back to 05:30-06:10 and 21:00-22:00 UK), undoing the 09:30 Sydney start. 11-23 MK asked again to remove the leftover 22:30-23:00 Sydney entry from Custom 2 so ROLL and SNGMON apply, leaving only 05:30-06:10 and 21:00-22:00; no reply yet.
 Next: Mahi to remove the Custom 2 22:30-23:00 Sydney entry for MK; Isaac/MK to confirm the ASXAUD open under the reverted table; Rory to look at the G30EUR layer and audit history; MK to decide on G30 min quantity.
 Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1794221476797189 https://mahifx.slack.com/archives/C06AR8MT8NT/p1795432877937119
-
-### compass-26-4-upgrade — FX and CFD environments upgraded to Compass 26.4
-status: open · since: 2026-11-13 · last: 2026-11-21
-State: FX and CFD upgraded 11-14 (CHG-2611-542H), 8 checks pending. Follow-on 11-20 to fix a 26.4 kill-switch regression: FX update (CHG-2611-P53V, notice 11-20 from Liam) and CFD update (CHG-2611-CRJQ) staged Fri, live at Sat 21 Nov reboots; CRJQ implemented 11-21 with 6 of 8 checks pending. LDN moved to Java 25 (CHG-2611-ZVKQ), implemented, 3 of 6 checks pending.
-Next: Arun to verify 542H (was due 2026-11-17); Liam to verify CRJQ by 11-24 and ZVKQ by 11-25; crypto 26.4 fix to be arranged next week.
-Refs: https://mahifx.slack.com/archives/C06AR8MT8NT/p1794567662931909 https://mahifx.slack.com/archives/C033K2P0RPT/p1795188866409899
 
 ### crypto-hedging — Crypto spot hedger tuning and LP de-prioritisation
 status: open · since: 2026-07-13 · last: 2026-11-20
