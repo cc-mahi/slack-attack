@@ -11,7 +11,7 @@ channels:
   mahi-alpha-cap-broker: C09F15FRTAB
 contacts:
   - {name: "Gerard McConnell", role: "ACG Markets — sign-off / Prop side ops contact; queried abnormal rollover prints", confidence: low}
-last_catchup: 2026-11-26T08:12:50Z
+last_catchup: 2026-11-27T08:16:42Z
 status: active
 ---
 
@@ -82,7 +82,7 @@ Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1791965549448229 https://ma
 ### alert-suppression — Monitoring noise before hedgers go on
 status: open · since: 2026-08-17 · last: 2026-09-10
 State: expectedBookStatusOnTimezones was set empty on 2026-08-17 to stop false alerts while hedgers are off and must be switched back on at go-live. On 2026-09-10 a PagerDuty alert for the SYNAPSE_MT5_B and backup sessions was a stopped Windows service on the backup MT5 trade server; Maten restarted it.
-Next: (re-opened: stale 77d, reviewed 2026-11-26; Alpha is live so action is due) Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
+Next: (re-opened: stale 78d, reviewed 2026-11-27; Alpha is live so action is due) Cameron Hughes to re-enable expectedBookStatusOnTimezones now Alpha is live and hedgers go on.
 Refs: https://mahifx.slack.com/archives/C09FFSWHZ8W/p1786998729725629 https://mahifx.slack.com/archives/C09FFSWHZ8W/p1789031144504449
 
 ## Arc
