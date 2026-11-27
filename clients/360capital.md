@@ -8,7 +8,7 @@ refs:
   wiki: null                                                 # no ../MahiProduct/wiki/clients/360capital.md
 channels: {}                      # analytics-only; no internal-/mahi-360capital channels exist, signal is cross-channel only
 contacts: []
-last_catchup: 2026-11-26T08:17:16Z
+last_catchup: 2026-11-27T08:17:41Z
 status: active
 ---
 
