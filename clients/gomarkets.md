@@ -19,14 +19,20 @@ contacts:
   - {name: "Orpheas Paphitis", role: "client — acknowledged channel/book changes 2026-08", confidence: low}
   - {name: "Regina", role: "client ops — Centroid bridge / FIX session incidents (older context)", confidence: low}
   - {name: "David", role: "client ops — execution-rule / pricing-model questions (older context)", confidence: low}
-last_catchup: 2026-11-26T08:13:54Z
+last_catchup: 2026-11-27T08:17:42Z
 status: active
 ---
 
 ## Now
-Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: LP position re-sync (~$30M manual-hedge LP positions in B House; evening adjustments booked 2026-11-12, USDJPY B-to-A move still requested); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
+Active, metals-heavy broker client (XAUUSD) on a NYC Compass stack, hands-on and still learning the tooling (Cyprus staff in weekly training). Live threads: removing _HOLDING markets from visibility (asked 11-26); LP position re-sync (~$30M manual-hedge LP positions in B House; evening adjustments booked 2026-11-12, USDJPY B-to-A move still requested); LP-entity migration to AU venues cut over on 2026-11-02 (Finalto disabled, no AU entity yet); unwinding the _HOLDING books by EOD with LDN help, Radex risk-splitting residue plus an incoming MeanFin flow, and Go's gateway saturation from ~20 channels. Pricing smoothness (flicker vs the MetaQuotes feed) and a suspicious MINT LP feed are the sensitive pricing items.
 
 ## Streams
+
+### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
+status: open · since: 2026-09-08 · last: 2026-11-26
+State: Cutover happened at the 2026-11-02 open: Go switched ISPRIME, 26DEGREES, LMAX_LDN (and IG available) to its AU entity and re-pointed FIX sessions; Nathan reports it went smoothly. In Compass the plain market names are now the AU entity and *_HOLDING are the old MU entity. Go has not set up an AU Finalto entity, so all Finalto trading is disabled in config (FINALTO_HOLDING cleared and reopened with other LPs). Unwinding MU positions uses hybridHedgerSubTrading1 (close at _HOLDING) and hybridHedgerTrading1 (reopen at AU LPs), with small residuals closed manually. Will finds this manual (manual adjustments plus hedger restart per symbol/market), asked for a more automated risk upload, and asked how residual currency amounts in the trading book work and whether they need clearing; Go wants ISPRIME_HOLDING, 26DEGREES_HOLDING and LMAX_LDN_HOLDING closed by EOD 11-02. Daria offered the LDN team and Isaac to run instruments in parallel and sweep residual P&L positions into another book so they do not net with hedger risk; Will accepted and asked Erik and Orpheas to coordinate. Isaac confirmed at 12:00 UTC that all positions were moved MU to AU; by 17:20 Erik reported MU LP accounts and HOLDING connections flat and exposure matching Tapaas, with only the AU LP account cross-check left; Will thanked Isaac. On 2026-11-26 Erik asked Mahi to remove the _HOLDING markets from visibility across Mahi now that the LPs have moved; Shyam agreed.
+Next: Shyam to remove _HOLDING markets from visibility (not yet confirmed done); Go (Erik) to flag any AU LP cross-check issue; answer Will's question on residual currency amounts if still open; Go to set up AU Finalto (no date).
+Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793598060430539 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793640007212149 https://mahifx.slack.com/archives/C09J1DP2QQH/p1795719539704819
 
 ### counterparty-blacklist — Blacklist / exclude counterparties on hedge cancels and rejections
 status: open · since: 2026-10-12 · last: 2026-11-26
@@ -87,15 +93,9 @@ State: Mac said Go will receive a new IG DEMO price stream with improved Spot Go
 Next: Go to fix the hub subscription rejection so market data streams; Mahi to run the news-event latency comparison once data has accumulated.
 Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1792629269396489 https://mahifx.slack.com/archives/CNF3WPNSK/p1793764431608789
 
-### au-lp-migration — LP migration to Go's Australian entity via *_HOLDING markets
-status: open · since: 2026-09-08 · last: 2026-11-02
-State: Cutover happened at the 2026-11-02 open: Go switched ISPRIME, 26DEGREES, LMAX_LDN (and IG available) to its AU entity and re-pointed FIX sessions; Nathan reports it went smoothly. In Compass the plain market names are now the AU entity and *_HOLDING are the old MU entity. Go has not set up an AU Finalto entity, so all Finalto trading is disabled in config (FINALTO_HOLDING cleared and reopened with other LPs). Unwinding MU positions uses hybridHedgerSubTrading1 (close at _HOLDING) and hybridHedgerTrading1 (reopen at AU LPs), with small residuals closed manually. Will finds this manual (manual adjustments plus hedger restart per symbol/market), asked for a more automated risk upload, and asked how residual currency amounts in the trading book work and whether they need clearing; Go wants ISPRIME_HOLDING, 26DEGREES_HOLDING and LMAX_LDN_HOLDING closed by EOD 11-02. Daria offered the LDN team and Isaac to run instruments in parallel and sweep residual P&L positions into another book so they do not net with hedger risk; Will accepted and asked Erik and Orpheas to coordinate. Isaac confirmed at 12:00 UTC that all positions were moved MU to AU; by 17:20 Erik reported MU LP accounts and HOLDING connections flat and exposure matching Tapaas, with only the AU LP account cross-check left; Will thanked Isaac.
-Next: Go (Erik) to finish cross-checking AU LP accounts and flag any issue; answer Will's question on residual currency amounts if still open; Go to set up AU Finalto (no date).
-Refs: https://mahifx.slack.com/archives/C09J1DP2QQH/p1788907409824289 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793598060430539 https://mahifx.slack.com/archives/C09J1DP2QQH/p1793640007212149
-
 ### lr-benign-flow — Published LR also charged on benign counterparties
-status: open · since: 2026-10-27 · last: 2026-10-27
-State: Isaac noted that because Go runs published LR, LR also lands on benign flow: the lr-health check on 2026-10-02 flagged 57 benign counterparties charged about $4.6k in total (mostly a few hundred dollars each, largest ~$1.6k). He dismissed the cards as the expected cost of published LR. If Go asks about fills for good clients, a more targeted setup (Infinox approach: penalise toxic flow harder, benign less) could be offered, but it shows up mostly as slippage so needs client sign-off and probably ties into Go's colour-routing work; unclear Go would be interested.
+status: watching · since: 2026-10-27 · last: 2026-10-27
+State: Downgraded to watching: no activity since 10-27, internal-only with no client action. Isaac noted that because Go runs published LR, LR also lands on benign flow: the lr-health check on 2026-10-02 flagged 57 benign counterparties charged about $4.6k in total (mostly a few hundred dollars each, largest ~$1.6k). He dismissed the cards as the expected cost of published LR. If Go asks about fills for good clients, a more targeted setup (Infinox approach: penalise toxic flow harder, benign less) could be offered, but it shows up mostly as slippage so needs client sign-off and probably ties into Go's colour-routing work; unclear Go would be interested.
 Next: Nathan to decide whether to raise it with Go; no client action.
 Refs: https://mahifx.slack.com/archives/CNF3WPNSK/p1793119374681369
 
