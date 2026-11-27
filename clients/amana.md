@@ -19,7 +19,7 @@ contacts:
   - {name: "Andreas Kleanthous / Mohamad Malkani / Rafik Mansour", role: "ops: futures expiry/start notices", confidence: low}
   - {name: "Omar Maatouk", role: "ops: pricing / hedging config, LP NOP", confidence: low}
   - {name: "Ali Wehbe / Ahmad Hashem", role: "ops: energy futures specs; Mahi_B rejection reports", confidence: low}
-last_catchup: 2026-11-26T08:12:52Z
+last_catchup: 2026-11-27T08:16:45Z
 status: active
 ---
 ## Now
@@ -36,6 +36,19 @@ State: 11-26 PH NOC saw D30 "out of session" rejects: Mahi hedge orders on G30 h
 Next: Nikos to decide on the G30EUR override; Dev on per-market sessions; William to apply the weekend change; Daria to implement the roll hold-back.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794607758054459 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795668853553909
 
+### ig-xau-hedging — IG_CENTROID as a metals hedge venue
+status: open · since: 2026-11-03 · last: 2026-11-26
+State: 11-26 Masri asked for an internal XAUUSD adjustment (IG_CENTROID +3000 / CMC_CENTROID -3000 at 3586.6); Isaac actioned it 14:08 UTC. 11-25 Masri asked for another; Isaac picked it up 08:02. 11-20 Omar had IG client-net XAUUSD corrected again (110.13 vs 50.13 lots at the LP): -60 lots booked internally, nothing sent to IG. 11-16 Nikos asked to enable IG for XAGUSD aggregation; Kate asked whether for hedging or pricing (unanswered). IG_CENTROID is a metals hedge LP (regular account only); Isaac enabled it for A-book XAU hedging 11-05 with a temporary max position pending IG NOP/margin. Omar asked whether per-LP commission can feed aggregation (Daria checking).
+Next: Nikos to answer Kate (XAGUSD hedging vs pricing); Mahi (Daria) to answer Omar on LP commission in aggregation.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793784345213029 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795701487979959
+
+
+### fx-crosses-async — Async for FX crosses on the A book
+status: open · since: 2026-11-26 · last: 2026-11-26
+State: 11-26 Nikos asked whether turning on Async for FX crosses (A book) is just a matter of directing flow to the A book; Isaac said yes, routing and hedging are set up and testing is optional. Moving a client (e.g. acc 8008930) needs an Amana repoint plus pre-repoint trade positions (e.g. GBPCHF) for Mahi to adjust B into A. Nikos: no one moving yet. No close hedger on B; B hedger works to VaR limits.
+Next: Amana to decide whether and when to move clients.
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1795693557738829 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795697787990009
+
 ### delay-rule-client — Removing a lone client from the 500 ms delay rule
 status: open · since: 2026-11-24 · last: 2026-11-24
 State: 11-24 Masri could not remove a client from the 500 ms delay because he is the only client on that rule; Nikos then put the client on another profile (08:06 UTC). No Mahi reply yet.
@@ -45,32 +58,25 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1795506928637669 https://ma
 
 ### weekend-reboot-outage — Gateways not relaunching after the weekly reboot (CFD/crypto down 11-21)
 status: open · since: 2026-11-21 · last: 2026-11-23
-State: Sat 11-21 about 12:00 UTC the Amana bridge got no response on reconnect to the CFD and crypto sessions (MAHI_A_HP_CFDCRY_LIVE; CFDCRYPTO second sessions); PH NOC and Omar chased from 12:55 UTC with no answer for about 3 hours; Inald restarted the gateways, sessions back about 15:20 UTC. 11-23 Daria gave the RCA: after the weekend reboot (~11:45 UTC) clientDistributionGateway3 and HP4 failed building B_CRYPTO_CLIENTS (Hazelcast lock timeout, then "Consumer for 806 already registered", HZ-003) and exited unrelaunched; only CLIENT_PRICE_BETA_LDN is in-band, CLIENT_PRICE_CRYPTO_LDN is still on Hazelcast. David Cooney floated weekend support for Amana; Daria offered moving the reboot to just before Sunday checks.
-11-23 Will reviewed it with Nikos, who asked about hot-hot failover; engineering's option is a second Compass instance in AWS London (eu-west-2), needing a dedicated Centroid link into AWS (Equinix Fabric/Megaport or a Direct Connect cross-connect); Liam drafted the ask for Nikos to put to Centroid.
+State: Sat 11-21 about 12:00 UTC the Amana bridge got no response reconnecting to the CFD and crypto sessions ; PH NOC and Omar chased from 12:55 UTC unanswered about 3 hours; Inald restarted gateways, sessions back about 15:20 UTC. 11-23 Daria gave the RCA: after the weekend reboot (~11:45 UTC) clientDistributionGateway3 and HP4 failed building B_CRYPTO_CLIENTS (Hazelcast lock timeout, then "Consumer for 806 already registered", HZ-003) and exited unrelaunched; only CLIENT_PRICE_BETA_LDN is in-band, CLIENT_PRICE_CRYPTO_LDN is still on Hazelcast. David floated weekend support; Daria offered moving the reboot to just before Sunday checks.
+11-23 Nikos asked about hot-hot failover; option is a second Compass in AWS London needing a dedicated Centroid link into AWS; Liam drafted the ask for Nikos to put to Centroid.
 Next: Nikos to ask Centroid for dedicated AWS connectivity; Engineering to make gateways self-recover; Liam to decide on in-band rollout for Amana; Amana to reply on reboot time; David to raise weekend support.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1795277723540489 https://mahifx.slack.com/archives/C08T42TMKU3/p1795430924104739
 
 
-### ig-xau-hedging — IG_CENTROID as a metals hedge venue
-status: open · since: 2026-11-03 · last: 2026-11-25
-State: 11-25 06:30 UTC Masri asked for another internal XAUUSD position adjustment; Isaac picked it up 08:02 (outcome not yet seen). 11-20 Omar had IG client-net XAUUSD corrected again (110.13 vs 50.13 lots at the LP): -60 lots booked internally, nothing sent to IG. 11-17 Masri had IG_CENTROID -5,500 oz and CMC_CENTROID +5,500 oz adjusted likewise. 11-16 Nikos asked to enable IG for XAGUSD aggregation on the non-swapfree account; Kate asked whether for hedging or price formation (unanswered). IG_CENTROID is a metals hedge LP (regular account only); Isaac enabled it for A-book XAU hedging 11-05 with a temporary max position pending IG NOP/margin. Omar asked whether per-LP commission can feed aggregation (Daria checking).
-Next: Nikos to answer Kate (XAGUSD hedging vs pricing); Mahi (Daria) to answer Omar on LP commission in aggregation.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1793784345213029 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795588225642219
-
-
 ### vip-feed — Third (VIP) pricing feed for XAU/XAG, now A_CLIENTS_VIP channel
 status: open · since: 2026-10-08 · last: 2026-11-20
-State: CLIENT_PRICE_VIP_LDN pricers added 10-08 (CMC only from 10-14). 11-19 Nikos moved a large returning client onto the A_CLIENTS_VIP channel; Nathan: it shares the VIP feed (depth/spread not per-channel; a channel markup or new feed is needed), set riskSplitting on A_CLIENTS_VIP. 11-20 the feed rounded up to 9c, Isaac traced it to a leftover fat-feed BMSL multiplier and fixed it; Nikos moved the client on at 08:35 UTC. CMC and LMAX TOB referenced at 100oz, published at 500oz. 11-19 (internal) VIP session was on Dist1 only, which since the 11-18 Dist3 move carries FX and metals, so VIP NDX futures rejected; fix is a VIP_CLIENTS_CFD session on A_CLIENTS_VIP plus a Dist3 restart at the 17:00 NY break.
+State: CLIENT_PRICE_VIP_LDN pricers added 10-08 (CMC only from 10-14). 11-19 Nikos moved a large returning client onto the A_CLIENTS_VIP channel; Nathan: it shares the VIP feed (depth/spread not per-channel), set riskSplitting on A_CLIENTS_VIP. 11-20 the feed rounded up to 9c, Isaac traced it to a leftover fat-feed BMSL multiplier and fixed it; Nikos moved the client on at 08:35 UTC. 11-19 VIP NDX futures rejected (VIP session only on Dist1); fix is a VIP_CLIENTS_CFD session plus Dist3 restart at the 17:00 NY break.
 Next: Rory to add the VIP_CLIENTS_CFD session and Dist3 restart; Mahi to adjust depth/spread after Nikos's tuning.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1791457134754879 https://mahifx.slack.com/archives/C08T42TMKU3/p1795084157976699
 
 
 ### futures-expiry-recs — Futures rolls, expiries and position adjustments
-status: open · since: 2026-08-17 · last: 2026-11-25
-State: 11-25 Rafik gave notice of GC6Z and SI6Z (Dec) settlement; Nathan flattened both in Compass by 21:08 UTC. 11-20 Andreas gave notice of CM6Z settlement; Masri confirmed it is the December corn contract, not live on Mahi, so no action. Amana posts expiry and start notices and Mahi zeroes positions at EOD, re-subscribing new contracts on Mahi_CMC_FIX. 11-17 Andreas announced CrudeOilZ6 settlement (Daria: no open position) and Mohamad Malkani said CrudeOilG7 and SI7H start 11-18; Daria switched the subscriptions and scheduled EOD restarts to pick them up.
+status: open · since: 2026-08-17 · last: 2026-11-26
+State: 11-26 Mohamad Malkani gave notice that the BrentOil7H future starts 11-27, to be activated after EOD. 11-25 Rafik gave notice of GC6Z and SI6Z (Dec) settlement; Nathan flattened both in Compass by 21:08 UTC. 11-20 Andreas gave notice of CM6Z settlement; Masri confirmed it is the December corn contract, not live on Mahi, so no action. Amana posts expiry and start notices and Mahi zeroes positions at EOD, re-subscribing new contracts on Mahi_CMC_FIX. 11-17 CrudeOilZ6 settled (no position); CrudeOilG7 and SI7H started 11-18 via Daria's subscription switch and EOD restarts.
 11-19 Masri reported hedging on the wrong symbol after SI7H was enabled: XAGFUT-H was not remapped from the P to the W futures hedger profile at EOD. Rory remapped it, restarted the hedgers and netted the mismatch at CMC (10,250oz) by 16:09 UTC.
 Next: Mahi to check futures contract rolls are fully remapped at EOD; Daria to confirm CrudeOilG7 is live.
-Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795637173171259
+Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1786993422025149 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795722208737329
 
 
 ### si-books — SI energies and SI indices books
@@ -82,7 +88,7 @@ Refs: https://mahifx.slack.com/archives/C08T42TMKU3/p1786981181951769 https://ma
 
 ### client-tag-passthru — Client login tag for CMC dynamic logins
 status: open · since: 2026-09-28 · last: 2026-11-25
-State: 11-25 Nikos could not find markouts per tag in Yield Profiles; Isaac: the tag 58 value is stored in Pulse as Comment on yieldprofiles, but only on B_CLIENTS_LDN (the pre-risk-split order), not carried to B_FX_CLIENTS_LDN, though present in SWAPFREE_CLIENTS_LDN. CMC needs dynamic FIX API client logins, so Amana wants to send them on tag 109 and have Mahi consume and echo them. Execution reports do not return 109 today (Rory 09-28); 11-02 Karen asked about a "tag 90017 plan", none visible. 11-03 Amana tested tag 58 (sub-login), live for one client; Rory: stored per order in Compass comments, not passed to CMC. 11-18 Karen enabled tag 58 sublogin for Mahi analytics and asked whether the new return tags are available; Rory to test 109=222.
+State: 11-25 Nikos could not find markouts per tag in Yield Profiles; Isaac: the tag 58 value is stored in Pulse as Comment on yieldprofiles, but only on B_CLIENTS_LDN (the pre-risk-split order), not carried to B_FX_CLIENTS_LDN, though present in SWAPFREE_CLIENTS_LDN. CMC needs dynamic FIX API client logins, so Amana wants to send them on tag 109 and have Mahi consume and echo them. Execution reports do not return 109 today (Rory 09-28); 11-03 tag 58 (sub-login) live for one client; stored per order in Compass comments, not passed to CMC. 11-18 Karen enabled tag 58 sublogin for Mahi analytics and asked whether the new return tags are available; Rory to test 109=222.
 Next: Mahi to say whether tag 109 (or 90017) can be consumed and returned; Amana to extend tag 58 to more clients/instruments.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1790602136754039 https://mahifx.slack.com/archives/C08SYSMP0EB/p1795602679174819
 
@@ -137,7 +143,7 @@ Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1794385645413669 https://ma
 
 ### gateway-split — Distribution gateway split (dist3 / HP dist4)
 status: open · since: 2026-10-23 · last: 2026-11-25
-State: 11-25 Isaac called the instrument split complete and began dropping the gateway throttle from 1/10ms to 1/8ms, aiming for 1/5ms or 2/10ms. Plan (CHG-2610-TRFK): FX and Metals stay on dist1/HP dist2; Crypto, Indices, Energies and futures move to dist3 and HP dist4. CFDs and cryptos switched 11-05, oils and gas 11-06, all indices and crypto 11-11 (only metals and FX still on the originals). Karen asked about removing a Mahi-side pricing throttle and disabling CFD/crypto on old sessions (no answer seen). Hadeel suspects ndx-price-flip relates to the index move.
+State: 11-25 Isaac called the instrument split complete and began dropping the gateway throttle from 1/10ms to 1/8ms, aiming for 1/5ms or 2/10ms. Plan (CHG-2610-TRFK): FX and Metals stay on dist1/HP dist2; Crypto, Indices, Energies and futures move to dist3 and HP dist4. Moves done 11-05 to 11-11; only metals and FX remain on the originals. Karen asked about removing a pricing throttle and disabling CFD/crypto on old sessions (no answer seen). Hadeel suspects ndx-price-flip relates to the index move.
 Next: Rory to answer Karen; Isaac to remove migrated symbols from dist1/HP dist2 at an EOD restart and keep stepping the throttle down.
 Refs: https://mahifx.slack.com/archives/C08SYSMP0EB/p1792765304547529 https://mahifx.slack.com/archives/C08T42TMKU3/p1795598397306789
 
