@@ -17,7 +17,7 @@ contacts:
   - {name: "Priojit", role: "TOT hire working closer with Compass (Jan 2026)", confidence: low}
   - {name: "Todd Hodges", role: "TOT internal contact; Compass product training Jan 2026", confidence: low}
   - {name: "Arjie", role: "MatchTrader operations contact at TOT", confidence: low}
-last_catchup: 2026-11-26T08:17:16Z
+last_catchup: 2026-11-27T08:17:42Z
 status: active
 ---
 
@@ -26,6 +26,18 @@ Prop firm; Mahi is dealing desk and risk. Payouts were high last week; Cameron H
 Open: TOT plans a perps offering in January (Mahi to ask instruments and funding); EURUSD PSM widening was stuck on 13-17 Nov (round-numbers override applied, $/M anomaly under investigation); Matt says TOT is back to #13 on Prop Firm Match spreads; no second price source if Mahi Central eu-west-2 drops (Liam Cordelle weighing options); MatchTrader IP whitelist (Mahi to action); CADCHF 4 ms-apart fills with 1.3 pip difference (Mahi to explain); drop-copy volume check with Shane.
 
 ## Streams
+
+### gold-spike-down — Gold sharp spike down on MT5 accounts
+status: open · since: 2026-11-27 · last: 2026-11-27
+State: On 2026-11-27 ~03:35 UTC Daniel forwarded a TOT complaint (from David) that gold spiked sharply down to $3513 across several MT5 accounts, with one account (98972042) as reference and a chart. Daria Horton replied that Mahi will look. No root cause yet.
+Next: Daria Horton to investigate the XAUUSD price spike and revert to Daniel.
+Refs: https://mahifx.slack.com/archives/C08U853T684/p1795750537166289 https://mahifx.slack.com/archives/C08U853T684/p1795752390514109
+
+### psm-w-stop-signal-fix — PSM-W queue overflow crashing stop signals
+status: open · since: 2026-11-26 · last: 2026-11-26
+State: Liam Cordelle self-approved change CHG-2611-MY3W (Infra, Servers, 2026-11-26 16:45-17:45Z) to stop stop-signals crashing when the PSM-W queue overflows; Cameron Hughes informed. Implemented 17:09Z, 3 of 3 verification checks pending, Liam to verify by 2026-12-07. Likely related to the PSM widening issues on this client.
+Next: Liam Cordelle to verify by 2026-12-07.
+Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1795711037084959 https://mahifx.slack.com/archives/C08TG143F4L/p1795712946592629
 
 ### prop-perps — Prop perps request
 status: open · since: 2026-09-30 · last: 2026-11-25
@@ -57,9 +69,9 @@ Next: Liam Cordelle to decide between the two options.
 Refs: https://mahifx.slack.com/archives/C08TG143F4L/p1793359672712069 https://mahifx.slack.com/archives/C08TG143F4L/p1793359694612209
 
 ### matchtrader-ip-allow — MatchTrader asks Mahi to whitelist an IP
-status: open · since: 2026-10-27 · last: 2026-10-27
-State: Lars forwarded a MatchTrader IT Support request for Mahi to whitelist 18.132.0.59. Cameron Hughes replied that Mahi will action it on 2026-10-27; no completion message seen yet.
-Next: Mahi (Cameron Hughes) to whitelist the IP and confirm to Lars.
+status: watching · since: 2026-10-27 · last: 2026-10-27
+State: Lars forwarded a MatchTrader IT Support request for Mahi to whitelist 18.132.0.59. Cameron Hughes replied that Mahi will action it on 2026-10-27; no completion message seen since.
+Next: Mahi (Cameron Hughes) to whitelist the IP and confirm to Lars. Watching: no follow-up seen since 2026-10-27.
 Refs: https://mahifx.slack.com/archives/C08U853T684/p1793098034378779 https://mahifx.slack.com/archives/C08U853T684/p1793098073453029
 
 ### prop-network-showcase — Mahi to show TOT its prop-network work
