@@ -17,14 +17,14 @@ contacts:
   - {name: "Andri Zamroni", role: "client trading ops — algo settings/limits, yield profiles", confidence: low}
   - {name: "Mohamad Richard", role: "client — Compass/Echo user requests", confidence: low}
   - {name: "Neil Whitehead", role: "client data/tech — backtesting, MySQL/Pulse queries (older lead)", confidence: low}
-last_catchup: 2026-11-26T08:17:17Z
+last_catchup: 2026-11-27T08:13:43Z
 status: active
 ---
 
 ## Now
 Client has moved to its Indonesia entity PT Surya Anugrah Mulya (2026-11-01), with new contact addresses.
-2026-11-20 NYC /tmp incident (client DB report, 39 fills unreported) reconciled by Mahi position adjustments; client queries to move to a replica DB. Client unexpectedly has an LP labelled "Valutrades" on its FEED1 quote session; awaiting their decision.
-Gold Feb27 roll on Surya rejected overnight 2026-11-24 for a missing security definition; fixed manually, root cause with Dev. Algo cutoff change (CHG-2611-WYCS) went live 2026-11-25, verification due 2026-11-27; Mahi UAT is moving to new servers.
+2026-11-26 Thanksgiving CME early close left TT algo orders hanging (Mahi unaware of the early close); handling of future closures to be agreed 2026-11-27. 2026-11-20 NYC /tmp incident (client DB report, 39 fills unreported) reconciled by Mahi position adjustments; client queries to move to a replica DB. Client unexpectedly has an LP labelled "Valutrades" on its FEED1 quote session; awaiting their decision.
+Gold Feb27 secdef rejects (2026-11-24) permanently fixed. Algo cutoff is now 1 minute (CHG-2611-WYCS, verification due 2026-11-27); Mahi UAT is moving to new servers.
 Active broker client (LDN + NYC, Beeks-hosted). Main work: algo order routing UAT through TT and QB via OneZero (tag 448 config strings), a new StoneX/Surya TT connection, and a pending bridge-to-production quote. Mahi offered ~$5k/month (Andrew Morgan, relayed 2026-10-12); client targets a 1 Jan launch with sign-off around mid-Nov. Client reported as very happy (GreySpark reference call 2026-08-26) but stopped CFD client onboarding globally (2026-09-09).
 
 ## Streams
@@ -35,34 +35,35 @@ State: Maten Rehimi told the client on 2026-11-25 that execution reports for chi
 Next: Mahi (Maten Rehimi) shows Brandon where the setting is in TT; client asks StoneX to disable it.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795621196455869 https://mahifx.slack.com/archives/C09HN93T0G2/p1795668338524089
 
-
 ### uat-migration — Mahi migrating client UAT environment (us-east-1) to new servers
 status: open · since: 2026-11-25 · last: 2026-11-26
 State: On 2026-11-25 Maten Rehimi asked the client to have OneZero UAT and Quantitative Brokers whitelist Mahi's new UAT IP (18.232.240.154), to confirm OneZero UAT can reach it on ports 9010/9011/9013/9014, and to say which IPs Mahi should whitelist for Compass dashboard access. On 2026-11-26 Brandon said OneZero whitelisting is done for port 23483, port connectivity will be confirmed once OneZero finishes, and asked Mahi to whitelist 108.136.145.119 for dashboard access first. QB whitelisting is not mentioned yet.
 Next: Mahi whitelists 108.136.145.119 for the new UAT Compass; Brandon confirms OneZero connectivity and QB whitelisting.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795617474509929 https://mahifx.slack.com/archives/C09HN93T0G2/p1795667078588009
 
-
 ### ab-book-queries — A/B book classification requests from overnight team
 status: open · since: 2026-07-08 · last: 2026-11-26
-State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-25: 77004329 answered B book, one to keep an eye on (Cameron Hughes). On 2026-11-26 Brandon asked whether these recommendations sit in a database he can pull programmatically; Shyam Hari said the calls are not stored, each is an analyst's read of the account's markouts and PnL at the time, and Brandon accepted (supersedes the earlier profile-recs-creds programmatic-access ask for these calls). Before that 2026-11-20: 68533315 asked by the overnight desk, Daria Horton replied A with a chart within 4 min. Before that 2026-11-15/16: 88522460 answered A book by Nathan Burch (flow goes offside quickly on most instruments, NDFUSD less so), and 65570981 answered A book by Shyam Hari within about 5 min; Andri asked how to read the chart and where to see it, and Shyam explained it is a yield profile (house-perspective markouts by horizon) - no answer yet on where the client can view it. Before that 2026-11-10 (69542274: trending B book over recent months, recent PnL dip to watch, Rory King, answered in 17 min); before that 2026-10-23 (92007741: A book, worth watching; 69011847: A book, both William Denny); before that 2026-10-21 (95503831: B book from Isaac Dann; 68565319 answered later the same day by Isaac Dann: small sample, looking like A book). Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
+State: Recurring: the client overnight desk posts "please advise Ac <id>" and a Mahi analyst replies A or B book with a chart, usually within minutes. Latest 2026-11-26: 69575523 answered A book by William Denny after about 33 min (the client chased once). Before that 2026-11-25: 77004329 answered B book, one to keep an eye on (Cameron Hughes). On 2026-11-26 Brandon asked whether these recommendations sit in a database he can pull programmatically; Shyam Hari said the calls are not stored, each is an analyst's read of the account's markouts and PnL at the time, and Brandon accepted (supersedes the earlier profile-recs-creds programmatic-access ask for these calls). Earlier requests (2026-10-21 to 2026-11-20) were answered A or B within minutes by Mahi analysts. Andri asked how to read the chart and where to see it, and Shyam explained it is a yield profile (house-perspective markouts by horizon) - no answer yet on where the client can view it. Client also asked what the Echo yield-profile "Off Market" filter means (Daria Horton explained 2026-08-20).
 Next: Mahi tells Andri where the yield profile can be viewed (Echo/Compass).
-Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1795667133225439
-
-
+Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1783493649978839 https://mahifx.slack.com/archives/CSLM3Q8AD/p1795702774044029
 
 ### algo-close-cutoff — Algo orders to TT expire before NY close; cutoff change deployed
-status: open · since: 2026-11-23 · last: 2026-11-25
-State: Garry Bersnov reported on 2026-11-23 that a ScalePOV order (sent 16:56:47 NY on 2026-11-20) expired after filling 2 of 13, and asked for the cutoff to be 1 minute before close. Rory King found Mahi cuts algo duration so orders finish 2 minutes before the 17:00 NY close, and TT takes whole minutes. On 2026-11-25 Garry asked again if the cutoff had been updated, after a 3-lot ScalePOV order on GCG7-FEB27 at 21:58:38Z on 2026-11-24 was rejected ("RCM-X: end time must be before market close"); no reply to him in the channel yet. Liam Cordelle raised and self-approved change CHG-2611-WYCS (TT order gateways get new contracts; algo cutoff 16:59), live at the 22:00-22:05Z restart on 2026-11-25 and implemented; 5 of 5 verification checks pending, Liam to verify by 2026-11-27.
-Next: Liam verifies CHG-2611-WYCS by 2026-11-27 and tells Garry the cutoff is now 1 minute.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795423437925179 https://mahifx.slack.com/archives/C09HN93T0G2/p1795607210353599 https://mahifx.slack.com/archives/CP7A1F8BT/p1795622404598549
+status: open · since: 2026-11-23 · last: 2026-11-26
+State: Garry Bersnov reported on 2026-11-23 that a ScalePOV order (sent 16:56:47 NY on 2026-11-20) expired after filling 2 of 13, and asked for the cutoff to be 1 minute before close. Rory King found Mahi cuts algo duration so orders finish 2 minutes before the 17:00 NY close, and TT takes whole minutes. On 2026-11-25 Garry asked again if the cutoff had been updated, after a 3-lot ScalePOV order on GCG7-FEB27 at 21:58:38Z on 2026-11-24 was rejected ("RCM-X: end time must be before market close"); On 2026-11-26 Liam told Garry the cutoff is now 1 minute and a permanent fix for the rejections was applied. Liam Cordelle raised and self-approved change CHG-2611-WYCS (TT order gateways get new contracts; algo cutoff 16:59), live at the 22:00-22:05Z restart on 2026-11-25 and implemented; 5 of 5 verification checks pending, Liam to verify by 2026-11-27.
+Next: Liam verifies CHG-2611-WYCS by 2026-11-27 (5 checks pending in the record).
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795423437925179 https://mahifx.slack.com/archives/C09HN93T0G2/p1795607210353599 https://mahifx.slack.com/archives/C09HN93T0G2/p1795694335996299
 
-### gold-feb-secdef — GCG7-FEB27 rejects on Surya TT; security definitions stale
-status: open · since: 2026-11-24 · last: 2026-11-25
-State: After the client rolled gold Dec2026 to Feb2027 for Surya on 2026-11-24, orders (incl. ScalePOV, 5 lots) were rejected overnight with "Unable to find security definition for instrument: GCG7-FEB27"; Nathan Burch got trades flowing about 19:52Z and told Garry Bersnov the new contract had not been set up on the Surya retail margin account (normally automatic), was added manually, no rejects since, and the cause was raised with Dev. At Garry's request Nathan added GCH7, GCJ7, CLH7, CLJ7 and NQH7 (matching the AMB account, which updates automatically). Daria Horton (internal) ticketed TT security definitions as a regression on 26.4: not updated since mid-Sep for the additional markets (Zendesk 23909).
-Next: Dev fixes automatic security-definition updates for the Surya account (ticket 23909).
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795540318668029 https://mahifx.slack.com/archives/C09HN93T0G2/p1795564582113569 https://mahifx.slack.com/archives/CP7A1F8BT/p1795550940476299
+### cme-early-close — Thanksgiving CME early close left TT algo orders hanging
+status: open · since: 2026-11-26 · last: 2026-11-26
+State: Around 17:36Z on 2026-11-26 Graeme Watkins reported gold and Nasdaq TT algo orders hanging again; the overnight desk wanted to trade manually and Liam Cordelle force-cancelled the order so the client's backup method could take over. Liam's cause: Mahi has no knowledge of the CME Thanksgiving early closure, so it sent orders with expire times after the close, the CME rejected them, and retry logic kept the order open on Mahi's side (cancels were reaching OneZero). Graeme found it odd that OneZero did not fail over and asked for one FIX reject message. Liam proposed discussing handling of future closures on 2026-11-27. Late evening the overnight desk asked Mahi to make sure no orders execute and Shyam Hari said Mahi would check.
+Next: Liam shares a reject FIX message with Graeme and agrees early-close handling (2026-11-27); Shyam Hari checks the overnight desk's latest request.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795714611396679 https://mahifx.slack.com/archives/C09HN93T0G2/p1795716056947019 https://mahifx.slack.com/archives/C09HN93T0G2/p1795720708874979
 
+### java25-london — Java 25 upgrade on London servers rolled back
+status: open · since: 2026-11-26 · last: 2026-11-26
+State: Liam Cordelle self-approved change CHG-2611-5FWA (Java 25 on the London servers, the first on CentOS 7, window 12:15-13:30Z on 2026-11-26). Verification failed and the change was rolled back at 14:10Z; no client impact was raised in the channels.
+Next: Liam decides whether to retry.
+Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795694851341679 https://mahifx.slack.com/archives/CP7A1F8BT/p1795702220729089
 
 ### efp-gold-quote — Client asks for a derived gold EFP (futures minus spot) quote
 status: open · since: 2026-11-23 · last: 2026-11-23
@@ -70,13 +71,11 @@ State: Brandon Soo emailed Bonnie Cassidy and support on 2026-11-23 with ten que
 Next: Bonnie gets Graeme's appetite to pay; quant team scopes via the ticket and answers Brandon's questions; Mahi quotes.
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795426648207919 https://mahifx.slack.com/archives/CP7A1F8BT/p1795446991718259
 
-
 ### feed1-valutrades-lp — Unknown "Valutrades" LP on client FEED1 quote session
 status: open · since: 2026-11-22 · last: 2026-11-23
 State: After the 2026-11-22 market open Shyam Hari noticed an LP labelled "Valutrades" on the client's FEED1 quote session (ValuCY_Live_Q) that Mahi has not set up, so its prices are unused; he asked what it is and whether the client wants it used. Garry Bersnov replied 2026-11-23 that the client is still discussing internally.
 Next: client (Garry) decides and tells Mahi whether to use the LP.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795388473669799 https://mahifx.slack.com/archives/C09HN93T0G2/p1795413133774249
-
 
 ### nyc-tmp-fill-incident — Client DB report filled NYC /tmp, fills not delivered
 status: open · since: 2026-11-20 · last: 2026-11-20
@@ -84,20 +83,17 @@ State: From ~07:21Z on 2026-11-20 a markout report run by the client's read-only
 Next: Mahi (Liam) delivers the replica DB details; Leonardo checks other parties' persistence gaps; longer term move FIX stores / MariaDB tmpdir off the 4.8G /tmp and consider a max_statement_time limit for valu.user.
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1795160898098069 https://mahifx.slack.com/archives/C09HN93T0G2/p1795166591925259
 
-
 ### icdx-pricing-failover — ICDX pricing rules moved off VT connections
 status: open · since: 2026-11-17 · last: 2026-11-17
 State: On 2026-11-17 Garry said the client no longer uses VT connections and asked Mahi to update the ICDX pricing rules to a new priority and failover order: ISP_OZNY4_RETAIL_MARGIN_SURYA primary, JUMP_OZNY4_RETAIL_MARGIN_SURYA first failover, VELO_OZNY4_RETAIL_MARGIN_SURYA second failover. Shyam Hari replied that Mahi will get it sorted. Related to the Surya entity move and the JT/FEED4 routing thread.
 Next: Mahi (Shyam Hari) applies the ICDX pricing-rule change and confirms to Garry.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1794894754394429 https://mahifx.slack.com/archives/C09HN93T0G2/p1794894979002469
 
-
 ### profile-recs-creds — Programmatic access to Mahi profile recommendations
 status: open · since: 2026-10-23 · last: 2026-11-17
-State: On 2026-11-17 Leonardo Borsi opened change CHG-2611-E19T (read-only DB access for the two further IPs, window 2026-11-17..2026-11-24, same login/SSL/read-only grants as CHG-2611-68EZ); Liam Cordelle approved it, noting the GRANTS must be copied over too. Neil Whitehead later acknowledged in the operations channel ("will let you know if any issues"). On 2026-11-16 Neil also asked to whitelist two further IPs (32.202.79.37, 54.88.253.4) for network and MySQL, saying that is the last; Rory King agreed. Brandon asked (2026-10-23) for credentials so the client IT team can pull the Mahi profile recommendations programmatically, i.e. DB access; Shyam Hari raised it with the dev team. On 2026-11-13 Neil Whitehead asked Mahi to whitelist two client IPs (13.218.4.162, 34.226.55.101) for the read-only DB user on the client DB at 192.81.111.24; Nathan Burch said he is making the request, and Arun opened change CHG-2611-68EZ (read-only database access to two more client IPs, window 2026-11-13..2026-11-20) awaiting approval. On 2026-11-16 Neil replied to Nathan that he can telnet but MySQL still refuses the user from 13.218.4.162 (access denied), so the grant looks not yet applied; Shyam Hari said Mahi will check.
+State: On 2026-11-17 Leonardo Borsi opened change CHG-2611-E19T (read-only DB access for the two further IPs, window 2026-11-17..2026-11-24, same login/SSL/read-only grants as CHG-2611-68EZ); Liam Cordelle approved it, noting the GRANTS must be copied over too. Neil Whitehead later acknowledged in the operations channel ("will let you know if any issues"). Earlier: Brandon asked (2026-10-23) for credentials so client IT can pull profile recommendations programmatically; on 2026-11-13/16 Neil asked to whitelist four client IPs for read-only MySQL on the client DB, via CHG-2611-68EZ (Mahi found the grant not yet applied for 13.218.4.162 on 2026-11-16). Shyam Hari said Mahi will check.
 Next: CHG-2611-68EZ and CHG-2611-E19T implemented with GRANTS copied and MySQL access confirmed for all four IPs (Mahi, Shyam Hari / Leonardo Borsi); Mahi confirms to Neil.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792729759993029 https://mahifx.slack.com/archives/C09HN93T0G2/p1794827657406459 https://mahifx.slack.com/archives/CP7A1F8BT/p1794909021865319 https://mahifx.slack.com/archives/C09HN93T0G2/p1794928110365059
-
 
 ### algo-uat-testing — Algo config strings via TT / QB (UAT then prod)
 status: open · since: 2026-08-19 · last: 2026-11-08
@@ -105,13 +101,11 @@ State: On 2026-11-08 Garry told Mahi the client will send algo parameters from i
 Next: Mahi confirms to Garry whether the algo parameter service is ready in Production (client sends params 2026-11-09); client raises the TT cancel with TT; Liam answers Graeme on a UAT GUI; client answers Liam on disabling the UAT timeout; client chases TT and QB; Mahi supplies FIX logs on request.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787128423896719 https://mahifx.slack.com/archives/C09HN93T0G2/p1794135431610409
 
-
 ### echo-compass-users — Echo/Compass user admin
 status: open · since: 2026-09-01 · last: 2026-11-04
 State: Re-opened. On 2026-11-04 Brandon asked for Echo and Compass credentials for a new user at the Surya entity (Slava); Daria Horton said Mahi will send them directly once created. Liam Cordelle noted on 2026-10-23 that the client has logins in the system (one named, one overnight) and offered to arrange access. On 2026-10-26 Garry asked Liam to add his own email and reset the overnight password. Andri asked whether a screenshotted control is where to cancel an order in Compass; Shyam Hari confirmed. Earlier: Echo user audit and removal of 14 users (2026-09-01); new Compass and Echo account for a client analyst created 2026-09-29.
 Next: Liam adds Garry's email and resets the overnight password; Mahi (Daria Horton) creates and sends Slava's Echo/Compass credentials.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1788234307503689 https://mahifx.slack.com/archives/C09HN93T0G2/p1793767610138899
-
 
 ### xau-mini-micro-source — Client queries source of XAUUSD mini/micro pricing
 status: open · since: 2026-11-03 · last: 2026-11-03
@@ -119,13 +113,11 @@ State: On 2026-11-03 Andri Zamroni urgently asked where mini and micro (XAUUSD, 
 Next: client checks their side; Mahi on request.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793686895184259 https://mahifx.slack.com/archives/C09HN93T0G2/p1793689672004209
 
-
 ### surya-entity-move — Client moved to Indonesian entity PT Surya Anugrah Mulya
 status: open · since: 2026-11-01 · last: 2026-11-01
 State: Nicole Vivian posted on 2026-11-01 that Valutrades has moved to its Indonesia entity, PT Surya Anugrah Mulya, with new commercial and Mahi-system-support contacts on the client side (addresses in the thread). Implications for contract party, billing and the Surya TT connection are not discussed yet.
 Next: Mahi to check whether the contracting/billing party and client-channel contacts need updating.
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1793566129040399
-
 
 ### feed-lp-routing — LP feed routing (B2Broker, JT)
 status: open · since: 2026-08-12 · last: 2026-10-28
@@ -133,31 +125,26 @@ State: Re-opened. New LPs (JT, GCEX, B2_OZNY4_RETAIL_MARGIN_VT) caused FEED4 dis
 Next: Mahi (Shyam Hari/Rory) answers Garry on how to add the JT market.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787633651014009 https://mahifx.slack.com/archives/C09HN93T0G2/p1793168593978109
 
-
-### support-channel-teams — Client asks about Microsoft Teams support channel
-status: open · since: 2026-10-27 · last: 2026-10-27
-State: Brandon asked whether Mahi supports Microsoft Teams for support because of a client compliance requirement to possibly switch platforms. Shyam Hari replied Mahi does not support Teams and prefers Slack or email, and asked for more detail on the requirement to take back to the team. No client reply yet.
-Next: Brandon shares the compliance detail; Mahi decides whether to accommodate.
-Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793071670570599 https://mahifx.slack.com/archives/C09HN93T0G2/p1793072932042059
-
-
 ### contract-rolls — Futures and CFD rolls announced by client
 status: watching · since: 2026-08-18 · last: 2026-11-24
 State: Client posts FYIs for rolls (USOIL Oct to Nov to Dec to Jan 2027 for AMB, gold Dec2026 to Feb2027 for AMB (acknowledged by Nathan Burch) and for Surya on 2026-11-24 (see gold-feb-secdef), US100 Sep to Dec, GC Dec26 gold). Mahi acknowledges; Garry asked on 2026-08-18 whether symbol pricing switches automatically on a roll.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1787042749088329 https://mahifx.slack.com/archives/C09HN93T0G2/p1795540286212189
-
 
 ### dashboard-stability — Compass dashboard and admin outages
 status: watching · since: 2026-08-17 · last: 2026-11-05
 State: On 2026-11-05 the overnight desk reported the NY admin trading/orders page slow to load (a filtered NQZ6 view); Shyam Hari and Daria Horton could load it fine, a refresh fixed it and the client confirmed. Earlier: Compass errors on 2026-09-20 (fix deployed by Sam Hewitt, trading unaffected), LDN dashboard login bounce fixed by a dashboard-only deploy on 2026-09-28 (NY already fixed), and a transient all-tab error on 2026-10-05 that cleared after refresh. Sam raised LDN backgroundJobs memory 2048 to 3072MB on 2026-09-01.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1789937493122649 https://mahifx.slack.com/archives/CSLM3Q8AD/p1793838767664399 https://mahifx.slack.com/archives/CSLM3Q8AD/p1793858285175349
 
+### support-channel-teams — Client asks about Microsoft Teams support channel
+status: watching · since: 2026-10-27 · last: 2026-10-27
+State: Brandon asked whether Mahi supports Microsoft Teams for support because of a client compliance requirement to possibly switch platforms. Shyam Hari replied Mahi does not support Teams and prefers Slack or email, and asked for more detail on the requirement to take back to the team. No client reply yet. Downgraded to watching: no activity for 31d; Brandon to share the compliance detail.
+Next: Brandon shares the compliance detail; Mahi decides whether to accommodate.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1793071670570599 https://mahifx.slack.com/archives/C09HN93T0G2/p1793072932042059
 
 ### overnight-reconnects — Overnight connection fixes
 status: watching · since: 2026-08-18 · last: 2026-10-25
 State: Overnight desk posts a screenshot ("please can you fix this for us") out of hours; Sam Hewitt or Daria Horton fix it within about 2 minutes and the client confirms (2026-08-18, 2026-08-27, 2026-09-21). On 2026-10-25 Brandon asked Mahi to confirm whether a screenshotted item was an issue; Shyam Hari checked and found everything fine.
 Refs: https://mahifx.slack.com/archives/CSLM3Q8AD/p1787088431402609 https://mahifx.slack.com/archives/CSLM3Q8AD/p1792962970307259
-
 
 ### oz-backup-whitelist — Whitelist OneZero hub backup IPs
 status: watching · since: 2026-10-22 · last: 2026-10-23
@@ -165,13 +152,11 @@ State: Brandon is auditing the OneZero hubs' backup connections and asked Mahi t
 Next: Brandon answers Maten (backup behaviour, telnet to 192.81.111.24 on all ports); Mahi then whitelists.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792659558042959 https://mahifx.slack.com/archives/C09HN93T0G2/p1792746206556109
 
-
 ### phillip-tt-removal — Remove deactivated Phillip TT connection
 status: watching · since: 2026-10-23 · last: 2026-10-23
 State: Graeme said the client stopped using the Phillip TT connection, which Phillip appears to have deactivated, leaving an error on Compass. Liam Cordelle removed it from Mahi's side on 2026-10-23. Andri then flagged another error screenshot and Liam asked if it was that connection; Graeme asked Brandon to remove the same connection on the OneZero side too. Downgraded to watching: no activity for 31d; Brandon to remove on OneZero side.
 Next: Brandon removes it on the OneZero side.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792758756367069 https://mahifx.slack.com/archives/C09HN93T0G2/p1792776666037109
-
 
 ### lr-setting-location — Client cannot find Liquidity Reduction setting in new screen
 status: watching · since: 2026-10-22 · last: 2026-10-22
@@ -179,13 +164,11 @@ State: Garry also asked whether old-UI Position maps to the new Rate Limit Amoun
 Next: Andri confirms he found it.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1792651200738679 https://mahifx.slack.com/archives/C09HN93T0G2/p1792658285372589
 
-
 ### stonex-surya-tt — New StoneX/Surya TT connection via OneZero
 status: watching · since: 2026-09-15 · last: 2026-10-13
 State: Mahi built fixOrdersTT4 and ttPassthroughGateway4 (NY) for market TT_MHNY4_FUND_STONEX_SURYA_FIX_OR; OneZero connected and logged on 2026-10-09. A test trade on 2026-10-13 was rejected with "TT FIX: No connection_id found for BankAlgo with providerID RCM". William Denny asked the client to check with TT whether the account is connected; client said it would. Downgraded to watching: no activity for 31d; client was to check with TT.
 Next: client checks with TT.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1789466674694669 https://mahifx.slack.com/archives/C09HN93T0G2/p1791889319503849
-
 
 ### algo-order-limits — Max order size limits on TT sessions
 status: watching · since: 2026-10-08 · last: 2026-10-12
@@ -193,13 +176,11 @@ State: A 3800-lot gold order was rejected by a Mahi-side per-contract max, not T
 Next: client decides on prod limits.
 Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1791450035281399 https://mahifx.slack.com/archives/C09HN93T0G2/p1791802948207999
 
-
 ### bridge-commercial — Bridge to production: pricing and scope
 status: watching · since: 2026-08-03 · last: 2026-10-12
 State: Graeme asked whether bridge deployment to production is still free; internally Andrew pushed back. On 2026-10-05 Graeme described a production system: one MT5 server to Compass to 1-3 regulated LPs (e.g. ISPrime), minimum volume, as an alternative to OneZero. Andrew agreed to quote up to $5k/month (revisit if volume or terms change), Bonnie relayed it 2026-10-12; Graeme replied it is a 1 Jan launch with sign-off by mid-Nov after his Jakarta trip. Downgraded to watching: no activity for 32d; client sign-off expected mid-Nov.
 Next: client sign-off mid-Nov; Mahi to hold quote and follow up on the named update cadence for build requests.
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1785744760869439 https://mahifx.slack.com/archives/CP7A1F8BT/p1791798007442899
-
 
 ### hotspot-pegged — CBOE Hotspot pegged-order integration
 status: watching · since: 2026-09-03 · last: 2026-10-05
@@ -207,6 +188,10 @@ State: Graeme asked whether Mahi still has a CBOE Hotspot integration (ITCH MD p
 Next: client comes back on Hotspot.
 Refs: https://mahifx.slack.com/archives/CP7A1F8BT/p1788444927995509 https://mahifx.slack.com/archives/CP7A1F8BT/p1791206090832099
 
+### gold-feb-secdef — GCG7-FEB27 rejects on Surya TT; security definitions stale
+status: closed · since: 2026-11-24 · last: 2026-11-26 · closed: 2026-11-27
+State: After the client rolled gold Dec2026 to Feb2027 for Surya on 2026-11-24, orders (incl. ScalePOV, 5 lots) were rejected overnight with "Unable to find security definition for instrument: GCG7-FEB27"; Nathan Burch got trades flowing about 19:52Z and told Garry Bersnov the new contract had not been set up on the Surya retail margin account (normally automatic), was added manually, no rejects since, and the cause was raised with Dev. At Garry's request Nathan added GCH7, GCJ7, CLH7, CLJ7 and NQH7 (matching the AMB account, which updates automatically). Daria Horton (internal) ticketed TT security definitions as a regression on 26.4: not updated since mid-Sep for the additional markets (Zendesk 23909). Closed: on 2026-11-26 Liam Cordelle told Garry a permanent fix is applied; no rejects reported since.
+Refs: https://mahifx.slack.com/archives/C09HN93T0G2/p1795540318668029 https://mahifx.slack.com/archives/C09HN93T0G2/p1795564582113569 https://mahifx.slack.com/archives/C09HN93T0G2/p1795694335996299
 
 ### ip-whitelist-beeks — Brandon cannot reach Compass/Echo from new IP
 status: closed · since: 2026-09-08 · last: 2026-09-16 · closed: 2026-11-16
