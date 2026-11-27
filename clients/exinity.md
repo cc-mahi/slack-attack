@@ -21,22 +21,34 @@ contacts:
   - {name: "Keshav Woottum", role: "ops — yield simulations, reporting", confidence: low}
   - {name: "George Moore", role: "ops — LP/UBS test-trade liaison, sim data", confidence: low}
   - {name: "Justin", role: "Exinity exec — CFD licence / commercial decisions", confidence: low}
-last_catchup: 2026-11-26T08:13:54Z
+last_catchup: 2026-11-27T08:14:57Z
 status: active
 ---
 
 ## Now
-Thanksgiving: Exinity halved the retail skew ceiling (2026-11-25) and chased Mahi for the EOD restart; no completion seen. Market FOKs on the Chuck session expire (no FOK-capable LP; send IoC). XAUFUT-Z expiry flattened 2026-11-25; futures books now in yield profiles. Will Carter wants an in-person QBR in early December (Andrew to pick a date).
+Thanksgiving: off-market reval quotes again caused PnL spikes at the 2026-11-26 open; signalProcessFI1 errored and was restarted 2026-11-27. Exinity halved the retail skew ceiling (2026-11-25) and chased Mahi for the EOD restart; no completion seen. Market FOKs on the Chuck session expire (no FOK-capable LP; send IoC). XAUFUT-Z expiry flattened 2026-11-25; futures books now in yield profiles. Will Carter wants an in-person QBR in early December (Andrew to pick a date).
 Recurring signal-process errors (latest 2026-11-26, signalProcessCFD1, restored) await a dev fix; trading-2 tickstore filled 2026-11-20 (fix PR 1101 awaits deploy); trading-1 gateway may fail to start again after a reboot; Centroid tag fix awaits retest.
 Exinity is migrating LPs from Hidden Road to Wedbush. Open on Mahi: STRDPARTNER disable RCA and alert, per-book PnL-drop alerts, XAU position realignment, TradersHub A-book move, XCUUSD spread decision, adaptive-skew sim owner, oil/silver futures scoping.
 
 ## Streams
 
 ### signal-process-alerts — Alerts on signal processes, no execution impact
-status: open · since: 2026-11-05 · last: 2026-11-26
-State: On 2026-11-26 ~04:31Z Mukhammad asked Mahi to check an error; Shyam confirmed signalProcessCFD1 was all good by 04:35Z. Same pattern 2026-11-12, 11-13 and 11-19: Nathan restored the processes each time and said on 11-12 that dev is working on a fix. Daria said earlier alerts had no trading impact (signal processes are outside execution). May relate to the 2026-10-26 signalProcessFI1 overflow.
+status: open · since: 2026-11-05 · last: 2026-11-27
+State: On 2026-11-27 ~01:30Z Samuel reported an error on signalProcessFI1; Daria restarted it by 01:33Z and called it resolved. On 2026-11-26 ~04:31Z Mukhammad asked Mahi to check an error; Shyam confirmed signalProcessCFD1 was all good by 04:35Z. Same pattern 2026-11-12, 11-13 and 11-19: Nathan restored the processes each time and said on 11-12 that dev is working on a fix. Daria said earlier alerts had no trading impact (signal processes are outside execution). May relate to the 2026-10-26 signalProcessFI1 overflow.
 Next: Mahi dev to deliver the fix for the recurring signal-process errors and tell Exinity the cause.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1795059543591619 https://mahifx.slack.com/archives/C0456LSHQQK/p1795667468587179 https://mahifx.slack.com/archives/C0456LSHQQK/p1795667733421739
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793854172360089 https://mahifx.slack.com/archives/C0456LSHQQK/p1795059543591619 https://mahifx.slack.com/archives/C0456LSHQQK/p1795667468587179 https://mahifx.slack.com/archives/C0456LSHQQK/p1795743027323379
+
+### lp-client-tags-448 — LPs want client tags in tag 448 (party ID)
+status: open · since: 2026-11-26 · last: 2026-11-26
+State: On 2026-11-26 George said some Exinity LPs want client tags enabled (tag 448 when tag 452 = 11), which Reactive says Mahi controls. William replied that Mahi's config already sets 452 to 11 on new orders and passes 448 PartyID as Exinity, asked which value Exinity wants (the counterparty tag?) and is checking whether the connector can pass it, possibly needing a software change.
+Next: George to say what should go in tag 448; William to confirm connector capability.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1795682520993899 https://mahifx.slack.com/archives/C0456LSHQQK/p1795711187616439
+
+### bbook-weekend-pnl — False -1.7M B-book PnL at Sunday open
+status: open · since: 2026-11-01 · last: 2026-11-26
+State: On 2026-11-26 ~22:31Z Mukhammad asked Mahi to check PnL spikes across books after the market open and whether off-market quotes were used for revals again; Shyam confirmed that was the cause (no fix or follow-up seen). On 2026-11-01 ~22:23Z Mukhammad asked whether the B-book PnL of -1.7M when rebased from Friday close was real, since XAU had not reopened (rebased from Sunday close it was fine). Shyam said it was not an actual loss: it reverted at the metals open once live pricing resumed, and Mahi is looking into the pricing used to mark the book over the weekend.
+Next: Mahi (Shyam) to report what weekend marking price caused the false -1.7M, and to say how the recurring off-market reval quotes will be prevented.
+Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793571776435089 https://mahifx.slack.com/archives/C0456LSHQQK/p1793575936910949 https://mahifx.slack.com/archives/C0456LSHQQK/p1795732290766269
 
 ### futures-yield-visibility — Futures and wash-book hedges missing from yield profiles
 status: open · since: 2026-11-17 · last: 2026-11-25
@@ -46,13 +58,13 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1794926506147159 https://ma
 
 ### centroid-fok-conformance — Centroid conformance: FOK brokered orders expire
 status: open · since: 2026-10-29 · last: 2026-11-25
-State: During Centroid/Mahi conformance testing on 2026-10-28 Matt saw an A-Book XAU/USD FOK market order cancelled (EXPIRED) on the Centroid connection while a PrimeXM FOK filled. Kate explained the liquidity pool has no FOK-capable gold market, so the brokered Centroid order expired before reaching an LP; the PXM order was internalised. On 2026-10-30 Kate explained rules are picked by trading account: Centroid (001) hits the Chuck profile with top-up off, while STP FOKs that fill (65280, A-BOOK rule) have Allow Top Up on; Daniel asked whether Centroid can be set up like STP. On 2026-11-13 Matt reported Centroid test trades reach Mahi but the Counterparty column lacks the MT5 login tag (MT5_3056_tem); Rory said it is a tag issue and gave the party-ID block to send (453=1, 448=MT5_3056_tem, 447=D, 452=3); Matt retests Monday 2026-11-16 (no result seen). On 2026-11-25 Louie reported API_111000012 market FOKs on the Chuck session rejected with "Internalisation Disabled IoC expired"; Rory explained Chuck routes every order straight to the liquidity pool, whose LPs do not accept FOK, so they expire; sent as IoC they would fill. No answer yet on whether the client can send IoC.
+State: During Centroid/Mahi conformance testing on 2026-10-28 Matt saw an A-Book XAU/USD FOK market order cancelled (EXPIRED) on the Centroid connection while a PrimeXM FOK filled. Kate: the liquidity pool has no FOK-capable gold market, so the brokered order expired; the PXM order was internalised. On 2026-10-30 Kate explained rules are picked by trading account: Centroid (001) hits the Chuck profile with top-up off, while STP FOKs that fill (65280, A-BOOK rule) have Allow Top Up on; Daniel asked whether Centroid can be set up like STP. On 2026-11-13 Matt reported Centroid test trades reach Mahi but the Counterparty column lacks the MT5 login tag (MT5_3056_tem); Rory gave the party-ID block to send (453=1, 448=MT5_3056_tem, 447=D, 452=3); Matt's 2026-11-16 retest result not seen. On 2026-11-25 Louie reported API_111000012 market FOKs on the Chuck session rejected with "Internalisation Disabled IoC expired"; Rory explained Chuck routes every order straight to the liquidity pool, whose LPs do not accept FOK, so they expire; sent as IoC they would fill. No answer yet on whether the client can send IoC.
 Next: Louie to say whether API_111000012 can send IoC instead of FOK; Matt to retest the party-ID tags and report back; Mahi (Kate) offered on 2026-10-30 to configure Allow Top Up on the Chuck profile; Exinity (Daniel/Matt) to say yes or change Centroid-side config so FOK is not brokered to WB.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793264343496069 https://mahifx.slack.com/archives/C0456LSHQQK/p1794594865097469 https://mahifx.slack.com/archives/C0456LSHQQK/p1795611498839669 https://mahifx.slack.com/archives/C0456LSHQQK/p1795613644357589
 
 ### skew-ceiling-halved — Exinity halved retail skew ceiling for Thanksgiving
 status: open · since: 2026-11-25 · last: 2026-11-25
-State: On 2026-11-25 Daniel asked for CLIENT_PRICE_RETAIL processes to be restarted at EOD, then posted that the adjustmentSignalParameters Price Adjustment Ceiling Pips is temporarily halved across ~47 instruments (FX majors/crosses, metals, indices, crypto) to cut skew magnitude and stay defensive over Thanksgiving liquidity. Kate asked for the reasoning and offered alternative config options; Kate said it was scheduled for EOD. Christian and Samuel chased for confirmation (latest 22:08Z); no completion reply seen. Needs reverting after the holiday.
+State: On 2026-11-25 Daniel asked for CLIENT_PRICE_RETAIL processes to be restarted at EOD, then posted that the adjustmentSignalParameters Price Adjustment Ceiling Pips is temporarily halved across ~47 instruments (FX majors/crosses, metals, indices, crypto) to cut skew magnitude and stay defensive over Thanksgiving liquidity. Kate asked for the reasoning and offered alternative config options; Kate said it was scheduled for EOD. Christian and Samuel chased for confirmation (latest 22:08Z); no completion reply seen.
 Next: Mahi to restart CLIENT_PRICE_RETAIL, confirm to Exinity, and agree when the ceiling is restored.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1795620680347519 https://mahifx.slack.com/archives/C0456LSHQQK/p1795644530429979
 
@@ -70,7 +82,7 @@ Refs: https://mahifx.slack.com/archives/C040V9LNKT5/p1795142350003819 https://ma
 
 ### order-reject-queries — Reject and fill investigations
 status: open · since: 2026-09-21 · last: 2026-11-18
-State: On 2026-11-18 Samuel asked why API_111000021 gets cancels on XAU; Nathan found they are limit IoC XAUUSD buys of 950oz at Mahi's top-of-book offer with only ~100oz available, so they cancel with LIQUIDITY_VIOLATION while same-size market orders fill. Open: Christian's 2026-10-09 FIX-log help request awaits his reply; Mukhammad's 2026-10-02 XAU rejects had no outcome seen. Earlier rejects were explained; the bridge must retry TPs, as Mahi holds no pending TP/SL.
+State: On 2026-11-18 Samuel asked why API_111000021 gets cancels on XAU; Nathan found they are limit IoC XAUUSD buys of 950oz at Mahi's top-of-book offer with only ~100oz available, so they cancel with LIQUIDITY_VIOLATION while same-size market orders fill. Open: Christian's 2026-10-09 FIX-log help request awaits his reply; Mukhammad's 2026-10-02 XAU rejects had no outcome seen. The bridge must retry TPs; Mahi holds no pending TP/SL.
 Next: Christian to say what he needs from the FIX logs; Exinity to check its bridge retry behaviour.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1790857668546679 https://mahifx.slack.com/archives/C0456LSHQQK/p1793756635298589 https://mahifx.slack.com/archives/C0456LSHQQK/p1794980608405509 https://mahifx.slack.com/archives/C0456LSHQQK/p1794981508143979
 
@@ -82,7 +94,7 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1794938681074289 https://ma
 
 ### weekend-ops-reliability — Weekend restarts, FIX session windows, hedger recovery
 status: open · since: 2026-08-17 · last: 2026-11-15
-State: Sat 2026-11-14 clientDistributionGateway1 on trading-1 failed to start after the weekly reboot (duplicate consumer registration on CLIENT_PRICE_VIP_LDN, no auto-restart); James restarted it by hand, which is what Siddig saw missing at 10:55Z. An OS patch on trading-2 (CHG-2611-DA9T) left two riskPathSI down until 09:59Z, and Beeks pulled a faulty LD4 link (NOCINT-860378). The gateway error may recur at the next reboot. 2026-10-17 reboot left hybrid hedgers down to ~10:55Z (duplicate Hazelcast shard ID, 2 GB heap, MySQL limit raised to 2048 on 2026-10-19; P2 RCA open).
+State: Sat 2026-11-14 clientDistributionGateway1 on trading-1 failed to start after the weekly reboot (duplicate consumer registration on CLIENT_PRICE_VIP_LDN, no auto-restart); James restarted it by hand, which is what Siddig saw missing at 10:55Z. An OS patch on trading-2 (CHG-2611-DA9T) left two riskPathSI down until 09:59Z,. The gateway error may recur at the next reboot. 2026-10-17 reboot left hybrid hedgers down ~2.5h (duplicate Hazelcast shard ID, 2 GB heap; P2 RCA open).
 Next: Mahi to find why the gateway fails to start after reboot, raise the trading-2 hazelcastNode heap above 2 GB and break down trading-1 MySQL connections; Daniel/Kate to revisit weekend support when weekend crypto starts.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1786976101361259 https://mahifx.slack.com/archives/C0456LSHQQK/https://mahifx.slack.com/archives/C040V9LNKT5/p1792424073139469 https://mahifx.slack.com/archives/C040V9LNKT5/p1794777515302229 https://mahifx.slack.com/archives/C040V9LNKT5/p1794780190721359
 
@@ -146,12 +158,6 @@ State: Saturday 2026-10-31's multicast change broke the admin feeds; Liam posted
 Next: Confirm admin feeds restored after the 22:00Z window.
 Refs: https://mahifx.slack.com/archives/C040V9LNKT5/p1793646965293749
 
-### bbook-weekend-pnl — False -1.7M B-book PnL at Sunday open
-status: open · since: 2026-11-01 · last: 2026-11-01
-State: On 2026-11-01 ~22:23Z Mukhammad asked whether the B-book PnL of -1.7M when rebased from Friday close was real, since XAU had not reopened (rebased from Sunday close it was fine). Shyam said it was not an actual loss: it reverted at the metals open once live pricing resumed, and Mahi is looking into the pricing used to mark the book over the weekend.
-Next: Mahi (Shyam) to report what weekend marking price caused the false -1.7M.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1793571776435089 https://mahifx.slack.com/archives/C0456LSHQQK/p1793575936910949
-
 ### wedbush-lp-migration — Hidden Road to Wedbush LPs, IOC/top-up mechanics
 status: open · since: 2026-08-05 · last: 2026-10-30
 State: Wedbush LPs do not take FOK/market orders, so STP clients top up with high-slippage IOC Limits (live 2026-08-20). A 2026-09-17 top-up left a 200oz residual on LIQUIDITY_POOL_LDN; Rory set Allow Top-Up to No on EXINITY_CONNECT_CHUCK; residual unresolved.
@@ -210,21 +216,6 @@ Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1787324960613979 https://ma
 status: closed · since: 2026-10-23 · last: 2026-10-26 · closed: 2026-11-26
 State: Compass 26.4 went live the weekend of 2026-10-24 (CHG-2610-VSHM). On 2026-10-26 signalProcessFI1 on trading-1 went down on an IFMSslidWndwCbackStream overflow (07:18Z); The overflow recurred 16:18Z; Cameron bounced it and rolled out the fix ~17:23Z. No further FI1 overflow since; later signal-process alerts are tracked in signal-process-alerts.
 Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792760362955399 https://mahifx.slack.com/archives/C040V9LNKT5/p1793035385218119
-
-### gbpaud-roll-cancels — GBPAUD cancels at rollover (wide-spread suppression)
-status: closed · since: 2026-11-11 · last: 2026-11-11 · closed: 2026-11-12
-State: 2026-11-11 rollover cancels were wide-spread suppression; bridge retried and filled. Samuel declined loosening it.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1794435903177429 https://mahifx.slack.com/archives/C0456LSHQQK/p1794437737729939
-
-### sunday-open-cancels — Last-look latency cancels at Sunday FX open
-status: closed · since: 2026-10-18 · last: 2026-10-18 · closed: 2026-11-12
-State: 391 orders cancelled by the latency safeguard before the restarted order process warmed up; dev ticket raised, assumed resolved.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792359440287539
-
-### ld-network-route28 — Beeks LD network incident and unconfirmed Route28 AVAX order
-status: closed · since: 2026-10-16 · last: 2026-10-16 · closed: 2026-11-12
-State: Beeks LD incident took hybridHedgerCFD1 down on an unconfirmed Route28 AVAX order; Kate restarted it. No answer seen, assumed resolved.
-Refs: https://mahifx.slack.com/archives/C0456LSHQQK/p1792143223051249 https://mahifx.slack.com/archives/C0456LSHQQK/p1792148922388959
 
 ### xau-cpi-slippage — XAUUSD 900oz fill slippage at CPI
 status: closed · since: 2026-11-10 · last: 2026-11-10 · closed: 2026-11-16
