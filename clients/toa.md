@@ -10,7 +10,7 @@ channels:
   internal-toa-ops: C035H1VNCAD
   toa-nado-shared: C09RGU1T1GE
 contacts: []
-last_catchup: 2026-11-26T08:17:17Z
+last_catchup: 2026-11-27T08:14:57Z
 status: active
 ---
 
@@ -20,6 +20,18 @@ Main threads: the CBOE hedger on CHI keeps tripping its PnL firewall (six trips 
 Several Argamon-raised issues arrive as forwards from `mahi-argamon-operations`, which is not in this dossier's channels.
 
 ## Streams
+
+### infra-releases — releases, new gateways and box changes on Argamon/Toa
+status: open · since: 2026-08-17 · last: 2026-11-26
+State: On 11-26 Shyam switched the Toa CHI pricing subscription proxied in from Args NY4 from XTXM_RCTV_HRP_2 to XTXM_RCTV_NWPB_1 (the HRP_2 stream is no longer received; CHG-2611-52WA), picked up on weekend reboots. James self-approved change CHG-2611-Z81H on 11-20 for Sat 11-21 08:00-09:00Z: Compass 26.4 with in-band Aeron metadata on every market (extends the APN KRAKEN-only test from 09-26). On 11-12 traderBinance on Argamon APN1 came down on a BINANCE_FUTURES_UM cancel timeout (order breaches limit 0); Arun was starting it back up. On 11-04 marketDataNado1 on Toa APN1 OOMed again (Inald); James (Toa Labs) disabled PagerDuty for Toa APN1 and Isaac Dann agreed it is fine to stop the box, so the leftover Nado process is being retired. Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
+Next: confirm the weekend reboot picks up the XTXM_RCTV_NWPB_1 change; confirm the 11-21 in-band Aeron change went through; stop the Toa APN1 box (approved 11-04); Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1794474981996009 https://mahifx.slack.com/archives/C035H1VNCAD/p1795734257936159
+
+### dropcopy-no-fwd-route — hrpFxDropCopy1 rejects on Toa-Argamon LDN
+status: open · since: 2026-11-26 · last: 2026-11-26
+State: On 11-26 Maten flagged four XAG/USD forward trades (value date 2026-11-30, 1000 and 50 lots, 14:13-14:15 UTC) rejected on hrpFxDropCopy1 for Toa-Argamon LDN with "No forward route". James forwarded the details to another channel; root cause and fix not visible here.
+Next: James to follow up on the forwarded report (route for XAG forwards).
+Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1795702942965179 https://mahifx.slack.com/archives/C035H1VNCAD/p1795703704149239
 
 ### cboe-hedger-chi — hedgerCBOE1 on CHI: firewall/PnL trips and state mismatches
 status: open · since: 2026-08-03 · last: 2026-11-25
@@ -32,12 +44,6 @@ status: open · since: 2026-07-21 · last: 2026-11-25
 State: hedgerHrpCME1 keeps going down on CHI. On 09-07 a `hedging.rules.profiles.profileDefinitions` edit caused "No rule for converting: XAU to: ZAR", and Leonardo reverted it via the LDN audit log (audit does not replicate between regions). On 08-30 propTrader1HrpChi1 was down after the weekend restart because a profile mapping pointed at expired MGCQ6; Nathan repointed it to MGCZ6. On 09-27 the hedger tripped on order breaches and ordersCME1/ordersCOMEX1 were stuck in starting; Lee left the hedger off, turned it back on, and said he would fix ordersCOMEXMarex1 later. On 11-25 Shyam flagged (PagerDuty) that gold hedging on Toa Args CHI is still on the Dec contracts although the market has rolled to Feb; James announced the roll at 11:22 UTC: Dec close-only since 11:11 GMT, new gold hedging goes into Feb (GCG7/MGCG7) and silver into Mar; whether the hedger profile mapping was repointed is not confirmed.
 Next: confirm gold hedging profile mapping points at the Feb contracts (as Nathan did for MGCQ6 to MGCZ6 on 08-30); Lee to fix ordersCOMEXMarex1.
 Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1784613134154519 https://mahifx.slack.com/archives/C035H1VNCAD/p1788800584804799 https://mahifx.slack.com/archives/C035H1VNCAD/p1795605763725059
-
-### infra-releases — releases, new gateways and box changes on Argamon/Toa
-status: open · since: 2026-08-17 · last: 2026-11-20
-State: James self-approved change CHG-2611-Z81H on 11-20 for Sat 11-21 08:00-09:00Z: Compass 26.4 with in-band Aeron metadata on every market (extends the APN KRAKEN-only test from 09-26). On 11-12 traderBinance on Argamon APN1 came down on a BINANCE_FUTURES_UM cancel timeout (order breaches limit 0); Arun was starting it back up. On 11-04 marketDataNado1 on Toa APN1 OOMed again (Inald); James (Toa Labs) disabled PagerDuty for Toa APN1 and Isaac Dann agreed it is fine to stop the box, so the leftover Nado process is being retired. Kraken Futures market data on Argamon APN1 has been down since about 02:20 UTC on 10-30 (Kraken-side incident, PagerDuty open, no resolution seen). Licence renewed 2026-08-17. 26.4 deployed to Argamon LDN/CHI on 09-26, then APN with `connectivity.aeron.metadata.inband` enabled for KRAKEN as a low-risk test. FX contracts were rolled by restart on 09-11. Lee set up new gateways on CHI (09-22), removed the natwest channel from LDN clientDist (restart planned EOD 09-24), and began setting up a new LP in TKY on 10-14. The secondary APN1 box was decommissioned but its multi-region infra was not unwound, so config updates queue up (09-07). hazelcastNode OOMs recurred (08-18, 09-07) and marketDataNado1 OOMed on 10-28 (Shyam restarted it, PagerDuty incident; a Nado process still running despite the wind-down) and CENTROID_NY4_A-MD sessions dropped for about 2 minutes on 09-16, flowing through to Argamon's TOA_CRYPTO-ORDER.
-Next: confirm the 11-21 in-band Aeron change went through; stop the Toa APN1 box (approved 11-04); Lee to finish the TKY LP; unwind the multi-region infra left from the sec-1 decommission.
-Refs: https://mahifx.slack.com/archives/C035H1VNCAD/p1787001242923619 https://mahifx.slack.com/archives/C035H1VNCAD/p1793148848983029 https://mahifx.slack.com/archives/C035H1VNCAD/p1794474981996009 https://mahifx.slack.com/archives/C035H1VNCAD/p1795193614817319
 
 ### pnl-var-alerting — PnL-drop, VaR and not-ticking alert noise
 status: open · since: 2026-06-25 · last: 2026-11-02
